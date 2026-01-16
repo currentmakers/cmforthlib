@@ -1,0 +1,512 @@
+\
+\ @file stm32n655.h
+\ @brief Loader for all peripherals in a STM32N655
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc1.fs
+.include adc1_s.fs
+.include adc2.fs
+.include adc2_s.fs
+.include adc12.fs
+.include adc12_s.fs
+.include adf.fs
+.include adf_s.fs
+.include bsec.fs
+.include bsec_s.fs
+.include cacheaxi.fs
+.include cacheaxi_s.fs
+.include crc.fs
+.include crc_s.fs
+.include cryp.fs
+.include cryp_s.fs
+.include csi.fs
+.include csi_s.fs
+.include dbgmcu.fs
+.include dbgmcu_s.fs
+.include dcmi.fs
+.include dcmi_s.fs
+.include dcmipp.fs
+.include dcmipp_s.fs
+.include dlybsd.fs
+.include dlybsd_s.fs
+.include dlybsd2.fs
+.include dlybsd2_s.fs
+.include dma2d.fs
+.include dma2d_s.fs
+.include dts.fs
+.include dts_s.fs
+.include eth.fs
+.include eth_s.fs
+.include exti.fs
+.include exti_s.fs
+.include fdcan1.fs
+.include fdcan1_s.fs
+.include fdcan2.fs
+.include fdcan2_s.fs
+.include fdcan3.fs
+.include fdcan3_s.fs
+.include fmc1.fs
+.include fmc1_s.fs
+.include gfxmmu.fs
+.include gfxmmu_s.fs
+.include gfxtim.fs
+.include gfxtim_s.fs
+.include gpdma.fs
+.include gpdma_s.fs
+.include gpioa.fs
+.include gpioa_s.fs
+.include gpiob.fs
+.include gpiob_s.fs
+.include gpioc.fs
+.include gpioc_s.fs
+.include gpiod.fs
+.include gpiod_s.fs
+.include gpioe.fs
+.include gpioe_s.fs
+.include gpiof.fs
+.include gpiof_s.fs
+.include gpiog.fs
+.include gpiog_s.fs
+.include gpioh.fs
+.include gpioh_s.fs
+.include gpion.fs
+.include gpion_s.fs
+.include gpioo.fs
+.include gpioo_s.fs
+.include gpiop.fs
+.include gpiop_s.fs
+.include gpioq.fs
+.include gpioq_s.fs
+.include hash.fs
+.include hash_s.fs
+.include hdp.fs
+.include hdp_s.fs
+.include hpdma.fs
+.include hpdma_s.fs
+.include iac.fs
+.include iac_s.fs
+.include icache.fs
+.include icache_s.fs
+.include iwdg.fs
+.include iwdg_s.fs
+.include i2c1.fs
+.include i2c1_s.fs
+.include i2c2.fs
+.include i2c2_s.fs
+.include i2c3.fs
+.include i2c3_s.fs
+.include i2c4.fs
+.include i2c4_s.fs
+.include i3c1.fs
+.include i3c1_s.fs
+.include i3c2.fs
+.include i3c2_s.fs
+.include jpeg.fs
+.include jpeg_s.fs
+.include ltdc.fs
+.include ltdc_s.fs
+.include lptim1.fs
+.include lptim1_s.fs
+.include lptim2.fs
+.include lptim2_s.fs
+.include lptim3.fs
+.include lptim3_s.fs
+.include lptim4.fs
+.include lptim4_s.fs
+.include lptim5.fs
+.include lptim5_s.fs
+.include lpuart1.fs
+.include lpuart1_s.fs
+.include mce1.fs
+.include mce1_s.fs
+.include mce2.fs
+.include mce2_s.fs
+.include mce3.fs
+.include mce3_s.fs
+.include mce4.fs
+.include mce4_s.fs
+.include mdf1.fs
+.include mdf1_s.fs
+.include mdios.fs
+.include mdios_s.fs
+.include otg1.fs
+.include otg1_s.fs
+.include otg2.fs
+.include otg2_s.fs
+.include pka.fs
+.include pka_s.fs
+.include pssi.fs
+.include pssi_s.fs
+.include pwr.fs
+.include pwr_s.fs
+.include ramcfg.fs
+.include ramcfg_s.fs
+.include rcc.fs
+.include rcc_s.fs
+.include rifsc.fs
+.include rifsc_s.fs
+.include risaf.fs
+.include risaf_s.fs
+.include rng.fs
+.include rng_s.fs
+.include rtc.fs
+.include rtc_s.fs
+.include saes.fs
+.include saes_s.fs
+.include sai1.fs
+.include sai1_s.fs
+.include sai2.fs
+.include sai2_s.fs
+.include sdmmc1.fs
+.include sdmmc1_s.fs
+.include sdmmc2.fs
+.include sdmmc2_s.fs
+.include spdifrx.fs
+.include spdifrx_s.fs
+.include spi1.fs
+.include spi1_s.fs
+.include spi2.fs
+.include spi2_s.fs
+.include spi3.fs
+.include spi3_s.fs
+.include spi4.fs
+.include spi4_s.fs
+.include spi5.fs
+.include spi5_s.fs
+.include spi6.fs
+.include spi6_s.fs
+.include syscfg.fs
+.include syscfg_s.fs
+.include tamp.fs
+.include tamp_s.fs
+.include tim1.fs
+.include tim1_s.fs
+.include tim2.fs
+.include tim2_s.fs
+.include tim3.fs
+.include tim3_s.fs
+.include tim4.fs
+.include tim4_s.fs
+.include tim5.fs
+.include tim5_s.fs
+.include tim6.fs
+.include tim6_s.fs
+.include tim7.fs
+.include tim7_s.fs
+.include tim8.fs
+.include tim8_s.fs
+.include tim9.fs
+.include tim9_s.fs
+.include tim10.fs
+.include tim10_s.fs
+.include tim11.fs
+.include tim11_s.fs
+.include tim12.fs
+.include tim12_s.fs
+.include tim13.fs
+.include tim13_s.fs
+.include tim14.fs
+.include tim14_s.fs
+.include tim15.fs
+.include tim15_s.fs
+.include tim16.fs
+.include tim16_s.fs
+.include tim17.fs
+.include tim17_s.fs
+.include tim18.fs
+.include tim18_s.fs
+.include ucpd.fs
+.include ucpd_s.fs
+.include usart1.fs
+.include usart1_s.fs
+.include usart2.fs
+.include usart2_s.fs
+.include usart3.fs
+.include usart3_s.fs
+.include uart4.fs
+.include uart4_s.fs
+.include uart5.fs
+.include uart5_s.fs
+.include usart6.fs
+.include usart6_s.fs
+.include uart7.fs
+.include uart7_s.fs
+.include uart8.fs
+.include uart8_s.fs
+.include uart9.fs
+.include uart9_s.fs
+.include usart10.fs
+.include usart10_s.fs
+.include venc.fs
+.include venc_s.fs
+.include vrefbuf.fs
+.include vrefbuf_s.fs
+.include wwdg.fs
+.include wwdg_s.fs
+.include xspim.fs
+.include xspim_s.fs
+.include xspi1.fs
+.include xspi1_s.fs
+.include xspi2.fs
+.include xspi2_s.fs
+.include xspi3.fs
+.include xspi3_s.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC1                   \ Analog-to-digital converters
+.include ADC1_S                 \ Analog-to-digital converters
+.include ADC2                   \ Analog-to-digital converters
+.include ADC2_S                 \ Analog-to-digital converters
+.include ADC12                  \ ADC common registers
+.include ADC12_S                \ ADC common registers
+.include ADF                    \ Audio digital filter
+.include ADF_S                  \ Audio digital filter
+.include BSEC                   \ Boot and security control
+.include BSEC_S                 \ Boot and security control
+.include CACHEAXI               \ AXI cache
+.include CACHEAXI_S             \ AXI cache
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include CRC_S                  \ Cyclic redundancy check calculation unit
+.include CRYP                   \ Cryptographic processor
+.include CRYP_S                 \ Cryptographic processor
+.include CSI                    \ CSI-2 Host
+.include CSI_S                  \ CSI-2 Host
+.include DBGMCU                 \ Microcontroller debug unit
+.include DBGMCU_S               \ Microcontroller debug unit
+.include DCMI                   \ Digital camera interface
+.include DCMI_S                 \ Digital camera interface
+.include DCMIPP                 \ Digital camera interface pixel pipeline
+.include DCMIPP_S               \ Digital camera interface pixel pipeline
+.include DLYBSD                 \ DLYBSD address block description
+.include DLYBSD_S               \ DLYBSD address block description
+.include DLYBSD2                \ DLYBSD address block description
+.include DLYBSD2_S              \ DLYBSD address block description
+.include DMA2D                  \ Chrom-ART Accelerator controller
+.include DMA2D_S                \ Chrom-ART Accelerator controller
+.include DTS                    \ Digital temperature sensor
+.include DTS_S                  \ Digital temperature sensor
+.include ETH                    \ Ethernet address block description
+.include ETH_S                  \ Ethernet address block description
+.include EXTI                   \ Extended interrupts and event controller
+.include EXTI_S                 \ Extended interrupts and event controller
+.include FDCAN1                 \ FDCAN register block
+.include FDCAN1_S               \ FDCAN register block
+.include FDCAN2                 \ FDCAN2 interrupt 0
+.include FDCAN2_S               \ FDCAN register block
+.include FDCAN3                 \ FDCAN3 interrupt 0
+.include FDCAN3_S               \ FDCAN register block
+.include FMC1                   \ Flexible memory controller
+.include FMC1_S                 \ Flexible memory controller
+.include GFXMMU                 \ Chrom-GRC
+.include GFXMMU_S               \ Chrom-GRC
+.include GFXTIM                 \ Graphic timer
+.include GFXTIM_S               \ Graphic timer
+.include GPDMA                  \ General purpose direct memory access controller
+.include GPDMA_S                \ General purpose direct memory access controller
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOA_S                \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOB_S                \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOC_S                \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOD_S                \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOE_S                \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include GPIOF_S                \ General-purpose I/Os
+.include GPIOG                  \ General-purpose I/Os
+.include GPIOG_S                \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include GPIOH_S                \ General-purpose I/Os
+.include GPION                  \ General-purpose I/Os
+.include GPION_S                \ General-purpose I/Os
+.include GPIOO                  \ General-purpose I/Os
+.include GPIOO_S                \ General-purpose I/Os
+.include GPIOP                  \ General-purpose I/Os
+.include GPIOP_S                \ General-purpose I/Os
+.include GPIOQ                  \ General-purpose I/Os
+.include GPIOQ_S                \ General-purpose I/Os
+.include HASH                   \ HASH register bank (full SHA-2/SHA-3)
+.include HASH_S                 \ HASH register bank (full SHA-2/SHA-3)
+.include HDP                    \ Hardware debug port
+.include HDP_S                  \ Hardware debug port
+.include HPDMA                  \ High-performance direct memory access controller
+.include HPDMA_S                \ High-performance direct memory access controller
+.include IAC                    \ Illegal access controller
+.include IAC_S                  \ Illegal access controller
+.include ICACHE                 \ Texture cache
+.include ICACHE_S               \ Texture cache
+.include IWDG                   \ Independent watchdog
+.include IWDG_S                 \ Independent watchdog
+.include I2C1                   \ Inter-integrated circuit
+.include I2C1_S                 \ Inter-integrated circuit
+.include I2C2                   \ Inter-integrated circuit
+.include I2C2_S                 \ Inter-integrated circuit
+.include I2C3                   \ Inter-integrated circuit
+.include I2C3_S                 \ Inter-integrated circuit
+.include I2C4                   \ Inter-integrated circuit
+.include I2C4_S                 \ Inter-integrated circuit
+.include I3C1                   \ Improved inter-integrated circuit
+.include I3C1_S                 \ Improved inter-integrated circuit
+.include I3C2                   \ I3C2 event interrupt
+.include I3C2_S                 \ Improved inter-integrated circuit
+.include JPEG                   \ JPEG codec
+.include JPEG_S                 \ JPEG codec
+.include LTDC                   \ LCD-TFT display controller
+.include LTDC_S                 \ LCD-TFT display controller
+.include LPTIM1                 \ Low-power timer
+.include LPTIM1_S               \ Low-power timer
+.include LPTIM2                 \ Low-power timer
+.include LPTIM2_S               \ Low-power timer
+.include LPTIM3                 \ Low-power timer
+.include LPTIM3_S               \ Low-power timer
+.include LPTIM4                 \ Low-power timer
+.include LPTIM4_S               \ Low-power timer
+.include LPTIM5                 \ Low-power timer
+.include LPTIM5_S               \ Low-power timer
+.include LPUART1                \ Low-power universal asynchronous receiver transmitter
+.include LPUART1_S              \ Low-power universal asynchronous receiver transmitter
+.include MCE1                   \ Memory cipher engine
+.include MCE1_S                 \ Memory cipher engine
+.include MCE2                   \ MCE2 global interrupt
+.include MCE2_S                 \ Memory cipher engine
+.include MCE3                   \ MCE3 global interrupt
+.include MCE3_S                 \ Memory cipher engine
+.include MCE4                   \ MCE4 global interrupt
+.include MCE4_S                 \ Memory cipher engine
+.include MDF1                   \ MDF register block
+.include MDF1_S                 \ MDF register block
+.include MDIOS                  \ Management data input/output
+.include MDIOS_S                \ Management data input/output
+.include OTG1                   \ USB on-the-go high-speed
+.include OTG1_S                 \ USB on-the-go high-speed
+.include OTG2                   \ USB OTG2 HS global interrupt
+.include OTG2_S                 \ USB on-the-go high-speed
+.include PKA                    \ Public key accelerator
+.include PKA_S                  \ Public key accelerator
+.include PSSI                   \ Parallel synchronous slave interface
+.include PSSI_S                 \ Parallel synchronous slave interface
+.include PWR                    \ Power control
+.include PWR_S                  \ Power control
+.include RAMCFG                 \ SRAM configuration controller
+.include RAMCFG_S               \ SRAM configuration controller
+.include RCC                    \ Reset and clock control
+.include RCC_S                  \ RCC global secure interrupt
+.include RIFSC                  \ Resource isolation framework security controller
+.include RIFSC_S                \ Resource isolation framework security controller
+.include RISAF                  \ Resource isolation slave unit for address space protection
+.include RISAF_S                \ Resource isolation slave unit for address space protection
+.include RNG                    \ True random number generator
+.include RNG_S                  \ True random number generator
+.include RTC                    \ Real-time clock
+.include RTC_S                  \ RTC secure interrupt
+.include SAES                   \ Secure AES coprocessor
+.include SAES_S                 \ Secure AES coprocessor
+.include SAI1                   \ Serial audio interface
+.include SAI1_S                 \ Serial audio interface
+.include SAI2                   \ SAI2 global interrupt A
+.include SAI2_S                 \ Serial audio interface
+.include SDMMC1                 \ Secure digital input/output MultiMediaCard interface
+.include SDMMC1_S               \ Secure digital input/output MultiMediaCard interface
+.include SDMMC2                 \ SDMMC2 global interrupt
+.include SDMMC2_S               \ Secure digital input/output MultiMediaCard interface
+.include SPDIFRX                \ SPDIF receiver interface
+.include SPDIFRX_S              \ SPDIF receiver interface
+.include SPI1                   \ Serial peripheral interface
+.include SPI1_S                 \ Serial peripheral interface
+.include SPI2                   \ SPI2 global interrupt A
+.include SPI2_S                 \ Serial peripheral interface
+.include SPI3                   \ SPI3 global interrupt A
+.include SPI3_S                 \ Serial peripheral interface
+.include SPI4                   \ SPI4 global interrupt A
+.include SPI4_S                 \ Serial peripheral interface
+.include SPI5                   \ SPI5 global interrupt A
+.include SPI5_S                 \ Serial peripheral interface
+.include SPI6                   \ SPI6 global interrupt A
+.include SPI6_S                 \ Serial peripheral interface
+.include SYSCFG                 \ System configuration controller
+.include SYSCFG_S               \ System configuration controller
+.include TAMP                   \ Tamper and backup registers
+.include TAMP_S                 \ Tamper and backup registers
+.include TIM1                   \ Advanced-control timers
+.include TIM1_S                 \ Advanced-control timers
+.include TIM2                   \ General-purpose timers
+.include TIM2_S                 \ General-purpose timers
+.include TIM3                   \ General purpose timers
+.include TIM3_S                 \ General purpose timers
+.include TIM4                   \ General purpose timers
+.include TIM4_S                 \ General purpose timers
+.include TIM5                   \ General purpose timers
+.include TIM5_S                 \ General purpose timers
+.include TIM6                   \ Basic timers
+.include TIM6_S                 \ Basic timers
+.include TIM7                   \ Basic timers
+.include TIM7_S                 \ Basic timers
+.include TIM8                   \ Advanced-control timers
+.include TIM8_S                 \ Advanced-control timers
+.include TIM9                   \ General-purpose timers
+.include TIM9_S                 \ General-purpose timers
+.include TIM10                  \ General-purpose timers
+.include TIM10_S                \ General-purpose timers
+.include TIM11                  \ General-purpose timers
+.include TIM11_S                \ General-purpose timers
+.include TIM12                  \ General-purpose timers
+.include TIM12_S                \ General-purpose timers
+.include TIM13                  \ General-purpose timers
+.include TIM13_S                \ General-purpose timers
+.include TIM14                  \ General-purpose timers
+.include TIM14_S                \ General-purpose timers
+.include TIM15                  \ General purpose timers
+.include TIM15_S                \ General purpose timers
+.include TIM16                  \ General purpose timers
+.include TIM16_S                \ General purpose timers
+.include TIM17                  \ General purpose timers
+.include TIM17_S                \ General purpose timers
+.include TIM18                  \ Basic timers
+.include TIM18_S                \ Basic timers
+.include UCPD                   \ USB Type-C/USB Power Delivery interface
+.include UCPD_S                 \ USB Type-C/USB Power Delivery interface
+.include USART1                 \ Universal synchronous/asynchronous receiver transmitter
+.include USART1_S               \ Universal synchronous/asynchronous receiver transmitter
+.include USART2                 \ USART2 Global interrupt
+.include USART2_S               \ Universal synchronous/asynchronous receiver transmitter
+.include USART3                 \ USART3 Global interrupt
+.include USART3_S               \ Universal synchronous/asynchronous receiver transmitter
+.include UART4                  \ UART4 Global interrupt
+.include UART4_S                \ Universal synchronous/asynchronous receiver transmitter
+.include UART5                  \ UART5 Global interrupt
+.include UART5_S                \ Universal synchronous/asynchronous receiver transmitter
+.include USART6                 \ USART6 Global interrupt
+.include USART6_S               \ Universal synchronous/asynchronous receiver transmitter
+.include UART7                  \ UART7 Global interrupt
+.include UART7_S                \ Universal synchronous/asynchronous receiver transmitter
+.include UART8                  \ UART8 Global interrupt
+.include UART8_S                \ Universal synchronous/asynchronous receiver transmitter
+.include UART9                  \ UART9 Global interrupt
+.include UART9_S                \ Universal synchronous/asynchronous receiver transmitter
+.include USART10                \ USART10 Global interrupt
+.include USART10_S              \ Universal synchronous/asynchronous receiver transmitter
+.include VENC                   \ Video encoder
+.include VENC_S                 \ Video encoder
+.include VREFBUF                \ Voltage reference buffer
+.include VREFBUF_S              \ Voltage reference buffer
+.include WWDG                   \ System window watchdog
+.include WWDG_S                 \ System window watchdog
+.include XSPIM                  \ XSPI I/O manager
+.include XSPIM_S                \ XSPI I/O manager
+.include XSPI1                  \ Extended-SPI interface
+.include XSPI1_S                \ Extended-SPI interface
+.include XSPI2                  \ XSPI2 global interrupt
+.include XSPI2_S                \ Extended-SPI interface
+.include XSPI3                  \ XSPI3 global interrupt
+.include XSPI3_S                \ Extended-SPI interface
+
+compiletoram
+

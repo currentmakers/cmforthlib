@@ -1,0 +1,120 @@
+\
+\ @file stm32f373.h
+\ @brief Loader for all peripherals in a STM32F373
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include gpioa.fs
+.include gpiob.fs
+.include gpiod.fs
+.include gpioc.fs
+.include gpioe.fs
+.include gpiof.fs
+.include tsc.fs
+.include crc.fs
+.include flash.fs
+.include rcc.fs
+.include dma1.fs
+.include dma2.fs
+.include tim2.fs
+.include tim5.fs
+.include tim3.fs
+.include tim4.fs
+.include tim19.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include i2s2ext.fs
+.include i2s3ext.fs
+.include adc.fs
+.include exti.fs
+.include cec.fs
+.include pwr.fs
+.include can.fs
+.include usb.fs
+.include i2c1.fs
+.include i2c2.fs
+.include iwdg.fs
+.include wwdg.fs
+.include rtc.fs
+.include sdadc1.fs
+.include sdadc2.fs
+.include sdadc3.fs
+.include dac2.fs
+.include tim6.fs
+.include tim7.fs
+.include tim18.fs
+.include tim13.fs
+.include tim14.fs
+.include tim12.fs
+.include dac1.fs
+.include dbgmcu.fs
+.include syscfg_comp_opamp.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include TSC                    \ Touch sensing controller
+.include CRC                    \ cyclic redundancy check calculation unit
+.include FLASH                  \ Flash
+.include RCC                    \ Reset and clock control
+.include DMA1                   \ DMA controller 1
+.include DMA2                   \ DMA2 channel interrupt
+.include TIM2                   \ General purpose timer
+.include TIM5                   \ General purpose timer
+.include TIM3                   \ General purpose timer
+.include TIM4                   \ Timer 4 global interrupt
+.include TIM19                  \ Timer 19 global interrupt
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General-purpose-timers
+.include TIM17                  \ Timer 17 global interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt/EXTI26 (USART1 wakeup event)
+.include USART3                 \ USART3 global interrupt/EXTI28 (USART1 wakeup event)
+.include SPI1                   \ Serial peripheral interface/Inter-IC sound
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global interrupt
+.include I2S2EXT                \ Serial peripheral interface/Inter-IC sound
+.include I2S3EXT                \ Serial peripheral interface/Inter-IC sound
+.include ADC                    \ Analog to digital converter
+.include EXTI                   \ External interrupt/event controller
+.include CEC                    \ HDMI-CEC controller
+.include PWR                    \ Power control
+.include CAN                    \ Controller area network
+.include USB                    \ Universal serial bus full-speed device interface
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2_EV global interrupt/EXTI Line[4:2] interrupts
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ Window watchdog
+.include RTC                    \ Real-time clock
+.include SDADC1                 \ Sigma-delta analog-to-digital converter
+.include SDADC2                 \ ADC sigma delta 2 (SDADC2) global interrupt
+.include SDADC3                 \ ADC sigma delta 3 (SDADC3) global interrupt
+.include DAC2                   \ Digital-to-analog converter
+.include TIM6                   \ Basic timers
+.include TIM7                   \ Timer 7 global interrupt
+.include TIM18                  \ Timer 18 global interrupt/DAC3 underrun interrupt
+.include TIM13                  \ General purpose timers
+.include TIM14                  \ Timer 14 global interrupt
+.include TIM12                  \ General purpose timers
+.include DAC1                   \ Digital-to-analog converter
+.include DBGMCU                 \ Debug support
+.include SYSCFG_COMP_OPAMP      \ System configuration controller
+
+compiletoram
+

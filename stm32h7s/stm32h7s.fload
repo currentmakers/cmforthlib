@@ -1,0 +1,226 @@
+\
+\ @file stm32h7s.h
+\ @brief Loader for all peripherals in a STM32H7S
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc1.fs
+.include adc2.fs
+.include adc12_common.fs
+.include adf.fs
+.include cec.fs
+.include cordic.fs
+.include crc.fs
+.include crs.fs
+.include cryp.fs
+.include dbgmcu.fs
+.include dcmipp.fs
+.include dlyb1.fs
+.include dlyb2.fs
+.include dma2d.fs
+.include dts.fs
+.include eth.fs
+.include exti.fs
+.include fdcan1.fs
+.include fdcan2.fs
+.include flash.fs
+.include fmc.fs
+.include gfxmmu.fs
+.include gfxtim.fs
+.include gpdma.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include gpiog.fs
+.include gpioh.fs
+.include gpiom.fs
+.include gpion.fs
+.include gpioo.fs
+.include gpiop.fs
+.include hash.fs
+.include hpdma.fs
+.include icache.fs
+.include iwdg.fs
+.include i2c1_i3c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include jpeg.fs
+.include lptim1.fs
+.include lptim2.fs
+.include lptim3.fs
+.include lptim4.fs
+.include lptim5.fs
+.include lpuart1.fs
+.include ltdc.fs
+.include mce1.fs
+.include mce2.fs
+.include mce3.fs
+.include mdios.fs
+.include otg_hs.fs
+.include otg_fs.fs
+.include pka.fs
+.include pssi.fs
+.include pwr.fs
+.include ramcfg.fs
+.include rcc.fs
+.include rng.fs
+.include rtc.fs
+.include saes.fs
+.include sai1.fs
+.include sai2.fs
+.include sbs.fs
+.include sdmmc1.fs
+.include sdmmc2.fs
+.include spdifrx.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include spi4.fs
+.include spi5.fs
+.include spi6.fs
+.include tamp.fs
+.include tim1.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim6.fs
+.include tim7.fs
+.include tim9.fs
+.include tim12.fs
+.include tim13.fs
+.include tim14.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include ucpd.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include uart4.fs
+.include uart5.fs
+.include uart7.fs
+.include uart8.fs
+.include vrefbuf.fs
+.include wwdg.fs
+.include xspi1.fs
+.include xspi2.fs
+.include xspim1.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC1                   \ ADC register block
+.include ADC2                   \ ADC register block
+.include ADC12_COMMON           \ master and slave ADC common
+.include ADF                    \ Audio digital filter
+.include CEC                    \ HDMI-CEC controller
+.include CORDIC                 \ CORDIC register block
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include CRS                    \ Clock Recovery System
+.include CRYP                   \ Cryptographic processor
+.include DBGMCU                 \ Microcontroller debug unit
+.include DCMIPP                 \ Digital camera interface pixel pipeline
+.include DLYB1                  \ DLYB register block
+.include DLYB2                  \ DLYB register block
+.include DMA2D                  \ Chrom-Art Accelerator controller
+.include DTS                    \ Digital temperature sensor
+.include ETH                    \ Ethernet register block
+.include EXTI                   \ Extended interrupt and event controller
+.include FDCAN1                 \ FDCAN1 Interrupt 0
+.include FDCAN2                 \ FDCAN2 Interrupt 0
+.include FLASH                  \ Embedded Flash memory
+.include FMC                    \ Flexible memory controller
+.include GFXMMU                 \ Chrom-GRC
+.include GFXTIM                 \ Graphic timer
+.include GPDMA                  \ General purpose direct memory access controller
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include GPIOG                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include GPIOM                  \ General-purpose I/Os
+.include GPION                  \ General-purpose I/Os
+.include GPIOO                  \ General-purpose I/Os
+.include GPIOP                  \ GPIOP address block description
+.include HASH                   \ Hash processor
+.include HPDMA                  \ High-performance direct memory access controller
+.include ICACHE                 \ Texture cache
+.include IWDG                   \ IWDG register block
+.include I2C1_I3C1              \ Inter-integrated circuit
+.include I2C2                   \ I2C2 event interrupt
+.include I2C3                   \ I2C3 event interrupt
+.include JPEG                   \ JPEG codec
+.include LPTIM1                 \ Low power timer
+.include LPTIM2                 \ Low power timer
+.include LPTIM3                 \ Low power timer
+.include LPTIM4                 \ Low power timer
+.include LPTIM5                 \ Low power timer
+.include LPUART1                \ Low-power universal asynchronous receiver transmitter
+.include LTDC                   \ LTDC register block
+.include MCE1                   \ Memory cipher engine
+.include MCE2                   \ MCE2 global interrupt
+.include MCE3                   \ MCE3 global interrupt
+.include MDIOS                  \ Management data input/output
+.include OTG_HS                 \ OTG register block
+.include OTG_FS                 \ USB OTG FS global interrupt
+.include PKA                    \ Public key accelerator
+.include PSSI                   \ Parallel synchronous slave interface
+.include PWR                    \ Power control
+.include RAMCFG                 \ RAMs configuration controller
+.include RCC                    \ Reset and clock control
+.include RNG                    \ True random number generator
+.include RTC                    \ RTC register block
+.include SAES                   \ Secure AES coprocessor
+.include SAI1                   \ Serial audio interface
+.include SAI2                   \ SAI2 global interrupt A
+.include SBS                    \ System configuration, boot and security
+.include SDMMC1                 \ Secure digital input/output MultiMediaCard interface
+.include SDMMC2                 \ SDMMC2 global interrupt
+.include SPDIFRX                \ SPDIF receiver interface
+.include SPI1                   \ Serial peripheral interface
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global interrupt
+.include SPI4                   \ SPI4 global interrupt
+.include SPI5                   \ SPI5 global interrupt
+.include SPI6                   \ SPI6 global interrupt
+.include TAMP                   \ TAMP register block
+.include TIM1                   \ Advanced-control timers
+.include TIM2                   \ General-purpose timers
+.include TIM3                   \ General-purpose timers
+.include TIM4                   \ General-purpose timers
+.include TIM5                   \ General-purpose timers
+.include TIM6                   \ Basic timers
+.include TIM7                   \ Basic timers
+.include TIM9                   \ General-purpose timers
+.include TIM12                  \ General-purpose timers
+.include TIM13                  \ General-purpose timers
+.include TIM14                  \ General-purpose timers
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General purpose timers
+.include TIM17                  \ General purpose timers
+.include UCPD                   \ USB Type-C/USB Power Delivery interface
+.include USART1                 \ Universal synchronous/asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include USART3                 \ USART3 global interrupt
+.include UART4                  \ UART4 global interrupt
+.include UART5                  \ UART5 global interrupt
+.include UART7                  \ UART7 global interrupt
+.include UART8                  \ UART8 global interrupt
+.include VREFBUF                \ Voltage reference buffer
+.include WWDG                   \ WWDG
+.include XSPI1                  \ XSPI register block
+.include XSPI2                  \ XSPI register block
+.include XSPIM1                 \ XSPIM1 register block
+
+compiletoram
+

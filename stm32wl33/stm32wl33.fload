@@ -1,0 +1,86 @@
+\
+\ @file stm32wl33.h
+\ @brief Loader for all peripherals in a STM32WL33
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc.fs
+.include aes.fs
+.include crc.fs
+.include comp.fs
+.include dac.fs
+.include dbgmcu.fs
+.include dmamux.fs
+.include dma.fs
+.include dynamic_reg.fs
+.include flash_ctrl.fs
+.include gpioa.fs
+.include gpiob.fs
+.include i2c1.fs
+.include i2c2.fs
+.include iwdg.fs
+.include lcd.fs
+.include lpuart.fs
+.include lcsc.fs
+.include lpawur.fs
+.include misc.fs
+.include mr_subg.fs
+.include pwrc.fs
+.include rcc.fs
+.include retained.fs
+.include rng.fs
+.include rtc.fs
+.include spi.fs
+.include spi3.fs
+.include system_ctrl.fs
+.include switchable.fs
+.include status.fs
+.include static.fs
+.include tim16.fs
+.include tim2.fs
+.include usart.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC                    \ ADC address block description
+.include AES                    \ AES interrupt
+.include CRC                    \ CRC_DR register
+.include COMP                   \ COMP address block description
+.include DAC                    \ DAC address block description
+.include DBGMCU                 \ CR register
+.include DMAMUX                 \ DMAMUX address block description
+.include DMA                    \ DMA address block description
+.include DYNAMIC_REG            \ PCKTLEN_CONFIG register
+.include FLASH_CTRL             \ 4kb addressable space
+.include GPIOA                  \ GPIOA interrupt
+.include GPIOB                  \ GPIOB interrupt
+.include I2C1                   \ I2C1 interrupt
+.include I2C2                   \ I2C2 interrupt
+.include IWDG                   \ IWDG_KR register
+.include LCD                    \ LCD interrupt
+.include LPUART                 \ LPUART interrupt
+.include LCSC                   \ LCSC interrupt
+.include LPAWUR                 \ LPAWUR interrupt
+.include MISC                   \ RFIP_VERSION register
+.include MR_SUBG                \ MR_SUBG Busy interrupt
+.include PWRC                   \ PVD / BORH
+.include RCC                    \ Reset and Clock Controller
+.include RETAINED               \ RFIP_WAKEUPTIME register
+.include RNG                    \ RNG_CR register
+.include RTC                    \ RTC interrupt
+.include SPI                    \ SPI1 interrupt
+.include SPI3                   \ SPI3 interrupt
+.include SYSTEM_CTRL            \ DIE_ID register
+.include SWITCHABLE             \ RFIP_VERSION register
+.include STATUS                 \ RFSEQ_IRQ_STATUS register
+.include STATIC                 \ PCKT_CONFIG register
+.include TIM16                  \ TIM16 address block description
+.include TIM2                   \ TIM2 address block description
+.include USART                  \ USART interrupt
+
+compiletoram
+

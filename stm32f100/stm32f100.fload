@@ -1,0 +1,122 @@
+\
+\ @file stm32f100.h
+\ @brief Loader for all peripherals in a STM32F100
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include fsmc.fs
+.include pwr.fs
+.include rcc.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include gpiog.fs
+.include afio.fs
+.include exti.fs
+.include dma1.fs
+.include dma2.fs
+.include rtc.fs
+.include bkp.fs
+.include iwdg.fs
+.include wwdg.fs
+.include tim1.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim12.fs
+.include tim13.fs
+.include tim14.fs
+.include tim6.fs
+.include tim7.fs
+.include i2c1.fs
+.include i2c2.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include adc1.fs
+.include dac.fs
+.include dbg.fs
+.include uart4.fs
+.include uart5.fs
+.include crc.fs
+.include flash.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include cec.fs
+.include nvic.fs
+.include mpu.fs
+.include scb_actrl.fs
+.include nvic_stir.fs
+.include scb.fs
+.include stk.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include FSMC                   \ Flexible static memory controller
+.include PWR                    \ Power control
+.include RCC                    \ Reset and clock control
+.include GPIOA                  \ General purpose I/O
+.include GPIOB                  \ General purpose I/O
+.include GPIOC                  \ General purpose I/O
+.include GPIOD                  \ General purpose I/O
+.include GPIOE                  \ General purpose I/O
+.include GPIOF                  \ General purpose I/O
+.include GPIOG                  \ General purpose I/O
+.include AFIO                   \ Alternate function I/O
+.include EXTI                   \ EXTI
+.include DMA1                   \ DMA controller
+.include DMA2                   \ DMA2 Channel1 global interrupt
+.include RTC                    \ Real time clock
+.include BKP                    \ Backup registers
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ Window watchdog
+.include TIM1                   \ Advanced timer
+.include TIM2                   \ General purpose timer
+.include TIM3                   \ TIM3 global interrupt
+.include TIM4                   \ TIM4 global interrupt
+.include TIM5                   \ TIM5 global interrupt
+.include TIM12                  \ General purpose timer
+.include TIM13                  \ General purpose timer
+.include TIM14                  \ TIM14 global interrupt
+.include TIM6                   \ Basic timer
+.include TIM7                   \ TIM7 global interrupt
+.include I2C1                   \ Inter integrated circuit
+.include I2C2                   \ I2C2 event interrupt
+.include SPI1                   \ Serial peripheral interface
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include USART3                 \ USART3 global interrupt
+.include ADC1                   \ Analog to digital converter
+.include DAC                    \ Digital to analog converter
+.include DBG                    \ Debug support
+.include UART4                  \ Universal asynchronous receiver transmitter
+.include UART5                  \ Universal asynchronous receiver transmitter
+.include CRC                    \ CRC calculation unit
+.include FLASH                  \ FLASH
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General-purpose-timers
+.include TIM17                  \ General-purpose-timers
+.include CEC                    \ HDMI-CEC controller
+.include NVIC                   \ Nested Vectored Interrupt Controller
+.include MPU                    \ Memory protection unit
+.include SCB_ACTRL              \ System control block ACTLR
+.include NVIC_STIR              \ Nested vectored interrupt controller
+.include SCB                    \ System control block
+.include STK                    \ SysTick timer
+
+compiletoram
+

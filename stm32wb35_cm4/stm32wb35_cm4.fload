@@ -1,0 +1,98 @@
+\
+\ @file stm32wb35_cm4.h
+\ @brief Loader for all peripherals in a STM32WB35_CM4
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include dma1.fs
+.include dma2.fs
+.include dmamux.fs
+.include crc.fs
+.include iwdg.fs
+.include wwdg.fs
+.include comp.fs
+.include i2c1.fs
+.include i2c3.fs
+.include flash.fs
+.include quadspi.fs
+.include rcc.fs
+.include pwr.fs
+.include syscfg.fs
+.include rng.fs
+.include aes1.fs
+.include aes2.fs
+.include hsem.fs
+.include adc.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpioe.fs
+.include gpioh.fs
+.include tim2.fs
+.include tim16.fs
+.include tim17.fs
+.include tim1.fs
+.include lptim1.fs
+.include lptim2.fs
+.include usart1.fs
+.include lpuart1.fs
+.include sai1.fs
+.include spi1.fs
+.include rtc.fs
+.include dbgmcu.fs
+.include pka.fs
+.include ipcc.fs
+.include exti.fs
+.include crs.fs
+.include usb.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include DMA1                   \ Direct memory access controller
+.include DMA2                   \ Direct memory access controller
+.include DMAMUX                 \ Direct memory access Multiplexer
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ System window watchdog
+.include COMP                   \ Comparator instance 1
+.include I2C1                   \ Inter-integrated circuit
+.include I2C3                   \ I2C3 event interrupt
+.include FLASH                  \ Flash
+.include QUADSPI                \ QuadSPI interface
+.include RCC                    \ Reset and clock control
+.include PWR                    \ Power control
+.include SYSCFG                 \ System configuration controller
+.include RNG                    \ Random number generator
+.include AES1                   \ Advanced encryption standard hardware accelerator 1
+.include AES2                   \ Advanced encryption standard hardware accelerator 1
+.include HSEM                   \ HSEM
+.include ADC                    \ Analog to Digital Converter instance 1
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include TIM2                   \ General-purpose-timers
+.include TIM16                  \ General purpose timers
+.include TIM17                  \ General purpose timers
+.include TIM1                   \ Advanced-timers
+.include LPTIM1                 \ Low power timer
+.include LPTIM2                 \ LPtimer 2 global interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include LPUART1                \ LPUART1 global interrupt
+.include SAI1                   \ Serial audio interface
+.include SPI1                   \ Serial peripheral interface/Inter-IC sound
+.include RTC                    \ Real-time clock
+.include DBGMCU                 \ Debug support
+.include PKA                    \ PKA
+.include IPCC                   \ IPCC
+.include EXTI                   \ External interrupt/event controller
+.include CRS                    \ Clock recovery system
+.include USB                    \ Universal serial bus full-speed device interface
+
+compiletoram
+

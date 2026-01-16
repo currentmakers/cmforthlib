@@ -1,0 +1,204 @@
+\
+\ @file stm32f779.h
+\ @brief Loader for all peripherals in a STM32F779
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include rng.fs
+.include hash.fs
+.include cryp.fs
+.include dcmi.fs
+.include fmc.fs
+.include dma2.fs
+.include dma1.fs
+.include rcc.fs
+.include gpiod.fs
+.include gpioc.fs
+.include gpiok.fs
+.include gpioj.fs
+.include gpioi.fs
+.include gpioh.fs
+.include gpiog.fs
+.include gpiof.fs
+.include gpioe.fs
+.include gpiob.fs
+.include gpioa.fs
+.include syscfg.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include spi4.fs
+.include spi5.fs
+.include spi6.fs
+.include adc1.fs
+.include adc2.fs
+.include adc3.fs
+.include adc_common.fs
+.include dbg.fs
+.include dac.fs
+.include pwr.fs
+.include iwdg.fs
+.include wwdg.fs
+.include tim1.fs
+.include tim8.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim9.fs
+.include tim12.fs
+.include tim10.fs
+.include tim11.fs
+.include tim13.fs
+.include tim14.fs
+.include tim6.fs
+.include tim7.fs
+.include ethernet_mac.fs
+.include crc.fs
+.include can1.fs
+.include can2.fs
+.include can3.fs
+.include flash.fs
+.include exti.fs
+.include ltdc.fs
+.include sai1.fs
+.include sai2.fs
+.include dma2d.fs
+.include quadspi.fs
+.include cec.fs
+.include spdifrx.fs
+.include sdmmc1.fs
+.include sdmmc2.fs
+.include lptim1.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include i2c4.fs
+.include rtc.fs
+.include usart6.fs
+.include usart1.fs
+.include usart3.fs
+.include usart2.fs
+.include uart5.fs
+.include uart4.fs
+.include uart8.fs
+.include uart7.fs
+.include otg_fs_global.fs
+.include otg_hs_global.fs
+.include mdios.fs
+.include dfsdm.fs
+.include jpeg.fs
+.include ethernet_mmc.fs
+.include ethernet_ptp.fs
+.include ethernet_dma.fs
+.include otg_fs_host.fs
+.include otg_fs_device.fs
+.include otg_fs_pwrclk.fs
+.include otg_hs_host.fs
+.include otg_hs_device.fs
+.include otg_hs_pwrclk.fs
+.include dsi.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include RNG                    \ Random number generator
+.include HASH                   \ Hash processor
+.include CRYP                   \ Cryptographic processor
+.include DCMI                   \ Digital camera interface
+.include FMC                    \ Flexible memory controller
+.include DMA2                   \ DMA controller
+.include DMA1                   \ DMA1 Stream0 global interrupt
+.include RCC                    \ Reset and clock control
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOK                  \ General-purpose I/Os
+.include GPIOJ                  \ General-purpose I/Os
+.include GPIOI                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include GPIOG                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOA                  \ General-purpose I/Os
+.include SYSCFG                 \ System configuration controller
+.include SPI1                   \ Serial peripheral interface
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global interrupt
+.include SPI4                   \ SPI 4 global interrupt
+.include SPI5                   \ SPI 5 global interrupt
+.include SPI6                   \ SPI 6 global interrupt
+.include ADC1                   \ Analog-to-digital converter
+.include ADC2                   \ Analog-to-digital converter
+.include ADC3                   \ Analog-to-digital converter
+.include ADC_COMMON             \ Common ADC registers
+.include DBG                    \ Debug support
+.include DAC                    \ Digital-to-analog converter
+.include PWR                    \ Power control
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ Window watchdog
+.include TIM1                   \ Advanced-timers
+.include TIM8                   \ TIM8 Break interrupt and TIM12 global interrupt
+.include TIM2                   \ General purpose timers
+.include TIM3                   \ General purpose timers
+.include TIM4                   \ General purpose timers
+.include TIM5                   \ TIM5 global interrupt
+.include TIM9                   \ General purpose timers
+.include TIM12                  \ General purpose timers
+.include TIM10                  \ General-purpose-timers
+.include TIM11                  \ General-purpose-timers
+.include TIM13                  \ General-purpose-timers
+.include TIM14                  \ General-purpose-timers
+.include TIM6                   \ Basic timers
+.include TIM7                   \ TIM7 global interrupt
+.include ETHERNET_MAC           \ Ethernet: media access control (MAC)
+.include CRC                    \ Cryptographic processor
+.include CAN1                   \ Controller area network
+.include CAN2                   \ CAN2 TX interrupts
+.include CAN3                   \ CAN3 TX interrupt
+.include FLASH                  \ FLASH
+.include EXTI                   \ External interrupt/event controller
+.include LTDC                   \ LCD-TFT Controller
+.include SAI1                   \ Serial audio interface
+.include SAI2                   \ SAI2 global interrupt
+.include DMA2D                  \ DMA2D controller
+.include QUADSPI                \ QuadSPI interface
+.include CEC                    \ HDMI-CEC controller
+.include SPDIFRX                \ Receiver Interface
+.include SDMMC1                 \ Secure digital input/output interface
+.include SDMMC2                 \ SDMMC2 global interrupt
+.include LPTIM1                 \ Low power timer
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ Inter-integrated circuit
+.include I2C3                   \ I2C3 event interrupt
+.include I2C4                   \ I2C4 event interrupt
+.include RTC                    \ Real-time clock
+.include USART6                 \ Universal synchronous asynchronous receiver transmitter
+.include USART1                 \ USART1 global interrupt
+.include USART3                 \ USART3 global interrupt
+.include USART2                 \ USART2 global interrupt
+.include UART5                  \ UART5 global interrupt
+.include UART4                  \ UART4 global interrupt
+.include UART8                  \ UART 8 global interrupt
+.include UART7                  \ UART 7 global interrupt
+.include OTG_FS_GLOBAL          \ USB on the go full speed
+.include OTG_HS_GLOBAL          \ USB on the go high speed
+.include MDIOS                  \ Management data input/output slave
+.include DFSDM                  \ Digital filter for sigma delta modulators
+.include JPEG                   \ JPEG codec
+.include ETHERNET_MMC           \ Ethernet: MAC management counters
+.include ETHERNET_PTP           \ Ethernet: Precision time protocol
+.include ETHERNET_DMA           \ Ethernet: DMA controller operation
+.include OTG_FS_HOST            \ USB on the go full speed
+.include OTG_FS_DEVICE          \ USB on the go full speed
+.include OTG_FS_PWRCLK          \ USB on the go full speed
+.include OTG_HS_HOST            \ USB on the go high speed
+.include OTG_HS_DEVICE          \ USB on the go high speed
+.include OTG_HS_PWRCLK          \ USB on the go high speed
+.include DSI                    \ DSI Host
+
+compiletoram
+

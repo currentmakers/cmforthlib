@@ -1,0 +1,80 @@
+\
+\ @file stm32wb30_cm4.h
+\ @brief Loader for all peripherals in a STM32WB30_CM4
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc.fs
+.include aes2.fs
+.include crc.fs
+.include dbgmcu.fs
+.include dma1.fs
+.include dmamux.fs
+.include exti.fs
+.include flash.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpioe.fs
+.include gpioh.fs
+.include hsem.fs
+.include i2c1.fs
+.include ipcc.fs
+.include iwdg.fs
+.include lptim1.fs
+.include lptim2.fs
+.include pka.fs
+.include pwr.fs
+.include rcc.fs
+.include rng.fs
+.include rtc.fs
+.include spi1.fs
+.include syscfg.fs
+.include tim1.fs
+.include tim2.fs
+.include tim16.fs
+.include tim17.fs
+.include usart1.fs
+.include wwdg.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC                    \ Analog to Digital Converter instance 1
+.include AES2                   \ Advanced encryption standard hardware accelerator 1
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include DBGMCU                 \ Debug support
+.include DMA1                   \ Direct memory access controller
+.include DMAMUX                 \ Direct memory access Multiplexer
+.include EXTI                   \ External interrupt/event controller
+.include FLASH                  \ Flash
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include HSEM                   \ HSEM
+.include I2C1                   \ Inter-integrated circuit
+.include IPCC                   \ IPCC
+.include IWDG                   \ Independent watchdog
+.include LPTIM1                 \ Low power timer
+.include LPTIM2                 \ LPtimer 2 global interrupt
+.include PKA                    \ PKA
+.include PWR                    \ Power control
+.include RCC                    \ Reset and clock control
+.include RNG                    \ Random number generator
+.include RTC                    \ Real-time clock
+.include SPI1                   \ Serial peripheral interface/Inter-IC sound
+.include SYSCFG                 \ System configuration controller
+.include TIM1                   \ Advanced-timers
+.include TIM2                   \ General-purpose-timers
+.include TIM16                  \ General purpose timers
+.include TIM17                  \ General purpose timers
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include WWDG                   \ System window watchdog
+
+compiletoram
+

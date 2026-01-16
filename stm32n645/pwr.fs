@@ -1,0 +1,264 @@
+\
+\ @file pwr.fs
+\ @brief Power control
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+.include ../common.fs
+
+\
+\ @brief PWR control register 1
+\ Address offset: 0x00
+\ Reset value: 0x00000024
+\
+
+$00000004 constant PWR_PWR_CR1_SDEN                                 \ SMPS step-down converter enable
+$00000010 constant PWR_PWR_CR1_MODE_PDN                             \ Enables the pull down on output voltage during power-down mode
+$00000020 constant PWR_PWR_CR1_LPDS08V                              \ SMPS low-power mode enable (SVOS high only)
+$001f0000 constant PWR_PWR_CR1_POPL                                 \ pwr_on pulse low configuration.
+
+
+\
+\ @brief PWR control register 2
+\ Address offset: 0x04
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_CR2_PVDEN                                \ Programmable voltage detector enable
+$00000100 constant PWR_PWR_CR2_PVDO                                 \ Programmable voltage detect output
+
+
+\
+\ @brief PWR control register 3
+\ Address offset: 0x08
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_CR3_VCOREMONEN                           \ V less than sub>DDCORE less than /sub> monitoring enable
+$00000010 constant PWR_PWR_CR3_VCORELLS                             \ V less than sub>DDCORE less than /sub> voltage detector low-level selection
+$00000100 constant PWR_PWR_CR3_VCOREL                               \ Monitored V less than sub>DDCORE less than /sub> level above low threshold
+$00000200 constant PWR_PWR_CR3_VCOREH                               \ Monitored V less than sub>DDCORE less than /sub> level above high threshold
+
+
+\
+\ @brief PWR control register 4
+\ Address offset: 0x0C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_CR4_TCMRBSEN                             \ I-TCM and D-TCM RAMs backup supply enable (used to maintain TCM RAMs content in Standby mode)
+$00000010 constant PWR_PWR_CR4_TCMFLXRBSEN                          \ I-TCM FLEXMEM backup supply enable (used to maintain I-TCM FLEX MEM content in Standby mode)
+
+
+\
+\ @brief PWR voltage scaling control register
+\ Address offset: 0x20
+\ Reset value: 0x00020002
+\
+
+$00000001 constant PWR_PWR_VOSCR_VOS                                \ Voltage scaling selection according to performance
+$00000002 constant PWR_PWR_VOSCR_VOSRDY                             \ VOS ready bit for V less than sub>CORE less than /sub> voltage scaling output selection
+$00010000 constant PWR_PWR_VOSCR_ACTVOS                             \ VOS currently applied for V less than sub>CORE less than /sub> voltage scaling selection
+$00020000 constant PWR_PWR_VOSCR_ACTVOSRDY                          \ Voltage level ready bit for currently used ACTVOS
+
+
+\
+\ @brief PWR backup domain control register 1
+\ Address offset: 0x24
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_BDCR1_MONEN                              \ V less than sub>BAT less than /sub> and temperature monitoring enable
+$00010000 constant PWR_PWR_BDCR1_VBATL                              \ V less than sub>BAT less than /sub> level monitoring versus low threshold
+$00020000 constant PWR_PWR_BDCR1_VBATH                              \ V less than sub>BAT less than /sub> level monitoring versus high threshold
+$00040000 constant PWR_PWR_BDCR1_TEMPL                              \ Temperature level monitoring versus low threshold
+$00080000 constant PWR_PWR_BDCR1_TEMPH                              \ Temperature level monitoring versus high threshold
+
+
+\
+\ @brief PWR backup domain control register 2
+\ Address offset: 0x28
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_BDCR2_BKPRBSEN                           \ Backup RAM backup supply enable (used to maintain BKPRAM content in Standby and V less than sub>BAT less than /sub> modes).
+
+
+\
+\ @brief PWR disable backup protection control register
+\ Address offset: 0x2C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_DBPCR_DBP                                \ Disable backup domain write protection
+
+
+\
+\ @brief PWR CPU control register
+\ Address offset: 0x30
+\ Reset value: 0x00010000
+\
+
+$00000001 constant PWR_PWR_CPUCR_PDDS                               \ Power-down deepsleep selection
+$00000002 constant PWR_PWR_CPUCR_CSSF                               \ Clear Standby and Stop flags (always read as 0)
+$00000100 constant PWR_PWR_CPUCR_STOPF                              \ Stop flag
+$00000200 constant PWR_PWR_CPUCR_SBF                                \ Standby flag
+$00010000 constant PWR_PWR_CPUCR_SVOS                               \ System Stop mode voltage scaling selection
+
+
+\
+\ @brief PWR supply voltage monitoring control register 1
+\ Address offset: 0x34
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_SVMCR1_VDDIO4VMEN                        \ V less than sub>DDIO4 less than /sub>independent I/O voltage monitor enable
+$00000100 constant PWR_PWR_SVMCR1_VDDIO4SV                          \ V less than sub>DDIO4 less than /sub>independent I/O supply valid.
+$00010000 constant PWR_PWR_SVMCR1_VDDIO4RDY                         \ V less than sub>DDIO4 less than /sub>ready
+$01000000 constant PWR_PWR_SVMCR1_VDDIO4VRSEL                       \ V less than sub>DDIO4 less than /sub> I/O voltage range selection
+$02000000 constant PWR_PWR_SVMCR1_VDDIO4VRSTBY                      \ V less than sub>DDIO4 less than /sub> I/O voltage range Standby mode
+
+
+\
+\ @brief PWR supply voltage monitoring control register 2
+\ Address offset: 0x38
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_SVMCR2_VDDIO5VMEN                        \ V less than sub>DDIO5 less than /sub>independent voltage monitor enable
+$00000100 constant PWR_PWR_SVMCR2_VDDIO5SV                          \ V less than sub>DDIO5 less than /sub>independent supply valid
+$00010000 constant PWR_PWR_SVMCR2_VDDIO5RDY                         \ V less than sub>DDIO5 less than /sub>ready
+$01000000 constant PWR_PWR_SVMCR2_VDDIO5VRSEL                       \ V less than sub>DDIO5 less than /sub> I/O voltage range selection
+$02000000 constant PWR_PWR_SVMCR2_VDDIO5VRSTBY                      \ V less than sub>DDIO5 less than /sub> I/O voltage range Standby mode
+
+
+\
+\ @brief PWR supply voltage monitoring control register 3
+\ Address offset: 0x3C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_SVMCR3_VDDIO2VMEN                        \ V less than sub>DDIO2 less than /sub>independent voltage monitor enable
+$00000002 constant PWR_PWR_SVMCR3_VDDIO3VMEN                        \ V less than sub>DDIO3 less than /sub>independent voltage monitor enable
+$00000004 constant PWR_PWR_SVMCR3_USB33VMEN                         \ V less than sub>DD33USB less than /sub>independent USB 33 voltage monitor enable.
+$00000010 constant PWR_PWR_SVMCR3_AVMEN                             \ V less than sub>DDA18ADC less than /sub>independent ADC voltage monitor enable
+$00000100 constant PWR_PWR_SVMCR3_VDDIO2SV                          \ V less than sub>DDIO2 less than /sub>independent supply valid.
+$00000200 constant PWR_PWR_SVMCR3_VDDIO3SV                          \ V less than sub>DDIO3 less than /sub>independent supply valid
+$00000400 constant PWR_PWR_SVMCR3_USB33SV                           \ V less than sub>DD33USB less than /sub>independent supply valid
+$00001000 constant PWR_PWR_SVMCR3_ASV                               \ V less than sub>DDA18ADC less than /sub>independent supply valid
+$00010000 constant PWR_PWR_SVMCR3_VDDIO2RDY                         \ V less than sub>DDIO2 less than /sub>ready
+$00020000 constant PWR_PWR_SVMCR3_VDDIO3RDY                         \ V less than sub>DDIO3 less than /sub>ready
+$00040000 constant PWR_PWR_SVMCR3_USB33RDY                          \ V less than sub>DD33USB less than /sub>ready
+$00100000 constant PWR_PWR_SVMCR3_ARDY                              \ V less than sub>DDA18ADC less than /sub>ready
+$01000000 constant PWR_PWR_SVMCR3_VDDIOVRSEL                        \ V less than sub>DD less than /sub> I/O voltage range selection
+$02000000 constant PWR_PWR_SVMCR3_VDDIO2VRSEL                       \ V less than sub>DDIO2 less than /sub> I/O voltage range selection
+$04000000 constant PWR_PWR_SVMCR3_VDDIO3VRSEL                       \ V less than sub>DDIO3 less than /sub> I/O voltage range selection
+
+
+\
+\ @brief PWR wake-up clear register
+\ Address offset: 0x50
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_WKUPCR_WKUPC1                            \ Clear wake-up flag for WKUP1 pin
+$00000002 constant PWR_PWR_WKUPCR_WKUPC2                            \ Clear wake-up flag for WKUP2 pin
+$00000004 constant PWR_PWR_WKUPCR_WKUPC3                            \ Clear wake-up flag for WKUP3 pin
+$00000008 constant PWR_PWR_WKUPCR_WKUPC4                            \ Clear wake-up flag for WKUP4 pin
+
+
+\
+\ @brief PWR wake-up status register
+\ Address offset: 0x54
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_WKUPSR_WKUPF1                            \ Wake-up flag for WKUP1 pin before enable
+$00000002 constant PWR_PWR_WKUPSR_WKUPF2                            \ Wake-up flag for WKUP2 pin before enable
+$00000004 constant PWR_PWR_WKUPSR_WKUPF3                            \ Wake-up flag for WKUP3 pin before enable
+$00000008 constant PWR_PWR_WKUPSR_WKUPF4                            \ Wake-up flag for WKUP4 pin before enable
+
+
+\
+\ @brief PWR wake-up enable and polarity register
+\ Address offset: 0x58
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_WKUPEPR_WKUPEN1                          \ Enable WKUP1 pin
+$00000002 constant PWR_PWR_WKUPEPR_WKUPEN2                          \ Enable WKUP2 pin
+$00000004 constant PWR_PWR_WKUPEPR_WKUPEN3                          \ Enable WKUP3 pin
+$00000008 constant PWR_PWR_WKUPEPR_WKUPEN4                          \ Enable WKUP4 pin
+$00000100 constant PWR_PWR_WKUPEPR_WKUPP1                           \ Wake-up polarity bit for WKUP1 pin
+$00000200 constant PWR_PWR_WKUPEPR_WKUPP2                           \ Wake-up polarity bit for WKUP2 pin
+$00000400 constant PWR_PWR_WKUPEPR_WKUPP3                           \ Wake-up polarity bit for WKUP3 pin
+$00000800 constant PWR_PWR_WKUPEPR_WKUPP4                           \ Wake-up polarity bit for WKUP4 pin
+$00030000 constant PWR_PWR_WKUPEPR_WKUPPUPD1                        \ Wake-up pull configuration for WKUP1 pin
+$000c0000 constant PWR_PWR_WKUPEPR_WKUPPUPD2                        \ Wake-up pull configuration for WKUP2 pin
+$00300000 constant PWR_PWR_WKUPEPR_WKUPPUPD3                        \ Wake-up pull configuration for WKUP3 pin
+$00c00000 constant PWR_PWR_WKUPEPR_WKUPPUPD4                        \ Wake-up pull configuration for WKUP4 pin
+
+
+\
+\ @brief PWR security configuration register
+\ Address offset: 0x70
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_SECCFGR_SEC0                             \ System supply configuration secure protection
+$00000002 constant PWR_PWR_SECCFGR_SEC1                             \ Programmable voltage detector secure protection
+$00000004 constant PWR_PWR_SECCFGR_SEC2                             \ V less than sub>DDCORE less than /sub> monitor secure protection
+$00000008 constant PWR_PWR_SECCFGR_SEC3                             \ I-TCM, D-TCM, and I-TCM FLEXMEM low power control secure protection
+$00000010 constant PWR_PWR_SECCFGR_SEC4                             \ Voltage scaling selection secure protection
+$00000020 constant PWR_PWR_SECCFGR_SEC5                             \ Backup domain secure protection
+$00000040 constant PWR_PWR_SECCFGR_SEC6                             \ CPU power control secure protection
+$00000080 constant PWR_PWR_SECCFGR_SEC7                             \ Peripheral voltage monitor secure protection
+$00010000 constant PWR_PWR_SECCFGR_WKUPSEC1                         \ WKUP1 pin secure protection
+$00020000 constant PWR_PWR_SECCFGR_WKUPSEC2                         \ WKUP2 pin secure protection
+$00040000 constant PWR_PWR_SECCFGR_WKUPSEC3                         \ WKUP3 pin secure protection
+$00080000 constant PWR_PWR_SECCFGR_WKUPSEC4                         \ WKUP4 pin secure protection
+
+
+\
+\ @brief PWR privilege configuration register
+\ Address offset: 0x74
+\ Reset value: 0x00000000
+\
+
+$00000001 constant PWR_PWR_PRIVCFGR_PRIV0                           \ System supply configuration privileged protection
+$00000002 constant PWR_PWR_PRIVCFGR_PRIV1                           \ Programmable voltage detector privileged protection
+$00000004 constant PWR_PWR_PRIVCFGR_PRIV2                           \ V less than sub>DDCORE less than /sub> monitor privileged protection
+$00000008 constant PWR_PWR_PRIVCFGR_PRIV3                           \ I-TCM, D-TCM, and I-TCM FLEX MEM low power control privileged protection
+$00000010 constant PWR_PWR_PRIVCFGR_PRIV4                           \ Voltage scaling selection privileged protection
+$00000020 constant PWR_PWR_PRIVCFGR_PRIV5                           \ Backup domain privileged protection
+$00000040 constant PWR_PWR_PRIVCFGR_PRIV6                           \ CPU power control privileged protection
+$00000080 constant PWR_PWR_PRIVCFGR_PRIV7                           \ Peripheral voltage monitor privileged protection
+$00010000 constant PWR_PWR_PRIVCFGR_WKUPPRIV1                       \ WKUP1 pin privileged protection
+$00020000 constant PWR_PWR_PRIVCFGR_WKUPPRIV2                       \ WKUP2 pin privileged protection
+$00040000 constant PWR_PWR_PRIVCFGR_WKUPPRIV3                       \ WKUP3 pin privileged protection
+$00080000 constant PWR_PWR_PRIVCFGR_WKUPPRIV4                       \ WKUP4 pin privileged protection
+
+
+\
+\ @brief Power control
+\
+$46024800 constant PWR_PWR_CR1    \ offset: 0x00 : PWR control register 1
+$46024804 constant PWR_PWR_CR2    \ offset: 0x04 : PWR control register 2
+$46024808 constant PWR_PWR_CR3    \ offset: 0x08 : PWR control register 3
+$4602480c constant PWR_PWR_CR4    \ offset: 0x0C : PWR control register 4
+$46024820 constant PWR_PWR_VOSCR  \ offset: 0x20 : PWR voltage scaling control register
+$46024824 constant PWR_PWR_BDCR1  \ offset: 0x24 : PWR backup domain control register 1
+$46024828 constant PWR_PWR_BDCR2  \ offset: 0x28 : PWR backup domain control register 2
+$4602482c constant PWR_PWR_DBPCR  \ offset: 0x2C : PWR disable backup protection control register
+$46024830 constant PWR_PWR_CPUCR  \ offset: 0x30 : PWR CPU control register
+$46024834 constant PWR_PWR_SVMCR1  \ offset: 0x34 : PWR supply voltage monitoring control register 1
+$46024838 constant PWR_PWR_SVMCR2  \ offset: 0x38 : PWR supply voltage monitoring control register 2
+$4602483c constant PWR_PWR_SVMCR3  \ offset: 0x3C : PWR supply voltage monitoring control register 3
+$46024850 constant PWR_PWR_WKUPCR  \ offset: 0x50 : PWR wake-up clear register
+$46024854 constant PWR_PWR_WKUPSR  \ offset: 0x54 : PWR wake-up status register
+$46024858 constant PWR_PWR_WKUPEPR  \ offset: 0x58 : PWR wake-up enable and polarity register
+$46024870 constant PWR_PWR_SECCFGR  \ offset: 0x70 : PWR security configuration register
+$46024874 constant PWR_PWR_PRIVCFGR  \ offset: 0x74 : PWR privilege configuration register
+

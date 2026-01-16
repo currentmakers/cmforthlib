@@ -1,0 +1,152 @@
+\
+\ @file stm32l4x5.h
+\ @brief Loader for all peripherals in a STM32L4x5
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include dac1.fs
+.include dma1.fs
+.include dma2.fs
+.include crc.fs
+.include lcd.fs
+.include tsc.fs
+.include iwdg.fs
+.include wwdg.fs
+.include comp.fs
+.include firewall.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include flash.fs
+.include pwr.fs
+.include syscfg.fs
+.include rng.fs
+.include aes.fs
+.include adc1.fs
+.include adc2.fs
+.include adc3.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpioh.fs
+.include gpiof.fs
+.include gpiog.fs
+.include sai1.fs
+.include sai2.fs
+.include tim2.fs
+.include tim5.fs
+.include tim4.fs
+.include tim3.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include tim1.fs
+.include tim6.fs
+.include tim7.fs
+.include lptim1.fs
+.include lptim2.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include uart5.fs
+.include uart4.fs
+.include lpuart1.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include sdmmc.fs
+.include exti.fs
+.include vrefbuf.fs
+.include can1.fs
+.include rtc.fs
+.include swpmi1.fs
+.include opamp.fs
+.include crs.fs
+.include usb.fs
+.include quadspi.fs
+.include fmc.fs
+.include dfsdm.fs
+.include tim8.fs
+.include rcc.fs
+.include adc123_common.fs
+.include dbgmcu.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include DAC1                   \ Digital-to-analog converter
+.include DMA1                   \ Direct memory access controller
+.include DMA2                   \ DMA2 Channel 1 global Interrupt
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include LCD                    \ Liquid crystal display controller
+.include TSC                    \ Touch sensing controller
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ System window watchdog
+.include COMP                   \ Comparator
+.include FIREWALL               \ Firewall
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2 event interrupt
+.include I2C3                   \ I2C3 event interrupt
+.include FLASH                  \ Flash
+.include PWR                    \ Power control
+.include SYSCFG                 \ System configuration controller
+.include RNG                    \ Random number generator
+.include AES                    \ Advanced encryption standard hardware accelerator
+.include ADC1                   \ Analog-to-Digital Converter
+.include ADC2                   \ ADC1 and ADC2 global interrupt
+.include ADC3                   \ ADC3 global Interrupt
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include GPIOG                  \ General-purpose I/Os
+.include SAI1                   \ Serial audio interface
+.include SAI2                   \ SAI2 global interrupt
+.include TIM2                   \ General-purpose-timers
+.include TIM5                   \ TIM5 global Interrupt
+.include TIM4                   \ TIM4 global interrupt
+.include TIM3                   \ TIM3 global interrupt
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General purpose timers
+.include TIM17                  \ TIM1 Trigger and Commutation interrupts and TIM17 global interrupt
+.include TIM1                   \ Advanced-timers
+.include TIM6                   \ Basic-timers
+.include TIM7                   \ TIM7 global interrupt
+.include LPTIM1                 \ Low power timer
+.include LPTIM2                 \ LP TIM2 interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include USART3                 \ USART3 global interrupt
+.include UART5                  \ UART5 global Interrupt
+.include UART4                  \ UART4 global Interrupt
+.include LPUART1                \ Universal synchronous asynchronous receiver transmitter
+.include SPI1                   \ Serial peripheral interface/Inter-IC sound
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global Interrupt
+.include SDMMC                  \ Secure digital input/output interface
+.include EXTI                   \ External interrupt/event controller
+.include VREFBUF                \ Voltage reference buffer
+.include CAN1                   \ Controller area network
+.include RTC                    \ Real-time clock
+.include SWPMI1                 \ Single Wire Protocol Master Interface
+.include OPAMP                  \ Operational amplifiers
+.include CRS                    \ Clock recovery system
+.include USB                    \ Universal serial bus full-speed device interface
+.include QUADSPI                \ QuadSPI interface
+.include FMC                    \ Flexible memory controller
+.include DFSDM                  \ Digital filter for sigma delta modulators
+.include TIM8                   \ Advanced-timers
+.include RCC                    \ Reset and clock control
+.include ADC123_COMMON          \ Analog-to-Digital Converter
+.include DBGMCU                 \ Debug support
+
+compiletoram
+

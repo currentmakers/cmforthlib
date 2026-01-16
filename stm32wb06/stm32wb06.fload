@@ -1,0 +1,72 @@
+\
+\ @file stm32wb06.h
+\ @brief Loader for all peripherals in a STM32WB06
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc.fs
+.include crc.fs
+.include dma.fs
+.include dmamux.fs
+.include gpioa.fs
+.include i2c1.fs
+.include rcc.fs
+.include spi3.fs
+.include usart.fs
+.include blue.fs
+.include globalstatmach.fs
+.include radio_control.fs
+.include radio.fs
+.include rrm.fs
+.include wakeup.fs
+.include flash_ctrl.fs
+.include rng.fs
+.include pwrc.fs
+.include pka.fs
+.include gpiob.fs
+.include lpuart.fs
+.include spi2.fs
+.include spi1.fs
+.include i2c2.fs
+.include rtc.fs
+.include iwdg.fs
+.include tim1.fs
+.include system_ctrl.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC                    \ ADC address block description
+.include CRC                    \ CRC address block description
+.include DMA                    \ DMA interrupt
+.include DMAMUX                 \ CxCR register
+.include GPIOA                  \ GPIOA address block description
+.include I2C1                   \ I2C address block description
+.include RCC                    \ Reset and Clock Controller
+.include SPI3                   \ SPI address block description
+.include USART                  \ USART address block description
+.include BLUE                   \ BLE Tx/Rx interrupt
+.include GLOBALSTATMACH         \ WORD0 register
+.include RADIO_CONTROL          \ RADIO_CONTROL_ID register
+.include RADIO                  \ RADIO Error interrupt
+.include RRM                    \ UDRA_CTRL0 register
+.include WAKEUP                 \ WAKEUP_OFFSET register
+.include FLASH_CTRL             \ 4kb addressable space
+.include RNG                    \ RNG_CR register
+.include PWRC                   \ CR1 register
+.include PKA                    \ PKA interrupt
+.include GPIOB                  \ GPIOB interrupt
+.include LPUART                 \ LPUART interrupt
+.include SPI2                   \ SPI2 interrupt
+.include SPI1                   \ SPI1 interrupt
+.include I2C2                   \ I2C2 interrupt
+.include RTC                    \ RTC interrupt
+.include IWDG                   \ IWDG_KR register
+.include TIM1                   \ TIM1 interrupt
+.include SYSTEM_CTRL            \ DIE_ID register
+
+compiletoram
+

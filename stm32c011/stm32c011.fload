@@ -1,0 +1,70 @@
+\
+\ @file stm32c011.h
+\ @brief Loader for all peripherals in a STM32C011
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc.fs
+.include crc.fs
+.include dbg.fs
+.include dma.fs
+.include dmamux.fs
+.include exti.fs
+.include flash.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpiof.fs
+.include i2c1.fs
+.include iwdg.fs
+.include pwr.fs
+.include rcc.fs
+.include rtc.fs
+.include spi1.fs
+.include syscfg.fs
+.include tim1.fs
+.include tim3.fs
+.include tim14.fs
+.include tim16.fs
+.include tim17.fs
+.include usart1.fs
+.include usart2.fs
+.include wwdg.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC                    \ Analog to Digital Converter
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include DBG                    \ DBG register block
+.include DMA                    \ DMA controller
+.include DMAMUX                 \ DMAMUX register block
+.include EXTI                   \ EXTI address block description
+.include FLASH                  \ Spider_FLASH register block
+.include GPIOA                  \ GPIOA address block description
+.include GPIOB                  \ GPIOB address block description
+.include GPIOC                  \ GPIOC address block description
+.include GPIOD                  \ GPIOD address block description
+.include GPIOF                  \ GPIOF address block description
+.include I2C1                   \ I2C register block
+.include IWDG                   \ IWDG register block
+.include PWR                    \ PWR address block description
+.include RCC                    \ RCC address block description
+.include RTC                    \ RTC register block
+.include SPI1                   \ Serial peripheral interface
+.include SYSCFG                 \ SYSCFG register block
+.include TIM1                   \ Advanced-control timer
+.include TIM3                   \ General-purpose timer
+.include TIM14                  \ General-purpose timers
+.include TIM16                  \ General-purpose timers
+.include TIM17                  \ General-purpose timers
+.include USART1                 \ USART register block
+.include USART2                 \ USART2 global interrupt (combined with EXTI 25)
+.include WWDG                   \ WWDG register block
+
+compiletoram
+

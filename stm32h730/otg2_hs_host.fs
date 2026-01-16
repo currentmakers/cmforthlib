@@ -1,0 +1,1620 @@
+\
+\ @file otg2_hs_host.fs
+\ @brief USB 1 on the go high speed
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+.include ../common.fs
+
+\
+\ @brief OTG_HS host configuration register
+\ Address offset: 0x00
+\ Reset value: 0x00000000
+\
+
+$00000003 constant OTG2_HS_HOST_OTG_HS_HCFG_FSLSPCS                 \ FS/LS PHY clock select
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCFG_FSLSS                   \ FS- and LS-only support
+
+
+\
+\ @brief OTG_HS Host frame interval register
+\ Address offset: 0x04
+\ Reset value: 0x0000EA60
+\
+
+$0000ffff constant OTG2_HS_HOST_OTG_HS_HFIR_FRIVL                   \ Frame interval
+
+
+\
+\ @brief OTG_HS host frame number/frame time remaining register
+\ Address offset: 0x08
+\ Reset value: 0x00003FFF
+\
+
+$0000ffff constant OTG2_HS_HOST_OTG_HS_HFNUM_FRNUM                  \ Frame number
+$ffff0000 constant OTG2_HS_HOST_OTG_HS_HFNUM_FTREM                  \ Frame time remaining
+
+
+\
+\ @brief OTG_HS_Host periodic transmit FIFO/queue status register
+\ Address offset: 0x10
+\ Reset value: 0x00080100
+\
+
+$0000ffff constant OTG2_HS_HOST_OTG_HS_HPTXSTS_PTXFSAVL             \ Periodic transmit data FIFO space available
+$00ff0000 constant OTG2_HS_HOST_OTG_HS_HPTXSTS_PTXQSAV              \ Periodic transmit request queue space available
+$ff000000 constant OTG2_HS_HOST_OTG_HS_HPTXSTS_PTXQTOP              \ Top of the periodic transmit request queue
+
+
+\
+\ @brief OTG_HS Host all channels interrupt register
+\ Address offset: 0x14
+\ Reset value: 0x00000000
+\
+
+$0000ffff constant OTG2_HS_HOST_OTG_HS_HAINT_HAINT                  \ Channel interrupts
+
+
+\
+\ @brief OTG_HS host all channels interrupt mask register
+\ Address offset: 0x18
+\ Reset value: 0x00000000
+\
+
+$0000ffff constant OTG2_HS_HOST_OTG_HS_HAINTMSK_HAINTM              \ Channel interrupt mask
+
+
+\
+\ @brief OTG_HS host port control and status register
+\ Address offset: 0x40
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HPRT_PCSTS                   \ Port connect status
+$00000002 constant OTG2_HS_HOST_OTG_HS_HPRT_PCDET                   \ Port connect detected
+$00000004 constant OTG2_HS_HOST_OTG_HS_HPRT_PENA                    \ Port enable
+$00000008 constant OTG2_HS_HOST_OTG_HS_HPRT_PENCHNG                 \ Port enable/disable change
+$00000010 constant OTG2_HS_HOST_OTG_HS_HPRT_POCA                    \ Port overcurrent active
+$00000020 constant OTG2_HS_HOST_OTG_HS_HPRT_POCCHNG                 \ Port overcurrent change
+$00000040 constant OTG2_HS_HOST_OTG_HS_HPRT_PRES                    \ Port resume
+$00000080 constant OTG2_HS_HOST_OTG_HS_HPRT_PSUSP                   \ Port suspend
+$00000100 constant OTG2_HS_HOST_OTG_HS_HPRT_PRST                    \ Port reset
+$00000c00 constant OTG2_HS_HOST_OTG_HS_HPRT_PLSTS                   \ Port line status
+$00001000 constant OTG2_HS_HOST_OTG_HS_HPRT_PPWR                    \ Port power
+$0001e000 constant OTG2_HS_HOST_OTG_HS_HPRT_PTCTL                   \ Port test control
+$00060000 constant OTG2_HS_HOST_OTG_HS_HPRT_PSPD                    \ Port speed
+
+
+\
+\ @brief OTG_HS host channel-0 characteristics register
+\ Address offset: 0x100
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR0_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR0_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-0 split control register
+\ Address offset: 0x104
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT0_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT0_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT0_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT0_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT0_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-11 interrupt register
+\ Address offset: 0x108
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT0_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT0_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT0_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT0_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT0_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT0_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT0_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT0_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT0_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT0_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT0_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-11 interrupt mask register
+\ Address offset: 0x10C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK0_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-11 transfer size register
+\ Address offset: 0x110
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ0_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ0_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ0_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-0 DMA address register
+\ Address offset: 0x114
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA0_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-1 characteristics register
+\ Address offset: 0x120
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR1_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR1_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-1 split control register
+\ Address offset: 0x124
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT1_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT1_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT1_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT1_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT1_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-1 interrupt register
+\ Address offset: 0x128
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT1_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT1_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT1_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT1_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT1_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT1_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT1_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT1_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT1_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT1_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT1_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-1 interrupt mask register
+\ Address offset: 0x12C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK1_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-1 transfer size register
+\ Address offset: 0x130
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ1_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ1_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ1_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-1 DMA address register
+\ Address offset: 0x134
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA1_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-2 characteristics register
+\ Address offset: 0x140
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR2_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR2_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-2 split control register
+\ Address offset: 0x144
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT2_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT2_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT2_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT2_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT2_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-2 interrupt register
+\ Address offset: 0x148
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT2_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT2_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT2_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT2_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT2_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT2_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT2_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT2_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT2_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT2_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT2_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-2 interrupt mask register
+\ Address offset: 0x14C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK2_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-2 transfer size register
+\ Address offset: 0x150
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ2_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ2_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ2_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-2 DMA address register
+\ Address offset: 0x154
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA2_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-3 characteristics register
+\ Address offset: 0x160
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR3_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR3_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-3 split control register
+\ Address offset: 0x164
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT3_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT3_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT3_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT3_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT3_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-3 interrupt register
+\ Address offset: 0x168
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT3_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT3_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT3_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT3_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT3_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT3_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT3_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT3_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT3_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT3_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT3_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-3 interrupt mask register
+\ Address offset: 0x16C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK3_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-3 transfer size register
+\ Address offset: 0x170
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ3_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ3_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ3_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-3 DMA address register
+\ Address offset: 0x174
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA3_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-4 characteristics register
+\ Address offset: 0x180
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR4_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR4_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-4 split control register
+\ Address offset: 0x184
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT4_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT4_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT4_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT4_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT4_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-4 interrupt register
+\ Address offset: 0x188
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT4_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT4_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT4_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT4_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT4_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT4_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT4_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT4_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT4_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT4_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT4_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-4 interrupt mask register
+\ Address offset: 0x18C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK4_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-4 transfer size register
+\ Address offset: 0x190
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ4_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ4_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ4_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-4 DMA address register
+\ Address offset: 0x194
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA4_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-5 characteristics register
+\ Address offset: 0x1A0
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR5_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR5_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-5 split control register
+\ Address offset: 0x1A4
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT5_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT5_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT5_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT5_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT5_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-5 interrupt register
+\ Address offset: 0x1A8
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT5_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT5_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT5_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT5_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT5_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT5_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT5_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT5_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT5_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT5_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT5_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-5 interrupt mask register
+\ Address offset: 0x1AC
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK5_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-5 transfer size register
+\ Address offset: 0x1B0
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ5_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ5_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ5_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-5 DMA address register
+\ Address offset: 0x1B4
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA5_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-6 characteristics register
+\ Address offset: 0x1C0
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR6_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR6_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-6 split control register
+\ Address offset: 0x1C4
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT6_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT6_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT6_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT6_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT6_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-6 interrupt register
+\ Address offset: 0x1C8
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT6_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT6_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT6_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT6_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT6_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT6_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT6_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT6_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT6_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT6_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT6_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-6 interrupt mask register
+\ Address offset: 0x1CC
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK6_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-6 transfer size register
+\ Address offset: 0x1D0
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ6_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ6_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ6_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-6 DMA address register
+\ Address offset: 0x1D4
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA6_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-7 characteristics register
+\ Address offset: 0x1E0
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR7_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR7_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-7 split control register
+\ Address offset: 0x1E4
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT7_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT7_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT7_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT7_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT7_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-7 interrupt register
+\ Address offset: 0x1E8
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT7_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT7_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT7_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT7_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT7_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT7_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT7_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT7_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT7_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT7_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT7_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-7 interrupt mask register
+\ Address offset: 0x1EC
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK7_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-7 transfer size register
+\ Address offset: 0x1F0
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ7_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ7_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ7_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-7 DMA address register
+\ Address offset: 0x1F4
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA7_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-8 characteristics register
+\ Address offset: 0x200
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR8_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR8_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-8 split control register
+\ Address offset: 0x204
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT8_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT8_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT8_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT8_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT8_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-8 interrupt register
+\ Address offset: 0x208
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT8_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT8_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT8_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT8_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT8_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT8_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT8_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT8_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT8_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT8_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT8_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-8 interrupt mask register
+\ Address offset: 0x20C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK8_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-8 transfer size register
+\ Address offset: 0x210
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ8_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ8_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ8_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-8 DMA address register
+\ Address offset: 0x214
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA8_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-9 characteristics register
+\ Address offset: 0x220
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR9_MPSIZ                \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_EPNUM                \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_EPDIR                \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_LSDEV                \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_EPTYP                \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_MC                   \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_DAD                  \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_ODDFRM               \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_CHDIS                \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR9_CHENA                \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-9 split control register
+\ Address offset: 0x224
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT9_PRTADDR              \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT9_HUBADDR              \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT9_XACTPOS              \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT9_COMPLSPLT            \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT9_SPLITEN              \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-9 interrupt register
+\ Address offset: 0x228
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT9_XFRC                  \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT9_CHH                   \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT9_AHBERR                \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT9_STALL                 \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT9_NAK                   \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT9_ACK                   \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT9_NYET                  \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT9_TXERR                 \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT9_BBERR                 \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT9_FRMOR                 \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT9_DTERR                 \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-9 interrupt mask register
+\ Address offset: 0x22C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_XFRCM              \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_CHHM               \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_AHBERR             \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_STALLM             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_NAKM               \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_ACKM               \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_NYET               \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_TXERRM             \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_BBERRM             \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_FRMORM             \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK9_DTERRM             \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-9 transfer size register
+\ Address offset: 0x230
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ9_XFRSIZ               \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ9_PKTCNT               \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ9_DPID                 \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-9 DMA address register
+\ Address offset: 0x234
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA9_DMAADDR               \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-10 characteristics register
+\ Address offset: 0x240
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR10_MPSIZ               \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_EPNUM               \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_EPDIR               \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_LSDEV               \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_EPTYP               \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_MC                  \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_DAD                 \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_ODDFRM              \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_CHDIS               \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR10_CHENA               \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-10 split control register
+\ Address offset: 0x244
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT10_PRTADDR             \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT10_HUBADDR             \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT10_XACTPOS             \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT10_COMPLSPLT           \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT10_SPLITEN             \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-10 interrupt register
+\ Address offset: 0x248
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT10_XFRC                 \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT10_CHH                  \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT10_AHBERR               \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT10_STALL                \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT10_NAK                  \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT10_ACK                  \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT10_NYET                 \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT10_TXERR                \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT10_BBERR                \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT10_FRMOR                \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT10_DTERR                \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-10 interrupt mask register
+\ Address offset: 0x24C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_XFRCM             \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_CHHM              \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_AHBERR            \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_STALLM            \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_NAKM              \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_ACKM              \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_NYET              \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_TXERRM            \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_BBERRM            \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_FRMORM            \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK10_DTERRM            \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-10 transfer size register
+\ Address offset: 0x250
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ10_XFRSIZ              \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ10_PKTCNT              \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ10_DPID                \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-10 DMA address register
+\ Address offset: 0x254
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA10_DMAADDR              \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-11 characteristics register
+\ Address offset: 0x260
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR11_MPSIZ               \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_EPNUM               \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_EPDIR               \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_LSDEV               \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_EPTYP               \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_MC                  \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_DAD                 \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_ODDFRM              \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_CHDIS               \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR11_CHENA               \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-11 split control register
+\ Address offset: 0x264
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT11_PRTADDR             \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT11_HUBADDR             \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT11_XACTPOS             \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT11_COMPLSPLT           \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT11_SPLITEN             \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-11 interrupt register
+\ Address offset: 0x268
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT11_XFRC                 \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT11_CHH                  \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT11_AHBERR               \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT11_STALL                \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT11_NAK                  \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT11_ACK                  \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT11_NYET                 \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT11_TXERR                \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT11_BBERR                \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT11_FRMOR                \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT11_DTERR                \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-11 interrupt mask register
+\ Address offset: 0x26C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_XFRCM             \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_CHHM              \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_AHBERR            \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_STALLM            \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_NAKM              \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_ACKM              \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_NYET              \ response received interrupt mask
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_TXERRM            \ Transaction error mask
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_BBERRM            \ Babble error mask
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_FRMORM            \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK11_DTERRM            \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-11 transfer size register
+\ Address offset: 0x270
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ11_XFRSIZ              \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ11_PKTCNT              \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ11_DPID                \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-11 DMA address register
+\ Address offset: 0x274
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA11_DMAADDR              \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-12 characteristics register
+\ Address offset: 0x278
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR12_MPSIZ               \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_EPNUM               \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_EPDIR               \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_LSDEV               \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_EPTYP               \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_MC                  \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_DAD                 \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_ODDFRM              \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_CHDIS               \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR12_CHENA               \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-12 split control register
+\ Address offset: 0x27C
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT12_PRTADDR             \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT12_HUBADDR             \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT12_XACTPOS             \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT12_COMPLSPLT           \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT12_SPLITEN             \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-12 interrupt register
+\ Address offset: 0x280
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT12_XFRC                 \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT12_CHH                  \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT12_AHBERR               \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT12_STALL                \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT12_NAK                  \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT12_ACK                  \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT12_NYET                 \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT12_TXERR                \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT12_BBERR                \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT12_FRMOR                \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT12_DTERR                \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-12 interrupt mask register
+\ Address offset: 0x284
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_XFRCM             \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_CHHM              \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_AHBERR            \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_STALLM            \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_NAKM              \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_ACKM              \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_NYET              \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_TXERRM            \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_BBERRM            \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_FRMORM            \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12_DTERRM            \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-12 transfer size register
+\ Address offset: 0x288
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ12_XFRSIZ              \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ12_PKTCNT              \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ12_DPID                \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-12 DMA address register
+\ Address offset: 0x28C
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA12_DMAADDR              \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-13 characteristics register
+\ Address offset: 0x290
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR13_MPSIZ               \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_EPNUM               \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_EPDIR               \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_LSDEV               \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_EPTYP               \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_MC                  \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_DAD                 \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_ODDFRM              \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_CHDIS               \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR13_CHENA               \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-13 split control register
+\ Address offset: 0x294
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT13_PRTADDR             \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT13_HUBADDR             \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT13_XACTPOS             \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT13_COMPLSPLT           \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT13_SPLITEN             \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-13 interrupt register
+\ Address offset: 0x298
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT13_XFRC                 \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT13_CHH                  \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT13_AHBERR               \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT13_STALL                \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT13_NAK                  \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT13_ACK                  \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT13_NYET                 \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT13_TXERR                \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT13_BBERR                \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT13_FRMOR                \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT13_DTERR                \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-13 interrupt mask register
+\ Address offset: 0x29C
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_XFRCM             \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_CHHM              \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_AHBERR            \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_STALLM            \ STALLM response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_NAKM              \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_ACKM              \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_NYET              \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_TXERRM            \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_BBERRM            \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_FRMORM            \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK13_DTERRM            \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-13 transfer size register
+\ Address offset: 0x2A0
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ13_XFRSIZ              \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ13_PKTCNT              \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ13_DPID                \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-13 DMA address register
+\ Address offset: 0x2A4
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA13_DMAADDR              \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-14 characteristics register
+\ Address offset: 0x2A8
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR14_MPSIZ               \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_EPNUM               \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_EPDIR               \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_LSDEV               \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_EPTYP               \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_MC                  \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_DAD                 \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_ODDFRM              \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_CHDIS               \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR14_CHENA               \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-14 split control register
+\ Address offset: 0x2AC
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT14_PRTADDR             \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT14_HUBADDR             \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT14_XACTPOS             \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT14_COMPLSPLT           \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT14_SPLITEN             \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-14 interrupt register
+\ Address offset: 0x2B0
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT14_XFRC                 \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT14_CHH                  \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT14_AHBERR               \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT14_STALL                \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT14_NAK                  \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT14_ACK                  \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT14_NYET                 \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT14_TXERR                \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT14_BBERR                \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT14_FRMOR                \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT14_DTERR                \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-14 interrupt mask register
+\ Address offset: 0x2B4
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_XFRCM             \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_CHHM              \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_AHBERR            \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_STALLM            \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_NAKM              \ NAKM response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_ACKM              \ ACKM response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_NYET              \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_TXERRM            \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_BBERRM            \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_FRMORM            \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14_DTERRM            \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-14 transfer size register
+\ Address offset: 0x2B8
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ14_XFRSIZ              \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ14_PKTCNT              \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ14_DPID                \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-14 DMA address register
+\ Address offset: 0x2BC
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA14_DMAADDR              \ DMA address
+
+
+\
+\ @brief OTG_HS host channel-15 characteristics register
+\ Address offset: 0x2C0
+\ Reset value: 0x00000000
+\
+
+$000007ff constant OTG2_HS_HOST_OTG_HS_HCCHAR15_MPSIZ               \ Maximum packet size
+$00007800 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_EPNUM               \ Endpoint number
+$00008000 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_EPDIR               \ Endpoint direction
+$00020000 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_LSDEV               \ Low-speed device
+$000c0000 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_EPTYP               \ Endpoint type
+$00300000 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_MC                  \ Multi Count (MC) / Error Count (EC)
+$1fc00000 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_DAD                 \ Device address
+$20000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_ODDFRM              \ Odd frame
+$40000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_CHDIS               \ Channel disable
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCCHAR15_CHENA               \ Channel enable
+
+
+\
+\ @brief OTG_HS host channel-15 split control register
+\ Address offset: 0x2C4
+\ Reset value: 0x00000000
+\
+
+$0000007f constant OTG2_HS_HOST_OTG_HS_HCSPLT15_PRTADDR             \ Port address
+$00003f80 constant OTG2_HS_HOST_OTG_HS_HCSPLT15_HUBADDR             \ Hub address
+$0000c000 constant OTG2_HS_HOST_OTG_HS_HCSPLT15_XACTPOS             \ XACTPOS
+$00010000 constant OTG2_HS_HOST_OTG_HS_HCSPLT15_COMPLSPLT           \ Do complete split
+$80000000 constant OTG2_HS_HOST_OTG_HS_HCSPLT15_SPLITEN             \ Split enable
+
+
+\
+\ @brief OTG_HS host channel-15 interrupt register
+\ Address offset: 0x2C8
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINT15_XFRC                 \ Transfer completed
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINT15_CHH                  \ Channel halted
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINT15_AHBERR               \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINT15_STALL                \ STALL response received interrupt
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINT15_NAK                  \ NAK response received interrupt
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINT15_ACK                  \ ACK response received/transmitted interrupt
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINT15_NYET                 \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINT15_TXERR                \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINT15_BBERR                \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINT15_FRMOR                \ Frame overrun
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINT15_DTERR                \ Data toggle error
+
+
+\
+\ @brief OTG_HS host channel-15 interrupt mask register
+\ Address offset: 0x2CC
+\ Reset value: 0x00000000
+\
+
+$00000001 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_XFRCM             \ Transfer completed mask
+$00000002 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_CHHM              \ Channel halted mask
+$00000004 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_AHBERR            \ AHB error
+$00000008 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_STALL             \ STALL response received interrupt mask
+$00000010 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_NAKM              \ NAK response received interrupt mask
+$00000020 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_ACKM              \ ACK response received/transmitted interrupt mask
+$00000040 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_NYET              \ Response received interrupt
+$00000080 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_TXERRM            \ Transaction error
+$00000100 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_BBERRM            \ Babble error
+$00000200 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_FRMORM            \ Frame overrun mask
+$00000400 constant OTG2_HS_HOST_OTG_HS_HCINTMSK15_DTERRM            \ Data toggle error mask
+
+
+\
+\ @brief OTG_HS host channel-15 transfer size register
+\ Address offset: 0x2D0
+\ Reset value: 0x00000000
+\
+
+$0007ffff constant OTG2_HS_HOST_OTG_HS_HCTSIZ15_XFRSIZ              \ Transfer size
+$1ff80000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ15_PKTCNT              \ Packet count
+$60000000 constant OTG2_HS_HOST_OTG_HS_HCTSIZ15_DPID                \ Data PID
+
+
+\
+\ @brief OTG_HS host channel-15 DMA address register
+\ Address offset: 0x2D4
+\ Reset value: 0x00000000
+\
+
+$00000000 constant OTG2_HS_HOST_OTG_HS_HCDMA15_DMAADDR              \ DMA address
+
+
+\
+\ @brief USB 1 on the go high speed
+\
+$40080400 constant OTG2_HS_HOST_OTG_HS_HCFG  \ offset: 0x00 : OTG_HS host configuration register
+$40080404 constant OTG2_HS_HOST_OTG_HS_HFIR  \ offset: 0x04 : OTG_HS Host frame interval register
+$40080408 constant OTG2_HS_HOST_OTG_HS_HFNUM  \ offset: 0x08 : OTG_HS host frame number/frame time remaining register
+$40080410 constant OTG2_HS_HOST_OTG_HS_HPTXSTS  \ offset: 0x10 : OTG_HS_Host periodic transmit FIFO/queue status register
+$40080414 constant OTG2_HS_HOST_OTG_HS_HAINT  \ offset: 0x14 : OTG_HS Host all channels interrupt register
+$40080418 constant OTG2_HS_HOST_OTG_HS_HAINTMSK  \ offset: 0x18 : OTG_HS host all channels interrupt mask register
+$40080440 constant OTG2_HS_HOST_OTG_HS_HPRT  \ offset: 0x40 : OTG_HS host port control and status register
+$40080500 constant OTG2_HS_HOST_OTG_HS_HCCHAR0  \ offset: 0x100 : OTG_HS host channel-0 characteristics register
+$40080504 constant OTG2_HS_HOST_OTG_HS_HCSPLT0  \ offset: 0x104 : OTG_HS host channel-0 split control register
+$40080508 constant OTG2_HS_HOST_OTG_HS_HCINT0  \ offset: 0x108 : OTG_HS host channel-11 interrupt register
+$4008050c constant OTG2_HS_HOST_OTG_HS_HCINTMSK0  \ offset: 0x10C : OTG_HS host channel-11 interrupt mask register
+$40080510 constant OTG2_HS_HOST_OTG_HS_HCTSIZ0  \ offset: 0x110 : OTG_HS host channel-11 transfer size register
+$40080514 constant OTG2_HS_HOST_OTG_HS_HCDMA0  \ offset: 0x114 : OTG_HS host channel-0 DMA address register
+$40080520 constant OTG2_HS_HOST_OTG_HS_HCCHAR1  \ offset: 0x120 : OTG_HS host channel-1 characteristics register
+$40080524 constant OTG2_HS_HOST_OTG_HS_HCSPLT1  \ offset: 0x124 : OTG_HS host channel-1 split control register
+$40080528 constant OTG2_HS_HOST_OTG_HS_HCINT1  \ offset: 0x128 : OTG_HS host channel-1 interrupt register
+$4008052c constant OTG2_HS_HOST_OTG_HS_HCINTMSK1  \ offset: 0x12C : OTG_HS host channel-1 interrupt mask register
+$40080530 constant OTG2_HS_HOST_OTG_HS_HCTSIZ1  \ offset: 0x130 : OTG_HS host channel-1 transfer size register
+$40080534 constant OTG2_HS_HOST_OTG_HS_HCDMA1  \ offset: 0x134 : OTG_HS host channel-1 DMA address register
+$40080540 constant OTG2_HS_HOST_OTG_HS_HCCHAR2  \ offset: 0x140 : OTG_HS host channel-2 characteristics register
+$40080544 constant OTG2_HS_HOST_OTG_HS_HCSPLT2  \ offset: 0x144 : OTG_HS host channel-2 split control register
+$40080548 constant OTG2_HS_HOST_OTG_HS_HCINT2  \ offset: 0x148 : OTG_HS host channel-2 interrupt register
+$4008054c constant OTG2_HS_HOST_OTG_HS_HCINTMSK2  \ offset: 0x14C : OTG_HS host channel-2 interrupt mask register
+$40080550 constant OTG2_HS_HOST_OTG_HS_HCTSIZ2  \ offset: 0x150 : OTG_HS host channel-2 transfer size register
+$40080554 constant OTG2_HS_HOST_OTG_HS_HCDMA2  \ offset: 0x154 : OTG_HS host channel-2 DMA address register
+$40080560 constant OTG2_HS_HOST_OTG_HS_HCCHAR3  \ offset: 0x160 : OTG_HS host channel-3 characteristics register
+$40080564 constant OTG2_HS_HOST_OTG_HS_HCSPLT3  \ offset: 0x164 : OTG_HS host channel-3 split control register
+$40080568 constant OTG2_HS_HOST_OTG_HS_HCINT3  \ offset: 0x168 : OTG_HS host channel-3 interrupt register
+$4008056c constant OTG2_HS_HOST_OTG_HS_HCINTMSK3  \ offset: 0x16C : OTG_HS host channel-3 interrupt mask register
+$40080570 constant OTG2_HS_HOST_OTG_HS_HCTSIZ3  \ offset: 0x170 : OTG_HS host channel-3 transfer size register
+$40080574 constant OTG2_HS_HOST_OTG_HS_HCDMA3  \ offset: 0x174 : OTG_HS host channel-3 DMA address register
+$40080580 constant OTG2_HS_HOST_OTG_HS_HCCHAR4  \ offset: 0x180 : OTG_HS host channel-4 characteristics register
+$40080584 constant OTG2_HS_HOST_OTG_HS_HCSPLT4  \ offset: 0x184 : OTG_HS host channel-4 split control register
+$40080588 constant OTG2_HS_HOST_OTG_HS_HCINT4  \ offset: 0x188 : OTG_HS host channel-4 interrupt register
+$4008058c constant OTG2_HS_HOST_OTG_HS_HCINTMSK4  \ offset: 0x18C : OTG_HS host channel-4 interrupt mask register
+$40080590 constant OTG2_HS_HOST_OTG_HS_HCTSIZ4  \ offset: 0x190 : OTG_HS host channel-4 transfer size register
+$40080594 constant OTG2_HS_HOST_OTG_HS_HCDMA4  \ offset: 0x194 : OTG_HS host channel-4 DMA address register
+$400805a0 constant OTG2_HS_HOST_OTG_HS_HCCHAR5  \ offset: 0x1A0 : OTG_HS host channel-5 characteristics register
+$400805a4 constant OTG2_HS_HOST_OTG_HS_HCSPLT5  \ offset: 0x1A4 : OTG_HS host channel-5 split control register
+$400805a8 constant OTG2_HS_HOST_OTG_HS_HCINT5  \ offset: 0x1A8 : OTG_HS host channel-5 interrupt register
+$400805ac constant OTG2_HS_HOST_OTG_HS_HCINTMSK5  \ offset: 0x1AC : OTG_HS host channel-5 interrupt mask register
+$400805b0 constant OTG2_HS_HOST_OTG_HS_HCTSIZ5  \ offset: 0x1B0 : OTG_HS host channel-5 transfer size register
+$400805b4 constant OTG2_HS_HOST_OTG_HS_HCDMA5  \ offset: 0x1B4 : OTG_HS host channel-5 DMA address register
+$400805c0 constant OTG2_HS_HOST_OTG_HS_HCCHAR6  \ offset: 0x1C0 : OTG_HS host channel-6 characteristics register
+$400805c4 constant OTG2_HS_HOST_OTG_HS_HCSPLT6  \ offset: 0x1C4 : OTG_HS host channel-6 split control register
+$400805c8 constant OTG2_HS_HOST_OTG_HS_HCINT6  \ offset: 0x1C8 : OTG_HS host channel-6 interrupt register
+$400805cc constant OTG2_HS_HOST_OTG_HS_HCINTMSK6  \ offset: 0x1CC : OTG_HS host channel-6 interrupt mask register
+$400805d0 constant OTG2_HS_HOST_OTG_HS_HCTSIZ6  \ offset: 0x1D0 : OTG_HS host channel-6 transfer size register
+$400805d4 constant OTG2_HS_HOST_OTG_HS_HCDMA6  \ offset: 0x1D4 : OTG_HS host channel-6 DMA address register
+$400805e0 constant OTG2_HS_HOST_OTG_HS_HCCHAR7  \ offset: 0x1E0 : OTG_HS host channel-7 characteristics register
+$400805e4 constant OTG2_HS_HOST_OTG_HS_HCSPLT7  \ offset: 0x1E4 : OTG_HS host channel-7 split control register
+$400805e8 constant OTG2_HS_HOST_OTG_HS_HCINT7  \ offset: 0x1E8 : OTG_HS host channel-7 interrupt register
+$400805ec constant OTG2_HS_HOST_OTG_HS_HCINTMSK7  \ offset: 0x1EC : OTG_HS host channel-7 interrupt mask register
+$400805f0 constant OTG2_HS_HOST_OTG_HS_HCTSIZ7  \ offset: 0x1F0 : OTG_HS host channel-7 transfer size register
+$400805f4 constant OTG2_HS_HOST_OTG_HS_HCDMA7  \ offset: 0x1F4 : OTG_HS host channel-7 DMA address register
+$40080600 constant OTG2_HS_HOST_OTG_HS_HCCHAR8  \ offset: 0x200 : OTG_HS host channel-8 characteristics register
+$40080604 constant OTG2_HS_HOST_OTG_HS_HCSPLT8  \ offset: 0x204 : OTG_HS host channel-8 split control register
+$40080608 constant OTG2_HS_HOST_OTG_HS_HCINT8  \ offset: 0x208 : OTG_HS host channel-8 interrupt register
+$4008060c constant OTG2_HS_HOST_OTG_HS_HCINTMSK8  \ offset: 0x20C : OTG_HS host channel-8 interrupt mask register
+$40080610 constant OTG2_HS_HOST_OTG_HS_HCTSIZ8  \ offset: 0x210 : OTG_HS host channel-8 transfer size register
+$40080614 constant OTG2_HS_HOST_OTG_HS_HCDMA8  \ offset: 0x214 : OTG_HS host channel-8 DMA address register
+$40080620 constant OTG2_HS_HOST_OTG_HS_HCCHAR9  \ offset: 0x220 : OTG_HS host channel-9 characteristics register
+$40080624 constant OTG2_HS_HOST_OTG_HS_HCSPLT9  \ offset: 0x224 : OTG_HS host channel-9 split control register
+$40080628 constant OTG2_HS_HOST_OTG_HS_HCINT9  \ offset: 0x228 : OTG_HS host channel-9 interrupt register
+$4008062c constant OTG2_HS_HOST_OTG_HS_HCINTMSK9  \ offset: 0x22C : OTG_HS host channel-9 interrupt mask register
+$40080630 constant OTG2_HS_HOST_OTG_HS_HCTSIZ9  \ offset: 0x230 : OTG_HS host channel-9 transfer size register
+$40080634 constant OTG2_HS_HOST_OTG_HS_HCDMA9  \ offset: 0x234 : OTG_HS host channel-9 DMA address register
+$40080640 constant OTG2_HS_HOST_OTG_HS_HCCHAR10  \ offset: 0x240 : OTG_HS host channel-10 characteristics register
+$40080644 constant OTG2_HS_HOST_OTG_HS_HCSPLT10  \ offset: 0x244 : OTG_HS host channel-10 split control register
+$40080648 constant OTG2_HS_HOST_OTG_HS_HCINT10  \ offset: 0x248 : OTG_HS host channel-10 interrupt register
+$4008064c constant OTG2_HS_HOST_OTG_HS_HCINTMSK10  \ offset: 0x24C : OTG_HS host channel-10 interrupt mask register
+$40080650 constant OTG2_HS_HOST_OTG_HS_HCTSIZ10  \ offset: 0x250 : OTG_HS host channel-10 transfer size register
+$40080654 constant OTG2_HS_HOST_OTG_HS_HCDMA10  \ offset: 0x254 : OTG_HS host channel-10 DMA address register
+$40080660 constant OTG2_HS_HOST_OTG_HS_HCCHAR11  \ offset: 0x260 : OTG_HS host channel-11 characteristics register
+$40080664 constant OTG2_HS_HOST_OTG_HS_HCSPLT11  \ offset: 0x264 : OTG_HS host channel-11 split control register
+$40080668 constant OTG2_HS_HOST_OTG_HS_HCINT11  \ offset: 0x268 : OTG_HS host channel-11 interrupt register
+$4008066c constant OTG2_HS_HOST_OTG_HS_HCINTMSK11  \ offset: 0x26C : OTG_HS host channel-11 interrupt mask register
+$40080670 constant OTG2_HS_HOST_OTG_HS_HCTSIZ11  \ offset: 0x270 : OTG_HS host channel-11 transfer size register
+$40080674 constant OTG2_HS_HOST_OTG_HS_HCDMA11  \ offset: 0x274 : OTG_HS host channel-11 DMA address register
+$40080678 constant OTG2_HS_HOST_OTG_HS_HCCHAR12  \ offset: 0x278 : OTG_HS host channel-12 characteristics register
+$4008067c constant OTG2_HS_HOST_OTG_HS_HCSPLT12  \ offset: 0x27C : OTG_HS host channel-12 split control register
+$40080680 constant OTG2_HS_HOST_OTG_HS_HCINT12  \ offset: 0x280 : OTG_HS host channel-12 interrupt register
+$40080684 constant OTG2_HS_HOST_OTG_HS_HCINTMSK12  \ offset: 0x284 : OTG_HS host channel-12 interrupt mask register
+$40080688 constant OTG2_HS_HOST_OTG_HS_HCTSIZ12  \ offset: 0x288 : OTG_HS host channel-12 transfer size register
+$4008068c constant OTG2_HS_HOST_OTG_HS_HCDMA12  \ offset: 0x28C : OTG_HS host channel-12 DMA address register
+$40080690 constant OTG2_HS_HOST_OTG_HS_HCCHAR13  \ offset: 0x290 : OTG_HS host channel-13 characteristics register
+$40080694 constant OTG2_HS_HOST_OTG_HS_HCSPLT13  \ offset: 0x294 : OTG_HS host channel-13 split control register
+$40080698 constant OTG2_HS_HOST_OTG_HS_HCINT13  \ offset: 0x298 : OTG_HS host channel-13 interrupt register
+$4008069c constant OTG2_HS_HOST_OTG_HS_HCINTMSK13  \ offset: 0x29C : OTG_HS host channel-13 interrupt mask register
+$400806a0 constant OTG2_HS_HOST_OTG_HS_HCTSIZ13  \ offset: 0x2A0 : OTG_HS host channel-13 transfer size register
+$400806a4 constant OTG2_HS_HOST_OTG_HS_HCDMA13  \ offset: 0x2A4 : OTG_HS host channel-13 DMA address register
+$400806a8 constant OTG2_HS_HOST_OTG_HS_HCCHAR14  \ offset: 0x2A8 : OTG_HS host channel-14 characteristics register
+$400806ac constant OTG2_HS_HOST_OTG_HS_HCSPLT14  \ offset: 0x2AC : OTG_HS host channel-14 split control register
+$400806b0 constant OTG2_HS_HOST_OTG_HS_HCINT14  \ offset: 0x2B0 : OTG_HS host channel-14 interrupt register
+$400806b4 constant OTG2_HS_HOST_OTG_HS_HCINTMSK14  \ offset: 0x2B4 : OTG_HS host channel-14 interrupt mask register
+$400806b8 constant OTG2_HS_HOST_OTG_HS_HCTSIZ14  \ offset: 0x2B8 : OTG_HS host channel-14 transfer size register
+$400806bc constant OTG2_HS_HOST_OTG_HS_HCDMA14  \ offset: 0x2BC : OTG_HS host channel-14 DMA address register
+$400806c0 constant OTG2_HS_HOST_OTG_HS_HCCHAR15  \ offset: 0x2C0 : OTG_HS host channel-15 characteristics register
+$400806c4 constant OTG2_HS_HOST_OTG_HS_HCSPLT15  \ offset: 0x2C4 : OTG_HS host channel-15 split control register
+$400806c8 constant OTG2_HS_HOST_OTG_HS_HCINT15  \ offset: 0x2C8 : OTG_HS host channel-15 interrupt register
+$400806cc constant OTG2_HS_HOST_OTG_HS_HCINTMSK15  \ offset: 0x2CC : OTG_HS host channel-15 interrupt mask register
+$400806d0 constant OTG2_HS_HOST_OTG_HS_HCTSIZ15  \ offset: 0x2D0 : OTG_HS host channel-15 transfer size register
+$400806d4 constant OTG2_HS_HOST_OTG_HS_HCDMA15  \ offset: 0x2D4 : OTG_HS host channel-15 DMA address register
+

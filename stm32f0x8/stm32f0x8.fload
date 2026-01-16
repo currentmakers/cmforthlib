@@ -1,0 +1,114 @@
+\
+\ @file stm32f0x8.h
+\ @brief Loader for all peripherals in a STM32F0x8
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include crc.fs
+.include gpiof.fs
+.include gpiod.fs
+.include gpioc.fs
+.include gpiob.fs
+.include gpioe.fs
+.include gpioa.fs
+.include spi1.fs
+.include spi2.fs
+.include pwr.fs
+.include i2c1.fs
+.include i2c2.fs
+.include iwdg.fs
+.include wwdg.fs
+.include tim1.fs
+.include tim2.fs
+.include tim3.fs
+.include tim14.fs
+.include tim6.fs
+.include tim7.fs
+.include exti.fs
+.include nvic.fs
+.include dma1.fs
+.include dma2.fs
+.include rcc.fs
+.include syscfg_comp.fs
+.include adc.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include usart4.fs
+.include usart6.fs
+.include usart7.fs
+.include usart8.fs
+.include usart5.fs
+.include rtc.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include tsc.fs
+.include cec.fs
+.include flash.fs
+.include dbgmcu.fs
+.include usb.fs
+.include crs.fs
+.include can.fs
+.include dac.fs
+.include scb.fs
+.include stk.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include CRC                    \ cyclic redundancy check calculation unit
+.include GPIOF                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOA                  \ General-purpose I/Os
+.include SPI1                   \ Serial peripheral interface
+.include SPI2                   \ SPI2 global interrupt
+.include PWR                    \ Power control
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2 global interrupt
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ Window watchdog
+.include TIM1                   \ Advanced-timers
+.include TIM2                   \ General-purpose-timers
+.include TIM3                   \ TIM3 global interrupt
+.include TIM14                  \ General-purpose-timers
+.include TIM6                   \ Basic-timers
+.include TIM7                   \ TIM7 global interrupt
+.include EXTI                   \ External interrupt/event controller
+.include NVIC                   \ Nested Vectored Interrupt Controller
+.include DMA1                   \ DMA controller
+.include DMA2                   \ DMA1 channel 2 and 3 and DMA2 channel 1 and 2 interrupt
+.include RCC                    \ Reset and clock control
+.include SYSCFG_COMP            \ System configuration controller
+.include ADC                    \ Analog-to-digital converter
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include USART3                 \ Universal synchronous asynchronous receiver transmitter
+.include USART4                 \ Universal synchronous asynchronous receiver transmitter
+.include USART6                 \ Universal synchronous asynchronous receiver transmitter
+.include USART7                 \ USART3, USART4, USART5, USART6, USART7, USART8 global interrupt
+.include USART8                 \ Universal synchronous asynchronous receiver transmitter
+.include USART5                 \ Universal synchronous asynchronous receiver transmitter
+.include RTC                    \ Real-time clock
+.include TIM15                  \ General-purpose-timers
+.include TIM16                  \ General-purpose-timers
+.include TIM17                  \ TIM17 global interrupt
+.include TSC                    \ Touch sensing controller
+.include CEC                    \ HDMI-CEC controller
+.include FLASH                  \ Flash
+.include DBGMCU                 \ Debug support
+.include USB                    \ Universal serial bus full-speed device interface
+.include CRS                    \ Clock recovery system
+.include CAN                    \ Controller area network
+.include DAC                    \ Digital-to-analog converter
+.include SCB                    \ System control block
+.include STK                    \ SysTick timer
+
+compiletoram
+

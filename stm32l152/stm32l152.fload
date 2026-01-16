@@ -1,0 +1,116 @@
+\
+\ @file stm32l152.h
+\ @brief Loader for all peripherals in a STM32L152
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include aes.fs
+.include comp.fs
+.include crc.fs
+.include dac.fs
+.include dma1.fs
+.include dma2.fs
+.include exti.fs
+.include flash.fs
+.include fsmc.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include gpiog.fs
+.include gpioh.fs
+.include i2c1.fs
+.include i2c2.fs
+.include iwdg.fs
+.include lcd.fs
+.include opamp.fs
+.include pwr.fs
+.include rcc.fs
+.include ri.fs
+.include rtc.fs
+.include sdio.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include syscfg.fs
+.include tim10.fs
+.include tim11.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim6.fs
+.include tim7.fs
+.include tim9.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include uart4.fs
+.include uart5.fs
+.include usb.fs
+.include usb_sram.fs
+.include wwdg.fs
+.include adc.fs
+.include dbgmcu.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include AES                    \ Advanced encrytion standard hardware accelerator
+.include COMP                   \ Comparators
+.include CRC                    \ CRC calculation unit
+.include DAC                    \ Digital-to-analog converter
+.include DMA1                   \ Direct memory access controller
+.include DMA2                   \ DMA2 Channel 1 interrupt
+.include EXTI                   \ External interrupt/event controller
+.include FLASH                  \ Flash
+.include FSMC                   \ Flexible static memory controller
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include GPIOG                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2 event interrupt
+.include IWDG                   \ Independent watchdog
+.include LCD                    \ Liquid crystal display controller
+.include OPAMP                  \ Operational amplifiers
+.include PWR                    \ Power control
+.include RCC                    \ Reset and clock control
+.include RI                     \ Routing interface
+.include RTC                    \ Real-time clock
+.include SDIO                   \ Secure digital input/output interface
+.include SPI1                   \ Serial peripheral interface
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global interrupt
+.include SYSCFG                 \ System configuration controller
+.include TIM10                  \ General-purpose timers
+.include TIM11                  \ General-purpose timers
+.include TIM2                   \ General-purpose timers
+.include TIM3                   \ TIM3 global interrupt
+.include TIM4                   \ TIM4 global interrupt
+.include TIM5                   \ TIM5 global interrupt
+.include TIM6                   \ Basic timers
+.include TIM7                   \ TIM7 global interrupt
+.include TIM9                   \ General-purpose timers
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include USART3                 \ USART3 global interrupt
+.include UART4                  \ UART4 Global interrupt
+.include UART5                  \ UART5 Global interrupt
+.include USB                    \ Universal serial bus full-speed device interface
+.include USB_SRAM               \ Universal serial bus full-speed device interface
+.include WWDG                   \ Window watchdog
+.include ADC                    \ Analog-to-digital converter
+.include DBGMCU                 \ debug support
+
+compiletoram
+

@@ -1,0 +1,464 @@
+\
+\ @file stm32u5a9.h
+\ @brief Loader for all peripherals in a STM32U5A9
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc1.fs
+.include sec_adc1.fs
+.include adc2.fs
+.include sec_adc2.fs
+.include adc12_common.fs
+.include sec_adc12_common.fs
+.include adc4.fs
+.include sec_adc4.fs
+.include adf1.fs
+.include sec_adf1.fs
+.include aes.fs
+.include sec_aes.fs
+.include comp.fs
+.include sec_comp.fs
+.include cordic.fs
+.include sec_cordic.fs
+.include crc.fs
+.include sec_crc.fs
+.include crs.fs
+.include sec_crs.fs
+.include dac1.fs
+.include sec_dac1.fs
+.include dbgmcu.fs
+.include dcache1.fs
+.include sec_dcache1.fs
+.include dcache2.fs
+.include sec_dcache2.fs
+.include dcmi.fs
+.include sec_dcmi.fs
+.include dlybos1.fs
+.include sec_dlybos1.fs
+.include dlybos2.fs
+.include sec_dlybos2.fs
+.include dlybsd1.fs
+.include sec_dlybsd1.fs
+.include dlybsd2.fs
+.include sec_dlybsd2.fs
+.include dma2d.fs
+.include sec_dma2d.fs
+.include dsi.fs
+.include sec_dsi.fs
+.include exti.fs
+.include sec_exti.fs
+.include fdcan1_ram.fs
+.include sec_fdcan1_ram.fs
+.include fdcan1.fs
+.include sec_fdcan1.fs
+.include flash.fs
+.include sec_flash.fs
+.include fmac.fs
+.include sec_fmac.fs
+.include fmc.fs
+.include sec_fmc.fs
+.include gfxmmu.fs
+.include sec_gfxmmu.fs
+.include gpdma1.fs
+.include sec_gpdma1.fs
+.include gpioa.fs
+.include sec_gpioa.fs
+.include gpiob.fs
+.include sec_gpiob.fs
+.include gpioc.fs
+.include sec_gpioc.fs
+.include gpiod.fs
+.include sec_gpiod.fs
+.include gpioe.fs
+.include sec_gpioe.fs
+.include gpiof.fs
+.include sec_gpiof.fs
+.include gpiog.fs
+.include sec_gpiog.fs
+.include gpioh.fs
+.include sec_gpioh.fs
+.include gpioi.fs
+.include sec_gpioi.fs
+.include gpioj.fs
+.include sec_gpioj.fs
+.include gtzc1_mpcbb1.fs
+.include sec_gtzc1_mpcbb1.fs
+.include gtzc1_mpcbb2.fs
+.include sec_gtzc1_mpcbb2.fs
+.include gtzc1_mpcbb3.fs
+.include sec_gtzc1_mpcbb3.fs
+.include gtzc1_mpcbb5.fs
+.include sec_gtzc1_mpcbb5.fs
+.include gtzc1_tzic.fs
+.include sec_gtzc1_tzic.fs
+.include gtzc1_tzsc.fs
+.include sec_gtzc1_tzsc.fs
+.include gtzc2_mpcbb4.fs
+.include sec_gtzc2_mpcbb4.fs
+.include gtzc2_tzic.fs
+.include sec_gtzc2_tzic.fs
+.include gtzc2_tzsc.fs
+.include sec_gtzc2_tzsc.fs
+.include hash.fs
+.include sec_hash.fs
+.include hspi1.fs
+.include sec_hspi1.fs
+.include i2c1.fs
+.include sec_i2c1.fs
+.include i2c2.fs
+.include sec_i2c2.fs
+.include i2c3.fs
+.include sec_i2c3.fs
+.include i2c4.fs
+.include sec_i2c4.fs
+.include i2c5.fs
+.include sec_i2c5.fs
+.include i2c6.fs
+.include sec_i2c6.fs
+.include icache.fs
+.include sec_icache.fs
+.include iwdg.fs
+.include sec_iwdg.fs
+.include lpdma1.fs
+.include sec_lpdma1.fs
+.include lpgpio1.fs
+.include sec_lpgpio1.fs
+.include lptim1.fs
+.include sec_lptim1.fs
+.include lptim2.fs
+.include sec_lptim2.fs
+.include lptim3.fs
+.include sec_lptim3.fs
+.include lptim4.fs
+.include sec_lptim4.fs
+.include lpuart1.fs
+.include sec_lpuart1.fs
+.include ltdc.fs
+.include sec_ltdc.fs
+.include mdf1.fs
+.include sec_mdf1.fs
+.include octospi1.fs
+.include sec_octospi1.fs
+.include octospi2.fs
+.include sec_octospi2.fs
+.include octospim.fs
+.include sec_octospim.fs
+.include opamp.fs
+.include sec_opamp.fs
+.include otfdec1.fs
+.include sec_otfdec1.fs
+.include otfdec2.fs
+.include sec_otfdec2.fs
+.include otg_hs.fs
+.include sec_otg_hs.fs
+.include pka.fs
+.include sec_pka.fs
+.include pssi.fs
+.include sec_pssi.fs
+.include pwr.fs
+.include sec_pwr.fs
+.include ramcfg.fs
+.include sec_ramcfg.fs
+.include rcc.fs
+.include sec_rcc.fs
+.include rng.fs
+.include sec_rng.fs
+.include rtc.fs
+.include sec_rtc.fs
+.include saes.fs
+.include sec_saes.fs
+.include sai1.fs
+.include sec_sai1.fs
+.include sai2.fs
+.include sec_sai2.fs
+.include sdmmc1.fs
+.include sec_sdmmc1.fs
+.include sdmmc2.fs
+.include sec_sdmmc2.fs
+.include spi1.fs
+.include sec_spi1.fs
+.include spi2.fs
+.include sec_spi2.fs
+.include spi3.fs
+.include sec_spi3.fs
+.include syscfg.fs
+.include sec_syscfg.fs
+.include tamp.fs
+.include sec_tamp.fs
+.include tim1.fs
+.include sec_tim1.fs
+.include tim2.fs
+.include sec_tim2.fs
+.include tim3.fs
+.include sec_tim3.fs
+.include tim4.fs
+.include sec_tim4.fs
+.include tim5.fs
+.include sec_tim5.fs
+.include tim6.fs
+.include sec_tim6.fs
+.include tim7.fs
+.include sec_tim7.fs
+.include tim8.fs
+.include sec_tim8.fs
+.include tim15.fs
+.include sec_tim15.fs
+.include tim16.fs
+.include sec_tim16.fs
+.include tim17.fs
+.include sec_tim17.fs
+.include tsc.fs
+.include sec_tsc.fs
+.include ucpd1.fs
+.include sec_ucpd1.fs
+.include usart1.fs
+.include sec_usart1.fs
+.include usart2.fs
+.include sec_usart2.fs
+.include usart3.fs
+.include sec_usart3.fs
+.include uart4.fs
+.include sec_uart4.fs
+.include uart5.fs
+.include sec_uart5.fs
+.include usart6.fs
+.include sec_usart6.fs
+.include vrefbuf.fs
+.include sec_vrefbuf.fs
+.include wwdg.fs
+.include sec_wwdg.fs
+.include dcb.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC1                   \ ADC1
+.include SEC_ADC1               \ ADC1
+.include ADC2                   \ ADC1
+.include SEC_ADC2               \ ADC1
+.include ADC12_COMMON           \ Analog-to-Digital Converter
+.include SEC_ADC12_COMMON       \ Analog-to-Digital Converter
+.include ADC4                   \ ADC4
+.include SEC_ADC4               \ ADC4
+.include ADF1                   \ ADF1
+.include SEC_ADF1               \ ADF1
+.include AES                    \ Advanced encryption standard hardware accelerator
+.include SEC_AES                \ Advanced encryption standard hardware accelerator
+.include COMP                   \ Comparator
+.include SEC_COMP               \ Comparator
+.include CORDIC                 \ CORDIC Co-processor
+.include SEC_CORDIC             \ CORDIC Co-processor
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include SEC_CRC                \ Cyclic redundancy check calculation unit
+.include CRS                    \ Clock recovery system
+.include SEC_CRS                \ Clock recovery system
+.include DAC1                   \ Digital-to-analog converter
+.include SEC_DAC1               \ Digital-to-analog converter
+.include DBGMCU                 \ MCU debug component
+.include DCACHE1                \ DCACHE1
+.include SEC_DCACHE1            \ DCACHE1
+.include DCACHE2                \ Data cache 2 global interrupt
+.include SEC_DCACHE2            \ DCACHE1
+.include DCMI                   \ Digital camera interface
+.include SEC_DCMI               \ Digital camera interface
+.include DLYBOS1                \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+.include SEC_DLYBOS1            \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+.include DLYBOS2                \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+.include SEC_DLYBOS2            \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+.include DLYBSD1                \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+.include SEC_DLYBSD1            \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+.include DLYBSD2                \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+.include SEC_DLYBSD2            \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+.include DMA2D                  \ DMA2D controller
+.include SEC_DMA2D              \ DMA2D controller
+.include DSI                    \ DSI
+.include SEC_DSI                \ DSI
+.include EXTI                   \ External interrupt/event controller
+.include SEC_EXTI               \ External interrupt/event controller
+.include FDCAN1_RAM             \ FDCAN1_RAM
+.include SEC_FDCAN1_RAM         \ FDCAN1_RAM
+.include FDCAN1                 \ FDCAN1_RAM
+.include SEC_FDCAN1             \ FDCAN1_RAM
+.include FLASH                  \ Flash
+.include SEC_FLASH              \ Flash
+.include FMAC                   \ Filter Math Accelerator
+.include SEC_FMAC               \ Filter Math Accelerator
+.include FMC                    \ FMC
+.include SEC_FMC                \ FMC
+.include GFXMMU                 \ GFXMMU
+.include SEC_GFXMMU             \ GFXMMU
+.include GPDMA1                 \ GPDMA1
+.include SEC_GPDMA1             \ GPDMA1
+.include GPIOA                  \ General-purpose I/Os
+.include SEC_GPIOA              \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include SEC_GPIOB              \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include SEC_GPIOC              \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include SEC_GPIOD              \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include SEC_GPIOE              \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include SEC_GPIOF              \ General-purpose I/Os
+.include GPIOG                  \ General-purpose I/Os
+.include SEC_GPIOG              \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include SEC_GPIOH              \ General-purpose I/Os
+.include GPIOI                  \ General-purpose I/Os
+.include SEC_GPIOI              \ General-purpose I/Os
+.include GPIOJ                  \ General-purpose I/Os
+.include SEC_GPIOJ              \ General-purpose I/Os
+.include GTZC1_MPCBB1           \ GTZC1_MPCBB1
+.include SEC_GTZC1_MPCBB1       \ GTZC1_MPCBB1
+.include GTZC1_MPCBB2           \ GTZC1_MPCBB2
+.include SEC_GTZC1_MPCBB2       \ GTZC1_MPCBB2
+.include GTZC1_MPCBB3           \ GTZC1_MPCBB3
+.include SEC_GTZC1_MPCBB3       \ GTZC1_MPCBB3
+.include GTZC1_MPCBB5           \ GTZC1_MPCBB5
+.include SEC_GTZC1_MPCBB5       \ GTZC1_MPCBB5
+.include GTZC1_TZIC             \ GTZC1_TZIC
+.include SEC_GTZC1_TZIC         \ GTZC1_TZIC
+.include GTZC1_TZSC             \ GTZC1_TZSC
+.include SEC_GTZC1_TZSC         \ GTZC1_TZSC
+.include GTZC2_MPCBB4           \ GTZC2_MPCBB4
+.include SEC_GTZC2_MPCBB4       \ GTZC2_MPCBB4
+.include GTZC2_TZIC             \ GTZC2_TZIC
+.include SEC_GTZC2_TZIC         \ GTZC2_TZIC
+.include GTZC2_TZSC             \ GTZC2_TZSC
+.include SEC_GTZC2_TZSC         \ GTZC2_TZSC
+.include HASH                   \ Hash processor
+.include SEC_HASH               \ Hash processor
+.include HSPI1                  \ HSPI1
+.include SEC_HSPI1              \ HSPI1
+.include I2C1                   \ Inter-integrated circuit
+.include SEC_I2C1               \ Inter-integrated circuit
+.include I2C2                   \ I2C2 event interrupt
+.include SEC_I2C2               \ Inter-integrated circuit
+.include I2C3                   \ I2C3 event interrupt
+.include SEC_I2C3               \ Inter-integrated circuit
+.include I2C4                   \ I2C4 error interrupt
+.include SEC_I2C4               \ Inter-integrated circuit
+.include I2C5                   \ I2C5 error interrupt
+.include SEC_I2C5               \ I2C5 error interrupt
+.include I2C6                   \ I2C6 error interrupt
+.include SEC_I2C6               \ I2C6 error interrupt
+.include ICACHE                 \ ICache
+.include SEC_ICACHE             \ ICache
+.include IWDG                   \ Independent watchdog
+.include SEC_IWDG               \ Independent watchdog
+.include LPDMA1                 \ LPDMA1
+.include SEC_LPDMA1             \ LPDMA1
+.include LPGPIO1                \ LPGPIO1
+.include SEC_LPGPIO1            \ LPGPIO1
+.include LPTIM1                 \ Low power timer
+.include SEC_LPTIM1             \ Low power timer
+.include LPTIM2                 \ LPTIM2 global interrupt
+.include SEC_LPTIM2             \ Low power timer
+.include LPTIM3                 \ LPTIM3 global interrupt
+.include SEC_LPTIM3             \ Low power timer
+.include LPTIM4                 \ Low power timer
+.include SEC_LPTIM4             \ Low power timer
+.include LPUART1                \ Universal synchronous asynchronous receiver transmitter
+.include SEC_LPUART1            \ Universal synchronous asynchronous receiver transmitter
+.include LTDC                   \ LTDC
+.include SEC_LTDC               \ LTDC
+.include MDF1                   \ Multi-function digital filter
+.include SEC_MDF1               \ Multi-function digital filter
+.include OCTOSPI1               \ OctoSPI
+.include SEC_OCTOSPI1           \ OctoSPI
+.include OCTOSPI2               \ OCTOSPI2 global interrupt
+.include SEC_OCTOSPI2           \ OctoSPI
+.include OCTOSPIM               \ OCTOSPI I/O manager
+.include SEC_OCTOSPIM           \ OCTOSPI I/O manager
+.include OPAMP                  \ Operational amplifiers
+.include SEC_OPAMP              \ Operational amplifiers
+.include OTFDEC1                \ On-The-Fly Decryption engine
+.include SEC_OTFDEC1            \ On-The-Fly Decryption engine
+.include OTFDEC2                \ OTFDEC2 secure global interrupt
+.include SEC_OTFDEC2            \ On-The-Fly Decryption engine
+.include OTG_HS                 \ OTG_HS
+.include SEC_OTG_HS             \ OTG_HS
+.include PKA                    \ Private key accelerator
+.include SEC_PKA                \ Private key accelerator
+.include PSSI                   \ PSSI
+.include SEC_PSSI               \ PSSI
+.include PWR                    \ Power control
+.include SEC_PWR                \ Power control
+.include RAMCFG                 \ RAMCFG
+.include SEC_RAMCFG             \ RAMCFG
+.include RCC                    \ Reset and clock control
+.include SEC_RCC                \ Reset and clock control
+.include RNG                    \ Random number generator
+.include SEC_RNG                \ Random number generator
+.include RTC                    \ Real-time clock
+.include SEC_RTC                \ Real-time clock
+.include SAES                   \ Secure AES coprocessor
+.include SEC_SAES               \ Secure AES coprocessor
+.include SAI1                   \ Serial audio interface
+.include SEC_SAI1               \ Serial audio interface
+.include SAI2                   \ SAI2 global interrupt
+.include SEC_SAI2               \ Serial audio interface
+.include SDMMC1                 \ Secure digital input/output MultiMediaCard interface
+.include SEC_SDMMC1             \ Secure digital input/output MultiMediaCard interface
+.include SDMMC2                 \ SDMMC2 global interrupt
+.include SEC_SDMMC2             \ Secure digital input/output MultiMediaCard interface
+.include SPI1                   \ Serial peripheral interface
+.include SEC_SPI1               \ Serial peripheral interface
+.include SPI2                   \ SPI2 global interrupt
+.include SEC_SPI2               \ Serial peripheral interface
+.include SPI3                   \ SPI3 global interrupt
+.include SEC_SPI3               \ Serial peripheral interface
+.include SYSCFG                 \ System configuration controller
+.include SEC_SYSCFG             \ System configuration controller
+.include TAMP                   \ Tamper and backup registers
+.include SEC_TAMP               \ Tamper and backup registers
+.include TIM1                   \ Advanced-timers
+.include SEC_TIM1               \ Advanced-timers
+.include TIM2                   \ General-purpose-timers
+.include SEC_TIM2               \ General-purpose-timers
+.include TIM3                   \ TIM3 global interrupt
+.include SEC_TIM3               \ General-purpose-timers
+.include TIM4                   \ TIM4 global interrupt
+.include SEC_TIM4               \ General-purpose-timers
+.include TIM5                   \ TIM5 global interrupt
+.include SEC_TIM5               \ General-purpose-timers
+.include TIM6                   \ General-purpose-timers
+.include SEC_TIM6               \ General-purpose-timers
+.include TIM7                   \ TIM7 global interrupt
+.include SEC_TIM7               \ General-purpose-timers
+.include TIM8                   \ TIM8 Break Interrupt
+.include SEC_TIM8               \ Advanced-timers
+.include TIM15                  \ General purpose timers
+.include SEC_TIM15              \ General purpose timers
+.include TIM16                  \ General purpose timers
+.include SEC_TIM16              \ General purpose timers
+.include TIM17                  \ TIM17 global interrupt
+.include SEC_TIM17              \ General purpose timers
+.include TSC                    \ Touch sensing controller
+.include SEC_TSC                \ Touch sensing controller
+.include UCPD1                  \ USB Power Delivery interface
+.include SEC_UCPD1              \ USB Power Delivery interface
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include SEC_USART1             \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include SEC_USART2             \ Universal synchronous asynchronous receiver transmitter
+.include USART3                 \ USART3 global interrupt
+.include SEC_USART3             \ Universal synchronous asynchronous receiver transmitter
+.include UART4                  \ UART4 global interrupt
+.include SEC_UART4              \ Universal synchronous asynchronous receiver transmitter
+.include UART5                  \ UART5 global interrupt
+.include SEC_UART5              \ Universal synchronous asynchronous receiver transmitter
+.include USART6                 \ USART6 global interrupt
+.include SEC_USART6             \ Universal synchronous asynchronous receiver transmitter
+.include VREFBUF                \ Voltage reference buffer
+.include SEC_VREFBUF            \ Voltage reference buffer
+.include WWDG                   \ System window watchdog
+.include SEC_WWDG               \ System window watchdog
+.include DCB                    \ Debug Control Block
+
+compiletoram
+

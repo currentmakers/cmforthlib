@@ -1,0 +1,110 @@
+\
+\ @file stm32l053.h
+\ @brief Loader for all peripherals in a STM32L053
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include dac.fs
+.include dma1.fs
+.include crc.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioh.fs
+.include gpioe.fs
+.include lptim.fs
+.include rng.fs
+.include rtc.fs
+.include usart1.fs
+.include usart2.fs
+.include usart4.fs
+.include usart5.fs
+.include tsc.fs
+.include iwdg.fs
+.include wwdg.fs
+.include usb_fs.fs
+.include crs.fs
+.include firewall.fs
+.include rcc.fs
+.include syscfg_comp.fs
+.include spi1.fs
+.include spi2.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include pwr.fs
+.include flash.fs
+.include exti.fs
+.include adc.fs
+.include dbgmcu.fs
+.include tim2.fs
+.include tim3.fs
+.include tim6.fs
+.include tim7.fs
+.include tim21.fs
+.include tim22.fs
+.include lpusart1.fs
+.include nvic.fs
+.include usb_sram.fs
+.include lcd.fs
+.include mpu.fs
+.include stk.fs
+.include scb.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include DAC                    \ Digital-to-analog converter
+.include DMA1                   \ Direct memory access controller
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include LPTIM                  \ Low power timer
+.include RNG                    \ Random number generator
+.include RTC                    \ Real-time clock
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ Universal synchronous asynchronous receiver transmitter
+.include USART4                 \ USART4/USART5 global interrupt
+.include USART5                 \ USART2 global interrupt
+.include TSC                    \ Touch sensing controller
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ System window watchdog
+.include USB_FS                 \ Universal serial bus full-speed device interface
+.include CRS                    \ Clock recovery system
+.include FIREWALL               \ Firewall
+.include RCC                    \ Reset and clock control
+.include SYSCFG_COMP            \ System configuration controller and Comparator
+.include SPI1                   \ Serial peripheral interface
+.include SPI2                   \ SPI1_global_interrupt
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C1 global interrupt
+.include I2C3                   \ Inter-integrated circuit
+.include PWR                    \ Power control
+.include FLASH                  \ Flash
+.include EXTI                   \ External interrupt/event controller
+.include ADC                    \ Analog-to-digital converter
+.include DBGMCU                 \ Debug support
+.include TIM2                   \ General-purpose-timers
+.include TIM3                   \ TIM2 global interrupt
+.include TIM6                   \ Basic-timers
+.include TIM7                   \ TIM6 global interrupt and DAC
+.include TIM21                  \ General-purpose-timers
+.include TIM22                  \ General-purpose-timers
+.include LPUSART1               \ Universal synchronous asynchronous receiver transmitter
+.include NVIC                   \ Nested Vectored Interrupt Controller
+.include USB_SRAM               \ Universal serial bus full-speed device interface
+.include LCD                    \ Liquid crystal display controller
+.include MPU                    \ Memory protection unit
+.include STK                    \ SysTick timer
+.include SCB                    \ System control block
+
+compiletoram
+

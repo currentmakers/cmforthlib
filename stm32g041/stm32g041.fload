@@ -1,0 +1,94 @@
+\
+\ @file stm32g041.h
+\ @brief Loader for all peripherals in a STM32G041
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include iwdg.fs
+.include wwdg.fs
+.include flash.fs
+.include rcc.fs
+.include pwr.fs
+.include dma1.fs
+.include dma2.fs
+.include dmamux.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpiof.fs
+.include aes.fs
+.include rng.fs
+.include crc.fs
+.include exti.fs
+.include tim16.fs
+.include tim17.fs
+.include usart1.fs
+.include usart2.fs
+.include spi1.fs
+.include spi2.fs
+.include tim1.fs
+.include adc.fs
+.include syscfg.fs
+.include tamp.fs
+.include lptim1.fs
+.include lptim2.fs
+.include lpuart.fs
+.include i2c1.fs
+.include i2c2.fs
+.include rtc.fs
+.include tim14.fs
+.include tim2.fs
+.include tim3.fs
+.include vrefbuf.fs
+.include dbg.fs
+.include syscfg_itline.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ System window watchdog
+.include FLASH                  \ Flash
+.include RCC                    \ Reset and clock control
+.include PWR                    \ Power control
+.include DMA1                   \ DMA controller
+.include DMA2                   \ DMA controller
+.include DMAMUX                 \ DMAMUX
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include AES                    \ Advanced encryption standard hardware accelerator 1
+.include RNG                    \ Random number generator
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include EXTI                   \ External interrupt/event controller
+.include TIM16                  \ General purpose timers
+.include TIM17                  \ TIM17 global interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include SPI1                   \ Serial peripheral interface/Inter-IC sound
+.include SPI2                   \ SPI2 global interrupt
+.include TIM1                   \ Advanced-timers
+.include ADC                    \ Analog to Digital Converter instance 1
+.include SYSCFG                 \ System configuration controller
+.include TAMP                   \ Tamper and backup registers
+.include LPTIM1                 \ Low power timer
+.include LPTIM2                 \ Low power timer
+.include LPUART                 \ Universal synchronous asynchronous receiver transmitter
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2 global interrupt
+.include RTC                    \ Real-time clock
+.include TIM14                  \ General purpose timers
+.include TIM2                   \ General-purpose-timers
+.include TIM3                   \ General-purpose-timers
+.include VREFBUF                \ System configuration controller
+.include DBG                    \ MCU debug component
+.include SYSCFG_ITLINE          \ System configuration controller
+
+compiletoram
+

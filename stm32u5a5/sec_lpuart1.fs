@@ -1,0 +1,251 @@
+\
+\ @file sec_lpuart1.fs
+\ @brief Universal synchronous asynchronous receiver       transmitter
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+.include ../common.fs
+
+\
+\ @brief Control register 1
+\ Address offset: 0x00
+\ Reset value: 0x00000000
+\
+
+$00000001 constant SEC_LPUART1_CR1_ENABLED_UE                       \ USART enable
+$00000002 constant SEC_LPUART1_CR1_ENABLED_UESM                     \ USART enable in Stop mode
+$00000004 constant SEC_LPUART1_CR1_ENABLED_RE                       \ Receiver enable
+$00000008 constant SEC_LPUART1_CR1_ENABLED_TE                       \ Transmitter enable
+$00000010 constant SEC_LPUART1_CR1_ENABLED_IDLEIE                   \ IDLE interrupt enable
+$00000020 constant SEC_LPUART1_CR1_ENABLED_RXFNEIE                  \ RXFNEIE
+$00000040 constant SEC_LPUART1_CR1_ENABLED_TCIE                     \ Transmission complete interrupt enable
+$00000080 constant SEC_LPUART1_CR1_ENABLED_TXFNFIE                  \ TXFIFO not full interrupt enable
+$00000100 constant SEC_LPUART1_CR1_ENABLED_PEIE                     \ PE interrupt enable
+$00000200 constant SEC_LPUART1_CR1_ENABLED_PS                       \ Parity selection
+$00000400 constant SEC_LPUART1_CR1_ENABLED_PCE                      \ Parity control enable
+$00000800 constant SEC_LPUART1_CR1_ENABLED_WAKE                     \ Receiver wakeup method
+$00001000 constant SEC_LPUART1_CR1_ENABLED_M0                       \ Word length
+$00002000 constant SEC_LPUART1_CR1_ENABLED_MME                      \ Mute mode enable
+$00004000 constant SEC_LPUART1_CR1_ENABLED_CMIE                     \ Character match interrupt enable
+$001f0000 constant SEC_LPUART1_CR1_ENABLED_DEDT                     \ DEDT
+$03e00000 constant SEC_LPUART1_CR1_ENABLED_DEAT                     \ DEAT
+$10000000 constant SEC_LPUART1_CR1_ENABLED_M1                       \ Word length
+$20000000 constant SEC_LPUART1_CR1_ENABLED_FIFOEN                   \ FIFOEN
+$40000000 constant SEC_LPUART1_CR1_ENABLED_TXFEIE                   \ TXFEIE
+$80000000 constant SEC_LPUART1_CR1_ENABLED_RXFFIE                   \ RXFFIE
+
+
+\
+\ @brief Control register 1
+\ Address offset: 0x00
+\ Reset value: 0x00000000
+\
+
+$00000001 constant SEC_LPUART1_CR1_DISABLED_UE                      \ USART enable
+$00000002 constant SEC_LPUART1_CR1_DISABLED_UESM                    \ USART enable in Stop mode
+$00000004 constant SEC_LPUART1_CR1_DISABLED_RE                      \ Receiver enable
+$00000008 constant SEC_LPUART1_CR1_DISABLED_TE                      \ Transmitter enable
+$00000010 constant SEC_LPUART1_CR1_DISABLED_IDLEIE                  \ IDLE interrupt enable
+$00000020 constant SEC_LPUART1_CR1_DISABLED_RXFNEIE                 \ RXFNEIE
+$00000040 constant SEC_LPUART1_CR1_DISABLED_TCIE                    \ Transmission complete interrupt enable
+$00000080 constant SEC_LPUART1_CR1_DISABLED_TXFNFIE                 \ TXFIFO not full interrupt enable
+$00000100 constant SEC_LPUART1_CR1_DISABLED_PEIE                    \ PE interrupt enable
+$00000200 constant SEC_LPUART1_CR1_DISABLED_PS                      \ Parity selection
+$00000400 constant SEC_LPUART1_CR1_DISABLED_PCE                     \ Parity control enable
+$00000800 constant SEC_LPUART1_CR1_DISABLED_WAKE                    \ Receiver wakeup method
+$00001000 constant SEC_LPUART1_CR1_DISABLED_M0                      \ Word length
+$00002000 constant SEC_LPUART1_CR1_DISABLED_MME                     \ Mute mode enable
+$00004000 constant SEC_LPUART1_CR1_DISABLED_CMIE                    \ Character match interrupt enable
+$001f0000 constant SEC_LPUART1_CR1_DISABLED_DEDT                    \ DEDT
+$03e00000 constant SEC_LPUART1_CR1_DISABLED_DEAT                    \ DEAT
+$10000000 constant SEC_LPUART1_CR1_DISABLED_M1                      \ Word length
+$20000000 constant SEC_LPUART1_CR1_DISABLED_FIFOEN                  \ FIFOEN
+
+
+\
+\ @brief Control register 2
+\ Address offset: 0x04
+\ Reset value: 0x00000000
+\
+
+$00000010 constant SEC_LPUART1_CR2_ADDM7                            \ 7-bit Address Detection/4-bit Address Detection
+$00003000 constant SEC_LPUART1_CR2_STOP                             \ STOP bits
+$00008000 constant SEC_LPUART1_CR2_SWAP                             \ Swap TX/RX pins
+$00010000 constant SEC_LPUART1_CR2_RXINV                            \ RX pin active level inversion
+$00020000 constant SEC_LPUART1_CR2_TXINV                            \ TX pin active level inversion
+$00040000 constant SEC_LPUART1_CR2_DATAINV                          \ Binary data inversion
+$00080000 constant SEC_LPUART1_CR2_MSBFIRST                         \ Most significant bit first
+$ff000000 constant SEC_LPUART1_CR2_ADD                              \ Address of the LPUART node
+
+
+\
+\ @brief Control register 3
+\ Address offset: 0x08
+\ Reset value: 0x00000000
+\
+
+$00000001 constant SEC_LPUART1_CR3_EIE                              \ Error interrupt enable
+$00000008 constant SEC_LPUART1_CR3_HDSEL                            \ Half-duplex selection
+$00000040 constant SEC_LPUART1_CR3_DMAR                             \ DMA enable receiver
+$00000080 constant SEC_LPUART1_CR3_DMAT                             \ DMA enable transmitter
+$00000100 constant SEC_LPUART1_CR3_RTSE                             \ RTS enable
+$00000200 constant SEC_LPUART1_CR3_CTSE                             \ CTS enable
+$00000400 constant SEC_LPUART1_CR3_CTSIE                            \ CTS interrupt enable
+$00001000 constant SEC_LPUART1_CR3_OVRDIS                           \ Overrun Disable
+$00002000 constant SEC_LPUART1_CR3_DDRE                             \ DMA Disable on Reception Error
+$00004000 constant SEC_LPUART1_CR3_DEM                              \ Driver enable mode
+$00008000 constant SEC_LPUART1_CR3_DEP                              \ Driver enable polarity selection
+$00800000 constant SEC_LPUART1_CR3_TXFTIE                           \ TXFTIE
+$0e000000 constant SEC_LPUART1_CR3_RXFTCFG                          \ RXFTCFG
+$10000000 constant SEC_LPUART1_CR3_RXFTIE                           \ RXFTIE
+$e0000000 constant SEC_LPUART1_CR3_TXFTCFG                          \ TXFTCFG
+
+
+\
+\ @brief Baud rate register
+\ Address offset: 0x0C
+\ Reset value: 0x00000000
+\
+
+$000fffff constant SEC_LPUART1_BRR_BRR                              \ BRR
+
+
+\
+\ @brief Request register
+\ Address offset: 0x18
+\ Reset value: 0x00000000
+\
+
+$00000002 constant SEC_LPUART1_RQR_SBKRQ                            \ Send break request
+$00000004 constant SEC_LPUART1_RQR_MMRQ                             \ Mute mode request
+$00000008 constant SEC_LPUART1_RQR_RXFRQ                            \ Receive data flush request
+$00000010 constant SEC_LPUART1_RQR_TXFRQ                            \ TXFRQ
+
+
+\
+\ @brief Interrupt and status register
+\ Address offset: 0x1C
+\ Reset value: 0x008000C0
+\
+
+$00000001 constant SEC_LPUART1_ISR_ENABLED_PE                       \ PE
+$00000002 constant SEC_LPUART1_ISR_ENABLED_FE                       \ FE
+$00000004 constant SEC_LPUART1_ISR_ENABLED_NE                       \ NE
+$00000008 constant SEC_LPUART1_ISR_ENABLED_ORE                      \ ORE
+$00000010 constant SEC_LPUART1_ISR_ENABLED_IDLE                     \ IDLE
+$00000020 constant SEC_LPUART1_ISR_ENABLED_RXFNE                    \ RXFNE
+$00000040 constant SEC_LPUART1_ISR_ENABLED_TC                       \ TC
+$00000080 constant SEC_LPUART1_ISR_ENABLED_TXFNF                    \ TXFNF
+$00000200 constant SEC_LPUART1_ISR_ENABLED_CTSIF                    \ CTSIF
+$00000400 constant SEC_LPUART1_ISR_ENABLED_CTS                      \ CTS
+$00010000 constant SEC_LPUART1_ISR_ENABLED_BUSY                     \ BUSY
+$00020000 constant SEC_LPUART1_ISR_ENABLED_CMF                      \ CMF
+$00040000 constant SEC_LPUART1_ISR_ENABLED_SBKF                     \ SBKF
+$00080000 constant SEC_LPUART1_ISR_ENABLED_RWU                      \ RWU
+$00200000 constant SEC_LPUART1_ISR_ENABLED_TEACK                    \ TEACK
+$00400000 constant SEC_LPUART1_ISR_ENABLED_REACK                    \ REACK
+$00800000 constant SEC_LPUART1_ISR_ENABLED_TXFF                     \ TXFF
+$01000000 constant SEC_LPUART1_ISR_ENABLED_RXFF                     \ RXFF
+$04000000 constant SEC_LPUART1_ISR_ENABLED_RXFT                     \ RXFT
+$08000000 constant SEC_LPUART1_ISR_ENABLED_TXFT                     \ TXFT
+
+
+\
+\ @brief Interrupt and status register
+\ Address offset: 0x1C
+\ Reset value: 0x000000C0
+\
+
+$00000001 constant SEC_LPUART1_ISR_DISABLED_PE                      \ PE
+$00000002 constant SEC_LPUART1_ISR_DISABLED_FE                      \ FE
+$00000004 constant SEC_LPUART1_ISR_DISABLED_NE                      \ NE
+$00000008 constant SEC_LPUART1_ISR_DISABLED_ORE                     \ ORE
+$00000010 constant SEC_LPUART1_ISR_DISABLED_IDLE                    \ IDLE
+$00000020 constant SEC_LPUART1_ISR_DISABLED_RXNE                    \ RXNE
+$00000040 constant SEC_LPUART1_ISR_DISABLED_TC                      \ TC
+$00000080 constant SEC_LPUART1_ISR_DISABLED_TXE                     \ TXE
+$00000200 constant SEC_LPUART1_ISR_DISABLED_CTSIF                   \ CTSIF
+$00000400 constant SEC_LPUART1_ISR_DISABLED_CTS                     \ CTS
+$00010000 constant SEC_LPUART1_ISR_DISABLED_BUSY                    \ BUSY
+$00020000 constant SEC_LPUART1_ISR_DISABLED_CMF                     \ CMF
+$00040000 constant SEC_LPUART1_ISR_DISABLED_SBKF                    \ SBKF
+$00080000 constant SEC_LPUART1_ISR_DISABLED_RWU                     \ RWU
+$00200000 constant SEC_LPUART1_ISR_DISABLED_TEACK                   \ TEACK
+$00400000 constant SEC_LPUART1_ISR_DISABLED_REACK                   \ REACK
+
+
+\
+\ @brief Interrupt flag clear register
+\ Address offset: 0x20
+\ Reset value: 0x00000000
+\
+
+$00000001 constant SEC_LPUART1_ICR_PECF                             \ Parity error clear flag
+$00000002 constant SEC_LPUART1_ICR_FECF                             \ Framing error clear flag
+$00000004 constant SEC_LPUART1_ICR_NECF                             \ Noise detected clear flag
+$00000008 constant SEC_LPUART1_ICR_ORECF                            \ Overrun error clear flag
+$00000010 constant SEC_LPUART1_ICR_IDLECF                           \ Idle line detected clear flag
+$00000040 constant SEC_LPUART1_ICR_TCCF                             \ Transmission complete clear flag
+$00000200 constant SEC_LPUART1_ICR_CTSCF                            \ CTS clear flag
+$00020000 constant SEC_LPUART1_ICR_CMCF                             \ Character match clear flag
+
+
+\
+\ @brief Receive data register
+\ Address offset: 0x24
+\ Reset value: 0x00000000
+\
+
+$000001ff constant SEC_LPUART1_RDR_RDR                              \ Receive data value
+
+
+\
+\ @brief Transmit data register
+\ Address offset: 0x28
+\ Reset value: 0x00000000
+\
+
+$000001ff constant SEC_LPUART1_TDR_TDR                              \ Transmit data value
+
+
+\
+\ @brief prescaler register
+\ Address offset: 0x2C
+\ Reset value: 0x00000000
+\
+
+$0000000f constant SEC_LPUART1_PRESC_PRESCALER                      \ PRESCALER
+
+
+\
+\ @brief Autonomous mode control register
+\ Address offset: 0x30
+\ Reset value: 0x80000000
+\
+
+$0000ffff constant SEC_LPUART1_AUTOCR_TDN                           \ TDN
+$00010000 constant SEC_LPUART1_AUTOCR_TRIGPOL                       \ TRIGPOL
+$00020000 constant SEC_LPUART1_AUTOCR_TRIGEN                        \ TRIGEN
+$00040000 constant SEC_LPUART1_AUTOCR_IDLEDIS                       \ IDLEDIS
+$00780000 constant SEC_LPUART1_AUTOCR_TRIGSEL                       \ TRIGSEL
+
+
+\
+\ @brief Universal synchronous asynchronous receiver transmitter
+\
+$56002400 constant SEC_LPUART1_CR1_ENABLED  \ offset: 0x00 : Control register 1
+$56002400 constant SEC_LPUART1_CR1_DISABLED  \ offset: 0x00 : Control register 1
+$56002404 constant SEC_LPUART1_CR2  \ offset: 0x04 : Control register 2
+$56002408 constant SEC_LPUART1_CR3  \ offset: 0x08 : Control register 3
+$5600240c constant SEC_LPUART1_BRR  \ offset: 0x0C : Baud rate register
+$56002418 constant SEC_LPUART1_RQR  \ offset: 0x18 : Request register
+$5600241c constant SEC_LPUART1_ISR_ENABLED  \ offset: 0x1C : Interrupt and status register
+$5600241c constant SEC_LPUART1_ISR_DISABLED  \ offset: 0x1C : Interrupt and status register
+$56002420 constant SEC_LPUART1_ICR  \ offset: 0x20 : Interrupt flag clear register
+$56002424 constant SEC_LPUART1_RDR  \ offset: 0x24 : Receive data register
+$56002428 constant SEC_LPUART1_TDR  \ offset: 0x28 : Transmit data register
+$5600242c constant SEC_LPUART1_PRESC  \ offset: 0x2C : prescaler register
+$56002430 constant SEC_LPUART1_AUTOCR  \ offset: 0x30 : Autonomous mode control register
+

@@ -1,0 +1,102 @@
+\
+\ @file stm32g051.h
+\ @brief Loader for all peripherals in a STM32G051
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc.fs
+.include comp.fs
+.include crc.fs
+.include dac.fs
+.include dbg.fs
+.include dma1.fs
+.include dma2.fs
+.include dmamux.fs
+.include exti.fs
+.include flash.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include hdmi_cec.fs
+.include i2c1.fs
+.include i2c2.fs
+.include iwdg.fs
+.include lptim1.fs
+.include lptim2.fs
+.include lpuart1.fs
+.include pwr.fs
+.include rcc.fs
+.include rtc.fs
+.include spi1.fs
+.include spi2.fs
+.include syscfg.fs
+.include tamp.fs
+.include tim1.fs
+.include tim2.fs
+.include tim3.fs
+.include tim6.fs
+.include tim7.fs
+.include tim14.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include usart1.fs
+.include usart2.fs
+.include vrefbuf.fs
+.include wwdg.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC                    \ ADC address block description
+.include COMP                   \ Comparator
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include DAC                    \ DAC
+.include DBG                    \ Debug support
+.include DMA1                   \ DMA controller
+.include DMA2                   \ DMA controller
+.include DMAMUX                 \ DMAMUX
+.include EXTI                   \ External interrupt/event controller
+.include FLASH                  \ Flash
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include HDMI_CEC               \ HDMI-CEC
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2 global interrupt
+.include IWDG                   \ Independent watchdog
+.include LPTIM1                 \ Low power timer
+.include LPTIM2                 \ Low power timer
+.include LPUART1                \ Low-power universal asynchronous receiver transmitter
+.include PWR                    \ Power control
+.include RCC                    \ Reset and clock control
+.include RTC                    \ Real-time clock
+.include SPI1                   \ Serial peripheral interface
+.include SPI2                   \ SPI2 gloabl interrupt
+.include SYSCFG                 \ System configuration controller
+.include TAMP                   \ Tamper and backup registers
+.include TIM1                   \ Advanced-timers
+.include TIM2                   \ General-purpose-timers
+.include TIM3                   \ TIM3 global interrupt
+.include TIM6                   \ Basic timers
+.include TIM7                   \ TIM7 + LPTIM2 global interrupt
+.include TIM14                  \ General purpose timers
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General purpose timers
+.include TIM17                  \ TIM17 global interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include VREFBUF                \ System configuration controller
+.include WWDG                   \ System window watchdog
+
+compiletoram
+

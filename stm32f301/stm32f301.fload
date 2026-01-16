@@ -1,0 +1,86 @@
+\
+\ @file stm32f301.h
+\ @brief Loader for all peripherals in a STM32F301
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpiof.fs
+.include tsc.fs
+.include crc.fs
+.include flash.fs
+.include rcc.fs
+.include dma1.fs
+.include tim2.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include spi2.fs
+.include spi3.fs
+.include i2s2ext.fs
+.include i2s3ext.fs
+.include adc.fs
+.include exti.fs
+.include pwr.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include iwdg.fs
+.include wwdg.fs
+.include rtc.fs
+.include tim6.fs
+.include dac1.fs
+.include dbgmcu.fs
+.include syscfg_comp_opamp.fs
+.include tim1.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include TSC                    \ Touch sensing controller
+.include CRC                    \ cyclic redundancy check calculation unit
+.include FLASH                  \ Flash
+.include RCC                    \ Reset and clock control
+.include DMA1                   \ DMA controller 1
+.include TIM2                   \ General purpose timer
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General-purpose-timers
+.include TIM17                  \ Timer 17 global interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt/EXTI26 (USART1 wakeup event)
+.include USART3                 \ USART3 global interrupt/EXTI28 (USART1 wakeup event)
+.include SPI2                   \ Serial peripheral interface/Inter-IC sound
+.include SPI3                   \ Serial peripheral interface/Inter-IC sound
+.include I2S2EXT                \ Serial peripheral interface/Inter-IC sound
+.include I2S3EXT                \ Serial peripheral interface/Inter-IC sound
+.include ADC                    \ Analog to digital converter
+.include EXTI                   \ External interrupt/event controller
+.include PWR                    \ Power control
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2_EV global interrupt/EXTI Line[4:2] interrupts
+.include I2C3                   \ I2C3 event interrupt & EXTI Line27 interrupt
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ Window watchdog
+.include RTC                    \ Real-time clock
+.include TIM6                   \ Basic timers
+.include DAC1                   \ Digital-to-analog converter
+.include DBGMCU                 \ Debug support
+.include SYSCFG_COMP_OPAMP      \ System configuration controller
+.include TIM1                   \ Advanced-timers
+
+compiletoram
+

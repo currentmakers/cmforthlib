@@ -1,0 +1,78 @@
+\
+\ @file stm32l0x0.h
+\ @brief Loader for all peripherals in a STM32L0x0
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include dma1.fs
+.include crc.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioh.fs
+.include gpioe.fs
+.include lptim.fs
+.include rtc.fs
+.include usart2.fs
+.include iwdg.fs
+.include wwdg.fs
+.include firewall.fs
+.include rcc.fs
+.include syscfg.fs
+.include spi1.fs
+.include i2c1.fs
+.include pwr.fs
+.include flash.fs
+.include exti.fs
+.include adc.fs
+.include dbg.fs
+.include tim2.fs
+.include tim21.fs
+.include tim22.fs
+.include lpuart1.fs
+.include nvic.fs
+.include mpu.fs
+.include stk.fs
+.include scb.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include DMA1                   \ Direct memory access controller
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include LPTIM                  \ Low power timer
+.include RTC                    \ Real-time clock
+.include USART2                 \ Universal synchronous asynchronous receiver transmitter
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ System window watchdog
+.include FIREWALL               \ Firewall
+.include RCC                    \ Reset and clock control
+.include SYSCFG                 \ System configuration controller register
+.include SPI1                   \ Serial peripheral interface
+.include I2C1                   \ Inter-integrated circuit
+.include PWR                    \ Power control
+.include FLASH                  \ Flash
+.include EXTI                   \ External interrupt/event controller
+.include ADC                    \ Analog-to-digital converter
+.include DBG                    \ Debug support
+.include TIM2                   \ General-purpose-timers
+.include TIM21                  \ General-purpose-timers
+.include TIM22                  \ General-purpose-timers
+.include LPUART1                \ Lower power Universal asynchronous receiver transmitter
+.include NVIC                   \ Nested Vectored Interrupt Controller
+.include MPU                    \ Memory protection unit
+.include STK                    \ SysTick timer
+.include SCB                    \ System control block
+
+compiletoram
+

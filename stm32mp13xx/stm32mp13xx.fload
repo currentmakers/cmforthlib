@@ -1,0 +1,224 @@
+\
+\ @file stm32mp13xx.h
+\ @brief Loader for all peripherals in a STM32MP13xx
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc1.fs
+.include adc2.fs
+.include aximc.fs
+.include bsec.fs
+.include ccu.fs
+.include crc.fs
+.include cryp.fs
+.include dbgmcu.fs
+.include ddrctrl.fs
+.include ddrperfm.fs
+.include ddrphyc.fs
+.include dfsdm.fs
+.include dlybsd1.fs
+.include dlybsd2.fs
+.include dlybqs.fs
+.include dmamux1.fs
+.include dmamux2.fs
+.include dma1.fs
+.include dma2.fs
+.include dma3.fs
+.include dts.fs
+.include eth1.fs
+.include eth2.fs
+.include etzpc.fs
+.include exti.fs
+.include fdcan1.fs
+.include fdcan2.fs
+.include fmc.fs
+.include gicd.fs
+.include gicc.fs
+.include gich.fs
+.include gicv.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include gpiog.fs
+.include gpioh.fs
+.include gpioi.fs
+.include hash.fs
+.include hdp.fs
+.include iwdg1.fs
+.include iwdg2.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include i2c4.fs
+.include i2c5.fs
+.include lptim1.fs
+.include lptim2.fs
+.include lptim3.fs
+.include lptim4.fs
+.include lptim5.fs
+.include ltdc.fs
+.include mce.fs
+.include mdma.fs
+.include otg.fs
+.include pka.fs
+.include pwr.fs
+.include quadspi.fs
+.include rcc.fs
+.include rng.fs
+.include rtc.fs
+.include saes.fs
+.include sai1.fs
+.include sai2.fs
+.include spdifrx.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include spi4.fs
+.include spi5.fs
+.include stgenc.fs
+.include stgenr.fs
+.include syscfg.fs
+.include tamp.fs
+.include tim1.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim6.fs
+.include tim7.fs
+.include tim8.fs
+.include tim12.fs
+.include tim13.fs
+.include tim14.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include tsc.fs
+.include tzc.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include usart4.fs
+.include usart5.fs
+.include usart6.fs
+.include usart7.fs
+.include usart8.fs
+.include usbphyc.fs
+.include vrefbuf.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC1                   \ ADC
+.include ADC2                   \ ADC2 global interrupt
+.include AXIMC                  \ AXIMC
+.include BSEC                   \ BSEC
+.include CCU                    \ CCU
+.include CRC                    \ CRC
+.include CRYP                   \ CRYP
+.include DBGMCU                 \ Microcontroller Debug Unit
+.include DDRCTRL                \ DDRCTRL
+.include DDRPERFM               \ DDRPERFM
+.include DDRPHYC                \ DDRPHYC
+.include DFSDM                  \ DFSDM
+.include DLYBSD1                \ DLYB
+.include DLYBSD2                \ DLYB
+.include DLYBQS                 \ DLYB
+.include DMAMUX1                \ DMAMUX1
+.include DMAMUX2                \ DMAMUX2
+.include DMA1                   \ DMA1
+.include DMA2                   \ DMA2 stream0 global interrupt
+.include DMA3                   \ DMA3 stream0 global interrupt
+.include DTS                    \ DTS register block
+.include ETH1                   \ ETH
+.include ETH2                   \ Ethernet 2 global interrupt
+.include ETZPC                  \ ETZPC
+.include EXTI                   \ EXTI
+.include FDCAN1                 \ FDCAN1
+.include FDCAN2                 \ FDCAN2 interrupt 0
+.include FMC                    \ FMC register block
+.include GICD                   \ GICD address block description
+.include GICC                   \ GICC address block description
+.include GICH                   \ GICH address block description
+.include GICV                   \ GICV address block description
+.include GPIOA                  \ GPIOA
+.include GPIOB                  \ GPIOB
+.include GPIOC                  \ GPIOC
+.include GPIOD                  \ GPIOD
+.include GPIOE                  \ GPIOE
+.include GPIOF                  \ GPIOF
+.include GPIOG                  \ GPIOG
+.include GPIOH                  \ GPIOH
+.include GPIOI                  \ GPIOI
+.include HASH                   \ HASH register bank
+.include HDP                    \ HDP register block
+.include IWDG1                  \ IWDG1
+.include IWDG2                  \ IWDG2 early wake
+.include I2C1                   \ I2C
+.include I2C2                   \ I2C2 event interrupt
+.include I2C3                   \ I2C3 event interrupt
+.include I2C4                   \ I2C4 event interrupt
+.include I2C5                   \ I2C5 event interrupt
+.include LPTIM1                 \ LPTIM
+.include LPTIM2                 \ LPTIMER2 global interrupt
+.include LPTIM3                 \ LPTIMER3 global interrupt
+.include LPTIM4                 \ LPTIMER4 global interrupt
+.include LPTIM5                 \ LPTIMER5 global interrupt
+.include LTDC                   \ LTDC register block
+.include MCE                    \ MCE
+.include MDMA                   \ MDMA
+.include OTG                    \ OTG
+.include PKA                    \ PKA
+.include PWR                    \ PWR
+.include QUADSPI                \ QUADSPI1
+.include RCC                    \ RCC
+.include RNG                    \ RNG
+.include RTC                    \ RTC
+.include SAES                   \ SAES register block
+.include SAI1                   \ SAI1 register block
+.include SAI2                   \ SAI2 global interrupt
+.include SPDIFRX                \ SPDIFRX
+.include SPI1                   \ SPI1
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global interrupt
+.include SPI4                   \ SPI4 global interrupt
+.include SPI5                   \ SPI5 global interrupt
+.include STGENC                 \ STGEN
+.include STGENR                 \ STGENR
+.include SYSCFG                 \ SYSCFG
+.include TAMP                   \ TAMP
+.include TIM1                   \ TIM
+.include TIM2                   \ TIM2
+.include TIM3                   \ TIM3 global interrupt
+.include TIM4                   \ TIM4 global interrupt
+.include TIM5                   \ TIM5 global interrupt
+.include TIM6                   \ TIM6
+.include TIM7                   \ TIM7 global interrupt
+.include TIM8                   \ TIM
+.include TIM12                  \ TIM register block
+.include TIM13                  \ TIM register block
+.include TIM14                  \ TIM14 global interrupt
+.include TIM15                  \ TIM15
+.include TIM16                  \ TIM16
+.include TIM17                  \ TIM17 global interrupt
+.include TSC                    \ TSC
+.include TZC                    \ TZC
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include USART3                 \ USART3 global interrupt
+.include USART4                 \ USART4 global interrupt
+.include USART5                 \ USART5 global interrupt
+.include USART6                 \ USART6 global interrupt
+.include USART7                 \ USART7 global interrupt
+.include USART8                 \ USART8 global interrupt
+.include USBPHYC                \ USBPHYC
+.include VREFBUF                \ VREFBUF
+
+compiletoram
+

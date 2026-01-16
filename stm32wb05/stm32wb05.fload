@@ -1,0 +1,70 @@
+\
+\ @file stm32wb05.h
+\ @brief Loader for all peripherals in a STM32WB05
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc.fs
+.include crc.fs
+.include dma.fs
+.include dmamux.fs
+.include gpioa.fs
+.include gpiob.fs
+.include iwdg.fs
+.include lpuart.fs
+.include flash_ctrl.fs
+.include pka.fs
+.include pwrc.fs
+.include rng.fs
+.include rtc.fs
+.include system_ctrl.fs
+.include i2c1.fs
+.include rcc.fs
+.include spi3.fs
+.include tim2.fs
+.include tim16.fs
+.include tim17.fs
+.include usart.fs
+.include blue_reg.fs
+.include globalstatmach_reg.fs
+.include radio_control_reg.fs
+.include radio_reg_reg.fs
+.include rrm_reg.fs
+.include wakeup_reg.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC                    \ ADC interrupt
+.include CRC                    \ CRC address block description
+.include DMA                    \ DMA interrupt
+.include DMAMUX                 \ CxCR register
+.include GPIOA                  \ GPIOA interrupt
+.include GPIOB                  \ GPIOB interrupt
+.include IWDG                   \ IWDG_KR register
+.include LPUART                 \ LPUART interrupt
+.include FLASH_CTRL             \ 4kb addressable space
+.include PKA                    \ PKA interrupt
+.include PWRC                   \ CR1 register
+.include RNG                    \ TRNG
+.include RTC                    \ RTC interrupt
+.include SYSTEM_CTRL            \ DIE_ID register
+.include I2C1                   \ I2C address block description
+.include RCC                    \ Reset and Clock Controller
+.include SPI3                   \ SPI address block description
+.include TIM2                   \ TIM2 interrupt
+.include TIM16                  \ TIM16 interrupt
+.include TIM17                  \ TIM16 interrupt
+.include USART                  \ USART interrupt
+.include BLUE_REG               \ RADIO Tx/Rx interrupt
+.include GLOBALSTATMACH_REG     \ WORD0 register
+.include RADIO_CONTROL_REG      \ RADIO_CONTROL_ID register
+.include RADIO_REG_REG          \ RADIO Error interrupt
+.include RRM_REG                \ UDRA_CTRL0 register
+.include WAKEUP_REG             \ RADIO CPU Wakeup interrupt
+
+compiletoram
+

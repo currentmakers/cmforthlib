@@ -1,0 +1,204 @@
+\
+\ @file stm32wba54.h
+\ @brief Loader for all peripherals in a STM32WBA54
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc4.fs
+.include sec_adc4.fs
+.include aes.fs
+.include sec_aes.fs
+.include crc.fs
+.include sec_crc.fs
+.include comp.fs
+.include sec_comp.fs
+.include dbgmcu.fs
+.include exti.fs
+.include sec_exti.fs
+.include flash.fs
+.include sec_flash.fs
+.include gpdma.fs
+.include sec_gpdma.fs
+.include gpioa.fs
+.include sec_gpioa.fs
+.include gpiob.fs
+.include sec_gpiob.fs
+.include gpioc.fs
+.include sec_gpioc.fs
+.include gpioh.fs
+.include sec_gpioh.fs
+.include gtzc1_tzsc.fs
+.include sec_gtzc1_tzsc.fs
+.include gtzc1_tzic.fs
+.include sec_gtzc1_tzic.fs
+.include gtzc1_mpcbb1.fs
+.include sec_gtzc1_mpcbb1.fs
+.include gtzc1_mpcbb2.fs
+.include sec_gtzc1_mpcbb2.fs
+.include gtzc1_mpcbb6.fs
+.include sec_gtzc1_mpcbb6.fs
+.include hash.fs
+.include sec_hash.fs
+.include hsem.fs
+.include sec_hsem.fs
+.include icache.fs
+.include sec_icache.fs
+.include iwdg.fs
+.include sec_iwdg.fs
+.include i2c.fs
+.include sec_i2c1.fs
+.include i2c3.fs
+.include sec_i2c3.fs
+.include lptim1.fs
+.include sec_lptim1.fs
+.include lptim2.fs
+.include sec_lptim2.fs
+.include lpuart1.fs
+.include sec_lpuart1.fs
+.include pka.fs
+.include sec_pka.fs
+.include pwr.fs
+.include sec_pwr.fs
+.include ramcfg.fs
+.include sec_ramcfg.fs
+.include rcc.fs
+.include sec_rcc.fs
+.include rng.fs
+.include sec_rng.fs
+.include rtc.fs
+.include sec_rtc.fs
+.include saes.fs
+.include sec_saes.fs
+.include spi1.fs
+.include sec_spi1.fs
+.include spi3.fs
+.include sec_spi3.fs
+.include syscfg.fs
+.include sec_syscfg.fs
+.include tamp.fs
+.include sec_tamp.fs
+.include tim1.fs
+.include sec_tim1.fs
+.include tim2.fs
+.include sec_tim2.fs
+.include tim3.fs
+.include sec_tim3.fs
+.include tim16.fs
+.include sec_tim16.fs
+.include tim17.fs
+.include sec_tim17.fs
+.include tsc.fs
+.include sec_tsc.fs
+.include usart1.fs
+.include sec_usart1.fs
+.include usart2.fs
+.include sec_usart2.fs
+.include wwdg.fs
+.include sec_wwdg.fs
+.include ptaconv.fs
+.include sec_ptaconv.fs
+.include dcb.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC4                   \ ADC register block
+.include SEC_ADC4               \ ADC register block
+.include AES                    \ Advanced encryption standard hardware accelerator
+.include SEC_AES                \ Advanced encryption standard hardware accelerator
+.include CRC                    \ CRC register block
+.include SEC_CRC                \ CRC register block
+.include COMP                   \ Comparator
+.include SEC_COMP               \ Comparator
+.include DBGMCU                 \ DBGMCU address block description
+.include EXTI                   \ External interrupt/event controller
+.include SEC_EXTI               \ External interrupt/event controller
+.include FLASH                  \ Embedded Flash memory
+.include SEC_FLASH              \ Embedded Flash memory
+.include GPDMA                  \ General purpose direct memory access controller
+.include SEC_GPDMA              \ General purpose direct memory access controller
+.include GPIOA                  \ General-purpose I/Os
+.include SEC_GPIOA              \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include SEC_GPIOB              \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include SEC_GPIOC              \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include SEC_GPIOH              \ General-purpose I/Os
+.include GTZC1_TZSC             \ GTZC1_TZSC
+.include SEC_GTZC1_TZSC         \ GTZC1_TZSC
+.include GTZC1_TZIC             \ GTZC1_TZIC
+.include SEC_GTZC1_TZIC         \ GTZC1_TZIC
+.include GTZC1_MPCBB1           \ GTZC1_MPCBB1 address block description
+.include SEC_GTZC1_MPCBB1       \ GTZC1_MPCBB1 address block description
+.include GTZC1_MPCBB2           \ GTZC1_MPCBB1 address block description
+.include SEC_GTZC1_MPCBB2       \ GTZC1_MPCBB1 address block description
+.include GTZC1_MPCBB6           \ GTZC1_MPCBB6 address block description
+.include SEC_GTZC1_MPCBB6       \ GTZC1_MPCBB6 address block description
+.include HASH                   \ HASH register block
+.include SEC_HASH               \ HASH register block
+.include HSEM                   \ Hardware semaphore
+.include SEC_HSEM               \ Hardware semaphore
+.include ICACHE                 \ Instruction cache
+.include SEC_ICACHE             \ Instruction cache
+.include IWDG                   \ Independent watchdog
+.include SEC_IWDG               \ Independent watchdog
+.include I2C                    \ Inter-integrated circuit
+.include SEC_I2C1               \ Inter-integrated circuit
+.include I2C3                   \ I2C3 event interrupt
+.include SEC_I2C3               \ Inter-integrated circuit
+.include LPTIM1                 \ Low power timer
+.include SEC_LPTIM1             \ Low power timer
+.include LPTIM2                 \ LPTIM2 global interrupt
+.include SEC_LPTIM2             \ Low power timer
+.include LPUART1                \ LPUART address block description
+.include SEC_LPUART1            \ LPUART address block description
+.include PKA                    \ Private key accelerator
+.include SEC_PKA                \ Private key accelerator
+.include PWR                    \ Power control
+.include SEC_PWR                \ Power control
+.include RAMCFG                 \ RAMs configuration controller
+.include SEC_RAMCFG             \ RAMs configuration controller
+.include RCC                    \ Reset and clock control
+.include SEC_RCC                \ Reset and clock control
+.include RNG                    \ RNG register block
+.include SEC_RNG                \ RNG register block
+.include RTC                    \ Real-time clock
+.include SEC_RTC                \ Real-time clock
+.include SAES                   \ Secure AES coprocessor
+.include SEC_SAES               \ Secure AES coprocessor
+.include SPI1                   \ Serial peripheral interface
+.include SEC_SPI1               \ Serial peripheral interface
+.include SPI3                   \ SPI3 global interrupt
+.include SEC_SPI3               \ Serial peripheral interface
+.include SYSCFG                 \ System configuration controller
+.include SEC_SYSCFG             \ System configuration controller
+.include TAMP                   \ Tamper and backup registers
+.include SEC_TAMP               \ Tamper and backup registers
+.include TIM1                   \ TIM1 address block description
+.include SEC_TIM1               \ TIM1 address block description
+.include TIM2                   \ TIM2 address block description
+.include SEC_TIM2               \ TIM2 address block description
+.include TIM3                   \ TIM3 global interrupt
+.include SEC_TIM3               \ TIM2 address block description
+.include TIM16                  \ TIM16 address block description
+.include SEC_TIM16              \ TIM16 address block description
+.include TIM17                  \ TIM17 global interrupt
+.include SEC_TIM17              \ TIM16 address block description
+.include TSC                    \ Touch sensing controller
+.include SEC_TSC                \ Touch sensing controller
+.include USART1                 \ USART register block
+.include SEC_USART1             \ USART register block
+.include USART2                 \ USART2 global interrupt
+.include SEC_USART2             \ USART register block
+.include WWDG                   \ System window watchdog
+.include SEC_WWDG               \ System window watchdog
+.include PTACONV                \ PTA converter
+.include SEC_PTACONV            \ PTA converter
+.include DCB                    \ Debug Control Block
+
+compiletoram
+

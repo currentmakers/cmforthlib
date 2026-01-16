@@ -1,0 +1,110 @@
+\
+\ @file stm32f411.h
+\ @brief Loader for all peripherals in a STM32F411
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc_common.fs
+.include adc1.fs
+.include crc.fs
+.include dbg.fs
+.include exti.fs
+.include flash.fs
+.include iwdg.fs
+.include otg_fs_device.fs
+.include otg_fs_global.fs
+.include otg_fs_host.fs
+.include otg_fs_pwrclk.fs
+.include pwr.fs
+.include rcc.fs
+.include rtc.fs
+.include sdio.fs
+.include syscfg.fs
+.include tim1.fs
+.include tim8.fs
+.include tim10.fs
+.include tim11.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim9.fs
+.include usart1.fs
+.include usart2.fs
+.include usart6.fs
+.include wwdg.fs
+.include dma2.fs
+.include dma1.fs
+.include gpioh.fs
+.include gpioe.fs
+.include gpiod.fs
+.include gpioc.fs
+.include gpiob.fs
+.include gpioa.fs
+.include i2c3.fs
+.include i2c2.fs
+.include i2c1.fs
+.include i2s2ext.fs
+.include i2s3ext.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include spi4.fs
+.include spi5.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC_COMMON             \ ADC common registers
+.include ADC1                   \ Analog-to-digital converter
+.include CRC                    \ Cryptographic processor
+.include DBG                    \ Debug support
+.include EXTI                   \ External interrupt/event controller
+.include FLASH                  \ FLASH
+.include IWDG                   \ Independent watchdog
+.include OTG_FS_DEVICE          \ USB on the go full speed
+.include OTG_FS_GLOBAL          \ USB on the go full speed
+.include OTG_FS_HOST            \ USB on the go full speed
+.include OTG_FS_PWRCLK          \ USB on the go full speed
+.include PWR                    \ Power control
+.include RCC                    \ Reset and clock control
+.include RTC                    \ Real-time clock
+.include SDIO                   \ Secure digital input/output interface
+.include SYSCFG                 \ System configuration controller
+.include TIM1                   \ Advanced-timers
+.include TIM8                   \ Advanced-timers
+.include TIM10                  \ General-purpose-timers
+.include TIM11                  \ General-purpose-timers
+.include TIM2                   \ General purpose timers
+.include TIM3                   \ General purpose timers
+.include TIM4                   \ TIM4 global interrupt
+.include TIM5                   \ General-purpose-timers
+.include TIM9                   \ General purpose timers
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include USART6                 \ USART6 global interrupt
+.include WWDG                   \ Window watchdog
+.include DMA2                   \ DMA controller
+.include DMA1                   \ RTC Wakeup interrupt through the EXTI line
+.include GPIOH                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOA                  \ General-purpose I/Os
+.include I2C3                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2 event interrupt
+.include I2C1                   \ I2C1 event interrupt
+.include I2S2EXT                \ Serial peripheral interface
+.include I2S3EXT                \ Serial peripheral interface
+.include SPI1                   \ SPI1 global interrupt
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global interrupt
+.include SPI4                   \ SPI 4 global interrupt
+.include SPI5                   \ SPI 5 global interrupt
+
+compiletoram
+

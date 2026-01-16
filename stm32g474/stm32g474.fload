@@ -1,0 +1,182 @@
+\
+\ @file stm32g474.h
+\ @brief Loader for all peripherals in a STM32G474
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include crc.fs
+.include iwdg.fs
+.include wwdg.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include i2c4.fs
+.include flash.fs
+.include dbgmcu.fs
+.include rcc.fs
+.include pwr.fs
+.include rng.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include gpiog.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include tim1.fs
+.include tim20.fs
+.include tim8.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim6.fs
+.include tim7.fs
+.include lptimer1.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include uart4.fs
+.include uart5.fs
+.include lpuart1.fs
+.include spi1.fs
+.include spi4.fs
+.include spi3.fs
+.include spi2.fs
+.include exti.fs
+.include rtc.fs
+.include fmc.fs
+.include dma1.fs
+.include dma2.fs
+.include dmamux.fs
+.include syscfg.fs
+.include vrefbuf.fs
+.include comp.fs
+.include opamp.fs
+.include hrtim_master.fs
+.include hrtim_tima.fs
+.include hrtim_timb.fs
+.include hrtim_timc.fs
+.include hrtim_timd.fs
+.include hrtim_time.fs
+.include hrtim_timf.fs
+.include hrtim_common.fs
+.include quadspi.fs
+.include dac1.fs
+.include dac2.fs
+.include dac3.fs
+.include dac4.fs
+.include adc1.fs
+.include adc2.fs
+.include adc3.fs
+.include adc4.fs
+.include adc5.fs
+.include adc12_common.fs
+.include adc345_common.fs
+.include fmac.fs
+.include cordic.fs
+.include sai.fs
+.include tamp.fs
+.include fdcan.fs
+.include fdcan1.fs
+.include fdcan2.fs
+.include fdcan3.fs
+.include ucpd1.fs
+.include usb_fs_device.fs
+.include crs.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include IWDG                   \ WinWATCHDOG
+.include WWDG                   \ System window watchdog
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ Window Watchdog interrupt
+.include I2C3                   \ I2C3_EV
+.include I2C4                   \ I2C4_EV
+.include FLASH                  \ Flash
+.include DBGMCU                 \ Debug support
+.include RCC                    \ Reset and clock control
+.include PWR                    \ Power control
+.include RNG                    \ Random number generator
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include GPIOG                  \ General-purpose I/Os
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General purpose timers
+.include TIM17                  \ General purpose timers
+.include TIM1                   \ Advanced-timers
+.include TIM20                  \ TIM20_BRK
+.include TIM8                   \ TIM8_BRK
+.include TIM2                   \ Advanced-timers
+.include TIM3                   \ TIM3
+.include TIM4                   \ TIM4
+.include TIM5                   \ TIM5
+.include TIM6                   \ Basic-timers
+.include TIM7                   \ TIM7
+.include LPTIMER1               \ Low power timer
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2
+.include USART3                 \ USART3
+.include UART4                  \ Universal synchronous asynchronous receiver transmitter
+.include UART5                  \ UART5
+.include LPUART1                \ Universal synchronous asynchronous receiver transmitter
+.include SPI1                   \ Serial peripheral interface/Inter-IC sound
+.include SPI4                   \ Serial peripheral interface/Inter-IC sound
+.include SPI3                   \ SPI3
+.include SPI2                   \ SPI2
+.include EXTI                   \ External interrupt/event controller
+.include RTC                    \ Real-time clock
+.include FMC                    \ Flexible memory controller
+.include DMA1                   \ DMA controller
+.include DMA2                   \ DMA1 channel 7 interrupt
+.include DMAMUX                 \ DMAMUX
+.include SYSCFG                 \ System configuration controller
+.include VREFBUF                \ Voltage reference buffer
+.include COMP                   \ Comparator control and status register
+.include OPAMP                  \ Operational amplifiers
+.include HRTIM_MASTER           \ High Resolution Timer: Master Timers
+.include HRTIM_TIMA             \ High Resolution Timer: TIMA
+.include HRTIM_TIMB             \ High Resolution Timer: TIMB
+.include HRTIM_TIMC             \ High Resolution Timer: TIMC
+.include HRTIM_TIMD             \ High Resolution Timer: TIMD
+.include HRTIM_TIME             \ High Resolution Timer: TIME
+.include HRTIM_TIMF             \ High Resolution Timer: TIMF
+.include HRTIM_COMMON           \ High Resolution Timer: Common functions
+.include QUADSPI                \ QuadSPI interface
+.include DAC1                   \ Digital-to-analog converter
+.include DAC2                   \ Digital-to-analog converter
+.include DAC3                   \ Digital-to-analog converter
+.include DAC4                   \ Digital-to-analog converter
+.include ADC1                   \ Analog-to-Digital Converter
+.include ADC2                   \ Analog-to-Digital Converter
+.include ADC3                   \ Analog-to-Digital Converter
+.include ADC4                   \ ADC4
+.include ADC5                   \ ADC5
+.include ADC12_COMMON           \ Analog-to-Digital Converter
+.include ADC345_COMMON          \ Analog-to-Digital Converter
+.include FMAC                   \ Filter Math Accelerator
+.include CORDIC                 \ CORDIC Co-processor
+.include SAI                    \ Serial audio interface
+.include TAMP                   \ Tamper and backup registers
+.include FDCAN                  \ FDCAN
+.include FDCAN1                 \ FDCAN1 interrupt 0
+.include FDCAN2                 \ FDCAN2 interrupt 0
+.include FDCAN3                 \ FDCAN3 interrupt 0
+.include UCPD1                  \ UCPD1
+.include USB_FS_DEVICE          \ USB_FS_device
+.include CRS                    \ CRS
+
+compiletoram
+

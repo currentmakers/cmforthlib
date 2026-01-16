@@ -1,0 +1,82 @@
+\
+\ @file stm32wba50.h
+\ @brief Loader for all peripherals in a STM32WBA50
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc4.fs
+.include aes.fs
+.include crc.fs
+.include dbgmcu.fs
+.include exti.fs
+.include flash.fs
+.include gpdma.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpioh.fs
+.include hash.fs
+.include hsem.fs
+.include icache.fs
+.include iwdg.fs
+.include i2c3.fs
+.include lptim1.fs
+.include lpuart1.fs
+.include pka.fs
+.include pwr.fs
+.include ramcfg.fs
+.include rcc.fs
+.include rng.fs
+.include rtc.fs
+.include spi3.fs
+.include syscfg.fs
+.include tamp.fs
+.include tim1.fs
+.include tim2.fs
+.include tim16.fs
+.include tsc.fs
+.include usart1.fs
+.include wwdg.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC4                   \ ADC register block
+.include AES                    \ Advanced encryption standard hardware accelerator
+.include CRC                    \ CRC register block
+.include DBGMCU                 \ DBGMCU address block description
+.include EXTI                   \ External interrupt/event controller
+.include FLASH                  \ Embedded Flash memory
+.include GPDMA                  \ General purpose direct memory access controller
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include HASH                   \ HASH register block
+.include HSEM                   \ Hardware semaphore
+.include ICACHE                 \ Instruction cache
+.include IWDG                   \ Independent watchdog
+.include I2C3                   \ Inter-integrated circuit
+.include LPTIM1                 \ Low power timer
+.include LPUART1                \ LPUART address block description
+.include PKA                    \ Private key accelerator
+.include PWR                    \ Power control
+.include RAMCFG                 \ RAMs configuration controller
+.include RCC                    \ Reset and clock control
+.include RNG                    \ RNG register block
+.include RTC                    \ Real-time clock
+.include SPI3                   \ Serial peripheral interface
+.include SYSCFG                 \ System configuration controller
+.include TAMP                   \ Tamper and backup registers
+.include TIM1                   \ TIM1 address block description
+.include TIM2                   \ TIM2 address block description
+.include TIM16                  \ TIM16 address block description
+.include TSC                    \ Touch sensing controller
+.include USART1                 \ USART register block
+.include WWDG                   \ System window watchdog
+
+compiletoram
+

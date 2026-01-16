@@ -1,0 +1,122 @@
+\
+\ @file stm32u073.h
+\ @brief Loader for all peripherals in a STM32U073
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc.fs
+.include comp1.fs
+.include crc.fs
+.include crs.fs
+.include dac.fs
+.include dbgmcu.fs
+.include dmamux.fs
+.include dma1.fs
+.include dma2.fs
+.include exti.fs
+.include flash.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include iwdg.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include lcd.fs
+.include lptim1.fs
+.include lptim2.fs
+.include lptim3.fs
+.include lpuart1.fs
+.include lpuart2.fs
+.include lpuart3.fs
+.include opamp.fs
+.include pwr.fs
+.include rcc.fs
+.include rng.fs
+.include rtc.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include syscfg.fs
+.include tamp.fs
+.include tim1.fs
+.include tim2.fs
+.include tim3.fs
+.include tim6.fs
+.include tim7.fs
+.include tim15.fs
+.include tim16.fs
+.include tsc.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include usart4.fs
+.include usb.fs
+.include vrefbuf.fs
+.include wwdg.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC                    \ ADC address block description
+.include COMP1                  \ COMP address block description
+.include CRC                    \ CRC address block description
+.include CRS                    \ CRS address block description
+.include DAC                    \ DAC address block description
+.include DBGMCU                 \ DBGMCU register block
+.include DMAMUX                 \ DMAMUX address block description
+.include DMA1                   \ DMA register bank
+.include DMA2                   \ DMA register bank
+.include EXTI                   \ EXTI register block
+.include FLASH                  \ Mamba FLASH register block
+.include GPIOA                  \ GPIOA address block description
+.include GPIOB                  \ GPIOB address block description
+.include GPIOC                  \ GPIOC address block description
+.include GPIOD                  \ GPIOD address block description
+.include GPIOE                  \ GPIOE address block description
+.include GPIOF                  \ GPIOF address block description
+.include IWDG                   \ IWDG address block description
+.include I2C1                   \ I2C address block description
+.include I2C2                   \ I2C2/3/4 global interrupt
+.include I2C3                   \ I2C address block description
+.include LCD                    \ LCD address block description
+.include LPTIM1                 \ LPTIM1 address block description
+.include LPTIM2                 \ LPTIM2 address block description
+.include LPTIM3                 \ LPTIM3 address block description
+.include LPUART1                \ LPUART address block description
+.include LPUART2                \ LPUART address block description
+.include LPUART3                \ LPUART address block description
+.include OPAMP                  \ OPAMP address block description
+.include PWR                    \ PWR register block
+.include RCC                    \ RCC address block description
+.include RNG                    \ RNG address block description
+.include RTC                    \ RTC register block
+.include SPI1                   \ SPI address block description
+.include SPI2                   \ SPI2/3 global interrupt
+.include SPI3                   \ SPI address block description
+.include SYSCFG                 \ SYSCFG register block
+.include TAMP                   \ TAMP register block
+.include TIM1                   \ TIM1 address block description
+.include TIM2                   \ TIM2 address block description
+.include TIM3                   \ TIM3 address block description
+.include TIM6                   \ TIM6 address block description
+.include TIM7                   \ TIM7 address block description
+.include TIM15                  \ TIM15 address block description
+.include TIM16                  \ TIM16 address block description
+.include TSC                    \ TSC address block description
+.include USART1                 \ USART address block description
+.include USART2                 \ USART2 and LPUART2 global interrupt (combined with EXTI lines 26 and 35)
+.include USART3                 \ USART3 and LPUART1 global interrupt (combined with EXTI lines 24 and 28)
+.include USART4                 \ USART4 and LPUART3 global interrupt (combined with EXTI lines 20 and 34)
+.include USB                    \ USB address block description
+.include VREFBUF                \ VREFBUF address block description
+.include WWDG                   \ WWDG address block description
+
+compiletoram
+

@@ -1,0 +1,170 @@
+\
+\ @file stm32l4x6.h
+\ @brief Loader for all peripherals in a STM32L4x6
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include dac.fs
+.include dma1.fs
+.include dma2.fs
+.include crc.fs
+.include lcd.fs
+.include tsc.fs
+.include iwdg.fs
+.include wwdg.fs
+.include comp.fs
+.include firewall.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include i2c4.fs
+.include flash.fs
+.include dbgmcu.fs
+.include quadspi.fs
+.include rcc.fs
+.include pwr.fs
+.include syscfg.fs
+.include dfsdm.fs
+.include rng.fs
+.include aes.fs
+.include adc1.fs
+.include adc2.fs
+.include adc3.fs
+.include adc_common.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include gpiog.fs
+.include gpioh.fs
+.include gpioi.fs
+.include sai1.fs
+.include sai2.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include tim1.fs
+.include tim8.fs
+.include tim6.fs
+.include tim7.fs
+.include lptim1.fs
+.include lptim2.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include uart4.fs
+.include uart5.fs
+.include lpuart1.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include sdmmc1.fs
+.include exti.fs
+.include vrefbuf.fs
+.include can1.fs
+.include can2.fs
+.include rtc.fs
+.include otg_fs_global.fs
+.include otg_fs_host.fs
+.include otg_fs_device.fs
+.include otg_fs_pwrclk.fs
+.include swpmi1.fs
+.include opamp.fs
+.include fmc.fs
+.include crs.fs
+.include dcmi.fs
+.include hash.fs
+.include dma2d.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include DAC                    \ Digital-to-analog converter
+.include DMA1                   \ Direct memory access controller
+.include DMA2                   \ DMA2 Channel 1 global Interrupt
+.include CRC                    \ Cyclic redundancy check calculation unit
+.include LCD                    \ Liquid crystal display controller
+.include TSC                    \ Touch sensing controller
+.include IWDG                   \ Independent watchdog
+.include WWDG                   \ System window watchdog
+.include COMP                   \ Comparator
+.include FIREWALL               \ Firewall
+.include I2C1                   \ Inter-integrated circuit
+.include I2C2                   \ I2C2 event interrupt
+.include I2C3                   \ I2C3 event interrupt
+.include I2C4                   \ I2C4 event interrupt
+.include FLASH                  \ Flash
+.include DBGMCU                 \ Debug support
+.include QUADSPI                \ QuadSPI interface
+.include RCC                    \ Reset and clock control
+.include PWR                    \ Power control
+.include SYSCFG                 \ System configuration controller
+.include DFSDM                  \ Digital filter for sigma delta modulators
+.include RNG                    \ Random number generator
+.include AES                    \ Advanced encryption standard hardware accelerator
+.include ADC1                   \ Analog-to-Digital Converter
+.include ADC2                   \ ADC1 and ADC2 global interrupt
+.include ADC3                   \ ADC1 and ADC2 global interrupt
+.include ADC_COMMON             \ Analog-to-Digital Converter
+.include GPIOA                  \ General-purpose I/Os
+.include GPIOB                  \ General-purpose I/Os
+.include GPIOC                  \ General-purpose I/Os
+.include GPIOD                  \ General-purpose I/Os
+.include GPIOE                  \ General-purpose I/Os
+.include GPIOF                  \ General-purpose I/Os
+.include GPIOG                  \ General-purpose I/Os
+.include GPIOH                  \ General-purpose I/Os
+.include GPIOI                  \ General-purpose I/Os
+.include SAI1                   \ Serial audio interface
+.include SAI2                   \ SAI2 global interrupt
+.include TIM2                   \ General-purpose-timers
+.include TIM3                   \ TIM3 global interrupt
+.include TIM4                   \ TIM4 global interrupt
+.include TIM5                   \ TIM5 global Interrupt
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General purpose timers
+.include TIM17                  \ General purpose timers
+.include TIM1                   \ Advanced-timers
+.include TIM8                   \ Advanced-timers
+.include TIM6                   \ Basic-timers
+.include TIM7                   \ TIM7 global interrupt
+.include LPTIM1                 \ Low power timer
+.include LPTIM2                 \ LP TIM2 interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ Universal synchronous asynchronous receiver transmitter
+.include USART3                 \ Universal synchronous asynchronous receiver transmitter
+.include UART4                  \ Universal synchronous asynchronous receiver transmitter
+.include UART5                  \ UART5 global Interrupt
+.include LPUART1                \ Universal synchronous asynchronous receiver transmitter
+.include SPI1                   \ Serial peripheral interface/Inter-IC sound
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global Interrupt
+.include SDMMC1                 \ Secure digital input/output interface
+.include EXTI                   \ External interrupt/event controller
+.include VREFBUF                \ Voltage reference buffer
+.include CAN1                   \ Controller area network
+.include CAN2                   \ CAN2 TX interrupt
+.include RTC                    \ Real-time clock
+.include OTG_FS_GLOBAL          \ USB on the go full speed
+.include OTG_FS_HOST            \ USB on the go full speed
+.include OTG_FS_DEVICE          \ USB on the go full speed
+.include OTG_FS_PWRCLK          \ USB on the go full speed
+.include SWPMI1                 \ Single Wire Protocol Master Interface
+.include OPAMP                  \ Operational amplifiers
+.include FMC                    \ Flexible memory controller
+.include CRS                    \ Clock recovery system
+.include DCMI                   \ Digital camera interface
+.include HASH                   \ Hash processor
+.include DMA2D                  \ DMA2D controller
+
+compiletoram
+

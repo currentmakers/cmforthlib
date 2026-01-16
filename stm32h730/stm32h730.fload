@@ -1,0 +1,262 @@
+\
+\ @file stm32h730.h
+\ @brief Loader for all peripherals in a STM32H730
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+compiletoram
+.include adc1.fs
+.include adc2.fs
+.include adc12_common.fs
+.include adc3.fs
+.include adc3_common.fs
+.include axi.fs
+.include bdma.fs
+.include can_ccu.fs
+.include cec.fs
+.include comp1.fs
+.include cordic.fs
+.include crc.fs
+.include crs.fs
+.include cryp.fs
+.include dac.fs
+.include dbgmcu.fs
+.include dcmi.fs
+.include delay_block_sdmmc1.fs
+.include delay_block_sdmmc2.fs
+.include dfsdm.fs
+.include dma1.fs
+.include dma2.fs
+.include dma2d.fs
+.include dmamux1.fs
+.include dmamux2.fs
+.include delay_block_octospi1.fs
+.include delay_block_octospi2.fs
+.include exti.fs
+.include ethernet_mac.fs
+.include fdcan1.fs
+.include fdcan2.fs
+.include fdcan3.fs
+.include fmac.fs
+.include fmc.fs
+.include flash.fs
+.include gpioa.fs
+.include gpiob.fs
+.include gpioc.fs
+.include gpiod.fs
+.include gpioe.fs
+.include gpiof.fs
+.include gpiog.fs
+.include gpioh.fs
+.include gpioj.fs
+.include gpiok.fs
+.include hsem.fs
+.include i2c1.fs
+.include i2c2.fs
+.include i2c3.fs
+.include i2c4.fs
+.include i2c5.fs
+.include iwdg1.fs
+.include lptim1.fs
+.include lptim2.fs
+.include lptim3.fs
+.include lptim4.fs
+.include lptim5.fs
+.include lpuart1.fs
+.include ltdc.fs
+.include mdios.fs
+.include mdma.fs
+.include octospi1.fs
+.include octospi2.fs
+.include opamp.fs
+.include otg1_hs_device.fs
+.include otg2_hs_device.fs
+.include otg1_hs_global.fs
+.include otg1_hs_host.fs
+.include otg2_hs_host.fs
+.include otg1_hs_pwrclk.fs
+.include otg2_hs_pwrclk.fs
+.include octospii_o_manager.fs
+.include otfdec1.fs
+.include otfdec2.fs
+.include pssi.fs
+.include pwr.fs
+.include ramecc1.fs
+.include ramecc2.fs
+.include ramecc3.fs
+.include rcc.fs
+.include rng.fs
+.include rtc.fs
+.include sai1.fs
+.include sai4.fs
+.include sdmmc1.fs
+.include sdmmc2.fs
+.include spdifrx.fs
+.include spi1.fs
+.include spi2.fs
+.include spi3.fs
+.include spi4.fs
+.include spi5.fs
+.include spi6.fs
+.include swpmi.fs
+.include syscfg.fs
+.include tim1.fs
+.include tim2.fs
+.include tim3.fs
+.include tim4.fs
+.include tim5.fs
+.include tim6.fs
+.include tim7.fs
+.include tim8.fs
+.include tim12.fs
+.include tim13.fs
+.include tim14.fs
+.include tim15.fs
+.include tim16.fs
+.include tim17.fs
+.include tim23.fs
+.include tim24.fs
+.include usart1.fs
+.include usart2.fs
+.include usart3.fs
+.include uart4.fs
+.include uart5.fs
+.include usart6.fs
+.include uart7.fs
+.include uart8.fs
+.include uart9.fs
+.include usart10.fs
+.include vrefbuf.fs
+.include wwdg1.fs
+
+decimal
+
+\ Peripheral Instance Definitions
+.include ADC1                   \ Analog to Digital Converter
+.include ADC2                   \ Analog to Digital Converter
+.include ADC12_COMMON           \ Analog-to-Digital Converter
+.include ADC3                   \ Analog-to-Digital Converter
+.include ADC3_COMMON            \ Analog-to-Digital Converter
+.include AXI                    \ AXI interconnect registers
+.include BDMA                   \ BDMA
+.include CAN_CCU                \ CCU registers
+.include CEC                    \ CEC
+.include COMP1                  \ COMP1
+.include CORDIC                 \ CORDIC register block
+.include CRC                    \ Cryptographic processor
+.include CRS                    \ Clock Recovery System
+.include CRYP                   \ Cryptographic processor
+.include DAC                    \ DAC
+.include DBGMCU                 \ Microcontroller Debug Unit
+.include DCMI                   \ Digital camera interface
+.include DELAY_BLOCK_SDMMC1     \ DELAY_Block_SDMMC1
+.include DELAY_BLOCK_SDMMC2     \ DELAY_Block_SDMMC1
+.include DFSDM                  \ Digital filter for sigma delta modulators
+.include DMA1                   \ DMA controller
+.include DMA2                   \ DMA2 Stream0 interrupt
+.include DMA2D                  \ DMA2D
+.include DMAMUX1                \ DMAMUX
+.include DMAMUX2                \ DMAMUX
+.include DELAY_BLOCK_OCTOSPI1   \ DELAY_Block_SDMMC1
+.include DELAY_BLOCK_OCTOSPI2   \ DELAY_Block_SDMMC1
+.include EXTI                   \ External interrupt/event controller
+.include ETHERNET_MAC           \ Ethernet: media access control (MAC)
+.include FDCAN1                 \ FDCAN1
+.include FDCAN2                 \ FDCAN2 Interrupt 0
+.include FDCAN3                 \ FDCAN3 Interrupt 0
+.include FMAC                   \ FMAC register block
+.include FMC                    \ FMC
+.include FLASH                  \ Flash
+.include GPIOA                  \ GPIO
+.include GPIOB                  \ GPIO
+.include GPIOC                  \ GPIO
+.include GPIOD                  \ GPIO
+.include GPIOE                  \ GPIO
+.include GPIOF                  \ GPIO
+.include GPIOG                  \ GPIO
+.include GPIOH                  \ GPIO
+.include GPIOJ                  \ GPIO
+.include GPIOK                  \ GPIO
+.include HSEM                   \ HSEM
+.include I2C1                   \ I2C
+.include I2C2                   \ I2C2 event interrupt
+.include I2C3                   \ I2C3 event interrupt
+.include I2C4                   \ I2C4 event interrupt
+.include I2C5                   \ I2C5 event interrupt
+.include IWDG1                  \ IWDG
+.include LPTIM1                 \ Low power timer
+.include LPTIM2                 \ LPTIM2 timer interrupt
+.include LPTIM3                 \ Low power timer
+.include LPTIM4                 \ LPTIM2 timer interrupt
+.include LPTIM5                 \ LPTIM2 timer interrupt
+.include LPUART1                \ LPUART1
+.include LTDC                   \ LCD-TFT Controller
+.include MDIOS                  \ Management data input/output slave
+.include MDMA                   \ MDMA
+.include OCTOSPI1               \ OctoSPI
+.include OCTOSPI2               \ OCTOSPI2 global interrupt
+.include OPAMP                  \ Operational amplifiers
+.include OTG1_HS_DEVICE         \ USB 1 on the go high speed
+.include OTG2_HS_DEVICE         \ USB 1 on the go high speed
+.include OTG1_HS_GLOBAL         \ USB 1 on the go high speed
+.include OTG1_HS_HOST           \ USB 1 on the go high speed
+.include OTG2_HS_HOST           \ USB 1 on the go high speed
+.include OTG1_HS_PWRCLK         \ USB 1 on the go high speed
+.include OTG2_HS_PWRCLK         \ USB 1 on the go high speed
+.include OCTOSPII_O_MANAGER     \ OctoSPI IO Manager
+.include OTFDEC1                \ OTFDEC address block description
+.include OTFDEC2                \ OTFDEC2 interrupt
+.include PSSI                   \ PSSI register block
+.include PWR                    \ PWR
+.include RAMECC1                \ ECC controller is associated to each RAM area
+.include RAMECC2                \ ECC controller is associated to each RAM area
+.include RAMECC3                \ ECC controller is associated to each RAM area
+.include RCC                    \ Reset and clock control
+.include RNG                    \ RNG
+.include RTC                    \ RTC
+.include SAI1                   \ SAI
+.include SAI4                   \ SAI4 global interrupt
+.include SDMMC1                 \ SDMMC1
+.include SDMMC2                 \ SDMMC2 global interrupt
+.include SPDIFRX                \ Receiver Interface
+.include SPI1                   \ Serial peripheral interface
+.include SPI2                   \ SPI2 global interrupt
+.include SPI3                   \ SPI3 global interrupt
+.include SPI4                   \ SPI4 global interrupt
+.include SPI5                   \ SPI5 global interrupt
+.include SPI6                   \ SPI6 global interrupt
+.include SWPMI                  \ Single Wire Protocol Master Interface
+.include SYSCFG                 \ System configuration controller
+.include TIM1                   \ Advanced-timers
+.include TIM2                   \ General purpose timers
+.include TIM3                   \ TIM3 global interrupt
+.include TIM4                   \ TIM4 global interrupt
+.include TIM5                   \ TIM5 global interrupt
+.include TIM6                   \ Basic timers
+.include TIM7                   \ TIM7 global interrupt
+.include TIM8                   \ TIM8 and 12 break global
+.include TIM12                  \ General purpose timers
+.include TIM13                  \ General purpose timers
+.include TIM14                  \ General purpose timers
+.include TIM15                  \ General purpose timers
+.include TIM16                  \ General-purpose-timers
+.include TIM17                  \ General-purpose-timers
+.include TIM23                  \ TIM23 global interrupt
+.include TIM24                  \ TIM24 global interrupt
+.include USART1                 \ Universal synchronous asynchronous receiver transmitter
+.include USART2                 \ USART2 global interrupt
+.include USART3                 \ USART3 global interrupt
+.include UART4                  \ UART4 global interrupt
+.include UART5                  \ UART5 global interrupt
+.include USART6                 \ USART6 global interrupt
+.include UART7                  \ UART7 global interrupt
+.include UART8                  \ UART8 global interrupt
+.include UART9                  \ UART9 interrupt
+.include USART10                \ USART10 interrupt
+.include VREFBUF                \ VREFBUF
+.include WWDG1                  \ WWDG
+
+compiletoram
+
