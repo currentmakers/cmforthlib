@@ -1,0 +1,475 @@
+\
+\ @file dma.fs
+\ @brief DMA controller
+\
+\ This file is auto-generated from SVD file.
+\ DO NOT EDIT MANUALLY.
+\
+
+[ifndef] DMA_DEF
+
+  [ifdef] DMA_DMA_ISR_DEF
+    \
+    \ @brief DMA interrupt status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_GIF1                       \ [0x00] global interrupt flag for channel 1
+    $01 constant DMA_TCIF1                      \ [0x01] transfer complete (TC) flag for channel 1
+    $02 constant DMA_HTIF1                      \ [0x02] half transfer (HT) flag for channel 1
+    $03 constant DMA_TEIF1                      \ [0x03] transfer error (TE) flag for channel 1
+    $04 constant DMA_GIF2                       \ [0x04] global interrupt flag for channel 2
+    $05 constant DMA_TCIF2                      \ [0x05] transfer complete (TC) flag for channel 2
+    $06 constant DMA_HTIF2                      \ [0x06] half transfer (HT) flag for channel 2
+    $07 constant DMA_TEIF2                      \ [0x07] transfer error (TE) flag for channel 2
+    $08 constant DMA_GIF3                       \ [0x08] global interrupt flag for channel 3
+    $09 constant DMA_TCIF3                      \ [0x09] transfer complete (TC) flag for channel 3
+    $0a constant DMA_HTIF3                      \ [0x0a] half transfer (HT) flag for channel 3
+    $0b constant DMA_TEIF3                      \ [0x0b] transfer error (TE) flag for channel 3
+    $0c constant DMA_GIF4                       \ [0x0c] global interrupt flag for channel 4
+    $0d constant DMA_TCIF4                      \ [0x0d] transfer complete (TC) flag for channel 4
+    $0e constant DMA_HTIF4                      \ [0x0e] half transfer (HT) flag for channel 4
+    $0f constant DMA_TEIF4                      \ [0x0f] transfer error (TE) flag for channel 4
+    $10 constant DMA_GIF5                       \ [0x10] global interrupt flag for channel 5
+    $11 constant DMA_TCIF5                      \ [0x11] transfer complete (TC) flag for channel 5
+    $12 constant DMA_HTIF5                      \ [0x12] half transfer (HT) flag for channel 5
+    $13 constant DMA_TEIF5                      \ [0x13] transfer error (TE) flag for channel 5
+    $14 constant DMA_GIF6                       \ [0x14] global interrupt flag for channel 6
+    $15 constant DMA_TCIF6                      \ [0x15] transfer complete (TC) flag for channel 6
+    $16 constant DMA_HTIF6                      \ [0x16] half transfer (HT) flag for channel 6
+    $17 constant DMA_TEIF6                      \ [0x17] transfer error (TE) flag for channel 6
+    $18 constant DMA_GIF7                       \ [0x18] global interrupt flag for channel 7
+    $19 constant DMA_TCIF7                      \ [0x19] transfer complete (TC) flag for channel 7
+    $1a constant DMA_HTIF7                      \ [0x1a] half transfer (HT) flag for channel 7
+    $1b constant DMA_TEIF7                      \ [0x1b] transfer error (TE) flag for channel 7
+  [then]
+
+
+  [ifdef] DMA_DMA_IFCR_DEF
+    \
+    \ @brief DMA interrupt flag clear register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_CGIF1                      \ [0x00] global interrupt flag clear for channel 1
+    $01 constant DMA_CTCIF1                     \ [0x01] transfer complete flag clear for channel 1
+    $02 constant DMA_CHTIF1                     \ [0x02] half transfer flag clear for channel 1
+    $03 constant DMA_CTEIF1                     \ [0x03] transfer error flag clear for channel 1
+    $04 constant DMA_CGIF2                      \ [0x04] global interrupt flag clear for channel 2
+    $05 constant DMA_CTCIF2                     \ [0x05] transfer complete flag clear for channel 2
+    $06 constant DMA_CHTIF2                     \ [0x06] half transfer flag clear for channel 2
+    $07 constant DMA_CTEIF2                     \ [0x07] transfer error flag clear for channel 2
+    $08 constant DMA_CGIF3                      \ [0x08] global interrupt flag clear for channel 3
+    $09 constant DMA_CTCIF3                     \ [0x09] transfer complete flag clear for channel 3
+    $0a constant DMA_CHTIF3                     \ [0x0a] half transfer flag clear for channel 3
+    $0b constant DMA_CTEIF3                     \ [0x0b] transfer error flag clear for channel 3
+    $0c constant DMA_CGIF4                      \ [0x0c] global interrupt flag clear for channel 4
+    $0d constant DMA_CTCIF4                     \ [0x0d] transfer complete flag clear for channel 4
+    $0e constant DMA_CHTIF4                     \ [0x0e] half transfer flag clear for channel 4
+    $0f constant DMA_CTEIF4                     \ [0x0f] transfer error flag clear for channel 4
+    $10 constant DMA_CGIF5                      \ [0x10] global interrupt flag clear for channel 5
+    $11 constant DMA_CTCIF5                     \ [0x11] transfer complete flag clear for channel 5
+    $12 constant DMA_CHTIF5                     \ [0x12] half transfer flag clear for channel 5
+    $13 constant DMA_CTEIF5                     \ [0x13] transfer error flag clear for channel 5
+    $14 constant DMA_CGIF6                      \ [0x14] global interrupt flag clear for channel 6
+    $15 constant DMA_CTCIF6                     \ [0x15] transfer complete flag clear for channel 6
+    $16 constant DMA_CHTIF6                     \ [0x16] half transfer flag clear for channel 6
+    $17 constant DMA_CTEIF6                     \ [0x17] transfer error flag clear for channel 6
+    $18 constant DMA_CGIF7                      \ [0x18] global interrupt flag clear for channel 7
+    $19 constant DMA_CTCIF7                     \ [0x19] transfer complete flag clear for channel 7
+    $1a constant DMA_CHTIF7                     \ [0x1a] half transfer flag clear for channel 7
+    $1b constant DMA_CTEIF7                     \ [0x1b] transfer error flag clear for channel 7
+  [then]
+
+
+  [ifdef] DMA_DMA_CCR1_DEF
+    \
+    \ @brief DMA channel 1 configuration register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_EN                         \ [0x00] channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the DMA_ISR register is cleared (by setting the CTEIFx bit of the DMA_IFCR register). Note: this bit is set and cleared by software.
+    $01 constant DMA_TCIE                       \ [0x01] transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $02 constant DMA_HTIE                       \ [0x02] half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $03 constant DMA_TEIE                       \ [0x03] transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $04 constant DMA_DIR                        \ [0x04] data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $05 constant DMA_CIRC                       \ [0x05] circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $06 constant DMA_PINC                       \ [0x06] peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $07 constant DMA_MINC                       \ [0x07] memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $08 constant DMA_PSIZE                      \ [0x08 : 2] peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0a constant DMA_MSIZE                      \ [0x0a : 2] memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0c constant DMA_PL                         \ [0x0c : 2] priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0e constant DMA_MEM2MEM                    \ [0x0e] memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CNDTR1_DEF
+    \
+    \ @brief DMA channel x number of data register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_NDT                        \ [0x00 : 16] number of data to transfer
+  [then]
+
+
+  [ifdef] DMA_DMA_CPAR1_DEF
+    \
+    \ @brief DMA channel x peripheral address register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_PA                         \ [0x00 : 32] peripheral address It contains the base address of the peripheral data register from/to which the data will be read/written. When PSIZE[1:0]=01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE=10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR=1 and the memory source address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR=1 and the peripheral source address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CMAR1_DEF
+    \
+    \ @brief DMA channel x memory address register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_MA                         \ [0x00 : 32] peripheral address It contains the base address of the memory from/to which the data will be read/written. When MSIZE[1:0]=01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE=10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR=1 and the memory destination address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR=1 and the peripheral destination address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CCR2_DEF
+    \
+    \ @brief DMA channel 2 configuration register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_EN                         \ [0x00] channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the DMA_ISR register is cleared (by setting the CTEIFx bit of the DMA_IFCR register). Note: this bit is set and cleared by software.
+    $01 constant DMA_TCIE                       \ [0x01] transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $02 constant DMA_HTIE                       \ [0x02] half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $03 constant DMA_TEIE                       \ [0x03] transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $04 constant DMA_DIR                        \ [0x04] data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $05 constant DMA_CIRC                       \ [0x05] circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $06 constant DMA_PINC                       \ [0x06] peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $07 constant DMA_MINC                       \ [0x07] memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $08 constant DMA_PSIZE                      \ [0x08 : 2] peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0a constant DMA_MSIZE                      \ [0x0a : 2] memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0c constant DMA_PL                         \ [0x0c : 2] priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0e constant DMA_MEM2MEM                    \ [0x0e] memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CNDTR2_DEF
+    \
+    \ @brief DMA channel x number of data register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_NDT                        \ [0x00 : 16] number of data to transfer
+  [then]
+
+
+  [ifdef] DMA_DMA_CPAR2_DEF
+    \
+    \ @brief DMA channel x peripheral address register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_PA                         \ [0x00 : 32] peripheral address It contains the base address of the peripheral data register from/to which the data will be read/written. When PSIZE[1:0]=01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE=10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR=1 and the memory source address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR=1 and the peripheral source address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CMAR2_DEF
+    \
+    \ @brief DMA channel x memory address register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_MA                         \ [0x00 : 32] peripheral address It contains the base address of the memory from/to which the data will be read/written. When MSIZE[1:0]=01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE=10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR=1 and the memory destination address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR=1 and the peripheral destination address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CCR3_DEF
+    \
+    \ @brief DMA channel 3 configuration register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_EN                         \ [0x00] channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the DMA_ISR register is cleared (by setting the CTEIFx bit of the DMA_IFCR register). Note: this bit is set and cleared by software.
+    $01 constant DMA_TCIE                       \ [0x01] transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $02 constant DMA_HTIE                       \ [0x02] half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $03 constant DMA_TEIE                       \ [0x03] transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $04 constant DMA_DIR                        \ [0x04] data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $05 constant DMA_CIRC                       \ [0x05] circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $06 constant DMA_PINC                       \ [0x06] peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $07 constant DMA_MINC                       \ [0x07] memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $08 constant DMA_PSIZE                      \ [0x08 : 2] peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0a constant DMA_MSIZE                      \ [0x0a : 2] memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0c constant DMA_PL                         \ [0x0c : 2] priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0e constant DMA_MEM2MEM                    \ [0x0e] memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CNDTR3_DEF
+    \
+    \ @brief DMA channel x configuration register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_NDT                        \ [0x00 : 16] number of data to transfer
+  [then]
+
+
+  [ifdef] DMA_DMA_CPAR3_DEF
+    \
+    \ @brief DMA channel x peripheral address register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_PA                         \ [0x00 : 32] peripheral address It contains the base address of the peripheral data register from/to which the data will be read/written. When PSIZE[1:0]=01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE=10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR=1 and the memory source address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR=1 and the peripheral source address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CMAR3_DEF
+    \
+    \ @brief DMA channel x memory address register
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_MA                         \ [0x00 : 32] peripheral address It contains the base address of the memory from/to which the data will be read/written. When MSIZE[1:0]=01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE=10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR=1 and the memory destination address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR=1 and the peripheral destination address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CCR4_DEF
+    \
+    \ @brief DMA channel 4 configuration register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_EN                         \ [0x00] channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the DMA_ISR register is cleared (by setting the CTEIFx bit of the DMA_IFCR register). Note: this bit is set and cleared by software.
+    $01 constant DMA_TCIE                       \ [0x01] transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $02 constant DMA_HTIE                       \ [0x02] half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $03 constant DMA_TEIE                       \ [0x03] transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $04 constant DMA_DIR                        \ [0x04] data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $05 constant DMA_CIRC                       \ [0x05] circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $06 constant DMA_PINC                       \ [0x06] peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $07 constant DMA_MINC                       \ [0x07] memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $08 constant DMA_PSIZE                      \ [0x08 : 2] peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0a constant DMA_MSIZE                      \ [0x0a : 2] memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0c constant DMA_PL                         \ [0x0c : 2] priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0e constant DMA_MEM2MEM                    \ [0x0e] memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CNDTR4_DEF
+    \
+    \ @brief DMA channel x configuration register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_NDT                        \ [0x00 : 16] number of data to transfer
+  [then]
+
+
+  [ifdef] DMA_DMA_CPAR4_DEF
+    \
+    \ @brief DMA channel x peripheral address register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_PA                         \ [0x00 : 32] peripheral address It contains the base address of the peripheral data register from/to which the data will be read/written. When PSIZE[1:0]=01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE=10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR=1 and the memory source address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR=1 and the peripheral source address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CMAR4_DEF
+    \
+    \ @brief DMA channel x memory address register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_MA                         \ [0x00 : 32] peripheral address It contains the base address of the memory from/to which the data will be read/written. When MSIZE[1:0]=01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE=10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR=1 and the memory destination address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR=1 and the peripheral destination address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CCR5_DEF
+    \
+    \ @brief DMA channel 5 configuration register
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_EN                         \ [0x00] channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the DMA_ISR register is cleared (by setting the CTEIFx bit of the DMA_IFCR register). Note: this bit is set and cleared by software.
+    $01 constant DMA_TCIE                       \ [0x01] transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $02 constant DMA_HTIE                       \ [0x02] half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $03 constant DMA_TEIE                       \ [0x03] transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $04 constant DMA_DIR                        \ [0x04] data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $05 constant DMA_CIRC                       \ [0x05] circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $06 constant DMA_PINC                       \ [0x06] peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $07 constant DMA_MINC                       \ [0x07] memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $08 constant DMA_PSIZE                      \ [0x08 : 2] peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0a constant DMA_MSIZE                      \ [0x0a : 2] memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0c constant DMA_PL                         \ [0x0c : 2] priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0e constant DMA_MEM2MEM                    \ [0x0e] memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CNDTR5_DEF
+    \
+    \ @brief DMA channel x configuration register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_NDT                        \ [0x00 : 16] number of data to transfer
+  [then]
+
+
+  [ifdef] DMA_DMA_CPAR5_DEF
+    \
+    \ @brief DMA channel x peripheral address register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_PA                         \ [0x00 : 32] peripheral address It contains the base address of the peripheral data register from/to which the data will be read/written. When PSIZE[1:0]=01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE=10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR=1 and the memory source address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR=1 and the peripheral source address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CMAR5_DEF
+    \
+    \ @brief DMA channel x memory address register
+    \ Address offset: 0x64
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_MA                         \ [0x00 : 32] peripheral address It contains the base address of the memory from/to which the data will be read/written. When MSIZE[1:0]=01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE=10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR=1 and the memory destination address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR=1 and the peripheral destination address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CCR6_DEF
+    \
+    \ @brief DMA channel 6 configuration register
+    \ Address offset: 0x6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_EN                         \ [0x00] channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the DMA_ISR register is cleared (by setting the CTEIFx bit of the DMA_IFCR register). Note: this bit is set and cleared by software.
+    $01 constant DMA_TCIE                       \ [0x01] transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $02 constant DMA_HTIE                       \ [0x02] half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $03 constant DMA_TEIE                       \ [0x03] transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $04 constant DMA_DIR                        \ [0x04] data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $05 constant DMA_CIRC                       \ [0x05] circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $06 constant DMA_PINC                       \ [0x06] peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $07 constant DMA_MINC                       \ [0x07] memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $08 constant DMA_PSIZE                      \ [0x08 : 2] peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0a constant DMA_MSIZE                      \ [0x0a : 2] memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0c constant DMA_PL                         \ [0x0c : 2] priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0e constant DMA_MEM2MEM                    \ [0x0e] memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CNDTR6_DEF
+    \
+    \ @brief DMA channel x configuration register
+    \ Address offset: 0x70
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_NDT                        \ [0x00 : 16] number of data to transfer
+  [then]
+
+
+  [ifdef] DMA_DMA_CPAR6_DEF
+    \
+    \ @brief DMA channel x peripheral address register
+    \ Address offset: 0x74
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_PA                         \ [0x00 : 32] peripheral address It contains the base address of the peripheral data register from/to which the data will be read/written. When PSIZE[1:0]=01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE=10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR=1 and the memory source address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR=1 and the peripheral source address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CMAR6_DEF
+    \
+    \ @brief DMA channel x memory address register
+    \ Address offset: 0x78
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_MA                         \ [0x00 : 32] peripheral address It contains the base address of the memory from/to which the data will be read/written. When MSIZE[1:0]=01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE=10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR=1 and the memory destination address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR=1 and the peripheral destination address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CCR7_DEF
+    \
+    \ @brief DMA channel 7 configuration register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_EN                         \ [0x00] channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the DMA_ISR register is cleared (by setting the CTEIFx bit of the DMA_IFCR register). Note: this bit is set and cleared by software.
+    $01 constant DMA_TCIE                       \ [0x01] transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $02 constant DMA_HTIE                       \ [0x02] half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $03 constant DMA_TEIE                       \ [0x03] transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $04 constant DMA_DIR                        \ [0x04] data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the DMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the DMA_CMARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $05 constant DMA_CIRC                       \ [0x05] circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+    $06 constant DMA_PINC                       \ [0x06] peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $07 constant DMA_MINC                       \ [0x07] memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $08 constant DMA_PSIZE                      \ [0x08 : 2] peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR=1 and the memory source if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR=1 and the peripheral source if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0a constant DMA_MSIZE                      \ [0x0a : 2] memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR=1 and the memory destination if DIR=0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR=1 and the peripheral destination if DIR=0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0c constant DMA_PL                         \ [0x0c : 2] priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+    $0e constant DMA_MEM2MEM                    \ [0x0e] memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CNDTR7_DEF
+    \
+    \ @brief DMA channel x configuration register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_NDT                        \ [0x00 : 16] number of data to transfer
+  [then]
+
+
+  [ifdef] DMA_DMA_CPAR7_DEF
+    \
+    \ @brief DMA channel x peripheral address register
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_PA                         \ [0x00 : 32] peripheral address It contains the base address of the peripheral data register from/to which the data will be read/written. When PSIZE[1:0]=01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE=10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR=1 and the memory source address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR=1 and the peripheral source address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+
+  [ifdef] DMA_DMA_CMAR7_DEF
+    \
+    \ @brief DMA channel x memory address register
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA_MA                         \ [0x00 : 32] peripheral address It contains the base address of the memory from/to which the data will be read/written. When MSIZE[1:0]=01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE=10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR=1 and the memory destination address if DIR=0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR=1 and the peripheral destination address if DIR=0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN=1).
+  [then]
+
+  \
+  \ @brief DMA controller
+  \
+  $00 constant DMA_DMA_ISR              \ DMA interrupt status register
+  $04 constant DMA_DMA_IFCR             \ DMA interrupt flag clear register
+  $08 constant DMA_DMA_CCR1             \ DMA channel 1 configuration register
+  $0C constant DMA_DMA_CNDTR1           \ DMA channel x number of data register
+  $10 constant DMA_DMA_CPAR1            \ DMA channel x peripheral address register
+  $14 constant DMA_DMA_CMAR1            \ DMA channel x memory address register
+  $1C constant DMA_DMA_CCR2             \ DMA channel 2 configuration register
+  $20 constant DMA_DMA_CNDTR2           \ DMA channel x number of data register
+  $24 constant DMA_DMA_CPAR2            \ DMA channel x peripheral address register
+  $28 constant DMA_DMA_CMAR2            \ DMA channel x memory address register
+  $30 constant DMA_DMA_CCR3             \ DMA channel 3 configuration register
+  $34 constant DMA_DMA_CNDTR3           \ DMA channel x configuration register
+  $38 constant DMA_DMA_CPAR3            \ DMA channel x peripheral address register
+  $3C constant DMA_DMA_CMAR3            \ DMA channel x memory address register
+  $44 constant DMA_DMA_CCR4             \ DMA channel 4 configuration register
+  $48 constant DMA_DMA_CNDTR4           \ DMA channel x configuration register
+  $4C constant DMA_DMA_CPAR4            \ DMA channel x peripheral address register
+  $50 constant DMA_DMA_CMAR4            \ DMA channel x memory address register
+  $58 constant DMA_DMA_CCR5             \ DMA channel 5 configuration register
+  $5C constant DMA_DMA_CNDTR5           \ DMA channel x configuration register
+  $60 constant DMA_DMA_CPAR5            \ DMA channel x peripheral address register
+  $64 constant DMA_DMA_CMAR5            \ DMA channel x memory address register
+  $6C constant DMA_DMA_CCR6             \ DMA channel 6 configuration register
+  $70 constant DMA_DMA_CNDTR6           \ DMA channel x configuration register
+  $74 constant DMA_DMA_CPAR6            \ DMA channel x peripheral address register
+  $78 constant DMA_DMA_CMAR6            \ DMA channel x memory address register
+  $80 constant DMA_DMA_CCR7             \ DMA channel 7 configuration register
+  $84 constant DMA_DMA_CNDTR7           \ DMA channel x configuration register
+  $88 constant DMA_DMA_CPAR7            \ DMA channel x peripheral address register
+  $8C constant DMA_DMA_CMAR7            \ DMA channel x memory address register
+
+: DMA_DEF ; [then]
