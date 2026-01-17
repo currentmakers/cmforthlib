@@ -6,137 +6,143 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] LPTIM3_DEF
 
-\
-\ @brief LPTIM3 interrupt and status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM3_LPTIM3_ISR_OUTPUT_CC1IF                   \ Compare 1 interrupt flag If channel CC1 is configured as output: The CC1IF flag is set by hardware to inform application that LPTIM_CNT register value matches the compare register's value. CC1IF flag can be cleared by writing 1 to the CC1CF bit in the LPTIM_ICR register.
-$00000002 constant LPTIM3_LPTIM3_ISR_OUTPUT_ARRM                    \ Autoreload match ARRM is set by hardware to inform application that LPTIM_CNT registers value reached the LPTIM_ARR registers value. ARRM flag can be cleared by writing 1 to the ARRMCF bit in the LPTIM_ICR register.
-$00000004 constant LPTIM3_LPTIM3_ISR_OUTPUT_EXTTRIG                 \ External trigger edge event EXTTRIG is set by hardware to inform application that a valid edge on the selected external trigger input has occurred. If the trigger is ignored because the timer has already started, then this flag is not set. EXTTRIG flag can be cleared by writing 1 to the EXTTRIGCF bit in the LPTIM_ICR register.
-$00000008 constant LPTIM3_LPTIM3_ISR_OUTPUT_CMP1OK                  \ Compare register 1 update OK CMP1OK is set by hardware to inform application that the APB bus write operation to the LPTIM_CCR1 register has been successfully completed. CMP1OK flag can be cleared by writing 1 to the CMP1OKCF bit in the LPTIM_ICR register.
-$00000010 constant LPTIM3_LPTIM3_ISR_OUTPUT_ARROK                   \ Autoreload register update OK ARROK is set by hardware to inform application that the APB bus write operation to the LPTIM_ARR register has been successfully completed. ARROK flag can be cleared by writing 1 to the ARROKCF bit in the LPTIM_ICR register.
-$00000020 constant LPTIM3_LPTIM3_ISR_OUTPUT_UP                      \ Counter direction change down to up In Encoder mode, UP bit is set by hardware to inform application that the counter direction has changed from down to up. UP flag can be cleared by writing 1 to the UPCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000040 constant LPTIM3_LPTIM3_ISR_OUTPUT_DOWN                    \ Counter direction change up to down In Encoder mode, DOWN bit is set by hardware to inform application that the counter direction has changed from up to down. DOWN flag can be cleared by writing 1 to the DOWNCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000080 constant LPTIM3_LPTIM3_ISR_OUTPUT_UE                      \ LPTIM update event occurred UE is set by hardware to inform application that an update event was generated. The corresponding interrupt or DMA request is generated if enabled. UE flag can be cleared by writing 1 to the UECF bit in the LPTIM_ICR register. The UE flag is automatically cleared by hardware once the LPTIM_ARR register is written by any bus master like CPU or DMA.
-$00000100 constant LPTIM3_LPTIM3_ISR_OUTPUT_REPOK                   \ Repetition register update OK REPOK is set by hardware to inform application that the APB bus write operation to the LPTIM_RCR register has been successfully completed. REPOK flag can be cleared by writing 1 to the REPOKCF bit in the LPTIM_ICR register.
-$00000200 constant LPTIM3_LPTIM3_ISR_OUTPUT_CC2IF                   \ Compare 2 interrupt flag If channel CC2 is configured as output: The CC2IF flag is set by hardware to inform application that LPTIM_CNT register value matches the compare register's value. CC2IF flag can be cleared by writing 1 to the CC2CF bit in the LPTIM_ICR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$00080000 constant LPTIM3_LPTIM3_ISR_OUTPUT_CMP2OK                  \ Compare register 2 update OK CMP2OK is set by hardware to inform application that the APB bus write operation to the LPTIM_CCR2 register has been successfully completed. CMP2OK flag can be cleared by writing 1 to the CMP2OKCF bit in the LPTIM_ICR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$01000000 constant LPTIM3_LPTIM3_ISR_OUTPUT_DIEROK                  \ Interrupt enable register update OK DIEROK is set by hardware to inform application that the APB bus write operation to the LPTIM_DIER register has been successfully completed. DIEROK flag can be cleared by writing 1 to the DIEROKCF bit in the LPTIM_ICR register.
-
-
-\
-\ @brief LPTIM3 interrupt and status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM3_LPTIM3_ISR_INPUT_CC1IF                    \ capture 1 interrupt flag If channel CC1 is configured as input: CC1IF is set by hardware to inform application that the current value of the counter is captured in LPTIM_CCR1 register. The corresponding interrupt or DMA request is generated if enabled. The CC1OF flag is set if the CC1IF flag was already high.
-$00000002 constant LPTIM3_LPTIM3_ISR_INPUT_ARRM                     \ Autoreload match ARRM is set by hardware to inform application that LPTIM_CNT registers value reached the LPTIM_ARR registers value. ARRM flag can be cleared by writing 1 to the ARRMCF bit in the LPTIM_ICR register.
-$00000004 constant LPTIM3_LPTIM3_ISR_INPUT_EXTTRIG                  \ External trigger edge event EXTTRIG is set by hardware to inform application that a valid edge on the selected external trigger input has occurred. If the trigger is ignored because the timer has already started, then this flag is not set. EXTTRIG flag can be cleared by writing 1 to the EXTTRIGCF bit in the LPTIM_ICR register.
-$00000010 constant LPTIM3_LPTIM3_ISR_INPUT_ARROK                    \ Autoreload register update OK ARROK is set by hardware to inform application that the APB bus write operation to the LPTIM_ARR register has been successfully completed. ARROK flag can be cleared by writing 1 to the ARROKCF bit in the LPTIM_ICR register.
-$00000020 constant LPTIM3_LPTIM3_ISR_INPUT_UP                       \ Counter direction change down to up In Encoder mode, UP bit is set by hardware to inform application that the counter direction has changed from down to up. UP flag can be cleared by writing 1 to the UPCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000040 constant LPTIM3_LPTIM3_ISR_INPUT_DOWN                     \ Counter direction change up to down In Encoder mode, DOWN bit is set by hardware to inform application that the counter direction has changed from up to down. DOWN flag can be cleared by writing 1 to the DOWNCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000080 constant LPTIM3_LPTIM3_ISR_INPUT_UE                       \ LPTIM update event occurred UE is set by hardware to inform application that an update event was generated. UE flag can be cleared by writing 1 to the UECF bit in the LPTIM_ICR register.
-$00000100 constant LPTIM3_LPTIM3_ISR_INPUT_REPOK                    \ Repetition register update OK REPOK is set by hardware to inform application that the APB bus write operation to the LPTIM_RCR register has been successfully completed. REPOK flag can be cleared by writing 1 to the REPOKCF bit in the LPTIM_ICR register.
-$00000200 constant LPTIM3_LPTIM3_ISR_INPUT_CC2IF                    \ Capture 2 interrupt flag If channel CC2 is configured as input: CC2IF is set by hardware to inform application that the current value of the counter is captured in LPTIM_CCR2 register. The corresponding interrupt or DMA request is generated if enabled. The CC2OF flag is set if the CC2IF flag was already high. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$00001000 constant LPTIM3_LPTIM3_ISR_INPUT_CC1OF                    \ Capture 1 over-capture flag This flag is set by hardware only when the corresponding channel is configured in input capture mode. It is cleared by software by writing 1 to the CC1OCF bit in the LPTIM_ICR register. Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
-$00002000 constant LPTIM3_LPTIM3_ISR_INPUT_CC2OF                    \ Capture 2 over-capture flag This flag is set by hardware only when the corresponding channel is configured in input capture mode. It is cleared by software by writing 1 to the CC2OCF bit in the LPTIM_ICR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$01000000 constant LPTIM3_LPTIM3_ISR_INPUT_DIEROK                   \ Interrupt enable register update OK DIEROK is set by hardware to inform application that the APB bus write operation to the LPTIM_DIER register has been successfully completed. DIEROK flag can be cleared by writing 1 to the DIEROKCF bit in the LPTIM_ICR register.
+  [ifdef] LPTIM3_LPTIM3_ISR_OUTPUT_DEF
+    \
+    \ @brief LPTIM3 interrupt and status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM3_CC1IF                   \ [0x00] Compare 1 interrupt flag If channel CC1 is configured as output: The CC1IF flag is set by hardware to inform application that LPTIM_CNT register value matches the compare register's value. CC1IF flag can be cleared by writing 1 to the CC1CF bit in the LPTIM_ICR register.
+    $01 constant LPTIM3_ARRM                    \ [0x01] Autoreload match ARRM is set by hardware to inform application that LPTIM_CNT registers value reached the LPTIM_ARR registers value. ARRM flag can be cleared by writing 1 to the ARRMCF bit in the LPTIM_ICR register.
+    $02 constant LPTIM3_EXTTRIG                 \ [0x02] External trigger edge event EXTTRIG is set by hardware to inform application that a valid edge on the selected external trigger input has occurred. If the trigger is ignored because the timer has already started, then this flag is not set. EXTTRIG flag can be cleared by writing 1 to the EXTTRIGCF bit in the LPTIM_ICR register.
+    $03 constant LPTIM3_CMP1OK                  \ [0x03] Compare register 1 update OK CMP1OK is set by hardware to inform application that the APB bus write operation to the LPTIM_CCR1 register has been successfully completed. CMP1OK flag can be cleared by writing 1 to the CMP1OKCF bit in the LPTIM_ICR register.
+    $04 constant LPTIM3_ARROK                   \ [0x04] Autoreload register update OK ARROK is set by hardware to inform application that the APB bus write operation to the LPTIM_ARR register has been successfully completed. ARROK flag can be cleared by writing 1 to the ARROKCF bit in the LPTIM_ICR register.
+    $05 constant LPTIM3_UP                      \ [0x05] Counter direction change down to up In Encoder mode, UP bit is set by hardware to inform application that the counter direction has changed from down to up. UP flag can be cleared by writing 1 to the UPCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $06 constant LPTIM3_DOWN                    \ [0x06] Counter direction change up to down In Encoder mode, DOWN bit is set by hardware to inform application that the counter direction has changed from up to down. DOWN flag can be cleared by writing 1 to the DOWNCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $07 constant LPTIM3_UE                      \ [0x07] LPTIM update event occurred UE is set by hardware to inform application that an update event was generated. The corresponding interrupt or DMA request is generated if enabled. UE flag can be cleared by writing 1 to the UECF bit in the LPTIM_ICR register. The UE flag is automatically cleared by hardware once the LPTIM_ARR register is written by any bus master like CPU or DMA.
+    $08 constant LPTIM3_REPOK                   \ [0x08] Repetition register update OK REPOK is set by hardware to inform application that the APB bus write operation to the LPTIM_RCR register has been successfully completed. REPOK flag can be cleared by writing 1 to the REPOKCF bit in the LPTIM_ICR register.
+    $09 constant LPTIM3_CC2IF                   \ [0x09] Compare 2 interrupt flag If channel CC2 is configured as output: The CC2IF flag is set by hardware to inform application that LPTIM_CNT register value matches the compare register's value. CC2IF flag can be cleared by writing 1 to the CC2CF bit in the LPTIM_ICR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $13 constant LPTIM3_CMP2OK                  \ [0x13] Compare register 2 update OK CMP2OK is set by hardware to inform application that the APB bus write operation to the LPTIM_CCR2 register has been successfully completed. CMP2OK flag can be cleared by writing 1 to the CMP2OKCF bit in the LPTIM_ICR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $18 constant LPTIM3_DIEROK                  \ [0x18] Interrupt enable register update OK DIEROK is set by hardware to inform application that the APB bus write operation to the LPTIM_DIER register has been successfully completed. DIEROK flag can be cleared by writing 1 to the DIEROKCF bit in the LPTIM_ICR register.
+  [then]
 
 
-\
-\ @brief LPTIM3 interrupt clear register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM3_LPTIM3_ICR_OUTPUT_CC1CF                   \ Capture/compare 1 clear flag Writing 1 to this bit clears the CC1IF flag in the LPTIM_ISR register.
-$00000002 constant LPTIM3_LPTIM3_ICR_OUTPUT_ARRMCF                  \ Autoreload match clear flag Writing 1 to this bit clears the ARRM flag in the LPTIM_ISR register
-$00000004 constant LPTIM3_LPTIM3_ICR_OUTPUT_EXTTRIGCF               \ External trigger valid edge clear flag Writing 1 to this bit clears the EXTTRIG flag in the LPTIM_ISR register
-$00000008 constant LPTIM3_LPTIM3_ICR_OUTPUT_CMP1OKCF                \ Compare register 1 update OK clear flag Writing 1 to this bit clears the CMP1OK flag in the LPTIM_ISR register.
-$00000010 constant LPTIM3_LPTIM3_ICR_OUTPUT_ARROKCF                 \ Autoreload register update OK clear flag Writing 1 to this bit clears the ARROK flag in the LPTIM_ISR register
-$00000020 constant LPTIM3_LPTIM3_ICR_OUTPUT_UPCF                    \ Direction change to UP clear flag Writing 1 to this bit clear the UP flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000040 constant LPTIM3_LPTIM3_ICR_OUTPUT_DOWNCF                  \ Direction change to down clear flag Writing 1 to this bit clear the DOWN flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000080 constant LPTIM3_LPTIM3_ICR_OUTPUT_UECF                    \ Update event clear flag Writing 1 to this bit clear the UE flag in the LPTIM_ISR register.
-$00000100 constant LPTIM3_LPTIM3_ICR_OUTPUT_REPOKCF                 \ Repetition register update OK clear flag Writing 1 to this bit clears the REPOK flag in the LPTIM_ISR register.
-$00000200 constant LPTIM3_LPTIM3_ICR_OUTPUT_CC2CF                   \ Capture/compare 2 clear flag Writing 1 to this bit clears the CC2IF flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$00080000 constant LPTIM3_LPTIM3_ICR_OUTPUT_CMP2OKCF                \ Compare register 2 update OK clear flag Writing 1 to this bit clears the CMP2OK flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$01000000 constant LPTIM3_LPTIM3_ICR_OUTPUT_DIEROKCF                \ Interrupt enable register update OK clear flag Writing 1 to this bit clears the DIEROK flag in the LPTIM_ISR register.
-
-
-\
-\ @brief LPTIM3 interrupt clear register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM3_LPTIM3_ICR_INPUT_CC1CF                    \ Capture/compare 1 clear flag Writing 1 to this bit clears the CC1IF flag in the LPTIM_ISR register.
-$00000002 constant LPTIM3_LPTIM3_ICR_INPUT_ARRMCF                   \ Autoreload match clear flag Writing 1 to this bit clears the ARRM flag in the LPTIM_ISR register
-$00000004 constant LPTIM3_LPTIM3_ICR_INPUT_EXTTRIGCF                \ External trigger valid edge clear flag Writing 1 to this bit clears the EXTTRIG flag in the LPTIM_ISR register
-$00000010 constant LPTIM3_LPTIM3_ICR_INPUT_ARROKCF                  \ Autoreload register update OK clear flag Writing 1 to this bit clears the ARROK flag in the LPTIM_ISR register
-$00000020 constant LPTIM3_LPTIM3_ICR_INPUT_UPCF                     \ Direction change to UP clear flag Writing 1 to this bit clear the UP flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000040 constant LPTIM3_LPTIM3_ICR_INPUT_DOWNCF                   \ Direction change to down clear flag Writing 1 to this bit clear the DOWN flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000080 constant LPTIM3_LPTIM3_ICR_INPUT_UECF                     \ Update event clear flag Writing 1 to this bit clear the UE flag in the LPTIM_ISR register.
-$00000100 constant LPTIM3_LPTIM3_ICR_INPUT_REPOKCF                  \ Repetition register update OK clear flag Writing 1 to this bit clears the REPOK flag in the LPTIM_ISR register.
-$00000200 constant LPTIM3_LPTIM3_ICR_INPUT_CC2CF                    \ Capture/compare 2 clear flag Writing 1 to this bit clears the CC2IF flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$00001000 constant LPTIM3_LPTIM3_ICR_INPUT_CC1OCF                   \ Capture/compare 1 over-capture clear flag Writing 1 to this bit clears the CC1OF flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
-$00002000 constant LPTIM3_LPTIM3_ICR_INPUT_CC2OCF                   \ Capture/compare 2 over-capture clear flag Writing 1 to this bit clears the CC2OF flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$01000000 constant LPTIM3_LPTIM3_ICR_INPUT_DIEROKCF                 \ Interrupt enable register update OK clear flag Writing 1 to this bit clears the DIEROK flag in the LPTIM_ISR register.
+  [ifdef] LPTIM3_LPTIM3_ISR_INPUT_DEF
+    \
+    \ @brief LPTIM3 interrupt and status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM3_CC1IF                   \ [0x00] capture 1 interrupt flag If channel CC1 is configured as input: CC1IF is set by hardware to inform application that the current value of the counter is captured in LPTIM_CCR1 register. The corresponding interrupt or DMA request is generated if enabled. The CC1OF flag is set if the CC1IF flag was already high.
+    $01 constant LPTIM3_ARRM                    \ [0x01] Autoreload match ARRM is set by hardware to inform application that LPTIM_CNT registers value reached the LPTIM_ARR registers value. ARRM flag can be cleared by writing 1 to the ARRMCF bit in the LPTIM_ICR register.
+    $02 constant LPTIM3_EXTTRIG                 \ [0x02] External trigger edge event EXTTRIG is set by hardware to inform application that a valid edge on the selected external trigger input has occurred. If the trigger is ignored because the timer has already started, then this flag is not set. EXTTRIG flag can be cleared by writing 1 to the EXTTRIGCF bit in the LPTIM_ICR register.
+    $04 constant LPTIM3_ARROK                   \ [0x04] Autoreload register update OK ARROK is set by hardware to inform application that the APB bus write operation to the LPTIM_ARR register has been successfully completed. ARROK flag can be cleared by writing 1 to the ARROKCF bit in the LPTIM_ICR register.
+    $05 constant LPTIM3_UP                      \ [0x05] Counter direction change down to up In Encoder mode, UP bit is set by hardware to inform application that the counter direction has changed from down to up. UP flag can be cleared by writing 1 to the UPCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $06 constant LPTIM3_DOWN                    \ [0x06] Counter direction change up to down In Encoder mode, DOWN bit is set by hardware to inform application that the counter direction has changed from up to down. DOWN flag can be cleared by writing 1 to the DOWNCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $07 constant LPTIM3_UE                      \ [0x07] LPTIM update event occurred UE is set by hardware to inform application that an update event was generated. UE flag can be cleared by writing 1 to the UECF bit in the LPTIM_ICR register.
+    $08 constant LPTIM3_REPOK                   \ [0x08] Repetition register update OK REPOK is set by hardware to inform application that the APB bus write operation to the LPTIM_RCR register has been successfully completed. REPOK flag can be cleared by writing 1 to the REPOKCF bit in the LPTIM_ICR register.
+    $09 constant LPTIM3_CC2IF                   \ [0x09] Capture 2 interrupt flag If channel CC2 is configured as input: CC2IF is set by hardware to inform application that the current value of the counter is captured in LPTIM_CCR2 register. The corresponding interrupt or DMA request is generated if enabled. The CC2OF flag is set if the CC2IF flag was already high. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $0c constant LPTIM3_CC1OF                   \ [0x0c] Capture 1 over-capture flag This flag is set by hardware only when the corresponding channel is configured in input capture mode. It is cleared by software by writing 1 to the CC1OCF bit in the LPTIM_ICR register. Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
+    $0d constant LPTIM3_CC2OF                   \ [0x0d] Capture 2 over-capture flag This flag is set by hardware only when the corresponding channel is configured in input capture mode. It is cleared by software by writing 1 to the CC2OCF bit in the LPTIM_ICR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $18 constant LPTIM3_DIEROK                  \ [0x18] Interrupt enable register update OK DIEROK is set by hardware to inform application that the APB bus write operation to the LPTIM_DIER register has been successfully completed. DIEROK flag can be cleared by writing 1 to the DIEROKCF bit in the LPTIM_ICR register.
+  [then]
 
 
-\
-\ @brief LPTIM3 interrupt enable register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM3_LPTIM3_DIER_OUTPUT_CC1IE                  \ Capture/compare 1 interrupt enable
-$00000002 constant LPTIM3_LPTIM3_DIER_OUTPUT_ARRMIE                 \ Autoreload match Interrupt Enable
-$00000004 constant LPTIM3_LPTIM3_DIER_OUTPUT_EXTTRIGIE              \ External trigger valid edge Interrupt Enable
-$00000008 constant LPTIM3_LPTIM3_DIER_OUTPUT_CMP1OKIE               \ Compare register 1 update OK interrupt enable
-$00000010 constant LPTIM3_LPTIM3_DIER_OUTPUT_ARROKIE                \ Autoreload register update OK Interrupt Enable
-$00000020 constant LPTIM3_LPTIM3_DIER_OUTPUT_UPIE                   \ Direction change to UP Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000040 constant LPTIM3_LPTIM3_DIER_OUTPUT_DOWNIE                 \ Direction change to down Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000080 constant LPTIM3_LPTIM3_DIER_OUTPUT_UEIE                   \ Update event interrupt enable
-$00000100 constant LPTIM3_LPTIM3_DIER_OUTPUT_REPOKIE                \ Repetition register update OK interrupt Enable
-$00000200 constant LPTIM3_LPTIM3_DIER_OUTPUT_CC2IE                  \ Capture/compare 2 interrupt enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$00080000 constant LPTIM3_LPTIM3_DIER_OUTPUT_CMP2OKIE               \ Compare register 2 update OK interrupt enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$00800000 constant LPTIM3_LPTIM3_DIER_OUTPUT_UEDE                   \ Update event DMA request enable Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
-
-
-\
-\ @brief LPTIM3 interrupt enable register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM3_LPTIM3_DIER_INPUT_CC1IE                   \ Capture/compare 1 interrupt enable
-$00000002 constant LPTIM3_LPTIM3_DIER_INPUT_ARRMIE                  \ Autoreload match Interrupt Enable
-$00000004 constant LPTIM3_LPTIM3_DIER_INPUT_EXTTRIGIE               \ External trigger valid edge Interrupt Enable
-$00000010 constant LPTIM3_LPTIM3_DIER_INPUT_ARROKIE                 \ Autoreload register update OK Interrupt Enable
-$00000020 constant LPTIM3_LPTIM3_DIER_INPUT_UPIE                    \ Direction change to UP Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000040 constant LPTIM3_LPTIM3_DIER_INPUT_DOWNIE                  \ Direction change to down Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
-$00000080 constant LPTIM3_LPTIM3_DIER_INPUT_UEIE                    \ Update event interrupt enable
-$00000100 constant LPTIM3_LPTIM3_DIER_INPUT_REPOKIE                 \ Repetition register update OK interrupt Enable
-$00000200 constant LPTIM3_LPTIM3_DIER_INPUT_CC2IE                   \ Capture/compare 2 interrupt enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$00001000 constant LPTIM3_LPTIM3_DIER_INPUT_CC1OIE                  \ Capture/compare 1 over-capture interrupt enable Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
-$00002000 constant LPTIM3_LPTIM3_DIER_INPUT_CC2OIE                  \ Capture/compare 2 over-capture interrupt enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
-$00010000 constant LPTIM3_LPTIM3_DIER_INPUT_CC1DE                   \ Capture/compare 1 DMA request enable Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
-$00800000 constant LPTIM3_LPTIM3_DIER_INPUT_UEDE                    \ Update event DMA request enable Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
-$02000000 constant LPTIM3_LPTIM3_DIER_INPUT_CC2DE                   \ Capture/compare 2 DMA request enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+  [ifdef] LPTIM3_LPTIM3_ICR_OUTPUT_DEF
+    \
+    \ @brief LPTIM3 interrupt clear register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM3_CC1CF                   \ [0x00] Capture/compare 1 clear flag Writing 1 to this bit clears the CC1IF flag in the LPTIM_ISR register.
+    $01 constant LPTIM3_ARRMCF                  \ [0x01] Autoreload match clear flag Writing 1 to this bit clears the ARRM flag in the LPTIM_ISR register
+    $02 constant LPTIM3_EXTTRIGCF               \ [0x02] External trigger valid edge clear flag Writing 1 to this bit clears the EXTTRIG flag in the LPTIM_ISR register
+    $03 constant LPTIM3_CMP1OKCF                \ [0x03] Compare register 1 update OK clear flag Writing 1 to this bit clears the CMP1OK flag in the LPTIM_ISR register.
+    $04 constant LPTIM3_ARROKCF                 \ [0x04] Autoreload register update OK clear flag Writing 1 to this bit clears the ARROK flag in the LPTIM_ISR register
+    $05 constant LPTIM3_UPCF                    \ [0x05] Direction change to UP clear flag Writing 1 to this bit clear the UP flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $06 constant LPTIM3_DOWNCF                  \ [0x06] Direction change to down clear flag Writing 1 to this bit clear the DOWN flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $07 constant LPTIM3_UECF                    \ [0x07] Update event clear flag Writing 1 to this bit clear the UE flag in the LPTIM_ISR register.
+    $08 constant LPTIM3_REPOKCF                 \ [0x08] Repetition register update OK clear flag Writing 1 to this bit clears the REPOK flag in the LPTIM_ISR register.
+    $09 constant LPTIM3_CC2CF                   \ [0x09] Capture/compare 2 clear flag Writing 1 to this bit clears the CC2IF flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $13 constant LPTIM3_CMP2OKCF                \ [0x13] Compare register 2 update OK clear flag Writing 1 to this bit clears the CMP2OK flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $18 constant LPTIM3_DIEROKCF                \ [0x18] Interrupt enable register update OK clear flag Writing 1 to this bit clears the DIEROK flag in the LPTIM_ISR register.
+  [then]
 
 
-\
-\ @brief Low power timer
-\
-$58002800 constant LPTIM3_LPTIM3_ISR_OUTPUT  \ offset: 0x00 : LPTIM3 interrupt and status register
-$58002800 constant LPTIM3_LPTIM3_ISR_INPUT  \ offset: 0x00 : LPTIM3 interrupt and status register
-$58002804 constant LPTIM3_LPTIM3_ICR_OUTPUT  \ offset: 0x04 : LPTIM3 interrupt clear register
-$58002804 constant LPTIM3_LPTIM3_ICR_INPUT  \ offset: 0x04 : LPTIM3 interrupt clear register
-$58002808 constant LPTIM3_LPTIM3_DIER_OUTPUT  \ offset: 0x08 : LPTIM3 interrupt enable register
-$58002808 constant LPTIM3_LPTIM3_DIER_INPUT  \ offset: 0x08 : LPTIM3 interrupt enable register
+  [ifdef] LPTIM3_LPTIM3_ICR_INPUT_DEF
+    \
+    \ @brief LPTIM3 interrupt clear register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM3_CC1CF                   \ [0x00] Capture/compare 1 clear flag Writing 1 to this bit clears the CC1IF flag in the LPTIM_ISR register.
+    $01 constant LPTIM3_ARRMCF                  \ [0x01] Autoreload match clear flag Writing 1 to this bit clears the ARRM flag in the LPTIM_ISR register
+    $02 constant LPTIM3_EXTTRIGCF               \ [0x02] External trigger valid edge clear flag Writing 1 to this bit clears the EXTTRIG flag in the LPTIM_ISR register
+    $04 constant LPTIM3_ARROKCF                 \ [0x04] Autoreload register update OK clear flag Writing 1 to this bit clears the ARROK flag in the LPTIM_ISR register
+    $05 constant LPTIM3_UPCF                    \ [0x05] Direction change to UP clear flag Writing 1 to this bit clear the UP flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $06 constant LPTIM3_DOWNCF                  \ [0x06] Direction change to down clear flag Writing 1 to this bit clear the DOWN flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $07 constant LPTIM3_UECF                    \ [0x07] Update event clear flag Writing 1 to this bit clear the UE flag in the LPTIM_ISR register.
+    $08 constant LPTIM3_REPOKCF                 \ [0x08] Repetition register update OK clear flag Writing 1 to this bit clears the REPOK flag in the LPTIM_ISR register.
+    $09 constant LPTIM3_CC2CF                   \ [0x09] Capture/compare 2 clear flag Writing 1 to this bit clears the CC2IF flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $0c constant LPTIM3_CC1OCF                  \ [0x0c] Capture/compare 1 over-capture clear flag Writing 1 to this bit clears the CC1OF flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
+    $0d constant LPTIM3_CC2OCF                  \ [0x0d] Capture/compare 2 over-capture clear flag Writing 1 to this bit clears the CC2OF flag in the LPTIM_ISR register. Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $18 constant LPTIM3_DIEROKCF                \ [0x18] Interrupt enable register update OK clear flag Writing 1 to this bit clears the DIEROK flag in the LPTIM_ISR register.
+  [then]
 
+
+  [ifdef] LPTIM3_LPTIM3_DIER_OUTPUT_DEF
+    \
+    \ @brief LPTIM3 interrupt enable register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM3_CC1IE                   \ [0x00] Capture/compare 1 interrupt enable
+    $01 constant LPTIM3_ARRMIE                  \ [0x01] Autoreload match Interrupt Enable
+    $02 constant LPTIM3_EXTTRIGIE               \ [0x02] External trigger valid edge Interrupt Enable
+    $03 constant LPTIM3_CMP1OKIE                \ [0x03] Compare register 1 update OK interrupt enable
+    $04 constant LPTIM3_ARROKIE                 \ [0x04] Autoreload register update OK Interrupt Enable
+    $05 constant LPTIM3_UPIE                    \ [0x05] Direction change to UP Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $06 constant LPTIM3_DOWNIE                  \ [0x06] Direction change to down Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $07 constant LPTIM3_UEIE                    \ [0x07] Update event interrupt enable
+    $08 constant LPTIM3_REPOKIE                 \ [0x08] Repetition register update OK interrupt Enable
+    $09 constant LPTIM3_CC2IE                   \ [0x09] Capture/compare 2 interrupt enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $13 constant LPTIM3_CMP2OKIE                \ [0x13] Compare register 2 update OK interrupt enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $17 constant LPTIM3_UEDE                    \ [0x17] Update event DMA request enable Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
+  [then]
+
+
+  [ifdef] LPTIM3_LPTIM3_DIER_INPUT_DEF
+    \
+    \ @brief LPTIM3 interrupt enable register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM3_CC1IE                   \ [0x00] Capture/compare 1 interrupt enable
+    $01 constant LPTIM3_ARRMIE                  \ [0x01] Autoreload match Interrupt Enable
+    $02 constant LPTIM3_EXTTRIGIE               \ [0x02] External trigger valid edge Interrupt Enable
+    $04 constant LPTIM3_ARROKIE                 \ [0x04] Autoreload register update OK Interrupt Enable
+    $05 constant LPTIM3_UPIE                    \ [0x05] Direction change to UP Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $06 constant LPTIM3_DOWNIE                  \ [0x06] Direction change to down Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Refer to Section 26.3.
+    $07 constant LPTIM3_UEIE                    \ [0x07] Update event interrupt enable
+    $08 constant LPTIM3_REPOKIE                 \ [0x08] Repetition register update OK interrupt Enable
+    $09 constant LPTIM3_CC2IE                   \ [0x09] Capture/compare 2 interrupt enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $0c constant LPTIM3_CC1OIE                  \ [0x0c] Capture/compare 1 over-capture interrupt enable Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
+    $0d constant LPTIM3_CC2OIE                  \ [0x0d] Capture/compare 2 over-capture interrupt enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+    $10 constant LPTIM3_CC1DE                   \ [0x10] Capture/compare 1 DMA request enable Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
+    $17 constant LPTIM3_UEDE                    \ [0x17] Update event DMA request enable Note: If LPTIM does not implement at least 1 channel this bit is reserved. Refer to Section 26.3.
+    $19 constant LPTIM3_CC2DE                   \ [0x19] Capture/compare 2 DMA request enable Note: If LPTIM does not implement at least 2 channels this bit is reserved. Refer to Section 26.3.
+  [then]
+
+  \
+  \ @brief Low power timer
+  \
+  $00 constant LPTIM3_LPTIM3_ISR_OUTPUT \ LPTIM3 interrupt and status register
+  $00 constant LPTIM3_LPTIM3_ISR_INPUT  \ LPTIM3 interrupt and status register
+  $04 constant LPTIM3_LPTIM3_ICR_OUTPUT \ LPTIM3 interrupt clear register
+  $04 constant LPTIM3_LPTIM3_ICR_INPUT  \ LPTIM3 interrupt clear register
+  $08 constant LPTIM3_LPTIM3_DIER_OUTPUT    \ LPTIM3 interrupt enable register
+  $08 constant LPTIM3_LPTIM3_DIER_INPUT \ LPTIM3 interrupt enable register
+
+: LPTIM3_DEF ; [then]

@@ -1,25 +1,26 @@
 \
 \ @file art.fs
-\ @brief accelerator - control register       (ART_CTR)
+\ @brief accelerator - control register (ART_CTR)
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ART_DEF
 
-\
-\ @brief control register
-\ Address offset: 0x00
-\ Reset value: 0x00000004
-\
+  [ifdef] ART_CTR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000004
+    \
+    $00 constant ART_EN                         \ [0x00] Cache enable
+    $08 constant ART_PCACHEADDR                 \ [0x08 : 12] Cacheable page index
+  [then]
 
-$00000001 constant ART_CTR_EN                                       \ Cache enable
-$000fff00 constant ART_CTR_PCACHEADDR                               \ Cacheable page index
+  \
+  \ @brief accelerator - control register (ART_CTR)
+  \
+  $00 constant ART_CTR                  \ control register
 
-
-\
-\ @brief accelerator - control register (ART_CTR)
-\
-$40024400 constant ART_CTR        \ offset: 0x00 : control register
-
+: ART_DEF ; [then]

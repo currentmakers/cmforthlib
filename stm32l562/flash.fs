@@ -6,420 +6,453 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] FLASH_DEF
+
+  [ifdef] FLASH_ACR_DEF
+    \
+    \ @brief Access control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_LATENCY                  \ [0x00 : 4] Latency
+    $0d constant FLASH_RUN_PD                   \ [0x0d] Flash Power-down mode during Low-power run mode
+    $0e constant FLASH_SLEEP_PD                 \ [0x0e] Flash Power-down mode during Low-power sleep mode
+    $0f constant FLASH_LVEN                     \ [0x0f] LVEN
+  [then]
+
+
+  [ifdef] FLASH_PDKEYR_DEF
+    \
+    \ @brief Power down key register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_PDKEYR                   \ [0x00 : 32] RUN_PD in FLASH_ACR key
+  [then]
+
+
+  [ifdef] FLASH_NSKEYR_DEF
+    \
+    \ @brief Flash non-secure key register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_NSKEYR                   \ [0x00 : 32] NSKEYR
+  [then]
+
+
+  [ifdef] FLASH_SECKEYR_DEF
+    \
+    \ @brief Flash secure key register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECKEYR                  \ [0x00 : 32] SECKEYR
+  [then]
+
+
+  [ifdef] FLASH_OPTKEYR_DEF
+    \
+    \ @brief Flash option key register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_OPTKEYR                  \ [0x00 : 32] OPTKEYR
+  [then]
+
+
+  [ifdef] FLASH_LVEKEYR_DEF
+    \
+    \ @brief Flash low voltage key register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_LVEKEYR                  \ [0x00 : 32] LVEKEYR
+  [then]
+
+
+  [ifdef] FLASH_NSSR_DEF
+    \
+    \ @brief Flash status register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_NSEOP                    \ [0x00] NSEOP
+    $01 constant FLASH_NSOPERR                  \ [0x01] NSOPERR
+    $03 constant FLASH_NSPROGERR                \ [0x03] NSPROGERR
+    $04 constant FLASH_NSWRPERR                 \ [0x04] NSWRPERR
+    $05 constant FLASH_NSPGAERR                 \ [0x05] NSPGAERR
+    $06 constant FLASH_NSSIZERR                 \ [0x06] NSSIZERR
+    $07 constant FLASH_NSPGSERR                 \ [0x07] NSPGSERR
+    $0d constant FLASH_OPTWERR                  \ [0x0d] OPTWERR
+    $0f constant FLASH_OPTVERR                  \ [0x0f] OPTVERR
+    $10 constant FLASH_NSBSY                    \ [0x10] NSBusy
+  [then]
+
+
+  [ifdef] FLASH_SECSR_DEF
+    \
+    \ @brief Flash status register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECEOP                   \ [0x00] SECEOP
+    $01 constant FLASH_SECOPERR                 \ [0x01] SECOPERR
+    $03 constant FLASH_SECPROGERR               \ [0x03] SECPROGERR
+    $04 constant FLASH_SECWRPERR                \ [0x04] SECWRPERR
+    $05 constant FLASH_SECPGAERR                \ [0x05] SECPGAERR
+    $06 constant FLASH_SECSIZERR                \ [0x06] SECSIZERR
+    $07 constant FLASH_SECPGSERR                \ [0x07] SECPGSERR
+    $0e constant FLASH_SECRDERR                 \ [0x0e] Secure read protection error
+    $10 constant FLASH_SECBSY                   \ [0x10] SECBusy
+  [then]
+
 
-\
-\ @brief Access control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000000f constant FLASH_ACR_LATENCY                                \ Latency
-$00002000 constant FLASH_ACR_RUN_PD                                 \ Flash Power-down mode during Low-power run mode
-$00004000 constant FLASH_ACR_SLEEP_PD                               \ Flash Power-down mode during Low-power sleep mode
-$00008000 constant FLASH_ACR_LVEN                                   \ LVEN
-
-
-\
-\ @brief Power down key register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_PDKEYR_PDKEYR                              \ RUN_PD in FLASH_ACR key
-
-
-\
-\ @brief Flash non-secure key register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_NSKEYR_NSKEYR                              \ NSKEYR
-
-
-\
-\ @brief Flash secure key register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECKEYR_SECKEYR                            \ SECKEYR
-
-
-\
-\ @brief Flash option key register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_OPTKEYR_OPTKEYR                            \ OPTKEYR
-
-
-\
-\ @brief Flash low voltage key register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_LVEKEYR_LVEKEYR                            \ LVEKEYR
-
-
-\
-\ @brief Flash status register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FLASH_NSSR_NSEOP                                 \ NSEOP
-$00000002 constant FLASH_NSSR_NSOPERR                               \ NSOPERR
-$00000008 constant FLASH_NSSR_NSPROGERR                             \ NSPROGERR
-$00000010 constant FLASH_NSSR_NSWRPERR                              \ NSWRPERR
-$00000020 constant FLASH_NSSR_NSPGAERR                              \ NSPGAERR
-$00000040 constant FLASH_NSSR_NSSIZERR                              \ NSSIZERR
-$00000080 constant FLASH_NSSR_NSPGSERR                              \ NSPGSERR
-$00002000 constant FLASH_NSSR_OPTWERR                               \ OPTWERR
-$00008000 constant FLASH_NSSR_OPTVERR                               \ OPTVERR
-$00010000 constant FLASH_NSSR_NSBSY                                 \ NSBusy
-
-
-\
-\ @brief Flash status register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FLASH_SECSR_SECEOP                               \ SECEOP
-$00000002 constant FLASH_SECSR_SECOPERR                             \ SECOPERR
-$00000008 constant FLASH_SECSR_SECPROGERR                           \ SECPROGERR
-$00000010 constant FLASH_SECSR_SECWRPERR                            \ SECWRPERR
-$00000020 constant FLASH_SECSR_SECPGAERR                            \ SECPGAERR
-$00000040 constant FLASH_SECSR_SECSIZERR                            \ SECSIZERR
-$00000080 constant FLASH_SECSR_SECPGSERR                            \ SECPGSERR
-$00004000 constant FLASH_SECSR_SECRDERR                             \ Secure read protection error
-$00010000 constant FLASH_SECSR_SECBSY                               \ SECBusy
-
-
-\
-\ @brief Flash non-secure control register
-\ Address offset: 0x28
-\ Reset value: 0xC0000000
-\
-
-$00000001 constant FLASH_NSCR_NSPG                                  \ NSPG
-$00000002 constant FLASH_NSCR_NSPER                                 \ NSPER
-$00000004 constant FLASH_NSCR_NSMER1                                \ NSMER1
-$000003f8 constant FLASH_NSCR_NSPNB                                 \ NSPNB
-$00000800 constant FLASH_NSCR_NSBKER                                \ NSBKER
-$00008000 constant FLASH_NSCR_NSMER2                                \ NSMER2
-$00010000 constant FLASH_NSCR_NSSTRT                                \ Options modification start
-$00020000 constant FLASH_NSCR_OPTSTRT                               \ Options modification start
-$01000000 constant FLASH_NSCR_NSEOPIE                               \ NSEOPIE
-$02000000 constant FLASH_NSCR_NSERRIE                               \ NSERRIE
-$08000000 constant FLASH_NSCR_OBL_LAUNCH                            \ Force the option byte loading
-$40000000 constant FLASH_NSCR_OPTLOCK                               \ Options Lock
-$80000000 constant FLASH_NSCR_NSLOCK                                \ NSLOCK
-
-
-\
-\ @brief Flash secure control register
-\ Address offset: 0x2C
-\ Reset value: 0x80000000
-\
-
-$00000001 constant FLASH_SECCR_SECPG                                \ SECPG
-$00000002 constant FLASH_SECCR_SECPER                               \ SECPER
-$00000004 constant FLASH_SECCR_SECMER1                              \ SECMER1
-$000003f8 constant FLASH_SECCR_SECPNB                               \ SECPNB
-$00000800 constant FLASH_SECCR_SECBKER                              \ SECBKER
-$00008000 constant FLASH_SECCR_SECMER2                              \ SECMER2
-$00010000 constant FLASH_SECCR_SECSTRT                              \ SECSTRT
-$01000000 constant FLASH_SECCR_SECEOPIE                             \ SECEOPIE
-$02000000 constant FLASH_SECCR_SECERRIE                             \ SECERRIE
-$04000000 constant FLASH_SECCR_SECRDERRIE                           \ SECRDERRIE
-$20000000 constant FLASH_SECCR_SECINV                               \ SECINV
-$80000000 constant FLASH_SECCR_SECLOCK                              \ SECLOCK
-
-
-\
-\ @brief Flash ECC register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant FLASH_ECCR_ADDR_ECC                              \ ECC fail address
-$00200000 constant FLASH_ECCR_BK_ECC                                \ BK_ECC
-$00400000 constant FLASH_ECCR_SYSF_ECC                              \ SYSF_ECC
-$01000000 constant FLASH_ECCR_ECCIE                                 \ ECC correction interrupt enable
-$10000000 constant FLASH_ECCR_ECCC2                                 \ ECCC2
-$20000000 constant FLASH_ECCR_ECCD2                                 \ ECCD2
-$40000000 constant FLASH_ECCR_ECCC                                  \ ECC correction
-$80000000 constant FLASH_ECCR_ECCD                                  \ ECC detection
-
-
-\
-\ @brief Flash option register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FLASH_OPTR_RDP                                   \ Read protection level
-$00000700 constant FLASH_OPTR_BOR_LEV                               \ BOR reset Level
-$00001000 constant FLASH_OPTR_NRST_STOP                             \ nRST_STOP
-$00002000 constant FLASH_OPTR_NRST_STDBY                            \ nRST_STDBY
-$00004000 constant FLASH_OPTR_NRST_SHDW                             \ nRST_SHDW
-$00010000 constant FLASH_OPTR_IWDG_SW                               \ Independent watchdog selection
-$00020000 constant FLASH_OPTR_IWDG_STOP                             \ Independent watchdog counter freeze in Stop mode
-$00040000 constant FLASH_OPTR_IWDG_STDBY                            \ Independent watchdog counter freeze in Standby mode
-$00080000 constant FLASH_OPTR_WWDG_SW                               \ Window watchdog selection
-$00100000 constant FLASH_OPTR_SWAP_BANK                             \ SWAP_BANK
-$00200000 constant FLASH_OPTR_DB256K                                \ DB256K
-$00400000 constant FLASH_OPTR_DBANK                                 \ DBANK
-$01000000 constant FLASH_OPTR_SRAM2_PE                              \ SRAM2 parity check enable
-$02000000 constant FLASH_OPTR_SRAM2_RST                             \ SRAM2 Erase when system reset
-$04000000 constant FLASH_OPTR_NSWBOOT0                              \ nSWBOOT0
-$08000000 constant FLASH_OPTR_NBOOT0                                \ nBOOT0
-$10000000 constant FLASH_OPTR_PA15_PUPEN                            \ PA15_PUPEN
-$80000000 constant FLASH_OPTR_TZEN                                  \ TZEN
-
-
-\
-\ @brief Flash non-secure boot address 0 register
-\ Address offset: 0x44
-\ Reset value: 0x0000000F
-\
-
-$ffffff80 constant FLASH_NSBOOTADD0R_NSBOOTADD0                     \ NSBOOTADD0
-
-
-\
-\ @brief Flash non-secure boot address 1 register
-\ Address offset: 0x48
-\ Reset value: 0x0000000F
-\
-
-$ffffff80 constant FLASH_NSBOOTADD1R_NSBOOTADD1                     \ NSBOOTADD1
-
-
-\
-\ @brief FFlash secure boot address 0 register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FLASH_SECBOOTADD0R_BOOT_LOCK                     \ BOOT_LOCK
-$ffffff80 constant FLASH_SECBOOTADD0R_SECBOOTADD0                   \ SECBOOTADD0
-
-
-\
-\ @brief Flash bank 1 secure watermak1 register
-\ Address offset: 0x50
-\ Reset value: 0xFF00FF00
-\
-
-$0000007f constant FLASH_SECWM1R1_SECWM1_PSTRT                      \ SECWM1_PSTRT
-$007f0000 constant FLASH_SECWM1R1_SECWM1_PEND                       \ SECWM1_PEND
-
-
-\
-\ @brief Flash secure watermak1 register 2
-\ Address offset: 0x54
-\ Reset value: 0x0F000F00
-\
-
-$0000007f constant FLASH_SECWM1R2_PCROP1_PSTRT                      \ PCROP1_PSTRT
-$00008000 constant FLASH_SECWM1R2_PCROP1EN                          \ PCROP1EN
-$007f0000 constant FLASH_SECWM1R2_HDP1_PEND                         \ HDP1_PEND
-$80000000 constant FLASH_SECWM1R2_HDP1EN                            \ HDP1EN
-
-
-\
-\ @brief Flash Bank 1 WRP area A address register
-\ Address offset: 0x58
-\ Reset value: 0xFF00FF00
-\
-
-$0000007f constant FLASH_WRP1AR_WRP1A_PSTRT                         \ WRP1A_PSTRT
-$007f0000 constant FLASH_WRP1AR_WRP1A_PEND                          \ WRP1A_PEND
-
-
-\
-\ @brief Flash Bank 1 WRP area B address register
-\ Address offset: 0x5C
-\ Reset value: 0xFF00FF00
-\
-
-$0000007f constant FLASH_WRP1BR_WRP1B_PSTRT                         \ WRP1B_PSTRT
-$007f0000 constant FLASH_WRP1BR_WRP1B_PEND                          \ WRP1B_PEND
-
-
-\
-\ @brief Flash secure watermak2 register
-\ Address offset: 0x60
-\ Reset value: 0xFF00FF00
-\
-
-$0000007f constant FLASH_SECWM2R1_SECWM2_PSTRT                      \ SECWM2_PSTRT
-$007f0000 constant FLASH_SECWM2R1_SECWM2_PEND                       \ SECWM2_PEND
-
-
-\
-\ @brief Flash secure watermak2 register2
-\ Address offset: 0x64
-\ Reset value: 0x0F000F00
-\
-
-$0000007f constant FLASH_SECWM2R2_PCROP2_PSTRT                      \ PCROP2_PSTRT
-$00008000 constant FLASH_SECWM2R2_PCROP2EN                          \ PCROP2EN
-$007f0000 constant FLASH_SECWM2R2_HDP2_PEND                         \ HDP2_PEND
-$80000000 constant FLASH_SECWM2R2_HDP2EN                            \ HDP2EN
-
-
-\
-\ @brief Flash WPR2 area A address register
-\ Address offset: 0x68
-\ Reset value: 0xFF00FF00
-\
-
-$0000007f constant FLASH_WRP2AR_WRP2A_PSTRT                         \ WRP2A_PSTRT
-$007f0000 constant FLASH_WRP2AR_WRP2A_PEND                          \ WRP2A_PEND
-
-
-\
-\ @brief Flash WPR2 area B address register
-\ Address offset: 0x6C
-\ Reset value: 0xFF00FF00
-\
-
-$0000007f constant FLASH_WRP2BR_WRP2B_PSTRT                         \ WRP2B_PSTRT
-$007f0000 constant FLASH_WRP2BR_WRP2B_PEND                          \ WRP2B_PEND
-
-
-\
-\ @brief FLASH secure block based bank 1 register
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECBB1R1_SECBB1                            \ SECBB1
-
-
-\
-\ @brief FLASH secure block based bank 1 register
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECBB1R2_SECBB1                            \ SECBB1
-
-
-\
-\ @brief FLASH secure block based bank 1 register
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECBB1R3_SECBB1                            \ SECBB1
-
-
-\
-\ @brief FLASH secure block based bank 1 register
-\ Address offset: 0x8C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECBB1R4_SECBB1                            \ SECBB1
-
-
-\
-\ @brief FLASH secure block based bank 2 register
-\ Address offset: 0xA0
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECBB2R1_SECBB2                            \ SECBB2
-
-
-\
-\ @brief FLASH secure block based bank 2 register
-\ Address offset: 0xA4
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECBB2R2_SECBB2                            \ SECBB2
-
-
-\
-\ @brief FLASH secure block based bank 2 register
-\ Address offset: 0xA8
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECBB2R3_SECBB2                            \ SECBB2
-
-
-\
-\ @brief FLASH secure block based bank 2 register
-\ Address offset: 0xAC
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_SECBB2R4_SECBB2                            \ SECBB2
-
-
-\
-\ @brief FLASH secure HDP control register
-\ Address offset: 0xC0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FLASH_SECHDPCR_HDP1_ACCDIS                       \ HDP1_ACCDIS
-$00000002 constant FLASH_SECHDPCR_HDP2_ACCDIS                       \ HDP2_ACCDIS
-
-
-\
-\ @brief Power privilege configuration register
-\ Address offset: 0xC4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FLASH_PRIVCFGR_PRIV                              \ PRIV
-
-
-\
-\ @brief Flash
-\
-$40022000 constant FLASH_ACR      \ offset: 0x00 : Access control register
-$40022004 constant FLASH_PDKEYR   \ offset: 0x04 : Power down key register
-$40022008 constant FLASH_NSKEYR   \ offset: 0x08 : Flash non-secure key register
-$4002200c constant FLASH_SECKEYR  \ offset: 0x0C : Flash secure key register
-$40022010 constant FLASH_OPTKEYR  \ offset: 0x10 : Flash option key register
-$40022014 constant FLASH_LVEKEYR  \ offset: 0x14 : Flash low voltage key register
-$40022020 constant FLASH_NSSR     \ offset: 0x20 : Flash status register
-$40022024 constant FLASH_SECSR    \ offset: 0x24 : Flash status register
-$40022028 constant FLASH_NSCR     \ offset: 0x28 : Flash non-secure control register
-$4002202c constant FLASH_SECCR    \ offset: 0x2C : Flash secure control register
-$40022030 constant FLASH_ECCR     \ offset: 0x30 : Flash ECC register
-$40022040 constant FLASH_OPTR     \ offset: 0x40 : Flash option register
-$40022044 constant FLASH_NSBOOTADD0R  \ offset: 0x44 : Flash non-secure boot address 0 register
-$40022048 constant FLASH_NSBOOTADD1R  \ offset: 0x48 : Flash non-secure boot address 1 register
-$4002204c constant FLASH_SECBOOTADD0R  \ offset: 0x4C : FFlash secure boot address 0 register
-$40022050 constant FLASH_SECWM1R1  \ offset: 0x50 : Flash bank 1 secure watermak1 register
-$40022054 constant FLASH_SECWM1R2  \ offset: 0x54 : Flash secure watermak1 register 2
-$40022058 constant FLASH_WRP1AR   \ offset: 0x58 : Flash Bank 1 WRP area A address register
-$4002205c constant FLASH_WRP1BR   \ offset: 0x5C : Flash Bank 1 WRP area B address register
-$40022060 constant FLASH_SECWM2R1  \ offset: 0x60 : Flash secure watermak2 register
-$40022064 constant FLASH_SECWM2R2  \ offset: 0x64 : Flash secure watermak2 register2
-$40022068 constant FLASH_WRP2AR   \ offset: 0x68 : Flash WPR2 area A address register
-$4002206c constant FLASH_WRP2BR   \ offset: 0x6C : Flash WPR2 area B address register
-$40022080 constant FLASH_SECBB1R1  \ offset: 0x80 : FLASH secure block based bank 1 register
-$40022084 constant FLASH_SECBB1R2  \ offset: 0x84 : FLASH secure block based bank 1 register
-$40022088 constant FLASH_SECBB1R3  \ offset: 0x88 : FLASH secure block based bank 1 register
-$4002208c constant FLASH_SECBB1R4  \ offset: 0x8C : FLASH secure block based bank 1 register
-$400220a0 constant FLASH_SECBB2R1  \ offset: 0xA0 : FLASH secure block based bank 2 register
-$400220a4 constant FLASH_SECBB2R2  \ offset: 0xA4 : FLASH secure block based bank 2 register
-$400220a8 constant FLASH_SECBB2R3  \ offset: 0xA8 : FLASH secure block based bank 2 register
-$400220ac constant FLASH_SECBB2R4  \ offset: 0xAC : FLASH secure block based bank 2 register
-$400220c0 constant FLASH_SECHDPCR  \ offset: 0xC0 : FLASH secure HDP control register
-$400220c4 constant FLASH_PRIVCFGR  \ offset: 0xC4 : Power privilege configuration register
-
+  [ifdef] FLASH_NSCR_DEF
+    \
+    \ @brief Flash non-secure control register
+    \ Address offset: 0x28
+    \ Reset value: 0xC0000000
+    \
+    $00 constant FLASH_NSPG                     \ [0x00] NSPG
+    $01 constant FLASH_NSPER                    \ [0x01] NSPER
+    $02 constant FLASH_NSMER1                   \ [0x02] NSMER1
+    $03 constant FLASH_NSPNB                    \ [0x03 : 7] NSPNB
+    $0b constant FLASH_NSBKER                   \ [0x0b] NSBKER
+    $0f constant FLASH_NSMER2                   \ [0x0f] NSMER2
+    $10 constant FLASH_NSSTRT                   \ [0x10] Options modification start
+    $11 constant FLASH_OPTSTRT                  \ [0x11] Options modification start
+    $18 constant FLASH_NSEOPIE                  \ [0x18] NSEOPIE
+    $19 constant FLASH_NSERRIE                  \ [0x19] NSERRIE
+    $1b constant FLASH_OBL_LAUNCH               \ [0x1b] Force the option byte loading
+    $1e constant FLASH_OPTLOCK                  \ [0x1e] Options Lock
+    $1f constant FLASH_NSLOCK                   \ [0x1f] NSLOCK
+  [then]
+
+
+  [ifdef] FLASH_SECCR_DEF
+    \
+    \ @brief Flash secure control register
+    \ Address offset: 0x2C
+    \ Reset value: 0x80000000
+    \
+    $00 constant FLASH_SECPG                    \ [0x00] SECPG
+    $01 constant FLASH_SECPER                   \ [0x01] SECPER
+    $02 constant FLASH_SECMER1                  \ [0x02] SECMER1
+    $03 constant FLASH_SECPNB                   \ [0x03 : 7] SECPNB
+    $0b constant FLASH_SECBKER                  \ [0x0b] SECBKER
+    $0f constant FLASH_SECMER2                  \ [0x0f] SECMER2
+    $10 constant FLASH_SECSTRT                  \ [0x10] SECSTRT
+    $18 constant FLASH_SECEOPIE                 \ [0x18] SECEOPIE
+    $19 constant FLASH_SECERRIE                 \ [0x19] SECERRIE
+    $1a constant FLASH_SECRDERRIE               \ [0x1a] SECRDERRIE
+    $1d constant FLASH_SECINV                   \ [0x1d] SECINV
+    $1f constant FLASH_SECLOCK                  \ [0x1f] SECLOCK
+  [then]
+
+
+  [ifdef] FLASH_ECCR_DEF
+    \
+    \ @brief Flash ECC register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_ADDR_ECC                 \ [0x00 : 19] ECC fail address
+    $15 constant FLASH_BK_ECC                   \ [0x15] BK_ECC
+    $16 constant FLASH_SYSF_ECC                 \ [0x16] SYSF_ECC
+    $18 constant FLASH_ECCIE                    \ [0x18] ECC correction interrupt enable
+    $1c constant FLASH_ECCC2                    \ [0x1c] ECCC2
+    $1d constant FLASH_ECCD2                    \ [0x1d] ECCD2
+    $1e constant FLASH_ECCC                     \ [0x1e] ECC correction
+    $1f constant FLASH_ECCD                     \ [0x1f] ECC detection
+  [then]
+
+
+  [ifdef] FLASH_OPTR_DEF
+    \
+    \ @brief Flash option register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_RDP                      \ [0x00 : 8] Read protection level
+    $08 constant FLASH_BOR_LEV                  \ [0x08 : 3] BOR reset Level
+    $0c constant FLASH_nRST_STOP                \ [0x0c] nRST_STOP
+    $0d constant FLASH_nRST_STDBY               \ [0x0d] nRST_STDBY
+    $0e constant FLASH_nRST_SHDW                \ [0x0e] nRST_SHDW
+    $10 constant FLASH_IWDG_SW                  \ [0x10] Independent watchdog selection
+    $11 constant FLASH_IWDG_STOP                \ [0x11] Independent watchdog counter freeze in Stop mode
+    $12 constant FLASH_IWDG_STDBY               \ [0x12] Independent watchdog counter freeze in Standby mode
+    $13 constant FLASH_WWDG_SW                  \ [0x13] Window watchdog selection
+    $14 constant FLASH_SWAP_BANK                \ [0x14] SWAP_BANK
+    $15 constant FLASH_DB256K                   \ [0x15] DB256K
+    $16 constant FLASH_DBANK                    \ [0x16] DBANK
+    $18 constant FLASH_SRAM2_PE                 \ [0x18] SRAM2 parity check enable
+    $19 constant FLASH_SRAM2_RST                \ [0x19] SRAM2 Erase when system reset
+    $1a constant FLASH_nSWBOOT0                 \ [0x1a] nSWBOOT0
+    $1b constant FLASH_nBOOT0                   \ [0x1b] nBOOT0
+    $1c constant FLASH_PA15_PUPEN               \ [0x1c] PA15_PUPEN
+    $1f constant FLASH_TZEN                     \ [0x1f] TZEN
+  [then]
+
+
+  [ifdef] FLASH_NSBOOTADD0R_DEF
+    \
+    \ @brief Flash non-secure boot address 0 register
+    \ Address offset: 0x44
+    \ Reset value: 0x0000000F
+    \
+    $07 constant FLASH_NSBOOTADD0               \ [0x07 : 25] NSBOOTADD0
+  [then]
+
+
+  [ifdef] FLASH_NSBOOTADD1R_DEF
+    \
+    \ @brief Flash non-secure boot address 1 register
+    \ Address offset: 0x48
+    \ Reset value: 0x0000000F
+    \
+    $07 constant FLASH_NSBOOTADD1               \ [0x07 : 25] NSBOOTADD1
+  [then]
+
+
+  [ifdef] FLASH_SECBOOTADD0R_DEF
+    \
+    \ @brief FFlash secure boot address 0 register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_BOOT_LOCK                \ [0x00] BOOT_LOCK
+    $07 constant FLASH_SECBOOTADD0              \ [0x07 : 25] SECBOOTADD0
+  [then]
+
+
+  [ifdef] FLASH_SECWM1R1_DEF
+    \
+    \ @brief Flash bank 1 secure watermak1 register
+    \ Address offset: 0x50
+    \ Reset value: 0xFF00FF00
+    \
+    $00 constant FLASH_SECWM1_PSTRT             \ [0x00 : 7] SECWM1_PSTRT
+    $10 constant FLASH_SECWM1_PEND              \ [0x10 : 7] SECWM1_PEND
+  [then]
+
+
+  [ifdef] FLASH_SECWM1R2_DEF
+    \
+    \ @brief Flash secure watermak1 register 2
+    \ Address offset: 0x54
+    \ Reset value: 0x0F000F00
+    \
+    $00 constant FLASH_PCROP1_PSTRT             \ [0x00 : 7] PCROP1_PSTRT
+    $0f constant FLASH_PCROP1EN                 \ [0x0f] PCROP1EN
+    $10 constant FLASH_HDP1_PEND                \ [0x10 : 7] HDP1_PEND
+    $1f constant FLASH_HDP1EN                   \ [0x1f] HDP1EN
+  [then]
+
+
+  [ifdef] FLASH_WRP1AR_DEF
+    \
+    \ @brief Flash Bank 1 WRP area A address register
+    \ Address offset: 0x58
+    \ Reset value: 0xFF00FF00
+    \
+    $00 constant FLASH_WRP1A_PSTRT              \ [0x00 : 7] WRP1A_PSTRT
+    $10 constant FLASH_WRP1A_PEND               \ [0x10 : 7] WRP1A_PEND
+  [then]
+
+
+  [ifdef] FLASH_WRP1BR_DEF
+    \
+    \ @brief Flash Bank 1 WRP area B address register
+    \ Address offset: 0x5C
+    \ Reset value: 0xFF00FF00
+    \
+    $00 constant FLASH_WRP1B_PSTRT              \ [0x00 : 7] WRP1B_PSTRT
+    $10 constant FLASH_WRP1B_PEND               \ [0x10 : 7] WRP1B_PEND
+  [then]
+
+
+  [ifdef] FLASH_SECWM2R1_DEF
+    \
+    \ @brief Flash secure watermak2 register
+    \ Address offset: 0x60
+    \ Reset value: 0xFF00FF00
+    \
+    $00 constant FLASH_SECWM2_PSTRT             \ [0x00 : 7] SECWM2_PSTRT
+    $10 constant FLASH_SECWM2_PEND              \ [0x10 : 7] SECWM2_PEND
+  [then]
+
+
+  [ifdef] FLASH_SECWM2R2_DEF
+    \
+    \ @brief Flash secure watermak2 register2
+    \ Address offset: 0x64
+    \ Reset value: 0x0F000F00
+    \
+    $00 constant FLASH_PCROP2_PSTRT             \ [0x00 : 7] PCROP2_PSTRT
+    $0f constant FLASH_PCROP2EN                 \ [0x0f] PCROP2EN
+    $10 constant FLASH_HDP2_PEND                \ [0x10 : 7] HDP2_PEND
+    $1f constant FLASH_HDP2EN                   \ [0x1f] HDP2EN
+  [then]
+
+
+  [ifdef] FLASH_WRP2AR_DEF
+    \
+    \ @brief Flash WPR2 area A address register
+    \ Address offset: 0x68
+    \ Reset value: 0xFF00FF00
+    \
+    $00 constant FLASH_WRP2A_PSTRT              \ [0x00 : 7] WRP2A_PSTRT
+    $10 constant FLASH_WRP2A_PEND               \ [0x10 : 7] WRP2A_PEND
+  [then]
+
+
+  [ifdef] FLASH_WRP2BR_DEF
+    \
+    \ @brief Flash WPR2 area B address register
+    \ Address offset: 0x6C
+    \ Reset value: 0xFF00FF00
+    \
+    $00 constant FLASH_WRP2B_PSTRT              \ [0x00 : 7] WRP2B_PSTRT
+    $10 constant FLASH_WRP2B_PEND               \ [0x10 : 7] WRP2B_PEND
+  [then]
+
+
+  [ifdef] FLASH_SECBB1R1_DEF
+    \
+    \ @brief FLASH secure block based bank 1 register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECBB1                   \ [0x00 : 32] SECBB1
+  [then]
+
+
+  [ifdef] FLASH_SECBB1R2_DEF
+    \
+    \ @brief FLASH secure block based bank 1 register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECBB1                   \ [0x00 : 32] SECBB1
+  [then]
+
+
+  [ifdef] FLASH_SECBB1R3_DEF
+    \
+    \ @brief FLASH secure block based bank 1 register
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECBB1                   \ [0x00 : 32] SECBB1
+  [then]
+
+
+  [ifdef] FLASH_SECBB1R4_DEF
+    \
+    \ @brief FLASH secure block based bank 1 register
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECBB1                   \ [0x00 : 32] SECBB1
+  [then]
+
+
+  [ifdef] FLASH_SECBB2R1_DEF
+    \
+    \ @brief FLASH secure block based bank 2 register
+    \ Address offset: 0xA0
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECBB2                   \ [0x00 : 32] SECBB2
+  [then]
+
+
+  [ifdef] FLASH_SECBB2R2_DEF
+    \
+    \ @brief FLASH secure block based bank 2 register
+    \ Address offset: 0xA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECBB2                   \ [0x00 : 32] SECBB2
+  [then]
+
+
+  [ifdef] FLASH_SECBB2R3_DEF
+    \
+    \ @brief FLASH secure block based bank 2 register
+    \ Address offset: 0xA8
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECBB2                   \ [0x00 : 32] SECBB2
+  [then]
+
+
+  [ifdef] FLASH_SECBB2R4_DEF
+    \
+    \ @brief FLASH secure block based bank 2 register
+    \ Address offset: 0xAC
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_SECBB2                   \ [0x00 : 32] SECBB2
+  [then]
+
+
+  [ifdef] FLASH_SECHDPCR_DEF
+    \
+    \ @brief FLASH secure HDP control register
+    \ Address offset: 0xC0
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_HDP1_ACCDIS              \ [0x00] HDP1_ACCDIS
+    $01 constant FLASH_HDP2_ACCDIS              \ [0x01] HDP2_ACCDIS
+  [then]
+
+
+  [ifdef] FLASH_PRIVCFGR_DEF
+    \
+    \ @brief Power privilege configuration register
+    \ Address offset: 0xC4
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_PRIV                     \ [0x00] PRIV
+  [then]
+
+  \
+  \ @brief Flash
+  \
+  $00 constant FLASH_ACR                \ Access control register
+  $04 constant FLASH_PDKEYR             \ Power down key register
+  $08 constant FLASH_NSKEYR             \ Flash non-secure key register
+  $0C constant FLASH_SECKEYR            \ Flash secure key register
+  $10 constant FLASH_OPTKEYR            \ Flash option key register
+  $14 constant FLASH_LVEKEYR            \ Flash low voltage key register
+  $20 constant FLASH_NSSR               \ Flash status register
+  $24 constant FLASH_SECSR              \ Flash status register
+  $28 constant FLASH_NSCR               \ Flash non-secure control register
+  $2C constant FLASH_SECCR              \ Flash secure control register
+  $30 constant FLASH_ECCR               \ Flash ECC register
+  $40 constant FLASH_OPTR               \ Flash option register
+  $44 constant FLASH_NSBOOTADD0R        \ Flash non-secure boot address 0 register
+  $48 constant FLASH_NSBOOTADD1R        \ Flash non-secure boot address 1 register
+  $4C constant FLASH_SECBOOTADD0R       \ FFlash secure boot address 0 register
+  $50 constant FLASH_SECWM1R1           \ Flash bank 1 secure watermak1 register
+  $54 constant FLASH_SECWM1R2           \ Flash secure watermak1 register 2
+  $58 constant FLASH_WRP1AR             \ Flash Bank 1 WRP area A address register
+  $5C constant FLASH_WRP1BR             \ Flash Bank 1 WRP area B address register
+  $60 constant FLASH_SECWM2R1           \ Flash secure watermak2 register
+  $64 constant FLASH_SECWM2R2           \ Flash secure watermak2 register2
+  $68 constant FLASH_WRP2AR             \ Flash WPR2 area A address register
+  $6C constant FLASH_WRP2BR             \ Flash WPR2 area B address register
+  $80 constant FLASH_SECBB1R1           \ FLASH secure block based bank 1 register
+  $84 constant FLASH_SECBB1R2           \ FLASH secure block based bank 1 register
+  $88 constant FLASH_SECBB1R3           \ FLASH secure block based bank 1 register
+  $8C constant FLASH_SECBB1R4           \ FLASH secure block based bank 1 register
+  $A0 constant FLASH_SECBB2R1           \ FLASH secure block based bank 2 register
+  $A4 constant FLASH_SECBB2R2           \ FLASH secure block based bank 2 register
+  $A8 constant FLASH_SECBB2R3           \ FLASH secure block based bank 2 register
+  $AC constant FLASH_SECBB2R4           \ FLASH secure block based bank 2 register
+  $C0 constant FLASH_SECHDPCR           \ FLASH secure HDP control register
+  $C4 constant FLASH_PRIVCFGR           \ Power privilege configuration register
+
+: FLASH_DEF ; [then]

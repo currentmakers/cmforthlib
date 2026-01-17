@@ -6,462 +6,486 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief Clock control register
-\ Address offset: 0x00
-\ Reset value: 0x00000500
-\
-
-$00000100 constant RCC_CR_HSION                                     \ HSI16 clock enable
-$00000200 constant RCC_CR_HSIKERON                                  \ HSI16 always enable for peripheral kernels
-$00000400 constant RCC_CR_HSIRDY                                    \ HSI16 clock ready flag
-$00003800 constant RCC_CR_HSIDIV                                    \ HSI16 clock division factor
-$00010000 constant RCC_CR_HSEON                                     \ HSE clock enable
-$00020000 constant RCC_CR_HSERDY                                    \ HSE clock ready flag
-$00040000 constant RCC_CR_HSEBYP                                    \ HSE crystal oscillator bypass
-$00080000 constant RCC_CR_CSSON                                     \ Clock security system enable
-$00400000 constant RCC_CR_HSI48ON                                   \ HSI48ON
-$00800000 constant RCC_CR_HSI48RDY                                  \ HSI48RDY
-$01000000 constant RCC_CR_PLLON                                     \ PLL enable
-$02000000 constant RCC_CR_PLLRDY                                    \ PLL clock ready flag
-
-
-\
-\ @brief Internal clock sources calibration register
-\ Address offset: 0x04
-\ Reset value: 0x00004000
-\
-
-$000000ff constant RCC_ICSCR_HSICAL                                 \ HSI16 clock calibration
-$00007f00 constant RCC_ICSCR_HSITRIM                                \ HSI16 clock trimming
-
-
-\
-\ @brief Clock configuration register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RCC_CFGR_SW                                      \ System clock switch
-$00000038 constant RCC_CFGR_SWS                                     \ System clock switch status
-$00000f00 constant RCC_CFGR_HPRE                                    \ AHB prescaler
-$00007000 constant RCC_CFGR_PPRE                                    \ APB prescaler
-$000f0000 constant RCC_CFGR_MCO2SEL                                 \ MCO2SEL
-$00f00000 constant RCC_CFGR_MCO2PRE                                 \ MCO2PRE
-$0f000000 constant RCC_CFGR_MCOSEL                                  \ Microcontroller clock output
-$f0000000 constant RCC_CFGR_MCOPRE                                  \ Microcontroller clock output prescaler
-
-
-\
-\ @brief PLL configuration register
-\ Address offset: 0x0C
-\ Reset value: 0x00001000
-\
-
-$00000003 constant RCC_PLLCFGR_PLLSRC                               \ PLL input clock source
-$00000070 constant RCC_PLLCFGR_PLLM                                 \ Division factor M of the PLL input clock divider
-$0000ff00 constant RCC_PLLCFGR_PLLN                                 \ PLL frequency multiplication factor N
-$00010000 constant RCC_PLLCFGR_PLLPEN                               \ PLLPCLK clock output enable
-$003e0000 constant RCC_PLLCFGR_PLLP                                 \ PLL VCO division factor P for PLLPCLK clock output
-$01000000 constant RCC_PLLCFGR_PLLQEN                               \ PLLQCLK clock output enable
-$0e000000 constant RCC_PLLCFGR_PLLQ                                 \ PLL VCO division factor Q for PLLQCLK clock output
-$10000000 constant RCC_PLLCFGR_PLLREN                               \ PLLRCLK clock output enable
-$e0000000 constant RCC_PLLCFGR_PLLR                                 \ PLL VCO division factor R for PLLRCLK clock output
-
-
-\
-\ @brief RCC clock recovery RC register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$000001ff constant RCC_CRRCR_HSI48CAL                               \ HSI48 clock calibration
-
-
-\
-\ @brief Clock interrupt enable register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_CIER_LSIRDYIE                                \ LSI ready interrupt enable
-$00000002 constant RCC_CIER_LSERDYIE                                \ LSE ready interrupt enable
-$00000008 constant RCC_CIER_HSIRDYIE                                \ HSI ready interrupt enable
-$00000010 constant RCC_CIER_HSERDYIE                                \ HSE ready interrupt enable
-$00000020 constant RCC_CIER_PLLSYSRDYIE                             \ PLL ready interrupt enable
-
-
-\
-\ @brief Clock interrupt flag register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_CIFR_LSIRDYF                                 \ LSI ready interrupt flag
-$00000002 constant RCC_CIFR_LSERDYF                                 \ LSE ready interrupt flag
-$00000004 constant RCC_CIFR_HSI48RDYF                               \ HSI48RDYF
-$00000008 constant RCC_CIFR_HSIRDYF                                 \ HSI ready interrupt flag
-$00000010 constant RCC_CIFR_HSERDYF                                 \ HSE ready interrupt flag
-$00000020 constant RCC_CIFR_PLLSYSRDYF                              \ PLL ready interrupt flag
-$00000100 constant RCC_CIFR_CSSF                                    \ Clock security system interrupt flag
-$00000200 constant RCC_CIFR_LSECSSF                                 \ LSE Clock security system interrupt flag
-
-
-\
-\ @brief Clock interrupt clear register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_CICR_LSIRDYC                                 \ LSI ready interrupt clear
-$00000002 constant RCC_CICR_LSERDYC                                 \ LSE ready interrupt clear
-$00000004 constant RCC_CICR_HSI48RDYC                               \ HSI48RDYC
-$00000008 constant RCC_CICR_HSIRDYC                                 \ HSI ready interrupt clear
-$00000010 constant RCC_CICR_HSERDYC                                 \ HSE ready interrupt clear
-$00000020 constant RCC_CICR_PLLSYSRDYC                              \ PLL ready interrupt clear
-$00000100 constant RCC_CICR_CSSC                                    \ Clock security system interrupt clear
-$00000200 constant RCC_CICR_LSECSSC                                 \ LSE Clock security system interrupt clear
-
-
-\
-\ @brief I/O port reset register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_IOPRSTR_GPIOARST                             \ GPIOARST
-$00000002 constant RCC_IOPRSTR_GPIOBRST                             \ GPIOBRST
-$00000004 constant RCC_IOPRSTR_GPIOCRST                             \ GPIOCRST
-$00000008 constant RCC_IOPRSTR_GPIODRST                             \ GPIODRST
-$00000010 constant RCC_IOPRSTR_GPIOERST                             \ GPIOERST
-$00000020 constant RCC_IOPRSTR_GPIOFRST                             \ GPIOFRST
-
-
-\
-\ @brief AHB peripheral reset register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_AHBRSTR_DMA1RST                              \ DMA1 reset
-$00000002 constant RCC_AHBRSTR_DMA2RST                              \ DMA1 reset
-$00000100 constant RCC_AHBRSTR_FLASHRST                             \ FLITF reset
-$00001000 constant RCC_AHBRSTR_CRCRST                               \ CRC reset
-
-
-\
-\ @brief APB peripheral reset register 1
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_APBRSTR1_TIM2RST                             \ TIM2 timer reset
-$00000002 constant RCC_APBRSTR1_TIM3RST                             \ TIM3 timer reset
-$00000004 constant RCC_APBRSTR1_TIM4RST                             \ TIM4 timer reset
-$00000010 constant RCC_APBRSTR1_TIM6RST                             \ TIM6 timer reset
-$00000020 constant RCC_APBRSTR1_TIM7RST                             \ TIM7 timer reset
-$00000080 constant RCC_APBRSTR1_LPUART2RST                          \ LPUART2RST
-$00000100 constant RCC_APBRSTR1_USART5RST                           \ USART5RST
-$00000200 constant RCC_APBRSTR1_USART6RST                           \ USART6RST
-$00001000 constant RCC_APBRSTR1_FDCANRST                            \ FDCANRST
-$00002000 constant RCC_APBRSTR1_USBRST                              \ USBRST
-$00004000 constant RCC_APBRSTR1_SPI2RST                             \ SPI2 reset
-$00008000 constant RCC_APBRSTR1_SPI3RST                             \ SPI3 reset
-$00010000 constant RCC_APBRSTR1_CRSRST                              \ CRSRST
-$00020000 constant RCC_APBRSTR1_USART2RST                           \ USART2 reset
-$00040000 constant RCC_APBRSTR1_USART3RST                           \ USART3 reset
-$00080000 constant RCC_APBRSTR1_USART4RST                           \ USART4 reset
-$00100000 constant RCC_APBRSTR1_LPUART1RST                          \ LPUART1 reset
-$00200000 constant RCC_APBRSTR1_I2C1RST                             \ I2C1 reset
-$00400000 constant RCC_APBRSTR1_I2C2RST                             \ I2C2 reset
-$00800000 constant RCC_APBRSTR1_I2C3RST                             \ I2C3RST reset
-$01000000 constant RCC_APBRSTR1_CECRST                              \ HDMI CEC reset
-$02000000 constant RCC_APBRSTR1_UCPD1RST                            \ UCPD1 reset
-$04000000 constant RCC_APBRSTR1_UCPD2RST                            \ UCPD2 reset
-$08000000 constant RCC_APBRSTR1_DBGRST                              \ Debug support reset
-$10000000 constant RCC_APBRSTR1_PWRRST                              \ Power interface reset
-$20000000 constant RCC_APBRSTR1_DAC1RST                             \ DAC1 interface reset
-$40000000 constant RCC_APBRSTR1_LPTIM2RST                           \ Low Power Timer 2 reset
-$80000000 constant RCC_APBRSTR1_LPTIM1RST                           \ Low Power Timer 1 reset
-
-
-\
-\ @brief APB peripheral reset register 2
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_APBRSTR2_SYSCFGRST                           \ SYSCFG, COMP and VREFBUF reset
-$00000800 constant RCC_APBRSTR2_TIM1RST                             \ TIM1 timer reset
-$00001000 constant RCC_APBRSTR2_SPI1RST                             \ SPI1 reset
-$00004000 constant RCC_APBRSTR2_USART1RST                           \ USART1 reset
-$00008000 constant RCC_APBRSTR2_TIM14RST                            \ TIM14 timer reset
-$00010000 constant RCC_APBRSTR2_TIM15RST                            \ TIM15 timer reset
-$00020000 constant RCC_APBRSTR2_TIM16RST                            \ TIM16 timer reset
-$00040000 constant RCC_APBRSTR2_TIM17RST                            \ TIM17 timer reset
-$00100000 constant RCC_APBRSTR2_ADCRST                              \ ADC reset
-
-
-\
-\ @brief GPIO clock enable register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_IOPENR_GPIOAEN                               \ I/O port A clock enable during Sleep mode
-$00000002 constant RCC_IOPENR_GPIOBEN                               \ I/O port B clock enable during Sleep mode
-$00000004 constant RCC_IOPENR_GPIOCEN                               \ I/O port C clock enable during Sleep mode
-$00000008 constant RCC_IOPENR_GPIODEN                               \ I/O port D clock enable during Sleep mode
-$00000010 constant RCC_IOPENR_GPIOEEN                               \ I/O port E clock enable during Sleep mode
-$00000020 constant RCC_IOPENR_GPIOFEN                               \ I/O port F clock enable during Sleep mode
-
-
-\
-\ @brief AHB peripheral clock enable register
-\ Address offset: 0x38
-\ Reset value: 0x00000100
-\
-
-$00000001 constant RCC_AHBENR_DMA1EN                                \ DMA1 clock enable
-$00000002 constant RCC_AHBENR_DMA2EN                                \ DMA2 clock enable
-$00000100 constant RCC_AHBENR_FLASHEN                               \ Flash memory interface clock enable
-$00001000 constant RCC_AHBENR_CRCEN                                 \ CRC clock enable
-
-
-\
-\ @brief APB peripheral clock enable register 1
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_APBENR1_TIM2EN                               \ TIM2 timer clock enable
-$00000002 constant RCC_APBENR1_TIM3EN                               \ TIM3 timer clock enable
-$00000004 constant RCC_APBENR1_TIM4EN                               \ TIM4 timer clock enable
-$00000010 constant RCC_APBENR1_TIM6EN                               \ TIM6 timer clock enable
-$00000020 constant RCC_APBENR1_TIM7EN                               \ TIM7 timer clock enable
-$00000080 constant RCC_APBENR1_LPUART2EN                            \ LPUART2 clock enable
-$00000100 constant RCC_APBENR1_USART5EN                             \ USART5EN
-$00000200 constant RCC_APBENR1_USART6EN                             \ USART6EN
-$00000400 constant RCC_APBENR1_RTCAPBEN                             \ RTC APB clock enable
-$00000800 constant RCC_APBENR1_WWDGEN                               \ WWDG clock enable
-$00001000 constant RCC_APBENR1_FDCANEN                              \ USBEN
-$00002000 constant RCC_APBENR1_USBEN                                \ USBEN
-$00004000 constant RCC_APBENR1_SPI2EN                               \ SPI2 clock enable
-$00008000 constant RCC_APBENR1_SPI3EN                               \ SPI3 clock enable
-$00010000 constant RCC_APBENR1_CRSEN                                \ CRSEN
-$00020000 constant RCC_APBENR1_USART2EN                             \ USART2 clock enable
-$00040000 constant RCC_APBENR1_USART3EN                             \ USART3 clock enable
-$00080000 constant RCC_APBENR1_USART4EN                             \ USART4 clock enable
-$00100000 constant RCC_APBENR1_LPUART1EN                            \ LPUART1 clock enable
-$00200000 constant RCC_APBENR1_I2C1EN                               \ I2C1 clock enable
-$00400000 constant RCC_APBENR1_I2C2EN                               \ I2C2 clock enable
-$00800000 constant RCC_APBENR1_I2C3EN                               \ I2C3 clock enable
-$01000000 constant RCC_APBENR1_CECEN                                \ HDMI CEC clock enable
-$02000000 constant RCC_APBENR1_UCPD1EN                              \ UCPD1 clock enable
-$04000000 constant RCC_APBENR1_UCPD2EN                              \ UCPD2 clock enable
-$08000000 constant RCC_APBENR1_DBGEN                                \ Debug support clock enable
-$10000000 constant RCC_APBENR1_PWREN                                \ Power interface clock enable
-$20000000 constant RCC_APBENR1_DAC1EN                               \ DAC1 interface clock enable
-$40000000 constant RCC_APBENR1_LPTIM2EN                             \ LPTIM2 clock enable
-$80000000 constant RCC_APBENR1_LPTIM1EN                             \ LPTIM1 clock enable
-
-
-\
-\ @brief APB peripheral clock enable register 2
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_APBENR2_SYSCFGEN                             \ SYSCFG, COMP and VREFBUF clock enable
-$00000800 constant RCC_APBENR2_TIM1EN                               \ TIM1 timer clock enable
-$00001000 constant RCC_APBENR2_SPI1EN                               \ SPI1 clock enable
-$00004000 constant RCC_APBENR2_USART1EN                             \ USART1 clock enable
-$00008000 constant RCC_APBENR2_TIM14EN                              \ TIM14 timer clock enable
-$00010000 constant RCC_APBENR2_TIM15EN                              \ TIM15 timer clock enable
-$00020000 constant RCC_APBENR2_TIM16EN                              \ TIM16 timer clock enable
-$00040000 constant RCC_APBENR2_TIM17EN                              \ TIM16 timer clock enable
-$00100000 constant RCC_APBENR2_ADCEN                                \ ADC clock enable
-
-
-\
-\ @brief GPIO in Sleep mode clock enable register
-\ Address offset: 0x44
-\ Reset value: 0x0000003F
-\
-
-$00000001 constant RCC_IOPSMENR_GPIOASMEN                           \ I/O port A clock enable during Sleep mode
-$00000002 constant RCC_IOPSMENR_GPIOBSMEN                           \ I/O port B clock enable during Sleep mode
-$00000004 constant RCC_IOPSMENR_GPIOCSMEN                           \ I/O port C clock enable during Sleep mode
-$00000008 constant RCC_IOPSMENR_GPIODSMEN                           \ I/O port D clock enable during Sleep mode
-$00000010 constant RCC_IOPSMENR_GPIOESMEN                           \ I/O port E clock enable during Sleep mode
-$00000020 constant RCC_IOPSMENR_GPIOFSMEN                           \ I/O port F clock enable during Sleep mode
-
-
-\
-\ @brief AHB peripheral clock enable in Sleep mode register
-\ Address offset: 0x48
-\ Reset value: 0x00051303
-\
-
-$00000001 constant RCC_AHBSMENR_DMA1SMEN                            \ DMA1 clock enable during Sleep mode
-$00000002 constant RCC_AHBSMENR_DMA2SMEN                            \ DMA2 clock enable during Sleep mode
-$00000100 constant RCC_AHBSMENR_FLASHSMEN                           \ Flash memory interface clock enable during Sleep mode
-$00000200 constant RCC_AHBSMENR_SRAMSMEN                            \ SRAM clock enable during Sleep mode
-$00001000 constant RCC_AHBSMENR_CRCSMEN                             \ CRC clock enable during Sleep mode
-
-
-\
-\ @brief APB peripheral clock enable in Sleep mode register 1
-\ Address offset: 0x4C
-\ Reset value: 0xFFFFFFB7
-\
-
-$00000001 constant RCC_APBSMENR1_TIM2SMEN                           \ TIM2 timer clock enable during Sleep mode
-$00000002 constant RCC_APBSMENR1_TIM3SMEN                           \ TIM3 timer clock enable during Sleep mode
-$00000004 constant RCC_APBSMENR1_TIM4SMEN                           \ TIM4 timer clock enable during Sleep mode
-$00000010 constant RCC_APBSMENR1_TIM6SMEN                           \ TIM6 timer clock enable during Sleep mode
-$00000020 constant RCC_APBSMENR1_TIM7SMEN                           \ TIM7 timer clock enable during Sleep mode
-$00000080 constant RCC_APBSMENR1_LPUART2SMEN                        \ LPUART2 clock enable
-$00000100 constant RCC_APBSMENR1_USART5SMEN                         \ USART5 clock enable
-$00000200 constant RCC_APBSMENR1_USART6SMEN                         \ USART6 clock enable
-$00000400 constant RCC_APBSMENR1_RTCAPBSMEN                         \ RTC APB clock enable during Sleep mode
-$00000800 constant RCC_APBSMENR1_WWDGSMEN                           \ WWDG clock enable during Sleep mode
-$00001000 constant RCC_APBSMENR1_FDCANSMEN                          \ FDCAN clock enable during Sleep mode
-$00002000 constant RCC_APBSMENR1_USBSMEN                            \ USB clock enable during Sleep mode
-$00004000 constant RCC_APBSMENR1_SPI2SMEN                           \ SPI2 clock enable during Sleep mode
-$00008000 constant RCC_APBSMENR1_SPI3SMEN                           \ SPI3 clock enable during Sleep mode
-$00010000 constant RCC_APBSMENR1_CRSSSMEN                           \ CRSS clock enable during Sleep mode
-$00020000 constant RCC_APBSMENR1_USART2SMEN                         \ USART2 clock enable during Sleep mode
-$00040000 constant RCC_APBSMENR1_USART3SMEN                         \ USART3 clock enable during Sleep mode
-$00080000 constant RCC_APBSMENR1_USART4SMEN                         \ USART4 clock enable during Sleep mode
-$00100000 constant RCC_APBSMENR1_LPUART1SMEN                        \ LPUART1 clock enable during Sleep mode
-$00200000 constant RCC_APBSMENR1_I2C1SMEN                           \ I2C1 clock enable during Sleep mode
-$00400000 constant RCC_APBSMENR1_I2C2SMEN                           \ I2C2 clock enable during Sleep mode
-$00800000 constant RCC_APBSMENR1_I2C3SMEN                           \ I2C3 clock enable during Sleep mode
-$01000000 constant RCC_APBSMENR1_CECSMEN                            \ HDMI CEC clock enable during Sleep mode
-$02000000 constant RCC_APBSMENR1_UCPD1SMEN                          \ UCPD1 clock enable during Sleep mode
-$04000000 constant RCC_APBSMENR1_UCPD2SMEN                          \ UCPD2 clock enable during Sleep mode
-$08000000 constant RCC_APBSMENR1_DBGSMEN                            \ Debug support clock enable during Sleep mode
-$10000000 constant RCC_APBSMENR1_PWRSMEN                            \ Power interface clock enable during Sleep mode
-$20000000 constant RCC_APBSMENR1_DAC1SMEN                           \ DAC1 interface clock enable during Sleep mode
-$40000000 constant RCC_APBSMENR1_LPTIM2SMEN                         \ Low Power Timer 2 clock enable during Sleep mode
-$80000000 constant RCC_APBSMENR1_LPTIM1SMEN                         \ Low Power Timer 1 clock enable during Sleep mode
-
-
-\
-\ @brief APB peripheral clock enable in Sleep mode register 2
-\ Address offset: 0x50
-\ Reset value: 0x0017D801
-\
-
-$00000001 constant RCC_APBSMENR2_SYSCFGSMEN                         \ SYSCFG, COMP and VREFBUF clock enable during Sleep mode
-$00000800 constant RCC_APBSMENR2_TIM1SMEN                           \ TIM1 timer clock enable during Sleep mode
-$00001000 constant RCC_APBSMENR2_SPI1SMEN                           \ SPI1 clock enable during Sleep mode
-$00004000 constant RCC_APBSMENR2_USART1SMEN                         \ USART1 clock enable during Sleep mode
-$00008000 constant RCC_APBSMENR2_TIM14SMEN                          \ TIM14 timer clock enable during Sleep mode
-$00010000 constant RCC_APBSMENR2_TIM15SMEN                          \ TIM15 timer clock enable during Sleep mode
-$00020000 constant RCC_APBSMENR2_TIM16SMEN                          \ TIM16 timer clock enable during Sleep mode
-$00040000 constant RCC_APBSMENR2_TIM17SMEN                          \ TIM16 timer clock enable during Sleep mode
-$00100000 constant RCC_APBSMENR2_ADCSMEN                            \ ADC clock enable during Sleep mode
-
-
-\
-\ @brief Peripherals independent clock configuration register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000003 constant RCC_CCIPR_USART1SEL                              \ USART1 clock source selection
-$0000000c constant RCC_CCIPR_USART2SEL                              \ USART2 clock source selection
-$00000030 constant RCC_CCIPR_USART3SEL                              \ USART3 clock source selection
-$00000040 constant RCC_CCIPR_CECSEL                                 \ HDMI CEC clock source selection
-$00000300 constant RCC_CCIPR_LPUART2SEL                             \ LPUART2 clock source selection
-$00000c00 constant RCC_CCIPR_LPUART1SEL                             \ LPUART1 clock source selection
-$00003000 constant RCC_CCIPR_I2C1SEL                                \ I2C1 clock source selection
-$0000c000 constant RCC_CCIPR_I2S2SEL                                \ I2S1 clock source selection
-$000c0000 constant RCC_CCIPR_LPTIM1SEL                              \ LPTIM1 clock source selection
-$00300000 constant RCC_CCIPR_LPTIM2SEL                              \ LPTIM2 clock source selection
-$00400000 constant RCC_CCIPR_TIM1SEL                                \ TIM1 clock source selection
-$01000000 constant RCC_CCIPR_TIM15SEL                               \ TIM15 clock source selection
-$c0000000 constant RCC_CCIPR_ADCSEL                                 \ ADCs clock source selection
-
-
-\
-\ @brief Peripherals independent clock configuration register 2
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000003 constant RCC_CCIPR2_I2S1SEL                               \ 2S1SEL
-$0000000c constant RCC_CCIPR2_I2S2SEL                               \ I2S2SEL
-$00000300 constant RCC_CCIPR2_FDCANSEL                              \ FDCANSEL
-$00003000 constant RCC_CCIPR2_USBSEL                                \ USBSEL
-
-
-\
-\ @brief RTC domain control register
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_BDCR_LSEON                                   \ LSE oscillator enable
-$00000002 constant RCC_BDCR_LSERDY                                  \ LSE oscillator ready
-$00000004 constant RCC_BDCR_LSEBYP                                  \ LSE oscillator bypass
-$00000018 constant RCC_BDCR_LSEDRV                                  \ LSE oscillator drive capability
-$00000020 constant RCC_BDCR_LSECSSON                                \ CSS on LSE enable
-$00000040 constant RCC_BDCR_LSECSSD                                 \ CSS on LSE failure Detection
-$00000300 constant RCC_BDCR_RTCSEL                                  \ RTC clock source selection
-$00008000 constant RCC_BDCR_RTCEN                                   \ RTC clock enable
-$00010000 constant RCC_BDCR_BDRST                                   \ RTC domain software reset
-$01000000 constant RCC_BDCR_LSCOEN                                  \ Low-speed clock output (LSCO) enable
-$02000000 constant RCC_BDCR_LSCOSEL                                 \ Low-speed clock output selection
-
-
-\
-\ @brief Control/status register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_CSR_LSION                                    \ LSI oscillator enable
-$00000002 constant RCC_CSR_LSIRDY                                   \ LSI oscillator ready
-$00800000 constant RCC_CSR_RMVF                                     \ Remove reset flags
-$02000000 constant RCC_CSR_OBLRSTF                                  \ Option byte loader reset flag
-$04000000 constant RCC_CSR_PINRSTF                                  \ Pin reset flag
-$08000000 constant RCC_CSR_PWRRSTF                                  \ BOR or POR/PDR flag
-$10000000 constant RCC_CSR_SFTRSTF                                  \ Software reset flag
-$20000000 constant RCC_CSR_IWDGRSTF                                 \ Independent window watchdog reset flag
-$40000000 constant RCC_CSR_WWDGRSTF                                 \ Window watchdog reset flag
-$80000000 constant RCC_CSR_LPWRRSTF                                 \ Low-power reset flag
-
-
-\
-\ @brief Reset and clock control
-\
-$40021000 constant RCC_CR         \ offset: 0x00 : Clock control register
-$40021004 constant RCC_ICSCR      \ offset: 0x04 : Internal clock sources calibration register
-$40021008 constant RCC_CFGR       \ offset: 0x08 : Clock configuration register
-$4002100c constant RCC_PLLCFGR    \ offset: 0x0C : PLL configuration register
-$40021014 constant RCC_CRRCR      \ offset: 0x14 : RCC clock recovery RC register
-$40021018 constant RCC_CIER       \ offset: 0x18 : Clock interrupt enable register
-$4002101c constant RCC_CIFR       \ offset: 0x1C : Clock interrupt flag register
-$40021020 constant RCC_CICR       \ offset: 0x20 : Clock interrupt clear register
-$40021024 constant RCC_IOPRSTR    \ offset: 0x24 : I/O port reset register
-$40021028 constant RCC_AHBRSTR    \ offset: 0x28 : AHB peripheral reset register
-$4002102c constant RCC_APBRSTR1   \ offset: 0x2C : APB peripheral reset register 1
-$40021030 constant RCC_APBRSTR2   \ offset: 0x30 : APB peripheral reset register 2
-$40021034 constant RCC_IOPENR     \ offset: 0x34 : GPIO clock enable register
-$40021038 constant RCC_AHBENR     \ offset: 0x38 : AHB peripheral clock enable register
-$4002103c constant RCC_APBENR1    \ offset: 0x3C : APB peripheral clock enable register 1
-$40021040 constant RCC_APBENR2    \ offset: 0x40 : APB peripheral clock enable register 2
-$40021044 constant RCC_IOPSMENR   \ offset: 0x44 : GPIO in Sleep mode clock enable register
-$40021048 constant RCC_AHBSMENR   \ offset: 0x48 : AHB peripheral clock enable in Sleep mode register
-$4002104c constant RCC_APBSMENR1  \ offset: 0x4C : APB peripheral clock enable in Sleep mode register 1
-$40021050 constant RCC_APBSMENR2  \ offset: 0x50 : APB peripheral clock enable in Sleep mode register 2
-$40021054 constant RCC_CCIPR      \ offset: 0x54 : Peripherals independent clock configuration register
-$40021058 constant RCC_CCIPR2     \ offset: 0x58 : Peripherals independent clock configuration register 2
-$4002105c constant RCC_BDCR       \ offset: 0x5C : RTC domain control register
-$40021060 constant RCC_CSR        \ offset: 0x60 : Control/status register
-
+[ifndef] RCC_DEF
+
+  [ifdef] RCC_CR_DEF
+    \
+    \ @brief Clock control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000500
+    \
+    $08 constant RCC_HSION                      \ [0x08] HSI16 clock enable
+    $09 constant RCC_HSIKERON                   \ [0x09] HSI16 always enable for peripheral kernels
+    $0a constant RCC_HSIRDY                     \ [0x0a] HSI16 clock ready flag
+    $0b constant RCC_HSIDIV                     \ [0x0b : 3] HSI16 clock division factor
+    $10 constant RCC_HSEON                      \ [0x10] HSE clock enable
+    $11 constant RCC_HSERDY                     \ [0x11] HSE clock ready flag
+    $12 constant RCC_HSEBYP                     \ [0x12] HSE crystal oscillator bypass
+    $13 constant RCC_CSSON                      \ [0x13] Clock security system enable
+    $16 constant RCC_HSI48ON                    \ [0x16] HSI48ON
+    $17 constant RCC_HSI48RDY                   \ [0x17] HSI48RDY
+    $18 constant RCC_PLLON                      \ [0x18] PLL enable
+    $19 constant RCC_PLLRDY                     \ [0x19] PLL clock ready flag
+  [then]
+
+
+  [ifdef] RCC_ICSCR_DEF
+    \
+    \ @brief Internal clock sources calibration register
+    \ Address offset: 0x04
+    \ Reset value: 0x00004000
+    \
+    $00 constant RCC_HSICAL                     \ [0x00 : 8] HSI16 clock calibration
+    $08 constant RCC_HSITRIM                    \ [0x08 : 7] HSI16 clock trimming
+  [then]
+
+
+  [ifdef] RCC_CFGR_DEF
+    \
+    \ @brief Clock configuration register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SW                         \ [0x00 : 3] System clock switch
+    $03 constant RCC_SWS                        \ [0x03 : 3] System clock switch status
+    $08 constant RCC_HPRE                       \ [0x08 : 4] AHB prescaler
+    $0c constant RCC_PPRE                       \ [0x0c : 3] APB prescaler
+    $10 constant RCC_MCO2SEL                    \ [0x10 : 4] MCO2SEL
+    $14 constant RCC_MCO2PRE                    \ [0x14 : 4] MCO2PRE
+    $18 constant RCC_MCOSEL                     \ [0x18 : 4] Microcontroller clock output
+    $1c constant RCC_MCOPRE                     \ [0x1c : 4] Microcontroller clock output prescaler
+  [then]
+
+
+  [ifdef] RCC_PLLCFGR_DEF
+    \
+    \ @brief PLL configuration register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00001000
+    \
+    $00 constant RCC_PLLSRC                     \ [0x00 : 2] PLL input clock source
+    $04 constant RCC_PLLM                       \ [0x04 : 3] Division factor M of the PLL input clock divider
+    $08 constant RCC_PLLN                       \ [0x08 : 8] PLL frequency multiplication factor N
+    $10 constant RCC_PLLPEN                     \ [0x10] PLLPCLK clock output enable
+    $11 constant RCC_PLLP                       \ [0x11 : 5] PLL VCO division factor P for PLLPCLK clock output
+    $18 constant RCC_PLLQEN                     \ [0x18] PLLQCLK clock output enable
+    $19 constant RCC_PLLQ                       \ [0x19 : 3] PLL VCO division factor Q for PLLQCLK clock output
+    $1c constant RCC_PLLREN                     \ [0x1c] PLLRCLK clock output enable
+    $1d constant RCC_PLLR                       \ [0x1d : 3] PLL VCO division factor R for PLLRCLK clock output
+  [then]
+
+
+  [ifdef] RCC_CRRCR_DEF
+    \
+    \ @brief RCC clock recovery RC register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HSI48CAL                   \ [0x00 : 9] HSI48 clock calibration
+  [then]
+
+
+  [ifdef] RCC_CIER_DEF
+    \
+    \ @brief Clock interrupt enable register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIRDYIE                   \ [0x00] LSI ready interrupt enable
+    $01 constant RCC_LSERDYIE                   \ [0x01] LSE ready interrupt enable
+    $03 constant RCC_HSIRDYIE                   \ [0x03] HSI ready interrupt enable
+    $04 constant RCC_HSERDYIE                   \ [0x04] HSE ready interrupt enable
+    $05 constant RCC_PLLSYSRDYIE                \ [0x05] PLL ready interrupt enable
+  [then]
+
+
+  [ifdef] RCC_CIFR_DEF
+    \
+    \ @brief Clock interrupt flag register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIRDYF                    \ [0x00] LSI ready interrupt flag
+    $01 constant RCC_LSERDYF                    \ [0x01] LSE ready interrupt flag
+    $02 constant RCC_HSI48RDYF                  \ [0x02] HSI48RDYF
+    $03 constant RCC_HSIRDYF                    \ [0x03] HSI ready interrupt flag
+    $04 constant RCC_HSERDYF                    \ [0x04] HSE ready interrupt flag
+    $05 constant RCC_PLLSYSRDYF                 \ [0x05] PLL ready interrupt flag
+    $08 constant RCC_CSSF                       \ [0x08] Clock security system interrupt flag
+    $09 constant RCC_LSECSSF                    \ [0x09] LSE Clock security system interrupt flag
+  [then]
+
+
+  [ifdef] RCC_CICR_DEF
+    \
+    \ @brief Clock interrupt clear register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIRDYC                    \ [0x00] LSI ready interrupt clear
+    $01 constant RCC_LSERDYC                    \ [0x01] LSE ready interrupt clear
+    $02 constant RCC_HSI48RDYC                  \ [0x02] HSI48RDYC
+    $03 constant RCC_HSIRDYC                    \ [0x03] HSI ready interrupt clear
+    $04 constant RCC_HSERDYC                    \ [0x04] HSE ready interrupt clear
+    $05 constant RCC_PLLSYSRDYC                 \ [0x05] PLL ready interrupt clear
+    $08 constant RCC_CSSC                       \ [0x08] Clock security system interrupt clear
+    $09 constant RCC_LSECSSC                    \ [0x09] LSE Clock security system interrupt clear
+  [then]
+
+
+  [ifdef] RCC_IOPRSTR_DEF
+    \
+    \ @brief I/O port reset register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOARST                   \ [0x00] GPIOARST
+    $01 constant RCC_GPIOBRST                   \ [0x01] GPIOBRST
+    $02 constant RCC_GPIOCRST                   \ [0x02] GPIOCRST
+    $03 constant RCC_GPIODRST                   \ [0x03] GPIODRST
+    $04 constant RCC_GPIOERST                   \ [0x04] GPIOERST
+    $05 constant RCC_GPIOFRST                   \ [0x05] GPIOFRST
+  [then]
+
+
+  [ifdef] RCC_AHBRSTR_DEF
+    \
+    \ @brief AHB peripheral reset register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DMA1RST                    \ [0x00] DMA1 reset
+    $01 constant RCC_DMA2RST                    \ [0x01] DMA1 reset
+    $08 constant RCC_FLASHRST                   \ [0x08] FLITF reset
+    $0c constant RCC_CRCRST                     \ [0x0c] CRC reset
+  [then]
+
+
+  [ifdef] RCC_APBRSTR1_DEF
+    \
+    \ @brief APB peripheral reset register 1
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2RST                    \ [0x00] TIM2 timer reset
+    $01 constant RCC_TIM3RST                    \ [0x01] TIM3 timer reset
+    $02 constant RCC_TIM4RST                    \ [0x02] TIM4 timer reset
+    $04 constant RCC_TIM6RST                    \ [0x04] TIM6 timer reset
+    $05 constant RCC_TIM7RST                    \ [0x05] TIM7 timer reset
+    $07 constant RCC_LPUART2RST                 \ [0x07] LPUART2RST
+    $08 constant RCC_USART5RST                  \ [0x08] USART5RST
+    $09 constant RCC_USART6RST                  \ [0x09] USART6RST
+    $0c constant RCC_FDCANRST                   \ [0x0c] FDCANRST
+    $0d constant RCC_USBRST                     \ [0x0d] USBRST
+    $0e constant RCC_SPI2RST                    \ [0x0e] SPI2 reset
+    $0f constant RCC_SPI3RST                    \ [0x0f] SPI3 reset
+    $10 constant RCC_CRSRST                     \ [0x10] CRSRST
+    $11 constant RCC_USART2RST                  \ [0x11] USART2 reset
+    $12 constant RCC_USART3RST                  \ [0x12] USART3 reset
+    $13 constant RCC_USART4RST                  \ [0x13] USART4 reset
+    $14 constant RCC_LPUART1RST                 \ [0x14] LPUART1 reset
+    $15 constant RCC_I2C1RST                    \ [0x15] I2C1 reset
+    $16 constant RCC_I2C2RST                    \ [0x16] I2C2 reset
+    $17 constant RCC_I2C3RST                    \ [0x17] I2C3RST reset
+    $18 constant RCC_CECRST                     \ [0x18] HDMI CEC reset
+    $19 constant RCC_UCPD1RST                   \ [0x19] UCPD1 reset
+    $1a constant RCC_UCPD2RST                   \ [0x1a] UCPD2 reset
+    $1b constant RCC_DBGRST                     \ [0x1b] Debug support reset
+    $1c constant RCC_PWRRST                     \ [0x1c] Power interface reset
+    $1d constant RCC_DAC1RST                    \ [0x1d] DAC1 interface reset
+    $1e constant RCC_LPTIM2RST                  \ [0x1e] Low Power Timer 2 reset
+    $1f constant RCC_LPTIM1RST                  \ [0x1f] Low Power Timer 1 reset
+  [then]
+
+
+  [ifdef] RCC_APBRSTR2_DEF
+    \
+    \ @brief APB peripheral reset register 2
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGRST                  \ [0x00] SYSCFG, COMP and VREFBUF reset
+    $0b constant RCC_TIM1RST                    \ [0x0b] TIM1 timer reset
+    $0c constant RCC_SPI1RST                    \ [0x0c] SPI1 reset
+    $0e constant RCC_USART1RST                  \ [0x0e] USART1 reset
+    $0f constant RCC_TIM14RST                   \ [0x0f] TIM14 timer reset
+    $10 constant RCC_TIM15RST                   \ [0x10] TIM15 timer reset
+    $11 constant RCC_TIM16RST                   \ [0x11] TIM16 timer reset
+    $12 constant RCC_TIM17RST                   \ [0x12] TIM17 timer reset
+    $14 constant RCC_ADCRST                     \ [0x14] ADC reset
+  [then]
+
+
+  [ifdef] RCC_IOPENR_DEF
+    \
+    \ @brief GPIO clock enable register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOAEN                    \ [0x00] I/O port A clock enable during Sleep mode
+    $01 constant RCC_GPIOBEN                    \ [0x01] I/O port B clock enable during Sleep mode
+    $02 constant RCC_GPIOCEN                    \ [0x02] I/O port C clock enable during Sleep mode
+    $03 constant RCC_GPIODEN                    \ [0x03] I/O port D clock enable during Sleep mode
+    $04 constant RCC_GPIOEEN                    \ [0x04] I/O port E clock enable during Sleep mode
+    $05 constant RCC_GPIOFEN                    \ [0x05] I/O port F clock enable during Sleep mode
+  [then]
+
+
+  [ifdef] RCC_AHBENR_DEF
+    \
+    \ @brief AHB peripheral clock enable register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000100
+    \
+    $00 constant RCC_DMA1EN                     \ [0x00] DMA1 clock enable
+    $01 constant RCC_DMA2EN                     \ [0x01] DMA2 clock enable
+    $08 constant RCC_FLASHEN                    \ [0x08] Flash memory interface clock enable
+    $0c constant RCC_CRCEN                      \ [0x0c] CRC clock enable
+  [then]
+
+
+  [ifdef] RCC_APBENR1_DEF
+    \
+    \ @brief APB peripheral clock enable register 1
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2EN                     \ [0x00] TIM2 timer clock enable
+    $01 constant RCC_TIM3EN                     \ [0x01] TIM3 timer clock enable
+    $02 constant RCC_TIM4EN                     \ [0x02] TIM4 timer clock enable
+    $04 constant RCC_TIM6EN                     \ [0x04] TIM6 timer clock enable
+    $05 constant RCC_TIM7EN                     \ [0x05] TIM7 timer clock enable
+    $07 constant RCC_LPUART2EN                  \ [0x07] LPUART2 clock enable
+    $08 constant RCC_USART5EN                   \ [0x08] USART5EN
+    $09 constant RCC_USART6EN                   \ [0x09] USART6EN
+    $0a constant RCC_RTCAPBEN                   \ [0x0a] RTC APB clock enable
+    $0b constant RCC_WWDGEN                     \ [0x0b] WWDG clock enable
+    $0c constant RCC_FDCANEN                    \ [0x0c] USBEN
+    $0d constant RCC_USBEN                      \ [0x0d] USBEN
+    $0e constant RCC_SPI2EN                     \ [0x0e] SPI2 clock enable
+    $0f constant RCC_SPI3EN                     \ [0x0f] SPI3 clock enable
+    $10 constant RCC_CRSEN                      \ [0x10] CRSEN
+    $11 constant RCC_USART2EN                   \ [0x11] USART2 clock enable
+    $12 constant RCC_USART3EN                   \ [0x12] USART3 clock enable
+    $13 constant RCC_USART4EN                   \ [0x13] USART4 clock enable
+    $14 constant RCC_LPUART1EN                  \ [0x14] LPUART1 clock enable
+    $15 constant RCC_I2C1EN                     \ [0x15] I2C1 clock enable
+    $16 constant RCC_I2C2EN                     \ [0x16] I2C2 clock enable
+    $17 constant RCC_I2C3EN                     \ [0x17] I2C3 clock enable
+    $18 constant RCC_CECEN                      \ [0x18] HDMI CEC clock enable
+    $19 constant RCC_UCPD1EN                    \ [0x19] UCPD1 clock enable
+    $1a constant RCC_UCPD2EN                    \ [0x1a] UCPD2 clock enable
+    $1b constant RCC_DBGEN                      \ [0x1b] Debug support clock enable
+    $1c constant RCC_PWREN                      \ [0x1c] Power interface clock enable
+    $1d constant RCC_DAC1EN                     \ [0x1d] DAC1 interface clock enable
+    $1e constant RCC_LPTIM2EN                   \ [0x1e] LPTIM2 clock enable
+    $1f constant RCC_LPTIM1EN                   \ [0x1f] LPTIM1 clock enable
+  [then]
+
+
+  [ifdef] RCC_APBENR2_DEF
+    \
+    \ @brief APB peripheral clock enable register 2
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGEN                   \ [0x00] SYSCFG, COMP and VREFBUF clock enable
+    $0b constant RCC_TIM1EN                     \ [0x0b] TIM1 timer clock enable
+    $0c constant RCC_SPI1EN                     \ [0x0c] SPI1 clock enable
+    $0e constant RCC_USART1EN                   \ [0x0e] USART1 clock enable
+    $0f constant RCC_TIM14EN                    \ [0x0f] TIM14 timer clock enable
+    $10 constant RCC_TIM15EN                    \ [0x10] TIM15 timer clock enable
+    $11 constant RCC_TIM16EN                    \ [0x11] TIM16 timer clock enable
+    $12 constant RCC_TIM17EN                    \ [0x12] TIM16 timer clock enable
+    $14 constant RCC_ADCEN                      \ [0x14] ADC clock enable
+  [then]
+
+
+  [ifdef] RCC_IOPSMENR_DEF
+    \
+    \ @brief GPIO in Sleep mode clock enable register
+    \ Address offset: 0x44
+    \ Reset value: 0x0000003F
+    \
+    $00 constant RCC_GPIOASMEN                  \ [0x00] I/O port A clock enable during Sleep mode
+    $01 constant RCC_GPIOBSMEN                  \ [0x01] I/O port B clock enable during Sleep mode
+    $02 constant RCC_GPIOCSMEN                  \ [0x02] I/O port C clock enable during Sleep mode
+    $03 constant RCC_GPIODSMEN                  \ [0x03] I/O port D clock enable during Sleep mode
+    $04 constant RCC_GPIOESMEN                  \ [0x04] I/O port E clock enable during Sleep mode
+    $05 constant RCC_GPIOFSMEN                  \ [0x05] I/O port F clock enable during Sleep mode
+  [then]
+
+
+  [ifdef] RCC_AHBSMENR_DEF
+    \
+    \ @brief AHB peripheral clock enable in Sleep mode register
+    \ Address offset: 0x48
+    \ Reset value: 0x00051303
+    \
+    $00 constant RCC_DMA1SMEN                   \ [0x00] DMA1 clock enable during Sleep mode
+    $01 constant RCC_DMA2SMEN                   \ [0x01] DMA2 clock enable during Sleep mode
+    $08 constant RCC_FLASHSMEN                  \ [0x08] Flash memory interface clock enable during Sleep mode
+    $09 constant RCC_SRAMSMEN                   \ [0x09] SRAM clock enable during Sleep mode
+    $0c constant RCC_CRCSMEN                    \ [0x0c] CRC clock enable during Sleep mode
+  [then]
+
+
+  [ifdef] RCC_APBSMENR1_DEF
+    \
+    \ @brief APB peripheral clock enable in Sleep mode register 1
+    \ Address offset: 0x4C
+    \ Reset value: 0xFFFFFFB7
+    \
+    $00 constant RCC_TIM2SMEN                   \ [0x00] TIM2 timer clock enable during Sleep mode
+    $01 constant RCC_TIM3SMEN                   \ [0x01] TIM3 timer clock enable during Sleep mode
+    $02 constant RCC_TIM4SMEN                   \ [0x02] TIM4 timer clock enable during Sleep mode
+    $04 constant RCC_TIM6SMEN                   \ [0x04] TIM6 timer clock enable during Sleep mode
+    $05 constant RCC_TIM7SMEN                   \ [0x05] TIM7 timer clock enable during Sleep mode
+    $07 constant RCC_LPUART2SMEN                \ [0x07] LPUART2 clock enable
+    $08 constant RCC_USART5SMEN                 \ [0x08] USART5 clock enable
+    $09 constant RCC_USART6SMEN                 \ [0x09] USART6 clock enable
+    $0a constant RCC_RTCAPBSMEN                 \ [0x0a] RTC APB clock enable during Sleep mode
+    $0b constant RCC_WWDGSMEN                   \ [0x0b] WWDG clock enable during Sleep mode
+    $0c constant RCC_FDCANSMEN                  \ [0x0c] FDCAN clock enable during Sleep mode
+    $0d constant RCC_USBSMEN                    \ [0x0d] USB clock enable during Sleep mode
+    $0e constant RCC_SPI2SMEN                   \ [0x0e] SPI2 clock enable during Sleep mode
+    $0f constant RCC_SPI3SMEN                   \ [0x0f] SPI3 clock enable during Sleep mode
+    $10 constant RCC_CRSSSMEN                   \ [0x10] CRSS clock enable during Sleep mode
+    $11 constant RCC_USART2SMEN                 \ [0x11] USART2 clock enable during Sleep mode
+    $12 constant RCC_USART3SMEN                 \ [0x12] USART3 clock enable during Sleep mode
+    $13 constant RCC_USART4SMEN                 \ [0x13] USART4 clock enable during Sleep mode
+    $14 constant RCC_LPUART1SMEN                \ [0x14] LPUART1 clock enable during Sleep mode
+    $15 constant RCC_I2C1SMEN                   \ [0x15] I2C1 clock enable during Sleep mode
+    $16 constant RCC_I2C2SMEN                   \ [0x16] I2C2 clock enable during Sleep mode
+    $17 constant RCC_I2C3SMEN                   \ [0x17] I2C3 clock enable during Sleep mode
+    $18 constant RCC_CECSMEN                    \ [0x18] HDMI CEC clock enable during Sleep mode
+    $19 constant RCC_UCPD1SMEN                  \ [0x19] UCPD1 clock enable during Sleep mode
+    $1a constant RCC_UCPD2SMEN                  \ [0x1a] UCPD2 clock enable during Sleep mode
+    $1b constant RCC_DBGSMEN                    \ [0x1b] Debug support clock enable during Sleep mode
+    $1c constant RCC_PWRSMEN                    \ [0x1c] Power interface clock enable during Sleep mode
+    $1d constant RCC_DAC1SMEN                   \ [0x1d] DAC1 interface clock enable during Sleep mode
+    $1e constant RCC_LPTIM2SMEN                 \ [0x1e] Low Power Timer 2 clock enable during Sleep mode
+    $1f constant RCC_LPTIM1SMEN                 \ [0x1f] Low Power Timer 1 clock enable during Sleep mode
+  [then]
+
+
+  [ifdef] RCC_APBSMENR2_DEF
+    \
+    \ @brief APB peripheral clock enable in Sleep mode register 2
+    \ Address offset: 0x50
+    \ Reset value: 0x0017D801
+    \
+    $00 constant RCC_SYSCFGSMEN                 \ [0x00] SYSCFG, COMP and VREFBUF clock enable during Sleep mode
+    $0b constant RCC_TIM1SMEN                   \ [0x0b] TIM1 timer clock enable during Sleep mode
+    $0c constant RCC_SPI1SMEN                   \ [0x0c] SPI1 clock enable during Sleep mode
+    $0e constant RCC_USART1SMEN                 \ [0x0e] USART1 clock enable during Sleep mode
+    $0f constant RCC_TIM14SMEN                  \ [0x0f] TIM14 timer clock enable during Sleep mode
+    $10 constant RCC_TIM15SMEN                  \ [0x10] TIM15 timer clock enable during Sleep mode
+    $11 constant RCC_TIM16SMEN                  \ [0x11] TIM16 timer clock enable during Sleep mode
+    $12 constant RCC_TIM17SMEN                  \ [0x12] TIM16 timer clock enable during Sleep mode
+    $14 constant RCC_ADCSMEN                    \ [0x14] ADC clock enable during Sleep mode
+  [then]
+
+
+  [ifdef] RCC_CCIPR_DEF
+    \
+    \ @brief Peripherals independent clock configuration register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_USART1SEL                  \ [0x00 : 2] USART1 clock source selection
+    $02 constant RCC_USART2SEL                  \ [0x02 : 2] USART2 clock source selection
+    $04 constant RCC_USART3SEL                  \ [0x04 : 2] USART3 clock source selection
+    $06 constant RCC_CECSEL                     \ [0x06] HDMI CEC clock source selection
+    $08 constant RCC_LPUART2SEL                 \ [0x08 : 2] LPUART2 clock source selection
+    $0a constant RCC_LPUART1SEL                 \ [0x0a : 2] LPUART1 clock source selection
+    $0c constant RCC_I2C1SEL                    \ [0x0c : 2] I2C1 clock source selection
+    $0e constant RCC_I2S2SEL                    \ [0x0e : 2] I2S1 clock source selection
+    $12 constant RCC_LPTIM1SEL                  \ [0x12 : 2] LPTIM1 clock source selection
+    $14 constant RCC_LPTIM2SEL                  \ [0x14 : 2] LPTIM2 clock source selection
+    $16 constant RCC_TIM1SEL                    \ [0x16] TIM1 clock source selection
+    $18 constant RCC_TIM15SEL                   \ [0x18] TIM15 clock source selection
+    $1e constant RCC_ADCSEL                     \ [0x1e : 2] ADCs clock source selection
+  [then]
+
+
+  [ifdef] RCC_CCIPR2_DEF
+    \
+    \ @brief Peripherals independent clock configuration register 2
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_I2S1SEL                    \ [0x00 : 2] 2S1SEL
+    $02 constant RCC_I2S2SEL                    \ [0x02 : 2] I2S2SEL
+    $08 constant RCC_FDCANSEL                   \ [0x08 : 2] FDCANSEL
+    $0c constant RCC_USBSEL                     \ [0x0c : 2] USBSEL
+  [then]
+
+
+  [ifdef] RCC_BDCR_DEF
+    \
+    \ @brief RTC domain control register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSEON                      \ [0x00] LSE oscillator enable
+    $01 constant RCC_LSERDY                     \ [0x01] LSE oscillator ready
+    $02 constant RCC_LSEBYP                     \ [0x02] LSE oscillator bypass
+    $03 constant RCC_LSEDRV                     \ [0x03 : 2] LSE oscillator drive capability
+    $05 constant RCC_LSECSSON                   \ [0x05] CSS on LSE enable
+    $06 constant RCC_LSECSSD                    \ [0x06] CSS on LSE failure Detection
+    $08 constant RCC_RTCSEL                     \ [0x08 : 2] RTC clock source selection
+    $0f constant RCC_RTCEN                      \ [0x0f] RTC clock enable
+    $10 constant RCC_BDRST                      \ [0x10] RTC domain software reset
+    $18 constant RCC_LSCOEN                     \ [0x18] Low-speed clock output (LSCO) enable
+    $19 constant RCC_LSCOSEL                    \ [0x19] Low-speed clock output selection
+  [then]
+
+
+  [ifdef] RCC_CSR_DEF
+    \
+    \ @brief Control/status register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSION                      \ [0x00] LSI oscillator enable
+    $01 constant RCC_LSIRDY                     \ [0x01] LSI oscillator ready
+    $17 constant RCC_RMVF                       \ [0x17] Remove reset flags
+    $19 constant RCC_OBLRSTF                    \ [0x19] Option byte loader reset flag
+    $1a constant RCC_PINRSTF                    \ [0x1a] Pin reset flag
+    $1b constant RCC_PWRRSTF                    \ [0x1b] BOR or POR/PDR flag
+    $1c constant RCC_SFTRSTF                    \ [0x1c] Software reset flag
+    $1d constant RCC_IWDGRSTF                   \ [0x1d] Independent window watchdog reset flag
+    $1e constant RCC_WWDGRSTF                   \ [0x1e] Window watchdog reset flag
+    $1f constant RCC_LPWRRSTF                   \ [0x1f] Low-power reset flag
+  [then]
+
+  \
+  \ @brief Reset and clock control
+  \
+  $00 constant RCC_CR                   \ Clock control register
+  $04 constant RCC_ICSCR                \ Internal clock sources calibration register
+  $08 constant RCC_CFGR                 \ Clock configuration register
+  $0C constant RCC_PLLCFGR              \ PLL configuration register
+  $14 constant RCC_CRRCR                \ RCC clock recovery RC register
+  $18 constant RCC_CIER                 \ Clock interrupt enable register
+  $1C constant RCC_CIFR                 \ Clock interrupt flag register
+  $20 constant RCC_CICR                 \ Clock interrupt clear register
+  $24 constant RCC_IOPRSTR              \ I/O port reset register
+  $28 constant RCC_AHBRSTR              \ AHB peripheral reset register
+  $2C constant RCC_APBRSTR1             \ APB peripheral reset register 1
+  $30 constant RCC_APBRSTR2             \ APB peripheral reset register 2
+  $34 constant RCC_IOPENR               \ GPIO clock enable register
+  $38 constant RCC_AHBENR               \ AHB peripheral clock enable register
+  $3C constant RCC_APBENR1              \ APB peripheral clock enable register 1
+  $40 constant RCC_APBENR2              \ APB peripheral clock enable register 2
+  $44 constant RCC_IOPSMENR             \ GPIO in Sleep mode clock enable register
+  $48 constant RCC_AHBSMENR             \ AHB peripheral clock enable in Sleep mode register
+  $4C constant RCC_APBSMENR1            \ APB peripheral clock enable in Sleep mode register 1
+  $50 constant RCC_APBSMENR2            \ APB peripheral clock enable in Sleep mode register 2
+  $54 constant RCC_CCIPR                \ Peripherals independent clock configuration register
+  $58 constant RCC_CCIPR2               \ Peripherals independent clock configuration register 2
+  $5C constant RCC_BDCR                 \ RTC domain control register
+  $60 constant RCC_CSR                  \ Control/status register
+
+: RCC_DEF ; [then]

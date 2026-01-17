@@ -1,120 +1,96 @@
 \
-\ @file stm32f373.h
-\ @brief Loader for all peripherals in a STM32F373
+\ @file stm32f373.fload
+\ @brief Device header for STM32F373
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include gpioa.fs
-.include gpiob.fs
-.include gpiod.fs
-.include gpioc.fs
-.include gpioe.fs
-.include gpiof.fs
-.include tsc.fs
-.include crc.fs
-.include flash.fs
-.include rcc.fs
-.include dma1.fs
-.include dma2.fs
-.include tim2.fs
-.include tim5.fs
-.include tim3.fs
-.include tim4.fs
-.include tim19.fs
-.include tim15.fs
-.include tim16.fs
-.include tim17.fs
-.include usart1.fs
-.include usart2.fs
-.include usart3.fs
-.include spi1.fs
-.include spi2.fs
-.include spi3.fs
-.include i2s2ext.fs
-.include i2s3ext.fs
-.include adc.fs
-.include exti.fs
-.include cec.fs
-.include pwr.fs
-.include can.fs
-.include usb.fs
-.include i2c1.fs
-.include i2c2.fs
-.include iwdg.fs
-.include wwdg.fs
-.include rtc.fs
-.include sdadc1.fs
-.include sdadc2.fs
-.include sdadc3.fs
-.include dac2.fs
-.include tim6.fs
-.include tim7.fs
-.include tim18.fs
-.include tim13.fs
-.include tim14.fs
-.include tim12.fs
-.include dac1.fs
-.include dbgmcu.fs
-.include syscfg_comp_opamp.fs
+[ifndef] STM32F373_LOADER
+  .include "gpioa.fs"
+  .include "gpioc.fs"
+  .include "tsc.fs"
+  .include "crc.fs"
+  .include "flash.fs"
+  .include "rcc.fs"
+  .include "dma.fs"
+  .include "tim2.fs"
+  .include "tim5.fs"
+  .include "tim3.fs"
+  .include "tim15.fs"
+  .include "tim16.fs"
+  .include "usart.fs"
+  .include "spi1.fs"
+  .include "adc.fs"
+  .include "exti.fs"
+  .include "cec.fs"
+  .include "pwr.fs"
+  .include "can.fs"
+  .include "usb.fs"
+  .include "i2c.fs"
+  .include "iwdg.fs"
+  .include "wwdg.fs"
+  .include "rtc.fs"
+  .include "sdadc.fs"
+  .include "dac2.fs"
+  .include "tim6.fs"
+  .include "tim13.fs"
+  .include "tim12.fs"
+  .include "dac1.fs"
+  .include "dbgmcu.fs"
+  .include "syscfg_comp_opamp.fs"
 
-decimal
+  $0x48000000 constant GPIOA            \ See gpioa.fs
+  $0x48000400 constant GPIOB            \ See gpioa.fs
+  $0x48000C00 constant GPIOD            \ See gpioa.fs
+  $0x48000800 constant GPIOC            \ See gpioc.fs
+  $0x48001000 constant GPIOE            \ See gpioc.fs
+  $0x48001400 constant GPIOF            \ See gpioc.fs
+  $0x40024000 constant TSC              \ See tsc.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x40021000 constant RCC              \ See rcc.fs
+  $0x40020000 constant DMA1             \ See dma.fs
+  $0x40020400 constant DMA2             \ See dma.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40000C00 constant TIM5             \ See tim5.fs
+  $0x40000400 constant TIM3             \ See tim3.fs
+  $0x40000800 constant TIM4             \ See tim3.fs
+  $0x40015C00 constant TIM19            \ See tim3.fs
+  $0x40014000 constant TIM15            \ See tim15.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x40014800 constant TIM17            \ See tim16.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x40013000 constant SPI1             \ See spi1.fs
+  $0x40003800 constant SPI2             \ See spi1.fs
+  $0x40003C00 constant SPI3             \ See spi1.fs
+  $0x40003400 constant I2S2EXT          \ See spi1.fs
+  $0x40004000 constant I2S3EXT          \ See spi1.fs
+  $0x40012400 constant ADC              \ See adc.fs
+  $0x40010400 constant EXTI             \ See exti.fs
+  $0x40007800 constant CEC              \ See cec.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40006400 constant CAN              \ See can.fs
+  $0x40005C00 constant USB              \ See usb.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40016000 constant SDADC1           \ See sdadc.fs
+  $0x40016400 constant SDADC2           \ See sdadc.fs
+  $0x40016800 constant SDADC3           \ See sdadc.fs
+  $0x40009800 constant DAC2             \ See dac2.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim6.fs
+  $0x40009C00 constant TIM18            \ See tim6.fs
+  $0x40001C00 constant TIM13            \ See tim13.fs
+  $0x40002000 constant TIM14            \ See tim13.fs
+  $0x40001800 constant TIM12            \ See tim12.fs
+  $0x40007400 constant DAC1             \ See dac1.fs
+  $0xE0042000 constant DBGMCU           \ See dbgmcu.fs
+  $0x40010000 constant SYSCFG_COMP_OPAMP    \ See syscfg_comp_opamp.fs
 
-\ Peripheral Instance Definitions
-.include GPIOA                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOD                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOE                  \ General-purpose I/Os
-.include GPIOF                  \ General-purpose I/Os
-.include TSC                    \ Touch sensing controller
-.include CRC                    \ cyclic redundancy check calculation unit
-.include FLASH                  \ Flash
-.include RCC                    \ Reset and clock control
-.include DMA1                   \ DMA controller 1
-.include DMA2                   \ DMA2 channel interrupt
-.include TIM2                   \ General purpose timer
-.include TIM5                   \ General purpose timer
-.include TIM3                   \ General purpose timer
-.include TIM4                   \ Timer 4 global interrupt
-.include TIM19                  \ Timer 19 global interrupt
-.include TIM15                  \ General purpose timers
-.include TIM16                  \ General-purpose-timers
-.include TIM17                  \ Timer 17 global interrupt
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include USART2                 \ USART2 global interrupt/EXTI26 (USART1 wakeup event)
-.include USART3                 \ USART3 global interrupt/EXTI28 (USART1 wakeup event)
-.include SPI1                   \ Serial peripheral interface/Inter-IC sound
-.include SPI2                   \ SPI2 global interrupt
-.include SPI3                   \ SPI3 global interrupt
-.include I2S2EXT                \ Serial peripheral interface/Inter-IC sound
-.include I2S3EXT                \ Serial peripheral interface/Inter-IC sound
-.include ADC                    \ Analog to digital converter
-.include EXTI                   \ External interrupt/event controller
-.include CEC                    \ HDMI-CEC controller
-.include PWR                    \ Power control
-.include CAN                    \ Controller area network
-.include USB                    \ Universal serial bus full-speed device interface
-.include I2C1                   \ Inter-integrated circuit
-.include I2C2                   \ I2C2_EV global interrupt/EXTI Line[4:2] interrupts
-.include IWDG                   \ Independent watchdog
-.include WWDG                   \ Window watchdog
-.include RTC                    \ Real-time clock
-.include SDADC1                 \ Sigma-delta analog-to-digital converter
-.include SDADC2                 \ ADC sigma delta 2 (SDADC2) global interrupt
-.include SDADC3                 \ ADC sigma delta 3 (SDADC3) global interrupt
-.include DAC2                   \ Digital-to-analog converter
-.include TIM6                   \ Basic timers
-.include TIM7                   \ Timer 7 global interrupt
-.include TIM18                  \ Timer 18 global interrupt/DAC3 underrun interrupt
-.include TIM13                  \ General purpose timers
-.include TIM14                  \ Timer 14 global interrupt
-.include TIM12                  \ General purpose timers
-.include DAC1                   \ Digital-to-analog converter
-.include DBGMCU                 \ Debug support
-.include SYSCFG_COMP_OPAMP      \ System configuration controller
-
-compiletoram
-
+: STM32F373_LOADER ; [then]

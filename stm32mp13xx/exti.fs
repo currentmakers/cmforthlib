@@ -6,812 +6,873 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_RTSR1_RT0                              \ RT0
-$00000002 constant EXTI_EXTI_RTSR1_RT1                              \ RT1
-$00000004 constant EXTI_EXTI_RTSR1_RT2                              \ RT2
-$00000008 constant EXTI_EXTI_RTSR1_RT3                              \ RT3
-$00000010 constant EXTI_EXTI_RTSR1_RT4                              \ RT4
-$00000020 constant EXTI_EXTI_RTSR1_RT5                              \ RT5
-$00000040 constant EXTI_EXTI_RTSR1_RT6                              \ RT6
-$00000080 constant EXTI_EXTI_RTSR1_RT7                              \ RT7
-$00000100 constant EXTI_EXTI_RTSR1_RT8                              \ RT8
-$00000200 constant EXTI_EXTI_RTSR1_RT9                              \ RT9
-$00000400 constant EXTI_EXTI_RTSR1_RT10                             \ RT10
-$00000800 constant EXTI_EXTI_RTSR1_RT11                             \ RT11
-$00001000 constant EXTI_EXTI_RTSR1_RT12                             \ RT12
-$00002000 constant EXTI_EXTI_RTSR1_RT13                             \ RT13
-$00004000 constant EXTI_EXTI_RTSR1_RT14                             \ RT14
-$00008000 constant EXTI_EXTI_RTSR1_RT15                             \ RT15
-$00010000 constant EXTI_EXTI_RTSR1_RT16                             \ RT16
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_FTSR1_FT0                              \ FT0
-$00000002 constant EXTI_EXTI_FTSR1_FT1                              \ FT1
-$00000004 constant EXTI_EXTI_FTSR1_FT2                              \ FT2
-$00000008 constant EXTI_EXTI_FTSR1_FT3                              \ FT3
-$00000010 constant EXTI_EXTI_FTSR1_FT4                              \ FT4
-$00000020 constant EXTI_EXTI_FTSR1_FT5                              \ FT5
-$00000040 constant EXTI_EXTI_FTSR1_FT6                              \ FT6
-$00000080 constant EXTI_EXTI_FTSR1_FT7                              \ FT7
-$00000100 constant EXTI_EXTI_FTSR1_FT8                              \ FT8
-$00000200 constant EXTI_EXTI_FTSR1_FT9                              \ FT9
-$00000400 constant EXTI_EXTI_FTSR1_FT10                             \ FT10
-$00000800 constant EXTI_EXTI_FTSR1_FT11                             \ FT11
-$00001000 constant EXTI_EXTI_FTSR1_FT12                             \ FT12
-$00002000 constant EXTI_EXTI_FTSR1_FT13                             \ FT13
-$00004000 constant EXTI_EXTI_FTSR1_FT14                             \ FT14
-$00008000 constant EXTI_EXTI_FTSR1_FT15                             \ FT15
-$00010000 constant EXTI_EXTI_FTSR1_FT16                             \ FT16
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_SWIER1_SWI0                            \ SWI0
-$00000002 constant EXTI_EXTI_SWIER1_SWI1                            \ SWI1
-$00000004 constant EXTI_EXTI_SWIER1_SWI2                            \ SWI2
-$00000008 constant EXTI_EXTI_SWIER1_SWI3                            \ SWI3
-$00000010 constant EXTI_EXTI_SWIER1_SWI4                            \ SWI4
-$00000020 constant EXTI_EXTI_SWIER1_SWI5                            \ SWI5
-$00000040 constant EXTI_EXTI_SWIER1_SWI6                            \ SWI6
-$00000080 constant EXTI_EXTI_SWIER1_SWI7                            \ SWI7
-$00000100 constant EXTI_EXTI_SWIER1_SWI8                            \ SWI8
-$00000200 constant EXTI_EXTI_SWIER1_SWI9                            \ SWI9
-$00000400 constant EXTI_EXTI_SWIER1_SWI10                           \ SWI10
-$00000800 constant EXTI_EXTI_SWIER1_SWI11                           \ SWI11
-$00001000 constant EXTI_EXTI_SWIER1_SWI12                           \ SWI12
-$00002000 constant EXTI_EXTI_SWIER1_SWI13                           \ SWI13
-$00004000 constant EXTI_EXTI_SWIER1_SWI14                           \ SWI14
-$00008000 constant EXTI_EXTI_SWIER1_SWI15                           \ SWI15
-$00010000 constant EXTI_EXTI_SWIER1_SWI16                           \ SWI16
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_RPR1_RPIF0                             \ RPIF0
-$00000002 constant EXTI_EXTI_RPR1_RPIF1                             \ RPIF1
-$00000004 constant EXTI_EXTI_RPR1_RPIF2                             \ RPIF2
-$00000008 constant EXTI_EXTI_RPR1_RPIF3                             \ RPIF3
-$00000010 constant EXTI_EXTI_RPR1_RPIF4                             \ RPIF4
-$00000020 constant EXTI_EXTI_RPR1_RPIF5                             \ RPIF5
-$00000040 constant EXTI_EXTI_RPR1_RPIF6                             \ RPIF6
-$00000080 constant EXTI_EXTI_RPR1_RPIF7                             \ RPIF7
-$00000100 constant EXTI_EXTI_RPR1_RPIF8                             \ RPIF8
-$00000200 constant EXTI_EXTI_RPR1_RPIF9                             \ RPIF9
-$00000400 constant EXTI_EXTI_RPR1_RPIF10                            \ RPIF10
-$00000800 constant EXTI_EXTI_RPR1_RPIF11                            \ RPIF11
-$00001000 constant EXTI_EXTI_RPR1_RPIF12                            \ RPIF12
-$00002000 constant EXTI_EXTI_RPR1_RPIF13                            \ RPIF13
-$00004000 constant EXTI_EXTI_RPR1_RPIF14                            \ RPIF14
-$00008000 constant EXTI_EXTI_RPR1_RPIF15                            \ RPIF15
-$00010000 constant EXTI_EXTI_RPR1_RPIF16                            \ RPIF16
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_FPR1_FPIF0                             \ FPIF0
-$00000002 constant EXTI_EXTI_FPR1_FPIF1                             \ FPIF1
-$00000004 constant EXTI_EXTI_FPR1_FPIF2                             \ FPIF2
-$00000008 constant EXTI_EXTI_FPR1_FPIF3                             \ FPIF3
-$00000010 constant EXTI_EXTI_FPR1_FPIF4                             \ FPIF4
-$00000020 constant EXTI_EXTI_FPR1_FPIF5                             \ FPIF5
-$00000040 constant EXTI_EXTI_FPR1_FPIF6                             \ FPIF6
-$00000080 constant EXTI_EXTI_FPR1_FPIF7                             \ FPIF7
-$00000100 constant EXTI_EXTI_FPR1_FPIF8                             \ FPIF8
-$00000200 constant EXTI_EXTI_FPR1_FPIF9                             \ FPIF9
-$00000400 constant EXTI_EXTI_FPR1_FPIF10                            \ FPIF10
-$00000800 constant EXTI_EXTI_FPR1_FPIF11                            \ FPIF11
-$00001000 constant EXTI_EXTI_FPR1_FPIF12                            \ FPIF12
-$00002000 constant EXTI_EXTI_FPR1_FPIF13                            \ FPIF13
-$00004000 constant EXTI_EXTI_FPR1_FPIF14                            \ FPIF14
-$00008000 constant EXTI_EXTI_FPR1_FPIF15                            \ FPIF15
-$00010000 constant EXTI_EXTI_FPR1_FPIF16                            \ FPIF16
-
-
-\
-\ @brief This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_TZENR1_TZEN0                           \ TZEN0
-$00000002 constant EXTI_EXTI_TZENR1_TZEN1                           \ TZEN1
-$00000004 constant EXTI_EXTI_TZENR1_TZEN2                           \ TZEN2
-$00000008 constant EXTI_EXTI_TZENR1_TZEN3                           \ TZEN3
-$00000010 constant EXTI_EXTI_TZENR1_TZEN4                           \ TZEN4
-$00000020 constant EXTI_EXTI_TZENR1_TZEN5                           \ TZEN5
-$00000040 constant EXTI_EXTI_TZENR1_TZEN6                           \ TZEN6
-$00000080 constant EXTI_EXTI_TZENR1_TZEN7                           \ TZEN7
-$00000100 constant EXTI_EXTI_TZENR1_TZEN8                           \ TZEN8
-$00000200 constant EXTI_EXTI_TZENR1_TZEN9                           \ TZEN9
-$00000400 constant EXTI_EXTI_TZENR1_TZEN10                          \ TZEN10
-$00000800 constant EXTI_EXTI_TZENR1_TZEN11                          \ TZEN11
-$00001000 constant EXTI_EXTI_TZENR1_TZEN12                          \ TZEN12
-$00002000 constant EXTI_EXTI_TZENR1_TZEN13                          \ TZEN13
-$00004000 constant EXTI_EXTI_TZENR1_TZEN14                          \ TZEN14
-$00008000 constant EXTI_EXTI_TZENR1_TZEN15                          \ TZEN15
-$00020000 constant EXTI_EXTI_TZENR1_TZEN17                          \ TZEN17
-$00040000 constant EXTI_EXTI_TZENR1_TZEN18                          \ TZEN18
-$00080000 constant EXTI_EXTI_TZENR1_TZEN19                          \ TZEN19
-$01000000 constant EXTI_EXTI_TZENR1_TZEN24                          \ TZEN24
-$04000000 constant EXTI_EXTI_TZENR1_TZEN26                          \ TZEN26
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000200 constant EXTI_EXTI_TZENR2_TZEN41                          \ TZEN41
-$00400000 constant EXTI_EXTI_TZENR2_TZEN54                          \ TZEN54
-$00800000 constant EXTI_EXTI_TZENR2_TZEN55                          \ TZEN55
-$01000000 constant EXTI_EXTI_TZENR2_TZEN56                          \ TZEN56
-$02000000 constant EXTI_EXTI_TZENR2_TZEN57                          \ TZEN57
-$04000000 constant EXTI_EXTI_TZENR2_TZEN58                          \ TZEN58
-$08000000 constant EXTI_EXTI_TZENR2_TZEN59                          \ TZEN59
-$10000000 constant EXTI_EXTI_TZENR2_TZEN60                          \ TZEN60
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000002 constant EXTI_EXTI_RTSR3_RT65                             \ RT65
-$00000004 constant EXTI_EXTI_RTSR3_RT66                             \ RT66
-$00000010 constant EXTI_EXTI_RTSR3_RT68                             \ RT68
-$00000200 constant EXTI_EXTI_RTSR3_RT73                             \ RT73
-$00000400 constant EXTI_EXTI_RTSR3_RT74                             \ RT74
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000002 constant EXTI_EXTI_FTSR3_FT65                             \ FT65
-$00000004 constant EXTI_EXTI_FTSR3_FT66                             \ FT66
-$00000010 constant EXTI_EXTI_FTSR3_FT68                             \ FT68
-$00000200 constant EXTI_EXTI_FTSR3_FT73                             \ FT73
-$00000400 constant EXTI_EXTI_FTSR3_FT74                             \ FT74
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000002 constant EXTI_EXTI_SWIER3_SWI65                           \ SWI65
-$00000004 constant EXTI_EXTI_SWIER3_SWI66                           \ SWI66
-$00000010 constant EXTI_EXTI_SWIER3_SWI68                           \ SWI68
-$00000200 constant EXTI_EXTI_SWIER3_SWI73                           \ SWI73
-$00000400 constant EXTI_EXTI_SWIER3_SWI74                           \ SWI74
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant EXTI_EXTI_RPR3_RPIF65                            \ RPIF65
-$00000004 constant EXTI_EXTI_RPR3_RPIF66                            \ RPIF66
-$00000010 constant EXTI_EXTI_RPR3_RPIF68                            \ RPIF68
-$00000200 constant EXTI_EXTI_RPR3_RPIF73                            \ RPIF73
-$00000400 constant EXTI_EXTI_RPR3_RPIF74                            \ RPIF74
-
-
-\
-\ @brief Contains only register bits for configurable events.
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000002 constant EXTI_EXTI_FPR3_FPIF65                            \ FPIF65
-$00000004 constant EXTI_EXTI_FPR3_FPIF66                            \ FPIF66
-$00000010 constant EXTI_EXTI_FPR3_FPIF68                            \ FPIF68
-$00000200 constant EXTI_EXTI_FPR3_FPIF73                            \ FPIF73
-$00000400 constant EXTI_EXTI_FPR3_FPIF74                            \ FPIF74
-
-
-\
-\ @brief This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$000000ff constant EXTI_EXTI_EXTICR1_EXTI0                          \ EXTI0
-$0000ff00 constant EXTI_EXTI_EXTICR1_EXTI1                          \ EXTI1
-$00ff0000 constant EXTI_EXTI_EXTICR1_EXTI2                          \ EXTI2
-$ff000000 constant EXTI_EXTI_EXTICR1_EXTI3                          \ EXTI3
-
-
-\
-\ @brief EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
-\ Address offset: 0x64
-\ Reset value: 0x00000000
-\
-
-$000000ff constant EXTI_EXTI_EXTICR2_EXTI4                          \ EXTI4
-$0000ff00 constant EXTI_EXTI_EXTICR2_EXTI5                          \ EXTI5
-$00ff0000 constant EXTI_EXTI_EXTICR2_EXTI6                          \ EXTI6
-$ff000000 constant EXTI_EXTI_EXTICR2_EXTI7                          \ EXTI7
-
-
-\
-\ @brief EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$000000ff constant EXTI_EXTI_EXTICR3_EXTI8                          \ EXTI8
-$0000ff00 constant EXTI_EXTI_EXTICR3_EXTI9                          \ EXTI9
-$00ff0000 constant EXTI_EXTI_EXTICR3_EXTI10                         \ EXTI10
-$ff000000 constant EXTI_EXTI_EXTICR3_EXTI11                         \ EXTI11
-
-
-\
-\ @brief EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
-\ Address offset: 0x6C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant EXTI_EXTI_EXTICR4_EXTI12                         \ EXTI12
-$0000ff00 constant EXTI_EXTI_EXTICR4_EXTI13                         \ EXTI13
-$00ff0000 constant EXTI_EXTI_EXTICR4_EXTI14                         \ EXTI14
-$ff000000 constant EXTI_EXTI_EXTICR4_EXTI15                         \ EXTI15
-
-
-\
-\ @brief Contains register bits for configurable events and Direct events.
-\ Address offset: 0x80
-\ Reset value: 0xFFFE0000
-\
-
-$00000001 constant EXTI_EXTI_IMR1_IM0                               \ IM0
-$00000002 constant EXTI_EXTI_IMR1_IM1                               \ IM1
-$00000004 constant EXTI_EXTI_IMR1_IM2                               \ IM2
-$00000008 constant EXTI_EXTI_IMR1_IM3                               \ IM3
-$00000010 constant EXTI_EXTI_IMR1_IM4                               \ IM4
-$00000020 constant EXTI_EXTI_IMR1_IM5                               \ IM5
-$00000040 constant EXTI_EXTI_IMR1_IM6                               \ IM6
-$00000080 constant EXTI_EXTI_IMR1_IM7                               \ IM7
-$00000100 constant EXTI_EXTI_IMR1_IM8                               \ IM8
-$00000200 constant EXTI_EXTI_IMR1_IM9                               \ IM9
-$00000400 constant EXTI_EXTI_IMR1_IM10                              \ IM10
-$00000800 constant EXTI_EXTI_IMR1_IM11                              \ IM11
-$00001000 constant EXTI_EXTI_IMR1_IM12                              \ IM12
-$00002000 constant EXTI_EXTI_IMR1_IM13                              \ IM13
-$00004000 constant EXTI_EXTI_IMR1_IM14                              \ IM14
-$00008000 constant EXTI_EXTI_IMR1_IM15                              \ IM15
-$00010000 constant EXTI_EXTI_IMR1_IM16                              \ IM16
-$00020000 constant EXTI_EXTI_IMR1_IM17                              \ IM17
-$00040000 constant EXTI_EXTI_IMR1_IM18                              \ IM18
-$00080000 constant EXTI_EXTI_IMR1_IM19                              \ IM19
-$00100000 constant EXTI_EXTI_IMR1_IM20                              \ IM20
-$00200000 constant EXTI_EXTI_IMR1_IM21                              \ IM21
-$00400000 constant EXTI_EXTI_IMR1_IM22                              \ IM22
-$00800000 constant EXTI_EXTI_IMR1_IM23                              \ IM23
-$01000000 constant EXTI_EXTI_IMR1_IM24                              \ IM24
-$02000000 constant EXTI_EXTI_IMR1_IM25                              \ IM25
-$04000000 constant EXTI_EXTI_IMR1_IM26                              \ IM26
-$08000000 constant EXTI_EXTI_IMR1_IM27                              \ IM27
-$10000000 constant EXTI_EXTI_IMR1_IM28                              \ IM28
-$20000000 constant EXTI_EXTI_IMR1_IM29                              \ IM29
-$40000000 constant EXTI_EXTI_IMR1_IM30                              \ IM30
-$80000000 constant EXTI_EXTI_IMR1_IM31                              \ IM31
-
-
-\
-\ @brief EXTI CPU wakeup with event mask register
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_EMR1_EM0                               \ EM0
-$00000002 constant EXTI_EXTI_EMR1_EM1                               \ EM1
-$00000004 constant EXTI_EXTI_EMR1_EM2                               \ EM2
-$00000008 constant EXTI_EXTI_EMR1_EM3                               \ EM3
-$00000010 constant EXTI_EXTI_EMR1_EM4                               \ EM4
-$00000020 constant EXTI_EXTI_EMR1_EM5                               \ EM5
-$00000040 constant EXTI_EXTI_EMR1_EM6                               \ EM6
-$00000080 constant EXTI_EXTI_EMR1_EM7                               \ EM7
-$00000100 constant EXTI_EXTI_EMR1_EM8                               \ EM8
-$00000200 constant EXTI_EXTI_EMR1_EM9                               \ EM9
-$00000400 constant EXTI_EXTI_EMR1_EM10                              \ EM10
-$00000800 constant EXTI_EXTI_EMR1_EM11                              \ EM11
-$00001000 constant EXTI_EXTI_EMR1_EM12                              \ EM12
-$00002000 constant EXTI_EXTI_EMR1_EM13                              \ EM13
-$00004000 constant EXTI_EXTI_EMR1_EM14                              \ EM14
-$00008000 constant EXTI_EXTI_EMR1_EM15                              \ EM15
-$00020000 constant EXTI_EXTI_EMR1_EM17                              \ EM17
-$00040000 constant EXTI_EXTI_EMR1_EM18                              \ EM18
-$00080000 constant EXTI_EXTI_EMR1_EM19                              \ EM19
-
-
-\
-\ @brief Contains register bits for configurable events and direct events.
-\ Address offset: 0x90
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant EXTI_EXTI_IMR2_IM32                              \ IM32
-$00000002 constant EXTI_EXTI_IMR2_IM33                              \ IM33
-$00000004 constant EXTI_EXTI_IMR2_IM34                              \ IM34
-$00000008 constant EXTI_EXTI_IMR2_IM35                              \ IM35
-$00000010 constant EXTI_EXTI_IMR2_IM36                              \ IM36
-$00000020 constant EXTI_EXTI_IMR2_IM37                              \ IM37
-$00000040 constant EXTI_EXTI_IMR2_IM38                              \ IM38
-$00000080 constant EXTI_EXTI_IMR2_IM39                              \ IM39
-$00000100 constant EXTI_EXTI_IMR2_IM40                              \ IM40
-$00000200 constant EXTI_EXTI_IMR2_IM41                              \ IM41
-$00000400 constant EXTI_EXTI_IMR2_IM42                              \ IM42
-$00000800 constant EXTI_EXTI_IMR2_IM43                              \ IM43
-$00001000 constant EXTI_EXTI_IMR2_IM44                              \ IM44
-$00002000 constant EXTI_EXTI_IMR2_IM45                              \ IM45
-$00004000 constant EXTI_EXTI_IMR2_IM46                              \ IM46
-$00008000 constant EXTI_EXTI_IMR2_IM47                              \ IM47
-$00010000 constant EXTI_EXTI_IMR2_IM48                              \ IM48
-$00020000 constant EXTI_EXTI_IMR2_IM49                              \ IM49
-$00040000 constant EXTI_EXTI_IMR2_IM50                              \ IM50
-$00080000 constant EXTI_EXTI_IMR2_IM51                              \ IM51
-$00100000 constant EXTI_EXTI_IMR2_IM52                              \ IM52
-$00200000 constant EXTI_EXTI_IMR2_IM53                              \ IM53
-$00400000 constant EXTI_EXTI_IMR2_IM54                              \ IM54
-$00800000 constant EXTI_EXTI_IMR2_IM55                              \ IM55
-$01000000 constant EXTI_EXTI_IMR2_IM56                              \ IM56
-$02000000 constant EXTI_EXTI_IMR2_IM57                              \ IM57
-$04000000 constant EXTI_EXTI_IMR2_IM58                              \ IM58
-$08000000 constant EXTI_EXTI_IMR2_IM59                              \ IM59
-$10000000 constant EXTI_EXTI_IMR2_IM60                              \ IM60
-$20000000 constant EXTI_EXTI_IMR2_IM61                              \ IM61
-$40000000 constant EXTI_EXTI_IMR2_IM62                              \ IM62
-$80000000 constant EXTI_EXTI_IMR2_IM63                              \ IM63
-
-
-\
-\ @brief EXTI CPU wakeup with event mask register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief Contains register bits for configurable events and direct events.
-\ Address offset: 0xA0
-\ Reset value: 0x00000DE9
-\
-
-$00000001 constant EXTI_EXTI_IMR3_IM64                              \ IM64
-$00000002 constant EXTI_EXTI_IMR3_IM65                              \ IM65
-$00000004 constant EXTI_EXTI_IMR3_IM66                              \ IM66
-$00000008 constant EXTI_EXTI_IMR3_IM67                              \ IM67
-$00000010 constant EXTI_EXTI_IMR3_IM68                              \ IM68
-$00000020 constant EXTI_EXTI_IMR3_IM69                              \ IM69
-$00000040 constant EXTI_EXTI_IMR3_IM70                              \ IM70
-$00000080 constant EXTI_EXTI_IMR3_IM71                              \ IM71
-$00000100 constant EXTI_EXTI_IMR3_IM72                              \ IM72
-$00000200 constant EXTI_EXTI_IMR3_IM73                              \ IM73
-$00000400 constant EXTI_EXTI_IMR3_IM74                              \ IM74
-$00000800 constant EXTI_EXTI_IMR3_IM75                              \ IM75
-
-
-\
-\ @brief EXTI CPU wakeup with event mask register
-\ Address offset: 0xA4
-\ Reset value: 0x00000000
-\
-
-$00000004 constant EXTI_EXTI_EMR3_EM66                              \ EM66
-
-
-\
-\ @brief Contains register bits for configurable events and Direct events.
-\ Address offset: 0xC0
-\ Reset value: 0xFFFE0000
-\
-
-$00000001 constant EXTI_EXTI_C2IMR1_IM0                             \ IM0
-$00000002 constant EXTI_EXTI_C2IMR1_IM1                             \ IM1
-$00000004 constant EXTI_EXTI_C2IMR1_IM2                             \ IM2
-$00000008 constant EXTI_EXTI_C2IMR1_IM3                             \ IM3
-$00000010 constant EXTI_EXTI_C2IMR1_IM4                             \ IM4
-$00000020 constant EXTI_EXTI_C2IMR1_IM5                             \ IM5
-$00000040 constant EXTI_EXTI_C2IMR1_IM6                             \ IM6
-$00000080 constant EXTI_EXTI_C2IMR1_IM7                             \ IM7
-$00000100 constant EXTI_EXTI_C2IMR1_IM8                             \ IM8
-$00000200 constant EXTI_EXTI_C2IMR1_IM9                             \ IM9
-$00000400 constant EXTI_EXTI_C2IMR1_IM10                            \ IM10
-$00000800 constant EXTI_EXTI_C2IMR1_IM11                            \ IM11
-$00001000 constant EXTI_EXTI_C2IMR1_IM12                            \ IM12
-$00002000 constant EXTI_EXTI_C2IMR1_IM13                            \ IM13
-$00004000 constant EXTI_EXTI_C2IMR1_IM14                            \ IM14
-$00008000 constant EXTI_EXTI_C2IMR1_IM15                            \ IM15
-$00010000 constant EXTI_EXTI_C2IMR1_IM16                            \ IM16
-$00020000 constant EXTI_EXTI_C2IMR1_IM17                            \ IM17
-$00040000 constant EXTI_EXTI_C2IMR1_IM18                            \ IM18
-$00080000 constant EXTI_EXTI_C2IMR1_IM19                            \ IM19
-$00100000 constant EXTI_EXTI_C2IMR1_IM20                            \ IM20
-$00200000 constant EXTI_EXTI_C2IMR1_IM21                            \ IM21
-$00400000 constant EXTI_EXTI_C2IMR1_IM22                            \ IM22
-$00800000 constant EXTI_EXTI_C2IMR1_IM23                            \ IM23
-$01000000 constant EXTI_EXTI_C2IMR1_IM24                            \ IM24
-$02000000 constant EXTI_EXTI_C2IMR1_IM25                            \ IM25
-$04000000 constant EXTI_EXTI_C2IMR1_IM26                            \ IM26
-$08000000 constant EXTI_EXTI_C2IMR1_IM27                            \ IM27
-$10000000 constant EXTI_EXTI_C2IMR1_IM28                            \ IM28
-$20000000 constant EXTI_EXTI_C2IMR1_IM29                            \ IM29
-$40000000 constant EXTI_EXTI_C2IMR1_IM30                            \ IM30
-$80000000 constant EXTI_EXTI_C2IMR1_IM31                            \ IM31
-
-
-\
-\ @brief EXTI CPU2 wakeup with event mask register
-\ Address offset: 0xC4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_C2EMR1_EM0                             \ EM0
-$00000002 constant EXTI_EXTI_C2EMR1_EM1                             \ EM1
-$00000004 constant EXTI_EXTI_C2EMR1_EM2                             \ EM2
-$00000008 constant EXTI_EXTI_C2EMR1_EM3                             \ EM3
-$00000010 constant EXTI_EXTI_C2EMR1_EM4                             \ EM4
-$00000020 constant EXTI_EXTI_C2EMR1_EM5                             \ EM5
-$00000040 constant EXTI_EXTI_C2EMR1_EM6                             \ EM6
-$00000080 constant EXTI_EXTI_C2EMR1_EM7                             \ EM7
-$00000100 constant EXTI_EXTI_C2EMR1_EM8                             \ EM8
-$00000200 constant EXTI_EXTI_C2EMR1_EM9                             \ EM9
-$00000400 constant EXTI_EXTI_C2EMR1_EM10                            \ EM10
-$00000800 constant EXTI_EXTI_C2EMR1_EM11                            \ EM11
-$00001000 constant EXTI_EXTI_C2EMR1_EM12                            \ EM12
-$00002000 constant EXTI_EXTI_C2EMR1_EM13                            \ EM13
-$00004000 constant EXTI_EXTI_C2EMR1_EM14                            \ EM14
-$00008000 constant EXTI_EXTI_C2EMR1_EM15                            \ EM15
-$00020000 constant EXTI_EXTI_C2EMR1_EM17                            \ EM17
-$00040000 constant EXTI_EXTI_C2EMR1_EM18                            \ EM18
-$00080000 constant EXTI_EXTI_C2EMR1_EM19                            \ EM19
-
-
-\
-\ @brief Contains register bits for configurable events and direct events.
-\ Address offset: 0xD0
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant EXTI_EXTI_C2IMR2_IM32                            \ IM32
-$00000002 constant EXTI_EXTI_C2IMR2_IM33                            \ IM33
-$00000004 constant EXTI_EXTI_C2IMR2_IM34                            \ IM34
-$00000008 constant EXTI_EXTI_C2IMR2_IM35                            \ IM35
-$00000010 constant EXTI_EXTI_C2IMR2_IM36                            \ IM36
-$00000020 constant EXTI_EXTI_C2IMR2_IM37                            \ IM37
-$00000040 constant EXTI_EXTI_C2IMR2_IM38                            \ IM38
-$00000080 constant EXTI_EXTI_C2IMR2_IM39                            \ IM39
-$00000100 constant EXTI_EXTI_C2IMR2_IM40                            \ IM40
-$00000200 constant EXTI_EXTI_C2IMR2_IM41                            \ IM41
-$00000400 constant EXTI_EXTI_C2IMR2_IM42                            \ IM42
-$00000800 constant EXTI_EXTI_C2IMR2_IM43                            \ IM43
-$00001000 constant EXTI_EXTI_C2IMR2_IM44                            \ IM44
-$00002000 constant EXTI_EXTI_C2IMR2_IM45                            \ IM45
-$00004000 constant EXTI_EXTI_C2IMR2_IM46                            \ IM46
-$00008000 constant EXTI_EXTI_C2IMR2_IM47                            \ IM47
-$00010000 constant EXTI_EXTI_C2IMR2_IM48                            \ IM48
-$00020000 constant EXTI_EXTI_C2IMR2_IM49                            \ IM49
-$00040000 constant EXTI_EXTI_C2IMR2_IM50                            \ IM50
-$00080000 constant EXTI_EXTI_C2IMR2_IM51                            \ IM51
-$00100000 constant EXTI_EXTI_C2IMR2_IM52                            \ IM52
-$00200000 constant EXTI_EXTI_C2IMR2_IM53                            \ IM53
-$00400000 constant EXTI_EXTI_C2IMR2_IM54                            \ IM54
-$00800000 constant EXTI_EXTI_C2IMR2_IM55                            \ IM55
-$01000000 constant EXTI_EXTI_C2IMR2_IM56                            \ IM56
-$02000000 constant EXTI_EXTI_C2IMR2_IM57                            \ IM57
-$04000000 constant EXTI_EXTI_C2IMR2_IM58                            \ IM58
-$08000000 constant EXTI_EXTI_C2IMR2_IM59                            \ IM59
-$10000000 constant EXTI_EXTI_C2IMR2_IM60                            \ IM60
-$20000000 constant EXTI_EXTI_C2IMR2_IM61                            \ IM61
-$40000000 constant EXTI_EXTI_C2IMR2_IM62                            \ IM62
-$80000000 constant EXTI_EXTI_C2IMR2_IM63                            \ IM63
-
-
-\
-\ @brief EXTI CPU2 wakeup with event mask register
-\ Address offset: 0xD4
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief Contains register bits for configurable events and direct events.
-\ Address offset: 0xE0
-\ Reset value: 0x00000DE9
-\
-
-$00000001 constant EXTI_EXTI_C2IMR3_IM64                            \ IM64
-$00000002 constant EXTI_EXTI_C2IMR3_IM65                            \ IM65
-$00000004 constant EXTI_EXTI_C2IMR3_IM66                            \ IM66
-$00000008 constant EXTI_EXTI_C2IMR3_IM67                            \ IM67
-$00000010 constant EXTI_EXTI_C2IMR3_IM68                            \ IM68
-$00000020 constant EXTI_EXTI_C2IMR3_IM69                            \ IM69
-$00000040 constant EXTI_EXTI_C2IMR3_IM70                            \ IM70
-$00000080 constant EXTI_EXTI_C2IMR3_IM71                            \ IM71
-$00000100 constant EXTI_EXTI_C2IMR3_IM72                            \ IM72
-$00000200 constant EXTI_EXTI_C2IMR3_IM73                            \ IM73
-$00000400 constant EXTI_EXTI_C2IMR3_IM74                            \ IM74
-$00000800 constant EXTI_EXTI_C2IMR3_IM75                            \ IM75
-
-
-\
-\ @brief EXTI CPU2 wakeup with event mask register
-\ Address offset: 0xE4
-\ Reset value: 0x00000000
-\
-
-$00000004 constant EXTI_EXTI_C2EMR3_EM66                            \ EM66
-
-
-\
-\ @brief EXTI hardware configuration register 13
-\ Address offset: 0x3C0
-\ Reset value: 0x050EFFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR13_TZ                            \ TZ
-
-
-\
-\ @brief EXTI hardware configuration register 12
-\ Address offset: 0x3C4
-\ Reset value: 0x050EFFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR12_TZ                            \ TZ
-
-
-\
-\ @brief EXTI hardware configuration register 11
-\ Address offset: 0x3C8
-\ Reset value: 0x050EFFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR11_TZ                            \ TZ
-
-
-\
-\ @brief EXTI hardware configuration register 10
-\ Address offset: 0x3CC
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief EXTI hardware configuration register 9
-\ Address offset: 0x3D0
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief EXTI hardware configuration register 8
-\ Address offset: 0x3D4
-\ Reset value: 0x00000000
-\
-
-
-\
-\ @brief EXTI hardware configuration register 7
-\ Address offset: 0x3D8
-\ Reset value: 0x000EFFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR7_CPUEVENT                       \ CPUEVENT
-
-
-\
-\ @brief EXTI hardware configuration register 6
-\ Address offset: 0x3DC
-\ Reset value: 0x000EFFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR6_CPUEVENT                       \ CPUEVENT
-
-
-\
-\ @brief EXTI hardware configuration register 5
-\ Address offset: 0x3E0
-\ Reset value: 0x000EFFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR5_CPUEVENT                       \ CPUEVENT
-
-
-\
-\ @brief EXTI hardware configuration register 4
-\ Address offset: 0x3E4
-\ Reset value: 0x0001FFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR4_EVENT_TRG                      \ EVENT_TRG
-
-
-\
-\ @brief EXTI hardware configuration register 3
-\ Address offset: 0x3E8
-\ Reset value: 0x0001FFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR3_EVENT_TRG                      \ EVENT_TRG
-
-
-\
-\ @brief EXTI hardware configuration register 2
-\ Address offset: 0x3EC
-\ Reset value: 0x0001FFFF
-\
-
-$00000000 constant EXTI_EXTI_HWCFGR2_EVENT_TRG                      \ EVENT_TRG
-
-
-\
-\ @brief EXTI hardware configuration register 1
-\ Address offset: 0x3F0
-\ Reset value: 0x000B214B
-\
-
-$000000ff constant EXTI_EXTI_HWCFGR1_NBEVENTS                       \ NBEVENTS
-$00000f00 constant EXTI_EXTI_HWCFGR1_NBCPUS                         \ NBCPUS
-$0000f000 constant EXTI_EXTI_HWCFGR1_CPUEVTEN                       \ CPUEVTEN
-$00ff0000 constant EXTI_EXTI_HWCFGR1_NBIOPORT                       \ NBIOPORT
-
-
-\
-\ @brief EXTI IP version register
-\ Address offset: 0x3F4
-\ Reset value: 0x00000030
-\
-
-$0000000f constant EXTI_EXTI_VERR_MINREV                            \ MINREV
-$000000f0 constant EXTI_EXTI_VERR_MAJREV                            \ MAJREV
-
-
-\
-\ @brief EXTI identification register
-\ Address offset: 0x3F8
-\ Reset value: 0x000E0001
-\
-
-$00000000 constant EXTI_EXTI_IPIDR_IPID                             \ IPID
-
-
-\
-\ @brief EXTI size ID register
-\ Address offset: 0x3FC
-\ Reset value: 0xA3C5DD01
-\
-
-$00000000 constant EXTI_EXTI_SIDR_SID                               \ SID
-
-
-\
-\ @brief EXTI
-\
-$5000d000 constant EXTI_EXTI_RTSR1  \ offset: 0x00 : Contains only register bits for configurable events.
-$5000d004 constant EXTI_EXTI_FTSR1  \ offset: 0x04 : Contains only register bits for configurable events.
-$5000d008 constant EXTI_EXTI_SWIER1  \ offset: 0x08 : Contains only register bits for configurable events.
-$5000d00c constant EXTI_EXTI_RPR1  \ offset: 0x0C : Contains only register bits for configurable events.
-$5000d010 constant EXTI_EXTI_FPR1  \ offset: 0x10 : Contains only register bits for configurable events.
-$5000d014 constant EXTI_EXTI_TZENR1  \ offset: 0x14 : This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
-$5000d020 constant EXTI_EXTI_RTSR2  \ offset: 0x20 : Contains only register bits for configurable events.
-$5000d024 constant EXTI_EXTI_FTSR2  \ offset: 0x24 : Contains only register bits for configurable events.
-$5000d028 constant EXTI_EXTI_SWIER2  \ offset: 0x28 : Contains only register bits for configurable events.
-$5000d02c constant EXTI_EXTI_RPR2  \ offset: 0x2C : Contains only register bits for configurable events.
-$5000d030 constant EXTI_EXTI_FPR2  \ offset: 0x30 : Contains only register bits for configurable events.
-$5000d034 constant EXTI_EXTI_TZENR2  \ offset: 0x34 : This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
-$5000d040 constant EXTI_EXTI_RTSR3  \ offset: 0x40 : Contains only register bits for configurable events.
-$5000d044 constant EXTI_EXTI_FTSR3  \ offset: 0x44 : Contains only register bits for configurable events.
-$5000d048 constant EXTI_EXTI_SWIER3  \ offset: 0x48 : Contains only register bits for configurable events.
-$5000d04c constant EXTI_EXTI_RPR3  \ offset: 0x4C : Contains only register bits for configurable events.
-$5000d050 constant EXTI_EXTI_FPR3  \ offset: 0x50 : Contains only register bits for configurable events.
-$5000d054 constant EXTI_EXTI_TZENR3  \ offset: 0x54 : This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
-$5000d060 constant EXTI_EXTI_EXTICR1  \ offset: 0x60 : EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
-$5000d064 constant EXTI_EXTI_EXTICR2  \ offset: 0x64 : EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
-$5000d068 constant EXTI_EXTI_EXTICR3  \ offset: 0x68 : EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
-$5000d06c constant EXTI_EXTI_EXTICR4  \ offset: 0x6C : EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
-$5000d080 constant EXTI_EXTI_IMR1  \ offset: 0x80 : Contains register bits for configurable events and Direct events.
-$5000d084 constant EXTI_EXTI_EMR1  \ offset: 0x84 : EXTI CPU wakeup with event mask register
-$5000d090 constant EXTI_EXTI_IMR2  \ offset: 0x90 : Contains register bits for configurable events and direct events.
-$5000d094 constant EXTI_EXTI_EMR2  \ offset: 0x94 : EXTI CPU wakeup with event mask register
-$5000d0a0 constant EXTI_EXTI_IMR3  \ offset: 0xA0 : Contains register bits for configurable events and direct events.
-$5000d0a4 constant EXTI_EXTI_EMR3  \ offset: 0xA4 : EXTI CPU wakeup with event mask register
-$5000d0c0 constant EXTI_EXTI_C2IMR1  \ offset: 0xC0 : Contains register bits for configurable events and Direct events.
-$5000d0c4 constant EXTI_EXTI_C2EMR1  \ offset: 0xC4 : EXTI CPU2 wakeup with event mask register
-$5000d0d0 constant EXTI_EXTI_C2IMR2  \ offset: 0xD0 : Contains register bits for configurable events and direct events.
-$5000d0d4 constant EXTI_EXTI_C2EMR2  \ offset: 0xD4 : EXTI CPU2 wakeup with event mask register
-$5000d0e0 constant EXTI_EXTI_C2IMR3  \ offset: 0xE0 : Contains register bits for configurable events and direct events.
-$5000d0e4 constant EXTI_EXTI_C2EMR3  \ offset: 0xE4 : EXTI CPU2 wakeup with event mask register
-$5000d3c0 constant EXTI_EXTI_HWCFGR13  \ offset: 0x3C0 : EXTI hardware configuration register 13
-$5000d3c4 constant EXTI_EXTI_HWCFGR12  \ offset: 0x3C4 : EXTI hardware configuration register 12
-$5000d3c8 constant EXTI_EXTI_HWCFGR11  \ offset: 0x3C8 : EXTI hardware configuration register 11
-$5000d3cc constant EXTI_EXTI_HWCFGR10  \ offset: 0x3CC : EXTI hardware configuration register 10
-$5000d3d0 constant EXTI_EXTI_HWCFGR9  \ offset: 0x3D0 : EXTI hardware configuration register 9
-$5000d3d4 constant EXTI_EXTI_HWCFGR8  \ offset: 0x3D4 : EXTI hardware configuration register 8
-$5000d3d8 constant EXTI_EXTI_HWCFGR7  \ offset: 0x3D8 : EXTI hardware configuration register 7
-$5000d3dc constant EXTI_EXTI_HWCFGR6  \ offset: 0x3DC : EXTI hardware configuration register 6
-$5000d3e0 constant EXTI_EXTI_HWCFGR5  \ offset: 0x3E0 : EXTI hardware configuration register 5
-$5000d3e4 constant EXTI_EXTI_HWCFGR4  \ offset: 0x3E4 : EXTI hardware configuration register 4
-$5000d3e8 constant EXTI_EXTI_HWCFGR3  \ offset: 0x3E8 : EXTI hardware configuration register 3
-$5000d3ec constant EXTI_EXTI_HWCFGR2  \ offset: 0x3EC : EXTI hardware configuration register 2
-$5000d3f0 constant EXTI_EXTI_HWCFGR1  \ offset: 0x3F0 : EXTI hardware configuration register 1
-$5000d3f4 constant EXTI_EXTI_VERR  \ offset: 0x3F4 : EXTI IP version register
-$5000d3f8 constant EXTI_EXTI_IPIDR  \ offset: 0x3F8 : EXTI identification register
-$5000d3fc constant EXTI_EXTI_SIDR  \ offset: 0x3FC : EXTI size ID register
-
+[ifndef] EXTI_DEF
+
+  [ifdef] EXTI_EXTI_RTSR1_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_RT0                       \ [0x00] RT0
+    $01 constant EXTI_RT1                       \ [0x01] RT1
+    $02 constant EXTI_RT2                       \ [0x02] RT2
+    $03 constant EXTI_RT3                       \ [0x03] RT3
+    $04 constant EXTI_RT4                       \ [0x04] RT4
+    $05 constant EXTI_RT5                       \ [0x05] RT5
+    $06 constant EXTI_RT6                       \ [0x06] RT6
+    $07 constant EXTI_RT7                       \ [0x07] RT7
+    $08 constant EXTI_RT8                       \ [0x08] RT8
+    $09 constant EXTI_RT9                       \ [0x09] RT9
+    $0a constant EXTI_RT10                      \ [0x0a] RT10
+    $0b constant EXTI_RT11                      \ [0x0b] RT11
+    $0c constant EXTI_RT12                      \ [0x0c] RT12
+    $0d constant EXTI_RT13                      \ [0x0d] RT13
+    $0e constant EXTI_RT14                      \ [0x0e] RT14
+    $0f constant EXTI_RT15                      \ [0x0f] RT15
+    $10 constant EXTI_RT16                      \ [0x10] RT16
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FTSR1_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_FT0                       \ [0x00] FT0
+    $01 constant EXTI_FT1                       \ [0x01] FT1
+    $02 constant EXTI_FT2                       \ [0x02] FT2
+    $03 constant EXTI_FT3                       \ [0x03] FT3
+    $04 constant EXTI_FT4                       \ [0x04] FT4
+    $05 constant EXTI_FT5                       \ [0x05] FT5
+    $06 constant EXTI_FT6                       \ [0x06] FT6
+    $07 constant EXTI_FT7                       \ [0x07] FT7
+    $08 constant EXTI_FT8                       \ [0x08] FT8
+    $09 constant EXTI_FT9                       \ [0x09] FT9
+    $0a constant EXTI_FT10                      \ [0x0a] FT10
+    $0b constant EXTI_FT11                      \ [0x0b] FT11
+    $0c constant EXTI_FT12                      \ [0x0c] FT12
+    $0d constant EXTI_FT13                      \ [0x0d] FT13
+    $0e constant EXTI_FT14                      \ [0x0e] FT14
+    $0f constant EXTI_FT15                      \ [0x0f] FT15
+    $10 constant EXTI_FT16                      \ [0x10] FT16
+  [then]
+
+
+  [ifdef] EXTI_EXTI_SWIER1_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_SWI0                      \ [0x00] SWI0
+    $01 constant EXTI_SWI1                      \ [0x01] SWI1
+    $02 constant EXTI_SWI2                      \ [0x02] SWI2
+    $03 constant EXTI_SWI3                      \ [0x03] SWI3
+    $04 constant EXTI_SWI4                      \ [0x04] SWI4
+    $05 constant EXTI_SWI5                      \ [0x05] SWI5
+    $06 constant EXTI_SWI6                      \ [0x06] SWI6
+    $07 constant EXTI_SWI7                      \ [0x07] SWI7
+    $08 constant EXTI_SWI8                      \ [0x08] SWI8
+    $09 constant EXTI_SWI9                      \ [0x09] SWI9
+    $0a constant EXTI_SWI10                     \ [0x0a] SWI10
+    $0b constant EXTI_SWI11                     \ [0x0b] SWI11
+    $0c constant EXTI_SWI12                     \ [0x0c] SWI12
+    $0d constant EXTI_SWI13                     \ [0x0d] SWI13
+    $0e constant EXTI_SWI14                     \ [0x0e] SWI14
+    $0f constant EXTI_SWI15                     \ [0x0f] SWI15
+    $10 constant EXTI_SWI16                     \ [0x10] SWI16
+  [then]
+
+
+  [ifdef] EXTI_EXTI_RPR1_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_RPIF0                     \ [0x00] RPIF0
+    $01 constant EXTI_RPIF1                     \ [0x01] RPIF1
+    $02 constant EXTI_RPIF2                     \ [0x02] RPIF2
+    $03 constant EXTI_RPIF3                     \ [0x03] RPIF3
+    $04 constant EXTI_RPIF4                     \ [0x04] RPIF4
+    $05 constant EXTI_RPIF5                     \ [0x05] RPIF5
+    $06 constant EXTI_RPIF6                     \ [0x06] RPIF6
+    $07 constant EXTI_RPIF7                     \ [0x07] RPIF7
+    $08 constant EXTI_RPIF8                     \ [0x08] RPIF8
+    $09 constant EXTI_RPIF9                     \ [0x09] RPIF9
+    $0a constant EXTI_RPIF10                    \ [0x0a] RPIF10
+    $0b constant EXTI_RPIF11                    \ [0x0b] RPIF11
+    $0c constant EXTI_RPIF12                    \ [0x0c] RPIF12
+    $0d constant EXTI_RPIF13                    \ [0x0d] RPIF13
+    $0e constant EXTI_RPIF14                    \ [0x0e] RPIF14
+    $0f constant EXTI_RPIF15                    \ [0x0f] RPIF15
+    $10 constant EXTI_RPIF16                    \ [0x10] RPIF16
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FPR1_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_FPIF0                     \ [0x00] FPIF0
+    $01 constant EXTI_FPIF1                     \ [0x01] FPIF1
+    $02 constant EXTI_FPIF2                     \ [0x02] FPIF2
+    $03 constant EXTI_FPIF3                     \ [0x03] FPIF3
+    $04 constant EXTI_FPIF4                     \ [0x04] FPIF4
+    $05 constant EXTI_FPIF5                     \ [0x05] FPIF5
+    $06 constant EXTI_FPIF6                     \ [0x06] FPIF6
+    $07 constant EXTI_FPIF7                     \ [0x07] FPIF7
+    $08 constant EXTI_FPIF8                     \ [0x08] FPIF8
+    $09 constant EXTI_FPIF9                     \ [0x09] FPIF9
+    $0a constant EXTI_FPIF10                    \ [0x0a] FPIF10
+    $0b constant EXTI_FPIF11                    \ [0x0b] FPIF11
+    $0c constant EXTI_FPIF12                    \ [0x0c] FPIF12
+    $0d constant EXTI_FPIF13                    \ [0x0d] FPIF13
+    $0e constant EXTI_FPIF14                    \ [0x0e] FPIF14
+    $0f constant EXTI_FPIF15                    \ [0x0f] FPIF15
+    $10 constant EXTI_FPIF16                    \ [0x10] FPIF16
+  [then]
+
+
+  [ifdef] EXTI_EXTI_TZENR1_DEF
+    \
+    \ @brief This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_TZEN0                     \ [0x00] TZEN0
+    $01 constant EXTI_TZEN1                     \ [0x01] TZEN1
+    $02 constant EXTI_TZEN2                     \ [0x02] TZEN2
+    $03 constant EXTI_TZEN3                     \ [0x03] TZEN3
+    $04 constant EXTI_TZEN4                     \ [0x04] TZEN4
+    $05 constant EXTI_TZEN5                     \ [0x05] TZEN5
+    $06 constant EXTI_TZEN6                     \ [0x06] TZEN6
+    $07 constant EXTI_TZEN7                     \ [0x07] TZEN7
+    $08 constant EXTI_TZEN8                     \ [0x08] TZEN8
+    $09 constant EXTI_TZEN9                     \ [0x09] TZEN9
+    $0a constant EXTI_TZEN10                    \ [0x0a] TZEN10
+    $0b constant EXTI_TZEN11                    \ [0x0b] TZEN11
+    $0c constant EXTI_TZEN12                    \ [0x0c] TZEN12
+    $0d constant EXTI_TZEN13                    \ [0x0d] TZEN13
+    $0e constant EXTI_TZEN14                    \ [0x0e] TZEN14
+    $0f constant EXTI_TZEN15                    \ [0x0f] TZEN15
+    $11 constant EXTI_TZEN17                    \ [0x11] TZEN17
+    $12 constant EXTI_TZEN18                    \ [0x12] TZEN18
+    $13 constant EXTI_TZEN19                    \ [0x13] TZEN19
+    $18 constant EXTI_TZEN24                    \ [0x18] TZEN24
+    $1a constant EXTI_TZEN26                    \ [0x1a] TZEN26
+  [then]
+
+
+  [ifdef] EXTI_EXTI_RTSR2_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FTSR2_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_SWIER2_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_RPR2_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FPR2_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_TZENR2_DEF
+    \
+    \ @brief This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $09 constant EXTI_TZEN41                    \ [0x09] TZEN41
+    $16 constant EXTI_TZEN54                    \ [0x16] TZEN54
+    $17 constant EXTI_TZEN55                    \ [0x17] TZEN55
+    $18 constant EXTI_TZEN56                    \ [0x18] TZEN56
+    $19 constant EXTI_TZEN57                    \ [0x19] TZEN57
+    $1a constant EXTI_TZEN58                    \ [0x1a] TZEN58
+    $1b constant EXTI_TZEN59                    \ [0x1b] TZEN59
+    $1c constant EXTI_TZEN60                    \ [0x1c] TZEN60
+  [then]
+
+
+  [ifdef] EXTI_EXTI_RTSR3_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $01 constant EXTI_RT65                      \ [0x01] RT65
+    $02 constant EXTI_RT66                      \ [0x02] RT66
+    $04 constant EXTI_RT68                      \ [0x04] RT68
+    $09 constant EXTI_RT73                      \ [0x09] RT73
+    $0a constant EXTI_RT74                      \ [0x0a] RT74
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FTSR3_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $01 constant EXTI_FT65                      \ [0x01] FT65
+    $02 constant EXTI_FT66                      \ [0x02] FT66
+    $04 constant EXTI_FT68                      \ [0x04] FT68
+    $09 constant EXTI_FT73                      \ [0x09] FT73
+    $0a constant EXTI_FT74                      \ [0x0a] FT74
+  [then]
+
+
+  [ifdef] EXTI_EXTI_SWIER3_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $01 constant EXTI_SWI65                     \ [0x01] SWI65
+    $02 constant EXTI_SWI66                     \ [0x02] SWI66
+    $04 constant EXTI_SWI68                     \ [0x04] SWI68
+    $09 constant EXTI_SWI73                     \ [0x09] SWI73
+    $0a constant EXTI_SWI74                     \ [0x0a] SWI74
+  [then]
+
+
+  [ifdef] EXTI_EXTI_RPR3_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $01 constant EXTI_RPIF65                    \ [0x01] RPIF65
+    $02 constant EXTI_RPIF66                    \ [0x02] RPIF66
+    $04 constant EXTI_RPIF68                    \ [0x04] RPIF68
+    $09 constant EXTI_RPIF73                    \ [0x09] RPIF73
+    $0a constant EXTI_RPIF74                    \ [0x0a] RPIF74
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FPR3_DEF
+    \
+    \ @brief Contains only register bits for configurable events.
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $01 constant EXTI_FPIF65                    \ [0x01] FPIF65
+    $02 constant EXTI_FPIF66                    \ [0x02] FPIF66
+    $04 constant EXTI_FPIF68                    \ [0x04] FPIF68
+    $09 constant EXTI_FPIF73                    \ [0x09] FPIF73
+    $0a constant EXTI_FPIF74                    \ [0x0a] FPIF74
+  [then]
+
+
+  [ifdef] EXTI_EXTI_TZENR3_DEF
+    \
+    \ @brief This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EXTICR1_DEF
+    \
+    \ @brief EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EXTI0                     \ [0x00 : 8] EXTI0
+    $08 constant EXTI_EXTI1                     \ [0x08 : 8] EXTI1
+    $10 constant EXTI_EXTI2                     \ [0x10 : 8] EXTI2
+    $18 constant EXTI_EXTI3                     \ [0x18 : 8] EXTI3
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EXTICR2_DEF
+    \
+    \ @brief EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
+    \ Address offset: 0x64
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EXTI4                     \ [0x00 : 8] EXTI4
+    $08 constant EXTI_EXTI5                     \ [0x08 : 8] EXTI5
+    $10 constant EXTI_EXTI6                     \ [0x10 : 8] EXTI6
+    $18 constant EXTI_EXTI7                     \ [0x18 : 8] EXTI7
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EXTICR3_DEF
+    \
+    \ @brief EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EXTI8                     \ [0x00 : 8] EXTI8
+    $08 constant EXTI_EXTI9                     \ [0x08 : 8] EXTI9
+    $10 constant EXTI_EXTI10                    \ [0x10 : 8] EXTI10
+    $18 constant EXTI_EXTI11                    \ [0x18 : 8] EXTI11
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EXTICR4_DEF
+    \
+    \ @brief EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
+    \ Address offset: 0x6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EXTI12                    \ [0x00 : 8] EXTI12
+    $08 constant EXTI_EXTI13                    \ [0x08 : 8] EXTI13
+    $10 constant EXTI_EXTI14                    \ [0x10 : 8] EXTI14
+    $18 constant EXTI_EXTI15                    \ [0x18 : 8] EXTI15
+  [then]
+
+
+  [ifdef] EXTI_EXTI_IMR1_DEF
+    \
+    \ @brief Contains register bits for configurable events and Direct events.
+    \ Address offset: 0x80
+    \ Reset value: 0xFFFE0000
+    \
+    $00 constant EXTI_IM0                       \ [0x00] IM0
+    $01 constant EXTI_IM1                       \ [0x01] IM1
+    $02 constant EXTI_IM2                       \ [0x02] IM2
+    $03 constant EXTI_IM3                       \ [0x03] IM3
+    $04 constant EXTI_IM4                       \ [0x04] IM4
+    $05 constant EXTI_IM5                       \ [0x05] IM5
+    $06 constant EXTI_IM6                       \ [0x06] IM6
+    $07 constant EXTI_IM7                       \ [0x07] IM7
+    $08 constant EXTI_IM8                       \ [0x08] IM8
+    $09 constant EXTI_IM9                       \ [0x09] IM9
+    $0a constant EXTI_IM10                      \ [0x0a] IM10
+    $0b constant EXTI_IM11                      \ [0x0b] IM11
+    $0c constant EXTI_IM12                      \ [0x0c] IM12
+    $0d constant EXTI_IM13                      \ [0x0d] IM13
+    $0e constant EXTI_IM14                      \ [0x0e] IM14
+    $0f constant EXTI_IM15                      \ [0x0f] IM15
+    $10 constant EXTI_IM16                      \ [0x10] IM16
+    $11 constant EXTI_IM17                      \ [0x11] IM17
+    $12 constant EXTI_IM18                      \ [0x12] IM18
+    $13 constant EXTI_IM19                      \ [0x13] IM19
+    $14 constant EXTI_IM20                      \ [0x14] IM20
+    $15 constant EXTI_IM21                      \ [0x15] IM21
+    $16 constant EXTI_IM22                      \ [0x16] IM22
+    $17 constant EXTI_IM23                      \ [0x17] IM23
+    $18 constant EXTI_IM24                      \ [0x18] IM24
+    $19 constant EXTI_IM25                      \ [0x19] IM25
+    $1a constant EXTI_IM26                      \ [0x1a] IM26
+    $1b constant EXTI_IM27                      \ [0x1b] IM27
+    $1c constant EXTI_IM28                      \ [0x1c] IM28
+    $1d constant EXTI_IM29                      \ [0x1d] IM29
+    $1e constant EXTI_IM30                      \ [0x1e] IM30
+    $1f constant EXTI_IM31                      \ [0x1f] IM31
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EMR1_DEF
+    \
+    \ @brief EXTI CPU wakeup with event mask register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EM0                       \ [0x00] EM0
+    $01 constant EXTI_EM1                       \ [0x01] EM1
+    $02 constant EXTI_EM2                       \ [0x02] EM2
+    $03 constant EXTI_EM3                       \ [0x03] EM3
+    $04 constant EXTI_EM4                       \ [0x04] EM4
+    $05 constant EXTI_EM5                       \ [0x05] EM5
+    $06 constant EXTI_EM6                       \ [0x06] EM6
+    $07 constant EXTI_EM7                       \ [0x07] EM7
+    $08 constant EXTI_EM8                       \ [0x08] EM8
+    $09 constant EXTI_EM9                       \ [0x09] EM9
+    $0a constant EXTI_EM10                      \ [0x0a] EM10
+    $0b constant EXTI_EM11                      \ [0x0b] EM11
+    $0c constant EXTI_EM12                      \ [0x0c] EM12
+    $0d constant EXTI_EM13                      \ [0x0d] EM13
+    $0e constant EXTI_EM14                      \ [0x0e] EM14
+    $0f constant EXTI_EM15                      \ [0x0f] EM15
+    $11 constant EXTI_EM17                      \ [0x11] EM17
+    $12 constant EXTI_EM18                      \ [0x12] EM18
+    $13 constant EXTI_EM19                      \ [0x13] EM19
+  [then]
+
+
+  [ifdef] EXTI_EXTI_IMR2_DEF
+    \
+    \ @brief Contains register bits for configurable events and direct events.
+    \ Address offset: 0x90
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant EXTI_IM32                      \ [0x00] IM32
+    $01 constant EXTI_IM33                      \ [0x01] IM33
+    $02 constant EXTI_IM34                      \ [0x02] IM34
+    $03 constant EXTI_IM35                      \ [0x03] IM35
+    $04 constant EXTI_IM36                      \ [0x04] IM36
+    $05 constant EXTI_IM37                      \ [0x05] IM37
+    $06 constant EXTI_IM38                      \ [0x06] IM38
+    $07 constant EXTI_IM39                      \ [0x07] IM39
+    $08 constant EXTI_IM40                      \ [0x08] IM40
+    $09 constant EXTI_IM41                      \ [0x09] IM41
+    $0a constant EXTI_IM42                      \ [0x0a] IM42
+    $0b constant EXTI_IM43                      \ [0x0b] IM43
+    $0c constant EXTI_IM44                      \ [0x0c] IM44
+    $0d constant EXTI_IM45                      \ [0x0d] IM45
+    $0e constant EXTI_IM46                      \ [0x0e] IM46
+    $0f constant EXTI_IM47                      \ [0x0f] IM47
+    $10 constant EXTI_IM48                      \ [0x10] IM48
+    $11 constant EXTI_IM49                      \ [0x11] IM49
+    $12 constant EXTI_IM50                      \ [0x12] IM50
+    $13 constant EXTI_IM51                      \ [0x13] IM51
+    $14 constant EXTI_IM52                      \ [0x14] IM52
+    $15 constant EXTI_IM53                      \ [0x15] IM53
+    $16 constant EXTI_IM54                      \ [0x16] IM54
+    $17 constant EXTI_IM55                      \ [0x17] IM55
+    $18 constant EXTI_IM56                      \ [0x18] IM56
+    $19 constant EXTI_IM57                      \ [0x19] IM57
+    $1a constant EXTI_IM58                      \ [0x1a] IM58
+    $1b constant EXTI_IM59                      \ [0x1b] IM59
+    $1c constant EXTI_IM60                      \ [0x1c] IM60
+    $1d constant EXTI_IM61                      \ [0x1d] IM61
+    $1e constant EXTI_IM62                      \ [0x1e] IM62
+    $1f constant EXTI_IM63                      \ [0x1f] IM63
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EMR2_DEF
+    \
+    \ @brief EXTI CPU wakeup with event mask register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_IMR3_DEF
+    \
+    \ @brief Contains register bits for configurable events and direct events.
+    \ Address offset: 0xA0
+    \ Reset value: 0x00000DE9
+    \
+    $00 constant EXTI_IM64                      \ [0x00] IM64
+    $01 constant EXTI_IM65                      \ [0x01] IM65
+    $02 constant EXTI_IM66                      \ [0x02] IM66
+    $03 constant EXTI_IM67                      \ [0x03] IM67
+    $04 constant EXTI_IM68                      \ [0x04] IM68
+    $05 constant EXTI_IM69                      \ [0x05] IM69
+    $06 constant EXTI_IM70                      \ [0x06] IM70
+    $07 constant EXTI_IM71                      \ [0x07] IM71
+    $08 constant EXTI_IM72                      \ [0x08] IM72
+    $09 constant EXTI_IM73                      \ [0x09] IM73
+    $0a constant EXTI_IM74                      \ [0x0a] IM74
+    $0b constant EXTI_IM75                      \ [0x0b] IM75
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EMR3_DEF
+    \
+    \ @brief EXTI CPU wakeup with event mask register
+    \ Address offset: 0xA4
+    \ Reset value: 0x00000000
+    \
+    $02 constant EXTI_EM66                      \ [0x02] EM66
+  [then]
+
+
+  [ifdef] EXTI_EXTI_C2IMR1_DEF
+    \
+    \ @brief Contains register bits for configurable events and Direct events.
+    \ Address offset: 0xC0
+    \ Reset value: 0xFFFE0000
+    \
+    $00 constant EXTI_IM0                       \ [0x00] IM0
+    $01 constant EXTI_IM1                       \ [0x01] IM1
+    $02 constant EXTI_IM2                       \ [0x02] IM2
+    $03 constant EXTI_IM3                       \ [0x03] IM3
+    $04 constant EXTI_IM4                       \ [0x04] IM4
+    $05 constant EXTI_IM5                       \ [0x05] IM5
+    $06 constant EXTI_IM6                       \ [0x06] IM6
+    $07 constant EXTI_IM7                       \ [0x07] IM7
+    $08 constant EXTI_IM8                       \ [0x08] IM8
+    $09 constant EXTI_IM9                       \ [0x09] IM9
+    $0a constant EXTI_IM10                      \ [0x0a] IM10
+    $0b constant EXTI_IM11                      \ [0x0b] IM11
+    $0c constant EXTI_IM12                      \ [0x0c] IM12
+    $0d constant EXTI_IM13                      \ [0x0d] IM13
+    $0e constant EXTI_IM14                      \ [0x0e] IM14
+    $0f constant EXTI_IM15                      \ [0x0f] IM15
+    $10 constant EXTI_IM16                      \ [0x10] IM16
+    $11 constant EXTI_IM17                      \ [0x11] IM17
+    $12 constant EXTI_IM18                      \ [0x12] IM18
+    $13 constant EXTI_IM19                      \ [0x13] IM19
+    $14 constant EXTI_IM20                      \ [0x14] IM20
+    $15 constant EXTI_IM21                      \ [0x15] IM21
+    $16 constant EXTI_IM22                      \ [0x16] IM22
+    $17 constant EXTI_IM23                      \ [0x17] IM23
+    $18 constant EXTI_IM24                      \ [0x18] IM24
+    $19 constant EXTI_IM25                      \ [0x19] IM25
+    $1a constant EXTI_IM26                      \ [0x1a] IM26
+    $1b constant EXTI_IM27                      \ [0x1b] IM27
+    $1c constant EXTI_IM28                      \ [0x1c] IM28
+    $1d constant EXTI_IM29                      \ [0x1d] IM29
+    $1e constant EXTI_IM30                      \ [0x1e] IM30
+    $1f constant EXTI_IM31                      \ [0x1f] IM31
+  [then]
+
+
+  [ifdef] EXTI_EXTI_C2EMR1_DEF
+    \
+    \ @brief EXTI CPU2 wakeup with event mask register
+    \ Address offset: 0xC4
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EM0                       \ [0x00] EM0
+    $01 constant EXTI_EM1                       \ [0x01] EM1
+    $02 constant EXTI_EM2                       \ [0x02] EM2
+    $03 constant EXTI_EM3                       \ [0x03] EM3
+    $04 constant EXTI_EM4                       \ [0x04] EM4
+    $05 constant EXTI_EM5                       \ [0x05] EM5
+    $06 constant EXTI_EM6                       \ [0x06] EM6
+    $07 constant EXTI_EM7                       \ [0x07] EM7
+    $08 constant EXTI_EM8                       \ [0x08] EM8
+    $09 constant EXTI_EM9                       \ [0x09] EM9
+    $0a constant EXTI_EM10                      \ [0x0a] EM10
+    $0b constant EXTI_EM11                      \ [0x0b] EM11
+    $0c constant EXTI_EM12                      \ [0x0c] EM12
+    $0d constant EXTI_EM13                      \ [0x0d] EM13
+    $0e constant EXTI_EM14                      \ [0x0e] EM14
+    $0f constant EXTI_EM15                      \ [0x0f] EM15
+    $11 constant EXTI_EM17                      \ [0x11] EM17
+    $12 constant EXTI_EM18                      \ [0x12] EM18
+    $13 constant EXTI_EM19                      \ [0x13] EM19
+  [then]
+
+
+  [ifdef] EXTI_EXTI_C2IMR2_DEF
+    \
+    \ @brief Contains register bits for configurable events and direct events.
+    \ Address offset: 0xD0
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant EXTI_IM32                      \ [0x00] IM32
+    $01 constant EXTI_IM33                      \ [0x01] IM33
+    $02 constant EXTI_IM34                      \ [0x02] IM34
+    $03 constant EXTI_IM35                      \ [0x03] IM35
+    $04 constant EXTI_IM36                      \ [0x04] IM36
+    $05 constant EXTI_IM37                      \ [0x05] IM37
+    $06 constant EXTI_IM38                      \ [0x06] IM38
+    $07 constant EXTI_IM39                      \ [0x07] IM39
+    $08 constant EXTI_IM40                      \ [0x08] IM40
+    $09 constant EXTI_IM41                      \ [0x09] IM41
+    $0a constant EXTI_IM42                      \ [0x0a] IM42
+    $0b constant EXTI_IM43                      \ [0x0b] IM43
+    $0c constant EXTI_IM44                      \ [0x0c] IM44
+    $0d constant EXTI_IM45                      \ [0x0d] IM45
+    $0e constant EXTI_IM46                      \ [0x0e] IM46
+    $0f constant EXTI_IM47                      \ [0x0f] IM47
+    $10 constant EXTI_IM48                      \ [0x10] IM48
+    $11 constant EXTI_IM49                      \ [0x11] IM49
+    $12 constant EXTI_IM50                      \ [0x12] IM50
+    $13 constant EXTI_IM51                      \ [0x13] IM51
+    $14 constant EXTI_IM52                      \ [0x14] IM52
+    $15 constant EXTI_IM53                      \ [0x15] IM53
+    $16 constant EXTI_IM54                      \ [0x16] IM54
+    $17 constant EXTI_IM55                      \ [0x17] IM55
+    $18 constant EXTI_IM56                      \ [0x18] IM56
+    $19 constant EXTI_IM57                      \ [0x19] IM57
+    $1a constant EXTI_IM58                      \ [0x1a] IM58
+    $1b constant EXTI_IM59                      \ [0x1b] IM59
+    $1c constant EXTI_IM60                      \ [0x1c] IM60
+    $1d constant EXTI_IM61                      \ [0x1d] IM61
+    $1e constant EXTI_IM62                      \ [0x1e] IM62
+    $1f constant EXTI_IM63                      \ [0x1f] IM63
+  [then]
+
+
+  [ifdef] EXTI_EXTI_C2EMR2_DEF
+    \
+    \ @brief EXTI CPU2 wakeup with event mask register
+    \ Address offset: 0xD4
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_C2IMR3_DEF
+    \
+    \ @brief Contains register bits for configurable events and direct events.
+    \ Address offset: 0xE0
+    \ Reset value: 0x00000DE9
+    \
+    $00 constant EXTI_IM64                      \ [0x00] IM64
+    $01 constant EXTI_IM65                      \ [0x01] IM65
+    $02 constant EXTI_IM66                      \ [0x02] IM66
+    $03 constant EXTI_IM67                      \ [0x03] IM67
+    $04 constant EXTI_IM68                      \ [0x04] IM68
+    $05 constant EXTI_IM69                      \ [0x05] IM69
+    $06 constant EXTI_IM70                      \ [0x06] IM70
+    $07 constant EXTI_IM71                      \ [0x07] IM71
+    $08 constant EXTI_IM72                      \ [0x08] IM72
+    $09 constant EXTI_IM73                      \ [0x09] IM73
+    $0a constant EXTI_IM74                      \ [0x0a] IM74
+    $0b constant EXTI_IM75                      \ [0x0b] IM75
+  [then]
+
+
+  [ifdef] EXTI_EXTI_C2EMR3_DEF
+    \
+    \ @brief EXTI CPU2 wakeup with event mask register
+    \ Address offset: 0xE4
+    \ Reset value: 0x00000000
+    \
+    $02 constant EXTI_EM66                      \ [0x02] EM66
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR13_DEF
+    \
+    \ @brief EXTI hardware configuration register 13
+    \ Address offset: 0x3C0
+    \ Reset value: 0x050EFFFF
+    \
+    $00 constant EXTI_TZ                        \ [0x00 : 32] TZ
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR12_DEF
+    \
+    \ @brief EXTI hardware configuration register 12
+    \ Address offset: 0x3C4
+    \ Reset value: 0x050EFFFF
+    \
+    $00 constant EXTI_TZ                        \ [0x00 : 32] TZ
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR11_DEF
+    \
+    \ @brief EXTI hardware configuration register 11
+    \ Address offset: 0x3C8
+    \ Reset value: 0x050EFFFF
+    \
+    $00 constant EXTI_TZ                        \ [0x00 : 32] TZ
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR10_DEF
+    \
+    \ @brief EXTI hardware configuration register 10
+    \ Address offset: 0x3CC
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR9_DEF
+    \
+    \ @brief EXTI hardware configuration register 9
+    \ Address offset: 0x3D0
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR8_DEF
+    \
+    \ @brief EXTI hardware configuration register 8
+    \ Address offset: 0x3D4
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR7_DEF
+    \
+    \ @brief EXTI hardware configuration register 7
+    \ Address offset: 0x3D8
+    \ Reset value: 0x000EFFFF
+    \
+    $00 constant EXTI_CPUEVENT                  \ [0x00 : 32] CPUEVENT
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR6_DEF
+    \
+    \ @brief EXTI hardware configuration register 6
+    \ Address offset: 0x3DC
+    \ Reset value: 0x000EFFFF
+    \
+    $00 constant EXTI_CPUEVENT                  \ [0x00 : 32] CPUEVENT
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR5_DEF
+    \
+    \ @brief EXTI hardware configuration register 5
+    \ Address offset: 0x3E0
+    \ Reset value: 0x000EFFFF
+    \
+    $00 constant EXTI_CPUEVENT                  \ [0x00 : 32] CPUEVENT
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR4_DEF
+    \
+    \ @brief EXTI hardware configuration register 4
+    \ Address offset: 0x3E4
+    \ Reset value: 0x0001FFFF
+    \
+    $00 constant EXTI_EVENT_TRG                 \ [0x00 : 32] EVENT_TRG
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR3_DEF
+    \
+    \ @brief EXTI hardware configuration register 3
+    \ Address offset: 0x3E8
+    \ Reset value: 0x0001FFFF
+    \
+    $00 constant EXTI_EVENT_TRG                 \ [0x00 : 32] EVENT_TRG
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR2_DEF
+    \
+    \ @brief EXTI hardware configuration register 2
+    \ Address offset: 0x3EC
+    \ Reset value: 0x0001FFFF
+    \
+    $00 constant EXTI_EVENT_TRG                 \ [0x00 : 32] EVENT_TRG
+  [then]
+
+
+  [ifdef] EXTI_EXTI_HWCFGR1_DEF
+    \
+    \ @brief EXTI hardware configuration register 1
+    \ Address offset: 0x3F0
+    \ Reset value: 0x000B214B
+    \
+    $00 constant EXTI_NBEVENTS                  \ [0x00 : 8] NBEVENTS
+    $08 constant EXTI_NBCPUS                    \ [0x08 : 4] NBCPUS
+    $0c constant EXTI_CPUEVTEN                  \ [0x0c : 4] CPUEVTEN
+    $10 constant EXTI_NBIOPORT                  \ [0x10 : 8] NBIOPORT
+  [then]
+
+
+  [ifdef] EXTI_EXTI_VERR_DEF
+    \
+    \ @brief EXTI IP version register
+    \ Address offset: 0x3F4
+    \ Reset value: 0x00000030
+    \
+    $00 constant EXTI_MINREV                    \ [0x00 : 4] MINREV
+    $04 constant EXTI_MAJREV                    \ [0x04 : 4] MAJREV
+  [then]
+
+
+  [ifdef] EXTI_EXTI_IPIDR_DEF
+    \
+    \ @brief EXTI identification register
+    \ Address offset: 0x3F8
+    \ Reset value: 0x000E0001
+    \
+    $00 constant EXTI_IPID                      \ [0x00 : 32] IPID
+  [then]
+
+
+  [ifdef] EXTI_EXTI_SIDR_DEF
+    \
+    \ @brief EXTI size ID register
+    \ Address offset: 0x3FC
+    \ Reset value: 0xA3C5DD01
+    \
+    $00 constant EXTI_SID                       \ [0x00 : 32] SID
+  [then]
+
+  \
+  \ @brief EXTI
+  \
+  $00 constant EXTI_EXTI_RTSR1          \ Contains only register bits for configurable events.
+  $04 constant EXTI_EXTI_FTSR1          \ Contains only register bits for configurable events.
+  $08 constant EXTI_EXTI_SWIER1         \ Contains only register bits for configurable events.
+  $0C constant EXTI_EXTI_RPR1           \ Contains only register bits for configurable events.
+  $10 constant EXTI_EXTI_FPR1           \ Contains only register bits for configurable events.
+  $14 constant EXTI_EXTI_TZENR1         \ This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
+  $20 constant EXTI_EXTI_RTSR2          \ Contains only register bits for configurable events.
+  $24 constant EXTI_EXTI_FTSR2          \ Contains only register bits for configurable events.
+  $28 constant EXTI_EXTI_SWIER2         \ Contains only register bits for configurable events.
+  $2C constant EXTI_EXTI_RPR2           \ Contains only register bits for configurable events.
+  $30 constant EXTI_EXTI_FPR2           \ Contains only register bits for configurable events.
+  $34 constant EXTI_EXTI_TZENR2         \ This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
+  $40 constant EXTI_EXTI_RTSR3          \ Contains only register bits for configurable events.
+  $44 constant EXTI_EXTI_FTSR3          \ Contains only register bits for configurable events.
+  $48 constant EXTI_EXTI_SWIER3         \ Contains only register bits for configurable events.
+  $4C constant EXTI_EXTI_RPR3           \ Contains only register bits for configurable events.
+  $50 constant EXTI_EXTI_FPR3           \ Contains only register bits for configurable events.
+  $54 constant EXTI_EXTI_TZENR3         \ This register provides TrustZone Write access security, a non-secure write access will generate a bus error. A non-secure read will return the register data. Contains only register bits for TrustZone capable Input events.
+  $60 constant EXTI_EXTI_EXTICR1        \ EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
+  $64 constant EXTI_EXTI_EXTICR2        \ EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
+  $68 constant EXTI_EXTI_EXTICR3        \ EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
+  $6C constant EXTI_EXTI_EXTICR4        \ EXTIm fields contain only the number of bits in line with the nb_ioport configuration.
+  $80 constant EXTI_EXTI_IMR1           \ Contains register bits for configurable events and Direct events.
+  $84 constant EXTI_EXTI_EMR1           \ EXTI CPU wakeup with event mask register
+  $90 constant EXTI_EXTI_IMR2           \ Contains register bits for configurable events and direct events.
+  $94 constant EXTI_EXTI_EMR2           \ EXTI CPU wakeup with event mask register
+  $A0 constant EXTI_EXTI_IMR3           \ Contains register bits for configurable events and direct events.
+  $A4 constant EXTI_EXTI_EMR3           \ EXTI CPU wakeup with event mask register
+  $C0 constant EXTI_EXTI_C2IMR1         \ Contains register bits for configurable events and Direct events.
+  $C4 constant EXTI_EXTI_C2EMR1         \ EXTI CPU2 wakeup with event mask register
+  $D0 constant EXTI_EXTI_C2IMR2         \ Contains register bits for configurable events and direct events.
+  $D4 constant EXTI_EXTI_C2EMR2         \ EXTI CPU2 wakeup with event mask register
+  $E0 constant EXTI_EXTI_C2IMR3         \ Contains register bits for configurable events and direct events.
+  $E4 constant EXTI_EXTI_C2EMR3         \ EXTI CPU2 wakeup with event mask register
+  $3C0 constant EXTI_EXTI_HWCFGR13      \ EXTI hardware configuration register 13
+  $3C4 constant EXTI_EXTI_HWCFGR12      \ EXTI hardware configuration register 12
+  $3C8 constant EXTI_EXTI_HWCFGR11      \ EXTI hardware configuration register 11
+  $3CC constant EXTI_EXTI_HWCFGR10      \ EXTI hardware configuration register 10
+  $3D0 constant EXTI_EXTI_HWCFGR9       \ EXTI hardware configuration register 9
+  $3D4 constant EXTI_EXTI_HWCFGR8       \ EXTI hardware configuration register 8
+  $3D8 constant EXTI_EXTI_HWCFGR7       \ EXTI hardware configuration register 7
+  $3DC constant EXTI_EXTI_HWCFGR6       \ EXTI hardware configuration register 6
+  $3E0 constant EXTI_EXTI_HWCFGR5       \ EXTI hardware configuration register 5
+  $3E4 constant EXTI_EXTI_HWCFGR4       \ EXTI hardware configuration register 4
+  $3E8 constant EXTI_EXTI_HWCFGR3       \ EXTI hardware configuration register 3
+  $3EC constant EXTI_EXTI_HWCFGR2       \ EXTI hardware configuration register 2
+  $3F0 constant EXTI_EXTI_HWCFGR1       \ EXTI hardware configuration register 1
+  $3F4 constant EXTI_EXTI_VERR          \ EXTI IP version register
+  $3F8 constant EXTI_EXTI_IPIDR         \ EXTI identification register
+  $3FC constant EXTI_EXTI_SIDR          \ EXTI size ID register
+
+: EXTI_DEF ; [then]

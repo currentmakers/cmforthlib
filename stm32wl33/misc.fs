@@ -6,85 +6,92 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] MISC_DEF
 
-\
-\ @brief RFIP_VERSION register
-\ Address offset: 0x00
-\ Reset value: 0x00001200
-\
-
-$000000f0 constant MISC_RFIP_VERSION_REVISION                       \ Revision of the MR_SubG (to be used for metal fixes)
-$00000f00 constant MISC_RFIP_VERSION_VERSION                        \ Version of the MR_SubG (to be used for cut upgrades)
-$0000f000 constant MISC_RFIP_VERSION_PRODUCT                        \ Used for major upgrades (new protocols support / new features)
-
-
-\
-\ @brief RRM_UDRA_CTRL register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant MISC_RRM_UDRA_CTRL_RRM_CMD_REQ                   \ Action bit: write 1 to request a RRM-UDRA command.
+  [ifdef] MISC_RFIP_VERSION_DEF
+    \
+    \ @brief RFIP_VERSION register
+    \ Address offset: 0x00
+    \ Reset value: 0x00001200
+    \
+    $04 constant MISC_REVISION                  \ [0x04 : 4] Revision of the MR_SubG (to be used for metal fixes)
+    $08 constant MISC_VERSION                   \ [0x08 : 4] Version of the MR_SubG (to be used for cut upgrades)
+    $0c constant MISC_PRODUCT                   \ [0x0c : 4] Used for major upgrades (new protocols support / new features)
+  [then]
 
 
-\
-\ @brief SEQUENCER_CTRL register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant MISC_SEQUENCER_CTRL_GEN_SEQ_TRIGGER              \ Action bit: write 1 to generate a trigger event on Sequencer.
-$00000002 constant MISC_SEQUENCER_CTRL_DISABLE_SEQ                  \ Enable/disable the Sequencer
-
-
-\
-\ @brief ABSOLUTE_TIME register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant MISC_ABSOLUTE_TIME_ABSOLUTE_TIME                 \ Indicate the interpolated absolute.
+  [ifdef] MISC_RRM_UDRA_CTRL_DEF
+    \
+    \ @brief RRM_UDRA_CTRL register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant MISC_RRM_CMD_REQ               \ [0x00] Action bit: write 1 to request a RRM-UDRA command.
+  [then]
 
 
-\
-\ @brief SCM_COUNTER_VAL register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00007fff constant MISC_SCM_COUNTER_VAL_SCM_COUNTER_CURRVAL         \ Slow Clock Measurement: number of 16 MHz clock cycles contained in 32 slow clock periods.
-
-
-\
-\ @brief SCM_MIN_MAX register
-\ Address offset: 0x14
-\ Reset value: 0x00007FFF
-\
-
-$00007fff constant MISC_SCM_MIN_MAX_SCM_COUNTER_MINVAL              \ Slow Clock Measurement: minimum SCM_COUNTER value seen since the counter is ON and since last clear request.
-$7fff0000 constant MISC_SCM_MIN_MAX_SCM_COUNTER_MAXVAL              \ Slow Clock Measurement: maximum SCM_COUNTER value seen since the counter is ON and since last clear request.
-$80000000 constant MISC_SCM_MIN_MAX_CLEAR_MIN_MAX                   \ Write 1' to clear the SCM_COUNTER_MINVAL and SCM_COUNTER_MAXVAL bit fields.
+  [ifdef] MISC_SEQUENCER_CTRL_DEF
+    \
+    \ @brief SEQUENCER_CTRL register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant MISC_GEN_SEQ_TRIGGER           \ [0x00] Action bit: write 1 to generate a trigger event on Sequencer.
+    $01 constant MISC_DISABLE_SEQ               \ [0x01] Enable/disable the Sequencer
+  [then]
 
 
-\
-\ @brief WAKEUP_IRQ_STATUS register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
+  [ifdef] MISC_ABSOLUTE_TIME_DEF
+    \
+    \ @brief ABSOLUTE_TIME register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant MISC_ABSOLUTE_TIME             \ [0x00 : 32] Indicate the interpolated absolute.
+  [then]
 
-$00000001 constant MISC_WAKEUP_IRQ_STATUS_CPU_WAKEUP_F              \ Set when the interpolated absolute time matches the CPU_WAKEUPTIME while WAKEUP_CTRL.
-$00000002 constant MISC_WAKEUP_IRQ_STATUS_RFIP_WAKEUP_F             \ Set when the interpolated absolute time matches the RFIP_WAKEUPTIME while WAKEUP_CTRL.
+
+  [ifdef] MISC_SCM_COUNTER_VAL_DEF
+    \
+    \ @brief SCM_COUNTER_VAL register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant MISC_SCM_COUNTER_CURRVAL       \ [0x00 : 15] Slow Clock Measurement: number of 16 MHz clock cycles contained in 32 slow clock periods.
+  [then]
 
 
-\
-\ @brief RFIP_VERSION register
-\
-$49000700 constant MISC_RFIP_VERSION  \ offset: 0x00 : RFIP_VERSION register
-$49000704 constant MISC_RRM_UDRA_CTRL  \ offset: 0x04 : RRM_UDRA_CTRL register
-$49000708 constant MISC_SEQUENCER_CTRL  \ offset: 0x08 : SEQUENCER_CTRL register
-$4900070c constant MISC_ABSOLUTE_TIME  \ offset: 0x0C : ABSOLUTE_TIME register
-$49000710 constant MISC_SCM_COUNTER_VAL  \ offset: 0x10 : SCM_COUNTER_VAL register
-$49000714 constant MISC_SCM_MIN_MAX  \ offset: 0x14 : SCM_MIN_MAX register
-$49000718 constant MISC_WAKEUP_IRQ_STATUS  \ offset: 0x18 : WAKEUP_IRQ_STATUS register
+  [ifdef] MISC_SCM_MIN_MAX_DEF
+    \
+    \ @brief SCM_MIN_MAX register
+    \ Address offset: 0x14
+    \ Reset value: 0x00007FFF
+    \
+    $00 constant MISC_SCM_COUNTER_MINVAL        \ [0x00 : 15] Slow Clock Measurement: minimum SCM_COUNTER value seen since the counter is ON and since last clear request.
+    $10 constant MISC_SCM_COUNTER_MAXVAL        \ [0x10 : 15] Slow Clock Measurement: maximum SCM_COUNTER value seen since the counter is ON and since last clear request.
+    $1f constant MISC_CLEAR_MIN_MAX             \ [0x1f] Write 1' to clear the SCM_COUNTER_MINVAL and SCM_COUNTER_MAXVAL bit fields.
+  [then]
 
+
+  [ifdef] MISC_WAKEUP_IRQ_STATUS_DEF
+    \
+    \ @brief WAKEUP_IRQ_STATUS register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant MISC_CPU_WAKEUP_F              \ [0x00] Set when the interpolated absolute time matches the CPU_WAKEUPTIME while WAKEUP_CTRL.
+    $01 constant MISC_RFIP_WAKEUP_F             \ [0x01] Set when the interpolated absolute time matches the RFIP_WAKEUPTIME while WAKEUP_CTRL.
+  [then]
+
+  \
+  \ @brief RFIP_VERSION register
+  \
+  $00 constant MISC_RFIP_VERSION        \ RFIP_VERSION register
+  $04 constant MISC_RRM_UDRA_CTRL       \ RRM_UDRA_CTRL register
+  $08 constant MISC_SEQUENCER_CTRL      \ SEQUENCER_CTRL register
+  $0C constant MISC_ABSOLUTE_TIME       \ ABSOLUTE_TIME register
+  $10 constant MISC_SCM_COUNTER_VAL     \ SCM_COUNTER_VAL register
+  $14 constant MISC_SCM_MIN_MAX         \ SCM_MIN_MAX register
+  $18 constant MISC_WAKEUP_IRQ_STATUS   \ WAKEUP_IRQ_STATUS register
+
+: MISC_DEF ; [then]

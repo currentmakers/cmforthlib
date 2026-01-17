@@ -6,310 +6,322 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GPIOB_DEF
 
-\
-\ @brief GPIO port B mode register
-\ Address offset: 0x00
-\ Reset value: 0xFFFFFEBF
-\
-
-$00000003 constant GPIOB_GPIOB_MODER_MODE0                          \ Port configuration I/O pin 0
-$0000000c constant GPIOB_GPIOB_MODER_MODE1                          \ Port configuration I/O pin 1
-$00000030 constant GPIOB_GPIOB_MODER_MODE2                          \ Port configuration I/O pin 2
-$000000c0 constant GPIOB_GPIOB_MODER_MODE3                          \ Port configuration I/O pin 3
-$00000300 constant GPIOB_GPIOB_MODER_MODE4                          \ Port configuration I/O pin 4
-$00000c00 constant GPIOB_GPIOB_MODER_MODE5                          \ Port configuration I/O pin 5
-$00003000 constant GPIOB_GPIOB_MODER_MODE6                          \ Port configuration I/O pin 6
-$0000c000 constant GPIOB_GPIOB_MODER_MODE7                          \ Port configuration I/O pin 7
-$00030000 constant GPIOB_GPIOB_MODER_MODE8                          \ Port configuration I/O pin 8
-$000c0000 constant GPIOB_GPIOB_MODER_MODE9                          \ Port configuration I/O pin 9
-$00300000 constant GPIOB_GPIOB_MODER_MODE10                         \ Port configuration I/O pin 10 Note that bits 21:20 are reserved on STM32WBA55xx devices.
-$00c00000 constant GPIOB_GPIOB_MODER_MODE11                         \ Port configuration I/O pin 11
-$03000000 constant GPIOB_GPIOB_MODER_MODE12                         \ Port configuration I/O pin 12
-$0c000000 constant GPIOB_GPIOB_MODER_MODE13                         \ Port configuration I/O pin 13
-$30000000 constant GPIOB_GPIOB_MODER_MODE14                         \ Port configuration I/O pin 14
-$c0000000 constant GPIOB_GPIOB_MODER_MODE15                         \ Port configuration I/O pin 15 These bits are written by software to configure the I/O mode. Access can be protected by GPIOB SEC15.
-
-
-\
-\ @brief GPIO port B output type register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOB_GPIOB_OTYPER_OT0                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000002 constant GPIOB_GPIOB_OTYPER_OT1                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000004 constant GPIOB_GPIOB_OTYPER_OT2                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000008 constant GPIOB_GPIOB_OTYPER_OT3                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000010 constant GPIOB_GPIOB_OTYPER_OT4                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000020 constant GPIOB_GPIOB_OTYPER_OT5                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000040 constant GPIOB_GPIOB_OTYPER_OT6                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000080 constant GPIOB_GPIOB_OTYPER_OT7                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000100 constant GPIOB_GPIOB_OTYPER_OT8                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000200 constant GPIOB_GPIOB_OTYPER_OT9                           \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000400 constant GPIOB_GPIOB_OTYPER_OT10                          \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000800 constant GPIOB_GPIOB_OTYPER_OT11                          \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00001000 constant GPIOB_GPIOB_OTYPER_OT12                          \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00002000 constant GPIOB_GPIOB_OTYPER_OT13                          \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00004000 constant GPIOB_GPIOB_OTYPER_OT14                          \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00008000 constant GPIOB_GPIOB_OTYPER_OT15                          \ Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+  [ifdef] GPIOB_GPIOB_MODER_DEF
+    \
+    \ @brief GPIO port B mode register
+    \ Address offset: 0x00
+    \ Reset value: 0xFFFFFEBF
+    \
+    $00 constant GPIOB_MODE0                    \ [0x00 : 2] Port configuration I/O pin 0
+    $02 constant GPIOB_MODE1                    \ [0x02 : 2] Port configuration I/O pin 1
+    $04 constant GPIOB_MODE2                    \ [0x04 : 2] Port configuration I/O pin 2
+    $06 constant GPIOB_MODE3                    \ [0x06 : 2] Port configuration I/O pin 3
+    $08 constant GPIOB_MODE4                    \ [0x08 : 2] Port configuration I/O pin 4
+    $0a constant GPIOB_MODE5                    \ [0x0a : 2] Port configuration I/O pin 5
+    $0c constant GPIOB_MODE6                    \ [0x0c : 2] Port configuration I/O pin 6
+    $0e constant GPIOB_MODE7                    \ [0x0e : 2] Port configuration I/O pin 7
+    $10 constant GPIOB_MODE8                    \ [0x10 : 2] Port configuration I/O pin 8
+    $12 constant GPIOB_MODE9                    \ [0x12 : 2] Port configuration I/O pin 9
+    $14 constant GPIOB_MODE10                   \ [0x14 : 2] Port configuration I/O pin 10 Note that bits 21:20 are reserved on STM32WBA55xx devices.
+    $16 constant GPIOB_MODE11                   \ [0x16 : 2] Port configuration I/O pin 11
+    $18 constant GPIOB_MODE12                   \ [0x18 : 2] Port configuration I/O pin 12
+    $1a constant GPIOB_MODE13                   \ [0x1a : 2] Port configuration I/O pin 13
+    $1c constant GPIOB_MODE14                   \ [0x1c : 2] Port configuration I/O pin 14
+    $1e constant GPIOB_MODE15                   \ [0x1e : 2] Port configuration I/O pin 15 These bits are written by software to configure the I/O mode. Access can be protected by GPIOB SEC15.
+  [then]
 
 
-\
-\ @brief GPIO port B output speed register
-\ Address offset: 0x08
-\ Reset value: 0x00000080
-\
-
-$00000003 constant GPIOB_GPIOB_OSPEEDR_OSPEED0                      \ Port configuration I/O pin 0
-$0000000c constant GPIOB_GPIOB_OSPEEDR_OSPEED1                      \ Port configuration I/O pin 1
-$00000030 constant GPIOB_GPIOB_OSPEEDR_OSPEED2                      \ Port configuration I/O pin 2
-$000000c0 constant GPIOB_GPIOB_OSPEEDR_OSPEED3                      \ Port configuration I/O pin 3
-$00000300 constant GPIOB_GPIOB_OSPEEDR_OSPEED4                      \ Port configuration I/O pin 4
-$00000c00 constant GPIOB_GPIOB_OSPEEDR_OSPEED5                      \ Port configuration I/O pin 5
-$00003000 constant GPIOB_GPIOB_OSPEEDR_OSPEED6                      \ Port configuration I/O pin 6
-$0000c000 constant GPIOB_GPIOB_OSPEEDR_OSPEED7                      \ Port configuration I/O pin 7
-$00030000 constant GPIOB_GPIOB_OSPEEDR_OSPEED8                      \ Port configuration I/O pin 8
-$000c0000 constant GPIOB_GPIOB_OSPEEDR_OSPEED9                      \ Port configuration I/O pin 9
-$00300000 constant GPIOB_GPIOB_OSPEEDR_OSPEED10                     \ Port configuration I/O pin 10 Note that bits 21:20 are reserved on STM32WBA55xx devices.
-$00c00000 constant GPIOB_GPIOB_OSPEEDR_OSPEED11                     \ Port configuration I/O pin 11
-$03000000 constant GPIOB_GPIOB_OSPEEDR_OSPEED12                     \ Port configuration I/O pin 12
-$0c000000 constant GPIOB_GPIOB_OSPEEDR_OSPEED13                     \ Port configuration I/O pin 13
-$30000000 constant GPIOB_GPIOB_OSPEEDR_OSPEED14                     \ Port configuration I/O pin 14
-$c0000000 constant GPIOB_GPIOB_OSPEEDR_OSPEED15                     \ Port configuration I/O pin 15 These bits are written by software to configure the I/O output speed. Access can be protected by GPIOB SEC15. Note: Refer to the device datasheet for the frequency specifications and the power supply and load conditions for each speed.
-
-
-\
-\ @brief GPIO port B pull-up/pull-down register
-\ Address offset: 0x0C
-\ Reset value: 0x00000100
-\
-
-$00000003 constant GPIOB_GPIOB_PUPDR_PUPD0                          \ Port configuration I/O pin 0
-$0000000c constant GPIOB_GPIOB_PUPDR_PUPD1                          \ Port configuration I/O pin 1
-$00000030 constant GPIOB_GPIOB_PUPDR_PUPD2                          \ Port configuration I/O pin 2
-$000000c0 constant GPIOB_GPIOB_PUPDR_PUPD3                          \ Port configuration I/O pin 3
-$00000300 constant GPIOB_GPIOB_PUPDR_PUPD4                          \ Port configuration I/O pin 4
-$00000c00 constant GPIOB_GPIOB_PUPDR_PUPD5                          \ Port configuration I/O pin 5
-$00003000 constant GPIOB_GPIOB_PUPDR_PUPD6                          \ Port configuration I/O pin 6
-$0000c000 constant GPIOB_GPIOB_PUPDR_PUPD7                          \ Port configuration I/O pin 7
-$00030000 constant GPIOB_GPIOB_PUPDR_PUPD8                          \ Port configuration I/O pin 8
-$000c0000 constant GPIOB_GPIOB_PUPDR_PUPD9                          \ Port configuration I/O pin 9
-$00300000 constant GPIOB_GPIOB_PUPDR_PUPD10                         \ Port configuration I/O pin 10 Note that bits 21:20 are reserved on STM32WBA55xx devices.
-$00c00000 constant GPIOB_GPIOB_PUPDR_PUPD11                         \ Port configuration I/O pin 11
-$03000000 constant GPIOB_GPIOB_PUPDR_PUPD12                         \ Port configuration I/O pin 12
-$0c000000 constant GPIOB_GPIOB_PUPDR_PUPD13                         \ Port configuration I/O pin 13
-$30000000 constant GPIOB_GPIOB_PUPDR_PUPD14                         \ Port configuration I/O pin 14
-$c0000000 constant GPIOB_GPIOB_PUPDR_PUPD15                         \ Port configuration I/O pin 15 These bits are written by software to configure the I/O pull-up or pull-down Access can be protected by GPIOB SEC15.
+  [ifdef] GPIOB_GPIOB_OTYPER_DEF
+    \
+    \ @brief GPIO port B output type register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOB_OT0                      \ [0x00] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $01 constant GPIOB_OT1                      \ [0x01] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $02 constant GPIOB_OT2                      \ [0x02] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $03 constant GPIOB_OT3                      \ [0x03] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $04 constant GPIOB_OT4                      \ [0x04] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $05 constant GPIOB_OT5                      \ [0x05] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $06 constant GPIOB_OT6                      \ [0x06] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $07 constant GPIOB_OT7                      \ [0x07] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $08 constant GPIOB_OT8                      \ [0x08] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $09 constant GPIOB_OT9                      \ [0x09] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0a constant GPIOB_OT10                     \ [0x0a] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0b constant GPIOB_OT11                     \ [0x0b] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0c constant GPIOB_OT12                     \ [0x0c] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0d constant GPIOB_OT13                     \ [0x0d] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0e constant GPIOB_OT14                     \ [0x0e] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0f constant GPIOB_OT15                     \ [0x0f] Port configuration I/O pin y These bits are written by software to configure the I/O output type. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+  [then]
 
 
-\
-\ @brief GPIO port B input data register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOB_GPIOB_IDR_ID0                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000002 constant GPIOB_GPIOB_IDR_ID1                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000004 constant GPIOB_GPIOB_IDR_ID2                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000008 constant GPIOB_GPIOB_IDR_ID3                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000010 constant GPIOB_GPIOB_IDR_ID4                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000020 constant GPIOB_GPIOB_IDR_ID5                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000040 constant GPIOB_GPIOB_IDR_ID6                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000080 constant GPIOB_GPIOB_IDR_ID7                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000100 constant GPIOB_GPIOB_IDR_ID8                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000200 constant GPIOB_GPIOB_IDR_ID9                              \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000400 constant GPIOB_GPIOB_IDR_ID10                             \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000800 constant GPIOB_GPIOB_IDR_ID11                             \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00001000 constant GPIOB_GPIOB_IDR_ID12                             \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00002000 constant GPIOB_GPIOB_IDR_ID13                             \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00004000 constant GPIOB_GPIOB_IDR_ID14                             \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00008000 constant GPIOB_GPIOB_IDR_ID15                             \ Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-
-
-\
-\ @brief GPIO port B output data register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOB_GPIOB_ODR_OD0                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000002 constant GPIOB_GPIOB_ODR_OD1                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000004 constant GPIOB_GPIOB_ODR_OD2                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000008 constant GPIOB_GPIOB_ODR_OD3                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000010 constant GPIOB_GPIOB_ODR_OD4                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000020 constant GPIOB_GPIOB_ODR_OD5                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000040 constant GPIOB_GPIOB_ODR_OD6                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000080 constant GPIOB_GPIOB_ODR_OD7                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000100 constant GPIOB_GPIOB_ODR_OD8                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000200 constant GPIOB_GPIOB_ODR_OD9                              \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000400 constant GPIOB_GPIOB_ODR_OD10                             \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00000800 constant GPIOB_GPIOB_ODR_OD11                             \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00001000 constant GPIOB_GPIOB_ODR_OD12                             \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00002000 constant GPIOB_GPIOB_ODR_OD13                             \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00004000 constant GPIOB_GPIOB_ODR_OD14                             \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
-$00008000 constant GPIOB_GPIOB_ODR_OD15                             \ Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+  [ifdef] GPIOB_GPIOB_OSPEEDR_DEF
+    \
+    \ @brief GPIO port B output speed register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000080
+    \
+    $00 constant GPIOB_OSPEED0                  \ [0x00 : 2] Port configuration I/O pin 0
+    $02 constant GPIOB_OSPEED1                  \ [0x02 : 2] Port configuration I/O pin 1
+    $04 constant GPIOB_OSPEED2                  \ [0x04 : 2] Port configuration I/O pin 2
+    $06 constant GPIOB_OSPEED3                  \ [0x06 : 2] Port configuration I/O pin 3
+    $08 constant GPIOB_OSPEED4                  \ [0x08 : 2] Port configuration I/O pin 4
+    $0a constant GPIOB_OSPEED5                  \ [0x0a : 2] Port configuration I/O pin 5
+    $0c constant GPIOB_OSPEED6                  \ [0x0c : 2] Port configuration I/O pin 6
+    $0e constant GPIOB_OSPEED7                  \ [0x0e : 2] Port configuration I/O pin 7
+    $10 constant GPIOB_OSPEED8                  \ [0x10 : 2] Port configuration I/O pin 8
+    $12 constant GPIOB_OSPEED9                  \ [0x12 : 2] Port configuration I/O pin 9
+    $14 constant GPIOB_OSPEED10                 \ [0x14 : 2] Port configuration I/O pin 10 Note that bits 21:20 are reserved on STM32WBA55xx devices.
+    $16 constant GPIOB_OSPEED11                 \ [0x16 : 2] Port configuration I/O pin 11
+    $18 constant GPIOB_OSPEED12                 \ [0x18 : 2] Port configuration I/O pin 12
+    $1a constant GPIOB_OSPEED13                 \ [0x1a : 2] Port configuration I/O pin 13
+    $1c constant GPIOB_OSPEED14                 \ [0x1c : 2] Port configuration I/O pin 14
+    $1e constant GPIOB_OSPEED15                 \ [0x1e : 2] Port configuration I/O pin 15 These bits are written by software to configure the I/O output speed. Access can be protected by GPIOB SEC15. Note: Refer to the device datasheet for the frequency specifications and the power supply and load conditions for each speed.
+  [then]
 
 
-\
-\ @brief GPIO port B bit set/reset register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOB_GPIOB_BSRR_BS0                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000002 constant GPIOB_GPIOB_BSRR_BS1                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000004 constant GPIOB_GPIOB_BSRR_BS2                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000008 constant GPIOB_GPIOB_BSRR_BS3                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000010 constant GPIOB_GPIOB_BSRR_BS4                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000020 constant GPIOB_GPIOB_BSRR_BS5                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000040 constant GPIOB_GPIOB_BSRR_BS6                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000080 constant GPIOB_GPIOB_BSRR_BS7                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000100 constant GPIOB_GPIOB_BSRR_BS8                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000200 constant GPIOB_GPIOB_BSRR_BS9                             \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000400 constant GPIOB_GPIOB_BSRR_BS10                            \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000800 constant GPIOB_GPIOB_BSRR_BS11                            \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00001000 constant GPIOB_GPIOB_BSRR_BS12                            \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00002000 constant GPIOB_GPIOB_BSRR_BS13                            \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00004000 constant GPIOB_GPIOB_BSRR_BS14                            \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00008000 constant GPIOB_GPIOB_BSRR_BS15                            \ Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00010000 constant GPIOB_GPIOB_BSRR_BR0                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$00020000 constant GPIOB_GPIOB_BSRR_BR1                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$00040000 constant GPIOB_GPIOB_BSRR_BR2                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$00080000 constant GPIOB_GPIOB_BSRR_BR3                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$00100000 constant GPIOB_GPIOB_BSRR_BR4                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$00200000 constant GPIOB_GPIOB_BSRR_BR5                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$00400000 constant GPIOB_GPIOB_BSRR_BR6                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$00800000 constant GPIOB_GPIOB_BSRR_BR7                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$01000000 constant GPIOB_GPIOB_BSRR_BR8                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$02000000 constant GPIOB_GPIOB_BSRR_BR9                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$04000000 constant GPIOB_GPIOB_BSRR_BR10                            \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$08000000 constant GPIOB_GPIOB_BSRR_BR11                            \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$10000000 constant GPIOB_GPIOB_BSRR_BR12                            \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$20000000 constant GPIOB_GPIOB_BSRR_BR13                            \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$40000000 constant GPIOB_GPIOB_BSRR_BR14                            \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
-$80000000 constant GPIOB_GPIOB_BSRR_BR15                            \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+  [ifdef] GPIOB_GPIOB_PUPDR_DEF
+    \
+    \ @brief GPIO port B pull-up/pull-down register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000100
+    \
+    $00 constant GPIOB_PUPD0                    \ [0x00 : 2] Port configuration I/O pin 0
+    $02 constant GPIOB_PUPD1                    \ [0x02 : 2] Port configuration I/O pin 1
+    $04 constant GPIOB_PUPD2                    \ [0x04 : 2] Port configuration I/O pin 2
+    $06 constant GPIOB_PUPD3                    \ [0x06 : 2] Port configuration I/O pin 3
+    $08 constant GPIOB_PUPD4                    \ [0x08 : 2] Port configuration I/O pin 4
+    $0a constant GPIOB_PUPD5                    \ [0x0a : 2] Port configuration I/O pin 5
+    $0c constant GPIOB_PUPD6                    \ [0x0c : 2] Port configuration I/O pin 6
+    $0e constant GPIOB_PUPD7                    \ [0x0e : 2] Port configuration I/O pin 7
+    $10 constant GPIOB_PUPD8                    \ [0x10 : 2] Port configuration I/O pin 8
+    $12 constant GPIOB_PUPD9                    \ [0x12 : 2] Port configuration I/O pin 9
+    $14 constant GPIOB_PUPD10                   \ [0x14 : 2] Port configuration I/O pin 10 Note that bits 21:20 are reserved on STM32WBA55xx devices.
+    $16 constant GPIOB_PUPD11                   \ [0x16 : 2] Port configuration I/O pin 11
+    $18 constant GPIOB_PUPD12                   \ [0x18 : 2] Port configuration I/O pin 12
+    $1a constant GPIOB_PUPD13                   \ [0x1a : 2] Port configuration I/O pin 13
+    $1c constant GPIOB_PUPD14                   \ [0x1c : 2] Port configuration I/O pin 14
+    $1e constant GPIOB_PUPD15                   \ [0x1e : 2] Port configuration I/O pin 15 These bits are written by software to configure the I/O pull-up or pull-down Access can be protected by GPIOB SEC15.
+  [then]
 
 
-\
-\ @brief GPIO port B configuration lock register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOB_GPIOB_LCKR_LCK0                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000002 constant GPIOB_GPIOB_LCKR_LCK1                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000004 constant GPIOB_GPIOB_LCKR_LCK2                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000008 constant GPIOB_GPIOB_LCKR_LCK3                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000010 constant GPIOB_GPIOB_LCKR_LCK4                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000020 constant GPIOB_GPIOB_LCKR_LCK5                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000040 constant GPIOB_GPIOB_LCKR_LCK6                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000080 constant GPIOB_GPIOB_LCKR_LCK7                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000100 constant GPIOB_GPIOB_LCKR_LCK8                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000200 constant GPIOB_GPIOB_LCKR_LCK9                            \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000400 constant GPIOB_GPIOB_LCKR_LCK10                           \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000800 constant GPIOB_GPIOB_LCKR_LCK11                           \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00001000 constant GPIOB_GPIOB_LCKR_LCK12                           \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00002000 constant GPIOB_GPIOB_LCKR_LCK13                           \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00004000 constant GPIOB_GPIOB_LCKR_LCK14                           \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00008000 constant GPIOB_GPIOB_LCKR_LCK15                           \ Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00010000 constant GPIOB_GPIOB_LCKR_LCKK                            \ Lock key This bit can be read any time. It can only be modified using the lock key write sequence. Access can be protected by any GPIOB SECy. - LOCK key write sequence: WR LCKR[16] = 1 + LCKR[15:0] WR LCKR[16] = 0 + LCKR[15:0] WR LCKR[16] = 1 + LCKR[15:0] - LOCK key read RD LCKR[16] = 1 (this read operation is optional but it confirms that the lock is active) Note: During the LOCK key write sequence, the value of LCKR[15:0] must not change. Note: Any error in the lock sequence aborts the LOCK. Note: After the first LOCK sequence on any bit of the port, any read access on the LCKK bit returns 1 until the next MCU reset or peripheral reset.
-
-
-\
-\ @brief GPIO port B alternate function low register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOB_GPIOB_AFRL_AFSEL0                          \ Alternate function selection for port I/O pin 0
-$000000f0 constant GPIOB_GPIOB_AFRL_AFSEL1                          \ Alternate function selection for port I/O pin 1
-$00000f00 constant GPIOB_GPIOB_AFRL_AFSEL2                          \ Alternate function selection for port I/O pin 2
-$0000f000 constant GPIOB_GPIOB_AFRL_AFSEL3                          \ Alternate function selection for port I/O pin 3
-$000f0000 constant GPIOB_GPIOB_AFRL_AFSEL4                          \ Alternate function selection for port I/O pin 4
-$00f00000 constant GPIOB_GPIOB_AFRL_AFSEL5                          \ Alternate function selection for port I/O pin 5
-$0f000000 constant GPIOB_GPIOB_AFRL_AFSEL6                          \ Alternate function selection for port I/O pin 6
-$f0000000 constant GPIOB_GPIOB_AFRL_AFSEL7                          \ Alternate function selection for port I/O pin 7 These bits are written by software to configure alternate function I/Os. Access can be protected by GPIOB SEC7.
+  [ifdef] GPIOB_GPIOB_IDR_DEF
+    \
+    \ @brief GPIO port B input data register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOB_ID0                      \ [0x00] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $01 constant GPIOB_ID1                      \ [0x01] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $02 constant GPIOB_ID2                      \ [0x02] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $03 constant GPIOB_ID3                      \ [0x03] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $04 constant GPIOB_ID4                      \ [0x04] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $05 constant GPIOB_ID5                      \ [0x05] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $06 constant GPIOB_ID6                      \ [0x06] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $07 constant GPIOB_ID7                      \ [0x07] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $08 constant GPIOB_ID8                      \ [0x08] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $09 constant GPIOB_ID9                      \ [0x09] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0a constant GPIOB_ID10                     \ [0x0a] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0b constant GPIOB_ID11                     \ [0x0b] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0c constant GPIOB_ID12                     \ [0x0c] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0d constant GPIOB_ID13                     \ [0x0d] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0e constant GPIOB_ID14                     \ [0x0e] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0f constant GPIOB_ID15                     \ [0x0f] Port input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+  [then]
 
 
-\
-\ @brief GPIO port B alternate function high register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOB_GPIOB_AFRH_AFSEL8                          \ Alternate function selection for port I/O pin 8
-$000000f0 constant GPIOB_GPIOB_AFRH_AFSEL9                          \ Alternate function selection for port I/O pin 9
-$00000f00 constant GPIOB_GPIOB_AFRH_AFSEL10                         \ Alternate function selection for port I/O pin 10 Note that bit 11:8 are reserved on STM32WBA55xx devices.
-$0000f000 constant GPIOB_GPIOB_AFRH_AFSEL11                         \ Alternate function selection for port I/O pin 11
-$000f0000 constant GPIOB_GPIOB_AFRH_AFSEL12                         \ Alternate function selection for port I/O pin 12
-$00f00000 constant GPIOB_GPIOB_AFRH_AFSEL13                         \ Alternate function selection for port I/O pin 13
-$0f000000 constant GPIOB_GPIOB_AFRH_AFSEL14                         \ Alternate function selection for port I/O pin 14
-$f0000000 constant GPIOB_GPIOB_AFRH_AFSEL15                         \ Alternate function selection for port I/O pin 15 These bits are written by software to configure alternate function I/Os. Access can be protected by GPIOB SEC15.
-
-
-\
-\ @brief GPIO port B bit reset register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOB_GPIOB_BRR_BR0                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000002 constant GPIOB_GPIOB_BRR_BR1                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000004 constant GPIOB_GPIOB_BRR_BR2                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000008 constant GPIOB_GPIOB_BRR_BR3                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000010 constant GPIOB_GPIOB_BRR_BR4                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000020 constant GPIOB_GPIOB_BRR_BR5                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000040 constant GPIOB_GPIOB_BRR_BR6                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000080 constant GPIOB_GPIOB_BRR_BR7                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000100 constant GPIOB_GPIOB_BRR_BR8                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000200 constant GPIOB_GPIOB_BRR_BR9                              \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000400 constant GPIOB_GPIOB_BRR_BR10                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000800 constant GPIOB_GPIOB_BRR_BR11                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00001000 constant GPIOB_GPIOB_BRR_BR12                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00002000 constant GPIOB_GPIOB_BRR_BR13                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00004000 constant GPIOB_GPIOB_BRR_BR14                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00008000 constant GPIOB_GPIOB_BRR_BR15                             \ Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+  [ifdef] GPIOB_GPIOB_ODR_DEF
+    \
+    \ @brief GPIO port B output data register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOB_OD0                      \ [0x00] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $01 constant GPIOB_OD1                      \ [0x01] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $02 constant GPIOB_OD2                      \ [0x02] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $03 constant GPIOB_OD3                      \ [0x03] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $04 constant GPIOB_OD4                      \ [0x04] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $05 constant GPIOB_OD5                      \ [0x05] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $06 constant GPIOB_OD6                      \ [0x06] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $07 constant GPIOB_OD7                      \ [0x07] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $08 constant GPIOB_OD8                      \ [0x08] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $09 constant GPIOB_OD9                      \ [0x09] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $0a constant GPIOB_OD10                     \ [0x0a] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $0b constant GPIOB_OD11                     \ [0x0b] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $0c constant GPIOB_OD12                     \ [0x0c] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $0d constant GPIOB_OD13                     \ [0x0d] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $0e constant GPIOB_OD14                     \ [0x0e] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+    $0f constant GPIOB_OD15                     \ [0x0f] Port output data I/O pin y These bits can be read and written by software. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices. Note: For atomic bit set/reset, the OD bits can be individually set and/or reset by writing to the GPIOB_BSRR or GPIOB_BRR registers.
+  [then]
 
 
-\
-\ @brief GPIO port B secure configuration register
-\ Address offset: 0x30
-\ Reset value: 0x0000FFFF
-\
+  [ifdef] GPIOB_GPIOB_BSRR_DEF
+    \
+    \ @brief GPIO port B bit set/reset register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOB_BS0                      \ [0x00] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $01 constant GPIOB_BS1                      \ [0x01] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $02 constant GPIOB_BS2                      \ [0x02] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $03 constant GPIOB_BS3                      \ [0x03] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $04 constant GPIOB_BS4                      \ [0x04] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $05 constant GPIOB_BS5                      \ [0x05] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $06 constant GPIOB_BS6                      \ [0x06] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $07 constant GPIOB_BS7                      \ [0x07] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $08 constant GPIOB_BS8                      \ [0x08] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $09 constant GPIOB_BS9                      \ [0x09] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0a constant GPIOB_BS10                     \ [0x0a] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0b constant GPIOB_BS11                     \ [0x0b] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0c constant GPIOB_BS12                     \ [0x0c] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0d constant GPIOB_BS13                     \ [0x0d] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0e constant GPIOB_BS14                     \ [0x0e] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0f constant GPIOB_BS15                     \ [0x0f] Port set I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $10 constant GPIOB_BR0                      \ [0x10] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $11 constant GPIOB_BR1                      \ [0x11] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $12 constant GPIOB_BR2                      \ [0x12] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $13 constant GPIOB_BR3                      \ [0x13] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $14 constant GPIOB_BR4                      \ [0x14] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $15 constant GPIOB_BR5                      \ [0x15] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $16 constant GPIOB_BR6                      \ [0x16] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $17 constant GPIOB_BR7                      \ [0x17] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $18 constant GPIOB_BR8                      \ [0x18] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $19 constant GPIOB_BR9                      \ [0x19] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $1a constant GPIOB_BR10                     \ [0x1a] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $1b constant GPIOB_BR11                     \ [0x1b] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $1c constant GPIOB_BR12                     \ [0x1c] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $1d constant GPIOB_BR13                     \ [0x1d] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $1e constant GPIOB_BR14                     \ [0x1e] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+    $1f constant GPIOB_BR15                     \ [0x1f] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 26 is reserved on STM32WBA55xx devices. Note: If both BSy and BRy are set, BSy has priority.
+  [then]
 
-$00000001 constant GPIOB_GPIOB_SECCFGR_SEC0                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000002 constant GPIOB_GPIOB_SECCFGR_SEC1                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000004 constant GPIOB_GPIOB_SECCFGR_SEC2                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000008 constant GPIOB_GPIOB_SECCFGR_SEC3                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000010 constant GPIOB_GPIOB_SECCFGR_SEC4                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000020 constant GPIOB_GPIOB_SECCFGR_SEC5                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000040 constant GPIOB_GPIOB_SECCFGR_SEC6                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000080 constant GPIOB_GPIOB_SECCFGR_SEC7                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000100 constant GPIOB_GPIOB_SECCFGR_SEC8                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000200 constant GPIOB_GPIOB_SECCFGR_SEC9                         \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000400 constant GPIOB_GPIOB_SECCFGR_SEC10                        \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00000800 constant GPIOB_GPIOB_SECCFGR_SEC11                        \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00001000 constant GPIOB_GPIOB_SECCFGR_SEC12                        \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00002000 constant GPIOB_GPIOB_SECCFGR_SEC13                        \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00004000 constant GPIOB_GPIOB_SECCFGR_SEC14                        \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
-$00008000 constant GPIOB_GPIOB_SECCFGR_SEC15                        \ I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+
+  [ifdef] GPIOB_GPIOB_LCKR_DEF
+    \
+    \ @brief GPIO port B configuration lock register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOB_LCK0                     \ [0x00] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $01 constant GPIOB_LCK1                     \ [0x01] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $02 constant GPIOB_LCK2                     \ [0x02] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $03 constant GPIOB_LCK3                     \ [0x03] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $04 constant GPIOB_LCK4                     \ [0x04] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $05 constant GPIOB_LCK5                     \ [0x05] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $06 constant GPIOB_LCK6                     \ [0x06] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $07 constant GPIOB_LCK7                     \ [0x07] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $08 constant GPIOB_LCK8                     \ [0x08] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $09 constant GPIOB_LCK9                     \ [0x09] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0a constant GPIOB_LCK10                    \ [0x0a] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0b constant GPIOB_LCK11                    \ [0x0b] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0c constant GPIOB_LCK12                    \ [0x0c] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0d constant GPIOB_LCK13                    \ [0x0d] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0e constant GPIOB_LCK14                    \ [0x0e] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0f constant GPIOB_LCK15                    \ [0x0f] Port lock I/O pin y These bits are read/write but can only be written when the LCKK bit is 0 Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $10 constant GPIOB_LCKK                     \ [0x10] Lock key This bit can be read any time. It can only be modified using the lock key write sequence. Access can be protected by any GPIOB SECy. - LOCK key write sequence: WR LCKR[16] = 1 + LCKR[15:0] WR LCKR[16] = 0 + LCKR[15:0] WR LCKR[16] = 1 + LCKR[15:0] - LOCK key read RD LCKR[16] = 1 (this read operation is optional but it confirms that the lock is active) Note: During the LOCK key write sequence, the value of LCKR[15:0] must not change. Note: Any error in the lock sequence aborts the LOCK. Note: After the first LOCK sequence on any bit of the port, any read access on the LCKK bit returns 1 until the next MCU reset or peripheral reset.
+  [then]
 
 
-\
-\ @brief General-purpose I/Os
-\
-$42020400 constant GPIOB_GPIOB_MODER  \ offset: 0x00 : GPIO port B mode register
-$42020404 constant GPIOB_GPIOB_OTYPER  \ offset: 0x04 : GPIO port B output type register
-$42020408 constant GPIOB_GPIOB_OSPEEDR  \ offset: 0x08 : GPIO port B output speed register
-$4202040c constant GPIOB_GPIOB_PUPDR  \ offset: 0x0C : GPIO port B pull-up/pull-down register
-$42020410 constant GPIOB_GPIOB_IDR  \ offset: 0x10 : GPIO port B input data register
-$42020414 constant GPIOB_GPIOB_ODR  \ offset: 0x14 : GPIO port B output data register
-$42020418 constant GPIOB_GPIOB_BSRR  \ offset: 0x18 : GPIO port B bit set/reset register
-$4202041c constant GPIOB_GPIOB_LCKR  \ offset: 0x1C : GPIO port B configuration lock register
-$42020420 constant GPIOB_GPIOB_AFRL  \ offset: 0x20 : GPIO port B alternate function low register
-$42020424 constant GPIOB_GPIOB_AFRH  \ offset: 0x24 : GPIO port B alternate function high register
-$42020428 constant GPIOB_GPIOB_BRR  \ offset: 0x28 : GPIO port B bit reset register
-$42020430 constant GPIOB_GPIOB_SECCFGR  \ offset: 0x30 : GPIO port B secure configuration register
+  [ifdef] GPIOB_GPIOB_AFRL_DEF
+    \
+    \ @brief GPIO port B alternate function low register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOB_AFSEL0                   \ [0x00 : 4] Alternate function selection for port I/O pin 0
+    $04 constant GPIOB_AFSEL1                   \ [0x04 : 4] Alternate function selection for port I/O pin 1
+    $08 constant GPIOB_AFSEL2                   \ [0x08 : 4] Alternate function selection for port I/O pin 2
+    $0c constant GPIOB_AFSEL3                   \ [0x0c : 4] Alternate function selection for port I/O pin 3
+    $10 constant GPIOB_AFSEL4                   \ [0x10 : 4] Alternate function selection for port I/O pin 4
+    $14 constant GPIOB_AFSEL5                   \ [0x14 : 4] Alternate function selection for port I/O pin 5
+    $18 constant GPIOB_AFSEL6                   \ [0x18 : 4] Alternate function selection for port I/O pin 6
+    $1c constant GPIOB_AFSEL7                   \ [0x1c : 4] Alternate function selection for port I/O pin 7 These bits are written by software to configure alternate function I/Os. Access can be protected by GPIOB SEC7.
+  [then]
 
+
+  [ifdef] GPIOB_GPIOB_AFRH_DEF
+    \
+    \ @brief GPIO port B alternate function high register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOB_AFSEL8                   \ [0x00 : 4] Alternate function selection for port I/O pin 8
+    $04 constant GPIOB_AFSEL9                   \ [0x04 : 4] Alternate function selection for port I/O pin 9
+    $08 constant GPIOB_AFSEL10                  \ [0x08 : 4] Alternate function selection for port I/O pin 10 Note that bit 11:8 are reserved on STM32WBA55xx devices.
+    $0c constant GPIOB_AFSEL11                  \ [0x0c : 4] Alternate function selection for port I/O pin 11
+    $10 constant GPIOB_AFSEL12                  \ [0x10 : 4] Alternate function selection for port I/O pin 12
+    $14 constant GPIOB_AFSEL13                  \ [0x14 : 4] Alternate function selection for port I/O pin 13
+    $18 constant GPIOB_AFSEL14                  \ [0x18 : 4] Alternate function selection for port I/O pin 14
+    $1c constant GPIOB_AFSEL15                  \ [0x1c : 4] Alternate function selection for port I/O pin 15 These bits are written by software to configure alternate function I/Os. Access can be protected by GPIOB SEC15.
+  [then]
+
+
+  [ifdef] GPIOB_GPIOB_BRR_DEF
+    \
+    \ @brief GPIO port B bit reset register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOB_BR0                      \ [0x00] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $01 constant GPIOB_BR1                      \ [0x01] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $02 constant GPIOB_BR2                      \ [0x02] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $03 constant GPIOB_BR3                      \ [0x03] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $04 constant GPIOB_BR4                      \ [0x04] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $05 constant GPIOB_BR5                      \ [0x05] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $06 constant GPIOB_BR6                      \ [0x06] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $07 constant GPIOB_BR7                      \ [0x07] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $08 constant GPIOB_BR8                      \ [0x08] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $09 constant GPIOB_BR9                      \ [0x09] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0a constant GPIOB_BR10                     \ [0x0a] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0b constant GPIOB_BR11                     \ [0x0b] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0c constant GPIOB_BR12                     \ [0x0c] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0d constant GPIOB_BR13                     \ [0x0d] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0e constant GPIOB_BR14                     \ [0x0e] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0f constant GPIOB_BR15                     \ [0x0f] Port reset I/O pin y These bits are write-only. A read to these bits returns the value 0. Access can be protected by GPIOB SECy. Note that bit 10 is reserved on STM32WBA55xx devices.
+  [then]
+
+
+  [ifdef] GPIOB_GPIOB_SECCFGR_DEF
+    \
+    \ @brief GPIO port B secure configuration register
+    \ Address offset: 0x30
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant GPIOB_SEC0                     \ [0x00] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $01 constant GPIOB_SEC1                     \ [0x01] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $02 constant GPIOB_SEC2                     \ [0x02] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $03 constant GPIOB_SEC3                     \ [0x03] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $04 constant GPIOB_SEC4                     \ [0x04] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $05 constant GPIOB_SEC5                     \ [0x05] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $06 constant GPIOB_SEC6                     \ [0x06] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $07 constant GPIOB_SEC7                     \ [0x07] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $08 constant GPIOB_SEC8                     \ [0x08] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $09 constant GPIOB_SEC9                     \ [0x09] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0a constant GPIOB_SEC10                    \ [0x0a] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0b constant GPIOB_SEC11                    \ [0x0b] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0c constant GPIOB_SEC12                    \ [0x0c] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0d constant GPIOB_SEC13                    \ [0x0d] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0e constant GPIOB_SEC14                    \ [0x0e] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+    $0f constant GPIOB_SEC15                    \ [0x0f] I/O pin of port secure bit enable y These bits are written by software to enabled the security I/O port pin. Note that bit 10 is reserved on STM32WBA55xx devices.
+  [then]
+
+  \
+  \ @brief General-purpose I/Os
+  \
+  $00 constant GPIOB_GPIOB_MODER        \ GPIO port B mode register
+  $04 constant GPIOB_GPIOB_OTYPER       \ GPIO port B output type register
+  $08 constant GPIOB_GPIOB_OSPEEDR      \ GPIO port B output speed register
+  $0C constant GPIOB_GPIOB_PUPDR        \ GPIO port B pull-up/pull-down register
+  $10 constant GPIOB_GPIOB_IDR          \ GPIO port B input data register
+  $14 constant GPIOB_GPIOB_ODR          \ GPIO port B output data register
+  $18 constant GPIOB_GPIOB_BSRR         \ GPIO port B bit set/reset register
+  $1C constant GPIOB_GPIOB_LCKR         \ GPIO port B configuration lock register
+  $20 constant GPIOB_GPIOB_AFRL         \ GPIO port B alternate function low register
+  $24 constant GPIOB_GPIOB_AFRH         \ GPIO port B alternate function high register
+  $28 constant GPIOB_GPIOB_BRR          \ GPIO port B bit reset register
+  $30 constant GPIOB_GPIOB_SECCFGR      \ GPIO port B secure configuration register
+
+: GPIOB_DEF ; [then]

@@ -6,136 +6,147 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM13_DEF
 
-\
-\ @brief TIM13 control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_CR1_CEN                              \ CEN
-$00000002 constant TIM13_TIM13_CR1_UDIS                             \ UDIS
-$00000004 constant TIM13_TIM13_CR1_URS                              \ URS
-$00000008 constant TIM13_TIM13_CR1_OPM                              \ OPM
-$00000080 constant TIM13_TIM13_CR1_ARPE                             \ ARPE
-$00000300 constant TIM13_TIM13_CR1_CKD                              \ CKD
-$00000800 constant TIM13_TIM13_CR1_UIFREMAP                         \ UIFREMAP
-
-
-\
-\ @brief TIM13 Interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_DIER_UIE                             \ UIE
-$00000002 constant TIM13_TIM13_DIER_CC1IE                           \ CC1IE
+  [ifdef] TIM13_TIM13_CR1_DEF
+    \
+    \ @brief TIM13 control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CEN                      \ [0x00] CEN
+    $01 constant TIM13_UDIS                     \ [0x01] UDIS
+    $02 constant TIM13_URS                      \ [0x02] URS
+    $03 constant TIM13_OPM                      \ [0x03] OPM
+    $07 constant TIM13_ARPE                     \ [0x07] ARPE
+    $08 constant TIM13_CKD                      \ [0x08 : 2] CKD
+    $0b constant TIM13_UIFREMAP                 \ [0x0b] UIFREMAP
+  [then]
 
 
-\
-\ @brief TIM13 status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_SR_UIF                               \ UIF
-$00000002 constant TIM13_TIM13_SR_CC1IF                             \ CC1IF
-$00000200 constant TIM13_TIM13_SR_CC1OF                             \ CC1OF
-
-
-\
-\ @brief TIM13 event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_EGR_UG                               \ UG
-$00000002 constant TIM13_TIM13_EGR_CC1G                             \ CC1G
+  [ifdef] TIM13_TIM13_DIER_DEF
+    \
+    \ @brief TIM13 Interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UIE                      \ [0x00] UIE
+    $01 constant TIM13_CC1IE                    \ [0x01] CC1IE
+  [then]
 
 
-\
-\ @brief The channels can be used in input (capture mode) or in output (compare mode). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function in input and in output mode. For a given bit, OCxx describes its function when the channel is configured in output, ICxx describes its function when the channel is configured in input. So one must take care that the same bit can have a different meaning for the input stage and for the output stage. Output compare mode
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM13_TIM13_CCMR1_CC1S                           \ CC1S
-$00000004 constant TIM13_TIM13_CCMR1_OC1FE                          \ OC1FE
-$00000008 constant TIM13_TIM13_CCMR1_OC1PE                          \ OC1PE
-$00000070 constant TIM13_TIM13_CCMR1_OC1M                           \ OC1M
-$00010000 constant TIM13_TIM13_CCMR1_OC1M3                          \ OC1M3
-
-
-\
-\ @brief TIM13 capture/compare enable register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_CCER_CC1E                            \ CC1E
-$00000002 constant TIM13_TIM13_CCER_CC1P                            \ CC1P
-$00000008 constant TIM13_TIM13_CCER_CC1NP                           \ CC1NP
+  [ifdef] TIM13_TIM13_SR_DEF
+    \
+    \ @brief TIM13 status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UIF                      \ [0x00] UIF
+    $01 constant TIM13_CC1IF                    \ [0x01] CC1IF
+    $09 constant TIM13_CC1OF                    \ [0x09] CC1OF
+  [then]
 
 
-\
-\ @brief TIM13 counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM13_TIM13_CNT_CNT                              \ CNT
-$80000000 constant TIM13_TIM13_CNT_UIFCPY                           \ UIFCPY
-
-
-\
-\ @brief TIM13 prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM13_TIM13_PSC_PSC                              \ PSC
+  [ifdef] TIM13_TIM13_EGR_DEF
+    \
+    \ @brief TIM13 event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UG                       \ [0x00] UG
+    $01 constant TIM13_CC1G                     \ [0x01] CC1G
+  [then]
 
 
-\
-\ @brief TIM13 auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x0000FFFF
-\
-
-$0000ffff constant TIM13_TIM13_ARR_ARR                              \ ARR
-
-
-\
-\ @brief TIM13 capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM13_TIM13_CCR1_CCR1                            \ CCR1
+  [ifdef] TIM13_TIM13_CCMR1_DEF
+    \
+    \ @brief The channels can be used in input (capture mode) or in output (compare mode). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function in input and in output mode. For a given bit, OCxx describes its function when the channel is configured in output, ICxx describes its function when the channel is configured in input. So one must take care that the same bit can have a different meaning for the input stage and for the output stage. Output compare mode
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CC1S                     \ [0x00 : 2] CC1S
+    $02 constant TIM13_OC1FE                    \ [0x02] OC1FE
+    $03 constant TIM13_OC1PE                    \ [0x03] OC1PE
+    $04 constant TIM13_OC1M                     \ [0x04 : 3] OC1M
+    $10 constant TIM13_OC1M3                    \ [0x10] OC1M3
+  [then]
 
 
-\
-\ @brief TIM13 timer input selection register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
+  [ifdef] TIM13_TIM13_CCER_DEF
+    \
+    \ @brief TIM13 capture/compare enable register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CC1E                     \ [0x00] CC1E
+    $01 constant TIM13_CC1P                     \ [0x01] CC1P
+    $03 constant TIM13_CC1NP                    \ [0x03] CC1NP
+  [then]
 
-$0000000f constant TIM13_TIM13_TISEL_TI1SEL                         \ TI1SEL
+
+  [ifdef] TIM13_TIM13_CNT_DEF
+    \
+    \ @brief TIM13 counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CNT                      \ [0x00 : 16] CNT
+    $1f constant TIM13_UIFCPY                   \ [0x1f] UIFCPY
+  [then]
 
 
-\
-\ @brief TIM13
-\
-$40007000 constant TIM13_TIM13_CR1  \ offset: 0x00 : TIM13 control register 1
-$4000700c constant TIM13_TIM13_DIER  \ offset: 0x0C : TIM13 Interrupt enable register
-$40007010 constant TIM13_TIM13_SR  \ offset: 0x10 : TIM13 status register
-$40007014 constant TIM13_TIM13_EGR  \ offset: 0x14 : TIM13 event generation register
-$40007018 constant TIM13_TIM13_CCMR1  \ offset: 0x18 : The channels can be used in input (capture mode) or in output (compare mode). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function in input and in output mode. For a given bit, OCxx describes its function when the channel is configured in output, ICxx describes its function when the channel is configured in input. So one must take care that the same bit can have a different meaning for the input stage and for the output stage. Output compare mode
-$40007020 constant TIM13_TIM13_CCER  \ offset: 0x20 : TIM13 capture/compare enable register
-$40007024 constant TIM13_TIM13_CNT  \ offset: 0x24 : TIM13 counter
-$40007028 constant TIM13_TIM13_PSC  \ offset: 0x28 : TIM13 prescaler
-$4000702c constant TIM13_TIM13_ARR  \ offset: 0x2C : TIM13 auto-reload register
-$40007034 constant TIM13_TIM13_CCR1  \ offset: 0x34 : TIM13 capture/compare register 1
-$40007068 constant TIM13_TIM13_TISEL  \ offset: 0x68 : TIM13 timer input selection register
+  [ifdef] TIM13_TIM13_PSC_DEF
+    \
+    \ @brief TIM13 prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_PSC                      \ [0x00 : 16] PSC
+  [then]
 
+
+  [ifdef] TIM13_TIM13_ARR_DEF
+    \
+    \ @brief TIM13 auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant TIM13_ARR                      \ [0x00 : 16] ARR
+  [then]
+
+
+  [ifdef] TIM13_TIM13_CCR1_DEF
+    \
+    \ @brief TIM13 capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CCR1                     \ [0x00 : 16] CCR1
+  [then]
+
+
+  [ifdef] TIM13_TIM13_TISEL_DEF
+    \
+    \ @brief TIM13 timer input selection register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_TI1SEL                   \ [0x00 : 4] TI1SEL
+  [then]
+
+  \
+  \ @brief TIM13
+  \
+  $00 constant TIM13_TIM13_CR1          \ TIM13 control register 1
+  $0C constant TIM13_TIM13_DIER         \ TIM13 Interrupt enable register
+  $10 constant TIM13_TIM13_SR           \ TIM13 status register
+  $14 constant TIM13_TIM13_EGR          \ TIM13 event generation register
+  $18 constant TIM13_TIM13_CCMR1        \ The channels can be used in input (capture mode) or in output (compare mode). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function in input and in output mode. For a given bit, OCxx describes its function when the channel is configured in output, ICxx describes its function when the channel is configured in input. So one must take care that the same bit can have a different meaning for the input stage and for the output stage. Output compare mode
+  $20 constant TIM13_TIM13_CCER         \ TIM13 capture/compare enable register
+  $24 constant TIM13_TIM13_CNT          \ TIM13 counter
+  $28 constant TIM13_TIM13_PSC          \ TIM13 prescaler
+  $2C constant TIM13_TIM13_ARR          \ TIM13 auto-reload register
+  $34 constant TIM13_TIM13_CCR1         \ TIM13 capture/compare register 1
+  $68 constant TIM13_TIM13_TISEL        \ TIM13 timer input selection register
+
+: TIM13_DEF ; [then]

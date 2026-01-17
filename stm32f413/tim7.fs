@@ -6,96 +6,104 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM7_DEF
 
-\
-\ @brief control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM7_CR1_CEN                                     \ Counter enable
-$00000002 constant TIM7_CR1_UDIS                                    \ Update disable
-$00000004 constant TIM7_CR1_URS                                     \ Update request source
-$00000008 constant TIM7_CR1_OPM                                     \ One-pulse mode
-$00000080 constant TIM7_CR1_ARPE                                    \ Auto-reload preload enable
-$00000800 constant TIM7_CR1_UIFREMAP                                \ UIF status bit remapping
-
-
-\
-\ @brief control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000070 constant TIM7_CR2_MMS                                     \ Master mode selection
+  [ifdef] TIM7_CR1_DEF
+    \
+    \ @brief control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM7_CEN                       \ [0x00] Counter enable
+    $01 constant TIM7_UDIS                      \ [0x01] Update disable
+    $02 constant TIM7_URS                       \ [0x02] Update request source
+    $03 constant TIM7_OPM                       \ [0x03] One-pulse mode
+    $07 constant TIM7_ARPE                      \ [0x07] Auto-reload preload enable
+    $0b constant TIM7_UIFREMAP                  \ [0x0b] UIF status bit remapping
+  [then]
 
 
-\
-\ @brief DMA/Interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM7_DIER_UIE                                    \ Update interrupt enable
-$00000100 constant TIM7_DIER_UDE                                    \ Update DMA request enable
-
-
-\
-\ @brief status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM7_SR_UIF                                      \ Update interrupt flag
+  [ifdef] TIM7_CR2_DEF
+    \
+    \ @brief control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $04 constant TIM7_MMS                       \ [0x04 : 3] Master mode selection
+  [then]
 
 
-\
-\ @brief event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM7_EGR_UG                                      \ Update generation
-
-
-\
-\ @brief counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM7_CNT_CNT                                     \ Low counter value
-$80000000 constant TIM7_CNT_UIFCPY                                  \ UIF Copy
+  [ifdef] TIM7_DIER_DEF
+    \
+    \ @brief DMA/Interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM7_UIE                       \ [0x00] Update interrupt enable
+    $08 constant TIM7_UDE                       \ [0x08] Update DMA request enable
+  [then]
 
 
-\
-\ @brief prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM7_PSC_PSC                                     \ Prescaler value
-
-
-\
-\ @brief auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM7_ARR_ARR                                     \ Low Auto-reload value
+  [ifdef] TIM7_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM7_UIF                       \ [0x00] Update interrupt flag
+  [then]
 
 
-\
-\ @brief Basic timers
-\
-$40001400 constant TIM7_CR1       \ offset: 0x00 : control register 1
-$40001404 constant TIM7_CR2       \ offset: 0x04 : control register 2
-$4000140c constant TIM7_DIER      \ offset: 0x0C : DMA/Interrupt enable register
-$40001410 constant TIM7_SR        \ offset: 0x10 : status register
-$40001414 constant TIM7_EGR       \ offset: 0x14 : event generation register
-$40001424 constant TIM7_CNT       \ offset: 0x24 : counter
-$40001428 constant TIM7_PSC       \ offset: 0x28 : prescaler
-$4000142c constant TIM7_ARR       \ offset: 0x2C : auto-reload register
+  [ifdef] TIM7_EGR_DEF
+    \
+    \ @brief event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM7_UG                        \ [0x00] Update generation
+  [then]
 
+
+  [ifdef] TIM7_CNT_DEF
+    \
+    \ @brief counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM7_CNT                       \ [0x00 : 16] Low counter value
+    $1f constant TIM7_UIFCPY                    \ [0x1f] UIF Copy
+  [then]
+
+
+  [ifdef] TIM7_PSC_DEF
+    \
+    \ @brief prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM7_PSC                       \ [0x00 : 16] Prescaler value
+  [then]
+
+
+  [ifdef] TIM7_ARR_DEF
+    \
+    \ @brief auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM7_ARR                       \ [0x00 : 16] Low Auto-reload value
+  [then]
+
+  \
+  \ @brief Basic timers
+  \
+  $00 constant TIM7_CR1                 \ control register 1
+  $04 constant TIM7_CR2                 \ control register 2
+  $0C constant TIM7_DIER                \ DMA/Interrupt enable register
+  $10 constant TIM7_SR                  \ status register
+  $14 constant TIM7_EGR                 \ event generation register
+  $24 constant TIM7_CNT                 \ counter
+  $28 constant TIM7_PSC                 \ prescaler
+  $2C constant TIM7_ARR                 \ auto-reload register
+
+: TIM7_DEF ; [then]

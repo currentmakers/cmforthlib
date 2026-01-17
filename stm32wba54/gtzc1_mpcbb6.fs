@@ -6,113 +6,117 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GTZC1_MPCBB6_DEF
 
-\
-\ @brief MPCBB control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_MPCBB6_GTZC1_MPCBB_CR_GLOCK                \ lock the control register of the MPCBB until next reset; This bit is cleared by default and once set, it can not be reset until system reset.
-$40000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_CR_INVSECSTATE          \ SRAM clocks security state; This bit is used to define the internal SRAM clocks control in RCC as secure or not.
-$80000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_CR_SRWILADIS            \ secure read/write illegal access disable; This bit disables the detection of an illegal access when a secure read/write transaction access a non-secure blocks of the block-based SRAM (secure fetch on non-secure block is always considered illegal).
-
-
-\
-\ @brief GTZC1 SRAMz MPCBB configuration lock register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_MPCBB6_GTZC1_MPCBB_CFGLOCK_SPLCK0          \ Security/privilege configuration lock super-block; This bit is set by software and can be cleared only by system reset.; note that bit [3:2] are reserved on sales type STM32WBA5xEx for MPCBB1.
+  [ifdef] GTZC1_MPCBB6_GTZC1_MPCBB_CR_DEF
+    \
+    \ @brief MPCBB control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_MPCBB6_GLOCK             \ [0x00] lock the control register of the MPCBB until next reset; This bit is cleared by default and once set, it can not be reset until system reset.
+    $1e constant GTZC1_MPCBB6_INVSECSTATE       \ [0x1e] SRAM clocks security state; This bit is used to define the internal SRAM clocks control in RCC as secure or not.
+    $1f constant GTZC1_MPCBB6_SRWILADIS         \ [0x1f] secure read/write illegal access disable; This bit disables the detection of an illegal access when a secure read/write transaction access a non-secure blocks of the block-based SRAM (secure fetch on non-secure block is always considered illegal).
+  [then]
 
 
-\
-\ @brief GTZC1 MPCBB security configuration for super-block 0 register
-\ Address offset: 0x100
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC0           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000002 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC1           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000004 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC2           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000008 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC3           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000010 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC4           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000020 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC5           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000040 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC6           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000080 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC7           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000100 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC8           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000200 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC9           \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000400 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC10          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000800 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC11          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00001000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC12          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00002000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC13          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00004000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC14          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00008000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC15          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00010000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC16          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00020000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC17          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00040000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC18          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00080000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC19          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00100000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC20          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00200000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC21          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00400000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC22          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00800000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC23          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$01000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC24          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$02000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC25          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$04000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC26          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$08000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC27          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$10000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC28          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$20000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC29          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$40000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC30          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$80000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_SEC31          \ Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+  [ifdef] GTZC1_MPCBB6_GTZC1_MPCBB_CFGLOCK_DEF
+    \
+    \ @brief GTZC1 SRAMz MPCBB configuration lock register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_MPCBB6_SPLCK0            \ [0x00] Security/privilege configuration lock super-block; This bit is set by software and can be cleared only by system reset.; note that bit [3:2] are reserved on sales type STM32WBA5xEx for MPCBB1.
+  [then]
 
 
-\
-\ @brief GTZC1 MPCBB privileged configuration for super-block 0 register
-\ Address offset: 0x200
-\ Reset value: 0xFFFFFFFF
-\
+  [ifdef] GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0_DEF
+    \
+    \ @brief GTZC1 MPCBB security configuration for super-block 0 register
+    \ Address offset: 0x100
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC1_MPCBB6_SEC0              \ [0x00] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $01 constant GTZC1_MPCBB6_SEC1              \ [0x01] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $02 constant GTZC1_MPCBB6_SEC2              \ [0x02] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $03 constant GTZC1_MPCBB6_SEC3              \ [0x03] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $04 constant GTZC1_MPCBB6_SEC4              \ [0x04] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $05 constant GTZC1_MPCBB6_SEC5              \ [0x05] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $06 constant GTZC1_MPCBB6_SEC6              \ [0x06] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $07 constant GTZC1_MPCBB6_SEC7              \ [0x07] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $08 constant GTZC1_MPCBB6_SEC8              \ [0x08] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $09 constant GTZC1_MPCBB6_SEC9              \ [0x09] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0a constant GTZC1_MPCBB6_SEC10             \ [0x0a] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0b constant GTZC1_MPCBB6_SEC11             \ [0x0b] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0c constant GTZC1_MPCBB6_SEC12             \ [0x0c] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0d constant GTZC1_MPCBB6_SEC13             \ [0x0d] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0e constant GTZC1_MPCBB6_SEC14             \ [0x0e] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0f constant GTZC1_MPCBB6_SEC15             \ [0x0f] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $10 constant GTZC1_MPCBB6_SEC16             \ [0x10] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $11 constant GTZC1_MPCBB6_SEC17             \ [0x11] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $12 constant GTZC1_MPCBB6_SEC18             \ [0x12] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $13 constant GTZC1_MPCBB6_SEC19             \ [0x13] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $14 constant GTZC1_MPCBB6_SEC20             \ [0x14] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $15 constant GTZC1_MPCBB6_SEC21             \ [0x15] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $16 constant GTZC1_MPCBB6_SEC22             \ [0x16] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $17 constant GTZC1_MPCBB6_SEC23             \ [0x17] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $18 constant GTZC1_MPCBB6_SEC24             \ [0x18] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $19 constant GTZC1_MPCBB6_SEC25             \ [0x19] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1a constant GTZC1_MPCBB6_SEC26             \ [0x1a] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1b constant GTZC1_MPCBB6_SEC27             \ [0x1b] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1c constant GTZC1_MPCBB6_SEC28             \ [0x1c] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1d constant GTZC1_MPCBB6_SEC29             \ [0x1d] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1e constant GTZC1_MPCBB6_SEC30             \ [0x1e] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1f constant GTZC1_MPCBB6_SEC31             \ [0x1f] Security configuration for block y (y = 0 to 31) in super block n Unprivileged write to this bit is ignored if PRIVy bit is set in GTZC1_MPCBB_PRIVCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+  [then]
 
-$00000001 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV0         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000002 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV1         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000004 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV2         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000008 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV3         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000010 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV4         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000020 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV5         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000040 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV6         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000080 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV7         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000100 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV8         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000200 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV9         \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000400 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV10        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00000800 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV11        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00001000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV12        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00002000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV13        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00004000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV14        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00008000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV15        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00010000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV16        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00020000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV17        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00040000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV18        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00080000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV19        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00100000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV20        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00200000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV21        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00400000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV22        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$00800000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV23        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$01000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV24        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$02000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV25        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$04000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV26        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$08000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV27        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$10000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV28        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$20000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV29        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$40000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV30        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
-$80000000 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_PRIV31        \ Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
 
+  [ifdef] GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0_DEF
+    \
+    \ @brief GTZC1 MPCBB privileged configuration for super-block 0 register
+    \ Address offset: 0x200
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC1_MPCBB6_PRIV0             \ [0x00] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $01 constant GTZC1_MPCBB6_PRIV1             \ [0x01] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $02 constant GTZC1_MPCBB6_PRIV2             \ [0x02] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $03 constant GTZC1_MPCBB6_PRIV3             \ [0x03] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $04 constant GTZC1_MPCBB6_PRIV4             \ [0x04] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $05 constant GTZC1_MPCBB6_PRIV5             \ [0x05] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $06 constant GTZC1_MPCBB6_PRIV6             \ [0x06] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $07 constant GTZC1_MPCBB6_PRIV7             \ [0x07] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $08 constant GTZC1_MPCBB6_PRIV8             \ [0x08] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $09 constant GTZC1_MPCBB6_PRIV9             \ [0x09] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0a constant GTZC1_MPCBB6_PRIV10            \ [0x0a] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0b constant GTZC1_MPCBB6_PRIV11            \ [0x0b] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0c constant GTZC1_MPCBB6_PRIV12            \ [0x0c] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0d constant GTZC1_MPCBB6_PRIV13            \ [0x0d] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0e constant GTZC1_MPCBB6_PRIV14            \ [0x0e] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $0f constant GTZC1_MPCBB6_PRIV15            \ [0x0f] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $10 constant GTZC1_MPCBB6_PRIV16            \ [0x10] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $11 constant GTZC1_MPCBB6_PRIV17            \ [0x11] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $12 constant GTZC1_MPCBB6_PRIV18            \ [0x12] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $13 constant GTZC1_MPCBB6_PRIV19            \ [0x13] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $14 constant GTZC1_MPCBB6_PRIV20            \ [0x14] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $15 constant GTZC1_MPCBB6_PRIV21            \ [0x15] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $16 constant GTZC1_MPCBB6_PRIV22            \ [0x16] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $17 constant GTZC1_MPCBB6_PRIV23            \ [0x17] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $18 constant GTZC1_MPCBB6_PRIV24            \ [0x18] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $19 constant GTZC1_MPCBB6_PRIV25            \ [0x19] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1a constant GTZC1_MPCBB6_PRIV26            \ [0x1a] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1b constant GTZC1_MPCBB6_PRIV27            \ [0x1b] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1c constant GTZC1_MPCBB6_PRIV28            \ [0x1c] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1d constant GTZC1_MPCBB6_PRIV29            \ [0x1d] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1e constant GTZC1_MPCBB6_PRIV30            \ [0x1e] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+    $1f constant GTZC1_MPCBB6_PRIV31            \ [0x1f] Privileged configuration for block y (y = 0 to 31), belonging to super-block n. Non-secure write to this bit is ignored if SECy bit is set in GTZC1_MPCBB_SECCFGRn. Writes are ignored if SPLCKn bit is set in GTZC1_MPCBB_CFGLOCK.
+  [then]
 
-\
-\ @brief GTZC1_MPCBB6 address block description
-\
-$40034000 constant GTZC1_MPCBB6_GTZC1_MPCBB_CR  \ offset: 0x00 : MPCBB control register
-$40034010 constant GTZC1_MPCBB6_GTZC1_MPCBB_CFGLOCK  \ offset: 0x10 : GTZC1 SRAMz MPCBB configuration lock register
-$40034100 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0  \ offset: 0x100 : GTZC1 MPCBB security configuration for super-block 0 register
-$40034200 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0  \ offset: 0x200 : GTZC1 MPCBB privileged configuration for super-block 0 register
+  \
+  \ @brief GTZC1_MPCBB6 address block description
+  \
+  $00 constant GTZC1_MPCBB6_GTZC1_MPCBB_CR    \ MPCBB control register
+  $10 constant GTZC1_MPCBB6_GTZC1_MPCBB_CFGLOCK    \ GTZC1 SRAMz MPCBB configuration lock register
+  $100 constant GTZC1_MPCBB6_GTZC1_MPCBB_SECCFGR0    \ GTZC1 MPCBB security configuration for super-block 0 register
+  $200 constant GTZC1_MPCBB6_GTZC1_MPCBB_PRIVCFGR0    \ GTZC1 MPCBB privileged configuration for super-block 0 register
 
+: GTZC1_MPCBB6_DEF ; [then]

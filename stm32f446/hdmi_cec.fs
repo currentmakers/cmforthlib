@@ -6,103 +6,109 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] HDMI_CEC_DEF
 
-\
-\ @brief CEC control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HDMI_CEC_CEC_CR_CECEN                            \ CEC Enable
-$00000002 constant HDMI_CEC_CEC_CR_TXSOM                            \ Tx Start Of Message
-$00000004 constant HDMI_CEC_CEC_CR_TXEOM                            \ Tx End Of Message
-
-
-\
-\ @brief CEC configuration register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000007 constant HDMI_CEC_CEC_CFGR_SFT                            \ Signal Free Time
-$00000008 constant HDMI_CEC_CEC_CFGR_RXTOL                          \ Rx-Tolerance
-$00000010 constant HDMI_CEC_CEC_CFGR_BRESTP                         \ Rx-Stop on Bit Rising Error
-$00000020 constant HDMI_CEC_CEC_CFGR_BREGEN                         \ Generate Error-Bit on Bit Rising Error
-$00000040 constant HDMI_CEC_CEC_CFGR_LBPEGEN                        \ Generate Error-Bit on Long Bit Period Error
-$00000080 constant HDMI_CEC_CEC_CFGR_BRDNOGEN                       \ Avoid Error-Bit Generation in Broadcast
-$00000100 constant HDMI_CEC_CEC_CFGR_SFTOP                          \ SFT Option Bit
-$7fff0000 constant HDMI_CEC_CEC_CFGR_OAR                            \ Own addresses configuration
-$80000000 constant HDMI_CEC_CEC_CFGR_LSTN                           \ Listen mode
+  [ifdef] HDMI_CEC_CEC_CR_DEF
+    \
+    \ @brief CEC control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant HDMI_CEC_CECEN                 \ [0x00] CEC Enable
+    $01 constant HDMI_CEC_TXSOM                 \ [0x01] Tx Start Of Message
+    $02 constant HDMI_CEC_TXEOM                 \ [0x02] Tx End Of Message
+  [then]
 
 
-\
-\ @brief CEC Tx data register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HDMI_CEC_CEC_TXDR_TXD                            \ Tx Data register
-
-
-\
-\ @brief CEC Rx Data Register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HDMI_CEC_CEC_RXDR_RXD                            \ Rx Data register
-
-
-\
-\ @brief CEC Interrupt and Status Register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HDMI_CEC_CEC_ISR_RXBR                            \ Rx-Byte Received
-$00000002 constant HDMI_CEC_CEC_ISR_RXEND                           \ End Of Reception
-$00000004 constant HDMI_CEC_CEC_ISR_RXOVR                           \ Rx-Overrun
-$00000008 constant HDMI_CEC_CEC_ISR_BRE                             \ Rx-Bit Rising Error
-$00000010 constant HDMI_CEC_CEC_ISR_SBPE                            \ Rx-Short Bit Period Error
-$00000020 constant HDMI_CEC_CEC_ISR_LBPE                            \ Rx-Long Bit Period Error
-$00000040 constant HDMI_CEC_CEC_ISR_RXACKE                          \ Rx-Missing Acknowledge
-$00000080 constant HDMI_CEC_CEC_ISR_ARBLST                          \ Arbitration Lost
-$00000100 constant HDMI_CEC_CEC_ISR_TXBR                            \ Tx-Byte Request
-$00000200 constant HDMI_CEC_CEC_ISR_TXEND                           \ End of Transmission
-$00000400 constant HDMI_CEC_CEC_ISR_TXUDR                           \ Tx-Buffer Underrun
-$00000800 constant HDMI_CEC_CEC_ISR_TXERR                           \ Tx-Error
-$00001000 constant HDMI_CEC_CEC_ISR_TXACKE                          \ Tx-Missing Acknowledge Error
+  [ifdef] HDMI_CEC_CEC_CFGR_DEF
+    \
+    \ @brief CEC configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant HDMI_CEC_SFT                   \ [0x00 : 3] Signal Free Time
+    $03 constant HDMI_CEC_RXTOL                 \ [0x03] Rx-Tolerance
+    $04 constant HDMI_CEC_BRESTP                \ [0x04] Rx-Stop on Bit Rising Error
+    $05 constant HDMI_CEC_BREGEN                \ [0x05] Generate Error-Bit on Bit Rising Error
+    $06 constant HDMI_CEC_LBPEGEN               \ [0x06] Generate Error-Bit on Long Bit Period Error
+    $07 constant HDMI_CEC_BRDNOGEN              \ [0x07] Avoid Error-Bit Generation in Broadcast
+    $08 constant HDMI_CEC_SFTOP                 \ [0x08] SFT Option Bit
+    $10 constant HDMI_CEC_OAR                   \ [0x10 : 15] Own addresses configuration
+    $1f constant HDMI_CEC_LSTN                  \ [0x1f] Listen mode
+  [then]
 
 
-\
-\ @brief CEC interrupt enable register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HDMI_CEC_CEC_IER_RXBRIE                          \ Rx-Byte Received Interrupt Enable
-$00000002 constant HDMI_CEC_CEC_IER_RXENDIE                         \ End Of Reception Interrupt Enable
-$00000004 constant HDMI_CEC_CEC_IER_RXOVRIE                         \ Rx-Buffer Overrun Interrupt Enable
-$00000008 constant HDMI_CEC_CEC_IER_BREIE                           \ Bit Rising Error Interrupt Enable
-$00000010 constant HDMI_CEC_CEC_IER_SBPEIE                          \ Short Bit Period Error Interrupt Enable
-$00000020 constant HDMI_CEC_CEC_IER_LBPEIE                          \ Long Bit Period Error Interrupt Enable
-$00000040 constant HDMI_CEC_CEC_IER_RXACKIE                         \ Rx-Missing Acknowledge Error Interrupt Enable
-$00000080 constant HDMI_CEC_CEC_IER_ARBLSTIE                        \ Arbitration Lost Interrupt Enable
-$00000100 constant HDMI_CEC_CEC_IER_TXBRIE                          \ Tx-Byte Request Interrupt Enable
-$00000200 constant HDMI_CEC_CEC_IER_TXENDIE                         \ Tx-End Of Message Interrupt Enable
-$00000400 constant HDMI_CEC_CEC_IER_TXUDRIE                         \ Tx-Underrun Interrupt Enable
-$00000800 constant HDMI_CEC_CEC_IER_TXERRIE                         \ Tx-Error Interrupt Enable
-$00001000 constant HDMI_CEC_CEC_IER_TXACKIE                         \ Tx-Missing Acknowledge Error Interrupt Enable
+  [ifdef] HDMI_CEC_CEC_TXDR_DEF
+    \
+    \ @brief CEC Tx data register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant HDMI_CEC_TXD                   \ [0x00 : 8] Tx Data register
+  [then]
 
 
-\
-\ @brief HDMI-CEC controller
-\
-$40006c00 constant HDMI_CEC_CEC_CR  \ offset: 0x00 : CEC control register
-$40006c04 constant HDMI_CEC_CEC_CFGR  \ offset: 0x04 : CEC configuration register
-$40006c08 constant HDMI_CEC_CEC_TXDR  \ offset: 0x08 : CEC Tx data register
-$40006c0c constant HDMI_CEC_CEC_RXDR  \ offset: 0x0C : CEC Rx Data Register
-$40006c10 constant HDMI_CEC_CEC_ISR  \ offset: 0x10 : CEC Interrupt and Status Register
-$40006c14 constant HDMI_CEC_CEC_IER  \ offset: 0x14 : CEC interrupt enable register
+  [ifdef] HDMI_CEC_CEC_RXDR_DEF
+    \
+    \ @brief CEC Rx Data Register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HDMI_CEC_RXD                   \ [0x00 : 8] Rx Data register
+  [then]
 
+
+  [ifdef] HDMI_CEC_CEC_ISR_DEF
+    \
+    \ @brief CEC Interrupt and Status Register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant HDMI_CEC_RXBR                  \ [0x00] Rx-Byte Received
+    $01 constant HDMI_CEC_RXEND                 \ [0x01] End Of Reception
+    $02 constant HDMI_CEC_RXOVR                 \ [0x02] Rx-Overrun
+    $03 constant HDMI_CEC_BRE                   \ [0x03] Rx-Bit Rising Error
+    $04 constant HDMI_CEC_SBPE                  \ [0x04] Rx-Short Bit Period Error
+    $05 constant HDMI_CEC_LBPE                  \ [0x05] Rx-Long Bit Period Error
+    $06 constant HDMI_CEC_RXACKE                \ [0x06] Rx-Missing Acknowledge
+    $07 constant HDMI_CEC_ARBLST                \ [0x07] Arbitration Lost
+    $08 constant HDMI_CEC_TXBR                  \ [0x08] Tx-Byte Request
+    $09 constant HDMI_CEC_TXEND                 \ [0x09] End of Transmission
+    $0a constant HDMI_CEC_TXUDR                 \ [0x0a] Tx-Buffer Underrun
+    $0b constant HDMI_CEC_TXERR                 \ [0x0b] Tx-Error
+    $0c constant HDMI_CEC_TXACKE                \ [0x0c] Tx-Missing Acknowledge Error
+  [then]
+
+
+  [ifdef] HDMI_CEC_CEC_IER_DEF
+    \
+    \ @brief CEC interrupt enable register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant HDMI_CEC_RXBRIE                \ [0x00] Rx-Byte Received Interrupt Enable
+    $01 constant HDMI_CEC_RXENDIE               \ [0x01] End Of Reception Interrupt Enable
+    $02 constant HDMI_CEC_RXOVRIE               \ [0x02] Rx-Buffer Overrun Interrupt Enable
+    $03 constant HDMI_CEC_BREIE                 \ [0x03] Bit Rising Error Interrupt Enable
+    $04 constant HDMI_CEC_SBPEIE                \ [0x04] Short Bit Period Error Interrupt Enable
+    $05 constant HDMI_CEC_LBPEIE                \ [0x05] Long Bit Period Error Interrupt Enable
+    $06 constant HDMI_CEC_RXACKIE               \ [0x06] Rx-Missing Acknowledge Error Interrupt Enable
+    $07 constant HDMI_CEC_ARBLSTIE              \ [0x07] Arbitration Lost Interrupt Enable
+    $08 constant HDMI_CEC_TXBRIE                \ [0x08] Tx-Byte Request Interrupt Enable
+    $09 constant HDMI_CEC_TXENDIE               \ [0x09] Tx-End Of Message Interrupt Enable
+    $0a constant HDMI_CEC_TXUDRIE               \ [0x0a] Tx-Underrun Interrupt Enable
+    $0b constant HDMI_CEC_TXERRIE               \ [0x0b] Tx-Error Interrupt Enable
+    $0c constant HDMI_CEC_TXACKIE               \ [0x0c] Tx-Missing Acknowledge Error Interrupt Enable
+  [then]
+
+  \
+  \ @brief HDMI-CEC controller
+  \
+  $00 constant HDMI_CEC_CEC_CR          \ CEC control register
+  $04 constant HDMI_CEC_CEC_CFGR        \ CEC configuration register
+  $08 constant HDMI_CEC_CEC_TXDR        \ CEC Tx data register
+  $0C constant HDMI_CEC_CEC_RXDR        \ CEC Rx Data Register
+  $10 constant HDMI_CEC_CEC_ISR         \ CEC Interrupt and Status Register
+  $14 constant HDMI_CEC_CEC_IER         \ CEC interrupt enable register
+
+: HDMI_CEC_DEF ; [then]

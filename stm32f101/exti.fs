@@ -6,177 +6,183 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] EXTI_DEF
 
-\
-\ @brief Interrupt mask register (EXTI_IMR)
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_IMR_MR0                                     \ Interrupt Mask on line 0
-$00000002 constant EXTI_IMR_MR1                                     \ Interrupt Mask on line 1
-$00000004 constant EXTI_IMR_MR2                                     \ Interrupt Mask on line 2
-$00000008 constant EXTI_IMR_MR3                                     \ Interrupt Mask on line 3
-$00000010 constant EXTI_IMR_MR4                                     \ Interrupt Mask on line 4
-$00000020 constant EXTI_IMR_MR5                                     \ Interrupt Mask on line 5
-$00000040 constant EXTI_IMR_MR6                                     \ Interrupt Mask on line 6
-$00000080 constant EXTI_IMR_MR7                                     \ Interrupt Mask on line 7
-$00000100 constant EXTI_IMR_MR8                                     \ Interrupt Mask on line 8
-$00000200 constant EXTI_IMR_MR9                                     \ Interrupt Mask on line 9
-$00000400 constant EXTI_IMR_MR10                                    \ Interrupt Mask on line 10
-$00000800 constant EXTI_IMR_MR11                                    \ Interrupt Mask on line 11
-$00001000 constant EXTI_IMR_MR12                                    \ Interrupt Mask on line 12
-$00002000 constant EXTI_IMR_MR13                                    \ Interrupt Mask on line 13
-$00004000 constant EXTI_IMR_MR14                                    \ Interrupt Mask on line 14
-$00008000 constant EXTI_IMR_MR15                                    \ Interrupt Mask on line 15
-$00010000 constant EXTI_IMR_MR16                                    \ Interrupt Mask on line 16
-$00020000 constant EXTI_IMR_MR17                                    \ Interrupt Mask on line 17
-$00040000 constant EXTI_IMR_MR18                                    \ Interrupt Mask on line 18
-
-
-\
-\ @brief Event mask register (EXTI_EMR)
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EMR_MR0                                     \ Event Mask on line 0
-$00000002 constant EXTI_EMR_MR1                                     \ Event Mask on line 1
-$00000004 constant EXTI_EMR_MR2                                     \ Event Mask on line 2
-$00000008 constant EXTI_EMR_MR3                                     \ Event Mask on line 3
-$00000010 constant EXTI_EMR_MR4                                     \ Event Mask on line 4
-$00000020 constant EXTI_EMR_MR5                                     \ Event Mask on line 5
-$00000040 constant EXTI_EMR_MR6                                     \ Event Mask on line 6
-$00000080 constant EXTI_EMR_MR7                                     \ Event Mask on line 7
-$00000100 constant EXTI_EMR_MR8                                     \ Event Mask on line 8
-$00000200 constant EXTI_EMR_MR9                                     \ Event Mask on line 9
-$00000400 constant EXTI_EMR_MR10                                    \ Event Mask on line 10
-$00000800 constant EXTI_EMR_MR11                                    \ Event Mask on line 11
-$00001000 constant EXTI_EMR_MR12                                    \ Event Mask on line 12
-$00002000 constant EXTI_EMR_MR13                                    \ Event Mask on line 13
-$00004000 constant EXTI_EMR_MR14                                    \ Event Mask on line 14
-$00008000 constant EXTI_EMR_MR15                                    \ Event Mask on line 15
-$00010000 constant EXTI_EMR_MR16                                    \ Event Mask on line 16
-$00020000 constant EXTI_EMR_MR17                                    \ Event Mask on line 17
-$00040000 constant EXTI_EMR_MR18                                    \ Event Mask on line 18
+  [ifdef] EXTI_IMR_DEF
+    \
+    \ @brief Interrupt mask register (EXTI_IMR)
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_MR0                       \ [0x00] Interrupt Mask on line 0
+    $01 constant EXTI_MR1                       \ [0x01] Interrupt Mask on line 1
+    $02 constant EXTI_MR2                       \ [0x02] Interrupt Mask on line 2
+    $03 constant EXTI_MR3                       \ [0x03] Interrupt Mask on line 3
+    $04 constant EXTI_MR4                       \ [0x04] Interrupt Mask on line 4
+    $05 constant EXTI_MR5                       \ [0x05] Interrupt Mask on line 5
+    $06 constant EXTI_MR6                       \ [0x06] Interrupt Mask on line 6
+    $07 constant EXTI_MR7                       \ [0x07] Interrupt Mask on line 7
+    $08 constant EXTI_MR8                       \ [0x08] Interrupt Mask on line 8
+    $09 constant EXTI_MR9                       \ [0x09] Interrupt Mask on line 9
+    $0a constant EXTI_MR10                      \ [0x0a] Interrupt Mask on line 10
+    $0b constant EXTI_MR11                      \ [0x0b] Interrupt Mask on line 11
+    $0c constant EXTI_MR12                      \ [0x0c] Interrupt Mask on line 12
+    $0d constant EXTI_MR13                      \ [0x0d] Interrupt Mask on line 13
+    $0e constant EXTI_MR14                      \ [0x0e] Interrupt Mask on line 14
+    $0f constant EXTI_MR15                      \ [0x0f] Interrupt Mask on line 15
+    $10 constant EXTI_MR16                      \ [0x10] Interrupt Mask on line 16
+    $11 constant EXTI_MR17                      \ [0x11] Interrupt Mask on line 17
+    $12 constant EXTI_MR18                      \ [0x12] Interrupt Mask on line 18
+  [then]
 
 
-\
-\ @brief Rising Trigger selection register (EXTI_RTSR)
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_RTSR_TR0                                    \ Rising trigger event configuration of line 0
-$00000002 constant EXTI_RTSR_TR1                                    \ Rising trigger event configuration of line 1
-$00000004 constant EXTI_RTSR_TR2                                    \ Rising trigger event configuration of line 2
-$00000008 constant EXTI_RTSR_TR3                                    \ Rising trigger event configuration of line 3
-$00000010 constant EXTI_RTSR_TR4                                    \ Rising trigger event configuration of line 4
-$00000020 constant EXTI_RTSR_TR5                                    \ Rising trigger event configuration of line 5
-$00000040 constant EXTI_RTSR_TR6                                    \ Rising trigger event configuration of line 6
-$00000080 constant EXTI_RTSR_TR7                                    \ Rising trigger event configuration of line 7
-$00000100 constant EXTI_RTSR_TR8                                    \ Rising trigger event configuration of line 8
-$00000200 constant EXTI_RTSR_TR9                                    \ Rising trigger event configuration of line 9
-$00000400 constant EXTI_RTSR_TR10                                   \ Rising trigger event configuration of line 10
-$00000800 constant EXTI_RTSR_TR11                                   \ Rising trigger event configuration of line 11
-$00001000 constant EXTI_RTSR_TR12                                   \ Rising trigger event configuration of line 12
-$00002000 constant EXTI_RTSR_TR13                                   \ Rising trigger event configuration of line 13
-$00004000 constant EXTI_RTSR_TR14                                   \ Rising trigger event configuration of line 14
-$00008000 constant EXTI_RTSR_TR15                                   \ Rising trigger event configuration of line 15
-$00010000 constant EXTI_RTSR_TR16                                   \ Rising trigger event configuration of line 16
-$00020000 constant EXTI_RTSR_TR17                                   \ Rising trigger event configuration of line 17
-$00040000 constant EXTI_RTSR_TR18                                   \ Rising trigger event configuration of line 18
-
-
-\
-\ @brief Falling Trigger selection register (EXTI_FTSR)
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_FTSR_TR0                                    \ Falling trigger event configuration of line 0
-$00000002 constant EXTI_FTSR_TR1                                    \ Falling trigger event configuration of line 1
-$00000004 constant EXTI_FTSR_TR2                                    \ Falling trigger event configuration of line 2
-$00000008 constant EXTI_FTSR_TR3                                    \ Falling trigger event configuration of line 3
-$00000010 constant EXTI_FTSR_TR4                                    \ Falling trigger event configuration of line 4
-$00000020 constant EXTI_FTSR_TR5                                    \ Falling trigger event configuration of line 5
-$00000040 constant EXTI_FTSR_TR6                                    \ Falling trigger event configuration of line 6
-$00000080 constant EXTI_FTSR_TR7                                    \ Falling trigger event configuration of line 7
-$00000100 constant EXTI_FTSR_TR8                                    \ Falling trigger event configuration of line 8
-$00000200 constant EXTI_FTSR_TR9                                    \ Falling trigger event configuration of line 9
-$00000400 constant EXTI_FTSR_TR10                                   \ Falling trigger event configuration of line 10
-$00000800 constant EXTI_FTSR_TR11                                   \ Falling trigger event configuration of line 11
-$00001000 constant EXTI_FTSR_TR12                                   \ Falling trigger event configuration of line 12
-$00002000 constant EXTI_FTSR_TR13                                   \ Falling trigger event configuration of line 13
-$00004000 constant EXTI_FTSR_TR14                                   \ Falling trigger event configuration of line 14
-$00008000 constant EXTI_FTSR_TR15                                   \ Falling trigger event configuration of line 15
-$00010000 constant EXTI_FTSR_TR16                                   \ Falling trigger event configuration of line 16
-$00020000 constant EXTI_FTSR_TR17                                   \ Falling trigger event configuration of line 17
-$00040000 constant EXTI_FTSR_TR18                                   \ Falling trigger event configuration of line 18
+  [ifdef] EXTI_EMR_DEF
+    \
+    \ @brief Event mask register (EXTI_EMR)
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_MR0                       \ [0x00] Event Mask on line 0
+    $01 constant EXTI_MR1                       \ [0x01] Event Mask on line 1
+    $02 constant EXTI_MR2                       \ [0x02] Event Mask on line 2
+    $03 constant EXTI_MR3                       \ [0x03] Event Mask on line 3
+    $04 constant EXTI_MR4                       \ [0x04] Event Mask on line 4
+    $05 constant EXTI_MR5                       \ [0x05] Event Mask on line 5
+    $06 constant EXTI_MR6                       \ [0x06] Event Mask on line 6
+    $07 constant EXTI_MR7                       \ [0x07] Event Mask on line 7
+    $08 constant EXTI_MR8                       \ [0x08] Event Mask on line 8
+    $09 constant EXTI_MR9                       \ [0x09] Event Mask on line 9
+    $0a constant EXTI_MR10                      \ [0x0a] Event Mask on line 10
+    $0b constant EXTI_MR11                      \ [0x0b] Event Mask on line 11
+    $0c constant EXTI_MR12                      \ [0x0c] Event Mask on line 12
+    $0d constant EXTI_MR13                      \ [0x0d] Event Mask on line 13
+    $0e constant EXTI_MR14                      \ [0x0e] Event Mask on line 14
+    $0f constant EXTI_MR15                      \ [0x0f] Event Mask on line 15
+    $10 constant EXTI_MR16                      \ [0x10] Event Mask on line 16
+    $11 constant EXTI_MR17                      \ [0x11] Event Mask on line 17
+    $12 constant EXTI_MR18                      \ [0x12] Event Mask on line 18
+  [then]
 
 
-\
-\ @brief Software interrupt event register (EXTI_SWIER)
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_SWIER_SWIER0                                \ Software Interrupt on line 0
-$00000002 constant EXTI_SWIER_SWIER1                                \ Software Interrupt on line 1
-$00000004 constant EXTI_SWIER_SWIER2                                \ Software Interrupt on line 2
-$00000008 constant EXTI_SWIER_SWIER3                                \ Software Interrupt on line 3
-$00000010 constant EXTI_SWIER_SWIER4                                \ Software Interrupt on line 4
-$00000020 constant EXTI_SWIER_SWIER5                                \ Software Interrupt on line 5
-$00000040 constant EXTI_SWIER_SWIER6                                \ Software Interrupt on line 6
-$00000080 constant EXTI_SWIER_SWIER7                                \ Software Interrupt on line 7
-$00000100 constant EXTI_SWIER_SWIER8                                \ Software Interrupt on line 8
-$00000200 constant EXTI_SWIER_SWIER9                                \ Software Interrupt on line 9
-$00000400 constant EXTI_SWIER_SWIER10                               \ Software Interrupt on line 10
-$00000800 constant EXTI_SWIER_SWIER11                               \ Software Interrupt on line 11
-$00001000 constant EXTI_SWIER_SWIER12                               \ Software Interrupt on line 12
-$00002000 constant EXTI_SWIER_SWIER13                               \ Software Interrupt on line 13
-$00004000 constant EXTI_SWIER_SWIER14                               \ Software Interrupt on line 14
-$00008000 constant EXTI_SWIER_SWIER15                               \ Software Interrupt on line 15
-$00010000 constant EXTI_SWIER_SWIER16                               \ Software Interrupt on line 16
-$00020000 constant EXTI_SWIER_SWIER17                               \ Software Interrupt on line 17
-$00040000 constant EXTI_SWIER_SWIER18                               \ Software Interrupt on line 18
-
-
-\
-\ @brief Pending register (EXTI_PR)
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_PR_PR0                                      \ Pending bit 0
-$00000002 constant EXTI_PR_PR1                                      \ Pending bit 1
-$00000004 constant EXTI_PR_PR2                                      \ Pending bit 2
-$00000008 constant EXTI_PR_PR3                                      \ Pending bit 3
-$00000010 constant EXTI_PR_PR4                                      \ Pending bit 4
-$00000020 constant EXTI_PR_PR5                                      \ Pending bit 5
-$00000040 constant EXTI_PR_PR6                                      \ Pending bit 6
-$00000080 constant EXTI_PR_PR7                                      \ Pending bit 7
-$00000100 constant EXTI_PR_PR8                                      \ Pending bit 8
-$00000200 constant EXTI_PR_PR9                                      \ Pending bit 9
-$00000400 constant EXTI_PR_PR10                                     \ Pending bit 10
-$00000800 constant EXTI_PR_PR11                                     \ Pending bit 11
-$00001000 constant EXTI_PR_PR12                                     \ Pending bit 12
-$00002000 constant EXTI_PR_PR13                                     \ Pending bit 13
-$00004000 constant EXTI_PR_PR14                                     \ Pending bit 14
-$00008000 constant EXTI_PR_PR15                                     \ Pending bit 15
-$00010000 constant EXTI_PR_PR16                                     \ Pending bit 16
-$00020000 constant EXTI_PR_PR17                                     \ Pending bit 17
-$00040000 constant EXTI_PR_PR18                                     \ Pending bit 18
+  [ifdef] EXTI_RTSR_DEF
+    \
+    \ @brief Rising Trigger selection register (EXTI_RTSR)
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_TR0                       \ [0x00] Rising trigger event configuration of line 0
+    $01 constant EXTI_TR1                       \ [0x01] Rising trigger event configuration of line 1
+    $02 constant EXTI_TR2                       \ [0x02] Rising trigger event configuration of line 2
+    $03 constant EXTI_TR3                       \ [0x03] Rising trigger event configuration of line 3
+    $04 constant EXTI_TR4                       \ [0x04] Rising trigger event configuration of line 4
+    $05 constant EXTI_TR5                       \ [0x05] Rising trigger event configuration of line 5
+    $06 constant EXTI_TR6                       \ [0x06] Rising trigger event configuration of line 6
+    $07 constant EXTI_TR7                       \ [0x07] Rising trigger event configuration of line 7
+    $08 constant EXTI_TR8                       \ [0x08] Rising trigger event configuration of line 8
+    $09 constant EXTI_TR9                       \ [0x09] Rising trigger event configuration of line 9
+    $0a constant EXTI_TR10                      \ [0x0a] Rising trigger event configuration of line 10
+    $0b constant EXTI_TR11                      \ [0x0b] Rising trigger event configuration of line 11
+    $0c constant EXTI_TR12                      \ [0x0c] Rising trigger event configuration of line 12
+    $0d constant EXTI_TR13                      \ [0x0d] Rising trigger event configuration of line 13
+    $0e constant EXTI_TR14                      \ [0x0e] Rising trigger event configuration of line 14
+    $0f constant EXTI_TR15                      \ [0x0f] Rising trigger event configuration of line 15
+    $10 constant EXTI_TR16                      \ [0x10] Rising trigger event configuration of line 16
+    $11 constant EXTI_TR17                      \ [0x11] Rising trigger event configuration of line 17
+    $12 constant EXTI_TR18                      \ [0x12] Rising trigger event configuration of line 18
+  [then]
 
 
-\
-\ @brief EXTI
-\
-$40010400 constant EXTI_IMR       \ offset: 0x00 : Interrupt mask register (EXTI_IMR)
-$40010404 constant EXTI_EMR       \ offset: 0x04 : Event mask register (EXTI_EMR)
-$40010408 constant EXTI_RTSR      \ offset: 0x08 : Rising Trigger selection register (EXTI_RTSR)
-$4001040c constant EXTI_FTSR      \ offset: 0x0C : Falling Trigger selection register (EXTI_FTSR)
-$40010410 constant EXTI_SWIER     \ offset: 0x10 : Software interrupt event register (EXTI_SWIER)
-$40010414 constant EXTI_PR        \ offset: 0x14 : Pending register (EXTI_PR)
+  [ifdef] EXTI_FTSR_DEF
+    \
+    \ @brief Falling Trigger selection register (EXTI_FTSR)
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_TR0                       \ [0x00] Falling trigger event configuration of line 0
+    $01 constant EXTI_TR1                       \ [0x01] Falling trigger event configuration of line 1
+    $02 constant EXTI_TR2                       \ [0x02] Falling trigger event configuration of line 2
+    $03 constant EXTI_TR3                       \ [0x03] Falling trigger event configuration of line 3
+    $04 constant EXTI_TR4                       \ [0x04] Falling trigger event configuration of line 4
+    $05 constant EXTI_TR5                       \ [0x05] Falling trigger event configuration of line 5
+    $06 constant EXTI_TR6                       \ [0x06] Falling trigger event configuration of line 6
+    $07 constant EXTI_TR7                       \ [0x07] Falling trigger event configuration of line 7
+    $08 constant EXTI_TR8                       \ [0x08] Falling trigger event configuration of line 8
+    $09 constant EXTI_TR9                       \ [0x09] Falling trigger event configuration of line 9
+    $0a constant EXTI_TR10                      \ [0x0a] Falling trigger event configuration of line 10
+    $0b constant EXTI_TR11                      \ [0x0b] Falling trigger event configuration of line 11
+    $0c constant EXTI_TR12                      \ [0x0c] Falling trigger event configuration of line 12
+    $0d constant EXTI_TR13                      \ [0x0d] Falling trigger event configuration of line 13
+    $0e constant EXTI_TR14                      \ [0x0e] Falling trigger event configuration of line 14
+    $0f constant EXTI_TR15                      \ [0x0f] Falling trigger event configuration of line 15
+    $10 constant EXTI_TR16                      \ [0x10] Falling trigger event configuration of line 16
+    $11 constant EXTI_TR17                      \ [0x11] Falling trigger event configuration of line 17
+    $12 constant EXTI_TR18                      \ [0x12] Falling trigger event configuration of line 18
+  [then]
 
+
+  [ifdef] EXTI_SWIER_DEF
+    \
+    \ @brief Software interrupt event register (EXTI_SWIER)
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_SWIER0                    \ [0x00] Software Interrupt on line 0
+    $01 constant EXTI_SWIER1                    \ [0x01] Software Interrupt on line 1
+    $02 constant EXTI_SWIER2                    \ [0x02] Software Interrupt on line 2
+    $03 constant EXTI_SWIER3                    \ [0x03] Software Interrupt on line 3
+    $04 constant EXTI_SWIER4                    \ [0x04] Software Interrupt on line 4
+    $05 constant EXTI_SWIER5                    \ [0x05] Software Interrupt on line 5
+    $06 constant EXTI_SWIER6                    \ [0x06] Software Interrupt on line 6
+    $07 constant EXTI_SWIER7                    \ [0x07] Software Interrupt on line 7
+    $08 constant EXTI_SWIER8                    \ [0x08] Software Interrupt on line 8
+    $09 constant EXTI_SWIER9                    \ [0x09] Software Interrupt on line 9
+    $0a constant EXTI_SWIER10                   \ [0x0a] Software Interrupt on line 10
+    $0b constant EXTI_SWIER11                   \ [0x0b] Software Interrupt on line 11
+    $0c constant EXTI_SWIER12                   \ [0x0c] Software Interrupt on line 12
+    $0d constant EXTI_SWIER13                   \ [0x0d] Software Interrupt on line 13
+    $0e constant EXTI_SWIER14                   \ [0x0e] Software Interrupt on line 14
+    $0f constant EXTI_SWIER15                   \ [0x0f] Software Interrupt on line 15
+    $10 constant EXTI_SWIER16                   \ [0x10] Software Interrupt on line 16
+    $11 constant EXTI_SWIER17                   \ [0x11] Software Interrupt on line 17
+    $12 constant EXTI_SWIER18                   \ [0x12] Software Interrupt on line 18
+  [then]
+
+
+  [ifdef] EXTI_PR_DEF
+    \
+    \ @brief Pending register (EXTI_PR)
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_PR0                       \ [0x00] Pending bit 0
+    $01 constant EXTI_PR1                       \ [0x01] Pending bit 1
+    $02 constant EXTI_PR2                       \ [0x02] Pending bit 2
+    $03 constant EXTI_PR3                       \ [0x03] Pending bit 3
+    $04 constant EXTI_PR4                       \ [0x04] Pending bit 4
+    $05 constant EXTI_PR5                       \ [0x05] Pending bit 5
+    $06 constant EXTI_PR6                       \ [0x06] Pending bit 6
+    $07 constant EXTI_PR7                       \ [0x07] Pending bit 7
+    $08 constant EXTI_PR8                       \ [0x08] Pending bit 8
+    $09 constant EXTI_PR9                       \ [0x09] Pending bit 9
+    $0a constant EXTI_PR10                      \ [0x0a] Pending bit 10
+    $0b constant EXTI_PR11                      \ [0x0b] Pending bit 11
+    $0c constant EXTI_PR12                      \ [0x0c] Pending bit 12
+    $0d constant EXTI_PR13                      \ [0x0d] Pending bit 13
+    $0e constant EXTI_PR14                      \ [0x0e] Pending bit 14
+    $0f constant EXTI_PR15                      \ [0x0f] Pending bit 15
+    $10 constant EXTI_PR16                      \ [0x10] Pending bit 16
+    $11 constant EXTI_PR17                      \ [0x11] Pending bit 17
+    $12 constant EXTI_PR18                      \ [0x12] Pending bit 18
+  [then]
+
+  \
+  \ @brief EXTI
+  \
+  $00 constant EXTI_IMR                 \ Interrupt mask register (EXTI_IMR)
+  $04 constant EXTI_EMR                 \ Event mask register (EXTI_EMR)
+  $08 constant EXTI_RTSR                \ Rising Trigger selection register (EXTI_RTSR)
+  $0C constant EXTI_FTSR                \ Falling Trigger selection register (EXTI_FTSR)
+  $10 constant EXTI_SWIER               \ Software interrupt event register (EXTI_SWIER)
+  $14 constant EXTI_PR                  \ Pending register (EXTI_PR)
+
+: EXTI_DEF ; [then]

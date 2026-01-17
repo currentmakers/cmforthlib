@@ -6,92 +6,99 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SYSCFG_DEF
 
-\
-\ @brief memory remap register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000003 constant SYSCFG_MEMRM_MEM_MODE                            \ MEM_MODE
-
-
-\
-\ @brief peripheral mode configuration register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00800000 constant SYSCFG_PMC_MII_RMII_SEL                          \ Ethernet PHY interface selection
+  [ifdef] SYSCFG_MEMRM_DEF
+    \
+    \ @brief memory remap register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_MEM_MODE                \ [0x00 : 2] MEM_MODE
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 1
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR1_EXTI0                             \ EXTI x configuration (x = 0 to 3)
-$000000f0 constant SYSCFG_EXTICR1_EXTI1                             \ EXTI x configuration (x = 0 to 3)
-$00000f00 constant SYSCFG_EXTICR1_EXTI2                             \ EXTI x configuration (x = 0 to 3)
-$0000f000 constant SYSCFG_EXTICR1_EXTI3                             \ EXTI x configuration (x = 0 to 3)
+  [ifdef] SYSCFG_PMC_DEF
+    \
+    \ @brief peripheral mode configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $17 constant SYSCFG_MII_RMII_SEL            \ [0x17] Ethernet PHY interface selection
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR2_EXTI4                             \ EXTI x configuration (x = 4 to 7)
-$000000f0 constant SYSCFG_EXTICR2_EXTI5                             \ EXTI x configuration (x = 4 to 7)
-$00000f00 constant SYSCFG_EXTICR2_EXTI6                             \ EXTI x configuration (x = 4 to 7)
-$0000f000 constant SYSCFG_EXTICR2_EXTI7                             \ EXTI x configuration (x = 4 to 7)
-
-
-\
-\ @brief external interrupt configuration register 3
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR3_EXTI8                             \ EXTI x configuration (x = 8 to 11)
-$000000f0 constant SYSCFG_EXTICR3_EXTI9                             \ EXTI x configuration (x = 8 to 11)
-$00000f00 constant SYSCFG_EXTICR3_EXTI10                            \ EXTI10
-$0000f000 constant SYSCFG_EXTICR3_EXTI11                            \ EXTI x configuration (x = 8 to 11)
+  [ifdef] SYSCFG_EXTICR1_DEF
+    \
+    \ @brief external interrupt configuration register 1
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI0                   \ [0x00 : 4] EXTI x configuration (x = 0 to 3)
+    $04 constant SYSCFG_EXTI1                   \ [0x04 : 4] EXTI x configuration (x = 0 to 3)
+    $08 constant SYSCFG_EXTI2                   \ [0x08 : 4] EXTI x configuration (x = 0 to 3)
+    $0c constant SYSCFG_EXTI3                   \ [0x0c : 4] EXTI x configuration (x = 0 to 3)
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 4
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR4_EXTI12                            \ EXTI x configuration (x = 12 to 15)
-$000000f0 constant SYSCFG_EXTICR4_EXTI13                            \ EXTI x configuration (x = 12 to 15)
-$00000f00 constant SYSCFG_EXTICR4_EXTI14                            \ EXTI x configuration (x = 12 to 15)
-$0000f000 constant SYSCFG_EXTICR4_EXTI15                            \ EXTI x configuration (x = 12 to 15)
-
-
-\
-\ @brief Compensation cell control register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CMPCR_CMP_PD                              \ Compensation cell power-down
-$00000080 constant SYSCFG_CMPCR_READY                               \ READY
+  [ifdef] SYSCFG_EXTICR2_DEF
+    \
+    \ @brief external interrupt configuration register 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI4                   \ [0x00 : 4] EXTI x configuration (x = 4 to 7)
+    $04 constant SYSCFG_EXTI5                   \ [0x04 : 4] EXTI x configuration (x = 4 to 7)
+    $08 constant SYSCFG_EXTI6                   \ [0x08 : 4] EXTI x configuration (x = 4 to 7)
+    $0c constant SYSCFG_EXTI7                   \ [0x0c : 4] EXTI x configuration (x = 4 to 7)
+  [then]
 
 
-\
-\ @brief System configuration controller
-\
-$40013800 constant SYSCFG_MEMRM   \ offset: 0x00 : memory remap register
-$40013804 constant SYSCFG_PMC     \ offset: 0x04 : peripheral mode configuration register
-$40013808 constant SYSCFG_EXTICR1  \ offset: 0x08 : external interrupt configuration register 1
-$4001380c constant SYSCFG_EXTICR2  \ offset: 0x0C : external interrupt configuration register 2
-$40013810 constant SYSCFG_EXTICR3  \ offset: 0x10 : external interrupt configuration register 3
-$40013814 constant SYSCFG_EXTICR4  \ offset: 0x14 : external interrupt configuration register 4
-$40013820 constant SYSCFG_CMPCR   \ offset: 0x20 : Compensation cell control register
+  [ifdef] SYSCFG_EXTICR3_DEF
+    \
+    \ @brief external interrupt configuration register 3
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI8                   \ [0x00 : 4] EXTI x configuration (x = 8 to 11)
+    $04 constant SYSCFG_EXTI9                   \ [0x04 : 4] EXTI x configuration (x = 8 to 11)
+    $08 constant SYSCFG_EXTI10                  \ [0x08 : 4] EXTI10
+    $0c constant SYSCFG_EXTI11                  \ [0x0c : 4] EXTI x configuration (x = 8 to 11)
+  [then]
 
+
+  [ifdef] SYSCFG_EXTICR4_DEF
+    \
+    \ @brief external interrupt configuration register 4
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI12                  \ [0x00 : 4] EXTI x configuration (x = 12 to 15)
+    $04 constant SYSCFG_EXTI13                  \ [0x04 : 4] EXTI x configuration (x = 12 to 15)
+    $08 constant SYSCFG_EXTI14                  \ [0x08 : 4] EXTI x configuration (x = 12 to 15)
+    $0c constant SYSCFG_EXTI15                  \ [0x0c : 4] EXTI x configuration (x = 12 to 15)
+  [then]
+
+
+  [ifdef] SYSCFG_CMPCR_DEF
+    \
+    \ @brief Compensation cell control register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_CMP_PD                  \ [0x00] Compensation cell power-down
+    $07 constant SYSCFG_READY                   \ [0x07] READY
+  [then]
+
+  \
+  \ @brief System configuration controller
+  \
+  $00 constant SYSCFG_MEMRM             \ memory remap register
+  $04 constant SYSCFG_PMC               \ peripheral mode configuration register
+  $08 constant SYSCFG_EXTICR1           \ external interrupt configuration register 1
+  $0C constant SYSCFG_EXTICR2           \ external interrupt configuration register 2
+  $10 constant SYSCFG_EXTICR3           \ external interrupt configuration register 3
+  $14 constant SYSCFG_EXTICR4           \ external interrupt configuration register 4
+  $20 constant SYSCFG_CMPCR             \ Compensation cell control register
+
+: SYSCFG_DEF ; [then]

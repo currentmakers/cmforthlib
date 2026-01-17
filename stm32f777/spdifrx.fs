@@ -6,117 +6,124 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SPDIFRX_DEF
 
-\
-\ @brief Control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000003 constant SPDIFRX_CR_SPDIFEN                               \ Peripheral Block Enable
-$00000004 constant SPDIFRX_CR_RXDMAEN                               \ Receiver DMA ENable for data flow
-$00000008 constant SPDIFRX_CR_RXSTEO                                \ STerEO Mode
-$00000030 constant SPDIFRX_CR_DRFMT                                 \ RX Data format
-$00000040 constant SPDIFRX_CR_PMSK                                  \ Mask Parity error bit
-$00000080 constant SPDIFRX_CR_VMSK                                  \ Mask of Validity bit
-$00000100 constant SPDIFRX_CR_CUMSK                                 \ Mask of channel status and user bits
-$00000200 constant SPDIFRX_CR_PTMSK                                 \ Mask of Preamble Type bits
-$00000400 constant SPDIFRX_CR_CBDMAEN                               \ Control Buffer DMA ENable for control flow
-$00000800 constant SPDIFRX_CR_CHSEL                                 \ Channel Selection
-$00003000 constant SPDIFRX_CR_NBTR                                  \ Maximum allowed re-tries during synchronization phase
-$00004000 constant SPDIFRX_CR_WFA                                   \ Wait For Activity
-$00070000 constant SPDIFRX_CR_INSEL                                 \ input selection
-
-
-\
-\ @brief Interrupt mask register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPDIFRX_IMR_RXNEIE                               \ RXNE interrupt enable
-$00000002 constant SPDIFRX_IMR_CSRNEIE                              \ Control Buffer Ready Interrupt Enable
-$00000004 constant SPDIFRX_IMR_PERRIE                               \ Parity error interrupt enable
-$00000008 constant SPDIFRX_IMR_OVRIE                                \ Overrun error Interrupt Enable
-$00000010 constant SPDIFRX_IMR_SBLKIE                               \ Synchronization Block Detected Interrupt Enable
-$00000020 constant SPDIFRX_IMR_SYNCDIE                              \ Synchronization Done
-$00000040 constant SPDIFRX_IMR_IFEIE                                \ Serial Interface Error Interrupt Enable
+  [ifdef] SPDIFRX_CR_DEF
+    \
+    \ @brief Control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPDIFRX_SPDIFEN                \ [0x00 : 2] Peripheral Block Enable
+    $02 constant SPDIFRX_RXDMAEN                \ [0x02] Receiver DMA ENable for data flow
+    $03 constant SPDIFRX_RXSTEO                 \ [0x03] STerEO Mode
+    $04 constant SPDIFRX_DRFMT                  \ [0x04 : 2] RX Data format
+    $06 constant SPDIFRX_PMSK                   \ [0x06] Mask Parity error bit
+    $07 constant SPDIFRX_VMSK                   \ [0x07] Mask of Validity bit
+    $08 constant SPDIFRX_CUMSK                  \ [0x08] Mask of channel status and user bits
+    $09 constant SPDIFRX_PTMSK                  \ [0x09] Mask of Preamble Type bits
+    $0a constant SPDIFRX_CBDMAEN                \ [0x0a] Control Buffer DMA ENable for control flow
+    $0b constant SPDIFRX_CHSEL                  \ [0x0b] Channel Selection
+    $0c constant SPDIFRX_NBTR                   \ [0x0c : 2] Maximum allowed re-tries during synchronization phase
+    $0e constant SPDIFRX_WFA                    \ [0x0e] Wait For Activity
+    $10 constant SPDIFRX_INSEL                  \ [0x10 : 3] input selection
+  [then]
 
 
-\
-\ @brief Status register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPDIFRX_SR_RXNE                                  \ Read data register not empty
-$00000002 constant SPDIFRX_SR_CSRNE                                 \ Control Buffer register is not empty
-$00000004 constant SPDIFRX_SR_PERR                                  \ Parity error
-$00000008 constant SPDIFRX_SR_OVR                                   \ Overrun error
-$00000010 constant SPDIFRX_SR_SBD                                   \ Synchronization Block Detected
-$00000020 constant SPDIFRX_SR_SYNCD                                 \ Synchronization Done
-$00000040 constant SPDIFRX_SR_FERR                                  \ Framing error
-$00000080 constant SPDIFRX_SR_SERR                                  \ Synchronization error
-$00000100 constant SPDIFRX_SR_TERR                                  \ Time-out error
-$7fff0000 constant SPDIFRX_SR_WIDTH5                                \ Duration of 5 symbols counted with SPDIF_CLK
+  [ifdef] SPDIFRX_IMR_DEF
+    \
+    \ @brief Interrupt mask register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPDIFRX_RXNEIE                 \ [0x00] RXNE interrupt enable
+    $01 constant SPDIFRX_CSRNEIE                \ [0x01] Control Buffer Ready Interrupt Enable
+    $02 constant SPDIFRX_PERRIE                 \ [0x02] Parity error interrupt enable
+    $03 constant SPDIFRX_OVRIE                  \ [0x03] Overrun error Interrupt Enable
+    $04 constant SPDIFRX_SBLKIE                 \ [0x04] Synchronization Block Detected Interrupt Enable
+    $05 constant SPDIFRX_SYNCDIE                \ [0x05] Synchronization Done
+    $06 constant SPDIFRX_IFEIE                  \ [0x06] Serial Interface Error Interrupt Enable
+  [then]
 
 
-\
-\ @brief Interrupt Flag Clear register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000004 constant SPDIFRX_IFCR_PERRCF                              \ Clears the Parity error flag
-$00000008 constant SPDIFRX_IFCR_OVRCF                               \ Clears the Overrun error flag
-$00000010 constant SPDIFRX_IFCR_SBDCF                               \ Clears the Synchronization Block Detected flag
-$00000020 constant SPDIFRX_IFCR_SYNCDCF                             \ Clears the Synchronization Done flag
-
-
-\
-\ @brief Data input register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00ffffff constant SPDIFRX_DR_DR                                    \ Parity Error bit
-$01000000 constant SPDIFRX_DR_PE                                    \ Parity Error bit
-$02000000 constant SPDIFRX_DR_V                                     \ Validity bit
-$04000000 constant SPDIFRX_DR_U                                     \ User bit
-$08000000 constant SPDIFRX_DR_C                                     \ Channel Status bit
-$30000000 constant SPDIFRX_DR_PT                                    \ Preamble Type
+  [ifdef] SPDIFRX_SR_DEF
+    \
+    \ @brief Status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPDIFRX_RXNE                   \ [0x00] Read data register not empty
+    $01 constant SPDIFRX_CSRNE                  \ [0x01] Control Buffer register is not empty
+    $02 constant SPDIFRX_PERR                   \ [0x02] Parity error
+    $03 constant SPDIFRX_OVR                    \ [0x03] Overrun error
+    $04 constant SPDIFRX_SBD                    \ [0x04] Synchronization Block Detected
+    $05 constant SPDIFRX_SYNCD                  \ [0x05] Synchronization Done
+    $06 constant SPDIFRX_FERR                   \ [0x06] Framing error
+    $07 constant SPDIFRX_SERR                   \ [0x07] Synchronization error
+    $08 constant SPDIFRX_TERR                   \ [0x08] Time-out error
+    $10 constant SPDIFRX_WIDTH5                 \ [0x10 : 15] Duration of 5 symbols counted with SPDIF_CLK
+  [then]
 
 
-\
-\ @brief Channel Status register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SPDIFRX_CSR_USR                                  \ User data information
-$00ff0000 constant SPDIFRX_CSR_CS                                   \ Channel A status information
-$01000000 constant SPDIFRX_CSR_SOB                                  \ Start Of Block
-
-
-\
-\ @brief Debug Information register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00001fff constant SPDIFRX_DIR_THI                                  \ Threshold HIGH
-$1fff0000 constant SPDIFRX_DIR_TLO                                  \ Threshold LOW
+  [ifdef] SPDIFRX_IFCR_DEF
+    \
+    \ @brief Interrupt Flag Clear register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $02 constant SPDIFRX_PERRCF                 \ [0x02] Clears the Parity error flag
+    $03 constant SPDIFRX_OVRCF                  \ [0x03] Clears the Overrun error flag
+    $04 constant SPDIFRX_SBDCF                  \ [0x04] Clears the Synchronization Block Detected flag
+    $05 constant SPDIFRX_SYNCDCF                \ [0x05] Clears the Synchronization Done flag
+  [then]
 
 
-\
-\ @brief Receiver Interface
-\
-$40004000 constant SPDIFRX_CR     \ offset: 0x00 : Control register
-$40004004 constant SPDIFRX_IMR    \ offset: 0x04 : Interrupt mask register
-$40004008 constant SPDIFRX_SR     \ offset: 0x08 : Status register
-$4000400c constant SPDIFRX_IFCR   \ offset: 0x0C : Interrupt Flag Clear register
-$40004010 constant SPDIFRX_DR     \ offset: 0x10 : Data input register
-$40004014 constant SPDIFRX_CSR    \ offset: 0x14 : Channel Status register
-$40004018 constant SPDIFRX_DIR    \ offset: 0x18 : Debug Information register
+  [ifdef] SPDIFRX_DR_DEF
+    \
+    \ @brief Data input register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPDIFRX_DR                     \ [0x00 : 24] Parity Error bit
+    $18 constant SPDIFRX_PE                     \ [0x18] Parity Error bit
+    $19 constant SPDIFRX_V                      \ [0x19] Validity bit
+    $1a constant SPDIFRX_U                      \ [0x1a] User bit
+    $1b constant SPDIFRX_C                      \ [0x1b] Channel Status bit
+    $1c constant SPDIFRX_PT                     \ [0x1c : 2] Preamble Type
+  [then]
 
+
+  [ifdef] SPDIFRX_CSR_DEF
+    \
+    \ @brief Channel Status register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPDIFRX_USR                    \ [0x00 : 16] User data information
+    $10 constant SPDIFRX_CS                     \ [0x10 : 8] Channel A status information
+    $18 constant SPDIFRX_SOB                    \ [0x18] Start Of Block
+  [then]
+
+
+  [ifdef] SPDIFRX_DIR_DEF
+    \
+    \ @brief Debug Information register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPDIFRX_THI                    \ [0x00 : 13] Threshold HIGH
+    $10 constant SPDIFRX_TLO                    \ [0x10 : 13] Threshold LOW
+  [then]
+
+  \
+  \ @brief Receiver Interface
+  \
+  $00 constant SPDIFRX_CR               \ Control register
+  $04 constant SPDIFRX_IMR              \ Interrupt mask register
+  $08 constant SPDIFRX_SR               \ Status register
+  $0C constant SPDIFRX_IFCR             \ Interrupt Flag Clear register
+  $10 constant SPDIFRX_DR               \ Data input register
+  $14 constant SPDIFRX_CSR              \ Channel Status register
+  $18 constant SPDIFRX_DIR              \ Debug Information register
+
+: SPDIFRX_DEF ; [then]

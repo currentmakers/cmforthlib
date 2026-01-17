@@ -6,79 +6,85 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ICACHE_DEF
 
-\
-\ @brief ICACHE control register
-\ Address offset: 0x00
-\ Reset value: 0x00000004
-\
-
-$00000001 constant ICACHE_ICACHE_CR_EN                              \ enable
-$00000002 constant ICACHE_ICACHE_CR_CACHEINV                        \ cache invalidation Set by software and cleared by hardware when the BUSYF flag is set (during cache maintenance operation). Writing 0 has no effect.
-$00000004 constant ICACHE_ICACHE_CR_WAYSEL                          \ cache associativity mode selection This bit allows user to choose ICACHE set-associativity. It can be written by software only when cache is disabled (EN = 0).
-$00010000 constant ICACHE_ICACHE_CR_HITMEN                          \ hit monitor enable
-$00020000 constant ICACHE_ICACHE_CR_MISSMEN                         \ miss monitor enable
-$00040000 constant ICACHE_ICACHE_CR_HITMRST                         \ hit monitor reset
-$00080000 constant ICACHE_ICACHE_CR_MISSMRST                        \ miss monitor reset
-
-
-\
-\ @brief ICACHE status register
-\ Address offset: 0x04
-\ Reset value: 0x00000001
-\
-
-$00000001 constant ICACHE_ICACHE_SR_BUSYF                           \ busy flag
-$00000002 constant ICACHE_ICACHE_SR_BSYENDF                         \ busy end flag
-$00000004 constant ICACHE_ICACHE_SR_ERRF                            \ cache error flag
+  [ifdef] ICACHE_ICACHE_CR_DEF
+    \
+    \ @brief ICACHE control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000004
+    \
+    $00 constant ICACHE_EN                      \ [0x00] enable
+    $01 constant ICACHE_CACHEINV                \ [0x01] cache invalidation Set by software and cleared by hardware when the BUSYF flag is set (during cache maintenance operation). Writing 0 has no effect.
+    $02 constant ICACHE_WAYSEL                  \ [0x02] cache associativity mode selection This bit allows user to choose ICACHE set-associativity. It can be written by software only when cache is disabled (EN = 0).
+    $10 constant ICACHE_HITMEN                  \ [0x10] hit monitor enable
+    $11 constant ICACHE_MISSMEN                 \ [0x11] miss monitor enable
+    $12 constant ICACHE_HITMRST                 \ [0x12] hit monitor reset
+    $13 constant ICACHE_MISSMRST                \ [0x13] miss monitor reset
+  [then]
 
 
-\
-\ @brief ICACHE interrupt enable register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000002 constant ICACHE_ICACHE_IER_BSYENDIE                       \ interrupt enable on busy end Set by software to enable an interrupt generation at the end of a cache invalidate operation.
-$00000004 constant ICACHE_ICACHE_IER_ERRIE                          \ interrupt enable on cache error Set by software to enable an interrupt generation in case of cache functional error (cacheable write access)
-
-
-\
-\ @brief ICACHE flag clear register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant ICACHE_ICACHE_FCR_CBSYENDF                       \ clear busy end flag Set by software.
-$00000004 constant ICACHE_ICACHE_FCR_CERRF                          \ clear cache error flag Set by software.
+  [ifdef] ICACHE_ICACHE_SR_DEF
+    \
+    \ @brief ICACHE status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000001
+    \
+    $00 constant ICACHE_BUSYF                   \ [0x00] busy flag
+    $01 constant ICACHE_BSYENDF                 \ [0x01] busy end flag
+    $02 constant ICACHE_ERRF                    \ [0x02] cache error flag
+  [then]
 
 
-\
-\ @brief ICACHE hit monitor register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ICACHE_ICACHE_HMONR_HITMON                       \ cache hit monitor counter
-
-
-\
-\ @brief ICACHE miss monitor register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ICACHE_ICACHE_MMONR_MISSMON                      \ cache miss monitor counter
+  [ifdef] ICACHE_ICACHE_IER_DEF
+    \
+    \ @brief ICACHE interrupt enable register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $01 constant ICACHE_BSYENDIE                \ [0x01] interrupt enable on busy end Set by software to enable an interrupt generation at the end of a cache invalidate operation.
+    $02 constant ICACHE_ERRIE                   \ [0x02] interrupt enable on cache error Set by software to enable an interrupt generation in case of cache functional error (cacheable write access)
+  [then]
 
 
-\
-\ @brief Texture cache
-\
-$52015000 constant ICACHE_ICACHE_CR  \ offset: 0x00 : ICACHE control register
-$52015004 constant ICACHE_ICACHE_SR  \ offset: 0x04 : ICACHE status register
-$52015008 constant ICACHE_ICACHE_IER  \ offset: 0x08 : ICACHE interrupt enable register
-$5201500c constant ICACHE_ICACHE_FCR  \ offset: 0x0C : ICACHE flag clear register
-$52015010 constant ICACHE_ICACHE_HMONR  \ offset: 0x10 : ICACHE hit monitor register
-$52015014 constant ICACHE_ICACHE_MMONR  \ offset: 0x14 : ICACHE miss monitor register
+  [ifdef] ICACHE_ICACHE_FCR_DEF
+    \
+    \ @brief ICACHE flag clear register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $01 constant ICACHE_CBSYENDF                \ [0x01] clear busy end flag Set by software.
+    $02 constant ICACHE_CERRF                   \ [0x02] clear cache error flag Set by software.
+  [then]
 
+
+  [ifdef] ICACHE_ICACHE_HMONR_DEF
+    \
+    \ @brief ICACHE hit monitor register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant ICACHE_HITMON                  \ [0x00 : 32] cache hit monitor counter
+  [then]
+
+
+  [ifdef] ICACHE_ICACHE_MMONR_DEF
+    \
+    \ @brief ICACHE miss monitor register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant ICACHE_MISSMON                 \ [0x00 : 16] cache miss monitor counter
+  [then]
+
+  \
+  \ @brief Texture cache
+  \
+  $00 constant ICACHE_ICACHE_CR         \ ICACHE control register
+  $04 constant ICACHE_ICACHE_SR         \ ICACHE status register
+  $08 constant ICACHE_ICACHE_IER        \ ICACHE interrupt enable register
+  $0C constant ICACHE_ICACHE_FCR        \ ICACHE flag clear register
+  $10 constant ICACHE_ICACHE_HMONR      \ ICACHE hit monitor register
+  $14 constant ICACHE_ICACHE_MMONR      \ ICACHE miss monitor register
+
+: ICACHE_DEF ; [then]

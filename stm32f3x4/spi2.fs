@@ -1,147 +1,156 @@
 \
 \ @file spi2.fs
-\ @brief Serial peripheral       interface/Inter-IC2
+\ @brief Serial peripheral interface/Inter-IC2
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SPI2_DEF
 
-\
-\ @brief control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPI2_CR1_CPHA                                    \ Clock phase
-$00000002 constant SPI2_CR1_CPOL                                    \ Clock polarity
-$00000004 constant SPI2_CR1_MSTR                                    \ Master selection
-$00000038 constant SPI2_CR1_BR                                      \ Baud rate control
-$00000040 constant SPI2_CR1_SPE                                     \ SPI enable
-$00000080 constant SPI2_CR1_LSBFIRST                                \ Frame format
-$00000100 constant SPI2_CR1_SSI                                     \ Internal slave select
-$00000200 constant SPI2_CR1_SSM                                     \ Software slave management
-$00000400 constant SPI2_CR1_RXONLY                                  \ Receive only
-$00000800 constant SPI2_CR1_DFF                                     \ Data frame format
-$00001000 constant SPI2_CR1_CRCNEXT                                 \ CRC transfer next
-$00002000 constant SPI2_CR1_CRCEN                                   \ Hardware CRC calculation enable
-$00004000 constant SPI2_CR1_BIDIOE                                  \ Output enable in bidirectional mode
-$00008000 constant SPI2_CR1_BIDIMODE                                \ Bidirectional data mode enable
-
-
-\
-\ @brief control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPI2_CR2_RXDMAEN                                 \ Rx buffer DMA enable
-$00000002 constant SPI2_CR2_TXDMAEN                                 \ Tx buffer DMA enable
-$00000004 constant SPI2_CR2_SSOE                                    \ SS output enable
-$00000008 constant SPI2_CR2_NSSP                                    \ NSS pulse management
-$00000010 constant SPI2_CR2_FRF                                     \ Frame format
-$00000020 constant SPI2_CR2_ERRIE                                   \ Error interrupt enable
-$00000040 constant SPI2_CR2_RXNEIE                                  \ RX buffer not empty interrupt enable
-$00000080 constant SPI2_CR2_TXEIE                                   \ Tx buffer empty interrupt enable
-$00000f00 constant SPI2_CR2_DS                                      \ Data size
-$00001000 constant SPI2_CR2_FRXTH                                   \ FIFO reception threshold
-$00002000 constant SPI2_CR2_LDMA_RX                                 \ Last DMA transfer for reception
-$00004000 constant SPI2_CR2_LDMA_TX                                 \ Last DMA transfer for transmission
+  [ifdef] SPI2_CR1_DEF
+    \
+    \ @brief control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI2_CPHA                      \ [0x00] Clock phase
+    $01 constant SPI2_CPOL                      \ [0x01] Clock polarity
+    $02 constant SPI2_MSTR                      \ [0x02] Master selection
+    $03 constant SPI2_BR                        \ [0x03 : 3] Baud rate control
+    $06 constant SPI2_SPE                       \ [0x06] SPI enable
+    $07 constant SPI2_LSBFIRST                  \ [0x07] Frame format
+    $08 constant SPI2_SSI                       \ [0x08] Internal slave select
+    $09 constant SPI2_SSM                       \ [0x09] Software slave management
+    $0a constant SPI2_RXONLY                    \ [0x0a] Receive only
+    $0b constant SPI2_DFF                       \ [0x0b] Data frame format
+    $0c constant SPI2_CRCNEXT                   \ [0x0c] CRC transfer next
+    $0d constant SPI2_CRCEN                     \ [0x0d] Hardware CRC calculation enable
+    $0e constant SPI2_BIDIOE                    \ [0x0e] Output enable in bidirectional mode
+    $0f constant SPI2_BIDIMODE                  \ [0x0f] Bidirectional data mode enable
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x08
-\ Reset value: 0x00000002
-\
-
-$00000001 constant SPI2_SR_RXNE                                     \ Receive buffer not empty
-$00000002 constant SPI2_SR_TXE                                      \ Transmit buffer empty
-$00000004 constant SPI2_SR_CHSIDE                                   \ Channel side
-$00000008 constant SPI2_SR_UDR                                      \ Underrun flag
-$00000010 constant SPI2_SR_CRCERR                                   \ CRC error flag
-$00000020 constant SPI2_SR_MODF                                     \ Mode fault
-$00000040 constant SPI2_SR_OVR                                      \ Overrun flag
-$00000080 constant SPI2_SR_BSY                                      \ Busy flag
-$00000100 constant SPI2_SR_TIFRFE                                   \ TI frame format error
-$00000600 constant SPI2_SR_FRLVL                                    \ FIFO reception level
-$00001800 constant SPI2_SR_FTLVL                                    \ FIFO transmission level
-
-
-\
-\ @brief data register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SPI2_DR_DR                                       \ Data register
+  [ifdef] SPI2_CR2_DEF
+    \
+    \ @brief control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI2_RXDMAEN                   \ [0x00] Rx buffer DMA enable
+    $01 constant SPI2_TXDMAEN                   \ [0x01] Tx buffer DMA enable
+    $02 constant SPI2_SSOE                      \ [0x02] SS output enable
+    $03 constant SPI2_NSSP                      \ [0x03] NSS pulse management
+    $04 constant SPI2_FRF                       \ [0x04] Frame format
+    $05 constant SPI2_ERRIE                     \ [0x05] Error interrupt enable
+    $06 constant SPI2_RXNEIE                    \ [0x06] RX buffer not empty interrupt enable
+    $07 constant SPI2_TXEIE                     \ [0x07] Tx buffer empty interrupt enable
+    $08 constant SPI2_DS                        \ [0x08 : 4] Data size
+    $0c constant SPI2_FRXTH                     \ [0x0c] FIFO reception threshold
+    $0d constant SPI2_LDMA_RX                   \ [0x0d] Last DMA transfer for reception
+    $0e constant SPI2_LDMA_TX                   \ [0x0e] Last DMA transfer for transmission
+  [then]
 
 
-\
-\ @brief CRC polynomial register
-\ Address offset: 0x10
-\ Reset value: 0x00000007
-\
-
-$0000ffff constant SPI2_CRCPR_CRCPOLY                               \ CRC polynomial register
-
-
-\
-\ @brief RX CRC register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SPI2_RXCRCR_RXCRC                                \ Rx CRC register
-
-
-\
-\ @brief TX CRC register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SPI2_TXCRCR_TXCRC                                \ Tx CRC register
+  [ifdef] SPI2_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000002
+    \
+    $00 constant SPI2_RXNE                      \ [0x00] Receive buffer not empty
+    $01 constant SPI2_TXE                       \ [0x01] Transmit buffer empty
+    $02 constant SPI2_CHSIDE                    \ [0x02] Channel side
+    $03 constant SPI2_UDR                       \ [0x03] Underrun flag
+    $04 constant SPI2_CRCERR                    \ [0x04] CRC error flag
+    $05 constant SPI2_MODF                      \ [0x05] Mode fault
+    $06 constant SPI2_OVR                       \ [0x06] Overrun flag
+    $07 constant SPI2_BSY                       \ [0x07] Busy flag
+    $08 constant SPI2_TIFRFE                    \ [0x08] TI frame format error
+    $09 constant SPI2_FRLVL                     \ [0x09 : 2] FIFO reception level
+    $0b constant SPI2_FTLVL                     \ [0x0b : 2] FIFO transmission level
+  [then]
 
 
-\
-\ @brief I2S configuration register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPI2_I2SCFGR_CHLEN                               \ Channel length (number of bits per audio channel)
-$00000006 constant SPI2_I2SCFGR_DATLEN                              \ Data length to be transferred
-$00000008 constant SPI2_I2SCFGR_CKPOL                               \ Steady state clock polarity
-$00000030 constant SPI2_I2SCFGR_I2SSTD                              \ I2S standard selection
-$00000080 constant SPI2_I2SCFGR_PCMSYNC                             \ PCM frame synchronization
-$00000300 constant SPI2_I2SCFGR_I2SCFG                              \ I2S configuration mode
-$00000400 constant SPI2_I2SCFGR_I2SE                                \ I2S Enable
-$00000800 constant SPI2_I2SCFGR_I2SMOD                              \ I2S mode selection
+  [ifdef] SPI2_DR_DEF
+    \
+    \ @brief data register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI2_DR                        \ [0x00 : 16] Data register
+  [then]
 
 
-\
-\ @brief I2S prescaler register
-\ Address offset: 0x20
-\ Reset value: 0x00000010
-\
+  [ifdef] SPI2_CRCPR_DEF
+    \
+    \ @brief CRC polynomial register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000007
+    \
+    $00 constant SPI2_CRCPOLY                   \ [0x00 : 16] CRC polynomial register
+  [then]
 
-$000000ff constant SPI2_I2SPR_I2SDIV                                \ I2S Linear prescaler
-$00000100 constant SPI2_I2SPR_ODD                                   \ Odd factor for the prescaler
-$00000200 constant SPI2_I2SPR_MCKOE                                 \ Master clock output enable
+
+  [ifdef] SPI2_RXCRCR_DEF
+    \
+    \ @brief RX CRC register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI2_RxCRC                     \ [0x00 : 16] Rx CRC register
+  [then]
 
 
-\
-\ @brief Serial peripheral interface/Inter-IC2
-\
-$40003800 constant SPI2_CR1       \ offset: 0x00 : control register 1
-$40003804 constant SPI2_CR2       \ offset: 0x04 : control register 2
-$40003808 constant SPI2_SR        \ offset: 0x08 : status register
-$4000380c constant SPI2_DR        \ offset: 0x0C : data register
-$40003810 constant SPI2_CRCPR     \ offset: 0x10 : CRC polynomial register
-$40003814 constant SPI2_RXCRCR    \ offset: 0x14 : RX CRC register
-$40003818 constant SPI2_TXCRCR    \ offset: 0x18 : TX CRC register
-$4000381c constant SPI2_I2SCFGR   \ offset: 0x1C : I2S configuration register
-$40003820 constant SPI2_I2SPR     \ offset: 0x20 : I2S prescaler register
+  [ifdef] SPI2_TXCRCR_DEF
+    \
+    \ @brief TX CRC register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI2_TxCRC                     \ [0x00 : 16] Tx CRC register
+  [then]
 
+
+  [ifdef] SPI2_I2SCFGR_DEF
+    \
+    \ @brief I2S configuration register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI2_CHLEN                     \ [0x00] Channel length (number of bits per audio channel)
+    $01 constant SPI2_DATLEN                    \ [0x01 : 2] Data length to be transferred
+    $03 constant SPI2_CKPOL                     \ [0x03] Steady state clock polarity
+    $04 constant SPI2_I2SSTD                    \ [0x04 : 2] I2S standard selection
+    $07 constant SPI2_PCMSYNC                   \ [0x07] PCM frame synchronization
+    $08 constant SPI2_I2SCFG                    \ [0x08 : 2] I2S configuration mode
+    $0a constant SPI2_I2SE                      \ [0x0a] I2S Enable
+    $0b constant SPI2_I2SMOD                    \ [0x0b] I2S mode selection
+  [then]
+
+
+  [ifdef] SPI2_I2SPR_DEF
+    \
+    \ @brief I2S prescaler register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000010
+    \
+    $00 constant SPI2_I2SDIV                    \ [0x00 : 8] I2S Linear prescaler
+    $08 constant SPI2_ODD                       \ [0x08] Odd factor for the prescaler
+    $09 constant SPI2_MCKOE                     \ [0x09] Master clock output enable
+  [then]
+
+  \
+  \ @brief Serial peripheral interface/Inter-IC2
+  \
+  $00 constant SPI2_CR1                 \ control register 1
+  $04 constant SPI2_CR2                 \ control register 2
+  $08 constant SPI2_SR                  \ status register
+  $0C constant SPI2_DR                  \ data register
+  $10 constant SPI2_CRCPR               \ CRC polynomial register
+  $14 constant SPI2_RXCRCR              \ RX CRC register
+  $18 constant SPI2_TXCRCR              \ TX CRC register
+  $1C constant SPI2_I2SCFGR             \ I2S configuration register
+  $20 constant SPI2_I2SPR               \ I2S prescaler register
+
+: SPI2_DEF ; [then]

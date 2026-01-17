@@ -1,248 +1,261 @@
 \
 \ @file usb.fs
-\ @brief Universal serial bus full-speed device       interface
+\ @brief Universal serial bus full-speed device interface
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] USB_DEF
 
-\
-\ @brief endpoint 0 register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_USB_EP0R_EA                                  \ Endpoint address
-$00000030 constant USB_USB_EP0R_STAT_TX                             \ Status bits, for transmission transfers
-$00000040 constant USB_USB_EP0R_DTOG_TX                             \ Data Toggle, for transmission transfers
-$00000080 constant USB_USB_EP0R_CTR_TX                              \ Correct Transfer for transmission
-$00000100 constant USB_USB_EP0R_EP_KIND                             \ Endpoint kind
-$00000600 constant USB_USB_EP0R_EP_TYPE                             \ Endpoint type
-$00000800 constant USB_USB_EP0R_SETUP                               \ Setup transaction completed
-$00003000 constant USB_USB_EP0R_STAT_RX                             \ Status bits, for reception transfers
-$00004000 constant USB_USB_EP0R_DTOG_RX                             \ Data Toggle, for reception transfers
-$00008000 constant USB_USB_EP0R_CTR_RX                              \ Correct transfer for reception
-
-
-\
-\ @brief endpoint 1 register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_USB_EP1R_EA                                  \ Endpoint address
-$00000030 constant USB_USB_EP1R_STAT_TX                             \ Status bits, for transmission transfers
-$00000040 constant USB_USB_EP1R_DTOG_TX                             \ Data Toggle, for transmission transfers
-$00000080 constant USB_USB_EP1R_CTR_TX                              \ Correct Transfer for transmission
-$00000100 constant USB_USB_EP1R_EP_KIND                             \ Endpoint kind
-$00000600 constant USB_USB_EP1R_EP_TYPE                             \ Endpoint type
-$00000800 constant USB_USB_EP1R_SETUP                               \ Setup transaction completed
-$00003000 constant USB_USB_EP1R_STAT_RX                             \ Status bits, for reception transfers
-$00004000 constant USB_USB_EP1R_DTOG_RX                             \ Data Toggle, for reception transfers
-$00008000 constant USB_USB_EP1R_CTR_RX                              \ Correct transfer for reception
+  [ifdef] USB_USB_EP0R_DEF
+    \
+    \ @brief endpoint 0 register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EA                         \ [0x00 : 4] Endpoint address
+    $04 constant USB_STAT_TX                    \ [0x04 : 2] Status bits, for transmission transfers
+    $06 constant USB_DTOG_TX                    \ [0x06] Data Toggle, for transmission transfers
+    $07 constant USB_CTR_TX                     \ [0x07] Correct Transfer for transmission
+    $08 constant USB_EP_KIND                    \ [0x08] Endpoint kind
+    $09 constant USB_EP_TYPE                    \ [0x09 : 2] Endpoint type
+    $0b constant USB_SETUP                      \ [0x0b] Setup transaction completed
+    $0c constant USB_STAT_RX                    \ [0x0c : 2] Status bits, for reception transfers
+    $0e constant USB_DTOG_RX                    \ [0x0e] Data Toggle, for reception transfers
+    $0f constant USB_CTR_RX                     \ [0x0f] Correct transfer for reception
+  [then]
 
 
-\
-\ @brief endpoint 2 register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_USB_EP2R_EA                                  \ Endpoint address
-$00000030 constant USB_USB_EP2R_STAT_TX                             \ Status bits, for transmission transfers
-$00000040 constant USB_USB_EP2R_DTOG_TX                             \ Data Toggle, for transmission transfers
-$00000080 constant USB_USB_EP2R_CTR_TX                              \ Correct Transfer for transmission
-$00000100 constant USB_USB_EP2R_EP_KIND                             \ Endpoint kind
-$00000600 constant USB_USB_EP2R_EP_TYPE                             \ Endpoint type
-$00000800 constant USB_USB_EP2R_SETUP                               \ Setup transaction completed
-$00003000 constant USB_USB_EP2R_STAT_RX                             \ Status bits, for reception transfers
-$00004000 constant USB_USB_EP2R_DTOG_RX                             \ Data Toggle, for reception transfers
-$00008000 constant USB_USB_EP2R_CTR_RX                              \ Correct transfer for reception
-
-
-\
-\ @brief endpoint 3 register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_USB_EP3R_EA                                  \ Endpoint address
-$00000030 constant USB_USB_EP3R_STAT_TX                             \ Status bits, for transmission transfers
-$00000040 constant USB_USB_EP3R_DTOG_TX                             \ Data Toggle, for transmission transfers
-$00000080 constant USB_USB_EP3R_CTR_TX                              \ Correct Transfer for transmission
-$00000100 constant USB_USB_EP3R_EP_KIND                             \ Endpoint kind
-$00000600 constant USB_USB_EP3R_EP_TYPE                             \ Endpoint type
-$00000800 constant USB_USB_EP3R_SETUP                               \ Setup transaction completed
-$00003000 constant USB_USB_EP3R_STAT_RX                             \ Status bits, for reception transfers
-$00004000 constant USB_USB_EP3R_DTOG_RX                             \ Data Toggle, for reception transfers
-$00008000 constant USB_USB_EP3R_CTR_RX                              \ Correct transfer for reception
+  [ifdef] USB_USB_EP1R_DEF
+    \
+    \ @brief endpoint 1 register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EA                         \ [0x00 : 4] Endpoint address
+    $04 constant USB_STAT_TX                    \ [0x04 : 2] Status bits, for transmission transfers
+    $06 constant USB_DTOG_TX                    \ [0x06] Data Toggle, for transmission transfers
+    $07 constant USB_CTR_TX                     \ [0x07] Correct Transfer for transmission
+    $08 constant USB_EP_KIND                    \ [0x08] Endpoint kind
+    $09 constant USB_EP_TYPE                    \ [0x09 : 2] Endpoint type
+    $0b constant USB_SETUP                      \ [0x0b] Setup transaction completed
+    $0c constant USB_STAT_RX                    \ [0x0c : 2] Status bits, for reception transfers
+    $0e constant USB_DTOG_RX                    \ [0x0e] Data Toggle, for reception transfers
+    $0f constant USB_CTR_RX                     \ [0x0f] Correct transfer for reception
+  [then]
 
 
-\
-\ @brief endpoint 4 register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_USB_EP4R_EA                                  \ Endpoint address
-$00000030 constant USB_USB_EP4R_STAT_TX                             \ Status bits, for transmission transfers
-$00000040 constant USB_USB_EP4R_DTOG_TX                             \ Data Toggle, for transmission transfers
-$00000080 constant USB_USB_EP4R_CTR_TX                              \ Correct Transfer for transmission
-$00000100 constant USB_USB_EP4R_EP_KIND                             \ Endpoint kind
-$00000600 constant USB_USB_EP4R_EP_TYPE                             \ Endpoint type
-$00000800 constant USB_USB_EP4R_SETUP                               \ Setup transaction completed
-$00003000 constant USB_USB_EP4R_STAT_RX                             \ Status bits, for reception transfers
-$00004000 constant USB_USB_EP4R_DTOG_RX                             \ Data Toggle, for reception transfers
-$00008000 constant USB_USB_EP4R_CTR_RX                              \ Correct transfer for reception
-
-
-\
-\ @brief endpoint 5 register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_USB_EP5R_EA                                  \ Endpoint address
-$00000030 constant USB_USB_EP5R_STAT_TX                             \ Status bits, for transmission transfers
-$00000040 constant USB_USB_EP5R_DTOG_TX                             \ Data Toggle, for transmission transfers
-$00000080 constant USB_USB_EP5R_CTR_TX                              \ Correct Transfer for transmission
-$00000100 constant USB_USB_EP5R_EP_KIND                             \ Endpoint kind
-$00000600 constant USB_USB_EP5R_EP_TYPE                             \ Endpoint type
-$00000800 constant USB_USB_EP5R_SETUP                               \ Setup transaction completed
-$00003000 constant USB_USB_EP5R_STAT_RX                             \ Status bits, for reception transfers
-$00004000 constant USB_USB_EP5R_DTOG_RX                             \ Data Toggle, for reception transfers
-$00008000 constant USB_USB_EP5R_CTR_RX                              \ Correct transfer for reception
+  [ifdef] USB_USB_EP2R_DEF
+    \
+    \ @brief endpoint 2 register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EA                         \ [0x00 : 4] Endpoint address
+    $04 constant USB_STAT_TX                    \ [0x04 : 2] Status bits, for transmission transfers
+    $06 constant USB_DTOG_TX                    \ [0x06] Data Toggle, for transmission transfers
+    $07 constant USB_CTR_TX                     \ [0x07] Correct Transfer for transmission
+    $08 constant USB_EP_KIND                    \ [0x08] Endpoint kind
+    $09 constant USB_EP_TYPE                    \ [0x09 : 2] Endpoint type
+    $0b constant USB_SETUP                      \ [0x0b] Setup transaction completed
+    $0c constant USB_STAT_RX                    \ [0x0c : 2] Status bits, for reception transfers
+    $0e constant USB_DTOG_RX                    \ [0x0e] Data Toggle, for reception transfers
+    $0f constant USB_CTR_RX                     \ [0x0f] Correct transfer for reception
+  [then]
 
 
-\
-\ @brief endpoint 6 register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_USB_EP6R_EA                                  \ Endpoint address
-$00000030 constant USB_USB_EP6R_STAT_TX                             \ Status bits, for transmission transfers
-$00000040 constant USB_USB_EP6R_DTOG_TX                             \ Data Toggle, for transmission transfers
-$00000080 constant USB_USB_EP6R_CTR_TX                              \ Correct Transfer for transmission
-$00000100 constant USB_USB_EP6R_EP_KIND                             \ Endpoint kind
-$00000600 constant USB_USB_EP6R_EP_TYPE                             \ Endpoint type
-$00000800 constant USB_USB_EP6R_SETUP                               \ Setup transaction completed
-$00003000 constant USB_USB_EP6R_STAT_RX                             \ Status bits, for reception transfers
-$00004000 constant USB_USB_EP6R_DTOG_RX                             \ Data Toggle, for reception transfers
-$00008000 constant USB_USB_EP6R_CTR_RX                              \ Correct transfer for reception
-
-
-\
-\ @brief endpoint 7 register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_USB_EP7R_EA                                  \ Endpoint address
-$00000030 constant USB_USB_EP7R_STAT_TX                             \ Status bits, for transmission transfers
-$00000040 constant USB_USB_EP7R_DTOG_TX                             \ Data Toggle, for transmission transfers
-$00000080 constant USB_USB_EP7R_CTR_TX                              \ Correct Transfer for transmission
-$00000100 constant USB_USB_EP7R_EP_KIND                             \ Endpoint kind
-$00000600 constant USB_USB_EP7R_EP_TYPE                             \ Endpoint type
-$00000800 constant USB_USB_EP7R_SETUP                               \ Setup transaction completed
-$00003000 constant USB_USB_EP7R_STAT_RX                             \ Status bits, for reception transfers
-$00004000 constant USB_USB_EP7R_DTOG_RX                             \ Data Toggle, for reception transfers
-$00008000 constant USB_USB_EP7R_CTR_RX                              \ Correct transfer for reception
+  [ifdef] USB_USB_EP3R_DEF
+    \
+    \ @brief endpoint 3 register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EA                         \ [0x00 : 4] Endpoint address
+    $04 constant USB_STAT_TX                    \ [0x04 : 2] Status bits, for transmission transfers
+    $06 constant USB_DTOG_TX                    \ [0x06] Data Toggle, for transmission transfers
+    $07 constant USB_CTR_TX                     \ [0x07] Correct Transfer for transmission
+    $08 constant USB_EP_KIND                    \ [0x08] Endpoint kind
+    $09 constant USB_EP_TYPE                    \ [0x09 : 2] Endpoint type
+    $0b constant USB_SETUP                      \ [0x0b] Setup transaction completed
+    $0c constant USB_STAT_RX                    \ [0x0c : 2] Status bits, for reception transfers
+    $0e constant USB_DTOG_RX                    \ [0x0e] Data Toggle, for reception transfers
+    $0f constant USB_CTR_RX                     \ [0x0f] Correct transfer for reception
+  [then]
 
 
-\
-\ @brief control register
-\ Address offset: 0x40
-\ Reset value: 0x00000003
-\
-
-$00000001 constant USB_USB_CNTR_FRES                                \ Force USB Reset
-$00000002 constant USB_USB_CNTR_PDWN                                \ Power down
-$00000004 constant USB_USB_CNTR_LPMODE                              \ Low-power mode
-$00000008 constant USB_USB_CNTR_FSUSP                               \ Force suspend
-$00000010 constant USB_USB_CNTR_RESUME                              \ Resume request
-$00000100 constant USB_USB_CNTR_ESOFM                               \ Expected start of frame interrupt mask
-$00000200 constant USB_USB_CNTR_SOFM                                \ Start of frame interrupt mask
-$00000400 constant USB_USB_CNTR_RESETM                              \ USB reset interrupt mask
-$00000800 constant USB_USB_CNTR_SUSPM                               \ Suspend mode interrupt mask
-$00001000 constant USB_USB_CNTR_WKUPM                               \ Wakeup interrupt mask
-$00002000 constant USB_USB_CNTR_ERRM                                \ Error interrupt mask
-$00004000 constant USB_USB_CNTR_PMAOVRM                             \ Packet memory area over / underrun interrupt mask
-$00008000 constant USB_USB_CNTR_CTRM                                \ Correct transfer interrupt mask
+  [ifdef] USB_USB_EP4R_DEF
+    \
+    \ @brief endpoint 4 register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EA                         \ [0x00 : 4] Endpoint address
+    $04 constant USB_STAT_TX                    \ [0x04 : 2] Status bits, for transmission transfers
+    $06 constant USB_DTOG_TX                    \ [0x06] Data Toggle, for transmission transfers
+    $07 constant USB_CTR_TX                     \ [0x07] Correct Transfer for transmission
+    $08 constant USB_EP_KIND                    \ [0x08] Endpoint kind
+    $09 constant USB_EP_TYPE                    \ [0x09 : 2] Endpoint type
+    $0b constant USB_SETUP                      \ [0x0b] Setup transaction completed
+    $0c constant USB_STAT_RX                    \ [0x0c : 2] Status bits, for reception transfers
+    $0e constant USB_DTOG_RX                    \ [0x0e] Data Toggle, for reception transfers
+    $0f constant USB_CTR_RX                     \ [0x0f] Correct transfer for reception
+  [then]
 
 
-\
-\ @brief interrupt status register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_ISTR_EP_ID                                   \ Endpoint Identifier
-$00000010 constant USB_ISTR_DIR                                     \ Direction of transaction
-$00000100 constant USB_ISTR_ESOF                                    \ Expected start frame
-$00000200 constant USB_ISTR_SOF                                     \ start of frame
-$00000400 constant USB_ISTR_RESET                                   \ reset request
-$00000800 constant USB_ISTR_SUSP                                    \ Suspend mode request
-$00001000 constant USB_ISTR_WKUP                                    \ Wakeup
-$00002000 constant USB_ISTR_ERR                                     \ Error
-$00004000 constant USB_ISTR_PMAOVR                                  \ Packet memory area over / underrun
-$00008000 constant USB_ISTR_CTR                                     \ Correct transfer
-
-
-\
-\ @brief frame number register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$000007ff constant USB_FNR_FN                                       \ Frame number
-$00001800 constant USB_FNR_LSOF                                     \ Lost SOF
-$00002000 constant USB_FNR_LCK                                      \ Locked
-$00004000 constant USB_FNR_RXDM                                     \ Receive data - line status
-$00008000 constant USB_FNR_RXDP                                     \ Receive data + line status
+  [ifdef] USB_USB_EP5R_DEF
+    \
+    \ @brief endpoint 5 register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EA                         \ [0x00 : 4] Endpoint address
+    $04 constant USB_STAT_TX                    \ [0x04 : 2] Status bits, for transmission transfers
+    $06 constant USB_DTOG_TX                    \ [0x06] Data Toggle, for transmission transfers
+    $07 constant USB_CTR_TX                     \ [0x07] Correct Transfer for transmission
+    $08 constant USB_EP_KIND                    \ [0x08] Endpoint kind
+    $09 constant USB_EP_TYPE                    \ [0x09 : 2] Endpoint type
+    $0b constant USB_SETUP                      \ [0x0b] Setup transaction completed
+    $0c constant USB_STAT_RX                    \ [0x0c : 2] Status bits, for reception transfers
+    $0e constant USB_DTOG_RX                    \ [0x0e] Data Toggle, for reception transfers
+    $0f constant USB_CTR_RX                     \ [0x0f] Correct transfer for reception
+  [then]
 
 
-\
-\ @brief device address
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USB_DADDR_ADD                                    \ Device address
-$00000002 constant USB_DADDR_ADD1                                   \ Device address
-$00000004 constant USB_DADDR_ADD2                                   \ Device address
-$00000008 constant USB_DADDR_ADD3                                   \ Device address
-$00000010 constant USB_DADDR_ADD4                                   \ Device address
-$00000020 constant USB_DADDR_ADD5                                   \ Device address
-$00000040 constant USB_DADDR_ADD6                                   \ Device address
-$00000080 constant USB_DADDR_EF                                     \ Enable function
-
-
-\
-\ @brief Buffer table address
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$0000fff8 constant USB_BTABLE_BTABLE                                \ Buffer table
+  [ifdef] USB_USB_EP6R_DEF
+    \
+    \ @brief endpoint 6 register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EA                         \ [0x00 : 4] Endpoint address
+    $04 constant USB_STAT_TX                    \ [0x04 : 2] Status bits, for transmission transfers
+    $06 constant USB_DTOG_TX                    \ [0x06] Data Toggle, for transmission transfers
+    $07 constant USB_CTR_TX                     \ [0x07] Correct Transfer for transmission
+    $08 constant USB_EP_KIND                    \ [0x08] Endpoint kind
+    $09 constant USB_EP_TYPE                    \ [0x09 : 2] Endpoint type
+    $0b constant USB_SETUP                      \ [0x0b] Setup transaction completed
+    $0c constant USB_STAT_RX                    \ [0x0c : 2] Status bits, for reception transfers
+    $0e constant USB_DTOG_RX                    \ [0x0e] Data Toggle, for reception transfers
+    $0f constant USB_CTR_RX                     \ [0x0f] Correct transfer for reception
+  [then]
 
 
-\
-\ @brief Universal serial bus full-speed device interface
-\
-$40005c00 constant USB_USB_EP0R   \ offset: 0x00 : endpoint 0 register
-$40005c04 constant USB_USB_EP1R   \ offset: 0x04 : endpoint 1 register
-$40005c08 constant USB_USB_EP2R   \ offset: 0x08 : endpoint 2 register
-$40005c0c constant USB_USB_EP3R   \ offset: 0x0C : endpoint 3 register
-$40005c10 constant USB_USB_EP4R   \ offset: 0x10 : endpoint 4 register
-$40005c14 constant USB_USB_EP5R   \ offset: 0x14 : endpoint 5 register
-$40005c18 constant USB_USB_EP6R   \ offset: 0x18 : endpoint 6 register
-$40005c1c constant USB_USB_EP7R   \ offset: 0x1C : endpoint 7 register
-$40005c40 constant USB_USB_CNTR   \ offset: 0x40 : control register
-$40005c44 constant USB_ISTR       \ offset: 0x44 : interrupt status register
-$40005c48 constant USB_FNR        \ offset: 0x48 : frame number register
-$40005c4c constant USB_DADDR      \ offset: 0x4C : device address
-$40005c50 constant USB_BTABLE     \ offset: 0x50 : Buffer table address
+  [ifdef] USB_USB_EP7R_DEF
+    \
+    \ @brief endpoint 7 register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EA                         \ [0x00 : 4] Endpoint address
+    $04 constant USB_STAT_TX                    \ [0x04 : 2] Status bits, for transmission transfers
+    $06 constant USB_DTOG_TX                    \ [0x06] Data Toggle, for transmission transfers
+    $07 constant USB_CTR_TX                     \ [0x07] Correct Transfer for transmission
+    $08 constant USB_EP_KIND                    \ [0x08] Endpoint kind
+    $09 constant USB_EP_TYPE                    \ [0x09 : 2] Endpoint type
+    $0b constant USB_SETUP                      \ [0x0b] Setup transaction completed
+    $0c constant USB_STAT_RX                    \ [0x0c : 2] Status bits, for reception transfers
+    $0e constant USB_DTOG_RX                    \ [0x0e] Data Toggle, for reception transfers
+    $0f constant USB_CTR_RX                     \ [0x0f] Correct transfer for reception
+  [then]
 
+
+  [ifdef] USB_USB_CNTR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000003
+    \
+    $00 constant USB_FRES                       \ [0x00] Force USB Reset
+    $01 constant USB_PDWN                       \ [0x01] Power down
+    $02 constant USB_LPMODE                     \ [0x02] Low-power mode
+    $03 constant USB_FSUSP                      \ [0x03] Force suspend
+    $04 constant USB_RESUME                     \ [0x04] Resume request
+    $08 constant USB_ESOFM                      \ [0x08] Expected start of frame interrupt mask
+    $09 constant USB_SOFM                       \ [0x09] Start of frame interrupt mask
+    $0a constant USB_RESETM                     \ [0x0a] USB reset interrupt mask
+    $0b constant USB_SUSPM                      \ [0x0b] Suspend mode interrupt mask
+    $0c constant USB_WKUPM                      \ [0x0c] Wakeup interrupt mask
+    $0d constant USB_ERRM                       \ [0x0d] Error interrupt mask
+    $0e constant USB_PMAOVRM                    \ [0x0e] Packet memory area over / underrun interrupt mask
+    $0f constant USB_CTRM                       \ [0x0f] Correct transfer interrupt mask
+  [then]
+
+
+  [ifdef] USB_ISTR_DEF
+    \
+    \ @brief interrupt status register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_EP_ID                      \ [0x00 : 4] Endpoint Identifier
+    $04 constant USB_DIR                        \ [0x04] Direction of transaction
+    $08 constant USB_ESOF                       \ [0x08] Expected start frame
+    $09 constant USB_SOF                        \ [0x09] start of frame
+    $0a constant USB_RESET                      \ [0x0a] reset request
+    $0b constant USB_SUSP                       \ [0x0b] Suspend mode request
+    $0c constant USB_WKUP                       \ [0x0c] Wakeup
+    $0d constant USB_ERR                        \ [0x0d] Error
+    $0e constant USB_PMAOVR                     \ [0x0e] Packet memory area over / underrun
+    $0f constant USB_CTR                        \ [0x0f] Correct transfer
+  [then]
+
+
+  [ifdef] USB_FNR_DEF
+    \
+    \ @brief frame number register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FN                         \ [0x00 : 11] Frame number
+    $0b constant USB_LSOF                       \ [0x0b : 2] Lost SOF
+    $0d constant USB_LCK                        \ [0x0d] Locked
+    $0e constant USB_RXDM                       \ [0x0e] Receive data - line status
+    $0f constant USB_RXDP                       \ [0x0f] Receive data + line status
+  [then]
+
+
+  [ifdef] USB_DADDR_DEF
+    \
+    \ @brief device address
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_ADD                        \ [0x00] Device address
+    $01 constant USB_ADD1                       \ [0x01] Device address
+    $02 constant USB_ADD2                       \ [0x02] Device address
+    $03 constant USB_ADD3                       \ [0x03] Device address
+    $04 constant USB_ADD4                       \ [0x04] Device address
+    $05 constant USB_ADD5                       \ [0x05] Device address
+    $06 constant USB_ADD6                       \ [0x06] Device address
+    $07 constant USB_EF                         \ [0x07] Enable function
+  [then]
+
+
+  [ifdef] USB_BTABLE_DEF
+    \
+    \ @brief Buffer table address
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $03 constant USB_BTABLE                     \ [0x03 : 13] Buffer table
+  [then]
+
+  \
+  \ @brief Universal serial bus full-speed device interface
+  \
+  $00 constant USB_USB_EP0R             \ endpoint 0 register
+  $04 constant USB_USB_EP1R             \ endpoint 1 register
+  $08 constant USB_USB_EP2R             \ endpoint 2 register
+  $0C constant USB_USB_EP3R             \ endpoint 3 register
+  $10 constant USB_USB_EP4R             \ endpoint 4 register
+  $14 constant USB_USB_EP5R             \ endpoint 5 register
+  $18 constant USB_USB_EP6R             \ endpoint 6 register
+  $1C constant USB_USB_EP7R             \ endpoint 7 register
+  $40 constant USB_USB_CNTR             \ control register
+  $44 constant USB_ISTR                 \ interrupt status register
+  $48 constant USB_FNR                  \ frame number register
+  $4C constant USB_DADDR                \ device address
+  $50 constant USB_BTABLE               \ Buffer table address
+
+: USB_DEF ; [then]

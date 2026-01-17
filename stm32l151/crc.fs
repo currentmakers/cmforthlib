@@ -6,39 +6,42 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] CRC_DEF
 
-\
-\ @brief Data register
-\ Address offset: 0x00
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000000 constant CRC_DR_DATA_REGISTER                             \ Data Register
-
-
-\
-\ @brief Independent data register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000007f constant CRC_IDR_INDEPENDENT_DATA_REGISTER                \ Independent data register
+  [ifdef] CRC_DR_DEF
+    \
+    \ @brief Data register
+    \ Address offset: 0x00
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant CRC_Data_register              \ [0x00 : 32] Data Register
+  [then]
 
 
-\
-\ @brief Control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
+  [ifdef] CRC_IDR_DEF
+    \
+    \ @brief Independent data register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRC_Independent_data_register  \ [0x00 : 7] Independent data register
+  [then]
 
-$00000001 constant CRC_CR_RESET                                     \ RESET
 
+  [ifdef] CRC_CR_DEF
+    \
+    \ @brief Control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRC_RESET                      \ [0x00] RESET
+  [then]
 
-\
-\ @brief CRC calculation unit
-\
-$40023000 constant CRC_DR         \ offset: 0x00 : Data register
-$40023004 constant CRC_IDR        \ offset: 0x04 : Independent data register
-$40023008 constant CRC_CR         \ offset: 0x08 : Control register
+  \
+  \ @brief CRC calculation unit
+  \
+  $00 constant CRC_DR                   \ Data register
+  $04 constant CRC_IDR                  \ Independent data register
+  $08 constant CRC_CR                   \ Control register
 
+: CRC_DEF ; [then]

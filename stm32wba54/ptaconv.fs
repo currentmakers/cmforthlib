@@ -6,44 +6,47 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] PTACONV_DEF
 
-\
-\ @brief PTACONV active control register
-\ Address offset: 0x00
-\ Reset value: 0x00050014
-\
-
-$000000ff constant PTACONV_PTACONV_ACTCR_TACTIVE                    \ PTA_ACTIVE setup time in us
-$00008000 constant PTACONV_PTACONV_ACTCR_ACTPOL                     \ PTA_ACTIVE polarity
-$000f0000 constant PTACONV_PTACONV_ACTCR_TABORT                     \ PTA_ACTIVE delay to cease an ongoing transmission in us
-$00100000 constant PTACONV_PTACONV_ACTCR_ABORTDIS                   \ Disable PTA_ACTIVE deny to abort an ongoing transmission
-
-
-\
-\ @brief PTACONV priority control register
-\ Address offset: 0x04
-\ Reset value: 0x0000000A
-\
-
-$0000001f constant PTACONV_PTACONV_PRICR_TPRIORITY                  \ Priority valid time in us.
-$00008000 constant PTACONV_PTACONV_PRICR_PRIPOL                     \ Priority polarity.
+  [ifdef] PTACONV_PTACONV_ACTCR_DEF
+    \
+    \ @brief PTACONV active control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00050014
+    \
+    $00 constant PTACONV_TACTIVE                \ [0x00 : 8] PTA_ACTIVE setup time in us
+    $0f constant PTACONV_ACTPOL                 \ [0x0f] PTA_ACTIVE polarity
+    $10 constant PTACONV_TABORT                 \ [0x10 : 4] PTA_ACTIVE delay to cease an ongoing transmission in us
+    $14 constant PTACONV_ABORTDIS               \ [0x14] Disable PTA_ACTIVE deny to abort an ongoing transmission
+  [then]
 
 
-\
-\ @brief PTACONV control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
+  [ifdef] PTACONV_PTACONV_PRICR_DEF
+    \
+    \ @brief PTACONV priority control register
+    \ Address offset: 0x04
+    \ Reset value: 0x0000000A
+    \
+    $00 constant PTACONV_TPRIORITY              \ [0x00 : 5] Priority valid time in us.
+    $0f constant PTACONV_PRIPOL                 \ [0x0f] Priority polarity.
+  [then]
 
-$00008000 constant PTACONV_PTACONV_CR_TXRXPOL                       \ PTA_STATUS transmit and receive polarity.
-$80000000 constant PTACONV_PTACONV_CR_GRANTPOL                      \ PTA_GRANT polarity.
 
+  [ifdef] PTACONV_PTACONV_CR_DEF
+    \
+    \ @brief PTACONV control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $0f constant PTACONV_TXRXPOL                \ [0x0f] PTA_STATUS transmit and receive polarity.
+    $1f constant PTACONV_GRANTPOL               \ [0x1f] PTA_GRANT polarity.
+  [then]
 
-\
-\ @brief PTA converter
-\
-$48038000 constant PTACONV_PTACONV_ACTCR  \ offset: 0x00 : PTACONV active control register
-$48038004 constant PTACONV_PTACONV_PRICR  \ offset: 0x04 : PTACONV priority control register
-$48038008 constant PTACONV_PTACONV_CR  \ offset: 0x08 : PTACONV control register
+  \
+  \ @brief PTA converter
+  \
+  $00 constant PTACONV_PTACONV_ACTCR    \ PTACONV active control register
+  $04 constant PTACONV_PTACONV_PRICR    \ PTACONV priority control register
+  $08 constant PTACONV_PTACONV_CR       \ PTACONV control register
 
+: PTACONV_DEF ; [then]

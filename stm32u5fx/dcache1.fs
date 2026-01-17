@@ -6,129 +6,139 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DCACHE1_DEF
 
-\
-\ @brief DCACHE control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DCACHE1_DCACHE_CR_EN                             \ EN
-$00000002 constant DCACHE1_DCACHE_CR_CACHEINV                       \ CACHEINV
-$00000700 constant DCACHE1_DCACHE_CR_CACHECMD                       \ CACHECMD
-$00000800 constant DCACHE1_DCACHE_CR_STARTCMD                       \ STARTCMD
-$00010000 constant DCACHE1_DCACHE_CR_RHITMEN                        \ RHITMEN
-$00020000 constant DCACHE1_DCACHE_CR_RMISSMEN                       \ RMISSMEN
-$00040000 constant DCACHE1_DCACHE_CR_RHITMRST                       \ RHITMRST
-$00080000 constant DCACHE1_DCACHE_CR_RMISSMRST                      \ RMISSMRST
-$00100000 constant DCACHE1_DCACHE_CR_WHITMEN                        \ WHITMEN
-$00200000 constant DCACHE1_DCACHE_CR_WMISSMEN                       \ WMISSMEN
-$00400000 constant DCACHE1_DCACHE_CR_WHITMRST                       \ WHITMRST
-$00800000 constant DCACHE1_DCACHE_CR_WMISSMRST                      \ WMISSMRST
-$80000000 constant DCACHE1_DCACHE_CR_HBURST                         \ HBURST
-
-
-\
-\ @brief DCACHE status register
-\ Address offset: 0x04
-\ Reset value: 0x00000001
-\
-
-$00000001 constant DCACHE1_DCACHE_SR_BUSYF                          \ BUSYF
-$00000002 constant DCACHE1_DCACHE_SR_BSYENDF                        \ BSYENDF
-$00000004 constant DCACHE1_DCACHE_SR_ERRF                           \ ERRF
-$00000008 constant DCACHE1_DCACHE_SR_BUSYCMDF                       \ BUSYCMDF
-$00000010 constant DCACHE1_DCACHE_SR_CMDENDF                        \ CMDENDF
+  [ifdef] DCACHE1_DCACHE_CR_DEF
+    \
+    \ @brief DCACHE control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DCACHE1_EN                     \ [0x00] EN
+    $01 constant DCACHE1_CACHEINV               \ [0x01] CACHEINV
+    $08 constant DCACHE1_CACHECMD               \ [0x08 : 3] CACHECMD
+    $0b constant DCACHE1_STARTCMD               \ [0x0b] STARTCMD
+    $10 constant DCACHE1_RHITMEN                \ [0x10] RHITMEN
+    $11 constant DCACHE1_RMISSMEN               \ [0x11] RMISSMEN
+    $12 constant DCACHE1_RHITMRST               \ [0x12] RHITMRST
+    $13 constant DCACHE1_RMISSMRST              \ [0x13] RMISSMRST
+    $14 constant DCACHE1_WHITMEN                \ [0x14] WHITMEN
+    $15 constant DCACHE1_WMISSMEN               \ [0x15] WMISSMEN
+    $16 constant DCACHE1_WHITMRST               \ [0x16] WHITMRST
+    $17 constant DCACHE1_WMISSMRST              \ [0x17] WMISSMRST
+    $1f constant DCACHE1_HBURST                 \ [0x1f] HBURST
+  [then]
 
 
-\
-\ @brief DCACHE interrupt enable register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000002 constant DCACHE1_DCACHE_IER_BSYENDIE                      \ BSYENDIE
-$00000004 constant DCACHE1_DCACHE_IER_ERRIE                         \ ERRIE
-$00000010 constant DCACHE1_DCACHE_IER_CMDENDIE                      \ CMDENDIE
-
-
-\
-\ @brief DCACHE flag clear register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant DCACHE1_DCACHE_FCR_CBSYENDF                      \ CBSYENDF
-$00000004 constant DCACHE1_DCACHE_FCR_CERRF                         \ CERRF
-$00000010 constant DCACHE1_DCACHE_FCR_CCMDENDF                      \ CCMDENDF
+  [ifdef] DCACHE1_DCACHE_SR_DEF
+    \
+    \ @brief DCACHE status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000001
+    \
+    $00 constant DCACHE1_BUSYF                  \ [0x00] BUSYF
+    $01 constant DCACHE1_BSYENDF                \ [0x01] BSYENDF
+    $02 constant DCACHE1_ERRF                   \ [0x02] ERRF
+    $03 constant DCACHE1_BUSYCMDF               \ [0x03] BUSYCMDF
+    $04 constant DCACHE1_CMDENDF                \ [0x04] CMDENDF
+  [then]
 
 
-\
-\ @brief DCACHE read-hit monitor register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DCACHE1_DCACHE_RHMONR_RHITMON                    \ RHITMON
-
-
-\
-\ @brief DCACHE read-miss monitor register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DCACHE1_DCACHE_RMMONR_MRISSMON                   \ RMISSMON
+  [ifdef] DCACHE1_DCACHE_IER_DEF
+    \
+    \ @brief DCACHE interrupt enable register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $01 constant DCACHE1_BSYENDIE               \ [0x01] BSYENDIE
+    $02 constant DCACHE1_ERRIE                  \ [0x02] ERRIE
+    $04 constant DCACHE1_CMDENDIE               \ [0x04] CMDENDIE
+  [then]
 
 
-\
-\ @brief write-hit monitor register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DCACHE1_DCACHE_WHMONR_WHITMON                    \ WHITMON
-
-
-\
-\ @brief write-miss monitor register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DCACHE1_DCACHE_WMMONR_WMISSMON                   \ WMISSMON
+  [ifdef] DCACHE1_DCACHE_FCR_DEF
+    \
+    \ @brief DCACHE flag clear register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $01 constant DCACHE1_CBSYENDF               \ [0x01] CBSYENDF
+    $02 constant DCACHE1_CERRF                  \ [0x02] CERRF
+    $04 constant DCACHE1_CCMDENDF               \ [0x04] CCMDENDF
+  [then]
 
 
-\
-\ @brief command range start address register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$fffffff0 constant DCACHE1_DCACHE_CMDRSADDRR_CMDSTARTADDR           \ CMDSTARTADDR
-
-
-\
-\ @brief command range start address register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$fffffff0 constant DCACHE1_DCACHE_CMDREADDRR_CMDENDADDR             \ CMDENDADDR
+  [ifdef] DCACHE1_DCACHE_RHMONR_DEF
+    \
+    \ @brief DCACHE read-hit monitor register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant DCACHE1_RHITMON                \ [0x00 : 32] RHITMON
+  [then]
 
 
-\
-\ @brief DCACHE1
-\
-$40031400 constant DCACHE1_DCACHE_CR  \ offset: 0x00 : DCACHE control register
-$40031404 constant DCACHE1_DCACHE_SR  \ offset: 0x04 : DCACHE status register
-$40031408 constant DCACHE1_DCACHE_IER  \ offset: 0x08 : DCACHE interrupt enable register
-$4003140c constant DCACHE1_DCACHE_FCR  \ offset: 0x0C : DCACHE flag clear register
-$40031410 constant DCACHE1_DCACHE_RHMONR  \ offset: 0x10 : DCACHE read-hit monitor register
-$40031414 constant DCACHE1_DCACHE_RMMONR  \ offset: 0x14 : DCACHE read-miss monitor register
-$40031420 constant DCACHE1_DCACHE_WHMONR  \ offset: 0x20 : write-hit monitor register
-$40031424 constant DCACHE1_DCACHE_WMMONR  \ offset: 0x24 : write-miss monitor register
-$40031428 constant DCACHE1_DCACHE_CMDRSADDRR  \ offset: 0x28 : command range start address register
-$4003142c constant DCACHE1_DCACHE_CMDREADDRR  \ offset: 0x2C : command range start address register
+  [ifdef] DCACHE1_DCACHE_RMMONR_DEF
+    \
+    \ @brief DCACHE read-miss monitor register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant DCACHE1_MRISSMON               \ [0x00 : 16] RMISSMON
+  [then]
 
+
+  [ifdef] DCACHE1_DCACHE_WHMONR_DEF
+    \
+    \ @brief write-hit monitor register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant DCACHE1_WHITMON                \ [0x00 : 32] WHITMON
+  [then]
+
+
+  [ifdef] DCACHE1_DCACHE_WMMONR_DEF
+    \
+    \ @brief write-miss monitor register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant DCACHE1_WMISSMON               \ [0x00 : 16] WMISSMON
+  [then]
+
+
+  [ifdef] DCACHE1_DCACHE_CMDRSADDRR_DEF
+    \
+    \ @brief command range start address register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $04 constant DCACHE1_CMDSTARTADDR           \ [0x04 : 28] CMDSTARTADDR
+  [then]
+
+
+  [ifdef] DCACHE1_DCACHE_CMDREADDRR_DEF
+    \
+    \ @brief command range start address register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $04 constant DCACHE1_CMDENDADDR             \ [0x04 : 28] CMDENDADDR
+  [then]
+
+  \
+  \ @brief DCACHE1
+  \
+  $00 constant DCACHE1_DCACHE_CR        \ DCACHE control register
+  $04 constant DCACHE1_DCACHE_SR        \ DCACHE status register
+  $08 constant DCACHE1_DCACHE_IER       \ DCACHE interrupt enable register
+  $0C constant DCACHE1_DCACHE_FCR       \ DCACHE flag clear register
+  $10 constant DCACHE1_DCACHE_RHMONR    \ DCACHE read-hit monitor register
+  $14 constant DCACHE1_DCACHE_RMMONR    \ DCACHE read-miss monitor register
+  $20 constant DCACHE1_DCACHE_WHMONR    \ write-hit monitor register
+  $24 constant DCACHE1_DCACHE_WMMONR    \ write-miss monitor register
+  $28 constant DCACHE1_DCACHE_CMDRSADDRR    \ command range start address register
+  $2C constant DCACHE1_DCACHE_CMDREADDRR    \ command range start address register
+
+: DCACHE1_DEF ; [then]

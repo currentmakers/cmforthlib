@@ -6,95 +6,102 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] CEC_DEF
 
-\
-\ @brief configuration register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CEC_CFGR_PE                                      \ Peripheral enable
-$00000002 constant CEC_CFGR_IE                                      \ Interrupt enable
-$00000004 constant CEC_CFGR_BTEM                                    \ Bit timing error mode
-$00000008 constant CEC_CFGR_BPEM                                    \ Bit period error mode
-
-
-\
-\ @brief CEC own address register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000000f constant CEC_OAR_OA                                       \ Own address
+  [ifdef] CEC_CFGR_DEF
+    \
+    \ @brief configuration register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant CEC_PE                         \ [0x00] Peripheral enable
+    $01 constant CEC_IE                         \ [0x01] Interrupt enable
+    $02 constant CEC_BTEM                       \ [0x02] Bit timing error mode
+    $03 constant CEC_BPEM                       \ [0x03] Bit period error mode
+  [then]
 
 
-\
-\ @brief Rx Data Register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00003fff constant CEC_PRES_PRESC                                   \ CEC Rx Data Register
-
-
-\
-\ @brief CEC error status register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CEC_ESR_BTE                                      \ Bit timing error
-$00000002 constant CEC_ESR_BPE                                      \ Bit period error
-$00000004 constant CEC_ESR_RBTFE                                    \ Rx block transfer finished error
-$00000008 constant CEC_ESR_SBE                                      \ Start bit error
-$00000010 constant CEC_ESR_ACKE                                     \ Block acknowledge error
-$00000020 constant CEC_ESR_LINE                                     \ Line error
-$00000040 constant CEC_ESR_TBTFE                                    \ Tx block transfer finished error
+  [ifdef] CEC_OAR_DEF
+    \
+    \ @brief CEC own address register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant CEC_OA                         \ [0x00 : 4] Own address
+  [then]
 
 
-\
-\ @brief CEC control and status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CEC_CSR_TSOM                                     \ Tx start of message
-$00000002 constant CEC_CSR_TEOM                                     \ Tx end of message
-$00000004 constant CEC_CSR_TERR                                     \ Tx error
-$00000008 constant CEC_CSR_TBTRF                                    \ Tx byte transfer request or block transfer finished
-$00000010 constant CEC_CSR_RSOM                                     \ Rx start of message
-$00000020 constant CEC_CSR_REOM                                     \ Rx end of message
-$00000040 constant CEC_CSR_RERR                                     \ Rx error
-$00000080 constant CEC_CSR_RBTF                                     \ Rx byte/block transfer finished
+  [ifdef] CEC_PRES_DEF
+    \
+    \ @brief Rx Data Register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant CEC_PRESC                      \ [0x00 : 14] CEC Rx Data Register
+  [then]
 
 
-\
-\ @brief CEC Tx data register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$000000ff constant CEC_TXD_TXD                                      \ Tx Data register
-
-
-\
-\ @brief CEC Rx data register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$000000ff constant CEC_RXD_RXD                                      \ Rx data
+  [ifdef] CEC_ESR_DEF
+    \
+    \ @brief CEC error status register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CEC_BTE                        \ [0x00] Bit timing error
+    $01 constant CEC_BPE                        \ [0x01] Bit period error
+    $02 constant CEC_RBTFE                      \ [0x02] Rx block transfer finished error
+    $03 constant CEC_SBE                        \ [0x03] Start bit error
+    $04 constant CEC_ACKE                       \ [0x04] Block acknowledge error
+    $05 constant CEC_LINE                       \ [0x05] Line error
+    $06 constant CEC_TBTFE                      \ [0x06] Tx block transfer finished error
+  [then]
 
 
-\
-\ @brief HDMI-CEC controller
-\
-$40007800 constant CEC_CFGR       \ offset: 0x00 : configuration register
-$40007804 constant CEC_OAR        \ offset: 0x04 : CEC own address register
-$40007808 constant CEC_PRES       \ offset: 0x08 : Rx Data Register
-$4000780c constant CEC_ESR        \ offset: 0x0C : CEC error status register
-$40007810 constant CEC_CSR        \ offset: 0x10 : CEC control and status register
-$40007814 constant CEC_TXD        \ offset: 0x14 : CEC Tx data register
-$40007818 constant CEC_RXD        \ offset: 0x18 : CEC Rx data register
+  [ifdef] CEC_CSR_DEF
+    \
+    \ @brief CEC control and status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant CEC_TSOM                       \ [0x00] Tx start of message
+    $01 constant CEC_TEOM                       \ [0x01] Tx end of message
+    $02 constant CEC_TERR                       \ [0x02] Tx error
+    $03 constant CEC_TBTRF                      \ [0x03] Tx byte transfer request or block transfer finished
+    $04 constant CEC_RSOM                       \ [0x04] Rx start of message
+    $05 constant CEC_REOM                       \ [0x05] Rx end of message
+    $06 constant CEC_RERR                       \ [0x06] Rx error
+    $07 constant CEC_RBTF                       \ [0x07] Rx byte/block transfer finished
+  [then]
 
+
+  [ifdef] CEC_TXD_DEF
+    \
+    \ @brief CEC Tx data register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant CEC_TXD                        \ [0x00 : 8] Tx Data register
+  [then]
+
+
+  [ifdef] CEC_RXD_DEF
+    \
+    \ @brief CEC Rx data register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant CEC_RXD                        \ [0x00 : 8] Rx data
+  [then]
+
+  \
+  \ @brief HDMI-CEC controller
+  \
+  $00 constant CEC_CFGR                 \ configuration register
+  $04 constant CEC_OAR                  \ CEC own address register
+  $08 constant CEC_PRES                 \ Rx Data Register
+  $0C constant CEC_ESR                  \ CEC error status register
+  $10 constant CEC_CSR                  \ CEC control and status register
+  $14 constant CEC_TXD                  \ CEC Tx data register
+  $18 constant CEC_RXD                  \ CEC Rx data register
+
+: CEC_DEF ; [then]

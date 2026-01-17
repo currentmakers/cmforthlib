@@ -6,43 +6,46 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] WWDG_DEF
 
-\
-\ @brief Control register
-\ Address offset: 0x00
-\ Reset value: 0x0000007F
-\
-
-$0000007f constant WWDG_CR_T                                        \ 7-bit counter (MSB to LSB)
-$00000080 constant WWDG_CR_WDGA                                     \ Activation bit
-
-
-\
-\ @brief Configuration register
-\ Address offset: 0x04
-\ Reset value: 0x0000007F
-\
-
-$0000007f constant WWDG_CFR_W                                       \ 7-bit window value
-$00000080 constant WWDG_CFR_WDGTB0                                  \ WDGTB0
-$00000100 constant WWDG_CFR_WDGTB1                                  \ Timer base
-$00000200 constant WWDG_CFR_EWI                                     \ Early wakeup interrupt
+  [ifdef] WWDG_CR_DEF
+    \
+    \ @brief Control register
+    \ Address offset: 0x00
+    \ Reset value: 0x0000007F
+    \
+    $00 constant WWDG_T                         \ [0x00 : 7] 7-bit counter (MSB to LSB)
+    $07 constant WWDG_WDGA                      \ [0x07] Activation bit
+  [then]
 
 
-\
-\ @brief SR
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
+  [ifdef] WWDG_CFR_DEF
+    \
+    \ @brief Configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x0000007F
+    \
+    $00 constant WWDG_W                         \ [0x00 : 7] 7-bit window value
+    $07 constant WWDG_WDGTB0                    \ [0x07] WDGTB0
+    $08 constant WWDG_WDGTB1                    \ [0x08] Timer base
+    $09 constant WWDG_EWI                       \ [0x09] Early wakeup interrupt
+  [then]
 
-$00000001 constant WWDG_SR_EWIF                                     \ EWIF
 
+  [ifdef] WWDG_SR_DEF
+    \
+    \ @brief SR
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant WWDG_EWIF                      \ [0x00] EWIF
+  [then]
 
-\
-\ @brief Window watchdog
-\
-$40002c00 constant WWDG_CR        \ offset: 0x00 : Control register
-$40002c04 constant WWDG_CFR       \ offset: 0x04 : Configuration register
-$40002c08 constant WWDG_SR        \ offset: 0x08 : SR
+  \
+  \ @brief Window watchdog
+  \
+  $00 constant WWDG_CR                  \ Control register
+  $04 constant WWDG_CFR                 \ Configuration register
+  $08 constant WWDG_SR                  \ SR
 
+: WWDG_DEF ; [then]

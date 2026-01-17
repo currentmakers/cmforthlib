@@ -1,105 +1,111 @@
 \
 \ @file uart4.fs
-\ @brief Universal asynchronous receiver       transmitter
+\ @brief Universal asynchronous receiver transmitter
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] UART4_DEF
 
-\
-\ @brief UART4_SR
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UART4_SR_PE                                      \ Parity error
-$00000002 constant UART4_SR_FE                                      \ Framing error
-$00000004 constant UART4_SR_NE                                      \ Noise error flag
-$00000008 constant UART4_SR_ORE                                     \ Overrun error
-$00000010 constant UART4_SR_IDLE                                    \ IDLE line detected
-$00000020 constant UART4_SR_RXNE                                    \ Read data register not empty
-$00000040 constant UART4_SR_TC                                      \ Transmission complete
-$00000080 constant UART4_SR_TXE                                     \ Transmit data register empty
-$00000100 constant UART4_SR_LBD                                     \ LIN break detection flag
-
-
-\
-\ @brief UART4_DR
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$000001ff constant UART4_DR_DR                                      \ DR
+  [ifdef] UART4_SR_DEF
+    \
+    \ @brief UART4_SR
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant UART4_PE                       \ [0x00] Parity error
+    $01 constant UART4_FE                       \ [0x01] Framing error
+    $02 constant UART4_NE                       \ [0x02] Noise error flag
+    $03 constant UART4_ORE                      \ [0x03] Overrun error
+    $04 constant UART4_IDLE                     \ [0x04] IDLE line detected
+    $05 constant UART4_RXNE                     \ [0x05] Read data register not empty
+    $06 constant UART4_TC                       \ [0x06] Transmission complete
+    $07 constant UART4_TXE                      \ [0x07] Transmit data register empty
+    $08 constant UART4_LBD                      \ [0x08] LIN break detection flag
+  [then]
 
 
-\
-\ @brief UART4_BRR
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant UART4_BRR_DIV_FRACTION                           \ DIV_Fraction
-$0000fff0 constant UART4_BRR_DIV_MANTISSA                           \ DIV_Mantissa
-
-
-\
-\ @brief UART4_CR1
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UART4_CR1_SBK                                    \ Send break
-$00000002 constant UART4_CR1_RWU                                    \ Receiver wakeup
-$00000004 constant UART4_CR1_RE                                     \ Receiver enable
-$00000008 constant UART4_CR1_TE                                     \ Transmitter enable
-$00000010 constant UART4_CR1_IDLEIE                                 \ IDLE interrupt enable
-$00000020 constant UART4_CR1_RXNEIE                                 \ RXNE interrupt enable
-$00000040 constant UART4_CR1_TCIE                                   \ Transmission complete interrupt enable
-$00000080 constant UART4_CR1_TXEIE                                  \ TXE interrupt enable
-$00000100 constant UART4_CR1_PEIE                                   \ PE interrupt enable
-$00000200 constant UART4_CR1_PS                                     \ Parity selection
-$00000400 constant UART4_CR1_PCE                                    \ Parity control enable
-$00000800 constant UART4_CR1_WAKE                                   \ Wakeup method
-$00001000 constant UART4_CR1_M                                      \ Word length
-$00002000 constant UART4_CR1_UE                                     \ USART enable
+  [ifdef] UART4_DR_DEF
+    \
+    \ @brief UART4_DR
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant UART4_DR                       \ [0x00 : 9] DR
+  [then]
 
 
-\
-\ @brief UART4_CR2
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000000f constant UART4_CR2_ADD                                    \ Address of the USART node
-$00000020 constant UART4_CR2_LBDL                                   \ lin break detection length
-$00000040 constant UART4_CR2_LBDIE                                  \ LIN break detection interrupt enable
-$00003000 constant UART4_CR2_STOP                                   \ STOP bits
-$00004000 constant UART4_CR2_LINEN                                  \ LIN mode enable
+  [ifdef] UART4_BRR_DEF
+    \
+    \ @brief UART4_BRR
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant UART4_DIV_Fraction             \ [0x00 : 4] DIV_Fraction
+    $04 constant UART4_DIV_Mantissa             \ [0x04 : 12] DIV_Mantissa
+  [then]
 
 
-\
-\ @brief UART4_CR3
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
+  [ifdef] UART4_CR1_DEF
+    \
+    \ @brief UART4_CR1
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UART4_SBK                      \ [0x00] Send break
+    $01 constant UART4_RWU                      \ [0x01] Receiver wakeup
+    $02 constant UART4_RE                       \ [0x02] Receiver enable
+    $03 constant UART4_TE                       \ [0x03] Transmitter enable
+    $04 constant UART4_IDLEIE                   \ [0x04] IDLE interrupt enable
+    $05 constant UART4_RXNEIE                   \ [0x05] RXNE interrupt enable
+    $06 constant UART4_TCIE                     \ [0x06] Transmission complete interrupt enable
+    $07 constant UART4_TXEIE                    \ [0x07] TXE interrupt enable
+    $08 constant UART4_PEIE                     \ [0x08] PE interrupt enable
+    $09 constant UART4_PS                       \ [0x09] Parity selection
+    $0a constant UART4_PCE                      \ [0x0a] Parity control enable
+    $0b constant UART4_WAKE                     \ [0x0b] Wakeup method
+    $0c constant UART4_M                        \ [0x0c] Word length
+    $0d constant UART4_UE                       \ [0x0d] USART enable
+  [then]
 
-$00000001 constant UART4_CR3_EIE                                    \ Error interrupt enable
-$00000002 constant UART4_CR3_IREN                                   \ IrDA mode enable
-$00000004 constant UART4_CR3_IRLP                                   \ IrDA low-power
-$00000008 constant UART4_CR3_HDSEL                                  \ Half-duplex selection
-$00000040 constant UART4_CR3_DMAR                                   \ DMA enable receiver
-$00000080 constant UART4_CR3_DMAT                                   \ DMA enable transmitter
+
+  [ifdef] UART4_CR2_DEF
+    \
+    \ @brief UART4_CR2
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant UART4_ADD                      \ [0x00 : 4] Address of the USART node
+    $05 constant UART4_LBDL                     \ [0x05] lin break detection length
+    $06 constant UART4_LBDIE                    \ [0x06] LIN break detection interrupt enable
+    $0c constant UART4_STOP                     \ [0x0c : 2] STOP bits
+    $0e constant UART4_LINEN                    \ [0x0e] LIN mode enable
+  [then]
 
 
-\
-\ @brief Universal asynchronous receiver transmitter
-\
-$40004c00 constant UART4_SR       \ offset: 0x00 : UART4_SR
-$40004c04 constant UART4_DR       \ offset: 0x04 : UART4_DR
-$40004c08 constant UART4_BRR      \ offset: 0x08 : UART4_BRR
-$40004c0c constant UART4_CR1      \ offset: 0x0C : UART4_CR1
-$40004c10 constant UART4_CR2      \ offset: 0x10 : UART4_CR2
-$40004c14 constant UART4_CR3      \ offset: 0x14 : UART4_CR3
+  [ifdef] UART4_CR3_DEF
+    \
+    \ @brief UART4_CR3
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant UART4_EIE                      \ [0x00] Error interrupt enable
+    $01 constant UART4_IREN                     \ [0x01] IrDA mode enable
+    $02 constant UART4_IRLP                     \ [0x02] IrDA low-power
+    $03 constant UART4_HDSEL                    \ [0x03] Half-duplex selection
+    $06 constant UART4_DMAR                     \ [0x06] DMA enable receiver
+    $07 constant UART4_DMAT                     \ [0x07] DMA enable transmitter
+  [then]
 
+  \
+  \ @brief Universal asynchronous receiver transmitter
+  \
+  $00 constant UART4_SR                 \ UART4_SR
+  $04 constant UART4_DR                 \ UART4_DR
+  $08 constant UART4_BRR                \ UART4_BRR
+  $0C constant UART4_CR1                \ UART4_CR1
+  $10 constant UART4_CR2                \ UART4_CR2
+  $14 constant UART4_CR3                \ UART4_CR3
+
+: UART4_DEF ; [then]

@@ -6,134 +6,145 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM13_DEF
 
-\
-\ @brief control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_CR1_CEN                                    \ Counter enable
-$00000002 constant TIM13_CR1_UDIS                                   \ Update disable
-$00000004 constant TIM13_CR1_URS                                    \ Update request source
-$00000080 constant TIM13_CR1_ARPE                                   \ Auto-reload preload enable
-$00000300 constant TIM13_CR1_CKD                                    \ Clock division
-
-
-\
-\ @brief DMA/Interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_DIER_UIE                                   \ Update interrupt enable
-$00000002 constant TIM13_DIER_CC1IE                                 \ Capture/Compare 1 interrupt enable
+  [ifdef] TIM13_CR1_DEF
+    \
+    \ @brief control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CEN                      \ [0x00] Counter enable
+    $01 constant TIM13_UDIS                     \ [0x01] Update disable
+    $02 constant TIM13_URS                      \ [0x02] Update request source
+    $07 constant TIM13_ARPE                     \ [0x07] Auto-reload preload enable
+    $08 constant TIM13_CKD                      \ [0x08 : 2] Clock division
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_SR_UIF                                     \ Update interrupt flag
-$00000002 constant TIM13_SR_CC1IF                                   \ Capture/compare 1 interrupt flag
-$00000200 constant TIM13_SR_CC1OF                                   \ Capture/Compare 1 overcapture flag
-
-
-\
-\ @brief event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_EGR_UG                                     \ Update generation
-$00000002 constant TIM13_EGR_CC1G                                   \ Capture/compare 1 generation
+  [ifdef] TIM13_DIER_DEF
+    \
+    \ @brief DMA/Interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UIE                      \ [0x00] Update interrupt enable
+    $01 constant TIM13_CC1IE                    \ [0x01] Capture/Compare 1 interrupt enable
+  [then]
 
 
-\
-\ @brief capture/compare mode register (output mode)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM13_CCMR1_OUTPUT_CC1S                          \ Capture/Compare 1 selection
-$00000004 constant TIM13_CCMR1_OUTPUT_OC1FE                         \ Output compare 1 fast enable
-$00000008 constant TIM13_CCMR1_OUTPUT_OC1PE                         \ Output Compare 1 preload enable
-$00000070 constant TIM13_CCMR1_OUTPUT_OC1M                          \ Output Compare 1 mode
-
-
-\
-\ @brief capture/compare mode register (input mode)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM13_CCMR1_INPUT_CC1S                           \ Capture/Compare 1 selection
-$0000000c constant TIM13_CCMR1_INPUT_IC1PSC                         \ Input capture 1 prescaler
-$000000f0 constant TIM13_CCMR1_INPUT_IC1F                           \ Input capture 1 filter
+  [ifdef] TIM13_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UIF                      \ [0x00] Update interrupt flag
+    $01 constant TIM13_CC1IF                    \ [0x01] Capture/compare 1 interrupt flag
+    $09 constant TIM13_CC1OF                    \ [0x09] Capture/Compare 1 overcapture flag
+  [then]
 
 
-\
-\ @brief capture/compare enable register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_CCER_CC1E                                  \ Capture/Compare 1 output enable
-$00000002 constant TIM13_CCER_CC1P                                  \ Capture/Compare 1 output Polarity
-$00000008 constant TIM13_CCER_CC1NP                                 \ Capture/Compare 1 output Polarity
-
-
-\
-\ @brief counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM13_CNT_CNT                                    \ counter value
+  [ifdef] TIM13_EGR_DEF
+    \
+    \ @brief event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UG                       \ [0x00] Update generation
+    $01 constant TIM13_CC1G                     \ [0x01] Capture/compare 1 generation
+  [then]
 
 
-\
-\ @brief prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM13_PSC_PSC                                    \ Prescaler value
-
-
-\
-\ @brief auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM13_ARR_ARR                                    \ Auto-reload value
+  [ifdef] TIM13_CCMR1_Output_DEF
+    \
+    \ @brief capture/compare mode register (output mode)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM13_OC1FE                    \ [0x02] Output compare 1 fast enable
+    $03 constant TIM13_OC1PE                    \ [0x03] Output Compare 1 preload enable
+    $04 constant TIM13_OC1M                     \ [0x04 : 3] Output Compare 1 mode
+  [then]
 
 
-\
-\ @brief capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
+  [ifdef] TIM13_CCMR1_Input_DEF
+    \
+    \ @brief capture/compare mode register (input mode)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM13_IC1PSC                   \ [0x02 : 2] Input capture 1 prescaler
+    $04 constant TIM13_IC1F                     \ [0x04 : 4] Input capture 1 filter
+  [then]
 
-$0000ffff constant TIM13_CCR1_CCR1                                  \ Capture/Compare 1 value
+
+  [ifdef] TIM13_CCER_DEF
+    \
+    \ @brief capture/compare enable register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CC1E                     \ [0x00] Capture/Compare 1 output enable
+    $01 constant TIM13_CC1P                     \ [0x01] Capture/Compare 1 output Polarity
+    $03 constant TIM13_CC1NP                    \ [0x03] Capture/Compare 1 output Polarity
+  [then]
 
 
-\
-\ @brief General purpose timer
-\
-$40001c00 constant TIM13_CR1      \ offset: 0x00 : control register 1
-$40001c0c constant TIM13_DIER     \ offset: 0x0C : DMA/Interrupt enable register
-$40001c10 constant TIM13_SR       \ offset: 0x10 : status register
-$40001c14 constant TIM13_EGR      \ offset: 0x14 : event generation register
-$40001c18 constant TIM13_CCMR1_OUTPUT  \ offset: 0x18 : capture/compare mode register (output mode)
-$40001c18 constant TIM13_CCMR1_INPUT  \ offset: 0x18 : capture/compare mode register (input mode)
-$40001c20 constant TIM13_CCER     \ offset: 0x20 : capture/compare enable register
-$40001c24 constant TIM13_CNT      \ offset: 0x24 : counter
-$40001c28 constant TIM13_PSC      \ offset: 0x28 : prescaler
-$40001c2c constant TIM13_ARR      \ offset: 0x2C : auto-reload register
-$40001c34 constant TIM13_CCR1     \ offset: 0x34 : capture/compare register 1
+  [ifdef] TIM13_CNT_DEF
+    \
+    \ @brief counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CNT                      \ [0x00 : 16] counter value
+  [then]
 
+
+  [ifdef] TIM13_PSC_DEF
+    \
+    \ @brief prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_PSC                      \ [0x00 : 16] Prescaler value
+  [then]
+
+
+  [ifdef] TIM13_ARR_DEF
+    \
+    \ @brief auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_ARR                      \ [0x00 : 16] Auto-reload value
+  [then]
+
+
+  [ifdef] TIM13_CCR1_DEF
+    \
+    \ @brief capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CCR1                     \ [0x00 : 16] Capture/Compare 1 value
+  [then]
+
+  \
+  \ @brief General purpose timer
+  \
+  $00 constant TIM13_CR1                \ control register 1
+  $0C constant TIM13_DIER               \ DMA/Interrupt enable register
+  $10 constant TIM13_SR                 \ status register
+  $14 constant TIM13_EGR                \ event generation register
+  $18 constant TIM13_CCMR1_OUTPUT       \ capture/compare mode register (output mode)
+  $18 constant TIM13_CCMR1_INPUT        \ capture/compare mode register (input mode)
+  $20 constant TIM13_CCER               \ capture/compare enable register
+  $24 constant TIM13_CNT                \ counter
+  $28 constant TIM13_PSC                \ prescaler
+  $2C constant TIM13_ARR                \ auto-reload register
+  $34 constant TIM13_CCR1               \ capture/compare register 1
+
+: TIM13_DEF ; [then]

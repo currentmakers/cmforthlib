@@ -6,47 +6,49 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] PWR_DEF
 
-\
-\ @brief power control register
-\ Address offset: 0x00
-\ Reset value: 0x00001000
-\
-
-$00000001 constant PWR_CR_LPSDSR                                    \ Low-power deep sleep
-$00000002 constant PWR_CR_PDDS                                      \ Power down deepsleep
-$00000004 constant PWR_CR_CWUF                                      \ Clear wakeup flag
-$00000008 constant PWR_CR_CSBF                                      \ Clear standby flag
-$00000010 constant PWR_CR_PVDE                                      \ Power voltage detector enable
-$000000e0 constant PWR_CR_PLS                                       \ PVD level selection
-$00000100 constant PWR_CR_DBP                                       \ Disable backup domain write protection
-$00000200 constant PWR_CR_ULP                                       \ Ultralow power mode
-$00000400 constant PWR_CR_FWU                                       \ Fast wakeup
-$00001800 constant PWR_CR_VOS                                       \ Voltage scaling range selection
-$00004000 constant PWR_CR_LPRUN                                     \ Low power run mode
-
-
-\
-\ @brief power control/status register
-\ Address offset: 0x04
-\ Reset value: 0x00000008
-\
-
-$00000001 constant PWR_CSR_WUF                                      \ Wakeup flag
-$00000002 constant PWR_CSR_SBF                                      \ Standby flag
-$00000004 constant PWR_CSR_PVDO                                     \ PVD output
-$00000008 constant PWR_CSR_VREFINTRDYF                              \ Internal voltage reference (VREFINT) ready flag
-$00000010 constant PWR_CSR_VOSF                                     \ Voltage Scaling select flag
-$00000020 constant PWR_CSR_REGLPF                                   \ Regulator LP flag
-$00000100 constant PWR_CSR_EWUP1                                    \ Enable WKUP pin 1
-$00000200 constant PWR_CSR_EWUP2                                    \ Enable WKUP pin 2
-$00000400 constant PWR_CSR_EWUP3                                    \ Enable WKUP pin 3
+  [ifdef] PWR_CR_DEF
+    \
+    \ @brief power control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00001000
+    \
+    $00 constant PWR_LPSDSR                     \ [0x00] Low-power deep sleep
+    $01 constant PWR_PDDS                       \ [0x01] Power down deepsleep
+    $02 constant PWR_CWUF                       \ [0x02] Clear wakeup flag
+    $03 constant PWR_CSBF                       \ [0x03] Clear standby flag
+    $04 constant PWR_PVDE                       \ [0x04] Power voltage detector enable
+    $05 constant PWR_PLS                        \ [0x05 : 3] PVD level selection
+    $08 constant PWR_DBP                        \ [0x08] Disable backup domain write protection
+    $09 constant PWR_ULP                        \ [0x09] Ultralow power mode
+    $0a constant PWR_FWU                        \ [0x0a] Fast wakeup
+    $0b constant PWR_VOS                        \ [0x0b : 2] Voltage scaling range selection
+    $0e constant PWR_LPRUN                      \ [0x0e] Low power run mode
+  [then]
 
 
-\
-\ @brief Power control
-\
-$40007000 constant PWR_CR         \ offset: 0x00 : power control register
-$40007004 constant PWR_CSR        \ offset: 0x04 : power control/status register
+  [ifdef] PWR_CSR_DEF
+    \
+    \ @brief power control/status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000008
+    \
+    $00 constant PWR_WUF                        \ [0x00] Wakeup flag
+    $01 constant PWR_SBF                        \ [0x01] Standby flag
+    $02 constant PWR_PVDO                       \ [0x02] PVD output
+    $03 constant PWR_VREFINTRDYF                \ [0x03] Internal voltage reference (VREFINT) ready flag
+    $04 constant PWR_VOSF                       \ [0x04] Voltage Scaling select flag
+    $05 constant PWR_REGLPF                     \ [0x05] Regulator LP flag
+    $08 constant PWR_EWUP1                      \ [0x08] Enable WKUP pin 1
+    $09 constant PWR_EWUP2                      \ [0x09] Enable WKUP pin 2
+    $0a constant PWR_EWUP3                      \ [0x0a] Enable WKUP pin 3
+  [then]
 
+  \
+  \ @brief Power control
+  \
+  $00 constant PWR_CR                   \ power control register
+  $04 constant PWR_CSR                  \ power control/status register
+
+: PWR_DEF ; [then]

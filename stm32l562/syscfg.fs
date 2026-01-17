@@ -6,201 +6,212 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SYSCFG_DEF
 
-\
-\ @brief SYSCFG secure configuration register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_SECCFGR_SYSCFGSEC                         \ SYSCFG clock control security
-$00000002 constant SYSCFG_SECCFGR_CLASSBSEC                         \ ClassB security
-$00000004 constant SYSCFG_SECCFGR_SRAM2SEC                          \ SRAM2 security
-$00000008 constant SYSCFG_SECCFGR_FPUSEC                            \ FPUSEC
-
-
-\
-\ @brief configuration register 1
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000100 constant SYSCFG_CFGR1_BOOSTEN                             \ I/O analog switch voltage booster enable
-$00000200 constant SYSCFG_CFGR1_ANASWVDD                            \ GPIO analog switch control voltage selection
-$00010000 constant SYSCFG_CFGR1_I2C_PB6_FMP                         \ Fast-mode Plus (Fm+) driving capability activation on PB6
-$00020000 constant SYSCFG_CFGR1_I2C_PB7_FMP                         \ Fast-mode Plus (Fm+) driving capability activation on PB7
-$00040000 constant SYSCFG_CFGR1_I2C_PB8_FMP                         \ Fast-mode Plus (Fm+) driving capability activation on PB8
-$00080000 constant SYSCFG_CFGR1_I2C_PB9_FMP                         \ Fast-mode Plus (Fm+) driving capability activation on PB9
-$00100000 constant SYSCFG_CFGR1_I2C1_FMP                            \ I2C1 Fast-mode Plus driving capability activation
-$00200000 constant SYSCFG_CFGR1_I2C2_FMP                            \ I2C2 Fast-mode Plus driving capability activation
-$00400000 constant SYSCFG_CFGR1_I2C3_FMP                            \ I2C3 Fast-mode Plus driving capability activation
-$00800000 constant SYSCFG_CFGR1_I2C4_FMP                            \ I2C4_FMP
+  [ifdef] SYSCFG_SECCFGR_DEF
+    \
+    \ @brief SYSCFG secure configuration register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_SYSCFGSEC               \ [0x00] SYSCFG clock control security
+    $01 constant SYSCFG_CLASSBSEC               \ [0x01] ClassB security
+    $02 constant SYSCFG_SRAM2SEC                \ [0x02] SRAM2 security
+    $03 constant SYSCFG_FPUSEC                  \ [0x03] FPUSEC
+  [then]
 
 
-\
-\ @brief FPU interrupt mask register
-\ Address offset: 0x08
-\ Reset value: 0x0000001F
-\
-
-$0000003f constant SYSCFG_FPUIMR_FPU_IE                             \ Floating point unit interrupts enable bits
-
-
-\
-\ @brief SYSCFG CPU non-secure lock register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CNSLCKR_LOCKNSVTOR                        \ VTOR_NS register lock
-$00000002 constant SYSCFG_CNSLCKR_LOCKNSMPU                         \ Non-secure MPU registers lock
-
-
-\
-\ @brief SYSCFG CPU secure lock register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CSLOCKR_LOCKSVTAIRCR                      \ LOCKSVTAIRCR
-$00000002 constant SYSCFG_CSLOCKR_LOCKSMPU                          \ LOCKSMPU
-$00000004 constant SYSCFG_CSLOCKR_LOCKSAU                           \ LOCKSAU
+  [ifdef] SYSCFG_CFGR1_DEF
+    \
+    \ @brief configuration register 1
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $08 constant SYSCFG_BOOSTEN                 \ [0x08] I/O analog switch voltage booster enable
+    $09 constant SYSCFG_ANASWVDD                \ [0x09] GPIO analog switch control voltage selection
+    $10 constant SYSCFG_I2C_PB6_FMP             \ [0x10] Fast-mode Plus (Fm+) driving capability activation on PB6
+    $11 constant SYSCFG_I2C_PB7_FMP             \ [0x11] Fast-mode Plus (Fm+) driving capability activation on PB7
+    $12 constant SYSCFG_I2C_PB8_FMP             \ [0x12] Fast-mode Plus (Fm+) driving capability activation on PB8
+    $13 constant SYSCFG_I2C_PB9_FMP             \ [0x13] Fast-mode Plus (Fm+) driving capability activation on PB9
+    $14 constant SYSCFG_I2C1_FMP                \ [0x14] I2C1 Fast-mode Plus driving capability activation
+    $15 constant SYSCFG_I2C2_FMP                \ [0x15] I2C2 Fast-mode Plus driving capability activation
+    $16 constant SYSCFG_I2C3_FMP                \ [0x16] I2C3 Fast-mode Plus driving capability activation
+    $17 constant SYSCFG_I2C4_FMP                \ [0x17] I2C4_FMP
+  [then]
 
 
-\
-\ @brief CFGR2
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CFGR2_CLL                                 \ LOCKUP (hardfault) output enable bit
-$00000002 constant SYSCFG_CFGR2_SPL                                 \ SRAM2 parity lock bit
-$00000004 constant SYSCFG_CFGR2_PVDL                                \ PVD lock enable bit
-$00000008 constant SYSCFG_CFGR2_ECCL                                \ ECC Lock
-$00000100 constant SYSCFG_CFGR2_SPF                                 \ SRAM2 parity error flag
+  [ifdef] SYSCFG_FPUIMR_DEF
+    \
+    \ @brief FPU interrupt mask register
+    \ Address offset: 0x08
+    \ Reset value: 0x0000001F
+    \
+    $00 constant SYSCFG_FPU_IE                  \ [0x00 : 6] Floating point unit interrupts enable bits
+  [then]
 
 
-\
-\ @brief SCSR
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_SCSR_SRAM2ER                              \ SRAM2 Erase
-$00000002 constant SYSCFG_SCSR_SRAM2BSY                             \ SRAM2 busy by erase operation
-
-
-\
-\ @brief SKR
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant SYSCFG_SKR_KEY                                   \ SRAM2 write protection key for software erase
+  [ifdef] SYSCFG_CNSLCKR_DEF
+    \
+    \ @brief SYSCFG CPU non-secure lock register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_LOCKNSVTOR              \ [0x00] VTOR_NS register lock
+    $01 constant SYSCFG_LOCKNSMPU               \ [0x01] Non-secure MPU registers lock
+  [then]
 
 
-\
-\ @brief SWPR
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_SWPR_P0WP                                 \ P0WP
-$00000002 constant SYSCFG_SWPR_P1WP                                 \ P1WP
-$00000004 constant SYSCFG_SWPR_P2WP                                 \ P2WP
-$00000008 constant SYSCFG_SWPR_P3WP                                 \ P3WP
-$00000010 constant SYSCFG_SWPR_P4WP                                 \ P4WP
-$00000020 constant SYSCFG_SWPR_P5WP                                 \ P5WP
-$00000040 constant SYSCFG_SWPR_P6WP                                 \ P6WP
-$00000080 constant SYSCFG_SWPR_P7WP                                 \ P7WP
-$00000100 constant SYSCFG_SWPR_P8WP                                 \ P8WP
-$00000200 constant SYSCFG_SWPR_P9WP                                 \ P9WP
-$00000400 constant SYSCFG_SWPR_P10WP                                \ P10WP
-$00000800 constant SYSCFG_SWPR_P11WP                                \ P11WP
-$00001000 constant SYSCFG_SWPR_P12WP                                \ P12WP
-$00002000 constant SYSCFG_SWPR_P13WP                                \ P13WP
-$00004000 constant SYSCFG_SWPR_P14WP                                \ P14WP
-$00008000 constant SYSCFG_SWPR_P15WP                                \ P15WP
-$00010000 constant SYSCFG_SWPR_P16WP                                \ P16WP
-$00020000 constant SYSCFG_SWPR_P17WP                                \ P17WP
-$00040000 constant SYSCFG_SWPR_P18WP                                \ P18WP
-$00080000 constant SYSCFG_SWPR_P19WP                                \ P19WP
-$00100000 constant SYSCFG_SWPR_P20WP                                \ P20WP
-$00200000 constant SYSCFG_SWPR_P21WP                                \ P21WP
-$00400000 constant SYSCFG_SWPR_P22WP                                \ P22WP
-$00800000 constant SYSCFG_SWPR_P23WP                                \ P23WP
-$01000000 constant SYSCFG_SWPR_P24WP                                \ P24WP
-$02000000 constant SYSCFG_SWPR_P25WP                                \ P25WP
-$04000000 constant SYSCFG_SWPR_P26WP                                \ P26WP
-$08000000 constant SYSCFG_SWPR_P27WP                                \ P27WP
-$10000000 constant SYSCFG_SWPR_P28WP                                \ P28WP
-$20000000 constant SYSCFG_SWPR_P29WP                                \ P29WP
-$40000000 constant SYSCFG_SWPR_P30WP                                \ P30WP
-$80000000 constant SYSCFG_SWPR_P31WP                                \ SRAM2 page 31 write protection
+  [ifdef] SYSCFG_CSLOCKR_DEF
+    \
+    \ @brief SYSCFG CPU secure lock register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_LOCKSVTAIRCR            \ [0x00] LOCKSVTAIRCR
+    $01 constant SYSCFG_LOCKSMPU                \ [0x01] LOCKSMPU
+    $02 constant SYSCFG_LOCKSAU                 \ [0x02] LOCKSAU
+  [then]
 
 
-\
-\ @brief SWPR2
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_SWPR2_P32WP                               \ P32WP
-$00000002 constant SYSCFG_SWPR2_P33WP                               \ P33WP
-$00000004 constant SYSCFG_SWPR2_P34WP                               \ P34WP
-$00000008 constant SYSCFG_SWPR2_P35WP                               \ P35WP
-$00000010 constant SYSCFG_SWPR2_P36WP                               \ P36WP
-$00000020 constant SYSCFG_SWPR2_P37WP                               \ P37WP
-$00000040 constant SYSCFG_SWPR2_P38WP                               \ P38WP
-$00000080 constant SYSCFG_SWPR2_P39WP                               \ P39WP
-$00000100 constant SYSCFG_SWPR2_P40WP                               \ P40WP
-$00000200 constant SYSCFG_SWPR2_P41WP                               \ P41WP
-$00000400 constant SYSCFG_SWPR2_P42WP                               \ P42WP
-$00000800 constant SYSCFG_SWPR2_P43WP                               \ P43WP
-$00001000 constant SYSCFG_SWPR2_P44WP                               \ P44WP
-$00002000 constant SYSCFG_SWPR2_P45WP                               \ P45WP
-$00004000 constant SYSCFG_SWPR2_P46WP                               \ P46WP
-$00008000 constant SYSCFG_SWPR2_P47WP                               \ P47WP
-$00010000 constant SYSCFG_SWPR2_P48WP                               \ P48WP
-$00020000 constant SYSCFG_SWPR2_P49WP                               \ P49WP
-$00040000 constant SYSCFG_SWPR2_P50WP                               \ P50WP
-$00080000 constant SYSCFG_SWPR2_P51WP                               \ P51WP
-$00100000 constant SYSCFG_SWPR2_P52WP                               \ P52WP
-$00200000 constant SYSCFG_SWPR2_P53WP                               \ P53WP
-$00400000 constant SYSCFG_SWPR2_P54WP                               \ P54WP
-$00800000 constant SYSCFG_SWPR2_P55WP                               \ P55WP
-$01000000 constant SYSCFG_SWPR2_P56WP                               \ P56WP
-$02000000 constant SYSCFG_SWPR2_P57WP                               \ P57WP
-$04000000 constant SYSCFG_SWPR2_P58WP                               \ P58WP
-$08000000 constant SYSCFG_SWPR2_P59WP                               \ P59WP
-$10000000 constant SYSCFG_SWPR2_P60WP                               \ P60WP
-$20000000 constant SYSCFG_SWPR2_P61WP                               \ P61WP
-$40000000 constant SYSCFG_SWPR2_P62WP                               \ P62WP
-$80000000 constant SYSCFG_SWPR2_P63WP                               \ P63WP
+  [ifdef] SYSCFG_CFGR2_DEF
+    \
+    \ @brief CFGR2
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_CLL                     \ [0x00] LOCKUP (hardfault) output enable bit
+    $01 constant SYSCFG_SPL                     \ [0x01] SRAM2 parity lock bit
+    $02 constant SYSCFG_PVDL                    \ [0x02] PVD lock enable bit
+    $03 constant SYSCFG_ECCL                    \ [0x03] ECC Lock
+    $08 constant SYSCFG_SPF                     \ [0x08] SRAM2 parity error flag
+  [then]
 
 
-\
-\ @brief RSSCMDR
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
+  [ifdef] SYSCFG_SCSR_DEF
+    \
+    \ @brief SCSR
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_SRAM2ER                 \ [0x00] SRAM2 Erase
+    $01 constant SYSCFG_SRAM2BSY                \ [0x01] SRAM2 busy by erase operation
+  [then]
 
-$000000ff constant SYSCFG_RSSCMDR_RSSCMD                            \ RSS commands
+
+  [ifdef] SYSCFG_SKR_DEF
+    \
+    \ @brief SKR
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_KEY                     \ [0x00 : 8] SRAM2 write protection key for software erase
+  [then]
 
 
-\
-\ @brief System configuration controller
-\
-$40010000 constant SYSCFG_SECCFGR  \ offset: 0x00 : SYSCFG secure configuration register
-$40010004 constant SYSCFG_CFGR1   \ offset: 0x04 : configuration register 1
-$40010008 constant SYSCFG_FPUIMR  \ offset: 0x08 : FPU interrupt mask register
-$4001000c constant SYSCFG_CNSLCKR  \ offset: 0x0C : SYSCFG CPU non-secure lock register
-$40010010 constant SYSCFG_CSLOCKR  \ offset: 0x10 : SYSCFG CPU secure lock register
-$40010014 constant SYSCFG_CFGR2   \ offset: 0x14 : CFGR2
-$40010018 constant SYSCFG_SCSR    \ offset: 0x18 : SCSR
-$4001001c constant SYSCFG_SKR     \ offset: 0x1C : SKR
-$40010020 constant SYSCFG_SWPR    \ offset: 0x20 : SWPR
-$40010024 constant SYSCFG_SWPR2   \ offset: 0x24 : SWPR2
-$4001002c constant SYSCFG_RSSCMDR  \ offset: 0x2C : RSSCMDR
+  [ifdef] SYSCFG_SWPR_DEF
+    \
+    \ @brief SWPR
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_P0WP                    \ [0x00] P0WP
+    $01 constant SYSCFG_P1WP                    \ [0x01] P1WP
+    $02 constant SYSCFG_P2WP                    \ [0x02] P2WP
+    $03 constant SYSCFG_P3WP                    \ [0x03] P3WP
+    $04 constant SYSCFG_P4WP                    \ [0x04] P4WP
+    $05 constant SYSCFG_P5WP                    \ [0x05] P5WP
+    $06 constant SYSCFG_P6WP                    \ [0x06] P6WP
+    $07 constant SYSCFG_P7WP                    \ [0x07] P7WP
+    $08 constant SYSCFG_P8WP                    \ [0x08] P8WP
+    $09 constant SYSCFG_P9WP                    \ [0x09] P9WP
+    $0a constant SYSCFG_P10WP                   \ [0x0a] P10WP
+    $0b constant SYSCFG_P11WP                   \ [0x0b] P11WP
+    $0c constant SYSCFG_P12WP                   \ [0x0c] P12WP
+    $0d constant SYSCFG_P13WP                   \ [0x0d] P13WP
+    $0e constant SYSCFG_P14WP                   \ [0x0e] P14WP
+    $0f constant SYSCFG_P15WP                   \ [0x0f] P15WP
+    $10 constant SYSCFG_P16WP                   \ [0x10] P16WP
+    $11 constant SYSCFG_P17WP                   \ [0x11] P17WP
+    $12 constant SYSCFG_P18WP                   \ [0x12] P18WP
+    $13 constant SYSCFG_P19WP                   \ [0x13] P19WP
+    $14 constant SYSCFG_P20WP                   \ [0x14] P20WP
+    $15 constant SYSCFG_P21WP                   \ [0x15] P21WP
+    $16 constant SYSCFG_P22WP                   \ [0x16] P22WP
+    $17 constant SYSCFG_P23WP                   \ [0x17] P23WP
+    $18 constant SYSCFG_P24WP                   \ [0x18] P24WP
+    $19 constant SYSCFG_P25WP                   \ [0x19] P25WP
+    $1a constant SYSCFG_P26WP                   \ [0x1a] P26WP
+    $1b constant SYSCFG_P27WP                   \ [0x1b] P27WP
+    $1c constant SYSCFG_P28WP                   \ [0x1c] P28WP
+    $1d constant SYSCFG_P29WP                   \ [0x1d] P29WP
+    $1e constant SYSCFG_P30WP                   \ [0x1e] P30WP
+    $1f constant SYSCFG_P31WP                   \ [0x1f] SRAM2 page 31 write protection
+  [then]
 
+
+  [ifdef] SYSCFG_SWPR2_DEF
+    \
+    \ @brief SWPR2
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_P32WP                   \ [0x00] P32WP
+    $01 constant SYSCFG_P33WP                   \ [0x01] P33WP
+    $02 constant SYSCFG_P34WP                   \ [0x02] P34WP
+    $03 constant SYSCFG_P35WP                   \ [0x03] P35WP
+    $04 constant SYSCFG_P36WP                   \ [0x04] P36WP
+    $05 constant SYSCFG_P37WP                   \ [0x05] P37WP
+    $06 constant SYSCFG_P38WP                   \ [0x06] P38WP
+    $07 constant SYSCFG_P39WP                   \ [0x07] P39WP
+    $08 constant SYSCFG_P40WP                   \ [0x08] P40WP
+    $09 constant SYSCFG_P41WP                   \ [0x09] P41WP
+    $0a constant SYSCFG_P42WP                   \ [0x0a] P42WP
+    $0b constant SYSCFG_P43WP                   \ [0x0b] P43WP
+    $0c constant SYSCFG_P44WP                   \ [0x0c] P44WP
+    $0d constant SYSCFG_P45WP                   \ [0x0d] P45WP
+    $0e constant SYSCFG_P46WP                   \ [0x0e] P46WP
+    $0f constant SYSCFG_P47WP                   \ [0x0f] P47WP
+    $10 constant SYSCFG_P48WP                   \ [0x10] P48WP
+    $11 constant SYSCFG_P49WP                   \ [0x11] P49WP
+    $12 constant SYSCFG_P50WP                   \ [0x12] P50WP
+    $13 constant SYSCFG_P51WP                   \ [0x13] P51WP
+    $14 constant SYSCFG_P52WP                   \ [0x14] P52WP
+    $15 constant SYSCFG_P53WP                   \ [0x15] P53WP
+    $16 constant SYSCFG_P54WP                   \ [0x16] P54WP
+    $17 constant SYSCFG_P55WP                   \ [0x17] P55WP
+    $18 constant SYSCFG_P56WP                   \ [0x18] P56WP
+    $19 constant SYSCFG_P57WP                   \ [0x19] P57WP
+    $1a constant SYSCFG_P58WP                   \ [0x1a] P58WP
+    $1b constant SYSCFG_P59WP                   \ [0x1b] P59WP
+    $1c constant SYSCFG_P60WP                   \ [0x1c] P60WP
+    $1d constant SYSCFG_P61WP                   \ [0x1d] P61WP
+    $1e constant SYSCFG_P62WP                   \ [0x1e] P62WP
+    $1f constant SYSCFG_P63WP                   \ [0x1f] P63WP
+  [then]
+
+
+  [ifdef] SYSCFG_RSSCMDR_DEF
+    \
+    \ @brief RSSCMDR
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_RSSCMD                  \ [0x00 : 8] RSS commands
+  [then]
+
+  \
+  \ @brief System configuration controller
+  \
+  $00 constant SYSCFG_SECCFGR           \ SYSCFG secure configuration register
+  $04 constant SYSCFG_CFGR1             \ configuration register 1
+  $08 constant SYSCFG_FPUIMR            \ FPU interrupt mask register
+  $0C constant SYSCFG_CNSLCKR           \ SYSCFG CPU non-secure lock register
+  $10 constant SYSCFG_CSLOCKR           \ SYSCFG CPU secure lock register
+  $14 constant SYSCFG_CFGR2             \ CFGR2
+  $18 constant SYSCFG_SCSR              \ SCSR
+  $1C constant SYSCFG_SKR               \ SKR
+  $20 constant SYSCFG_SWPR              \ SWPR
+  $24 constant SYSCFG_SWPR2             \ SWPR2
+  $2C constant SYSCFG_RSSCMDR           \ RSSCMDR
+
+: SYSCFG_DEF ; [then]

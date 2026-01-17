@@ -6,111 +6,118 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SPI1_DEF
 
-\
-\ @brief control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPI1_CR1_CPHA                                    \ Clock phase
-$00000002 constant SPI1_CR1_CPOL                                    \ Clock polarity
-$00000004 constant SPI1_CR1_MSTR                                    \ Master selection
-$00000038 constant SPI1_CR1_BR                                      \ Baud rate control
-$00000040 constant SPI1_CR1_SPE                                     \ SPI enable
-$00000080 constant SPI1_CR1_LSBFIRST                                \ Frame format
-$00000100 constant SPI1_CR1_SSI                                     \ Internal slave select
-$00000200 constant SPI1_CR1_SSM                                     \ Software slave management
-$00000400 constant SPI1_CR1_RXONLY                                  \ Receive only
-$00000800 constant SPI1_CR1_CRCL                                    \ CRC length
-$00001000 constant SPI1_CR1_CRCNEXT                                 \ CRC transfer next
-$00002000 constant SPI1_CR1_CRCEN                                   \ Hardware CRC calculation enable
-$00004000 constant SPI1_CR1_BIDIOE                                  \ Output enable in bidirectional mode
-$00008000 constant SPI1_CR1_BIDIMODE                                \ Bidirectional data mode enable
-
-
-\
-\ @brief control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPI1_CR2_RXDMAEN                                 \ Rx buffer DMA enable
-$00000002 constant SPI1_CR2_TXDMAEN                                 \ Tx buffer DMA enable
-$00000004 constant SPI1_CR2_SSOE                                    \ SS output enable
-$00000008 constant SPI1_CR2_NSSP                                    \ NSS pulse management
-$00000010 constant SPI1_CR2_FRF                                     \ Frame format
-$00000020 constant SPI1_CR2_ERRIE                                   \ Error interrupt enable
-$00000040 constant SPI1_CR2_RXNEIE                                  \ RX buffer not empty interrupt enable
-$00000080 constant SPI1_CR2_TXEIE                                   \ Tx buffer empty interrupt enable
-$00000f00 constant SPI1_CR2_DS                                      \ Data size
-$00001000 constant SPI1_CR2_FRXTH                                   \ FIFO reception threshold
-$00002000 constant SPI1_CR2_LDMA_RX                                 \ Last DMA transfer for reception
-$00004000 constant SPI1_CR2_LDMA_TX                                 \ Last DMA transfer for transmission
+  [ifdef] SPI1_CR1_DEF
+    \
+    \ @brief control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI1_CPHA                      \ [0x00] Clock phase
+    $01 constant SPI1_CPOL                      \ [0x01] Clock polarity
+    $02 constant SPI1_MSTR                      \ [0x02] Master selection
+    $03 constant SPI1_BR                        \ [0x03 : 3] Baud rate control
+    $06 constant SPI1_SPE                       \ [0x06] SPI enable
+    $07 constant SPI1_LSBFIRST                  \ [0x07] Frame format
+    $08 constant SPI1_SSI                       \ [0x08] Internal slave select
+    $09 constant SPI1_SSM                       \ [0x09] Software slave management
+    $0a constant SPI1_RXONLY                    \ [0x0a] Receive only
+    $0b constant SPI1_CRCL                      \ [0x0b] CRC length
+    $0c constant SPI1_CRCNEXT                   \ [0x0c] CRC transfer next
+    $0d constant SPI1_CRCEN                     \ [0x0d] Hardware CRC calculation enable
+    $0e constant SPI1_BIDIOE                    \ [0x0e] Output enable in bidirectional mode
+    $0f constant SPI1_BIDIMODE                  \ [0x0f] Bidirectional data mode enable
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x08
-\ Reset value: 0x00000002
-\
-
-$00000001 constant SPI1_SR_RXNE                                     \ Receive buffer not empty
-$00000002 constant SPI1_SR_TXE                                      \ Transmit buffer empty
-$00000010 constant SPI1_SR_CRCERR                                   \ CRC error flag
-$00000020 constant SPI1_SR_MODF                                     \ Mode fault
-$00000040 constant SPI1_SR_OVR                                      \ Overrun flag
-$00000080 constant SPI1_SR_BSY                                      \ Busy flag
-$00000100 constant SPI1_SR_TIFRFE                                   \ TI frame format error
-$00000600 constant SPI1_SR_FRLVL                                    \ FIFO reception level
-$00001800 constant SPI1_SR_FTLVL                                    \ FIFO transmission level
-
-
-\
-\ @brief data register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SPI1_DR_DR                                       \ Data register
+  [ifdef] SPI1_CR2_DEF
+    \
+    \ @brief control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI1_RXDMAEN                   \ [0x00] Rx buffer DMA enable
+    $01 constant SPI1_TXDMAEN                   \ [0x01] Tx buffer DMA enable
+    $02 constant SPI1_SSOE                      \ [0x02] SS output enable
+    $03 constant SPI1_NSSP                      \ [0x03] NSS pulse management
+    $04 constant SPI1_FRF                       \ [0x04] Frame format
+    $05 constant SPI1_ERRIE                     \ [0x05] Error interrupt enable
+    $06 constant SPI1_RXNEIE                    \ [0x06] RX buffer not empty interrupt enable
+    $07 constant SPI1_TXEIE                     \ [0x07] Tx buffer empty interrupt enable
+    $08 constant SPI1_DS                        \ [0x08 : 4] Data size
+    $0c constant SPI1_FRXTH                     \ [0x0c] FIFO reception threshold
+    $0d constant SPI1_LDMA_RX                   \ [0x0d] Last DMA transfer for reception
+    $0e constant SPI1_LDMA_TX                   \ [0x0e] Last DMA transfer for transmission
+  [then]
 
 
-\
-\ @brief CRC polynomial register
-\ Address offset: 0x10
-\ Reset value: 0x00000007
-\
-
-$0000ffff constant SPI1_CRCPR_CRCPOLY                               \ CRC polynomial register
-
-
-\
-\ @brief RX CRC register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SPI1_RXCRCR_RXCRC                                \ Rx CRC register
-
-
-\
-\ @brief TX CRC register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SPI1_TXCRCR_TXCRC                                \ Tx CRC register
+  [ifdef] SPI1_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000002
+    \
+    $00 constant SPI1_RXNE                      \ [0x00] Receive buffer not empty
+    $01 constant SPI1_TXE                       \ [0x01] Transmit buffer empty
+    $04 constant SPI1_CRCERR                    \ [0x04] CRC error flag
+    $05 constant SPI1_MODF                      \ [0x05] Mode fault
+    $06 constant SPI1_OVR                       \ [0x06] Overrun flag
+    $07 constant SPI1_BSY                       \ [0x07] Busy flag
+    $08 constant SPI1_TIFRFE                    \ [0x08] TI frame format error
+    $09 constant SPI1_FRLVL                     \ [0x09 : 2] FIFO reception level
+    $0b constant SPI1_FTLVL                     \ [0x0b : 2] FIFO transmission level
+  [then]
 
 
-\
-\ @brief Serial peripheral interface
-\
-$40013000 constant SPI1_CR1       \ offset: 0x00 : control register 1
-$40013004 constant SPI1_CR2       \ offset: 0x04 : control register 2
-$40013008 constant SPI1_SR        \ offset: 0x08 : status register
-$4001300c constant SPI1_DR        \ offset: 0x0C : data register
-$40013010 constant SPI1_CRCPR     \ offset: 0x10 : CRC polynomial register
-$40013014 constant SPI1_RXCRCR    \ offset: 0x14 : RX CRC register
-$40013018 constant SPI1_TXCRCR    \ offset: 0x18 : TX CRC register
+  [ifdef] SPI1_DR_DEF
+    \
+    \ @brief data register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI1_DR                        \ [0x00 : 16] Data register
+  [then]
 
+
+  [ifdef] SPI1_CRCPR_DEF
+    \
+    \ @brief CRC polynomial register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000007
+    \
+    $00 constant SPI1_CRCPOLY                   \ [0x00 : 16] CRC polynomial register
+  [then]
+
+
+  [ifdef] SPI1_RXCRCR_DEF
+    \
+    \ @brief RX CRC register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI1_RxCRC                     \ [0x00 : 16] Rx CRC register
+  [then]
+
+
+  [ifdef] SPI1_TXCRCR_DEF
+    \
+    \ @brief TX CRC register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI1_TxCRC                     \ [0x00 : 16] Tx CRC register
+  [then]
+
+  \
+  \ @brief Serial peripheral interface
+  \
+  $00 constant SPI1_CR1                 \ control register 1
+  $04 constant SPI1_CR2                 \ control register 2
+  $08 constant SPI1_SR                  \ status register
+  $0C constant SPI1_DR                  \ data register
+  $10 constant SPI1_CRCPR               \ CRC polynomial register
+  $14 constant SPI1_RXCRCR              \ RX CRC register
+  $18 constant SPI1_TXCRCR              \ TX CRC register
+
+: SPI1_DEF ; [then]

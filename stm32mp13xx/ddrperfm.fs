@@ -6,175 +6,191 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DDRPERFM_DEF
 
-\
-\ @brief DDRPERFM control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DDRPERFM_DDRPERFM_CTL_START                      \ Start counters which are enabled, the time counter (TCNT) is always enabled. writing a '1â when the counters are running (DDRPERFM_STATUS.BUSY = 1) is ignored
-$00000002 constant DDRPERFM_DDRPERFM_CTL_STOP                       \ stop all the counters. Writing a '1â when the counters are stopped (DDRPERFM_STATUS.BUSY = 0) is ignored
-
-
-\
-\ @brief DDRPERFM configurationl register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000000f constant DDRPERFM_DDRPERFM_CFG_EN                         \ enable counter x (from 0 to 3)
-$00030000 constant DDRPERFM_DDRPERFM_CFG_SEL                        \ select set of signals to be monitored (from 0 to 3) (see signal set description in ) and counters to be enabled
+  [ifdef] DDRPERFM_DDRPERFM_CTL_DEF
+    \
+    \ @brief DDRPERFM control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_START                 \ [0x00] Start counters which are enabled, the time counter (TCNT) is always enabled. writing a '1â when the counters are running (DDRPERFM_STATUS.BUSY = 1) is ignored
+    $01 constant DDRPERFM_STOP                  \ [0x01] stop all the counters. Writing a '1â when the counters are stopped (DDRPERFM_STATUS.BUSY = 0) is ignored
+  [then]
 
 
-\
-\ @brief DDRPERFM status register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant DDRPERFM_DDRPERFM_STATUS_COVF                    \ Counter x Overflow (with x from 0 to 3)
-$00010000 constant DDRPERFM_DDRPERFM_STATUS_BUSY                    \ Busy Status
-$80000000 constant DDRPERFM_DDRPERFM_STATUS_TOVF                    \ total counter overflow
-
-
-\
-\ @brief DDRPERFM counter clear register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant DDRPERFM_DDRPERFM_CCR_CCLR                       \ counter x Clear (with x from 0 to 3)
-$80000000 constant DDRPERFM_DDRPERFM_CCR_TCLR                       \ time counter clear
+  [ifdef] DDRPERFM_DDRPERFM_CFG_DEF
+    \
+    \ @brief DDRPERFM configurationl register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_EN                    \ [0x00 : 4] enable counter x (from 0 to 3)
+    $10 constant DDRPERFM_SEL                   \ [0x10 : 2] select set of signals to be monitored (from 0 to 3) (see signal set description in ) and counters to be enabled
+  [then]
 
 
-\
-\ @brief DDRPERFM interrupt enable register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DDRPERFM_DDRPERFM_IER_OVFIE                      \ overflow interrupt enable
-
-
-\
-\ @brief DDRPERFM interrupt status register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DDRPERFM_DDRPERFM_ISR_OVFF                       \ overflow flag This flag is set when one counter is in overflow
+  [ifdef] DDRPERFM_DDRPERFM_STATUS_DEF
+    \
+    \ @brief DDRPERFM status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_COVF                  \ [0x00 : 4] Counter x Overflow (with x from 0 to 3)
+    $10 constant DDRPERFM_BUSY                  \ [0x10] Busy Status
+    $1f constant DDRPERFM_TOVF                  \ [0x1f] total counter overflow
+  [then]
 
 
-\
-\ @brief DDRPERFM interrupt clear register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DDRPERFM_DDRPERFM_ICR_OVF                        \ overflow flag
-
-
-\
-\ @brief DDRPERFM time counter register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DDRPERFM_DDRPERFM_TCNT_CNT                       \ total time, this is number of DDR controller clocks elapsed while DDRPERFM has been running.
+  [ifdef] DDRPERFM_DDRPERFM_CCR_DEF
+    \
+    \ @brief DDRPERFM counter clear register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_CCLR                  \ [0x00 : 4] counter x Clear (with x from 0 to 3)
+    $1f constant DDRPERFM_TCLR                  \ [0x1f] time counter clear
+  [then]
 
 
-\
-\ @brief DDRPERFM event counter 0 register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DDRPERFM_DDRPERFM_CNT0_CNT                       \ event counter value.
-
-
-\
-\ @brief DDRPERFM event counter 1 register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DDRPERFM_DDRPERFM_CNT1_CNT                       \ event counter value.
+  [ifdef] DDRPERFM_DDRPERFM_IER_DEF
+    \
+    \ @brief DDRPERFM interrupt enable register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_OVFIE                 \ [0x00] overflow interrupt enable
+  [then]
 
 
-\
-\ @brief DDRPERFM event counter 2 register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DDRPERFM_DDRPERFM_CNT2_CNT                       \ event counter value.
-
-
-\
-\ @brief DDRPERFM event counter 3 register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DDRPERFM_DDRPERFM_CNT3_CNT                       \ event counter value.
+  [ifdef] DDRPERFM_DDRPERFM_ISR_DEF
+    \
+    \ @brief DDRPERFM interrupt status register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_OVFF                  \ [0x00] overflow flag This flag is set when one counter is in overflow
+  [then]
 
 
-\
-\ @brief DDRPERFM hardware configuration register
-\ Address offset: 0x3F0
-\ Reset value: 0x00000004
-\
-
-$0000000f constant DDRPERFM_DDRPERFM_HWCFG_NCNT                     \ number of counters for this configuration (4)
-
-
-\
-\ @brief DDRPERFM version register
-\ Address offset: 0x3F4
-\ Reset value: 0x00000010
-\
-
-$0000000f constant DDRPERFM_DDRPERFM_VER_MINREV                     \ Minor revision number.
-$000000f0 constant DDRPERFM_DDRPERFM_VER_MAJREV                     \ Major revision number.
+  [ifdef] DDRPERFM_DDRPERFM_ICR_DEF
+    \
+    \ @brief DDRPERFM interrupt clear register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_OVF                   \ [0x00] overflow flag
+  [then]
 
 
-\
-\ @brief DDRPERFM ID register
-\ Address offset: 0x3F8
-\ Reset value: 0x00140061
-\
-
-$00000000 constant DDRPERFM_DDRPERFM_ID_ID                          \ DDRPERFM unique identification.
-
-
-\
-\ @brief DDRPERFM magic ID register
-\ Address offset: 0x3FC
-\ Reset value: 0xA3C5DD01
-\
-
-$00000000 constant DDRPERFM_DDRPERFM_SID_SID                        \ magic ID for automatic IP discovery.
+  [ifdef] DDRPERFM_DDRPERFM_TCNT_DEF
+    \
+    \ @brief DDRPERFM time counter register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_CNT                   \ [0x00 : 32] total time, this is number of DDR controller clocks elapsed while DDRPERFM has been running.
+  [then]
 
 
-\
-\ @brief DDRPERFM
-\
-$5a007000 constant DDRPERFM_DDRPERFM_CTL  \ offset: 0x00 : DDRPERFM control register
-$5a007004 constant DDRPERFM_DDRPERFM_CFG  \ offset: 0x04 : DDRPERFM configurationl register
-$5a007008 constant DDRPERFM_DDRPERFM_STATUS  \ offset: 0x08 : DDRPERFM status register
-$5a00700c constant DDRPERFM_DDRPERFM_CCR  \ offset: 0x0C : DDRPERFM counter clear register
-$5a007010 constant DDRPERFM_DDRPERFM_IER  \ offset: 0x10 : DDRPERFM interrupt enable register
-$5a007014 constant DDRPERFM_DDRPERFM_ISR  \ offset: 0x14 : DDRPERFM interrupt status register
-$5a007018 constant DDRPERFM_DDRPERFM_ICR  \ offset: 0x18 : DDRPERFM interrupt clear register
-$5a007020 constant DDRPERFM_DDRPERFM_TCNT  \ offset: 0x20 : DDRPERFM time counter register
-$5a007030 constant DDRPERFM_DDRPERFM_CNT0  \ offset: 0x30 : DDRPERFM event counter 0 register
-$5a007038 constant DDRPERFM_DDRPERFM_CNT1  \ offset: 0x38 : DDRPERFM event counter 1 register
-$5a007040 constant DDRPERFM_DDRPERFM_CNT2  \ offset: 0x40 : DDRPERFM event counter 2 register
-$5a007048 constant DDRPERFM_DDRPERFM_CNT3  \ offset: 0x48 : DDRPERFM event counter 3 register
-$5a0073f0 constant DDRPERFM_DDRPERFM_HWCFG  \ offset: 0x3F0 : DDRPERFM hardware configuration register
-$5a0073f4 constant DDRPERFM_DDRPERFM_VER  \ offset: 0x3F4 : DDRPERFM version register
-$5a0073f8 constant DDRPERFM_DDRPERFM_ID  \ offset: 0x3F8 : DDRPERFM ID register
-$5a0073fc constant DDRPERFM_DDRPERFM_SID  \ offset: 0x3FC : DDRPERFM magic ID register
+  [ifdef] DDRPERFM_DDRPERFM_CNT0_DEF
+    \
+    \ @brief DDRPERFM event counter 0 register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_CNT                   \ [0x00 : 32] event counter value.
+  [then]
 
+
+  [ifdef] DDRPERFM_DDRPERFM_CNT1_DEF
+    \
+    \ @brief DDRPERFM event counter 1 register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_CNT                   \ [0x00 : 32] event counter value.
+  [then]
+
+
+  [ifdef] DDRPERFM_DDRPERFM_CNT2_DEF
+    \
+    \ @brief DDRPERFM event counter 2 register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_CNT                   \ [0x00 : 32] event counter value.
+  [then]
+
+
+  [ifdef] DDRPERFM_DDRPERFM_CNT3_DEF
+    \
+    \ @brief DDRPERFM event counter 3 register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant DDRPERFM_CNT                   \ [0x00 : 32] event counter value.
+  [then]
+
+
+  [ifdef] DDRPERFM_DDRPERFM_HWCFG_DEF
+    \
+    \ @brief DDRPERFM hardware configuration register
+    \ Address offset: 0x3F0
+    \ Reset value: 0x00000004
+    \
+    $00 constant DDRPERFM_NCNT                  \ [0x00 : 4] number of counters for this configuration (4)
+  [then]
+
+
+  [ifdef] DDRPERFM_DDRPERFM_VER_DEF
+    \
+    \ @brief DDRPERFM version register
+    \ Address offset: 0x3F4
+    \ Reset value: 0x00000010
+    \
+    $00 constant DDRPERFM_MINREV                \ [0x00 : 4] Minor revision number.
+    $04 constant DDRPERFM_MAJREV                \ [0x04 : 4] Major revision number.
+  [then]
+
+
+  [ifdef] DDRPERFM_DDRPERFM_ID_DEF
+    \
+    \ @brief DDRPERFM ID register
+    \ Address offset: 0x3F8
+    \ Reset value: 0x00140061
+    \
+    $00 constant DDRPERFM_ID                    \ [0x00 : 32] DDRPERFM unique identification.
+  [then]
+
+
+  [ifdef] DDRPERFM_DDRPERFM_SID_DEF
+    \
+    \ @brief DDRPERFM magic ID register
+    \ Address offset: 0x3FC
+    \ Reset value: 0xA3C5DD01
+    \
+    $00 constant DDRPERFM_SID                   \ [0x00 : 32] magic ID for automatic IP discovery.
+  [then]
+
+  \
+  \ @brief DDRPERFM
+  \
+  $00 constant DDRPERFM_DDRPERFM_CTL    \ DDRPERFM control register
+  $04 constant DDRPERFM_DDRPERFM_CFG    \ DDRPERFM configurationl register
+  $08 constant DDRPERFM_DDRPERFM_STATUS \ DDRPERFM status register
+  $0C constant DDRPERFM_DDRPERFM_CCR    \ DDRPERFM counter clear register
+  $10 constant DDRPERFM_DDRPERFM_IER    \ DDRPERFM interrupt enable register
+  $14 constant DDRPERFM_DDRPERFM_ISR    \ DDRPERFM interrupt status register
+  $18 constant DDRPERFM_DDRPERFM_ICR    \ DDRPERFM interrupt clear register
+  $20 constant DDRPERFM_DDRPERFM_TCNT   \ DDRPERFM time counter register
+  $30 constant DDRPERFM_DDRPERFM_CNT0   \ DDRPERFM event counter 0 register
+  $38 constant DDRPERFM_DDRPERFM_CNT1   \ DDRPERFM event counter 1 register
+  $40 constant DDRPERFM_DDRPERFM_CNT2   \ DDRPERFM event counter 2 register
+  $48 constant DDRPERFM_DDRPERFM_CNT3   \ DDRPERFM event counter 3 register
+  $3F0 constant DDRPERFM_DDRPERFM_HWCFG \ DDRPERFM hardware configuration register
+  $3F4 constant DDRPERFM_DDRPERFM_VER   \ DDRPERFM version register
+  $3F8 constant DDRPERFM_DDRPERFM_ID    \ DDRPERFM ID register
+  $3FC constant DDRPERFM_DDRPERFM_SID   \ DDRPERFM magic ID register
+
+: DDRPERFM_DEF ; [then]

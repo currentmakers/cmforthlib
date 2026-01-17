@@ -6,49 +6,51 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] COMP_DEF
 
-\
-\ @brief Comparator 1 control and status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant COMP_COMP1_CSR_EN                                \ COMP channel 1 enable bit
-$000000f0 constant COMP_COMP1_CSR_INMSEL                            \ Comparator 2 signal selector for inverting input INM
-$00000300 constant COMP_COMP1_CSR_INPSEL                            \ Comparator 2 signal selector for non-inverting input
-$00000800 constant COMP_COMP1_CSR_WINMODE                           \ Comparator 2 non-inverting input selector for window mode
-$00004000 constant COMP_COMP1_CSR_WINOUT                            \ Comparator 2 output selector
-$00008000 constant COMP_COMP1_CSR_POLARITY                          \ Comparator 2 polarity selector
-$00030000 constant COMP_COMP1_CSR_HYST                              \ Comparator 2 hysteresis selector
-$000c0000 constant COMP_COMP1_CSR_PWRMODE                           \ Comparator 2 power mode selector
-$01f00000 constant COMP_COMP1_CSR_BLANKSEL                          \ Comparator 2 blanking source selector
-$40000000 constant COMP_COMP1_CSR_VALUE                             \ Comparator 2 output status
-$80000000 constant COMP_COMP1_CSR_LOCK                              \ COMP2_CSR register lock
-
-
-\
-\ @brief Comparator 2 control and status register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant COMP_COMP2_CSR_EN                                \ COMP channel 1 enable bit
-$000000f0 constant COMP_COMP2_CSR_INMSEL                            \ Comparator 2 signal selector for inverting input INM
-$00000300 constant COMP_COMP2_CSR_INPSEL                            \ Comparator 2 signal selector for non-inverting input
-$00000800 constant COMP_COMP2_CSR_WINMODE                           \ Comparator 2 non-inverting input selector for window mode
-$00004000 constant COMP_COMP2_CSR_WINOUT                            \ Comparator 2 output selector
-$00008000 constant COMP_COMP2_CSR_POLARITY                          \ Comparator 2 polarity selector
-$00030000 constant COMP_COMP2_CSR_HYST                              \ Comparator 2 hysteresis selector
-$000c0000 constant COMP_COMP2_CSR_PWRMODE                           \ Comparator 2 power mode selector
-$01f00000 constant COMP_COMP2_CSR_BLANKSEL                          \ Comparator 2 blanking source selector
-$40000000 constant COMP_COMP2_CSR_VALUE                             \ Comparator 2 output status
-$80000000 constant COMP_COMP2_CSR_LOCK                              \ COMP2_CSR register lock
+  [ifdef] COMP_COMP1_CSR_DEF
+    \
+    \ @brief Comparator 1 control and status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant COMP_EN                        \ [0x00] COMP channel 1 enable bit
+    $04 constant COMP_INMSEL                    \ [0x04 : 4] Comparator 2 signal selector for inverting input INM
+    $08 constant COMP_INPSEL                    \ [0x08 : 2] Comparator 2 signal selector for non-inverting input
+    $0b constant COMP_WINMODE                   \ [0x0b] Comparator 2 non-inverting input selector for window mode
+    $0e constant COMP_WINOUT                    \ [0x0e] Comparator 2 output selector
+    $0f constant COMP_POLARITY                  \ [0x0f] Comparator 2 polarity selector
+    $10 constant COMP_HYST                      \ [0x10 : 2] Comparator 2 hysteresis selector
+    $12 constant COMP_PWRMODE                   \ [0x12 : 2] Comparator 2 power mode selector
+    $14 constant COMP_BLANKSEL                  \ [0x14 : 5] Comparator 2 blanking source selector
+    $1e constant COMP_VALUE                     \ [0x1e] Comparator 2 output status
+    $1f constant COMP_LOCK                      \ [0x1f] COMP2_CSR register lock
+  [then]
 
 
-\
-\ @brief COMP1
-\
-$40010200 constant COMP_COMP1_CSR  \ offset: 0x00 : Comparator 1 control and status register
-$40010204 constant COMP_COMP2_CSR  \ offset: 0x04 : Comparator 2 control and status register
+  [ifdef] COMP_COMP2_CSR_DEF
+    \
+    \ @brief Comparator 2 control and status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant COMP_EN                        \ [0x00] COMP channel 1 enable bit
+    $04 constant COMP_INMSEL                    \ [0x04 : 4] Comparator 2 signal selector for inverting input INM
+    $08 constant COMP_INPSEL                    \ [0x08 : 2] Comparator 2 signal selector for non-inverting input
+    $0b constant COMP_WINMODE                   \ [0x0b] Comparator 2 non-inverting input selector for window mode
+    $0e constant COMP_WINOUT                    \ [0x0e] Comparator 2 output selector
+    $0f constant COMP_POLARITY                  \ [0x0f] Comparator 2 polarity selector
+    $10 constant COMP_HYST                      \ [0x10 : 2] Comparator 2 hysteresis selector
+    $12 constant COMP_PWRMODE                   \ [0x12 : 2] Comparator 2 power mode selector
+    $14 constant COMP_BLANKSEL                  \ [0x14 : 5] Comparator 2 blanking source selector
+    $1e constant COMP_VALUE                     \ [0x1e] Comparator 2 output status
+    $1f constant COMP_LOCK                      \ [0x1f] COMP2_CSR register lock
+  [then]
 
+  \
+  \ @brief COMP1
+  \
+  $00 constant COMP_COMP1_CSR           \ Comparator 1 control and status register
+  $04 constant COMP_COMP2_CSR           \ Comparator 2 control and status register
+
+: COMP_DEF ; [then]

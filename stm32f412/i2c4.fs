@@ -6,188 +6,199 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] I2C4_DEF
 
-\
-\ @brief Control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant I2C4_CR1_PE                                      \ Peripheral enable
-$00000002 constant I2C4_CR1_TXIE                                    \ TXIE
-$00000004 constant I2C4_CR1_RXIE                                    \ RXIE
-$00000008 constant I2C4_CR1_ADDRE                                   \ ADDRE
-$00000010 constant I2C4_CR1_NACKIE                                  \ NACKIE
-$00000020 constant I2C4_CR1_STOPIE                                  \ STOPIE
-$00000040 constant I2C4_CR1_TCIE                                    \ TCIE
-$00000080 constant I2C4_CR1_ERRIE                                   \ ERRIE
-$00000f00 constant I2C4_CR1_DNF                                     \ DNF
-$00001000 constant I2C4_CR1_ANFOFF                                  \ ANFOFF
-$00004000 constant I2C4_CR1_TCDMAEN                                 \ TCDMAEN
-$00008000 constant I2C4_CR1_RXDMAEN                                 \ RXDMAEN
-$00010000 constant I2C4_CR1_SBC                                     \ SBC
-$00020000 constant I2C4_CR1_NOSTRETCH                               \ NOSTRETCH
-$00040000 constant I2C4_CR1_WUPEN                                   \ WUPEN
-$00080000 constant I2C4_CR1_GCEN                                    \ GCEN
-$00100000 constant I2C4_CR1_SMBHEN                                  \ SMBHEN
-$00200000 constant I2C4_CR1_SMBDEN                                  \ SMBDEN
-$00400000 constant I2C4_CR1_ALERTEN                                 \ ALERTEN
-$00800000 constant I2C4_CR1_PECEN                                   \ PECEN
-
-
-\
-\ @brief Control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant I2C4_CR2_SADD0                                   \ Slave address bit 0
-$000000fe constant I2C4_CR2_SADD1_7                                 \ Slave address bit 7_1
-$00000300 constant I2C4_CR2_SADD8_9                                 \ Slave address bit 8_9
-$00000400 constant I2C4_CR2_RD_WRN                                  \ Transfer direction
-$00000800 constant I2C4_CR2_ADD10                                   \ 10-bit addressing mode
-$00001000 constant I2C4_CR2_HEAD10R                                 \ 10-bit address header only read direction
-$00002000 constant I2C4_CR2_START                                   \ Start generation
-$00004000 constant I2C4_CR2_STOP                                    \ Stop generation
-$00008000 constant I2C4_CR2_NACK                                    \ NACK generation
-$00ff0000 constant I2C4_CR2_NBYTES                                  \ Number of bytes
-$01000000 constant I2C4_CR2_RELOAD                                  \ NBYTES reload mode
-$02000000 constant I2C4_CR2_AUTOEND                                 \ Automatic end mode
-$04000000 constant I2C4_CR2_PECBYTE                                 \ Packet error checking byte
+  [ifdef] I2C4_CR1_DEF
+    \
+    \ @brief Control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant I2C4_PE                        \ [0x00] Peripheral enable
+    $01 constant I2C4_TXIE                      \ [0x01] TXIE
+    $02 constant I2C4_RXIE                      \ [0x02] RXIE
+    $03 constant I2C4_ADDRE                     \ [0x03] ADDRE
+    $04 constant I2C4_NACKIE                    \ [0x04] NACKIE
+    $05 constant I2C4_STOPIE                    \ [0x05] STOPIE
+    $06 constant I2C4_TCIE                      \ [0x06] TCIE
+    $07 constant I2C4_ERRIE                     \ [0x07] ERRIE
+    $08 constant I2C4_DNF                       \ [0x08 : 4] DNF
+    $0c constant I2C4_ANFOFF                    \ [0x0c] ANFOFF
+    $0e constant I2C4_TCDMAEN                   \ [0x0e] TCDMAEN
+    $0f constant I2C4_RXDMAEN                   \ [0x0f] RXDMAEN
+    $10 constant I2C4_SBC                       \ [0x10] SBC
+    $11 constant I2C4_NOSTRETCH                 \ [0x11] NOSTRETCH
+    $12 constant I2C4_WUPEN                     \ [0x12] WUPEN
+    $13 constant I2C4_GCEN                      \ [0x13] GCEN
+    $14 constant I2C4_SMBHEN                    \ [0x14] SMBHEN
+    $15 constant I2C4_SMBDEN                    \ [0x15] SMBDEN
+    $16 constant I2C4_ALERTEN                   \ [0x16] ALERTEN
+    $17 constant I2C4_PECEN                     \ [0x17] PECEN
+  [then]
 
 
-\
-\ @brief Own address register 1
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant I2C4_OAR1_OA1                                    \ OA1
-$000000fe constant I2C4_OAR1_OA11_7                                 \ OA11_7
-$00000300 constant I2C4_OAR1_OA18_9                                 \ OA18_9
-$00000400 constant I2C4_OAR1_OA1MODE                                \ OA1MODE
-$00008000 constant I2C4_OAR1_OA1EN                                  \ OA1EN
-
-
-\
-\ @brief Own address register 2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$000000fe constant I2C4_OAR2_OA21_7                                 \ OA21_7
-$00000700 constant I2C4_OAR2_OA2MSK                                 \ OA2MSK
-$00008000 constant I2C4_OAR2_OA2EN                                  \ OA2EN
+  [ifdef] I2C4_CR2_DEF
+    \
+    \ @brief Control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant I2C4_SADD0                     \ [0x00] Slave address bit 0
+    $01 constant I2C4_SADD1_7                   \ [0x01 : 7] Slave address bit 7_1
+    $08 constant I2C4_SADD8_9                   \ [0x08 : 2] Slave address bit 8_9
+    $0a constant I2C4_RD_WRN                    \ [0x0a] Transfer direction
+    $0b constant I2C4_ADD10                     \ [0x0b] 10-bit addressing mode
+    $0c constant I2C4_HEAD10R                   \ [0x0c] 10-bit address header only read direction
+    $0d constant I2C4_START                     \ [0x0d] Start generation
+    $0e constant I2C4_STOP                      \ [0x0e] Stop generation
+    $0f constant I2C4_NACK                      \ [0x0f] NACK generation
+    $10 constant I2C4_NBYTES                    \ [0x10 : 8] Number of bytes
+    $18 constant I2C4_RELOAD                    \ [0x18] NBYTES reload mode
+    $19 constant I2C4_AUTOEND                   \ [0x19] Automatic end mode
+    $1a constant I2C4_PECBYTE                   \ [0x1a] Packet error checking byte
+  [then]
 
 
-\
-\ @brief Timing register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$000000ff constant I2C4_TIMINGR_SCLL                                \ SCLL
-$0000ff00 constant I2C4_TIMINGR_SCLH                                \ SCLH
-$000f0000 constant I2C4_TIMINGR_SDADEL                              \ SDADEL
-$00f00000 constant I2C4_TIMINGR_SCLDEL                              \ SCLDEL
-$f0000000 constant I2C4_TIMINGR_PRESC                               \ PRESC
-
-
-\
-\ @brief Timeout register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000fff constant I2C4_TIMEOUTR_TIMEOUTA                           \ TIMEOUTA
-$00001000 constant I2C4_TIMEOUTR_TIDLE                              \ TIDLE
-$00008000 constant I2C4_TIMEOUTR_TIMOUTEN                           \ TIMOUTEN
-$0fff0000 constant I2C4_TIMEOUTR_TIMEOUTB                           \ TIMEOUTB
-$80000000 constant I2C4_TIMEOUTR_TEXTEN                             \ TEXTEN
+  [ifdef] I2C4_OAR1_DEF
+    \
+    \ @brief Own address register 1
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant I2C4_OA1                       \ [0x00] OA1
+    $01 constant I2C4_OA11_7                    \ [0x01 : 7] OA11_7
+    $08 constant I2C4_OA18_9                    \ [0x08 : 2] OA18_9
+    $0a constant I2C4_OA1MODE                   \ [0x0a] OA1MODE
+    $0f constant I2C4_OA1EN                     \ [0x0f] OA1EN
+  [then]
 
 
-\
-\ @brief Interrupt and Status register
-\ Address offset: 0x18
-\ Reset value: 0x00000001
-\
-
-$00000001 constant I2C4_ISR_TXE                                     \ TXE
-$00000002 constant I2C4_ISR_TXIS                                    \ TXIS
-$00000004 constant I2C4_ISR_RXNE                                    \ RXNE
-$00000008 constant I2C4_ISR_ADDR                                    \ ADDR
-$00000010 constant I2C4_ISR_NACKF                                   \ NACKF
-$00000020 constant I2C4_ISR_STOPF                                   \ STOPF
-$00000040 constant I2C4_ISR_TC                                      \ TC
-$00000080 constant I2C4_ISR_TCR                                     \ TCR
-$00000100 constant I2C4_ISR_BERR                                    \ BERR
-$00000200 constant I2C4_ISR_ARLO                                    \ ARLO
-$00000400 constant I2C4_ISR_OVR                                     \ OVR
-$00000800 constant I2C4_ISR_PECERR                                  \ PECERR
-$00001000 constant I2C4_ISR_TIMEOUT                                 \ TIMEOUT
-$00002000 constant I2C4_ISR_ALERT                                   \ ALERT
-$00008000 constant I2C4_ISR_BUSY                                    \ BUSY
-$00010000 constant I2C4_ISR_DIR                                     \ DIR
-$00fe0000 constant I2C4_ISR_ADDCODE                                 \ ADDCODE
+  [ifdef] I2C4_OAR2_DEF
+    \
+    \ @brief Own address register 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $01 constant I2C4_OA21_7                    \ [0x01 : 7] OA21_7
+    $08 constant I2C4_OA2MSK                    \ [0x08 : 3] OA2MSK
+    $0f constant I2C4_OA2EN                     \ [0x0f] OA2EN
+  [then]
 
 
-\
-\ @brief Interrupt clear register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000008 constant I2C4_ICR_ADDRCF                                  \ ADDRCF
-$00000010 constant I2C4_ICR_NACKCF                                  \ NACKCF
-$00000020 constant I2C4_ICR_STOPCF                                  \ STOPCF
-$00000100 constant I2C4_ICR_BERRCF                                  \ BERRCF
-$00000200 constant I2C4_ICR_ARLOCF                                  \ ARLOCF
-$00000400 constant I2C4_ICR_OVRCF                                   \ OVRCF
-$00000800 constant I2C4_ICR_PECCF                                   \ PECCF
-$00001000 constant I2C4_ICR_TIMOUTCF                                \ TIMOUTCF
-$00002000 constant I2C4_ICR_ALERTC                                  \ ALERTC
+  [ifdef] I2C4_TIMINGR_DEF
+    \
+    \ @brief Timing register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant I2C4_SCLL                      \ [0x00 : 8] SCLL
+    $08 constant I2C4_SCLH                      \ [0x08 : 8] SCLH
+    $10 constant I2C4_SDADEL                    \ [0x10 : 4] SDADEL
+    $14 constant I2C4_SCLDEL                    \ [0x14 : 4] SCLDEL
+    $1c constant I2C4_PRESC                     \ [0x1c : 4] PRESC
+  [then]
 
 
-\
-\ @brief PEC register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$000000ff constant I2C4_PECR_PEC                                    \ PEC
-
-
-\
-\ @brief Receive data register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000000ff constant I2C4_RXDR_RXDATA                                 \ RXDATA
+  [ifdef] I2C4_TIMEOUTR_DEF
+    \
+    \ @brief Timeout register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant I2C4_TIMEOUTA                  \ [0x00 : 12] TIMEOUTA
+    $0c constant I2C4_TIDLE                     \ [0x0c] TIDLE
+    $0f constant I2C4_TIMOUTEN                  \ [0x0f] TIMOUTEN
+    $10 constant I2C4_TIMEOUTB                  \ [0x10 : 12] TIMEOUTB
+    $1f constant I2C4_TEXTEN                    \ [0x1f] TEXTEN
+  [then]
 
 
-\
-\ @brief Transmit data register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
+  [ifdef] I2C4_ISR_DEF
+    \
+    \ @brief Interrupt and Status register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000001
+    \
+    $00 constant I2C4_TXE                       \ [0x00] TXE
+    $01 constant I2C4_TXIS                      \ [0x01] TXIS
+    $02 constant I2C4_RXNE                      \ [0x02] RXNE
+    $03 constant I2C4_ADDR                      \ [0x03] ADDR
+    $04 constant I2C4_NACKF                     \ [0x04] NACKF
+    $05 constant I2C4_STOPF                     \ [0x05] STOPF
+    $06 constant I2C4_TC                        \ [0x06] TC
+    $07 constant I2C4_TCR                       \ [0x07] TCR
+    $08 constant I2C4_BERR                      \ [0x08] BERR
+    $09 constant I2C4_ARLO                      \ [0x09] ARLO
+    $0a constant I2C4_OVR                       \ [0x0a] OVR
+    $0b constant I2C4_PECERR                    \ [0x0b] PECERR
+    $0c constant I2C4_TIMEOUT                   \ [0x0c] TIMEOUT
+    $0d constant I2C4_ALERT                     \ [0x0d] ALERT
+    $0f constant I2C4_BUSY                      \ [0x0f] BUSY
+    $10 constant I2C4_DIR                       \ [0x10] DIR
+    $11 constant I2C4_ADDCODE                   \ [0x11 : 7] ADDCODE
+  [then]
 
-$000000ff constant I2C4_TXDR_TXDATA                                 \ TXDATA
+
+  [ifdef] I2C4_ICR_DEF
+    \
+    \ @brief Interrupt clear register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $03 constant I2C4_ADDRCF                    \ [0x03] ADDRCF
+    $04 constant I2C4_NACKCF                    \ [0x04] NACKCF
+    $05 constant I2C4_STOPCF                    \ [0x05] STOPCF
+    $08 constant I2C4_BERRCF                    \ [0x08] BERRCF
+    $09 constant I2C4_ARLOCF                    \ [0x09] ARLOCF
+    $0a constant I2C4_OVRCF                     \ [0x0a] OVRCF
+    $0b constant I2C4_PECCF                     \ [0x0b] PECCF
+    $0c constant I2C4_TIMOUTCF                  \ [0x0c] TIMOUTCF
+    $0d constant I2C4_ALERTC                    \ [0x0d] ALERTC
+  [then]
 
 
-\
-\ @brief Inter-integrated circuit
-\
-$40006000 constant I2C4_CR1       \ offset: 0x00 : Control register 1
-$40006004 constant I2C4_CR2       \ offset: 0x04 : Control register 2
-$40006008 constant I2C4_OAR1      \ offset: 0x08 : Own address register 1
-$4000600c constant I2C4_OAR2      \ offset: 0x0C : Own address register 2
-$40006010 constant I2C4_TIMINGR   \ offset: 0x10 : Timing register
-$40006014 constant I2C4_TIMEOUTR  \ offset: 0x14 : Timeout register
-$40006018 constant I2C4_ISR       \ offset: 0x18 : Interrupt and Status register
-$4000601c constant I2C4_ICR       \ offset: 0x1C : Interrupt clear register
-$40006020 constant I2C4_PECR      \ offset: 0x20 : PEC register
-$40006024 constant I2C4_RXDR      \ offset: 0x24 : Receive data register
-$40006028 constant I2C4_TXDR      \ offset: 0x28 : Transmit data register
+  [ifdef] I2C4_PECR_DEF
+    \
+    \ @brief PEC register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant I2C4_PEC                       \ [0x00 : 8] PEC
+  [then]
 
+
+  [ifdef] I2C4_RXDR_DEF
+    \
+    \ @brief Receive data register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant I2C4_RXDATA                    \ [0x00 : 8] RXDATA
+  [then]
+
+
+  [ifdef] I2C4_TXDR_DEF
+    \
+    \ @brief Transmit data register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant I2C4_TXDATA                    \ [0x00 : 8] TXDATA
+  [then]
+
+  \
+  \ @brief Inter-integrated circuit
+  \
+  $00 constant I2C4_CR1                 \ Control register 1
+  $04 constant I2C4_CR2                 \ Control register 2
+  $08 constant I2C4_OAR1                \ Own address register 1
+  $0C constant I2C4_OAR2                \ Own address register 2
+  $10 constant I2C4_TIMINGR             \ Timing register
+  $14 constant I2C4_TIMEOUTR            \ Timeout register
+  $18 constant I2C4_ISR                 \ Interrupt and Status register
+  $1C constant I2C4_ICR                 \ Interrupt clear register
+  $20 constant I2C4_PECR                \ PEC register
+  $24 constant I2C4_RXDR                \ Receive data register
+  $28 constant I2C4_TXDR                \ Transmit data register
+
+: I2C4_DEF ; [then]

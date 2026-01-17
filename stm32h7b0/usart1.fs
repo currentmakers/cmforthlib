@@ -1,257 +1,269 @@
 \
 \ @file usart1.fs
-\ @brief Universal synchronous asynchronous receiver       transmitter
+\ @brief Universal synchronous asynchronous receiver transmitter
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] USART1_DEF
 
-\
-\ @brief Control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USART1_CR1_UE                                    \ USART enable
-$00000002 constant USART1_CR1_UESM                                  \ USART enable in Stop mode
-$00000004 constant USART1_CR1_RE                                    \ Receiver enable
-$00000008 constant USART1_CR1_TE                                    \ Transmitter enable
-$00000010 constant USART1_CR1_IDLEIE                                \ IDLE interrupt enable
-$00000020 constant USART1_CR1_RXNEIE                                \ RXNE interrupt enable
-$00000040 constant USART1_CR1_TCIE                                  \ Transmission complete interrupt enable
-$00000080 constant USART1_CR1_TXEIE                                 \ interrupt enable
-$00000100 constant USART1_CR1_PEIE                                  \ PE interrupt enable
-$00000200 constant USART1_CR1_PS                                    \ Parity selection
-$00000400 constant USART1_CR1_PCE                                   \ Parity control enable
-$00000800 constant USART1_CR1_WAKE                                  \ Receiver wakeup method
-$00001000 constant USART1_CR1_M0                                    \ Word length
-$00002000 constant USART1_CR1_MME                                   \ Mute mode enable
-$00004000 constant USART1_CR1_CMIE                                  \ Character match interrupt enable
-$00008000 constant USART1_CR1_OVER8                                 \ Oversampling mode
-$00010000 constant USART1_CR1_DEDT0                                 \ DEDT0
-$00020000 constant USART1_CR1_DEDT1                                 \ DEDT1
-$00040000 constant USART1_CR1_DEDT2                                 \ DEDT2
-$00080000 constant USART1_CR1_DEDT3                                 \ DEDT3
-$00100000 constant USART1_CR1_DEDT4                                 \ Driver Enable de-assertion time
-$00200000 constant USART1_CR1_DEAT0                                 \ DEAT0
-$00400000 constant USART1_CR1_DEAT1                                 \ DEAT1
-$00800000 constant USART1_CR1_DEAT2                                 \ DEAT2
-$01000000 constant USART1_CR1_DEAT3                                 \ DEAT3
-$02000000 constant USART1_CR1_DEAT4                                 \ Driver Enable assertion time
-$04000000 constant USART1_CR1_RTOIE                                 \ Receiver timeout interrupt enable
-$08000000 constant USART1_CR1_EOBIE                                 \ End of Block interrupt enable
-$10000000 constant USART1_CR1_M1                                    \ Word length
-$20000000 constant USART1_CR1_FIFOEN                                \ FIFO mode enable
-$40000000 constant USART1_CR1_TXFEIE                                \ TXFIFO empty interrupt enable
-$80000000 constant USART1_CR1_RXFFIE                                \ RXFIFO Full interrupt enable
-
-
-\
-\ @brief Control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USART1_CR2_SLVEN                                 \ Synchronous Slave mode enable
-$00000008 constant USART1_CR2_DIS_NSS                               \ When the DSI_NSS bit is set, the NSS pin input is ignored
-$00000010 constant USART1_CR2_ADDM7                                 \ 7-bit Address Detection/4-bit Address Detection
-$00000020 constant USART1_CR2_LBDL                                  \ LIN break detection length
-$00000040 constant USART1_CR2_LBDIE                                 \ LIN break detection interrupt enable
-$00000100 constant USART1_CR2_LBCL                                  \ Last bit clock pulse
-$00000200 constant USART1_CR2_CPHA                                  \ Clock phase
-$00000400 constant USART1_CR2_CPOL                                  \ Clock polarity
-$00000800 constant USART1_CR2_CLKEN                                 \ Clock enable
-$00003000 constant USART1_CR2_STOP                                  \ STOP bits
-$00004000 constant USART1_CR2_LINEN                                 \ LIN mode enable
-$00008000 constant USART1_CR2_SWAP                                  \ Swap TX/RX pins
-$00010000 constant USART1_CR2_RXINV                                 \ RX pin active level inversion
-$00020000 constant USART1_CR2_TXINV                                 \ TX pin active level inversion
-$00040000 constant USART1_CR2_TAINV                                 \ Binary data inversion
-$00080000 constant USART1_CR2_MSBFIRST                              \ Most significant bit first
-$00100000 constant USART1_CR2_ABREN                                 \ Auto baud rate enable
-$00200000 constant USART1_CR2_ABRMOD0                               \ ABRMOD0
-$00400000 constant USART1_CR2_ABRMOD1                               \ Auto baud rate mode
-$00800000 constant USART1_CR2_RTOEN                                 \ Receiver timeout enable
-$0f000000 constant USART1_CR2_ADD0_3                                \ Address of the USART node
-$f0000000 constant USART1_CR2_ADD4_7                                \ Address of the USART node
+  [ifdef] USART1_CR1_DEF
+    \
+    \ @brief Control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_UE                      \ [0x00] USART enable
+    $01 constant USART1_UESM                    \ [0x01] USART enable in Stop mode
+    $02 constant USART1_RE                      \ [0x02] Receiver enable
+    $03 constant USART1_TE                      \ [0x03] Transmitter enable
+    $04 constant USART1_IDLEIE                  \ [0x04] IDLE interrupt enable
+    $05 constant USART1_RXNEIE                  \ [0x05] RXNE interrupt enable
+    $06 constant USART1_TCIE                    \ [0x06] Transmission complete interrupt enable
+    $07 constant USART1_TXEIE                   \ [0x07] interrupt enable
+    $08 constant USART1_PEIE                    \ [0x08] PE interrupt enable
+    $09 constant USART1_PS                      \ [0x09] Parity selection
+    $0a constant USART1_PCE                     \ [0x0a] Parity control enable
+    $0b constant USART1_WAKE                    \ [0x0b] Receiver wakeup method
+    $0c constant USART1_M0                      \ [0x0c] Word length
+    $0d constant USART1_MME                     \ [0x0d] Mute mode enable
+    $0e constant USART1_CMIE                    \ [0x0e] Character match interrupt enable
+    $0f constant USART1_OVER8                   \ [0x0f] Oversampling mode
+    $10 constant USART1_DEDT0                   \ [0x10] DEDT0
+    $11 constant USART1_DEDT1                   \ [0x11] DEDT1
+    $12 constant USART1_DEDT2                   \ [0x12] DEDT2
+    $13 constant USART1_DEDT3                   \ [0x13] DEDT3
+    $14 constant USART1_DEDT4                   \ [0x14] Driver Enable de-assertion time
+    $15 constant USART1_DEAT0                   \ [0x15] DEAT0
+    $16 constant USART1_DEAT1                   \ [0x16] DEAT1
+    $17 constant USART1_DEAT2                   \ [0x17] DEAT2
+    $18 constant USART1_DEAT3                   \ [0x18] DEAT3
+    $19 constant USART1_DEAT4                   \ [0x19] Driver Enable assertion time
+    $1a constant USART1_RTOIE                   \ [0x1a] Receiver timeout interrupt enable
+    $1b constant USART1_EOBIE                   \ [0x1b] End of Block interrupt enable
+    $1c constant USART1_M1                      \ [0x1c] Word length
+    $1d constant USART1_FIFOEN                  \ [0x1d] FIFO mode enable
+    $1e constant USART1_TXFEIE                  \ [0x1e] TXFIFO empty interrupt enable
+    $1f constant USART1_RXFFIE                  \ [0x1f] RXFIFO Full interrupt enable
+  [then]
 
 
-\
-\ @brief Control register 3
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USART1_CR3_EIE                                   \ Error interrupt enable
-$00000002 constant USART1_CR3_IREN                                  \ Ir mode enable
-$00000004 constant USART1_CR3_IRLP                                  \ Ir low-power
-$00000008 constant USART1_CR3_HDSEL                                 \ Half-duplex selection
-$00000010 constant USART1_CR3_NACK                                  \ Smartcard NACK enable
-$00000020 constant USART1_CR3_SCEN                                  \ Smartcard mode enable
-$00000040 constant USART1_CR3_DMAR                                  \ DMA enable receiver
-$00000080 constant USART1_CR3_DMAT                                  \ DMA enable transmitter
-$00000100 constant USART1_CR3_RTSE                                  \ RTS enable
-$00000200 constant USART1_CR3_CTSE                                  \ CTS enable
-$00000400 constant USART1_CR3_CTSIE                                 \ CTS interrupt enable
-$00000800 constant USART1_CR3_ONEBIT                                \ One sample bit method enable
-$00001000 constant USART1_CR3_OVRDIS                                \ Overrun Disable
-$00002000 constant USART1_CR3_DDRE                                  \ DMA Disable on Reception Error
-$00004000 constant USART1_CR3_DEM                                   \ Driver enable mode
-$00008000 constant USART1_CR3_DEP                                   \ Driver enable polarity selection
-$000e0000 constant USART1_CR3_SCARCNT                               \ Smartcard auto-retry count
-$00300000 constant USART1_CR3_WUS                                   \ Wakeup from Stop mode interrupt flag selection
-$00400000 constant USART1_CR3_WUFIE                                 \ Wakeup from Stop mode interrupt enable
-$00800000 constant USART1_CR3_TXFTIE                                \ TXFIFO threshold interrupt enable
-$01000000 constant USART1_CR3_TCBGTIE                               \ Transmission Complete before guard time, interrupt enable
-$0e000000 constant USART1_CR3_RXFTCFG                               \ Receive FIFO threshold configuration
-$10000000 constant USART1_CR3_RXFTIE                                \ RXFIFO threshold interrupt enable
-$e0000000 constant USART1_CR3_TXFTCFG                               \ TXFIFO threshold configuration
-
-
-\
-\ @brief Baud rate register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USART1_BRR_BRR_0_3                               \ DIV_Fraction
-$0000fff0 constant USART1_BRR_BRR_4_15                              \ DIV_Mantissa
+  [ifdef] USART1_CR2_DEF
+    \
+    \ @brief Control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_SLVEN                   \ [0x00] Synchronous Slave mode enable
+    $03 constant USART1_DIS_NSS                 \ [0x03] When the DSI_NSS bit is set, the NSS pin input is ignored
+    $04 constant USART1_ADDM7                   \ [0x04] 7-bit Address Detection/4-bit Address Detection
+    $05 constant USART1_LBDL                    \ [0x05] LIN break detection length
+    $06 constant USART1_LBDIE                   \ [0x06] LIN break detection interrupt enable
+    $08 constant USART1_LBCL                    \ [0x08] Last bit clock pulse
+    $09 constant USART1_CPHA                    \ [0x09] Clock phase
+    $0a constant USART1_CPOL                    \ [0x0a] Clock polarity
+    $0b constant USART1_CLKEN                   \ [0x0b] Clock enable
+    $0c constant USART1_STOP                    \ [0x0c : 2] STOP bits
+    $0e constant USART1_LINEN                   \ [0x0e] LIN mode enable
+    $0f constant USART1_SWAP                    \ [0x0f] Swap TX/RX pins
+    $10 constant USART1_RXINV                   \ [0x10] RX pin active level inversion
+    $11 constant USART1_TXINV                   \ [0x11] TX pin active level inversion
+    $12 constant USART1_TAINV                   \ [0x12] Binary data inversion
+    $13 constant USART1_MSBFIRST                \ [0x13] Most significant bit first
+    $14 constant USART1_ABREN                   \ [0x14] Auto baud rate enable
+    $15 constant USART1_ABRMOD0                 \ [0x15] ABRMOD0
+    $16 constant USART1_ABRMOD1                 \ [0x16] Auto baud rate mode
+    $17 constant USART1_RTOEN                   \ [0x17] Receiver timeout enable
+    $18 constant USART1_ADD0_3                  \ [0x18 : 4] Address of the USART node
+    $1c constant USART1_ADD4_7                  \ [0x1c : 4] Address of the USART node
+  [then]
 
 
-\
-\ @brief Guard time and prescaler register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$000000ff constant USART1_GTPR_PSC                                  \ Prescaler value
-$0000ff00 constant USART1_GTPR_GT                                   \ Guard time value
-
-
-\
-\ @brief Receiver timeout register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00ffffff constant USART1_RTOR_RTO                                  \ Receiver timeout value
-$ff000000 constant USART1_RTOR_BLEN                                 \ Block Length
-
-
-\
-\ @brief Request register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USART1_RQR_ABRRQ                                 \ Auto baud rate request
-$00000002 constant USART1_RQR_SBKRQ                                 \ Send break request
-$00000004 constant USART1_RQR_MMRQ                                  \ Mute mode request
-$00000008 constant USART1_RQR_RXFRQ                                 \ Receive data flush request
-$00000010 constant USART1_RQR_TXFRQ                                 \ Transmit data flush request
-
-
-\
-\ @brief Interrupt & status register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USART1_ISR_PE                                    \ PE
-$00000002 constant USART1_ISR_FE                                    \ FE
-$00000004 constant USART1_ISR_NF                                    \ NF
-$00000008 constant USART1_ISR_ORE                                   \ ORE
-$00000010 constant USART1_ISR_IDLE                                  \ IDLE
-$00000020 constant USART1_ISR_RXNE                                  \ RXNE
-$00000040 constant USART1_ISR_TC                                    \ TC
-$00000080 constant USART1_ISR_TXE                                   \ TXE
-$00000100 constant USART1_ISR_LBDF                                  \ LBDF
-$00000200 constant USART1_ISR_CTSIF                                 \ CTSIF
-$00000400 constant USART1_ISR_CTS                                   \ CTS
-$00000800 constant USART1_ISR_RTOF                                  \ RTOF
-$00001000 constant USART1_ISR_EOBF                                  \ EOBF
-$00002000 constant USART1_ISR_UDR                                   \ SPI slave underrun error flag
-$00004000 constant USART1_ISR_ABRE                                  \ ABRE
-$00008000 constant USART1_ISR_ABRF                                  \ ABRF
-$00010000 constant USART1_ISR_BUSY                                  \ BUSY
-$00020000 constant USART1_ISR_CMF                                   \ CMF
-$00040000 constant USART1_ISR_SBKF                                  \ SBKF
-$00080000 constant USART1_ISR_RWU                                   \ RWU
-$00100000 constant USART1_ISR_WUF                                   \ WUF
-$00200000 constant USART1_ISR_TEACK                                 \ TEACK
-$00400000 constant USART1_ISR_REACK                                 \ REACK
-$00800000 constant USART1_ISR_TXFE                                  \ TXFIFO Empty
-$01000000 constant USART1_ISR_RXFF                                  \ RXFIFO Full
-$02000000 constant USART1_ISR_TCBGT                                 \ Transmission complete before guard time flag
-$04000000 constant USART1_ISR_RXFT                                  \ RXFIFO threshold flag
-$08000000 constant USART1_ISR_TXFT                                  \ TXFIFO threshold flag
+  [ifdef] USART1_CR3_DEF
+    \
+    \ @brief Control register 3
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_EIE                     \ [0x00] Error interrupt enable
+    $01 constant USART1_IREN                    \ [0x01] Ir mode enable
+    $02 constant USART1_IRLP                    \ [0x02] Ir low-power
+    $03 constant USART1_HDSEL                   \ [0x03] Half-duplex selection
+    $04 constant USART1_NACK                    \ [0x04] Smartcard NACK enable
+    $05 constant USART1_SCEN                    \ [0x05] Smartcard mode enable
+    $06 constant USART1_DMAR                    \ [0x06] DMA enable receiver
+    $07 constant USART1_DMAT                    \ [0x07] DMA enable transmitter
+    $08 constant USART1_RTSE                    \ [0x08] RTS enable
+    $09 constant USART1_CTSE                    \ [0x09] CTS enable
+    $0a constant USART1_CTSIE                   \ [0x0a] CTS interrupt enable
+    $0b constant USART1_ONEBIT                  \ [0x0b] One sample bit method enable
+    $0c constant USART1_OVRDIS                  \ [0x0c] Overrun Disable
+    $0d constant USART1_DDRE                    \ [0x0d] DMA Disable on Reception Error
+    $0e constant USART1_DEM                     \ [0x0e] Driver enable mode
+    $0f constant USART1_DEP                     \ [0x0f] Driver enable polarity selection
+    $11 constant USART1_SCARCNT                 \ [0x11 : 3] Smartcard auto-retry count
+    $14 constant USART1_WUS                     \ [0x14 : 2] Wakeup from Stop mode interrupt flag selection
+    $16 constant USART1_WUFIE                   \ [0x16] Wakeup from Stop mode interrupt enable
+    $17 constant USART1_TXFTIE                  \ [0x17] TXFIFO threshold interrupt enable
+    $18 constant USART1_TCBGTIE                 \ [0x18] Transmission Complete before guard time, interrupt enable
+    $19 constant USART1_RXFTCFG                 \ [0x19 : 3] Receive FIFO threshold configuration
+    $1c constant USART1_RXFTIE                  \ [0x1c] RXFIFO threshold interrupt enable
+    $1d constant USART1_TXFTCFG                 \ [0x1d : 3] TXFIFO threshold configuration
+  [then]
 
 
-\
-\ @brief Interrupt flag clear register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USART1_ICR_PECF                                  \ Parity error clear flag
-$00000002 constant USART1_ICR_FECF                                  \ Framing error clear flag
-$00000004 constant USART1_ICR_NCF                                   \ Noise detected clear flag
-$00000008 constant USART1_ICR_ORECF                                 \ Overrun error clear flag
-$00000010 constant USART1_ICR_IDLECF                                \ Idle line detected clear flag
-$00000020 constant USART1_ICR_TXFECF                                \ TXFIFO empty clear flag
-$00000040 constant USART1_ICR_TCCF                                  \ Transmission complete clear flag
-$00000080 constant USART1_ICR_TCBGTC                                \ Transmission complete before Guard time clear flag
-$00000100 constant USART1_ICR_LBDCF                                 \ LIN break detection clear flag
-$00000200 constant USART1_ICR_CTSCF                                 \ CTS clear flag
-$00000800 constant USART1_ICR_RTOCF                                 \ Receiver timeout clear flag
-$00001000 constant USART1_ICR_EOBCF                                 \ End of block clear flag
-$00002000 constant USART1_ICR_UDRCF                                 \ SPI slave underrun clear flag
-$00020000 constant USART1_ICR_CMCF                                  \ Character match clear flag
-$00100000 constant USART1_ICR_WUCF                                  \ Wakeup from Stop mode clear flag
+  [ifdef] USART1_BRR_DEF
+    \
+    \ @brief Baud rate register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_BRR_0_3                 \ [0x00 : 4] DIV_Fraction
+    $04 constant USART1_BRR_4_15                \ [0x04 : 12] DIV_Mantissa
+  [then]
 
 
-\
-\ @brief Receive data register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000001ff constant USART1_RDR_RDR                                   \ Receive data value
-
-
-\
-\ @brief Transmit data register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$000001ff constant USART1_TDR_TDR                                   \ Transmit data value
+  [ifdef] USART1_GTPR_DEF
+    \
+    \ @brief Guard time and prescaler register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_PSC                     \ [0x00 : 8] Prescaler value
+    $08 constant USART1_GT                      \ [0x08 : 8] Guard time value
+  [then]
 
 
-\
-\ @brief USART prescaler register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
+  [ifdef] USART1_RTOR_DEF
+    \
+    \ @brief Receiver timeout register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_RTO                     \ [0x00 : 24] Receiver timeout value
+    $18 constant USART1_BLEN                    \ [0x18 : 8] Block Length
+  [then]
 
-$0000000f constant USART1_PRESC_PRESCALER                           \ Clock prescaler
+
+  [ifdef] USART1_RQR_DEF
+    \
+    \ @brief Request register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_ABRRQ                   \ [0x00] Auto baud rate request
+    $01 constant USART1_SBKRQ                   \ [0x01] Send break request
+    $02 constant USART1_MMRQ                    \ [0x02] Mute mode request
+    $03 constant USART1_RXFRQ                   \ [0x03] Receive data flush request
+    $04 constant USART1_TXFRQ                   \ [0x04] Transmit data flush request
+  [then]
 
 
-\
-\ @brief Universal synchronous asynchronous receiver transmitter
-\
-$40011000 constant USART1_CR1     \ offset: 0x00 : Control register 1
-$40011004 constant USART1_CR2     \ offset: 0x04 : Control register 2
-$40011008 constant USART1_CR3     \ offset: 0x08 : Control register 3
-$4001100c constant USART1_BRR     \ offset: 0x0C : Baud rate register
-$40011010 constant USART1_GTPR    \ offset: 0x10 : Guard time and prescaler register
-$40011014 constant USART1_RTOR    \ offset: 0x14 : Receiver timeout register
-$40011018 constant USART1_RQR     \ offset: 0x18 : Request register
-$4001101c constant USART1_ISR     \ offset: 0x1C : Interrupt & status register
-$40011020 constant USART1_ICR     \ offset: 0x20 : Interrupt flag clear register
-$40011024 constant USART1_RDR     \ offset: 0x24 : Receive data register
-$40011028 constant USART1_TDR     \ offset: 0x28 : Transmit data register
-$4001102c constant USART1_PRESC   \ offset: 0x2C : USART prescaler register
+  [ifdef] USART1_ISR_DEF
+    \
+    \ @brief Interrupt & status register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_PE                      \ [0x00] PE
+    $01 constant USART1_FE                      \ [0x01] FE
+    $02 constant USART1_NF                      \ [0x02] NF
+    $03 constant USART1_ORE                     \ [0x03] ORE
+    $04 constant USART1_IDLE                    \ [0x04] IDLE
+    $05 constant USART1_RXNE                    \ [0x05] RXNE
+    $06 constant USART1_TC                      \ [0x06] TC
+    $07 constant USART1_TXE                     \ [0x07] TXE
+    $08 constant USART1_LBDF                    \ [0x08] LBDF
+    $09 constant USART1_CTSIF                   \ [0x09] CTSIF
+    $0a constant USART1_CTS                     \ [0x0a] CTS
+    $0b constant USART1_RTOF                    \ [0x0b] RTOF
+    $0c constant USART1_EOBF                    \ [0x0c] EOBF
+    $0d constant USART1_UDR                     \ [0x0d] SPI slave underrun error flag
+    $0e constant USART1_ABRE                    \ [0x0e] ABRE
+    $0f constant USART1_ABRF                    \ [0x0f] ABRF
+    $10 constant USART1_BUSY                    \ [0x10] BUSY
+    $11 constant USART1_CMF                     \ [0x11] CMF
+    $12 constant USART1_SBKF                    \ [0x12] SBKF
+    $13 constant USART1_RWU                     \ [0x13] RWU
+    $14 constant USART1_WUF                     \ [0x14] WUF
+    $15 constant USART1_TEACK                   \ [0x15] TEACK
+    $16 constant USART1_REACK                   \ [0x16] REACK
+    $17 constant USART1_TXFE                    \ [0x17] TXFIFO Empty
+    $18 constant USART1_RXFF                    \ [0x18] RXFIFO Full
+    $19 constant USART1_TCBGT                   \ [0x19] Transmission complete before guard time flag
+    $1a constant USART1_RXFT                    \ [0x1a] RXFIFO threshold flag
+    $1b constant USART1_TXFT                    \ [0x1b] TXFIFO threshold flag
+  [then]
 
+
+  [ifdef] USART1_ICR_DEF
+    \
+    \ @brief Interrupt flag clear register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_PECF                    \ [0x00] Parity error clear flag
+    $01 constant USART1_FECF                    \ [0x01] Framing error clear flag
+    $02 constant USART1_NCF                     \ [0x02] Noise detected clear flag
+    $03 constant USART1_ORECF                   \ [0x03] Overrun error clear flag
+    $04 constant USART1_IDLECF                  \ [0x04] Idle line detected clear flag
+    $05 constant USART1_TXFECF                  \ [0x05] TXFIFO empty clear flag
+    $06 constant USART1_TCCF                    \ [0x06] Transmission complete clear flag
+    $07 constant USART1_TCBGTC                  \ [0x07] Transmission complete before Guard time clear flag
+    $08 constant USART1_LBDCF                   \ [0x08] LIN break detection clear flag
+    $09 constant USART1_CTSCF                   \ [0x09] CTS clear flag
+    $0b constant USART1_RTOCF                   \ [0x0b] Receiver timeout clear flag
+    $0c constant USART1_EOBCF                   \ [0x0c] End of block clear flag
+    $0d constant USART1_UDRCF                   \ [0x0d] SPI slave underrun clear flag
+    $11 constant USART1_CMCF                    \ [0x11] Character match clear flag
+    $14 constant USART1_WUCF                    \ [0x14] Wakeup from Stop mode clear flag
+  [then]
+
+
+  [ifdef] USART1_RDR_DEF
+    \
+    \ @brief Receive data register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_RDR                     \ [0x00 : 9] Receive data value
+  [then]
+
+
+  [ifdef] USART1_TDR_DEF
+    \
+    \ @brief Transmit data register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_TDR                     \ [0x00 : 9] Transmit data value
+  [then]
+
+
+  [ifdef] USART1_PRESC_DEF
+    \
+    \ @brief USART prescaler register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USART1_PRESCALER               \ [0x00 : 4] Clock prescaler
+  [then]
+
+  \
+  \ @brief Universal synchronous asynchronous receiver transmitter
+  \
+  $00 constant USART1_CR1               \ Control register 1
+  $04 constant USART1_CR2               \ Control register 2
+  $08 constant USART1_CR3               \ Control register 3
+  $0C constant USART1_BRR               \ Baud rate register
+  $10 constant USART1_GTPR              \ Guard time and prescaler register
+  $14 constant USART1_RTOR              \ Receiver timeout register
+  $18 constant USART1_RQR               \ Request register
+  $1C constant USART1_ISR               \ Interrupt & status register
+  $20 constant USART1_ICR               \ Interrupt flag clear register
+  $24 constant USART1_RDR               \ Receive data register
+  $28 constant USART1_TDR               \ Transmit data register
+  $2C constant USART1_PRESC             \ USART prescaler register
+
+: USART1_DEF ; [then]

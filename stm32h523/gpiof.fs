@@ -6,335 +6,348 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GPIOF_DEF
 
-\
-\ @brief GPIO port mode register
-\ Address offset: 0x00
-\ Reset value: 0x00FFFFFF
-\
-
-$00000003 constant GPIOF_GPIOF_MODER_MODE0                          \ Port x configuration I/O pin y
-$0000000c constant GPIOF_GPIOF_MODER_MODE1                          \ Port x configuration I/O pin y
-$00000030 constant GPIOF_GPIOF_MODER_MODE2                          \ Port x configuration I/O pin y
-$000000c0 constant GPIOF_GPIOF_MODER_MODE3                          \ Port x configuration I/O pin y
-$00000300 constant GPIOF_GPIOF_MODER_MODE4                          \ Port x configuration I/O pin y
-$00000c00 constant GPIOF_GPIOF_MODER_MODE5                          \ Port x configuration I/O pin y
-$00003000 constant GPIOF_GPIOF_MODER_MODE6                          \ Port x configuration I/O pin y
-$0000c000 constant GPIOF_GPIOF_MODER_MODE7                          \ Port x configuration I/O pin y
-$00030000 constant GPIOF_GPIOF_MODER_MODE8                          \ Port x configuration I/O pin y
-$000c0000 constant GPIOF_GPIOF_MODER_MODE9                          \ Port x configuration I/O pin y
-$00300000 constant GPIOF_GPIOF_MODER_MODE10                         \ Port x configuration I/O pin y
-$00c00000 constant GPIOF_GPIOF_MODER_MODE11                         \ Port x configuration I/O pin y
-$03000000 constant GPIOF_GPIOF_MODER_MODE12                         \ Port x configuration I/O pin y
-$0c000000 constant GPIOF_GPIOF_MODER_MODE13                         \ Port x configuration I/O pin y
-$30000000 constant GPIOF_GPIOF_MODER_MODE14                         \ Port x configuration I/O pin y
-$c0000000 constant GPIOF_GPIOF_MODER_MODE15                         \ Port x configuration I/O pin y
-
-
-\
-\ @brief GPIO port output type register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOF_GPIOF_OTYPER_OT0                           \ Port x configuration I/O pin y
-$00000002 constant GPIOF_GPIOF_OTYPER_OT1                           \ Port x configuration I/O pin y
-$00000004 constant GPIOF_GPIOF_OTYPER_OT2                           \ Port x configuration I/O pin y
-$00000008 constant GPIOF_GPIOF_OTYPER_OT3                           \ Port x configuration I/O pin y
-$00000010 constant GPIOF_GPIOF_OTYPER_OT4                           \ Port x configuration I/O pin y
-$00000020 constant GPIOF_GPIOF_OTYPER_OT5                           \ Port x configuration I/O pin y
-$00000040 constant GPIOF_GPIOF_OTYPER_OT6                           \ Port x configuration I/O pin y
-$00000080 constant GPIOF_GPIOF_OTYPER_OT7                           \ Port x configuration I/O pin y
-$00000100 constant GPIOF_GPIOF_OTYPER_OT8                           \ Port x configuration I/O pin y
-$00000200 constant GPIOF_GPIOF_OTYPER_OT9                           \ Port x configuration I/O pin y
-$00000400 constant GPIOF_GPIOF_OTYPER_OT10                          \ Port x configuration I/O pin y
-$00000800 constant GPIOF_GPIOF_OTYPER_OT11                          \ Port x configuration I/O pin y
-$00001000 constant GPIOF_GPIOF_OTYPER_OT12                          \ Port x configuration I/O pin y
-$00002000 constant GPIOF_GPIOF_OTYPER_OT13                          \ Port x configuration I/O pin y
-$00004000 constant GPIOF_GPIOF_OTYPER_OT14                          \ Port x configuration I/O pin y
-$00008000 constant GPIOF_GPIOF_OTYPER_OT15                          \ Port x configuration I/O pin y
+  [ifdef] GPIOF_GPIOF_MODER_DEF
+    \
+    \ @brief GPIO port mode register
+    \ Address offset: 0x00
+    \ Reset value: 0x00FFFFFF
+    \
+    $00 constant GPIOF_MODE0                    \ [0x00 : 2] Port x configuration I/O pin y
+    $02 constant GPIOF_MODE1                    \ [0x02 : 2] Port x configuration I/O pin y
+    $04 constant GPIOF_MODE2                    \ [0x04 : 2] Port x configuration I/O pin y
+    $06 constant GPIOF_MODE3                    \ [0x06 : 2] Port x configuration I/O pin y
+    $08 constant GPIOF_MODE4                    \ [0x08 : 2] Port x configuration I/O pin y
+    $0a constant GPIOF_MODE5                    \ [0x0a : 2] Port x configuration I/O pin y
+    $0c constant GPIOF_MODE6                    \ [0x0c : 2] Port x configuration I/O pin y
+    $0e constant GPIOF_MODE7                    \ [0x0e : 2] Port x configuration I/O pin y
+    $10 constant GPIOF_MODE8                    \ [0x10 : 2] Port x configuration I/O pin y
+    $12 constant GPIOF_MODE9                    \ [0x12 : 2] Port x configuration I/O pin y
+    $14 constant GPIOF_MODE10                   \ [0x14 : 2] Port x configuration I/O pin y
+    $16 constant GPIOF_MODE11                   \ [0x16 : 2] Port x configuration I/O pin y
+    $18 constant GPIOF_MODE12                   \ [0x18 : 2] Port x configuration I/O pin y
+    $1a constant GPIOF_MODE13                   \ [0x1a : 2] Port x configuration I/O pin y
+    $1c constant GPIOF_MODE14                   \ [0x1c : 2] Port x configuration I/O pin y
+    $1e constant GPIOF_MODE15                   \ [0x1e : 2] Port x configuration I/O pin y
+  [then]
 
 
-\
-\ @brief GPIO port output speed register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000003 constant GPIOF_GPIOF_OSPEEDR_OSPEED0                      \ Port x configuration I/O pin y
-$0000000c constant GPIOF_GPIOF_OSPEEDR_OSPEED1                      \ Port x configuration I/O pin y
-$00000030 constant GPIOF_GPIOF_OSPEEDR_OSPEED2                      \ Port x configuration I/O pin y
-$000000c0 constant GPIOF_GPIOF_OSPEEDR_OSPEED3                      \ Port x configuration I/O pin y
-$00000300 constant GPIOF_GPIOF_OSPEEDR_OSPEED4                      \ Port x configuration I/O pin y
-$00000c00 constant GPIOF_GPIOF_OSPEEDR_OSPEED5                      \ Port x configuration I/O pin y
-$00003000 constant GPIOF_GPIOF_OSPEEDR_OSPEED6                      \ Port x configuration I/O pin y
-$0000c000 constant GPIOF_GPIOF_OSPEEDR_OSPEED7                      \ Port x configuration I/O pin y
-$00030000 constant GPIOF_GPIOF_OSPEEDR_OSPEED8                      \ Port x configuration I/O pin y
-$000c0000 constant GPIOF_GPIOF_OSPEEDR_OSPEED9                      \ Port x configuration I/O pin y
-$00300000 constant GPIOF_GPIOF_OSPEEDR_OSPEED10                     \ Port x configuration I/O pin y
-$00c00000 constant GPIOF_GPIOF_OSPEEDR_OSPEED11                     \ Port x configuration I/O pin y
-$03000000 constant GPIOF_GPIOF_OSPEEDR_OSPEED12                     \ Port x configuration I/O pin y
-$0c000000 constant GPIOF_GPIOF_OSPEEDR_OSPEED13                     \ Port x configuration I/O pin y
-$30000000 constant GPIOF_GPIOF_OSPEEDR_OSPEED14                     \ Port x configuration I/O pin y
-$c0000000 constant GPIOF_GPIOF_OSPEEDR_OSPEED15                     \ Port x configuration I/O pin y
-
-
-\
-\ @brief GPIO port pull-up/pull-down register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant GPIOF_GPIOF_PUPDR_PUPD0                          \ Port x configuration I/O pin y
-$0000000c constant GPIOF_GPIOF_PUPDR_PUPD1                          \ Port x configuration I/O pin y
-$00000030 constant GPIOF_GPIOF_PUPDR_PUPD2                          \ Port x configuration I/O pin y
-$000000c0 constant GPIOF_GPIOF_PUPDR_PUPD3                          \ Port x configuration I/O pin y
-$00000300 constant GPIOF_GPIOF_PUPDR_PUPD4                          \ Port x configuration I/O pin y
-$00000c00 constant GPIOF_GPIOF_PUPDR_PUPD5                          \ Port x configuration I/O pin y
-$00003000 constant GPIOF_GPIOF_PUPDR_PUPD6                          \ Port x configuration I/O pin y
-$0000c000 constant GPIOF_GPIOF_PUPDR_PUPD7                          \ Port x configuration I/O pin y
-$00030000 constant GPIOF_GPIOF_PUPDR_PUPD8                          \ Port x configuration I/O pin y
-$000c0000 constant GPIOF_GPIOF_PUPDR_PUPD9                          \ Port x configuration I/O pin y
-$00300000 constant GPIOF_GPIOF_PUPDR_PUPD10                         \ Port x configuration I/O pin y
-$00c00000 constant GPIOF_GPIOF_PUPDR_PUPD11                         \ Port x configuration I/O pin y
-$03000000 constant GPIOF_GPIOF_PUPDR_PUPD12                         \ Port x configuration I/O pin y
-$0c000000 constant GPIOF_GPIOF_PUPDR_PUPD13                         \ Port x configuration I/O pin y
-$30000000 constant GPIOF_GPIOF_PUPDR_PUPD14                         \ Port x configuration I/O pin y
-$c0000000 constant GPIOF_GPIOF_PUPDR_PUPD15                         \ Port x configuration I/O pin y
+  [ifdef] GPIOF_GPIOF_OTYPER_DEF
+    \
+    \ @brief GPIO port output type register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_OT0                      \ [0x00] Port x configuration I/O pin y
+    $01 constant GPIOF_OT1                      \ [0x01] Port x configuration I/O pin y
+    $02 constant GPIOF_OT2                      \ [0x02] Port x configuration I/O pin y
+    $03 constant GPIOF_OT3                      \ [0x03] Port x configuration I/O pin y
+    $04 constant GPIOF_OT4                      \ [0x04] Port x configuration I/O pin y
+    $05 constant GPIOF_OT5                      \ [0x05] Port x configuration I/O pin y
+    $06 constant GPIOF_OT6                      \ [0x06] Port x configuration I/O pin y
+    $07 constant GPIOF_OT7                      \ [0x07] Port x configuration I/O pin y
+    $08 constant GPIOF_OT8                      \ [0x08] Port x configuration I/O pin y
+    $09 constant GPIOF_OT9                      \ [0x09] Port x configuration I/O pin y
+    $0a constant GPIOF_OT10                     \ [0x0a] Port x configuration I/O pin y
+    $0b constant GPIOF_OT11                     \ [0x0b] Port x configuration I/O pin y
+    $0c constant GPIOF_OT12                     \ [0x0c] Port x configuration I/O pin y
+    $0d constant GPIOF_OT13                     \ [0x0d] Port x configuration I/O pin y
+    $0e constant GPIOF_OT14                     \ [0x0e] Port x configuration I/O pin y
+    $0f constant GPIOF_OT15                     \ [0x0f] Port x configuration I/O pin y
+  [then]
 
 
-\
-\ @brief GPIO port input data register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOF_GPIOF_IDR_ID0                              \ Port x input data I/O pin y
-$00000002 constant GPIOF_GPIOF_IDR_ID1                              \ Port x input data I/O pin y
-$00000004 constant GPIOF_GPIOF_IDR_ID2                              \ Port x input data I/O pin y
-$00000008 constant GPIOF_GPIOF_IDR_ID3                              \ Port x input data I/O pin y
-$00000010 constant GPIOF_GPIOF_IDR_ID4                              \ Port x input data I/O pin y
-$00000020 constant GPIOF_GPIOF_IDR_ID5                              \ Port x input data I/O pin y
-$00000040 constant GPIOF_GPIOF_IDR_ID6                              \ Port x input data I/O pin y
-$00000080 constant GPIOF_GPIOF_IDR_ID7                              \ Port x input data I/O pin y
-$00000100 constant GPIOF_GPIOF_IDR_ID8                              \ Port x input data I/O pin y
-$00000200 constant GPIOF_GPIOF_IDR_ID9                              \ Port x input data I/O pin y
-$00000400 constant GPIOF_GPIOF_IDR_ID10                             \ Port x input data I/O pin y
-$00000800 constant GPIOF_GPIOF_IDR_ID11                             \ Port x input data I/O pin y
-$00001000 constant GPIOF_GPIOF_IDR_ID12                             \ Port x input data I/O pin y
-$00002000 constant GPIOF_GPIOF_IDR_ID13                             \ Port x input data I/O pin y
-$00004000 constant GPIOF_GPIOF_IDR_ID14                             \ Port x input data I/O pin y
-$00008000 constant GPIOF_GPIOF_IDR_ID15                             \ Port x input data I/O pin y
-
-
-\
-\ @brief GPIO port output data register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOF_GPIOF_ODR_OD0                              \ Port output data I/O pin y
-$00000002 constant GPIOF_GPIOF_ODR_OD1                              \ Port output data I/O pin y
-$00000004 constant GPIOF_GPIOF_ODR_OD2                              \ Port output data I/O pin y
-$00000008 constant GPIOF_GPIOF_ODR_OD3                              \ Port output data I/O pin y
-$00000010 constant GPIOF_GPIOF_ODR_OD4                              \ Port output data I/O pin y
-$00000020 constant GPIOF_GPIOF_ODR_OD5                              \ Port output data I/O pin y
-$00000040 constant GPIOF_GPIOF_ODR_OD6                              \ Port output data I/O pin y
-$00000080 constant GPIOF_GPIOF_ODR_OD7                              \ Port output data I/O pin y
-$00000100 constant GPIOF_GPIOF_ODR_OD8                              \ Port output data I/O pin y
-$00000200 constant GPIOF_GPIOF_ODR_OD9                              \ Port output data I/O pin y
-$00000400 constant GPIOF_GPIOF_ODR_OD10                             \ Port output data I/O pin y
-$00000800 constant GPIOF_GPIOF_ODR_OD11                             \ Port output data I/O pin y
-$00001000 constant GPIOF_GPIOF_ODR_OD12                             \ Port output data I/O pin y
-$00002000 constant GPIOF_GPIOF_ODR_OD13                             \ Port output data I/O pin y
-$00004000 constant GPIOF_GPIOF_ODR_OD14                             \ Port output data I/O pin y
-$00008000 constant GPIOF_GPIOF_ODR_OD15                             \ Port output data I/O pin y
+  [ifdef] GPIOF_GPIOF_OSPEEDR_DEF
+    \
+    \ @brief GPIO port output speed register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_OSPEED0                  \ [0x00 : 2] Port x configuration I/O pin y
+    $02 constant GPIOF_OSPEED1                  \ [0x02 : 2] Port x configuration I/O pin y
+    $04 constant GPIOF_OSPEED2                  \ [0x04 : 2] Port x configuration I/O pin y
+    $06 constant GPIOF_OSPEED3                  \ [0x06 : 2] Port x configuration I/O pin y
+    $08 constant GPIOF_OSPEED4                  \ [0x08 : 2] Port x configuration I/O pin y
+    $0a constant GPIOF_OSPEED5                  \ [0x0a : 2] Port x configuration I/O pin y
+    $0c constant GPIOF_OSPEED6                  \ [0x0c : 2] Port x configuration I/O pin y
+    $0e constant GPIOF_OSPEED7                  \ [0x0e : 2] Port x configuration I/O pin y
+    $10 constant GPIOF_OSPEED8                  \ [0x10 : 2] Port x configuration I/O pin y
+    $12 constant GPIOF_OSPEED9                  \ [0x12 : 2] Port x configuration I/O pin y
+    $14 constant GPIOF_OSPEED10                 \ [0x14 : 2] Port x configuration I/O pin y
+    $16 constant GPIOF_OSPEED11                 \ [0x16 : 2] Port x configuration I/O pin y
+    $18 constant GPIOF_OSPEED12                 \ [0x18 : 2] Port x configuration I/O pin y
+    $1a constant GPIOF_OSPEED13                 \ [0x1a : 2] Port x configuration I/O pin y
+    $1c constant GPIOF_OSPEED14                 \ [0x1c : 2] Port x configuration I/O pin y
+    $1e constant GPIOF_OSPEED15                 \ [0x1e : 2] Port x configuration I/O pin y
+  [then]
 
 
-\
-\ @brief GPIO port bit set/reset register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOF_GPIOF_BSRR_BS0                             \ Port x set I/O pin y
-$00000002 constant GPIOF_GPIOF_BSRR_BS1                             \ Port x set I/O pin y
-$00000004 constant GPIOF_GPIOF_BSRR_BS2                             \ Port x set I/O pin y
-$00000008 constant GPIOF_GPIOF_BSRR_BS3                             \ Port x set I/O pin y
-$00000010 constant GPIOF_GPIOF_BSRR_BS4                             \ Port x set I/O pin y
-$00000020 constant GPIOF_GPIOF_BSRR_BS5                             \ Port x set I/O pin y
-$00000040 constant GPIOF_GPIOF_BSRR_BS6                             \ Port x set I/O pin y
-$00000080 constant GPIOF_GPIOF_BSRR_BS7                             \ Port x set I/O pin y
-$00000100 constant GPIOF_GPIOF_BSRR_BS8                             \ Port x set I/O pin y
-$00000200 constant GPIOF_GPIOF_BSRR_BS9                             \ Port x set I/O pin y
-$00000400 constant GPIOF_GPIOF_BSRR_BS10                            \ Port x set I/O pin y
-$00000800 constant GPIOF_GPIOF_BSRR_BS11                            \ Port x set I/O pin y
-$00001000 constant GPIOF_GPIOF_BSRR_BS12                            \ Port x set I/O pin y
-$00002000 constant GPIOF_GPIOF_BSRR_BS13                            \ Port x set I/O pin y
-$00004000 constant GPIOF_GPIOF_BSRR_BS14                            \ Port x set I/O pin y
-$00008000 constant GPIOF_GPIOF_BSRR_BS15                            \ Port x set I/O pin y
-$00010000 constant GPIOF_GPIOF_BSRR_BR0                             \ Port x reset I/O pin y
-$00020000 constant GPIOF_GPIOF_BSRR_BR1                             \ Port x reset I/O pin y
-$00040000 constant GPIOF_GPIOF_BSRR_BR2                             \ Port x reset I/O pin y
-$00080000 constant GPIOF_GPIOF_BSRR_BR3                             \ Port x reset I/O pin y
-$00100000 constant GPIOF_GPIOF_BSRR_BR4                             \ Port x reset I/O pin y
-$00200000 constant GPIOF_GPIOF_BSRR_BR5                             \ Port x reset I/O pin y
-$00400000 constant GPIOF_GPIOF_BSRR_BR6                             \ Port x reset I/O pin y
-$00800000 constant GPIOF_GPIOF_BSRR_BR7                             \ Port x reset I/O pin y
-$01000000 constant GPIOF_GPIOF_BSRR_BR8                             \ Port x reset I/O pin y
-$02000000 constant GPIOF_GPIOF_BSRR_BR9                             \ Port x reset I/O pin y
-$04000000 constant GPIOF_GPIOF_BSRR_BR10                            \ Port x reset I/O pin y
-$08000000 constant GPIOF_GPIOF_BSRR_BR11                            \ Port x reset I/O pin y
-$10000000 constant GPIOF_GPIOF_BSRR_BR12                            \ Port x reset I/O pin y
-$20000000 constant GPIOF_GPIOF_BSRR_BR13                            \ Port x reset I/O pin y
-$40000000 constant GPIOF_GPIOF_BSRR_BR14                            \ Port x reset I/O pin y
-$80000000 constant GPIOF_GPIOF_BSRR_BR15                            \ Port x reset I/O pin y
+  [ifdef] GPIOF_GPIOF_PUPDR_DEF
+    \
+    \ @brief GPIO port pull-up/pull-down register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_PUPD0                    \ [0x00 : 2] Port x configuration I/O pin y
+    $02 constant GPIOF_PUPD1                    \ [0x02 : 2] Port x configuration I/O pin y
+    $04 constant GPIOF_PUPD2                    \ [0x04 : 2] Port x configuration I/O pin y
+    $06 constant GPIOF_PUPD3                    \ [0x06 : 2] Port x configuration I/O pin y
+    $08 constant GPIOF_PUPD4                    \ [0x08 : 2] Port x configuration I/O pin y
+    $0a constant GPIOF_PUPD5                    \ [0x0a : 2] Port x configuration I/O pin y
+    $0c constant GPIOF_PUPD6                    \ [0x0c : 2] Port x configuration I/O pin y
+    $0e constant GPIOF_PUPD7                    \ [0x0e : 2] Port x configuration I/O pin y
+    $10 constant GPIOF_PUPD8                    \ [0x10 : 2] Port x configuration I/O pin y
+    $12 constant GPIOF_PUPD9                    \ [0x12 : 2] Port x configuration I/O pin y
+    $14 constant GPIOF_PUPD10                   \ [0x14 : 2] Port x configuration I/O pin y
+    $16 constant GPIOF_PUPD11                   \ [0x16 : 2] Port x configuration I/O pin y
+    $18 constant GPIOF_PUPD12                   \ [0x18 : 2] Port x configuration I/O pin y
+    $1a constant GPIOF_PUPD13                   \ [0x1a : 2] Port x configuration I/O pin y
+    $1c constant GPIOF_PUPD14                   \ [0x1c : 2] Port x configuration I/O pin y
+    $1e constant GPIOF_PUPD15                   \ [0x1e : 2] Port x configuration I/O pin y
+  [then]
 
 
-\
-\ @brief GPIO port configuration lock register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOF_GPIOF_LCKR_LCK0                            \ Port x lock I/O pin y
-$00000002 constant GPIOF_GPIOF_LCKR_LCK1                            \ Port x lock I/O pin y
-$00000004 constant GPIOF_GPIOF_LCKR_LCK2                            \ Port x lock I/O pin y
-$00000008 constant GPIOF_GPIOF_LCKR_LCK3                            \ Port x lock I/O pin y
-$00000010 constant GPIOF_GPIOF_LCKR_LCK4                            \ Port x lock I/O pin y
-$00000020 constant GPIOF_GPIOF_LCKR_LCK5                            \ Port x lock I/O pin y
-$00000040 constant GPIOF_GPIOF_LCKR_LCK6                            \ Port x lock I/O pin y
-$00000080 constant GPIOF_GPIOF_LCKR_LCK7                            \ Port x lock I/O pin y
-$00000100 constant GPIOF_GPIOF_LCKR_LCK8                            \ Port x lock I/O pin y
-$00000200 constant GPIOF_GPIOF_LCKR_LCK9                            \ Port x lock I/O pin y
-$00000400 constant GPIOF_GPIOF_LCKR_LCK10                           \ Port x lock I/O pin y
-$00000800 constant GPIOF_GPIOF_LCKR_LCK11                           \ Port x lock I/O pin y
-$00001000 constant GPIOF_GPIOF_LCKR_LCK12                           \ Port x lock I/O pin y
-$00002000 constant GPIOF_GPIOF_LCKR_LCK13                           \ Port x lock I/O pin y
-$00004000 constant GPIOF_GPIOF_LCKR_LCK14                           \ Port x lock I/O pin y
-$00008000 constant GPIOF_GPIOF_LCKR_LCK15                           \ Port x lock I/O pin y
-$00010000 constant GPIOF_GPIOF_LCKR_LCKK                            \ Lock key
-
-
-\
-\ @brief GPIO alternate function low register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOF_GPIOF_AFRL_AFSEL0                          \ Alternate function selection for port x I/O pin y
-$000000f0 constant GPIOF_GPIOF_AFRL_AFSEL1                          \ Alternate function selection for port x I/O pin y
-$00000f00 constant GPIOF_GPIOF_AFRL_AFSEL2                          \ Alternate function selection for port x I/O pin y
-$0000f000 constant GPIOF_GPIOF_AFRL_AFSEL3                          \ Alternate function selection for port x I/O pin y
-$000f0000 constant GPIOF_GPIOF_AFRL_AFSEL4                          \ Alternate function selection for port x I/O pin y
-$00f00000 constant GPIOF_GPIOF_AFRL_AFSEL5                          \ Alternate function selection for port x I/O pin y
-$0f000000 constant GPIOF_GPIOF_AFRL_AFSEL6                          \ Alternate function selection for port x I/O pin y
-$f0000000 constant GPIOF_GPIOF_AFRL_AFSEL7                          \ Alternate function selection for port x I/O pin y
+  [ifdef] GPIOF_GPIOF_IDR_DEF
+    \
+    \ @brief GPIO port input data register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_ID0                      \ [0x00] Port x input data I/O pin y
+    $01 constant GPIOF_ID1                      \ [0x01] Port x input data I/O pin y
+    $02 constant GPIOF_ID2                      \ [0x02] Port x input data I/O pin y
+    $03 constant GPIOF_ID3                      \ [0x03] Port x input data I/O pin y
+    $04 constant GPIOF_ID4                      \ [0x04] Port x input data I/O pin y
+    $05 constant GPIOF_ID5                      \ [0x05] Port x input data I/O pin y
+    $06 constant GPIOF_ID6                      \ [0x06] Port x input data I/O pin y
+    $07 constant GPIOF_ID7                      \ [0x07] Port x input data I/O pin y
+    $08 constant GPIOF_ID8                      \ [0x08] Port x input data I/O pin y
+    $09 constant GPIOF_ID9                      \ [0x09] Port x input data I/O pin y
+    $0a constant GPIOF_ID10                     \ [0x0a] Port x input data I/O pin y
+    $0b constant GPIOF_ID11                     \ [0x0b] Port x input data I/O pin y
+    $0c constant GPIOF_ID12                     \ [0x0c] Port x input data I/O pin y
+    $0d constant GPIOF_ID13                     \ [0x0d] Port x input data I/O pin y
+    $0e constant GPIOF_ID14                     \ [0x0e] Port x input data I/O pin y
+    $0f constant GPIOF_ID15                     \ [0x0f] Port x input data I/O pin y
+  [then]
 
 
-\
-\ @brief GPIO alternate function high register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOF_GPIOF_AFRH_AFSEL8                          \ Alternate function selection for port x I/O pin y
-$000000f0 constant GPIOF_GPIOF_AFRH_AFSEL9                          \ Alternate function selection for port x I/O pin y
-$00000f00 constant GPIOF_GPIOF_AFRH_AFSEL10                         \ Alternate function selection for port x I/O pin y
-$0000f000 constant GPIOF_GPIOF_AFRH_AFSEL11                         \ Alternate function selection for port x I/O pin y
-$000f0000 constant GPIOF_GPIOF_AFRH_AFSEL12                         \ Alternate function selection for port x I/O pin y
-$00f00000 constant GPIOF_GPIOF_AFRH_AFSEL13                         \ Alternate function selection for port x I/O pin y
-$0f000000 constant GPIOF_GPIOF_AFRH_AFSEL14                         \ Alternate function selection for port x I/O pin y
-$f0000000 constant GPIOF_GPIOF_AFRH_AFSEL15                         \ Alternate function selection for port x I/O pin y
-
-
-\
-\ @brief GPIO port bit reset register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOF_GPIOF_BRR_BR0                              \ Port x reset IO pin y
-$00000002 constant GPIOF_GPIOF_BRR_BR1                              \ Port x reset IO pin y
-$00000004 constant GPIOF_GPIOF_BRR_BR2                              \ Port x reset IO pin y
-$00000008 constant GPIOF_GPIOF_BRR_BR3                              \ Port x reset IO pin y
-$00000010 constant GPIOF_GPIOF_BRR_BR4                              \ Port x reset IO pin y
-$00000020 constant GPIOF_GPIOF_BRR_BR5                              \ Port x reset IO pin y
-$00000040 constant GPIOF_GPIOF_BRR_BR6                              \ Port x reset IO pin y
-$00000080 constant GPIOF_GPIOF_BRR_BR7                              \ Port x reset IO pin y
-$00000100 constant GPIOF_GPIOF_BRR_BR8                              \ Port x reset IO pin y
-$00000200 constant GPIOF_GPIOF_BRR_BR9                              \ Port x reset IO pin y
-$00000400 constant GPIOF_GPIOF_BRR_BR10                             \ Port x reset IO pin y
-$00000800 constant GPIOF_GPIOF_BRR_BR11                             \ Port x reset IO pin y
-$00001000 constant GPIOF_GPIOF_BRR_BR12                             \ Port x reset IO pin y
-$00002000 constant GPIOF_GPIOF_BRR_BR13                             \ Port x reset IO pin y
-$00004000 constant GPIOF_GPIOF_BRR_BR14                             \ Port x reset IO pin y
-$00008000 constant GPIOF_GPIOF_BRR_BR15                             \ Port x reset IO pin y
+  [ifdef] GPIOF_GPIOF_ODR_DEF
+    \
+    \ @brief GPIO port output data register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_OD0                      \ [0x00] Port output data I/O pin y
+    $01 constant GPIOF_OD1                      \ [0x01] Port output data I/O pin y
+    $02 constant GPIOF_OD2                      \ [0x02] Port output data I/O pin y
+    $03 constant GPIOF_OD3                      \ [0x03] Port output data I/O pin y
+    $04 constant GPIOF_OD4                      \ [0x04] Port output data I/O pin y
+    $05 constant GPIOF_OD5                      \ [0x05] Port output data I/O pin y
+    $06 constant GPIOF_OD6                      \ [0x06] Port output data I/O pin y
+    $07 constant GPIOF_OD7                      \ [0x07] Port output data I/O pin y
+    $08 constant GPIOF_OD8                      \ [0x08] Port output data I/O pin y
+    $09 constant GPIOF_OD9                      \ [0x09] Port output data I/O pin y
+    $0a constant GPIOF_OD10                     \ [0x0a] Port output data I/O pin y
+    $0b constant GPIOF_OD11                     \ [0x0b] Port output data I/O pin y
+    $0c constant GPIOF_OD12                     \ [0x0c] Port output data I/O pin y
+    $0d constant GPIOF_OD13                     \ [0x0d] Port output data I/O pin y
+    $0e constant GPIOF_OD14                     \ [0x0e] Port output data I/O pin y
+    $0f constant GPIOF_OD15                     \ [0x0f] Port output data I/O pin y
+  [then]
 
 
-\
-\ @brief GPIO high-speed low-voltage register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOF_GPIOF_HSLVR_HSLV0                          \ Port x high-speed low-voltage configuration
-$00000002 constant GPIOF_GPIOF_HSLVR_HSLV1                          \ Port x high-speed low-voltage configuration
-$00000004 constant GPIOF_GPIOF_HSLVR_HSLV2                          \ Port x high-speed low-voltage configuration
-$00000008 constant GPIOF_GPIOF_HSLVR_HSLV3                          \ Port x high-speed low-voltage configuration
-$00000010 constant GPIOF_GPIOF_HSLVR_HSLV4                          \ Port x high-speed low-voltage configuration
-$00000020 constant GPIOF_GPIOF_HSLVR_HSLV5                          \ Port x high-speed low-voltage configuration
-$00000040 constant GPIOF_GPIOF_HSLVR_HSLV6                          \ Port x high-speed low-voltage configuration
-$00000080 constant GPIOF_GPIOF_HSLVR_HSLV7                          \ Port x high-speed low-voltage configuration
-$00000100 constant GPIOF_GPIOF_HSLVR_HSLV8                          \ Port x high-speed low-voltage configuration
-$00000200 constant GPIOF_GPIOF_HSLVR_HSLV9                          \ Port x high-speed low-voltage configuration
-$00000400 constant GPIOF_GPIOF_HSLVR_HSLV10                         \ Port x high-speed low-voltage configuration
-$00000800 constant GPIOF_GPIOF_HSLVR_HSLV11                         \ Port x high-speed low-voltage configuration
-$00001000 constant GPIOF_GPIOF_HSLVR_HSLV12                         \ Port x high-speed low-voltage configuration
-$00002000 constant GPIOF_GPIOF_HSLVR_HSLV13                         \ Port x high-speed low-voltage configuration
-$00004000 constant GPIOF_GPIOF_HSLVR_HSLV14                         \ Port x high-speed low-voltage configuration
-$00008000 constant GPIOF_GPIOF_HSLVR_HSLV15                         \ Port x high-speed low-voltage configuration
-
-
-\
-\ @brief GPIO secure configuration register
-\ Address offset: 0x30
-\ Reset value: 0x00000FFF
-\
-
-$00000001 constant GPIOF_GPIOF_SECCFGR_SEC0                         \ I/O pin of Port x secure bit enable y
-$00000002 constant GPIOF_GPIOF_SECCFGR_SEC1                         \ I/O pin of Port x secure bit enable y
-$00000004 constant GPIOF_GPIOF_SECCFGR_SEC2                         \ I/O pin of Port x secure bit enable y
-$00000008 constant GPIOF_GPIOF_SECCFGR_SEC3                         \ I/O pin of Port x secure bit enable y
-$00000010 constant GPIOF_GPIOF_SECCFGR_SEC4                         \ I/O pin of Port x secure bit enable y
-$00000020 constant GPIOF_GPIOF_SECCFGR_SEC5                         \ I/O pin of Port x secure bit enable y
-$00000040 constant GPIOF_GPIOF_SECCFGR_SEC6                         \ I/O pin of Port x secure bit enable y
-$00000080 constant GPIOF_GPIOF_SECCFGR_SEC7                         \ I/O pin of Port x secure bit enable y
-$00000100 constant GPIOF_GPIOF_SECCFGR_SEC8                         \ I/O pin of Port x secure bit enable y
-$00000200 constant GPIOF_GPIOF_SECCFGR_SEC9                         \ I/O pin of Port x secure bit enable y
-$00000400 constant GPIOF_GPIOF_SECCFGR_SEC10                        \ I/O pin of Port x secure bit enable y
-$00000800 constant GPIOF_GPIOF_SECCFGR_SEC11                        \ I/O pin of Port x secure bit enable y
-$00001000 constant GPIOF_GPIOF_SECCFGR_SEC12                        \ I/O pin of Port x secure bit enable y
-$00002000 constant GPIOF_GPIOF_SECCFGR_SEC13                        \ I/O pin of Port x secure bit enable y
-$00004000 constant GPIOF_GPIOF_SECCFGR_SEC14                        \ I/O pin of Port x secure bit enable y
-$00008000 constant GPIOF_GPIOF_SECCFGR_SEC15                        \ I/O pin of Port x secure bit enable y
+  [ifdef] GPIOF_GPIOF_BSRR_DEF
+    \
+    \ @brief GPIO port bit set/reset register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_BS0                      \ [0x00] Port x set I/O pin y
+    $01 constant GPIOF_BS1                      \ [0x01] Port x set I/O pin y
+    $02 constant GPIOF_BS2                      \ [0x02] Port x set I/O pin y
+    $03 constant GPIOF_BS3                      \ [0x03] Port x set I/O pin y
+    $04 constant GPIOF_BS4                      \ [0x04] Port x set I/O pin y
+    $05 constant GPIOF_BS5                      \ [0x05] Port x set I/O pin y
+    $06 constant GPIOF_BS6                      \ [0x06] Port x set I/O pin y
+    $07 constant GPIOF_BS7                      \ [0x07] Port x set I/O pin y
+    $08 constant GPIOF_BS8                      \ [0x08] Port x set I/O pin y
+    $09 constant GPIOF_BS9                      \ [0x09] Port x set I/O pin y
+    $0a constant GPIOF_BS10                     \ [0x0a] Port x set I/O pin y
+    $0b constant GPIOF_BS11                     \ [0x0b] Port x set I/O pin y
+    $0c constant GPIOF_BS12                     \ [0x0c] Port x set I/O pin y
+    $0d constant GPIOF_BS13                     \ [0x0d] Port x set I/O pin y
+    $0e constant GPIOF_BS14                     \ [0x0e] Port x set I/O pin y
+    $0f constant GPIOF_BS15                     \ [0x0f] Port x set I/O pin y
+    $10 constant GPIOF_BR0                      \ [0x10] Port x reset I/O pin y
+    $11 constant GPIOF_BR1                      \ [0x11] Port x reset I/O pin y
+    $12 constant GPIOF_BR2                      \ [0x12] Port x reset I/O pin y
+    $13 constant GPIOF_BR3                      \ [0x13] Port x reset I/O pin y
+    $14 constant GPIOF_BR4                      \ [0x14] Port x reset I/O pin y
+    $15 constant GPIOF_BR5                      \ [0x15] Port x reset I/O pin y
+    $16 constant GPIOF_BR6                      \ [0x16] Port x reset I/O pin y
+    $17 constant GPIOF_BR7                      \ [0x17] Port x reset I/O pin y
+    $18 constant GPIOF_BR8                      \ [0x18] Port x reset I/O pin y
+    $19 constant GPIOF_BR9                      \ [0x19] Port x reset I/O pin y
+    $1a constant GPIOF_BR10                     \ [0x1a] Port x reset I/O pin y
+    $1b constant GPIOF_BR11                     \ [0x1b] Port x reset I/O pin y
+    $1c constant GPIOF_BR12                     \ [0x1c] Port x reset I/O pin y
+    $1d constant GPIOF_BR13                     \ [0x1d] Port x reset I/O pin y
+    $1e constant GPIOF_BR14                     \ [0x1e] Port x reset I/O pin y
+    $1f constant GPIOF_BR15                     \ [0x1f] Port x reset I/O pin y
+  [then]
 
 
-\
-\ @brief GPIOF address block description
-\
-$42021400 constant GPIOF_GPIOF_MODER  \ offset: 0x00 : GPIO port mode register
-$42021404 constant GPIOF_GPIOF_OTYPER  \ offset: 0x04 : GPIO port output type register
-$42021408 constant GPIOF_GPIOF_OSPEEDR  \ offset: 0x08 : GPIO port output speed register
-$4202140c constant GPIOF_GPIOF_PUPDR  \ offset: 0x0C : GPIO port pull-up/pull-down register
-$42021410 constant GPIOF_GPIOF_IDR  \ offset: 0x10 : GPIO port input data register
-$42021414 constant GPIOF_GPIOF_ODR  \ offset: 0x14 : GPIO port output data register
-$42021418 constant GPIOF_GPIOF_BSRR  \ offset: 0x18 : GPIO port bit set/reset register
-$4202141c constant GPIOF_GPIOF_LCKR  \ offset: 0x1C : GPIO port configuration lock register
-$42021420 constant GPIOF_GPIOF_AFRL  \ offset: 0x20 : GPIO alternate function low register
-$42021424 constant GPIOF_GPIOF_AFRH  \ offset: 0x24 : GPIO alternate function high register
-$42021428 constant GPIOF_GPIOF_BRR  \ offset: 0x28 : GPIO port bit reset register
-$4202142c constant GPIOF_GPIOF_HSLVR  \ offset: 0x2C : GPIO high-speed low-voltage register
-$42021430 constant GPIOF_GPIOF_SECCFGR  \ offset: 0x30 : GPIO secure configuration register
+  [ifdef] GPIOF_GPIOF_LCKR_DEF
+    \
+    \ @brief GPIO port configuration lock register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_LCK0                     \ [0x00] Port x lock I/O pin y
+    $01 constant GPIOF_LCK1                     \ [0x01] Port x lock I/O pin y
+    $02 constant GPIOF_LCK2                     \ [0x02] Port x lock I/O pin y
+    $03 constant GPIOF_LCK3                     \ [0x03] Port x lock I/O pin y
+    $04 constant GPIOF_LCK4                     \ [0x04] Port x lock I/O pin y
+    $05 constant GPIOF_LCK5                     \ [0x05] Port x lock I/O pin y
+    $06 constant GPIOF_LCK6                     \ [0x06] Port x lock I/O pin y
+    $07 constant GPIOF_LCK7                     \ [0x07] Port x lock I/O pin y
+    $08 constant GPIOF_LCK8                     \ [0x08] Port x lock I/O pin y
+    $09 constant GPIOF_LCK9                     \ [0x09] Port x lock I/O pin y
+    $0a constant GPIOF_LCK10                    \ [0x0a] Port x lock I/O pin y
+    $0b constant GPIOF_LCK11                    \ [0x0b] Port x lock I/O pin y
+    $0c constant GPIOF_LCK12                    \ [0x0c] Port x lock I/O pin y
+    $0d constant GPIOF_LCK13                    \ [0x0d] Port x lock I/O pin y
+    $0e constant GPIOF_LCK14                    \ [0x0e] Port x lock I/O pin y
+    $0f constant GPIOF_LCK15                    \ [0x0f] Port x lock I/O pin y
+    $10 constant GPIOF_LCKK                     \ [0x10] Lock key
+  [then]
 
+
+  [ifdef] GPIOF_GPIOF_AFRL_DEF
+    \
+    \ @brief GPIO alternate function low register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_AFSEL0                   \ [0x00 : 4] Alternate function selection for port x I/O pin y
+    $04 constant GPIOF_AFSEL1                   \ [0x04 : 4] Alternate function selection for port x I/O pin y
+    $08 constant GPIOF_AFSEL2                   \ [0x08 : 4] Alternate function selection for port x I/O pin y
+    $0c constant GPIOF_AFSEL3                   \ [0x0c : 4] Alternate function selection for port x I/O pin y
+    $10 constant GPIOF_AFSEL4                   \ [0x10 : 4] Alternate function selection for port x I/O pin y
+    $14 constant GPIOF_AFSEL5                   \ [0x14 : 4] Alternate function selection for port x I/O pin y
+    $18 constant GPIOF_AFSEL6                   \ [0x18 : 4] Alternate function selection for port x I/O pin y
+    $1c constant GPIOF_AFSEL7                   \ [0x1c : 4] Alternate function selection for port x I/O pin y
+  [then]
+
+
+  [ifdef] GPIOF_GPIOF_AFRH_DEF
+    \
+    \ @brief GPIO alternate function high register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_AFSEL8                   \ [0x00 : 4] Alternate function selection for port x I/O pin y
+    $04 constant GPIOF_AFSEL9                   \ [0x04 : 4] Alternate function selection for port x I/O pin y
+    $08 constant GPIOF_AFSEL10                  \ [0x08 : 4] Alternate function selection for port x I/O pin y
+    $0c constant GPIOF_AFSEL11                  \ [0x0c : 4] Alternate function selection for port x I/O pin y
+    $10 constant GPIOF_AFSEL12                  \ [0x10 : 4] Alternate function selection for port x I/O pin y
+    $14 constant GPIOF_AFSEL13                  \ [0x14 : 4] Alternate function selection for port x I/O pin y
+    $18 constant GPIOF_AFSEL14                  \ [0x18 : 4] Alternate function selection for port x I/O pin y
+    $1c constant GPIOF_AFSEL15                  \ [0x1c : 4] Alternate function selection for port x I/O pin y
+  [then]
+
+
+  [ifdef] GPIOF_GPIOF_BRR_DEF
+    \
+    \ @brief GPIO port bit reset register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_BR0                      \ [0x00] Port x reset IO pin y
+    $01 constant GPIOF_BR1                      \ [0x01] Port x reset IO pin y
+    $02 constant GPIOF_BR2                      \ [0x02] Port x reset IO pin y
+    $03 constant GPIOF_BR3                      \ [0x03] Port x reset IO pin y
+    $04 constant GPIOF_BR4                      \ [0x04] Port x reset IO pin y
+    $05 constant GPIOF_BR5                      \ [0x05] Port x reset IO pin y
+    $06 constant GPIOF_BR6                      \ [0x06] Port x reset IO pin y
+    $07 constant GPIOF_BR7                      \ [0x07] Port x reset IO pin y
+    $08 constant GPIOF_BR8                      \ [0x08] Port x reset IO pin y
+    $09 constant GPIOF_BR9                      \ [0x09] Port x reset IO pin y
+    $0a constant GPIOF_BR10                     \ [0x0a] Port x reset IO pin y
+    $0b constant GPIOF_BR11                     \ [0x0b] Port x reset IO pin y
+    $0c constant GPIOF_BR12                     \ [0x0c] Port x reset IO pin y
+    $0d constant GPIOF_BR13                     \ [0x0d] Port x reset IO pin y
+    $0e constant GPIOF_BR14                     \ [0x0e] Port x reset IO pin y
+    $0f constant GPIOF_BR15                     \ [0x0f] Port x reset IO pin y
+  [then]
+
+
+  [ifdef] GPIOF_GPIOF_HSLVR_DEF
+    \
+    \ @brief GPIO high-speed low-voltage register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOF_HSLV0                    \ [0x00] Port x high-speed low-voltage configuration
+    $01 constant GPIOF_HSLV1                    \ [0x01] Port x high-speed low-voltage configuration
+    $02 constant GPIOF_HSLV2                    \ [0x02] Port x high-speed low-voltage configuration
+    $03 constant GPIOF_HSLV3                    \ [0x03] Port x high-speed low-voltage configuration
+    $04 constant GPIOF_HSLV4                    \ [0x04] Port x high-speed low-voltage configuration
+    $05 constant GPIOF_HSLV5                    \ [0x05] Port x high-speed low-voltage configuration
+    $06 constant GPIOF_HSLV6                    \ [0x06] Port x high-speed low-voltage configuration
+    $07 constant GPIOF_HSLV7                    \ [0x07] Port x high-speed low-voltage configuration
+    $08 constant GPIOF_HSLV8                    \ [0x08] Port x high-speed low-voltage configuration
+    $09 constant GPIOF_HSLV9                    \ [0x09] Port x high-speed low-voltage configuration
+    $0a constant GPIOF_HSLV10                   \ [0x0a] Port x high-speed low-voltage configuration
+    $0b constant GPIOF_HSLV11                   \ [0x0b] Port x high-speed low-voltage configuration
+    $0c constant GPIOF_HSLV12                   \ [0x0c] Port x high-speed low-voltage configuration
+    $0d constant GPIOF_HSLV13                   \ [0x0d] Port x high-speed low-voltage configuration
+    $0e constant GPIOF_HSLV14                   \ [0x0e] Port x high-speed low-voltage configuration
+    $0f constant GPIOF_HSLV15                   \ [0x0f] Port x high-speed low-voltage configuration
+  [then]
+
+
+  [ifdef] GPIOF_GPIOF_SECCFGR_DEF
+    \
+    \ @brief GPIO secure configuration register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000FFF
+    \
+    $00 constant GPIOF_SEC0                     \ [0x00] I/O pin of Port x secure bit enable y
+    $01 constant GPIOF_SEC1                     \ [0x01] I/O pin of Port x secure bit enable y
+    $02 constant GPIOF_SEC2                     \ [0x02] I/O pin of Port x secure bit enable y
+    $03 constant GPIOF_SEC3                     \ [0x03] I/O pin of Port x secure bit enable y
+    $04 constant GPIOF_SEC4                     \ [0x04] I/O pin of Port x secure bit enable y
+    $05 constant GPIOF_SEC5                     \ [0x05] I/O pin of Port x secure bit enable y
+    $06 constant GPIOF_SEC6                     \ [0x06] I/O pin of Port x secure bit enable y
+    $07 constant GPIOF_SEC7                     \ [0x07] I/O pin of Port x secure bit enable y
+    $08 constant GPIOF_SEC8                     \ [0x08] I/O pin of Port x secure bit enable y
+    $09 constant GPIOF_SEC9                     \ [0x09] I/O pin of Port x secure bit enable y
+    $0a constant GPIOF_SEC10                    \ [0x0a] I/O pin of Port x secure bit enable y
+    $0b constant GPIOF_SEC11                    \ [0x0b] I/O pin of Port x secure bit enable y
+    $0c constant GPIOF_SEC12                    \ [0x0c] I/O pin of Port x secure bit enable y
+    $0d constant GPIOF_SEC13                    \ [0x0d] I/O pin of Port x secure bit enable y
+    $0e constant GPIOF_SEC14                    \ [0x0e] I/O pin of Port x secure bit enable y
+    $0f constant GPIOF_SEC15                    \ [0x0f] I/O pin of Port x secure bit enable y
+  [then]
+
+  \
+  \ @brief GPIOF address block description
+  \
+  $00 constant GPIOF_GPIOF_MODER        \ GPIO port mode register
+  $04 constant GPIOF_GPIOF_OTYPER       \ GPIO port output type register
+  $08 constant GPIOF_GPIOF_OSPEEDR      \ GPIO port output speed register
+  $0C constant GPIOF_GPIOF_PUPDR        \ GPIO port pull-up/pull-down register
+  $10 constant GPIOF_GPIOF_IDR          \ GPIO port input data register
+  $14 constant GPIOF_GPIOF_ODR          \ GPIO port output data register
+  $18 constant GPIOF_GPIOF_BSRR         \ GPIO port bit set/reset register
+  $1C constant GPIOF_GPIOF_LCKR         \ GPIO port configuration lock register
+  $20 constant GPIOF_GPIOF_AFRL         \ GPIO alternate function low register
+  $24 constant GPIOF_GPIOF_AFRH         \ GPIO alternate function high register
+  $28 constant GPIOF_GPIOF_BRR          \ GPIO port bit reset register
+  $2C constant GPIOF_GPIOF_HSLVR        \ GPIO high-speed low-voltage register
+  $30 constant GPIOF_GPIOF_SECCFGR      \ GPIO secure configuration register
+
+: GPIOF_DEF ; [then]

@@ -1,314 +1,326 @@
 \
 \ @file exti.fs
-\ @brief External interrupt/event       controller
+\ @brief External interrupt/event controller
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] EXTI_DEF
 
-\
-\ @brief Interrupt mask register
-\ Address offset: 0x00
-\ Reset value: 0xFF820000
-\
-
-$00000001 constant EXTI_IMR1_IM0                                    \ Interrupt Mask on line 0
-$00000002 constant EXTI_IMR1_IM1                                    \ Interrupt Mask on line 1
-$00000004 constant EXTI_IMR1_IM2                                    \ Interrupt Mask on line 2
-$00000008 constant EXTI_IMR1_IM3                                    \ Interrupt Mask on line 3
-$00000010 constant EXTI_IMR1_IM4                                    \ Interrupt Mask on line 4
-$00000020 constant EXTI_IMR1_IM5                                    \ Interrupt Mask on line 5
-$00000040 constant EXTI_IMR1_IM6                                    \ Interrupt Mask on line 6
-$00000080 constant EXTI_IMR1_IM7                                    \ Interrupt Mask on line 7
-$00000100 constant EXTI_IMR1_IM8                                    \ Interrupt Mask on line 8
-$00000200 constant EXTI_IMR1_IM9                                    \ Interrupt Mask on line 9
-$00000400 constant EXTI_IMR1_IM10                                   \ Interrupt Mask on line 10
-$00000800 constant EXTI_IMR1_IM11                                   \ Interrupt Mask on line 11
-$00001000 constant EXTI_IMR1_IM12                                   \ Interrupt Mask on line 12
-$00002000 constant EXTI_IMR1_IM13                                   \ Interrupt Mask on line 13
-$00004000 constant EXTI_IMR1_IM14                                   \ Interrupt Mask on line 14
-$00008000 constant EXTI_IMR1_IM15                                   \ Interrupt Mask on line 15
-$00010000 constant EXTI_IMR1_IM16                                   \ Interrupt Mask on line 16
-$00020000 constant EXTI_IMR1_IM17                                   \ Interrupt Mask on line 17
-$00040000 constant EXTI_IMR1_IM18                                   \ Interrupt Mask on line 18
-$00080000 constant EXTI_IMR1_IM19                                   \ Interrupt Mask on line 19
-$00100000 constant EXTI_IMR1_IM20                                   \ Interrupt Mask on line 20
-$00200000 constant EXTI_IMR1_IM21                                   \ Interrupt Mask on line 21
-$00400000 constant EXTI_IMR1_IM22                                   \ Interrupt Mask on line 22
-$00800000 constant EXTI_IMR1_IM23                                   \ Interrupt Mask on line 23
-$01000000 constant EXTI_IMR1_IM24                                   \ Interrupt Mask on line 24
-$02000000 constant EXTI_IMR1_IM25                                   \ Interrupt Mask on line 25
-$04000000 constant EXTI_IMR1_IM26                                   \ Interrupt Mask on line 26
-$08000000 constant EXTI_IMR1_IM27                                   \ Interrupt Mask on line 27
-$10000000 constant EXTI_IMR1_IM28                                   \ Interrupt Mask on line 28
-$20000000 constant EXTI_IMR1_IM29                                   \ Interrupt Mask on line 29
-$40000000 constant EXTI_IMR1_IM30                                   \ Interrupt Mask on line 30
-$80000000 constant EXTI_IMR1_IM31                                   \ Interrupt Mask on line 31
-
-
-\
-\ @brief Event mask register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EMR1_EM0                                    \ Event Mask on line 0
-$00000002 constant EXTI_EMR1_EM1                                    \ Event Mask on line 1
-$00000004 constant EXTI_EMR1_EM2                                    \ Event Mask on line 2
-$00000008 constant EXTI_EMR1_EM3                                    \ Event Mask on line 3
-$00000010 constant EXTI_EMR1_EM4                                    \ Event Mask on line 4
-$00000020 constant EXTI_EMR1_EM5                                    \ Event Mask on line 5
-$00000040 constant EXTI_EMR1_EM6                                    \ Event Mask on line 6
-$00000080 constant EXTI_EMR1_EM7                                    \ Event Mask on line 7
-$00000100 constant EXTI_EMR1_EM8                                    \ Event Mask on line 8
-$00000200 constant EXTI_EMR1_EM9                                    \ Event Mask on line 9
-$00000400 constant EXTI_EMR1_EM10                                   \ Event Mask on line 10
-$00000800 constant EXTI_EMR1_EM11                                   \ Event Mask on line 11
-$00001000 constant EXTI_EMR1_EM12                                   \ Event Mask on line 12
-$00002000 constant EXTI_EMR1_EM13                                   \ Event Mask on line 13
-$00004000 constant EXTI_EMR1_EM14                                   \ Event Mask on line 14
-$00008000 constant EXTI_EMR1_EM15                                   \ Event Mask on line 15
-$00010000 constant EXTI_EMR1_EM16                                   \ Event Mask on line 16
-$00020000 constant EXTI_EMR1_EM17                                   \ Event Mask on line 17
-$00040000 constant EXTI_EMR1_EM18                                   \ Event Mask on line 18
-$00080000 constant EXTI_EMR1_EM19                                   \ Event Mask on line 19
-$00100000 constant EXTI_EMR1_EM20                                   \ Event Mask on line 20
-$00200000 constant EXTI_EMR1_EM21                                   \ Event Mask on line 21
-$00400000 constant EXTI_EMR1_EM22                                   \ Event Mask on line 22
-$00800000 constant EXTI_EMR1_EM23                                   \ Event Mask on line 23
-$01000000 constant EXTI_EMR1_EM24                                   \ Event Mask on line 24
-$02000000 constant EXTI_EMR1_EM25                                   \ Event Mask on line 25
-$04000000 constant EXTI_EMR1_EM26                                   \ Event Mask on line 26
-$08000000 constant EXTI_EMR1_EM27                                   \ Event Mask on line 27
-$10000000 constant EXTI_EMR1_EM28                                   \ Event Mask on line 28
-$20000000 constant EXTI_EMR1_EM29                                   \ Event Mask on line 29
-$40000000 constant EXTI_EMR1_EM30                                   \ Event Mask on line 30
-$80000000 constant EXTI_EMR1_EM31                                   \ Event Mask on line 31
+  [ifdef] EXTI_IMR1_DEF
+    \
+    \ @brief Interrupt mask register
+    \ Address offset: 0x00
+    \ Reset value: 0xFF820000
+    \
+    $00 constant EXTI_IM0                       \ [0x00] Interrupt Mask on line 0
+    $01 constant EXTI_IM1                       \ [0x01] Interrupt Mask on line 1
+    $02 constant EXTI_IM2                       \ [0x02] Interrupt Mask on line 2
+    $03 constant EXTI_IM3                       \ [0x03] Interrupt Mask on line 3
+    $04 constant EXTI_IM4                       \ [0x04] Interrupt Mask on line 4
+    $05 constant EXTI_IM5                       \ [0x05] Interrupt Mask on line 5
+    $06 constant EXTI_IM6                       \ [0x06] Interrupt Mask on line 6
+    $07 constant EXTI_IM7                       \ [0x07] Interrupt Mask on line 7
+    $08 constant EXTI_IM8                       \ [0x08] Interrupt Mask on line 8
+    $09 constant EXTI_IM9                       \ [0x09] Interrupt Mask on line 9
+    $0a constant EXTI_IM10                      \ [0x0a] Interrupt Mask on line 10
+    $0b constant EXTI_IM11                      \ [0x0b] Interrupt Mask on line 11
+    $0c constant EXTI_IM12                      \ [0x0c] Interrupt Mask on line 12
+    $0d constant EXTI_IM13                      \ [0x0d] Interrupt Mask on line 13
+    $0e constant EXTI_IM14                      \ [0x0e] Interrupt Mask on line 14
+    $0f constant EXTI_IM15                      \ [0x0f] Interrupt Mask on line 15
+    $10 constant EXTI_IM16                      \ [0x10] Interrupt Mask on line 16
+    $11 constant EXTI_IM17                      \ [0x11] Interrupt Mask on line 17
+    $12 constant EXTI_IM18                      \ [0x12] Interrupt Mask on line 18
+    $13 constant EXTI_IM19                      \ [0x13] Interrupt Mask on line 19
+    $14 constant EXTI_IM20                      \ [0x14] Interrupt Mask on line 20
+    $15 constant EXTI_IM21                      \ [0x15] Interrupt Mask on line 21
+    $16 constant EXTI_IM22                      \ [0x16] Interrupt Mask on line 22
+    $17 constant EXTI_IM23                      \ [0x17] Interrupt Mask on line 23
+    $18 constant EXTI_IM24                      \ [0x18] Interrupt Mask on line 24
+    $19 constant EXTI_IM25                      \ [0x19] Interrupt Mask on line 25
+    $1a constant EXTI_IM26                      \ [0x1a] Interrupt Mask on line 26
+    $1b constant EXTI_IM27                      \ [0x1b] Interrupt Mask on line 27
+    $1c constant EXTI_IM28                      \ [0x1c] Interrupt Mask on line 28
+    $1d constant EXTI_IM29                      \ [0x1d] Interrupt Mask on line 29
+    $1e constant EXTI_IM30                      \ [0x1e] Interrupt Mask on line 30
+    $1f constant EXTI_IM31                      \ [0x1f] Interrupt Mask on line 31
+  [then]
 
 
-\
-\ @brief Rising Trigger selection register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_RTSR1_RT0                                   \ Rising trigger event configuration of line 0
-$00000002 constant EXTI_RTSR1_RT1                                   \ Rising trigger event configuration of line 1
-$00000004 constant EXTI_RTSR1_RT2                                   \ Rising trigger event configuration of line 2
-$00000008 constant EXTI_RTSR1_RT3                                   \ Rising trigger event configuration of line 3
-$00000010 constant EXTI_RTSR1_RT4                                   \ Rising trigger event configuration of line 4
-$00000020 constant EXTI_RTSR1_RT5                                   \ Rising trigger event configuration of line 5
-$00000040 constant EXTI_RTSR1_RT6                                   \ Rising trigger event configuration of line 6
-$00000080 constant EXTI_RTSR1_RT7                                   \ Rising trigger event configuration of line 7
-$00000100 constant EXTI_RTSR1_RT8                                   \ Rising trigger event configuration of line 8
-$00000200 constant EXTI_RTSR1_RT9                                   \ Rising trigger event configuration of line 9
-$00000400 constant EXTI_RTSR1_RT10                                  \ Rising trigger event configuration of line 10
-$00000800 constant EXTI_RTSR1_RT11                                  \ Rising trigger event configuration of line 11
-$00001000 constant EXTI_RTSR1_RT12                                  \ Rising trigger event configuration of line 12
-$00002000 constant EXTI_RTSR1_RT13                                  \ Rising trigger event configuration of line 13
-$00004000 constant EXTI_RTSR1_RT14                                  \ Rising trigger event configuration of line 14
-$00008000 constant EXTI_RTSR1_RT15                                  \ Rising trigger event configuration of line 15
-$00010000 constant EXTI_RTSR1_RT16                                  \ Rising trigger event configuration of line 16
-$00040000 constant EXTI_RTSR1_RT18                                  \ Rising trigger event configuration of line 18
-$00080000 constant EXTI_RTSR1_RT19                                  \ Rising trigger event configuration of line 19
-$00100000 constant EXTI_RTSR1_RT20                                  \ Rising trigger event configuration of line 20
-$00200000 constant EXTI_RTSR1_RT21                                  \ Rising trigger event configuration of line 21
-$00400000 constant EXTI_RTSR1_RT22                                  \ Rising trigger event configuration of line 22
-$e0000000 constant EXTI_RTSR1_RT                                    \ RT
-
-
-\
-\ @brief Falling Trigger selection register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_FTSR1_FT0                                   \ Falling trigger event configuration of line 0
-$00000002 constant EXTI_FTSR1_FT1                                   \ Falling trigger event configuration of line 1
-$00000004 constant EXTI_FTSR1_FT2                                   \ Falling trigger event configuration of line 2
-$00000008 constant EXTI_FTSR1_FT3                                   \ Falling trigger event configuration of line 3
-$00000010 constant EXTI_FTSR1_FT4                                   \ Falling trigger event configuration of line 4
-$00000020 constant EXTI_FTSR1_FT5                                   \ Falling trigger event configuration of line 5
-$00000040 constant EXTI_FTSR1_FT6                                   \ Falling trigger event configuration of line 6
-$00000080 constant EXTI_FTSR1_FT7                                   \ Falling trigger event configuration of line 7
-$00000100 constant EXTI_FTSR1_FT8                                   \ Falling trigger event configuration of line 8
-$00000200 constant EXTI_FTSR1_FT9                                   \ Falling trigger event configuration of line 9
-$00000400 constant EXTI_FTSR1_FT10                                  \ Falling trigger event configuration of line 10
-$00000800 constant EXTI_FTSR1_FT11                                  \ Falling trigger event configuration of line 11
-$00001000 constant EXTI_FTSR1_FT12                                  \ Falling trigger event configuration of line 12
-$00002000 constant EXTI_FTSR1_FT13                                  \ Falling trigger event configuration of line 13
-$00004000 constant EXTI_FTSR1_FT14                                  \ Falling trigger event configuration of line 14
-$00008000 constant EXTI_FTSR1_FT15                                  \ Falling trigger event configuration of line 15
-$00010000 constant EXTI_FTSR1_FT16                                  \ Falling trigger event configuration of line 16
-$00040000 constant EXTI_FTSR1_FT18                                  \ Falling trigger event configuration of line 18
-$00080000 constant EXTI_FTSR1_FT19                                  \ Falling trigger event configuration of line 19
-$00100000 constant EXTI_FTSR1_FT20                                  \ Falling trigger event configuration of line 20
-$00200000 constant EXTI_FTSR1_FT21                                  \ Falling trigger event configuration of line 21
-$00400000 constant EXTI_FTSR1_FT22                                  \ Falling trigger event configuration of line 22
+  [ifdef] EXTI_EMR1_DEF
+    \
+    \ @brief Event mask register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EM0                       \ [0x00] Event Mask on line 0
+    $01 constant EXTI_EM1                       \ [0x01] Event Mask on line 1
+    $02 constant EXTI_EM2                       \ [0x02] Event Mask on line 2
+    $03 constant EXTI_EM3                       \ [0x03] Event Mask on line 3
+    $04 constant EXTI_EM4                       \ [0x04] Event Mask on line 4
+    $05 constant EXTI_EM5                       \ [0x05] Event Mask on line 5
+    $06 constant EXTI_EM6                       \ [0x06] Event Mask on line 6
+    $07 constant EXTI_EM7                       \ [0x07] Event Mask on line 7
+    $08 constant EXTI_EM8                       \ [0x08] Event Mask on line 8
+    $09 constant EXTI_EM9                       \ [0x09] Event Mask on line 9
+    $0a constant EXTI_EM10                      \ [0x0a] Event Mask on line 10
+    $0b constant EXTI_EM11                      \ [0x0b] Event Mask on line 11
+    $0c constant EXTI_EM12                      \ [0x0c] Event Mask on line 12
+    $0d constant EXTI_EM13                      \ [0x0d] Event Mask on line 13
+    $0e constant EXTI_EM14                      \ [0x0e] Event Mask on line 14
+    $0f constant EXTI_EM15                      \ [0x0f] Event Mask on line 15
+    $10 constant EXTI_EM16                      \ [0x10] Event Mask on line 16
+    $11 constant EXTI_EM17                      \ [0x11] Event Mask on line 17
+    $12 constant EXTI_EM18                      \ [0x12] Event Mask on line 18
+    $13 constant EXTI_EM19                      \ [0x13] Event Mask on line 19
+    $14 constant EXTI_EM20                      \ [0x14] Event Mask on line 20
+    $15 constant EXTI_EM21                      \ [0x15] Event Mask on line 21
+    $16 constant EXTI_EM22                      \ [0x16] Event Mask on line 22
+    $17 constant EXTI_EM23                      \ [0x17] Event Mask on line 23
+    $18 constant EXTI_EM24                      \ [0x18] Event Mask on line 24
+    $19 constant EXTI_EM25                      \ [0x19] Event Mask on line 25
+    $1a constant EXTI_EM26                      \ [0x1a] Event Mask on line 26
+    $1b constant EXTI_EM27                      \ [0x1b] Event Mask on line 27
+    $1c constant EXTI_EM28                      \ [0x1c] Event Mask on line 28
+    $1d constant EXTI_EM29                      \ [0x1d] Event Mask on line 29
+    $1e constant EXTI_EM30                      \ [0x1e] Event Mask on line 30
+    $1f constant EXTI_EM31                      \ [0x1f] Event Mask on line 31
+  [then]
 
 
-\
-\ @brief Software interrupt event register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_SWIER1_SWI0                                 \ Software Interrupt on line 0
-$00000002 constant EXTI_SWIER1_SWI1                                 \ Software Interrupt on line 1
-$00000004 constant EXTI_SWIER1_SWI2                                 \ Software Interrupt on line 2
-$00000008 constant EXTI_SWIER1_SWI3                                 \ Software Interrupt on line 3
-$00000010 constant EXTI_SWIER1_SWI4                                 \ Software Interrupt on line 4
-$00000020 constant EXTI_SWIER1_SWI5                                 \ Software Interrupt on line 5
-$00000040 constant EXTI_SWIER1_SWI6                                 \ Software Interrupt on line 6
-$00000080 constant EXTI_SWIER1_SWI7                                 \ Software Interrupt on line 7
-$00000100 constant EXTI_SWIER1_SWI8                                 \ Software Interrupt on line 8
-$00000200 constant EXTI_SWIER1_SWI9                                 \ Software Interrupt on line 9
-$00000400 constant EXTI_SWIER1_SWI10                                \ Software Interrupt on line 10
-$00000800 constant EXTI_SWIER1_SWI11                                \ Software Interrupt on line 11
-$00001000 constant EXTI_SWIER1_SWI12                                \ Software Interrupt on line 12
-$00002000 constant EXTI_SWIER1_SWI13                                \ Software Interrupt on line 13
-$00004000 constant EXTI_SWIER1_SWI14                                \ Software Interrupt on line 14
-$00008000 constant EXTI_SWIER1_SWI15                                \ Software Interrupt on line 15
-$00010000 constant EXTI_SWIER1_SWI16                                \ Software Interrupt on line 16
-$00040000 constant EXTI_SWIER1_SWI18                                \ Software Interrupt on line 18
-$00080000 constant EXTI_SWIER1_SWI19                                \ Software Interrupt on line 19
-$00100000 constant EXTI_SWIER1_SWI20                                \ Software Interrupt on line 20
-$00200000 constant EXTI_SWIER1_SWI21                                \ Software Interrupt on line 21
-$00400000 constant EXTI_SWIER1_SWI22                                \ Software Interrupt on line 22
-
-
-\
-\ @brief Pending register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_PR1_PIF0                                    \ Pending bit 0
-$00000002 constant EXTI_PR1_PIF1                                    \ Pending bit 1
-$00000004 constant EXTI_PR1_PIF2                                    \ Pending bit 2
-$00000008 constant EXTI_PR1_PIF3                                    \ Pending bit 3
-$00000010 constant EXTI_PR1_PIF4                                    \ Pending bit 4
-$00000020 constant EXTI_PR1_PIF5                                    \ Pending bit 5
-$00000040 constant EXTI_PR1_PIF6                                    \ Pending bit 6
-$00000080 constant EXTI_PR1_PIF7                                    \ Pending bit 7
-$00000100 constant EXTI_PR1_PIF8                                    \ Pending bit 8
-$00000200 constant EXTI_PR1_PIF9                                    \ Pending bit 9
-$00000400 constant EXTI_PR1_PIF10                                   \ Pending bit 10
-$00000800 constant EXTI_PR1_PIF11                                   \ Pending bit 11
-$00001000 constant EXTI_PR1_PIF12                                   \ Pending bit 12
-$00002000 constant EXTI_PR1_PIF13                                   \ Pending bit 13
-$00004000 constant EXTI_PR1_PIF14                                   \ Pending bit 14
-$00008000 constant EXTI_PR1_PIF15                                   \ Pending bit 15
-$00010000 constant EXTI_PR1_PIF16                                   \ Pending bit 16
-$00040000 constant EXTI_PR1_PIF18                                   \ Pending bit 18
-$00080000 constant EXTI_PR1_PIF19                                   \ Pending bit 19
-$00100000 constant EXTI_PR1_PIF20                                   \ Pending bit 20
-$00200000 constant EXTI_PR1_PIF21                                   \ Pending bit 21
-$00400000 constant EXTI_PR1_PIF22                                   \ Pending bit 22
+  [ifdef] EXTI_RTSR1_DEF
+    \
+    \ @brief Rising Trigger selection register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_RT0                       \ [0x00] Rising trigger event configuration of line 0
+    $01 constant EXTI_RT1                       \ [0x01] Rising trigger event configuration of line 1
+    $02 constant EXTI_RT2                       \ [0x02] Rising trigger event configuration of line 2
+    $03 constant EXTI_RT3                       \ [0x03] Rising trigger event configuration of line 3
+    $04 constant EXTI_RT4                       \ [0x04] Rising trigger event configuration of line 4
+    $05 constant EXTI_RT5                       \ [0x05] Rising trigger event configuration of line 5
+    $06 constant EXTI_RT6                       \ [0x06] Rising trigger event configuration of line 6
+    $07 constant EXTI_RT7                       \ [0x07] Rising trigger event configuration of line 7
+    $08 constant EXTI_RT8                       \ [0x08] Rising trigger event configuration of line 8
+    $09 constant EXTI_RT9                       \ [0x09] Rising trigger event configuration of line 9
+    $0a constant EXTI_RT10                      \ [0x0a] Rising trigger event configuration of line 10
+    $0b constant EXTI_RT11                      \ [0x0b] Rising trigger event configuration of line 11
+    $0c constant EXTI_RT12                      \ [0x0c] Rising trigger event configuration of line 12
+    $0d constant EXTI_RT13                      \ [0x0d] Rising trigger event configuration of line 13
+    $0e constant EXTI_RT14                      \ [0x0e] Rising trigger event configuration of line 14
+    $0f constant EXTI_RT15                      \ [0x0f] Rising trigger event configuration of line 15
+    $10 constant EXTI_RT16                      \ [0x10] Rising trigger event configuration of line 16
+    $12 constant EXTI_RT18                      \ [0x12] Rising trigger event configuration of line 18
+    $13 constant EXTI_RT19                      \ [0x13] Rising trigger event configuration of line 19
+    $14 constant EXTI_RT20                      \ [0x14] Rising trigger event configuration of line 20
+    $15 constant EXTI_RT21                      \ [0x15] Rising trigger event configuration of line 21
+    $16 constant EXTI_RT22                      \ [0x16] Rising trigger event configuration of line 22
+    $1d constant EXTI_RT                        \ [0x1d : 3] RT
+  [then]
 
 
-\
-\ @brief Interrupt mask register
-\ Address offset: 0x20
-\ Reset value: 0xFFFFFF87
-\
-
-$00000001 constant EXTI_IMR2_IM32                                   \ Interrupt Mask on external/internal line 32
-$00000002 constant EXTI_IMR2_IM33                                   \ Interrupt Mask on external/internal line 33
-$00000004 constant EXTI_IMR2_IM34                                   \ Interrupt Mask on external/internal line 34
-$00000008 constant EXTI_IMR2_IM35                                   \ Interrupt Mask on external/internal line 35
-$00000010 constant EXTI_IMR2_IM36                                   \ Interrupt Mask on external/internal line 36
-$00000020 constant EXTI_IMR2_IM37                                   \ Interrupt Mask on external/internal line 37
-$00000040 constant EXTI_IMR2_IM38                                   \ Interrupt Mask on external/internal line 38
-$00000080 constant EXTI_IMR2_IM39                                   \ Interrupt Mask on external/internal line 39
-$00000100 constant EXTI_IMR2_IM40                                   \ Interrupt Mask on external/internal line 40
-$00000200 constant EXTI_IMR2_IM41                                   \ Interrupt Mask on external/internal line 41
-$00000400 constant EXTI_IMR2_IM42                                   \ Interrupt Mask on external/internal line 42
-$00000800 constant EXTI_IMR2_IM43                                   \ Interrupt Mask on external/internal line 43
-
-
-\
-\ @brief Event mask register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EMR2_EM32                                   \ Event mask on external/internal line 32
-$00000002 constant EXTI_EMR2_EM33                                   \ Event mask on external/internal line 33
-$00000004 constant EXTI_EMR2_EM34                                   \ Event mask on external/internal line 34
-$00000008 constant EXTI_EMR2_EM35                                   \ Event mask on external/internal line 35
-$00000010 constant EXTI_EMR2_EM36                                   \ Event mask on external/internal line 36
-$00000020 constant EXTI_EMR2_EM37                                   \ Event mask on external/internal line 37
-$00000040 constant EXTI_EMR2_EM38                                   \ Event mask on external/internal line 38
-$00000080 constant EXTI_EMR2_EM39                                   \ Event mask on external/internal line 39
-$00000100 constant EXTI_EMR2_EM40                                   \ Event mask on external/internal line 40
+  [ifdef] EXTI_FTSR1_DEF
+    \
+    \ @brief Falling Trigger selection register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_FT0                       \ [0x00] Falling trigger event configuration of line 0
+    $01 constant EXTI_FT1                       \ [0x01] Falling trigger event configuration of line 1
+    $02 constant EXTI_FT2                       \ [0x02] Falling trigger event configuration of line 2
+    $03 constant EXTI_FT3                       \ [0x03] Falling trigger event configuration of line 3
+    $04 constant EXTI_FT4                       \ [0x04] Falling trigger event configuration of line 4
+    $05 constant EXTI_FT5                       \ [0x05] Falling trigger event configuration of line 5
+    $06 constant EXTI_FT6                       \ [0x06] Falling trigger event configuration of line 6
+    $07 constant EXTI_FT7                       \ [0x07] Falling trigger event configuration of line 7
+    $08 constant EXTI_FT8                       \ [0x08] Falling trigger event configuration of line 8
+    $09 constant EXTI_FT9                       \ [0x09] Falling trigger event configuration of line 9
+    $0a constant EXTI_FT10                      \ [0x0a] Falling trigger event configuration of line 10
+    $0b constant EXTI_FT11                      \ [0x0b] Falling trigger event configuration of line 11
+    $0c constant EXTI_FT12                      \ [0x0c] Falling trigger event configuration of line 12
+    $0d constant EXTI_FT13                      \ [0x0d] Falling trigger event configuration of line 13
+    $0e constant EXTI_FT14                      \ [0x0e] Falling trigger event configuration of line 14
+    $0f constant EXTI_FT15                      \ [0x0f] Falling trigger event configuration of line 15
+    $10 constant EXTI_FT16                      \ [0x10] Falling trigger event configuration of line 16
+    $12 constant EXTI_FT18                      \ [0x12] Falling trigger event configuration of line 18
+    $13 constant EXTI_FT19                      \ [0x13] Falling trigger event configuration of line 19
+    $14 constant EXTI_FT20                      \ [0x14] Falling trigger event configuration of line 20
+    $15 constant EXTI_FT21                      \ [0x15] Falling trigger event configuration of line 21
+    $16 constant EXTI_FT22                      \ [0x16] Falling trigger event configuration of line 22
+  [then]
 
 
-\
-\ @brief Rising Trigger selection register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_RTSR2_RT32                                  \ Rising trigger event configuration bit of line 32
-$00000002 constant EXTI_RTSR2_RT33                                  \ Rising trigger event configuration bit of line 32
-$00000040 constant EXTI_RTSR2_RT38                                  \ Rising trigger event configuration bit of line 38
-$00000080 constant EXTI_RTSR2_RT39                                  \ Rising trigger event configuration bit of line 39
-$00000100 constant EXTI_RTSR2_RT40                                  \ Rising trigger event configuration bit of line 40
-$00000200 constant EXTI_RTSR2_RT41                                  \ Rising trigger event configuration bit of line 41
-
-
-\
-\ @brief Falling Trigger selection register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000008 constant EXTI_FTSR2_FT35                                  \ Falling trigger event configuration bit of line 35
-$00000010 constant EXTI_FTSR2_FT36                                  \ Falling trigger event configuration bit of line 36
-$00000020 constant EXTI_FTSR2_FT37                                  \ Falling trigger event configuration bit of line 37
-$00000040 constant EXTI_FTSR2_FT38                                  \ Falling trigger event configuration bit of line 38
-
-
-\
-\ @brief Software interrupt event register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000008 constant EXTI_SWIER2_SWI35                                \ Software interrupt on line 35
-$00000010 constant EXTI_SWIER2_SWI36                                \ Software interrupt on line 36
-$00000020 constant EXTI_SWIER2_SWI37                                \ Software interrupt on line 37
-$00000040 constant EXTI_SWIER2_SWI38                                \ Software interrupt on line 38
+  [ifdef] EXTI_SWIER1_DEF
+    \
+    \ @brief Software interrupt event register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_SWI0                      \ [0x00] Software Interrupt on line 0
+    $01 constant EXTI_SWI1                      \ [0x01] Software Interrupt on line 1
+    $02 constant EXTI_SWI2                      \ [0x02] Software Interrupt on line 2
+    $03 constant EXTI_SWI3                      \ [0x03] Software Interrupt on line 3
+    $04 constant EXTI_SWI4                      \ [0x04] Software Interrupt on line 4
+    $05 constant EXTI_SWI5                      \ [0x05] Software Interrupt on line 5
+    $06 constant EXTI_SWI6                      \ [0x06] Software Interrupt on line 6
+    $07 constant EXTI_SWI7                      \ [0x07] Software Interrupt on line 7
+    $08 constant EXTI_SWI8                      \ [0x08] Software Interrupt on line 8
+    $09 constant EXTI_SWI9                      \ [0x09] Software Interrupt on line 9
+    $0a constant EXTI_SWI10                     \ [0x0a] Software Interrupt on line 10
+    $0b constant EXTI_SWI11                     \ [0x0b] Software Interrupt on line 11
+    $0c constant EXTI_SWI12                     \ [0x0c] Software Interrupt on line 12
+    $0d constant EXTI_SWI13                     \ [0x0d] Software Interrupt on line 13
+    $0e constant EXTI_SWI14                     \ [0x0e] Software Interrupt on line 14
+    $0f constant EXTI_SWI15                     \ [0x0f] Software Interrupt on line 15
+    $10 constant EXTI_SWI16                     \ [0x10] Software Interrupt on line 16
+    $12 constant EXTI_SWI18                     \ [0x12] Software Interrupt on line 18
+    $13 constant EXTI_SWI19                     \ [0x13] Software Interrupt on line 19
+    $14 constant EXTI_SWI20                     \ [0x14] Software Interrupt on line 20
+    $15 constant EXTI_SWI21                     \ [0x15] Software Interrupt on line 21
+    $16 constant EXTI_SWI22                     \ [0x16] Software Interrupt on line 22
+  [then]
 
 
-\
-\ @brief Pending register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
+  [ifdef] EXTI_PR1_DEF
+    \
+    \ @brief Pending register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_PIF0                      \ [0x00] Pending bit 0
+    $01 constant EXTI_PIF1                      \ [0x01] Pending bit 1
+    $02 constant EXTI_PIF2                      \ [0x02] Pending bit 2
+    $03 constant EXTI_PIF3                      \ [0x03] Pending bit 3
+    $04 constant EXTI_PIF4                      \ [0x04] Pending bit 4
+    $05 constant EXTI_PIF5                      \ [0x05] Pending bit 5
+    $06 constant EXTI_PIF6                      \ [0x06] Pending bit 6
+    $07 constant EXTI_PIF7                      \ [0x07] Pending bit 7
+    $08 constant EXTI_PIF8                      \ [0x08] Pending bit 8
+    $09 constant EXTI_PIF9                      \ [0x09] Pending bit 9
+    $0a constant EXTI_PIF10                     \ [0x0a] Pending bit 10
+    $0b constant EXTI_PIF11                     \ [0x0b] Pending bit 11
+    $0c constant EXTI_PIF12                     \ [0x0c] Pending bit 12
+    $0d constant EXTI_PIF13                     \ [0x0d] Pending bit 13
+    $0e constant EXTI_PIF14                     \ [0x0e] Pending bit 14
+    $0f constant EXTI_PIF15                     \ [0x0f] Pending bit 15
+    $10 constant EXTI_PIF16                     \ [0x10] Pending bit 16
+    $12 constant EXTI_PIF18                     \ [0x12] Pending bit 18
+    $13 constant EXTI_PIF19                     \ [0x13] Pending bit 19
+    $14 constant EXTI_PIF20                     \ [0x14] Pending bit 20
+    $15 constant EXTI_PIF21                     \ [0x15] Pending bit 21
+    $16 constant EXTI_PIF22                     \ [0x16] Pending bit 22
+  [then]
 
-$00000008 constant EXTI_PR2_PIF35                                   \ Pending interrupt flag on line 35
-$00000010 constant EXTI_PR2_PIF36                                   \ Pending interrupt flag on line 36
-$00000020 constant EXTI_PR2_PIF37                                   \ Pending interrupt flag on line 37
-$00000040 constant EXTI_PR2_PIF38                                   \ Pending interrupt flag on line 38
+
+  [ifdef] EXTI_IMR2_DEF
+    \
+    \ @brief Interrupt mask register
+    \ Address offset: 0x20
+    \ Reset value: 0xFFFFFF87
+    \
+    $00 constant EXTI_IM32                      \ [0x00] Interrupt Mask on external/internal line 32
+    $01 constant EXTI_IM33                      \ [0x01] Interrupt Mask on external/internal line 33
+    $02 constant EXTI_IM34                      \ [0x02] Interrupt Mask on external/internal line 34
+    $03 constant EXTI_IM35                      \ [0x03] Interrupt Mask on external/internal line 35
+    $04 constant EXTI_IM36                      \ [0x04] Interrupt Mask on external/internal line 36
+    $05 constant EXTI_IM37                      \ [0x05] Interrupt Mask on external/internal line 37
+    $06 constant EXTI_IM38                      \ [0x06] Interrupt Mask on external/internal line 38
+    $07 constant EXTI_IM39                      \ [0x07] Interrupt Mask on external/internal line 39
+    $08 constant EXTI_IM40                      \ [0x08] Interrupt Mask on external/internal line 40
+    $09 constant EXTI_IM41                      \ [0x09] Interrupt Mask on external/internal line 41
+    $0a constant EXTI_IM42                      \ [0x0a] Interrupt Mask on external/internal line 42
+    $0b constant EXTI_IM43                      \ [0x0b] Interrupt Mask on external/internal line 43
+  [then]
 
 
-\
-\ @brief External interrupt/event controller
-\
-$40010400 constant EXTI_IMR1      \ offset: 0x00 : Interrupt mask register
-$40010404 constant EXTI_EMR1      \ offset: 0x04 : Event mask register
-$40010408 constant EXTI_RTSR1     \ offset: 0x08 : Rising Trigger selection register
-$4001040c constant EXTI_FTSR1     \ offset: 0x0C : Falling Trigger selection register
-$40010410 constant EXTI_SWIER1    \ offset: 0x10 : Software interrupt event register
-$40010414 constant EXTI_PR1       \ offset: 0x14 : Pending register
-$40010420 constant EXTI_IMR2      \ offset: 0x20 : Interrupt mask register
-$40010424 constant EXTI_EMR2      \ offset: 0x24 : Event mask register
-$40010428 constant EXTI_RTSR2     \ offset: 0x28 : Rising Trigger selection register
-$4001042c constant EXTI_FTSR2     \ offset: 0x2C : Falling Trigger selection register
-$40010430 constant EXTI_SWIER2    \ offset: 0x30 : Software interrupt event register
-$40010434 constant EXTI_PR2       \ offset: 0x34 : Pending register
+  [ifdef] EXTI_EMR2_DEF
+    \
+    \ @brief Event mask register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EM32                      \ [0x00] Event mask on external/internal line 32
+    $01 constant EXTI_EM33                      \ [0x01] Event mask on external/internal line 33
+    $02 constant EXTI_EM34                      \ [0x02] Event mask on external/internal line 34
+    $03 constant EXTI_EM35                      \ [0x03] Event mask on external/internal line 35
+    $04 constant EXTI_EM36                      \ [0x04] Event mask on external/internal line 36
+    $05 constant EXTI_EM37                      \ [0x05] Event mask on external/internal line 37
+    $06 constant EXTI_EM38                      \ [0x06] Event mask on external/internal line 38
+    $07 constant EXTI_EM39                      \ [0x07] Event mask on external/internal line 39
+    $08 constant EXTI_EM40                      \ [0x08] Event mask on external/internal line 40
+  [then]
 
+
+  [ifdef] EXTI_RTSR2_DEF
+    \
+    \ @brief Rising Trigger selection register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_RT32                      \ [0x00] Rising trigger event configuration bit of line 32
+    $01 constant EXTI_RT33                      \ [0x01] Rising trigger event configuration bit of line 32
+    $06 constant EXTI_RT38                      \ [0x06] Rising trigger event configuration bit of line 38
+    $07 constant EXTI_RT39                      \ [0x07] Rising trigger event configuration bit of line 39
+    $08 constant EXTI_RT40                      \ [0x08] Rising trigger event configuration bit of line 40
+    $09 constant EXTI_RT41                      \ [0x09] Rising trigger event configuration bit of line 41
+  [then]
+
+
+  [ifdef] EXTI_FTSR2_DEF
+    \
+    \ @brief Falling Trigger selection register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $03 constant EXTI_FT35                      \ [0x03] Falling trigger event configuration bit of line 35
+    $04 constant EXTI_FT36                      \ [0x04] Falling trigger event configuration bit of line 36
+    $05 constant EXTI_FT37                      \ [0x05] Falling trigger event configuration bit of line 37
+    $06 constant EXTI_FT38                      \ [0x06] Falling trigger event configuration bit of line 38
+  [then]
+
+
+  [ifdef] EXTI_SWIER2_DEF
+    \
+    \ @brief Software interrupt event register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $03 constant EXTI_SWI35                     \ [0x03] Software interrupt on line 35
+    $04 constant EXTI_SWI36                     \ [0x04] Software interrupt on line 36
+    $05 constant EXTI_SWI37                     \ [0x05] Software interrupt on line 37
+    $06 constant EXTI_SWI38                     \ [0x06] Software interrupt on line 38
+  [then]
+
+
+  [ifdef] EXTI_PR2_DEF
+    \
+    \ @brief Pending register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $03 constant EXTI_PIF35                     \ [0x03] Pending interrupt flag on line 35
+    $04 constant EXTI_PIF36                     \ [0x04] Pending interrupt flag on line 36
+    $05 constant EXTI_PIF37                     \ [0x05] Pending interrupt flag on line 37
+    $06 constant EXTI_PIF38                     \ [0x06] Pending interrupt flag on line 38
+  [then]
+
+  \
+  \ @brief External interrupt/event controller
+  \
+  $00 constant EXTI_IMR1                \ Interrupt mask register
+  $04 constant EXTI_EMR1                \ Event mask register
+  $08 constant EXTI_RTSR1               \ Rising Trigger selection register
+  $0C constant EXTI_FTSR1               \ Falling Trigger selection register
+  $10 constant EXTI_SWIER1              \ Software interrupt event register
+  $14 constant EXTI_PR1                 \ Pending register
+  $20 constant EXTI_IMR2                \ Interrupt mask register
+  $24 constant EXTI_EMR2                \ Event mask register
+  $28 constant EXTI_RTSR2               \ Rising Trigger selection register
+  $2C constant EXTI_FTSR2               \ Falling Trigger selection register
+  $30 constant EXTI_SWIER2              \ Software interrupt event register
+  $34 constant EXTI_PR2                 \ Pending register
+
+: EXTI_DEF ; [then]

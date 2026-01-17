@@ -6,21 +6,22 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] OTG1_HS_PWRCLK_DEF
 
-\
-\ @brief Power and clock gating control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
+  [ifdef] OTG1_HS_PWRCLK_OTG_HS_PCGCR_DEF
+    \
+    \ @brief Power and clock gating control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG1_HS_PWRCLK_STPPCLK         \ [0x00] Stop PHY clock
+    $01 constant OTG1_HS_PWRCLK_GATEHCLK        \ [0x01] Gate HCLK
+    $04 constant OTG1_HS_PWRCLK_PHYSUSP         \ [0x04] PHY suspended
+  [then]
 
-$00000001 constant OTG1_HS_PWRCLK_OTG_HS_PCGCR_STPPCLK              \ Stop PHY clock
-$00000002 constant OTG1_HS_PWRCLK_OTG_HS_PCGCR_GATEHCLK             \ Gate HCLK
-$00000010 constant OTG1_HS_PWRCLK_OTG_HS_PCGCR_PHYSUSP              \ PHY suspended
+  \
+  \ @brief USB 1 on the go high speed
+  \
+  $00 constant OTG1_HS_PWRCLK_OTG_HS_PCGCR    \ Power and clock gating control register
 
-
-\
-\ @brief USB 1 on the go high speed
-\
-$40040e00 constant OTG1_HS_PWRCLK_OTG_HS_PCGCR  \ offset: 0x00 : Power and clock gating control register
-
+: OTG1_HS_PWRCLK_DEF ; [then]

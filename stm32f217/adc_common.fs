@@ -6,63 +6,66 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ADC_COMMON_DEF
 
-\
-\ @brief ADC Common status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_COMMON_CSR_AWD1                              \ Analog watchdog flag of ADC 1
-$00000002 constant ADC_COMMON_CSR_EOC1                              \ End of conversion of ADC 1
-$00000004 constant ADC_COMMON_CSR_JEOC1                             \ Injected channel end of conversion of ADC 1
-$00000008 constant ADC_COMMON_CSR_JSTRT1                            \ Injected channel Start flag of ADC 1
-$00000010 constant ADC_COMMON_CSR_STRT1                             \ Regular channel Start flag of ADC 1
-$00000020 constant ADC_COMMON_CSR_OVR1                              \ Overrun flag of ADC 1
-$00000100 constant ADC_COMMON_CSR_AWD2                              \ Analog watchdog flag of ADC 2
-$00000200 constant ADC_COMMON_CSR_EOC2                              \ End of conversion of ADC 2
-$00000400 constant ADC_COMMON_CSR_JEOC2                             \ Injected channel end of conversion of ADC 2
-$00000800 constant ADC_COMMON_CSR_JSTRT2                            \ Injected channel Start flag of ADC 2
-$00001000 constant ADC_COMMON_CSR_STRT2                             \ Regular channel Start flag of ADC 2
-$00002000 constant ADC_COMMON_CSR_OVR2                              \ Overrun flag of ADC 2
-$00010000 constant ADC_COMMON_CSR_AWD3                              \ Analog watchdog flag of ADC 3
-$00020000 constant ADC_COMMON_CSR_EOC3                              \ End of conversion of ADC 3
-$00040000 constant ADC_COMMON_CSR_JEOC3                             \ Injected channel end of conversion of ADC 3
-$00080000 constant ADC_COMMON_CSR_JSTRT3                            \ Injected channel Start flag of ADC 3
-$00100000 constant ADC_COMMON_CSR_STRT3                             \ Regular channel Start flag of ADC 3
-$00200000 constant ADC_COMMON_CSR_OVR3                              \ Overrun flag of ADC3
-
-
-\
-\ @brief ADC common control register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_COMMON_CCR_MULT                              \ Multi ADC mode selection
-$00000f00 constant ADC_COMMON_CCR_DELAY                             \ Delay between 2 sampling phases
-$00002000 constant ADC_COMMON_CCR_DDS                               \ DMA disable selection for multi-ADC mode
-$0000c000 constant ADC_COMMON_CCR_DMA                               \ Direct memory access mode for multi ADC mode
-$00030000 constant ADC_COMMON_CCR_ADCPRE                            \ ADC prescaler
-$00400000 constant ADC_COMMON_CCR_VBATE                             \ VBAT enable
-$00800000 constant ADC_COMMON_CCR_TSVREFE                           \ Temperature sensor and VREFINT enable
+  [ifdef] ADC_COMMON_CSR_DEF
+    \
+    \ @brief ADC Common status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_COMMON_AWD1                \ [0x00] Analog watchdog flag of ADC 1
+    $01 constant ADC_COMMON_EOC1                \ [0x01] End of conversion of ADC 1
+    $02 constant ADC_COMMON_JEOC1               \ [0x02] Injected channel end of conversion of ADC 1
+    $03 constant ADC_COMMON_JSTRT1              \ [0x03] Injected channel Start flag of ADC 1
+    $04 constant ADC_COMMON_STRT1               \ [0x04] Regular channel Start flag of ADC 1
+    $05 constant ADC_COMMON_OVR1                \ [0x05] Overrun flag of ADC 1
+    $08 constant ADC_COMMON_AWD2                \ [0x08] Analog watchdog flag of ADC 2
+    $09 constant ADC_COMMON_EOC2                \ [0x09] End of conversion of ADC 2
+    $0a constant ADC_COMMON_JEOC2               \ [0x0a] Injected channel end of conversion of ADC 2
+    $0b constant ADC_COMMON_JSTRT2              \ [0x0b] Injected channel Start flag of ADC 2
+    $0c constant ADC_COMMON_STRT2               \ [0x0c] Regular channel Start flag of ADC 2
+    $0d constant ADC_COMMON_OVR2                \ [0x0d] Overrun flag of ADC 2
+    $10 constant ADC_COMMON_AWD3                \ [0x10] Analog watchdog flag of ADC 3
+    $11 constant ADC_COMMON_EOC3                \ [0x11] End of conversion of ADC 3
+    $12 constant ADC_COMMON_JEOC3               \ [0x12] Injected channel end of conversion of ADC 3
+    $13 constant ADC_COMMON_JSTRT3              \ [0x13] Injected channel Start flag of ADC 3
+    $14 constant ADC_COMMON_STRT3               \ [0x14] Regular channel Start flag of ADC 3
+    $15 constant ADC_COMMON_OVR3                \ [0x15] Overrun flag of ADC3
+  [then]
 
 
-\
-\ @brief ADC common regular data register for dual and triple modes
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
+  [ifdef] ADC_COMMON_CCR_DEF
+    \
+    \ @brief ADC common control register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_COMMON_MULT                \ [0x00 : 5] Multi ADC mode selection
+    $08 constant ADC_COMMON_DELAY               \ [0x08 : 4] Delay between 2 sampling phases
+    $0d constant ADC_COMMON_DDS                 \ [0x0d] DMA disable selection for multi-ADC mode
+    $0e constant ADC_COMMON_DMA                 \ [0x0e : 2] Direct memory access mode for multi ADC mode
+    $10 constant ADC_COMMON_ADCPRE              \ [0x10 : 2] ADC prescaler
+    $16 constant ADC_COMMON_VBATE               \ [0x16] VBAT enable
+    $17 constant ADC_COMMON_TSVREFE             \ [0x17] Temperature sensor and VREFINT enable
+  [then]
 
-$0000ffff constant ADC_COMMON_CDR_DATA1                             \ 1st data item of a pair of regular conversions
-$ffff0000 constant ADC_COMMON_CDR_DATA2                             \ 2nd data item of a pair of regular conversions
 
+  [ifdef] ADC_COMMON_CDR_DEF
+    \
+    \ @brief ADC common regular data register for dual and triple modes
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_COMMON_DATA1               \ [0x00 : 16] 1st data item of a pair of regular conversions
+    $10 constant ADC_COMMON_DATA2               \ [0x10 : 16] 2nd data item of a pair of regular conversions
+  [then]
 
-\
-\ @brief Common ADC registers
-\
-$40012300 constant ADC_COMMON_CSR  \ offset: 0x00 : ADC Common status register
-$40012304 constant ADC_COMMON_CCR  \ offset: 0x04 : ADC common control register
-$40012308 constant ADC_COMMON_CDR  \ offset: 0x08 : ADC common regular data register for dual and triple modes
+  \
+  \ @brief Common ADC registers
+  \
+  $00 constant ADC_COMMON_CSR           \ ADC Common status register
+  $04 constant ADC_COMMON_CCR           \ ADC common control register
+  $08 constant ADC_COMMON_CDR           \ ADC common regular data register for dual and triple modes
 
+: ADC_COMMON_DEF ; [then]

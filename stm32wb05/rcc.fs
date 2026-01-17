@@ -6,254 +6,270 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] RCC_DEF
 
-\
-\ @brief CR register
-\ Address offset: 0x00
-\ Reset value: 0x00001400
-\
-
-$00000004 constant RCC_CR_LSION                                     \ Internal Low Speed oscillator enable Set and reset by software. Reset source only for this field: PORESETn
-$00000008 constant RCC_CR_LSIRDY                                    \ Internal Low Speed oscillator Ready Set and reset by hardware to indicate when the Low Speed Internal RC oscillator is stable. Reset source only for this field: PORESETn
-$00000010 constant RCC_CR_LSEON                                     \ External Low Speed Clock enable. Set and reset by software. Reset source only for this field: PORESETn
-$00000020 constant RCC_CR_LSERDY                                    \ External Low Speed Clock ready flag. Set by hardware to indicate that LSE oscillator is stable.
-$00000040 constant RCC_CR_LSEBYP                                    \ External Low Speed Clock bypass. Set and reset by software. Reset source only for this field: PORESETn
-$00000380 constant RCC_CR_LOCKDET_NSTOP                             \ Lock detector Nstop value When start_stop signal is high; a counter is incremented every 16 MHz clock cycle. When the counter reaches (NSTOP+1) x 64 value, the lock_det signal is set high indicating that the PLL is locked. As soon as the start_stop signal is low the counter is reset to 0.
-$00000400 constant RCC_CR_HSIRDY                                    \ Internal High Speed clock ready flag. Set by hardware to indicate that internal RC 64MHz oscillator is stable. This bit is activated only if the RC is enabled by HSION (it is not activated if the RC is enabled by an IP request).
-$00001000 constant RCC_CR_HSEPLLBUFON                               \ External High Speed Clock Buffer for PLL RF2G4 enable. Set and reset by software.
-$00002000 constant RCC_CR_HSIPLLON                                  \ Internal High Speed Clock PLL enable
-$00004000 constant RCC_CR_HSIPLLRDY                                 \ Internal High Speed Clock PLL ready flag.
-$00008000 constant RCC_CR_FMRAT                                     \ Force MR_BLE active transmission status (for debug purpose)
-$00010000 constant RCC_CR_HSEON                                     \ External High Speed Clock enable. Set and reset by software. in low power mode, HSE is turned off.
-$00020000 constant RCC_CR_HSERDY                                    \ External High Speed Clock ready flag. Set by hardware to indicate that HSE oscillator is stable.
-
-
-\
-\ @brief CFGR register
-\ Address offset: 0x08
-\ Reset value: 0x00000240
-\
-
-$00000001 constant RCC_CFGR_SMPSINV                                 \ bit to control inversion of the SMPS clock
-$00000002 constant RCC_CFGR_HSESEL                                  \ Clock source selection request:
-$00000004 constant RCC_CFGR_STOPHSI                                 \ Stop HSI clock source request
-$00000008 constant RCC_CFGR_HSESEL_STATUS                           \ Clock source selection Status
-$000000e0 constant RCC_CFGR_CLKSYSDIV                               \ CLKSYSDIV: system clock divided factor from HSI_64M. 000: system clock frequency is 64 MHz (not available when HSESEL=1) 001: system clock frequency is 32 MHz 010: system clock frequency is 16 MHz 011: system clock frequency is 8 MHz * 100: system clock frequency is 4 MHz * 101: system clock frequency is 2 MHz * 110: system clock frequency is 1 MHz * 111: not used. *: If RCC_APB2ENR.MRBLEEN bit is set, writing in CLKSYSDIV one of those values is replaced by a 010b = 16 MHz writing at hardware level. Warning: if the software programs the 64 MHz frequency target while the RCC_CFGR.HSESEL=1, the hardware will switch the system clock tree on HSI64MPLL again (and restart HSIPLL64M analog block if RCC_CFGR.STOPHSI=1) To switch the system frequency between 64 / 32 / 16 MHz without risk when the MR_BLE is used, prefer the RCC_CSCMDR register to change the system frequency. the MR_BLE frequency must always be equal or less than the CPU/system clock to have functional radio.
-$00000700 constant RCC_CFGR_CLKSYSDIV_STATUS                        \ CLKSYSDIV_STATUS: system clock frequency status Set and cleared by hardware to indicate the actual system clock frequency. This register must be read to be sure that the new frequency, selected by CLKSYSDIV, has been applied. 000: system clock frequency is 64 MHz 001: system clock frequency is 32 MHz 010: system clock frequency is 16 MHz 011: system clock frequency is 8 MHz 100: system clock frequency is 4 MHz 101: system clock frequency is 2 MHz 110: system clock frequency is 1 MHz 111: not used. The actual clock frequency switching can be delayed of up to 128 system clock cycles, depending on the RCC internal counter status at the moment the new CLKSYSDIV is applied
-$00001000 constant RCC_CFGR_SMPSDIV                                 \ SMPS clock prescaling factor to generate 4MHz or 8MHz
-$00002000 constant RCC_CFGR_LPUCLKSEL                               \ Selection of LPUART clock:
-$00018000 constant RCC_CFGR_CLKSLOWSEL                              \ slow clock source selection Set by software to select the clock source. This is no glitch free mechanism Reset source only for this field: PORESETn
-$00020000 constant RCC_CFGR_IOBOOSTEN                               \ IO BOOSTER enable Set and reset by software.
-$00040000 constant RCC_CFGR_IOBOOSTCLKEXTEN                         \ IO BOOSTER clock enable as external clock Set and reset by software.
-$00080000 constant RCC_CFGR_LCOEN                                   \ LCO output enable
-$00c00000 constant RCC_CFGR_SPI3I2SCLKSEL                           \ Selection of I2S1 clock: 1x:64MHz peripheral clock
-$03000000 constant RCC_CFGR_LCOSEL                                  \ Low speed Configurable Clock Output Selection. Set and reset by software. Glitches propagation possible. Reset source only for this field: PORESETn
-$1c000000 constant RCC_CFGR_MCOSEL                                  \ Main Configurable Clock Output Selection. Set and reset by software. Glitches propagation possible.
-$e0000000 constant RCC_CFGR_CCOPRE                                  \ Configurable Clock Output Prescaler. Set and reset by software. Glitches propagation if CCOPRE is modified after CCO output is enabled. Others: not used
+  [ifdef] RCC_CR_DEF
+    \
+    \ @brief CR register
+    \ Address offset: 0x00
+    \ Reset value: 0x00001400
+    \
+    $02 constant RCC_LSION                      \ [0x02] Internal Low Speed oscillator enable Set and reset by software. Reset source only for this field: PORESETn
+    $03 constant RCC_LSIRDY                     \ [0x03] Internal Low Speed oscillator Ready Set and reset by hardware to indicate when the Low Speed Internal RC oscillator is stable. Reset source only for this field: PORESETn
+    $04 constant RCC_LSEON                      \ [0x04] External Low Speed Clock enable. Set and reset by software. Reset source only for this field: PORESETn
+    $05 constant RCC_LSERDY                     \ [0x05] External Low Speed Clock ready flag. Set by hardware to indicate that LSE oscillator is stable.
+    $06 constant RCC_LSEBYP                     \ [0x06] External Low Speed Clock bypass. Set and reset by software. Reset source only for this field: PORESETn
+    $07 constant RCC_LOCKDET_NSTOP              \ [0x07 : 3] Lock detector Nstop value When start_stop signal is high; a counter is incremented every 16 MHz clock cycle. When the counter reaches (NSTOP+1) x 64 value, the lock_det signal is set high indicating that the PLL is locked. As soon as the start_stop signal is low the counter is reset to 0.
+    $0a constant RCC_HSIRDY                     \ [0x0a] Internal High Speed clock ready flag. Set by hardware to indicate that internal RC 64MHz oscillator is stable. This bit is activated only if the RC is enabled by HSION (it is not activated if the RC is enabled by an IP request).
+    $0c constant RCC_HSEPLLBUFON                \ [0x0c] External High Speed Clock Buffer for PLL RF2G4 enable. Set and reset by software.
+    $0d constant RCC_HSIPLLON                   \ [0x0d] Internal High Speed Clock PLL enable
+    $0e constant RCC_HSIPLLRDY                  \ [0x0e] Internal High Speed Clock PLL ready flag.
+    $0f constant RCC_FMRAT                      \ [0x0f] Force MR_BLE active transmission status (for debug purpose)
+    $10 constant RCC_HSEON                      \ [0x10] External High Speed Clock enable. Set and reset by software. in low power mode, HSE is turned off.
+    $11 constant RCC_HSERDY                     \ [0x11] External High Speed Clock ready flag. Set by hardware to indicate that HSE oscillator is stable.
+  [then]
 
 
-\
-\ @brief CIER register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_CIER_LSIRDYIE                                \ LSI Ready Interrupt Enable. Set and reset by software to enable/disable interrupt caused by internal RC 32 kHz oscillator stabilization.
-$00000002 constant RCC_CIER_LSERDYIE                                \ LSE Ready Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the external 32 kHz oscillator stabilization.
-$00000008 constant RCC_CIER_HSIRDYIE                                \ HSI Ready Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the internal RC 64MHz oscillator stabilization.
-$00000010 constant RCC_CIER_HSERDYIE                                \ HSE Ready Interrupt Enable Set and reset by software to enable/disable interrupt caused by the external HSE oscillator stabilization.
-$00000020 constant RCC_CIER_HSIPLLRDYIE                             \ HSI PLL Ready Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the HSI 64MHz PLL locked on HSE.
-$00000040 constant RCC_CIER_HSIPLLUNLOCKDETIE                       \ HSIPLLUNLOCKDETIE: HSI PLL unlock detection Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the HSI 64MHz PLL unlock.
-$00000080 constant RCC_CIER_RTCRSTIE                                \ RTCRSTIE: RTC reset end Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the RTC reset end.
-$00000100 constant RCC_CIER_WDGRSTIE                                \ WDGRSTIE: Watchdog reset end Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the watchdog reset end.
-$00000200 constant RCC_CIER_LPURSTIE                                \ LPURSTIE: LPUART reset release interrupt enable.
-
-
-\
-\ @brief CIFR register
-\ Address offset: 0x1C
-\ Reset value: 0x00000008
-\
-
-$00000001 constant RCC_CIFR_LSIRDYIF                                \ LSI Ready Interrupt flag Set by hardware when LSI clock becomes stable.
-$00000002 constant RCC_CIFR_LSERDYIF                                \ LSE Ready Interrupt Flag. Set by hardware when LSE clock becomes stable.
-$00000008 constant RCC_CIFR_HSIRDYIF                                \ HSI Ready Interrupt Flag. Set by hardware when HSI becomes stable.
-$00000010 constant RCC_CIFR_HSERDYIF                                \ HSE Ready Interrupt Flag. Set by hardware when HSE becomes stable.
-$00000020 constant RCC_CIFR_HSIPLLRDYIF                             \ HSI PLL Ready Interrupt Flag. Set by hardware when HSI PLL 64MHz becomes stable.
-$00000040 constant RCC_CIFR_HSIPLLUNLOCKDETIF                       \ HSIPLLUNLOCKDETIF: HSI PLL unlock detection Interrupt Flag.
-$00000080 constant RCC_CIFR_RTCRSTIF                                \ RTC reset end Interrupt Flag. Raised when reset is released on 32kHz clock
-$00000100 constant RCC_CIFR_WDGRSTIF                                \ WDG reset end Interrupt Flag. Raised when reset is released on 32kHz clock
-$00000200 constant RCC_CIFR_LPURSTF                                 \ LPUART reset release flag
+  [ifdef] RCC_CFGR_DEF
+    \
+    \ @brief CFGR register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000240
+    \
+    $00 constant RCC_SMPSINV                    \ [0x00] bit to control inversion of the SMPS clock
+    $01 constant RCC_HSESEL                     \ [0x01] Clock source selection request:
+    $02 constant RCC_STOPHSI                    \ [0x02] Stop HSI clock source request
+    $03 constant RCC_HSESEL_STATUS              \ [0x03] Clock source selection Status
+    $05 constant RCC_CLKSYSDIV                  \ [0x05 : 3] CLKSYSDIV: system clock divided factor from HSI_64M. 000: system clock frequency is 64 MHz (not available when HSESEL=1) 001: system clock frequency is 32 MHz 010: system clock frequency is 16 MHz 011: system clock frequency is 8 MHz * 100: system clock frequency is 4 MHz * 101: system clock frequency is 2 MHz * 110: system clock frequency is 1 MHz * 111: not used. *: If RCC_APB2ENR.MRBLEEN bit is set, writing in CLKSYSDIV one of those values is replaced by a 010b = 16 MHz writing at hardware level. Warning: if the software programs the 64 MHz frequency target while the RCC_CFGR.HSESEL=1, the hardware will switch the system clock tree on HSI64MPLL again (and restart HSIPLL64M analog block if RCC_CFGR.STOPHSI=1) To switch the system frequency between 64 / 32 / 16 MHz without risk when the MR_BLE is used, prefer the RCC_CSCMDR register to change the system frequency. the MR_BLE frequency must always be equal or less than the CPU/system clock to have functional radio.
+    $08 constant RCC_CLKSYSDIV_STATUS           \ [0x08 : 3] CLKSYSDIV_STATUS: system clock frequency status Set and cleared by hardware to indicate the actual system clock frequency. This register must be read to be sure that the new frequency, selected by CLKSYSDIV, has been applied. 000: system clock frequency is 64 MHz 001: system clock frequency is 32 MHz 010: system clock frequency is 16 MHz 011: system clock frequency is 8 MHz 100: system clock frequency is 4 MHz 101: system clock frequency is 2 MHz 110: system clock frequency is 1 MHz 111: not used. The actual clock frequency switching can be delayed of up to 128 system clock cycles, depending on the RCC internal counter status at the moment the new CLKSYSDIV is applied
+    $0c constant RCC_SMPSDIV                    \ [0x0c] SMPS clock prescaling factor to generate 4MHz or 8MHz
+    $0d constant RCC_LPUCLKSEL                  \ [0x0d] Selection of LPUART clock:
+    $0f constant RCC_CLKSLOWSEL                 \ [0x0f : 2] slow clock source selection Set by software to select the clock source. This is no glitch free mechanism Reset source only for this field: PORESETn
+    $11 constant RCC_IOBOOSTEN                  \ [0x11] IO BOOSTER enable Set and reset by software.
+    $12 constant RCC_IOBOOSTCLKEXTEN            \ [0x12] IO BOOSTER clock enable as external clock Set and reset by software.
+    $13 constant RCC_LCOEN                      \ [0x13] LCO output enable
+    $16 constant RCC_SPI3I2SCLKSEL              \ [0x16 : 2] Selection of I2S1 clock: 1x:64MHz peripheral clock
+    $18 constant RCC_LCOSEL                     \ [0x18 : 2] Low speed Configurable Clock Output Selection. Set and reset by software. Glitches propagation possible. Reset source only for this field: PORESETn
+    $1a constant RCC_MCOSEL                     \ [0x1a : 3] Main Configurable Clock Output Selection. Set and reset by software. Glitches propagation possible.
+    $1d constant RCC_CCOPRE                     \ [0x1d : 3] Configurable Clock Output Prescaler. Set and reset by software. Glitches propagation if CCOPRE is modified after CCO output is enabled. Others: not used
+  [then]
 
 
-\
-\ @brief CSCMDR register
-\ Address offset: 0x20
-\ Reset value: 0x00000080
-\
-
-$00000001 constant RCC_CSCMDR_REQUEST                               \ Request for system clock switching Cleared by hardware when system clock frequency switch is done
-$0000000e constant RCC_CSCMDR_CLKSYSDIV_REQ                         \ system clock dividing factor from HSI_64M requested Note: behavior depends on BLEEN in APB2ENR register
-$00000030 constant RCC_CSCMDR_STATUS                                \ Status of clock switch sequence
-$00000040 constant RCC_CSCMDR_EOFSEQ_IE                             \ End of sequence Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the clock system switch.
-$00000080 constant RCC_CSCMDR_EOFSEQ_IRQ                            \ End of Sequence flag Set by hardware when clock system swtich is ended
-
-
-\
-\ @brief AHBRSTR register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_AHBRSTR_DMARST                               \ DMA and DMAMUX reset Set and reset by software.
-$00000004 constant RCC_AHBRSTR_GPIOARST                             \ GPIOA reset Set and reset by software.
-$00000008 constant RCC_AHBRSTR_GPIOBRST                             \ GPIOB reset Set and reset by software.
-$00001000 constant RCC_AHBRSTR_CRCRST                               \ CRC reset Set and reset by software.
-$00010000 constant RCC_AHBRSTR_PKARST                               \ PKA reset Set and reset by software.
-$00040000 constant RCC_AHBRSTR_RNGRST                               \ RNG reset Set and reset by software.
+  [ifdef] RCC_CIER_DEF
+    \
+    \ @brief CIER register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIRDYIE                   \ [0x00] LSI Ready Interrupt Enable. Set and reset by software to enable/disable interrupt caused by internal RC 32 kHz oscillator stabilization.
+    $01 constant RCC_LSERDYIE                   \ [0x01] LSE Ready Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the external 32 kHz oscillator stabilization.
+    $03 constant RCC_HSIRDYIE                   \ [0x03] HSI Ready Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the internal RC 64MHz oscillator stabilization.
+    $04 constant RCC_HSERDYIE                   \ [0x04] HSE Ready Interrupt Enable Set and reset by software to enable/disable interrupt caused by the external HSE oscillator stabilization.
+    $05 constant RCC_HSIPLLRDYIE                \ [0x05] HSI PLL Ready Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the HSI 64MHz PLL locked on HSE.
+    $06 constant RCC_HSIPLLUNLOCKDETIE          \ [0x06] HSIPLLUNLOCKDETIE: HSI PLL unlock detection Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the HSI 64MHz PLL unlock.
+    $07 constant RCC_RTCRSTIE                   \ [0x07] RTCRSTIE: RTC reset end Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the RTC reset end.
+    $08 constant RCC_WDGRSTIE                   \ [0x08] WDGRSTIE: Watchdog reset end Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the watchdog reset end.
+    $09 constant RCC_LPURSTIE                   \ [0x09] LPURSTIE: LPUART reset release interrupt enable.
+  [then]
 
 
-\
-\ @brief APB0RSTR register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_APB0RSTR_TIM1RST                             \ TIM1: Advanced Timer reset Set and reset by software.
-$00000002 constant RCC_APB0RSTR_TIM16RST                            \ TIM16 reset
-$00000004 constant RCC_APB0RSTR_TIM17RST                            \ TIM17 reset
-$00000100 constant RCC_APB0RSTR_SYSCFGRST                           \ SYSTEM CONFIG reset Set and reset by software.
-$00001000 constant RCC_APB0RSTR_RTCRST                              \ RTC reset Set and reset by software.
-$00004000 constant RCC_APB0RSTR_WDRST                               \ WATCHDOG reset Set and reset by software.
-
-
-\
-\ @brief APB1RSTR register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_APB1RSTR_AUXADCRST                           \ AUXADC reset for Aux-ADC digital clock Set and reset by software.
-$00000100 constant RCC_APB1RSTR_LPUARTRST                           \ LPUART reset Set and reset by software.
-$00000400 constant RCC_APB1RSTR_USARTRST                            \ USART reset Set and reset by software.
-$00004000 constant RCC_APB1RSTR_SPI3RST                             \ SPI3 reset Set and reset by software.
-$00200000 constant RCC_APB1RSTR_I2C21RST                            \ I2C1 reset Set and reset by software.
+  [ifdef] RCC_CIFR_DEF
+    \
+    \ @brief CIFR register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000008
+    \
+    $00 constant RCC_LSIRDYIF                   \ [0x00] LSI Ready Interrupt flag Set by hardware when LSI clock becomes stable.
+    $01 constant RCC_LSERDYIF                   \ [0x01] LSE Ready Interrupt Flag. Set by hardware when LSE clock becomes stable.
+    $03 constant RCC_HSIRDYIF                   \ [0x03] HSI Ready Interrupt Flag. Set by hardware when HSI becomes stable.
+    $04 constant RCC_HSERDYIF                   \ [0x04] HSE Ready Interrupt Flag. Set by hardware when HSE becomes stable.
+    $05 constant RCC_HSIPLLRDYIF                \ [0x05] HSI PLL Ready Interrupt Flag. Set by hardware when HSI PLL 64MHz becomes stable.
+    $06 constant RCC_HSIPLLUNLOCKDETIF          \ [0x06] HSIPLLUNLOCKDETIF: HSI PLL unlock detection Interrupt Flag.
+    $07 constant RCC_RTCRSTIF                   \ [0x07] RTC reset end Interrupt Flag. Raised when reset is released on 32kHz clock
+    $08 constant RCC_WDGRSTIF                   \ [0x08] WDG reset end Interrupt Flag. Raised when reset is released on 32kHz clock
+    $09 constant RCC_LPURSTF                    \ [0x09] LPUART reset release flag
+  [then]
 
 
-\
-\ @brief APB2RSTR register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_APB2RSTR_BLERST                              \ BLE reset.
-
-
-\
-\ @brief AHBENR register
-\ Address offset: 0x50
-\ Reset value: 0x0000000C
-\
-
-$00000001 constant RCC_AHBENR_DMAEN                                 \ DMA and DMAMUX enable Set and enable by software.
-$00000004 constant RCC_AHBENR_GPIOAEN                               \ GPIOA enable. It must be enabled by default
-$00000008 constant RCC_AHBENR_GPIOBEN                               \ GPIOB enable. It must be enabled by default
-$00001000 constant RCC_AHBENR_CRCEN                                 \ CRC enable Set and enable by software.
-$00010000 constant RCC_AHBENR_PKAEN                                 \ PKA clock enable Set and enable by software.
-$00040000 constant RCC_AHBENR_RNGEN                                 \ RNG clock enable Set and enable by software.
+  [ifdef] RCC_CSCMDR_DEF
+    \
+    \ @brief CSCMDR register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000080
+    \
+    $00 constant RCC_REQUEST                    \ [0x00] Request for system clock switching Cleared by hardware when system clock frequency switch is done
+    $01 constant RCC_CLKSYSDIV_REQ              \ [0x01 : 3] system clock dividing factor from HSI_64M requested Note: behavior depends on BLEEN in APB2ENR register
+    $04 constant RCC_STATUS                     \ [0x04 : 2] Status of clock switch sequence
+    $06 constant RCC_EOFSEQ_IE                  \ [0x06] End of sequence Interrupt Enable. Set and reset by software to enable/disable interrupt caused by the clock system switch.
+    $07 constant RCC_EOFSEQ_IRQ                 \ [0x07] End of Sequence flag Set by hardware when clock system swtich is ended
+  [then]
 
 
-\
-\ @brief APB0ENR register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_APB0ENR_TIM2EN                               \ TIM2: Advanced Timer clock enable Set and enable by software.
-$00000002 constant RCC_APB0ENR_TIM16EN                              \ TIM16 enable
-$00000004 constant RCC_APB0ENR_TIM17EN                              \ TIM17 enable
-$00000100 constant RCC_APB0ENR_SYSCFGEN                             \ SYSTEM CONFIG enable Set and enable by software.
-$00001000 constant RCC_APB0ENR_RTCEN                                \ RTC clock enable Set and enable by software. Reset source only for this field: PORESETn
-$00004000 constant RCC_APB0ENR_WDGEN                                \ Watchdog clock enable. Set and enable by software.
-
-
-\
-\ @brief APB1ENR register
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_APB1ENR_ADCDIGEN                             \ AUXADC clock enable for Aux-ADC digital clock Set and enable by software.
-$00000020 constant RCC_APB1ENR_ADCANAEN                             \ ADC clock enable for Aux-ADC analog clock Set and enable by software.
-$00000100 constant RCC_APB1ENR_LPUARTEN                             \ LPUART clock enable Set and enable by software.
-$00000400 constant RCC_APB1ENR_USART1EN                             \ USART clock enable Set and enable by software.
-$00004000 constant RCC_APB1ENR_SPI3EN                               \ SPI3 clock enable Set and enable by software.
-$00200000 constant RCC_APB1ENR_I2C1EN                               \ I2C1 clock enable Set and enable by software.
+  [ifdef] RCC_AHBRSTR_DEF
+    \
+    \ @brief AHBRSTR register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DMARST                     \ [0x00] DMA and DMAMUX reset Set and reset by software.
+    $02 constant RCC_GPIOARST                   \ [0x02] GPIOA reset Set and reset by software.
+    $03 constant RCC_GPIOBRST                   \ [0x03] GPIOB reset Set and reset by software.
+    $0c constant RCC_CRCRST                     \ [0x0c] CRC reset Set and reset by software.
+    $10 constant RCC_PKARST                     \ [0x10] PKA reset Set and reset by software.
+    $12 constant RCC_RNGRST                     \ [0x12] RNG reset Set and reset by software.
+  [then]
 
 
-\
-\ @brief APB2ENR register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_APB2ENR_MRBLEEN                              \ MR_BLE enable
-$00000004 constant RCC_APB2ENR_CLKBLEDIV                            \ MR_BLE clock frequency selection when RCC_APB2ENR.MRBLEEN=1
-
-
-\
-\ @brief CSR register
-\ Address offset: 0x94
-\ Reset value: 0x0C000000
-\
-
-$00800000 constant RCC_CSR_RMVF                                     \ Remove reset flag Set by software to clear the value of the reset flags. It auto clears by HW after clearing reason flags
-$04000000 constant RCC_CSR_PADRSTF                                  \ SYSTEM reset flag Reset by software by writing the RMVF bit. Set by hardware when a reset from pad occurs.
-$08000000 constant RCC_CSR_PORRSTF                                  \ POWER reset flag Reset by software by writing the RMVF bit. Set by hardware when a power reset occurs from LPMURESET block.
-$10000000 constant RCC_CSR_SFTRSTF                                  \ Software reset flag Reset by software by writing the RMVF bit. Set by hardware when a software reset occurs.
-$20000000 constant RCC_CSR_WDGRSTF                                  \ Watchdog reset flag Reset by software by writing the RMVF bit. Set by hardware when a watchdog reset from V33 domain occurs.
-$40000000 constant RCC_CSR_LOCKUPRSTF                               \ LOCK UP reset flag from CM0 Reset by software by writing the RMVF bit. Set by hardware from unrecoverable exception CPU. It reset V12i domain, FLASH controller and peripherals.
+  [ifdef] RCC_APB0RSTR_DEF
+    \
+    \ @brief APB0RSTR register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1RST                    \ [0x00] TIM1: Advanced Timer reset Set and reset by software.
+    $01 constant RCC_TIM16RST                   \ [0x01] TIM16 reset
+    $02 constant RCC_TIM17RST                   \ [0x02] TIM17 reset
+    $08 constant RCC_SYSCFGRST                  \ [0x08] SYSTEM CONFIG reset Set and reset by software.
+    $0c constant RCC_RTCRST                     \ [0x0c] RTC reset Set and reset by software.
+    $0e constant RCC_WDRST                      \ [0x0e] WATCHDOG reset Set and reset by software.
+  [then]
 
 
-\
-\ @brief RFSWHSECR register
-\ Address offset: 0x98
-\ Reset value: 0x00000030
-\
-
-$00000008 constant RCC_RFSWHSECR_SATRG                              \ Sense Amplifier threshold Set by software.
-$00000070 constant RCC_RFSWHSECR_GMC                                \ High Speed External XO current control Set by software.
-$00000080 constant RCC_RFSWHSECR_SWXOTUNEEN                         \ RF-HSE capacitor bank tuning by SW enable Set by software
-$00003f00 constant RCC_RFSWHSECR_SWXOTUNE                           \ RF-HSE capacitor bank tuning value by SW Set by software
-
-
-\
-\ @brief RFHSECR register
-\ Address offset: 0x9C
-\ Reset value: 0x00000000
-\
-
-$0000003f constant RCC_RFHSECR_XOTUNE                               \ RF-HSE capacitor bank tuning Set by option byte loading soon after Power On Reset.
+  [ifdef] RCC_APB1RSTR_DEF
+    \
+    \ @brief APB1RSTR register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_AUXADCRST                  \ [0x04] AUXADC reset for Aux-ADC digital clock Set and reset by software.
+    $08 constant RCC_LPUARTRST                  \ [0x08] LPUART reset Set and reset by software.
+    $0a constant RCC_USARTRST                   \ [0x0a] USART reset Set and reset by software.
+    $0e constant RCC_SPI3RST                    \ [0x0e] SPI3 reset Set and reset by software.
+    $15 constant RCC_I2C21RST                   \ [0x15] I2C1 reset Set and reset by software.
+  [then]
 
 
-\
-\ @brief Reset and Clock Controller
-\
-$48400000 constant RCC_CR         \ offset: 0x00 : CR register
-$48400008 constant RCC_CFGR       \ offset: 0x08 : CFGR register
-$48400018 constant RCC_CIER       \ offset: 0x18 : CIER register
-$4840001c constant RCC_CIFR       \ offset: 0x1C : CIFR register
-$48400020 constant RCC_CSCMDR     \ offset: 0x20 : CSCMDR register
-$48400030 constant RCC_AHBRSTR    \ offset: 0x30 : AHBRSTR register
-$48400034 constant RCC_APB0RSTR   \ offset: 0x34 : APB0RSTR register
-$48400038 constant RCC_APB1RSTR   \ offset: 0x38 : APB1RSTR register
-$48400040 constant RCC_APB2RSTR   \ offset: 0x40 : APB2RSTR register
-$48400050 constant RCC_AHBENR     \ offset: 0x50 : AHBENR register
-$48400054 constant RCC_APB0ENR    \ offset: 0x54 : APB0ENR register
-$48400058 constant RCC_APB1ENR    \ offset: 0x58 : APB1ENR register
-$48400060 constant RCC_APB2ENR    \ offset: 0x60 : APB2ENR register
-$48400094 constant RCC_CSR        \ offset: 0x94 : CSR register
-$48400098 constant RCC_RFSWHSECR  \ offset: 0x98 : RFSWHSECR register
-$4840009c constant RCC_RFHSECR    \ offset: 0x9C : RFHSECR register
+  [ifdef] RCC_APB2RSTR_DEF
+    \
+    \ @brief APB2RSTR register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_BLERST                     \ [0x00] BLE reset.
+  [then]
 
+
+  [ifdef] RCC_AHBENR_DEF
+    \
+    \ @brief AHBENR register
+    \ Address offset: 0x50
+    \ Reset value: 0x0000000C
+    \
+    $00 constant RCC_DMAEN                      \ [0x00] DMA and DMAMUX enable Set and enable by software.
+    $02 constant RCC_GPIOAEN                    \ [0x02] GPIOA enable. It must be enabled by default
+    $03 constant RCC_GPIOBEN                    \ [0x03] GPIOB enable. It must be enabled by default
+    $0c constant RCC_CRCEN                      \ [0x0c] CRC enable Set and enable by software.
+    $10 constant RCC_PKAEN                      \ [0x10] PKA clock enable Set and enable by software.
+    $12 constant RCC_RNGEN                      \ [0x12] RNG clock enable Set and enable by software.
+  [then]
+
+
+  [ifdef] RCC_APB0ENR_DEF
+    \
+    \ @brief APB0ENR register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2EN                     \ [0x00] TIM2: Advanced Timer clock enable Set and enable by software.
+    $01 constant RCC_TIM16EN                    \ [0x01] TIM16 enable
+    $02 constant RCC_TIM17EN                    \ [0x02] TIM17 enable
+    $08 constant RCC_SYSCFGEN                   \ [0x08] SYSTEM CONFIG enable Set and enable by software.
+    $0c constant RCC_RTCEN                      \ [0x0c] RTC clock enable Set and enable by software. Reset source only for this field: PORESETn
+    $0e constant RCC_WDGEN                      \ [0x0e] Watchdog clock enable. Set and enable by software.
+  [then]
+
+
+  [ifdef] RCC_APB1ENR_DEF
+    \
+    \ @brief APB1ENR register
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_ADCDIGEN                   \ [0x04] AUXADC clock enable for Aux-ADC digital clock Set and enable by software.
+    $05 constant RCC_ADCANAEN                   \ [0x05] ADC clock enable for Aux-ADC analog clock Set and enable by software.
+    $08 constant RCC_LPUARTEN                   \ [0x08] LPUART clock enable Set and enable by software.
+    $0a constant RCC_USART1EN                   \ [0x0a] USART clock enable Set and enable by software.
+    $0e constant RCC_SPI3EN                     \ [0x0e] SPI3 clock enable Set and enable by software.
+    $15 constant RCC_I2C1EN                     \ [0x15] I2C1 clock enable Set and enable by software.
+  [then]
+
+
+  [ifdef] RCC_APB2ENR_DEF
+    \
+    \ @brief APB2ENR register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MRBLEEN                    \ [0x00] MR_BLE enable
+    $02 constant RCC_CLKBLEDIV                  \ [0x02] MR_BLE clock frequency selection when RCC_APB2ENR.MRBLEEN=1
+  [then]
+
+
+  [ifdef] RCC_CSR_DEF
+    \
+    \ @brief CSR register
+    \ Address offset: 0x94
+    \ Reset value: 0x0C000000
+    \
+    $17 constant RCC_RMVF                       \ [0x17] Remove reset flag Set by software to clear the value of the reset flags. It auto clears by HW after clearing reason flags
+    $1a constant RCC_PADRSTF                    \ [0x1a] SYSTEM reset flag Reset by software by writing the RMVF bit. Set by hardware when a reset from pad occurs.
+    $1b constant RCC_PORRSTF                    \ [0x1b] POWER reset flag Reset by software by writing the RMVF bit. Set by hardware when a power reset occurs from LPMURESET block.
+    $1c constant RCC_SFTRSTF                    \ [0x1c] Software reset flag Reset by software by writing the RMVF bit. Set by hardware when a software reset occurs.
+    $1d constant RCC_WDGRSTF                    \ [0x1d] Watchdog reset flag Reset by software by writing the RMVF bit. Set by hardware when a watchdog reset from V33 domain occurs.
+    $1e constant RCC_LOCKUPRSTF                 \ [0x1e] LOCK UP reset flag from CM0 Reset by software by writing the RMVF bit. Set by hardware from unrecoverable exception CPU. It reset V12i domain, FLASH controller and peripherals.
+  [then]
+
+
+  [ifdef] RCC_RFSWHSECR_DEF
+    \
+    \ @brief RFSWHSECR register
+    \ Address offset: 0x98
+    \ Reset value: 0x00000030
+    \
+    $03 constant RCC_SATRG                      \ [0x03] Sense Amplifier threshold Set by software.
+    $04 constant RCC_GMC                        \ [0x04 : 3] High Speed External XO current control Set by software.
+    $07 constant RCC_SWXOTUNEEN                 \ [0x07] RF-HSE capacitor bank tuning by SW enable Set by software
+    $08 constant RCC_SWXOTUNE                   \ [0x08 : 6] RF-HSE capacitor bank tuning value by SW Set by software
+  [then]
+
+
+  [ifdef] RCC_RFHSECR_DEF
+    \
+    \ @brief RFHSECR register
+    \ Address offset: 0x9C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_XOTUNE                     \ [0x00 : 6] RF-HSE capacitor bank tuning Set by option byte loading soon after Power On Reset.
+  [then]
+
+  \
+  \ @brief Reset and Clock Controller
+  \
+  $00 constant RCC_CR                   \ CR register
+  $08 constant RCC_CFGR                 \ CFGR register
+  $18 constant RCC_CIER                 \ CIER register
+  $1C constant RCC_CIFR                 \ CIFR register
+  $20 constant RCC_CSCMDR               \ CSCMDR register
+  $30 constant RCC_AHBRSTR              \ AHBRSTR register
+  $34 constant RCC_APB0RSTR             \ APB0RSTR register
+  $38 constant RCC_APB1RSTR             \ APB1RSTR register
+  $40 constant RCC_APB2RSTR             \ APB2RSTR register
+  $50 constant RCC_AHBENR               \ AHBENR register
+  $54 constant RCC_APB0ENR              \ APB0ENR register
+  $58 constant RCC_APB1ENR              \ APB1ENR register
+  $60 constant RCC_APB2ENR              \ APB2ENR register
+  $94 constant RCC_CSR                  \ CSR register
+  $98 constant RCC_RFSWHSECR            \ RFSWHSECR register
+  $9C constant RCC_RFHSECR              \ RFHSECR register
+
+: RCC_DEF ; [then]

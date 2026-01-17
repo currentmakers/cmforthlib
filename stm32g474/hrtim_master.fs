@@ -1,169 +1,180 @@
 \
 \ @file hrtim_master.fs
-\ @brief High Resolution Timer: Master       Timers
+\ @brief High Resolution Timer: Master Timers
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] HRTIM_MASTER_DEF
 
-\
-\ @brief Master Timer Control Register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000007 constant HRTIM_MASTER_MCR_CK_PSC                          \ HRTIM Master Clock prescaler
-$00000008 constant HRTIM_MASTER_MCR_CONT                            \ Master Continuous mode
-$00000010 constant HRTIM_MASTER_MCR_RETRIG                          \ Master Re-triggerable mode
-$00000020 constant HRTIM_MASTER_MCR_HALF                            \ Half mode enable
-$000000c0 constant HRTIM_MASTER_MCR_INTLVD                          \ Interleaved mode
-$00000300 constant HRTIM_MASTER_MCR_SYNC_IN                         \ synchronization input
-$00000400 constant HRTIM_MASTER_MCR_SYNCRSTM                        \ Synchronization Resets Master
-$00000800 constant HRTIM_MASTER_MCR_SYNCSTRTM                       \ Synchronization Starts Master
-$00003000 constant HRTIM_MASTER_MCR_SYNC_OUT                        \ Synchronization output
-$0000c000 constant HRTIM_MASTER_MCR_SYNC_SRC                        \ Synchronization source
-$00010000 constant HRTIM_MASTER_MCR_MCEN                            \ Master Counter enable
-$00020000 constant HRTIM_MASTER_MCR_TACEN                           \ Timer A counter enable
-$00040000 constant HRTIM_MASTER_MCR_TBCEN                           \ Timer B counter enable
-$00080000 constant HRTIM_MASTER_MCR_TCCEN                           \ Timer C counter enable
-$00100000 constant HRTIM_MASTER_MCR_TDCEN                           \ Timer D counter enable
-$00200000 constant HRTIM_MASTER_MCR_TECEN                           \ Timer E counter enable
-$00400000 constant HRTIM_MASTER_MCR_TFCEN                           \ Timer F counter enable
-$06000000 constant HRTIM_MASTER_MCR_DACSYNC                         \ AC Synchronization
-$08000000 constant HRTIM_MASTER_MCR_PREEN                           \ Preload enable
-$20000000 constant HRTIM_MASTER_MCR_MREPU                           \ Master Timer Repetition update
-$c0000000 constant HRTIM_MASTER_MCR_BRSTDMA                         \ Burst DMA Update
-
-
-\
-\ @brief Master Timer Interrupt Status Register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HRTIM_MASTER_MISR_MCMP1                          \ Master Compare 1 Interrupt Flag
-$00000002 constant HRTIM_MASTER_MISR_MCMP2                          \ Master Compare 2 Interrupt Flag
-$00000004 constant HRTIM_MASTER_MISR_MCMP3                          \ Master Compare 3 Interrupt Flag
-$00000008 constant HRTIM_MASTER_MISR_MCMP4                          \ Master Compare 4 Interrupt Flag
-$00000010 constant HRTIM_MASTER_MISR_MREP                           \ Master Repetition Interrupt Flag
-$00000020 constant HRTIM_MASTER_MISR_SYNC                           \ Sync Input Interrupt Flag
-$00000040 constant HRTIM_MASTER_MISR_MUPD                           \ Master Update Interrupt Flag
+  [ifdef] HRTIM_MASTER_MCR_DEF
+    \
+    \ @brief Master Timer Control Register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_CK_PSC            \ [0x00 : 3] HRTIM Master Clock prescaler
+    $03 constant HRTIM_MASTER_CONT              \ [0x03] Master Continuous mode
+    $04 constant HRTIM_MASTER_RETRIG            \ [0x04] Master Re-triggerable mode
+    $05 constant HRTIM_MASTER_HALF              \ [0x05] Half mode enable
+    $06 constant HRTIM_MASTER_INTLVD            \ [0x06 : 2] Interleaved mode
+    $08 constant HRTIM_MASTER_SYNC_IN           \ [0x08 : 2] synchronization input
+    $0a constant HRTIM_MASTER_SYNCRSTM          \ [0x0a] Synchronization Resets Master
+    $0b constant HRTIM_MASTER_SYNCSTRTM         \ [0x0b] Synchronization Starts Master
+    $0c constant HRTIM_MASTER_SYNC_OUT          \ [0x0c : 2] Synchronization output
+    $0e constant HRTIM_MASTER_SYNC_SRC          \ [0x0e : 2] Synchronization source
+    $10 constant HRTIM_MASTER_MCEN              \ [0x10] Master Counter enable
+    $11 constant HRTIM_MASTER_TACEN             \ [0x11] Timer A counter enable
+    $12 constant HRTIM_MASTER_TBCEN             \ [0x12] Timer B counter enable
+    $13 constant HRTIM_MASTER_TCCEN             \ [0x13] Timer C counter enable
+    $14 constant HRTIM_MASTER_TDCEN             \ [0x14] Timer D counter enable
+    $15 constant HRTIM_MASTER_TECEN             \ [0x15] Timer E counter enable
+    $16 constant HRTIM_MASTER_TFCEN             \ [0x16] Timer F counter enable
+    $19 constant HRTIM_MASTER_DACSYNC           \ [0x19 : 2] AC Synchronization
+    $1b constant HRTIM_MASTER_PREEN             \ [0x1b] Preload enable
+    $1d constant HRTIM_MASTER_MREPU             \ [0x1d] Master Timer Repetition update
+    $1e constant HRTIM_MASTER_BRSTDMA           \ [0x1e : 2] Burst DMA Update
+  [then]
 
 
-\
-\ @brief Master Timer Interrupt Clear Register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HRTIM_MASTER_MICR_MCMP1C                         \ Master Compare 1 Interrupt flag clear
-$00000002 constant HRTIM_MASTER_MICR_MCMP2C                         \ Master Compare 2 Interrupt flag clear
-$00000004 constant HRTIM_MASTER_MICR_MCMP3C                         \ Master Compare 3 Interrupt flag clear
-$00000008 constant HRTIM_MASTER_MICR_MCMP4C                         \ Master Compare 4 Interrupt flag clear
-$00000010 constant HRTIM_MASTER_MICR_MREPC                          \ Repetition Interrupt flag clear
-$00000020 constant HRTIM_MASTER_MICR_SYNCC                          \ Sync Input Interrupt flag clear
-$00000040 constant HRTIM_MASTER_MICR_MUPDC                          \ Master update Interrupt flag clear
-
-
-\
-\ @brief HRTIM Master Timer DMA / Interrupt Enable Register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HRTIM_MASTER_MDIER_MCMP1IE                       \ MCMP1IE
-$00000002 constant HRTIM_MASTER_MDIER_MCMP2IE                       \ MCMP2IE
-$00000004 constant HRTIM_MASTER_MDIER_MCMP3IE                       \ MCMP3IE
-$00000008 constant HRTIM_MASTER_MDIER_MCMP4IE                       \ MCMP4IE
-$00000010 constant HRTIM_MASTER_MDIER_MREPIE                        \ MREPIE
-$00000020 constant HRTIM_MASTER_MDIER_SYNCIE                        \ SYNCIE
-$00000040 constant HRTIM_MASTER_MDIER_MUPDIE                        \ MUPDIE
-$00010000 constant HRTIM_MASTER_MDIER_MCMP1DE                       \ MCMP1DE
-$00020000 constant HRTIM_MASTER_MDIER_MCMP2DE                       \ MCMP2DE
-$00040000 constant HRTIM_MASTER_MDIER_MCMP3DE                       \ MCMP3DE
-$00080000 constant HRTIM_MASTER_MDIER_MCMP4DE                       \ MCMP4DE
-$00100000 constant HRTIM_MASTER_MDIER_MREPDE                        \ MREPDE
-$00200000 constant HRTIM_MASTER_MDIER_SYNCDE                        \ SYNCDE
-$00400000 constant HRTIM_MASTER_MDIER_MUPDDE                        \ MUPDDE
+  [ifdef] HRTIM_MASTER_MISR_DEF
+    \
+    \ @brief Master Timer Interrupt Status Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MCMP1             \ [0x00] Master Compare 1 Interrupt Flag
+    $01 constant HRTIM_MASTER_MCMP2             \ [0x01] Master Compare 2 Interrupt Flag
+    $02 constant HRTIM_MASTER_MCMP3             \ [0x02] Master Compare 3 Interrupt Flag
+    $03 constant HRTIM_MASTER_MCMP4             \ [0x03] Master Compare 4 Interrupt Flag
+    $04 constant HRTIM_MASTER_MREP              \ [0x04] Master Repetition Interrupt Flag
+    $05 constant HRTIM_MASTER_SYNC              \ [0x05] Sync Input Interrupt Flag
+    $06 constant HRTIM_MASTER_MUPD              \ [0x06] Master Update Interrupt Flag
+  [then]
 
 
-\
-\ @brief Master Timer Counter Register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant HRTIM_MASTER_MCNTR_MCNT                          \ Counter value
-
-
-\
-\ @brief Master Timer Period Register
-\ Address offset: 0x14
-\ Reset value: 0x0000FFFF
-\
-
-$0000ffff constant HRTIM_MASTER_MPER_MPER                           \ Master Timer Period value
+  [ifdef] HRTIM_MASTER_MICR_DEF
+    \
+    \ @brief Master Timer Interrupt Clear Register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MCMP1C            \ [0x00] Master Compare 1 Interrupt flag clear
+    $01 constant HRTIM_MASTER_MCMP2C            \ [0x01] Master Compare 2 Interrupt flag clear
+    $02 constant HRTIM_MASTER_MCMP3C            \ [0x02] Master Compare 3 Interrupt flag clear
+    $03 constant HRTIM_MASTER_MCMP4C            \ [0x03] Master Compare 4 Interrupt flag clear
+    $04 constant HRTIM_MASTER_MREPC             \ [0x04] Repetition Interrupt flag clear
+    $05 constant HRTIM_MASTER_SYNCC             \ [0x05] Sync Input Interrupt flag clear
+    $06 constant HRTIM_MASTER_MUPDC             \ [0x06] Master update Interrupt flag clear
+  [then]
 
 
-\
-\ @brief Master Timer Repetition Register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HRTIM_MASTER_MREP_MREP                           \ Master Timer Repetition counter value
-
-
-\
-\ @brief Master Timer Compare 1 Register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant HRTIM_MASTER_MCMP1R_MCMP1                        \ Master Timer Compare 1 value
-
-
-\
-\ @brief Master Timer Compare 2 Register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant HRTIM_MASTER_MCMP2R_MCMP2                        \ Master Timer Compare 2 value
+  [ifdef] HRTIM_MASTER_MDIER_DEF
+    \
+    \ @brief HRTIM Master Timer DMA / Interrupt Enable Register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MCMP1IE           \ [0x00] MCMP1IE
+    $01 constant HRTIM_MASTER_MCMP2IE           \ [0x01] MCMP2IE
+    $02 constant HRTIM_MASTER_MCMP3IE           \ [0x02] MCMP3IE
+    $03 constant HRTIM_MASTER_MCMP4IE           \ [0x03] MCMP4IE
+    $04 constant HRTIM_MASTER_MREPIE            \ [0x04] MREPIE
+    $05 constant HRTIM_MASTER_SYNCIE            \ [0x05] SYNCIE
+    $06 constant HRTIM_MASTER_MUPDIE            \ [0x06] MUPDIE
+    $10 constant HRTIM_MASTER_MCMP1DE           \ [0x10] MCMP1DE
+    $11 constant HRTIM_MASTER_MCMP2DE           \ [0x11] MCMP2DE
+    $12 constant HRTIM_MASTER_MCMP3DE           \ [0x12] MCMP3DE
+    $13 constant HRTIM_MASTER_MCMP4DE           \ [0x13] MCMP4DE
+    $14 constant HRTIM_MASTER_MREPDE            \ [0x14] MREPDE
+    $15 constant HRTIM_MASTER_SYNCDE            \ [0x15] SYNCDE
+    $16 constant HRTIM_MASTER_MUPDDE            \ [0x16] MUPDDE
+  [then]
 
 
-\
-\ @brief Master Timer Compare 3 Register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant HRTIM_MASTER_MCMP3R_MCMP3                        \ Master Timer Compare 3 value
-
-
-\
-\ @brief Master Timer Compare 4 Register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant HRTIM_MASTER_MCMP4R_MCMP4                        \ Master Timer Compare 4 value
+  [ifdef] HRTIM_MASTER_MCNTR_DEF
+    \
+    \ @brief Master Timer Counter Register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MCNT              \ [0x00 : 16] Counter value
+  [then]
 
 
-\
-\ @brief High Resolution Timer: Master Timers
-\
-$40016800 constant HRTIM_MASTER_MCR  \ offset: 0x00 : Master Timer Control Register
-$40016804 constant HRTIM_MASTER_MISR  \ offset: 0x04 : Master Timer Interrupt Status Register
-$40016808 constant HRTIM_MASTER_MICR  \ offset: 0x08 : Master Timer Interrupt Clear Register
-$4001680c constant HRTIM_MASTER_MDIER  \ offset: 0x0C : HRTIM Master Timer DMA / Interrupt Enable Register
-$40016810 constant HRTIM_MASTER_MCNTR  \ offset: 0x10 : Master Timer Counter Register
-$40016814 constant HRTIM_MASTER_MPER  \ offset: 0x14 : Master Timer Period Register
-$40016818 constant HRTIM_MASTER_MREP  \ offset: 0x18 : Master Timer Repetition Register
-$4001681c constant HRTIM_MASTER_MCMP1R  \ offset: 0x1C : Master Timer Compare 1 Register
-$40016824 constant HRTIM_MASTER_MCMP2R  \ offset: 0x24 : Master Timer Compare 2 Register
-$40016828 constant HRTIM_MASTER_MCMP3R  \ offset: 0x28 : Master Timer Compare 3 Register
-$4001682c constant HRTIM_MASTER_MCMP4R  \ offset: 0x2C : Master Timer Compare 4 Register
+  [ifdef] HRTIM_MASTER_MPER_DEF
+    \
+    \ @brief Master Timer Period Register
+    \ Address offset: 0x14
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant HRTIM_MASTER_MPER              \ [0x00 : 16] Master Timer Period value
+  [then]
 
+
+  [ifdef] HRTIM_MASTER_MREP_DEF
+    \
+    \ @brief Master Timer Repetition Register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MREP              \ [0x00 : 8] Master Timer Repetition counter value
+  [then]
+
+
+  [ifdef] HRTIM_MASTER_MCMP1R_DEF
+    \
+    \ @brief Master Timer Compare 1 Register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MCMP1             \ [0x00 : 16] Master Timer Compare 1 value
+  [then]
+
+
+  [ifdef] HRTIM_MASTER_MCMP2R_DEF
+    \
+    \ @brief Master Timer Compare 2 Register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MCMP2             \ [0x00 : 16] Master Timer Compare 2 value
+  [then]
+
+
+  [ifdef] HRTIM_MASTER_MCMP3R_DEF
+    \
+    \ @brief Master Timer Compare 3 Register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MCMP3             \ [0x00 : 16] Master Timer Compare 3 value
+  [then]
+
+
+  [ifdef] HRTIM_MASTER_MCMP4R_DEF
+    \
+    \ @brief Master Timer Compare 4 Register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HRTIM_MASTER_MCMP4             \ [0x00 : 16] Master Timer Compare 4 value
+  [then]
+
+  \
+  \ @brief High Resolution Timer: Master Timers
+  \
+  $00 constant HRTIM_MASTER_MCR         \ Master Timer Control Register
+  $04 constant HRTIM_MASTER_MISR        \ Master Timer Interrupt Status Register
+  $08 constant HRTIM_MASTER_MICR        \ Master Timer Interrupt Clear Register
+  $0C constant HRTIM_MASTER_MDIER       \ HRTIM Master Timer DMA / Interrupt Enable Register
+  $10 constant HRTIM_MASTER_MCNTR       \ Master Timer Counter Register
+  $14 constant HRTIM_MASTER_MPER        \ Master Timer Period Register
+  $18 constant HRTIM_MASTER_MREP        \ Master Timer Repetition Register
+  $1C constant HRTIM_MASTER_MCMP1R      \ Master Timer Compare 1 Register
+  $24 constant HRTIM_MASTER_MCMP2R      \ Master Timer Compare 2 Register
+  $28 constant HRTIM_MASTER_MCMP3R      \ Master Timer Compare 3 Register
+  $2C constant HRTIM_MASTER_MCMP4R      \ Master Timer Compare 4 Register
+
+: HRTIM_MASTER_DEF ; [then]

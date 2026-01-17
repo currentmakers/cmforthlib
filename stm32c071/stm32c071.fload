@@ -1,80 +1,73 @@
 \
-\ @file stm32c071.h
-\ @brief Loader for all peripherals in a STM32C071
+\ @file stm32c071.fload
+\ @brief Device header for STM32C071
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include crc.fs
-.include crs.fs
-.include dbg.fs
-.include dma.fs
-.include dmamux.fs
-.include exti.fs
-.include flash.fs
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpiod.fs
-.include gpiof.fs
-.include iwdg.fs
-.include i2c1.fs
-.include i2c2.fs
-.include pwr.fs
-.include rcc.fs
-.include rtc.fs
-.include spi1.fs
-.include spi2.fs
-.include syscfg.fs
-.include tim1.fs
-.include tim2.fs
-.include tim3.fs
-.include tim14.fs
-.include tim16.fs
-.include tim17.fs
-.include usart1.fs
-.include usart2.fs
-.include usb.fs
-.include wwdg.fs
+[ifndef] STM32C071_LOADER
+  .include "adc.fs"
+  .include "crc.fs"
+  .include "crs.fs"
+  .include "dbg.fs"
+  .include "dma.fs"
+  .include "dmamux.fs"
+  .include "exti.fs"
+  .include "flash.fs"
+  .include "gpioa.fs"
+  .include "gpiob.fs"
+  .include "gpioc.fs"
+  .include "gpiod.fs"
+  .include "gpiof.fs"
+  .include "iwdg.fs"
+  .include "i2c.fs"
+  .include "pwr.fs"
+  .include "rcc.fs"
+  .include "rtc.fs"
+  .include "spi.fs"
+  .include "syscfg.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim3.fs"
+  .include "tim14.fs"
+  .include "tim16.fs"
+  .include "tim17.fs"
+  .include "usart.fs"
+  .include "usb.fs"
+  .include "wwdg.fs"
 
-decimal
+  $0x40012400 constant ADC              \ See adc.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40006C00 constant CRS              \ See crs.fs
+  $0x40015800 constant DBG              \ See dbg.fs
+  $0x40020000 constant DMA              \ See dma.fs
+  $0x40020800 constant DMAMUX           \ See dmamux.fs
+  $0x40021800 constant EXTI             \ See exti.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x50000000 constant GPIOA            \ See gpioa.fs
+  $0x50000400 constant GPIOB            \ See gpiob.fs
+  $0x50000800 constant GPIOC            \ See gpioc.fs
+  $0x50000C00 constant GPIOD            \ See gpiod.fs
+  $0x50001400 constant GPIOF            \ See gpiof.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40021000 constant RCC              \ See rcc.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x40010000 constant SYSCFG           \ See syscfg.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim3.fs
+  $0x40002000 constant TIM14            \ See tim14.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x40014800 constant TIM17            \ See tim17.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40005C00 constant USB              \ See usb.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ ADC address block description
-.include CRC                    \ CRC address block description
-.include CRS                    \ CRS address block description
-.include DBG                    \ DBG address block description
-.include DMA                    \ DMA register bank
-.include DMAMUX                 \ DMAMUX address block description
-.include EXTI                   \ EXTI address block description
-.include FLASH                  \ Spider_FLASH register block
-.include GPIOA                  \ GPIOA address block description
-.include GPIOB                  \ GPIOB address block description
-.include GPIOC                  \ GPIOC address block description
-.include GPIOD                  \ GPIOD address block description
-.include GPIOF                  \ GPIOF address block description
-.include IWDG                   \ IWDG address block description
-.include I2C1                   \ I2C address block description
-.include I2C2                   \ I2C2 global interrupt
-.include PWR                    \ PWR address block description
-.include RCC                    \ RCC address block description
-.include RTC                    \ RTC address block description
-.include SPI1                   \ SPI address block description
-.include SPI2                   \ SPI2 global interrupt
-.include SYSCFG                 \ Spider_SYSCFG register block
-.include TIM1                   \ TIM1 address block description
-.include TIM2                   \ TIM2 address block description
-.include TIM3                   \ TIM3 address block description
-.include TIM14                  \ TIM14 address block description
-.include TIM16                  \ TIM16 address block description
-.include TIM17                  \ TIM17 address block description
-.include USART1                 \ USART address block description
-.include USART2                 \ USART2 global interrupt
-.include USB                    \ USB address block description
-.include WWDG                   \ WWDG address block description
-
-compiletoram
-
+: STM32C071_LOADER ; [then]

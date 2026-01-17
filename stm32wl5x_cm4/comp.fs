@@ -6,52 +6,54 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] COMP_DEF
 
-\
-\ @brief COMP1_CSR
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant COMP_COMP1_CSR_EN                                \ Comparator 1 enable bit
-$0000000c constant COMP_COMP1_CSR_PWRMODE                           \ Power Mode of the comparator 1
-$00000070 constant COMP_COMP1_CSR_INMSEL                            \ Comparator 1 input minus selection bits
-$00000180 constant COMP_COMP1_CSR_INPSEL                            \ Comparator1 input plus selection bit
-$00008000 constant COMP_COMP1_CSR_POLARITY                          \ Comparator 1 polarity selection bit
-$00030000 constant COMP_COMP1_CSR_HYST                              \ Comparator 1 hysteresis selection bits
-$001c0000 constant COMP_COMP1_CSR_BLANKING                          \ Comparator 1 blanking source selection bits
-$00400000 constant COMP_COMP1_CSR_BRGEN                             \ Scaler bridge enable
-$00800000 constant COMP_COMP1_CSR_SCALEN                            \ Voltage scaler enable bit
-$06000000 constant COMP_COMP1_CSR_INMESEL                           \ comparator 1 input minus extended selection bits.
-$40000000 constant COMP_COMP1_CSR_VALUE                             \ Comparator 1 output status bit
-$80000000 constant COMP_COMP1_CSR_LOCK                              \ COMP1_CSR register lock bit
-
-
-\
-\ @brief COMP2_CSR
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant COMP_COMP2_CSR_EN                                \ Comparator 2 enable bit
-$0000000c constant COMP_COMP2_CSR_PWRMODE                           \ Power Mode of the comparator 2
-$00000070 constant COMP_COMP2_CSR_INMSEL                            \ Comparator 2 input minus selection bits
-$00000180 constant COMP_COMP2_CSR_INPSEL                            \ Comparator 1 input plus selection bit
-$00000200 constant COMP_COMP2_CSR_WINMODE                           \ Windows mode selection bit
-$00008000 constant COMP_COMP2_CSR_POLARITY                          \ Comparator 2 polarity selection bit
-$00030000 constant COMP_COMP2_CSR_HYST                              \ Comparator 2 hysteresis selection bits
-$001c0000 constant COMP_COMP2_CSR_BLANKING                          \ Comparator 2 blanking source selection bits
-$00400000 constant COMP_COMP2_CSR_BRGEN                             \ Scaler bridge enable
-$00800000 constant COMP_COMP2_CSR_SCALEN                            \ Voltage scaler enable bit
-$06000000 constant COMP_COMP2_CSR_INMESEL                           \ comparator 2 input minus extended selection bits.
-$40000000 constant COMP_COMP2_CSR_VALUE                             \ Comparator 2 output status bit
-$80000000 constant COMP_COMP2_CSR_LOCK                              \ CSR register lock bit
+  [ifdef] COMP_COMP1_CSR_DEF
+    \
+    \ @brief COMP1_CSR
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant COMP_EN                        \ [0x00] Comparator 1 enable bit
+    $02 constant COMP_PWRMODE                   \ [0x02 : 2] Power Mode of the comparator 1
+    $04 constant COMP_INMSEL                    \ [0x04 : 3] Comparator 1 input minus selection bits
+    $07 constant COMP_INPSEL                    \ [0x07 : 2] Comparator1 input plus selection bit
+    $0f constant COMP_POLARITY                  \ [0x0f] Comparator 1 polarity selection bit
+    $10 constant COMP_HYST                      \ [0x10 : 2] Comparator 1 hysteresis selection bits
+    $12 constant COMP_BLANKING                  \ [0x12 : 3] Comparator 1 blanking source selection bits
+    $16 constant COMP_BRGEN                     \ [0x16] Scaler bridge enable
+    $17 constant COMP_SCALEN                    \ [0x17] Voltage scaler enable bit
+    $19 constant COMP_INMESEL                   \ [0x19 : 2] comparator 1 input minus extended selection bits.
+    $1e constant COMP_VALUE                     \ [0x1e] Comparator 1 output status bit
+    $1f constant COMP_LOCK                      \ [0x1f] COMP1_CSR register lock bit
+  [then]
 
 
-\
-\ @brief Comparator
-\
-$40010200 constant COMP_COMP1_CSR  \ offset: 0x00 : COMP1_CSR
-$40010204 constant COMP_COMP2_CSR  \ offset: 0x04 : COMP2_CSR
+  [ifdef] COMP_COMP2_CSR_DEF
+    \
+    \ @brief COMP2_CSR
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant COMP_EN                        \ [0x00] Comparator 2 enable bit
+    $02 constant COMP_PWRMODE                   \ [0x02 : 2] Power Mode of the comparator 2
+    $04 constant COMP_INMSEL                    \ [0x04 : 3] Comparator 2 input minus selection bits
+    $07 constant COMP_INPSEL                    \ [0x07 : 2] Comparator 1 input plus selection bit
+    $09 constant COMP_WINMODE                   \ [0x09] Windows mode selection bit
+    $0f constant COMP_POLARITY                  \ [0x0f] Comparator 2 polarity selection bit
+    $10 constant COMP_HYST                      \ [0x10 : 2] Comparator 2 hysteresis selection bits
+    $12 constant COMP_BLANKING                  \ [0x12 : 3] Comparator 2 blanking source selection bits
+    $16 constant COMP_BRGEN                     \ [0x16] Scaler bridge enable
+    $17 constant COMP_SCALEN                    \ [0x17] Voltage scaler enable bit
+    $19 constant COMP_INMESEL                   \ [0x19 : 2] comparator 2 input minus extended selection bits.
+    $1e constant COMP_VALUE                     \ [0x1e] Comparator 2 output status bit
+    $1f constant COMP_LOCK                      \ [0x1f] CSR register lock bit
+  [then]
 
+  \
+  \ @brief Comparator
+  \
+  $00 constant COMP_COMP1_CSR           \ COMP1_CSR
+  $04 constant COMP_COMP2_CSR           \ COMP2_CSR
+
+: COMP_DEF ; [then]

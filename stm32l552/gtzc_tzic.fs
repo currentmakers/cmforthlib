@@ -6,300 +6,309 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GTZC_TZIC_DEF
 
-\
-\ @brief TZIC interrupt enable register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_IER1_TIM2IE                            \ TIM2IE
-$00000002 constant GTZC_TZIC_IER1_TIM3IE                            \ TIM3IE
-$00000004 constant GTZC_TZIC_IER1_TIM4IE                            \ TIM4IE
-$00000008 constant GTZC_TZIC_IER1_TIM5IE                            \ TIM5IE
-$00000010 constant GTZC_TZIC_IER1_TIM6IE                            \ TIM6IE
-$00000020 constant GTZC_TZIC_IER1_TIM7IE                            \ TIM7IE
-$00000040 constant GTZC_TZIC_IER1_WWDGIE                            \ WWDGIE
-$00000080 constant GTZC_TZIC_IER1_IWDGIE                            \ IWDGIE
-$00000100 constant GTZC_TZIC_IER1_SPI2IE                            \ SPI2IE
-$00000200 constant GTZC_TZIC_IER1_SPI3IE                            \ SPI3IE
-$00000400 constant GTZC_TZIC_IER1_USART2IE                          \ USART2IE
-$00000800 constant GTZC_TZIC_IER1_USART3IE                          \ USART3IE
-$00001000 constant GTZC_TZIC_IER1_UART4IE                           \ UART4IE
-$00002000 constant GTZC_TZIC_IER1_UART5IE                           \ UART5IE
-$00004000 constant GTZC_TZIC_IER1_I2C1IE                            \ I2C1IE
-$00008000 constant GTZC_TZIC_IER1_I2C2IE                            \ I2C2IE
-$00010000 constant GTZC_TZIC_IER1_I2C3IE                            \ I2C3IE
-$00020000 constant GTZC_TZIC_IER1_CRSIE                             \ CRSIE
-$00040000 constant GTZC_TZIC_IER1_DACIE                             \ DACIE
-$00080000 constant GTZC_TZIC_IER1_OPAMPIE                           \ OPAMPIE
-$00100000 constant GTZC_TZIC_IER1_LPTIM1IE                          \ LPTIM1IE
-$00200000 constant GTZC_TZIC_IER1_LPUART1IE                         \ LPUART1IE
-$00400000 constant GTZC_TZIC_IER1_I2C4IE                            \ I2C4IE
-$00800000 constant GTZC_TZIC_IER1_LPTIM2IE                          \ LPTIM2IE
-$01000000 constant GTZC_TZIC_IER1_LPTIM3IE                          \ LPTIM3IE
-$02000000 constant GTZC_TZIC_IER1_FDCAN1IE                          \ FDCAN1IE
-$04000000 constant GTZC_TZIC_IER1_USBFSIE                           \ USBFSIE
-$08000000 constant GTZC_TZIC_IER1_UCPD1IE                           \ UCPD1IE
-$10000000 constant GTZC_TZIC_IER1_VREFBUFIE                         \ VREFBUFIE
-$20000000 constant GTZC_TZIC_IER1_COMPIE                            \ COMPIE
-$40000000 constant GTZC_TZIC_IER1_TIM1IE                            \ TIM1IE
-$80000000 constant GTZC_TZIC_IER1_SPI1IE                            \ SPI1IE
-
-
-\
-\ @brief TZIC interrupt enable register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_IER2_TIM8IE                            \ TIM8IE
-$00000002 constant GTZC_TZIC_IER2_USART1IE                          \ USART1IE
-$00000004 constant GTZC_TZIC_IER2_TIM15IE                           \ TIM15IE
-$00000008 constant GTZC_TZIC_IER2_TIM16IE                           \ TIM16IE
-$00000010 constant GTZC_TZIC_IER2_TIM17IE                           \ TIM17IE
-$00000020 constant GTZC_TZIC_IER2_SAI1IE                            \ SAI1IE
-$00000040 constant GTZC_TZIC_IER2_SAI2IE                            \ SAI2IE
-$00000080 constant GTZC_TZIC_IER2_DFSDM1IE                          \ DFSDM1IE
-$00000100 constant GTZC_TZIC_IER2_CRCIE                             \ CRCIE
-$00000200 constant GTZC_TZIC_IER2_TSCIE                             \ TSCIE
-$00000400 constant GTZC_TZIC_IER2_ICACHEIE                          \ ICACHEIE
-$00000800 constant GTZC_TZIC_IER2_ADCIE                             \ ADCIE
-$00001000 constant GTZC_TZIC_IER2_AESIE                             \ AESIE
-$00002000 constant GTZC_TZIC_IER2_HASHIE                            \ HASHIE
-$00004000 constant GTZC_TZIC_IER2_RNGIE                             \ RNGIE
-$00008000 constant GTZC_TZIC_IER2_PKAIE                             \ PKAIE
-$00010000 constant GTZC_TZIC_IER2_SDMMC1IE                          \ SDMMC1IE
-$00020000 constant GTZC_TZIC_IER2_FMC_REGIE                         \ FMC_REGIE
-$00040000 constant GTZC_TZIC_IER2_OCTOSPI1_REGIE                    \ OCTOSPI1_REGIE
-$00080000 constant GTZC_TZIC_IER2_RTCIE                             \ RTCIE
-$00100000 constant GTZC_TZIC_IER2_PWRIE                             \ PWRIE
-$00200000 constant GTZC_TZIC_IER2_SYSCFGIE                          \ SYSCFGIE
-$00400000 constant GTZC_TZIC_IER2_DMA1IE                            \ DMA1IE
-$00800000 constant GTZC_TZIC_IER2_DMA2IE                            \ DMA2IE
-$01000000 constant GTZC_TZIC_IER2_DMAMUX1IE                         \ DMAMUX1IE
-$02000000 constant GTZC_TZIC_IER2_RCCIE                             \ RCCIE
-$04000000 constant GTZC_TZIC_IER2_FLASHIE                           \ FLASHIE
-$08000000 constant GTZC_TZIC_IER2_FLASH_REGIE                       \ FLASH_REGIE
-$10000000 constant GTZC_TZIC_IER2_EXTIIE                            \ EXTIIE
-$20000000 constant GTZC_TZIC_IER2_OTFDEC1IE                         \ OTFDEC1IE
+  [ifdef] GTZC_TZIC_IER1_DEF
+    \
+    \ @brief TZIC interrupt enable register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TIM2IE               \ [0x00] TIM2IE
+    $01 constant GTZC_TZIC_TIM3IE               \ [0x01] TIM3IE
+    $02 constant GTZC_TZIC_TIM4IE               \ [0x02] TIM4IE
+    $03 constant GTZC_TZIC_TIM5IE               \ [0x03] TIM5IE
+    $04 constant GTZC_TZIC_TIM6IE               \ [0x04] TIM6IE
+    $05 constant GTZC_TZIC_TIM7IE               \ [0x05] TIM7IE
+    $06 constant GTZC_TZIC_WWDGIE               \ [0x06] WWDGIE
+    $07 constant GTZC_TZIC_IWDGIE               \ [0x07] IWDGIE
+    $08 constant GTZC_TZIC_SPI2IE               \ [0x08] SPI2IE
+    $09 constant GTZC_TZIC_SPI3IE               \ [0x09] SPI3IE
+    $0a constant GTZC_TZIC_USART2IE             \ [0x0a] USART2IE
+    $0b constant GTZC_TZIC_USART3IE             \ [0x0b] USART3IE
+    $0c constant GTZC_TZIC_UART4IE              \ [0x0c] UART4IE
+    $0d constant GTZC_TZIC_UART5IE              \ [0x0d] UART5IE
+    $0e constant GTZC_TZIC_I2C1IE               \ [0x0e] I2C1IE
+    $0f constant GTZC_TZIC_I2C2IE               \ [0x0f] I2C2IE
+    $10 constant GTZC_TZIC_I2C3IE               \ [0x10] I2C3IE
+    $11 constant GTZC_TZIC_CRSIE                \ [0x11] CRSIE
+    $12 constant GTZC_TZIC_DACIE                \ [0x12] DACIE
+    $13 constant GTZC_TZIC_OPAMPIE              \ [0x13] OPAMPIE
+    $14 constant GTZC_TZIC_LPTIM1IE             \ [0x14] LPTIM1IE
+    $15 constant GTZC_TZIC_LPUART1IE            \ [0x15] LPUART1IE
+    $16 constant GTZC_TZIC_I2C4IE               \ [0x16] I2C4IE
+    $17 constant GTZC_TZIC_LPTIM2IE             \ [0x17] LPTIM2IE
+    $18 constant GTZC_TZIC_LPTIM3IE             \ [0x18] LPTIM3IE
+    $19 constant GTZC_TZIC_FDCAN1IE             \ [0x19] FDCAN1IE
+    $1a constant GTZC_TZIC_USBFSIE              \ [0x1a] USBFSIE
+    $1b constant GTZC_TZIC_UCPD1IE              \ [0x1b] UCPD1IE
+    $1c constant GTZC_TZIC_VREFBUFIE            \ [0x1c] VREFBUFIE
+    $1d constant GTZC_TZIC_COMPIE               \ [0x1d] COMPIE
+    $1e constant GTZC_TZIC_TIM1IE               \ [0x1e] TIM1IE
+    $1f constant GTZC_TZIC_SPI1IE               \ [0x1f] SPI1IE
+  [then]
 
 
-\
-\ @brief TZIC interrupt enable register 3
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_IER3_TZSCIE                            \ TZSCIE
-$00000002 constant GTZC_TZIC_IER3_TZICIE                            \ TZICIE
-$00000004 constant GTZC_TZIC_IER3_MPCWM1IE                          \ MPCWM1IE
-$00000008 constant GTZC_TZIC_IER3_MPCWM2IE                          \ MPCWM2IE
-$00000010 constant GTZC_TZIC_IER3_MPCBB1IE                          \ MPCBB1IE
-$00000020 constant GTZC_TZIC_IER3_MPCBB1_REGIE                      \ MPCBB1_REGIE
-$00000040 constant GTZC_TZIC_IER3_MPCBB2IE                          \ MPCBB2IE
-$00000080 constant GTZC_TZIC_IER3_MPCBB2_REGIE                      \ MPCBB2_REGIE
-
-
-\
-\ @brief TZIC interrupt status register 1
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_SR1_TIM2F                              \ TIM2F
-$00000002 constant GTZC_TZIC_SR1_TIM3F                              \ TIM3F
-$00000004 constant GTZC_TZIC_SR1_TIM4F                              \ TIM4F
-$00000008 constant GTZC_TZIC_SR1_TIM5F                              \ TIM5F
-$00000010 constant GTZC_TZIC_SR1_TIM6F                              \ TIM6F
-$00000020 constant GTZC_TZIC_SR1_TIM7F                              \ TIM7F
-$00000040 constant GTZC_TZIC_SR1_WWDGF                              \ WWDGF
-$00000080 constant GTZC_TZIC_SR1_IWDGF                              \ IWDGF
-$00000100 constant GTZC_TZIC_SR1_SPI2F                              \ SPI2F
-$00000200 constant GTZC_TZIC_SR1_SPI3F                              \ SPI3F
-$00000400 constant GTZC_TZIC_SR1_USART2F                            \ USART2F
-$00000800 constant GTZC_TZIC_SR1_USART3F                            \ USART3F
-$00001000 constant GTZC_TZIC_SR1_UART4F                             \ UART4F
-$00002000 constant GTZC_TZIC_SR1_UART5F                             \ UART5F
-$00004000 constant GTZC_TZIC_SR1_I2C1F                              \ I2C1F
-$00008000 constant GTZC_TZIC_SR1_I2C2F                              \ I2C2F
-$00010000 constant GTZC_TZIC_SR1_I2C3F                              \ I2C3F
-$00020000 constant GTZC_TZIC_SR1_CRSF                               \ CRSF
-$00040000 constant GTZC_TZIC_SR1_DACF                               \ DACF
-$00080000 constant GTZC_TZIC_SR1_OPAMPF                             \ OPAMPF
-$00100000 constant GTZC_TZIC_SR1_LPTIM1F                            \ LPTIM1F
-$00200000 constant GTZC_TZIC_SR1_LPUART1F                           \ LPUART1F
-$00400000 constant GTZC_TZIC_SR1_I2C4F                              \ I2C4F
-$00800000 constant GTZC_TZIC_SR1_LPTIM2F                            \ LPTIM2F
-$01000000 constant GTZC_TZIC_SR1_LPTIM3F                            \ LPTIM3F
-$02000000 constant GTZC_TZIC_SR1_FDCAN1F                            \ FDCAN1F
-$04000000 constant GTZC_TZIC_SR1_USBFSF                             \ USBFSF
-$08000000 constant GTZC_TZIC_SR1_UCPD1F                             \ UCPD1F
-$10000000 constant GTZC_TZIC_SR1_VREFBUFF                           \ VREFBUFF
-$20000000 constant GTZC_TZIC_SR1_COMPF                              \ COMPF
-$40000000 constant GTZC_TZIC_SR1_TIM1F                              \ TIM1F
-$80000000 constant GTZC_TZIC_SR1_SPI1F                              \ SPI1F
+  [ifdef] GTZC_TZIC_IER2_DEF
+    \
+    \ @brief TZIC interrupt enable register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TIM8IE               \ [0x00] TIM8IE
+    $01 constant GTZC_TZIC_USART1IE             \ [0x01] USART1IE
+    $02 constant GTZC_TZIC_TIM15IE              \ [0x02] TIM15IE
+    $03 constant GTZC_TZIC_TIM16IE              \ [0x03] TIM16IE
+    $04 constant GTZC_TZIC_TIM17IE              \ [0x04] TIM17IE
+    $05 constant GTZC_TZIC_SAI1IE               \ [0x05] SAI1IE
+    $06 constant GTZC_TZIC_SAI2IE               \ [0x06] SAI2IE
+    $07 constant GTZC_TZIC_DFSDM1IE             \ [0x07] DFSDM1IE
+    $08 constant GTZC_TZIC_CRCIE                \ [0x08] CRCIE
+    $09 constant GTZC_TZIC_TSCIE                \ [0x09] TSCIE
+    $0a constant GTZC_TZIC_ICACHEIE             \ [0x0a] ICACHEIE
+    $0b constant GTZC_TZIC_ADCIE                \ [0x0b] ADCIE
+    $0c constant GTZC_TZIC_AESIE                \ [0x0c] AESIE
+    $0d constant GTZC_TZIC_HASHIE               \ [0x0d] HASHIE
+    $0e constant GTZC_TZIC_RNGIE                \ [0x0e] RNGIE
+    $0f constant GTZC_TZIC_PKAIE                \ [0x0f] PKAIE
+    $10 constant GTZC_TZIC_SDMMC1IE             \ [0x10] SDMMC1IE
+    $11 constant GTZC_TZIC_FMC_REGIE            \ [0x11] FMC_REGIE
+    $12 constant GTZC_TZIC_OCTOSPI1_REGIE       \ [0x12] OCTOSPI1_REGIE
+    $13 constant GTZC_TZIC_RTCIE                \ [0x13] RTCIE
+    $14 constant GTZC_TZIC_PWRIE                \ [0x14] PWRIE
+    $15 constant GTZC_TZIC_SYSCFGIE             \ [0x15] SYSCFGIE
+    $16 constant GTZC_TZIC_DMA1IE               \ [0x16] DMA1IE
+    $17 constant GTZC_TZIC_DMA2IE               \ [0x17] DMA2IE
+    $18 constant GTZC_TZIC_DMAMUX1IE            \ [0x18] DMAMUX1IE
+    $19 constant GTZC_TZIC_RCCIE                \ [0x19] RCCIE
+    $1a constant GTZC_TZIC_FLASHIE              \ [0x1a] FLASHIE
+    $1b constant GTZC_TZIC_FLASH_REGIE          \ [0x1b] FLASH_REGIE
+    $1c constant GTZC_TZIC_EXTIIE               \ [0x1c] EXTIIE
+    $1d constant GTZC_TZIC_OTFDEC1IE            \ [0x1d] OTFDEC1IE
+  [then]
 
 
-\
-\ @brief TZIC interrupt status register 2
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_SR2_TIM8F                              \ TIM8F
-$00000002 constant GTZC_TZIC_SR2_USART1F                            \ USART1F
-$00000004 constant GTZC_TZIC_SR2_TIM15F                             \ TIM15F
-$00000008 constant GTZC_TZIC_SR2_TIM16F                             \ TIM16F
-$00000010 constant GTZC_TZIC_SR2_TIM17F                             \ TIM17F
-$00000020 constant GTZC_TZIC_SR2_SAI1F                              \ SAI1F
-$00000040 constant GTZC_TZIC_SR2_SAI2F                              \ SAI2F
-$00000080 constant GTZC_TZIC_SR2_DFSDM1F                            \ DFSDM1F
-$00000100 constant GTZC_TZIC_SR2_CRCF                               \ CRCF
-$00000200 constant GTZC_TZIC_SR2_TSCF                               \ TSCF
-$00000400 constant GTZC_TZIC_SR2_ICACHEF                            \ ICACHEF
-$00000800 constant GTZC_TZIC_SR2_ADCF                               \ ADCF
-$00001000 constant GTZC_TZIC_SR2_AESF                               \ AESF
-$00002000 constant GTZC_TZIC_SR2_HASHF                              \ HASHF
-$00004000 constant GTZC_TZIC_SR2_RNGF                               \ RNGF
-$00008000 constant GTZC_TZIC_SR2_PKAF                               \ PKAF
-$00010000 constant GTZC_TZIC_SR2_SDMMC1F                            \ SDMMC1F
-$00020000 constant GTZC_TZIC_SR2_FMC_REGF                           \ FMC_REGF
-$00040000 constant GTZC_TZIC_SR2_OCTOSPI1_REGF                      \ OCTOSPI1_REGF
-$00080000 constant GTZC_TZIC_SR2_RTCF                               \ RTCF
-$00100000 constant GTZC_TZIC_SR2_PWRF                               \ PWRF
-$00200000 constant GTZC_TZIC_SR2_SYSCFGF                            \ SYSCFGF
-$00400000 constant GTZC_TZIC_SR2_DMA1F                              \ DMA1F
-$00800000 constant GTZC_TZIC_SR2_DMA2F                              \ DMA2F
-$01000000 constant GTZC_TZIC_SR2_DMAMUX1F                           \ DMAMUX1F
-$02000000 constant GTZC_TZIC_SR2_RCCF                               \ RCCF
-$04000000 constant GTZC_TZIC_SR2_FLASHF                             \ FLASHF
-$08000000 constant GTZC_TZIC_SR2_FLASH_REGF                         \ FLASH_REGF
-$10000000 constant GTZC_TZIC_SR2_EXTIF                              \ EXTIF
-$20000000 constant GTZC_TZIC_SR2_OTFDEC1F                           \ OTFDEC1F
+  [ifdef] GTZC_TZIC_IER3_DEF
+    \
+    \ @brief TZIC interrupt enable register 3
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TZSCIE               \ [0x00] TZSCIE
+    $01 constant GTZC_TZIC_TZICIE               \ [0x01] TZICIE
+    $02 constant GTZC_TZIC_MPCWM1IE             \ [0x02] MPCWM1IE
+    $03 constant GTZC_TZIC_MPCWM2IE             \ [0x03] MPCWM2IE
+    $04 constant GTZC_TZIC_MPCBB1IE             \ [0x04] MPCBB1IE
+    $05 constant GTZC_TZIC_MPCBB1_REGIE         \ [0x05] MPCBB1_REGIE
+    $06 constant GTZC_TZIC_MPCBB2IE             \ [0x06] MPCBB2IE
+    $07 constant GTZC_TZIC_MPCBB2_REGIE         \ [0x07] MPCBB2_REGIE
+  [then]
 
 
-\
-\ @brief TZIC interrupt status register 3
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_SR3_TZSCF                              \ TZSCF
-$00000002 constant GTZC_TZIC_SR3_TZICF                              \ TZICF
-$00000004 constant GTZC_TZIC_SR3_MPCWM1F                            \ MPCWM1F
-$00000008 constant GTZC_TZIC_SR3_MPCWM2F                            \ MPCWM2F
-$00000010 constant GTZC_TZIC_SR3_MPCBB1F                            \ MPCBB1F
-$00000020 constant GTZC_TZIC_SR3_MPCBB1_REGF                        \ MPCBB1_REGF
-$00000040 constant GTZC_TZIC_SR3_MPCBB2F                            \ MPCBB2F
-$00000080 constant GTZC_TZIC_SR3_MPCBB2_REGF                        \ MPCBB2_REGF
-
-
-\
-\ @brief TZIC interrupt clear register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_FCR1_TIM2FC                            \ TIM2FC
-$00000002 constant GTZC_TZIC_FCR1_TIM3FC                            \ TIM3FC
-$00000004 constant GTZC_TZIC_FCR1_TIM4FC                            \ TIM4FC
-$00000008 constant GTZC_TZIC_FCR1_TIM5FC                            \ TIM5FC
-$00000010 constant GTZC_TZIC_FCR1_TIM6FC                            \ TIM6FC
-$00000020 constant GTZC_TZIC_FCR1_TIM7FC                            \ TIM7FC
-$00000040 constant GTZC_TZIC_FCR1_WWDGFC                            \ WWDGFC
-$00000080 constant GTZC_TZIC_FCR1_IWDGFC                            \ IWDGFC
-$00000100 constant GTZC_TZIC_FCR1_SPI2FC                            \ SPI2FC
-$00000200 constant GTZC_TZIC_FCR1_SPI3FC                            \ SPI3FC
-$00000400 constant GTZC_TZIC_FCR1_USART2FC                          \ USART2FC
-$00000800 constant GTZC_TZIC_FCR1_USART3FC                          \ USART3FC
-$00001000 constant GTZC_TZIC_FCR1_UART4FC                           \ UART4FC
-$00002000 constant GTZC_TZIC_FCR1_UART5FC                           \ UART5FC
-$00004000 constant GTZC_TZIC_FCR1_I2C1FC                            \ I2C1FC
-$00008000 constant GTZC_TZIC_FCR1_I2C2FC                            \ I2C2FC
-$00010000 constant GTZC_TZIC_FCR1_I2C3FC                            \ I2C3FC
-$00020000 constant GTZC_TZIC_FCR1_CRSFC                             \ CRSFC
-$00040000 constant GTZC_TZIC_FCR1_DACFC                             \ DACFC
-$00080000 constant GTZC_TZIC_FCR1_OPAMPFC                           \ OPAMPFC
-$00100000 constant GTZC_TZIC_FCR1_LPTIM1FC                          \ LPTIM1FC
-$00200000 constant GTZC_TZIC_FCR1_LPUART1FC                         \ LPUART1FC
-$00400000 constant GTZC_TZIC_FCR1_I2C4FC                            \ I2C4FC
-$00800000 constant GTZC_TZIC_FCR1_LPTIM2FC                          \ LPTIM2FC
-$01000000 constant GTZC_TZIC_FCR1_LPTIM3FC                          \ LPTIM3FC
-$02000000 constant GTZC_TZIC_FCR1_FDCAN1FC                          \ FDCAN1FC
-$04000000 constant GTZC_TZIC_FCR1_USBFSFC                           \ USBFSFC
-$08000000 constant GTZC_TZIC_FCR1_UCPD1FC                           \ UCPD1FC
-$10000000 constant GTZC_TZIC_FCR1_VREFBUFFC                         \ VREFBUFFC
-$20000000 constant GTZC_TZIC_FCR1_COMPFC                            \ COMPFC
-$40000000 constant GTZC_TZIC_FCR1_TIM1FC                            \ TIM1FC
-$80000000 constant GTZC_TZIC_FCR1_SPI1FC                            \ SPI1FC
+  [ifdef] GTZC_TZIC_SR1_DEF
+    \
+    \ @brief TZIC interrupt status register 1
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TIM2F                \ [0x00] TIM2F
+    $01 constant GTZC_TZIC_TIM3F                \ [0x01] TIM3F
+    $02 constant GTZC_TZIC_TIM4F                \ [0x02] TIM4F
+    $03 constant GTZC_TZIC_TIM5F                \ [0x03] TIM5F
+    $04 constant GTZC_TZIC_TIM6F                \ [0x04] TIM6F
+    $05 constant GTZC_TZIC_TIM7F                \ [0x05] TIM7F
+    $06 constant GTZC_TZIC_WWDGF                \ [0x06] WWDGF
+    $07 constant GTZC_TZIC_IWDGF                \ [0x07] IWDGF
+    $08 constant GTZC_TZIC_SPI2F                \ [0x08] SPI2F
+    $09 constant GTZC_TZIC_SPI3F                \ [0x09] SPI3F
+    $0a constant GTZC_TZIC_USART2F              \ [0x0a] USART2F
+    $0b constant GTZC_TZIC_USART3F              \ [0x0b] USART3F
+    $0c constant GTZC_TZIC_UART4F               \ [0x0c] UART4F
+    $0d constant GTZC_TZIC_UART5F               \ [0x0d] UART5F
+    $0e constant GTZC_TZIC_I2C1F                \ [0x0e] I2C1F
+    $0f constant GTZC_TZIC_I2C2F                \ [0x0f] I2C2F
+    $10 constant GTZC_TZIC_I2C3F                \ [0x10] I2C3F
+    $11 constant GTZC_TZIC_CRSF                 \ [0x11] CRSF
+    $12 constant GTZC_TZIC_DACF                 \ [0x12] DACF
+    $13 constant GTZC_TZIC_OPAMPF               \ [0x13] OPAMPF
+    $14 constant GTZC_TZIC_LPTIM1F              \ [0x14] LPTIM1F
+    $15 constant GTZC_TZIC_LPUART1F             \ [0x15] LPUART1F
+    $16 constant GTZC_TZIC_I2C4F                \ [0x16] I2C4F
+    $17 constant GTZC_TZIC_LPTIM2F              \ [0x17] LPTIM2F
+    $18 constant GTZC_TZIC_LPTIM3F              \ [0x18] LPTIM3F
+    $19 constant GTZC_TZIC_FDCAN1F              \ [0x19] FDCAN1F
+    $1a constant GTZC_TZIC_USBFSF               \ [0x1a] USBFSF
+    $1b constant GTZC_TZIC_UCPD1F               \ [0x1b] UCPD1F
+    $1c constant GTZC_TZIC_VREFBUFF             \ [0x1c] VREFBUFF
+    $1d constant GTZC_TZIC_COMPF                \ [0x1d] COMPF
+    $1e constant GTZC_TZIC_TIM1F                \ [0x1e] TIM1F
+    $1f constant GTZC_TZIC_SPI1F                \ [0x1f] SPI1F
+  [then]
 
 
-\
-\ @brief TZIC interrupt clear register 2
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_FCR2_TIM8FC                            \ TIM8FC
-$00000002 constant GTZC_TZIC_FCR2_USART1FC                          \ USART1FC
-$00000004 constant GTZC_TZIC_FCR2_TIM15FC                           \ TIM15FC
-$00000008 constant GTZC_TZIC_FCR2_TIM16FC                           \ TIM16FC
-$00000010 constant GTZC_TZIC_FCR2_TIM17FC                           \ TIM17FC
-$00000020 constant GTZC_TZIC_FCR2_SAI1FC                            \ SAI1FC
-$00000040 constant GTZC_TZIC_FCR2_SAI2FC                            \ SAI2FC
-$00000080 constant GTZC_TZIC_FCR2_DFSDM1FC                          \ DFSDM1FC
-$00000100 constant GTZC_TZIC_FCR2_CRCFC                             \ CRCFC
-$00000200 constant GTZC_TZIC_FCR2_TSCFC                             \ TSCFC
-$00000400 constant GTZC_TZIC_FCR2_ICACHEFC                          \ ICACHEFC
-$00000800 constant GTZC_TZIC_FCR2_ADCFC                             \ ADCFC
-$00001000 constant GTZC_TZIC_FCR2_AESFC                             \ AESFC
-$00002000 constant GTZC_TZIC_FCR2_HASHFC                            \ HASHFC
-$00004000 constant GTZC_TZIC_FCR2_RNGFC                             \ RNGFC
-$00008000 constant GTZC_TZIC_FCR2_PKAFC                             \ PKAFC
-$00010000 constant GTZC_TZIC_FCR2_SDMMC1FC                          \ SDMMC1FC
-$00020000 constant GTZC_TZIC_FCR2_FMC_REGFC                         \ FMC_REGFC
-$00040000 constant GTZC_TZIC_FCR2_OCTOSPI1_REGFC                    \ OCTOSPI1_REGFC
-$00080000 constant GTZC_TZIC_FCR2_RTCFC                             \ RTCFC
-$00100000 constant GTZC_TZIC_FCR2_PWRFC                             \ PWRFC
-$00200000 constant GTZC_TZIC_FCR2_SYSCFGFC                          \ SYSCFGFC
-$00400000 constant GTZC_TZIC_FCR2_DMA1FC                            \ DMA1FC
-$00800000 constant GTZC_TZIC_FCR2_DMA2FC                            \ DMA2FC
-$01000000 constant GTZC_TZIC_FCR2_DMAMUX1FC                         \ DMAMUX1FC
-$02000000 constant GTZC_TZIC_FCR2_RCCFC                             \ RCCFC
-$04000000 constant GTZC_TZIC_FCR2_FLASHFC                           \ FLASHFC
-$08000000 constant GTZC_TZIC_FCR2_FLASH_REGFC                       \ FLASH_REGFC
-$10000000 constant GTZC_TZIC_FCR2_EXTIFC                            \ EXTIFC
-$20000000 constant GTZC_TZIC_FCR2_OTFDEC1FC                         \ OTFDEC1FC
-
-
-\
-\ @brief TZIC interrupt clear register 3
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZIC_FCR3_TZSCFC                            \ TZSCFC
-$00000002 constant GTZC_TZIC_FCR3_TZICFC                            \ TZICFC
-$00000004 constant GTZC_TZIC_FCR3_MPCWM1FC                          \ MPCWM1FC
-$00000008 constant GTZC_TZIC_FCR3_MPCWM2FC                          \ MPCWM2FC
-$00000010 constant GTZC_TZIC_FCR3_MPCBB1FC                          \ MPCBB1FC
-$00000020 constant GTZC_TZIC_FCR3_MPCBB1_REGFC                      \ MPCBB1_REGFC
-$00000040 constant GTZC_TZIC_FCR3_MPCBB2FC                          \ MPCBB2FC
-$00000080 constant GTZC_TZIC_FCR3_MPCBB2_REGFC                      \ MPCBB2_REGFC
+  [ifdef] GTZC_TZIC_SR2_DEF
+    \
+    \ @brief TZIC interrupt status register 2
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TIM8F                \ [0x00] TIM8F
+    $01 constant GTZC_TZIC_USART1F              \ [0x01] USART1F
+    $02 constant GTZC_TZIC_TIM15F               \ [0x02] TIM15F
+    $03 constant GTZC_TZIC_TIM16F               \ [0x03] TIM16F
+    $04 constant GTZC_TZIC_TIM17F               \ [0x04] TIM17F
+    $05 constant GTZC_TZIC_SAI1F                \ [0x05] SAI1F
+    $06 constant GTZC_TZIC_SAI2F                \ [0x06] SAI2F
+    $07 constant GTZC_TZIC_DFSDM1F              \ [0x07] DFSDM1F
+    $08 constant GTZC_TZIC_CRCF                 \ [0x08] CRCF
+    $09 constant GTZC_TZIC_TSCF                 \ [0x09] TSCF
+    $0a constant GTZC_TZIC_ICACHEF              \ [0x0a] ICACHEF
+    $0b constant GTZC_TZIC_ADCF                 \ [0x0b] ADCF
+    $0c constant GTZC_TZIC_AESF                 \ [0x0c] AESF
+    $0d constant GTZC_TZIC_HASHF                \ [0x0d] HASHF
+    $0e constant GTZC_TZIC_RNGF                 \ [0x0e] RNGF
+    $0f constant GTZC_TZIC_PKAF                 \ [0x0f] PKAF
+    $10 constant GTZC_TZIC_SDMMC1F              \ [0x10] SDMMC1F
+    $11 constant GTZC_TZIC_FMC_REGF             \ [0x11] FMC_REGF
+    $12 constant GTZC_TZIC_OCTOSPI1_REGF        \ [0x12] OCTOSPI1_REGF
+    $13 constant GTZC_TZIC_RTCF                 \ [0x13] RTCF
+    $14 constant GTZC_TZIC_PWRF                 \ [0x14] PWRF
+    $15 constant GTZC_TZIC_SYSCFGF              \ [0x15] SYSCFGF
+    $16 constant GTZC_TZIC_DMA1F                \ [0x16] DMA1F
+    $17 constant GTZC_TZIC_DMA2F                \ [0x17] DMA2F
+    $18 constant GTZC_TZIC_DMAMUX1F             \ [0x18] DMAMUX1F
+    $19 constant GTZC_TZIC_RCCF                 \ [0x19] RCCF
+    $1a constant GTZC_TZIC_FLASHF               \ [0x1a] FLASHF
+    $1b constant GTZC_TZIC_FLASH_REGF           \ [0x1b] FLASH_REGF
+    $1c constant GTZC_TZIC_EXTIF                \ [0x1c] EXTIF
+    $1d constant GTZC_TZIC_OTFDEC1F             \ [0x1d] OTFDEC1F
+  [then]
 
 
-\
-\ @brief GTZC_TZIC
-\
-$40032800 constant GTZC_TZIC_IER1  \ offset: 0x00 : TZIC interrupt enable register 1
-$40032804 constant GTZC_TZIC_IER2  \ offset: 0x04 : TZIC interrupt enable register 2
-$40032808 constant GTZC_TZIC_IER3  \ offset: 0x08 : TZIC interrupt enable register 3
-$40032810 constant GTZC_TZIC_SR1  \ offset: 0x10 : TZIC interrupt status register 1
-$40032814 constant GTZC_TZIC_SR2  \ offset: 0x14 : TZIC interrupt status register 2
-$40032818 constant GTZC_TZIC_SR3  \ offset: 0x18 : TZIC interrupt status register 3
-$40032820 constant GTZC_TZIC_FCR1  \ offset: 0x20 : TZIC interrupt clear register 1
-$40032824 constant GTZC_TZIC_FCR2  \ offset: 0x24 : TZIC interrupt clear register 2
-$40032828 constant GTZC_TZIC_FCR3  \ offset: 0x28 : TZIC interrupt clear register 3
+  [ifdef] GTZC_TZIC_SR3_DEF
+    \
+    \ @brief TZIC interrupt status register 3
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TZSCF                \ [0x00] TZSCF
+    $01 constant GTZC_TZIC_TZICF                \ [0x01] TZICF
+    $02 constant GTZC_TZIC_MPCWM1F              \ [0x02] MPCWM1F
+    $03 constant GTZC_TZIC_MPCWM2F              \ [0x03] MPCWM2F
+    $04 constant GTZC_TZIC_MPCBB1F              \ [0x04] MPCBB1F
+    $05 constant GTZC_TZIC_MPCBB1_REGF          \ [0x05] MPCBB1_REGF
+    $06 constant GTZC_TZIC_MPCBB2F              \ [0x06] MPCBB2F
+    $07 constant GTZC_TZIC_MPCBB2_REGF          \ [0x07] MPCBB2_REGF
+  [then]
 
+
+  [ifdef] GTZC_TZIC_FCR1_DEF
+    \
+    \ @brief TZIC interrupt clear register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TIM2FC               \ [0x00] TIM2FC
+    $01 constant GTZC_TZIC_TIM3FC               \ [0x01] TIM3FC
+    $02 constant GTZC_TZIC_TIM4FC               \ [0x02] TIM4FC
+    $03 constant GTZC_TZIC_TIM5FC               \ [0x03] TIM5FC
+    $04 constant GTZC_TZIC_TIM6FC               \ [0x04] TIM6FC
+    $05 constant GTZC_TZIC_TIM7FC               \ [0x05] TIM7FC
+    $06 constant GTZC_TZIC_WWDGFC               \ [0x06] WWDGFC
+    $07 constant GTZC_TZIC_IWDGFC               \ [0x07] IWDGFC
+    $08 constant GTZC_TZIC_SPI2FC               \ [0x08] SPI2FC
+    $09 constant GTZC_TZIC_SPI3FC               \ [0x09] SPI3FC
+    $0a constant GTZC_TZIC_USART2FC             \ [0x0a] USART2FC
+    $0b constant GTZC_TZIC_USART3FC             \ [0x0b] USART3FC
+    $0c constant GTZC_TZIC_UART4FC              \ [0x0c] UART4FC
+    $0d constant GTZC_TZIC_UART5FC              \ [0x0d] UART5FC
+    $0e constant GTZC_TZIC_I2C1FC               \ [0x0e] I2C1FC
+    $0f constant GTZC_TZIC_I2C2FC               \ [0x0f] I2C2FC
+    $10 constant GTZC_TZIC_I2C3FC               \ [0x10] I2C3FC
+    $11 constant GTZC_TZIC_CRSFC                \ [0x11] CRSFC
+    $12 constant GTZC_TZIC_DACFC                \ [0x12] DACFC
+    $13 constant GTZC_TZIC_OPAMPFC              \ [0x13] OPAMPFC
+    $14 constant GTZC_TZIC_LPTIM1FC             \ [0x14] LPTIM1FC
+    $15 constant GTZC_TZIC_LPUART1FC            \ [0x15] LPUART1FC
+    $16 constant GTZC_TZIC_I2C4FC               \ [0x16] I2C4FC
+    $17 constant GTZC_TZIC_LPTIM2FC             \ [0x17] LPTIM2FC
+    $18 constant GTZC_TZIC_LPTIM3FC             \ [0x18] LPTIM3FC
+    $19 constant GTZC_TZIC_FDCAN1FC             \ [0x19] FDCAN1FC
+    $1a constant GTZC_TZIC_USBFSFC              \ [0x1a] USBFSFC
+    $1b constant GTZC_TZIC_UCPD1FC              \ [0x1b] UCPD1FC
+    $1c constant GTZC_TZIC_VREFBUFFC            \ [0x1c] VREFBUFFC
+    $1d constant GTZC_TZIC_COMPFC               \ [0x1d] COMPFC
+    $1e constant GTZC_TZIC_TIM1FC               \ [0x1e] TIM1FC
+    $1f constant GTZC_TZIC_SPI1FC               \ [0x1f] SPI1FC
+  [then]
+
+
+  [ifdef] GTZC_TZIC_FCR2_DEF
+    \
+    \ @brief TZIC interrupt clear register 2
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TIM8FC               \ [0x00] TIM8FC
+    $01 constant GTZC_TZIC_USART1FC             \ [0x01] USART1FC
+    $02 constant GTZC_TZIC_TIM15FC              \ [0x02] TIM15FC
+    $03 constant GTZC_TZIC_TIM16FC              \ [0x03] TIM16FC
+    $04 constant GTZC_TZIC_TIM17FC              \ [0x04] TIM17FC
+    $05 constant GTZC_TZIC_SAI1FC               \ [0x05] SAI1FC
+    $06 constant GTZC_TZIC_SAI2FC               \ [0x06] SAI2FC
+    $07 constant GTZC_TZIC_DFSDM1FC             \ [0x07] DFSDM1FC
+    $08 constant GTZC_TZIC_CRCFC                \ [0x08] CRCFC
+    $09 constant GTZC_TZIC_TSCFC                \ [0x09] TSCFC
+    $0a constant GTZC_TZIC_ICACHEFC             \ [0x0a] ICACHEFC
+    $0b constant GTZC_TZIC_ADCFC                \ [0x0b] ADCFC
+    $0c constant GTZC_TZIC_AESFC                \ [0x0c] AESFC
+    $0d constant GTZC_TZIC_HASHFC               \ [0x0d] HASHFC
+    $0e constant GTZC_TZIC_RNGFC                \ [0x0e] RNGFC
+    $0f constant GTZC_TZIC_PKAFC                \ [0x0f] PKAFC
+    $10 constant GTZC_TZIC_SDMMC1FC             \ [0x10] SDMMC1FC
+    $11 constant GTZC_TZIC_FMC_REGFC            \ [0x11] FMC_REGFC
+    $12 constant GTZC_TZIC_OCTOSPI1_REGFC       \ [0x12] OCTOSPI1_REGFC
+    $13 constant GTZC_TZIC_RTCFC                \ [0x13] RTCFC
+    $14 constant GTZC_TZIC_PWRFC                \ [0x14] PWRFC
+    $15 constant GTZC_TZIC_SYSCFGFC             \ [0x15] SYSCFGFC
+    $16 constant GTZC_TZIC_DMA1FC               \ [0x16] DMA1FC
+    $17 constant GTZC_TZIC_DMA2FC               \ [0x17] DMA2FC
+    $18 constant GTZC_TZIC_DMAMUX1FC            \ [0x18] DMAMUX1FC
+    $19 constant GTZC_TZIC_RCCFC                \ [0x19] RCCFC
+    $1a constant GTZC_TZIC_FLASHFC              \ [0x1a] FLASHFC
+    $1b constant GTZC_TZIC_FLASH_REGFC          \ [0x1b] FLASH_REGFC
+    $1c constant GTZC_TZIC_EXTIFC               \ [0x1c] EXTIFC
+    $1d constant GTZC_TZIC_OTFDEC1FC            \ [0x1d] OTFDEC1FC
+  [then]
+
+
+  [ifdef] GTZC_TZIC_FCR3_DEF
+    \
+    \ @brief TZIC interrupt clear register 3
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZIC_TZSCFC               \ [0x00] TZSCFC
+    $01 constant GTZC_TZIC_TZICFC               \ [0x01] TZICFC
+    $02 constant GTZC_TZIC_MPCWM1FC             \ [0x02] MPCWM1FC
+    $03 constant GTZC_TZIC_MPCWM2FC             \ [0x03] MPCWM2FC
+    $04 constant GTZC_TZIC_MPCBB1FC             \ [0x04] MPCBB1FC
+    $05 constant GTZC_TZIC_MPCBB1_REGFC         \ [0x05] MPCBB1_REGFC
+    $06 constant GTZC_TZIC_MPCBB2FC             \ [0x06] MPCBB2FC
+    $07 constant GTZC_TZIC_MPCBB2_REGFC         \ [0x07] MPCBB2_REGFC
+  [then]
+
+  \
+  \ @brief GTZC_TZIC
+  \
+  $00 constant GTZC_TZIC_IER1           \ TZIC interrupt enable register 1
+  $04 constant GTZC_TZIC_IER2           \ TZIC interrupt enable register 2
+  $08 constant GTZC_TZIC_IER3           \ TZIC interrupt enable register 3
+  $10 constant GTZC_TZIC_SR1            \ TZIC interrupt status register 1
+  $14 constant GTZC_TZIC_SR2            \ TZIC interrupt status register 2
+  $18 constant GTZC_TZIC_SR3            \ TZIC interrupt status register 3
+  $20 constant GTZC_TZIC_FCR1           \ TZIC interrupt clear register 1
+  $24 constant GTZC_TZIC_FCR2           \ TZIC interrupt clear register 2
+  $28 constant GTZC_TZIC_FCR3           \ TZIC interrupt clear register 3
+
+: GTZC_TZIC_DEF ; [then]

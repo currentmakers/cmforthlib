@@ -1,168 +1,134 @@
 \
-\ @file stm32f407.h
-\ @brief Loader for all peripherals in a STM32F407
+\ @file stm32f407.fload
+\ @brief Device header for STM32F407
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include rng.fs
-.include dcmi.fs
-.include fsmc.fs
-.include dbg.fs
-.include dma2.fs
-.include dma1.fs
-.include rcc.fs
-.include gpioi.fs
-.include gpioh.fs
-.include gpiog.fs
-.include gpiof.fs
-.include gpioe.fs
-.include gpiod.fs
-.include gpioc.fs
-.include gpioj.fs
-.include gpiok.fs
-.include gpiob.fs
-.include gpioa.fs
-.include syscfg.fs
-.include spi1.fs
-.include spi2.fs
-.include spi3.fs
-.include i2s2ext.fs
-.include i2s3ext.fs
-.include sdio.fs
-.include adc1.fs
-.include adc2.fs
-.include adc3.fs
-.include usart6.fs
-.include usart1.fs
-.include usart2.fs
-.include usart3.fs
-.include dac.fs
-.include pwr.fs
-.include i2c3.fs
-.include i2c2.fs
-.include i2c1.fs
-.include iwdg.fs
-.include wwdg.fs
-.include rtc.fs
-.include uart4.fs
-.include uart5.fs
-.include c_adc.fs
-.include tim1.fs
-.include tim8.fs
-.include tim2.fs
-.include tim3.fs
-.include tim4.fs
-.include tim5.fs
-.include tim9.fs
-.include tim12.fs
-.include tim10.fs
-.include tim13.fs
-.include tim14.fs
-.include tim11.fs
-.include tim6.fs
-.include tim7.fs
-.include ethernet_mac.fs
-.include ethernet_mmc.fs
-.include ethernet_ptp.fs
-.include ethernet_dma.fs
-.include crc.fs
-.include otg_fs_global.fs
-.include otg_fs_host.fs
-.include otg_fs_device.fs
-.include otg_fs_pwrclk.fs
-.include can1.fs
-.include can2.fs
-.include flash.fs
-.include exti.fs
-.include otg_hs_global.fs
-.include otg_hs_host.fs
-.include otg_hs_device.fs
-.include otg_hs_pwrclk.fs
-.include hash.fs
-.include cryp.fs
+[ifndef] STM32F407_LOADER
+  .include "rng.fs"
+  .include "dcmi.fs"
+  .include "fsmc.fs"
+  .include "dbg.fs"
+  .include "dma.fs"
+  .include "rcc.fs"
+  .include "gpio.fs"
+  .include "syscfg.fs"
+  .include "spi1.fs"
+  .include "sdio.fs"
+  .include "adc.fs"
+  .include "usart.fs"
+  .include "dac.fs"
+  .include "pwr.fs"
+  .include "i2c.fs"
+  .include "iwdg.fs"
+  .include "wwdg.fs"
+  .include "rtc.fs"
+  .include "uart.fs"
+  .include "c_adc.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim3.fs"
+  .include "tim5.fs"
+  .include "tim9.fs"
+  .include "tim10.fs"
+  .include "tim11.fs"
+  .include "tim6.fs"
+  .include "ethernet_mac.fs"
+  .include "ethernet_mmc.fs"
+  .include "ethernet_ptp.fs"
+  .include "ethernet_dma.fs"
+  .include "crc.fs"
+  .include "otg_fs_global.fs"
+  .include "otg_fs_host.fs"
+  .include "otg_fs_device.fs"
+  .include "otg_fs_pwrclk.fs"
+  .include "can.fs"
+  .include "flash.fs"
+  .include "exti.fs"
+  .include "otg_hs_global.fs"
+  .include "otg_hs_host.fs"
+  .include "otg_hs_device.fs"
+  .include "otg_hs_pwrclk.fs"
+  .include "hash.fs"
+  .include "cryp.fs"
 
-decimal
+  $0x50060800 constant RNG              \ See rng.fs
+  $0x50050000 constant DCMI             \ See dcmi.fs
+  $0xA0000000 constant FSMC             \ See fsmc.fs
+  $0xE0042000 constant DBG              \ See dbg.fs
+  $0x40026400 constant DMA2             \ See dma.fs
+  $0x40026000 constant DMA1             \ See dma.fs
+  $0x40023800 constant RCC              \ See rcc.fs
+  $0x40022000 constant GPIOI            \ See gpio.fs
+  $0x40021C00 constant GPIOH            \ See gpio.fs
+  $0x40021800 constant GPIOG            \ See gpio.fs
+  $0x40021400 constant GPIOF            \ See gpio.fs
+  $0x40021000 constant GPIOE            \ See gpio.fs
+  $0x40020C00 constant GPIOD            \ See gpio.fs
+  $0x40020800 constant GPIOC            \ See gpio.fs
+  $0x40022400 constant GPIOJ            \ See gpio.fs
+  $0x40022800 constant GPIOK            \ See gpio.fs
+  $0x40020400 constant GPIOB            \ See gpio.fs
+  $0x40020000 constant GPIOA            \ See gpio.fs
+  $0x40013800 constant SYSCFG           \ See syscfg.fs
+  $0x40013000 constant SPI1             \ See spi1.fs
+  $0x40003800 constant SPI2             \ See spi1.fs
+  $0x40003C00 constant SPI3             \ See spi1.fs
+  $0x40003400 constant I2S2EXT          \ See spi1.fs
+  $0x40004000 constant I2S3EXT          \ See spi1.fs
+  $0x40012C00 constant SDIO             \ See sdio.fs
+  $0x40012000 constant ADC1             \ See adc.fs
+  $0x40012100 constant ADC2             \ See adc.fs
+  $0x40012200 constant ADC3             \ See adc.fs
+  $0x40011400 constant USART6           \ See usart.fs
+  $0x40011000 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x40007400 constant DAC              \ See dac.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40005C00 constant I2C3             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40004C00 constant UART4            \ See uart.fs
+  $0x40005000 constant UART5            \ See uart.fs
+  $0x40012300 constant C_ADC            \ See c_adc.fs
+  $0x40010000 constant TIM1             \ See tim1.fs
+  $0x40010400 constant TIM8             \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim3.fs
+  $0x40000800 constant TIM4             \ See tim3.fs
+  $0x40000C00 constant TIM5             \ See tim5.fs
+  $0x40014000 constant TIM9             \ See tim9.fs
+  $0x40001800 constant TIM12            \ See tim9.fs
+  $0x40014400 constant TIM10            \ See tim10.fs
+  $0x40001C00 constant TIM13            \ See tim10.fs
+  $0x40002000 constant TIM14            \ See tim10.fs
+  $0x40014800 constant TIM11            \ See tim11.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim6.fs
+  $0x40028000 constant ETHERNET_MAC     \ See ethernet_mac.fs
+  $0x40028100 constant ETHERNET_MMC     \ See ethernet_mmc.fs
+  $0x40028700 constant ETHERNET_PTP     \ See ethernet_ptp.fs
+  $0x40029000 constant ETHERNET_DMA     \ See ethernet_dma.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x50000000 constant OTG_FS_GLOBAL    \ See otg_fs_global.fs
+  $0x50000400 constant OTG_FS_HOST      \ See otg_fs_host.fs
+  $0x50000800 constant OTG_FS_DEVICE    \ See otg_fs_device.fs
+  $0x50000E00 constant OTG_FS_PWRCLK    \ See otg_fs_pwrclk.fs
+  $0x40006400 constant CAN1             \ See can.fs
+  $0x40006800 constant CAN2             \ See can.fs
+  $0x40023C00 constant FLASH            \ See flash.fs
+  $0x40013C00 constant EXTI             \ See exti.fs
+  $0x40040000 constant OTG_HS_GLOBAL    \ See otg_hs_global.fs
+  $0x40040400 constant OTG_HS_HOST      \ See otg_hs_host.fs
+  $0x40040800 constant OTG_HS_DEVICE    \ See otg_hs_device.fs
+  $0x40040E00 constant OTG_HS_PWRCLK    \ See otg_hs_pwrclk.fs
+  $0x50060400 constant HASH             \ See hash.fs
+  $0x50060000 constant CRYP             \ See cryp.fs
 
-\ Peripheral Instance Definitions
-.include RNG                    \ Random number generator
-.include DCMI                   \ Digital camera interface
-.include FSMC                   \ Flexible memory controller
-.include DBG                    \ Debug support
-.include DMA2                   \ DMA controller
-.include DMA1                   \ DMA1 Stream0 global interrupt
-.include RCC                    \ Reset and clock control
-.include GPIOI                  \ General-purpose I/Os
-.include GPIOH                  \ General-purpose I/Os
-.include GPIOG                  \ General-purpose I/Os
-.include GPIOF                  \ General-purpose I/Os
-.include GPIOE                  \ General-purpose I/Os
-.include GPIOD                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOJ                  \ General-purpose I/Os
-.include GPIOK                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOA                  \ General-purpose I/Os
-.include SYSCFG                 \ System configuration controller
-.include SPI1                   \ Serial peripheral interface
-.include SPI2                   \ SPI2 global interrupt
-.include SPI3                   \ SPI3 global interrupt
-.include I2S2EXT                \ Serial peripheral interface
-.include I2S3EXT                \ Serial peripheral interface
-.include SDIO                   \ Secure digital input/output interface
-.include ADC1                   \ Analog-to-digital converter
-.include ADC2                   \ Analog-to-digital converter
-.include ADC3                   \ Analog-to-digital converter
-.include USART6                 \ Universal synchronous asynchronous receiver transmitter
-.include USART1                 \ USART1 global interrupt
-.include USART2                 \ USART2 global interrupt
-.include USART3                 \ USART3 global interrupt
-.include DAC                    \ Digital-to-analog converter
-.include PWR                    \ Power control
-.include I2C3                   \ Inter-integrated circuit
-.include I2C2                   \ I2C2 event interrupt
-.include I2C1                   \ I2C1 event interrupt
-.include IWDG                   \ Independent watchdog
-.include WWDG                   \ Window watchdog
-.include RTC                    \ Real-time clock
-.include UART4                  \ Universal synchronous asynchronous receiver transmitter
-.include UART5                  \ UART5 global interrupt
-.include C_ADC                  \ Common ADC registers
-.include TIM1                   \ Advanced-timers
-.include TIM8                   \ TIM8 Break interrupt and TIM12 global interrupt
-.include TIM2                   \ General purpose timers
-.include TIM3                   \ General purpose timers
-.include TIM4                   \ TIM4 global interrupt
-.include TIM5                   \ General-purpose-timers
-.include TIM9                   \ General purpose timers
-.include TIM12                  \ TIM8 Break interrupt and TIM12 global interrupt
-.include TIM10                  \ General-purpose-timers
-.include TIM13                  \ TIM8 Update interrupt and TIM13 global interrupt
-.include TIM14                  \ TIM8 Trigger and Commutation interrupts and TIM14 global interrupt
-.include TIM11                  \ General-purpose-timers
-.include TIM6                   \ Basic timers
-.include TIM7                   \ TIM7 global interrupt
-.include ETHERNET_MAC           \ Ethernet: media access control (MAC)
-.include ETHERNET_MMC           \ Ethernet: MAC management counters
-.include ETHERNET_PTP           \ Ethernet: Precision time protocol
-.include ETHERNET_DMA           \ Ethernet: DMA controller operation
-.include CRC                    \ Cryptographic processor
-.include OTG_FS_GLOBAL          \ USB on the go full speed
-.include OTG_FS_HOST            \ USB on the go full speed
-.include OTG_FS_DEVICE          \ USB on the go full speed
-.include OTG_FS_PWRCLK          \ USB on the go full speed
-.include CAN1                   \ Controller area network
-.include CAN2                   \ CAN2 TX interrupts
-.include FLASH                  \ FLASH
-.include EXTI                   \ External interrupt/event controller
-.include OTG_HS_GLOBAL          \ USB on the go high speed
-.include OTG_HS_HOST            \ USB on the go high speed
-.include OTG_HS_DEVICE          \ USB on the go high speed
-.include OTG_HS_PWRCLK          \ USB on the go high speed
-.include HASH                   \ Hash processor
-.include CRYP                   \ Cryptographic processor
-
-compiletoram
-
+: STM32F407_LOADER ; [then]

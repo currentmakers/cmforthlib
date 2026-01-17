@@ -6,576 +6,628 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief AA0_DIG_USR register
-\ Address offset: 0x00
-\ Reset value: 0x000000D6
-\
-
-$000000ff constant RADIO_AA0_DIG_USR_AA_7_0                         \ Least significant byte of the Bluetooth LE Access Address code
-
-
-\
-\ @brief AA1_DIG_USR register
-\ Address offset: 0x04
-\ Reset value: 0x000000BE
-\
-
-$000000ff constant RADIO_AA1_DIG_USR_AA_15_8                        \ Next byte of the Bluetooth LE Access Address code.
-
-
-\
-\ @brief AA2_DIG_USR register
-\ Address offset: 0x08
-\ Reset value: 0x00000089
-\
-
-$000000ff constant RADIO_AA2_DIG_USR_AA_23_16                       \ Next byte of the Bluetooth LE Access Address code
-
-
-\
-\ @brief AA3_DIG_USR register
-\ Address offset: 0x0C
-\ Reset value: 0x0000008E
-\
-
-$000000ff constant RADIO_AA3_DIG_USR_AA_31_24                       \ Most significant byte of the Bluetooth LE Access Address code.
-
-
-\
-\ @brief DEM_MOD_DIG_USR register
-\ Address offset: 0x10
-\ Reset value: 0x00000026
-\
-
-$000000fe constant RADIO_DEM_MOD_DIG_USR_CHANNEL_NUM                \ Index for internal lock up table in which the synthesizer setup is contained.
-
-
-\
-\ @brief RADIO_FSM_USR register
-\ Address offset: 0x14
-\ Reset value: 0x00000004
-\
-
-$00000002 constant RADIO_RADIO_FSM_USR_EN_CALIB_CBP                 \ CBP calibration enable bit.
-$00000004 constant RADIO_RADIO_FSM_USR_EN_CALIB_SYNTH               \ SYNTH calibration enable bit.
-$000000f8 constant RADIO_RADIO_FSM_USR_PA_POWER                     \ PA Power coefficient.
-
-
-\
-\ @brief PHYCTRL_DIG_USR register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RADIO_PHYCTRL_DIG_USR_RXTXPHY                    \ RXTXPHY selection.
-
-
-\
-\ @brief AFC1_DIG_ENG register
-\ Address offset: 0x48
-\ Reset value: 0x00000044
-\
-
-$0000000f constant RADIO_AFC1_DIG_ENG_AFC_DELAY_AFTER               \ Set the decay factor of the AFC loop after Access Address detection
-$000000f0 constant RADIO_AFC1_DIG_ENG_AFC_DELAY_BEFORE              \ Set the decay factor of the AFC loop before Access Address detection
-
-
-\
-\ @brief CR0_DIG_ENG register
-\ Address offset: 0x54
-\ Reset value: 0x00000044
-\
-
-$0000000f constant RADIO_CR0_DIG_ENG_CR_GAIN_AFTER                  \ Set the gain of the clock recovery loop before Access Address detection to the value
-$000000f0 constant RADIO_CR0_DIG_ENG_CR_GAIN_BEFORE                 \ Set the gain of the clock recovery loop before Access Address detection to the value
-
-
-\
-\ @brief CR0_LR register
-\ Address offset: 0x68
-\ Reset value: 0x00000066
-\
-
-$0000000f constant RADIO_CR0_LR_CR_LR_GAIN_AFTER                    \ Set the gain of the clock recovery loop after Access Address detection to the value 2^(-CR_LR_GAIN_ AFTER) when the coded PHY is in use
-$000000f0 constant RADIO_CR0_LR_CR_LR_GAIN_BEFORE                   \ Set the gain of the clock recovery loop before Access Address detection to the value 2^(-CR_LR_GAIN_ BEFORE) when the coded PHY is in use
-
-
-\
-\ @brief VIT_CONF_DIG_ENG register
-\ Address offset: 0x6C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RADIO_VIT_CONF_DIG_ENG_VIT_EN                    \ Viterbi enable
-$000000fc constant RADIO_VIT_CONF_DIG_ENG_SPARE                     \ spare
-
-
-\
-\ @brief LR_PD_THR_DIG_ENG register
-\ Address offset: 0x84
-\ Reset value: 0x00000050
-\
-
-$000000ff constant RADIO_LR_PD_THR_DIG_ENG_LR_PD_THR                \ preamble detect threshold value
-
-
-\
-\ @brief LR_RSSI_THR_DIG_ENG register
-\ Address offset: 0x88
-\ Reset value: 0x0000001B
-\
-
-$000000ff constant RADIO_LR_RSSI_THR_DIG_ENG_LR_RSSI_THR            \ RSSI or peak threshold value
-
-
-\
-\ @brief LR_AAC_THR_DIG_ENG register
-\ Address offset: 0x8C
-\ Reset value: 0x00000038
-\
-
-$000000ff constant RADIO_LR_AAC_THR_DIG_ENG_LR_AAC_THR              \ address coded correlation threshold
-
-
-\
-\ @brief SYNTHCAL0_DIG_ENG register
-\ Address offset: 0xA8
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RADIO_SYNTHCAL0_DIG_ENG_SYNTHCAL_DEBUG_BUS_SEL    \ for Debug purpose
-$000000c0 constant RADIO_SYNTHCAL0_DIG_ENG_SYNTH_IF_FREQ_CAL        \ Define the frequency applied on the PLL during calibration phase
-
-
-\
-\ @brief DTB5_DIG_ENG register
-\ Address offset: 0xF0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RADIO_DTB5_DIG_ENG_RXTX_START_SEL                \ enable the possibility to control some signals by the other register bits instead of system design:
-$00000002 constant RADIO_DTB5_DIG_ENG_TX_ACTIVE                     \ Force TX_ACTIVE signal
-$00000004 constant RADIO_DTB5_DIG_ENG_RX_ACTIVE                     \ Force RX_ACTIVE signal
-$00000008 constant RADIO_DTB5_DIG_ENG_INITIALIZE                    \ Force INITIALIZE signal (emulate a token request of the IP_BLE)
-$00000010 constant RADIO_DTB5_DIG_ENG_PORT_SELECTED_EN              \ enable port selection
-$00000020 constant RADIO_DTB5_DIG_ENG_PORT_SELECTED_0               \ force port_selected[0] signal
-
-
-\
-\ @brief RXADC_ANA_USR register
-\ Address offset: 0x148
-\ Reset value: 0x0000001B
-\
-
-$00000007 constant RADIO_RXADC_ANA_USR_RFD_RXADC_DELAYTRIM_I        \ ADC loop delay control bits for I channel to apply when SW overload is enabled
-$00000038 constant RADIO_RXADC_ANA_USR_RFD_RXADC_DELAYTRIM_Q        \ ADC loop delay control bits for Q channel to apply when SW overload is enabled
-$00000040 constant RADIO_RXADC_ANA_USR_RXADC_DELAYTRIM_I_TST_SEL    \ Enable the SW overload on RXADX delay trimming
-$00000080 constant RADIO_RXADC_ANA_USR_RXADC_DELAYTRIM_Q_TST_SEL    \ Enable the SW overload on RXADX delay trimming
-
-
-\
-\ @brief LDO_ANA_ENG register
-\ Address offset: 0x154
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RADIO_LDO_ANA_ENG_RFD_RF_REG_BYPASS              \ RF_REG Bypass mode:
-
-
-\
-\ @brief CBIAS0_ANA_ENG register
-\ Address offset: 0x174
-\ Reset value: 0x00000088
-\
-
-$0000000f constant RADIO_CBIAS0_ANA_ENG_RFD_CBIAS_IBIAS_TRIM        \ overloaded value for cbias current trimming (when CBIAS0_TRIM_TST_SEL = 1)
-$000000f0 constant RADIO_CBIAS0_ANA_ENG_RFD_CBIAS_IPTAT_TRIM        \ overloaded value for cbias current trimming (when CBIAS0_TRIM_TST_SEL = 1)
-
-
-\
-\ @brief CBIAS1_ANA_ENG register
-\ Address offset: 0x178
-\ Reset value: 0x00000000
-\
-
-$00000080 constant RADIO_CBIAS1_ANA_ENG_CBIAS0_TRIM_TST_SEL         \ When set, RFD_CBIAS_(IPTAT/IBIAS)_TRIM are used instead of HW trimmings
-
-
-\
-\ @brief SYNTHCAL0_DIG_OUT register
-\ Address offset: 0x180
-\ Reset value: 0x00000000
-\
-
-$0000007f constant RADIO_SYNTHCAL0_DIG_OUT_VCO_CALAMP_OUT_6_0       \ VCO CALAMP value
-
-
-\
-\ @brief SYNTHCAL1_DIG_OUT register
-\ Address offset: 0x184
-\ Reset value: 0x00000001
-\
-
-$0000000f constant RADIO_SYNTHCAL1_DIG_OUT_VCO_CALAMP_OUT_10_7      \ VCO CALAMP value
-
-
-\
-\ @brief SYNTHCAL2_DIG_OUT register
-\ Address offset: 0x188
-\ Reset value: 0x00000040
-\
-
-$0000007f constant RADIO_SYNTHCAL2_DIG_OUT_VCO_CALFREQ_OUT          \ VCO CALFREQ value
-
-
-\
-\ @brief SYNTHCAL3_DIG_OUT register
-\ Address offset: 0x18C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant RADIO_SYNTHCAL3_DIG_OUT_SYNTHCAL_DEBUG_BUS       \ Calibration debug bus.
-
-
-\
-\ @brief SYNTHCAL4_DIG_OUT register
-\ Address offset: 0x190
-\ Reset value: 0x00000018
-\
-
-$0000003f constant RADIO_SYNTHCAL4_DIG_OUT_MOD_REF_DAC_WORD_OUT     \ Calibration word
-
-
-\
-\ @brief SYNTHCAL5_DIG_OUT register
-\ Address offset: 0x194
-\ Reset value: 0x00000007
-\
-
-$0000000f constant RADIO_SYNTHCAL5_DIG_OUT_CBP_CALIB_WORD           \ CBP Calibration word
-
-
-\
-\ @brief FSM_STATUS_DIG_OUT register
-\ Address offset: 0x198
-\ Reset value: 0x00000000
-\
-
-$0000001f constant RADIO_FSM_STATUS_DIG_OUT_STATUS                  \ RF FSM state:
-$00000080 constant RADIO_FSM_STATUS_DIG_OUT_SYNTH_CAL_ERROR         \ PLL calibration error
-
-
-\
-\ @brief RSSI0_DIG_OUT register
-\ Address offset: 0x1A4
-\ Reset value: 0x00000008
-\
-
-$000000ff constant RADIO_RSSI0_DIG_OUT_RSSI_MEAS_OUT_7_0            \ Measure of the received signal strength.
-
-
-\
-\ @brief RSSI1_DIG_OUT register
-\ Address offset: 0x1A8
-\ Reset value: 0x00000008
-\
-
-$000000ff constant RADIO_RSSI1_DIG_OUT_RSSI_MEAS_OUT_15_8           \ Measure of the received signal strength
-
-
-\
-\ @brief AGC_DIG_OUT register
-\ Address offset: 0x1AC
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RADIO_AGC_DIG_OUT_AGC_ATT_OUT                    \ AGC attenuation value
-
-
-\
-\ @brief DEMOD_DIG_OUT register
-\ Address offset: 0x1B0
-\ Reset value: 0x00000000
-\
-
-$00000003 constant RADIO_DEMOD_DIG_OUT_CI_FIELD                     \ CI field
-$00000004 constant RADIO_DEMOD_DIG_OUT_AAC_FOUND                    \ aac_found
-$00000008 constant RADIO_DEMOD_DIG_OUT_PD_FOUND                     \ pd_found
-$00000010 constant RADIO_DEMOD_DIG_OUT_RX_END                       \ rx_end
-
-
-\
-\ @brief AGC2_ANA_TST register
-\ Address offset: 0x1BC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RADIO_AGC2_ANA_TST_AGC2_ANA_TST_SEL              \ Selection:
-$0000000e constant RADIO_AGC2_ANA_TST_AGC_ANTENNAE_USR_TRIM         \ the AGC antenna trimming value ( when AGC2_ANA_TST_SEL = 1)
-
-
-\
-\ @brief AGC0_DIG_ENG register
-\ Address offset: 0x1C0
-\ Reset value: 0x0000004A
-\
-
-$0000003f constant RADIO_AGC0_DIG_ENG_AGC_THR_HIGH                  \ High AGC threshold
-$00000040 constant RADIO_AGC0_DIG_ENG_AGC_ENABLE                    \ Enable AGC
-
-
-\
-\ @brief AGC1_DIG_ENG register
-\ Address offset: 0x1C4
-\ Reset value: 0x00000084
-\
-
-$0000003f constant RADIO_AGC1_DIG_ENG_AGC_THR_LOW_6                 \ Low threshold for 6dB steps
-$00000040 constant RADIO_AGC1_DIG_ENG_AGC_AUTOLOCK                  \ AGC locks when level is steady between high threshold and lock threshold
-$00000080 constant RADIO_AGC1_DIG_ENG_AGC_LOCK_SYNC                 \ AGC locks when Access Address is detected (recommended)
-
-
-\
-\ @brief AGC10_DIG_ENG register
-\ Address offset: 0x1E8
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RADIO_AGC10_DIG_ENG_ATT_IF_0                     \ Attenuation at IF Level for the AGC step 0:
-$00000008 constant RADIO_AGC10_DIG_ENG_ATT_LNA_0                    \ Attenuation at LNA Level for the AGC step 0:
-$00000030 constant RADIO_AGC10_DIG_ENG_ATT_ANT_0                    \ Attenuation at Antenna Level for the AGC step 0:
-
-
-\
-\ @brief AGC11_DIG_ENG register
-\ Address offset: 0x1EC
-\ Reset value: 0x00000010
-\
-
-$00000007 constant RADIO_AGC11_DIG_ENG_ATT_IF_1                     \ Attenuation at IF Level for the AGC step 1
-$00000008 constant RADIO_AGC11_DIG_ENG_ATT_LNA_1                    \ Attenuation at LNA Level for the AGC step 1
-$00000030 constant RADIO_AGC11_DIG_ENG_ATT_ANT_1                    \ Attenuation at Antenna Level for the AGC step 1
-
-
-\
-\ @brief AGC12_DIG_ENG register
-\ Address offset: 0x1F0
-\ Reset value: 0x00000020
-\
-
-$00000007 constant RADIO_AGC12_DIG_ENG_ATT_IF_2                     \ Attenuation at IF Level for the AGC step 2
-$00000008 constant RADIO_AGC12_DIG_ENG_ATT_LNA_2                    \ Attenuation at LNA Level for the AGC step 2
-$00000030 constant RADIO_AGC12_DIG_ENG_ATT_ANT_2                    \ Attenuation at Antenna Level for the AGC step 2
-
-
-\
-\ @brief AGC13_DIG_ENG register
-\ Address offset: 0x1F4
-\ Reset value: 0x00000030
-\
-
-$00000007 constant RADIO_AGC13_DIG_ENG_ATT_IF_3                     \ Attenuation at IF Level for the AGC step 3
-$00000008 constant RADIO_AGC13_DIG_ENG_ATT_LNA_3                    \ Attenuation at LNA Level for the AGC step 3
-$00000030 constant RADIO_AGC13_DIG_ENG_ATT_ANT_3                    \ Attenuation at Antenna Level for the AGC step 3
-
-
-\
-\ @brief AGC14_DIG_ENG register
-\ Address offset: 0x1F8
-\ Reset value: 0x00000038
-\
-
-$00000007 constant RADIO_AGC14_DIG_ENG_ATT_IF_4                     \ Attenuation at IF Level for the AGC step 4
-$00000008 constant RADIO_AGC14_DIG_ENG_ATT_LNA_4                    \ Attenuation at LNA Level for the AGC step 4
-$00000030 constant RADIO_AGC14_DIG_ENG_ATT_ANT_4                    \ Attenuation at Antenna Level for the AGC step 4
-
-
-\
-\ @brief AGC15_DIG_ENG register
-\ Address offset: 0x1FC
-\ Reset value: 0x00000039
-\
-
-$00000007 constant RADIO_AGC15_DIG_ENG_ATT_IF_5                     \ Attenuation at IF Level for the AGC step 5
-$00000008 constant RADIO_AGC15_DIG_ENG_ATT_LNA_5                    \ Attenuation at LNA Level for the AGC step 5
-$00000030 constant RADIO_AGC15_DIG_ENG_ATT_ANT_5                    \ Attenuation at Antenna Level for the AGC step 5
-
-
-\
-\ @brief AGC16_DIG_ENG register
-\ Address offset: 0x200
-\ Reset value: 0x0000003A
-\
-
-$00000007 constant RADIO_AGC16_DIG_ENG_ATT_IF_6                     \ Attenuation at IF Level for the AGC step 6
-$00000008 constant RADIO_AGC16_DIG_ENG_ATT_LNA_6                    \ Attenuation at LNA Level for the AGC step 6
-$00000030 constant RADIO_AGC16_DIG_ENG_ATT_ANT_6                    \ Attenuation at Antenna Level for the AGC step 6
-
-
-\
-\ @brief AGC17_DIG_ENG register
-\ Address offset: 0x204
-\ Reset value: 0x0000003B
-\
-
-$00000007 constant RADIO_AGC17_DIG_ENG_ATT_IF_7                     \ Attenuation at IF Level for the AGC step 7
-$00000008 constant RADIO_AGC17_DIG_ENG_ATT_LNA_7                    \ Attenuation at LNA Level for the AGC step 7
-$00000030 constant RADIO_AGC17_DIG_ENG_ATT_ANT_7                    \ Attenuation at Antenna Level for the AGC step 7
-
-
-\
-\ @brief AGC18_DIG_ENG register
-\ Address offset: 0x208
-\ Reset value: 0x0000003C
-\
-
-$00000007 constant RADIO_AGC18_DIG_ENG_ATT_IF_8                     \ Attenuation at IF Level for the AGC step 8
-$00000008 constant RADIO_AGC18_DIG_ENG_ATT_LNA_8                    \ Attenuation at LNA Level for the AGC step 8
-$00000030 constant RADIO_AGC18_DIG_ENG_ATT_ANT_8                    \ Attenuation at Antenna Level for the AGC step 8
-
-
-\
-\ @brief AGC19_DIG_ENG register
-\ Address offset: 0x20C
-\ Reset value: 0x0000003D
-\
-
-$00000007 constant RADIO_AGC19_DIG_ENG_ATT_IF_9                     \ Attenuation at IF Level for the AGC step 9
-$00000008 constant RADIO_AGC19_DIG_ENG_ATT_LNA_9                    \ Attenuation at LNA Level for the AGC step 9
-$00000030 constant RADIO_AGC19_DIG_ENG_ATT_ANT_9                    \ Attenuation at Antenna Level for the AGC step 9
-
-
-\
-\ @brief RXADC_HW_TRIM_OUT register
-\ Address offset: 0x224
-\ Reset value: 0x0000001B
-\
-
-$00000007 constant RADIO_RXADC_HW_TRIM_OUT_HW_RXADC_DELAYTRIM_I     \ control bits of the RX ADC loop delay for I channel (provided by the HW trimming, automatically loaded on POR).
-$00000038 constant RADIO_RXADC_HW_TRIM_OUT_HW_RXADC_DELAYTRIM_Q     \ control bits of the RX ADC loop delay for Q channel (provided by the HW trimming, automatically loaded on POR).
-
-
-\
-\ @brief CBIAS0_HW_TRIM_OUT register
-\ Address offset: 0x228
-\ Reset value: 0x00000088
-\
-
-$0000000f constant RADIO_CBIAS0_HW_TRIM_OUT_HW_CBIAS_IBIAS_TRIM     \ CBIAS current (provided by the HW trimming, automatically loaded on POR).
-$000000f0 constant RADIO_CBIAS0_HW_TRIM_OUT_HW_CBIAS_IPTAT_TRIM     \ CBIAS current (provided by the HW trimming, automatically loaded on POR).
-
-
-\
-\ @brief AGC_HW_TRIM_OUT register
-\ Address offset: 0x230
-\ Reset value: 0x00000006
-\
-
-$0000000e constant RADIO_AGC_HW_TRIM_OUT_HW_AGC_ANTENNAE_TRIM       \ AGC trim value (provided by the HW trimming, automatically loaded on POR).
-
-
-\
-\ @brief DEMOD_IQ2_DIG_TST register
-\ Address offset: 0x23C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant RADIO_DEMOD_IQ2_DIG_TST_EXTCFG_SAMPLING_TIME     \ Defines the sampling time, when extended configuration is enabled:
-$0000000c constant RADIO_DEMOD_IQ2_DIG_TST_EXTCFG_TRIG_SELECTION    \ Defines the trigger/anchor point of the IQ sampling, when extended configuration is enabled:
-
-
-\
-\ @brief ANTSW0_DIG_USR register
-\ Address offset: 0x240
-\ Reset value: 0x0000001C
-\
-
-$0000007f constant RADIO_ANTSW0_DIG_USR_RX_TIME_TO_SAMPLE           \ specifies the exact timing of the first I/Q sampling in the reference period.
-
-
-\
-\ @brief ANTSW1_DIG_USR register
-\ Address offset: 0x244
-\ Reset value: 0x0000000B
-\
-
-$0000003f constant RADIO_ANTSW1_DIG_USR_RX_TIME_TO_SWITCH           \ specifies the exact timing of the antenna switching at receiver level (in AoA).
-
-
-\
-\ @brief ANTSW2_DIG_USR register
-\ Address offset: 0x248
-\ Reset value: 0x00000029
-\
-
-$0000007f constant RADIO_ANTSW2_DIG_USR_TX_TIME_TO_SWITCH           \ specifies the exact timing of the antenna switching during transmission at LE_1M baud rate (in AoD).
-
-
-\
-\ @brief ANTSW3_DIG_USR register
-\ Address offset: 0x24C
-\ Reset value: 0x00000023
-\
-
-$0000007f constant RADIO_ANTSW3_DIG_USR_TX_TIME_TO_SWITCH_2M        \ specifies the exact timing of the antenna switching during transmission at LE_2M baud rate (in AoD).
-
-
-\
-\ @brief RADIO Error interrupt
-\
-$60001500 constant RADIO_AA0_DIG_USR  \ offset: 0x00 : AA0_DIG_USR register
-$60001504 constant RADIO_AA1_DIG_USR  \ offset: 0x04 : AA1_DIG_USR register
-$60001508 constant RADIO_AA2_DIG_USR  \ offset: 0x08 : AA2_DIG_USR register
-$6000150c constant RADIO_AA3_DIG_USR  \ offset: 0x0C : AA3_DIG_USR register
-$60001510 constant RADIO_DEM_MOD_DIG_USR  \ offset: 0x10 : DEM_MOD_DIG_USR register
-$60001514 constant RADIO_RADIO_FSM_USR  \ offset: 0x14 : RADIO_FSM_USR register
-$60001518 constant RADIO_PHYCTRL_DIG_USR  \ offset: 0x18 : PHYCTRL_DIG_USR register
-$60001548 constant RADIO_AFC1_DIG_ENG  \ offset: 0x48 : AFC1_DIG_ENG register
-$60001554 constant RADIO_CR0_DIG_ENG  \ offset: 0x54 : CR0_DIG_ENG register
-$60001568 constant RADIO_CR0_LR   \ offset: 0x68 : CR0_LR register
-$6000156c constant RADIO_VIT_CONF_DIG_ENG  \ offset: 0x6C : VIT_CONF_DIG_ENG register
-$60001584 constant RADIO_LR_PD_THR_DIG_ENG  \ offset: 0x84 : LR_PD_THR_DIG_ENG register
-$60001588 constant RADIO_LR_RSSI_THR_DIG_ENG  \ offset: 0x88 : LR_RSSI_THR_DIG_ENG register
-$6000158c constant RADIO_LR_AAC_THR_DIG_ENG  \ offset: 0x8C : LR_AAC_THR_DIG_ENG register
-$600015a8 constant RADIO_SYNTHCAL0_DIG_ENG  \ offset: 0xA8 : SYNTHCAL0_DIG_ENG register
-$600015f0 constant RADIO_DTB5_DIG_ENG  \ offset: 0xF0 : DTB5_DIG_ENG register
-$60001648 constant RADIO_RXADC_ANA_USR  \ offset: 0x148 : RXADC_ANA_USR register
-$60001654 constant RADIO_LDO_ANA_ENG  \ offset: 0x154 : LDO_ANA_ENG register
-$60001674 constant RADIO_CBIAS0_ANA_ENG  \ offset: 0x174 : CBIAS0_ANA_ENG register
-$60001678 constant RADIO_CBIAS1_ANA_ENG  \ offset: 0x178 : CBIAS1_ANA_ENG register
-$60001680 constant RADIO_SYNTHCAL0_DIG_OUT  \ offset: 0x180 : SYNTHCAL0_DIG_OUT register
-$60001684 constant RADIO_SYNTHCAL1_DIG_OUT  \ offset: 0x184 : SYNTHCAL1_DIG_OUT register
-$60001688 constant RADIO_SYNTHCAL2_DIG_OUT  \ offset: 0x188 : SYNTHCAL2_DIG_OUT register
-$6000168c constant RADIO_SYNTHCAL3_DIG_OUT  \ offset: 0x18C : SYNTHCAL3_DIG_OUT register
-$60001690 constant RADIO_SYNTHCAL4_DIG_OUT  \ offset: 0x190 : SYNTHCAL4_DIG_OUT register
-$60001694 constant RADIO_SYNTHCAL5_DIG_OUT  \ offset: 0x194 : SYNTHCAL5_DIG_OUT register
-$60001698 constant RADIO_FSM_STATUS_DIG_OUT  \ offset: 0x198 : FSM_STATUS_DIG_OUT register
-$600016a4 constant RADIO_RSSI0_DIG_OUT  \ offset: 0x1A4 : RSSI0_DIG_OUT register
-$600016a8 constant RADIO_RSSI1_DIG_OUT  \ offset: 0x1A8 : RSSI1_DIG_OUT register
-$600016ac constant RADIO_AGC_DIG_OUT  \ offset: 0x1AC : AGC_DIG_OUT register
-$600016b0 constant RADIO_DEMOD_DIG_OUT  \ offset: 0x1B0 : DEMOD_DIG_OUT register
-$600016bc constant RADIO_AGC2_ANA_TST  \ offset: 0x1BC : AGC2_ANA_TST register
-$600016c0 constant RADIO_AGC0_DIG_ENG  \ offset: 0x1C0 : AGC0_DIG_ENG register
-$600016c4 constant RADIO_AGC1_DIG_ENG  \ offset: 0x1C4 : AGC1_DIG_ENG register
-$600016e8 constant RADIO_AGC10_DIG_ENG  \ offset: 0x1E8 : AGC10_DIG_ENG register
-$600016ec constant RADIO_AGC11_DIG_ENG  \ offset: 0x1EC : AGC11_DIG_ENG register
-$600016f0 constant RADIO_AGC12_DIG_ENG  \ offset: 0x1F0 : AGC12_DIG_ENG register
-$600016f4 constant RADIO_AGC13_DIG_ENG  \ offset: 0x1F4 : AGC13_DIG_ENG register
-$600016f8 constant RADIO_AGC14_DIG_ENG  \ offset: 0x1F8 : AGC14_DIG_ENG register
-$600016fc constant RADIO_AGC15_DIG_ENG  \ offset: 0x1FC : AGC15_DIG_ENG register
-$60001700 constant RADIO_AGC16_DIG_ENG  \ offset: 0x200 : AGC16_DIG_ENG register
-$60001704 constant RADIO_AGC17_DIG_ENG  \ offset: 0x204 : AGC17_DIG_ENG register
-$60001708 constant RADIO_AGC18_DIG_ENG  \ offset: 0x208 : AGC18_DIG_ENG register
-$6000170c constant RADIO_AGC19_DIG_ENG  \ offset: 0x20C : AGC19_DIG_ENG register
-$60001724 constant RADIO_RXADC_HW_TRIM_OUT  \ offset: 0x224 : RXADC_HW_TRIM_OUT register
-$60001728 constant RADIO_CBIAS0_HW_TRIM_OUT  \ offset: 0x228 : CBIAS0_HW_TRIM_OUT register
-$60001730 constant RADIO_AGC_HW_TRIM_OUT  \ offset: 0x230 : AGC_HW_TRIM_OUT register
-$6000173c constant RADIO_DEMOD_IQ2_DIG_TST  \ offset: 0x23C : DEMOD_IQ2_DIG_TST register
-$60001740 constant RADIO_ANTSW0_DIG_USR  \ offset: 0x240 : ANTSW0_DIG_USR register
-$60001744 constant RADIO_ANTSW1_DIG_USR  \ offset: 0x244 : ANTSW1_DIG_USR register
-$60001748 constant RADIO_ANTSW2_DIG_USR  \ offset: 0x248 : ANTSW2_DIG_USR register
-$6000174c constant RADIO_ANTSW3_DIG_USR  \ offset: 0x24C : ANTSW3_DIG_USR register
-
+[ifndef] RADIO_DEF
+
+  [ifdef] RADIO_AA0_DIG_USR_DEF
+    \
+    \ @brief AA0_DIG_USR register
+    \ Address offset: 0x00
+    \ Reset value: 0x000000D6
+    \
+    $00 constant RADIO_AA_7_0                   \ [0x00 : 8] Least significant byte of the Bluetooth LE Access Address code
+  [then]
+
+
+  [ifdef] RADIO_AA1_DIG_USR_DEF
+    \
+    \ @brief AA1_DIG_USR register
+    \ Address offset: 0x04
+    \ Reset value: 0x000000BE
+    \
+    $00 constant RADIO_AA_15_8                  \ [0x00 : 8] Next byte of the Bluetooth LE Access Address code.
+  [then]
+
+
+  [ifdef] RADIO_AA2_DIG_USR_DEF
+    \
+    \ @brief AA2_DIG_USR register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000089
+    \
+    $00 constant RADIO_AA_23_16                 \ [0x00 : 8] Next byte of the Bluetooth LE Access Address code
+  [then]
+
+
+  [ifdef] RADIO_AA3_DIG_USR_DEF
+    \
+    \ @brief AA3_DIG_USR register
+    \ Address offset: 0x0C
+    \ Reset value: 0x0000008E
+    \
+    $00 constant RADIO_AA_31_24                 \ [0x00 : 8] Most significant byte of the Bluetooth LE Access Address code.
+  [then]
+
+
+  [ifdef] RADIO_DEM_MOD_DIG_USR_DEF
+    \
+    \ @brief DEM_MOD_DIG_USR register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000026
+    \
+    $01 constant RADIO_CHANNEL_NUM              \ [0x01 : 7] Index for internal lock up table in which the synthesizer setup is contained.
+  [then]
+
+
+  [ifdef] RADIO_RADIO_FSM_USR_DEF
+    \
+    \ @brief RADIO_FSM_USR register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000004
+    \
+    $01 constant RADIO_EN_CALIB_CBP             \ [0x01] CBP calibration enable bit.
+    $02 constant RADIO_EN_CALIB_SYNTH           \ [0x02] SYNTH calibration enable bit.
+    $03 constant RADIO_PA_POWER                 \ [0x03 : 5] PA Power coefficient.
+  [then]
+
+
+  [ifdef] RADIO_PHYCTRL_DIG_USR_DEF
+    \
+    \ @brief PHYCTRL_DIG_USR register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_RXTXPHY                  \ [0x00 : 3] RXTXPHY selection.
+  [then]
+
+
+  [ifdef] RADIO_AFC1_DIG_ENG_DEF
+    \
+    \ @brief AFC1_DIG_ENG register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000044
+    \
+    $00 constant RADIO_AFC_DELAY_AFTER          \ [0x00 : 4] Set the decay factor of the AFC loop after Access Address detection
+    $04 constant RADIO_AFC_DELAY_BEFORE         \ [0x04 : 4] Set the decay factor of the AFC loop before Access Address detection
+  [then]
+
+
+  [ifdef] RADIO_CR0_DIG_ENG_DEF
+    \
+    \ @brief CR0_DIG_ENG register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000044
+    \
+    $00 constant RADIO_CR_GAIN_AFTER            \ [0x00 : 4] Set the gain of the clock recovery loop before Access Address detection to the value
+    $04 constant RADIO_CR_GAIN_BEFORE           \ [0x04 : 4] Set the gain of the clock recovery loop before Access Address detection to the value
+  [then]
+
+
+  [ifdef] RADIO_CR0_LR_DEF
+    \
+    \ @brief CR0_LR register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000066
+    \
+    $00 constant RADIO_CR_LR_GAIN_AFTER         \ [0x00 : 4] Set the gain of the clock recovery loop after Access Address detection to the value 2^(-CR_LR_GAIN_ AFTER) when the coded PHY is in use
+    $04 constant RADIO_CR_LR_GAIN_BEFORE        \ [0x04 : 4] Set the gain of the clock recovery loop before Access Address detection to the value 2^(-CR_LR_GAIN_ BEFORE) when the coded PHY is in use
+  [then]
+
+
+  [ifdef] RADIO_VIT_CONF_DIG_ENG_DEF
+    \
+    \ @brief VIT_CONF_DIG_ENG register
+    \ Address offset: 0x6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_VIT_EN                   \ [0x00] Viterbi enable
+    $02 constant RADIO_SPARE                    \ [0x02 : 6] spare
+  [then]
+
+
+  [ifdef] RADIO_LR_PD_THR_DIG_ENG_DEF
+    \
+    \ @brief LR_PD_THR_DIG_ENG register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000050
+    \
+    $00 constant RADIO_LR_PD_THR                \ [0x00 : 8] preamble detect threshold value
+  [then]
+
+
+  [ifdef] RADIO_LR_RSSI_THR_DIG_ENG_DEF
+    \
+    \ @brief LR_RSSI_THR_DIG_ENG register
+    \ Address offset: 0x88
+    \ Reset value: 0x0000001B
+    \
+    $00 constant RADIO_LR_RSSI_THR              \ [0x00 : 8] RSSI or peak threshold value
+  [then]
+
+
+  [ifdef] RADIO_LR_AAC_THR_DIG_ENG_DEF
+    \
+    \ @brief LR_AAC_THR_DIG_ENG register
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000038
+    \
+    $00 constant RADIO_LR_AAC_THR               \ [0x00 : 8] address coded correlation threshold
+  [then]
+
+
+  [ifdef] RADIO_SYNTHCAL0_DIG_ENG_DEF
+    \
+    \ @brief SYNTHCAL0_DIG_ENG register
+    \ Address offset: 0xA8
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_SYNTHCAL_DEBUG_BUS_SEL   \ [0x00 : 4] for Debug purpose
+    $06 constant RADIO_SYNTH_IF_FREQ_CAL        \ [0x06 : 2] Define the frequency applied on the PLL during calibration phase
+  [then]
+
+
+  [ifdef] RADIO_DTB5_DIG_ENG_DEF
+    \
+    \ @brief DTB5_DIG_ENG register
+    \ Address offset: 0xF0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_RXTX_START_SEL           \ [0x00] enable the possibility to control some signals by the other register bits instead of system design:
+    $01 constant RADIO_TX_ACTIVE                \ [0x01] Force TX_ACTIVE signal
+    $02 constant RADIO_RX_ACTIVE                \ [0x02] Force RX_ACTIVE signal
+    $03 constant RADIO_INITIALIZE               \ [0x03] Force INITIALIZE signal (emulate a token request of the IP_BLE)
+    $04 constant RADIO_PORT_SELECTED_EN         \ [0x04] enable port selection
+    $05 constant RADIO_PORT_SELECTED_0          \ [0x05] force port_selected[0] signal
+  [then]
+
+
+  [ifdef] RADIO_RXADC_ANA_USR_DEF
+    \
+    \ @brief RXADC_ANA_USR register
+    \ Address offset: 0x148
+    \ Reset value: 0x0000001B
+    \
+    $00 constant RADIO_RFD_RXADC_DELAYTRIM_I    \ [0x00 : 3] ADC loop delay control bits for I channel to apply when SW overload is enabled
+    $03 constant RADIO_RFD_RXADC_DELAYTRIM_Q    \ [0x03 : 3] ADC loop delay control bits for Q channel to apply when SW overload is enabled
+    $06 constant RADIO_RXADC_DELAYTRIM_I_TST_SEL     \ [0x06] Enable the SW overload on RXADX delay trimming
+    $07 constant RADIO_RXADC_DELAYTRIM_Q_TST_SEL     \ [0x07] Enable the SW overload on RXADX delay trimming
+  [then]
+
+
+  [ifdef] RADIO_LDO_ANA_ENG_DEF
+    \
+    \ @brief LDO_ANA_ENG register
+    \ Address offset: 0x154
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_RFD_RF_REG_BYPASS        \ [0x00] RF_REG Bypass mode:
+  [then]
+
+
+  [ifdef] RADIO_CBIAS0_ANA_ENG_DEF
+    \
+    \ @brief CBIAS0_ANA_ENG register
+    \ Address offset: 0x174
+    \ Reset value: 0x00000088
+    \
+    $00 constant RADIO_RFD_CBIAS_IBIAS_TRIM     \ [0x00 : 4] overloaded value for cbias current trimming (when CBIAS0_TRIM_TST_SEL = 1)
+    $04 constant RADIO_RFD_CBIAS_IPTAT_TRIM     \ [0x04 : 4] overloaded value for cbias current trimming (when CBIAS0_TRIM_TST_SEL = 1)
+  [then]
+
+
+  [ifdef] RADIO_CBIAS1_ANA_ENG_DEF
+    \
+    \ @brief CBIAS1_ANA_ENG register
+    \ Address offset: 0x178
+    \ Reset value: 0x00000000
+    \
+    $07 constant RADIO_CBIAS0_TRIM_TST_SEL      \ [0x07] When set, RFD_CBIAS_(IPTAT/IBIAS)_TRIM are used instead of HW trimmings
+  [then]
+
+
+  [ifdef] RADIO_SYNTHCAL0_DIG_OUT_DEF
+    \
+    \ @brief SYNTHCAL0_DIG_OUT register
+    \ Address offset: 0x180
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_VCO_CALAMP_OUT_6_0       \ [0x00 : 7] VCO CALAMP value
+  [then]
+
+
+  [ifdef] RADIO_SYNTHCAL1_DIG_OUT_DEF
+    \
+    \ @brief SYNTHCAL1_DIG_OUT register
+    \ Address offset: 0x184
+    \ Reset value: 0x00000001
+    \
+    $00 constant RADIO_VCO_CALAMP_OUT_10_7      \ [0x00 : 4] VCO CALAMP value
+  [then]
+
+
+  [ifdef] RADIO_SYNTHCAL2_DIG_OUT_DEF
+    \
+    \ @brief SYNTHCAL2_DIG_OUT register
+    \ Address offset: 0x188
+    \ Reset value: 0x00000040
+    \
+    $00 constant RADIO_VCO_CALFREQ_OUT          \ [0x00 : 7] VCO CALFREQ value
+  [then]
+
+
+  [ifdef] RADIO_SYNTHCAL3_DIG_OUT_DEF
+    \
+    \ @brief SYNTHCAL3_DIG_OUT register
+    \ Address offset: 0x18C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_SYNTHCAL_DEBUG_BUS       \ [0x00 : 8] Calibration debug bus.
+  [then]
+
+
+  [ifdef] RADIO_SYNTHCAL4_DIG_OUT_DEF
+    \
+    \ @brief SYNTHCAL4_DIG_OUT register
+    \ Address offset: 0x190
+    \ Reset value: 0x00000018
+    \
+    $00 constant RADIO_MOD_REF_DAC_WORD_OUT     \ [0x00 : 6] Calibration word
+  [then]
+
+
+  [ifdef] RADIO_SYNTHCAL5_DIG_OUT_DEF
+    \
+    \ @brief SYNTHCAL5_DIG_OUT register
+    \ Address offset: 0x194
+    \ Reset value: 0x00000007
+    \
+    $00 constant RADIO_CBP_CALIB_WORD           \ [0x00 : 4] CBP Calibration word
+  [then]
+
+
+  [ifdef] RADIO_FSM_STATUS_DIG_OUT_DEF
+    \
+    \ @brief FSM_STATUS_DIG_OUT register
+    \ Address offset: 0x198
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_STATUS                   \ [0x00 : 5] RF FSM state:
+    $07 constant RADIO_SYNTH_CAL_ERROR          \ [0x07] PLL calibration error
+  [then]
+
+
+  [ifdef] RADIO_RSSI0_DIG_OUT_DEF
+    \
+    \ @brief RSSI0_DIG_OUT register
+    \ Address offset: 0x1A4
+    \ Reset value: 0x00000008
+    \
+    $00 constant RADIO_RSSI_MEAS_OUT_7_0        \ [0x00 : 8] Measure of the received signal strength.
+  [then]
+
+
+  [ifdef] RADIO_RSSI1_DIG_OUT_DEF
+    \
+    \ @brief RSSI1_DIG_OUT register
+    \ Address offset: 0x1A8
+    \ Reset value: 0x00000008
+    \
+    $00 constant RADIO_RSSI_MEAS_OUT_15_8       \ [0x00 : 8] Measure of the received signal strength
+  [then]
+
+
+  [ifdef] RADIO_AGC_DIG_OUT_DEF
+    \
+    \ @brief AGC_DIG_OUT register
+    \ Address offset: 0x1AC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_AGC_ATT_OUT              \ [0x00 : 4] AGC attenuation value
+  [then]
+
+
+  [ifdef] RADIO_DEMOD_DIG_OUT_DEF
+    \
+    \ @brief DEMOD_DIG_OUT register
+    \ Address offset: 0x1B0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_CI_FIELD                 \ [0x00 : 2] CI field
+    $02 constant RADIO_AAC_FOUND                \ [0x02] aac_found
+    $03 constant RADIO_PD_FOUND                 \ [0x03] pd_found
+    $04 constant RADIO_RX_END                   \ [0x04] rx_end
+  [then]
+
+
+  [ifdef] RADIO_AGC2_ANA_TST_DEF
+    \
+    \ @brief AGC2_ANA_TST register
+    \ Address offset: 0x1BC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_AGC2_ANA_TST_SEL         \ [0x00] Selection:
+    $01 constant RADIO_AGC_ANTENNAE_USR_TRIM    \ [0x01 : 3] the AGC antenna trimming value ( when AGC2_ANA_TST_SEL = 1)
+  [then]
+
+
+  [ifdef] RADIO_AGC0_DIG_ENG_DEF
+    \
+    \ @brief AGC0_DIG_ENG register
+    \ Address offset: 0x1C0
+    \ Reset value: 0x0000004A
+    \
+    $00 constant RADIO_AGC_THR_HIGH             \ [0x00 : 6] High AGC threshold
+    $06 constant RADIO_AGC_ENABLE               \ [0x06] Enable AGC
+  [then]
+
+
+  [ifdef] RADIO_AGC1_DIG_ENG_DEF
+    \
+    \ @brief AGC1_DIG_ENG register
+    \ Address offset: 0x1C4
+    \ Reset value: 0x00000084
+    \
+    $00 constant RADIO_AGC_THR_LOW_6            \ [0x00 : 6] Low threshold for 6dB steps
+    $06 constant RADIO_AGC_AUTOLOCK             \ [0x06] AGC locks when level is steady between high threshold and lock threshold
+    $07 constant RADIO_AGC_LOCK_SYNC            \ [0x07] AGC locks when Access Address is detected (recommended)
+  [then]
+
+
+  [ifdef] RADIO_AGC10_DIG_ENG_DEF
+    \
+    \ @brief AGC10_DIG_ENG register
+    \ Address offset: 0x1E8
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_ATT_IF_0                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 0:
+    $03 constant RADIO_ATT_LNA_0                \ [0x03] Attenuation at LNA Level for the AGC step 0:
+    $04 constant RADIO_ATT_ANT_0                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 0:
+  [then]
+
+
+  [ifdef] RADIO_AGC11_DIG_ENG_DEF
+    \
+    \ @brief AGC11_DIG_ENG register
+    \ Address offset: 0x1EC
+    \ Reset value: 0x00000010
+    \
+    $00 constant RADIO_ATT_IF_1                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 1
+    $03 constant RADIO_ATT_LNA_1                \ [0x03] Attenuation at LNA Level for the AGC step 1
+    $04 constant RADIO_ATT_ANT_1                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 1
+  [then]
+
+
+  [ifdef] RADIO_AGC12_DIG_ENG_DEF
+    \
+    \ @brief AGC12_DIG_ENG register
+    \ Address offset: 0x1F0
+    \ Reset value: 0x00000020
+    \
+    $00 constant RADIO_ATT_IF_2                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 2
+    $03 constant RADIO_ATT_LNA_2                \ [0x03] Attenuation at LNA Level for the AGC step 2
+    $04 constant RADIO_ATT_ANT_2                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 2
+  [then]
+
+
+  [ifdef] RADIO_AGC13_DIG_ENG_DEF
+    \
+    \ @brief AGC13_DIG_ENG register
+    \ Address offset: 0x1F4
+    \ Reset value: 0x00000030
+    \
+    $00 constant RADIO_ATT_IF_3                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 3
+    $03 constant RADIO_ATT_LNA_3                \ [0x03] Attenuation at LNA Level for the AGC step 3
+    $04 constant RADIO_ATT_ANT_3                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 3
+  [then]
+
+
+  [ifdef] RADIO_AGC14_DIG_ENG_DEF
+    \
+    \ @brief AGC14_DIG_ENG register
+    \ Address offset: 0x1F8
+    \ Reset value: 0x00000038
+    \
+    $00 constant RADIO_ATT_IF_4                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 4
+    $03 constant RADIO_ATT_LNA_4                \ [0x03] Attenuation at LNA Level for the AGC step 4
+    $04 constant RADIO_ATT_ANT_4                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 4
+  [then]
+
+
+  [ifdef] RADIO_AGC15_DIG_ENG_DEF
+    \
+    \ @brief AGC15_DIG_ENG register
+    \ Address offset: 0x1FC
+    \ Reset value: 0x00000039
+    \
+    $00 constant RADIO_ATT_IF_5                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 5
+    $03 constant RADIO_ATT_LNA_5                \ [0x03] Attenuation at LNA Level for the AGC step 5
+    $04 constant RADIO_ATT_ANT_5                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 5
+  [then]
+
+
+  [ifdef] RADIO_AGC16_DIG_ENG_DEF
+    \
+    \ @brief AGC16_DIG_ENG register
+    \ Address offset: 0x200
+    \ Reset value: 0x0000003A
+    \
+    $00 constant RADIO_ATT_IF_6                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 6
+    $03 constant RADIO_ATT_LNA_6                \ [0x03] Attenuation at LNA Level for the AGC step 6
+    $04 constant RADIO_ATT_ANT_6                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 6
+  [then]
+
+
+  [ifdef] RADIO_AGC17_DIG_ENG_DEF
+    \
+    \ @brief AGC17_DIG_ENG register
+    \ Address offset: 0x204
+    \ Reset value: 0x0000003B
+    \
+    $00 constant RADIO_ATT_IF_7                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 7
+    $03 constant RADIO_ATT_LNA_7                \ [0x03] Attenuation at LNA Level for the AGC step 7
+    $04 constant RADIO_ATT_ANT_7                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 7
+  [then]
+
+
+  [ifdef] RADIO_AGC18_DIG_ENG_DEF
+    \
+    \ @brief AGC18_DIG_ENG register
+    \ Address offset: 0x208
+    \ Reset value: 0x0000003C
+    \
+    $00 constant RADIO_ATT_IF_8                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 8
+    $03 constant RADIO_ATT_LNA_8                \ [0x03] Attenuation at LNA Level for the AGC step 8
+    $04 constant RADIO_ATT_ANT_8                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 8
+  [then]
+
+
+  [ifdef] RADIO_AGC19_DIG_ENG_DEF
+    \
+    \ @brief AGC19_DIG_ENG register
+    \ Address offset: 0x20C
+    \ Reset value: 0x0000003D
+    \
+    $00 constant RADIO_ATT_IF_9                 \ [0x00 : 3] Attenuation at IF Level for the AGC step 9
+    $03 constant RADIO_ATT_LNA_9                \ [0x03] Attenuation at LNA Level for the AGC step 9
+    $04 constant RADIO_ATT_ANT_9                \ [0x04 : 2] Attenuation at Antenna Level for the AGC step 9
+  [then]
+
+
+  [ifdef] RADIO_RXADC_HW_TRIM_OUT_DEF
+    \
+    \ @brief RXADC_HW_TRIM_OUT register
+    \ Address offset: 0x224
+    \ Reset value: 0x0000001B
+    \
+    $00 constant RADIO_HW_RXADC_DELAYTRIM_I     \ [0x00 : 3] control bits of the RX ADC loop delay for I channel (provided by the HW trimming, automatically loaded on POR).
+    $03 constant RADIO_HW_RXADC_DELAYTRIM_Q     \ [0x03 : 3] control bits of the RX ADC loop delay for Q channel (provided by the HW trimming, automatically loaded on POR).
+  [then]
+
+
+  [ifdef] RADIO_CBIAS0_HW_TRIM_OUT_DEF
+    \
+    \ @brief CBIAS0_HW_TRIM_OUT register
+    \ Address offset: 0x228
+    \ Reset value: 0x00000088
+    \
+    $00 constant RADIO_HW_CBIAS_IBIAS_TRIM      \ [0x00 : 4] CBIAS current (provided by the HW trimming, automatically loaded on POR).
+    $04 constant RADIO_HW_CBIAS_IPTAT_TRIM      \ [0x04 : 4] CBIAS current (provided by the HW trimming, automatically loaded on POR).
+  [then]
+
+
+  [ifdef] RADIO_AGC_HW_TRIM_OUT_DEF
+    \
+    \ @brief AGC_HW_TRIM_OUT register
+    \ Address offset: 0x230
+    \ Reset value: 0x00000006
+    \
+    $01 constant RADIO_HW_AGC_ANTENNAE_TRIM     \ [0x01 : 3] AGC trim value (provided by the HW trimming, automatically loaded on POR).
+  [then]
+
+
+  [ifdef] RADIO_DEMOD_IQ2_DIG_TST_DEF
+    \
+    \ @brief DEMOD_IQ2_DIG_TST register
+    \ Address offset: 0x23C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RADIO_EXTCFG_SAMPLING_TIME     \ [0x00 : 2] Defines the sampling time, when extended configuration is enabled:
+    $02 constant RADIO_EXTCFG_TRIG_SELECTION    \ [0x02 : 2] Defines the trigger/anchor point of the IQ sampling, when extended configuration is enabled:
+  [then]
+
+
+  [ifdef] RADIO_ANTSW0_DIG_USR_DEF
+    \
+    \ @brief ANTSW0_DIG_USR register
+    \ Address offset: 0x240
+    \ Reset value: 0x0000001C
+    \
+    $00 constant RADIO_RX_TIME_TO_SAMPLE        \ [0x00 : 7] specifies the exact timing of the first I/Q sampling in the reference period.
+  [then]
+
+
+  [ifdef] RADIO_ANTSW1_DIG_USR_DEF
+    \
+    \ @brief ANTSW1_DIG_USR register
+    \ Address offset: 0x244
+    \ Reset value: 0x0000000B
+    \
+    $00 constant RADIO_RX_TIME_TO_SWITCH        \ [0x00 : 6] specifies the exact timing of the antenna switching at receiver level (in AoA).
+  [then]
+
+
+  [ifdef] RADIO_ANTSW2_DIG_USR_DEF
+    \
+    \ @brief ANTSW2_DIG_USR register
+    \ Address offset: 0x248
+    \ Reset value: 0x00000029
+    \
+    $00 constant RADIO_TX_TIME_TO_SWITCH        \ [0x00 : 7] specifies the exact timing of the antenna switching during transmission at LE_1M baud rate (in AoD).
+  [then]
+
+
+  [ifdef] RADIO_ANTSW3_DIG_USR_DEF
+    \
+    \ @brief ANTSW3_DIG_USR register
+    \ Address offset: 0x24C
+    \ Reset value: 0x00000023
+    \
+    $00 constant RADIO_TX_TIME_TO_SWITCH_2M     \ [0x00 : 7] specifies the exact timing of the antenna switching during transmission at LE_2M baud rate (in AoD).
+  [then]
+
+  \
+  \ @brief RADIO Error interrupt
+  \
+  $00 constant RADIO_AA0_DIG_USR        \ AA0_DIG_USR register
+  $04 constant RADIO_AA1_DIG_USR        \ AA1_DIG_USR register
+  $08 constant RADIO_AA2_DIG_USR        \ AA2_DIG_USR register
+  $0C constant RADIO_AA3_DIG_USR        \ AA3_DIG_USR register
+  $10 constant RADIO_DEM_MOD_DIG_USR    \ DEM_MOD_DIG_USR register
+  $14 constant RADIO_RADIO_FSM_USR      \ RADIO_FSM_USR register
+  $18 constant RADIO_PHYCTRL_DIG_USR    \ PHYCTRL_DIG_USR register
+  $48 constant RADIO_AFC1_DIG_ENG       \ AFC1_DIG_ENG register
+  $54 constant RADIO_CR0_DIG_ENG        \ CR0_DIG_ENG register
+  $68 constant RADIO_CR0_LR             \ CR0_LR register
+  $6C constant RADIO_VIT_CONF_DIG_ENG   \ VIT_CONF_DIG_ENG register
+  $84 constant RADIO_LR_PD_THR_DIG_ENG  \ LR_PD_THR_DIG_ENG register
+  $88 constant RADIO_LR_RSSI_THR_DIG_ENG    \ LR_RSSI_THR_DIG_ENG register
+  $8C constant RADIO_LR_AAC_THR_DIG_ENG \ LR_AAC_THR_DIG_ENG register
+  $A8 constant RADIO_SYNTHCAL0_DIG_ENG  \ SYNTHCAL0_DIG_ENG register
+  $F0 constant RADIO_DTB5_DIG_ENG       \ DTB5_DIG_ENG register
+  $148 constant RADIO_RXADC_ANA_USR     \ RXADC_ANA_USR register
+  $154 constant RADIO_LDO_ANA_ENG       \ LDO_ANA_ENG register
+  $174 constant RADIO_CBIAS0_ANA_ENG    \ CBIAS0_ANA_ENG register
+  $178 constant RADIO_CBIAS1_ANA_ENG    \ CBIAS1_ANA_ENG register
+  $180 constant RADIO_SYNTHCAL0_DIG_OUT \ SYNTHCAL0_DIG_OUT register
+  $184 constant RADIO_SYNTHCAL1_DIG_OUT \ SYNTHCAL1_DIG_OUT register
+  $188 constant RADIO_SYNTHCAL2_DIG_OUT \ SYNTHCAL2_DIG_OUT register
+  $18C constant RADIO_SYNTHCAL3_DIG_OUT \ SYNTHCAL3_DIG_OUT register
+  $190 constant RADIO_SYNTHCAL4_DIG_OUT \ SYNTHCAL4_DIG_OUT register
+  $194 constant RADIO_SYNTHCAL5_DIG_OUT \ SYNTHCAL5_DIG_OUT register
+  $198 constant RADIO_FSM_STATUS_DIG_OUT    \ FSM_STATUS_DIG_OUT register
+  $1A4 constant RADIO_RSSI0_DIG_OUT     \ RSSI0_DIG_OUT register
+  $1A8 constant RADIO_RSSI1_DIG_OUT     \ RSSI1_DIG_OUT register
+  $1AC constant RADIO_AGC_DIG_OUT       \ AGC_DIG_OUT register
+  $1B0 constant RADIO_DEMOD_DIG_OUT     \ DEMOD_DIG_OUT register
+  $1BC constant RADIO_AGC2_ANA_TST      \ AGC2_ANA_TST register
+  $1C0 constant RADIO_AGC0_DIG_ENG      \ AGC0_DIG_ENG register
+  $1C4 constant RADIO_AGC1_DIG_ENG      \ AGC1_DIG_ENG register
+  $1E8 constant RADIO_AGC10_DIG_ENG     \ AGC10_DIG_ENG register
+  $1EC constant RADIO_AGC11_DIG_ENG     \ AGC11_DIG_ENG register
+  $1F0 constant RADIO_AGC12_DIG_ENG     \ AGC12_DIG_ENG register
+  $1F4 constant RADIO_AGC13_DIG_ENG     \ AGC13_DIG_ENG register
+  $1F8 constant RADIO_AGC14_DIG_ENG     \ AGC14_DIG_ENG register
+  $1FC constant RADIO_AGC15_DIG_ENG     \ AGC15_DIG_ENG register
+  $200 constant RADIO_AGC16_DIG_ENG     \ AGC16_DIG_ENG register
+  $204 constant RADIO_AGC17_DIG_ENG     \ AGC17_DIG_ENG register
+  $208 constant RADIO_AGC18_DIG_ENG     \ AGC18_DIG_ENG register
+  $20C constant RADIO_AGC19_DIG_ENG     \ AGC19_DIG_ENG register
+  $224 constant RADIO_RXADC_HW_TRIM_OUT \ RXADC_HW_TRIM_OUT register
+  $228 constant RADIO_CBIAS0_HW_TRIM_OUT    \ CBIAS0_HW_TRIM_OUT register
+  $230 constant RADIO_AGC_HW_TRIM_OUT   \ AGC_HW_TRIM_OUT register
+  $23C constant RADIO_DEMOD_IQ2_DIG_TST \ DEMOD_IQ2_DIG_TST register
+  $240 constant RADIO_ANTSW0_DIG_USR    \ ANTSW0_DIG_USR register
+  $244 constant RADIO_ANTSW1_DIG_USR    \ ANTSW1_DIG_USR register
+  $248 constant RADIO_ANTSW2_DIG_USR    \ ANTSW2_DIG_USR register
+  $24C constant RADIO_ANTSW3_DIG_USR    \ ANTSW3_DIG_USR register
+
+: RADIO_DEF ; [then]

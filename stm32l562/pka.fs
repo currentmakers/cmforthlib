@@ -6,49 +6,52 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] PKA_DEF
 
-\
-\ @brief PKA control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PKA_PKA_CR_EN                                    \ PKA Enable
-$00000002 constant PKA_PKA_CR_START                                 \ Start the operation
-$00003f00 constant PKA_PKA_CR_MODE                                  \ PKA operation code
-$00020000 constant PKA_PKA_CR_PROCENDIE                             \ End of operation interrupt enable
-$00080000 constant PKA_PKA_CR_RAMERRIE                              \ RAM error interrupt enable
-$00100000 constant PKA_PKA_CR_ADDRERRIE                             \ Address error interrupt enable
-
-
-\
-\ @brief PKA status register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00010000 constant PKA_PKA_SR_BUSY                                  \ PKA operation in progress
-$00020000 constant PKA_PKA_SR_PROCENDF                              \ PKA end of operation flag
-$00080000 constant PKA_PKA_SR_RAMERRF                               \ PKA ram error flag
-$00100000 constant PKA_PKA_SR_ADDRERRF                              \ address er flag
+  [ifdef] PKA_PKA_CR_DEF
+    \
+    \ @brief PKA control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant PKA_EN                         \ [0x00] PKA Enable
+    $01 constant PKA_START                      \ [0x01] Start the operation
+    $08 constant PKA_MODE                       \ [0x08 : 6] PKA operation code
+    $11 constant PKA_PROCENDIE                  \ [0x11] End of operation interrupt enable
+    $13 constant PKA_RAMERRIE                   \ [0x13] RAM error interrupt enable
+    $14 constant PKA_ADDRERRIE                  \ [0x14] Address error interrupt enable
+  [then]
 
 
-\
-\ @brief PKA clear flag register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
+  [ifdef] PKA_PKA_SR_DEF
+    \
+    \ @brief PKA status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $10 constant PKA_BUSY                       \ [0x10] PKA operation in progress
+    $11 constant PKA_PROCENDF                   \ [0x11] PKA end of operation flag
+    $13 constant PKA_RAMERRF                    \ [0x13] PKA ram error flag
+    $14 constant PKA_ADDRERRF                   \ [0x14] address er flag
+  [then]
 
-$00020000 constant PKA_PKA_CLRFR_PROCENDFC                          \ clear PKA end of operation flag
-$00080000 constant PKA_PKA_CLRFR_RAMERRFC                           \ CLEAR PKA RAM ERROR FLAG
-$00100000 constant PKA_PKA_CLRFR_ADDRERRFC                          \ clear address error flag
 
+  [ifdef] PKA_PKA_CLRFR_DEF
+    \
+    \ @brief PKA clear flag register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $11 constant PKA_PROCENDFC                  \ [0x11] clear PKA end of operation flag
+    $13 constant PKA_RAMERRFC                   \ [0x13] CLEAR PKA RAM ERROR FLAG
+    $14 constant PKA_ADDRERRFC                  \ [0x14] clear address error flag
+  [then]
 
-\
-\ @brief PKA
-\
-$420c2000 constant PKA_PKA_CR     \ offset: 0x00 : PKA control register
-$420c2004 constant PKA_PKA_SR     \ offset: 0x04 : PKA status register
-$420c2008 constant PKA_PKA_CLRFR  \ offset: 0x08 : PKA clear flag register
+  \
+  \ @brief PKA
+  \
+  $00 constant PKA_PKA_CR               \ PKA control register
+  $04 constant PKA_PKA_SR               \ PKA status register
+  $08 constant PKA_PKA_CLRFR            \ PKA clear flag register
 
+: PKA_DEF ; [then]

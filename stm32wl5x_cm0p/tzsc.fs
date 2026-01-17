@@ -6,84 +6,91 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TZSC_DEF
 
-\
-\ @brief TZSC control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TZSC_TZSC_CR_LCK                                 \ LCK
-
-
-\
-\ @brief TZSC security configuration register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000004 constant TZSC_TZSC_SECCFGR1_AESSEC                        \ AESSEC
-$00000008 constant TZSC_TZSC_SECCFGR1_RNGSEC                        \ RNGSEC
-$00002000 constant TZSC_TZSC_SECCFGR1_PKASEC                        \ PKASEC
+  [ifdef] TZSC_TZSC_CR_DEF
+    \
+    \ @brief TZSC control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TZSC_LCK                       \ [0x00] LCK
+  [then]
 
 
-\
-\ @brief TZSC privilege configuration register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000004 constant TZSC_TZSC_PRIVCFGR1_AESPRIV                      \ AESPRIV
-$00000008 constant TZSC_TZSC_PRIVCFGR1_RNGPRIV                      \ RNGPRIV
-$00000010 constant TZSC_TZSC_PRIVCFGR1_SUBGHZSPIPRIV                \ SUBGHZSPIPRIV
-$00002000 constant TZSC_TZSC_PRIVCFGR1_PKAPRIV                      \ PKAPRIV
-
-
-\
-\ @brief Unprivileged Water Mark 1 register
-\ Address offset: 0x130
-\ Reset value: 0x0FFF0000
-\
-
-$0fff0000 constant TZSC_TZSC_MPCWM1_UPWMR_LGTH                      \ LGTH
+  [ifdef] TZSC_TZSC_SECCFGR1_DEF
+    \
+    \ @brief TZSC security configuration register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $02 constant TZSC_AESSEC                    \ [0x02] AESSEC
+    $03 constant TZSC_RNGSEC                    \ [0x03] RNGSEC
+    $0d constant TZSC_PKASEC                    \ [0x0d] PKASEC
+  [then]
 
 
-\
-\ @brief Unprivileged Writable Water Mark 1 register
-\ Address offset: 0x134
-\ Reset value: 0x0FFF0000
-\
-
-$0fff0000 constant TZSC_TZSC_MPCWM1_UPWWMR_LGTH                     \ Define the length of Flash Unprivileged Writable area, in 2
-
-
-\
-\ @brief Unprivileged Water Mark 2 register
-\ Address offset: 0x138
-\ Reset value: 0x0FFF0000
-\
-
-$0fff0000 constant TZSC_TZSC_MPCWM2_UPWMR_LGTH                      \ LGTH
+  [ifdef] TZSC_TZSC_PRIVCFGR1_DEF
+    \
+    \ @brief TZSC privilege configuration register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $02 constant TZSC_AESPRIV                   \ [0x02] AESPRIV
+    $03 constant TZSC_RNGPRIV                   \ [0x03] RNGPRIV
+    $04 constant TZSC_SUBGHZSPIPRIV             \ [0x04] SUBGHZSPIPRIV
+    $0d constant TZSC_PKAPRIV                   \ [0x0d] PKAPRIV
+  [then]
 
 
-\
-\ @brief Unprivileged Water Mark 3 register
-\ Address offset: 0x140
-\ Reset value: 0x0FFF0000
-\
+  [ifdef] TZSC_TZSC_MPCWM1_UPWMR_DEF
+    \
+    \ @brief Unprivileged Water Mark 1 register
+    \ Address offset: 0x130
+    \ Reset value: 0x0FFF0000
+    \
+    $10 constant TZSC_LGTH                      \ [0x10 : 12] LGTH
+  [then]
 
-$0fff0000 constant TZSC_TZSC_MPCWM3_UPWMR_LGTH                      \ LGTH
+
+  [ifdef] TZSC_TZSC_MPCWM1_UPWWMR_DEF
+    \
+    \ @brief Unprivileged Writable Water Mark 1 register
+    \ Address offset: 0x134
+    \ Reset value: 0x0FFF0000
+    \
+    $10 constant TZSC_LGTH                      \ [0x10 : 12] Define the length of Flash Unprivileged Writable area, in 2
+  [then]
 
 
-\
-\ @brief Global TrustZone Controller
-\
-$58004400 constant TZSC_TZSC_CR   \ offset: 0x00 : TZSC control register
-$58004410 constant TZSC_TZSC_SECCFGR1  \ offset: 0x10 : TZSC security configuration register
-$58004420 constant TZSC_TZSC_PRIVCFGR1  \ offset: 0x20 : TZSC privilege configuration register 1
-$58004530 constant TZSC_TZSC_MPCWM1_UPWMR  \ offset: 0x130 : Unprivileged Water Mark 1 register
-$58004534 constant TZSC_TZSC_MPCWM1_UPWWMR  \ offset: 0x134 : Unprivileged Writable Water Mark 1 register
-$58004538 constant TZSC_TZSC_MPCWM2_UPWMR  \ offset: 0x138 : Unprivileged Water Mark 2 register
-$58004540 constant TZSC_TZSC_MPCWM3_UPWMR  \ offset: 0x140 : Unprivileged Water Mark 3 register
+  [ifdef] TZSC_TZSC_MPCWM2_UPWMR_DEF
+    \
+    \ @brief Unprivileged Water Mark 2 register
+    \ Address offset: 0x138
+    \ Reset value: 0x0FFF0000
+    \
+    $10 constant TZSC_LGTH                      \ [0x10 : 12] LGTH
+  [then]
 
+
+  [ifdef] TZSC_TZSC_MPCWM3_UPWMR_DEF
+    \
+    \ @brief Unprivileged Water Mark 3 register
+    \ Address offset: 0x140
+    \ Reset value: 0x0FFF0000
+    \
+    $10 constant TZSC_LGTH                      \ [0x10 : 12] LGTH
+  [then]
+
+  \
+  \ @brief Global TrustZone Controller
+  \
+  $00 constant TZSC_TZSC_CR             \ TZSC control register
+  $10 constant TZSC_TZSC_SECCFGR1       \ TZSC security configuration register
+  $20 constant TZSC_TZSC_PRIVCFGR1      \ TZSC privilege configuration register 1
+  $130 constant TZSC_TZSC_MPCWM1_UPWMR  \ Unprivileged Water Mark 1 register
+  $134 constant TZSC_TZSC_MPCWM1_UPWWMR \ Unprivileged Writable Water Mark 1 register
+  $138 constant TZSC_TZSC_MPCWM2_UPWMR  \ Unprivileged Water Mark 2 register
+  $140 constant TZSC_TZSC_MPCWM3_UPWMR  \ Unprivileged Water Mark 3 register
+
+: TZSC_DEF ; [then]

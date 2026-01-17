@@ -6,84 +6,90 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] CAN_CCU_DEF
 
-\
-\ @brief Clock Calibration Unit Core Release Register
-\ Address offset: 0x00
-\ Reset value: 0x11141218
-\
-
-$000000ff constant CAN_CCU_CREL_DAY                                 \ Time Stamp Day
-$0000ff00 constant CAN_CCU_CREL_MON                                 \ Time Stamp Month
-$000f0000 constant CAN_CCU_CREL_YEAR                                \ Time Stamp Year
-$00f00000 constant CAN_CCU_CREL_SUBSTEP                             \ Sub-step of Core Release
-$0f000000 constant CAN_CCU_CREL_STEP                                \ Step of Core Release
-$f0000000 constant CAN_CCU_CREL_REL                                 \ Core Release
-
-
-\
-\ @brief Calibration Configuration Register
-\ Address offset: 0x04
-\ Reset value: 0x00000004
-\
-
-$0000001f constant CAN_CCU_CCFG_TQBT                                \ Time Quanta per Bit Time
-$00000040 constant CAN_CCU_CCFG_BCC                                 \ Bypass Clock Calibration
-$00000080 constant CAN_CCU_CCFG_CFL                                 \ Calibration Field Length
-$0000ff00 constant CAN_CCU_CCFG_OCPM                                \ Oscillator Clock Periods Minimum
-$000f0000 constant CAN_CCU_CCFG_CDIV                                \ Clock Divider
-$80000000 constant CAN_CCU_CCFG_SWR                                 \ Software Reset
+  [ifdef] CAN_CCU_CREL_DEF
+    \
+    \ @brief Clock Calibration Unit Core Release Register
+    \ Address offset: 0x00
+    \ Reset value: 0x11141218
+    \
+    $00 constant CAN_CCU_DAY                    \ [0x00 : 8] Time Stamp Day
+    $08 constant CAN_CCU_MON                    \ [0x08 : 8] Time Stamp Month
+    $10 constant CAN_CCU_YEAR                   \ [0x10 : 4] Time Stamp Year
+    $14 constant CAN_CCU_SUBSTEP                \ [0x14 : 4] Sub-step of Core Release
+    $18 constant CAN_CCU_STEP                   \ [0x18 : 4] Step of Core Release
+    $1c constant CAN_CCU_REL                    \ [0x1c : 4] Core Release
+  [then]
 
 
-\
-\ @brief Calibration Status Register
-\ Address offset: 0x08
-\ Reset value: 0x0203FFFF
-\
-
-$0003ffff constant CAN_CCU_CSTAT_OCPC                               \ Oscillator Clock Period Counter
-$1ffc0000 constant CAN_CCU_CSTAT_TQC                                \ Time Quanta Counter
-$c0000000 constant CAN_CCU_CSTAT_CALS                               \ Calibration State
-
-
-\
-\ @brief Calibration Watchdog Register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant CAN_CCU_CWD_WDC                                  \ WDC
-$ffff0000 constant CAN_CCU_CWD_WDV                                  \ WDV
+  [ifdef] CAN_CCU_CCFG_DEF
+    \
+    \ @brief Calibration Configuration Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000004
+    \
+    $00 constant CAN_CCU_TQBT                   \ [0x00 : 5] Time Quanta per Bit Time
+    $06 constant CAN_CCU_BCC                    \ [0x06] Bypass Clock Calibration
+    $07 constant CAN_CCU_CFL                    \ [0x07] Calibration Field Length
+    $08 constant CAN_CCU_OCPM                   \ [0x08 : 8] Oscillator Clock Periods Minimum
+    $10 constant CAN_CCU_CDIV                   \ [0x10 : 4] Clock Divider
+    $1f constant CAN_CCU_SWR                    \ [0x1f] Software Reset
+  [then]
 
 
-\
-\ @brief Clock Calibration Unit Interrupt Register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CAN_CCU_IR_CWE                                   \ Calibration Watchdog Event
-$00000002 constant CAN_CCU_IR_CSC                                   \ Calibration State Changed
-
-
-\
-\ @brief Clock Calibration Unit Interrupt Enable Register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CAN_CCU_IE_CWEE                                  \ Calibration Watchdog Event Enable
-$00000002 constant CAN_CCU_IE_CSCE                                  \ Calibration State Changed Enable
+  [ifdef] CAN_CCU_CSTAT_DEF
+    \
+    \ @brief Calibration Status Register
+    \ Address offset: 0x08
+    \ Reset value: 0x0203FFFF
+    \
+    $00 constant CAN_CCU_OCPC                   \ [0x00 : 18] Oscillator Clock Period Counter
+    $12 constant CAN_CCU_TQC                    \ [0x12 : 11] Time Quanta Counter
+    $1e constant CAN_CCU_CALS                   \ [0x1e : 2] Calibration State
+  [then]
 
 
-\
-\ @brief CCU registers
-\
-$4000a800 constant CAN_CCU_CREL   \ offset: 0x00 : Clock Calibration Unit Core Release Register
-$4000a804 constant CAN_CCU_CCFG   \ offset: 0x04 : Calibration Configuration Register
-$4000a808 constant CAN_CCU_CSTAT  \ offset: 0x08 : Calibration Status Register
-$4000a80c constant CAN_CCU_CWD    \ offset: 0x0C : Calibration Watchdog Register
-$4000a810 constant CAN_CCU_IR     \ offset: 0x10 : Clock Calibration Unit Interrupt Register
-$4000a814 constant CAN_CCU_IE     \ offset: 0x14 : Clock Calibration Unit Interrupt Enable Register
+  [ifdef] CAN_CCU_CWD_DEF
+    \
+    \ @brief Calibration Watchdog Register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CAN_CCU_WDC                    \ [0x00 : 16] WDC
+    $10 constant CAN_CCU_WDV                    \ [0x10 : 16] WDV
+  [then]
 
+
+  [ifdef] CAN_CCU_IR_DEF
+    \
+    \ @brief Clock Calibration Unit Interrupt Register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant CAN_CCU_CWE                    \ [0x00] Calibration Watchdog Event
+    $01 constant CAN_CCU_CSC                    \ [0x01] Calibration State Changed
+  [then]
+
+
+  [ifdef] CAN_CCU_IE_DEF
+    \
+    \ @brief Clock Calibration Unit Interrupt Enable Register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant CAN_CCU_CWEE                   \ [0x00] Calibration Watchdog Event Enable
+    $01 constant CAN_CCU_CSCE                   \ [0x01] Calibration State Changed Enable
+  [then]
+
+  \
+  \ @brief CCU registers
+  \
+  $00 constant CAN_CCU_CREL             \ Clock Calibration Unit Core Release Register
+  $04 constant CAN_CCU_CCFG             \ Calibration Configuration Register
+  $08 constant CAN_CCU_CSTAT            \ Calibration Status Register
+  $0C constant CAN_CCU_CWD              \ Calibration Watchdog Register
+  $10 constant CAN_CCU_IR               \ Clock Calibration Unit Interrupt Register
+  $14 constant CAN_CCU_IE               \ Clock Calibration Unit Interrupt Enable Register
+
+: CAN_CCU_DEF ; [then]

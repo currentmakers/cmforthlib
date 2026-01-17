@@ -1,78 +1,71 @@
 \
-\ @file stm32wb10_cm4.h
-\ @brief Loader for all peripherals in a STM32WB10_CM4
+\ @file stm32wb10_cm4.fload
+\ @brief Device header for STM32WB10_CM4
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include crc.fs
-.include dbgmcu.fs
-.include dma1.fs
-.include dmamux.fs
-.include exti.fs
-.include flash.fs
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpioe.fs
-.include gpioh.fs
-.include hsem.fs
-.include i2c1.fs
-.include ipcc.fs
-.include iwdg.fs
-.include lptim1.fs
-.include lptim2.fs
-.include mpu.fs
-.include pka.fs
-.include pwr.fs
-.include rcc.fs
-.include rng.fs
-.include rtc.fs
-.include spi1.fs
-.include syscfg.fs
-.include tim1.fs
-.include tim2.fs
-.include tsc.fs
-.include usart1.fs
-.include wwdg.fs
+[ifndef] STM32WB10_CM4_LOADER
+  .include "adc.fs"
+  .include "crc.fs"
+  .include "dbgmcu.fs"
+  .include "dma1.fs"
+  .include "dmamux.fs"
+  .include "exti.fs"
+  .include "flash.fs"
+  .include "gpio.fs"
+  .include "gpioe.fs"
+  .include "gpioh.fs"
+  .include "hsem.fs"
+  .include "i2c1.fs"
+  .include "ipcc.fs"
+  .include "iwdg.fs"
+  .include "lptim.fs"
+  .include "mpu.fs"
+  .include "pka.fs"
+  .include "pwr.fs"
+  .include "rcc.fs"
+  .include "rng.fs"
+  .include "rtc.fs"
+  .include "spi1.fs"
+  .include "syscfg.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tsc.fs"
+  .include "usart1.fs"
+  .include "wwdg.fs"
 
-decimal
+  $0x40012400 constant ADC              \ See adc.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0xE0042000 constant DBGMCU           \ See dbgmcu.fs
+  $0x40020000 constant DMA1             \ See dma1.fs
+  $0x40020800 constant DMAMUX           \ See dmamux.fs
+  $0x58000800 constant EXTI             \ See exti.fs
+  $0x58004000 constant FLASH            \ See flash.fs
+  $0x48000000 constant GPIOA            \ See gpio.fs
+  $0x48000400 constant GPIOB            \ See gpio.fs
+  $0x48000800 constant GPIOC            \ See gpio.fs
+  $0x48001000 constant GPIOE            \ See gpioe.fs
+  $0x48001C00 constant GPIOH            \ See gpioh.fs
+  $0x58001400 constant HSEM             \ See hsem.fs
+  $0x40005400 constant I2C1             \ See i2c1.fs
+  $0x58000C00 constant IPCC             \ See ipcc.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40007C00 constant LPTIM1           \ See lptim.fs
+  $0x40009400 constant LPTIM2           \ See lptim.fs
+  $0xE000ED90 constant MPU              \ See mpu.fs
+  $0x58002000 constant PKA              \ See pka.fs
+  $0x58000400 constant PWR              \ See pwr.fs
+  $0x58000000 constant RCC              \ See rcc.fs
+  $0x58001000 constant RNG              \ See rng.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40013000 constant SPI1             \ See spi1.fs
+  $0x40010000 constant SYSCFG           \ See syscfg.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40024000 constant TSC              \ See tsc.fs
+  $0x40013800 constant USART1           \ See usart1.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ Analog to Digital Converter
-.include CRC                    \ Cyclic redundancy check calculation unit
-.include DBGMCU                 \ Debug support
-.include DMA1                   \ Direct memory access controller
-.include DMAMUX                 \ Direct memory access Multiplexer
-.include EXTI                   \ External interrupt/event controller
-.include FLASH                  \ Flash
-.include GPIOA                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOE                  \ General-purpose I/Os
-.include GPIOH                  \ General-purpose I/Os
-.include HSEM                   \ HSEM
-.include I2C1                   \ Inter-integrated circuit
-.include IPCC                   \ IPCC
-.include IWDG                   \ Independent watchdog
-.include LPTIM1                 \ Low power timer
-.include LPTIM2                 \ LPtimer 2 global interrupt
-.include MPU                    \ Memory protection unit
-.include PKA                    \ PKA
-.include PWR                    \ Power control
-.include RCC                    \ Reset and clock control
-.include RNG                    \ Random number generator
-.include RTC                    \ Real-time clock
-.include SPI1                   \ Serial peripheral interface/Inter-IC sound
-.include SYSCFG                 \ System configuration controller
-.include TIM1                   \ Advanced-timers
-.include TIM2                   \ General-purpose-timers
-.include TSC                    \ Touch sensing controller
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include WWDG                   \ System window watchdog
-
-compiletoram
-
+: STM32WB10_CM4_LOADER ; [then]

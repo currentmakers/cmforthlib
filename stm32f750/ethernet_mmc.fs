@@ -6,132 +6,143 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ETHERNET_MMC_DEF
 
-\
-\ @brief Ethernet MMC control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ETHERNET_MMC_MMCCR_CR                            \ CR
-$00000002 constant ETHERNET_MMC_MMCCR_CSR                           \ CSR
-$00000004 constant ETHERNET_MMC_MMCCR_ROR                           \ ROR
-$00000008 constant ETHERNET_MMC_MMCCR_MCF                           \ MCF
-$00000010 constant ETHERNET_MMC_MMCCR_MCP                           \ MCP
-$00000020 constant ETHERNET_MMC_MMCCR_MCFHP                         \ MCFHP
-
-
-\
-\ @brief Ethernet MMC receive interrupt register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000020 constant ETHERNET_MMC_MMCRIR_RFCES                        \ RFCES
-$00000040 constant ETHERNET_MMC_MMCRIR_RFAES                        \ RFAES
-$00020000 constant ETHERNET_MMC_MMCRIR_RGUFS                        \ RGUFS
+  [ifdef] ETHERNET_MMC_MMCCR_DEF
+    \
+    \ @brief Ethernet MMC control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_MMC_CR                \ [0x00] CR
+    $01 constant ETHERNET_MMC_CSR               \ [0x01] CSR
+    $02 constant ETHERNET_MMC_ROR               \ [0x02] ROR
+    $03 constant ETHERNET_MMC_MCF               \ [0x03] MCF
+    $04 constant ETHERNET_MMC_MCP               \ [0x04] MCP
+    $05 constant ETHERNET_MMC_MCFHP             \ [0x05] MCFHP
+  [then]
 
 
-\
-\ @brief Ethernet MMC transmit interrupt register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00004000 constant ETHERNET_MMC_MMCTIR_TGFSCS                       \ TGFSCS
-$00008000 constant ETHERNET_MMC_MMCTIR_TGFMSCS                      \ TGFMSCS
-$00200000 constant ETHERNET_MMC_MMCTIR_TGFS                         \ TGFS
-
-
-\
-\ @brief Ethernet MMC receive interrupt mask register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000020 constant ETHERNET_MMC_MMCRIMR_RFCEM                       \ RFCEM
-$00000040 constant ETHERNET_MMC_MMCRIMR_RFAEM                       \ RFAEM
-$00020000 constant ETHERNET_MMC_MMCRIMR_RGUFM                       \ RGUFM
+  [ifdef] ETHERNET_MMC_MMCRIR_DEF
+    \
+    \ @brief Ethernet MMC receive interrupt register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $05 constant ETHERNET_MMC_RFCES             \ [0x05] RFCES
+    $06 constant ETHERNET_MMC_RFAES             \ [0x06] RFAES
+    $11 constant ETHERNET_MMC_RGUFS             \ [0x11] RGUFS
+  [then]
 
 
-\
-\ @brief Ethernet MMC transmit interrupt mask register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00004000 constant ETHERNET_MMC_MMCTIMR_TGFSCM                      \ TGFSCM
-$00008000 constant ETHERNET_MMC_MMCTIMR_TGFMSCM                     \ TGFMSCM
-$00010000 constant ETHERNET_MMC_MMCTIMR_TGFM                        \ TGFM
-
-
-\
-\ @brief Ethernet MMC transmitted good frames after a single collision counter
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_MMC_MMCTGFSCCR_TGFSCC                   \ TGFSCC
+  [ifdef] ETHERNET_MMC_MMCTIR_DEF
+    \
+    \ @brief Ethernet MMC transmit interrupt register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $0e constant ETHERNET_MMC_TGFSCS            \ [0x0e] TGFSCS
+    $0f constant ETHERNET_MMC_TGFMSCS           \ [0x0f] TGFMSCS
+    $15 constant ETHERNET_MMC_TGFS              \ [0x15] TGFS
+  [then]
 
 
-\
-\ @brief Ethernet MMC transmitted good frames after more than a single collision
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_MMC_MMCTGFMSCCR_TGFMSCC                 \ TGFMSCC
-
-
-\
-\ @brief Ethernet MMC transmitted good frames counter register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_MMC_MMCTGFCR_TGFC                       \ HTL
+  [ifdef] ETHERNET_MMC_MMCRIMR_DEF
+    \
+    \ @brief Ethernet MMC receive interrupt mask register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $05 constant ETHERNET_MMC_RFCEM             \ [0x05] RFCEM
+    $06 constant ETHERNET_MMC_RFAEM             \ [0x06] RFAEM
+    $11 constant ETHERNET_MMC_RGUFM             \ [0x11] RGUFM
+  [then]
 
 
-\
-\ @brief Ethernet MMC received frames with CRC error counter register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_MMC_MMCRFCECR_RFCFC                     \ RFCFC
-
-
-\
-\ @brief Ethernet MMC received frames with alignment error counter register
-\ Address offset: 0x98
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_MMC_MMCRFAECR_RFAEC                     \ RFAEC
+  [ifdef] ETHERNET_MMC_MMCTIMR_DEF
+    \
+    \ @brief Ethernet MMC transmit interrupt mask register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $0e constant ETHERNET_MMC_TGFSCM            \ [0x0e] TGFSCM
+    $0f constant ETHERNET_MMC_TGFMSCM           \ [0x0f] TGFMSCM
+    $10 constant ETHERNET_MMC_TGFM              \ [0x10] TGFM
+  [then]
 
 
-\
-\ @brief MMC received good unicast frames counter register
-\ Address offset: 0xC4
-\ Reset value: 0x00000000
-\
+  [ifdef] ETHERNET_MMC_MMCTGFSCCR_DEF
+    \
+    \ @brief Ethernet MMC transmitted good frames after a single collision counter
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_MMC_TGFSCC            \ [0x00 : 32] TGFSCC
+  [then]
 
-$00000000 constant ETHERNET_MMC_MMCRGUFCR_RGUFC                     \ RGUFC
+
+  [ifdef] ETHERNET_MMC_MMCTGFMSCCR_DEF
+    \
+    \ @brief Ethernet MMC transmitted good frames after more than a single collision
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_MMC_TGFMSCC           \ [0x00 : 32] TGFMSCC
+  [then]
 
 
-\
-\ @brief Ethernet: MAC management counters
-\
-$40028100 constant ETHERNET_MMC_MMCCR  \ offset: 0x00 : Ethernet MMC control register
-$40028104 constant ETHERNET_MMC_MMCRIR  \ offset: 0x04 : Ethernet MMC receive interrupt register
-$40028108 constant ETHERNET_MMC_MMCTIR  \ offset: 0x08 : Ethernet MMC transmit interrupt register
-$4002810c constant ETHERNET_MMC_MMCRIMR  \ offset: 0x0C : Ethernet MMC receive interrupt mask register
-$40028110 constant ETHERNET_MMC_MMCTIMR  \ offset: 0x10 : Ethernet MMC transmit interrupt mask register
-$4002814c constant ETHERNET_MMC_MMCTGFSCCR  \ offset: 0x4C : Ethernet MMC transmitted good frames after a single collision counter
-$40028150 constant ETHERNET_MMC_MMCTGFMSCCR  \ offset: 0x50 : Ethernet MMC transmitted good frames after more than a single collision
-$40028168 constant ETHERNET_MMC_MMCTGFCR  \ offset: 0x68 : Ethernet MMC transmitted good frames counter register
-$40028194 constant ETHERNET_MMC_MMCRFCECR  \ offset: 0x94 : Ethernet MMC received frames with CRC error counter register
-$40028198 constant ETHERNET_MMC_MMCRFAECR  \ offset: 0x98 : Ethernet MMC received frames with alignment error counter register
-$400281c4 constant ETHERNET_MMC_MMCRGUFCR  \ offset: 0xC4 : MMC received good unicast frames counter register
+  [ifdef] ETHERNET_MMC_MMCTGFCR_DEF
+    \
+    \ @brief Ethernet MMC transmitted good frames counter register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_MMC_TGFC              \ [0x00 : 32] HTL
+  [then]
 
+
+  [ifdef] ETHERNET_MMC_MMCRFCECR_DEF
+    \
+    \ @brief Ethernet MMC received frames with CRC error counter register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_MMC_RFCFC             \ [0x00 : 32] RFCFC
+  [then]
+
+
+  [ifdef] ETHERNET_MMC_MMCRFAECR_DEF
+    \
+    \ @brief Ethernet MMC received frames with alignment error counter register
+    \ Address offset: 0x98
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_MMC_RFAEC             \ [0x00 : 32] RFAEC
+  [then]
+
+
+  [ifdef] ETHERNET_MMC_MMCRGUFCR_DEF
+    \
+    \ @brief MMC received good unicast frames counter register
+    \ Address offset: 0xC4
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_MMC_RGUFC             \ [0x00 : 32] RGUFC
+  [then]
+
+  \
+  \ @brief Ethernet: MAC management counters
+  \
+  $00 constant ETHERNET_MMC_MMCCR       \ Ethernet MMC control register
+  $04 constant ETHERNET_MMC_MMCRIR      \ Ethernet MMC receive interrupt register
+  $08 constant ETHERNET_MMC_MMCTIR      \ Ethernet MMC transmit interrupt register
+  $0C constant ETHERNET_MMC_MMCRIMR     \ Ethernet MMC receive interrupt mask register
+  $10 constant ETHERNET_MMC_MMCTIMR     \ Ethernet MMC transmit interrupt mask register
+  $4C constant ETHERNET_MMC_MMCTGFSCCR  \ Ethernet MMC transmitted good frames after a single collision counter
+  $50 constant ETHERNET_MMC_MMCTGFMSCCR \ Ethernet MMC transmitted good frames after more than a single collision
+  $68 constant ETHERNET_MMC_MMCTGFCR    \ Ethernet MMC transmitted good frames counter register
+  $94 constant ETHERNET_MMC_MMCRFCECR   \ Ethernet MMC received frames with CRC error counter register
+  $98 constant ETHERNET_MMC_MMCRFAECR   \ Ethernet MMC received frames with alignment error counter register
+  $C4 constant ETHERNET_MMC_MMCRGUFCR   \ MMC received good unicast frames counter register
+
+: ETHERNET_MMC_DEF ; [then]

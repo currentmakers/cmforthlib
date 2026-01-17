@@ -6,206 +6,222 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM16_DEF
 
-\
-\ @brief TIM16/TIM17 control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM16_TIMX_CR1_CEN                               \ CEN
-$00000002 constant TIM16_TIMX_CR1_UDIS                              \ UDIS
-$00000004 constant TIM16_TIMX_CR1_URS                               \ URS
-$00000008 constant TIM16_TIMX_CR1_OPM                               \ OPM
-$00000080 constant TIM16_TIMX_CR1_ARPE                              \ ARPE
-$00000300 constant TIM16_TIMX_CR1_CKD                               \ CKD
-$00000800 constant TIM16_TIMX_CR1_UIFREMAP                          \ UIFREMAP
-
-
-\
-\ @brief TIM16/TIM17 control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM16_TIMX_CR2_CCPC                              \ CCPC
-$00000004 constant TIM16_TIMX_CR2_CCUS                              \ CCUS
-$00000008 constant TIM16_TIMX_CR2_CCDS                              \ CCDS
-$00000100 constant TIM16_TIMX_CR2_OIS1                              \ OIS1
-$00000200 constant TIM16_TIMX_CR2_OIS1N                             \ OIS1N
+  [ifdef] TIM16_TIMx_CR1_DEF
+    \
+    \ @brief TIM16/TIM17 control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_CEN                      \ [0x00] CEN
+    $01 constant TIM16_UDIS                     \ [0x01] UDIS
+    $02 constant TIM16_URS                      \ [0x02] URS
+    $03 constant TIM16_OPM                      \ [0x03] OPM
+    $07 constant TIM16_ARPE                     \ [0x07] ARPE
+    $08 constant TIM16_CKD                      \ [0x08 : 2] CKD
+    $0b constant TIM16_UIFREMAP                 \ [0x0b] UIFREMAP
+  [then]
 
 
-\
-\ @brief TIM16/TIM17 DMA/interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM16_TIMX_DIER_UIE                              \ UIE
-$00000002 constant TIM16_TIMX_DIER_CC1IE                            \ CC1IE
-$00000020 constant TIM16_TIMX_DIER_COMIE                            \ COMIE
-$00000080 constant TIM16_TIMX_DIER_BIE                              \ BIE
-$00000100 constant TIM16_TIMX_DIER_UDE                              \ UDE
-$00000200 constant TIM16_TIMX_DIER_CC1DE                            \ CC1DE
-$00002000 constant TIM16_TIMX_DIER_COMDE                            \ COMDE
-
-
-\
-\ @brief TIM16/TIM17 status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM16_TIMX_SR_UIF                                \ UIF
-$00000002 constant TIM16_TIMX_SR_CC1IF                              \ CC1IF
-$00000020 constant TIM16_TIMX_SR_COMIF                              \ COMIF
-$00000080 constant TIM16_TIMX_SR_BIF                                \ BIF
-$00000200 constant TIM16_TIMX_SR_CC1OF                              \ CC1OF
+  [ifdef] TIM16_TIMx_CR2_DEF
+    \
+    \ @brief TIM16/TIM17 control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_CCPC                     \ [0x00] CCPC
+    $02 constant TIM16_CCUS                     \ [0x02] CCUS
+    $03 constant TIM16_CCDS                     \ [0x03] CCDS
+    $08 constant TIM16_OIS1                     \ [0x08] OIS1
+    $09 constant TIM16_OIS1N                    \ [0x09] OIS1N
+  [then]
 
 
-\
-\ @brief event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM16_TIMX_EGR_UG                                \ Update generation
-
-
-\
-\ @brief TIM16/TIM17 capture/compare enable register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM16_TIMX_CCER_CC1E                             \ CC1E
-$00000002 constant TIM16_TIMX_CCER_CC1P                             \ CC1P
-$00000004 constant TIM16_TIMX_CCER_CC1NE                            \ CC1NE
-$00000008 constant TIM16_TIMX_CCER_CC1NP                            \ CC1NP
+  [ifdef] TIM16_TIMx_DIER_DEF
+    \
+    \ @brief TIM16/TIM17 DMA/interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_UIE                      \ [0x00] UIE
+    $01 constant TIM16_CC1IE                    \ [0x01] CC1IE
+    $05 constant TIM16_COMIE                    \ [0x05] COMIE
+    $07 constant TIM16_BIE                      \ [0x07] BIE
+    $08 constant TIM16_UDE                      \ [0x08] UDE
+    $09 constant TIM16_CC1DE                    \ [0x09] CC1DE
+    $0d constant TIM16_COMDE                    \ [0x0d] COMDE
+  [then]
 
 
-\
-\ @brief TIM16/TIM17 counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM16_TIMX_CNT_CNT                               \ CNT
-$80000000 constant TIM16_TIMX_CNT_UIFCPY                            \ UIFCPY
-
-
-\
-\ @brief TIM16/TIM17 prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM16_TIMX_PSC_PSC                               \ PSC
+  [ifdef] TIM16_TIMx_SR_DEF
+    \
+    \ @brief TIM16/TIM17 status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_UIF                      \ [0x00] UIF
+    $01 constant TIM16_CC1IF                    \ [0x01] CC1IF
+    $05 constant TIM16_COMIF                    \ [0x05] COMIF
+    $07 constant TIM16_BIF                      \ [0x07] BIF
+    $09 constant TIM16_CC1OF                    \ [0x09] CC1OF
+  [then]
 
 
-\
-\ @brief TIM16/TIM17 auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x0000FFFF
-\
-
-$0000ffff constant TIM16_TIMX_ARR_ARR                               \ ARR
-
-
-\
-\ @brief TIM16/TIM17 repetition counter register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$000000ff constant TIM16_TIMX_RCR_REP                               \ REP
+  [ifdef] TIM16_TIMx_EGR_DEF
+    \
+    \ @brief event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_UG                       \ [0x00] Update generation
+  [then]
 
 
-\
-\ @brief TIM16/TIM17 capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM16_TIMX_CCR1_CCR1                             \ CCR1
-
-
-\
-\ @brief As the BKBID, BKDSRM, BKF[3:0], AOE, BKP, BKE, OSSI, OSSR and DTG[7:0] bits may be write-locked depending on the LOCK configuration, it may be necessary to configure all of them during the first write access to the TIMx_BDTR register.
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$000000ff constant TIM16_TIMX_BDTR_DTG                              \ DTG
-$00000300 constant TIM16_TIMX_BDTR_LOCK                             \ LOCK
-$00000400 constant TIM16_TIMX_BDTR_OSSI                             \ OSSI
-$00000800 constant TIM16_TIMX_BDTR_OSSR                             \ OSSR
-$00001000 constant TIM16_TIMX_BDTR_BKE                              \ BKE
-$00002000 constant TIM16_TIMX_BDTR_BKP                              \ BKP
-$00004000 constant TIM16_TIMX_BDTR_AOE                              \ AOE
-$00008000 constant TIM16_TIMX_BDTR_MOE                              \ MOE
-$000f0000 constant TIM16_TIMX_BDTR_BKF                              \ BKF
-$04000000 constant TIM16_TIMX_BDTR_BKDSRM                           \ BKDSRM
-$10000000 constant TIM16_TIMX_BDTR_BKBID                            \ BKBID
+  [ifdef] TIM16_TIMx_CCER_DEF
+    \
+    \ @brief TIM16/TIM17 capture/compare enable register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_CC1E                     \ [0x00] CC1E
+    $01 constant TIM16_CC1P                     \ [0x01] CC1P
+    $02 constant TIM16_CC1NE                    \ [0x02] CC1NE
+    $03 constant TIM16_CC1NP                    \ [0x03] CC1NP
+  [then]
 
 
-\
-\ @brief TIM16/TIM17 DMA control register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0000001f constant TIM16_TIMX_DCR_DBA                               \ DBA
-$00001f00 constant TIM16_TIMX_DCR_DBL                               \ DBL
-
-
-\
-\ @brief TIM16/TIM17 DMA address for full transfer
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM16_TIMX_DMAR_DMAB                             \ DMAB
+  [ifdef] TIM16_TIMx_CNT_DEF
+    \
+    \ @brief TIM16/TIM17 counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_CNT                      \ [0x00 : 16] CNT
+    $1f constant TIM16_UIFCPY                   \ [0x1f] UIFCPY
+  [then]
 
 
-\
-\ @brief TIM17 alternate function register 1
-\ Address offset: 0x60
-\ Reset value: 0x00000001
-\
-
-$00000001 constant TIM16_TIMX_AF1_BKINE                             \ BKINE
-$00000100 constant TIM16_TIMX_AF1_BKDF1BK2E                         \ BKDF1BK2E
-$00000200 constant TIM16_TIMX_AF1_BKINP                             \ BKINP
-
-
-\
-\ @brief TIM17 input selection register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$0000000f constant TIM16_TIMX_TISEL_TI1SEL                          \ TI1SEL
+  [ifdef] TIM16_TIMx_PSC_DEF
+    \
+    \ @brief TIM16/TIM17 prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_PSC                      \ [0x00 : 16] PSC
+  [then]
 
 
-\
-\ @brief TIM16
-\
-$44007000 constant TIM16_TIMX_CR1  \ offset: 0x00 : TIM16/TIM17 control register 1
-$44007004 constant TIM16_TIMX_CR2  \ offset: 0x04 : TIM16/TIM17 control register 2
-$4400700c constant TIM16_TIMX_DIER  \ offset: 0x0C : TIM16/TIM17 DMA/interrupt enable register
-$44007010 constant TIM16_TIMX_SR  \ offset: 0x10 : TIM16/TIM17 status register
-$44007014 constant TIM16_TIMX_EGR  \ offset: 0x14 : event generation register
-$44007020 constant TIM16_TIMX_CCER  \ offset: 0x20 : TIM16/TIM17 capture/compare enable register
-$44007024 constant TIM16_TIMX_CNT  \ offset: 0x24 : TIM16/TIM17 counter
-$44007028 constant TIM16_TIMX_PSC  \ offset: 0x28 : TIM16/TIM17 prescaler
-$4400702c constant TIM16_TIMX_ARR  \ offset: 0x2C : TIM16/TIM17 auto-reload register
-$44007030 constant TIM16_TIMX_RCR  \ offset: 0x30 : TIM16/TIM17 repetition counter register
-$44007034 constant TIM16_TIMX_CCR1  \ offset: 0x34 : TIM16/TIM17 capture/compare register 1
-$44007044 constant TIM16_TIMX_BDTR  \ offset: 0x44 : As the BKBID, BKDSRM, BKF[3:0], AOE, BKP, BKE, OSSI, OSSR and DTG[7:0] bits may be write-locked depending on the LOCK configuration, it may be necessary to configure all of them during the first write access to the TIMx_BDTR register.
-$44007048 constant TIM16_TIMX_DCR  \ offset: 0x48 : TIM16/TIM17 DMA control register
-$4400704c constant TIM16_TIMX_DMAR  \ offset: 0x4C : TIM16/TIM17 DMA address for full transfer
-$44007060 constant TIM16_TIMX_AF1  \ offset: 0x60 : TIM17 alternate function register 1
-$44007068 constant TIM16_TIMX_TISEL  \ offset: 0x68 : TIM17 input selection register
+  [ifdef] TIM16_TIMx_ARR_DEF
+    \
+    \ @brief TIM16/TIM17 auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant TIM16_ARR                      \ [0x00 : 16] ARR
+  [then]
 
+
+  [ifdef] TIM16_TIMx_RCR_DEF
+    \
+    \ @brief TIM16/TIM17 repetition counter register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_REP                      \ [0x00 : 8] REP
+  [then]
+
+
+  [ifdef] TIM16_TIMx_CCR1_DEF
+    \
+    \ @brief TIM16/TIM17 capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_CCR1                     \ [0x00 : 16] CCR1
+  [then]
+
+
+  [ifdef] TIM16_TIMx_BDTR_DEF
+    \
+    \ @brief As the BKBID, BKDSRM, BKF[3:0], AOE, BKP, BKE, OSSI, OSSR and DTG[7:0] bits may be write-locked depending on the LOCK configuration, it may be necessary to configure all of them during the first write access to the TIMx_BDTR register.
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_DTG                      \ [0x00 : 8] DTG
+    $08 constant TIM16_LOCK                     \ [0x08 : 2] LOCK
+    $0a constant TIM16_OSSI                     \ [0x0a] OSSI
+    $0b constant TIM16_OSSR                     \ [0x0b] OSSR
+    $0c constant TIM16_BKE                      \ [0x0c] BKE
+    $0d constant TIM16_BKP                      \ [0x0d] BKP
+    $0e constant TIM16_AOE                      \ [0x0e] AOE
+    $0f constant TIM16_MOE                      \ [0x0f] MOE
+    $10 constant TIM16_BKF                      \ [0x10 : 4] BKF
+    $1a constant TIM16_BKDSRM                   \ [0x1a] BKDSRM
+    $1c constant TIM16_BKBID                    \ [0x1c] BKBID
+  [then]
+
+
+  [ifdef] TIM16_TIMx_DCR_DEF
+    \
+    \ @brief TIM16/TIM17 DMA control register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_DBA                      \ [0x00 : 5] DBA
+    $08 constant TIM16_DBL                      \ [0x08 : 5] DBL
+  [then]
+
+
+  [ifdef] TIM16_TIMx_DMAR_DEF
+    \
+    \ @brief TIM16/TIM17 DMA address for full transfer
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_DMAB                     \ [0x00 : 16] DMAB
+  [then]
+
+
+  [ifdef] TIM16_TIMx_AF1_DEF
+    \
+    \ @brief TIM17 alternate function register 1
+    \ Address offset: 0x60
+    \ Reset value: 0x00000001
+    \
+    $00 constant TIM16_BKINE                    \ [0x00] BKINE
+    $08 constant TIM16_BKDF1BK2E                \ [0x08] BKDF1BK2E
+    $09 constant TIM16_BKINP                    \ [0x09] BKINP
+  [then]
+
+
+  [ifdef] TIM16_TIMx_TISEL_DEF
+    \
+    \ @brief TIM17 input selection register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM16_TI1SEL                   \ [0x00 : 4] TI1SEL
+  [then]
+
+  \
+  \ @brief TIM16
+  \
+  $00 constant TIM16_TIMX_CR1           \ TIM16/TIM17 control register 1
+  $04 constant TIM16_TIMX_CR2           \ TIM16/TIM17 control register 2
+  $0C constant TIM16_TIMX_DIER          \ TIM16/TIM17 DMA/interrupt enable register
+  $10 constant TIM16_TIMX_SR            \ TIM16/TIM17 status register
+  $14 constant TIM16_TIMX_EGR           \ event generation register
+  $20 constant TIM16_TIMX_CCER          \ TIM16/TIM17 capture/compare enable register
+  $24 constant TIM16_TIMX_CNT           \ TIM16/TIM17 counter
+  $28 constant TIM16_TIMX_PSC           \ TIM16/TIM17 prescaler
+  $2C constant TIM16_TIMX_ARR           \ TIM16/TIM17 auto-reload register
+  $30 constant TIM16_TIMX_RCR           \ TIM16/TIM17 repetition counter register
+  $34 constant TIM16_TIMX_CCR1          \ TIM16/TIM17 capture/compare register 1
+  $44 constant TIM16_TIMX_BDTR          \ As the BKBID, BKDSRM, BKF[3:0], AOE, BKP, BKE, OSSI, OSSR and DTG[7:0] bits may be write-locked depending on the LOCK configuration, it may be necessary to configure all of them during the first write access to the TIMx_BDTR register.
+  $48 constant TIM16_TIMX_DCR           \ TIM16/TIM17 DMA control register
+  $4C constant TIM16_TIMX_DMAR          \ TIM16/TIM17 DMA address for full transfer
+  $60 constant TIM16_TIMX_AF1           \ TIM17 alternate function register 1
+  $68 constant TIM16_TIMX_TISEL         \ TIM17 input selection register
+
+: TIM16_DEF ; [then]

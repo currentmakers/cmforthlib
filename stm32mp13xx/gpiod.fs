@@ -6,471 +6,497 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief GPIO port mode register
-\ Address offset: 0x00
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000003 constant GPIOD_GPIOD_MODER_MODER0                         \ MODER0
-$0000000c constant GPIOD_GPIOD_MODER_MODER1                         \ MODER1
-$00000030 constant GPIOD_GPIOD_MODER_MODER2                         \ MODER2
-$000000c0 constant GPIOD_GPIOD_MODER_MODER3                         \ MODER3
-$00000300 constant GPIOD_GPIOD_MODER_MODER4                         \ MODER4
-$00000c00 constant GPIOD_GPIOD_MODER_MODER5                         \ MODER5
-$00003000 constant GPIOD_GPIOD_MODER_MODER6                         \ MODER6
-$0000c000 constant GPIOD_GPIOD_MODER_MODER7                         \ MODER7
-$00030000 constant GPIOD_GPIOD_MODER_MODER8                         \ MODER8
-$000c0000 constant GPIOD_GPIOD_MODER_MODER9                         \ MODER9
-$00300000 constant GPIOD_GPIOD_MODER_MODER10                        \ MODER10
-$00c00000 constant GPIOD_GPIOD_MODER_MODER11                        \ MODER11
-$03000000 constant GPIOD_GPIOD_MODER_MODER12                        \ MODER12
-$0c000000 constant GPIOD_GPIOD_MODER_MODER13                        \ MODER13
-$30000000 constant GPIOD_GPIOD_MODER_MODER14                        \ MODER14
-$c0000000 constant GPIOD_GPIOD_MODER_MODER15                        \ MODER15
-
-
-\
-\ @brief GPIO port output type register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOD_GPIOD_OTYPER_OT0                           \ OT0
-$00000002 constant GPIOD_GPIOD_OTYPER_OT1                           \ OT1
-$00000004 constant GPIOD_GPIOD_OTYPER_OT2                           \ OT2
-$00000008 constant GPIOD_GPIOD_OTYPER_OT3                           \ OT3
-$00000010 constant GPIOD_GPIOD_OTYPER_OT4                           \ OT4
-$00000020 constant GPIOD_GPIOD_OTYPER_OT5                           \ OT5
-$00000040 constant GPIOD_GPIOD_OTYPER_OT6                           \ OT6
-$00000080 constant GPIOD_GPIOD_OTYPER_OT7                           \ OT7
-$00000100 constant GPIOD_GPIOD_OTYPER_OT8                           \ OT8
-$00000200 constant GPIOD_GPIOD_OTYPER_OT9                           \ OT9
-$00000400 constant GPIOD_GPIOD_OTYPER_OT10                          \ OT10
-$00000800 constant GPIOD_GPIOD_OTYPER_OT11                          \ OT11
-$00001000 constant GPIOD_GPIOD_OTYPER_OT12                          \ OT12
-$00002000 constant GPIOD_GPIOD_OTYPER_OT13                          \ OT13
-$00004000 constant GPIOD_GPIOD_OTYPER_OT14                          \ OT14
-$00008000 constant GPIOD_GPIOD_OTYPER_OT15                          \ OT15
-
-
-\
-\ @brief GPIO port output speed register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000003 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR0                     \ OSPEEDR0
-$0000000c constant GPIOD_GPIOD_OSPEEDR_OSPEEDR1                     \ OSPEEDR1
-$00000030 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR2                     \ OSPEEDR2
-$000000c0 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR3                     \ OSPEEDR3
-$00000300 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR4                     \ OSPEEDR4
-$00000c00 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR5                     \ OSPEEDR5
-$00003000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR6                     \ OSPEEDR6
-$0000c000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR7                     \ OSPEEDR7
-$00030000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR8                     \ OSPEEDR8
-$000c0000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR9                     \ OSPEEDR9
-$00300000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR10                    \ OSPEEDR10
-$00c00000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR11                    \ OSPEEDR11
-$03000000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR12                    \ OSPEEDR12
-$0c000000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR13                    \ OSPEEDR13
-$30000000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR14                    \ OSPEEDR14
-$c0000000 constant GPIOD_GPIOD_OSPEEDR_OSPEEDR15                    \ OSPEEDR15
-
-
-\
-\ @brief GPIO port pull-up/pull-down register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant GPIOD_GPIOD_PUPDR_PUPDR0                         \ PUPDR0
-$0000000c constant GPIOD_GPIOD_PUPDR_PUPDR1                         \ PUPDR1
-$00000030 constant GPIOD_GPIOD_PUPDR_PUPDR2                         \ PUPDR2
-$000000c0 constant GPIOD_GPIOD_PUPDR_PUPDR3                         \ PUPDR3
-$00000300 constant GPIOD_GPIOD_PUPDR_PUPDR4                         \ PUPDR4
-$00000c00 constant GPIOD_GPIOD_PUPDR_PUPDR5                         \ PUPDR5
-$00003000 constant GPIOD_GPIOD_PUPDR_PUPDR6                         \ PUPDR6
-$0000c000 constant GPIOD_GPIOD_PUPDR_PUPDR7                         \ PUPDR7
-$00030000 constant GPIOD_GPIOD_PUPDR_PUPDR8                         \ PUPDR8
-$000c0000 constant GPIOD_GPIOD_PUPDR_PUPDR9                         \ PUPDR9
-$00300000 constant GPIOD_GPIOD_PUPDR_PUPDR10                        \ PUPDR10
-$00c00000 constant GPIOD_GPIOD_PUPDR_PUPDR11                        \ PUPDR11
-$03000000 constant GPIOD_GPIOD_PUPDR_PUPDR12                        \ PUPDR12
-$0c000000 constant GPIOD_GPIOD_PUPDR_PUPDR13                        \ PUPDR13
-$30000000 constant GPIOD_GPIOD_PUPDR_PUPDR14                        \ PUPDR14
-$c0000000 constant GPIOD_GPIOD_PUPDR_PUPDR15                        \ PUPDR15
-
-
-\
-\ @brief GPIO port input data register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOD_GPIOD_IDR_IDR0                             \ IDR0
-$00000002 constant GPIOD_GPIOD_IDR_IDR1                             \ IDR1
-$00000004 constant GPIOD_GPIOD_IDR_IDR2                             \ IDR2
-$00000008 constant GPIOD_GPIOD_IDR_IDR3                             \ IDR3
-$00000010 constant GPIOD_GPIOD_IDR_IDR4                             \ IDR4
-$00000020 constant GPIOD_GPIOD_IDR_IDR5                             \ IDR5
-$00000040 constant GPIOD_GPIOD_IDR_IDR6                             \ IDR6
-$00000080 constant GPIOD_GPIOD_IDR_IDR7                             \ IDR7
-$00000100 constant GPIOD_GPIOD_IDR_IDR8                             \ IDR8
-$00000200 constant GPIOD_GPIOD_IDR_IDR9                             \ IDR9
-$00000400 constant GPIOD_GPIOD_IDR_IDR10                            \ IDR10
-$00000800 constant GPIOD_GPIOD_IDR_IDR11                            \ IDR11
-$00001000 constant GPIOD_GPIOD_IDR_IDR12                            \ IDR12
-$00002000 constant GPIOD_GPIOD_IDR_IDR13                            \ IDR13
-$00004000 constant GPIOD_GPIOD_IDR_IDR14                            \ IDR14
-$00008000 constant GPIOD_GPIOD_IDR_IDR15                            \ IDR15
-
-
-\
-\ @brief GPIO port output data register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOD_GPIOD_ODR_ODR0                             \ ODR0
-$00000002 constant GPIOD_GPIOD_ODR_ODR1                             \ ODR1
-$00000004 constant GPIOD_GPIOD_ODR_ODR2                             \ ODR2
-$00000008 constant GPIOD_GPIOD_ODR_ODR3                             \ ODR3
-$00000010 constant GPIOD_GPIOD_ODR_ODR4                             \ ODR4
-$00000020 constant GPIOD_GPIOD_ODR_ODR5                             \ ODR5
-$00000040 constant GPIOD_GPIOD_ODR_ODR6                             \ ODR6
-$00000080 constant GPIOD_GPIOD_ODR_ODR7                             \ ODR7
-$00000100 constant GPIOD_GPIOD_ODR_ODR8                             \ ODR8
-$00000200 constant GPIOD_GPIOD_ODR_ODR9                             \ ODR9
-$00000400 constant GPIOD_GPIOD_ODR_ODR10                            \ ODR10
-$00000800 constant GPIOD_GPIOD_ODR_ODR11                            \ ODR11
-$00001000 constant GPIOD_GPIOD_ODR_ODR12                            \ ODR12
-$00002000 constant GPIOD_GPIOD_ODR_ODR13                            \ ODR13
-$00004000 constant GPIOD_GPIOD_ODR_ODR14                            \ ODR14
-$00008000 constant GPIOD_GPIOD_ODR_ODR15                            \ ODR15
-
-
-\
-\ @brief GPIO port bit set/reset register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOD_GPIOD_BSRR_BS0                             \ BS0
-$00000002 constant GPIOD_GPIOD_BSRR_BS1                             \ BS1
-$00000004 constant GPIOD_GPIOD_BSRR_BS2                             \ BS2
-$00000008 constant GPIOD_GPIOD_BSRR_BS3                             \ BS3
-$00000010 constant GPIOD_GPIOD_BSRR_BS4                             \ BS4
-$00000020 constant GPIOD_GPIOD_BSRR_BS5                             \ BS5
-$00000040 constant GPIOD_GPIOD_BSRR_BS6                             \ BS6
-$00000080 constant GPIOD_GPIOD_BSRR_BS7                             \ BS7
-$00000100 constant GPIOD_GPIOD_BSRR_BS8                             \ BS8
-$00000200 constant GPIOD_GPIOD_BSRR_BS9                             \ BS9
-$00000400 constant GPIOD_GPIOD_BSRR_BS10                            \ BS10
-$00000800 constant GPIOD_GPIOD_BSRR_BS11                            \ BS11
-$00001000 constant GPIOD_GPIOD_BSRR_BS12                            \ BS12
-$00002000 constant GPIOD_GPIOD_BSRR_BS13                            \ BS13
-$00004000 constant GPIOD_GPIOD_BSRR_BS14                            \ BS14
-$00008000 constant GPIOD_GPIOD_BSRR_BS15                            \ BS15
-$00010000 constant GPIOD_GPIOD_BSRR_BR0                             \ BR0
-$00020000 constant GPIOD_GPIOD_BSRR_BR1                             \ BR1
-$00040000 constant GPIOD_GPIOD_BSRR_BR2                             \ BR2
-$00080000 constant GPIOD_GPIOD_BSRR_BR3                             \ BR3
-$00100000 constant GPIOD_GPIOD_BSRR_BR4                             \ BR4
-$00200000 constant GPIOD_GPIOD_BSRR_BR5                             \ BR5
-$00400000 constant GPIOD_GPIOD_BSRR_BR6                             \ BR6
-$00800000 constant GPIOD_GPIOD_BSRR_BR7                             \ BR7
-$01000000 constant GPIOD_GPIOD_BSRR_BR8                             \ BR8
-$02000000 constant GPIOD_GPIOD_BSRR_BR9                             \ BR9
-$04000000 constant GPIOD_GPIOD_BSRR_BR10                            \ BR10
-$08000000 constant GPIOD_GPIOD_BSRR_BR11                            \ BR11
-$10000000 constant GPIOD_GPIOD_BSRR_BR12                            \ BR12
-$20000000 constant GPIOD_GPIOD_BSRR_BR13                            \ BR13
-$40000000 constant GPIOD_GPIOD_BSRR_BR14                            \ BR14
-$80000000 constant GPIOD_GPIOD_BSRR_BR15                            \ BR15
-
-
-\
-\ @brief This register is used to lock the configuration of the port bits when a correct write sequence is applied to bit 16 (LCKK). The value of bits [15:0] is used to lock the configuration of the GPIO. During the write sequence, the value of LCKR[15:0] must not change. When the LOCK sequence has been applied on a port bit, the value of this port bit can no longer be modified until the next MCU reset or peripheral reset. A specific write sequence is used to write to the GPIOx_LCKR register. Only word access (32-bit long) is allowed during this locking sequence. Each lock bit freezes a specific configuration register (control and alternate function registers).
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOD_GPIOD_LCKR_LCK0                            \ LCK0
-$00000002 constant GPIOD_GPIOD_LCKR_LCK1                            \ LCK1
-$00000004 constant GPIOD_GPIOD_LCKR_LCK2                            \ LCK2
-$00000008 constant GPIOD_GPIOD_LCKR_LCK3                            \ LCK3
-$00000010 constant GPIOD_GPIOD_LCKR_LCK4                            \ LCK4
-$00000020 constant GPIOD_GPIOD_LCKR_LCK5                            \ LCK5
-$00000040 constant GPIOD_GPIOD_LCKR_LCK6                            \ LCK6
-$00000080 constant GPIOD_GPIOD_LCKR_LCK7                            \ LCK7
-$00000100 constant GPIOD_GPIOD_LCKR_LCK8                            \ LCK8
-$00000200 constant GPIOD_GPIOD_LCKR_LCK9                            \ LCK9
-$00000400 constant GPIOD_GPIOD_LCKR_LCK10                           \ LCK10
-$00000800 constant GPIOD_GPIOD_LCKR_LCK11                           \ LCK11
-$00001000 constant GPIOD_GPIOD_LCKR_LCK12                           \ LCK12
-$00002000 constant GPIOD_GPIOD_LCKR_LCK13                           \ LCK13
-$00004000 constant GPIOD_GPIOD_LCKR_LCK14                           \ LCK14
-$00008000 constant GPIOD_GPIOD_LCKR_LCK15                           \ LCK15
-$00010000 constant GPIOD_GPIOD_LCKR_LCKK                            \ LCKK
-
-
-\
-\ @brief GPIO alternate function low register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOD_GPIOD_AFRL_AFR0                            \ AFR0
-$000000f0 constant GPIOD_GPIOD_AFRL_AFR1                            \ AFR1
-$00000f00 constant GPIOD_GPIOD_AFRL_AFR2                            \ AFR2
-$0000f000 constant GPIOD_GPIOD_AFRL_AFR3                            \ AFR3
-$000f0000 constant GPIOD_GPIOD_AFRL_AFR4                            \ AFR4
-$00f00000 constant GPIOD_GPIOD_AFRL_AFR5                            \ AFR5
-$0f000000 constant GPIOD_GPIOD_AFRL_AFR6                            \ AFR6
-$f0000000 constant GPIOD_GPIOD_AFRL_AFR7                            \ AFR7
-
-
-\
-\ @brief GPIO alternate function high register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOD_GPIOD_AFRH_AFR8                            \ AFR8
-$000000f0 constant GPIOD_GPIOD_AFRH_AFR9                            \ AFR9
-$00000f00 constant GPIOD_GPIOD_AFRH_AFR10                           \ AFR10
-$0000f000 constant GPIOD_GPIOD_AFRH_AFR11                           \ AFR11
-$000f0000 constant GPIOD_GPIOD_AFRH_AFR12                           \ AFR12
-$00f00000 constant GPIOD_GPIOD_AFRH_AFR13                           \ AFR13
-$0f000000 constant GPIOD_GPIOD_AFRH_AFR14                           \ AFR14
-$f0000000 constant GPIOD_GPIOD_AFRH_AFR15                           \ AFR15
-
-
-\
-\ @brief GPIO port bit reset register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOD_GPIOD_BRR_BR0                              \ BR0
-$00000002 constant GPIOD_GPIOD_BRR_BR1                              \ BR1
-$00000004 constant GPIOD_GPIOD_BRR_BR2                              \ BR2
-$00000008 constant GPIOD_GPIOD_BRR_BR3                              \ BR3
-$00000010 constant GPIOD_GPIOD_BRR_BR4                              \ BR4
-$00000020 constant GPIOD_GPIOD_BRR_BR5                              \ BR5
-$00000040 constant GPIOD_GPIOD_BRR_BR6                              \ BR6
-$00000080 constant GPIOD_GPIOD_BRR_BR7                              \ BR7
-$00000100 constant GPIOD_GPIOD_BRR_BR8                              \ BR8
-$00000200 constant GPIOD_GPIOD_BRR_BR9                              \ BR9
-$00000400 constant GPIOD_GPIOD_BRR_BR10                             \ BR10
-$00000800 constant GPIOD_GPIOD_BRR_BR11                             \ BR11
-$00001000 constant GPIOD_GPIOD_BRR_BR12                             \ BR12
-$00002000 constant GPIOD_GPIOD_BRR_BR13                             \ BR13
-$00004000 constant GPIOD_GPIOD_BRR_BR14                             \ BR14
-$00008000 constant GPIOD_GPIOD_BRR_BR15                             \ BR15
-
-
-\
-\ @brief GPIO secure configuration register
-\ Address offset: 0x30
-\ Reset value: 0x0000FFFF
-\
-
-$00000001 constant GPIOD_GPIOD_SECCFGR_SEC0                         \ SEC0
-$00000002 constant GPIOD_GPIOD_SECCFGR_SEC1                         \ SEC1
-$00000004 constant GPIOD_GPIOD_SECCFGR_SEC2                         \ SEC2
-$00000008 constant GPIOD_GPIOD_SECCFGR_SEC3                         \ SEC3
-$00000010 constant GPIOD_GPIOD_SECCFGR_SEC4                         \ SEC4
-$00000020 constant GPIOD_GPIOD_SECCFGR_SEC5                         \ SEC5
-$00000040 constant GPIOD_GPIOD_SECCFGR_SEC6                         \ SEC6
-$00000080 constant GPIOD_GPIOD_SECCFGR_SEC7                         \ SEC7
-$00000100 constant GPIOD_GPIOD_SECCFGR_SEC8                         \ SEC8
-$00000200 constant GPIOD_GPIOD_SECCFGR_SEC9                         \ SEC9
-$00000400 constant GPIOD_GPIOD_SECCFGR_SEC10                        \ SEC10
-$00000800 constant GPIOD_GPIOD_SECCFGR_SEC11                        \ SEC11
-$00001000 constant GPIOD_GPIOD_SECCFGR_SEC12                        \ SEC12
-$00002000 constant GPIOD_GPIOD_SECCFGR_SEC13                        \ SEC13
-$00004000 constant GPIOD_GPIOD_SECCFGR_SEC14                        \ SEC14
-$00008000 constant GPIOD_GPIOD_SECCFGR_SEC15                        \ SEC15
-
-
-\
-\ @brief For GPIOA, B, C, D, E, F, G, H, I, J and GPIOK: For GPIOZ:
-\ Address offset: 0x3C8
-\ Reset value: 0x00011240
-\
-
-$0000000f constant GPIOD_GPIOD_HWCFGR10_AHB_IOP                     \ AHB_IOP
-$000000f0 constant GPIOD_GPIOD_HWCFGR10_AF_SIZE                     \ AF_SIZE
-$00000f00 constant GPIOD_GPIOD_HWCFGR10_SPEED_CFG                   \ SPEED_CFG
-$0000f000 constant GPIOD_GPIOD_HWCFGR10_LOCK_CFG                    \ LOCK_CFG
-$000f0000 constant GPIOD_GPIOD_HWCFGR10_SEC_CFG                     \ SEC_CFG
-$00f00000 constant GPIOD_GPIOD_HWCFGR10_OR_CFG                      \ OR_CFG
-
-
-\
-\ @brief For GPIOA, B, C, D, E, F, G, H, I, and GPIOJ: For GPIOK and GPIOZ:
-\ Address offset: 0x3CC
-\ Reset value: 0x000000FF
-\
-
-$0000ffff constant GPIOD_GPIOD_HWCFGR9_EN_IO                        \ EN_IO
-
-
-\
-\ @brief For GPIOA, B, C, D, E, F, G, H, I, and GPIOJ: For GPIOK and GPIOZ:
-\ Address offset: 0x3D0
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOD_GPIOD_HWCFGR8_AF_PRIO8                     \ AF_PRIO8
-$000000f0 constant GPIOD_GPIOD_HWCFGR8_AF_PRIO9                     \ AF_PRIO9
-$00000f00 constant GPIOD_GPIOD_HWCFGR8_AF_PRIO10                    \ AF_PRIO10
-$0000f000 constant GPIOD_GPIOD_HWCFGR8_AF_PRIO11                    \ AF_PRIO11
-$000f0000 constant GPIOD_GPIOD_HWCFGR8_AF_PRIO12                    \ AF_PRIO12
-$00f00000 constant GPIOD_GPIOD_HWCFGR8_AF_PRIO13                    \ AF_PRIO13
-$0f000000 constant GPIOD_GPIOD_HWCFGR8_AF_PRIO14                    \ AF_PRIO14
-$f0000000 constant GPIOD_GPIOD_HWCFGR8_AF_PRIO15                    \ AF_PRIO15
-
-
-\
-\ @brief GPIO hardware configuration register 7
-\ Address offset: 0x3D4
-\ Reset value: 0xFFFFFFFF
-\
-
-$0000000f constant GPIOD_GPIOD_HWCFGR7_AF_PRIO0                     \ AF_PRIO0
-$000000f0 constant GPIOD_GPIOD_HWCFGR7_AF_PRIO1                     \ AF_PRIO1
-$00000f00 constant GPIOD_GPIOD_HWCFGR7_AF_PRIO2                     \ AF_PRIO2
-$0000f000 constant GPIOD_GPIOD_HWCFGR7_AF_PRIO3                     \ AF_PRIO3
-$000f0000 constant GPIOD_GPIOD_HWCFGR7_AF_PRIO4                     \ AF_PRIO4
-$00f00000 constant GPIOD_GPIOD_HWCFGR7_AF_PRIO5                     \ AF_PRIO5
-$0f000000 constant GPIOD_GPIOD_HWCFGR7_AF_PRIO6                     \ AF_PRIO6
-$f0000000 constant GPIOD_GPIOD_HWCFGR7_AF_PRIO7                     \ AF_PRIO7
-
-
-\
-\ @brief GPIO hardware configuration register 6
-\ Address offset: 0x3D8
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000000 constant GPIOD_GPIOD_HWCFGR6_MODER_RES                    \ MODER_RES
-
-
-\
-\ @brief GPIO hardware configuration register 5
-\ Address offset: 0x3DC
-\ Reset value: 0x00000000
-\
-
-$00000000 constant GPIOD_GPIOD_HWCFGR5_PUPDR_RES                    \ PUPDR_RES
-
-
-\
-\ @brief GPIO hardware configuration register 4
-\ Address offset: 0x3E0
-\ Reset value: 0x00000000
-\
-
-$00000000 constant GPIOD_GPIOD_HWCFGR4_OSPEED_RES                   \ OSPEED_RES
-
-
-\
-\ @brief GPIO hardware configuration register 3
-\ Address offset: 0x3E4
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant GPIOD_GPIOD_HWCFGR3_ODR_RES                      \ ODR_RES
-$ffff0000 constant GPIOD_GPIOD_HWCFGR3_OTYPER_RES                   \ OTYPER_RES
-
-
-\
-\ @brief GPIO hardware configuration register 2
-\ Address offset: 0x3E8
-\ Reset value: 0x00000000
-\
-
-$00000000 constant GPIOD_GPIOD_HWCFGR2_AFRL_RES                     \ AFRL_RES
-
-
-\
-\ @brief GPIO hardware configuration register 1
-\ Address offset: 0x3EC
-\ Reset value: 0x00000000
-\
-
-$00000000 constant GPIOD_GPIOD_HWCFGR1_AFRH_RES                     \ AFRH_RES
-
-
-\
-\ @brief GPIO hardware configuration register 0
-\ Address offset: 0x3F0
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant GPIOD_GPIOD_HWCFGR0_OR_RES                       \ OR_RES
-
-
-\
-\ @brief GPIO version register
-\ Address offset: 0x3F4
-\ Reset value: 0x00000040
-\
-
-$0000000f constant GPIOD_GPIOD_VERR_MINREV                          \ MINREV
-$000000f0 constant GPIOD_GPIOD_VERR_MAJREV                          \ MAJREV
-
-
-\
-\ @brief GPIO identification register
-\ Address offset: 0x3F8
-\ Reset value: 0x000F0002
-\
-
-$00000000 constant GPIOD_GPIOD_IPIDR_IPIDR                          \ IPIDR
-
-
-\
-\ @brief GPIO size identification register
-\ Address offset: 0x3FC
-\ Reset value: 0xA3C5DD01
-\
-
-$00000000 constant GPIOD_GPIOD_SIDR_SIDR                            \ SIDR
-
-
-\
-\ @brief GPIOD
-\
-$50005000 constant GPIOD_GPIOD_MODER  \ offset: 0x00 : GPIO port mode register
-$50005004 constant GPIOD_GPIOD_OTYPER  \ offset: 0x04 : GPIO port output type register
-$50005008 constant GPIOD_GPIOD_OSPEEDR  \ offset: 0x08 : GPIO port output speed register
-$5000500c constant GPIOD_GPIOD_PUPDR  \ offset: 0x0C : GPIO port pull-up/pull-down register
-$50005010 constant GPIOD_GPIOD_IDR  \ offset: 0x10 : GPIO port input data register
-$50005014 constant GPIOD_GPIOD_ODR  \ offset: 0x14 : GPIO port output data register
-$50005018 constant GPIOD_GPIOD_BSRR  \ offset: 0x18 : GPIO port bit set/reset register
-$5000501c constant GPIOD_GPIOD_LCKR  \ offset: 0x1C : This register is used to lock the configuration of the port bits when a correct write sequence is applied to bit 16 (LCKK). The value of bits [15:0] is used to lock the configuration of the GPIO. During the write sequence, the value of LCKR[15:0] must not change. When the LOCK sequence has been applied on a port bit, the value of this port bit can no longer be modified until the next MCU reset or peripheral reset. A specific write sequence is used to write to the GPIOx_LCKR register. Only word access (32-bit long) is allowed during this locking sequence. Each lock bit freezes a specific configuration register (control and alternate function registers).
-$50005020 constant GPIOD_GPIOD_AFRL  \ offset: 0x20 : GPIO alternate function low register
-$50005024 constant GPIOD_GPIOD_AFRH  \ offset: 0x24 : GPIO alternate function high register
-$50005028 constant GPIOD_GPIOD_BRR  \ offset: 0x28 : GPIO port bit reset register
-$50005030 constant GPIOD_GPIOD_SECCFGR  \ offset: 0x30 : GPIO secure configuration register
-$500053c8 constant GPIOD_GPIOD_HWCFGR10  \ offset: 0x3C8 : For GPIOA, B, C, D, E, F, G, H, I, J and GPIOK: For GPIOZ:
-$500053cc constant GPIOD_GPIOD_HWCFGR9  \ offset: 0x3CC : For GPIOA, B, C, D, E, F, G, H, I, and GPIOJ: For GPIOK and GPIOZ:
-$500053d0 constant GPIOD_GPIOD_HWCFGR8  \ offset: 0x3D0 : For GPIOA, B, C, D, E, F, G, H, I, and GPIOJ: For GPIOK and GPIOZ:
-$500053d4 constant GPIOD_GPIOD_HWCFGR7  \ offset: 0x3D4 : GPIO hardware configuration register 7
-$500053d8 constant GPIOD_GPIOD_HWCFGR6  \ offset: 0x3D8 : GPIO hardware configuration register 6
-$500053dc constant GPIOD_GPIOD_HWCFGR5  \ offset: 0x3DC : GPIO hardware configuration register 5
-$500053e0 constant GPIOD_GPIOD_HWCFGR4  \ offset: 0x3E0 : GPIO hardware configuration register 4
-$500053e4 constant GPIOD_GPIOD_HWCFGR3  \ offset: 0x3E4 : GPIO hardware configuration register 3
-$500053e8 constant GPIOD_GPIOD_HWCFGR2  \ offset: 0x3E8 : GPIO hardware configuration register 2
-$500053ec constant GPIOD_GPIOD_HWCFGR1  \ offset: 0x3EC : GPIO hardware configuration register 1
-$500053f0 constant GPIOD_GPIOD_HWCFGR0  \ offset: 0x3F0 : GPIO hardware configuration register 0
-$500053f4 constant GPIOD_GPIOD_VERR  \ offset: 0x3F4 : GPIO version register
-$500053f8 constant GPIOD_GPIOD_IPIDR  \ offset: 0x3F8 : GPIO identification register
-$500053fc constant GPIOD_GPIOD_SIDR  \ offset: 0x3FC : GPIO size identification register
+[ifndef] GPIOD_DEF
+
+  [ifdef] GPIOD_GPIOD_MODER_DEF
+    \
+    \ @brief GPIO port mode register
+    \ Address offset: 0x00
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GPIOD_MODER0                   \ [0x00 : 2] MODER0
+    $02 constant GPIOD_MODER1                   \ [0x02 : 2] MODER1
+    $04 constant GPIOD_MODER2                   \ [0x04 : 2] MODER2
+    $06 constant GPIOD_MODER3                   \ [0x06 : 2] MODER3
+    $08 constant GPIOD_MODER4                   \ [0x08 : 2] MODER4
+    $0a constant GPIOD_MODER5                   \ [0x0a : 2] MODER5
+    $0c constant GPIOD_MODER6                   \ [0x0c : 2] MODER6
+    $0e constant GPIOD_MODER7                   \ [0x0e : 2] MODER7
+    $10 constant GPIOD_MODER8                   \ [0x10 : 2] MODER8
+    $12 constant GPIOD_MODER9                   \ [0x12 : 2] MODER9
+    $14 constant GPIOD_MODER10                  \ [0x14 : 2] MODER10
+    $16 constant GPIOD_MODER11                  \ [0x16 : 2] MODER11
+    $18 constant GPIOD_MODER12                  \ [0x18 : 2] MODER12
+    $1a constant GPIOD_MODER13                  \ [0x1a : 2] MODER13
+    $1c constant GPIOD_MODER14                  \ [0x1c : 2] MODER14
+    $1e constant GPIOD_MODER15                  \ [0x1e : 2] MODER15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_OTYPER_DEF
+    \
+    \ @brief GPIO port output type register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_OT0                      \ [0x00] OT0
+    $01 constant GPIOD_OT1                      \ [0x01] OT1
+    $02 constant GPIOD_OT2                      \ [0x02] OT2
+    $03 constant GPIOD_OT3                      \ [0x03] OT3
+    $04 constant GPIOD_OT4                      \ [0x04] OT4
+    $05 constant GPIOD_OT5                      \ [0x05] OT5
+    $06 constant GPIOD_OT6                      \ [0x06] OT6
+    $07 constant GPIOD_OT7                      \ [0x07] OT7
+    $08 constant GPIOD_OT8                      \ [0x08] OT8
+    $09 constant GPIOD_OT9                      \ [0x09] OT9
+    $0a constant GPIOD_OT10                     \ [0x0a] OT10
+    $0b constant GPIOD_OT11                     \ [0x0b] OT11
+    $0c constant GPIOD_OT12                     \ [0x0c] OT12
+    $0d constant GPIOD_OT13                     \ [0x0d] OT13
+    $0e constant GPIOD_OT14                     \ [0x0e] OT14
+    $0f constant GPIOD_OT15                     \ [0x0f] OT15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_OSPEEDR_DEF
+    \
+    \ @brief GPIO port output speed register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_OSPEEDR0                 \ [0x00 : 2] OSPEEDR0
+    $02 constant GPIOD_OSPEEDR1                 \ [0x02 : 2] OSPEEDR1
+    $04 constant GPIOD_OSPEEDR2                 \ [0x04 : 2] OSPEEDR2
+    $06 constant GPIOD_OSPEEDR3                 \ [0x06 : 2] OSPEEDR3
+    $08 constant GPIOD_OSPEEDR4                 \ [0x08 : 2] OSPEEDR4
+    $0a constant GPIOD_OSPEEDR5                 \ [0x0a : 2] OSPEEDR5
+    $0c constant GPIOD_OSPEEDR6                 \ [0x0c : 2] OSPEEDR6
+    $0e constant GPIOD_OSPEEDR7                 \ [0x0e : 2] OSPEEDR7
+    $10 constant GPIOD_OSPEEDR8                 \ [0x10 : 2] OSPEEDR8
+    $12 constant GPIOD_OSPEEDR9                 \ [0x12 : 2] OSPEEDR9
+    $14 constant GPIOD_OSPEEDR10                \ [0x14 : 2] OSPEEDR10
+    $16 constant GPIOD_OSPEEDR11                \ [0x16 : 2] OSPEEDR11
+    $18 constant GPIOD_OSPEEDR12                \ [0x18 : 2] OSPEEDR12
+    $1a constant GPIOD_OSPEEDR13                \ [0x1a : 2] OSPEEDR13
+    $1c constant GPIOD_OSPEEDR14                \ [0x1c : 2] OSPEEDR14
+    $1e constant GPIOD_OSPEEDR15                \ [0x1e : 2] OSPEEDR15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_PUPDR_DEF
+    \
+    \ @brief GPIO port pull-up/pull-down register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_PUPDR0                   \ [0x00 : 2] PUPDR0
+    $02 constant GPIOD_PUPDR1                   \ [0x02 : 2] PUPDR1
+    $04 constant GPIOD_PUPDR2                   \ [0x04 : 2] PUPDR2
+    $06 constant GPIOD_PUPDR3                   \ [0x06 : 2] PUPDR3
+    $08 constant GPIOD_PUPDR4                   \ [0x08 : 2] PUPDR4
+    $0a constant GPIOD_PUPDR5                   \ [0x0a : 2] PUPDR5
+    $0c constant GPIOD_PUPDR6                   \ [0x0c : 2] PUPDR6
+    $0e constant GPIOD_PUPDR7                   \ [0x0e : 2] PUPDR7
+    $10 constant GPIOD_PUPDR8                   \ [0x10 : 2] PUPDR8
+    $12 constant GPIOD_PUPDR9                   \ [0x12 : 2] PUPDR9
+    $14 constant GPIOD_PUPDR10                  \ [0x14 : 2] PUPDR10
+    $16 constant GPIOD_PUPDR11                  \ [0x16 : 2] PUPDR11
+    $18 constant GPIOD_PUPDR12                  \ [0x18 : 2] PUPDR12
+    $1a constant GPIOD_PUPDR13                  \ [0x1a : 2] PUPDR13
+    $1c constant GPIOD_PUPDR14                  \ [0x1c : 2] PUPDR14
+    $1e constant GPIOD_PUPDR15                  \ [0x1e : 2] PUPDR15
+  [then]
+
 
+  [ifdef] GPIOD_GPIOD_IDR_DEF
+    \
+    \ @brief GPIO port input data register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_IDR0                     \ [0x00] IDR0
+    $01 constant GPIOD_IDR1                     \ [0x01] IDR1
+    $02 constant GPIOD_IDR2                     \ [0x02] IDR2
+    $03 constant GPIOD_IDR3                     \ [0x03] IDR3
+    $04 constant GPIOD_IDR4                     \ [0x04] IDR4
+    $05 constant GPIOD_IDR5                     \ [0x05] IDR5
+    $06 constant GPIOD_IDR6                     \ [0x06] IDR6
+    $07 constant GPIOD_IDR7                     \ [0x07] IDR7
+    $08 constant GPIOD_IDR8                     \ [0x08] IDR8
+    $09 constant GPIOD_IDR9                     \ [0x09] IDR9
+    $0a constant GPIOD_IDR10                    \ [0x0a] IDR10
+    $0b constant GPIOD_IDR11                    \ [0x0b] IDR11
+    $0c constant GPIOD_IDR12                    \ [0x0c] IDR12
+    $0d constant GPIOD_IDR13                    \ [0x0d] IDR13
+    $0e constant GPIOD_IDR14                    \ [0x0e] IDR14
+    $0f constant GPIOD_IDR15                    \ [0x0f] IDR15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_ODR_DEF
+    \
+    \ @brief GPIO port output data register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_ODR0                     \ [0x00] ODR0
+    $01 constant GPIOD_ODR1                     \ [0x01] ODR1
+    $02 constant GPIOD_ODR2                     \ [0x02] ODR2
+    $03 constant GPIOD_ODR3                     \ [0x03] ODR3
+    $04 constant GPIOD_ODR4                     \ [0x04] ODR4
+    $05 constant GPIOD_ODR5                     \ [0x05] ODR5
+    $06 constant GPIOD_ODR6                     \ [0x06] ODR6
+    $07 constant GPIOD_ODR7                     \ [0x07] ODR7
+    $08 constant GPIOD_ODR8                     \ [0x08] ODR8
+    $09 constant GPIOD_ODR9                     \ [0x09] ODR9
+    $0a constant GPIOD_ODR10                    \ [0x0a] ODR10
+    $0b constant GPIOD_ODR11                    \ [0x0b] ODR11
+    $0c constant GPIOD_ODR12                    \ [0x0c] ODR12
+    $0d constant GPIOD_ODR13                    \ [0x0d] ODR13
+    $0e constant GPIOD_ODR14                    \ [0x0e] ODR14
+    $0f constant GPIOD_ODR15                    \ [0x0f] ODR15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_BSRR_DEF
+    \
+    \ @brief GPIO port bit set/reset register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_BS0                      \ [0x00] BS0
+    $01 constant GPIOD_BS1                      \ [0x01] BS1
+    $02 constant GPIOD_BS2                      \ [0x02] BS2
+    $03 constant GPIOD_BS3                      \ [0x03] BS3
+    $04 constant GPIOD_BS4                      \ [0x04] BS4
+    $05 constant GPIOD_BS5                      \ [0x05] BS5
+    $06 constant GPIOD_BS6                      \ [0x06] BS6
+    $07 constant GPIOD_BS7                      \ [0x07] BS7
+    $08 constant GPIOD_BS8                      \ [0x08] BS8
+    $09 constant GPIOD_BS9                      \ [0x09] BS9
+    $0a constant GPIOD_BS10                     \ [0x0a] BS10
+    $0b constant GPIOD_BS11                     \ [0x0b] BS11
+    $0c constant GPIOD_BS12                     \ [0x0c] BS12
+    $0d constant GPIOD_BS13                     \ [0x0d] BS13
+    $0e constant GPIOD_BS14                     \ [0x0e] BS14
+    $0f constant GPIOD_BS15                     \ [0x0f] BS15
+    $10 constant GPIOD_BR0                      \ [0x10] BR0
+    $11 constant GPIOD_BR1                      \ [0x11] BR1
+    $12 constant GPIOD_BR2                      \ [0x12] BR2
+    $13 constant GPIOD_BR3                      \ [0x13] BR3
+    $14 constant GPIOD_BR4                      \ [0x14] BR4
+    $15 constant GPIOD_BR5                      \ [0x15] BR5
+    $16 constant GPIOD_BR6                      \ [0x16] BR6
+    $17 constant GPIOD_BR7                      \ [0x17] BR7
+    $18 constant GPIOD_BR8                      \ [0x18] BR8
+    $19 constant GPIOD_BR9                      \ [0x19] BR9
+    $1a constant GPIOD_BR10                     \ [0x1a] BR10
+    $1b constant GPIOD_BR11                     \ [0x1b] BR11
+    $1c constant GPIOD_BR12                     \ [0x1c] BR12
+    $1d constant GPIOD_BR13                     \ [0x1d] BR13
+    $1e constant GPIOD_BR14                     \ [0x1e] BR14
+    $1f constant GPIOD_BR15                     \ [0x1f] BR15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_LCKR_DEF
+    \
+    \ @brief This register is used to lock the configuration of the port bits when a correct write sequence is applied to bit 16 (LCKK). The value of bits [15:0] is used to lock the configuration of the GPIO. During the write sequence, the value of LCKR[15:0] must not change. When the LOCK sequence has been applied on a port bit, the value of this port bit can no longer be modified until the next MCU reset or peripheral reset. A specific write sequence is used to write to the GPIOx_LCKR register. Only word access (32-bit long) is allowed during this locking sequence. Each lock bit freezes a specific configuration register (control and alternate function registers).
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_LCK0                     \ [0x00] LCK0
+    $01 constant GPIOD_LCK1                     \ [0x01] LCK1
+    $02 constant GPIOD_LCK2                     \ [0x02] LCK2
+    $03 constant GPIOD_LCK3                     \ [0x03] LCK3
+    $04 constant GPIOD_LCK4                     \ [0x04] LCK4
+    $05 constant GPIOD_LCK5                     \ [0x05] LCK5
+    $06 constant GPIOD_LCK6                     \ [0x06] LCK6
+    $07 constant GPIOD_LCK7                     \ [0x07] LCK7
+    $08 constant GPIOD_LCK8                     \ [0x08] LCK8
+    $09 constant GPIOD_LCK9                     \ [0x09] LCK9
+    $0a constant GPIOD_LCK10                    \ [0x0a] LCK10
+    $0b constant GPIOD_LCK11                    \ [0x0b] LCK11
+    $0c constant GPIOD_LCK12                    \ [0x0c] LCK12
+    $0d constant GPIOD_LCK13                    \ [0x0d] LCK13
+    $0e constant GPIOD_LCK14                    \ [0x0e] LCK14
+    $0f constant GPIOD_LCK15                    \ [0x0f] LCK15
+    $10 constant GPIOD_LCKK                     \ [0x10] LCKK
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_AFRL_DEF
+    \
+    \ @brief GPIO alternate function low register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_AFR0                     \ [0x00 : 4] AFR0
+    $04 constant GPIOD_AFR1                     \ [0x04 : 4] AFR1
+    $08 constant GPIOD_AFR2                     \ [0x08 : 4] AFR2
+    $0c constant GPIOD_AFR3                     \ [0x0c : 4] AFR3
+    $10 constant GPIOD_AFR4                     \ [0x10 : 4] AFR4
+    $14 constant GPIOD_AFR5                     \ [0x14 : 4] AFR5
+    $18 constant GPIOD_AFR6                     \ [0x18 : 4] AFR6
+    $1c constant GPIOD_AFR7                     \ [0x1c : 4] AFR7
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_AFRH_DEF
+    \
+    \ @brief GPIO alternate function high register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_AFR8                     \ [0x00 : 4] AFR8
+    $04 constant GPIOD_AFR9                     \ [0x04 : 4] AFR9
+    $08 constant GPIOD_AFR10                    \ [0x08 : 4] AFR10
+    $0c constant GPIOD_AFR11                    \ [0x0c : 4] AFR11
+    $10 constant GPIOD_AFR12                    \ [0x10 : 4] AFR12
+    $14 constant GPIOD_AFR13                    \ [0x14 : 4] AFR13
+    $18 constant GPIOD_AFR14                    \ [0x18 : 4] AFR14
+    $1c constant GPIOD_AFR15                    \ [0x1c : 4] AFR15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_BRR_DEF
+    \
+    \ @brief GPIO port bit reset register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_BR0                      \ [0x00] BR0
+    $01 constant GPIOD_BR1                      \ [0x01] BR1
+    $02 constant GPIOD_BR2                      \ [0x02] BR2
+    $03 constant GPIOD_BR3                      \ [0x03] BR3
+    $04 constant GPIOD_BR4                      \ [0x04] BR4
+    $05 constant GPIOD_BR5                      \ [0x05] BR5
+    $06 constant GPIOD_BR6                      \ [0x06] BR6
+    $07 constant GPIOD_BR7                      \ [0x07] BR7
+    $08 constant GPIOD_BR8                      \ [0x08] BR8
+    $09 constant GPIOD_BR9                      \ [0x09] BR9
+    $0a constant GPIOD_BR10                     \ [0x0a] BR10
+    $0b constant GPIOD_BR11                     \ [0x0b] BR11
+    $0c constant GPIOD_BR12                     \ [0x0c] BR12
+    $0d constant GPIOD_BR13                     \ [0x0d] BR13
+    $0e constant GPIOD_BR14                     \ [0x0e] BR14
+    $0f constant GPIOD_BR15                     \ [0x0f] BR15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_SECCFGR_DEF
+    \
+    \ @brief GPIO secure configuration register
+    \ Address offset: 0x30
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant GPIOD_SEC0                     \ [0x00] SEC0
+    $01 constant GPIOD_SEC1                     \ [0x01] SEC1
+    $02 constant GPIOD_SEC2                     \ [0x02] SEC2
+    $03 constant GPIOD_SEC3                     \ [0x03] SEC3
+    $04 constant GPIOD_SEC4                     \ [0x04] SEC4
+    $05 constant GPIOD_SEC5                     \ [0x05] SEC5
+    $06 constant GPIOD_SEC6                     \ [0x06] SEC6
+    $07 constant GPIOD_SEC7                     \ [0x07] SEC7
+    $08 constant GPIOD_SEC8                     \ [0x08] SEC8
+    $09 constant GPIOD_SEC9                     \ [0x09] SEC9
+    $0a constant GPIOD_SEC10                    \ [0x0a] SEC10
+    $0b constant GPIOD_SEC11                    \ [0x0b] SEC11
+    $0c constant GPIOD_SEC12                    \ [0x0c] SEC12
+    $0d constant GPIOD_SEC13                    \ [0x0d] SEC13
+    $0e constant GPIOD_SEC14                    \ [0x0e] SEC14
+    $0f constant GPIOD_SEC15                    \ [0x0f] SEC15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR10_DEF
+    \
+    \ @brief For GPIOA, B, C, D, E, F, G, H, I, J and GPIOK: For GPIOZ:
+    \ Address offset: 0x3C8
+    \ Reset value: 0x00011240
+    \
+    $00 constant GPIOD_AHB_IOP                  \ [0x00 : 4] AHB_IOP
+    $04 constant GPIOD_AF_SIZE                  \ [0x04 : 4] AF_SIZE
+    $08 constant GPIOD_SPEED_CFG                \ [0x08 : 4] SPEED_CFG
+    $0c constant GPIOD_LOCK_CFG                 \ [0x0c : 4] LOCK_CFG
+    $10 constant GPIOD_SEC_CFG                  \ [0x10 : 4] SEC_CFG
+    $14 constant GPIOD_OR_CFG                   \ [0x14 : 4] OR_CFG
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR9_DEF
+    \
+    \ @brief For GPIOA, B, C, D, E, F, G, H, I, and GPIOJ: For GPIOK and GPIOZ:
+    \ Address offset: 0x3CC
+    \ Reset value: 0x000000FF
+    \
+    $00 constant GPIOD_EN_IO                    \ [0x00 : 16] EN_IO
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR8_DEF
+    \
+    \ @brief For GPIOA, B, C, D, E, F, G, H, I, and GPIOJ: For GPIOK and GPIOZ:
+    \ Address offset: 0x3D0
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_AF_PRIO8                 \ [0x00 : 4] AF_PRIO8
+    $04 constant GPIOD_AF_PRIO9                 \ [0x04 : 4] AF_PRIO9
+    $08 constant GPIOD_AF_PRIO10                \ [0x08 : 4] AF_PRIO10
+    $0c constant GPIOD_AF_PRIO11                \ [0x0c : 4] AF_PRIO11
+    $10 constant GPIOD_AF_PRIO12                \ [0x10 : 4] AF_PRIO12
+    $14 constant GPIOD_AF_PRIO13                \ [0x14 : 4] AF_PRIO13
+    $18 constant GPIOD_AF_PRIO14                \ [0x18 : 4] AF_PRIO14
+    $1c constant GPIOD_AF_PRIO15                \ [0x1c : 4] AF_PRIO15
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR7_DEF
+    \
+    \ @brief GPIO hardware configuration register 7
+    \ Address offset: 0x3D4
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GPIOD_AF_PRIO0                 \ [0x00 : 4] AF_PRIO0
+    $04 constant GPIOD_AF_PRIO1                 \ [0x04 : 4] AF_PRIO1
+    $08 constant GPIOD_AF_PRIO2                 \ [0x08 : 4] AF_PRIO2
+    $0c constant GPIOD_AF_PRIO3                 \ [0x0c : 4] AF_PRIO3
+    $10 constant GPIOD_AF_PRIO4                 \ [0x10 : 4] AF_PRIO4
+    $14 constant GPIOD_AF_PRIO5                 \ [0x14 : 4] AF_PRIO5
+    $18 constant GPIOD_AF_PRIO6                 \ [0x18 : 4] AF_PRIO6
+    $1c constant GPIOD_AF_PRIO7                 \ [0x1c : 4] AF_PRIO7
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR6_DEF
+    \
+    \ @brief GPIO hardware configuration register 6
+    \ Address offset: 0x3D8
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GPIOD_MODER_RES                \ [0x00 : 32] MODER_RES
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR5_DEF
+    \
+    \ @brief GPIO hardware configuration register 5
+    \ Address offset: 0x3DC
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_PUPDR_RES                \ [0x00 : 32] PUPDR_RES
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR4_DEF
+    \
+    \ @brief GPIO hardware configuration register 4
+    \ Address offset: 0x3E0
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_OSPEED_RES               \ [0x00 : 32] OSPEED_RES
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR3_DEF
+    \
+    \ @brief GPIO hardware configuration register 3
+    \ Address offset: 0x3E4
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_ODR_RES                  \ [0x00 : 16] ODR_RES
+    $10 constant GPIOD_OTYPER_RES               \ [0x10 : 16] OTYPER_RES
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR2_DEF
+    \
+    \ @brief GPIO hardware configuration register 2
+    \ Address offset: 0x3E8
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_AFRL_RES                 \ [0x00 : 32] AFRL_RES
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR1_DEF
+    \
+    \ @brief GPIO hardware configuration register 1
+    \ Address offset: 0x3EC
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_AFRH_RES                 \ [0x00 : 32] AFRH_RES
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_HWCFGR0_DEF
+    \
+    \ @brief GPIO hardware configuration register 0
+    \ Address offset: 0x3F0
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOD_OR_RES                   \ [0x00 : 16] OR_RES
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_VERR_DEF
+    \
+    \ @brief GPIO version register
+    \ Address offset: 0x3F4
+    \ Reset value: 0x00000040
+    \
+    $00 constant GPIOD_MINREV                   \ [0x00 : 4] MINREV
+    $04 constant GPIOD_MAJREV                   \ [0x04 : 4] MAJREV
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_IPIDR_DEF
+    \
+    \ @brief GPIO identification register
+    \ Address offset: 0x3F8
+    \ Reset value: 0x000F0002
+    \
+    $00 constant GPIOD_IPIDR                    \ [0x00 : 32] IPIDR
+  [then]
+
+
+  [ifdef] GPIOD_GPIOD_SIDR_DEF
+    \
+    \ @brief GPIO size identification register
+    \ Address offset: 0x3FC
+    \ Reset value: 0xA3C5DD01
+    \
+    $00 constant GPIOD_SIDR                     \ [0x00 : 32] SIDR
+  [then]
+
+  \
+  \ @brief GPIOD
+  \
+  $00 constant GPIOD_GPIOD_MODER        \ GPIO port mode register
+  $04 constant GPIOD_GPIOD_OTYPER       \ GPIO port output type register
+  $08 constant GPIOD_GPIOD_OSPEEDR      \ GPIO port output speed register
+  $0C constant GPIOD_GPIOD_PUPDR        \ GPIO port pull-up/pull-down register
+  $10 constant GPIOD_GPIOD_IDR          \ GPIO port input data register
+  $14 constant GPIOD_GPIOD_ODR          \ GPIO port output data register
+  $18 constant GPIOD_GPIOD_BSRR         \ GPIO port bit set/reset register
+  $1C constant GPIOD_GPIOD_LCKR         \ This register is used to lock the configuration of the port bits when a correct write sequence is applied to bit 16 (LCKK). The value of bits [15:0] is used to lock the configuration of the GPIO. During the write sequence, the value of LCKR[15:0] must not change. When the LOCK sequence has been applied on a port bit, the value of this port bit can no longer be modified until the next MCU reset or peripheral reset. A specific write sequence is used to write to the GPIOx_LCKR register. Only word access (32-bit long) is allowed during this locking sequence. Each lock bit freezes a specific configuration register (control and alternate function registers).
+  $20 constant GPIOD_GPIOD_AFRL         \ GPIO alternate function low register
+  $24 constant GPIOD_GPIOD_AFRH         \ GPIO alternate function high register
+  $28 constant GPIOD_GPIOD_BRR          \ GPIO port bit reset register
+  $30 constant GPIOD_GPIOD_SECCFGR      \ GPIO secure configuration register
+  $3C8 constant GPIOD_GPIOD_HWCFGR10    \ For GPIOA, B, C, D, E, F, G, H, I, J and GPIOK: For GPIOZ:
+  $3CC constant GPIOD_GPIOD_HWCFGR9     \ For GPIOA, B, C, D, E, F, G, H, I, and GPIOJ: For GPIOK and GPIOZ:
+  $3D0 constant GPIOD_GPIOD_HWCFGR8     \ For GPIOA, B, C, D, E, F, G, H, I, and GPIOJ: For GPIOK and GPIOZ:
+  $3D4 constant GPIOD_GPIOD_HWCFGR7     \ GPIO hardware configuration register 7
+  $3D8 constant GPIOD_GPIOD_HWCFGR6     \ GPIO hardware configuration register 6
+  $3DC constant GPIOD_GPIOD_HWCFGR5     \ GPIO hardware configuration register 5
+  $3E0 constant GPIOD_GPIOD_HWCFGR4     \ GPIO hardware configuration register 4
+  $3E4 constant GPIOD_GPIOD_HWCFGR3     \ GPIO hardware configuration register 3
+  $3E8 constant GPIOD_GPIOD_HWCFGR2     \ GPIO hardware configuration register 2
+  $3EC constant GPIOD_GPIOD_HWCFGR1     \ GPIO hardware configuration register 1
+  $3F0 constant GPIOD_GPIOD_HWCFGR0     \ GPIO hardware configuration register 0
+  $3F4 constant GPIOD_GPIOD_VERR        \ GPIO version register
+  $3F8 constant GPIOD_GPIOD_IPIDR       \ GPIO identification register
+  $3FC constant GPIOD_GPIOD_SIDR        \ GPIO size identification register
+
+: GPIOD_DEF ; [then]

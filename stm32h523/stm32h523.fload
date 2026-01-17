@@ -1,316 +1,222 @@
 \
-\ @file stm32h523.h
-\ @brief Loader for all peripherals in a STM32H523
+\ @file stm32h523.fload
+\ @brief Device header for STM32H523
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include adc_s.fs
-.include adc2.fs
-.include adc2_s.fs
-.include adcc.fs
-.include sec_adcc.fs
-.include crc.fs
-.include crc_s.fs
-.include crs.fs
-.include crs_s.fs
-.include dac.fs
-.include dac_s.fs
-.include dbgmcu.fs
-.include dbgmcu_s.fs
-.include dcache.fs
-.include dcache_s.fs
-.include dcmi.fs
-.include dcmi_s.fs
-.include dlybos1.fs
-.include dlybos1_s.fs
-.include dlybsd1.fs
-.include dlybsd1_s.fs
-.include dts.fs
-.include dts_s.fs
-.include exti.fs
-.include exti_s.fs
-.include fdcan.fs
-.include fdcan_s.fs
-.include fdcan2.fs
-.include fdcan2_s.fs
-.include flash.fs
-.include flash_s.fs
-.include fmc.fs
-.include fmc_s.fs
-.include gpdma.fs
-.include gpdma_s.fs
-.include gpdma2.fs
-.include gpdma2_s.fs
-.include gpioa.fs
-.include gpioa_s.fs
-.include gpiob.fs
-.include gpiob_s.fs
-.include gpioc.fs
-.include gpioc_s.fs
-.include gpiod.fs
-.include gpiod_s.fs
-.include gpioe.fs
-.include gpioe_s.fs
-.include gpiof.fs
-.include gpiof_s.fs
-.include gpiog.fs
-.include gpiog_s.fs
-.include gpioh.fs
-.include gpioh_s.fs
-.include gpioi.fs
-.include gpioi_s.fs
-.include gtzc1_tzic.fs
-.include gtzc1_tzic_s.fs
-.include gtzc1_tzsc.fs
-.include gtzc1_tzsc_s.fs
-.include hash.fs
-.include hash_s.fs
-.include i2c.fs
-.include i2c_s.fs
-.include i2c2.fs
-.include i2c2_s.fs
-.include i2c3.fs
-.include i2c3_s.fs
-.include i3c.fs
-.include i3c_s.fs
-.include i3c2.fs
-.include i3c2_s.fs
-.include icache.fs
-.include icache_s.fs
-.include iwdg.fs
-.include iwdg_s.fs
-.include lptim1.fs
-.include lptim1_s.fs
-.include lptim2.fs
-.include lptim2_s.fs
-.include lpuart.fs
-.include lpuart_s.fs
-.include octospi.fs
-.include octospi_s.fs
-.include pssi.fs
-.include pssi_s.fs
-.include pwr.fs
-.include pwr_s.fs
-.include ramcfg.fs
-.include ramcfg_s.fs
-.include rcc.fs
-.include rcc_s.fs
-.include rng.fs
-.include rng_s.fs
-.include rtc.fs
-.include rtc_s.fs
-.include sbs.fs
-.include sbs_s.fs
-.include sdmmc.fs
-.include sdmmc_s.fs
-.include spi.fs
-.include spi_s.fs
-.include spi2.fs
-.include spi2_s.fs
-.include spi3.fs
-.include spi3_s.fs
-.include spi4.fs
-.include spi4_s.fs
-.include tamp.fs
-.include tamp_s.fs
-.include tim1.fs
-.include tim1_s.fs
-.include tim2.fs
-.include tim2_s.fs
-.include tim3.fs
-.include tim3_s.fs
-.include tim4.fs
-.include tim4_s.fs
-.include tim5.fs
-.include tim5_s.fs
-.include tim6.fs
-.include tim6_s.fs
-.include tim7.fs
-.include tim7_s.fs
-.include tim8.fs
-.include tim8_s.fs
-.include tim15.fs
-.include tim15_s.fs
-.include ucpd.fs
-.include ucpd_s.fs
-.include usart.fs
-.include usart_s.fs
-.include usart2.fs
-.include usart2_s.fs
-.include usart3.fs
-.include usart3_s.fs
-.include uart4.fs
-.include uart4_s.fs
-.include uart5.fs
-.include uart5_s.fs
-.include usart6.fs
-.include usart6_s.fs
-.include usb.fs
-.include usb_s.fs
-.include usbsram.fs
-.include usbsram_s.fs
-.include vrefbuf.fs
-.include vrefbuf_s.fs
-.include wwdg.fs
-.include wwdg_s.fs
+[ifndef] STM32H523_LOADER
+  .include "adc.fs"
+  .include "adcc.fs"
+  .include "crc.fs"
+  .include "crs.fs"
+  .include "dac.fs"
+  .include "dbgmcu.fs"
+  .include "dcache.fs"
+  .include "dcmi.fs"
+  .include "dlyb.fs"
+  .include "dts.fs"
+  .include "exti.fs"
+  .include "fdcan.fs"
+  .include "flash.fs"
+  .include "fmc.fs"
+  .include "gpdma.fs"
+  .include "gpioa.fs"
+  .include "gpiob.fs"
+  .include "gpioc.fs"
+  .include "gpiod.fs"
+  .include "gpioe.fs"
+  .include "gpiof.fs"
+  .include "gpiog.fs"
+  .include "gpioh.fs"
+  .include "gpioi.fs"
+  .include "gtzc1_tzic.fs"
+  .include "gtzc1_tzsc.fs"
+  .include "hash.fs"
+  .include "i2c.fs"
+  .include "i3c.fs"
+  .include "icache.fs"
+  .include "iwdg.fs"
+  .include "lptim1.fs"
+  .include "lptim2.fs"
+  .include "lpuart.fs"
+  .include "octospi.fs"
+  .include "pssi.fs"
+  .include "pwr.fs"
+  .include "ramcfg.fs"
+  .include "rcc.fs"
+  .include "rng.fs"
+  .include "rtc.fs"
+  .include "sbs.fs"
+  .include "sdmmc.fs"
+  .include "spi.fs"
+  .include "tamp.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim3.fs"
+  .include "tim4.fs"
+  .include "tim5.fs"
+  .include "tim6.fs"
+  .include "tim7.fs"
+  .include "tim8.fs"
+  .include "tim15.fs"
+  .include "ucpd.fs"
+  .include "usart.fs"
+  .include "usb.fs"
+  .include "usbsram.fs"
+  .include "vrefbuf.fs"
+  .include "wwdg.fs"
 
-decimal
+  $0x42028000 constant ADC              \ See adc.fs
+  $0x52028000 constant ADC_S            \ See adc.fs
+  $0x42028100 constant ADC2             \ See adc.fs
+  $0x52028100 constant ADC2_S           \ See adc.fs
+  $0x42028300 constant ADCC             \ See adcc.fs
+  $0x52028300 constant SEC_ADCC         \ See adcc.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x50023000 constant CRC_S            \ See crc.fs
+  $0x40006000 constant CRS              \ See crs.fs
+  $0x50006000 constant CRS_S            \ See crs.fs
+  $0x42028400 constant DAC              \ See dac.fs
+  $0x52028400 constant DAC_S            \ See dac.fs
+  $0x44024000 constant DBGMCU           \ See dbgmcu.fs
+  $0x54024000 constant DBGMCU_S         \ See dbgmcu.fs
+  $0x40031400 constant DCACHE           \ See dcache.fs
+  $0x50031400 constant DCACHE_S         \ See dcache.fs
+  $0x4202C000 constant DCMI             \ See dcmi.fs
+  $0x5202C000 constant DCMI_S           \ See dcmi.fs
+  $0x4600F000 constant DLYBOS1          \ See dlyb.fs
+  $0x5600F000 constant DLYBOS1_S        \ See dlyb.fs
+  $0x46008400 constant DLYBSD1          \ See dlyb.fs
+  $0x56008400 constant DLYBSD1_S        \ See dlyb.fs
+  $0x40008C00 constant DTS              \ See dts.fs
+  $0x50008C00 constant DTS_S            \ See dts.fs
+  $0x44022000 constant EXTI             \ See exti.fs
+  $0x54022000 constant EXTI_S           \ See exti.fs
+  $0x4000A400 constant FDCAN            \ See fdcan.fs
+  $0x5000A400 constant FDCAN_S          \ See fdcan.fs
+  $0x4000A800 constant FDCAN2           \ See fdcan.fs
+  $0x5000A800 constant FDCAN2_S         \ See fdcan.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x50022000 constant FLASH_S          \ See flash.fs
+  $0x47000400 constant FMC              \ See fmc.fs
+  $0x57000400 constant FMC_S            \ See fmc.fs
+  $0x40020000 constant GPDMA            \ See gpdma.fs
+  $0x50020000 constant GPDMA_S          \ See gpdma.fs
+  $0x40021000 constant GPDMA2           \ See gpdma.fs
+  $0x50021000 constant GPDMA2_S         \ See gpdma.fs
+  $0x42020000 constant GPIOA            \ See gpioa.fs
+  $0x52020000 constant GPIOA_S          \ See gpioa.fs
+  $0x42020400 constant GPIOB            \ See gpiob.fs
+  $0x52020400 constant GPIOB_S          \ See gpiob.fs
+  $0x42020800 constant GPIOC            \ See gpioc.fs
+  $0x52020800 constant GPIOC_S          \ See gpioc.fs
+  $0x42020C00 constant GPIOD            \ See gpiod.fs
+  $0x52020C00 constant GPIOD_S          \ See gpiod.fs
+  $0x42021000 constant GPIOE            \ See gpioe.fs
+  $0x52021000 constant GPIOE_S          \ See gpioe.fs
+  $0x42021400 constant GPIOF            \ See gpiof.fs
+  $0x52021400 constant GPIOF_S          \ See gpiof.fs
+  $0x42021800 constant GPIOG            \ See gpiog.fs
+  $0x52021800 constant GPIOG_S          \ See gpiog.fs
+  $0x42021C00 constant GPIOH            \ See gpioh.fs
+  $0x52021C00 constant GPIOH_S          \ See gpioh.fs
+  $0x000001A0 constant GPIOI            \ See gpioi.fs
+  $0x100001A0 constant GPIOI_S          \ See gpioi.fs
+  $0x40032400 constant GTZC1_TZIC       \ See gtzc1_tzic.fs
+  $0x50032400 constant GTZC1_TZIC_S     \ See gtzc1_tzic.fs
+  $0x40036400 constant GTZC1_TZSC       \ See gtzc1_tzsc.fs
+  $0x50036400 constant GTZC1_TZSC_S     \ See gtzc1_tzsc.fs
+  $0x420C0400 constant HASH             \ See hash.fs
+  $0x520C0400 constant HASH_S           \ See hash.fs
+  $0x40005400 constant I2C              \ See i2c.fs
+  $0x50005400 constant I2C_S            \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x50005800 constant I2C2_S           \ See i2c.fs
+  $0x44002800 constant I2C3             \ See i2c.fs
+  $0x54002800 constant I2C3_S           \ See i2c.fs
+  $0x40005C00 constant I3C              \ See i3c.fs
+  $0x50005C00 constant I3C_S            \ See i3c.fs
+  $0x44003000 constant I3C2             \ See i3c.fs
+  $0x54003000 constant I3C2_S           \ See i3c.fs
+  $0x40030400 constant ICACHE           \ See icache.fs
+  $0x50030400 constant ICACHE_S         \ See icache.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x50003000 constant IWDG_S           \ See iwdg.fs
+  $0x44004400 constant LPTIM1           \ See lptim1.fs
+  $0x54004400 constant LPTIM1_S         \ See lptim1.fs
+  $0x40009400 constant LPTIM2           \ See lptim2.fs
+  $0x50009400 constant LPTIM2_S         \ See lptim2.fs
+  $0x44002400 constant LPUART           \ See lpuart.fs
+  $0x54002400 constant LPUART_S         \ See lpuart.fs
+  $0x47001400 constant OCTOSPI          \ See octospi.fs
+  $0x57001400 constant OCTOSPI_S        \ See octospi.fs
+  $0x4202C400 constant PSSI             \ See pssi.fs
+  $0x5202C400 constant PSSI_S           \ See pssi.fs
+  $0x44020800 constant PWR              \ See pwr.fs
+  $0x54020800 constant PWR_S            \ See pwr.fs
+  $0x40026000 constant RAMCFG           \ See ramcfg.fs
+  $0x50026000 constant RAMCFG_S         \ See ramcfg.fs
+  $0x44020C00 constant RCC              \ See rcc.fs
+  $0x54020C00 constant RCC_S            \ See rcc.fs
+  $0x420C0800 constant RNG              \ See rng.fs
+  $0x520C0800 constant RNG_S            \ See rng.fs
+  $0x44007800 constant RTC              \ See rtc.fs
+  $0x54007800 constant RTC_S            \ See rtc.fs
+  $0x44000400 constant SBS              \ See sbs.fs
+  $0x54000400 constant SBS_S            \ See sbs.fs
+  $0x46008000 constant SDMMC            \ See sdmmc.fs
+  $0x56008000 constant SDMMC_S          \ See sdmmc.fs
+  $0x40013000 constant SPI              \ See spi.fs
+  $0x50013000 constant SPI_S            \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x50003800 constant SPI2_S           \ See spi.fs
+  $0x40003C00 constant SPI3             \ See spi.fs
+  $0x50003C00 constant SPI3_S           \ See spi.fs
+  $0x40014C00 constant SPI4             \ See spi.fs
+  $0x50014C00 constant SPI4_S           \ See spi.fs
+  $0x44007C00 constant TAMP             \ See tamp.fs
+  $0x54007C00 constant TAMP_S           \ See tamp.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x50012C00 constant TIM1_S           \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x50000000 constant TIM2_S           \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim3.fs
+  $0x50000400 constant TIM3_S           \ See tim3.fs
+  $0x40000800 constant TIM4             \ See tim4.fs
+  $0x50000800 constant TIM4_S           \ See tim4.fs
+  $0x40000C00 constant TIM5             \ See tim5.fs
+  $0x50000C00 constant TIM5_S           \ See tim5.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x50001000 constant TIM6_S           \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim7.fs
+  $0x50001400 constant TIM7_S           \ See tim7.fs
+  $0x40013400 constant TIM8             \ See tim8.fs
+  $0x50013400 constant TIM8_S           \ See tim8.fs
+  $0x40014000 constant TIM15            \ See tim15.fs
+  $0x50014000 constant TIM15_S          \ See tim15.fs
+  $0x4000DC00 constant UCPD             \ See ucpd.fs
+  $0x5000DC00 constant UCPD_S           \ See ucpd.fs
+  $0x40013800 constant USART            \ See usart.fs
+  $0x50013800 constant USART_S          \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x50004400 constant USART2_S         \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x50004800 constant USART3_S         \ See usart.fs
+  $0x40004C00 constant UART4            \ See usart.fs
+  $0x50004C00 constant UART4_S          \ See usart.fs
+  $0x40005000 constant UART5            \ See usart.fs
+  $0x50005000 constant UART5_S          \ See usart.fs
+  $0x40006400 constant USART6           \ See usart.fs
+  $0x50006400 constant USART6_S         \ See usart.fs
+  $0x40016000 constant USB              \ See usb.fs
+  $0x50016000 constant USB_S            \ See usb.fs
+  $0x40016400 constant USBSRAM          \ See usbsram.fs
+  $0x50016400 constant USBSRAM_S        \ See usbsram.fs
+  $0x44007400 constant VREFBUF          \ See vrefbuf.fs
+  $0x54007400 constant VREFBUF_S        \ See vrefbuf.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
+  $0x50002C00 constant WWDG_S           \ See wwdg.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ ADC register block
-.include ADC_S                  \ ADC register block
-.include ADC2                   \ ADC2 global interrupt
-.include ADC2_S                 \ ADC register block
-.include ADCC                   \ ADC common registers block
-.include SEC_ADCC               \ ADC common registers block
-.include CRC                    \ CRC address block description
-.include CRC_S                  \ CRC address block description
-.include CRS                    \ CRS address block description
-.include CRS_S                  \ CRS address block description
-.include DAC                    \ DAC address block description
-.include DAC_S                  \ DAC address block description
-.include DBGMCU                 \ DBGMCU register block
-.include DBGMCU_S               \ DBGMCU register block
-.include DCACHE                 \ DCACHE register block
-.include DCACHE_S               \ DCACHE register block
-.include DCMI                   \ DCMI address block description
-.include DCMI_S                 \ DCMI address block description
-.include DLYBOS1                \ DLYB address block description
-.include DLYBOS1_S              \ DLYB address block description
-.include DLYBSD1                \ DLYB address block description
-.include DLYBSD1_S              \ DLYB address block description
-.include DTS                    \ DTS address block description
-.include DTS_S                  \ DTS address block description
-.include EXTI                   \ EXTI address block description
-.include EXTI_S                 \ EXTI address block description
-.include FDCAN                  \ FDCAN register blank and RAM
-.include FDCAN_S                \ FDCAN register blank and RAM
-.include FDCAN2                 \ FDCAN2 Interrupt 1
-.include FDCAN2_S               \ FDCAN register blank and RAM
-.include FLASH                  \ Mustang_FLASH register block
-.include FLASH_S                \ Flash secure global interrupt
-.include FMC                    \ FMC address block description
-.include FMC_S                  \ FMC address block description
-.include GPDMA                  \ GPDMA register block
-.include GPDMA_S                \ GPDMA register block
-.include GPDMA2                 \ GPDMA2 channel7 global interrupt
-.include GPDMA2_S               \ GPDMA register block
-.include GPIOA                  \ GPIOA address block description
-.include GPIOA_S                \ GPIOA address block description
-.include GPIOB                  \ GPIOB address block description
-.include GPIOB_S                \ GPIOB address block description
-.include GPIOC                  \ GPIOC address block description
-.include GPIOC_S                \ GPIOC address block description
-.include GPIOD                  \ GPIOD address block description
-.include GPIOD_S                \ GPIOD address block description
-.include GPIOE                  \ GPIOE address block description
-.include GPIOE_S                \ GPIOE address block description
-.include GPIOF                  \ GPIOF address block description
-.include GPIOF_S                \ GPIOF address block description
-.include GPIOG                  \ GPIOG address block description
-.include GPIOG_S                \ GPIOG address block description
-.include GPIOH                  \ GPIOH address block description
-.include GPIOH_S                \ GPIOH address block description
-.include GPIOI                  \ GPIOI address block description
-.include GPIOI_S                \ GPIOI address block description
-.include GTZC1_TZIC             \ GTZC1_MPCBBz register block
-.include GTZC1_TZIC_S           \ GTZC1_MPCBBz register block
-.include GTZC1_TZSC             \ GTZC1_MPCBBz register block
-.include GTZC1_TZSC_S           \ GTZC1_MPCBBz register block
-.include HASH                   \ HASH register bank
-.include HASH_S                 \ HASH register bank
-.include I2C                    \ I2C address block description
-.include I2C_S                  \ I2C address block description
-.include I2C2                   \ I2C2 error interrupt
-.include I2C2_S                 \ I2C address block description
-.include I2C3                   \ I2C3 error interrupt
-.include I2C3_S                 \ I2C address block description
-.include I3C                    \ I3C register block
-.include I3C_S                  \ I3C register block
-.include I3C2                   \ I3C2 error interrupt
-.include I3C2_S                 \ I3C register block
-.include ICACHE                 \ ICACHE register block
-.include ICACHE_S               \ ICACHE register block
-.include IWDG                   \ IWDG address block description
-.include IWDG_S                 \ IWDG address block description
-.include LPTIM1                 \ LPTIM1 address block description
-.include LPTIM1_S               \ LPTIM1 address block description
-.include LPTIM2                 \ LPTIM2 address block description
-.include LPTIM2_S               \ LPTIM2 address block description
-.include LPUART                 \ LPUART address block description
-.include LPUART_S               \ LPUART address block description
-.include OCTOSPI                \ OCTOSPI register block
-.include OCTOSPI_S              \ OCTOSPI register block
-.include PSSI                   \ PSSI register block
-.include PSSI_S                 \ PSSI register block
-.include PWR                    \ PWR address block description
-.include PWR_S                  \ PWR address block description
-.include RAMCFG                 \ RAMCFG address block description
-.include RAMCFG_S               \ RAMCFG address block description
-.include RCC                    \ RCC address block description
-.include RCC_S                  \ RCC address block description
-.include RNG                    \ RNG address block description
-.include RNG_S                  \ RNG address block description
-.include RTC                    \ RTC register block
-.include RTC_S                  \ RTC register block
-.include SBS                    \ SBS address block description
-.include SBS_S                  \ SBS address block description
-.include SDMMC                  \ SDMMC address block description
-.include SDMMC_S                \ SDMMC address block description
-.include SPI                    \ SPI address block description
-.include SPI_S                  \ SPI address block description
-.include SPI2                   \ SPI2 global interrupt
-.include SPI2_S                 \ SPI address block description
-.include SPI3                   \ SPI3 global interrupt
-.include SPI3_S                 \ SPI address block description
-.include SPI4                   \ SPI4 global interrupt
-.include SPI4_S                 \ SPI address block description
-.include TAMP                   \ TAMP register block
-.include TAMP_S                 \ TAMP register block
-.include TIM1                   \ TIM1 address block description
-.include TIM1_S                 \ TIM1 address block description
-.include TIM2                   \ TIM2 address block description
-.include TIM2_S                 \ TIM2 address block description
-.include TIM3                   \ TIM3 address block description
-.include TIM3_S                 \ TIM3 address block description
-.include TIM4                   \ TIM4 address block description
-.include TIM4_S                 \ TIM4 address block description
-.include TIM5                   \ TIM5 address block description
-.include TIM5_S                 \ TIM5 address block description
-.include TIM6                   \ TIM6 address block description
-.include TIM6_S                 \ TIM6 address block description
-.include TIM7                   \ TIM7 address block description
-.include TIM7_S                 \ TIM7 address block description
-.include TIM8                   \ TIM8 address block description
-.include TIM8_S                 \ TIM8 address block description
-.include TIM15                  \ TIM15 address block description
-.include TIM15_S                \ TIM15 address block description
-.include UCPD                   \ UCPD register block
-.include UCPD_S                 \ UCPD register block
-.include USART                  \ USART address block description
-.include USART_S                \ USART address block description
-.include USART2                 \ USART2 global interrupt
-.include USART2_S               \ USART address block description
-.include USART3                 \ USART3 global interrupt
-.include USART3_S               \ USART address block description
-.include UART4                  \ UART4 global interrupt
-.include UART4_S                \ USART address block description
-.include UART5                  \ UART5 global interrupt
-.include UART5_S                \ USART address block description
-.include USART6                 \ USART6 global interrupt
-.include USART6_S               \ USART address block description
-.include USB                    \ USB address block description
-.include USB_S                  \ USB address block description
-.include USBSRAM                \ USBSRAM address block description
-.include USBSRAM_S              \ USBSRAM address block description
-.include VREFBUF                \ VREFBUF address block description
-.include VREFBUF_S              \ VREFBUF address block description
-.include WWDG                   \ WWDG address block description
-.include WWDG_S                 \ WWDG address block description
-
-compiletoram
-
+: STM32H523_LOADER ; [then]

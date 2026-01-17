@@ -6,64 +6,69 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] CRC_DEF
 
-\
-\ @brief CRC data register
-\ Address offset: 0x00
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000000 constant CRC_CRC_DR_DR                                    \ Data register bits
-
-
-\
-\ @brief CRC independent data register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRC_CRC_IDR_IDR                                  \ General-purpose 32-bit data register bits
+  [ifdef] CRC_CRC_DR_DEF
+    \
+    \ @brief CRC data register
+    \ Address offset: 0x00
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant CRC_DR                         \ [0x00 : 32] Data register bits
+  [then]
 
 
-\
-\ @brief CRC control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRC_CRC_CR_RESET                                 \ RESET bit
-$00000018 constant CRC_CRC_CR_POLYSIZE                              \ Polynomial size
-$00000060 constant CRC_CRC_CR_REV_IN                                \ Reverse input data
-$00000180 constant CRC_CRC_CR_REV_OUT                               \ Reverse output data
-$00000200 constant CRC_CRC_CR_RTYPE_IN                              \ Reverse type input
-$00000400 constant CRC_CRC_CR_RTYPE_OUT                             \ Reverse type output
+  [ifdef] CRC_CRC_IDR_DEF
+    \
+    \ @brief CRC independent data register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRC_IDR                        \ [0x00 : 32] General-purpose 32-bit data register bits
+  [then]
 
 
-\
-\ @brief CRC initial value
-\ Address offset: 0x10
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000000 constant CRC_CRC_INIT_CRC_INIT                            \ Programmable initial CRC value
-
-
-\
-\ @brief CRC polynomial
-\ Address offset: 0x14
-\ Reset value: 0x04C11DB7
-\
-
-$00000000 constant CRC_CRC_POL_POL                                  \ Programmable polynomial
+  [ifdef] CRC_CRC_CR_DEF
+    \
+    \ @brief CRC control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRC_RESET                      \ [0x00] RESET bit
+    $03 constant CRC_POLYSIZE                   \ [0x03 : 2] Polynomial size
+    $05 constant CRC_REV_IN                     \ [0x05 : 2] Reverse input data
+    $07 constant CRC_REV_OUT                    \ [0x07 : 2] Reverse output data
+    $09 constant CRC_RTYPE_IN                   \ [0x09] Reverse type input
+    $0a constant CRC_RTYPE_OUT                  \ [0x0a] Reverse type output
+  [then]
 
 
-\
-\ @brief Cyclic redundancy check calculation unit
-\
-$46024c00 constant CRC_CRC_DR     \ offset: 0x00 : CRC data register
-$46024c04 constant CRC_CRC_IDR    \ offset: 0x04 : CRC independent data register
-$46024c08 constant CRC_CRC_CR     \ offset: 0x08 : CRC control register
-$46024c10 constant CRC_CRC_INIT   \ offset: 0x10 : CRC initial value
-$46024c14 constant CRC_CRC_POL    \ offset: 0x14 : CRC polynomial
+  [ifdef] CRC_CRC_INIT_DEF
+    \
+    \ @brief CRC initial value
+    \ Address offset: 0x10
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant CRC_CRC_INIT                   \ [0x00 : 32] Programmable initial CRC value
+  [then]
 
+
+  [ifdef] CRC_CRC_POL_DEF
+    \
+    \ @brief CRC polynomial
+    \ Address offset: 0x14
+    \ Reset value: 0x04C11DB7
+    \
+    $00 constant CRC_POL                        \ [0x00 : 32] Programmable polynomial
+  [then]
+
+  \
+  \ @brief Cyclic redundancy check calculation unit
+  \
+  $00 constant CRC_CRC_DR               \ CRC data register
+  $04 constant CRC_CRC_IDR              \ CRC independent data register
+  $08 constant CRC_CRC_CR               \ CRC control register
+  $10 constant CRC_CRC_INIT             \ CRC initial value
+  $14 constant CRC_CRC_POL              \ CRC polynomial
+
+: CRC_DEF ; [then]

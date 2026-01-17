@@ -1,128 +1,101 @@
 \
-\ @file stm32g0b1.h
-\ @brief Loader for all peripherals in a STM32G0B1
+\ @file stm32g0b1.fload
+\ @brief Device header for STM32G0B1
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include comp.fs
-.include crc.fs
-.include dac.fs
-.include dbg.fs
-.include dmamux.fs
-.include dma1.fs
-.include dma2.fs
-.include exti.fs
-.include fdcan1.fs
-.include fdcan2.fs
-.include flash.fs
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpiod.fs
-.include gpioe.fs
-.include gpiof.fs
-.include hdmi_cec.fs
-.include i2c1.fs
-.include i2c2.fs
-.include i2c3.fs
-.include iwdg.fs
-.include lptim1.fs
-.include lptim2.fs
-.include lpuart1.fs
-.include lpuart2.fs
-.include pwr.fs
-.include rcc.fs
-.include rtc.fs
-.include spi1.fs
-.include spi2.fs
-.include spi3.fs
-.include syscfg.fs
-.include tamp.fs
-.include tim1.fs
-.include tim2.fs
-.include tim3.fs
-.include tim4.fs
-.include tim6.fs
-.include tim7.fs
-.include tim14.fs
-.include tim15.fs
-.include tim16.fs
-.include tim17.fs
-.include ucpd1.fs
-.include ucpd2.fs
-.include usart1.fs
-.include usart2.fs
-.include usart3.fs
-.include usart4.fs
-.include usart5.fs
-.include usart6.fs
-.include usb.fs
-.include vrefbuf.fs
-.include wwdg.fs
+[ifndef] STM32G0B1_LOADER
+  .include "adc.fs"
+  .include "comp.fs"
+  .include "crc.fs"
+  .include "dac.fs"
+  .include "dbg.fs"
+  .include "dmamux.fs"
+  .include "dma.fs"
+  .include "exti.fs"
+  .include "fdcan.fs"
+  .include "flash.fs"
+  .include "gpio.fs"
+  .include "hdmi_cec.fs"
+  .include "i2c.fs"
+  .include "iwdg.fs"
+  .include "lptim.fs"
+  .include "lpuart.fs"
+  .include "pwr.fs"
+  .include "rcc.fs"
+  .include "rtc.fs"
+  .include "spi.fs"
+  .include "syscfg.fs"
+  .include "tamp.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim6.fs"
+  .include "tim14.fs"
+  .include "tim15.fs"
+  .include "tim16.fs"
+  .include "ucpd.fs"
+  .include "usart.fs"
+  .include "usb.fs"
+  .include "vrefbuf.fs"
+  .include "wwdg.fs"
 
-decimal
+  $0x40012400 constant ADC              \ See adc.fs
+  $0x40010200 constant COMP             \ See comp.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40007400 constant DAC              \ See dac.fs
+  $0x40015800 constant DBG              \ See dbg.fs
+  $0x40020800 constant DMAMUX           \ See dmamux.fs
+  $0x40020000 constant DMA1             \ See dma.fs
+  $0x40020400 constant DMA2             \ See dma.fs
+  $0x40021800 constant EXTI             \ See exti.fs
+  $0x40006400 constant FDCAN1           \ See fdcan.fs
+  $0x40006800 constant FDCAN2           \ See fdcan.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x50000000 constant GPIOA            \ See gpio.fs
+  $0x50000400 constant GPIOB            \ See gpio.fs
+  $0x50000800 constant GPIOC            \ See gpio.fs
+  $0x50000C00 constant GPIOD            \ See gpio.fs
+  $0x50001000 constant GPIOE            \ See gpio.fs
+  $0x50001400 constant GPIOF            \ See gpio.fs
+  $0x40007800 constant HDMI_CEC         \ See hdmi_cec.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40008800 constant I2C3             \ See i2c.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40007C00 constant LPTIM1           \ See lptim.fs
+  $0x40009400 constant LPTIM2           \ See lptim.fs
+  $0x40008000 constant LPUART1          \ See lpuart.fs
+  $0x40008400 constant LPUART2          \ See lpuart.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40021000 constant RCC              \ See rcc.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x40003C00 constant SPI3             \ See spi.fs
+  $0x40010000 constant SYSCFG           \ See syscfg.fs
+  $0x4000B000 constant TAMP             \ See tamp.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim2.fs
+  $0x40000800 constant TIM4             \ See tim2.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim6.fs
+  $0x40002000 constant TIM14            \ See tim14.fs
+  $0x40014000 constant TIM15            \ See tim15.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x40014800 constant TIM17            \ See tim16.fs
+  $0x4000A000 constant UCPD1            \ See ucpd.fs
+  $0x4000A400 constant UCPD2            \ See ucpd.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x40004C00 constant USART4           \ See usart.fs
+  $0x40005000 constant USART5           \ See usart.fs
+  $0x40013C00 constant USART6           \ See usart.fs
+  $0x40005C00 constant USB              \ See usb.fs
+  $0x40010030 constant VREFBUF          \ See vrefbuf.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ Analog to Digital Converter
-.include COMP                   \ Comparator
-.include CRC                    \ Cyclic redundancy check calculation unit
-.include DAC                    \ DAC
-.include DBG                    \ Debug support
-.include DMAMUX                 \ DMAMUX
-.include DMA1                   \ Direct memory access controller
-.include DMA2                   \ Direct memory access controller
-.include EXTI                   \ External interrupt/event controller
-.include FDCAN1                 \ FD controller area network
-.include FDCAN2                 \ FD controller area network
-.include FLASH                  \ Flash
-.include GPIOA                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOD                  \ General-purpose I/Os
-.include GPIOE                  \ General-purpose I/Os
-.include GPIOF                  \ General-purpose I/Os
-.include HDMI_CEC               \ HDMI-CEC
-.include I2C1                   \ Inter-integrated circuit
-.include I2C2                   \ I2C2 and I2C3 global interrupt
-.include I2C3                   \ Inter-integrated circuit
-.include IWDG                   \ Independent watchdog
-.include LPTIM1                 \ Low power timer
-.include LPTIM2                 \ Low power timer
-.include LPUART1                \ Low-power universal asynchronous receiver transmitter
-.include LPUART2                \ Low-power universal asynchronous receiver transmitter
-.include PWR                    \ Power control
-.include RCC                    \ Reset and clock control
-.include RTC                    \ Real-time clock
-.include SPI1                   \ Serial peripheral interface
-.include SPI2                   \ SPI2 gloabl interrupt
-.include SPI3                   \ Serial peripheral interface
-.include SYSCFG                 \ System configuration controller
-.include TAMP                   \ Tamper and backup registers
-.include TIM1                   \ Advanced-timers
-.include TIM2                   \ General-purpose-timers
-.include TIM3                   \ TIM3 global interrupt
-.include TIM4                   \ General-purpose-timers
-.include TIM6                   \ Basic timers
-.include TIM7                   \ TIM7 + LPTIM2 global interrupt
-.include TIM14                  \ General purpose timers
-.include TIM15                  \ General purpose timers
-.include TIM16                  \ General purpose timers
-.include TIM17                  \ TIM17 global interrupt
-.include UCPD1                  \ USB Power Delivery interface
-.include UCPD2                  \ USB Power Delivery interface
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include USART2                 \ USART2 and LPUART2 global interrupt (combined with EXTI 26)
-.include USART3                 \ USART3,4,5,6 and LPUART1 global interrupt (combined with EXTI 28)
-.include USART4                 \ Universal synchronous asynchronous receiver transmitter
-.include USART5                 \ Universal synchronous asynchronous receiver transmitter
-.include USART6                 \ Universal synchronous asynchronous receiver transmitter
-.include USB                    \ Universal serial bus full-speed host/device interface
-.include VREFBUF                \ System configuration controller
-.include WWDG                   \ System window watchdog
-
-compiletoram
-
+: STM32G0B1_LOADER ; [then]

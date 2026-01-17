@@ -1,276 +1,291 @@
 \
 \ @file usb_fs.fs
-\ @brief Universal serial bus full-speed device       interface
+\ @brief Universal serial bus full-speed device interface
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] USB_FS_DEF
 
-\
-\ @brief endpoint register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_EP0R_EA                                   \ EA
-$00000030 constant USB_FS_EP0R_STAT_TX                              \ STAT_TX
-$00000040 constant USB_FS_EP0R_DTOG_TX                              \ DTOG_TX
-$00000080 constant USB_FS_EP0R_CTR_TX                               \ CTR_TX
-$00000100 constant USB_FS_EP0R_EP_KIND                              \ EP_KIND
-$00000600 constant USB_FS_EP0R_EPTYPE                               \ EPTYPE
-$00000800 constant USB_FS_EP0R_SETUP                                \ SETUP
-$00003000 constant USB_FS_EP0R_STAT_RX                              \ STAT_RX
-$00004000 constant USB_FS_EP0R_DTOG_RX                              \ DTOG_RX
-$00008000 constant USB_FS_EP0R_CTR_RX                               \ CTR_RX
-
-
-\
-\ @brief endpoint register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_EP1R_EA                                   \ EA
-$00000030 constant USB_FS_EP1R_STAT_TX                              \ STAT_TX
-$00000040 constant USB_FS_EP1R_DTOG_TX                              \ DTOG_TX
-$00000080 constant USB_FS_EP1R_CTR_TX                               \ CTR_TX
-$00000100 constant USB_FS_EP1R_EP_KIND                              \ EP_KIND
-$00000600 constant USB_FS_EP1R_EPTYPE                               \ EPTYPE
-$00000800 constant USB_FS_EP1R_SETUP                                \ SETUP
-$00003000 constant USB_FS_EP1R_STAT_RX                              \ STAT_RX
-$00004000 constant USB_FS_EP1R_DTOG_RX                              \ DTOG_RX
-$00008000 constant USB_FS_EP1R_CTR_RX                               \ CTR_RX
+  [ifdef] USB_FS_EP0R_DEF
+    \
+    \ @brief endpoint register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EA                      \ [0x00 : 4] EA
+    $04 constant USB_FS_STAT_TX                 \ [0x04 : 2] STAT_TX
+    $06 constant USB_FS_DTOG_TX                 \ [0x06] DTOG_TX
+    $07 constant USB_FS_CTR_TX                  \ [0x07] CTR_TX
+    $08 constant USB_FS_EP_KIND                 \ [0x08] EP_KIND
+    $09 constant USB_FS_EPTYPE                  \ [0x09 : 2] EPTYPE
+    $0b constant USB_FS_SETUP                   \ [0x0b] SETUP
+    $0c constant USB_FS_STAT_RX                 \ [0x0c : 2] STAT_RX
+    $0e constant USB_FS_DTOG_RX                 \ [0x0e] DTOG_RX
+    $0f constant USB_FS_CTR_RX                  \ [0x0f] CTR_RX
+  [then]
 
 
-\
-\ @brief endpoint register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_EP2R_EA                                   \ EA
-$00000030 constant USB_FS_EP2R_STAT_TX                              \ STAT_TX
-$00000040 constant USB_FS_EP2R_DTOG_TX                              \ DTOG_TX
-$00000080 constant USB_FS_EP2R_CTR_TX                               \ CTR_TX
-$00000100 constant USB_FS_EP2R_EP_KIND                              \ EP_KIND
-$00000600 constant USB_FS_EP2R_EPTYPE                               \ EPTYPE
-$00000800 constant USB_FS_EP2R_SETUP                                \ SETUP
-$00003000 constant USB_FS_EP2R_STAT_RX                              \ STAT_RX
-$00004000 constant USB_FS_EP2R_DTOG_RX                              \ DTOG_RX
-$00008000 constant USB_FS_EP2R_CTR_RX                               \ CTR_RX
-
-
-\
-\ @brief endpoint register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_EP3R_EA                                   \ EA
-$00000030 constant USB_FS_EP3R_STAT_TX                              \ STAT_TX
-$00000040 constant USB_FS_EP3R_DTOG_TX                              \ DTOG_TX
-$00000080 constant USB_FS_EP3R_CTR_TX                               \ CTR_TX
-$00000100 constant USB_FS_EP3R_EP_KIND                              \ EP_KIND
-$00000600 constant USB_FS_EP3R_EPTYPE                               \ EPTYPE
-$00000800 constant USB_FS_EP3R_SETUP                                \ SETUP
-$00003000 constant USB_FS_EP3R_STAT_RX                              \ STAT_RX
-$00004000 constant USB_FS_EP3R_DTOG_RX                              \ DTOG_RX
-$00008000 constant USB_FS_EP3R_CTR_RX                               \ CTR_RX
+  [ifdef] USB_FS_EP1R_DEF
+    \
+    \ @brief endpoint register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EA                      \ [0x00 : 4] EA
+    $04 constant USB_FS_STAT_TX                 \ [0x04 : 2] STAT_TX
+    $06 constant USB_FS_DTOG_TX                 \ [0x06] DTOG_TX
+    $07 constant USB_FS_CTR_TX                  \ [0x07] CTR_TX
+    $08 constant USB_FS_EP_KIND                 \ [0x08] EP_KIND
+    $09 constant USB_FS_EPTYPE                  \ [0x09 : 2] EPTYPE
+    $0b constant USB_FS_SETUP                   \ [0x0b] SETUP
+    $0c constant USB_FS_STAT_RX                 \ [0x0c : 2] STAT_RX
+    $0e constant USB_FS_DTOG_RX                 \ [0x0e] DTOG_RX
+    $0f constant USB_FS_CTR_RX                  \ [0x0f] CTR_RX
+  [then]
 
 
-\
-\ @brief endpoint register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_EP4R_EA                                   \ EA
-$00000030 constant USB_FS_EP4R_STAT_TX                              \ STAT_TX
-$00000040 constant USB_FS_EP4R_DTOG_TX                              \ DTOG_TX
-$00000080 constant USB_FS_EP4R_CTR_TX                               \ CTR_TX
-$00000100 constant USB_FS_EP4R_EP_KIND                              \ EP_KIND
-$00000600 constant USB_FS_EP4R_EPTYPE                               \ EPTYPE
-$00000800 constant USB_FS_EP4R_SETUP                                \ SETUP
-$00003000 constant USB_FS_EP4R_STAT_RX                              \ STAT_RX
-$00004000 constant USB_FS_EP4R_DTOG_RX                              \ DTOG_RX
-$00008000 constant USB_FS_EP4R_CTR_RX                               \ CTR_RX
-
-
-\
-\ @brief endpoint register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_EP5R_EA                                   \ EA
-$00000030 constant USB_FS_EP5R_STAT_TX                              \ STAT_TX
-$00000040 constant USB_FS_EP5R_DTOG_TX                              \ DTOG_TX
-$00000080 constant USB_FS_EP5R_CTR_TX                               \ CTR_TX
-$00000100 constant USB_FS_EP5R_EP_KIND                              \ EP_KIND
-$00000600 constant USB_FS_EP5R_EPTYPE                               \ EPTYPE
-$00000800 constant USB_FS_EP5R_SETUP                                \ SETUP
-$00003000 constant USB_FS_EP5R_STAT_RX                              \ STAT_RX
-$00004000 constant USB_FS_EP5R_DTOG_RX                              \ DTOG_RX
-$00008000 constant USB_FS_EP5R_CTR_RX                               \ CTR_RX
+  [ifdef] USB_FS_EP2R_DEF
+    \
+    \ @brief endpoint register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EA                      \ [0x00 : 4] EA
+    $04 constant USB_FS_STAT_TX                 \ [0x04 : 2] STAT_TX
+    $06 constant USB_FS_DTOG_TX                 \ [0x06] DTOG_TX
+    $07 constant USB_FS_CTR_TX                  \ [0x07] CTR_TX
+    $08 constant USB_FS_EP_KIND                 \ [0x08] EP_KIND
+    $09 constant USB_FS_EPTYPE                  \ [0x09 : 2] EPTYPE
+    $0b constant USB_FS_SETUP                   \ [0x0b] SETUP
+    $0c constant USB_FS_STAT_RX                 \ [0x0c : 2] STAT_RX
+    $0e constant USB_FS_DTOG_RX                 \ [0x0e] DTOG_RX
+    $0f constant USB_FS_CTR_RX                  \ [0x0f] CTR_RX
+  [then]
 
 
-\
-\ @brief endpoint register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_EP6R_EA                                   \ EA
-$00000030 constant USB_FS_EP6R_STAT_TX                              \ STAT_TX
-$00000040 constant USB_FS_EP6R_DTOG_TX                              \ DTOG_TX
-$00000080 constant USB_FS_EP6R_CTR_TX                               \ CTR_TX
-$00000100 constant USB_FS_EP6R_EP_KIND                              \ EP_KIND
-$00000600 constant USB_FS_EP6R_EPTYPE                               \ EPTYPE
-$00000800 constant USB_FS_EP6R_SETUP                                \ SETUP
-$00003000 constant USB_FS_EP6R_STAT_RX                              \ STAT_RX
-$00004000 constant USB_FS_EP6R_DTOG_RX                              \ DTOG_RX
-$00008000 constant USB_FS_EP6R_CTR_RX                               \ CTR_RX
-
-
-\
-\ @brief endpoint register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_EP7R_EA                                   \ EA
-$00000030 constant USB_FS_EP7R_STAT_TX                              \ STAT_TX
-$00000040 constant USB_FS_EP7R_DTOG_TX                              \ DTOG_TX
-$00000080 constant USB_FS_EP7R_CTR_TX                               \ CTR_TX
-$00000100 constant USB_FS_EP7R_EP_KIND                              \ EP_KIND
-$00000600 constant USB_FS_EP7R_EPTYPE                               \ EPTYPE
-$00000800 constant USB_FS_EP7R_SETUP                                \ SETUP
-$00003000 constant USB_FS_EP7R_STAT_RX                              \ STAT_RX
-$00004000 constant USB_FS_EP7R_DTOG_RX                              \ DTOG_RX
-$00008000 constant USB_FS_EP7R_CTR_RX                               \ CTR_RX
+  [ifdef] USB_FS_EP3R_DEF
+    \
+    \ @brief endpoint register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EA                      \ [0x00 : 4] EA
+    $04 constant USB_FS_STAT_TX                 \ [0x04 : 2] STAT_TX
+    $06 constant USB_FS_DTOG_TX                 \ [0x06] DTOG_TX
+    $07 constant USB_FS_CTR_TX                  \ [0x07] CTR_TX
+    $08 constant USB_FS_EP_KIND                 \ [0x08] EP_KIND
+    $09 constant USB_FS_EPTYPE                  \ [0x09 : 2] EPTYPE
+    $0b constant USB_FS_SETUP                   \ [0x0b] SETUP
+    $0c constant USB_FS_STAT_RX                 \ [0x0c : 2] STAT_RX
+    $0e constant USB_FS_DTOG_RX                 \ [0x0e] DTOG_RX
+    $0f constant USB_FS_CTR_RX                  \ [0x0f] CTR_RX
+  [then]
 
 
-\
-\ @brief control register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USB_FS_CNTR_FRES                                 \ FRES
-$00000002 constant USB_FS_CNTR_PDWN                                 \ PDWN
-$00000004 constant USB_FS_CNTR_LPMODE                               \ LPMODE
-$00000008 constant USB_FS_CNTR_FSUSP                                \ FSUSP
-$00000010 constant USB_FS_CNTR_RESUME                               \ RESUME
-$00000020 constant USB_FS_CNTR_L1RESUME                             \ L1RESUME
-$00000080 constant USB_FS_CNTR_L1REQM                               \ L1REQM
-$00000100 constant USB_FS_CNTR_ESOFM                                \ ESOFM
-$00000200 constant USB_FS_CNTR_SOFM                                 \ SOFM
-$00000400 constant USB_FS_CNTR_RESETM                               \ RESETM
-$00000800 constant USB_FS_CNTR_SUSPM                                \ SUSPM
-$00001000 constant USB_FS_CNTR_WKUPM                                \ WKUPM
-$00002000 constant USB_FS_CNTR_ERRM                                 \ ERRM
-$00004000 constant USB_FS_CNTR_PMAOVRM                              \ PMAOVRM
-$00008000 constant USB_FS_CNTR_CTRM                                 \ CTRM
+  [ifdef] USB_FS_EP4R_DEF
+    \
+    \ @brief endpoint register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EA                      \ [0x00 : 4] EA
+    $04 constant USB_FS_STAT_TX                 \ [0x04 : 2] STAT_TX
+    $06 constant USB_FS_DTOG_TX                 \ [0x06] DTOG_TX
+    $07 constant USB_FS_CTR_TX                  \ [0x07] CTR_TX
+    $08 constant USB_FS_EP_KIND                 \ [0x08] EP_KIND
+    $09 constant USB_FS_EPTYPE                  \ [0x09 : 2] EPTYPE
+    $0b constant USB_FS_SETUP                   \ [0x0b] SETUP
+    $0c constant USB_FS_STAT_RX                 \ [0x0c : 2] STAT_RX
+    $0e constant USB_FS_DTOG_RX                 \ [0x0e] DTOG_RX
+    $0f constant USB_FS_CTR_RX                  \ [0x0f] CTR_RX
+  [then]
 
 
-\
-\ @brief interrupt status register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$0000000f constant USB_FS_ISTR_EP_ID                                \ EP_ID
-$00000010 constant USB_FS_ISTR_DIR                                  \ DIR
-$00000080 constant USB_FS_ISTR_L1REQ                                \ L1REQ
-$00000100 constant USB_FS_ISTR_ESOF                                 \ ESOF
-$00000200 constant USB_FS_ISTR_SOF                                  \ SOF
-$00000400 constant USB_FS_ISTR_RESET                                \ RESET
-$00000800 constant USB_FS_ISTR_SUSP                                 \ SUSP
-$00001000 constant USB_FS_ISTR_WKUP                                 \ WKUP
-$00002000 constant USB_FS_ISTR_ERR                                  \ ERR
-$00004000 constant USB_FS_ISTR_PMAOVR                               \ PMAOVR
-$00008000 constant USB_FS_ISTR_CTR                                  \ CTR
-
-
-\
-\ @brief frame number register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$000007ff constant USB_FS_FNR_FN                                    \ FN
-$00001800 constant USB_FS_FNR_LSOF                                  \ LSOF
-$00002000 constant USB_FS_FNR_LCK                                   \ LCK
-$00004000 constant USB_FS_FNR_RXDM                                  \ RXDM
-$00008000 constant USB_FS_FNR_RXDP                                  \ RXDP
+  [ifdef] USB_FS_EP5R_DEF
+    \
+    \ @brief endpoint register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EA                      \ [0x00 : 4] EA
+    $04 constant USB_FS_STAT_TX                 \ [0x04 : 2] STAT_TX
+    $06 constant USB_FS_DTOG_TX                 \ [0x06] DTOG_TX
+    $07 constant USB_FS_CTR_TX                  \ [0x07] CTR_TX
+    $08 constant USB_FS_EP_KIND                 \ [0x08] EP_KIND
+    $09 constant USB_FS_EPTYPE                  \ [0x09 : 2] EPTYPE
+    $0b constant USB_FS_SETUP                   \ [0x0b] SETUP
+    $0c constant USB_FS_STAT_RX                 \ [0x0c : 2] STAT_RX
+    $0e constant USB_FS_DTOG_RX                 \ [0x0e] DTOG_RX
+    $0f constant USB_FS_CTR_RX                  \ [0x0f] CTR_RX
+  [then]
 
 
-\
-\ @brief device address
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$0000007f constant USB_FS_DADDR_ADD                                 \ ADD
-$00000080 constant USB_FS_DADDR_EF                                  \ EF
-
-
-\
-\ @brief Buffer table address
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$0000fff8 constant USB_FS_BTABLE_BTABLE                             \ BTABLE
-
-
-\
-\ @brief LPM control and status register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000001 constant USB_FS_LPMCSR_LPMEN                              \ LPMEN
-$00000002 constant USB_FS_LPMCSR_LPMACK                             \ LPMACK
-$00000008 constant USB_FS_LPMCSR_REMWAKE                            \ REMWAKE
-$000000f0 constant USB_FS_LPMCSR_BESL                               \ BESL
+  [ifdef] USB_FS_EP6R_DEF
+    \
+    \ @brief endpoint register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EA                      \ [0x00 : 4] EA
+    $04 constant USB_FS_STAT_TX                 \ [0x04 : 2] STAT_TX
+    $06 constant USB_FS_DTOG_TX                 \ [0x06] DTOG_TX
+    $07 constant USB_FS_CTR_TX                  \ [0x07] CTR_TX
+    $08 constant USB_FS_EP_KIND                 \ [0x08] EP_KIND
+    $09 constant USB_FS_EPTYPE                  \ [0x09 : 2] EPTYPE
+    $0b constant USB_FS_SETUP                   \ [0x0b] SETUP
+    $0c constant USB_FS_STAT_RX                 \ [0x0c : 2] STAT_RX
+    $0e constant USB_FS_DTOG_RX                 \ [0x0e] DTOG_RX
+    $0f constant USB_FS_CTR_RX                  \ [0x0f] CTR_RX
+  [then]
 
 
-\
-\ @brief Battery charging detector
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
+  [ifdef] USB_FS_EP7R_DEF
+    \
+    \ @brief endpoint register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EA                      \ [0x00 : 4] EA
+    $04 constant USB_FS_STAT_TX                 \ [0x04 : 2] STAT_TX
+    $06 constant USB_FS_DTOG_TX                 \ [0x06] DTOG_TX
+    $07 constant USB_FS_CTR_TX                  \ [0x07] CTR_TX
+    $08 constant USB_FS_EP_KIND                 \ [0x08] EP_KIND
+    $09 constant USB_FS_EPTYPE                  \ [0x09 : 2] EPTYPE
+    $0b constant USB_FS_SETUP                   \ [0x0b] SETUP
+    $0c constant USB_FS_STAT_RX                 \ [0x0c : 2] STAT_RX
+    $0e constant USB_FS_DTOG_RX                 \ [0x0e] DTOG_RX
+    $0f constant USB_FS_CTR_RX                  \ [0x0f] CTR_RX
+  [then]
 
-$00000001 constant USB_FS_BCDR_BCDEN                                \ BCDEN
-$00000002 constant USB_FS_BCDR_DCDEN                                \ DCDEN
-$00000004 constant USB_FS_BCDR_PDEN                                 \ PDEN
-$00000008 constant USB_FS_BCDR_SDEN                                 \ SDEN
-$00000010 constant USB_FS_BCDR_DCDET                                \ DCDET
-$00000020 constant USB_FS_BCDR_PDET                                 \ PDET
-$00000040 constant USB_FS_BCDR_SDET                                 \ SDET
-$00000080 constant USB_FS_BCDR_PS2DET                               \ PS2DET
-$00008000 constant USB_FS_BCDR_DPPU                                 \ DPPU
+
+  [ifdef] USB_FS_CNTR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_FRES                    \ [0x00] FRES
+    $01 constant USB_FS_PDWN                    \ [0x01] PDWN
+    $02 constant USB_FS_LPMODE                  \ [0x02] LPMODE
+    $03 constant USB_FS_FSUSP                   \ [0x03] FSUSP
+    $04 constant USB_FS_RESUME                  \ [0x04] RESUME
+    $05 constant USB_FS_L1RESUME                \ [0x05] L1RESUME
+    $07 constant USB_FS_L1REQM                  \ [0x07] L1REQM
+    $08 constant USB_FS_ESOFM                   \ [0x08] ESOFM
+    $09 constant USB_FS_SOFM                    \ [0x09] SOFM
+    $0a constant USB_FS_RESETM                  \ [0x0a] RESETM
+    $0b constant USB_FS_SUSPM                   \ [0x0b] SUSPM
+    $0c constant USB_FS_WKUPM                   \ [0x0c] WKUPM
+    $0d constant USB_FS_ERRM                    \ [0x0d] ERRM
+    $0e constant USB_FS_PMAOVRM                 \ [0x0e] PMAOVRM
+    $0f constant USB_FS_CTRM                    \ [0x0f] CTRM
+  [then]
 
 
-\
-\ @brief Universal serial bus full-speed device interface
-\
-$40005c00 constant USB_FS_EP0R    \ offset: 0x00 : endpoint register
-$40005c04 constant USB_FS_EP1R    \ offset: 0x04 : endpoint register
-$40005c08 constant USB_FS_EP2R    \ offset: 0x08 : endpoint register
-$40005c0c constant USB_FS_EP3R    \ offset: 0x0C : endpoint register
-$40005c10 constant USB_FS_EP4R    \ offset: 0x10 : endpoint register
-$40005c14 constant USB_FS_EP5R    \ offset: 0x14 : endpoint register
-$40005c18 constant USB_FS_EP6R    \ offset: 0x18 : endpoint register
-$40005c1c constant USB_FS_EP7R    \ offset: 0x1C : endpoint register
-$40005c40 constant USB_FS_CNTR    \ offset: 0x40 : control register
-$40005c44 constant USB_FS_ISTR    \ offset: 0x44 : interrupt status register
-$40005c48 constant USB_FS_FNR     \ offset: 0x48 : frame number register
-$40005c4c constant USB_FS_DADDR   \ offset: 0x4C : device address
-$40005c50 constant USB_FS_BTABLE  \ offset: 0x50 : Buffer table address
-$40005c54 constant USB_FS_LPMCSR  \ offset: 0x54 : LPM control and status register
-$40005c58 constant USB_FS_BCDR    \ offset: 0x58 : Battery charging detector
+  [ifdef] USB_FS_ISTR_DEF
+    \
+    \ @brief interrupt status register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_EP_ID                   \ [0x00 : 4] EP_ID
+    $04 constant USB_FS_DIR                     \ [0x04] DIR
+    $07 constant USB_FS_L1REQ                   \ [0x07] L1REQ
+    $08 constant USB_FS_ESOF                    \ [0x08] ESOF
+    $09 constant USB_FS_SOF                     \ [0x09] SOF
+    $0a constant USB_FS_RESET                   \ [0x0a] RESET
+    $0b constant USB_FS_SUSP                    \ [0x0b] SUSP
+    $0c constant USB_FS_WKUP                    \ [0x0c] WKUP
+    $0d constant USB_FS_ERR                     \ [0x0d] ERR
+    $0e constant USB_FS_PMAOVR                  \ [0x0e] PMAOVR
+    $0f constant USB_FS_CTR                     \ [0x0f] CTR
+  [then]
 
+
+  [ifdef] USB_FS_FNR_DEF
+    \
+    \ @brief frame number register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_FN                      \ [0x00 : 11] FN
+    $0b constant USB_FS_LSOF                    \ [0x0b : 2] LSOF
+    $0d constant USB_FS_LCK                     \ [0x0d] LCK
+    $0e constant USB_FS_RXDM                    \ [0x0e] RXDM
+    $0f constant USB_FS_RXDP                    \ [0x0f] RXDP
+  [then]
+
+
+  [ifdef] USB_FS_DADDR_DEF
+    \
+    \ @brief device address
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_ADD                     \ [0x00 : 7] ADD
+    $07 constant USB_FS_EF                      \ [0x07] EF
+  [then]
+
+
+  [ifdef] USB_FS_BTABLE_DEF
+    \
+    \ @brief Buffer table address
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $03 constant USB_FS_BTABLE                  \ [0x03 : 13] BTABLE
+  [then]
+
+
+  [ifdef] USB_FS_LPMCSR_DEF
+    \
+    \ @brief LPM control and status register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_LPMEN                   \ [0x00] LPMEN
+    $01 constant USB_FS_LPMACK                  \ [0x01] LPMACK
+    $03 constant USB_FS_REMWAKE                 \ [0x03] REMWAKE
+    $04 constant USB_FS_BESL                    \ [0x04 : 4] BESL
+  [then]
+
+
+  [ifdef] USB_FS_BCDR_DEF
+    \
+    \ @brief Battery charging detector
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant USB_FS_BCDEN                   \ [0x00] BCDEN
+    $01 constant USB_FS_DCDEN                   \ [0x01] DCDEN
+    $02 constant USB_FS_PDEN                    \ [0x02] PDEN
+    $03 constant USB_FS_SDEN                    \ [0x03] SDEN
+    $04 constant USB_FS_DCDET                   \ [0x04] DCDET
+    $05 constant USB_FS_PDET                    \ [0x05] PDET
+    $06 constant USB_FS_SDET                    \ [0x06] SDET
+    $07 constant USB_FS_PS2DET                  \ [0x07] PS2DET
+    $0f constant USB_FS_DPPU                    \ [0x0f] DPPU
+  [then]
+
+  \
+  \ @brief Universal serial bus full-speed device interface
+  \
+  $00 constant USB_FS_EP0R              \ endpoint register
+  $04 constant USB_FS_EP1R              \ endpoint register
+  $08 constant USB_FS_EP2R              \ endpoint register
+  $0C constant USB_FS_EP3R              \ endpoint register
+  $10 constant USB_FS_EP4R              \ endpoint register
+  $14 constant USB_FS_EP5R              \ endpoint register
+  $18 constant USB_FS_EP6R              \ endpoint register
+  $1C constant USB_FS_EP7R              \ endpoint register
+  $40 constant USB_FS_CNTR              \ control register
+  $44 constant USB_FS_ISTR              \ interrupt status register
+  $48 constant USB_FS_FNR               \ frame number register
+  $4C constant USB_FS_DADDR             \ device address
+  $50 constant USB_FS_BTABLE            \ Buffer table address
+  $54 constant USB_FS_LPMCSR            \ LPM control and status register
+  $58 constant USB_FS_BCDR              \ Battery charging detector
+
+: USB_FS_DEF ; [then]

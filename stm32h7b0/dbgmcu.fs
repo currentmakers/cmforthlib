@@ -6,98 +6,104 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DBGMCU_DEF
 
-\
-\ @brief DBGMCU Identity Code Register
-\ Address offset: 0x00
-\ Reset value: 0x10006480
-\
-
-$00000fff constant DBGMCU_IDC_DEV_ID                                \ Device ID
-$ffff0000 constant DBGMCU_IDC_REV_ID                                \ Revision
-
-
-\
-\ @brief DBGMCU Configuration Register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBGMCU_CR_DBGSLEEP_CD                            \ Allow D1 domain debug in Sleep mode
-$00000002 constant DBGMCU_CR_DBGSTOP_CD                             \ Allow D1 domain debug in Stop mode
-$00000004 constant DBGMCU_CR_DBGSTBY_CD                             \ Allow D1 domain debug in Standby mode
-$00000080 constant DBGMCU_CR_DBGSTOP_SRD                            \ debug in SmartRun domain Stop mode
-$00000100 constant DBGMCU_CR_DBGSTBY_SRD                            \ debug in SmartRun domain Standby mode
-$00100000 constant DBGMCU_CR_TRACECLKEN                             \ Trace port clock enable
-$00200000 constant DBGMCU_CR_CDDBGCKEN                              \ CPU domain debug clock enable
-$00400000 constant DBGMCU_CR_SRDDBGCKEN                             \ SmartRun domain debug clock enable
-$10000000 constant DBGMCU_CR_TRGOEN                                 \ External trigger output enable
+  [ifdef] DBGMCU_IDC_DEF
+    \
+    \ @brief DBGMCU Identity Code Register
+    \ Address offset: 0x00
+    \ Reset value: 0x10006480
+    \
+    $00 constant DBGMCU_DEV_ID                  \ [0x00 : 12] Device ID
+    $10 constant DBGMCU_REV_ID                  \ [0x10 : 16] Revision
+  [then]
 
 
-\
-\ @brief DBGMCU APB3 peripheral freeze register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000040 constant DBGMCU_APB3FZ1_WWDG                              \ WWDG stop in debug
-
-
-\
-\ @brief DBGMCU APB1L peripheral freeze register
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBGMCU_APB1LFZ1_TIM2                             \ TIM2 stop in debug
-$00000002 constant DBGMCU_APB1LFZ1_TIM3                             \ TIM3 stop in debug
-$00000004 constant DBGMCU_APB1LFZ1_TIM4                             \ TIM4 stop in debug
-$00000008 constant DBGMCU_APB1LFZ1_TIM5                             \ TIM5 stop in debug
-$00000010 constant DBGMCU_APB1LFZ1_TIM6                             \ TIM6 stop in debug
-$00000020 constant DBGMCU_APB1LFZ1_TIM7                             \ TIM7 stop in debug
-$00000040 constant DBGMCU_APB1LFZ1_TIM12                            \ TIM12 stop in debug
-$00000080 constant DBGMCU_APB1LFZ1_TIM13                            \ TIM13 stop in debug
-$00000100 constant DBGMCU_APB1LFZ1_TIM14                            \ TIM14 stop in debug
-$00000200 constant DBGMCU_APB1LFZ1_LPTIM1                           \ LPTIM1 stop in debug
-$00200000 constant DBGMCU_APB1LFZ1_I2C1                             \ I2C1 SMBUS timeout stop in debug
-$00400000 constant DBGMCU_APB1LFZ1_I2C2                             \ I2C2 SMBUS timeout stop in debug
-$00800000 constant DBGMCU_APB1LFZ1_I2C3                             \ I2C3 SMBUS timeout stop in debug
+  [ifdef] DBGMCU_CR_DEF
+    \
+    \ @brief DBGMCU Configuration Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_DBGSLEEP_CD             \ [0x00] Allow D1 domain debug in Sleep mode
+    $01 constant DBGMCU_DBGSTOP_CD              \ [0x01] Allow D1 domain debug in Stop mode
+    $02 constant DBGMCU_DBGSTBY_CD              \ [0x02] Allow D1 domain debug in Standby mode
+    $07 constant DBGMCU_DBGSTOP_SRD             \ [0x07] debug in SmartRun domain Stop mode
+    $08 constant DBGMCU_DBGSTBY_SRD             \ [0x08] debug in SmartRun domain Standby mode
+    $14 constant DBGMCU_TRACECLKEN              \ [0x14] Trace port clock enable
+    $15 constant DBGMCU_CDDBGCKEN               \ [0x15] CPU domain debug clock enable
+    $16 constant DBGMCU_SRDDBGCKEN              \ [0x16] SmartRun domain debug clock enable
+    $1c constant DBGMCU_TRGOEN                  \ [0x1c] External trigger output enable
+  [then]
 
 
-\
-\ @brief DBGMCU APB2 peripheral freeze register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBGMCU_APB2FZ1_TIM1                              \ TIM1 stop in debug
-$00000002 constant DBGMCU_APB2FZ1_TIM8                              \ TIM8 stop in debug
-$00010000 constant DBGMCU_APB2FZ1_TIM15                             \ TIM15 stop in debug
-$00020000 constant DBGMCU_APB2FZ1_TIM16                             \ TIM16 stop in debug
-$00040000 constant DBGMCU_APB2FZ1_TIM17                             \ TIM17 stop in debug
+  [ifdef] DBGMCU_APB3FZ1_DEF
+    \
+    \ @brief DBGMCU APB3 peripheral freeze register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $06 constant DBGMCU_WWDG                    \ [0x06] WWDG stop in debug
+  [then]
 
 
-\
-\ @brief DBGMCU APB4 peripheral freeze register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
+  [ifdef] DBGMCU_APB1LFZ1_DEF
+    \
+    \ @brief DBGMCU APB1L peripheral freeze register
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_TIM2                    \ [0x00] TIM2 stop in debug
+    $01 constant DBGMCU_TIM3                    \ [0x01] TIM3 stop in debug
+    $02 constant DBGMCU_TIM4                    \ [0x02] TIM4 stop in debug
+    $03 constant DBGMCU_TIM5                    \ [0x03] TIM5 stop in debug
+    $04 constant DBGMCU_TIM6                    \ [0x04] TIM6 stop in debug
+    $05 constant DBGMCU_TIM7                    \ [0x05] TIM7 stop in debug
+    $06 constant DBGMCU_TIM12                   \ [0x06] TIM12 stop in debug
+    $07 constant DBGMCU_TIM13                   \ [0x07] TIM13 stop in debug
+    $08 constant DBGMCU_TIM14                   \ [0x08] TIM14 stop in debug
+    $09 constant DBGMCU_LPTIM1                  \ [0x09] LPTIM1 stop in debug
+    $15 constant DBGMCU_I2C1                    \ [0x15] I2C1 SMBUS timeout stop in debug
+    $16 constant DBGMCU_I2C2                    \ [0x16] I2C2 SMBUS timeout stop in debug
+    $17 constant DBGMCU_I2C3                    \ [0x17] I2C3 SMBUS timeout stop in debug
+  [then]
 
-$00000080 constant DBGMCU_APB4FZ1_I2C4                              \ I2C4 SMBUS timeout stop in debug
-$00000200 constant DBGMCU_APB4FZ1_LPTIM2                            \ LPTIM2 stop in debug
-$00000400 constant DBGMCU_APB4FZ1_LPTIM3                            \ LPTIM3 stop in debug
-$00010000 constant DBGMCU_APB4FZ1_RTC                               \ RTC stop in debug
-$00040000 constant DBGMCU_APB4FZ1_WDGLSCD                           \ LS watchdog for CPU domain stop in debug
+
+  [ifdef] DBGMCU_APB2FZ1_DEF
+    \
+    \ @brief DBGMCU APB2 peripheral freeze register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_TIM1                    \ [0x00] TIM1 stop in debug
+    $01 constant DBGMCU_TIM8                    \ [0x01] TIM8 stop in debug
+    $10 constant DBGMCU_TIM15                   \ [0x10] TIM15 stop in debug
+    $11 constant DBGMCU_TIM16                   \ [0x11] TIM16 stop in debug
+    $12 constant DBGMCU_TIM17                   \ [0x12] TIM17 stop in debug
+  [then]
 
 
-\
-\ @brief Microcontroller Debug Unit
-\
-$5c001000 constant DBGMCU_IDC     \ offset: 0x00 : DBGMCU Identity Code Register
-$5c001004 constant DBGMCU_CR      \ offset: 0x04 : DBGMCU Configuration Register
-$5c001034 constant DBGMCU_APB3FZ1  \ offset: 0x34 : DBGMCU APB3 peripheral freeze register
-$5c00103c constant DBGMCU_APB1LFZ1  \ offset: 0x3C : DBGMCU APB1L peripheral freeze register
-$5c00104c constant DBGMCU_APB2FZ1  \ offset: 0x4C : DBGMCU APB2 peripheral freeze register
-$5c001054 constant DBGMCU_APB4FZ1  \ offset: 0x54 : DBGMCU APB4 peripheral freeze register
+  [ifdef] DBGMCU_APB4FZ1_DEF
+    \
+    \ @brief DBGMCU APB4 peripheral freeze register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $07 constant DBGMCU_I2C4                    \ [0x07] I2C4 SMBUS timeout stop in debug
+    $09 constant DBGMCU_LPTIM2                  \ [0x09] LPTIM2 stop in debug
+    $0a constant DBGMCU_LPTIM3                  \ [0x0a] LPTIM3 stop in debug
+    $10 constant DBGMCU_RTC                     \ [0x10] RTC stop in debug
+    $12 constant DBGMCU_WDGLSCD                 \ [0x12] LS watchdog for CPU domain stop in debug
+  [then]
 
+  \
+  \ @brief Microcontroller Debug Unit
+  \
+  $00 constant DBGMCU_IDC               \ DBGMCU Identity Code Register
+  $04 constant DBGMCU_CR                \ DBGMCU Configuration Register
+  $34 constant DBGMCU_APB3FZ1           \ DBGMCU APB3 peripheral freeze register
+  $3C constant DBGMCU_APB1LFZ1          \ DBGMCU APB1L peripheral freeze register
+  $4C constant DBGMCU_APB2FZ1           \ DBGMCU APB2 peripheral freeze register
+  $54 constant DBGMCU_APB4FZ1           \ DBGMCU APB4 peripheral freeze register
+
+: DBGMCU_DEF ; [then]

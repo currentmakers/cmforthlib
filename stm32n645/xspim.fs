@@ -6,24 +6,25 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] XSPIM_DEF
 
-\
-\ @brief XSPIM control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
+  [ifdef] XSPIM_XSPIM_CR_DEF
+    \
+    \ @brief XSPIM control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant XSPIM_MUXEN                    \ [0x00] Multiplexed mode enable
+    $01 constant XSPIM_MODE                     \ [0x01] XSPI multiplexing mode
+    $04 constant XSPIM_CSSEL_OVR_EN             \ [0x04] Chip select selector override enable
+    $05 constant XSPIM_CSSEL_OVR_O1             \ [0x05] Chip select selector override setting for XSPI1
+    $06 constant XSPIM_CSSEL_OVR_O2             \ [0x06] Chip select selector override setting for XSPI2
+    $10 constant XSPIM_REQ2ACK_TIME             \ [0x10 : 8] REQ to ACK time
+  [then]
 
-$00000001 constant XSPIM_XSPIM_CR_MUXEN                             \ Multiplexed mode enable
-$00000002 constant XSPIM_XSPIM_CR_MODE                              \ XSPI multiplexing mode
-$00000010 constant XSPIM_XSPIM_CR_CSSEL_OVR_EN                      \ Chip select selector override enable
-$00000020 constant XSPIM_XSPIM_CR_CSSEL_OVR_O1                      \ Chip select selector override setting for XSPI1
-$00000040 constant XSPIM_XSPIM_CR_CSSEL_OVR_O2                      \ Chip select selector override setting for XSPI2
-$00ff0000 constant XSPIM_XSPIM_CR_REQ2ACK_TIME                      \ REQ to ACK time
+  \
+  \ @brief XSPI I/O manager
+  \
+  $00 constant XSPIM_XSPIM_CR           \ XSPIM control register
 
-
-\
-\ @brief XSPI I/O manager
-\
-$4802b400 constant XSPIM_XSPIM_CR  \ offset: 0x00 : XSPIM control register
-
+: XSPIM_DEF ; [then]

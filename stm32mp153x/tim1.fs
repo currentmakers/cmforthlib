@@ -6,402 +6,428 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief TIM1 control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM1_TIM1_CR1_CEN                                \ CEN
-$00000002 constant TIM1_TIM1_CR1_UDIS                               \ UDIS
-$00000004 constant TIM1_TIM1_CR1_URS                                \ URS
-$00000008 constant TIM1_TIM1_CR1_OPM                                \ OPM
-$00000010 constant TIM1_TIM1_CR1_DIR                                \ DIR
-$00000060 constant TIM1_TIM1_CR1_CMS                                \ CMS
-$00000080 constant TIM1_TIM1_CR1_ARPE                               \ ARPE
-$00000300 constant TIM1_TIM1_CR1_CKD                                \ CKD
-$00000800 constant TIM1_TIM1_CR1_UIFREMAP                           \ UIFREMAP
-
-
-\
-\ @brief TIM1 control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM1_TIM1_CR2_CCPC                               \ CCPC
-$00000004 constant TIM1_TIM1_CR2_CCUS                               \ CCUS
-$00000008 constant TIM1_TIM1_CR2_CCDS                               \ CCDS
-$00000070 constant TIM1_TIM1_CR2_MMS                                \ MMS
-$00000080 constant TIM1_TIM1_CR2_TI1S                               \ TI1S
-$00000100 constant TIM1_TIM1_CR2_OIS1                               \ OIS1
-$00000200 constant TIM1_TIM1_CR2_OIS1N                              \ OIS1N
-$00000400 constant TIM1_TIM1_CR2_OIS2                               \ OIS2
-$00000800 constant TIM1_TIM1_CR2_OIS2N                              \ OIS2N
-$00001000 constant TIM1_TIM1_CR2_OIS3                               \ OIS3
-$00002000 constant TIM1_TIM1_CR2_OIS3N                              \ OIS3N
-$00004000 constant TIM1_TIM1_CR2_OIS4                               \ OIS4
-$00010000 constant TIM1_TIM1_CR2_OIS5                               \ OIS5
-$00040000 constant TIM1_TIM1_CR2_OIS6                               \ OIS6
-$00f00000 constant TIM1_TIM1_CR2_MMS2                               \ MMS2
-
-
-\
-\ @brief TIM1 slave mode control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000007 constant TIM1_TIM1_SMCR_SMS                               \ SMS
-$00000070 constant TIM1_TIM1_SMCR_TS                                \ TS
-$00000080 constant TIM1_TIM1_SMCR_MSM                               \ MSM
-$00000f00 constant TIM1_TIM1_SMCR_ETF                               \ ETF
-$00003000 constant TIM1_TIM1_SMCR_ETPS                              \ ETPS
-$00004000 constant TIM1_TIM1_SMCR_ECE                               \ ECE
-$00008000 constant TIM1_TIM1_SMCR_ETP                               \ ETP
-$00010000 constant TIM1_TIM1_SMCR_SMS3                              \ SMS3
-$00100000 constant TIM1_TIM1_SMCR_TS3                               \ TS3
-$00200000 constant TIM1_TIM1_SMCR_TS4                               \ TS4
-
-
-\
-\ @brief TIM1 DMA/interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM1_TIM1_DIER_UIE                               \ UIE
-$00000002 constant TIM1_TIM1_DIER_CC1IE                             \ CC1IE
-$00000004 constant TIM1_TIM1_DIER_CC2IE                             \ CC2IE
-$00000008 constant TIM1_TIM1_DIER_CC3IE                             \ CC3IE
-$00000010 constant TIM1_TIM1_DIER_CC4IE                             \ CC4IE
-$00000020 constant TIM1_TIM1_DIER_COMIE                             \ COMIE
-$00000040 constant TIM1_TIM1_DIER_TIE                               \ TIE
-$00000080 constant TIM1_TIM1_DIER_BIE                               \ BIE
-$00000100 constant TIM1_TIM1_DIER_UDE                               \ UDE
-$00000200 constant TIM1_TIM1_DIER_CC1DE                             \ CC1DE
-$00000400 constant TIM1_TIM1_DIER_CC2DE                             \ CC2DE
-$00000800 constant TIM1_TIM1_DIER_CC3DE                             \ CC3DE
-$00001000 constant TIM1_TIM1_DIER_CC4DE                             \ CC4DE
-$00002000 constant TIM1_TIM1_DIER_COMDE                             \ COMDE
-$00004000 constant TIM1_TIM1_DIER_TDE                               \ TDE
-
-
-\
-\ @brief TIM1 status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM1_TIM1_SR_UIF                                 \ UIF
-$00000002 constant TIM1_TIM1_SR_CC1IF                               \ CC1IF
-$00000004 constant TIM1_TIM1_SR_CC2IF                               \ CC2IF
-$00000008 constant TIM1_TIM1_SR_CC3IF                               \ CC3IF
-$00000010 constant TIM1_TIM1_SR_CC4IF                               \ CC4IF
-$00000020 constant TIM1_TIM1_SR_COMIF                               \ COMIF
-$00000040 constant TIM1_TIM1_SR_TIF                                 \ TIF
-$00000080 constant TIM1_TIM1_SR_BIF                                 \ BIF
-$00000100 constant TIM1_TIM1_SR_B2IF                                \ B2IF
-$00000200 constant TIM1_TIM1_SR_CC1OF                               \ CC1OF
-$00000400 constant TIM1_TIM1_SR_CC2OF                               \ CC2OF
-$00000800 constant TIM1_TIM1_SR_CC3OF                               \ CC3OF
-$00001000 constant TIM1_TIM1_SR_CC4OF                               \ CC4OF
-$00002000 constant TIM1_TIM1_SR_SBIF                                \ SBIF
-$00010000 constant TIM1_TIM1_SR_CC5IF                               \ CC5IF
-$00020000 constant TIM1_TIM1_SR_CC6IF                               \ CC6IF
-
-
-\
-\ @brief TIM1 event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM1_TIM1_EGR_UG                                 \ UG
-$00000002 constant TIM1_TIM1_EGR_CC1G                               \ CC1G
-$00000004 constant TIM1_TIM1_EGR_CC2G                               \ CC2G
-$00000008 constant TIM1_TIM1_EGR_CC3G                               \ CC3G
-$00000010 constant TIM1_TIM1_EGR_CC4G                               \ CC4G
-$00000020 constant TIM1_TIM1_EGR_COMG                               \ COMG
-$00000040 constant TIM1_TIM1_EGR_TG                                 \ TG
-$00000080 constant TIM1_TIM1_EGR_BG                                 \ BG
-$00000100 constant TIM1_TIM1_EGR_B2G                                \ B2G
-
-
-\
-\ @brief The same register can be used for input capture mode (this section) or for output compare mode (next section). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function for input capture and for output compare modes. It is possible to combine both modes independently (e.g. channel 1 in input capture mode and channel 2 in output compare mode). Input capture mode:
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM1_TIM1_CCMR1ALTERNATE1_CC1S                   \ CC1S
-$0000000c constant TIM1_TIM1_CCMR1ALTERNATE1_IC1PSC                 \ IC1PSC
-$000000f0 constant TIM1_TIM1_CCMR1ALTERNATE1_IC1F                   \ IC1F
-$00000300 constant TIM1_TIM1_CCMR1ALTERNATE1_CC2S                   \ CC2S
-$00000c00 constant TIM1_TIM1_CCMR1ALTERNATE1_IC2PSC                 \ IC2PSC
-$0000f000 constant TIM1_TIM1_CCMR1ALTERNATE1_IC2F                   \ IC2F
-
-
-\
-\ @brief The same register can be used for input capture mode (this section) or for output compare mode (next section). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function for input capture and for output compare modes. It is possible to combine both modes independently (e.g. channel 1 in input capture mode and channel 2 in output compare mode). Input capture mode:
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM1_TIM1_CCMR2ALTERNATE17_CC3S                  \ CC3S
-$0000000c constant TIM1_TIM1_CCMR2ALTERNATE17_IC3PSC                \ IC3PSC
-$000000f0 constant TIM1_TIM1_CCMR2ALTERNATE17_IC3F                  \ IC3F
-$00000300 constant TIM1_TIM1_CCMR2ALTERNATE17_CC4S                  \ CC4S
-$00000c00 constant TIM1_TIM1_CCMR2ALTERNATE17_IC4PSC                \ IC4PSC
-$0000f000 constant TIM1_TIM1_CCMR2ALTERNATE17_IC4F                  \ IC4F
-
-
-\
-\ @brief TIM1 capture/compare enable register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM1_TIM1_CCER_CC1E                              \ CC1E
-$00000002 constant TIM1_TIM1_CCER_CC1P                              \ CC1P
-$00000004 constant TIM1_TIM1_CCER_CC1NE                             \ CC1NE
-$00000008 constant TIM1_TIM1_CCER_CC1NP                             \ CC1NP
-$00000010 constant TIM1_TIM1_CCER_CC2E                              \ CC2E
-$00000020 constant TIM1_TIM1_CCER_CC2P                              \ CC2P
-$00000040 constant TIM1_TIM1_CCER_CC2NE                             \ CC2NE
-$00000080 constant TIM1_TIM1_CCER_CC2NP                             \ CC2NP
-$00000100 constant TIM1_TIM1_CCER_CC3E                              \ CC3E
-$00000200 constant TIM1_TIM1_CCER_CC3P                              \ CC3P
-$00000400 constant TIM1_TIM1_CCER_CC3NE                             \ CC3NE
-$00000800 constant TIM1_TIM1_CCER_CC3NP                             \ CC3NP
-$00001000 constant TIM1_TIM1_CCER_CC4E                              \ CC4E
-$00002000 constant TIM1_TIM1_CCER_CC4P                              \ CC4P
-$00008000 constant TIM1_TIM1_CCER_CC4NP                             \ CC4NP
-$00010000 constant TIM1_TIM1_CCER_CC5E                              \ CC5E
-$00020000 constant TIM1_TIM1_CCER_CC5P                              \ CC5P
-$00100000 constant TIM1_TIM1_CCER_CC6E                              \ CC6E
-$00200000 constant TIM1_TIM1_CCER_CC6P                              \ CC6P
-
-
-\
-\ @brief TIM1 counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_CNT_CNT                                \ CNT
-$80000000 constant TIM1_TIM1_CNT_UIFCPY                             \ UIFCPY
-
-
-\
-\ @brief TIM1 prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_PSC_PSC                                \ PSC
-
-
-\
-\ @brief TIM1 auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x0000FFFF
-\
-
-$0000ffff constant TIM1_TIM1_ARR_ARR                                \ ARR
-
-
-\
-\ @brief TIM1 repetition counter register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_RCR_REP                                \ REP
-
-
-\
-\ @brief TIM1 capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_CCR1_CCR1                              \ CCR1
-
-
-\
-\ @brief TIM1 capture/compare register 2
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_CCR2_CCR2                              \ CCR2
-
-
-\
-\ @brief TIM1 capture/compare register 3
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_CCR3_CCR3                              \ CCR3
-
-
-\
-\ @brief TIM1 capture/compare register 4
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_CCR4_CCR4                              \ CCR4
-
-
-\
-\ @brief As the bits BK2BID, BKBID, BK2DSRM, BKDSRM, BK2P, BK2E, BK2F[3:0], BKF[3:0], AOE, BKP, BKE, OSSI, OSSR and DTG[7:0] can be write-locked depending on the LOCK configuration, it can be necessary to configure all of them during the first write access to the TIMx_BDTR register.
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$000000ff constant TIM1_TIM1_BDTR_DTG                               \ DTG
-$00000300 constant TIM1_TIM1_BDTR_LOCK                              \ LOCK
-$00000400 constant TIM1_TIM1_BDTR_OSSI                              \ OSSI
-$00000800 constant TIM1_TIM1_BDTR_OSSR                              \ OSSR
-$00001000 constant TIM1_TIM1_BDTR_BKE                               \ BKE
-$00002000 constant TIM1_TIM1_BDTR_BKP                               \ BKP
-$00004000 constant TIM1_TIM1_BDTR_AOE                               \ AOE
-$00008000 constant TIM1_TIM1_BDTR_MOE                               \ MOE
-$000f0000 constant TIM1_TIM1_BDTR_BKF                               \ BKF
-$00f00000 constant TIM1_TIM1_BDTR_BK2F                              \ BK2F
-$01000000 constant TIM1_TIM1_BDTR_BK2E                              \ BK2E
-$02000000 constant TIM1_TIM1_BDTR_BK2P                              \ BK2P
-$04000000 constant TIM1_TIM1_BDTR_BKDSRM                            \ BKDSRM
-$08000000 constant TIM1_TIM1_BDTR_BK2DSRM                           \ BK2DSRM
-$10000000 constant TIM1_TIM1_BDTR_BKBID                             \ BKBID
-$20000000 constant TIM1_TIM1_BDTR_BK2BID                            \ BK2BID
-
-
-\
-\ @brief TIM1 DMA control register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0000001f constant TIM1_TIM1_DCR_DBA                                \ DBA
-$00001f00 constant TIM1_TIM1_DCR_DBL                                \ DBL
-
-
-\
-\ @brief TIM1 DMA address for full transfer
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant TIM1_TIM1_DMAR_DMAB                              \ DMAB
-
-
-\
-\ @brief The channels 5 and 6 can only be configured in output. Output compare mode:
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000004 constant TIM1_TIM1_CCMR3_OC5FE                            \ OC5FE
-$00000008 constant TIM1_TIM1_CCMR3_OC5PE                            \ OC5PE
-$00000070 constant TIM1_TIM1_CCMR3_OC5M                             \ OC5M
-$00000080 constant TIM1_TIM1_CCMR3_OC5CE                            \ OC5CE
-$00000400 constant TIM1_TIM1_CCMR3_OC6FE                            \ OC6FE
-$00000800 constant TIM1_TIM1_CCMR3_OC6PE                            \ OC6PE
-$00007000 constant TIM1_TIM1_CCMR3_OC6M                             \ OC6M
-$00008000 constant TIM1_TIM1_CCMR3_OC6CE                            \ OC6CE
-$00010000 constant TIM1_TIM1_CCMR3_OC5M3                            \ OC5M3
-$01000000 constant TIM1_TIM1_CCMR3_OC6M3                            \ OC6M3
-
-
-\
-\ @brief TIM1 capture/compare register 5
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_CCR5_CCR5                              \ CCR5
-$20000000 constant TIM1_TIM1_CCR5_GC5C1                             \ GC5C1
-$40000000 constant TIM1_TIM1_CCR5_GC5C2                             \ GC5C2
-$80000000 constant TIM1_TIM1_CCR5_GC5C3                             \ GC5C3
-
-
-\
-\ @brief TIM1 capture/compare register 6
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM1_TIM1_CCR6_CCR6                              \ CCR6
-
-
-\
-\ @brief TIM1 alternate function option register 1
-\ Address offset: 0x60
-\ Reset value: 0x00000001
-\
-
-$00000001 constant TIM1_TIM1_AF1_BKINE                              \ BKINE
-$00000100 constant TIM1_TIM1_AF1_BKDF1BK0E                          \ BKDF1BK0E
-$00000200 constant TIM1_TIM1_AF1_BKINP                              \ BKINP
-$0003c000 constant TIM1_TIM1_AF1_ETRSEL                             \ ETRSEL
-
-
-\
-\ @brief TIM1 Alternate function register 2
-\ Address offset: 0x64
-\ Reset value: 0x00000001
-\
-
-$00000001 constant TIM1_TIM1_AF2_BK2INE                             \ BK2INE
-$00000100 constant TIM1_TIM1_AF2_BK2DF1BK1E                         \ BK2DF1BK1E
-$00000200 constant TIM1_TIM1_AF2_BK2INP                             \ BK2INP
-
-
-\
-\ @brief TIM1 timer input selection register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$0000000f constant TIM1_TIM1_TISEL_TI1SEL                           \ TI1SEL
-$00000f00 constant TIM1_TIM1_TISEL_TI2SEL                           \ TI2SEL
-$000f0000 constant TIM1_TIM1_TISEL_TI3SEL                           \ TI3SEL
-$0f000000 constant TIM1_TIM1_TISEL_TI4SEL                           \ TI4SEL
-
-
-\
-\ @brief TIM1
-\
-$44000000 constant TIM1_TIM1_CR1  \ offset: 0x00 : TIM1 control register 1
-$44000004 constant TIM1_TIM1_CR2  \ offset: 0x04 : TIM1 control register 2
-$44000008 constant TIM1_TIM1_SMCR  \ offset: 0x08 : TIM1 slave mode control register
-$4400000c constant TIM1_TIM1_DIER  \ offset: 0x0C : TIM1 DMA/interrupt enable register
-$44000010 constant TIM1_TIM1_SR   \ offset: 0x10 : TIM1 status register
-$44000014 constant TIM1_TIM1_EGR  \ offset: 0x14 : TIM1 event generation register
-$44000018 constant TIM1_TIM1_CCMR1ALTERNATE1  \ offset: 0x18 : The same register can be used for input capture mode (this section) or for output compare mode (next section). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function for input capture and for output compare modes. It is possible to combine both modes independently (e.g. channel 1 in input capture mode and channel 2 in output compare mode). Input capture mode:
-$4400001c constant TIM1_TIM1_CCMR2ALTERNATE17  \ offset: 0x1C : The same register can be used for input capture mode (this section) or for output compare mode (next section). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function for input capture and for output compare modes. It is possible to combine both modes independently (e.g. channel 1 in input capture mode and channel 2 in output compare mode). Input capture mode:
-$44000020 constant TIM1_TIM1_CCER  \ offset: 0x20 : TIM1 capture/compare enable register
-$44000024 constant TIM1_TIM1_CNT  \ offset: 0x24 : TIM1 counter
-$44000028 constant TIM1_TIM1_PSC  \ offset: 0x28 : TIM1 prescaler
-$4400002c constant TIM1_TIM1_ARR  \ offset: 0x2C : TIM1 auto-reload register
-$44000030 constant TIM1_TIM1_RCR  \ offset: 0x30 : TIM1 repetition counter register
-$44000034 constant TIM1_TIM1_CCR1  \ offset: 0x34 : TIM1 capture/compare register 1
-$44000038 constant TIM1_TIM1_CCR2  \ offset: 0x38 : TIM1 capture/compare register 2
-$4400003c constant TIM1_TIM1_CCR3  \ offset: 0x3C : TIM1 capture/compare register 3
-$44000040 constant TIM1_TIM1_CCR4  \ offset: 0x40 : TIM1 capture/compare register 4
-$44000044 constant TIM1_TIM1_BDTR  \ offset: 0x44 : As the bits BK2BID, BKBID, BK2DSRM, BKDSRM, BK2P, BK2E, BK2F[3:0], BKF[3:0], AOE, BKP, BKE, OSSI, OSSR and DTG[7:0] can be write-locked depending on the LOCK configuration, it can be necessary to configure all of them during the first write access to the TIMx_BDTR register.
-$44000048 constant TIM1_TIM1_DCR  \ offset: 0x48 : TIM1 DMA control register
-$4400004c constant TIM1_TIM1_DMAR  \ offset: 0x4C : TIM1 DMA address for full transfer
-$44000054 constant TIM1_TIM1_CCMR3  \ offset: 0x54 : The channels 5 and 6 can only be configured in output. Output compare mode:
-$44000058 constant TIM1_TIM1_CCR5  \ offset: 0x58 : TIM1 capture/compare register 5
-$4400005c constant TIM1_TIM1_CCR6  \ offset: 0x5C : TIM1 capture/compare register 6
-$44000060 constant TIM1_TIM1_AF1  \ offset: 0x60 : TIM1 alternate function option register 1
-$44000064 constant TIM1_TIM1_AF2  \ offset: 0x64 : TIM1 Alternate function register 2
-$44000068 constant TIM1_TIM1_TISEL  \ offset: 0x68 : TIM1 timer input selection register
-
+[ifndef] TIM1_DEF
+
+  [ifdef] TIM1_TIM1_CR1_DEF
+    \
+    \ @brief TIM1 control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CEN                       \ [0x00] CEN
+    $01 constant TIM1_UDIS                      \ [0x01] UDIS
+    $02 constant TIM1_URS                       \ [0x02] URS
+    $03 constant TIM1_OPM                       \ [0x03] OPM
+    $04 constant TIM1_DIR                       \ [0x04] DIR
+    $05 constant TIM1_CMS                       \ [0x05 : 2] CMS
+    $07 constant TIM1_ARPE                      \ [0x07] ARPE
+    $08 constant TIM1_CKD                       \ [0x08 : 2] CKD
+    $0b constant TIM1_UIFREMAP                  \ [0x0b] UIFREMAP
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CR2_DEF
+    \
+    \ @brief TIM1 control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CCPC                      \ [0x00] CCPC
+    $02 constant TIM1_CCUS                      \ [0x02] CCUS
+    $03 constant TIM1_CCDS                      \ [0x03] CCDS
+    $04 constant TIM1_MMS                       \ [0x04 : 3] MMS
+    $07 constant TIM1_TI1S                      \ [0x07] TI1S
+    $08 constant TIM1_OIS1                      \ [0x08] OIS1
+    $09 constant TIM1_OIS1N                     \ [0x09] OIS1N
+    $0a constant TIM1_OIS2                      \ [0x0a] OIS2
+    $0b constant TIM1_OIS2N                     \ [0x0b] OIS2N
+    $0c constant TIM1_OIS3                      \ [0x0c] OIS3
+    $0d constant TIM1_OIS3N                     \ [0x0d] OIS3N
+    $0e constant TIM1_OIS4                      \ [0x0e] OIS4
+    $10 constant TIM1_OIS5                      \ [0x10] OIS5
+    $12 constant TIM1_OIS6                      \ [0x12] OIS6
+    $14 constant TIM1_MMS2                      \ [0x14 : 4] MMS2
+  [then]
+
+
+  [ifdef] TIM1_TIM1_SMCR_DEF
+    \
+    \ @brief TIM1 slave mode control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_SMS                       \ [0x00 : 3] SMS
+    $04 constant TIM1_TS                        \ [0x04 : 3] TS
+    $07 constant TIM1_MSM                       \ [0x07] MSM
+    $08 constant TIM1_ETF                       \ [0x08 : 4] ETF
+    $0c constant TIM1_ETPS                      \ [0x0c : 2] ETPS
+    $0e constant TIM1_ECE                       \ [0x0e] ECE
+    $0f constant TIM1_ETP                       \ [0x0f] ETP
+    $10 constant TIM1_SMS3                      \ [0x10] SMS3
+    $14 constant TIM1_TS3                       \ [0x14] TS3
+    $15 constant TIM1_TS4                       \ [0x15] TS4
+  [then]
+
+
+  [ifdef] TIM1_TIM1_DIER_DEF
+    \
+    \ @brief TIM1 DMA/interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_UIE                       \ [0x00] UIE
+    $01 constant TIM1_CC1IE                     \ [0x01] CC1IE
+    $02 constant TIM1_CC2IE                     \ [0x02] CC2IE
+    $03 constant TIM1_CC3IE                     \ [0x03] CC3IE
+    $04 constant TIM1_CC4IE                     \ [0x04] CC4IE
+    $05 constant TIM1_COMIE                     \ [0x05] COMIE
+    $06 constant TIM1_TIE                       \ [0x06] TIE
+    $07 constant TIM1_BIE                       \ [0x07] BIE
+    $08 constant TIM1_UDE                       \ [0x08] UDE
+    $09 constant TIM1_CC1DE                     \ [0x09] CC1DE
+    $0a constant TIM1_CC2DE                     \ [0x0a] CC2DE
+    $0b constant TIM1_CC3DE                     \ [0x0b] CC3DE
+    $0c constant TIM1_CC4DE                     \ [0x0c] CC4DE
+    $0d constant TIM1_COMDE                     \ [0x0d] COMDE
+    $0e constant TIM1_TDE                       \ [0x0e] TDE
+  [then]
+
+
+  [ifdef] TIM1_TIM1_SR_DEF
+    \
+    \ @brief TIM1 status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_UIF                       \ [0x00] UIF
+    $01 constant TIM1_CC1IF                     \ [0x01] CC1IF
+    $02 constant TIM1_CC2IF                     \ [0x02] CC2IF
+    $03 constant TIM1_CC3IF                     \ [0x03] CC3IF
+    $04 constant TIM1_CC4IF                     \ [0x04] CC4IF
+    $05 constant TIM1_COMIF                     \ [0x05] COMIF
+    $06 constant TIM1_TIF                       \ [0x06] TIF
+    $07 constant TIM1_BIF                       \ [0x07] BIF
+    $08 constant TIM1_B2IF                      \ [0x08] B2IF
+    $09 constant TIM1_CC1OF                     \ [0x09] CC1OF
+    $0a constant TIM1_CC2OF                     \ [0x0a] CC2OF
+    $0b constant TIM1_CC3OF                     \ [0x0b] CC3OF
+    $0c constant TIM1_CC4OF                     \ [0x0c] CC4OF
+    $0d constant TIM1_SBIF                      \ [0x0d] SBIF
+    $10 constant TIM1_CC5IF                     \ [0x10] CC5IF
+    $11 constant TIM1_CC6IF                     \ [0x11] CC6IF
+  [then]
+
+
+  [ifdef] TIM1_TIM1_EGR_DEF
+    \
+    \ @brief TIM1 event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_UG                        \ [0x00] UG
+    $01 constant TIM1_CC1G                      \ [0x01] CC1G
+    $02 constant TIM1_CC2G                      \ [0x02] CC2G
+    $03 constant TIM1_CC3G                      \ [0x03] CC3G
+    $04 constant TIM1_CC4G                      \ [0x04] CC4G
+    $05 constant TIM1_COMG                      \ [0x05] COMG
+    $06 constant TIM1_TG                        \ [0x06] TG
+    $07 constant TIM1_BG                        \ [0x07] BG
+    $08 constant TIM1_B2G                       \ [0x08] B2G
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCMR1ALTERNATE1_DEF
+    \
+    \ @brief The same register can be used for input capture mode (this section) or for output compare mode (next section). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function for input capture and for output compare modes. It is possible to combine both modes independently (e.g. channel 1 in input capture mode and channel 2 in output compare mode). Input capture mode:
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CC1S                      \ [0x00 : 2] CC1S
+    $02 constant TIM1_IC1PSC                    \ [0x02 : 2] IC1PSC
+    $04 constant TIM1_IC1F                      \ [0x04 : 4] IC1F
+    $08 constant TIM1_CC2S                      \ [0x08 : 2] CC2S
+    $0a constant TIM1_IC2PSC                    \ [0x0a : 2] IC2PSC
+    $0c constant TIM1_IC2F                      \ [0x0c : 4] IC2F
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCMR2ALTERNATE17_DEF
+    \
+    \ @brief The same register can be used for input capture mode (this section) or for output compare mode (next section). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function for input capture and for output compare modes. It is possible to combine both modes independently (e.g. channel 1 in input capture mode and channel 2 in output compare mode). Input capture mode:
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CC3S                      \ [0x00 : 2] CC3S
+    $02 constant TIM1_IC3PSC                    \ [0x02 : 2] IC3PSC
+    $04 constant TIM1_IC3F                      \ [0x04 : 4] IC3F
+    $08 constant TIM1_CC4S                      \ [0x08 : 2] CC4S
+    $0a constant TIM1_IC4PSC                    \ [0x0a : 2] IC4PSC
+    $0c constant TIM1_IC4F                      \ [0x0c : 4] IC4F
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCER_DEF
+    \
+    \ @brief TIM1 capture/compare enable register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CC1E                      \ [0x00] CC1E
+    $01 constant TIM1_CC1P                      \ [0x01] CC1P
+    $02 constant TIM1_CC1NE                     \ [0x02] CC1NE
+    $03 constant TIM1_CC1NP                     \ [0x03] CC1NP
+    $04 constant TIM1_CC2E                      \ [0x04] CC2E
+    $05 constant TIM1_CC2P                      \ [0x05] CC2P
+    $06 constant TIM1_CC2NE                     \ [0x06] CC2NE
+    $07 constant TIM1_CC2NP                     \ [0x07] CC2NP
+    $08 constant TIM1_CC3E                      \ [0x08] CC3E
+    $09 constant TIM1_CC3P                      \ [0x09] CC3P
+    $0a constant TIM1_CC3NE                     \ [0x0a] CC3NE
+    $0b constant TIM1_CC3NP                     \ [0x0b] CC3NP
+    $0c constant TIM1_CC4E                      \ [0x0c] CC4E
+    $0d constant TIM1_CC4P                      \ [0x0d] CC4P
+    $0f constant TIM1_CC4NP                     \ [0x0f] CC4NP
+    $10 constant TIM1_CC5E                      \ [0x10] CC5E
+    $11 constant TIM1_CC5P                      \ [0x11] CC5P
+    $14 constant TIM1_CC6E                      \ [0x14] CC6E
+    $15 constant TIM1_CC6P                      \ [0x15] CC6P
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CNT_DEF
+    \
+    \ @brief TIM1 counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CNT                       \ [0x00 : 16] CNT
+    $1f constant TIM1_UIFCPY                    \ [0x1f] UIFCPY
+  [then]
+
+
+  [ifdef] TIM1_TIM1_PSC_DEF
+    \
+    \ @brief TIM1 prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_PSC                       \ [0x00 : 16] PSC
+  [then]
+
+
+  [ifdef] TIM1_TIM1_ARR_DEF
+    \
+    \ @brief TIM1 auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant TIM1_ARR                       \ [0x00 : 16] ARR
+  [then]
+
+
+  [ifdef] TIM1_TIM1_RCR_DEF
+    \
+    \ @brief TIM1 repetition counter register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_REP                       \ [0x00 : 16] REP
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCR1_DEF
+    \
+    \ @brief TIM1 capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CCR1                      \ [0x00 : 16] CCR1
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCR2_DEF
+    \
+    \ @brief TIM1 capture/compare register 2
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CCR2                      \ [0x00 : 16] CCR2
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCR3_DEF
+    \
+    \ @brief TIM1 capture/compare register 3
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CCR3                      \ [0x00 : 16] CCR3
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCR4_DEF
+    \
+    \ @brief TIM1 capture/compare register 4
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CCR4                      \ [0x00 : 16] CCR4
+  [then]
+
+
+  [ifdef] TIM1_TIM1_BDTR_DEF
+    \
+    \ @brief As the bits BK2BID, BKBID, BK2DSRM, BKDSRM, BK2P, BK2E, BK2F[3:0], BKF[3:0], AOE, BKP, BKE, OSSI, OSSR and DTG[7:0] can be write-locked depending on the LOCK configuration, it can be necessary to configure all of them during the first write access to the TIMx_BDTR register.
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_DTG                       \ [0x00 : 8] DTG
+    $08 constant TIM1_LOCK                      \ [0x08 : 2] LOCK
+    $0a constant TIM1_OSSI                      \ [0x0a] OSSI
+    $0b constant TIM1_OSSR                      \ [0x0b] OSSR
+    $0c constant TIM1_BKE                       \ [0x0c] BKE
+    $0d constant TIM1_BKP                       \ [0x0d] BKP
+    $0e constant TIM1_AOE                       \ [0x0e] AOE
+    $0f constant TIM1_MOE                       \ [0x0f] MOE
+    $10 constant TIM1_BKF                       \ [0x10 : 4] BKF
+    $14 constant TIM1_BK2F                      \ [0x14 : 4] BK2F
+    $18 constant TIM1_BK2E                      \ [0x18] BK2E
+    $19 constant TIM1_BK2P                      \ [0x19] BK2P
+    $1a constant TIM1_BKDSRM                    \ [0x1a] BKDSRM
+    $1b constant TIM1_BK2DSRM                   \ [0x1b] BK2DSRM
+    $1c constant TIM1_BKBID                     \ [0x1c] BKBID
+    $1d constant TIM1_BK2BID                    \ [0x1d] BK2BID
+  [then]
+
+
+  [ifdef] TIM1_TIM1_DCR_DEF
+    \
+    \ @brief TIM1 DMA control register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_DBA                       \ [0x00 : 5] DBA
+    $08 constant TIM1_DBL                       \ [0x08 : 5] DBL
+  [then]
+
+
+  [ifdef] TIM1_TIM1_DMAR_DEF
+    \
+    \ @brief TIM1 DMA address for full transfer
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_DMAB                      \ [0x00 : 32] DMAB
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCMR3_DEF
+    \
+    \ @brief The channels 5 and 6 can only be configured in output. Output compare mode:
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $02 constant TIM1_OC5FE                     \ [0x02] OC5FE
+    $03 constant TIM1_OC5PE                     \ [0x03] OC5PE
+    $04 constant TIM1_OC5M                      \ [0x04 : 3] OC5M
+    $07 constant TIM1_OC5CE                     \ [0x07] OC5CE
+    $0a constant TIM1_OC6FE                     \ [0x0a] OC6FE
+    $0b constant TIM1_OC6PE                     \ [0x0b] OC6PE
+    $0c constant TIM1_OC6M                      \ [0x0c : 3] OC6M
+    $0f constant TIM1_OC6CE                     \ [0x0f] OC6CE
+    $10 constant TIM1_OC5M3                     \ [0x10] OC5M3
+    $18 constant TIM1_OC6M3                     \ [0x18] OC6M3
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCR5_DEF
+    \
+    \ @brief TIM1 capture/compare register 5
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CCR5                      \ [0x00 : 16] CCR5
+    $1d constant TIM1_GC5C1                     \ [0x1d] GC5C1
+    $1e constant TIM1_GC5C2                     \ [0x1e] GC5C2
+    $1f constant TIM1_GC5C3                     \ [0x1f] GC5C3
+  [then]
+
+
+  [ifdef] TIM1_TIM1_CCR6_DEF
+    \
+    \ @brief TIM1 capture/compare register 6
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_CCR6                      \ [0x00 : 16] CCR6
+  [then]
+
+
+  [ifdef] TIM1_TIM1_AF1_DEF
+    \
+    \ @brief TIM1 alternate function option register 1
+    \ Address offset: 0x60
+    \ Reset value: 0x00000001
+    \
+    $00 constant TIM1_BKINE                     \ [0x00] BKINE
+    $08 constant TIM1_BKDF1BK0E                 \ [0x08] BKDF1BK0E
+    $09 constant TIM1_BKINP                     \ [0x09] BKINP
+    $0e constant TIM1_ETRSEL                    \ [0x0e : 4] ETRSEL
+  [then]
+
+
+  [ifdef] TIM1_TIM1_AF2_DEF
+    \
+    \ @brief TIM1 Alternate function register 2
+    \ Address offset: 0x64
+    \ Reset value: 0x00000001
+    \
+    $00 constant TIM1_BK2INE                    \ [0x00] BK2INE
+    $08 constant TIM1_BK2DF1BK1E                \ [0x08] BK2DF1BK1E
+    $09 constant TIM1_BK2INP                    \ [0x09] BK2INP
+  [then]
+
+
+  [ifdef] TIM1_TIM1_TISEL_DEF
+    \
+    \ @brief TIM1 timer input selection register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM1_TI1SEL                    \ [0x00 : 4] TI1SEL
+    $08 constant TIM1_TI2SEL                    \ [0x08 : 4] TI2SEL
+    $10 constant TIM1_TI3SEL                    \ [0x10 : 4] TI3SEL
+    $18 constant TIM1_TI4SEL                    \ [0x18 : 4] TI4SEL
+  [then]
+
+  \
+  \ @brief TIM1
+  \
+  $00 constant TIM1_TIM1_CR1            \ TIM1 control register 1
+  $04 constant TIM1_TIM1_CR2            \ TIM1 control register 2
+  $08 constant TIM1_TIM1_SMCR           \ TIM1 slave mode control register
+  $0C constant TIM1_TIM1_DIER           \ TIM1 DMA/interrupt enable register
+  $10 constant TIM1_TIM1_SR             \ TIM1 status register
+  $14 constant TIM1_TIM1_EGR            \ TIM1 event generation register
+  $18 constant TIM1_TIM1_CCMR1ALTERNATE1    \ The same register can be used for input capture mode (this section) or for output compare mode (next section). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function for input capture and for output compare modes. It is possible to combine both modes independently (e.g. channel 1 in input capture mode and channel 2 in output compare mode). Input capture mode:
+  $1C constant TIM1_TIM1_CCMR2ALTERNATE17    \ The same register can be used for input capture mode (this section) or for output compare mode (next section). The direction of a channel is defined by configuring the corresponding CCxS bits. All the other bits of this register have a different function for input capture and for output compare modes. It is possible to combine both modes independently (e.g. channel 1 in input capture mode and channel 2 in output compare mode). Input capture mode:
+  $20 constant TIM1_TIM1_CCER           \ TIM1 capture/compare enable register
+  $24 constant TIM1_TIM1_CNT            \ TIM1 counter
+  $28 constant TIM1_TIM1_PSC            \ TIM1 prescaler
+  $2C constant TIM1_TIM1_ARR            \ TIM1 auto-reload register
+  $30 constant TIM1_TIM1_RCR            \ TIM1 repetition counter register
+  $34 constant TIM1_TIM1_CCR1           \ TIM1 capture/compare register 1
+  $38 constant TIM1_TIM1_CCR2           \ TIM1 capture/compare register 2
+  $3C constant TIM1_TIM1_CCR3           \ TIM1 capture/compare register 3
+  $40 constant TIM1_TIM1_CCR4           \ TIM1 capture/compare register 4
+  $44 constant TIM1_TIM1_BDTR           \ As the bits BK2BID, BKBID, BK2DSRM, BKDSRM, BK2P, BK2E, BK2F[3:0], BKF[3:0], AOE, BKP, BKE, OSSI, OSSR and DTG[7:0] can be write-locked depending on the LOCK configuration, it can be necessary to configure all of them during the first write access to the TIMx_BDTR register.
+  $48 constant TIM1_TIM1_DCR            \ TIM1 DMA control register
+  $4C constant TIM1_TIM1_DMAR           \ TIM1 DMA address for full transfer
+  $54 constant TIM1_TIM1_CCMR3          \ The channels 5 and 6 can only be configured in output. Output compare mode:
+  $58 constant TIM1_TIM1_CCR5           \ TIM1 capture/compare register 5
+  $5C constant TIM1_TIM1_CCR6           \ TIM1 capture/compare register 6
+  $60 constant TIM1_TIM1_AF1            \ TIM1 alternate function option register 1
+  $64 constant TIM1_TIM1_AF2            \ TIM1 Alternate function register 2
+  $68 constant TIM1_TIM1_TISEL          \ TIM1 timer input selection register
+
+: TIM1_DEF ; [then]

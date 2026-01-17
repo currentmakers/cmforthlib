@@ -1,106 +1,95 @@
 \
-\ @file stm32wl5x_cm0p.h
-\ @brief Loader for all peripherals in a STM32WL5x_CM0P
+\ @file stm32wl5x_cm0p.fload
+\ @brief Device header for STM32WL5x_CM0P
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include aes.fs
-.include comp.fs
-.include crc.fs
-.include dac.fs
-.include dma1.fs
-.include dma2.fs
-.include dmamux.fs
-.include exti.fs
-.include flash.fs
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpioh.fs
-.include hsem.fs
-.include i2c1.fs
-.include i2c2.fs
-.include i2c3.fs
-.include ipcc.fs
-.include iwdg.fs
-.include lptim1.fs
-.include lptim2.fs
-.include lptim3.fs
-.include lpuart.fs
-.include pka.fs
-.include pwr.fs
-.include rcc.fs
-.include rng.fs
-.include rtc.fs
-.include spi1.fs
-.include spi2.fs
-.include spi3.fs
-.include syscfg.fs
-.include syscfg_continue.fs
-.include tamp.fs
-.include tim1.fs
-.include tim2.fs
-.include tim16.fs
-.include tim17.fs
-.include tzic.fs
-.include tzsc.fs
-.include usart1.fs
-.include usart2.fs
-.include vrefbuf.fs
-.include wwdg.fs
+[ifndef] STM32WL5X_CM0P_LOADER
+  .include "adc.fs"
+  .include "aes.fs"
+  .include "comp.fs"
+  .include "crc.fs"
+  .include "dac.fs"
+  .include "dma.fs"
+  .include "dmamux.fs"
+  .include "exti.fs"
+  .include "flash.fs"
+  .include "gpio.fs"
+  .include "gpioc.fs"
+  .include "gpioh.fs"
+  .include "hsem.fs"
+  .include "i2c.fs"
+  .include "ipcc.fs"
+  .include "iwdg.fs"
+  .include "lptim1.fs"
+  .include "lptim2.fs"
+  .include "lptim3.fs"
+  .include "lpuart.fs"
+  .include "pka.fs"
+  .include "pwr.fs"
+  .include "rcc.fs"
+  .include "rng.fs"
+  .include "rtc.fs"
+  .include "spi.fs"
+  .include "syscfg.fs"
+  .include "syscfg_continue.fs"
+  .include "tamp.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim16.fs"
+  .include "tim17.fs"
+  .include "tzic.fs"
+  .include "tzsc.fs"
+  .include "usart.fs"
+  .include "vrefbuf.fs"
+  .include "wwdg.fs"
 
-decimal
+  $0x40012400 constant ADC              \ See adc.fs
+  $0x58001800 constant AES              \ See aes.fs
+  $0x40010200 constant COMP             \ See comp.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40007400 constant DAC              \ See dac.fs
+  $0x40020000 constant DMA1             \ See dma.fs
+  $0x40020400 constant DMA2             \ See dma.fs
+  $0x40020800 constant DMAMUX           \ See dmamux.fs
+  $0x58000800 constant EXTI             \ See exti.fs
+  $0x58004000 constant FLASH            \ See flash.fs
+  $0x48000000 constant GPIOA            \ See gpio.fs
+  $0x48000400 constant GPIOB            \ See gpio.fs
+  $0x48000800 constant GPIOC            \ See gpioc.fs
+  $0x48001C00 constant GPIOH            \ See gpioh.fs
+  $0x58001400 constant HSEM             \ See hsem.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40005C00 constant I2C3             \ See i2c.fs
+  $0x58000C00 constant IPCC             \ See ipcc.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40007C00 constant LPTIM1           \ See lptim1.fs
+  $0x40009400 constant LPTIM2           \ See lptim2.fs
+  $0x40009800 constant LPTIM3           \ See lptim3.fs
+  $0x40008000 constant LPUART           \ See lpuart.fs
+  $0x58002000 constant PKA              \ See pka.fs
+  $0x58000400 constant PWR              \ See pwr.fs
+  $0x58000000 constant RCC              \ See rcc.fs
+  $0x58001000 constant RNG              \ See rng.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x58010000 constant SPI3             \ See spi.fs
+  $0x40010000 constant SYSCFG           \ See syscfg.fs
+  $0x40010100 constant SYSCFG_CONTINUE  \ See syscfg_continue.fs
+  $0x4000B000 constant TAMP             \ See tamp.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x40014800 constant TIM17            \ See tim17.fs
+  $0x58004800 constant TZIC             \ See tzic.fs
+  $0x58004400 constant TZSC             \ See tzsc.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40010030 constant VREFBUF          \ See vrefbuf.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ Analog to digital convertor
-.include AES                    \ Advanced encryption standard hardware accelerator 1
-.include COMP                   \ Comparator
-.include CRC                    \ Cyclic redundancy check calculation unit
-.include DAC                    \ Digital-to-analog converter
-.include DMA1                   \ Direct memory access controller
-.include DMA2                   \ DMA2 channel 7:1 secure and non-secure interrupt (C2IMR2[14:8]),DMAMUX1 overrun interrupt (C2IMR2[15])
-.include DMAMUX                 \ DMA request multiplexer
-.include EXTI                   \ External interrupt/event controller
-.include FLASH                  \ Flash
-.include GPIOA                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOH                  \ General-purpose I/Os
-.include HSEM                   \ Hardware semaphore
-.include I2C1                   \ Inter-integrated circuit
-.include I2C2                   \ I2C2 event interrupt , I2C2 error interrupt
-.include I2C3                   \ I2C3 event interrupt , I2C2 error interrupt
-.include IPCC                   \ Inter Processor communication controller
-.include IWDG                   \ Independent watchdog
-.include LPTIM1                 \ Low-power timer
-.include LPTIM2                 \ Low-power timer
-.include LPTIM3                 \ Low-power timer
-.include LPUART                 \ Universal synchronous asynchronous receiver transmitter
-.include PKA                    \ Public key accelerator
-.include PWR                    \ Power control
-.include RCC                    \ Reset and clock control
-.include RNG                    \ True random number generator
-.include RTC                    \ Real-time clock
-.include SPI1                   \ Serial peripheral interface/Inter-IC sound
-.include SPI2                   \ SPI2S2 global interrupt
-.include SPI3                   \ Sub-GHz radio SPI global interrupt
-.include SYSCFG                 \ System configuration controller
-.include SYSCFG_CONTINUE        \ System configuration controller
-.include TAMP                   \ Tamper and backup registers
-.include TIM1                   \ Advanced-control timers
-.include TIM2                   \ General-purpose-timers
-.include TIM16                  \ General-purpose timers
-.include TIM17                  \ General-purpose timers
-.include TZIC                   \ TrustZone Interrupt Control
-.include TZSC                   \ Global TrustZone Controller
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include USART2                 \ USART2 global interrupt
-.include VREFBUF                \ Voltage reference buffer
-.include WWDG                   \ System window watchdog
-
-compiletoram
-
+: STM32WL5X_CM0P_LOADER ; [then]

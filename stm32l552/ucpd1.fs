@@ -6,232 +6,247 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] UCPD1_DEF
 
-\
-\ @brief UCPD configuration register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000003f constant UCPD1_CFG1_HBITCLKDIV                            \ HBITCLKDIV
-$000007c0 constant UCPD1_CFG1_IFRGAP                                \ IFRGAP
-$0000f800 constant UCPD1_CFG1_TRANSWIN                              \ TRANSWIN
-$000e0000 constant UCPD1_CFG1_PSC_USBPDCLK                          \ PSC_USBPDCLK
-$1ff00000 constant UCPD1_CFG1_RXORDSETEN                            \ RXORDSETEN
-$20000000 constant UCPD1_CFG1_TXDMAEN                               \ TXDMAEN
-$40000000 constant UCPD1_CFG1_RXDMAEN                               \ RXDMAEN:
-$80000000 constant UCPD1_CFG1_UCPDEN                                \ UCPDEN
-
-
-\
-\ @brief UCPD configuration register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD1_CFG2_RXFILTDIS                             \ RXFILTDIS
-$00000002 constant UCPD1_CFG2_RXFILT2N3                             \ RXFILT2N3
-$00000004 constant UCPD1_CFG2_FORCECLK                              \ FORCECLK
-$00000008 constant UCPD1_CFG2_WUPEN                                 \ WUPEN
+  [ifdef] UCPD1_CFG1_DEF
+    \
+    \ @brief UCPD configuration register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_HBITCLKDIV               \ [0x00 : 6] HBITCLKDIV
+    $06 constant UCPD1_IFRGAP                   \ [0x06 : 5] IFRGAP
+    $0b constant UCPD1_TRANSWIN                 \ [0x0b : 5] TRANSWIN
+    $11 constant UCPD1_PSC_USBPDCLK             \ [0x11 : 3] PSC_USBPDCLK
+    $14 constant UCPD1_RXORDSETEN               \ [0x14 : 9] RXORDSETEN
+    $1d constant UCPD1_TXDMAEN                  \ [0x1d] TXDMAEN
+    $1e constant UCPD1_RXDMAEN                  \ [0x1e] RXDMAEN:
+    $1f constant UCPD1_UCPDEN                   \ [0x1f] UCPDEN
+  [then]
 
 
-\
-\ @brief UCPD configuration register 3
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant UCPD1_CFG3_TRIM1_NG_CCRPD                        \ TRIM1_NG_CCRPD
-$000001f0 constant UCPD1_CFG3_TRIM1_NG_CC1A5                        \ TRIM1_NG_CC1A5
-$00001e00 constant UCPD1_CFG3_TRIM1_NG_CC3A0                        \ TRIM1_NG_CC3A0
-$000f0000 constant UCPD1_CFG3_TRIM2_NG_CCRPD                        \ TRIM2_NG_CCRPD
-$01f00000 constant UCPD1_CFG3_TRIM2_NG_CC1A5                        \ TRIM2_NG_CC1A5
-$1e000000 constant UCPD1_CFG3_TRIM2_NG_CC3A0                        \ TRIM2_NG_CC3A0
-
-
-\
-\ @brief UCPD control register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant UCPD1_CR_TXMODE                                  \ TXMODE
-$00000004 constant UCPD1_CR_TXSEND                                  \ TXSEND
-$00000008 constant UCPD1_CR_TXHRST                                  \ TXHRST
-$00000010 constant UCPD1_CR_RXMODE                                  \ RXMODE
-$00000020 constant UCPD1_CR_PHYRXEN                                 \ PHYRXEN
-$00000040 constant UCPD1_CR_PHYCCSEL                                \ PHYCCSEL
-$00000180 constant UCPD1_CR_ANASUBMODE                              \ ANASUBMODE
-$00000200 constant UCPD1_CR_ANAMODE                                 \ ANAMODE
-$00000c00 constant UCPD1_CR_CCENABLE                                \ CCENABLE
-$00010000 constant UCPD1_CR_FRSRXEN                                 \ FRSRXEN
-$00020000 constant UCPD1_CR_FRSTX                                   \ FRSTX
-$00040000 constant UCPD1_CR_RDCH                                    \ RDCH
-$00100000 constant UCPD1_CR_CC1TCDIS                                \ CC1TCDIS
-$00200000 constant UCPD1_CR_CC2TCDIS                                \ CC2TCDIS
+  [ifdef] UCPD1_CFG2_DEF
+    \
+    \ @brief UCPD configuration register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_RXFILTDIS                \ [0x00] RXFILTDIS
+    $01 constant UCPD1_RXFILT2N3                \ [0x01] RXFILT2N3
+    $02 constant UCPD1_FORCECLK                 \ [0x02] FORCECLK
+    $03 constant UCPD1_WUPEN                    \ [0x03] WUPEN
+  [then]
 
 
-\
-\ @brief UCPD Interrupt Mask Register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD1_IMR_TXISIE                                 \ TXISIE
-$00000002 constant UCPD1_IMR_TXMSGDISCIE                            \ TXMSGDISCIE
-$00000004 constant UCPD1_IMR_TXMSGSENTIE                            \ TXMSGSENTIE
-$00000008 constant UCPD1_IMR_TXMSGABTIE                             \ TXMSGABTIE
-$00000010 constant UCPD1_IMR_HRSTDISCIE                             \ HRSTDISCIE
-$00000020 constant UCPD1_IMR_HRSTSENTIE                             \ HRSTSENTIE
-$00000040 constant UCPD1_IMR_TXUNDIE                                \ TXUNDIE
-$00000100 constant UCPD1_IMR_RXNEIE                                 \ RXNEIE
-$00000200 constant UCPD1_IMR_RXORDDETIE                             \ RXORDDETIE
-$00000400 constant UCPD1_IMR_RXHRSTDETIE                            \ RXHRSTDETIE
-$00000800 constant UCPD1_IMR_RXOVRIE                                \ RXOVRIE
-$00001000 constant UCPD1_IMR_RXMSGENDIE                             \ RXMSGENDIE
-$00004000 constant UCPD1_IMR_TYPECEVT1IE                            \ TYPECEVT1IE
-$00008000 constant UCPD1_IMR_TYPECEVT2IE                            \ TYPECEVT2IE
-$00100000 constant UCPD1_IMR_FRSEVTIE                               \ FRSEVTIE
+  [ifdef] UCPD1_CFG3_DEF
+    \
+    \ @brief UCPD configuration register 3
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_TRIM1_NG_CCRPD           \ [0x00 : 4] TRIM1_NG_CCRPD
+    $04 constant UCPD1_TRIM1_NG_CC1A5           \ [0x04 : 5] TRIM1_NG_CC1A5
+    $09 constant UCPD1_TRIM1_NG_CC3A0           \ [0x09 : 4] TRIM1_NG_CC3A0
+    $10 constant UCPD1_TRIM2_NG_CCRPD           \ [0x10 : 4] TRIM2_NG_CCRPD
+    $14 constant UCPD1_TRIM2_NG_CC1A5           \ [0x14 : 5] TRIM2_NG_CC1A5
+    $19 constant UCPD1_TRIM2_NG_CC3A0           \ [0x19 : 4] TRIM2_NG_CC3A0
+  [then]
 
 
-\
-\ @brief UCPD Status Register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD1_SR_TXIS                                    \ TXIS
-$00000002 constant UCPD1_SR_TXMSGDISC                               \ TXMSGDISC
-$00000004 constant UCPD1_SR_TXMSGSENT                               \ TXMSGSENT
-$00000008 constant UCPD1_SR_TXMSGABT                                \ TXMSGABT
-$00000010 constant UCPD1_SR_HRSTDISC                                \ HRSTDISC
-$00000020 constant UCPD1_SR_HRSTSENT                                \ HRSTSENT
-$00000040 constant UCPD1_SR_TXUND                                   \ TXUND
-$00000100 constant UCPD1_SR_RXNE                                    \ RXNE
-$00000200 constant UCPD1_SR_RXORDDET                                \ RXORDDET
-$00000400 constant UCPD1_SR_RXHRSTDET                               \ RXHRSTDET
-$00000800 constant UCPD1_SR_RXOVR                                   \ RXOVR
-$00001000 constant UCPD1_SR_RXMSGEND                                \ RXMSGEND
-$00002000 constant UCPD1_SR_RXERR                                   \ RXERR
-$00004000 constant UCPD1_SR_TYPECEVT1                               \ TYPECEVT1
-$00008000 constant UCPD1_SR_TYPECEVT2                               \ TYPECEVT2
-$00030000 constant UCPD1_SR_TYPEC_VSTATE_CC1                        \ TYPEC_VSTATE_CC1
-$000c0000 constant UCPD1_SR_TYPEC_VSTATE_CC2                        \ TYPEC_VSTATE_CC2
-$00100000 constant UCPD1_SR_FRSEVT                                  \ FRSEVT
+  [ifdef] UCPD1_CR_DEF
+    \
+    \ @brief UCPD control register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_TXMODE                   \ [0x00 : 2] TXMODE
+    $02 constant UCPD1_TXSEND                   \ [0x02] TXSEND
+    $03 constant UCPD1_TXHRST                   \ [0x03] TXHRST
+    $04 constant UCPD1_RXMODE                   \ [0x04] RXMODE
+    $05 constant UCPD1_PHYRXEN                  \ [0x05] PHYRXEN
+    $06 constant UCPD1_PHYCCSEL                 \ [0x06] PHYCCSEL
+    $07 constant UCPD1_ANASUBMODE               \ [0x07 : 2] ANASUBMODE
+    $09 constant UCPD1_ANAMODE                  \ [0x09] ANAMODE
+    $0a constant UCPD1_CCENABLE                 \ [0x0a : 2] CCENABLE
+    $10 constant UCPD1_FRSRXEN                  \ [0x10] FRSRXEN
+    $11 constant UCPD1_FRSTX                    \ [0x11] FRSTX
+    $12 constant UCPD1_RDCH                     \ [0x12] RDCH
+    $14 constant UCPD1_CC1TCDIS                 \ [0x14] CC1TCDIS
+    $15 constant UCPD1_CC2TCDIS                 \ [0x15] CC2TCDIS
+  [then]
 
 
-\
-\ @brief UCPD Interrupt Clear Register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000002 constant UCPD1_ICR_TXMSGDISCCF                            \ TXMSGDISCCF
-$00000004 constant UCPD1_ICR_TXMSGSENTCF                            \ TXMSGSENTCF
-$00000008 constant UCPD1_ICR_TXMSGABTCF                             \ TXMSGABTCF
-$00000010 constant UCPD1_ICR_HRSTDISCCF                             \ HRSTDISCCF
-$00000020 constant UCPD1_ICR_HRSTSENTCF                             \ HRSTSENTCF
-$00000040 constant UCPD1_ICR_TXUNDCF                                \ TXUNDCF
-$00000200 constant UCPD1_ICR_RXORDDETCF                             \ RXORDDETCF
-$00000400 constant UCPD1_ICR_RXHRSTDETCF                            \ RXHRSTDETCF
-$00000800 constant UCPD1_ICR_RXOVRCF                                \ RXOVRCF
-$00001000 constant UCPD1_ICR_RXMSGENDCF                             \ RXMSGENDCF
-$00004000 constant UCPD1_ICR_TYPECEVT1CF                            \ TYPECEVT1CF
-$00008000 constant UCPD1_ICR_TYPECEVT2CF                            \ TYPECEVT2CF
-$00100000 constant UCPD1_ICR_FRSEVTCF                               \ FRSEVTCF
-
-
-\
-\ @brief UCPD Tx Ordered Set Type Register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$000fffff constant UCPD1_TX_ORDSET_TXORDSET                         \ TXORDSET
+  [ifdef] UCPD1_IMR_DEF
+    \
+    \ @brief UCPD Interrupt Mask Register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_TXISIE                   \ [0x00] TXISIE
+    $01 constant UCPD1_TXMSGDISCIE              \ [0x01] TXMSGDISCIE
+    $02 constant UCPD1_TXMSGSENTIE              \ [0x02] TXMSGSENTIE
+    $03 constant UCPD1_TXMSGABTIE               \ [0x03] TXMSGABTIE
+    $04 constant UCPD1_HRSTDISCIE               \ [0x04] HRSTDISCIE
+    $05 constant UCPD1_HRSTSENTIE               \ [0x05] HRSTSENTIE
+    $06 constant UCPD1_TXUNDIE                  \ [0x06] TXUNDIE
+    $08 constant UCPD1_RXNEIE                   \ [0x08] RXNEIE
+    $09 constant UCPD1_RXORDDETIE               \ [0x09] RXORDDETIE
+    $0a constant UCPD1_RXHRSTDETIE              \ [0x0a] RXHRSTDETIE
+    $0b constant UCPD1_RXOVRIE                  \ [0x0b] RXOVRIE
+    $0c constant UCPD1_RXMSGENDIE               \ [0x0c] RXMSGENDIE
+    $0e constant UCPD1_TYPECEVT1IE              \ [0x0e] TYPECEVT1IE
+    $0f constant UCPD1_TYPECEVT2IE              \ [0x0f] TYPECEVT2IE
+    $14 constant UCPD1_FRSEVTIE                 \ [0x14] FRSEVTIE
+  [then]
 
 
-\
-\ @brief UCPD Tx Paysize Register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$000003ff constant UCPD1_TX_PAYSZ_TXPAYSZ                           \ TXPAYSZ
-
-
-\
-\ @brief UCPD Tx Data Register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000000ff constant UCPD1_TXDR_TXDATA                                \ TXDATA
-
-
-\
-\ @brief UCPD Rx Ordered Set Register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000007 constant UCPD1_RX_ORDSET_RXORDSET                         \ RXORDSET
-$00000008 constant UCPD1_RX_ORDSET_RXSOP3OF4                        \ RXSOP3OF4
-$00000070 constant UCPD1_RX_ORDSET_RXSOPKINVALID                    \ RXSOPKINVALID
+  [ifdef] UCPD1_SR_DEF
+    \
+    \ @brief UCPD Status Register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_TXIS                     \ [0x00] TXIS
+    $01 constant UCPD1_TXMSGDISC                \ [0x01] TXMSGDISC
+    $02 constant UCPD1_TXMSGSENT                \ [0x02] TXMSGSENT
+    $03 constant UCPD1_TXMSGABT                 \ [0x03] TXMSGABT
+    $04 constant UCPD1_HRSTDISC                 \ [0x04] HRSTDISC
+    $05 constant UCPD1_HRSTSENT                 \ [0x05] HRSTSENT
+    $06 constant UCPD1_TXUND                    \ [0x06] TXUND
+    $08 constant UCPD1_RXNE                     \ [0x08] RXNE
+    $09 constant UCPD1_RXORDDET                 \ [0x09] RXORDDET
+    $0a constant UCPD1_RXHRSTDET                \ [0x0a] RXHRSTDET
+    $0b constant UCPD1_RXOVR                    \ [0x0b] RXOVR
+    $0c constant UCPD1_RXMSGEND                 \ [0x0c] RXMSGEND
+    $0d constant UCPD1_RXERR                    \ [0x0d] RXERR
+    $0e constant UCPD1_TYPECEVT1                \ [0x0e] TYPECEVT1
+    $0f constant UCPD1_TYPECEVT2                \ [0x0f] TYPECEVT2
+    $10 constant UCPD1_TYPEC_VSTATE_CC1         \ [0x10 : 2] TYPEC_VSTATE_CC1
+    $12 constant UCPD1_TYPEC_VSTATE_CC2         \ [0x12 : 2] TYPEC_VSTATE_CC2
+    $14 constant UCPD1_FRSEVT                   \ [0x14] FRSEVT
+  [then]
 
 
-\
-\ @brief UCPD Rx Paysize Register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$000003ff constant UCPD1_RX_PAYSZ_RXPAYSZ                           \ RXPAYSZ
-
-
-\
-\ @brief UCPD Receive Data Register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$000000ff constant UCPD1_RXDR_RXDATA                                \ RXDATA
-
-
-\
-\ @brief UCPD Rx Ordered Set Extension Register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$000fffff constant UCPD1_RX_ORDEXT1_RXSOPX1                         \ RXSOPX1
+  [ifdef] UCPD1_ICR_DEF
+    \
+    \ @brief UCPD Interrupt Clear Register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $01 constant UCPD1_TXMSGDISCCF              \ [0x01] TXMSGDISCCF
+    $02 constant UCPD1_TXMSGSENTCF              \ [0x02] TXMSGSENTCF
+    $03 constant UCPD1_TXMSGABTCF               \ [0x03] TXMSGABTCF
+    $04 constant UCPD1_HRSTDISCCF               \ [0x04] HRSTDISCCF
+    $05 constant UCPD1_HRSTSENTCF               \ [0x05] HRSTSENTCF
+    $06 constant UCPD1_TXUNDCF                  \ [0x06] TXUNDCF
+    $09 constant UCPD1_RXORDDETCF               \ [0x09] RXORDDETCF
+    $0a constant UCPD1_RXHRSTDETCF              \ [0x0a] RXHRSTDETCF
+    $0b constant UCPD1_RXOVRCF                  \ [0x0b] RXOVRCF
+    $0c constant UCPD1_RXMSGENDCF               \ [0x0c] RXMSGENDCF
+    $0e constant UCPD1_TYPECEVT1CF              \ [0x0e] TYPECEVT1CF
+    $0f constant UCPD1_TYPECEVT2CF              \ [0x0f] TYPECEVT2CF
+    $14 constant UCPD1_FRSEVTCF                 \ [0x14] FRSEVTCF
+  [then]
 
 
-\
-\ @brief UCPD Rx Ordered Set Extension Register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
+  [ifdef] UCPD1_TX_ORDSET_DEF
+    \
+    \ @brief UCPD Tx Ordered Set Type Register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_TXORDSET                 \ [0x00 : 20] TXORDSET
+  [then]
 
-$000fffff constant UCPD1_RX_ORDEXT2_RXSOPX2                         \ RXSOPX2
+
+  [ifdef] UCPD1_TX_PAYSZ_DEF
+    \
+    \ @brief UCPD Tx Paysize Register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_TXPAYSZ                  \ [0x00 : 10] TXPAYSZ
+  [then]
 
 
-\
-\ @brief USB Power Delivery interface
-\
-$4000dc00 constant UCPD1_CFG1     \ offset: 0x00 : UCPD configuration register
-$4000dc04 constant UCPD1_CFG2     \ offset: 0x04 : UCPD configuration register 2
-$4000dc08 constant UCPD1_CFG3     \ offset: 0x08 : UCPD configuration register 3
-$4000dc0c constant UCPD1_CR       \ offset: 0x0C : UCPD control register
-$4000dc10 constant UCPD1_IMR      \ offset: 0x10 : UCPD Interrupt Mask Register
-$4000dc14 constant UCPD1_SR       \ offset: 0x14 : UCPD Status Register
-$4000dc18 constant UCPD1_ICR      \ offset: 0x18 : UCPD Interrupt Clear Register
-$4000dc1c constant UCPD1_TX_ORDSET  \ offset: 0x1C : UCPD Tx Ordered Set Type Register
-$4000dc20 constant UCPD1_TX_PAYSZ  \ offset: 0x20 : UCPD Tx Paysize Register
-$4000dc24 constant UCPD1_TXDR     \ offset: 0x24 : UCPD Tx Data Register
-$4000dc28 constant UCPD1_RX_ORDSET  \ offset: 0x28 : UCPD Rx Ordered Set Register
-$4000dc2c constant UCPD1_RX_PAYSZ  \ offset: 0x2C : UCPD Rx Paysize Register
-$4000dc30 constant UCPD1_RXDR     \ offset: 0x30 : UCPD Receive Data Register
-$4000dc34 constant UCPD1_RX_ORDEXT1  \ offset: 0x34 : UCPD Rx Ordered Set Extension Register
-$4000dc38 constant UCPD1_RX_ORDEXT2  \ offset: 0x38 : UCPD Rx Ordered Set Extension Register
+  [ifdef] UCPD1_TXDR_DEF
+    \
+    \ @brief UCPD Tx Data Register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_TXDATA                   \ [0x00 : 8] TXDATA
+  [then]
 
+
+  [ifdef] UCPD1_RX_ORDSET_DEF
+    \
+    \ @brief UCPD Rx Ordered Set Register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_RXORDSET                 \ [0x00 : 3] RXORDSET
+    $03 constant UCPD1_RXSOP3OF4                \ [0x03] RXSOP3OF4
+    $04 constant UCPD1_RXSOPKINVALID            \ [0x04 : 3] RXSOPKINVALID
+  [then]
+
+
+  [ifdef] UCPD1_RX_PAYSZ_DEF
+    \
+    \ @brief UCPD Rx Paysize Register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_RXPAYSZ                  \ [0x00 : 10] RXPAYSZ
+  [then]
+
+
+  [ifdef] UCPD1_RXDR_DEF
+    \
+    \ @brief UCPD Receive Data Register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_RXDATA                   \ [0x00 : 8] RXDATA
+  [then]
+
+
+  [ifdef] UCPD1_RX_ORDEXT1_DEF
+    \
+    \ @brief UCPD Rx Ordered Set Extension Register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_RXSOPX1                  \ [0x00 : 20] RXSOPX1
+  [then]
+
+
+  [ifdef] UCPD1_RX_ORDEXT2_DEF
+    \
+    \ @brief UCPD Rx Ordered Set Extension Register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD1_RXSOPX2                  \ [0x00 : 20] RXSOPX2
+  [then]
+
+  \
+  \ @brief USB Power Delivery interface
+  \
+  $00 constant UCPD1_CFG1               \ UCPD configuration register
+  $04 constant UCPD1_CFG2               \ UCPD configuration register 2
+  $08 constant UCPD1_CFG3               \ UCPD configuration register 3
+  $0C constant UCPD1_CR                 \ UCPD control register
+  $10 constant UCPD1_IMR                \ UCPD Interrupt Mask Register
+  $14 constant UCPD1_SR                 \ UCPD Status Register
+  $18 constant UCPD1_ICR                \ UCPD Interrupt Clear Register
+  $1C constant UCPD1_TX_ORDSET          \ UCPD Tx Ordered Set Type Register
+  $20 constant UCPD1_TX_PAYSZ           \ UCPD Tx Paysize Register
+  $24 constant UCPD1_TXDR               \ UCPD Tx Data Register
+  $28 constant UCPD1_RX_ORDSET          \ UCPD Rx Ordered Set Register
+  $2C constant UCPD1_RX_PAYSZ           \ UCPD Rx Paysize Register
+  $30 constant UCPD1_RXDR               \ UCPD Receive Data Register
+  $34 constant UCPD1_RX_ORDEXT1         \ UCPD Rx Ordered Set Extension Register
+  $38 constant UCPD1_RX_ORDEXT2         \ UCPD Rx Ordered Set Extension Register
+
+: UCPD1_DEF ; [then]

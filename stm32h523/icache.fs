@@ -6,139 +6,149 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ICACHE_DEF
 
-\
-\ @brief ICACHE control register
-\ Address offset: 0x00
-\ Reset value: 0x00000004
-\
-
-$00000001 constant ICACHE_ICACHE_CR_EN                              \ enable
-$00000002 constant ICACHE_ICACHE_CR_CACHEINV                        \ cache invalidation
-$00000004 constant ICACHE_ICACHE_CR_WAYSEL                          \ cache associativity mode selection
-$00010000 constant ICACHE_ICACHE_CR_HITMEN                          \ hit monitor enable
-$00020000 constant ICACHE_ICACHE_CR_MISSMEN                         \ miss monitor enable
-$00040000 constant ICACHE_ICACHE_CR_HITMRST                         \ hit monitor reset
-$00080000 constant ICACHE_ICACHE_CR_MISSMRST                        \ miss monitor reset
-
-
-\
-\ @brief ICACHE status register
-\ Address offset: 0x04
-\ Reset value: 0x00000001
-\
-
-$00000001 constant ICACHE_ICACHE_SR_BUSYF                           \ busy flag
-$00000002 constant ICACHE_ICACHE_SR_BSYENDF                         \ busy end flag
-$00000004 constant ICACHE_ICACHE_SR_ERRF                            \ cache error flag
+  [ifdef] ICACHE_ICACHE_CR_DEF
+    \
+    \ @brief ICACHE control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000004
+    \
+    $00 constant ICACHE_EN                      \ [0x00] enable
+    $01 constant ICACHE_CACHEINV                \ [0x01] cache invalidation
+    $02 constant ICACHE_WAYSEL                  \ [0x02] cache associativity mode selection
+    $10 constant ICACHE_HITMEN                  \ [0x10] hit monitor enable
+    $11 constant ICACHE_MISSMEN                 \ [0x11] miss monitor enable
+    $12 constant ICACHE_HITMRST                 \ [0x12] hit monitor reset
+    $13 constant ICACHE_MISSMRST                \ [0x13] miss monitor reset
+  [then]
 
 
-\
-\ @brief ICACHE interrupt enable register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000002 constant ICACHE_ICACHE_IER_BSYENDIE                       \ interrupt enable on busy end
-$00000004 constant ICACHE_ICACHE_IER_ERRIE                          \ interrupt enable on cache error
-
-
-\
-\ @brief ICACHE flag clear register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant ICACHE_ICACHE_FCR_CBSYENDF                       \ clear busy end flag
-$00000004 constant ICACHE_ICACHE_FCR_CERRF                          \ clear cache error flag
+  [ifdef] ICACHE_ICACHE_SR_DEF
+    \
+    \ @brief ICACHE status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000001
+    \
+    $00 constant ICACHE_BUSYF                   \ [0x00] busy flag
+    $01 constant ICACHE_BSYENDF                 \ [0x01] busy end flag
+    $02 constant ICACHE_ERRF                    \ [0x02] cache error flag
+  [then]
 
 
-\
-\ @brief ICACHE hit monitor register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ICACHE_ICACHE_HMONR_HITMON                       \ cache hit monitor counter
-
-
-\
-\ @brief ICACHE miss monitor register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ICACHE_ICACHE_MMONR_MISSMON                      \ cache miss monitor counter
+  [ifdef] ICACHE_ICACHE_IER_DEF
+    \
+    \ @brief ICACHE interrupt enable register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $01 constant ICACHE_BSYENDIE                \ [0x01] interrupt enable on busy end
+    $02 constant ICACHE_ERRIE                   \ [0x02] interrupt enable on cache error
+  [then]
 
 
-\
-\ @brief ICACHE region 0 configuration register
-\ Address offset: 0x20
-\ Reset value: 0x00000200
-\
-
-$000000ff constant ICACHE_ICACHE_CRR0_BASEADDR                      \ base address for region x
-$00000e00 constant ICACHE_ICACHE_CRR0_RSIZE                         \ size for region x
-$00008000 constant ICACHE_ICACHE_CRR0_REN                           \ enable for region x
-$07ff0000 constant ICACHE_ICACHE_CRR0_REMAPADDR                     \ remapped address for region x
-$10000000 constant ICACHE_ICACHE_CRR0_MSTSEL                        \ AHB cache master selection for region x
-$80000000 constant ICACHE_ICACHE_CRR0_HBURST                        \ output burst type for region x
+  [ifdef] ICACHE_ICACHE_FCR_DEF
+    \
+    \ @brief ICACHE flag clear register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $01 constant ICACHE_CBSYENDF                \ [0x01] clear busy end flag
+    $02 constant ICACHE_CERRF                   \ [0x02] clear cache error flag
+  [then]
 
 
-\
-\ @brief ICACHE region 1 configuration register
-\ Address offset: 0x24
-\ Reset value: 0x00000200
-\
-
-$000000ff constant ICACHE_ICACHE_CRR1_BASEADDR                      \ base address for region x
-$00000e00 constant ICACHE_ICACHE_CRR1_RSIZE                         \ size for region x
-$00008000 constant ICACHE_ICACHE_CRR1_REN                           \ enable for region x
-$07ff0000 constant ICACHE_ICACHE_CRR1_REMAPADDR                     \ remapped address for region x
-$10000000 constant ICACHE_ICACHE_CRR1_MSTSEL                        \ AHB cache master selection for region x
-$80000000 constant ICACHE_ICACHE_CRR1_HBURST                        \ output burst type for region x
+  [ifdef] ICACHE_ICACHE_HMONR_DEF
+    \
+    \ @brief ICACHE hit monitor register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant ICACHE_HITMON                  \ [0x00 : 32] cache hit monitor counter
+  [then]
 
 
-\
-\ @brief ICACHE region 2 configuration register
-\ Address offset: 0x28
-\ Reset value: 0x00000200
-\
-
-$000000ff constant ICACHE_ICACHE_CRR2_BASEADDR                      \ base address for region x
-$00000e00 constant ICACHE_ICACHE_CRR2_RSIZE                         \ size for region x
-$00008000 constant ICACHE_ICACHE_CRR2_REN                           \ enable for region x
-$07ff0000 constant ICACHE_ICACHE_CRR2_REMAPADDR                     \ remapped address for region x
-$10000000 constant ICACHE_ICACHE_CRR2_MSTSEL                        \ AHB cache master selection for region x
-$80000000 constant ICACHE_ICACHE_CRR2_HBURST                        \ output burst type for region x
+  [ifdef] ICACHE_ICACHE_MMONR_DEF
+    \
+    \ @brief ICACHE miss monitor register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant ICACHE_MISSMON                 \ [0x00 : 16] cache miss monitor counter
+  [then]
 
 
-\
-\ @brief ICACHE region 3 configuration register
-\ Address offset: 0x2C
-\ Reset value: 0x00000200
-\
+  [ifdef] ICACHE_ICACHE_CRR0_DEF
+    \
+    \ @brief ICACHE region 0 configuration register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000200
+    \
+    $00 constant ICACHE_BASEADDR                \ [0x00 : 8] base address for region x
+    $09 constant ICACHE_RSIZE                   \ [0x09 : 3] size for region x
+    $0f constant ICACHE_REN                     \ [0x0f] enable for region x
+    $10 constant ICACHE_REMAPADDR               \ [0x10 : 11] remapped address for region x
+    $1c constant ICACHE_MSTSEL                  \ [0x1c] AHB cache master selection for region x
+    $1f constant ICACHE_HBURST                  \ [0x1f] output burst type for region x
+  [then]
 
-$000000ff constant ICACHE_ICACHE_CRR3_BASEADDR                      \ base address for region x
-$00000e00 constant ICACHE_ICACHE_CRR3_RSIZE                         \ size for region x
-$00008000 constant ICACHE_ICACHE_CRR3_REN                           \ enable for region x
-$07ff0000 constant ICACHE_ICACHE_CRR3_REMAPADDR                     \ remapped address for region x
-$10000000 constant ICACHE_ICACHE_CRR3_MSTSEL                        \ AHB cache master selection for region x
-$80000000 constant ICACHE_ICACHE_CRR3_HBURST                        \ output burst type for region x
+
+  [ifdef] ICACHE_ICACHE_CRR1_DEF
+    \
+    \ @brief ICACHE region 1 configuration register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000200
+    \
+    $00 constant ICACHE_BASEADDR                \ [0x00 : 8] base address for region x
+    $09 constant ICACHE_RSIZE                   \ [0x09 : 3] size for region x
+    $0f constant ICACHE_REN                     \ [0x0f] enable for region x
+    $10 constant ICACHE_REMAPADDR               \ [0x10 : 11] remapped address for region x
+    $1c constant ICACHE_MSTSEL                  \ [0x1c] AHB cache master selection for region x
+    $1f constant ICACHE_HBURST                  \ [0x1f] output burst type for region x
+  [then]
 
 
-\
-\ @brief ICACHE register block
-\
-$40030400 constant ICACHE_ICACHE_CR  \ offset: 0x00 : ICACHE control register
-$40030404 constant ICACHE_ICACHE_SR  \ offset: 0x04 : ICACHE status register
-$40030408 constant ICACHE_ICACHE_IER  \ offset: 0x08 : ICACHE interrupt enable register
-$4003040c constant ICACHE_ICACHE_FCR  \ offset: 0x0C : ICACHE flag clear register
-$40030410 constant ICACHE_ICACHE_HMONR  \ offset: 0x10 : ICACHE hit monitor register
-$40030414 constant ICACHE_ICACHE_MMONR  \ offset: 0x14 : ICACHE miss monitor register
-$40030420 constant ICACHE_ICACHE_CRR0  \ offset: 0x20 : ICACHE region 0 configuration register
-$40030424 constant ICACHE_ICACHE_CRR1  \ offset: 0x24 : ICACHE region 1 configuration register
-$40030428 constant ICACHE_ICACHE_CRR2  \ offset: 0x28 : ICACHE region 2 configuration register
-$4003042c constant ICACHE_ICACHE_CRR3  \ offset: 0x2C : ICACHE region 3 configuration register
+  [ifdef] ICACHE_ICACHE_CRR2_DEF
+    \
+    \ @brief ICACHE region 2 configuration register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000200
+    \
+    $00 constant ICACHE_BASEADDR                \ [0x00 : 8] base address for region x
+    $09 constant ICACHE_RSIZE                   \ [0x09 : 3] size for region x
+    $0f constant ICACHE_REN                     \ [0x0f] enable for region x
+    $10 constant ICACHE_REMAPADDR               \ [0x10 : 11] remapped address for region x
+    $1c constant ICACHE_MSTSEL                  \ [0x1c] AHB cache master selection for region x
+    $1f constant ICACHE_HBURST                  \ [0x1f] output burst type for region x
+  [then]
 
+
+  [ifdef] ICACHE_ICACHE_CRR3_DEF
+    \
+    \ @brief ICACHE region 3 configuration register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000200
+    \
+    $00 constant ICACHE_BASEADDR                \ [0x00 : 8] base address for region x
+    $09 constant ICACHE_RSIZE                   \ [0x09 : 3] size for region x
+    $0f constant ICACHE_REN                     \ [0x0f] enable for region x
+    $10 constant ICACHE_REMAPADDR               \ [0x10 : 11] remapped address for region x
+    $1c constant ICACHE_MSTSEL                  \ [0x1c] AHB cache master selection for region x
+    $1f constant ICACHE_HBURST                  \ [0x1f] output burst type for region x
+  [then]
+
+  \
+  \ @brief ICACHE register block
+  \
+  $00 constant ICACHE_ICACHE_CR         \ ICACHE control register
+  $04 constant ICACHE_ICACHE_SR         \ ICACHE status register
+  $08 constant ICACHE_ICACHE_IER        \ ICACHE interrupt enable register
+  $0C constant ICACHE_ICACHE_FCR        \ ICACHE flag clear register
+  $10 constant ICACHE_ICACHE_HMONR      \ ICACHE hit monitor register
+  $14 constant ICACHE_ICACHE_MMONR      \ ICACHE miss monitor register
+  $20 constant ICACHE_ICACHE_CRR0       \ ICACHE region 0 configuration register
+  $24 constant ICACHE_ICACHE_CRR1       \ ICACHE region 1 configuration register
+  $28 constant ICACHE_ICACHE_CRR2       \ ICACHE region 2 configuration register
+  $2C constant ICACHE_ICACHE_CRR3       \ ICACHE region 3 configuration register
+
+: ICACHE_DEF ; [then]

@@ -6,23 +6,24 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SCB_ACTRL_DEF
 
-\
-\ @brief Auxiliary control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
+  [ifdef] SCB_ACTRL_ACTRL_DEF
+    \
+    \ @brief Auxiliary control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SCB_ACTRL_DISMCYCINT           \ [0x00] DISMCYCINT
+    $01 constant SCB_ACTRL_DISDEFWBUF           \ [0x01] DISDEFWBUF
+    $02 constant SCB_ACTRL_DISFOLD              \ [0x02] DISFOLD
+    $08 constant SCB_ACTRL_DISFPCA              \ [0x08] DISFPCA
+    $09 constant SCB_ACTRL_DISOOFP              \ [0x09] DISOOFP
+  [then]
 
-$00000001 constant SCB_ACTRL_ACTRL_DISMCYCINT                       \ DISMCYCINT
-$00000002 constant SCB_ACTRL_ACTRL_DISDEFWBUF                       \ DISDEFWBUF
-$00000004 constant SCB_ACTRL_ACTRL_DISFOLD                          \ DISFOLD
-$00000100 constant SCB_ACTRL_ACTRL_DISFPCA                          \ DISFPCA
-$00000200 constant SCB_ACTRL_ACTRL_DISOOFP                          \ DISOOFP
+  \
+  \ @brief System control block ACTLR
+  \
+  $00 constant SCB_ACTRL_ACTRL          \ Auxiliary control register
 
-
-\
-\ @brief System control block ACTLR
-\
-$e000e008 constant SCB_ACTRL_ACTRL  \ offset: 0x00 : Auxiliary control register
-
+: SCB_ACTRL_DEF ; [then]

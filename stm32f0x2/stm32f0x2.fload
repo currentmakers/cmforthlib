@@ -1,104 +1,87 @@
 \
-\ @file stm32f0x2.h
-\ @brief Loader for all peripherals in a STM32F0x2
+\ @file stm32f0x2.fload
+\ @brief Device header for STM32F0x2
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include crc.fs
-.include gpiof.fs
-.include gpiod.fs
-.include gpioc.fs
-.include gpiob.fs
-.include gpioe.fs
-.include gpioa.fs
-.include spi1.fs
-.include spi2.fs
-.include dac.fs
-.include pwr.fs
-.include i2c1.fs
-.include i2c2.fs
-.include iwdg.fs
-.include wwdg.fs
-.include tim1.fs
-.include tim2.fs
-.include tim3.fs
-.include tim14.fs
-.include tim6.fs
-.include tim7.fs
-.include exti.fs
-.include nvic.fs
-.include dma1.fs
-.include rcc.fs
-.include syscfg_comp.fs
-.include adc.fs
-.include usart1.fs
-.include usart2.fs
-.include usart3.fs
-.include usart4.fs
-.include rtc.fs
-.include tim15.fs
-.include tim16.fs
-.include tim17.fs
-.include tsc.fs
-.include cec.fs
-.include flash.fs
-.include dbgmcu.fs
-.include usb.fs
-.include crs.fs
-.include can.fs
-.include scb.fs
-.include stk.fs
+[ifndef] STM32F0X2_LOADER
+  .include "crc.fs"
+  .include "gpio.fs"
+  .include "spi.fs"
+  .include "dac.fs"
+  .include "pwr.fs"
+  .include "i2c.fs"
+  .include "iwdg.fs"
+  .include "wwdg.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim14.fs"
+  .include "tim6.fs"
+  .include "exti.fs"
+  .include "nvic.fs"
+  .include "dma1.fs"
+  .include "rcc.fs"
+  .include "syscfg_comp.fs"
+  .include "adc.fs"
+  .include "usart.fs"
+  .include "rtc.fs"
+  .include "tim15.fs"
+  .include "tim16.fs"
+  .include "tsc.fs"
+  .include "cec.fs"
+  .include "flash.fs"
+  .include "dbgmcu.fs"
+  .include "usb.fs"
+  .include "crs.fs"
+  .include "can.fs"
+  .include "scb.fs"
+  .include "stk.fs"
 
-decimal
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x48001400 constant GPIOF            \ See gpio.fs
+  $0x48000C00 constant GPIOD            \ See gpio.fs
+  $0x48000800 constant GPIOC            \ See gpio.fs
+  $0x48000400 constant GPIOB            \ See gpio.fs
+  $0x48001000 constant GPIOE            \ See gpio.fs
+  $0x48000000 constant GPIOA            \ See gpio.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x40007400 constant DAC              \ See dac.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim2.fs
+  $0x40002000 constant TIM14            \ See tim14.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim6.fs
+  $0x40010400 constant EXTI             \ See exti.fs
+  $0xE000E100 constant NVIC             \ See nvic.fs
+  $0x40020000 constant DMA1             \ See dma1.fs
+  $0x40021000 constant RCC              \ See rcc.fs
+  $0x40010000 constant SYSCFG_COMP      \ See syscfg_comp.fs
+  $0x40012400 constant ADC              \ See adc.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x40004C00 constant USART4           \ See usart.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40014000 constant TIM15            \ See tim15.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x40014800 constant TIM17            \ See tim16.fs
+  $0x40024000 constant TSC              \ See tsc.fs
+  $0x40007800 constant CEC              \ See cec.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x40015800 constant DBGMCU           \ See dbgmcu.fs
+  $0x40005C00 constant USB              \ See usb.fs
+  $0x40006C00 constant CRS              \ See crs.fs
+  $0x40006400 constant CAN              \ See can.fs
+  $0xE000ED00 constant SCB              \ See scb.fs
+  $0xE000E010 constant STK              \ See stk.fs
 
-\ Peripheral Instance Definitions
-.include CRC                    \ cyclic redundancy check calculation unit
-.include GPIOF                  \ General-purpose I/Os
-.include GPIOD                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOE                  \ General-purpose I/Os
-.include GPIOA                  \ General-purpose I/Os
-.include SPI1                   \ Serial peripheral interface
-.include SPI2                   \ SPI2 global interrupt
-.include DAC                    \ Digital-to-analog converter
-.include PWR                    \ Power control
-.include I2C1                   \ Inter-integrated circuit
-.include I2C2                   \ I2C2 global interrupt
-.include IWDG                   \ Independent watchdog
-.include WWDG                   \ Window watchdog
-.include TIM1                   \ Advanced-timers
-.include TIM2                   \ General-purpose-timers
-.include TIM3                   \ TIM3 global interrupt
-.include TIM14                  \ General-purpose-timers
-.include TIM6                   \ Basic-timers
-.include TIM7                   \ TIM7 global interrupt
-.include EXTI                   \ External interrupt/event controller
-.include NVIC                   \ Nested Vectored Interrupt Controller
-.include DMA1                   \ DMA controller
-.include RCC                    \ Reset and clock control
-.include SYSCFG_COMP            \ System configuration controller
-.include ADC                    \ Analog-to-digital converter
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include USART2                 \ USART2 global interrupt
-.include USART3                 \ USART3 and USART4 global interrupt
-.include USART4                 \ Universal synchronous asynchronous receiver transmitter
-.include RTC                    \ Real-time clock
-.include TIM15                  \ General-purpose-timers
-.include TIM16                  \ General-purpose-timers
-.include TIM17                  \ TIM17 global interrupt
-.include TSC                    \ Touch sensing controller
-.include CEC                    \ HDMI-CEC controller
-.include FLASH                  \ Flash
-.include DBGMCU                 \ Debug support
-.include USB                    \ Universal serial bus full-speed device interface
-.include CRS                    \ Clock recovery system
-.include CAN                    \ Controller area network
-.include SCB                    \ System control block
-.include STK                    \ SysTick timer
-
-compiletoram
-
+: STM32F0X2_LOADER ; [then]

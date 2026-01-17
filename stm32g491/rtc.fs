@@ -6,312 +6,332 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] RTC_DEF
 
-\
-\ @brief time register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_TR_SU                                        \ Second units in BCD format
-$00000070 constant RTC_TR_ST                                        \ Second tens in BCD format
-$00000f00 constant RTC_TR_MNU                                       \ Minute units in BCD format
-$00007000 constant RTC_TR_MNT                                       \ Minute tens in BCD format
-$000f0000 constant RTC_TR_HU                                        \ Hour units in BCD format
-$00300000 constant RTC_TR_HT                                        \ Hour tens in BCD format
-$00400000 constant RTC_TR_PM                                        \ AM/PM notation
-
-
-\
-\ @brief date register
-\ Address offset: 0x04
-\ Reset value: 0x00002101
-\
-
-$0000000f constant RTC_DR_DU                                        \ Date units in BCD format
-$00000030 constant RTC_DR_DT                                        \ Date tens in BCD format
-$00000f00 constant RTC_DR_MU                                        \ Month units in BCD format
-$00001000 constant RTC_DR_MT                                        \ Month tens in BCD format
-$0000e000 constant RTC_DR_WDU                                       \ Week day units
-$000f0000 constant RTC_DR_YU                                        \ Year units in BCD format
-$00f00000 constant RTC_DR_YT                                        \ Year tens in BCD format
+  [ifdef] RTC_TR_DEF
+    \
+    \ @brief time register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SU                         \ [0x00 : 4] Second units in BCD format
+    $04 constant RTC_ST                         \ [0x04 : 3] Second tens in BCD format
+    $08 constant RTC_MNU                        \ [0x08 : 4] Minute units in BCD format
+    $0c constant RTC_MNT                        \ [0x0c : 3] Minute tens in BCD format
+    $10 constant RTC_HU                         \ [0x10 : 4] Hour units in BCD format
+    $14 constant RTC_HT                         \ [0x14 : 2] Hour tens in BCD format
+    $16 constant RTC_PM                         \ [0x16] AM/PM notation
+  [then]
 
 
-\
-\ @brief sub second register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant RTC_SSR_SS                                       \ Sub second value
-
-
-\
-\ @brief initialization and status register
-\ Address offset: 0x0C
-\ Reset value: 0x00000007
-\
-
-$00000001 constant RTC_ICSR_ALRAWF                                  \ Alarm A write flag
-$00000002 constant RTC_ICSR_ALRBWF                                  \ Alarm B write flag
-$00000004 constant RTC_ICSR_WUTWF                                   \ Wakeup timer write flag
-$00000008 constant RTC_ICSR_SHPF                                    \ Shift operation pending
-$00000010 constant RTC_ICSR_INITS                                   \ Initialization status flag
-$00000020 constant RTC_ICSR_RSF                                     \ Registers synchronization flag
-$00000040 constant RTC_ICSR_INITF                                   \ Initialization flag
-$00000080 constant RTC_ICSR_INIT                                    \ Initialization mode
-$00010000 constant RTC_ICSR_RECALPF                                 \ Recalibration pending Flag
+  [ifdef] RTC_DR_DEF
+    \
+    \ @brief date register
+    \ Address offset: 0x04
+    \ Reset value: 0x00002101
+    \
+    $00 constant RTC_DU                         \ [0x00 : 4] Date units in BCD format
+    $04 constant RTC_DT                         \ [0x04 : 2] Date tens in BCD format
+    $08 constant RTC_MU                         \ [0x08 : 4] Month units in BCD format
+    $0c constant RTC_MT                         \ [0x0c] Month tens in BCD format
+    $0d constant RTC_WDU                        \ [0x0d : 3] Week day units
+    $10 constant RTC_YU                         \ [0x10 : 4] Year units in BCD format
+    $14 constant RTC_YT                         \ [0x14 : 4] Year tens in BCD format
+  [then]
 
 
-\
-\ @brief prescaler register
-\ Address offset: 0x10
-\ Reset value: 0x007F00FF
-\
-
-$00007fff constant RTC_PRER_PREDIV_S                                \ Synchronous prescaler factor
-$007f0000 constant RTC_PRER_PREDIV_A                                \ Asynchronous prescaler factor
-
-
-\
-\ @brief wakeup timer register
-\ Address offset: 0x14
-\ Reset value: 0x0000FFFF
-\
-
-$0000ffff constant RTC_WUTR_WUT                                     \ Wakeup auto-reload value bits
+  [ifdef] RTC_SSR_DEF
+    \
+    \ @brief sub second register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SS                         \ [0x00 : 16] Sub second value
+  [then]
 
 
-\
-\ @brief control register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RTC_CR_WCKSEL                                    \ Wakeup clock selection
-$00000008 constant RTC_CR_TSEDGE                                    \ Time-stamp event active edge
-$00000010 constant RTC_CR_REFCKON                                   \ Reference clock detection enable (50 or 60 Hz)
-$00000020 constant RTC_CR_BYPSHAD                                   \ Bypass the shadow registers
-$00000040 constant RTC_CR_FMT                                       \ Hour format
-$00000100 constant RTC_CR_ALRAE                                     \ Alarm A enable
-$00000200 constant RTC_CR_ALRBE                                     \ Alarm B enable
-$00000400 constant RTC_CR_WUTE                                      \ Wakeup timer enable
-$00000800 constant RTC_CR_TSE                                       \ Time stamp enable
-$00001000 constant RTC_CR_ALRAIE                                    \ Alarm A interrupt enable
-$00002000 constant RTC_CR_ALRBIE                                    \ Alarm B interrupt enable
-$00004000 constant RTC_CR_WUTIE                                     \ Wakeup timer interrupt enable
-$00008000 constant RTC_CR_TSIE                                      \ Time-stamp interrupt enable
-$00010000 constant RTC_CR_ADD1H                                     \ Add 1 hour (summer time change)
-$00020000 constant RTC_CR_SUB1H                                     \ Subtract 1 hour (winter time change)
-$00040000 constant RTC_CR_BKP                                       \ Backup
-$00080000 constant RTC_CR_COSEL                                     \ Calibration output selection
-$00100000 constant RTC_CR_POL                                       \ Output polarity
-$00600000 constant RTC_CR_OSEL                                      \ Output selection
-$00800000 constant RTC_CR_COE                                       \ Calibration output enable
-$01000000 constant RTC_CR_ITSE                                      \ timestamp on internal event enable
-$02000000 constant RTC_CR_TAMPTS                                    \ TAMPTS
-$04000000 constant RTC_CR_TAMPOE                                    \ TAMPOE
-$20000000 constant RTC_CR_TAMPALRM_PU                               \ TAMPALRM_PU
-$40000000 constant RTC_CR_TAMPALRM_TYPE                             \ TAMPALRM_TYPE
-$80000000 constant RTC_CR_OUT2EN                                    \ OUT2EN
+  [ifdef] RTC_ICSR_DEF
+    \
+    \ @brief initialization and status register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000007
+    \
+    $00 constant RTC_ALRAWF                     \ [0x00] Alarm A write flag
+    $01 constant RTC_ALRBWF                     \ [0x01] Alarm B write flag
+    $02 constant RTC_WUTWF                      \ [0x02] Wakeup timer write flag
+    $03 constant RTC_SHPF                       \ [0x03] Shift operation pending
+    $04 constant RTC_INITS                      \ [0x04] Initialization status flag
+    $05 constant RTC_RSF                        \ [0x05] Registers synchronization flag
+    $06 constant RTC_INITF                      \ [0x06] Initialization flag
+    $07 constant RTC_INIT                       \ [0x07] Initialization mode
+    $10 constant RTC_RECALPF                    \ [0x10] Recalibration pending Flag
+  [then]
 
 
-\
-\ @brief write protection register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000000ff constant RTC_WPR_KEY                                      \ Write protection key
-
-
-\
-\ @brief calibration register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$000001ff constant RTC_CALR_CALM                                    \ Calibration minus
-$00002000 constant RTC_CALR_CALW16                                  \ Use a 16-second calibration cycle period
-$00004000 constant RTC_CALR_CALW8                                   \ Use an 8-second calibration cycle period
-$00008000 constant RTC_CALR_CALP                                    \ Increase frequency of RTC by 488.5 ppm
+  [ifdef] RTC_PRER_DEF
+    \
+    \ @brief prescaler register
+    \ Address offset: 0x10
+    \ Reset value: 0x007F00FF
+    \
+    $00 constant RTC_PREDIV_S                   \ [0x00 : 15] Synchronous prescaler factor
+    $10 constant RTC_PREDIV_A                   \ [0x10 : 7] Asynchronous prescaler factor
+  [then]
 
 
-\
-\ @brief shift control register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00007fff constant RTC_SHIFTR_SUBFS                                 \ Subtract a fraction of a second
-$80000000 constant RTC_SHIFTR_ADD1S                                 \ Add one second
-
-
-\
-\ @brief time stamp time register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_TSTR_SU                                      \ Second units in BCD format
-$00000070 constant RTC_TSTR_ST                                      \ Second tens in BCD format
-$00000f00 constant RTC_TSTR_MNU                                     \ Minute units in BCD format
-$00007000 constant RTC_TSTR_MNT                                     \ Minute tens in BCD format
-$000f0000 constant RTC_TSTR_HU                                      \ Hour units in BCD format
-$00300000 constant RTC_TSTR_HT                                      \ Hour tens in BCD format
-$00400000 constant RTC_TSTR_PM                                      \ AM/PM notation
+  [ifdef] RTC_WUTR_DEF
+    \
+    \ @brief wakeup timer register
+    \ Address offset: 0x14
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant RTC_WUT                        \ [0x00 : 16] Wakeup auto-reload value bits
+  [then]
 
 
-\
-\ @brief time stamp date register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_TSDR_DU                                      \ Date units in BCD format
-$00000030 constant RTC_TSDR_DT                                      \ Date tens in BCD format
-$00000f00 constant RTC_TSDR_MU                                      \ Month units in BCD format
-$00001000 constant RTC_TSDR_MT                                      \ Month tens in BCD format
-$0000e000 constant RTC_TSDR_WDU                                     \ Week day units
-
-
-\
-\ @brief timestamp sub second register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant RTC_TSSSR_SS                                     \ Sub second value
-
-
-\
-\ @brief alarm A register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_ALRMAR_SU                                    \ Second units in BCD format
-$00000070 constant RTC_ALRMAR_ST                                    \ Second tens in BCD format
-$00000080 constant RTC_ALRMAR_MSK1                                  \ Alarm A seconds mask
-$00000f00 constant RTC_ALRMAR_MNU                                   \ Minute units in BCD format
-$00007000 constant RTC_ALRMAR_MNT                                   \ Minute tens in BCD format
-$00008000 constant RTC_ALRMAR_MSK2                                  \ Alarm A minutes mask
-$000f0000 constant RTC_ALRMAR_HU                                    \ Hour units in BCD format
-$00300000 constant RTC_ALRMAR_HT                                    \ Hour tens in BCD format
-$00400000 constant RTC_ALRMAR_PM                                    \ AM/PM notation
-$00800000 constant RTC_ALRMAR_MSK3                                  \ Alarm A hours mask
-$0f000000 constant RTC_ALRMAR_DU                                    \ Date units or day in BCD format
-$30000000 constant RTC_ALRMAR_DT                                    \ Date tens in BCD format
-$40000000 constant RTC_ALRMAR_WDSEL                                 \ Week day selection
-$80000000 constant RTC_ALRMAR_MSK4                                  \ Alarm A date mask
+  [ifdef] RTC_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_WCKSEL                     \ [0x00 : 3] Wakeup clock selection
+    $03 constant RTC_TSEDGE                     \ [0x03] Time-stamp event active edge
+    $04 constant RTC_REFCKON                    \ [0x04] Reference clock detection enable (50 or 60 Hz)
+    $05 constant RTC_BYPSHAD                    \ [0x05] Bypass the shadow registers
+    $06 constant RTC_FMT                        \ [0x06] Hour format
+    $08 constant RTC_ALRAE                      \ [0x08] Alarm A enable
+    $09 constant RTC_ALRBE                      \ [0x09] Alarm B enable
+    $0a constant RTC_WUTE                       \ [0x0a] Wakeup timer enable
+    $0b constant RTC_TSE                        \ [0x0b] Time stamp enable
+    $0c constant RTC_ALRAIE                     \ [0x0c] Alarm A interrupt enable
+    $0d constant RTC_ALRBIE                     \ [0x0d] Alarm B interrupt enable
+    $0e constant RTC_WUTIE                      \ [0x0e] Wakeup timer interrupt enable
+    $0f constant RTC_TSIE                       \ [0x0f] Time-stamp interrupt enable
+    $10 constant RTC_ADD1H                      \ [0x10] Add 1 hour (summer time change)
+    $11 constant RTC_SUB1H                      \ [0x11] Subtract 1 hour (winter time change)
+    $12 constant RTC_BKP                        \ [0x12] Backup
+    $13 constant RTC_COSEL                      \ [0x13] Calibration output selection
+    $14 constant RTC_POL                        \ [0x14] Output polarity
+    $15 constant RTC_OSEL                       \ [0x15 : 2] Output selection
+    $17 constant RTC_COE                        \ [0x17] Calibration output enable
+    $18 constant RTC_ITSE                       \ [0x18] timestamp on internal event enable
+    $19 constant RTC_TAMPTS                     \ [0x19] TAMPTS
+    $1a constant RTC_TAMPOE                     \ [0x1a] TAMPOE
+    $1d constant RTC_TAMPALRM_PU                \ [0x1d] TAMPALRM_PU
+    $1e constant RTC_TAMPALRM_TYPE              \ [0x1e] TAMPALRM_TYPE
+    $1f constant RTC_OUT2EN                     \ [0x1f] OUT2EN
+  [then]
 
 
-\
-\ @brief alarm A sub second register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00007fff constant RTC_ALRMASSR_SS                                  \ Sub seconds value
-$0f000000 constant RTC_ALRMASSR_MASKSS                              \ Mask the most-significant bits starting at this bit
-
-
-\
-\ @brief alarm B register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_ALRMBR_SU                                    \ Second units in BCD format
-$00000070 constant RTC_ALRMBR_ST                                    \ Second tens in BCD format
-$00000080 constant RTC_ALRMBR_MSK1                                  \ Alarm B seconds mask
-$00000f00 constant RTC_ALRMBR_MNU                                   \ Minute units in BCD format
-$00007000 constant RTC_ALRMBR_MNT                                   \ Minute tens in BCD format
-$00008000 constant RTC_ALRMBR_MSK2                                  \ Alarm B minutes mask
-$000f0000 constant RTC_ALRMBR_HU                                    \ Hour units in BCD format
-$00300000 constant RTC_ALRMBR_HT                                    \ Hour tens in BCD format
-$00400000 constant RTC_ALRMBR_PM                                    \ AM/PM notation
-$00800000 constant RTC_ALRMBR_MSK3                                  \ Alarm B hours mask
-$0f000000 constant RTC_ALRMBR_DU                                    \ Date units or day in BCD format
-$30000000 constant RTC_ALRMBR_DT                                    \ Date tens in BCD format
-$40000000 constant RTC_ALRMBR_WDSEL                                 \ Week day selection
-$80000000 constant RTC_ALRMBR_MSK4                                  \ Alarm B date mask
+  [ifdef] RTC_WPR_DEF
+    \
+    \ @brief write protection register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_KEY                        \ [0x00 : 8] Write protection key
+  [then]
 
 
-\
-\ @brief alarm B sub second register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00007fff constant RTC_ALRMBSSR_SS                                  \ Sub seconds value
-$0f000000 constant RTC_ALRMBSSR_MASKSS                              \ Mask the most-significant bits starting at this bit
-
-
-\
-\ @brief status register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RTC_SR_ALRAF                                     \ ALRAF
-$00000002 constant RTC_SR_ALRBF                                     \ ALRBF
-$00000004 constant RTC_SR_WUTF                                      \ WUTF
-$00000008 constant RTC_SR_TSF                                       \ TSF
-$00000010 constant RTC_SR_TSOVF                                     \ TSOVF
-$00000020 constant RTC_SR_ITSF                                      \ ITSF
+  [ifdef] RTC_CALR_DEF
+    \
+    \ @brief calibration register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_CALM                       \ [0x00 : 9] Calibration minus
+    $0d constant RTC_CALW16                     \ [0x0d] Use a 16-second calibration cycle period
+    $0e constant RTC_CALW8                      \ [0x0e] Use an 8-second calibration cycle period
+    $0f constant RTC_CALP                       \ [0x0f] Increase frequency of RTC by 488.5 ppm
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RTC_MISR_ALRAMF                                  \ ALRAMF
-$00000002 constant RTC_MISR_ALRBMF                                  \ ALRBMF
-$00000004 constant RTC_MISR_WUTMF                                   \ WUTMF
-$00000008 constant RTC_MISR_TSMF                                    \ TSMF
-$00000010 constant RTC_MISR_TSOVMF                                  \ TSOVMF
-$00000020 constant RTC_MISR_ITSMF                                   \ ITSMF
+  [ifdef] RTC_SHIFTR_DEF
+    \
+    \ @brief shift control register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SUBFS                      \ [0x00 : 15] Subtract a fraction of a second
+    $1f constant RTC_ADD1S                      \ [0x1f] Add one second
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
+  [ifdef] RTC_TSTR_DEF
+    \
+    \ @brief time stamp time register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SU                         \ [0x00 : 4] Second units in BCD format
+    $04 constant RTC_ST                         \ [0x04 : 3] Second tens in BCD format
+    $08 constant RTC_MNU                        \ [0x08 : 4] Minute units in BCD format
+    $0c constant RTC_MNT                        \ [0x0c : 3] Minute tens in BCD format
+    $10 constant RTC_HU                         \ [0x10 : 4] Hour units in BCD format
+    $14 constant RTC_HT                         \ [0x14 : 2] Hour tens in BCD format
+    $16 constant RTC_PM                         \ [0x16] AM/PM notation
+  [then]
 
-$00000001 constant RTC_SCR_CALRAF                                   \ CALRAF
-$00000002 constant RTC_SCR_CALRBF                                   \ CALRBF
-$00000004 constant RTC_SCR_CWUTF                                    \ CWUTF
-$00000008 constant RTC_SCR_CTSF                                     \ CTSF
-$00000010 constant RTC_SCR_CTSOVF                                   \ CTSOVF
-$00000020 constant RTC_SCR_CITSF                                    \ CITSF
+
+  [ifdef] RTC_TSDR_DEF
+    \
+    \ @brief time stamp date register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_DU                         \ [0x00 : 4] Date units in BCD format
+    $04 constant RTC_DT                         \ [0x04 : 2] Date tens in BCD format
+    $08 constant RTC_MU                         \ [0x08 : 4] Month units in BCD format
+    $0c constant RTC_MT                         \ [0x0c] Month tens in BCD format
+    $0d constant RTC_WDU                        \ [0x0d : 3] Week day units
+  [then]
 
 
-\
-\ @brief Real-time clock
-\
-$40002800 constant RTC_TR         \ offset: 0x00 : time register
-$40002804 constant RTC_DR         \ offset: 0x04 : date register
-$40002808 constant RTC_SSR        \ offset: 0x08 : sub second register
-$4000280c constant RTC_ICSR       \ offset: 0x0C : initialization and status register
-$40002810 constant RTC_PRER       \ offset: 0x10 : prescaler register
-$40002814 constant RTC_WUTR       \ offset: 0x14 : wakeup timer register
-$40002818 constant RTC_CR         \ offset: 0x18 : control register
-$40002824 constant RTC_WPR        \ offset: 0x24 : write protection register
-$40002828 constant RTC_CALR       \ offset: 0x28 : calibration register
-$4000282c constant RTC_SHIFTR     \ offset: 0x2C : shift control register
-$40002830 constant RTC_TSTR       \ offset: 0x30 : time stamp time register
-$40002834 constant RTC_TSDR       \ offset: 0x34 : time stamp date register
-$40002838 constant RTC_TSSSR      \ offset: 0x38 : timestamp sub second register
-$40002840 constant RTC_ALRMAR     \ offset: 0x40 : alarm A register
-$40002844 constant RTC_ALRMASSR   \ offset: 0x44 : alarm A sub second register
-$40002848 constant RTC_ALRMBR     \ offset: 0x48 : alarm B register
-$4000284c constant RTC_ALRMBSSR   \ offset: 0x4C : alarm B sub second register
-$40002850 constant RTC_SR         \ offset: 0x50 : status register
-$40002854 constant RTC_MISR       \ offset: 0x54 : status register
-$4000285c constant RTC_SCR        \ offset: 0x5C : status register
+  [ifdef] RTC_TSSSR_DEF
+    \
+    \ @brief timestamp sub second register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SS                         \ [0x00 : 16] Sub second value
+  [then]
 
+
+  [ifdef] RTC_ALRMAR_DEF
+    \
+    \ @brief alarm A register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SU                         \ [0x00 : 4] Second units in BCD format
+    $04 constant RTC_ST                         \ [0x04 : 3] Second tens in BCD format
+    $07 constant RTC_MSK1                       \ [0x07] Alarm A seconds mask
+    $08 constant RTC_MNU                        \ [0x08 : 4] Minute units in BCD format
+    $0c constant RTC_MNT                        \ [0x0c : 3] Minute tens in BCD format
+    $0f constant RTC_MSK2                       \ [0x0f] Alarm A minutes mask
+    $10 constant RTC_HU                         \ [0x10 : 4] Hour units in BCD format
+    $14 constant RTC_HT                         \ [0x14 : 2] Hour tens in BCD format
+    $16 constant RTC_PM                         \ [0x16] AM/PM notation
+    $17 constant RTC_MSK3                       \ [0x17] Alarm A hours mask
+    $18 constant RTC_DU                         \ [0x18 : 4] Date units or day in BCD format
+    $1c constant RTC_DT                         \ [0x1c : 2] Date tens in BCD format
+    $1e constant RTC_WDSEL                      \ [0x1e] Week day selection
+    $1f constant RTC_MSK4                       \ [0x1f] Alarm A date mask
+  [then]
+
+
+  [ifdef] RTC_ALRMASSR_DEF
+    \
+    \ @brief alarm A sub second register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SS                         \ [0x00 : 15] Sub seconds value
+    $18 constant RTC_MASKSS                     \ [0x18 : 4] Mask the most-significant bits starting at this bit
+  [then]
+
+
+  [ifdef] RTC_ALRMBR_DEF
+    \
+    \ @brief alarm B register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SU                         \ [0x00 : 4] Second units in BCD format
+    $04 constant RTC_ST                         \ [0x04 : 3] Second tens in BCD format
+    $07 constant RTC_MSK1                       \ [0x07] Alarm B seconds mask
+    $08 constant RTC_MNU                        \ [0x08 : 4] Minute units in BCD format
+    $0c constant RTC_MNT                        \ [0x0c : 3] Minute tens in BCD format
+    $0f constant RTC_MSK2                       \ [0x0f] Alarm B minutes mask
+    $10 constant RTC_HU                         \ [0x10 : 4] Hour units in BCD format
+    $14 constant RTC_HT                         \ [0x14 : 2] Hour tens in BCD format
+    $16 constant RTC_PM                         \ [0x16] AM/PM notation
+    $17 constant RTC_MSK3                       \ [0x17] Alarm B hours mask
+    $18 constant RTC_DU                         \ [0x18 : 4] Date units or day in BCD format
+    $1c constant RTC_DT                         \ [0x1c : 2] Date tens in BCD format
+    $1e constant RTC_WDSEL                      \ [0x1e] Week day selection
+    $1f constant RTC_MSK4                       \ [0x1f] Alarm B date mask
+  [then]
+
+
+  [ifdef] RTC_ALRMBSSR_DEF
+    \
+    \ @brief alarm B sub second register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SS                         \ [0x00 : 15] Sub seconds value
+    $18 constant RTC_MASKSS                     \ [0x18 : 4] Mask the most-significant bits starting at this bit
+  [then]
+
+
+  [ifdef] RTC_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_ALRAF                      \ [0x00] ALRAF
+    $01 constant RTC_ALRBF                      \ [0x01] ALRBF
+    $02 constant RTC_WUTF                       \ [0x02] WUTF
+    $03 constant RTC_TSF                        \ [0x03] TSF
+    $04 constant RTC_TSOVF                      \ [0x04] TSOVF
+    $05 constant RTC_ITSF                       \ [0x05] ITSF
+  [then]
+
+
+  [ifdef] RTC_MISR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_ALRAMF                     \ [0x00] ALRAMF
+    $01 constant RTC_ALRBMF                     \ [0x01] ALRBMF
+    $02 constant RTC_WUTMF                      \ [0x02] WUTMF
+    $03 constant RTC_TSMF                       \ [0x03] TSMF
+    $04 constant RTC_TSOVMF                     \ [0x04] TSOVMF
+    $05 constant RTC_ITSMF                      \ [0x05] ITSMF
+  [then]
+
+
+  [ifdef] RTC_SCR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_CALRAF                     \ [0x00] CALRAF
+    $01 constant RTC_CALRBF                     \ [0x01] CALRBF
+    $02 constant RTC_CWUTF                      \ [0x02] CWUTF
+    $03 constant RTC_CTSF                       \ [0x03] CTSF
+    $04 constant RTC_CTSOVF                     \ [0x04] CTSOVF
+    $05 constant RTC_CITSF                      \ [0x05] CITSF
+  [then]
+
+  \
+  \ @brief Real-time clock
+  \
+  $00 constant RTC_TR                   \ time register
+  $04 constant RTC_DR                   \ date register
+  $08 constant RTC_SSR                  \ sub second register
+  $0C constant RTC_ICSR                 \ initialization and status register
+  $10 constant RTC_PRER                 \ prescaler register
+  $14 constant RTC_WUTR                 \ wakeup timer register
+  $18 constant RTC_CR                   \ control register
+  $24 constant RTC_WPR                  \ write protection register
+  $28 constant RTC_CALR                 \ calibration register
+  $2C constant RTC_SHIFTR               \ shift control register
+  $30 constant RTC_TSTR                 \ time stamp time register
+  $34 constant RTC_TSDR                 \ time stamp date register
+  $38 constant RTC_TSSSR                \ timestamp sub second register
+  $40 constant RTC_ALRMAR               \ alarm A register
+  $44 constant RTC_ALRMASSR             \ alarm A sub second register
+  $48 constant RTC_ALRMBR               \ alarm B register
+  $4C constant RTC_ALRMBSSR             \ alarm B sub second register
+  $50 constant RTC_SR                   \ status register
+  $54 constant RTC_MISR                 \ status register
+  $5C constant RTC_SCR                  \ status register
+
+: RTC_DEF ; [then]

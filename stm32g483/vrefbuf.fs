@@ -6,32 +6,34 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] VREFBUF_DEF
 
-\
-\ @brief VREF_BUF Control and Status Register
-\ Address offset: 0x00
-\ Reset value: 0x00000002
-\
-
-$00000001 constant VREFBUF_VREFBUF_CSR_ENVR                         \ Enable Voltage Reference
-$00000002 constant VREFBUF_VREFBUF_CSR_HIZ                          \ High impedence mode for the VREF_BUF
-$00000008 constant VREFBUF_VREFBUF_CSR_VRR                          \ Voltage reference buffer ready
-$00000030 constant VREFBUF_VREFBUF_CSR_VRS                          \ Voltage reference scale
-
-
-\
-\ @brief VREF_BUF Calibration Control Register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000003f constant VREFBUF_VREFBUF_CCR_TRIM                         \ Trimming code
+  [ifdef] VREFBUF_VREFBUF_CSR_DEF
+    \
+    \ @brief VREF_BUF Control and Status Register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000002
+    \
+    $00 constant VREFBUF_ENVR                   \ [0x00] Enable Voltage Reference
+    $01 constant VREFBUF_HIZ                    \ [0x01] High impedence mode for the VREF_BUF
+    $03 constant VREFBUF_VRR                    \ [0x03] Voltage reference buffer ready
+    $04 constant VREFBUF_VRS                    \ [0x04 : 2] Voltage reference scale
+  [then]
 
 
-\
-\ @brief Voltage reference buffer
-\
-$40010030 constant VREFBUF_VREFBUF_CSR  \ offset: 0x00 : VREF_BUF Control and Status Register
-$40010034 constant VREFBUF_VREFBUF_CCR  \ offset: 0x04 : VREF_BUF Calibration Control Register
+  [ifdef] VREFBUF_VREFBUF_CCR_DEF
+    \
+    \ @brief VREF_BUF Calibration Control Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant VREFBUF_TRIM                   \ [0x00 : 6] Trimming code
+  [then]
 
+  \
+  \ @brief Voltage reference buffer
+  \
+  $00 constant VREFBUF_VREFBUF_CSR      \ VREF_BUF Control and Status Register
+  $04 constant VREFBUF_VREFBUF_CCR      \ VREF_BUF Calibration Control Register
+
+: VREFBUF_DEF ; [then]

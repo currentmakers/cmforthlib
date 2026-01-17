@@ -6,263 +6,287 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_CR_EN                                       \ AES enable
-$00000006 constant CRYP_CR_DATATYPE                                 \ Data type selection (for data in and data out to/from the cryptographic block)
-$00000018 constant CRYP_CR_MODE                                     \ AES operating mode
-$00000060 constant CRYP_CR_CHMOD                                    \ AES chaining mode
-$00000080 constant CRYP_CR_CCFC                                     \ Computation complete flag clear
-$00000100 constant CRYP_CR_ERRC                                     \ Error clear
-$00000200 constant CRYP_CR_CCFIE                                    \ CCF flag interrupt enable
-$00000400 constant CRYP_CR_ERRIE                                    \ Error interrupt enable
-$00000800 constant CRYP_CR_DMAINEN                                  \ Enable DMA management of data input phase
-$00001000 constant CRYP_CR_DMAOUTEN                                 \ Enable DMA management of data output phase
-$00006000 constant CRYP_CR_GCMPH                                    \ Used only for GCM, GMAC and CMAC algorithms and has no effect when other
-$00040000 constant CRYP_CR_KEYSIZE                                  \ Key size selection
-
-
-\
-\ @brief status register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_SR_CCF                                      \ Computation complete flag
-$00000002 constant CRYP_SR_RDERR                                    \ Read error flag
-$00000004 constant CRYP_SR_WRERR                                    \ Write error flag
-$00000008 constant CRYP_SR_BUSY                                     \ Busy flag
-
-
-\
-\ @brief data input register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_DINR_DINR                                   \ Data input
-
-
-\
-\ @brief data output register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_DOUTR_DOUTR                                 \ Data output
-
-
-\
-\ @brief key register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$7fffffff constant CRYP_KEYR0_KEYR0                                 \ Data output register
-
-
-\
-\ @brief key register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_KEYR1_KEYR1                                 \ Data output register
-
-
-\
-\ @brief key register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$7fffffff constant CRYP_KEYR2_KEYR2                                 \ Data output register
-
-
-\
-\ @brief key register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_KEYR3_KEYR3                                 \ Data output register
-
-
-\
-\ @brief initialization vector register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_IVR0_IVR0                                   \ initialization vector register
-
-
-\
-\ @brief initialization vector register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_IVR1_IVR1                                   \ Initialization vector register
-
-
-\
-\ @brief initialization vector register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_IVR2_IVR2                                   \ Initialization vector register
-
-
-\
-\ @brief initialization vector register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_IVR3_IVR3                                   \ Initialization vector register
-
-
-\
-\ @brief key registers
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_KEYR4_KEYR4                                 \ Data output register
-
-
-\
-\ @brief key registers
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_KEYR5_KEYR5                                 \ Data output register
-
-
-\
-\ @brief key registers
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_KEYR6_KEYR6                                 \ Data output register
-
-
-\
-\ @brief key registers
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_KEYR7_KEYR7                                 \ Data output register
-
-
-\
-\ @brief Suspend registers
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_SUSP0R_SUSP0R                               \ AES Suspend
-
-
-\
-\ @brief Suspend registers
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_SUSP1R_SUSP1R                               \ AES Suspend
-
-
-\
-\ @brief Suspend registers
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_SUSP2R_SUSP2R                               \ AES Suspend
-
-
-\
-\ @brief Suspend registers
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_SUSP3R_SUSP3R                               \ IV127
-
-
-\
-\ @brief Suspend registers
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_SUSP4R_SUSP4R                               \ AES Suspend
-
-
-\
-\ @brief Suspend registers
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_SUSP5R_SUSP5R                               \ AES Suspend
-
-
-\
-\ @brief Suspend registers
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_SUSP6R_SUSP6R                               \ AES Suspend
-
-
-\
-\ @brief Suspend registers
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_SUSP7R_SUSP7R                               \ AES Suspend
-
-
-\
-\ @brief Cryptographic processor
-\
-$50060000 constant CRYP_CR        \ offset: 0x00 : control register
-$50060004 constant CRYP_SR        \ offset: 0x04 : status register
-$50060008 constant CRYP_DINR      \ offset: 0x08 : data input register
-$5006000c constant CRYP_DOUTR     \ offset: 0x0C : data output register
-$50060010 constant CRYP_KEYR0     \ offset: 0x10 : key register
-$50060014 constant CRYP_KEYR1     \ offset: 0x14 : key register
-$50060018 constant CRYP_KEYR2     \ offset: 0x18 : key register
-$5006001c constant CRYP_KEYR3     \ offset: 0x1C : key register
-$50060020 constant CRYP_IVR0      \ offset: 0x20 : initialization vector register
-$50060024 constant CRYP_IVR1      \ offset: 0x24 : initialization vector register
-$50060028 constant CRYP_IVR2      \ offset: 0x28 : initialization vector register
-$5006002c constant CRYP_IVR3      \ offset: 0x2C : initialization vector register
-$50060030 constant CRYP_KEYR4     \ offset: 0x30 : key registers
-$50060034 constant CRYP_KEYR5     \ offset: 0x34 : key registers
-$50060038 constant CRYP_KEYR6     \ offset: 0x38 : key registers
-$5006003c constant CRYP_KEYR7     \ offset: 0x3C : key registers
-$50060040 constant CRYP_SUSP0R    \ offset: 0x40 : Suspend registers
-$50060044 constant CRYP_SUSP1R    \ offset: 0x44 : Suspend registers
-$50060048 constant CRYP_SUSP2R    \ offset: 0x48 : Suspend registers
-$5006004c constant CRYP_SUSP3R    \ offset: 0x4C : Suspend registers
-$50060050 constant CRYP_SUSP4R    \ offset: 0x50 : Suspend registers
-$50060054 constant CRYP_SUSP5R    \ offset: 0x54 : Suspend registers
-$50060058 constant CRYP_SUSP6R    \ offset: 0x58 : Suspend registers
-$5006005c constant CRYP_SUSP7R    \ offset: 0x5C : Suspend registers
-
+[ifndef] CRYP_DEF
+
+  [ifdef] CRYP_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_EN                        \ [0x00] AES enable
+    $01 constant CRYP_DATATYPE                  \ [0x01 : 2] Data type selection (for data in and data out to/from the cryptographic block)
+    $03 constant CRYP_MODE                      \ [0x03 : 2] AES operating mode
+    $05 constant CRYP_CHMOD                     \ [0x05 : 2] AES chaining mode
+    $07 constant CRYP_CCFC                      \ [0x07] Computation complete flag clear
+    $08 constant CRYP_ERRC                      \ [0x08] Error clear
+    $09 constant CRYP_CCFIE                     \ [0x09] CCF flag interrupt enable
+    $0a constant CRYP_ERRIE                     \ [0x0a] Error interrupt enable
+    $0b constant CRYP_DMAINEN                   \ [0x0b] Enable DMA management of data input phase
+    $0c constant CRYP_DMAOUTEN                  \ [0x0c] Enable DMA management of data output phase
+    $0d constant CRYP_GCMPH                     \ [0x0d : 2] Used only for GCM, GMAC and CMAC algorithms and has no effect when other
+    $12 constant CRYP_KEYSIZE                   \ [0x12] Key size selection
+  [then]
+
+
+  [ifdef] CRYP_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_CCF                       \ [0x00] Computation complete flag
+    $01 constant CRYP_RDERR                     \ [0x01] Read error flag
+    $02 constant CRYP_WRERR                     \ [0x02] Write error flag
+    $03 constant CRYP_Busy                      \ [0x03] Busy flag
+  [then]
+
+
+  [ifdef] CRYP_DINR_DEF
+    \
+    \ @brief data input register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_DINR                      \ [0x00 : 32] Data input
+  [then]
+
+
+  [ifdef] CRYP_DOUTR_DEF
+    \
+    \ @brief data output register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_DOUTR                     \ [0x00 : 32] Data output
+  [then]
+
+
+  [ifdef] CRYP_KEYR0_DEF
+    \
+    \ @brief key register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_KEYR0                     \ [0x00 : 31] Data output register
+  [then]
+
+
+  [ifdef] CRYP_KEYR1_DEF
+    \
+    \ @brief key register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_KEYR1                     \ [0x00 : 32] Data output register
+  [then]
+
+
+  [ifdef] CRYP_KEYR2_DEF
+    \
+    \ @brief key register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_KEYR2                     \ [0x00 : 31] Data output register
+  [then]
+
+
+  [ifdef] CRYP_KEYR3_DEF
+    \
+    \ @brief key register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_KEYR3                     \ [0x00 : 32] Data output register
+  [then]
+
+
+  [ifdef] CRYP_IVR0_DEF
+    \
+    \ @brief initialization vector register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_IVR0                      \ [0x00 : 32] initialization vector register
+  [then]
+
+
+  [ifdef] CRYP_IVR1_DEF
+    \
+    \ @brief initialization vector register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_IVR1                      \ [0x00 : 32] Initialization vector register
+  [then]
+
+
+  [ifdef] CRYP_IVR2_DEF
+    \
+    \ @brief initialization vector register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_IVR2                      \ [0x00 : 32] Initialization vector register
+  [then]
+
+
+  [ifdef] CRYP_IVR3_DEF
+    \
+    \ @brief initialization vector register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_IVR3                      \ [0x00 : 32] Initialization vector register
+  [then]
+
+
+  [ifdef] CRYP_KEYR4_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_KEYR4                     \ [0x00 : 32] Data output register
+  [then]
+
+
+  [ifdef] CRYP_KEYR5_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_KEYR5                     \ [0x00 : 32] Data output register
+  [then]
+
+
+  [ifdef] CRYP_KEYR6_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_KEYR6                     \ [0x00 : 32] Data output register
+  [then]
+
+
+  [ifdef] CRYP_KEYR7_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_KEYR7                     \ [0x00 : 32] Data output register
+  [then]
+
+
+  [ifdef] CRYP_SUSP0R_DEF
+    \
+    \ @brief Suspend registers
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_SUSP0R                    \ [0x00 : 32] AES Suspend
+  [then]
+
+
+  [ifdef] CRYP_SUSP1R_DEF
+    \
+    \ @brief Suspend registers
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_SUSP1R                    \ [0x00 : 32] AES Suspend
+  [then]
+
+
+  [ifdef] CRYP_SUSP2R_DEF
+    \
+    \ @brief Suspend registers
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_SUSP2R                    \ [0x00 : 32] AES Suspend
+  [then]
+
+
+  [ifdef] CRYP_SUSP3R_DEF
+    \
+    \ @brief Suspend registers
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_SUSP3R                    \ [0x00 : 32] IV127
+  [then]
+
+
+  [ifdef] CRYP_SUSP4R_DEF
+    \
+    \ @brief Suspend registers
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_SUSP4R                    \ [0x00 : 32] AES Suspend
+  [then]
+
+
+  [ifdef] CRYP_SUSP5R_DEF
+    \
+    \ @brief Suspend registers
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_SUSP5R                    \ [0x00 : 32] AES Suspend
+  [then]
+
+
+  [ifdef] CRYP_SUSP6R_DEF
+    \
+    \ @brief Suspend registers
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_SUSP6R                    \ [0x00 : 32] AES Suspend
+  [then]
+
+
+  [ifdef] CRYP_SUSP7R_DEF
+    \
+    \ @brief Suspend registers
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_SUSP7R                    \ [0x00 : 32] AES Suspend
+  [then]
+
+  \
+  \ @brief Cryptographic processor
+  \
+  $00 constant CRYP_CR                  \ control register
+  $04 constant CRYP_SR                  \ status register
+  $08 constant CRYP_DINR                \ data input register
+  $0C constant CRYP_DOUTR               \ data output register
+  $10 constant CRYP_KEYR0               \ key register
+  $14 constant CRYP_KEYR1               \ key register
+  $18 constant CRYP_KEYR2               \ key register
+  $1C constant CRYP_KEYR3               \ key register
+  $20 constant CRYP_IVR0                \ initialization vector register
+  $24 constant CRYP_IVR1                \ initialization vector register
+  $28 constant CRYP_IVR2                \ initialization vector register
+  $2C constant CRYP_IVR3                \ initialization vector register
+  $30 constant CRYP_KEYR4               \ key registers
+  $34 constant CRYP_KEYR5               \ key registers
+  $38 constant CRYP_KEYR6               \ key registers
+  $3C constant CRYP_KEYR7               \ key registers
+  $40 constant CRYP_SUSP0R              \ Suspend registers
+  $44 constant CRYP_SUSP1R              \ Suspend registers
+  $48 constant CRYP_SUSP2R              \ Suspend registers
+  $4C constant CRYP_SUSP3R              \ Suspend registers
+  $50 constant CRYP_SUSP4R              \ Suspend registers
+  $54 constant CRYP_SUSP5R              \ Suspend registers
+  $58 constant CRYP_SUSP6R              \ Suspend registers
+  $5C constant CRYP_SUSP7R              \ Suspend registers
+
+: CRYP_DEF ; [then]

@@ -6,164 +6,175 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GICH_DEF
 
-\
-\ @brief GICH hypervisor control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GICH_GICH_HCR_EN                                 \ EN
-$00000002 constant GICH_GICH_HCR_UIE                                \ UIE
-$00000004 constant GICH_GICH_HCR_LRENPIE                            \ LRENPIE
-$00000008 constant GICH_GICH_HCR_NPIE                               \ NPIE
-$00000010 constant GICH_GICH_HCR_VGRP0EIE                           \ VGRP0EIE
-$00000020 constant GICH_GICH_HCR_VGRP0DIE                           \ VGRP0DIE
-$00000040 constant GICH_GICH_HCR_VGRP1EIE                           \ VGRP1EIE
-$00000080 constant GICH_GICH_HCR_VGRP1DIE                           \ VGRP1DIE
-$f8000000 constant GICH_GICH_HCR_EOICOUNT                           \ EOICOUNT
-
-
-\
-\ @brief GICH VGIC type register
-\ Address offset: 0x04
-\ Reset value: 0x90000003
-\
-
-$0000001f constant GICH_GICH_VTR_LISTREGS                           \ LISTREGS
-$1c000000 constant GICH_GICH_VTR_PREBITS                            \ PREBITS
-$e0000000 constant GICH_GICH_VTR_PRIBITS                            \ PRIBITS
+  [ifdef] GICH_GICH_HCR_DEF
+    \
+    \ @brief GICH hypervisor control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICH_EN                        \ [0x00] EN
+    $01 constant GICH_UIE                       \ [0x01] UIE
+    $02 constant GICH_LRENPIE                   \ [0x02] LRENPIE
+    $03 constant GICH_NPIE                      \ [0x03] NPIE
+    $04 constant GICH_VGRP0EIE                  \ [0x04] VGRP0EIE
+    $05 constant GICH_VGRP0DIE                  \ [0x05] VGRP0DIE
+    $06 constant GICH_VGRP1EIE                  \ [0x06] VGRP1EIE
+    $07 constant GICH_VGRP1DIE                  \ [0x07] VGRP1DIE
+    $1b constant GICH_EOICOUNT                  \ [0x1b : 5] EOICOUNT
+  [then]
 
 
-\
-\ @brief GICH virtual machine control register
-\ Address offset: 0x08
-\ Reset value: 0x004D0000
-\
-
-$00000001 constant GICH_GICH_VMCR_VMGRP0EN                          \ VMGRP0EN
-$00000002 constant GICH_GICH_VMCR_VMGRP1EN                          \ VMGRP1EN
-$00000004 constant GICH_GICH_VMCR_VMACKCTL                          \ VMACKCTL
-$00000008 constant GICH_GICH_VMCR_VMFIQEN                           \ VMFIQEN
-$00000010 constant GICH_GICH_VMCR_VMCBPR                            \ VMCBPR
-$00000200 constant GICH_GICH_VMCR_VEM                               \ VEM
-$001c0000 constant GICH_GICH_VMCR_VMABP                             \ VMABP
-$00e00000 constant GICH_GICH_VMCR_VMBP                              \ VMBP
-$f8000000 constant GICH_GICH_VMCR_VMPRIMASK                         \ VMPRIMASK
+  [ifdef] GICH_GICH_VTR_DEF
+    \
+    \ @brief GICH VGIC type register
+    \ Address offset: 0x04
+    \ Reset value: 0x90000003
+    \
+    $00 constant GICH_LISTREGS                  \ [0x00 : 5] LISTREGS
+    $1a constant GICH_PREBITS                   \ [0x1a : 3] PREBITS
+    $1d constant GICH_PRIBITS                   \ [0x1d : 3] PRIBITS
+  [then]
 
 
-\
-\ @brief GICH maintenance interrupt status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GICH_GICH_MISR_EOI                               \ EOI
-$00000002 constant GICH_GICH_MISR_U                                 \ U
-$00000004 constant GICH_GICH_MISR_LRENP                             \ LRENP
-$00000008 constant GICH_GICH_MISR_NP                                \ NP
-$00000010 constant GICH_GICH_MISR_VGRP0E                            \ VGRP0E
-$00000020 constant GICH_GICH_MISR_VGRP0D                            \ VGRP0D
-$00000040 constant GICH_GICH_MISR_VGRP1E                            \ VGRP1E
-$00000080 constant GICH_GICH_MISR_VGRP1D                            \ VGRP1D
-
-
-\
-\ @brief GICH end of interrupt status register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant GICH_GICH_EISR0_EISR0                            \ EISR0
+  [ifdef] GICH_GICH_VMCR_DEF
+    \
+    \ @brief GICH virtual machine control register
+    \ Address offset: 0x08
+    \ Reset value: 0x004D0000
+    \
+    $00 constant GICH_VMGRP0EN                  \ [0x00] VMGRP0EN
+    $01 constant GICH_VMGRP1EN                  \ [0x01] VMGRP1EN
+    $02 constant GICH_VMACKCTL                  \ [0x02] VMACKCTL
+    $03 constant GICH_VMFIQEN                   \ [0x03] VMFIQEN
+    $04 constant GICH_VMCBPR                    \ [0x04] VMCBPR
+    $09 constant GICH_VEM                       \ [0x09] VEM
+    $12 constant GICH_VMABP                     \ [0x12 : 3] VMABP
+    $15 constant GICH_VMBP                      \ [0x15 : 3] VMBP
+    $1b constant GICH_VMPRIMASK                 \ [0x1b : 5] VMPRIMASK
+  [then]
 
 
-\
-\ @brief GICH empty list status register
-\ Address offset: 0x30
-\ Reset value: 0x0000000F
-\
-
-$00000000 constant GICH_GICH_ELSR0_ELSR0                            \ ELSR0
-
-
-\
-\ @brief GICH active priority register
-\ Address offset: 0xF0
-\ Reset value: 0x00000000
-\
-
-$00000000 constant GICH_GICH_APR0_APR0                              \ APR0
-
-
-\
-\ @brief GICH list register 0
-\ Address offset: 0x100
-\ Reset value: 0x00000000
-\
-
-$000003ff constant GICH_GICH_LR0_VIRTUALID                          \ VIRTUALID
-$000ffc00 constant GICH_GICH_LR0_PHYSICALID                         \ PHYSICALID
-$0f800000 constant GICH_GICH_LR0_PRIORITY                           \ PRIORITY
-$30000000 constant GICH_GICH_LR0_STATE                              \ STATE
-$40000000 constant GICH_GICH_LR0_GRP1                               \ GRP1
-$80000000 constant GICH_GICH_LR0_HW                                 \ HW
+  [ifdef] GICH_GICH_MISR_DEF
+    \
+    \ @brief GICH maintenance interrupt status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICH_EOI                       \ [0x00] EOI
+    $01 constant GICH_U                         \ [0x01] U
+    $02 constant GICH_LRENP                     \ [0x02] LRENP
+    $03 constant GICH_NP                        \ [0x03] NP
+    $04 constant GICH_VGRP0E                    \ [0x04] VGRP0E
+    $05 constant GICH_VGRP0D                    \ [0x05] VGRP0D
+    $06 constant GICH_VGRP1E                    \ [0x06] VGRP1E
+    $07 constant GICH_VGRP1D                    \ [0x07] VGRP1D
+  [then]
 
 
-\
-\ @brief GICH list register 1
-\ Address offset: 0x104
-\ Reset value: 0x00000000
-\
-
-$000003ff constant GICH_GICH_LR1_VIRTUALID                          \ VIRTUALID
-$000ffc00 constant GICH_GICH_LR1_PHYSICALID                         \ PHYSICALID
-$0f800000 constant GICH_GICH_LR1_PRIORITY                           \ PRIORITY
-$30000000 constant GICH_GICH_LR1_STATE                              \ STATE
-$40000000 constant GICH_GICH_LR1_GRP1                               \ GRP1
-$80000000 constant GICH_GICH_LR1_HW                                 \ HW
+  [ifdef] GICH_GICH_EISR0_DEF
+    \
+    \ @brief GICH end of interrupt status register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICH_EISR0                     \ [0x00 : 32] EISR0
+  [then]
 
 
-\
-\ @brief GICH list register 2
-\ Address offset: 0x108
-\ Reset value: 0x00000000
-\
-
-$000003ff constant GICH_GICH_LR2_VIRTUALID                          \ VIRTUALID
-$000ffc00 constant GICH_GICH_LR2_PHYSICALID                         \ PHYSICALID
-$0f800000 constant GICH_GICH_LR2_PRIORITY                           \ PRIORITY
-$30000000 constant GICH_GICH_LR2_STATE                              \ STATE
-$40000000 constant GICH_GICH_LR2_GRP1                               \ GRP1
-$80000000 constant GICH_GICH_LR2_HW                                 \ HW
+  [ifdef] GICH_GICH_ELSR0_DEF
+    \
+    \ @brief GICH empty list status register
+    \ Address offset: 0x30
+    \ Reset value: 0x0000000F
+    \
+    $00 constant GICH_ELSR0                     \ [0x00 : 32] ELSR0
+  [then]
 
 
-\
-\ @brief GICH list register 3
-\ Address offset: 0x10C
-\ Reset value: 0x00000000
-\
-
-$000003ff constant GICH_GICH_LR3_VIRTUALID                          \ VIRTUALID
-$000ffc00 constant GICH_GICH_LR3_PHYSICALID                         \ PHYSICALID
-$0f800000 constant GICH_GICH_LR3_PRIORITY                           \ PRIORITY
-$30000000 constant GICH_GICH_LR3_STATE                              \ STATE
-$40000000 constant GICH_GICH_LR3_GRP1                               \ GRP1
-$80000000 constant GICH_GICH_LR3_HW                                 \ HW
+  [ifdef] GICH_GICH_APR0_DEF
+    \
+    \ @brief GICH active priority register
+    \ Address offset: 0xF0
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICH_APR0                      \ [0x00 : 32] APR0
+  [then]
 
 
-\
-\ @brief GICH
-\
-$a0024000 constant GICH_GICH_HCR  \ offset: 0x00 : GICH hypervisor control register
-$a0024004 constant GICH_GICH_VTR  \ offset: 0x04 : GICH VGIC type register
-$a0024008 constant GICH_GICH_VMCR  \ offset: 0x08 : GICH virtual machine control register
-$a0024010 constant GICH_GICH_MISR  \ offset: 0x10 : GICH maintenance interrupt status register
-$a0024020 constant GICH_GICH_EISR0  \ offset: 0x20 : GICH end of interrupt status register
-$a0024030 constant GICH_GICH_ELSR0  \ offset: 0x30 : GICH empty list status register
-$a00240f0 constant GICH_GICH_APR0  \ offset: 0xF0 : GICH active priority register
-$a0024100 constant GICH_GICH_LR0  \ offset: 0x100 : GICH list register 0
-$a0024104 constant GICH_GICH_LR1  \ offset: 0x104 : GICH list register 1
-$a0024108 constant GICH_GICH_LR2  \ offset: 0x108 : GICH list register 2
-$a002410c constant GICH_GICH_LR3  \ offset: 0x10C : GICH list register 3
+  [ifdef] GICH_GICH_LR0_DEF
+    \
+    \ @brief GICH list register 0
+    \ Address offset: 0x100
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICH_VIRTUALID                 \ [0x00 : 10] VIRTUALID
+    $0a constant GICH_PHYSICALID                \ [0x0a : 10] PHYSICALID
+    $17 constant GICH_PRIORITY                  \ [0x17 : 5] PRIORITY
+    $1c constant GICH_STATE                     \ [0x1c : 2] STATE
+    $1e constant GICH_GRP1                      \ [0x1e] GRP1
+    $1f constant GICH_HW                        \ [0x1f] HW
+  [then]
 
+
+  [ifdef] GICH_GICH_LR1_DEF
+    \
+    \ @brief GICH list register 1
+    \ Address offset: 0x104
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICH_VIRTUALID                 \ [0x00 : 10] VIRTUALID
+    $0a constant GICH_PHYSICALID                \ [0x0a : 10] PHYSICALID
+    $17 constant GICH_PRIORITY                  \ [0x17 : 5] PRIORITY
+    $1c constant GICH_STATE                     \ [0x1c : 2] STATE
+    $1e constant GICH_GRP1                      \ [0x1e] GRP1
+    $1f constant GICH_HW                        \ [0x1f] HW
+  [then]
+
+
+  [ifdef] GICH_GICH_LR2_DEF
+    \
+    \ @brief GICH list register 2
+    \ Address offset: 0x108
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICH_VIRTUALID                 \ [0x00 : 10] VIRTUALID
+    $0a constant GICH_PHYSICALID                \ [0x0a : 10] PHYSICALID
+    $17 constant GICH_PRIORITY                  \ [0x17 : 5] PRIORITY
+    $1c constant GICH_STATE                     \ [0x1c : 2] STATE
+    $1e constant GICH_GRP1                      \ [0x1e] GRP1
+    $1f constant GICH_HW                        \ [0x1f] HW
+  [then]
+
+
+  [ifdef] GICH_GICH_LR3_DEF
+    \
+    \ @brief GICH list register 3
+    \ Address offset: 0x10C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICH_VIRTUALID                 \ [0x00 : 10] VIRTUALID
+    $0a constant GICH_PHYSICALID                \ [0x0a : 10] PHYSICALID
+    $17 constant GICH_PRIORITY                  \ [0x17 : 5] PRIORITY
+    $1c constant GICH_STATE                     \ [0x1c : 2] STATE
+    $1e constant GICH_GRP1                      \ [0x1e] GRP1
+    $1f constant GICH_HW                        \ [0x1f] HW
+  [then]
+
+  \
+  \ @brief GICH
+  \
+  $00 constant GICH_GICH_HCR            \ GICH hypervisor control register
+  $04 constant GICH_GICH_VTR            \ GICH VGIC type register
+  $08 constant GICH_GICH_VMCR           \ GICH virtual machine control register
+  $10 constant GICH_GICH_MISR           \ GICH maintenance interrupt status register
+  $20 constant GICH_GICH_EISR0          \ GICH end of interrupt status register
+  $30 constant GICH_GICH_ELSR0          \ GICH empty list status register
+  $F0 constant GICH_GICH_APR0           \ GICH active priority register
+  $100 constant GICH_GICH_LR0           \ GICH list register 0
+  $104 constant GICH_GICH_LR1           \ GICH list register 1
+  $108 constant GICH_GICH_LR2           \ GICH list register 2
+  $10C constant GICH_GICH_LR3           \ GICH list register 3
+
+: GICH_DEF ; [then]

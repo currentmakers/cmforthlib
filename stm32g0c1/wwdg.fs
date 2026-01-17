@@ -6,42 +6,45 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] WWDG_DEF
 
-\
-\ @brief Control register
-\ Address offset: 0x00
-\ Reset value: 0x0000007F
-\
-
-$0000007f constant WWDG_WWDG_CR_T                                   \ 7-bit counter (MSB to LSB) These bits contain the value of the watchdog counter, decremented every (4096 x 2WDGTB[1:0]) PCLK cycles. A reset is produced when it is decremented from 0x40 to 0x3F (T6 becomes cleared).
-$00000080 constant WWDG_WWDG_CR_WDGA                                \ Activation bit This bit is set by software and only cleared by hardware after a reset. When WDGA=1, the watchdog can generate a reset.
-
-
-\
-\ @brief Configuration register
-\ Address offset: 0x04
-\ Reset value: 0x0000007F
-\
-
-$0000007f constant WWDG_WWDG_CFR_W                                  \ 7-bit window value These bits contain the window value to be compared with the down-counter.
-$00000200 constant WWDG_WWDG_CFR_EWI                                \ Early wakeup interrupt When set, an interrupt occurs whenever the counter reaches the value 0x40. This interrupt is only cleared by hardware after a reset.
-$00003800 constant WWDG_WWDG_CFR_WDGTB                              \ Timer base The timebase of the prescaler can be modified as follows:
+  [ifdef] WWDG_WWDG_CR_DEF
+    \
+    \ @brief Control register
+    \ Address offset: 0x00
+    \ Reset value: 0x0000007F
+    \
+    $00 constant WWDG_T                         \ [0x00 : 7] 7-bit counter (MSB to LSB) These bits contain the value of the watchdog counter, decremented every (4096 x 2WDGTB[1:0]) PCLK cycles. A reset is produced when it is decremented from 0x40 to 0x3F (T6 becomes cleared).
+    $07 constant WWDG_WDGA                      \ [0x07] Activation bit This bit is set by software and only cleared by hardware after a reset. When WDGA=1, the watchdog can generate a reset.
+  [then]
 
 
-\
-\ @brief Status register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
+  [ifdef] WWDG_WWDG_CFR_DEF
+    \
+    \ @brief Configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x0000007F
+    \
+    $00 constant WWDG_W                         \ [0x00 : 7] 7-bit window value These bits contain the window value to be compared with the down-counter.
+    $09 constant WWDG_EWI                       \ [0x09] Early wakeup interrupt When set, an interrupt occurs whenever the counter reaches the value 0x40. This interrupt is only cleared by hardware after a reset.
+    $0b constant WWDG_WDGTB                     \ [0x0b : 3] Timer base The timebase of the prescaler can be modified as follows:
+  [then]
 
-$00000001 constant WWDG_WWDG_SR_EWIF                                \ Early wakeup interrupt flag
 
+  [ifdef] WWDG_WWDG_SR_DEF
+    \
+    \ @brief Status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant WWDG_EWIF                      \ [0x00] Early wakeup interrupt flag
+  [then]
 
-\
-\ @brief System window watchdog
-\
-$40002c00 constant WWDG_WWDG_CR   \ offset: 0x00 : Control register
-$40002c04 constant WWDG_WWDG_CFR  \ offset: 0x04 : Configuration register
-$40002c08 constant WWDG_WWDG_SR   \ offset: 0x08 : Status register
+  \
+  \ @brief System window watchdog
+  \
+  $00 constant WWDG_WWDG_CR             \ Control register
+  $04 constant WWDG_WWDG_CFR            \ Configuration register
+  $08 constant WWDG_WWDG_SR             \ Status register
 
+: WWDG_DEF ; [then]

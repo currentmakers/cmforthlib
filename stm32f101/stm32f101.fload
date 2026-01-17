@@ -1,150 +1,123 @@
 \
-\ @file stm32f101.h
-\ @brief Loader for all peripherals in a STM32F101
+\ @file stm32f101.fload
+\ @brief Device header for STM32F101
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include fsmc.fs
-.include pwr.fs
-.include rcc.fs
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpiod.fs
-.include gpioe.fs
-.include gpiof.fs
-.include gpiog.fs
-.include afio.fs
-.include exti.fs
-.include dma1.fs
-.include dma2.fs
-.include rtc.fs
-.include iwdg.fs
-.include wwdg.fs
-.include tim2.fs
-.include tim3.fs
-.include tim4.fs
-.include tim5.fs
-.include tim9.fs
-.include tim12.fs
-.include tim10.fs
-.include tim11.fs
-.include tim13.fs
-.include tim14.fs
-.include tim6.fs
-.include tim7.fs
-.include i2c1.fs
-.include i2c2.fs
-.include spi1.fs
-.include spi2.fs
-.include spi3.fs
-.include usart1.fs
-.include usart2.fs
-.include usart3.fs
-.include dac.fs
-.include dbg.fs
-.include uart4.fs
-.include uart5.fs
-.include crc.fs
-.include flash.fs
-.include bkp.fs
-.include adc1.fs
-.include otg_fs_device.fs
-.include otg_fs_global.fs
-.include otg_fs_host.fs
-.include otg_fs_pwrclk.fs
-.include can1.fs
-.include can2.fs
-.include ethernet_mmc.fs
-.include ethernet_mac.fs
-.include ethernet_ptp.fs
-.include ethernet_dma.fs
-.include usb.fs
-.include adc2.fs
-.include adc3.fs
-.include tim1.fs
-.include tim8.fs
-.include sdio.fs
-.include nvic.fs
-.include mpu.fs
-.include scb_actrl.fs
-.include nvic_stir.fs
-.include scb.fs
-.include stk.fs
+[ifndef] STM32F101_LOADER
+  .include "fsmc.fs"
+  .include "pwr.fs"
+  .include "rcc.fs"
+  .include "gpio.fs"
+  .include "afio.fs"
+  .include "exti.fs"
+  .include "dma.fs"
+  .include "rtc.fs"
+  .include "iwdg.fs"
+  .include "wwdg.fs"
+  .include "tim2.fs"
+  .include "tim9.fs"
+  .include "tim10.fs"
+  .include "tim6.fs"
+  .include "i2c.fs"
+  .include "spi.fs"
+  .include "usart.fs"
+  .include "dac.fs"
+  .include "dbg.fs"
+  .include "uart4.fs"
+  .include "uart5.fs"
+  .include "crc.fs"
+  .include "flash.fs"
+  .include "bkp.fs"
+  .include "adc1.fs"
+  .include "otg_fs_device.fs"
+  .include "otg_fs_global.fs"
+  .include "otg_fs_host.fs"
+  .include "otg_fs_pwrclk.fs"
+  .include "can.fs"
+  .include "ethernet_mmc.fs"
+  .include "ethernet_mac.fs"
+  .include "ethernet_ptp.fs"
+  .include "ethernet_dma.fs"
+  .include "usb.fs"
+  .include "adc.fs"
+  .include "tim1.fs"
+  .include "sdio.fs"
+  .include "nvic.fs"
+  .include "mpu.fs"
+  .include "scb_actrl.fs"
+  .include "nvic_stir.fs"
+  .include "scb.fs"
+  .include "stk.fs"
 
-decimal
+  $0xA0000000 constant FSMC             \ See fsmc.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40021000 constant RCC              \ See rcc.fs
+  $0x40010800 constant GPIOA            \ See gpio.fs
+  $0x40010C00 constant GPIOB            \ See gpio.fs
+  $0x40011000 constant GPIOC            \ See gpio.fs
+  $0x40011400 constant GPIOD            \ See gpio.fs
+  $0x40011800 constant GPIOE            \ See gpio.fs
+  $0x40011C00 constant GPIOF            \ See gpio.fs
+  $0x40012000 constant GPIOG            \ See gpio.fs
+  $0x40010000 constant AFIO             \ See afio.fs
+  $0x40010400 constant EXTI             \ See exti.fs
+  $0x40020000 constant DMA1             \ See dma.fs
+  $0x40020400 constant DMA2             \ See dma.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim2.fs
+  $0x40000800 constant TIM4             \ See tim2.fs
+  $0x40000C00 constant TIM5             \ See tim2.fs
+  $0x40014C00 constant TIM9             \ See tim9.fs
+  $0x40001800 constant TIM12            \ See tim9.fs
+  $0x40015000 constant TIM10            \ See tim10.fs
+  $0x40015400 constant TIM11            \ See tim10.fs
+  $0x40001C00 constant TIM13            \ See tim10.fs
+  $0x40002000 constant TIM14            \ See tim10.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim6.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x40003C00 constant SPI3             \ See spi.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x40007400 constant DAC              \ See dac.fs
+  $0xE0042000 constant DBG              \ See dbg.fs
+  $0x40004C00 constant UART4            \ See uart4.fs
+  $0x40005000 constant UART5            \ See uart5.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x40006C00 constant BKP              \ See bkp.fs
+  $0x40012400 constant ADC1             \ See adc1.fs
+  $0x50000800 constant OTG_FS_DEVICE    \ See otg_fs_device.fs
+  $0x50000000 constant OTG_FS_GLOBAL    \ See otg_fs_global.fs
+  $0x50000400 constant OTG_FS_HOST      \ See otg_fs_host.fs
+  $0x50000E00 constant OTG_FS_PWRCLK    \ See otg_fs_pwrclk.fs
+  $0x40006400 constant CAN1             \ See can.fs
+  $0x40006800 constant CAN2             \ See can.fs
+  $0x40028100 constant ETHERNET_MMC     \ See ethernet_mmc.fs
+  $0x40028000 constant ETHERNET_MAC     \ See ethernet_mac.fs
+  $0x40028700 constant ETHERNET_PTP     \ See ethernet_ptp.fs
+  $0x40029000 constant ETHERNET_DMA     \ See ethernet_dma.fs
+  $0x40005C00 constant USB              \ See usb.fs
+  $0x40012800 constant ADC2             \ See adc.fs
+  $0x40013C00 constant ADC3             \ See adc.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40013400 constant TIM8             \ See tim1.fs
+  $0x40018000 constant SDIO             \ See sdio.fs
+  $0xE000E100 constant NVIC             \ See nvic.fs
+  $0xE000ED90 constant MPU              \ See mpu.fs
+  $0xE000E008 constant SCB_ACTRL        \ See scb_actrl.fs
+  $0xE000EF00 constant NVIC_STIR        \ See nvic_stir.fs
+  $0xE000ED00 constant SCB              \ See scb.fs
+  $0xE000E010 constant STK              \ See stk.fs
 
-\ Peripheral Instance Definitions
-.include FSMC                   \ Flexible static memory controller
-.include PWR                    \ Power control
-.include RCC                    \ Reset and clock control
-.include GPIOA                  \ General purpose I/O
-.include GPIOB                  \ General purpose I/O
-.include GPIOC                  \ General purpose I/O
-.include GPIOD                  \ General purpose I/O
-.include GPIOE                  \ General purpose I/O
-.include GPIOF                  \ General purpose I/O
-.include GPIOG                  \ General purpose I/O
-.include AFIO                   \ Alternate function I/O
-.include EXTI                   \ EXTI
-.include DMA1                   \ DMA controller
-.include DMA2                   \ DMA2 Channel 1 interrupt
-.include RTC                    \ Real time clock
-.include IWDG                   \ Independent watchdog
-.include WWDG                   \ Window watchdog
-.include TIM2                   \ General purpose timer
-.include TIM3                   \ TIM3 global interrupt
-.include TIM4                   \ TIM4 global interrupt
-.include TIM5                   \ TIM5 global interrupt
-.include TIM9                   \ General purpose timer
-.include TIM12                  \ General purpose timer
-.include TIM10                  \ General purpose timer
-.include TIM11                  \ General purpose timer
-.include TIM13                  \ General purpose timer
-.include TIM14                  \ General purpose timer
-.include TIM6                   \ Basic timer
-.include TIM7                   \ Basic timer
-.include I2C1                   \ Inter integrated circuit
-.include I2C2                   \ I2C2 event interrupt
-.include SPI1                   \ Serial peripheral interface
-.include SPI2                   \ SPI2 global interrupt
-.include SPI3                   \ SPI3 global interrupt
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include USART2                 \ USART2 global interrupt
-.include USART3                 \ USART3 global interrupt
-.include DAC                    \ Digital to analog converter
-.include DBG                    \ Debug support
-.include UART4                  \ Universal asynchronous receiver transmitter
-.include UART5                  \ Universal asynchronous receiver transmitter
-.include CRC                    \ CRC calculation unit
-.include FLASH                  \ FLASH
-.include BKP                    \ Backup registers
-.include ADC1                   \ Analog to digital converter
-.include OTG_FS_DEVICE          \ USB on the go full speed
-.include OTG_FS_GLOBAL          \ USB on the go full speed
-.include OTG_FS_HOST            \ USB on the go full speed
-.include OTG_FS_PWRCLK          \ USB on the go full speed
-.include CAN1                   \ Controller area network
-.include CAN2                   \ Controller area network
-.include ETHERNET_MMC           \ Ethernet: MAC management counters
-.include ETHERNET_MAC           \ Ethernet: media access control
-.include ETHERNET_PTP           \ Ethernet: Precision time protocol
-.include ETHERNET_DMA           \ Ethernet: DMA controller operation
-.include USB                    \ Universal serial bus full-speed device interface
-.include ADC2                   \ Analog to digital converter
-.include ADC3                   \ ADC1 and ADC2 global interrupt
-.include TIM1                   \ Advanced timer
-.include TIM8                   \ TIM8 Break interrupt
-.include SDIO                   \ Secure digital input/output interface
-.include NVIC                   \ Nested Vectored Interrupt Controller
-.include MPU                    \ Memory protection unit
-.include SCB_ACTRL              \ System control block ACTLR
-.include NVIC_STIR              \ Nested vectored interrupt controller
-.include SCB                    \ System control block
-.include STK                    \ SysTick timer
-
-compiletoram
-
+: STM32F101_LOADER ; [then]

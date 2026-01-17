@@ -6,150 +6,160 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] LPTIM1_DEF
 
-\
-\ @brief Interrupt and Status Register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM1_ISR_CMPM                                  \ Compare match
-$00000002 constant LPTIM1_ISR_ARRM                                  \ Autoreload match
-$00000004 constant LPTIM1_ISR_EXTTRIG                               \ External trigger edge event
-$00000008 constant LPTIM1_ISR_CMPOK                                 \ Compare register update OK
-$00000010 constant LPTIM1_ISR_ARROK                                 \ Autoreload register update OK
-$00000020 constant LPTIM1_ISR_UP                                    \ Counter direction change down to up
-$00000040 constant LPTIM1_ISR_DOWN                                  \ Counter direction change up to down
-$00000080 constant LPTIM1_ISR_UE                                    \ LPTIM update event occurred
-$00000100 constant LPTIM1_ISR_REPOK                                 \ Repetition register update Ok
-
-
-\
-\ @brief Interrupt Clear Register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM1_ICR_CMPMCF                                \ compare match Clear Flag
-$00000002 constant LPTIM1_ICR_ARRMCF                                \ Autoreload match Clear Flag
-$00000004 constant LPTIM1_ICR_EXTTRIGCF                             \ External trigger valid edge Clear Flag
-$00000008 constant LPTIM1_ICR_CMPOKCF                               \ Compare register update OK Clear Flag
-$00000010 constant LPTIM1_ICR_ARROKCF                               \ Autoreload register update OK Clear Flag
-$00000020 constant LPTIM1_ICR_UPCF                                  \ Direction change to UP Clear Flag
-$00000040 constant LPTIM1_ICR_DOWNCF                                \ Direction change to down Clear Flag
-$00000080 constant LPTIM1_ICR_UECF                                  \ Update event clear flag
-$00000100 constant LPTIM1_ICR_REPOKCF                               \ Repetition register update OK clear flag
+  [ifdef] LPTIM1_ISR_DEF
+    \
+    \ @brief Interrupt and Status Register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_CMPM                    \ [0x00] Compare match
+    $01 constant LPTIM1_ARRM                    \ [0x01] Autoreload match
+    $02 constant LPTIM1_EXTTRIG                 \ [0x02] External trigger edge event
+    $03 constant LPTIM1_CMPOK                   \ [0x03] Compare register update OK
+    $04 constant LPTIM1_ARROK                   \ [0x04] Autoreload register update OK
+    $05 constant LPTIM1_UP                      \ [0x05] Counter direction change down to up
+    $06 constant LPTIM1_DOWN                    \ [0x06] Counter direction change up to down
+    $07 constant LPTIM1_UE                      \ [0x07] LPTIM update event occurred
+    $08 constant LPTIM1_REPOK                   \ [0x08] Repetition register update Ok
+  [then]
 
 
-\
-\ @brief Interrupt Enable Register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM1_IER_CMPMIE                                \ Compare match Interrupt Enable
-$00000002 constant LPTIM1_IER_ARRMIE                                \ Autoreload match Interrupt Enable
-$00000004 constant LPTIM1_IER_EXTTRIGIE                             \ External trigger valid edge Interrupt Enable
-$00000008 constant LPTIM1_IER_CMPOKIE                               \ Compare register update OK Interrupt Enable
-$00000010 constant LPTIM1_IER_ARROKIE                               \ Autoreload register update OK Interrupt Enable
-$00000020 constant LPTIM1_IER_UPIE                                  \ Direction change to UP Interrupt Enable
-$00000040 constant LPTIM1_IER_DOWNIE                                \ Direction change to down Interrupt Enable
-$00000080 constant LPTIM1_IER_UEIE                                  \ Update event interrupt enable
-$00000100 constant LPTIM1_IER_REPOKIE                               \ REPOKIE
-
-
-\
-\ @brief Configuration Register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM1_CFGR_CKSEL                                \ Clock selector
-$00000006 constant LPTIM1_CFGR_CKPOL                                \ Clock Polarity
-$00000018 constant LPTIM1_CFGR_CKFLT                                \ Configurable digital filter for external clock
-$000000c0 constant LPTIM1_CFGR_TRGFLT                               \ Configurable digital filter for trigger
-$00000e00 constant LPTIM1_CFGR_PRESC                                \ Clock prescaler
-$0000e000 constant LPTIM1_CFGR_TRIGSEL                              \ Trigger selector
-$00060000 constant LPTIM1_CFGR_TRIGEN                               \ Trigger enable and polarity
-$00080000 constant LPTIM1_CFGR_TIMOUT                               \ Timeout enable
-$00100000 constant LPTIM1_CFGR_WAVE                                 \ Waveform shape
-$00200000 constant LPTIM1_CFGR_WAVPOL                               \ Waveform shape polarity
-$00400000 constant LPTIM1_CFGR_PRELOAD                              \ Registers update mode
-$00800000 constant LPTIM1_CFGR_COUNTMODE                            \ counter mode enabled
-$01000000 constant LPTIM1_CFGR_ENC                                  \ Encoder mode enable
+  [ifdef] LPTIM1_ICR_DEF
+    \
+    \ @brief Interrupt Clear Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_CMPMCF                  \ [0x00] compare match Clear Flag
+    $01 constant LPTIM1_ARRMCF                  \ [0x01] Autoreload match Clear Flag
+    $02 constant LPTIM1_EXTTRIGCF               \ [0x02] External trigger valid edge Clear Flag
+    $03 constant LPTIM1_CMPOKCF                 \ [0x03] Compare register update OK Clear Flag
+    $04 constant LPTIM1_ARROKCF                 \ [0x04] Autoreload register update OK Clear Flag
+    $05 constant LPTIM1_UPCF                    \ [0x05] Direction change to UP Clear Flag
+    $06 constant LPTIM1_DOWNCF                  \ [0x06] Direction change to down Clear Flag
+    $07 constant LPTIM1_UECF                    \ [0x07] Update event clear flag
+    $08 constant LPTIM1_REPOKCF                 \ [0x08] Repetition register update OK clear flag
+  [then]
 
 
-\
-\ @brief Control Register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM1_CR_ENABLE                                 \ LPTIM Enable
-$00000002 constant LPTIM1_CR_SNGSTRT                                \ LPTIM start in single mode
-$00000004 constant LPTIM1_CR_CNTSTRT                                \ Timer start in continuous mode
-$00000008 constant LPTIM1_CR_RSTARE                                 \ Reset after read enable
-$00000010 constant LPTIM1_CR_COUNTRST                               \ Counter reset
-
-
-\
-\ @brief Compare Register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LPTIM1_CMP_CMP                                   \ Compare value
+  [ifdef] LPTIM1_IER_DEF
+    \
+    \ @brief Interrupt Enable Register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_CMPMIE                  \ [0x00] Compare match Interrupt Enable
+    $01 constant LPTIM1_ARRMIE                  \ [0x01] Autoreload match Interrupt Enable
+    $02 constant LPTIM1_EXTTRIGIE               \ [0x02] External trigger valid edge Interrupt Enable
+    $03 constant LPTIM1_CMPOKIE                 \ [0x03] Compare register update OK Interrupt Enable
+    $04 constant LPTIM1_ARROKIE                 \ [0x04] Autoreload register update OK Interrupt Enable
+    $05 constant LPTIM1_UPIE                    \ [0x05] Direction change to UP Interrupt Enable
+    $06 constant LPTIM1_DOWNIE                  \ [0x06] Direction change to down Interrupt Enable
+    $07 constant LPTIM1_UEIE                    \ [0x07] Update event interrupt enable
+    $08 constant LPTIM1_REPOKIE                 \ [0x08] REPOKIE
+  [then]
 
 
-\
-\ @brief Autoreload Register
-\ Address offset: 0x18
-\ Reset value: 0x00000001
-\
-
-$0000ffff constant LPTIM1_ARR_ARR                                   \ Auto reload value
-
-
-\
-\ @brief Counter Register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LPTIM1_CNT_CNT                                   \ Counter value
-
-
-\
-\ @brief LPTIM option register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPTIM1_OR_OR_0                                   \ Option register bit 0
-$00000002 constant LPTIM1_OR_OR_1                                   \ Option register bit 1
+  [ifdef] LPTIM1_CFGR_DEF
+    \
+    \ @brief Configuration Register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_CKSEL                   \ [0x00] Clock selector
+    $01 constant LPTIM1_CKPOL                   \ [0x01 : 2] Clock Polarity
+    $03 constant LPTIM1_CKFLT                   \ [0x03 : 2] Configurable digital filter for external clock
+    $06 constant LPTIM1_TRGFLT                  \ [0x06 : 2] Configurable digital filter for trigger
+    $09 constant LPTIM1_PRESC                   \ [0x09 : 3] Clock prescaler
+    $0d constant LPTIM1_TRIGSEL                 \ [0x0d : 3] Trigger selector
+    $11 constant LPTIM1_TRIGEN                  \ [0x11 : 2] Trigger enable and polarity
+    $13 constant LPTIM1_TIMOUT                  \ [0x13] Timeout enable
+    $14 constant LPTIM1_WAVE                    \ [0x14] Waveform shape
+    $15 constant LPTIM1_WAVPOL                  \ [0x15] Waveform shape polarity
+    $16 constant LPTIM1_PRELOAD                 \ [0x16] Registers update mode
+    $17 constant LPTIM1_COUNTMODE               \ [0x17] counter mode enabled
+    $18 constant LPTIM1_ENC                     \ [0x18] Encoder mode enable
+  [then]
 
 
-\
-\ @brief LPTIM repetition register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
+  [ifdef] LPTIM1_CR_DEF
+    \
+    \ @brief Control Register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_ENABLE                  \ [0x00] LPTIM Enable
+    $01 constant LPTIM1_SNGSTRT                 \ [0x01] LPTIM start in single mode
+    $02 constant LPTIM1_CNTSTRT                 \ [0x02] Timer start in continuous mode
+    $03 constant LPTIM1_RSTARE                  \ [0x03] Reset after read enable
+    $04 constant LPTIM1_COUNTRST                \ [0x04] Counter reset
+  [then]
 
-$000000ff constant LPTIM1_RCR_REP                                   \ Repetition register value
+
+  [ifdef] LPTIM1_CMP_DEF
+    \
+    \ @brief Compare Register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_CMP                     \ [0x00 : 16] Compare value
+  [then]
 
 
-\
-\ @brief Low power timer
-\
-$40007c00 constant LPTIM1_ISR     \ offset: 0x00 : Interrupt and Status Register
-$40007c04 constant LPTIM1_ICR     \ offset: 0x04 : Interrupt Clear Register
-$40007c08 constant LPTIM1_IER     \ offset: 0x08 : Interrupt Enable Register
-$40007c0c constant LPTIM1_CFGR    \ offset: 0x0C : Configuration Register
-$40007c10 constant LPTIM1_CR      \ offset: 0x10 : Control Register
-$40007c14 constant LPTIM1_CMP     \ offset: 0x14 : Compare Register
-$40007c18 constant LPTIM1_ARR     \ offset: 0x18 : Autoreload Register
-$40007c1c constant LPTIM1_CNT     \ offset: 0x1C : Counter Register
-$40007c20 constant LPTIM1_OR      \ offset: 0x20 : LPTIM option register
-$40007c28 constant LPTIM1_RCR     \ offset: 0x28 : LPTIM repetition register
+  [ifdef] LPTIM1_ARR_DEF
+    \
+    \ @brief Autoreload Register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000001
+    \
+    $00 constant LPTIM1_ARR                     \ [0x00 : 16] Auto reload value
+  [then]
 
+
+  [ifdef] LPTIM1_CNT_DEF
+    \
+    \ @brief Counter Register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_CNT                     \ [0x00 : 16] Counter value
+  [then]
+
+
+  [ifdef] LPTIM1_OR_DEF
+    \
+    \ @brief LPTIM option register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_OR_0                    \ [0x00] Option register bit 0
+    $01 constant LPTIM1_OR_1                    \ [0x01] Option register bit 1
+  [then]
+
+
+  [ifdef] LPTIM1_RCR_DEF
+    \
+    \ @brief LPTIM repetition register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPTIM1_REP                     \ [0x00 : 8] Repetition register value
+  [then]
+
+  \
+  \ @brief Low power timer
+  \
+  $00 constant LPTIM1_ISR               \ Interrupt and Status Register
+  $04 constant LPTIM1_ICR               \ Interrupt Clear Register
+  $08 constant LPTIM1_IER               \ Interrupt Enable Register
+  $0C constant LPTIM1_CFGR              \ Configuration Register
+  $10 constant LPTIM1_CR                \ Control Register
+  $14 constant LPTIM1_CMP               \ Compare Register
+  $18 constant LPTIM1_ARR               \ Autoreload Register
+  $1C constant LPTIM1_CNT               \ Counter Register
+  $20 constant LPTIM1_OR                \ LPTIM option register
+  $28 constant LPTIM1_RCR               \ LPTIM repetition register
+
+: LPTIM1_DEF ; [then]

@@ -6,2727 +6,2794 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief MPCBB control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_CR_LCK                        \ LCK
-$40000000 constant GTZC_MPCBB1_MPCBB1_CR_INVSECSTATE                \ INVSECSTATE
-$80000000 constant GTZC_MPCBB1_MPCBB1_CR_SRWILADIS                  \ SRWILADIS
-
-
-\
-\ @brief MPCBB control register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB0                \ LCKSB0
-$00000002 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB1                \ LCKSB1
-$00000004 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB2                \ LCKSB2
-$00000008 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB3                \ LCKSB3
-$00000010 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB4                \ LCKSB4
-$00000020 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB5                \ LCKSB5
-$00000040 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB6                \ LCKSB6
-$00000080 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB7                \ LCKSB7
-$00000100 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB8                \ LCKSB8
-$00000200 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB9                \ LCKSB9
-$00000400 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB10               \ LCKSB10
-$00000800 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB11               \ LCKSB11
-$00001000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB12               \ LCKSB12
-$00002000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB13               \ LCKSB13
-$00004000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB14               \ LCKSB14
-$00008000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB15               \ LCKSB15
-$00010000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB16               \ LCKSB16
-$00020000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB17               \ LCKSB17
-$00040000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB18               \ LCKSB18
-$00080000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB19               \ LCKSB19
-$00100000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB20               \ LCKSB20
-$00200000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB21               \ LCKSB21
-$00400000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB22               \ LCKSB22
-$00800000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB23               \ LCKSB23
-$01000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB24               \ LCKSB24
-$02000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB25               \ LCKSB25
-$04000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB26               \ LCKSB26
-$08000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB27               \ LCKSB27
-$10000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB28               \ LCKSB28
-$20000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB29               \ LCKSB29
-$40000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB30               \ LCKSB30
-$80000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR1_LCKSB31               \ LCKSB31
-
-
-\
-\ @brief MPCBB control register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB32               \ LCKSB32
-$00000002 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB33               \ LCKSB33
-$00000004 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB34               \ LCKSB34
-$00000008 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB35               \ LCKSB35
-$00000010 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB36               \ LCKSB36
-$00000020 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB37               \ LCKSB37
-$00000040 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB38               \ LCKSB38
-$00000080 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB39               \ LCKSB39
-$00000100 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB40               \ LCKSB40
-$00000200 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB41               \ LCKSB41
-$00000400 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB42               \ LCKSB42
-$00000800 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB43               \ LCKSB43
-$00001000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB44               \ LCKSB44
-$00002000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB45               \ LCKSB45
-$00004000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB46               \ LCKSB46
-$00008000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB47               \ LCKSB47
-$00010000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB48               \ LCKSB48
-$00020000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB49               \ LCKSB49
-$00040000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB50               \ LCKSB50
-$00080000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB51               \ LCKSB51
-$00100000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB52               \ LCKSB52
-$00200000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB53               \ LCKSB53
-$00400000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB54               \ LCKSB54
-$00800000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB55               \ LCKSB55
-$01000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB56               \ LCKSB56
-$02000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB57               \ LCKSB57
-$04000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB58               \ LCKSB58
-$08000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB59               \ LCKSB59
-$10000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB60               \ LCKSB60
-$20000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB61               \ LCKSB61
-$40000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB62               \ LCKSB62
-$80000000 constant GTZC_MPCBB1_MPCBB1_LCKVTR2_LCKSB63               \ LCKSB63
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x100
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR0_B0                      \ B0
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR0_B1                      \ B1
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR0_B2                      \ B2
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR0_B3                      \ B3
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR0_B4                      \ B4
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR0_B5                      \ B5
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR0_B6                      \ B6
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR0_B7                      \ B7
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR0_B8                      \ B8
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR0_B9                      \ B9
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR0_B10                     \ B10
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR0_B11                     \ B11
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B12                     \ B12
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B13                     \ B13
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B14                     \ B14
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B15                     \ B15
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B16                     \ B16
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B17                     \ B17
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B18                     \ B18
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B19                     \ B19
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B20                     \ B20
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B21                     \ B21
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B22                     \ B22
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B23                     \ B23
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B24                     \ B24
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B25                     \ B25
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B26                     \ B26
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B27                     \ B27
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B28                     \ B28
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B29                     \ B29
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B30                     \ B30
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR0_B31                     \ B31
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x104
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR1_B32                     \ B32
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR1_B33                     \ B33
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR1_B34                     \ B34
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR1_B35                     \ B35
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR1_B36                     \ B36
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR1_B37                     \ B37
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR1_B38                     \ B38
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR1_B39                     \ B39
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR1_B40                     \ B40
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR1_B41                     \ B41
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR1_B42                     \ B42
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR1_B43                     \ B43
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B44                     \ B44
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B45                     \ B45
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B46                     \ B46
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B47                     \ B47
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B48                     \ B48
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B49                     \ B49
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B50                     \ B50
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B51                     \ B51
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B52                     \ B52
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B53                     \ B53
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B54                     \ B54
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B55                     \ B55
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B56                     \ B56
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B57                     \ B57
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B58                     \ B58
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B59                     \ B59
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B60                     \ B60
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B61                     \ B61
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B62                     \ B62
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR1_B63                     \ B63
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x108
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR2_B64                     \ B64
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR2_B65                     \ B65
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR2_B66                     \ B66
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR2_B67                     \ B67
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR2_B68                     \ B68
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR2_B69                     \ B69
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR2_B70                     \ B70
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR2_B71                     \ B71
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR2_B72                     \ B72
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR2_B73                     \ B73
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR2_B74                     \ B74
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR2_B75                     \ B75
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B76                     \ B76
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B77                     \ B77
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B78                     \ B78
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B79                     \ B79
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B80                     \ B80
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B81                     \ B81
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B82                     \ B82
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B83                     \ B83
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B84                     \ B84
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B85                     \ B85
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B86                     \ B86
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B87                     \ B87
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B88                     \ B88
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B89                     \ B89
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B90                     \ B90
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B91                     \ B91
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B92                     \ B92
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B93                     \ B93
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B94                     \ B94
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR2_B95                     \ B95
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x10C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR3_B96                     \ B96
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR3_B97                     \ B97
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR3_B98                     \ B98
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR3_B99                     \ B99
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR3_B100                    \ B100
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR3_B101                    \ B101
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR3_B102                    \ B102
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR3_B103                    \ B103
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR3_B104                    \ B104
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR3_B105                    \ B105
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR3_B106                    \ B106
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR3_B107                    \ B107
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B108                    \ B108
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B109                    \ B109
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B110                    \ B110
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B111                    \ B111
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B112                    \ B112
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B113                    \ B113
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B114                    \ B114
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B115                    \ B115
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B116                    \ B116
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B117                    \ B117
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B118                    \ B118
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B119                    \ B119
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B120                    \ B120
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B121                    \ B121
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B122                    \ B122
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B123                    \ B123
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B124                    \ B124
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B125                    \ B125
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B126                    \ B126
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR3_B127                    \ B127
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x110
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR4_B128                    \ B128
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR4_B129                    \ B129
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR4_B130                    \ B130
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR4_B131                    \ B131
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR4_B132                    \ B132
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR4_B133                    \ B133
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR4_B134                    \ B134
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR4_B135                    \ B135
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR4_B136                    \ B136
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR4_B137                    \ B137
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR4_B138                    \ B138
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR4_B139                    \ B139
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B140                    \ B140
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B141                    \ B141
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B142                    \ B142
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B143                    \ B143
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B144                    \ B144
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B145                    \ B145
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B146                    \ B146
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B147                    \ B147
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B148                    \ B148
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B149                    \ B149
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B150                    \ B150
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B151                    \ B151
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B152                    \ B152
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B153                    \ B153
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B154                    \ B154
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B155                    \ B155
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B156                    \ B156
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B157                    \ B157
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B158                    \ B158
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR4_B159                    \ B159
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x114
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR5_B160                    \ B160
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR5_B161                    \ B161
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR5_B162                    \ B162
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR5_B163                    \ B163
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR5_B164                    \ B164
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR5_B165                    \ B165
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR5_B166                    \ B166
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR5_B167                    \ B167
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR5_B168                    \ B168
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR5_B169                    \ B169
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR5_B170                    \ B170
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR5_B171                    \ B171
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B172                    \ B172
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B173                    \ B173
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B174                    \ B174
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B175                    \ B175
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B176                    \ B176
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B177                    \ B177
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B178                    \ B178
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B179                    \ B179
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B180                    \ B180
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B181                    \ B181
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B182                    \ B182
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B183                    \ B183
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B184                    \ B184
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B185                    \ B185
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B186                    \ B186
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B187                    \ B187
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B188                    \ B188
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B189                    \ B189
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B190                    \ B190
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR5_B191                    \ B191
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x118
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR6_B192                    \ B192
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR6_B193                    \ B193
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR6_B194                    \ B194
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR6_B195                    \ B195
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR6_B196                    \ B196
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR6_B197                    \ B197
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR6_B198                    \ B198
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR6_B199                    \ B199
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR6_B200                    \ B200
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR6_B201                    \ B201
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR6_B202                    \ B202
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR6_B203                    \ B203
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B204                    \ B204
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B205                    \ B205
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B206                    \ B206
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B207                    \ B207
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B208                    \ B208
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B209                    \ B209
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B210                    \ B210
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B211                    \ B211
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B212                    \ B212
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B213                    \ B213
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B214                    \ B214
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B215                    \ B215
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B216                    \ B216
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B217                    \ B217
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B218                    \ B218
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B219                    \ B219
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B220                    \ B220
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B221                    \ B221
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B222                    \ B222
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR6_B223                    \ B223
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x11C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR7_B224                    \ B224
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR7_B225                    \ B225
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR7_B226                    \ B226
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR7_B227                    \ B227
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR7_B228                    \ B228
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR7_B229                    \ B229
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR7_B230                    \ B230
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR7_B231                    \ B231
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR7_B232                    \ B232
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR7_B233                    \ B233
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR7_B234                    \ B234
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR7_B235                    \ B235
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B236                    \ B236
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B237                    \ B237
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B238                    \ B238
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B239                    \ B239
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B240                    \ B240
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B241                    \ B241
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B242                    \ B242
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B243                    \ B243
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B244                    \ B244
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B245                    \ B245
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B246                    \ B246
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B247                    \ B247
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B248                    \ B248
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B249                    \ B249
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B250                    \ B250
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B251                    \ B251
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B252                    \ B252
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B253                    \ B253
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B254                    \ B254
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR7_B255                    \ B255
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x120
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR8_B256                    \ B256
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR8_B257                    \ B257
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR8_B258                    \ B258
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR8_B259                    \ B259
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR8_B260                    \ B260
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR8_B261                    \ B261
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR8_B262                    \ B262
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR8_B263                    \ B263
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR8_B264                    \ B264
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR8_B265                    \ B265
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR8_B266                    \ B266
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR8_B267                    \ B267
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B268                    \ B268
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B269                    \ B269
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B270                    \ B270
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B271                    \ B271
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B272                    \ B272
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B273                    \ B273
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B274                    \ B274
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B275                    \ B275
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B276                    \ B276
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B277                    \ B277
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B278                    \ B278
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B279                    \ B279
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B280                    \ B280
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B281                    \ B281
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B282                    \ B282
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B283                    \ B283
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B284                    \ B284
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B285                    \ B285
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B286                    \ B286
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR8_B287                    \ B287
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x124
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR9_B288                    \ B288
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR9_B289                    \ B289
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR9_B290                    \ B290
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR9_B291                    \ B291
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR9_B292                    \ B292
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR9_B293                    \ B293
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR9_B294                    \ B294
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR9_B295                    \ B295
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR9_B296                    \ B296
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR9_B297                    \ B297
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR9_B298                    \ B298
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR9_B299                    \ B299
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B300                    \ B300
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B301                    \ B301
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B302                    \ B302
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B303                    \ B303
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B304                    \ B304
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B305                    \ B305
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B306                    \ B306
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B307                    \ B307
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B308                    \ B308
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B309                    \ B309
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B310                    \ B310
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B311                    \ B311
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B312                    \ B312
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B313                    \ B313
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B314                    \ B314
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B315                    \ B315
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B316                    \ B316
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B317                    \ B317
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B318                    \ B318
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR9_B319                    \ B319
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x128
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR10_B320                   \ B320
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR10_B321                   \ B321
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR10_B322                   \ B322
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR10_B323                   \ B323
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR10_B324                   \ B324
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR10_B325                   \ B325
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR10_B326                   \ B326
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR10_B327                   \ B327
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR10_B328                   \ B328
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR10_B329                   \ B329
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR10_B330                   \ B330
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR10_B331                   \ B331
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B332                   \ B332
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B333                   \ B333
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B334                   \ B334
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B335                   \ B335
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B336                   \ B336
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B337                   \ B337
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B338                   \ B338
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B339                   \ B339
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B340                   \ B340
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B341                   \ B341
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B342                   \ B342
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B343                   \ B343
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B344                   \ B344
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B345                   \ B345
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B346                   \ B346
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B347                   \ B347
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B348                   \ B348
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B349                   \ B349
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B350                   \ B350
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR10_B351                   \ B351
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x12C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR11_B352                   \ B352
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR11_B353                   \ B353
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR11_B354                   \ B354
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR11_B355                   \ B355
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR11_B356                   \ B356
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR11_B357                   \ B357
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR11_B358                   \ B358
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR11_B359                   \ B359
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR11_B360                   \ B360
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR11_B361                   \ B361
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR11_B362                   \ B362
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR11_B363                   \ B363
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B364                   \ B364
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B365                   \ B365
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B366                   \ B366
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B367                   \ B367
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B368                   \ B368
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B369                   \ B369
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B370                   \ B370
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B371                   \ B371
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B372                   \ B372
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B373                   \ B373
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B374                   \ B374
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B375                   \ B375
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B376                   \ B376
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B377                   \ B377
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B378                   \ B378
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B379                   \ B379
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B380                   \ B380
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B381                   \ B381
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B382                   \ B382
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR11_B383                   \ B383
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x130
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR12_B384                   \ B384
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR12_B385                   \ B385
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR12_B386                   \ B386
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR12_B387                   \ B387
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR12_B388                   \ B388
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR12_B389                   \ B389
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR12_B390                   \ B390
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR12_B391                   \ B391
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR12_B392                   \ B392
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR12_B393                   \ B393
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR12_B394                   \ B394
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR12_B395                   \ B395
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B396                   \ B396
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B397                   \ B397
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B398                   \ B398
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B399                   \ B399
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B400                   \ B400
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B401                   \ B401
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B402                   \ B402
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B403                   \ B403
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B404                   \ B404
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B405                   \ B405
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B406                   \ B406
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B407                   \ B407
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B408                   \ B408
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B409                   \ B409
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B410                   \ B410
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B411                   \ B411
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B412                   \ B412
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B413                   \ B413
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B414                   \ B414
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR12_B415                   \ B415
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x134
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR13_B416                   \ B416
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR13_B417                   \ B417
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR13_B418                   \ B418
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR13_B419                   \ B419
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR13_B420                   \ B420
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR13_B421                   \ B421
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR13_B422                   \ B422
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR13_B423                   \ B423
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR13_B424                   \ B424
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR13_B425                   \ B425
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR13_B426                   \ B426
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR13_B427                   \ B427
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B428                   \ B428
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B429                   \ B429
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B430                   \ B430
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B431                   \ B431
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B432                   \ B432
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B433                   \ B433
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B434                   \ B434
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B435                   \ B435
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B436                   \ B436
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B437                   \ B437
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B438                   \ B438
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B439                   \ B439
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B440                   \ B440
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B441                   \ B441
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B442                   \ B442
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B443                   \ B443
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B444                   \ B444
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B445                   \ B445
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B446                   \ B446
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR13_B447                   \ B447
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x138
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR14_B448                   \ B448
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR14_B449                   \ B449
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR14_B450                   \ B450
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR14_B451                   \ B451
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR14_B452                   \ B452
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR14_B453                   \ B453
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR14_B454                   \ B454
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR14_B455                   \ B455
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR14_B456                   \ B456
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR14_B457                   \ B457
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR14_B458                   \ B458
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR14_B459                   \ B459
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B460                   \ B460
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B461                   \ B461
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B462                   \ B462
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B463                   \ B463
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B464                   \ B464
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B465                   \ B465
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B466                   \ B466
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B467                   \ B467
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B468                   \ B468
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B469                   \ B469
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B470                   \ B470
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B471                   \ B471
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B472                   \ B472
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B473                   \ B473
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B474                   \ B474
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B475                   \ B475
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B476                   \ B476
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B477                   \ B477
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B478                   \ B478
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR14_B479                   \ B479
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x13C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR15_B480                   \ B480
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR15_B481                   \ B481
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR15_B482                   \ B482
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR15_B483                   \ B483
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR15_B484                   \ B484
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR15_B485                   \ B485
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR15_B486                   \ B486
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR15_B487                   \ B487
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR15_B488                   \ B488
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR15_B489                   \ B489
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR15_B490                   \ B490
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR15_B491                   \ B491
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B492                   \ B492
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B493                   \ B493
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B494                   \ B494
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B495                   \ B495
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B496                   \ B496
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B497                   \ B497
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B498                   \ B498
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B499                   \ B499
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B500                   \ B500
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B501                   \ B501
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B502                   \ B502
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B503                   \ B503
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B504                   \ B504
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B505                   \ B505
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B506                   \ B506
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B507                   \ B507
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B508                   \ B508
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B509                   \ B509
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B510                   \ B510
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR15_B511                   \ B511
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x140
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR16_B512                   \ B512
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR16_B513                   \ B513
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR16_B514                   \ B514
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR16_B515                   \ B515
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR16_B516                   \ B516
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR16_B517                   \ B517
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR16_B518                   \ B518
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR16_B519                   \ B519
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR16_B520                   \ B520
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR16_B521                   \ B521
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR16_B522                   \ B522
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR16_B523                   \ B523
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B524                   \ B524
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B525                   \ B525
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B526                   \ B526
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B527                   \ B527
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B528                   \ B528
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B529                   \ B529
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B530                   \ B530
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B531                   \ B531
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B532                   \ B532
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B533                   \ B533
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B534                   \ B534
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B535                   \ B535
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B536                   \ B536
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B537                   \ B537
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B538                   \ B538
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B539                   \ B539
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B540                   \ B540
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B541                   \ B541
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B542                   \ B542
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR16_B543                   \ B543
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x144
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR17_B544                   \ B544
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR17_B545                   \ B545
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR17_B546                   \ B546
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR17_B547                   \ B547
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR17_B548                   \ B548
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR17_B549                   \ B549
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR17_B550                   \ B550
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR17_B551                   \ B551
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR17_B552                   \ B552
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR17_B553                   \ B553
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR17_B554                   \ B554
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR17_B555                   \ B555
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B556                   \ B556
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B557                   \ B557
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B558                   \ B558
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B559                   \ B559
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B560                   \ B560
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B561                   \ B561
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B562                   \ B562
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B563                   \ B563
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B564                   \ B564
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B565                   \ B565
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B566                   \ B566
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B567                   \ B567
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B568                   \ B568
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B569                   \ B569
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B570                   \ B570
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B571                   \ B571
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B572                   \ B572
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B573                   \ B573
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B574                   \ B574
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR17_B575                   \ B575
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x148
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR18_B576                   \ B576
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR18_B577                   \ B577
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR18_B578                   \ B578
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR18_B579                   \ B579
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR18_B580                   \ B580
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR18_B581                   \ B581
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR18_B582                   \ B582
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR18_B583                   \ B583
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR18_B584                   \ B584
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR18_B585                   \ B585
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR18_B586                   \ B586
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR18_B587                   \ B587
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B588                   \ B588
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B589                   \ B589
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B590                   \ B590
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B591                   \ B591
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B592                   \ B592
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B593                   \ B593
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B594                   \ B594
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B595                   \ B595
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B596                   \ B596
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B597                   \ B597
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B598                   \ B598
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B599                   \ B599
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B600                   \ B600
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B601                   \ B601
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B602                   \ B602
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B603                   \ B603
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B604                   \ B604
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B605                   \ B605
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B606                   \ B606
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR18_B607                   \ B607
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x14C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR19_B608                   \ B608
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR19_B609                   \ B609
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR19_B610                   \ B610
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR19_B611                   \ B611
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR19_B612                   \ B612
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR19_B613                   \ B613
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR19_B614                   \ B614
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR19_B615                   \ B615
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR19_B616                   \ B616
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR19_B617                   \ B617
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR19_B618                   \ B618
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR19_B619                   \ B619
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B620                   \ B620
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B621                   \ B621
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B622                   \ B622
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B623                   \ B623
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B624                   \ B624
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B625                   \ B625
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B626                   \ B626
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B627                   \ B627
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B628                   \ B628
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B629                   \ B629
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B630                   \ B630
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B631                   \ B631
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B632                   \ B632
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B633                   \ B633
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B634                   \ B634
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B635                   \ B635
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B636                   \ B636
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B637                   \ B637
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B638                   \ B638
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR19_B639                   \ B639
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x150
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR20_B640                   \ B640
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR20_B641                   \ B641
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR20_B642                   \ B642
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR20_B643                   \ B643
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR20_B644                   \ B644
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR20_B645                   \ B645
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR20_B646                   \ B646
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR20_B647                   \ B647
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR20_B648                   \ B648
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR20_B649                   \ B649
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR20_B650                   \ B650
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR20_B651                   \ B651
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B652                   \ B652
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B653                   \ B653
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B654                   \ B654
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B655                   \ B655
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B656                   \ B656
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B657                   \ B657
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B658                   \ B658
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B659                   \ B659
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B660                   \ B660
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B661                   \ B661
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B662                   \ B662
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B663                   \ B663
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B664                   \ B664
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B665                   \ B665
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B666                   \ B666
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B667                   \ B667
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B668                   \ B668
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B669                   \ B669
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B670                   \ B670
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR20_B671                   \ B671
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x154
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR21_B672                   \ B672
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR21_B673                   \ B673
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR21_B674                   \ B674
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR21_B675                   \ B675
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR21_B676                   \ B676
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR21_B677                   \ B677
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR21_B678                   \ B678
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR21_B679                   \ B679
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR21_B680                   \ B680
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR21_B681                   \ B681
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR21_B682                   \ B682
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR21_B683                   \ B683
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B684                   \ B684
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B685                   \ B685
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B686                   \ B686
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B687                   \ B687
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B688                   \ B688
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B689                   \ B689
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B690                   \ B690
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B691                   \ B691
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B692                   \ B692
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B693                   \ B693
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B694                   \ B694
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B695                   \ B695
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B696                   \ B696
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B697                   \ B697
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B698                   \ B698
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B699                   \ B699
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B700                   \ B700
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B701                   \ B701
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B702                   \ B702
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR21_B703                   \ B703
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x158
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR22_B704                   \ B704
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR22_B705                   \ B705
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR22_B706                   \ B706
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR22_B707                   \ B707
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR22_B708                   \ B708
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR22_B709                   \ B709
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR22_B710                   \ B710
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR22_B711                   \ B711
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR22_B712                   \ B712
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR22_B713                   \ B713
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR22_B714                   \ B714
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR22_B715                   \ B715
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B716                   \ B716
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B717                   \ B717
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B718                   \ B718
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B719                   \ B719
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B720                   \ B720
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B721                   \ B721
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B722                   \ B722
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B723                   \ B723
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B724                   \ B724
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B725                   \ B725
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B726                   \ B726
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B727                   \ B727
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B728                   \ B728
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B729                   \ B729
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B730                   \ B730
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B731                   \ B731
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B732                   \ B732
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B733                   \ B733
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B734                   \ B734
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR22_B735                   \ B735
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x15C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR23_B736                   \ B736
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR23_B737                   \ B737
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR23_B738                   \ B738
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR23_B739                   \ B739
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR23_B740                   \ B740
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR23_B741                   \ B741
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR23_B742                   \ B742
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR23_B743                   \ B743
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR23_B744                   \ B744
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR23_B745                   \ B745
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR23_B746                   \ B746
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR23_B747                   \ B747
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B748                   \ B748
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B749                   \ B749
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B750                   \ B750
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B751                   \ B751
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B752                   \ B752
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B753                   \ B753
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B754                   \ B754
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B755                   \ B755
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B756                   \ B756
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B757                   \ B757
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B758                   \ B758
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B759                   \ B759
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B760                   \ B760
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B761                   \ B761
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B762                   \ B762
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B763                   \ B763
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B764                   \ B764
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B765                   \ B765
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B766                   \ B766
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR23_B767                   \ B767
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x160
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR24_B768                   \ B768
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR24_B769                   \ B769
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR24_B770                   \ B770
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR24_B771                   \ B771
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR24_B772                   \ B772
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR24_B773                   \ B773
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR24_B774                   \ B774
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR24_B775                   \ B775
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR24_B776                   \ B776
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR24_B777                   \ B777
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR24_B778                   \ B778
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR24_B779                   \ B779
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B780                   \ B780
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B781                   \ B781
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B782                   \ B782
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B783                   \ B783
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B784                   \ B784
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B785                   \ B785
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B786                   \ B786
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B787                   \ B787
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B788                   \ B788
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B789                   \ B789
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B790                   \ B790
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B791                   \ B791
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B792                   \ B792
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B793                   \ B793
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B794                   \ B794
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B795                   \ B795
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B796                   \ B796
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B797                   \ B797
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B798                   \ B798
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR24_B799                   \ B799
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x164
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR25_B800                   \ B800
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR25_B801                   \ B801
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR25_B802                   \ B802
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR25_B803                   \ B803
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR25_B804                   \ B804
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR25_B805                   \ B805
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR25_B806                   \ B806
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR25_B807                   \ B807
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR25_B808                   \ B808
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR25_B809                   \ B809
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR25_B810                   \ B810
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR25_B811                   \ B811
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B812                   \ B812
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B813                   \ B813
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B814                   \ B814
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B815                   \ B815
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B816                   \ B816
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B817                   \ B817
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B818                   \ B818
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B819                   \ B819
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B820                   \ B820
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B821                   \ B821
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B822                   \ B822
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B823                   \ B823
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B824                   \ B824
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B825                   \ B825
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B826                   \ B826
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B827                   \ B827
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B828                   \ B828
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B829                   \ B829
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B830                   \ B830
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR25_B831                   \ B831
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x168
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR26_B832                   \ B832
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR26_B833                   \ B833
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR26_B834                   \ B834
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR26_B835                   \ B835
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR26_B836                   \ B836
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR26_B837                   \ B837
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR26_B838                   \ B838
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR26_B839                   \ B839
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR26_B840                   \ B840
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR26_B841                   \ B841
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR26_B842                   \ B842
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR26_B843                   \ B843
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B844                   \ B844
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B845                   \ B845
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B846                   \ B846
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B847                   \ B847
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B848                   \ B848
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B849                   \ B849
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B850                   \ B850
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B851                   \ B851
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B852                   \ B852
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B853                   \ B853
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B854                   \ B854
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B855                   \ B855
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B856                   \ B856
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B857                   \ B857
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B858                   \ B858
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B859                   \ B859
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B860                   \ B860
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B861                   \ B861
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B862                   \ B862
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR26_B863                   \ B863
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x16C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR27_B864                   \ B864
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR27_B865                   \ B865
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR27_B866                   \ B866
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR27_B867                   \ B867
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR27_B868                   \ B868
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR27_B869                   \ B869
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR27_B870                   \ B870
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR27_B871                   \ B871
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR27_B872                   \ B872
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR27_B873                   \ B873
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR27_B874                   \ B874
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR27_B875                   \ B875
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B876                   \ B876
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B877                   \ B877
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B878                   \ B878
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B879                   \ B879
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B880                   \ B880
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B881                   \ B881
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B882                   \ B882
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B883                   \ B883
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B884                   \ B884
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B885                   \ B885
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B886                   \ B886
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B887                   \ B887
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B888                   \ B888
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B889                   \ B889
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B890                   \ B890
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B891                   \ B891
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B892                   \ B892
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B893                   \ B893
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B894                   \ B894
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR27_B895                   \ B895
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x170
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR28_B896                   \ B896
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR28_B897                   \ B897
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR28_B898                   \ B898
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR28_B899                   \ B899
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR28_B900                   \ B900
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR28_B901                   \ B901
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR28_B902                   \ B902
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR28_B903                   \ B903
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR28_B904                   \ B904
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR28_B905                   \ B905
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR28_B906                   \ B906
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR28_B907                   \ B907
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B908                   \ B908
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B909                   \ B909
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B910                   \ B910
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B911                   \ B911
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B912                   \ B912
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B913                   \ B913
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B914                   \ B914
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B915                   \ B915
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B916                   \ B916
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B917                   \ B917
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B918                   \ B918
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B919                   \ B919
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B920                   \ B920
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B921                   \ B921
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B922                   \ B922
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B923                   \ B923
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B924                   \ B924
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B925                   \ B925
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B926                   \ B926
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR28_B927                   \ B927
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x174
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR29_B928                   \ B928
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR29_B929                   \ B929
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR29_B930                   \ B930
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR29_B931                   \ B931
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR29_B932                   \ B932
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR29_B933                   \ B933
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR29_B934                   \ B934
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR29_B935                   \ B935
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR29_B936                   \ B936
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR29_B937                   \ B937
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR29_B938                   \ B938
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR29_B939                   \ B939
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B940                   \ B940
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B941                   \ B941
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B942                   \ B942
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B943                   \ B943
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B944                   \ B944
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B945                   \ B945
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B946                   \ B946
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B947                   \ B947
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B948                   \ B948
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B949                   \ B949
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B950                   \ B950
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B951                   \ B951
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B952                   \ B952
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B953                   \ B953
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B954                   \ B954
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B955                   \ B955
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B956                   \ B956
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B957                   \ B957
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B958                   \ B958
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR29_B959                   \ B959
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x178
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR30_B960                   \ B960
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR30_B961                   \ B961
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR30_B962                   \ B962
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR30_B963                   \ B963
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR30_B964                   \ B964
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR30_B965                   \ B965
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR30_B966                   \ B966
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR30_B967                   \ B967
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR30_B968                   \ B968
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR30_B969                   \ B969
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR30_B970                   \ B970
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR30_B971                   \ B971
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B972                   \ B972
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B973                   \ B973
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B974                   \ B974
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B975                   \ B975
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B976                   \ B976
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B977                   \ B977
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B978                   \ B978
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B979                   \ B979
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B980                   \ B980
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B981                   \ B981
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B982                   \ B982
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B983                   \ B983
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B984                   \ B984
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B985                   \ B985
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B986                   \ B986
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B987                   \ B987
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B988                   \ B988
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B989                   \ B989
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B990                   \ B990
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR30_B991                   \ B991
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x17C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR31_B992                   \ B992
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR31_B993                   \ B993
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR31_B994                   \ B994
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR31_B995                   \ B995
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR31_B996                   \ B996
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR31_B997                   \ B997
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR31_B998                   \ B998
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR31_B999                   \ B999
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1000                  \ B1000
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1001                  \ B1001
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1002                  \ B1002
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1003                  \ B1003
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1004                  \ B1004
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1005                  \ B1005
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1006                  \ B1006
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1007                  \ B1007
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1008                  \ B1008
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1009                  \ B1009
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1010                  \ B1010
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1011                  \ B1011
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1012                  \ B1012
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1013                  \ B1013
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1014                  \ B1014
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1015                  \ B1015
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1016                  \ B1016
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1017                  \ B1017
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1018                  \ B1018
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1019                  \ B1019
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1020                  \ B1020
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1021                  \ B1021
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1022                  \ B1022
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR31_B1023                  \ B1023
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x180
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1024                  \ B1024
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1025                  \ B1025
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1026                  \ B1026
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1027                  \ B1027
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1028                  \ B1028
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1029                  \ B1029
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1030                  \ B1030
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1031                  \ B1031
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1032                  \ B1032
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1033                  \ B1033
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1034                  \ B1034
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1035                  \ B1035
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1036                  \ B1036
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1037                  \ B1037
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1038                  \ B1038
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1039                  \ B1039
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1040                  \ B1040
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1041                  \ B1041
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1042                  \ B1042
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1043                  \ B1043
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1044                  \ B1044
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1045                  \ B1045
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1046                  \ B1046
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1047                  \ B1047
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1048                  \ B1048
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1049                  \ B1049
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1050                  \ B1050
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1051                  \ B1051
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1052                  \ B1052
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1053                  \ B1053
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1054                  \ B1054
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR32_B1055                  \ B1055
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x184
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1056                  \ B1056
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1057                  \ B1057
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1058                  \ B1058
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1059                  \ B1059
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1060                  \ B1060
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1061                  \ B1061
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1062                  \ B1062
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1063                  \ B1063
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1064                  \ B1064
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1065                  \ B1065
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1066                  \ B1066
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1067                  \ B1067
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1068                  \ B1068
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1069                  \ B1069
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1070                  \ B1070
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1071                  \ B1071
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1072                  \ B1072
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1073                  \ B1073
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1074                  \ B1074
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1075                  \ B1075
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1076                  \ B1076
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1077                  \ B1077
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1078                  \ B1078
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1079                  \ B1079
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1080                  \ B1080
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1081                  \ B1081
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1082                  \ B1082
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1083                  \ B1083
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1084                  \ B1084
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1085                  \ B1085
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1086                  \ B1086
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR33_B1087                  \ B1087
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x188
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1088                  \ B1088
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1089                  \ B1089
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1090                  \ B1090
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1091                  \ B1091
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1092                  \ B1092
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1093                  \ B1093
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1094                  \ B1094
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1095                  \ B1095
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1096                  \ B1096
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1097                  \ B1097
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1098                  \ B1098
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1099                  \ B1099
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1100                  \ B1100
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1101                  \ B1101
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1102                  \ B1102
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1103                  \ B1103
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1104                  \ B1104
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1105                  \ B1105
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1106                  \ B1106
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1107                  \ B1107
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1108                  \ B1108
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1109                  \ B1109
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1110                  \ B1110
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1111                  \ B1111
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1112                  \ B1112
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1113                  \ B1113
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1114                  \ B1114
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1115                  \ B1115
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1116                  \ B1116
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1117                  \ B1117
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1118                  \ B1118
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR34_B1119                  \ B1119
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x18C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1120                  \ B1120
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1121                  \ B1121
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1122                  \ B1122
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1123                  \ B1123
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1124                  \ B1124
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1125                  \ B1125
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1126                  \ B1126
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1127                  \ B1127
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1128                  \ B1128
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1129                  \ B1129
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1130                  \ B1130
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1131                  \ B1131
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1132                  \ B1132
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1133                  \ B1133
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1134                  \ B1134
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1135                  \ B1135
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1136                  \ B1136
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1137                  \ B1137
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1138                  \ B1138
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1139                  \ B1139
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1140                  \ B1140
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1141                  \ B1141
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1142                  \ B1142
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1143                  \ B1143
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1144                  \ B1144
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1145                  \ B1145
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1146                  \ B1146
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1147                  \ B1147
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1148                  \ B1148
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1149                  \ B1149
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1150                  \ B1150
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR35_B1151                  \ B1151
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x190
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1152                  \ B1152
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1153                  \ B1153
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1154                  \ B1154
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1155                  \ B1155
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1156                  \ B1156
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1157                  \ B1157
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1158                  \ B1158
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1159                  \ B1159
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1160                  \ B1160
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1161                  \ B1161
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1162                  \ B1162
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1163                  \ B1163
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1164                  \ B1164
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1165                  \ B1165
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1166                  \ B1166
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1167                  \ B1167
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1168                  \ B1168
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1169                  \ B1169
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1170                  \ B1170
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1171                  \ B1171
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1172                  \ B1172
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1173                  \ B1173
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1174                  \ B1174
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1175                  \ B1175
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1176                  \ B1176
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1177                  \ B1177
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1178                  \ B1178
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1179                  \ B1179
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1180                  \ B1180
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1181                  \ B1181
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1182                  \ B1182
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR36_B1183                  \ B1183
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x194
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1184                  \ B1184
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1185                  \ B1185
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1186                  \ B1186
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1187                  \ B1187
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1188                  \ B1188
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1189                  \ B1189
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1190                  \ B1190
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1191                  \ B1191
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1192                  \ B1192
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1193                  \ B1193
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1194                  \ B1194
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1195                  \ B1195
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1196                  \ B1196
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1197                  \ B1197
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1198                  \ B1198
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1199                  \ B1199
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1200                  \ B1200
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1201                  \ B1201
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1202                  \ B1202
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1203                  \ B1203
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1204                  \ B1204
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1205                  \ B1205
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1206                  \ B1206
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1207                  \ B1207
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1208                  \ B1208
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1209                  \ B1209
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1210                  \ B1210
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1211                  \ B1211
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1212                  \ B1212
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1213                  \ B1213
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1214                  \ B1214
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR37_B1215                  \ B1215
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x198
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1216                  \ B1216
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1217                  \ B1217
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1218                  \ B1218
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1219                  \ B1219
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1220                  \ B1220
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1221                  \ B1221
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1222                  \ B1222
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1223                  \ B1223
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1224                  \ B1224
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1225                  \ B1225
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1226                  \ B1226
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1227                  \ B1227
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1228                  \ B1228
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1229                  \ B1229
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1230                  \ B1230
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1231                  \ B1231
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1232                  \ B1232
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1233                  \ B1233
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1234                  \ B1234
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1235                  \ B1235
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1236                  \ B1236
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1237                  \ B1237
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1238                  \ B1238
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1239                  \ B1239
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1240                  \ B1240
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1241                  \ B1241
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1242                  \ B1242
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1243                  \ B1243
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1244                  \ B1244
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1245                  \ B1245
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1246                  \ B1246
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR38_B1247                  \ B1247
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x19C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1248                  \ B1248
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1249                  \ B1249
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1250                  \ B1250
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1251                  \ B1251
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1252                  \ B1252
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1253                  \ B1253
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1254                  \ B1254
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1255                  \ B1255
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1256                  \ B1256
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1257                  \ B1257
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1258                  \ B1258
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1259                  \ B1259
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1260                  \ B1260
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1261                  \ B1261
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1262                  \ B1262
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1263                  \ B1263
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1264                  \ B1264
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1265                  \ B1265
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1266                  \ B1266
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1267                  \ B1267
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1268                  \ B1268
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1269                  \ B1269
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1270                  \ B1270
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1271                  \ B1271
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1272                  \ B1272
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1273                  \ B1273
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1274                  \ B1274
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1275                  \ B1275
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1276                  \ B1276
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1277                  \ B1277
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1278                  \ B1278
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR39_B1279                  \ B1279
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1A0
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1280                  \ B1280
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1281                  \ B1281
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1282                  \ B1282
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1283                  \ B1283
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1284                  \ B1284
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1285                  \ B1285
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1286                  \ B1286
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1287                  \ B1287
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1288                  \ B1288
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1289                  \ B1289
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1290                  \ B1290
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1291                  \ B1291
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1292                  \ B1292
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1293                  \ B1293
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1294                  \ B1294
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1295                  \ B1295
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1296                  \ B1296
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1297                  \ B1297
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1298                  \ B1298
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1299                  \ B1299
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1300                  \ B1300
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1301                  \ B1301
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1302                  \ B1302
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1303                  \ B1303
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1304                  \ B1304
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1305                  \ B1305
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1306                  \ B1306
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1307                  \ B1307
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1308                  \ B1308
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1309                  \ B1309
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1310                  \ B1310
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR40_B1311                  \ B1311
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1A4
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1312                  \ B1312
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1313                  \ B1313
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1314                  \ B1314
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1315                  \ B1315
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1316                  \ B1316
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1317                  \ B1317
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1318                  \ B1318
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1319                  \ B1319
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1320                  \ B1320
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1321                  \ B1321
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1322                  \ B1322
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1323                  \ B1323
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1324                  \ B1324
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1325                  \ B1325
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1326                  \ B1326
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1327                  \ B1327
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1328                  \ B1328
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1329                  \ B1329
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1330                  \ B1330
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1331                  \ B1331
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1332                  \ B1332
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1333                  \ B1333
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1334                  \ B1334
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1335                  \ B1335
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1336                  \ B1336
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1337                  \ B1337
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1338                  \ B1338
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1339                  \ B1339
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1340                  \ B1340
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1341                  \ B1341
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1342                  \ B1342
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR41_B1343                  \ B1343
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1A8
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1344                  \ B1344
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1345                  \ B1345
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1346                  \ B1346
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1347                  \ B1347
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1348                  \ B1348
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1349                  \ B1349
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1350                  \ B1350
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1351                  \ B1351
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1352                  \ B1352
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1353                  \ B1353
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1354                  \ B1354
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1355                  \ B1355
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1356                  \ B1356
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1357                  \ B1357
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1358                  \ B1358
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1359                  \ B1359
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1360                  \ B1360
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1361                  \ B1361
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1362                  \ B1362
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1363                  \ B1363
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1364                  \ B1364
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1365                  \ B1365
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1366                  \ B1366
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1367                  \ B1367
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1368                  \ B1368
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1369                  \ B1369
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1370                  \ B1370
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1371                  \ B1371
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1372                  \ B1372
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1373                  \ B1373
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1374                  \ B1374
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR42_B1375                  \ B1375
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1AC
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1376                  \ B1376
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1377                  \ B1377
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1378                  \ B1378
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1379                  \ B1379
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1380                  \ B1380
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1381                  \ B1381
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1382                  \ B1382
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1383                  \ B1383
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1384                  \ B1384
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1385                  \ B1385
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1386                  \ B1386
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1387                  \ B1387
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1388                  \ B1388
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1389                  \ B1389
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1390                  \ B1390
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1391                  \ B1391
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1392                  \ B1392
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1393                  \ B1393
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1394                  \ B1394
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1395                  \ B1395
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1396                  \ B1396
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1397                  \ B1397
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1398                  \ B1398
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1399                  \ B1399
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1400                  \ B1400
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1401                  \ B1401
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1402                  \ B1402
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1403                  \ B1403
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1404                  \ B1404
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1405                  \ B1405
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1406                  \ B1406
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR43_B1407                  \ B1407
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1B0
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1408                  \ B1408
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1409                  \ B1409
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1410                  \ B1410
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1411                  \ B1411
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1412                  \ B1412
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1413                  \ B1413
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1414                  \ B1414
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1415                  \ B1415
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1416                  \ B1416
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1417                  \ B1417
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1418                  \ B1418
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1419                  \ B1419
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1420                  \ B1420
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1421                  \ B1421
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1422                  \ B1422
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1423                  \ B1423
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1424                  \ B1424
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1425                  \ B1425
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1426                  \ B1426
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1427                  \ B1427
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1428                  \ B1428
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1429                  \ B1429
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1430                  \ B1430
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1431                  \ B1431
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1432                  \ B1432
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1433                  \ B1433
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1434                  \ B1434
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1435                  \ B1435
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1436                  \ B1436
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1437                  \ B1437
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1438                  \ B1438
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR44_B1439                  \ B1439
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1B4
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1440                  \ B1440
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1441                  \ B1441
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1442                  \ B1442
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1443                  \ B1443
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1444                  \ B1444
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1445                  \ B1445
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1446                  \ B1446
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1447                  \ B1447
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1448                  \ B1448
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1449                  \ B1449
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1450                  \ B1450
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1451                  \ B1451
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1452                  \ B1452
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1453                  \ B1453
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1454                  \ B1454
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1455                  \ B1455
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1456                  \ B1456
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1457                  \ B1457
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1458                  \ B1458
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1459                  \ B1459
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1460                  \ B1460
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1461                  \ B1461
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1462                  \ B1462
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1463                  \ B1463
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1464                  \ B1464
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1465                  \ B1465
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1466                  \ B1466
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1467                  \ B1467
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1468                  \ B1468
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1469                  \ B1469
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1470                  \ B1470
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR45_B1471                  \ B1471
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1B8
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1472                  \ B1472
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1473                  \ B1473
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1474                  \ B1474
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1475                  \ B1475
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1476                  \ B1476
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1477                  \ B1477
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1478                  \ B1478
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1479                  \ B1479
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1480                  \ B1480
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1481                  \ B1481
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1482                  \ B1482
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1483                  \ B1483
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1484                  \ B1484
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1485                  \ B1485
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1486                  \ B1486
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1487                  \ B1487
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1488                  \ B1488
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1489                  \ B1489
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1490                  \ B1490
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1491                  \ B1491
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1492                  \ B1492
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1493                  \ B1493
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1494                  \ B1494
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1495                  \ B1495
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1496                  \ B1496
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1497                  \ B1497
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1498                  \ B1498
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1499                  \ B1499
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1500                  \ B1500
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1501                  \ B1501
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1502                  \ B1502
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR46_B1503                  \ B1503
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1BC
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1504                  \ B1504
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1505                  \ B1505
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1506                  \ B1506
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1507                  \ B1507
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1508                  \ B1508
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1509                  \ B1509
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1510                  \ B1510
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1511                  \ B1511
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1512                  \ B1512
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1513                  \ B1513
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1514                  \ B1514
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1515                  \ B1515
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1516                  \ B1516
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1517                  \ B1517
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1518                  \ B1518
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1519                  \ B1519
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1520                  \ B1520
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1521                  \ B1521
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1522                  \ B1522
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1523                  \ B1523
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1524                  \ B1524
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1525                  \ B1525
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1526                  \ B1526
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1527                  \ B1527
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1528                  \ B1528
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1529                  \ B1529
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1530                  \ B1530
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1531                  \ B1531
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1532                  \ B1532
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1533                  \ B1533
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1534                  \ B1534
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR47_B1535                  \ B1535
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1C0
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1536                  \ B1536
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1537                  \ B1537
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1538                  \ B1538
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1539                  \ B1539
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1540                  \ B1540
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1541                  \ B1541
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1542                  \ B1542
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1543                  \ B1543
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1544                  \ B1544
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1545                  \ B1545
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1546                  \ B1546
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1547                  \ B1547
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1548                  \ B1548
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1549                  \ B1549
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1550                  \ B1550
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1551                  \ B1551
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1552                  \ B1552
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1553                  \ B1553
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1554                  \ B1554
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1555                  \ B1555
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1556                  \ B1556
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1557                  \ B1557
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1558                  \ B1558
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1559                  \ B1559
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1560                  \ B1560
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1561                  \ B1561
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1562                  \ B1562
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1563                  \ B1563
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1564                  \ B1564
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1565                  \ B1565
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1566                  \ B1566
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR48_B1567                  \ B1567
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1C4
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1568                  \ B1568
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1569                  \ B1569
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1570                  \ B1570
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1571                  \ B1571
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1572                  \ B1572
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1573                  \ B1573
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1574                  \ B1574
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1575                  \ B1575
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1576                  \ B1576
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1577                  \ B1577
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1578                  \ B1578
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1579                  \ B1579
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1580                  \ B1580
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1581                  \ B1581
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1582                  \ B1582
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1583                  \ B1583
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1584                  \ B1584
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1585                  \ B1585
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1586                  \ B1586
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1587                  \ B1587
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1588                  \ B1588
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1589                  \ B1589
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1590                  \ B1590
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1591                  \ B1591
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1592                  \ B1592
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1593                  \ B1593
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1594                  \ B1594
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1595                  \ B1595
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1596                  \ B1596
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1597                  \ B1597
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1598                  \ B1598
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR49_B1599                  \ B1599
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1C8
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1600                  \ B1600
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1601                  \ B1601
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1602                  \ B1602
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1603                  \ B1603
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1604                  \ B1604
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1605                  \ B1605
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1606                  \ B1606
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1607                  \ B1607
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1608                  \ B1608
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1609                  \ B1609
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1610                  \ B1610
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1611                  \ B1611
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1612                  \ B1612
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1613                  \ B1613
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1614                  \ B1614
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1615                  \ B1615
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1616                  \ B1616
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1617                  \ B1617
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1618                  \ B1618
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1619                  \ B1619
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1620                  \ B1620
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1621                  \ B1621
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1622                  \ B1622
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1623                  \ B1623
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1624                  \ B1624
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1625                  \ B1625
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1626                  \ B1626
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1627                  \ B1627
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1628                  \ B1628
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1629                  \ B1629
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1630                  \ B1630
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR50_B1631                  \ B1631
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1CC
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1632                  \ B1632
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1633                  \ B1633
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1634                  \ B1634
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1635                  \ B1635
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1636                  \ B1636
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1637                  \ B1637
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1638                  \ B1638
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1639                  \ B1639
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1640                  \ B1640
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1641                  \ B1641
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1642                  \ B1642
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1643                  \ B1643
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1644                  \ B1644
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1645                  \ B1645
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1646                  \ B1646
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1647                  \ B1647
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1648                  \ B1648
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1649                  \ B1649
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1650                  \ B1650
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1651                  \ B1651
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1652                  \ B1652
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1653                  \ B1653
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1654                  \ B1654
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1655                  \ B1655
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1656                  \ B1656
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1657                  \ B1657
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1658                  \ B1658
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1659                  \ B1659
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1660                  \ B1660
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1661                  \ B1661
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1662                  \ B1662
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR51_B1663                  \ B1663
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1D0
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1664                  \ B1664
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1665                  \ B1665
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1666                  \ B1666
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1667                  \ B1667
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1668                  \ B1668
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1669                  \ B1669
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1670                  \ B1670
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1671                  \ B1671
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1672                  \ B1672
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1673                  \ B1673
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1674                  \ B1674
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1675                  \ B1675
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1676                  \ B1676
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1677                  \ B1677
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1678                  \ B1678
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1679                  \ B1679
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1680                  \ B1680
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1681                  \ B1681
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1682                  \ B1682
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1683                  \ B1683
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1684                  \ B1684
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1685                  \ B1685
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1686                  \ B1686
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1687                  \ B1687
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1688                  \ B1688
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1689                  \ B1689
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1690                  \ B1690
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1691                  \ B1691
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1692                  \ B1692
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1693                  \ B1693
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1694                  \ B1694
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR52_B1695                  \ B1695
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1D4
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1696                  \ B1696
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1697                  \ B1697
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1698                  \ B1698
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1699                  \ B1699
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1700                  \ B1700
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1701                  \ B1701
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1702                  \ B1702
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1703                  \ B1703
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1704                  \ B1704
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1705                  \ B1705
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1706                  \ B1706
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1707                  \ B1707
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1708                  \ B1708
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1709                  \ B1709
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1710                  \ B1710
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1711                  \ B1711
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1712                  \ B1712
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1713                  \ B1713
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1714                  \ B1714
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1715                  \ B1715
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1716                  \ B1716
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1717                  \ B1717
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1718                  \ B1718
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1719                  \ B1719
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1720                  \ B1720
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1721                  \ B1721
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1722                  \ B1722
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1723                  \ B1723
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1724                  \ B1724
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1725                  \ B1725
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1726                  \ B1726
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR53_B1727                  \ B1727
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1D8
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1728                  \ B1728
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1729                  \ B1729
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1730                  \ B1730
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1731                  \ B1731
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1732                  \ B1732
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1733                  \ B1733
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1734                  \ B1734
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1735                  \ B1735
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1736                  \ B1736
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1737                  \ B1737
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1738                  \ B1738
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1739                  \ B1739
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1740                  \ B1740
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1741                  \ B1741
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1742                  \ B1742
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1743                  \ B1743
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1744                  \ B1744
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1745                  \ B1745
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1746                  \ B1746
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1747                  \ B1747
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1748                  \ B1748
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1749                  \ B1749
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1750                  \ B1750
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1751                  \ B1751
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1752                  \ B1752
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1753                  \ B1753
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1754                  \ B1754
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1755                  \ B1755
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1756                  \ B1756
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1757                  \ B1757
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1758                  \ B1758
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR54_B1759                  \ B1759
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1DC
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1760                  \ B1760
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1761                  \ B1761
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1762                  \ B1762
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1763                  \ B1763
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1764                  \ B1764
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1765                  \ B1765
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1766                  \ B1766
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1767                  \ B1767
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1768                  \ B1768
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1769                  \ B1769
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1770                  \ B1770
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1771                  \ B1771
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1772                  \ B1772
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1773                  \ B1773
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1774                  \ B1774
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1775                  \ B1775
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1776                  \ B1776
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1777                  \ B1777
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1778                  \ B1778
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1779                  \ B1779
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1780                  \ B1780
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1781                  \ B1781
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1782                  \ B1782
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1783                  \ B1783
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1784                  \ B1784
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1785                  \ B1785
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1786                  \ B1786
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1787                  \ B1787
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1788                  \ B1788
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1789                  \ B1789
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1790                  \ B1790
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR55_B1791                  \ B1791
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1E0
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1792                  \ B1792
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1793                  \ B1793
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1794                  \ B1794
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1795                  \ B1795
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1796                  \ B1796
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1797                  \ B1797
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1798                  \ B1798
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1799                  \ B1799
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1800                  \ B1800
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1801                  \ B1801
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1802                  \ B1802
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1803                  \ B1803
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1804                  \ B1804
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1805                  \ B1805
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1806                  \ B1806
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1807                  \ B1807
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1808                  \ B1808
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1809                  \ B1809
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1810                  \ B1810
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1811                  \ B1811
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1812                  \ B1812
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1813                  \ B1813
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1814                  \ B1814
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1815                  \ B1815
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1816                  \ B1816
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1817                  \ B1817
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1818                  \ B1818
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1819                  \ B1819
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1820                  \ B1820
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1821                  \ B1821
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1822                  \ B1822
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR56_B1823                  \ B1823
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1E4
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1824                  \ B1824
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1825                  \ B1825
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1826                  \ B1826
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1827                  \ B1827
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1828                  \ B1828
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1829                  \ B1829
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1830                  \ B1830
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1831                  \ B1831
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1832                  \ B1832
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1833                  \ B1833
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1834                  \ B1834
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1835                  \ B1835
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1836                  \ B1836
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1837                  \ B1837
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1838                  \ B1838
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1839                  \ B1839
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1840                  \ B1840
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1841                  \ B1841
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1842                  \ B1842
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1843                  \ B1843
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1844                  \ B1844
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1845                  \ B1845
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1846                  \ B1846
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1847                  \ B1847
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1848                  \ B1848
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1849                  \ B1849
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1850                  \ B1850
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1851                  \ B1851
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1852                  \ B1852
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1853                  \ B1853
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1854                  \ B1854
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR57_B1855                  \ B1855
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1E8
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1856                  \ B1856
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1857                  \ B1857
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1858                  \ B1858
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1859                  \ B1859
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1860                  \ B1860
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1861                  \ B1861
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1862                  \ B1862
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1863                  \ B1863
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1864                  \ B1864
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1865                  \ B1865
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1866                  \ B1866
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1867                  \ B1867
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1868                  \ B1868
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1869                  \ B1869
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1870                  \ B1870
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1871                  \ B1871
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1872                  \ B1872
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1873                  \ B1873
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1874                  \ B1874
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1875                  \ B1875
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1876                  \ B1876
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1877                  \ B1877
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1878                  \ B1878
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1879                  \ B1879
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1880                  \ B1880
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1881                  \ B1881
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1882                  \ B1882
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1883                  \ B1883
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1884                  \ B1884
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1885                  \ B1885
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1886                  \ B1886
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR58_B1887                  \ B1887
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1EC
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1888                  \ B1888
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1889                  \ B1889
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1890                  \ B1890
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1891                  \ B1891
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1892                  \ B1892
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1893                  \ B1893
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1894                  \ B1894
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1895                  \ B1895
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1896                  \ B1896
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1897                  \ B1897
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1898                  \ B1898
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1899                  \ B1899
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1900                  \ B1900
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1901                  \ B1901
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1902                  \ B1902
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1903                  \ B1903
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1904                  \ B1904
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1905                  \ B1905
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1906                  \ B1906
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1907                  \ B1907
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1908                  \ B1908
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1909                  \ B1909
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1910                  \ B1910
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1911                  \ B1911
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1912                  \ B1912
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1913                  \ B1913
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1914                  \ B1914
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1915                  \ B1915
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1916                  \ B1916
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1917                  \ B1917
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1918                  \ B1918
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR59_B1919                  \ B1919
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1F0
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1920                  \ B1920
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1921                  \ B1921
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1922                  \ B1922
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1923                  \ B1923
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1924                  \ B1924
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1925                  \ B1925
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1926                  \ B1926
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1927                  \ B1927
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1928                  \ B1928
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1929                  \ B1929
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1930                  \ B1930
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1931                  \ B1931
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1932                  \ B1932
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1933                  \ B1933
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1934                  \ B1934
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1935                  \ B1935
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1936                  \ B1936
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1937                  \ B1937
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1938                  \ B1938
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1939                  \ B1939
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1940                  \ B1940
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1941                  \ B1941
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1942                  \ B1942
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1943                  \ B1943
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1944                  \ B1944
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1945                  \ B1945
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1946                  \ B1946
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1947                  \ B1947
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1948                  \ B1948
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1949                  \ B1949
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1950                  \ B1950
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR60_B1951                  \ B1951
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1F4
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1952                  \ B1952
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1953                  \ B1953
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1954                  \ B1954
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1955                  \ B1955
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1956                  \ B1956
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1957                  \ B1957
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1958                  \ B1958
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1959                  \ B1959
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1960                  \ B1960
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1961                  \ B1961
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1962                  \ B1962
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1963                  \ B1963
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1964                  \ B1964
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1965                  \ B1965
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1966                  \ B1966
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1967                  \ B1967
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1968                  \ B1968
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1969                  \ B1969
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1970                  \ B1970
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1971                  \ B1971
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1972                  \ B1972
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1973                  \ B1973
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1974                  \ B1974
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1975                  \ B1975
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1976                  \ B1976
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1977                  \ B1977
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1978                  \ B1978
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1979                  \ B1979
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1980                  \ B1980
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1981                  \ B1981
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1982                  \ B1982
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR61_B1983                  \ B1983
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1F8
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1984                  \ B1984
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1985                  \ B1985
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1986                  \ B1986
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1987                  \ B1987
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1988                  \ B1988
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1989                  \ B1989
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1990                  \ B1990
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1991                  \ B1991
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1992                  \ B1992
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1993                  \ B1993
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1994                  \ B1994
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1995                  \ B1995
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1996                  \ B1996
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1997                  \ B1997
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1998                  \ B1998
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B1999                  \ B1999
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2000                  \ B2000
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2001                  \ B2001
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2002                  \ B2002
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2003                  \ B2003
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2004                  \ B2004
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2005                  \ B2005
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2006                  \ B2006
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2007                  \ B2007
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2008                  \ B2008
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2009                  \ B2009
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2010                  \ B2010
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2011                  \ B2011
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2012                  \ B2012
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2013                  \ B2013
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2014                  \ B2014
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR62_B2015                  \ B2015
-
-
-\
-\ @brief MPCBBx vector register
-\ Address offset: 0x1FC
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2016                  \ B2016
-$00000002 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2017                  \ B2017
-$00000004 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2018                  \ B2018
-$00000008 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2019                  \ B2019
-$00000010 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2020                  \ B2020
-$00000020 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2021                  \ B2021
-$00000040 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2022                  \ B2022
-$00000080 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2023                  \ B2023
-$00000100 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2024                  \ B2024
-$00000200 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2025                  \ B2025
-$00000400 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2026                  \ B2026
-$00000800 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2027                  \ B2027
-$00001000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2028                  \ B2028
-$00002000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2029                  \ B2029
-$00004000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2030                  \ B2030
-$00008000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2031                  \ B2031
-$00010000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2032                  \ B2032
-$00020000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2033                  \ B2033
-$00040000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2034                  \ B2034
-$00080000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2035                  \ B2035
-$00100000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2036                  \ B2036
-$00200000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2037                  \ B2037
-$00400000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2038                  \ B2038
-$00800000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2039                  \ B2039
-$01000000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2040                  \ B2040
-$02000000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2041                  \ B2041
-$04000000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2042                  \ B2042
-$08000000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2043                  \ B2043
-$10000000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2044                  \ B2044
-$20000000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2045                  \ B2045
-$40000000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2046                  \ B2046
-$80000000 constant GTZC_MPCBB1_MPCBB1_VCTR63_B2047                  \ B2047
-
-
-\
-\ @brief GTZC_MPCBB1
-\
-$40032c00 constant GTZC_MPCBB1_MPCBB1_CR  \ offset: 0x00 : MPCBB control register
-$40032c10 constant GTZC_MPCBB1_MPCBB1_LCKVTR1  \ offset: 0x10 : MPCBB control register
-$40032c14 constant GTZC_MPCBB1_MPCBB1_LCKVTR2  \ offset: 0x14 : MPCBB control register
-$40032d00 constant GTZC_MPCBB1_MPCBB1_VCTR0  \ offset: 0x100 : MPCBBx vector register
-$40032d04 constant GTZC_MPCBB1_MPCBB1_VCTR1  \ offset: 0x104 : MPCBBx vector register
-$40032d08 constant GTZC_MPCBB1_MPCBB1_VCTR2  \ offset: 0x108 : MPCBBx vector register
-$40032d0c constant GTZC_MPCBB1_MPCBB1_VCTR3  \ offset: 0x10C : MPCBBx vector register
-$40032d10 constant GTZC_MPCBB1_MPCBB1_VCTR4  \ offset: 0x110 : MPCBBx vector register
-$40032d14 constant GTZC_MPCBB1_MPCBB1_VCTR5  \ offset: 0x114 : MPCBBx vector register
-$40032d18 constant GTZC_MPCBB1_MPCBB1_VCTR6  \ offset: 0x118 : MPCBBx vector register
-$40032d1c constant GTZC_MPCBB1_MPCBB1_VCTR7  \ offset: 0x11C : MPCBBx vector register
-$40032d20 constant GTZC_MPCBB1_MPCBB1_VCTR8  \ offset: 0x120 : MPCBBx vector register
-$40032d24 constant GTZC_MPCBB1_MPCBB1_VCTR9  \ offset: 0x124 : MPCBBx vector register
-$40032d28 constant GTZC_MPCBB1_MPCBB1_VCTR10  \ offset: 0x128 : MPCBBx vector register
-$40032d2c constant GTZC_MPCBB1_MPCBB1_VCTR11  \ offset: 0x12C : MPCBBx vector register
-$40032d30 constant GTZC_MPCBB1_MPCBB1_VCTR12  \ offset: 0x130 : MPCBBx vector register
-$40032d34 constant GTZC_MPCBB1_MPCBB1_VCTR13  \ offset: 0x134 : MPCBBx vector register
-$40032d38 constant GTZC_MPCBB1_MPCBB1_VCTR14  \ offset: 0x138 : MPCBBx vector register
-$40032d3c constant GTZC_MPCBB1_MPCBB1_VCTR15  \ offset: 0x13C : MPCBBx vector register
-$40032d40 constant GTZC_MPCBB1_MPCBB1_VCTR16  \ offset: 0x140 : MPCBBx vector register
-$40032d44 constant GTZC_MPCBB1_MPCBB1_VCTR17  \ offset: 0x144 : MPCBBx vector register
-$40032d48 constant GTZC_MPCBB1_MPCBB1_VCTR18  \ offset: 0x148 : MPCBBx vector register
-$40032d4c constant GTZC_MPCBB1_MPCBB1_VCTR19  \ offset: 0x14C : MPCBBx vector register
-$40032d50 constant GTZC_MPCBB1_MPCBB1_VCTR20  \ offset: 0x150 : MPCBBx vector register
-$40032d54 constant GTZC_MPCBB1_MPCBB1_VCTR21  \ offset: 0x154 : MPCBBx vector register
-$40032d58 constant GTZC_MPCBB1_MPCBB1_VCTR22  \ offset: 0x158 : MPCBBx vector register
-$40032d5c constant GTZC_MPCBB1_MPCBB1_VCTR23  \ offset: 0x15C : MPCBBx vector register
-$40032d60 constant GTZC_MPCBB1_MPCBB1_VCTR24  \ offset: 0x160 : MPCBBx vector register
-$40032d64 constant GTZC_MPCBB1_MPCBB1_VCTR25  \ offset: 0x164 : MPCBBx vector register
-$40032d68 constant GTZC_MPCBB1_MPCBB1_VCTR26  \ offset: 0x168 : MPCBBx vector register
-$40032d6c constant GTZC_MPCBB1_MPCBB1_VCTR27  \ offset: 0x16C : MPCBBx vector register
-$40032d70 constant GTZC_MPCBB1_MPCBB1_VCTR28  \ offset: 0x170 : MPCBBx vector register
-$40032d74 constant GTZC_MPCBB1_MPCBB1_VCTR29  \ offset: 0x174 : MPCBBx vector register
-$40032d78 constant GTZC_MPCBB1_MPCBB1_VCTR30  \ offset: 0x178 : MPCBBx vector register
-$40032d7c constant GTZC_MPCBB1_MPCBB1_VCTR31  \ offset: 0x17C : MPCBBx vector register
-$40032d80 constant GTZC_MPCBB1_MPCBB1_VCTR32  \ offset: 0x180 : MPCBBx vector register
-$40032d84 constant GTZC_MPCBB1_MPCBB1_VCTR33  \ offset: 0x184 : MPCBBx vector register
-$40032d88 constant GTZC_MPCBB1_MPCBB1_VCTR34  \ offset: 0x188 : MPCBBx vector register
-$40032d8c constant GTZC_MPCBB1_MPCBB1_VCTR35  \ offset: 0x18C : MPCBBx vector register
-$40032d90 constant GTZC_MPCBB1_MPCBB1_VCTR36  \ offset: 0x190 : MPCBBx vector register
-$40032d94 constant GTZC_MPCBB1_MPCBB1_VCTR37  \ offset: 0x194 : MPCBBx vector register
-$40032d98 constant GTZC_MPCBB1_MPCBB1_VCTR38  \ offset: 0x198 : MPCBBx vector register
-$40032d9c constant GTZC_MPCBB1_MPCBB1_VCTR39  \ offset: 0x19C : MPCBBx vector register
-$40032da0 constant GTZC_MPCBB1_MPCBB1_VCTR40  \ offset: 0x1A0 : MPCBBx vector register
-$40032da4 constant GTZC_MPCBB1_MPCBB1_VCTR41  \ offset: 0x1A4 : MPCBBx vector register
-$40032da8 constant GTZC_MPCBB1_MPCBB1_VCTR42  \ offset: 0x1A8 : MPCBBx vector register
-$40032dac constant GTZC_MPCBB1_MPCBB1_VCTR43  \ offset: 0x1AC : MPCBBx vector register
-$40032db0 constant GTZC_MPCBB1_MPCBB1_VCTR44  \ offset: 0x1B0 : MPCBBx vector register
-$40032db4 constant GTZC_MPCBB1_MPCBB1_VCTR45  \ offset: 0x1B4 : MPCBBx vector register
-$40032db8 constant GTZC_MPCBB1_MPCBB1_VCTR46  \ offset: 0x1B8 : MPCBBx vector register
-$40032dbc constant GTZC_MPCBB1_MPCBB1_VCTR47  \ offset: 0x1BC : MPCBBx vector register
-$40032dc0 constant GTZC_MPCBB1_MPCBB1_VCTR48  \ offset: 0x1C0 : MPCBBx vector register
-$40032dc4 constant GTZC_MPCBB1_MPCBB1_VCTR49  \ offset: 0x1C4 : MPCBBx vector register
-$40032dc8 constant GTZC_MPCBB1_MPCBB1_VCTR50  \ offset: 0x1C8 : MPCBBx vector register
-$40032dcc constant GTZC_MPCBB1_MPCBB1_VCTR51  \ offset: 0x1CC : MPCBBx vector register
-$40032dd0 constant GTZC_MPCBB1_MPCBB1_VCTR52  \ offset: 0x1D0 : MPCBBx vector register
-$40032dd4 constant GTZC_MPCBB1_MPCBB1_VCTR53  \ offset: 0x1D4 : MPCBBx vector register
-$40032dd8 constant GTZC_MPCBB1_MPCBB1_VCTR54  \ offset: 0x1D8 : MPCBBx vector register
-$40032ddc constant GTZC_MPCBB1_MPCBB1_VCTR55  \ offset: 0x1DC : MPCBBx vector register
-$40032de0 constant GTZC_MPCBB1_MPCBB1_VCTR56  \ offset: 0x1E0 : MPCBBx vector register
-$40032de4 constant GTZC_MPCBB1_MPCBB1_VCTR57  \ offset: 0x1E4 : MPCBBx vector register
-$40032de8 constant GTZC_MPCBB1_MPCBB1_VCTR58  \ offset: 0x1E8 : MPCBBx vector register
-$40032dec constant GTZC_MPCBB1_MPCBB1_VCTR59  \ offset: 0x1EC : MPCBBx vector register
-$40032df0 constant GTZC_MPCBB1_MPCBB1_VCTR60  \ offset: 0x1F0 : MPCBBx vector register
-$40032df4 constant GTZC_MPCBB1_MPCBB1_VCTR61  \ offset: 0x1F4 : MPCBBx vector register
-$40032df8 constant GTZC_MPCBB1_MPCBB1_VCTR62  \ offset: 0x1F8 : MPCBBx vector register
-$40032dfc constant GTZC_MPCBB1_MPCBB1_VCTR63  \ offset: 0x1FC : MPCBBx vector register
-
+[ifndef] GTZC_MPCBB1_DEF
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_CR_DEF
+    \
+    \ @brief MPCBB control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_MPCBB1_LCK                \ [0x00] LCK
+    $1e constant GTZC_MPCBB1_INVSECSTATE        \ [0x1e] INVSECSTATE
+    $1f constant GTZC_MPCBB1_SRWILADIS          \ [0x1f] SRWILADIS
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_LCKVTR1_DEF
+    \
+    \ @brief MPCBB control register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_MPCBB1_LCKSB0             \ [0x00] LCKSB0
+    $01 constant GTZC_MPCBB1_LCKSB1             \ [0x01] LCKSB1
+    $02 constant GTZC_MPCBB1_LCKSB2             \ [0x02] LCKSB2
+    $03 constant GTZC_MPCBB1_LCKSB3             \ [0x03] LCKSB3
+    $04 constant GTZC_MPCBB1_LCKSB4             \ [0x04] LCKSB4
+    $05 constant GTZC_MPCBB1_LCKSB5             \ [0x05] LCKSB5
+    $06 constant GTZC_MPCBB1_LCKSB6             \ [0x06] LCKSB6
+    $07 constant GTZC_MPCBB1_LCKSB7             \ [0x07] LCKSB7
+    $08 constant GTZC_MPCBB1_LCKSB8             \ [0x08] LCKSB8
+    $09 constant GTZC_MPCBB1_LCKSB9             \ [0x09] LCKSB9
+    $0a constant GTZC_MPCBB1_LCKSB10            \ [0x0a] LCKSB10
+    $0b constant GTZC_MPCBB1_LCKSB11            \ [0x0b] LCKSB11
+    $0c constant GTZC_MPCBB1_LCKSB12            \ [0x0c] LCKSB12
+    $0d constant GTZC_MPCBB1_LCKSB13            \ [0x0d] LCKSB13
+    $0e constant GTZC_MPCBB1_LCKSB14            \ [0x0e] LCKSB14
+    $0f constant GTZC_MPCBB1_LCKSB15            \ [0x0f] LCKSB15
+    $10 constant GTZC_MPCBB1_LCKSB16            \ [0x10] LCKSB16
+    $11 constant GTZC_MPCBB1_LCKSB17            \ [0x11] LCKSB17
+    $12 constant GTZC_MPCBB1_LCKSB18            \ [0x12] LCKSB18
+    $13 constant GTZC_MPCBB1_LCKSB19            \ [0x13] LCKSB19
+    $14 constant GTZC_MPCBB1_LCKSB20            \ [0x14] LCKSB20
+    $15 constant GTZC_MPCBB1_LCKSB21            \ [0x15] LCKSB21
+    $16 constant GTZC_MPCBB1_LCKSB22            \ [0x16] LCKSB22
+    $17 constant GTZC_MPCBB1_LCKSB23            \ [0x17] LCKSB23
+    $18 constant GTZC_MPCBB1_LCKSB24            \ [0x18] LCKSB24
+    $19 constant GTZC_MPCBB1_LCKSB25            \ [0x19] LCKSB25
+    $1a constant GTZC_MPCBB1_LCKSB26            \ [0x1a] LCKSB26
+    $1b constant GTZC_MPCBB1_LCKSB27            \ [0x1b] LCKSB27
+    $1c constant GTZC_MPCBB1_LCKSB28            \ [0x1c] LCKSB28
+    $1d constant GTZC_MPCBB1_LCKSB29            \ [0x1d] LCKSB29
+    $1e constant GTZC_MPCBB1_LCKSB30            \ [0x1e] LCKSB30
+    $1f constant GTZC_MPCBB1_LCKSB31            \ [0x1f] LCKSB31
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_LCKVTR2_DEF
+    \
+    \ @brief MPCBB control register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_MPCBB1_LCKSB32            \ [0x00] LCKSB32
+    $01 constant GTZC_MPCBB1_LCKSB33            \ [0x01] LCKSB33
+    $02 constant GTZC_MPCBB1_LCKSB34            \ [0x02] LCKSB34
+    $03 constant GTZC_MPCBB1_LCKSB35            \ [0x03] LCKSB35
+    $04 constant GTZC_MPCBB1_LCKSB36            \ [0x04] LCKSB36
+    $05 constant GTZC_MPCBB1_LCKSB37            \ [0x05] LCKSB37
+    $06 constant GTZC_MPCBB1_LCKSB38            \ [0x06] LCKSB38
+    $07 constant GTZC_MPCBB1_LCKSB39            \ [0x07] LCKSB39
+    $08 constant GTZC_MPCBB1_LCKSB40            \ [0x08] LCKSB40
+    $09 constant GTZC_MPCBB1_LCKSB41            \ [0x09] LCKSB41
+    $0a constant GTZC_MPCBB1_LCKSB42            \ [0x0a] LCKSB42
+    $0b constant GTZC_MPCBB1_LCKSB43            \ [0x0b] LCKSB43
+    $0c constant GTZC_MPCBB1_LCKSB44            \ [0x0c] LCKSB44
+    $0d constant GTZC_MPCBB1_LCKSB45            \ [0x0d] LCKSB45
+    $0e constant GTZC_MPCBB1_LCKSB46            \ [0x0e] LCKSB46
+    $0f constant GTZC_MPCBB1_LCKSB47            \ [0x0f] LCKSB47
+    $10 constant GTZC_MPCBB1_LCKSB48            \ [0x10] LCKSB48
+    $11 constant GTZC_MPCBB1_LCKSB49            \ [0x11] LCKSB49
+    $12 constant GTZC_MPCBB1_LCKSB50            \ [0x12] LCKSB50
+    $13 constant GTZC_MPCBB1_LCKSB51            \ [0x13] LCKSB51
+    $14 constant GTZC_MPCBB1_LCKSB52            \ [0x14] LCKSB52
+    $15 constant GTZC_MPCBB1_LCKSB53            \ [0x15] LCKSB53
+    $16 constant GTZC_MPCBB1_LCKSB54            \ [0x16] LCKSB54
+    $17 constant GTZC_MPCBB1_LCKSB55            \ [0x17] LCKSB55
+    $18 constant GTZC_MPCBB1_LCKSB56            \ [0x18] LCKSB56
+    $19 constant GTZC_MPCBB1_LCKSB57            \ [0x19] LCKSB57
+    $1a constant GTZC_MPCBB1_LCKSB58            \ [0x1a] LCKSB58
+    $1b constant GTZC_MPCBB1_LCKSB59            \ [0x1b] LCKSB59
+    $1c constant GTZC_MPCBB1_LCKSB60            \ [0x1c] LCKSB60
+    $1d constant GTZC_MPCBB1_LCKSB61            \ [0x1d] LCKSB61
+    $1e constant GTZC_MPCBB1_LCKSB62            \ [0x1e] LCKSB62
+    $1f constant GTZC_MPCBB1_LCKSB63            \ [0x1f] LCKSB63
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR0_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x100
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B0                 \ [0x00] B0
+    $01 constant GTZC_MPCBB1_B1                 \ [0x01] B1
+    $02 constant GTZC_MPCBB1_B2                 \ [0x02] B2
+    $03 constant GTZC_MPCBB1_B3                 \ [0x03] B3
+    $04 constant GTZC_MPCBB1_B4                 \ [0x04] B4
+    $05 constant GTZC_MPCBB1_B5                 \ [0x05] B5
+    $06 constant GTZC_MPCBB1_B6                 \ [0x06] B6
+    $07 constant GTZC_MPCBB1_B7                 \ [0x07] B7
+    $08 constant GTZC_MPCBB1_B8                 \ [0x08] B8
+    $09 constant GTZC_MPCBB1_B9                 \ [0x09] B9
+    $0a constant GTZC_MPCBB1_B10                \ [0x0a] B10
+    $0b constant GTZC_MPCBB1_B11                \ [0x0b] B11
+    $0c constant GTZC_MPCBB1_B12                \ [0x0c] B12
+    $0d constant GTZC_MPCBB1_B13                \ [0x0d] B13
+    $0e constant GTZC_MPCBB1_B14                \ [0x0e] B14
+    $0f constant GTZC_MPCBB1_B15                \ [0x0f] B15
+    $10 constant GTZC_MPCBB1_B16                \ [0x10] B16
+    $11 constant GTZC_MPCBB1_B17                \ [0x11] B17
+    $12 constant GTZC_MPCBB1_B18                \ [0x12] B18
+    $13 constant GTZC_MPCBB1_B19                \ [0x13] B19
+    $14 constant GTZC_MPCBB1_B20                \ [0x14] B20
+    $15 constant GTZC_MPCBB1_B21                \ [0x15] B21
+    $16 constant GTZC_MPCBB1_B22                \ [0x16] B22
+    $17 constant GTZC_MPCBB1_B23                \ [0x17] B23
+    $18 constant GTZC_MPCBB1_B24                \ [0x18] B24
+    $19 constant GTZC_MPCBB1_B25                \ [0x19] B25
+    $1a constant GTZC_MPCBB1_B26                \ [0x1a] B26
+    $1b constant GTZC_MPCBB1_B27                \ [0x1b] B27
+    $1c constant GTZC_MPCBB1_B28                \ [0x1c] B28
+    $1d constant GTZC_MPCBB1_B29                \ [0x1d] B29
+    $1e constant GTZC_MPCBB1_B30                \ [0x1e] B30
+    $1f constant GTZC_MPCBB1_B31                \ [0x1f] B31
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR1_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x104
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B32                \ [0x00] B32
+    $01 constant GTZC_MPCBB1_B33                \ [0x01] B33
+    $02 constant GTZC_MPCBB1_B34                \ [0x02] B34
+    $03 constant GTZC_MPCBB1_B35                \ [0x03] B35
+    $04 constant GTZC_MPCBB1_B36                \ [0x04] B36
+    $05 constant GTZC_MPCBB1_B37                \ [0x05] B37
+    $06 constant GTZC_MPCBB1_B38                \ [0x06] B38
+    $07 constant GTZC_MPCBB1_B39                \ [0x07] B39
+    $08 constant GTZC_MPCBB1_B40                \ [0x08] B40
+    $09 constant GTZC_MPCBB1_B41                \ [0x09] B41
+    $0a constant GTZC_MPCBB1_B42                \ [0x0a] B42
+    $0b constant GTZC_MPCBB1_B43                \ [0x0b] B43
+    $0c constant GTZC_MPCBB1_B44                \ [0x0c] B44
+    $0d constant GTZC_MPCBB1_B45                \ [0x0d] B45
+    $0e constant GTZC_MPCBB1_B46                \ [0x0e] B46
+    $0f constant GTZC_MPCBB1_B47                \ [0x0f] B47
+    $10 constant GTZC_MPCBB1_B48                \ [0x10] B48
+    $11 constant GTZC_MPCBB1_B49                \ [0x11] B49
+    $12 constant GTZC_MPCBB1_B50                \ [0x12] B50
+    $13 constant GTZC_MPCBB1_B51                \ [0x13] B51
+    $14 constant GTZC_MPCBB1_B52                \ [0x14] B52
+    $15 constant GTZC_MPCBB1_B53                \ [0x15] B53
+    $16 constant GTZC_MPCBB1_B54                \ [0x16] B54
+    $17 constant GTZC_MPCBB1_B55                \ [0x17] B55
+    $18 constant GTZC_MPCBB1_B56                \ [0x18] B56
+    $19 constant GTZC_MPCBB1_B57                \ [0x19] B57
+    $1a constant GTZC_MPCBB1_B58                \ [0x1a] B58
+    $1b constant GTZC_MPCBB1_B59                \ [0x1b] B59
+    $1c constant GTZC_MPCBB1_B60                \ [0x1c] B60
+    $1d constant GTZC_MPCBB1_B61                \ [0x1d] B61
+    $1e constant GTZC_MPCBB1_B62                \ [0x1e] B62
+    $1f constant GTZC_MPCBB1_B63                \ [0x1f] B63
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR2_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x108
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B64                \ [0x00] B64
+    $01 constant GTZC_MPCBB1_B65                \ [0x01] B65
+    $02 constant GTZC_MPCBB1_B66                \ [0x02] B66
+    $03 constant GTZC_MPCBB1_B67                \ [0x03] B67
+    $04 constant GTZC_MPCBB1_B68                \ [0x04] B68
+    $05 constant GTZC_MPCBB1_B69                \ [0x05] B69
+    $06 constant GTZC_MPCBB1_B70                \ [0x06] B70
+    $07 constant GTZC_MPCBB1_B71                \ [0x07] B71
+    $08 constant GTZC_MPCBB1_B72                \ [0x08] B72
+    $09 constant GTZC_MPCBB1_B73                \ [0x09] B73
+    $0a constant GTZC_MPCBB1_B74                \ [0x0a] B74
+    $0b constant GTZC_MPCBB1_B75                \ [0x0b] B75
+    $0c constant GTZC_MPCBB1_B76                \ [0x0c] B76
+    $0d constant GTZC_MPCBB1_B77                \ [0x0d] B77
+    $0e constant GTZC_MPCBB1_B78                \ [0x0e] B78
+    $0f constant GTZC_MPCBB1_B79                \ [0x0f] B79
+    $10 constant GTZC_MPCBB1_B80                \ [0x10] B80
+    $11 constant GTZC_MPCBB1_B81                \ [0x11] B81
+    $12 constant GTZC_MPCBB1_B82                \ [0x12] B82
+    $13 constant GTZC_MPCBB1_B83                \ [0x13] B83
+    $14 constant GTZC_MPCBB1_B84                \ [0x14] B84
+    $15 constant GTZC_MPCBB1_B85                \ [0x15] B85
+    $16 constant GTZC_MPCBB1_B86                \ [0x16] B86
+    $17 constant GTZC_MPCBB1_B87                \ [0x17] B87
+    $18 constant GTZC_MPCBB1_B88                \ [0x18] B88
+    $19 constant GTZC_MPCBB1_B89                \ [0x19] B89
+    $1a constant GTZC_MPCBB1_B90                \ [0x1a] B90
+    $1b constant GTZC_MPCBB1_B91                \ [0x1b] B91
+    $1c constant GTZC_MPCBB1_B92                \ [0x1c] B92
+    $1d constant GTZC_MPCBB1_B93                \ [0x1d] B93
+    $1e constant GTZC_MPCBB1_B94                \ [0x1e] B94
+    $1f constant GTZC_MPCBB1_B95                \ [0x1f] B95
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR3_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x10C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B96                \ [0x00] B96
+    $01 constant GTZC_MPCBB1_B97                \ [0x01] B97
+    $02 constant GTZC_MPCBB1_B98                \ [0x02] B98
+    $03 constant GTZC_MPCBB1_B99                \ [0x03] B99
+    $04 constant GTZC_MPCBB1_B100               \ [0x04] B100
+    $05 constant GTZC_MPCBB1_B101               \ [0x05] B101
+    $06 constant GTZC_MPCBB1_B102               \ [0x06] B102
+    $07 constant GTZC_MPCBB1_B103               \ [0x07] B103
+    $08 constant GTZC_MPCBB1_B104               \ [0x08] B104
+    $09 constant GTZC_MPCBB1_B105               \ [0x09] B105
+    $0a constant GTZC_MPCBB1_B106               \ [0x0a] B106
+    $0b constant GTZC_MPCBB1_B107               \ [0x0b] B107
+    $0c constant GTZC_MPCBB1_B108               \ [0x0c] B108
+    $0d constant GTZC_MPCBB1_B109               \ [0x0d] B109
+    $0e constant GTZC_MPCBB1_B110               \ [0x0e] B110
+    $0f constant GTZC_MPCBB1_B111               \ [0x0f] B111
+    $10 constant GTZC_MPCBB1_B112               \ [0x10] B112
+    $11 constant GTZC_MPCBB1_B113               \ [0x11] B113
+    $12 constant GTZC_MPCBB1_B114               \ [0x12] B114
+    $13 constant GTZC_MPCBB1_B115               \ [0x13] B115
+    $14 constant GTZC_MPCBB1_B116               \ [0x14] B116
+    $15 constant GTZC_MPCBB1_B117               \ [0x15] B117
+    $16 constant GTZC_MPCBB1_B118               \ [0x16] B118
+    $17 constant GTZC_MPCBB1_B119               \ [0x17] B119
+    $18 constant GTZC_MPCBB1_B120               \ [0x18] B120
+    $19 constant GTZC_MPCBB1_B121               \ [0x19] B121
+    $1a constant GTZC_MPCBB1_B122               \ [0x1a] B122
+    $1b constant GTZC_MPCBB1_B123               \ [0x1b] B123
+    $1c constant GTZC_MPCBB1_B124               \ [0x1c] B124
+    $1d constant GTZC_MPCBB1_B125               \ [0x1d] B125
+    $1e constant GTZC_MPCBB1_B126               \ [0x1e] B126
+    $1f constant GTZC_MPCBB1_B127               \ [0x1f] B127
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR4_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x110
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B128               \ [0x00] B128
+    $01 constant GTZC_MPCBB1_B129               \ [0x01] B129
+    $02 constant GTZC_MPCBB1_B130               \ [0x02] B130
+    $03 constant GTZC_MPCBB1_B131               \ [0x03] B131
+    $04 constant GTZC_MPCBB1_B132               \ [0x04] B132
+    $05 constant GTZC_MPCBB1_B133               \ [0x05] B133
+    $06 constant GTZC_MPCBB1_B134               \ [0x06] B134
+    $07 constant GTZC_MPCBB1_B135               \ [0x07] B135
+    $08 constant GTZC_MPCBB1_B136               \ [0x08] B136
+    $09 constant GTZC_MPCBB1_B137               \ [0x09] B137
+    $0a constant GTZC_MPCBB1_B138               \ [0x0a] B138
+    $0b constant GTZC_MPCBB1_B139               \ [0x0b] B139
+    $0c constant GTZC_MPCBB1_B140               \ [0x0c] B140
+    $0d constant GTZC_MPCBB1_B141               \ [0x0d] B141
+    $0e constant GTZC_MPCBB1_B142               \ [0x0e] B142
+    $0f constant GTZC_MPCBB1_B143               \ [0x0f] B143
+    $10 constant GTZC_MPCBB1_B144               \ [0x10] B144
+    $11 constant GTZC_MPCBB1_B145               \ [0x11] B145
+    $12 constant GTZC_MPCBB1_B146               \ [0x12] B146
+    $13 constant GTZC_MPCBB1_B147               \ [0x13] B147
+    $14 constant GTZC_MPCBB1_B148               \ [0x14] B148
+    $15 constant GTZC_MPCBB1_B149               \ [0x15] B149
+    $16 constant GTZC_MPCBB1_B150               \ [0x16] B150
+    $17 constant GTZC_MPCBB1_B151               \ [0x17] B151
+    $18 constant GTZC_MPCBB1_B152               \ [0x18] B152
+    $19 constant GTZC_MPCBB1_B153               \ [0x19] B153
+    $1a constant GTZC_MPCBB1_B154               \ [0x1a] B154
+    $1b constant GTZC_MPCBB1_B155               \ [0x1b] B155
+    $1c constant GTZC_MPCBB1_B156               \ [0x1c] B156
+    $1d constant GTZC_MPCBB1_B157               \ [0x1d] B157
+    $1e constant GTZC_MPCBB1_B158               \ [0x1e] B158
+    $1f constant GTZC_MPCBB1_B159               \ [0x1f] B159
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR5_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x114
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B160               \ [0x00] B160
+    $01 constant GTZC_MPCBB1_B161               \ [0x01] B161
+    $02 constant GTZC_MPCBB1_B162               \ [0x02] B162
+    $03 constant GTZC_MPCBB1_B163               \ [0x03] B163
+    $04 constant GTZC_MPCBB1_B164               \ [0x04] B164
+    $05 constant GTZC_MPCBB1_B165               \ [0x05] B165
+    $06 constant GTZC_MPCBB1_B166               \ [0x06] B166
+    $07 constant GTZC_MPCBB1_B167               \ [0x07] B167
+    $08 constant GTZC_MPCBB1_B168               \ [0x08] B168
+    $09 constant GTZC_MPCBB1_B169               \ [0x09] B169
+    $0a constant GTZC_MPCBB1_B170               \ [0x0a] B170
+    $0b constant GTZC_MPCBB1_B171               \ [0x0b] B171
+    $0c constant GTZC_MPCBB1_B172               \ [0x0c] B172
+    $0d constant GTZC_MPCBB1_B173               \ [0x0d] B173
+    $0e constant GTZC_MPCBB1_B174               \ [0x0e] B174
+    $0f constant GTZC_MPCBB1_B175               \ [0x0f] B175
+    $10 constant GTZC_MPCBB1_B176               \ [0x10] B176
+    $11 constant GTZC_MPCBB1_B177               \ [0x11] B177
+    $12 constant GTZC_MPCBB1_B178               \ [0x12] B178
+    $13 constant GTZC_MPCBB1_B179               \ [0x13] B179
+    $14 constant GTZC_MPCBB1_B180               \ [0x14] B180
+    $15 constant GTZC_MPCBB1_B181               \ [0x15] B181
+    $16 constant GTZC_MPCBB1_B182               \ [0x16] B182
+    $17 constant GTZC_MPCBB1_B183               \ [0x17] B183
+    $18 constant GTZC_MPCBB1_B184               \ [0x18] B184
+    $19 constant GTZC_MPCBB1_B185               \ [0x19] B185
+    $1a constant GTZC_MPCBB1_B186               \ [0x1a] B186
+    $1b constant GTZC_MPCBB1_B187               \ [0x1b] B187
+    $1c constant GTZC_MPCBB1_B188               \ [0x1c] B188
+    $1d constant GTZC_MPCBB1_B189               \ [0x1d] B189
+    $1e constant GTZC_MPCBB1_B190               \ [0x1e] B190
+    $1f constant GTZC_MPCBB1_B191               \ [0x1f] B191
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR6_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x118
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B192               \ [0x00] B192
+    $01 constant GTZC_MPCBB1_B193               \ [0x01] B193
+    $02 constant GTZC_MPCBB1_B194               \ [0x02] B194
+    $03 constant GTZC_MPCBB1_B195               \ [0x03] B195
+    $04 constant GTZC_MPCBB1_B196               \ [0x04] B196
+    $05 constant GTZC_MPCBB1_B197               \ [0x05] B197
+    $06 constant GTZC_MPCBB1_B198               \ [0x06] B198
+    $07 constant GTZC_MPCBB1_B199               \ [0x07] B199
+    $08 constant GTZC_MPCBB1_B200               \ [0x08] B200
+    $09 constant GTZC_MPCBB1_B201               \ [0x09] B201
+    $0a constant GTZC_MPCBB1_B202               \ [0x0a] B202
+    $0b constant GTZC_MPCBB1_B203               \ [0x0b] B203
+    $0c constant GTZC_MPCBB1_B204               \ [0x0c] B204
+    $0d constant GTZC_MPCBB1_B205               \ [0x0d] B205
+    $0e constant GTZC_MPCBB1_B206               \ [0x0e] B206
+    $0f constant GTZC_MPCBB1_B207               \ [0x0f] B207
+    $10 constant GTZC_MPCBB1_B208               \ [0x10] B208
+    $11 constant GTZC_MPCBB1_B209               \ [0x11] B209
+    $12 constant GTZC_MPCBB1_B210               \ [0x12] B210
+    $13 constant GTZC_MPCBB1_B211               \ [0x13] B211
+    $14 constant GTZC_MPCBB1_B212               \ [0x14] B212
+    $15 constant GTZC_MPCBB1_B213               \ [0x15] B213
+    $16 constant GTZC_MPCBB1_B214               \ [0x16] B214
+    $17 constant GTZC_MPCBB1_B215               \ [0x17] B215
+    $18 constant GTZC_MPCBB1_B216               \ [0x18] B216
+    $19 constant GTZC_MPCBB1_B217               \ [0x19] B217
+    $1a constant GTZC_MPCBB1_B218               \ [0x1a] B218
+    $1b constant GTZC_MPCBB1_B219               \ [0x1b] B219
+    $1c constant GTZC_MPCBB1_B220               \ [0x1c] B220
+    $1d constant GTZC_MPCBB1_B221               \ [0x1d] B221
+    $1e constant GTZC_MPCBB1_B222               \ [0x1e] B222
+    $1f constant GTZC_MPCBB1_B223               \ [0x1f] B223
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR7_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x11C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B224               \ [0x00] B224
+    $01 constant GTZC_MPCBB1_B225               \ [0x01] B225
+    $02 constant GTZC_MPCBB1_B226               \ [0x02] B226
+    $03 constant GTZC_MPCBB1_B227               \ [0x03] B227
+    $04 constant GTZC_MPCBB1_B228               \ [0x04] B228
+    $05 constant GTZC_MPCBB1_B229               \ [0x05] B229
+    $06 constant GTZC_MPCBB1_B230               \ [0x06] B230
+    $07 constant GTZC_MPCBB1_B231               \ [0x07] B231
+    $08 constant GTZC_MPCBB1_B232               \ [0x08] B232
+    $09 constant GTZC_MPCBB1_B233               \ [0x09] B233
+    $0a constant GTZC_MPCBB1_B234               \ [0x0a] B234
+    $0b constant GTZC_MPCBB1_B235               \ [0x0b] B235
+    $0c constant GTZC_MPCBB1_B236               \ [0x0c] B236
+    $0d constant GTZC_MPCBB1_B237               \ [0x0d] B237
+    $0e constant GTZC_MPCBB1_B238               \ [0x0e] B238
+    $0f constant GTZC_MPCBB1_B239               \ [0x0f] B239
+    $10 constant GTZC_MPCBB1_B240               \ [0x10] B240
+    $11 constant GTZC_MPCBB1_B241               \ [0x11] B241
+    $12 constant GTZC_MPCBB1_B242               \ [0x12] B242
+    $13 constant GTZC_MPCBB1_B243               \ [0x13] B243
+    $14 constant GTZC_MPCBB1_B244               \ [0x14] B244
+    $15 constant GTZC_MPCBB1_B245               \ [0x15] B245
+    $16 constant GTZC_MPCBB1_B246               \ [0x16] B246
+    $17 constant GTZC_MPCBB1_B247               \ [0x17] B247
+    $18 constant GTZC_MPCBB1_B248               \ [0x18] B248
+    $19 constant GTZC_MPCBB1_B249               \ [0x19] B249
+    $1a constant GTZC_MPCBB1_B250               \ [0x1a] B250
+    $1b constant GTZC_MPCBB1_B251               \ [0x1b] B251
+    $1c constant GTZC_MPCBB1_B252               \ [0x1c] B252
+    $1d constant GTZC_MPCBB1_B253               \ [0x1d] B253
+    $1e constant GTZC_MPCBB1_B254               \ [0x1e] B254
+    $1f constant GTZC_MPCBB1_B255               \ [0x1f] B255
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR8_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x120
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B256               \ [0x00] B256
+    $01 constant GTZC_MPCBB1_B257               \ [0x01] B257
+    $02 constant GTZC_MPCBB1_B258               \ [0x02] B258
+    $03 constant GTZC_MPCBB1_B259               \ [0x03] B259
+    $04 constant GTZC_MPCBB1_B260               \ [0x04] B260
+    $05 constant GTZC_MPCBB1_B261               \ [0x05] B261
+    $06 constant GTZC_MPCBB1_B262               \ [0x06] B262
+    $07 constant GTZC_MPCBB1_B263               \ [0x07] B263
+    $08 constant GTZC_MPCBB1_B264               \ [0x08] B264
+    $09 constant GTZC_MPCBB1_B265               \ [0x09] B265
+    $0a constant GTZC_MPCBB1_B266               \ [0x0a] B266
+    $0b constant GTZC_MPCBB1_B267               \ [0x0b] B267
+    $0c constant GTZC_MPCBB1_B268               \ [0x0c] B268
+    $0d constant GTZC_MPCBB1_B269               \ [0x0d] B269
+    $0e constant GTZC_MPCBB1_B270               \ [0x0e] B270
+    $0f constant GTZC_MPCBB1_B271               \ [0x0f] B271
+    $10 constant GTZC_MPCBB1_B272               \ [0x10] B272
+    $11 constant GTZC_MPCBB1_B273               \ [0x11] B273
+    $12 constant GTZC_MPCBB1_B274               \ [0x12] B274
+    $13 constant GTZC_MPCBB1_B275               \ [0x13] B275
+    $14 constant GTZC_MPCBB1_B276               \ [0x14] B276
+    $15 constant GTZC_MPCBB1_B277               \ [0x15] B277
+    $16 constant GTZC_MPCBB1_B278               \ [0x16] B278
+    $17 constant GTZC_MPCBB1_B279               \ [0x17] B279
+    $18 constant GTZC_MPCBB1_B280               \ [0x18] B280
+    $19 constant GTZC_MPCBB1_B281               \ [0x19] B281
+    $1a constant GTZC_MPCBB1_B282               \ [0x1a] B282
+    $1b constant GTZC_MPCBB1_B283               \ [0x1b] B283
+    $1c constant GTZC_MPCBB1_B284               \ [0x1c] B284
+    $1d constant GTZC_MPCBB1_B285               \ [0x1d] B285
+    $1e constant GTZC_MPCBB1_B286               \ [0x1e] B286
+    $1f constant GTZC_MPCBB1_B287               \ [0x1f] B287
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR9_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x124
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B288               \ [0x00] B288
+    $01 constant GTZC_MPCBB1_B289               \ [0x01] B289
+    $02 constant GTZC_MPCBB1_B290               \ [0x02] B290
+    $03 constant GTZC_MPCBB1_B291               \ [0x03] B291
+    $04 constant GTZC_MPCBB1_B292               \ [0x04] B292
+    $05 constant GTZC_MPCBB1_B293               \ [0x05] B293
+    $06 constant GTZC_MPCBB1_B294               \ [0x06] B294
+    $07 constant GTZC_MPCBB1_B295               \ [0x07] B295
+    $08 constant GTZC_MPCBB1_B296               \ [0x08] B296
+    $09 constant GTZC_MPCBB1_B297               \ [0x09] B297
+    $0a constant GTZC_MPCBB1_B298               \ [0x0a] B298
+    $0b constant GTZC_MPCBB1_B299               \ [0x0b] B299
+    $0c constant GTZC_MPCBB1_B300               \ [0x0c] B300
+    $0d constant GTZC_MPCBB1_B301               \ [0x0d] B301
+    $0e constant GTZC_MPCBB1_B302               \ [0x0e] B302
+    $0f constant GTZC_MPCBB1_B303               \ [0x0f] B303
+    $10 constant GTZC_MPCBB1_B304               \ [0x10] B304
+    $11 constant GTZC_MPCBB1_B305               \ [0x11] B305
+    $12 constant GTZC_MPCBB1_B306               \ [0x12] B306
+    $13 constant GTZC_MPCBB1_B307               \ [0x13] B307
+    $14 constant GTZC_MPCBB1_B308               \ [0x14] B308
+    $15 constant GTZC_MPCBB1_B309               \ [0x15] B309
+    $16 constant GTZC_MPCBB1_B310               \ [0x16] B310
+    $17 constant GTZC_MPCBB1_B311               \ [0x17] B311
+    $18 constant GTZC_MPCBB1_B312               \ [0x18] B312
+    $19 constant GTZC_MPCBB1_B313               \ [0x19] B313
+    $1a constant GTZC_MPCBB1_B314               \ [0x1a] B314
+    $1b constant GTZC_MPCBB1_B315               \ [0x1b] B315
+    $1c constant GTZC_MPCBB1_B316               \ [0x1c] B316
+    $1d constant GTZC_MPCBB1_B317               \ [0x1d] B317
+    $1e constant GTZC_MPCBB1_B318               \ [0x1e] B318
+    $1f constant GTZC_MPCBB1_B319               \ [0x1f] B319
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR10_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x128
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B320               \ [0x00] B320
+    $01 constant GTZC_MPCBB1_B321               \ [0x01] B321
+    $02 constant GTZC_MPCBB1_B322               \ [0x02] B322
+    $03 constant GTZC_MPCBB1_B323               \ [0x03] B323
+    $04 constant GTZC_MPCBB1_B324               \ [0x04] B324
+    $05 constant GTZC_MPCBB1_B325               \ [0x05] B325
+    $06 constant GTZC_MPCBB1_B326               \ [0x06] B326
+    $07 constant GTZC_MPCBB1_B327               \ [0x07] B327
+    $08 constant GTZC_MPCBB1_B328               \ [0x08] B328
+    $09 constant GTZC_MPCBB1_B329               \ [0x09] B329
+    $0a constant GTZC_MPCBB1_B330               \ [0x0a] B330
+    $0b constant GTZC_MPCBB1_B331               \ [0x0b] B331
+    $0c constant GTZC_MPCBB1_B332               \ [0x0c] B332
+    $0d constant GTZC_MPCBB1_B333               \ [0x0d] B333
+    $0e constant GTZC_MPCBB1_B334               \ [0x0e] B334
+    $0f constant GTZC_MPCBB1_B335               \ [0x0f] B335
+    $10 constant GTZC_MPCBB1_B336               \ [0x10] B336
+    $11 constant GTZC_MPCBB1_B337               \ [0x11] B337
+    $12 constant GTZC_MPCBB1_B338               \ [0x12] B338
+    $13 constant GTZC_MPCBB1_B339               \ [0x13] B339
+    $14 constant GTZC_MPCBB1_B340               \ [0x14] B340
+    $15 constant GTZC_MPCBB1_B341               \ [0x15] B341
+    $16 constant GTZC_MPCBB1_B342               \ [0x16] B342
+    $17 constant GTZC_MPCBB1_B343               \ [0x17] B343
+    $18 constant GTZC_MPCBB1_B344               \ [0x18] B344
+    $19 constant GTZC_MPCBB1_B345               \ [0x19] B345
+    $1a constant GTZC_MPCBB1_B346               \ [0x1a] B346
+    $1b constant GTZC_MPCBB1_B347               \ [0x1b] B347
+    $1c constant GTZC_MPCBB1_B348               \ [0x1c] B348
+    $1d constant GTZC_MPCBB1_B349               \ [0x1d] B349
+    $1e constant GTZC_MPCBB1_B350               \ [0x1e] B350
+    $1f constant GTZC_MPCBB1_B351               \ [0x1f] B351
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR11_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x12C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B352               \ [0x00] B352
+    $01 constant GTZC_MPCBB1_B353               \ [0x01] B353
+    $02 constant GTZC_MPCBB1_B354               \ [0x02] B354
+    $03 constant GTZC_MPCBB1_B355               \ [0x03] B355
+    $04 constant GTZC_MPCBB1_B356               \ [0x04] B356
+    $05 constant GTZC_MPCBB1_B357               \ [0x05] B357
+    $06 constant GTZC_MPCBB1_B358               \ [0x06] B358
+    $07 constant GTZC_MPCBB1_B359               \ [0x07] B359
+    $08 constant GTZC_MPCBB1_B360               \ [0x08] B360
+    $09 constant GTZC_MPCBB1_B361               \ [0x09] B361
+    $0a constant GTZC_MPCBB1_B362               \ [0x0a] B362
+    $0b constant GTZC_MPCBB1_B363               \ [0x0b] B363
+    $0c constant GTZC_MPCBB1_B364               \ [0x0c] B364
+    $0d constant GTZC_MPCBB1_B365               \ [0x0d] B365
+    $0e constant GTZC_MPCBB1_B366               \ [0x0e] B366
+    $0f constant GTZC_MPCBB1_B367               \ [0x0f] B367
+    $10 constant GTZC_MPCBB1_B368               \ [0x10] B368
+    $11 constant GTZC_MPCBB1_B369               \ [0x11] B369
+    $12 constant GTZC_MPCBB1_B370               \ [0x12] B370
+    $13 constant GTZC_MPCBB1_B371               \ [0x13] B371
+    $14 constant GTZC_MPCBB1_B372               \ [0x14] B372
+    $15 constant GTZC_MPCBB1_B373               \ [0x15] B373
+    $16 constant GTZC_MPCBB1_B374               \ [0x16] B374
+    $17 constant GTZC_MPCBB1_B375               \ [0x17] B375
+    $18 constant GTZC_MPCBB1_B376               \ [0x18] B376
+    $19 constant GTZC_MPCBB1_B377               \ [0x19] B377
+    $1a constant GTZC_MPCBB1_B378               \ [0x1a] B378
+    $1b constant GTZC_MPCBB1_B379               \ [0x1b] B379
+    $1c constant GTZC_MPCBB1_B380               \ [0x1c] B380
+    $1d constant GTZC_MPCBB1_B381               \ [0x1d] B381
+    $1e constant GTZC_MPCBB1_B382               \ [0x1e] B382
+    $1f constant GTZC_MPCBB1_B383               \ [0x1f] B383
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR12_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x130
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B384               \ [0x00] B384
+    $01 constant GTZC_MPCBB1_B385               \ [0x01] B385
+    $02 constant GTZC_MPCBB1_B386               \ [0x02] B386
+    $03 constant GTZC_MPCBB1_B387               \ [0x03] B387
+    $04 constant GTZC_MPCBB1_B388               \ [0x04] B388
+    $05 constant GTZC_MPCBB1_B389               \ [0x05] B389
+    $06 constant GTZC_MPCBB1_B390               \ [0x06] B390
+    $07 constant GTZC_MPCBB1_B391               \ [0x07] B391
+    $08 constant GTZC_MPCBB1_B392               \ [0x08] B392
+    $09 constant GTZC_MPCBB1_B393               \ [0x09] B393
+    $0a constant GTZC_MPCBB1_B394               \ [0x0a] B394
+    $0b constant GTZC_MPCBB1_B395               \ [0x0b] B395
+    $0c constant GTZC_MPCBB1_B396               \ [0x0c] B396
+    $0d constant GTZC_MPCBB1_B397               \ [0x0d] B397
+    $0e constant GTZC_MPCBB1_B398               \ [0x0e] B398
+    $0f constant GTZC_MPCBB1_B399               \ [0x0f] B399
+    $10 constant GTZC_MPCBB1_B400               \ [0x10] B400
+    $11 constant GTZC_MPCBB1_B401               \ [0x11] B401
+    $12 constant GTZC_MPCBB1_B402               \ [0x12] B402
+    $13 constant GTZC_MPCBB1_B403               \ [0x13] B403
+    $14 constant GTZC_MPCBB1_B404               \ [0x14] B404
+    $15 constant GTZC_MPCBB1_B405               \ [0x15] B405
+    $16 constant GTZC_MPCBB1_B406               \ [0x16] B406
+    $17 constant GTZC_MPCBB1_B407               \ [0x17] B407
+    $18 constant GTZC_MPCBB1_B408               \ [0x18] B408
+    $19 constant GTZC_MPCBB1_B409               \ [0x19] B409
+    $1a constant GTZC_MPCBB1_B410               \ [0x1a] B410
+    $1b constant GTZC_MPCBB1_B411               \ [0x1b] B411
+    $1c constant GTZC_MPCBB1_B412               \ [0x1c] B412
+    $1d constant GTZC_MPCBB1_B413               \ [0x1d] B413
+    $1e constant GTZC_MPCBB1_B414               \ [0x1e] B414
+    $1f constant GTZC_MPCBB1_B415               \ [0x1f] B415
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR13_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x134
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B416               \ [0x00] B416
+    $01 constant GTZC_MPCBB1_B417               \ [0x01] B417
+    $02 constant GTZC_MPCBB1_B418               \ [0x02] B418
+    $03 constant GTZC_MPCBB1_B419               \ [0x03] B419
+    $04 constant GTZC_MPCBB1_B420               \ [0x04] B420
+    $05 constant GTZC_MPCBB1_B421               \ [0x05] B421
+    $06 constant GTZC_MPCBB1_B422               \ [0x06] B422
+    $07 constant GTZC_MPCBB1_B423               \ [0x07] B423
+    $08 constant GTZC_MPCBB1_B424               \ [0x08] B424
+    $09 constant GTZC_MPCBB1_B425               \ [0x09] B425
+    $0a constant GTZC_MPCBB1_B426               \ [0x0a] B426
+    $0b constant GTZC_MPCBB1_B427               \ [0x0b] B427
+    $0c constant GTZC_MPCBB1_B428               \ [0x0c] B428
+    $0d constant GTZC_MPCBB1_B429               \ [0x0d] B429
+    $0e constant GTZC_MPCBB1_B430               \ [0x0e] B430
+    $0f constant GTZC_MPCBB1_B431               \ [0x0f] B431
+    $10 constant GTZC_MPCBB1_B432               \ [0x10] B432
+    $11 constant GTZC_MPCBB1_B433               \ [0x11] B433
+    $12 constant GTZC_MPCBB1_B434               \ [0x12] B434
+    $13 constant GTZC_MPCBB1_B435               \ [0x13] B435
+    $14 constant GTZC_MPCBB1_B436               \ [0x14] B436
+    $15 constant GTZC_MPCBB1_B437               \ [0x15] B437
+    $16 constant GTZC_MPCBB1_B438               \ [0x16] B438
+    $17 constant GTZC_MPCBB1_B439               \ [0x17] B439
+    $18 constant GTZC_MPCBB1_B440               \ [0x18] B440
+    $19 constant GTZC_MPCBB1_B441               \ [0x19] B441
+    $1a constant GTZC_MPCBB1_B442               \ [0x1a] B442
+    $1b constant GTZC_MPCBB1_B443               \ [0x1b] B443
+    $1c constant GTZC_MPCBB1_B444               \ [0x1c] B444
+    $1d constant GTZC_MPCBB1_B445               \ [0x1d] B445
+    $1e constant GTZC_MPCBB1_B446               \ [0x1e] B446
+    $1f constant GTZC_MPCBB1_B447               \ [0x1f] B447
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR14_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x138
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B448               \ [0x00] B448
+    $01 constant GTZC_MPCBB1_B449               \ [0x01] B449
+    $02 constant GTZC_MPCBB1_B450               \ [0x02] B450
+    $03 constant GTZC_MPCBB1_B451               \ [0x03] B451
+    $04 constant GTZC_MPCBB1_B452               \ [0x04] B452
+    $05 constant GTZC_MPCBB1_B453               \ [0x05] B453
+    $06 constant GTZC_MPCBB1_B454               \ [0x06] B454
+    $07 constant GTZC_MPCBB1_B455               \ [0x07] B455
+    $08 constant GTZC_MPCBB1_B456               \ [0x08] B456
+    $09 constant GTZC_MPCBB1_B457               \ [0x09] B457
+    $0a constant GTZC_MPCBB1_B458               \ [0x0a] B458
+    $0b constant GTZC_MPCBB1_B459               \ [0x0b] B459
+    $0c constant GTZC_MPCBB1_B460               \ [0x0c] B460
+    $0d constant GTZC_MPCBB1_B461               \ [0x0d] B461
+    $0e constant GTZC_MPCBB1_B462               \ [0x0e] B462
+    $0f constant GTZC_MPCBB1_B463               \ [0x0f] B463
+    $10 constant GTZC_MPCBB1_B464               \ [0x10] B464
+    $11 constant GTZC_MPCBB1_B465               \ [0x11] B465
+    $12 constant GTZC_MPCBB1_B466               \ [0x12] B466
+    $13 constant GTZC_MPCBB1_B467               \ [0x13] B467
+    $14 constant GTZC_MPCBB1_B468               \ [0x14] B468
+    $15 constant GTZC_MPCBB1_B469               \ [0x15] B469
+    $16 constant GTZC_MPCBB1_B470               \ [0x16] B470
+    $17 constant GTZC_MPCBB1_B471               \ [0x17] B471
+    $18 constant GTZC_MPCBB1_B472               \ [0x18] B472
+    $19 constant GTZC_MPCBB1_B473               \ [0x19] B473
+    $1a constant GTZC_MPCBB1_B474               \ [0x1a] B474
+    $1b constant GTZC_MPCBB1_B475               \ [0x1b] B475
+    $1c constant GTZC_MPCBB1_B476               \ [0x1c] B476
+    $1d constant GTZC_MPCBB1_B477               \ [0x1d] B477
+    $1e constant GTZC_MPCBB1_B478               \ [0x1e] B478
+    $1f constant GTZC_MPCBB1_B479               \ [0x1f] B479
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR15_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x13C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B480               \ [0x00] B480
+    $01 constant GTZC_MPCBB1_B481               \ [0x01] B481
+    $02 constant GTZC_MPCBB1_B482               \ [0x02] B482
+    $03 constant GTZC_MPCBB1_B483               \ [0x03] B483
+    $04 constant GTZC_MPCBB1_B484               \ [0x04] B484
+    $05 constant GTZC_MPCBB1_B485               \ [0x05] B485
+    $06 constant GTZC_MPCBB1_B486               \ [0x06] B486
+    $07 constant GTZC_MPCBB1_B487               \ [0x07] B487
+    $08 constant GTZC_MPCBB1_B488               \ [0x08] B488
+    $09 constant GTZC_MPCBB1_B489               \ [0x09] B489
+    $0a constant GTZC_MPCBB1_B490               \ [0x0a] B490
+    $0b constant GTZC_MPCBB1_B491               \ [0x0b] B491
+    $0c constant GTZC_MPCBB1_B492               \ [0x0c] B492
+    $0d constant GTZC_MPCBB1_B493               \ [0x0d] B493
+    $0e constant GTZC_MPCBB1_B494               \ [0x0e] B494
+    $0f constant GTZC_MPCBB1_B495               \ [0x0f] B495
+    $10 constant GTZC_MPCBB1_B496               \ [0x10] B496
+    $11 constant GTZC_MPCBB1_B497               \ [0x11] B497
+    $12 constant GTZC_MPCBB1_B498               \ [0x12] B498
+    $13 constant GTZC_MPCBB1_B499               \ [0x13] B499
+    $14 constant GTZC_MPCBB1_B500               \ [0x14] B500
+    $15 constant GTZC_MPCBB1_B501               \ [0x15] B501
+    $16 constant GTZC_MPCBB1_B502               \ [0x16] B502
+    $17 constant GTZC_MPCBB1_B503               \ [0x17] B503
+    $18 constant GTZC_MPCBB1_B504               \ [0x18] B504
+    $19 constant GTZC_MPCBB1_B505               \ [0x19] B505
+    $1a constant GTZC_MPCBB1_B506               \ [0x1a] B506
+    $1b constant GTZC_MPCBB1_B507               \ [0x1b] B507
+    $1c constant GTZC_MPCBB1_B508               \ [0x1c] B508
+    $1d constant GTZC_MPCBB1_B509               \ [0x1d] B509
+    $1e constant GTZC_MPCBB1_B510               \ [0x1e] B510
+    $1f constant GTZC_MPCBB1_B511               \ [0x1f] B511
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR16_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x140
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B512               \ [0x00] B512
+    $01 constant GTZC_MPCBB1_B513               \ [0x01] B513
+    $02 constant GTZC_MPCBB1_B514               \ [0x02] B514
+    $03 constant GTZC_MPCBB1_B515               \ [0x03] B515
+    $04 constant GTZC_MPCBB1_B516               \ [0x04] B516
+    $05 constant GTZC_MPCBB1_B517               \ [0x05] B517
+    $06 constant GTZC_MPCBB1_B518               \ [0x06] B518
+    $07 constant GTZC_MPCBB1_B519               \ [0x07] B519
+    $08 constant GTZC_MPCBB1_B520               \ [0x08] B520
+    $09 constant GTZC_MPCBB1_B521               \ [0x09] B521
+    $0a constant GTZC_MPCBB1_B522               \ [0x0a] B522
+    $0b constant GTZC_MPCBB1_B523               \ [0x0b] B523
+    $0c constant GTZC_MPCBB1_B524               \ [0x0c] B524
+    $0d constant GTZC_MPCBB1_B525               \ [0x0d] B525
+    $0e constant GTZC_MPCBB1_B526               \ [0x0e] B526
+    $0f constant GTZC_MPCBB1_B527               \ [0x0f] B527
+    $10 constant GTZC_MPCBB1_B528               \ [0x10] B528
+    $11 constant GTZC_MPCBB1_B529               \ [0x11] B529
+    $12 constant GTZC_MPCBB1_B530               \ [0x12] B530
+    $13 constant GTZC_MPCBB1_B531               \ [0x13] B531
+    $14 constant GTZC_MPCBB1_B532               \ [0x14] B532
+    $15 constant GTZC_MPCBB1_B533               \ [0x15] B533
+    $16 constant GTZC_MPCBB1_B534               \ [0x16] B534
+    $17 constant GTZC_MPCBB1_B535               \ [0x17] B535
+    $18 constant GTZC_MPCBB1_B536               \ [0x18] B536
+    $19 constant GTZC_MPCBB1_B537               \ [0x19] B537
+    $1a constant GTZC_MPCBB1_B538               \ [0x1a] B538
+    $1b constant GTZC_MPCBB1_B539               \ [0x1b] B539
+    $1c constant GTZC_MPCBB1_B540               \ [0x1c] B540
+    $1d constant GTZC_MPCBB1_B541               \ [0x1d] B541
+    $1e constant GTZC_MPCBB1_B542               \ [0x1e] B542
+    $1f constant GTZC_MPCBB1_B543               \ [0x1f] B543
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR17_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x144
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B544               \ [0x00] B544
+    $01 constant GTZC_MPCBB1_B545               \ [0x01] B545
+    $02 constant GTZC_MPCBB1_B546               \ [0x02] B546
+    $03 constant GTZC_MPCBB1_B547               \ [0x03] B547
+    $04 constant GTZC_MPCBB1_B548               \ [0x04] B548
+    $05 constant GTZC_MPCBB1_B549               \ [0x05] B549
+    $06 constant GTZC_MPCBB1_B550               \ [0x06] B550
+    $07 constant GTZC_MPCBB1_B551               \ [0x07] B551
+    $08 constant GTZC_MPCBB1_B552               \ [0x08] B552
+    $09 constant GTZC_MPCBB1_B553               \ [0x09] B553
+    $0a constant GTZC_MPCBB1_B554               \ [0x0a] B554
+    $0b constant GTZC_MPCBB1_B555               \ [0x0b] B555
+    $0c constant GTZC_MPCBB1_B556               \ [0x0c] B556
+    $0d constant GTZC_MPCBB1_B557               \ [0x0d] B557
+    $0e constant GTZC_MPCBB1_B558               \ [0x0e] B558
+    $0f constant GTZC_MPCBB1_B559               \ [0x0f] B559
+    $10 constant GTZC_MPCBB1_B560               \ [0x10] B560
+    $11 constant GTZC_MPCBB1_B561               \ [0x11] B561
+    $12 constant GTZC_MPCBB1_B562               \ [0x12] B562
+    $13 constant GTZC_MPCBB1_B563               \ [0x13] B563
+    $14 constant GTZC_MPCBB1_B564               \ [0x14] B564
+    $15 constant GTZC_MPCBB1_B565               \ [0x15] B565
+    $16 constant GTZC_MPCBB1_B566               \ [0x16] B566
+    $17 constant GTZC_MPCBB1_B567               \ [0x17] B567
+    $18 constant GTZC_MPCBB1_B568               \ [0x18] B568
+    $19 constant GTZC_MPCBB1_B569               \ [0x19] B569
+    $1a constant GTZC_MPCBB1_B570               \ [0x1a] B570
+    $1b constant GTZC_MPCBB1_B571               \ [0x1b] B571
+    $1c constant GTZC_MPCBB1_B572               \ [0x1c] B572
+    $1d constant GTZC_MPCBB1_B573               \ [0x1d] B573
+    $1e constant GTZC_MPCBB1_B574               \ [0x1e] B574
+    $1f constant GTZC_MPCBB1_B575               \ [0x1f] B575
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR18_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x148
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B576               \ [0x00] B576
+    $01 constant GTZC_MPCBB1_B577               \ [0x01] B577
+    $02 constant GTZC_MPCBB1_B578               \ [0x02] B578
+    $03 constant GTZC_MPCBB1_B579               \ [0x03] B579
+    $04 constant GTZC_MPCBB1_B580               \ [0x04] B580
+    $05 constant GTZC_MPCBB1_B581               \ [0x05] B581
+    $06 constant GTZC_MPCBB1_B582               \ [0x06] B582
+    $07 constant GTZC_MPCBB1_B583               \ [0x07] B583
+    $08 constant GTZC_MPCBB1_B584               \ [0x08] B584
+    $09 constant GTZC_MPCBB1_B585               \ [0x09] B585
+    $0a constant GTZC_MPCBB1_B586               \ [0x0a] B586
+    $0b constant GTZC_MPCBB1_B587               \ [0x0b] B587
+    $0c constant GTZC_MPCBB1_B588               \ [0x0c] B588
+    $0d constant GTZC_MPCBB1_B589               \ [0x0d] B589
+    $0e constant GTZC_MPCBB1_B590               \ [0x0e] B590
+    $0f constant GTZC_MPCBB1_B591               \ [0x0f] B591
+    $10 constant GTZC_MPCBB1_B592               \ [0x10] B592
+    $11 constant GTZC_MPCBB1_B593               \ [0x11] B593
+    $12 constant GTZC_MPCBB1_B594               \ [0x12] B594
+    $13 constant GTZC_MPCBB1_B595               \ [0x13] B595
+    $14 constant GTZC_MPCBB1_B596               \ [0x14] B596
+    $15 constant GTZC_MPCBB1_B597               \ [0x15] B597
+    $16 constant GTZC_MPCBB1_B598               \ [0x16] B598
+    $17 constant GTZC_MPCBB1_B599               \ [0x17] B599
+    $18 constant GTZC_MPCBB1_B600               \ [0x18] B600
+    $19 constant GTZC_MPCBB1_B601               \ [0x19] B601
+    $1a constant GTZC_MPCBB1_B602               \ [0x1a] B602
+    $1b constant GTZC_MPCBB1_B603               \ [0x1b] B603
+    $1c constant GTZC_MPCBB1_B604               \ [0x1c] B604
+    $1d constant GTZC_MPCBB1_B605               \ [0x1d] B605
+    $1e constant GTZC_MPCBB1_B606               \ [0x1e] B606
+    $1f constant GTZC_MPCBB1_B607               \ [0x1f] B607
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR19_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x14C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B608               \ [0x00] B608
+    $01 constant GTZC_MPCBB1_B609               \ [0x01] B609
+    $02 constant GTZC_MPCBB1_B610               \ [0x02] B610
+    $03 constant GTZC_MPCBB1_B611               \ [0x03] B611
+    $04 constant GTZC_MPCBB1_B612               \ [0x04] B612
+    $05 constant GTZC_MPCBB1_B613               \ [0x05] B613
+    $06 constant GTZC_MPCBB1_B614               \ [0x06] B614
+    $07 constant GTZC_MPCBB1_B615               \ [0x07] B615
+    $08 constant GTZC_MPCBB1_B616               \ [0x08] B616
+    $09 constant GTZC_MPCBB1_B617               \ [0x09] B617
+    $0a constant GTZC_MPCBB1_B618               \ [0x0a] B618
+    $0b constant GTZC_MPCBB1_B619               \ [0x0b] B619
+    $0c constant GTZC_MPCBB1_B620               \ [0x0c] B620
+    $0d constant GTZC_MPCBB1_B621               \ [0x0d] B621
+    $0e constant GTZC_MPCBB1_B622               \ [0x0e] B622
+    $0f constant GTZC_MPCBB1_B623               \ [0x0f] B623
+    $10 constant GTZC_MPCBB1_B624               \ [0x10] B624
+    $11 constant GTZC_MPCBB1_B625               \ [0x11] B625
+    $12 constant GTZC_MPCBB1_B626               \ [0x12] B626
+    $13 constant GTZC_MPCBB1_B627               \ [0x13] B627
+    $14 constant GTZC_MPCBB1_B628               \ [0x14] B628
+    $15 constant GTZC_MPCBB1_B629               \ [0x15] B629
+    $16 constant GTZC_MPCBB1_B630               \ [0x16] B630
+    $17 constant GTZC_MPCBB1_B631               \ [0x17] B631
+    $18 constant GTZC_MPCBB1_B632               \ [0x18] B632
+    $19 constant GTZC_MPCBB1_B633               \ [0x19] B633
+    $1a constant GTZC_MPCBB1_B634               \ [0x1a] B634
+    $1b constant GTZC_MPCBB1_B635               \ [0x1b] B635
+    $1c constant GTZC_MPCBB1_B636               \ [0x1c] B636
+    $1d constant GTZC_MPCBB1_B637               \ [0x1d] B637
+    $1e constant GTZC_MPCBB1_B638               \ [0x1e] B638
+    $1f constant GTZC_MPCBB1_B639               \ [0x1f] B639
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR20_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x150
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B640               \ [0x00] B640
+    $01 constant GTZC_MPCBB1_B641               \ [0x01] B641
+    $02 constant GTZC_MPCBB1_B642               \ [0x02] B642
+    $03 constant GTZC_MPCBB1_B643               \ [0x03] B643
+    $04 constant GTZC_MPCBB1_B644               \ [0x04] B644
+    $05 constant GTZC_MPCBB1_B645               \ [0x05] B645
+    $06 constant GTZC_MPCBB1_B646               \ [0x06] B646
+    $07 constant GTZC_MPCBB1_B647               \ [0x07] B647
+    $08 constant GTZC_MPCBB1_B648               \ [0x08] B648
+    $09 constant GTZC_MPCBB1_B649               \ [0x09] B649
+    $0a constant GTZC_MPCBB1_B650               \ [0x0a] B650
+    $0b constant GTZC_MPCBB1_B651               \ [0x0b] B651
+    $0c constant GTZC_MPCBB1_B652               \ [0x0c] B652
+    $0d constant GTZC_MPCBB1_B653               \ [0x0d] B653
+    $0e constant GTZC_MPCBB1_B654               \ [0x0e] B654
+    $0f constant GTZC_MPCBB1_B655               \ [0x0f] B655
+    $10 constant GTZC_MPCBB1_B656               \ [0x10] B656
+    $11 constant GTZC_MPCBB1_B657               \ [0x11] B657
+    $12 constant GTZC_MPCBB1_B658               \ [0x12] B658
+    $13 constant GTZC_MPCBB1_B659               \ [0x13] B659
+    $14 constant GTZC_MPCBB1_B660               \ [0x14] B660
+    $15 constant GTZC_MPCBB1_B661               \ [0x15] B661
+    $16 constant GTZC_MPCBB1_B662               \ [0x16] B662
+    $17 constant GTZC_MPCBB1_B663               \ [0x17] B663
+    $18 constant GTZC_MPCBB1_B664               \ [0x18] B664
+    $19 constant GTZC_MPCBB1_B665               \ [0x19] B665
+    $1a constant GTZC_MPCBB1_B666               \ [0x1a] B666
+    $1b constant GTZC_MPCBB1_B667               \ [0x1b] B667
+    $1c constant GTZC_MPCBB1_B668               \ [0x1c] B668
+    $1d constant GTZC_MPCBB1_B669               \ [0x1d] B669
+    $1e constant GTZC_MPCBB1_B670               \ [0x1e] B670
+    $1f constant GTZC_MPCBB1_B671               \ [0x1f] B671
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR21_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x154
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B672               \ [0x00] B672
+    $01 constant GTZC_MPCBB1_B673               \ [0x01] B673
+    $02 constant GTZC_MPCBB1_B674               \ [0x02] B674
+    $03 constant GTZC_MPCBB1_B675               \ [0x03] B675
+    $04 constant GTZC_MPCBB1_B676               \ [0x04] B676
+    $05 constant GTZC_MPCBB1_B677               \ [0x05] B677
+    $06 constant GTZC_MPCBB1_B678               \ [0x06] B678
+    $07 constant GTZC_MPCBB1_B679               \ [0x07] B679
+    $08 constant GTZC_MPCBB1_B680               \ [0x08] B680
+    $09 constant GTZC_MPCBB1_B681               \ [0x09] B681
+    $0a constant GTZC_MPCBB1_B682               \ [0x0a] B682
+    $0b constant GTZC_MPCBB1_B683               \ [0x0b] B683
+    $0c constant GTZC_MPCBB1_B684               \ [0x0c] B684
+    $0d constant GTZC_MPCBB1_B685               \ [0x0d] B685
+    $0e constant GTZC_MPCBB1_B686               \ [0x0e] B686
+    $0f constant GTZC_MPCBB1_B687               \ [0x0f] B687
+    $10 constant GTZC_MPCBB1_B688               \ [0x10] B688
+    $11 constant GTZC_MPCBB1_B689               \ [0x11] B689
+    $12 constant GTZC_MPCBB1_B690               \ [0x12] B690
+    $13 constant GTZC_MPCBB1_B691               \ [0x13] B691
+    $14 constant GTZC_MPCBB1_B692               \ [0x14] B692
+    $15 constant GTZC_MPCBB1_B693               \ [0x15] B693
+    $16 constant GTZC_MPCBB1_B694               \ [0x16] B694
+    $17 constant GTZC_MPCBB1_B695               \ [0x17] B695
+    $18 constant GTZC_MPCBB1_B696               \ [0x18] B696
+    $19 constant GTZC_MPCBB1_B697               \ [0x19] B697
+    $1a constant GTZC_MPCBB1_B698               \ [0x1a] B698
+    $1b constant GTZC_MPCBB1_B699               \ [0x1b] B699
+    $1c constant GTZC_MPCBB1_B700               \ [0x1c] B700
+    $1d constant GTZC_MPCBB1_B701               \ [0x1d] B701
+    $1e constant GTZC_MPCBB1_B702               \ [0x1e] B702
+    $1f constant GTZC_MPCBB1_B703               \ [0x1f] B703
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR22_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x158
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B704               \ [0x00] B704
+    $01 constant GTZC_MPCBB1_B705               \ [0x01] B705
+    $02 constant GTZC_MPCBB1_B706               \ [0x02] B706
+    $03 constant GTZC_MPCBB1_B707               \ [0x03] B707
+    $04 constant GTZC_MPCBB1_B708               \ [0x04] B708
+    $05 constant GTZC_MPCBB1_B709               \ [0x05] B709
+    $06 constant GTZC_MPCBB1_B710               \ [0x06] B710
+    $07 constant GTZC_MPCBB1_B711               \ [0x07] B711
+    $08 constant GTZC_MPCBB1_B712               \ [0x08] B712
+    $09 constant GTZC_MPCBB1_B713               \ [0x09] B713
+    $0a constant GTZC_MPCBB1_B714               \ [0x0a] B714
+    $0b constant GTZC_MPCBB1_B715               \ [0x0b] B715
+    $0c constant GTZC_MPCBB1_B716               \ [0x0c] B716
+    $0d constant GTZC_MPCBB1_B717               \ [0x0d] B717
+    $0e constant GTZC_MPCBB1_B718               \ [0x0e] B718
+    $0f constant GTZC_MPCBB1_B719               \ [0x0f] B719
+    $10 constant GTZC_MPCBB1_B720               \ [0x10] B720
+    $11 constant GTZC_MPCBB1_B721               \ [0x11] B721
+    $12 constant GTZC_MPCBB1_B722               \ [0x12] B722
+    $13 constant GTZC_MPCBB1_B723               \ [0x13] B723
+    $14 constant GTZC_MPCBB1_B724               \ [0x14] B724
+    $15 constant GTZC_MPCBB1_B725               \ [0x15] B725
+    $16 constant GTZC_MPCBB1_B726               \ [0x16] B726
+    $17 constant GTZC_MPCBB1_B727               \ [0x17] B727
+    $18 constant GTZC_MPCBB1_B728               \ [0x18] B728
+    $19 constant GTZC_MPCBB1_B729               \ [0x19] B729
+    $1a constant GTZC_MPCBB1_B730               \ [0x1a] B730
+    $1b constant GTZC_MPCBB1_B731               \ [0x1b] B731
+    $1c constant GTZC_MPCBB1_B732               \ [0x1c] B732
+    $1d constant GTZC_MPCBB1_B733               \ [0x1d] B733
+    $1e constant GTZC_MPCBB1_B734               \ [0x1e] B734
+    $1f constant GTZC_MPCBB1_B735               \ [0x1f] B735
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR23_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x15C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B736               \ [0x00] B736
+    $01 constant GTZC_MPCBB1_B737               \ [0x01] B737
+    $02 constant GTZC_MPCBB1_B738               \ [0x02] B738
+    $03 constant GTZC_MPCBB1_B739               \ [0x03] B739
+    $04 constant GTZC_MPCBB1_B740               \ [0x04] B740
+    $05 constant GTZC_MPCBB1_B741               \ [0x05] B741
+    $06 constant GTZC_MPCBB1_B742               \ [0x06] B742
+    $07 constant GTZC_MPCBB1_B743               \ [0x07] B743
+    $08 constant GTZC_MPCBB1_B744               \ [0x08] B744
+    $09 constant GTZC_MPCBB1_B745               \ [0x09] B745
+    $0a constant GTZC_MPCBB1_B746               \ [0x0a] B746
+    $0b constant GTZC_MPCBB1_B747               \ [0x0b] B747
+    $0c constant GTZC_MPCBB1_B748               \ [0x0c] B748
+    $0d constant GTZC_MPCBB1_B749               \ [0x0d] B749
+    $0e constant GTZC_MPCBB1_B750               \ [0x0e] B750
+    $0f constant GTZC_MPCBB1_B751               \ [0x0f] B751
+    $10 constant GTZC_MPCBB1_B752               \ [0x10] B752
+    $11 constant GTZC_MPCBB1_B753               \ [0x11] B753
+    $12 constant GTZC_MPCBB1_B754               \ [0x12] B754
+    $13 constant GTZC_MPCBB1_B755               \ [0x13] B755
+    $14 constant GTZC_MPCBB1_B756               \ [0x14] B756
+    $15 constant GTZC_MPCBB1_B757               \ [0x15] B757
+    $16 constant GTZC_MPCBB1_B758               \ [0x16] B758
+    $17 constant GTZC_MPCBB1_B759               \ [0x17] B759
+    $18 constant GTZC_MPCBB1_B760               \ [0x18] B760
+    $19 constant GTZC_MPCBB1_B761               \ [0x19] B761
+    $1a constant GTZC_MPCBB1_B762               \ [0x1a] B762
+    $1b constant GTZC_MPCBB1_B763               \ [0x1b] B763
+    $1c constant GTZC_MPCBB1_B764               \ [0x1c] B764
+    $1d constant GTZC_MPCBB1_B765               \ [0x1d] B765
+    $1e constant GTZC_MPCBB1_B766               \ [0x1e] B766
+    $1f constant GTZC_MPCBB1_B767               \ [0x1f] B767
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR24_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x160
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B768               \ [0x00] B768
+    $01 constant GTZC_MPCBB1_B769               \ [0x01] B769
+    $02 constant GTZC_MPCBB1_B770               \ [0x02] B770
+    $03 constant GTZC_MPCBB1_B771               \ [0x03] B771
+    $04 constant GTZC_MPCBB1_B772               \ [0x04] B772
+    $05 constant GTZC_MPCBB1_B773               \ [0x05] B773
+    $06 constant GTZC_MPCBB1_B774               \ [0x06] B774
+    $07 constant GTZC_MPCBB1_B775               \ [0x07] B775
+    $08 constant GTZC_MPCBB1_B776               \ [0x08] B776
+    $09 constant GTZC_MPCBB1_B777               \ [0x09] B777
+    $0a constant GTZC_MPCBB1_B778               \ [0x0a] B778
+    $0b constant GTZC_MPCBB1_B779               \ [0x0b] B779
+    $0c constant GTZC_MPCBB1_B780               \ [0x0c] B780
+    $0d constant GTZC_MPCBB1_B781               \ [0x0d] B781
+    $0e constant GTZC_MPCBB1_B782               \ [0x0e] B782
+    $0f constant GTZC_MPCBB1_B783               \ [0x0f] B783
+    $10 constant GTZC_MPCBB1_B784               \ [0x10] B784
+    $11 constant GTZC_MPCBB1_B785               \ [0x11] B785
+    $12 constant GTZC_MPCBB1_B786               \ [0x12] B786
+    $13 constant GTZC_MPCBB1_B787               \ [0x13] B787
+    $14 constant GTZC_MPCBB1_B788               \ [0x14] B788
+    $15 constant GTZC_MPCBB1_B789               \ [0x15] B789
+    $16 constant GTZC_MPCBB1_B790               \ [0x16] B790
+    $17 constant GTZC_MPCBB1_B791               \ [0x17] B791
+    $18 constant GTZC_MPCBB1_B792               \ [0x18] B792
+    $19 constant GTZC_MPCBB1_B793               \ [0x19] B793
+    $1a constant GTZC_MPCBB1_B794               \ [0x1a] B794
+    $1b constant GTZC_MPCBB1_B795               \ [0x1b] B795
+    $1c constant GTZC_MPCBB1_B796               \ [0x1c] B796
+    $1d constant GTZC_MPCBB1_B797               \ [0x1d] B797
+    $1e constant GTZC_MPCBB1_B798               \ [0x1e] B798
+    $1f constant GTZC_MPCBB1_B799               \ [0x1f] B799
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR25_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x164
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B800               \ [0x00] B800
+    $01 constant GTZC_MPCBB1_B801               \ [0x01] B801
+    $02 constant GTZC_MPCBB1_B802               \ [0x02] B802
+    $03 constant GTZC_MPCBB1_B803               \ [0x03] B803
+    $04 constant GTZC_MPCBB1_B804               \ [0x04] B804
+    $05 constant GTZC_MPCBB1_B805               \ [0x05] B805
+    $06 constant GTZC_MPCBB1_B806               \ [0x06] B806
+    $07 constant GTZC_MPCBB1_B807               \ [0x07] B807
+    $08 constant GTZC_MPCBB1_B808               \ [0x08] B808
+    $09 constant GTZC_MPCBB1_B809               \ [0x09] B809
+    $0a constant GTZC_MPCBB1_B810               \ [0x0a] B810
+    $0b constant GTZC_MPCBB1_B811               \ [0x0b] B811
+    $0c constant GTZC_MPCBB1_B812               \ [0x0c] B812
+    $0d constant GTZC_MPCBB1_B813               \ [0x0d] B813
+    $0e constant GTZC_MPCBB1_B814               \ [0x0e] B814
+    $0f constant GTZC_MPCBB1_B815               \ [0x0f] B815
+    $10 constant GTZC_MPCBB1_B816               \ [0x10] B816
+    $11 constant GTZC_MPCBB1_B817               \ [0x11] B817
+    $12 constant GTZC_MPCBB1_B818               \ [0x12] B818
+    $13 constant GTZC_MPCBB1_B819               \ [0x13] B819
+    $14 constant GTZC_MPCBB1_B820               \ [0x14] B820
+    $15 constant GTZC_MPCBB1_B821               \ [0x15] B821
+    $16 constant GTZC_MPCBB1_B822               \ [0x16] B822
+    $17 constant GTZC_MPCBB1_B823               \ [0x17] B823
+    $18 constant GTZC_MPCBB1_B824               \ [0x18] B824
+    $19 constant GTZC_MPCBB1_B825               \ [0x19] B825
+    $1a constant GTZC_MPCBB1_B826               \ [0x1a] B826
+    $1b constant GTZC_MPCBB1_B827               \ [0x1b] B827
+    $1c constant GTZC_MPCBB1_B828               \ [0x1c] B828
+    $1d constant GTZC_MPCBB1_B829               \ [0x1d] B829
+    $1e constant GTZC_MPCBB1_B830               \ [0x1e] B830
+    $1f constant GTZC_MPCBB1_B831               \ [0x1f] B831
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR26_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x168
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B832               \ [0x00] B832
+    $01 constant GTZC_MPCBB1_B833               \ [0x01] B833
+    $02 constant GTZC_MPCBB1_B834               \ [0x02] B834
+    $03 constant GTZC_MPCBB1_B835               \ [0x03] B835
+    $04 constant GTZC_MPCBB1_B836               \ [0x04] B836
+    $05 constant GTZC_MPCBB1_B837               \ [0x05] B837
+    $06 constant GTZC_MPCBB1_B838               \ [0x06] B838
+    $07 constant GTZC_MPCBB1_B839               \ [0x07] B839
+    $08 constant GTZC_MPCBB1_B840               \ [0x08] B840
+    $09 constant GTZC_MPCBB1_B841               \ [0x09] B841
+    $0a constant GTZC_MPCBB1_B842               \ [0x0a] B842
+    $0b constant GTZC_MPCBB1_B843               \ [0x0b] B843
+    $0c constant GTZC_MPCBB1_B844               \ [0x0c] B844
+    $0d constant GTZC_MPCBB1_B845               \ [0x0d] B845
+    $0e constant GTZC_MPCBB1_B846               \ [0x0e] B846
+    $0f constant GTZC_MPCBB1_B847               \ [0x0f] B847
+    $10 constant GTZC_MPCBB1_B848               \ [0x10] B848
+    $11 constant GTZC_MPCBB1_B849               \ [0x11] B849
+    $12 constant GTZC_MPCBB1_B850               \ [0x12] B850
+    $13 constant GTZC_MPCBB1_B851               \ [0x13] B851
+    $14 constant GTZC_MPCBB1_B852               \ [0x14] B852
+    $15 constant GTZC_MPCBB1_B853               \ [0x15] B853
+    $16 constant GTZC_MPCBB1_B854               \ [0x16] B854
+    $17 constant GTZC_MPCBB1_B855               \ [0x17] B855
+    $18 constant GTZC_MPCBB1_B856               \ [0x18] B856
+    $19 constant GTZC_MPCBB1_B857               \ [0x19] B857
+    $1a constant GTZC_MPCBB1_B858               \ [0x1a] B858
+    $1b constant GTZC_MPCBB1_B859               \ [0x1b] B859
+    $1c constant GTZC_MPCBB1_B860               \ [0x1c] B860
+    $1d constant GTZC_MPCBB1_B861               \ [0x1d] B861
+    $1e constant GTZC_MPCBB1_B862               \ [0x1e] B862
+    $1f constant GTZC_MPCBB1_B863               \ [0x1f] B863
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR27_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x16C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B864               \ [0x00] B864
+    $01 constant GTZC_MPCBB1_B865               \ [0x01] B865
+    $02 constant GTZC_MPCBB1_B866               \ [0x02] B866
+    $03 constant GTZC_MPCBB1_B867               \ [0x03] B867
+    $04 constant GTZC_MPCBB1_B868               \ [0x04] B868
+    $05 constant GTZC_MPCBB1_B869               \ [0x05] B869
+    $06 constant GTZC_MPCBB1_B870               \ [0x06] B870
+    $07 constant GTZC_MPCBB1_B871               \ [0x07] B871
+    $08 constant GTZC_MPCBB1_B872               \ [0x08] B872
+    $09 constant GTZC_MPCBB1_B873               \ [0x09] B873
+    $0a constant GTZC_MPCBB1_B874               \ [0x0a] B874
+    $0b constant GTZC_MPCBB1_B875               \ [0x0b] B875
+    $0c constant GTZC_MPCBB1_B876               \ [0x0c] B876
+    $0d constant GTZC_MPCBB1_B877               \ [0x0d] B877
+    $0e constant GTZC_MPCBB1_B878               \ [0x0e] B878
+    $0f constant GTZC_MPCBB1_B879               \ [0x0f] B879
+    $10 constant GTZC_MPCBB1_B880               \ [0x10] B880
+    $11 constant GTZC_MPCBB1_B881               \ [0x11] B881
+    $12 constant GTZC_MPCBB1_B882               \ [0x12] B882
+    $13 constant GTZC_MPCBB1_B883               \ [0x13] B883
+    $14 constant GTZC_MPCBB1_B884               \ [0x14] B884
+    $15 constant GTZC_MPCBB1_B885               \ [0x15] B885
+    $16 constant GTZC_MPCBB1_B886               \ [0x16] B886
+    $17 constant GTZC_MPCBB1_B887               \ [0x17] B887
+    $18 constant GTZC_MPCBB1_B888               \ [0x18] B888
+    $19 constant GTZC_MPCBB1_B889               \ [0x19] B889
+    $1a constant GTZC_MPCBB1_B890               \ [0x1a] B890
+    $1b constant GTZC_MPCBB1_B891               \ [0x1b] B891
+    $1c constant GTZC_MPCBB1_B892               \ [0x1c] B892
+    $1d constant GTZC_MPCBB1_B893               \ [0x1d] B893
+    $1e constant GTZC_MPCBB1_B894               \ [0x1e] B894
+    $1f constant GTZC_MPCBB1_B895               \ [0x1f] B895
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR28_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x170
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B896               \ [0x00] B896
+    $01 constant GTZC_MPCBB1_B897               \ [0x01] B897
+    $02 constant GTZC_MPCBB1_B898               \ [0x02] B898
+    $03 constant GTZC_MPCBB1_B899               \ [0x03] B899
+    $04 constant GTZC_MPCBB1_B900               \ [0x04] B900
+    $05 constant GTZC_MPCBB1_B901               \ [0x05] B901
+    $06 constant GTZC_MPCBB1_B902               \ [0x06] B902
+    $07 constant GTZC_MPCBB1_B903               \ [0x07] B903
+    $08 constant GTZC_MPCBB1_B904               \ [0x08] B904
+    $09 constant GTZC_MPCBB1_B905               \ [0x09] B905
+    $0a constant GTZC_MPCBB1_B906               \ [0x0a] B906
+    $0b constant GTZC_MPCBB1_B907               \ [0x0b] B907
+    $0c constant GTZC_MPCBB1_B908               \ [0x0c] B908
+    $0d constant GTZC_MPCBB1_B909               \ [0x0d] B909
+    $0e constant GTZC_MPCBB1_B910               \ [0x0e] B910
+    $0f constant GTZC_MPCBB1_B911               \ [0x0f] B911
+    $10 constant GTZC_MPCBB1_B912               \ [0x10] B912
+    $11 constant GTZC_MPCBB1_B913               \ [0x11] B913
+    $12 constant GTZC_MPCBB1_B914               \ [0x12] B914
+    $13 constant GTZC_MPCBB1_B915               \ [0x13] B915
+    $14 constant GTZC_MPCBB1_B916               \ [0x14] B916
+    $15 constant GTZC_MPCBB1_B917               \ [0x15] B917
+    $16 constant GTZC_MPCBB1_B918               \ [0x16] B918
+    $17 constant GTZC_MPCBB1_B919               \ [0x17] B919
+    $18 constant GTZC_MPCBB1_B920               \ [0x18] B920
+    $19 constant GTZC_MPCBB1_B921               \ [0x19] B921
+    $1a constant GTZC_MPCBB1_B922               \ [0x1a] B922
+    $1b constant GTZC_MPCBB1_B923               \ [0x1b] B923
+    $1c constant GTZC_MPCBB1_B924               \ [0x1c] B924
+    $1d constant GTZC_MPCBB1_B925               \ [0x1d] B925
+    $1e constant GTZC_MPCBB1_B926               \ [0x1e] B926
+    $1f constant GTZC_MPCBB1_B927               \ [0x1f] B927
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR29_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x174
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B928               \ [0x00] B928
+    $01 constant GTZC_MPCBB1_B929               \ [0x01] B929
+    $02 constant GTZC_MPCBB1_B930               \ [0x02] B930
+    $03 constant GTZC_MPCBB1_B931               \ [0x03] B931
+    $04 constant GTZC_MPCBB1_B932               \ [0x04] B932
+    $05 constant GTZC_MPCBB1_B933               \ [0x05] B933
+    $06 constant GTZC_MPCBB1_B934               \ [0x06] B934
+    $07 constant GTZC_MPCBB1_B935               \ [0x07] B935
+    $08 constant GTZC_MPCBB1_B936               \ [0x08] B936
+    $09 constant GTZC_MPCBB1_B937               \ [0x09] B937
+    $0a constant GTZC_MPCBB1_B938               \ [0x0a] B938
+    $0b constant GTZC_MPCBB1_B939               \ [0x0b] B939
+    $0c constant GTZC_MPCBB1_B940               \ [0x0c] B940
+    $0d constant GTZC_MPCBB1_B941               \ [0x0d] B941
+    $0e constant GTZC_MPCBB1_B942               \ [0x0e] B942
+    $0f constant GTZC_MPCBB1_B943               \ [0x0f] B943
+    $10 constant GTZC_MPCBB1_B944               \ [0x10] B944
+    $11 constant GTZC_MPCBB1_B945               \ [0x11] B945
+    $12 constant GTZC_MPCBB1_B946               \ [0x12] B946
+    $13 constant GTZC_MPCBB1_B947               \ [0x13] B947
+    $14 constant GTZC_MPCBB1_B948               \ [0x14] B948
+    $15 constant GTZC_MPCBB1_B949               \ [0x15] B949
+    $16 constant GTZC_MPCBB1_B950               \ [0x16] B950
+    $17 constant GTZC_MPCBB1_B951               \ [0x17] B951
+    $18 constant GTZC_MPCBB1_B952               \ [0x18] B952
+    $19 constant GTZC_MPCBB1_B953               \ [0x19] B953
+    $1a constant GTZC_MPCBB1_B954               \ [0x1a] B954
+    $1b constant GTZC_MPCBB1_B955               \ [0x1b] B955
+    $1c constant GTZC_MPCBB1_B956               \ [0x1c] B956
+    $1d constant GTZC_MPCBB1_B957               \ [0x1d] B957
+    $1e constant GTZC_MPCBB1_B958               \ [0x1e] B958
+    $1f constant GTZC_MPCBB1_B959               \ [0x1f] B959
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR30_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x178
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B960               \ [0x00] B960
+    $01 constant GTZC_MPCBB1_B961               \ [0x01] B961
+    $02 constant GTZC_MPCBB1_B962               \ [0x02] B962
+    $03 constant GTZC_MPCBB1_B963               \ [0x03] B963
+    $04 constant GTZC_MPCBB1_B964               \ [0x04] B964
+    $05 constant GTZC_MPCBB1_B965               \ [0x05] B965
+    $06 constant GTZC_MPCBB1_B966               \ [0x06] B966
+    $07 constant GTZC_MPCBB1_B967               \ [0x07] B967
+    $08 constant GTZC_MPCBB1_B968               \ [0x08] B968
+    $09 constant GTZC_MPCBB1_B969               \ [0x09] B969
+    $0a constant GTZC_MPCBB1_B970               \ [0x0a] B970
+    $0b constant GTZC_MPCBB1_B971               \ [0x0b] B971
+    $0c constant GTZC_MPCBB1_B972               \ [0x0c] B972
+    $0d constant GTZC_MPCBB1_B973               \ [0x0d] B973
+    $0e constant GTZC_MPCBB1_B974               \ [0x0e] B974
+    $0f constant GTZC_MPCBB1_B975               \ [0x0f] B975
+    $10 constant GTZC_MPCBB1_B976               \ [0x10] B976
+    $11 constant GTZC_MPCBB1_B977               \ [0x11] B977
+    $12 constant GTZC_MPCBB1_B978               \ [0x12] B978
+    $13 constant GTZC_MPCBB1_B979               \ [0x13] B979
+    $14 constant GTZC_MPCBB1_B980               \ [0x14] B980
+    $15 constant GTZC_MPCBB1_B981               \ [0x15] B981
+    $16 constant GTZC_MPCBB1_B982               \ [0x16] B982
+    $17 constant GTZC_MPCBB1_B983               \ [0x17] B983
+    $18 constant GTZC_MPCBB1_B984               \ [0x18] B984
+    $19 constant GTZC_MPCBB1_B985               \ [0x19] B985
+    $1a constant GTZC_MPCBB1_B986               \ [0x1a] B986
+    $1b constant GTZC_MPCBB1_B987               \ [0x1b] B987
+    $1c constant GTZC_MPCBB1_B988               \ [0x1c] B988
+    $1d constant GTZC_MPCBB1_B989               \ [0x1d] B989
+    $1e constant GTZC_MPCBB1_B990               \ [0x1e] B990
+    $1f constant GTZC_MPCBB1_B991               \ [0x1f] B991
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR31_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x17C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B992               \ [0x00] B992
+    $01 constant GTZC_MPCBB1_B993               \ [0x01] B993
+    $02 constant GTZC_MPCBB1_B994               \ [0x02] B994
+    $03 constant GTZC_MPCBB1_B995               \ [0x03] B995
+    $04 constant GTZC_MPCBB1_B996               \ [0x04] B996
+    $05 constant GTZC_MPCBB1_B997               \ [0x05] B997
+    $06 constant GTZC_MPCBB1_B998               \ [0x06] B998
+    $07 constant GTZC_MPCBB1_B999               \ [0x07] B999
+    $08 constant GTZC_MPCBB1_B1000              \ [0x08] B1000
+    $09 constant GTZC_MPCBB1_B1001              \ [0x09] B1001
+    $0a constant GTZC_MPCBB1_B1002              \ [0x0a] B1002
+    $0b constant GTZC_MPCBB1_B1003              \ [0x0b] B1003
+    $0c constant GTZC_MPCBB1_B1004              \ [0x0c] B1004
+    $0d constant GTZC_MPCBB1_B1005              \ [0x0d] B1005
+    $0e constant GTZC_MPCBB1_B1006              \ [0x0e] B1006
+    $0f constant GTZC_MPCBB1_B1007              \ [0x0f] B1007
+    $10 constant GTZC_MPCBB1_B1008              \ [0x10] B1008
+    $11 constant GTZC_MPCBB1_B1009              \ [0x11] B1009
+    $12 constant GTZC_MPCBB1_B1010              \ [0x12] B1010
+    $13 constant GTZC_MPCBB1_B1011              \ [0x13] B1011
+    $14 constant GTZC_MPCBB1_B1012              \ [0x14] B1012
+    $15 constant GTZC_MPCBB1_B1013              \ [0x15] B1013
+    $16 constant GTZC_MPCBB1_B1014              \ [0x16] B1014
+    $17 constant GTZC_MPCBB1_B1015              \ [0x17] B1015
+    $18 constant GTZC_MPCBB1_B1016              \ [0x18] B1016
+    $19 constant GTZC_MPCBB1_B1017              \ [0x19] B1017
+    $1a constant GTZC_MPCBB1_B1018              \ [0x1a] B1018
+    $1b constant GTZC_MPCBB1_B1019              \ [0x1b] B1019
+    $1c constant GTZC_MPCBB1_B1020              \ [0x1c] B1020
+    $1d constant GTZC_MPCBB1_B1021              \ [0x1d] B1021
+    $1e constant GTZC_MPCBB1_B1022              \ [0x1e] B1022
+    $1f constant GTZC_MPCBB1_B1023              \ [0x1f] B1023
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR32_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x180
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1024              \ [0x00] B1024
+    $01 constant GTZC_MPCBB1_B1025              \ [0x01] B1025
+    $02 constant GTZC_MPCBB1_B1026              \ [0x02] B1026
+    $03 constant GTZC_MPCBB1_B1027              \ [0x03] B1027
+    $04 constant GTZC_MPCBB1_B1028              \ [0x04] B1028
+    $05 constant GTZC_MPCBB1_B1029              \ [0x05] B1029
+    $06 constant GTZC_MPCBB1_B1030              \ [0x06] B1030
+    $07 constant GTZC_MPCBB1_B1031              \ [0x07] B1031
+    $08 constant GTZC_MPCBB1_B1032              \ [0x08] B1032
+    $09 constant GTZC_MPCBB1_B1033              \ [0x09] B1033
+    $0a constant GTZC_MPCBB1_B1034              \ [0x0a] B1034
+    $0b constant GTZC_MPCBB1_B1035              \ [0x0b] B1035
+    $0c constant GTZC_MPCBB1_B1036              \ [0x0c] B1036
+    $0d constant GTZC_MPCBB1_B1037              \ [0x0d] B1037
+    $0e constant GTZC_MPCBB1_B1038              \ [0x0e] B1038
+    $0f constant GTZC_MPCBB1_B1039              \ [0x0f] B1039
+    $10 constant GTZC_MPCBB1_B1040              \ [0x10] B1040
+    $11 constant GTZC_MPCBB1_B1041              \ [0x11] B1041
+    $12 constant GTZC_MPCBB1_B1042              \ [0x12] B1042
+    $13 constant GTZC_MPCBB1_B1043              \ [0x13] B1043
+    $14 constant GTZC_MPCBB1_B1044              \ [0x14] B1044
+    $15 constant GTZC_MPCBB1_B1045              \ [0x15] B1045
+    $16 constant GTZC_MPCBB1_B1046              \ [0x16] B1046
+    $17 constant GTZC_MPCBB1_B1047              \ [0x17] B1047
+    $18 constant GTZC_MPCBB1_B1048              \ [0x18] B1048
+    $19 constant GTZC_MPCBB1_B1049              \ [0x19] B1049
+    $1a constant GTZC_MPCBB1_B1050              \ [0x1a] B1050
+    $1b constant GTZC_MPCBB1_B1051              \ [0x1b] B1051
+    $1c constant GTZC_MPCBB1_B1052              \ [0x1c] B1052
+    $1d constant GTZC_MPCBB1_B1053              \ [0x1d] B1053
+    $1e constant GTZC_MPCBB1_B1054              \ [0x1e] B1054
+    $1f constant GTZC_MPCBB1_B1055              \ [0x1f] B1055
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR33_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x184
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1056              \ [0x00] B1056
+    $01 constant GTZC_MPCBB1_B1057              \ [0x01] B1057
+    $02 constant GTZC_MPCBB1_B1058              \ [0x02] B1058
+    $03 constant GTZC_MPCBB1_B1059              \ [0x03] B1059
+    $04 constant GTZC_MPCBB1_B1060              \ [0x04] B1060
+    $05 constant GTZC_MPCBB1_B1061              \ [0x05] B1061
+    $06 constant GTZC_MPCBB1_B1062              \ [0x06] B1062
+    $07 constant GTZC_MPCBB1_B1063              \ [0x07] B1063
+    $08 constant GTZC_MPCBB1_B1064              \ [0x08] B1064
+    $09 constant GTZC_MPCBB1_B1065              \ [0x09] B1065
+    $0a constant GTZC_MPCBB1_B1066              \ [0x0a] B1066
+    $0b constant GTZC_MPCBB1_B1067              \ [0x0b] B1067
+    $0c constant GTZC_MPCBB1_B1068              \ [0x0c] B1068
+    $0d constant GTZC_MPCBB1_B1069              \ [0x0d] B1069
+    $0e constant GTZC_MPCBB1_B1070              \ [0x0e] B1070
+    $0f constant GTZC_MPCBB1_B1071              \ [0x0f] B1071
+    $10 constant GTZC_MPCBB1_B1072              \ [0x10] B1072
+    $11 constant GTZC_MPCBB1_B1073              \ [0x11] B1073
+    $12 constant GTZC_MPCBB1_B1074              \ [0x12] B1074
+    $13 constant GTZC_MPCBB1_B1075              \ [0x13] B1075
+    $14 constant GTZC_MPCBB1_B1076              \ [0x14] B1076
+    $15 constant GTZC_MPCBB1_B1077              \ [0x15] B1077
+    $16 constant GTZC_MPCBB1_B1078              \ [0x16] B1078
+    $17 constant GTZC_MPCBB1_B1079              \ [0x17] B1079
+    $18 constant GTZC_MPCBB1_B1080              \ [0x18] B1080
+    $19 constant GTZC_MPCBB1_B1081              \ [0x19] B1081
+    $1a constant GTZC_MPCBB1_B1082              \ [0x1a] B1082
+    $1b constant GTZC_MPCBB1_B1083              \ [0x1b] B1083
+    $1c constant GTZC_MPCBB1_B1084              \ [0x1c] B1084
+    $1d constant GTZC_MPCBB1_B1085              \ [0x1d] B1085
+    $1e constant GTZC_MPCBB1_B1086              \ [0x1e] B1086
+    $1f constant GTZC_MPCBB1_B1087              \ [0x1f] B1087
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR34_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x188
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1088              \ [0x00] B1088
+    $01 constant GTZC_MPCBB1_B1089              \ [0x01] B1089
+    $02 constant GTZC_MPCBB1_B1090              \ [0x02] B1090
+    $03 constant GTZC_MPCBB1_B1091              \ [0x03] B1091
+    $04 constant GTZC_MPCBB1_B1092              \ [0x04] B1092
+    $05 constant GTZC_MPCBB1_B1093              \ [0x05] B1093
+    $06 constant GTZC_MPCBB1_B1094              \ [0x06] B1094
+    $07 constant GTZC_MPCBB1_B1095              \ [0x07] B1095
+    $08 constant GTZC_MPCBB1_B1096              \ [0x08] B1096
+    $09 constant GTZC_MPCBB1_B1097              \ [0x09] B1097
+    $0a constant GTZC_MPCBB1_B1098              \ [0x0a] B1098
+    $0b constant GTZC_MPCBB1_B1099              \ [0x0b] B1099
+    $0c constant GTZC_MPCBB1_B1100              \ [0x0c] B1100
+    $0d constant GTZC_MPCBB1_B1101              \ [0x0d] B1101
+    $0e constant GTZC_MPCBB1_B1102              \ [0x0e] B1102
+    $0f constant GTZC_MPCBB1_B1103              \ [0x0f] B1103
+    $10 constant GTZC_MPCBB1_B1104              \ [0x10] B1104
+    $11 constant GTZC_MPCBB1_B1105              \ [0x11] B1105
+    $12 constant GTZC_MPCBB1_B1106              \ [0x12] B1106
+    $13 constant GTZC_MPCBB1_B1107              \ [0x13] B1107
+    $14 constant GTZC_MPCBB1_B1108              \ [0x14] B1108
+    $15 constant GTZC_MPCBB1_B1109              \ [0x15] B1109
+    $16 constant GTZC_MPCBB1_B1110              \ [0x16] B1110
+    $17 constant GTZC_MPCBB1_B1111              \ [0x17] B1111
+    $18 constant GTZC_MPCBB1_B1112              \ [0x18] B1112
+    $19 constant GTZC_MPCBB1_B1113              \ [0x19] B1113
+    $1a constant GTZC_MPCBB1_B1114              \ [0x1a] B1114
+    $1b constant GTZC_MPCBB1_B1115              \ [0x1b] B1115
+    $1c constant GTZC_MPCBB1_B1116              \ [0x1c] B1116
+    $1d constant GTZC_MPCBB1_B1117              \ [0x1d] B1117
+    $1e constant GTZC_MPCBB1_B1118              \ [0x1e] B1118
+    $1f constant GTZC_MPCBB1_B1119              \ [0x1f] B1119
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR35_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x18C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1120              \ [0x00] B1120
+    $01 constant GTZC_MPCBB1_B1121              \ [0x01] B1121
+    $02 constant GTZC_MPCBB1_B1122              \ [0x02] B1122
+    $03 constant GTZC_MPCBB1_B1123              \ [0x03] B1123
+    $04 constant GTZC_MPCBB1_B1124              \ [0x04] B1124
+    $05 constant GTZC_MPCBB1_B1125              \ [0x05] B1125
+    $06 constant GTZC_MPCBB1_B1126              \ [0x06] B1126
+    $07 constant GTZC_MPCBB1_B1127              \ [0x07] B1127
+    $08 constant GTZC_MPCBB1_B1128              \ [0x08] B1128
+    $09 constant GTZC_MPCBB1_B1129              \ [0x09] B1129
+    $0a constant GTZC_MPCBB1_B1130              \ [0x0a] B1130
+    $0b constant GTZC_MPCBB1_B1131              \ [0x0b] B1131
+    $0c constant GTZC_MPCBB1_B1132              \ [0x0c] B1132
+    $0d constant GTZC_MPCBB1_B1133              \ [0x0d] B1133
+    $0e constant GTZC_MPCBB1_B1134              \ [0x0e] B1134
+    $0f constant GTZC_MPCBB1_B1135              \ [0x0f] B1135
+    $10 constant GTZC_MPCBB1_B1136              \ [0x10] B1136
+    $11 constant GTZC_MPCBB1_B1137              \ [0x11] B1137
+    $12 constant GTZC_MPCBB1_B1138              \ [0x12] B1138
+    $13 constant GTZC_MPCBB1_B1139              \ [0x13] B1139
+    $14 constant GTZC_MPCBB1_B1140              \ [0x14] B1140
+    $15 constant GTZC_MPCBB1_B1141              \ [0x15] B1141
+    $16 constant GTZC_MPCBB1_B1142              \ [0x16] B1142
+    $17 constant GTZC_MPCBB1_B1143              \ [0x17] B1143
+    $18 constant GTZC_MPCBB1_B1144              \ [0x18] B1144
+    $19 constant GTZC_MPCBB1_B1145              \ [0x19] B1145
+    $1a constant GTZC_MPCBB1_B1146              \ [0x1a] B1146
+    $1b constant GTZC_MPCBB1_B1147              \ [0x1b] B1147
+    $1c constant GTZC_MPCBB1_B1148              \ [0x1c] B1148
+    $1d constant GTZC_MPCBB1_B1149              \ [0x1d] B1149
+    $1e constant GTZC_MPCBB1_B1150              \ [0x1e] B1150
+    $1f constant GTZC_MPCBB1_B1151              \ [0x1f] B1151
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR36_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x190
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1152              \ [0x00] B1152
+    $01 constant GTZC_MPCBB1_B1153              \ [0x01] B1153
+    $02 constant GTZC_MPCBB1_B1154              \ [0x02] B1154
+    $03 constant GTZC_MPCBB1_B1155              \ [0x03] B1155
+    $04 constant GTZC_MPCBB1_B1156              \ [0x04] B1156
+    $05 constant GTZC_MPCBB1_B1157              \ [0x05] B1157
+    $06 constant GTZC_MPCBB1_B1158              \ [0x06] B1158
+    $07 constant GTZC_MPCBB1_B1159              \ [0x07] B1159
+    $08 constant GTZC_MPCBB1_B1160              \ [0x08] B1160
+    $09 constant GTZC_MPCBB1_B1161              \ [0x09] B1161
+    $0a constant GTZC_MPCBB1_B1162              \ [0x0a] B1162
+    $0b constant GTZC_MPCBB1_B1163              \ [0x0b] B1163
+    $0c constant GTZC_MPCBB1_B1164              \ [0x0c] B1164
+    $0d constant GTZC_MPCBB1_B1165              \ [0x0d] B1165
+    $0e constant GTZC_MPCBB1_B1166              \ [0x0e] B1166
+    $0f constant GTZC_MPCBB1_B1167              \ [0x0f] B1167
+    $10 constant GTZC_MPCBB1_B1168              \ [0x10] B1168
+    $11 constant GTZC_MPCBB1_B1169              \ [0x11] B1169
+    $12 constant GTZC_MPCBB1_B1170              \ [0x12] B1170
+    $13 constant GTZC_MPCBB1_B1171              \ [0x13] B1171
+    $14 constant GTZC_MPCBB1_B1172              \ [0x14] B1172
+    $15 constant GTZC_MPCBB1_B1173              \ [0x15] B1173
+    $16 constant GTZC_MPCBB1_B1174              \ [0x16] B1174
+    $17 constant GTZC_MPCBB1_B1175              \ [0x17] B1175
+    $18 constant GTZC_MPCBB1_B1176              \ [0x18] B1176
+    $19 constant GTZC_MPCBB1_B1177              \ [0x19] B1177
+    $1a constant GTZC_MPCBB1_B1178              \ [0x1a] B1178
+    $1b constant GTZC_MPCBB1_B1179              \ [0x1b] B1179
+    $1c constant GTZC_MPCBB1_B1180              \ [0x1c] B1180
+    $1d constant GTZC_MPCBB1_B1181              \ [0x1d] B1181
+    $1e constant GTZC_MPCBB1_B1182              \ [0x1e] B1182
+    $1f constant GTZC_MPCBB1_B1183              \ [0x1f] B1183
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR37_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x194
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1184              \ [0x00] B1184
+    $01 constant GTZC_MPCBB1_B1185              \ [0x01] B1185
+    $02 constant GTZC_MPCBB1_B1186              \ [0x02] B1186
+    $03 constant GTZC_MPCBB1_B1187              \ [0x03] B1187
+    $04 constant GTZC_MPCBB1_B1188              \ [0x04] B1188
+    $05 constant GTZC_MPCBB1_B1189              \ [0x05] B1189
+    $06 constant GTZC_MPCBB1_B1190              \ [0x06] B1190
+    $07 constant GTZC_MPCBB1_B1191              \ [0x07] B1191
+    $08 constant GTZC_MPCBB1_B1192              \ [0x08] B1192
+    $09 constant GTZC_MPCBB1_B1193              \ [0x09] B1193
+    $0a constant GTZC_MPCBB1_B1194              \ [0x0a] B1194
+    $0b constant GTZC_MPCBB1_B1195              \ [0x0b] B1195
+    $0c constant GTZC_MPCBB1_B1196              \ [0x0c] B1196
+    $0d constant GTZC_MPCBB1_B1197              \ [0x0d] B1197
+    $0e constant GTZC_MPCBB1_B1198              \ [0x0e] B1198
+    $0f constant GTZC_MPCBB1_B1199              \ [0x0f] B1199
+    $10 constant GTZC_MPCBB1_B1200              \ [0x10] B1200
+    $11 constant GTZC_MPCBB1_B1201              \ [0x11] B1201
+    $12 constant GTZC_MPCBB1_B1202              \ [0x12] B1202
+    $13 constant GTZC_MPCBB1_B1203              \ [0x13] B1203
+    $14 constant GTZC_MPCBB1_B1204              \ [0x14] B1204
+    $15 constant GTZC_MPCBB1_B1205              \ [0x15] B1205
+    $16 constant GTZC_MPCBB1_B1206              \ [0x16] B1206
+    $17 constant GTZC_MPCBB1_B1207              \ [0x17] B1207
+    $18 constant GTZC_MPCBB1_B1208              \ [0x18] B1208
+    $19 constant GTZC_MPCBB1_B1209              \ [0x19] B1209
+    $1a constant GTZC_MPCBB1_B1210              \ [0x1a] B1210
+    $1b constant GTZC_MPCBB1_B1211              \ [0x1b] B1211
+    $1c constant GTZC_MPCBB1_B1212              \ [0x1c] B1212
+    $1d constant GTZC_MPCBB1_B1213              \ [0x1d] B1213
+    $1e constant GTZC_MPCBB1_B1214              \ [0x1e] B1214
+    $1f constant GTZC_MPCBB1_B1215              \ [0x1f] B1215
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR38_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x198
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1216              \ [0x00] B1216
+    $01 constant GTZC_MPCBB1_B1217              \ [0x01] B1217
+    $02 constant GTZC_MPCBB1_B1218              \ [0x02] B1218
+    $03 constant GTZC_MPCBB1_B1219              \ [0x03] B1219
+    $04 constant GTZC_MPCBB1_B1220              \ [0x04] B1220
+    $05 constant GTZC_MPCBB1_B1221              \ [0x05] B1221
+    $06 constant GTZC_MPCBB1_B1222              \ [0x06] B1222
+    $07 constant GTZC_MPCBB1_B1223              \ [0x07] B1223
+    $08 constant GTZC_MPCBB1_B1224              \ [0x08] B1224
+    $09 constant GTZC_MPCBB1_B1225              \ [0x09] B1225
+    $0a constant GTZC_MPCBB1_B1226              \ [0x0a] B1226
+    $0b constant GTZC_MPCBB1_B1227              \ [0x0b] B1227
+    $0c constant GTZC_MPCBB1_B1228              \ [0x0c] B1228
+    $0d constant GTZC_MPCBB1_B1229              \ [0x0d] B1229
+    $0e constant GTZC_MPCBB1_B1230              \ [0x0e] B1230
+    $0f constant GTZC_MPCBB1_B1231              \ [0x0f] B1231
+    $10 constant GTZC_MPCBB1_B1232              \ [0x10] B1232
+    $11 constant GTZC_MPCBB1_B1233              \ [0x11] B1233
+    $12 constant GTZC_MPCBB1_B1234              \ [0x12] B1234
+    $13 constant GTZC_MPCBB1_B1235              \ [0x13] B1235
+    $14 constant GTZC_MPCBB1_B1236              \ [0x14] B1236
+    $15 constant GTZC_MPCBB1_B1237              \ [0x15] B1237
+    $16 constant GTZC_MPCBB1_B1238              \ [0x16] B1238
+    $17 constant GTZC_MPCBB1_B1239              \ [0x17] B1239
+    $18 constant GTZC_MPCBB1_B1240              \ [0x18] B1240
+    $19 constant GTZC_MPCBB1_B1241              \ [0x19] B1241
+    $1a constant GTZC_MPCBB1_B1242              \ [0x1a] B1242
+    $1b constant GTZC_MPCBB1_B1243              \ [0x1b] B1243
+    $1c constant GTZC_MPCBB1_B1244              \ [0x1c] B1244
+    $1d constant GTZC_MPCBB1_B1245              \ [0x1d] B1245
+    $1e constant GTZC_MPCBB1_B1246              \ [0x1e] B1246
+    $1f constant GTZC_MPCBB1_B1247              \ [0x1f] B1247
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR39_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x19C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1248              \ [0x00] B1248
+    $01 constant GTZC_MPCBB1_B1249              \ [0x01] B1249
+    $02 constant GTZC_MPCBB1_B1250              \ [0x02] B1250
+    $03 constant GTZC_MPCBB1_B1251              \ [0x03] B1251
+    $04 constant GTZC_MPCBB1_B1252              \ [0x04] B1252
+    $05 constant GTZC_MPCBB1_B1253              \ [0x05] B1253
+    $06 constant GTZC_MPCBB1_B1254              \ [0x06] B1254
+    $07 constant GTZC_MPCBB1_B1255              \ [0x07] B1255
+    $08 constant GTZC_MPCBB1_B1256              \ [0x08] B1256
+    $09 constant GTZC_MPCBB1_B1257              \ [0x09] B1257
+    $0a constant GTZC_MPCBB1_B1258              \ [0x0a] B1258
+    $0b constant GTZC_MPCBB1_B1259              \ [0x0b] B1259
+    $0c constant GTZC_MPCBB1_B1260              \ [0x0c] B1260
+    $0d constant GTZC_MPCBB1_B1261              \ [0x0d] B1261
+    $0e constant GTZC_MPCBB1_B1262              \ [0x0e] B1262
+    $0f constant GTZC_MPCBB1_B1263              \ [0x0f] B1263
+    $10 constant GTZC_MPCBB1_B1264              \ [0x10] B1264
+    $11 constant GTZC_MPCBB1_B1265              \ [0x11] B1265
+    $12 constant GTZC_MPCBB1_B1266              \ [0x12] B1266
+    $13 constant GTZC_MPCBB1_B1267              \ [0x13] B1267
+    $14 constant GTZC_MPCBB1_B1268              \ [0x14] B1268
+    $15 constant GTZC_MPCBB1_B1269              \ [0x15] B1269
+    $16 constant GTZC_MPCBB1_B1270              \ [0x16] B1270
+    $17 constant GTZC_MPCBB1_B1271              \ [0x17] B1271
+    $18 constant GTZC_MPCBB1_B1272              \ [0x18] B1272
+    $19 constant GTZC_MPCBB1_B1273              \ [0x19] B1273
+    $1a constant GTZC_MPCBB1_B1274              \ [0x1a] B1274
+    $1b constant GTZC_MPCBB1_B1275              \ [0x1b] B1275
+    $1c constant GTZC_MPCBB1_B1276              \ [0x1c] B1276
+    $1d constant GTZC_MPCBB1_B1277              \ [0x1d] B1277
+    $1e constant GTZC_MPCBB1_B1278              \ [0x1e] B1278
+    $1f constant GTZC_MPCBB1_B1279              \ [0x1f] B1279
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR40_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1A0
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1280              \ [0x00] B1280
+    $01 constant GTZC_MPCBB1_B1281              \ [0x01] B1281
+    $02 constant GTZC_MPCBB1_B1282              \ [0x02] B1282
+    $03 constant GTZC_MPCBB1_B1283              \ [0x03] B1283
+    $04 constant GTZC_MPCBB1_B1284              \ [0x04] B1284
+    $05 constant GTZC_MPCBB1_B1285              \ [0x05] B1285
+    $06 constant GTZC_MPCBB1_B1286              \ [0x06] B1286
+    $07 constant GTZC_MPCBB1_B1287              \ [0x07] B1287
+    $08 constant GTZC_MPCBB1_B1288              \ [0x08] B1288
+    $09 constant GTZC_MPCBB1_B1289              \ [0x09] B1289
+    $0a constant GTZC_MPCBB1_B1290              \ [0x0a] B1290
+    $0b constant GTZC_MPCBB1_B1291              \ [0x0b] B1291
+    $0c constant GTZC_MPCBB1_B1292              \ [0x0c] B1292
+    $0d constant GTZC_MPCBB1_B1293              \ [0x0d] B1293
+    $0e constant GTZC_MPCBB1_B1294              \ [0x0e] B1294
+    $0f constant GTZC_MPCBB1_B1295              \ [0x0f] B1295
+    $10 constant GTZC_MPCBB1_B1296              \ [0x10] B1296
+    $11 constant GTZC_MPCBB1_B1297              \ [0x11] B1297
+    $12 constant GTZC_MPCBB1_B1298              \ [0x12] B1298
+    $13 constant GTZC_MPCBB1_B1299              \ [0x13] B1299
+    $14 constant GTZC_MPCBB1_B1300              \ [0x14] B1300
+    $15 constant GTZC_MPCBB1_B1301              \ [0x15] B1301
+    $16 constant GTZC_MPCBB1_B1302              \ [0x16] B1302
+    $17 constant GTZC_MPCBB1_B1303              \ [0x17] B1303
+    $18 constant GTZC_MPCBB1_B1304              \ [0x18] B1304
+    $19 constant GTZC_MPCBB1_B1305              \ [0x19] B1305
+    $1a constant GTZC_MPCBB1_B1306              \ [0x1a] B1306
+    $1b constant GTZC_MPCBB1_B1307              \ [0x1b] B1307
+    $1c constant GTZC_MPCBB1_B1308              \ [0x1c] B1308
+    $1d constant GTZC_MPCBB1_B1309              \ [0x1d] B1309
+    $1e constant GTZC_MPCBB1_B1310              \ [0x1e] B1310
+    $1f constant GTZC_MPCBB1_B1311              \ [0x1f] B1311
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR41_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1A4
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1312              \ [0x00] B1312
+    $01 constant GTZC_MPCBB1_B1313              \ [0x01] B1313
+    $02 constant GTZC_MPCBB1_B1314              \ [0x02] B1314
+    $03 constant GTZC_MPCBB1_B1315              \ [0x03] B1315
+    $04 constant GTZC_MPCBB1_B1316              \ [0x04] B1316
+    $05 constant GTZC_MPCBB1_B1317              \ [0x05] B1317
+    $06 constant GTZC_MPCBB1_B1318              \ [0x06] B1318
+    $07 constant GTZC_MPCBB1_B1319              \ [0x07] B1319
+    $08 constant GTZC_MPCBB1_B1320              \ [0x08] B1320
+    $09 constant GTZC_MPCBB1_B1321              \ [0x09] B1321
+    $0a constant GTZC_MPCBB1_B1322              \ [0x0a] B1322
+    $0b constant GTZC_MPCBB1_B1323              \ [0x0b] B1323
+    $0c constant GTZC_MPCBB1_B1324              \ [0x0c] B1324
+    $0d constant GTZC_MPCBB1_B1325              \ [0x0d] B1325
+    $0e constant GTZC_MPCBB1_B1326              \ [0x0e] B1326
+    $0f constant GTZC_MPCBB1_B1327              \ [0x0f] B1327
+    $10 constant GTZC_MPCBB1_B1328              \ [0x10] B1328
+    $11 constant GTZC_MPCBB1_B1329              \ [0x11] B1329
+    $12 constant GTZC_MPCBB1_B1330              \ [0x12] B1330
+    $13 constant GTZC_MPCBB1_B1331              \ [0x13] B1331
+    $14 constant GTZC_MPCBB1_B1332              \ [0x14] B1332
+    $15 constant GTZC_MPCBB1_B1333              \ [0x15] B1333
+    $16 constant GTZC_MPCBB1_B1334              \ [0x16] B1334
+    $17 constant GTZC_MPCBB1_B1335              \ [0x17] B1335
+    $18 constant GTZC_MPCBB1_B1336              \ [0x18] B1336
+    $19 constant GTZC_MPCBB1_B1337              \ [0x19] B1337
+    $1a constant GTZC_MPCBB1_B1338              \ [0x1a] B1338
+    $1b constant GTZC_MPCBB1_B1339              \ [0x1b] B1339
+    $1c constant GTZC_MPCBB1_B1340              \ [0x1c] B1340
+    $1d constant GTZC_MPCBB1_B1341              \ [0x1d] B1341
+    $1e constant GTZC_MPCBB1_B1342              \ [0x1e] B1342
+    $1f constant GTZC_MPCBB1_B1343              \ [0x1f] B1343
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR42_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1A8
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1344              \ [0x00] B1344
+    $01 constant GTZC_MPCBB1_B1345              \ [0x01] B1345
+    $02 constant GTZC_MPCBB1_B1346              \ [0x02] B1346
+    $03 constant GTZC_MPCBB1_B1347              \ [0x03] B1347
+    $04 constant GTZC_MPCBB1_B1348              \ [0x04] B1348
+    $05 constant GTZC_MPCBB1_B1349              \ [0x05] B1349
+    $06 constant GTZC_MPCBB1_B1350              \ [0x06] B1350
+    $07 constant GTZC_MPCBB1_B1351              \ [0x07] B1351
+    $08 constant GTZC_MPCBB1_B1352              \ [0x08] B1352
+    $09 constant GTZC_MPCBB1_B1353              \ [0x09] B1353
+    $0a constant GTZC_MPCBB1_B1354              \ [0x0a] B1354
+    $0b constant GTZC_MPCBB1_B1355              \ [0x0b] B1355
+    $0c constant GTZC_MPCBB1_B1356              \ [0x0c] B1356
+    $0d constant GTZC_MPCBB1_B1357              \ [0x0d] B1357
+    $0e constant GTZC_MPCBB1_B1358              \ [0x0e] B1358
+    $0f constant GTZC_MPCBB1_B1359              \ [0x0f] B1359
+    $10 constant GTZC_MPCBB1_B1360              \ [0x10] B1360
+    $11 constant GTZC_MPCBB1_B1361              \ [0x11] B1361
+    $12 constant GTZC_MPCBB1_B1362              \ [0x12] B1362
+    $13 constant GTZC_MPCBB1_B1363              \ [0x13] B1363
+    $14 constant GTZC_MPCBB1_B1364              \ [0x14] B1364
+    $15 constant GTZC_MPCBB1_B1365              \ [0x15] B1365
+    $16 constant GTZC_MPCBB1_B1366              \ [0x16] B1366
+    $17 constant GTZC_MPCBB1_B1367              \ [0x17] B1367
+    $18 constant GTZC_MPCBB1_B1368              \ [0x18] B1368
+    $19 constant GTZC_MPCBB1_B1369              \ [0x19] B1369
+    $1a constant GTZC_MPCBB1_B1370              \ [0x1a] B1370
+    $1b constant GTZC_MPCBB1_B1371              \ [0x1b] B1371
+    $1c constant GTZC_MPCBB1_B1372              \ [0x1c] B1372
+    $1d constant GTZC_MPCBB1_B1373              \ [0x1d] B1373
+    $1e constant GTZC_MPCBB1_B1374              \ [0x1e] B1374
+    $1f constant GTZC_MPCBB1_B1375              \ [0x1f] B1375
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR43_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1AC
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1376              \ [0x00] B1376
+    $01 constant GTZC_MPCBB1_B1377              \ [0x01] B1377
+    $02 constant GTZC_MPCBB1_B1378              \ [0x02] B1378
+    $03 constant GTZC_MPCBB1_B1379              \ [0x03] B1379
+    $04 constant GTZC_MPCBB1_B1380              \ [0x04] B1380
+    $05 constant GTZC_MPCBB1_B1381              \ [0x05] B1381
+    $06 constant GTZC_MPCBB1_B1382              \ [0x06] B1382
+    $07 constant GTZC_MPCBB1_B1383              \ [0x07] B1383
+    $08 constant GTZC_MPCBB1_B1384              \ [0x08] B1384
+    $09 constant GTZC_MPCBB1_B1385              \ [0x09] B1385
+    $0a constant GTZC_MPCBB1_B1386              \ [0x0a] B1386
+    $0b constant GTZC_MPCBB1_B1387              \ [0x0b] B1387
+    $0c constant GTZC_MPCBB1_B1388              \ [0x0c] B1388
+    $0d constant GTZC_MPCBB1_B1389              \ [0x0d] B1389
+    $0e constant GTZC_MPCBB1_B1390              \ [0x0e] B1390
+    $0f constant GTZC_MPCBB1_B1391              \ [0x0f] B1391
+    $10 constant GTZC_MPCBB1_B1392              \ [0x10] B1392
+    $11 constant GTZC_MPCBB1_B1393              \ [0x11] B1393
+    $12 constant GTZC_MPCBB1_B1394              \ [0x12] B1394
+    $13 constant GTZC_MPCBB1_B1395              \ [0x13] B1395
+    $14 constant GTZC_MPCBB1_B1396              \ [0x14] B1396
+    $15 constant GTZC_MPCBB1_B1397              \ [0x15] B1397
+    $16 constant GTZC_MPCBB1_B1398              \ [0x16] B1398
+    $17 constant GTZC_MPCBB1_B1399              \ [0x17] B1399
+    $18 constant GTZC_MPCBB1_B1400              \ [0x18] B1400
+    $19 constant GTZC_MPCBB1_B1401              \ [0x19] B1401
+    $1a constant GTZC_MPCBB1_B1402              \ [0x1a] B1402
+    $1b constant GTZC_MPCBB1_B1403              \ [0x1b] B1403
+    $1c constant GTZC_MPCBB1_B1404              \ [0x1c] B1404
+    $1d constant GTZC_MPCBB1_B1405              \ [0x1d] B1405
+    $1e constant GTZC_MPCBB1_B1406              \ [0x1e] B1406
+    $1f constant GTZC_MPCBB1_B1407              \ [0x1f] B1407
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR44_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1B0
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1408              \ [0x00] B1408
+    $01 constant GTZC_MPCBB1_B1409              \ [0x01] B1409
+    $02 constant GTZC_MPCBB1_B1410              \ [0x02] B1410
+    $03 constant GTZC_MPCBB1_B1411              \ [0x03] B1411
+    $04 constant GTZC_MPCBB1_B1412              \ [0x04] B1412
+    $05 constant GTZC_MPCBB1_B1413              \ [0x05] B1413
+    $06 constant GTZC_MPCBB1_B1414              \ [0x06] B1414
+    $07 constant GTZC_MPCBB1_B1415              \ [0x07] B1415
+    $08 constant GTZC_MPCBB1_B1416              \ [0x08] B1416
+    $09 constant GTZC_MPCBB1_B1417              \ [0x09] B1417
+    $0a constant GTZC_MPCBB1_B1418              \ [0x0a] B1418
+    $0b constant GTZC_MPCBB1_B1419              \ [0x0b] B1419
+    $0c constant GTZC_MPCBB1_B1420              \ [0x0c] B1420
+    $0d constant GTZC_MPCBB1_B1421              \ [0x0d] B1421
+    $0e constant GTZC_MPCBB1_B1422              \ [0x0e] B1422
+    $0f constant GTZC_MPCBB1_B1423              \ [0x0f] B1423
+    $10 constant GTZC_MPCBB1_B1424              \ [0x10] B1424
+    $11 constant GTZC_MPCBB1_B1425              \ [0x11] B1425
+    $12 constant GTZC_MPCBB1_B1426              \ [0x12] B1426
+    $13 constant GTZC_MPCBB1_B1427              \ [0x13] B1427
+    $14 constant GTZC_MPCBB1_B1428              \ [0x14] B1428
+    $15 constant GTZC_MPCBB1_B1429              \ [0x15] B1429
+    $16 constant GTZC_MPCBB1_B1430              \ [0x16] B1430
+    $17 constant GTZC_MPCBB1_B1431              \ [0x17] B1431
+    $18 constant GTZC_MPCBB1_B1432              \ [0x18] B1432
+    $19 constant GTZC_MPCBB1_B1433              \ [0x19] B1433
+    $1a constant GTZC_MPCBB1_B1434              \ [0x1a] B1434
+    $1b constant GTZC_MPCBB1_B1435              \ [0x1b] B1435
+    $1c constant GTZC_MPCBB1_B1436              \ [0x1c] B1436
+    $1d constant GTZC_MPCBB1_B1437              \ [0x1d] B1437
+    $1e constant GTZC_MPCBB1_B1438              \ [0x1e] B1438
+    $1f constant GTZC_MPCBB1_B1439              \ [0x1f] B1439
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR45_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1B4
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1440              \ [0x00] B1440
+    $01 constant GTZC_MPCBB1_B1441              \ [0x01] B1441
+    $02 constant GTZC_MPCBB1_B1442              \ [0x02] B1442
+    $03 constant GTZC_MPCBB1_B1443              \ [0x03] B1443
+    $04 constant GTZC_MPCBB1_B1444              \ [0x04] B1444
+    $05 constant GTZC_MPCBB1_B1445              \ [0x05] B1445
+    $06 constant GTZC_MPCBB1_B1446              \ [0x06] B1446
+    $07 constant GTZC_MPCBB1_B1447              \ [0x07] B1447
+    $08 constant GTZC_MPCBB1_B1448              \ [0x08] B1448
+    $09 constant GTZC_MPCBB1_B1449              \ [0x09] B1449
+    $0a constant GTZC_MPCBB1_B1450              \ [0x0a] B1450
+    $0b constant GTZC_MPCBB1_B1451              \ [0x0b] B1451
+    $0c constant GTZC_MPCBB1_B1452              \ [0x0c] B1452
+    $0d constant GTZC_MPCBB1_B1453              \ [0x0d] B1453
+    $0e constant GTZC_MPCBB1_B1454              \ [0x0e] B1454
+    $0f constant GTZC_MPCBB1_B1455              \ [0x0f] B1455
+    $10 constant GTZC_MPCBB1_B1456              \ [0x10] B1456
+    $11 constant GTZC_MPCBB1_B1457              \ [0x11] B1457
+    $12 constant GTZC_MPCBB1_B1458              \ [0x12] B1458
+    $13 constant GTZC_MPCBB1_B1459              \ [0x13] B1459
+    $14 constant GTZC_MPCBB1_B1460              \ [0x14] B1460
+    $15 constant GTZC_MPCBB1_B1461              \ [0x15] B1461
+    $16 constant GTZC_MPCBB1_B1462              \ [0x16] B1462
+    $17 constant GTZC_MPCBB1_B1463              \ [0x17] B1463
+    $18 constant GTZC_MPCBB1_B1464              \ [0x18] B1464
+    $19 constant GTZC_MPCBB1_B1465              \ [0x19] B1465
+    $1a constant GTZC_MPCBB1_B1466              \ [0x1a] B1466
+    $1b constant GTZC_MPCBB1_B1467              \ [0x1b] B1467
+    $1c constant GTZC_MPCBB1_B1468              \ [0x1c] B1468
+    $1d constant GTZC_MPCBB1_B1469              \ [0x1d] B1469
+    $1e constant GTZC_MPCBB1_B1470              \ [0x1e] B1470
+    $1f constant GTZC_MPCBB1_B1471              \ [0x1f] B1471
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR46_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1B8
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1472              \ [0x00] B1472
+    $01 constant GTZC_MPCBB1_B1473              \ [0x01] B1473
+    $02 constant GTZC_MPCBB1_B1474              \ [0x02] B1474
+    $03 constant GTZC_MPCBB1_B1475              \ [0x03] B1475
+    $04 constant GTZC_MPCBB1_B1476              \ [0x04] B1476
+    $05 constant GTZC_MPCBB1_B1477              \ [0x05] B1477
+    $06 constant GTZC_MPCBB1_B1478              \ [0x06] B1478
+    $07 constant GTZC_MPCBB1_B1479              \ [0x07] B1479
+    $08 constant GTZC_MPCBB1_B1480              \ [0x08] B1480
+    $09 constant GTZC_MPCBB1_B1481              \ [0x09] B1481
+    $0a constant GTZC_MPCBB1_B1482              \ [0x0a] B1482
+    $0b constant GTZC_MPCBB1_B1483              \ [0x0b] B1483
+    $0c constant GTZC_MPCBB1_B1484              \ [0x0c] B1484
+    $0d constant GTZC_MPCBB1_B1485              \ [0x0d] B1485
+    $0e constant GTZC_MPCBB1_B1486              \ [0x0e] B1486
+    $0f constant GTZC_MPCBB1_B1487              \ [0x0f] B1487
+    $10 constant GTZC_MPCBB1_B1488              \ [0x10] B1488
+    $11 constant GTZC_MPCBB1_B1489              \ [0x11] B1489
+    $12 constant GTZC_MPCBB1_B1490              \ [0x12] B1490
+    $13 constant GTZC_MPCBB1_B1491              \ [0x13] B1491
+    $14 constant GTZC_MPCBB1_B1492              \ [0x14] B1492
+    $15 constant GTZC_MPCBB1_B1493              \ [0x15] B1493
+    $16 constant GTZC_MPCBB1_B1494              \ [0x16] B1494
+    $17 constant GTZC_MPCBB1_B1495              \ [0x17] B1495
+    $18 constant GTZC_MPCBB1_B1496              \ [0x18] B1496
+    $19 constant GTZC_MPCBB1_B1497              \ [0x19] B1497
+    $1a constant GTZC_MPCBB1_B1498              \ [0x1a] B1498
+    $1b constant GTZC_MPCBB1_B1499              \ [0x1b] B1499
+    $1c constant GTZC_MPCBB1_B1500              \ [0x1c] B1500
+    $1d constant GTZC_MPCBB1_B1501              \ [0x1d] B1501
+    $1e constant GTZC_MPCBB1_B1502              \ [0x1e] B1502
+    $1f constant GTZC_MPCBB1_B1503              \ [0x1f] B1503
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR47_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1BC
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1504              \ [0x00] B1504
+    $01 constant GTZC_MPCBB1_B1505              \ [0x01] B1505
+    $02 constant GTZC_MPCBB1_B1506              \ [0x02] B1506
+    $03 constant GTZC_MPCBB1_B1507              \ [0x03] B1507
+    $04 constant GTZC_MPCBB1_B1508              \ [0x04] B1508
+    $05 constant GTZC_MPCBB1_B1509              \ [0x05] B1509
+    $06 constant GTZC_MPCBB1_B1510              \ [0x06] B1510
+    $07 constant GTZC_MPCBB1_B1511              \ [0x07] B1511
+    $08 constant GTZC_MPCBB1_B1512              \ [0x08] B1512
+    $09 constant GTZC_MPCBB1_B1513              \ [0x09] B1513
+    $0a constant GTZC_MPCBB1_B1514              \ [0x0a] B1514
+    $0b constant GTZC_MPCBB1_B1515              \ [0x0b] B1515
+    $0c constant GTZC_MPCBB1_B1516              \ [0x0c] B1516
+    $0d constant GTZC_MPCBB1_B1517              \ [0x0d] B1517
+    $0e constant GTZC_MPCBB1_B1518              \ [0x0e] B1518
+    $0f constant GTZC_MPCBB1_B1519              \ [0x0f] B1519
+    $10 constant GTZC_MPCBB1_B1520              \ [0x10] B1520
+    $11 constant GTZC_MPCBB1_B1521              \ [0x11] B1521
+    $12 constant GTZC_MPCBB1_B1522              \ [0x12] B1522
+    $13 constant GTZC_MPCBB1_B1523              \ [0x13] B1523
+    $14 constant GTZC_MPCBB1_B1524              \ [0x14] B1524
+    $15 constant GTZC_MPCBB1_B1525              \ [0x15] B1525
+    $16 constant GTZC_MPCBB1_B1526              \ [0x16] B1526
+    $17 constant GTZC_MPCBB1_B1527              \ [0x17] B1527
+    $18 constant GTZC_MPCBB1_B1528              \ [0x18] B1528
+    $19 constant GTZC_MPCBB1_B1529              \ [0x19] B1529
+    $1a constant GTZC_MPCBB1_B1530              \ [0x1a] B1530
+    $1b constant GTZC_MPCBB1_B1531              \ [0x1b] B1531
+    $1c constant GTZC_MPCBB1_B1532              \ [0x1c] B1532
+    $1d constant GTZC_MPCBB1_B1533              \ [0x1d] B1533
+    $1e constant GTZC_MPCBB1_B1534              \ [0x1e] B1534
+    $1f constant GTZC_MPCBB1_B1535              \ [0x1f] B1535
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR48_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1C0
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1536              \ [0x00] B1536
+    $01 constant GTZC_MPCBB1_B1537              \ [0x01] B1537
+    $02 constant GTZC_MPCBB1_B1538              \ [0x02] B1538
+    $03 constant GTZC_MPCBB1_B1539              \ [0x03] B1539
+    $04 constant GTZC_MPCBB1_B1540              \ [0x04] B1540
+    $05 constant GTZC_MPCBB1_B1541              \ [0x05] B1541
+    $06 constant GTZC_MPCBB1_B1542              \ [0x06] B1542
+    $07 constant GTZC_MPCBB1_B1543              \ [0x07] B1543
+    $08 constant GTZC_MPCBB1_B1544              \ [0x08] B1544
+    $09 constant GTZC_MPCBB1_B1545              \ [0x09] B1545
+    $0a constant GTZC_MPCBB1_B1546              \ [0x0a] B1546
+    $0b constant GTZC_MPCBB1_B1547              \ [0x0b] B1547
+    $0c constant GTZC_MPCBB1_B1548              \ [0x0c] B1548
+    $0d constant GTZC_MPCBB1_B1549              \ [0x0d] B1549
+    $0e constant GTZC_MPCBB1_B1550              \ [0x0e] B1550
+    $0f constant GTZC_MPCBB1_B1551              \ [0x0f] B1551
+    $10 constant GTZC_MPCBB1_B1552              \ [0x10] B1552
+    $11 constant GTZC_MPCBB1_B1553              \ [0x11] B1553
+    $12 constant GTZC_MPCBB1_B1554              \ [0x12] B1554
+    $13 constant GTZC_MPCBB1_B1555              \ [0x13] B1555
+    $14 constant GTZC_MPCBB1_B1556              \ [0x14] B1556
+    $15 constant GTZC_MPCBB1_B1557              \ [0x15] B1557
+    $16 constant GTZC_MPCBB1_B1558              \ [0x16] B1558
+    $17 constant GTZC_MPCBB1_B1559              \ [0x17] B1559
+    $18 constant GTZC_MPCBB1_B1560              \ [0x18] B1560
+    $19 constant GTZC_MPCBB1_B1561              \ [0x19] B1561
+    $1a constant GTZC_MPCBB1_B1562              \ [0x1a] B1562
+    $1b constant GTZC_MPCBB1_B1563              \ [0x1b] B1563
+    $1c constant GTZC_MPCBB1_B1564              \ [0x1c] B1564
+    $1d constant GTZC_MPCBB1_B1565              \ [0x1d] B1565
+    $1e constant GTZC_MPCBB1_B1566              \ [0x1e] B1566
+    $1f constant GTZC_MPCBB1_B1567              \ [0x1f] B1567
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR49_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1C4
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1568              \ [0x00] B1568
+    $01 constant GTZC_MPCBB1_B1569              \ [0x01] B1569
+    $02 constant GTZC_MPCBB1_B1570              \ [0x02] B1570
+    $03 constant GTZC_MPCBB1_B1571              \ [0x03] B1571
+    $04 constant GTZC_MPCBB1_B1572              \ [0x04] B1572
+    $05 constant GTZC_MPCBB1_B1573              \ [0x05] B1573
+    $06 constant GTZC_MPCBB1_B1574              \ [0x06] B1574
+    $07 constant GTZC_MPCBB1_B1575              \ [0x07] B1575
+    $08 constant GTZC_MPCBB1_B1576              \ [0x08] B1576
+    $09 constant GTZC_MPCBB1_B1577              \ [0x09] B1577
+    $0a constant GTZC_MPCBB1_B1578              \ [0x0a] B1578
+    $0b constant GTZC_MPCBB1_B1579              \ [0x0b] B1579
+    $0c constant GTZC_MPCBB1_B1580              \ [0x0c] B1580
+    $0d constant GTZC_MPCBB1_B1581              \ [0x0d] B1581
+    $0e constant GTZC_MPCBB1_B1582              \ [0x0e] B1582
+    $0f constant GTZC_MPCBB1_B1583              \ [0x0f] B1583
+    $10 constant GTZC_MPCBB1_B1584              \ [0x10] B1584
+    $11 constant GTZC_MPCBB1_B1585              \ [0x11] B1585
+    $12 constant GTZC_MPCBB1_B1586              \ [0x12] B1586
+    $13 constant GTZC_MPCBB1_B1587              \ [0x13] B1587
+    $14 constant GTZC_MPCBB1_B1588              \ [0x14] B1588
+    $15 constant GTZC_MPCBB1_B1589              \ [0x15] B1589
+    $16 constant GTZC_MPCBB1_B1590              \ [0x16] B1590
+    $17 constant GTZC_MPCBB1_B1591              \ [0x17] B1591
+    $18 constant GTZC_MPCBB1_B1592              \ [0x18] B1592
+    $19 constant GTZC_MPCBB1_B1593              \ [0x19] B1593
+    $1a constant GTZC_MPCBB1_B1594              \ [0x1a] B1594
+    $1b constant GTZC_MPCBB1_B1595              \ [0x1b] B1595
+    $1c constant GTZC_MPCBB1_B1596              \ [0x1c] B1596
+    $1d constant GTZC_MPCBB1_B1597              \ [0x1d] B1597
+    $1e constant GTZC_MPCBB1_B1598              \ [0x1e] B1598
+    $1f constant GTZC_MPCBB1_B1599              \ [0x1f] B1599
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR50_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1C8
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1600              \ [0x00] B1600
+    $01 constant GTZC_MPCBB1_B1601              \ [0x01] B1601
+    $02 constant GTZC_MPCBB1_B1602              \ [0x02] B1602
+    $03 constant GTZC_MPCBB1_B1603              \ [0x03] B1603
+    $04 constant GTZC_MPCBB1_B1604              \ [0x04] B1604
+    $05 constant GTZC_MPCBB1_B1605              \ [0x05] B1605
+    $06 constant GTZC_MPCBB1_B1606              \ [0x06] B1606
+    $07 constant GTZC_MPCBB1_B1607              \ [0x07] B1607
+    $08 constant GTZC_MPCBB1_B1608              \ [0x08] B1608
+    $09 constant GTZC_MPCBB1_B1609              \ [0x09] B1609
+    $0a constant GTZC_MPCBB1_B1610              \ [0x0a] B1610
+    $0b constant GTZC_MPCBB1_B1611              \ [0x0b] B1611
+    $0c constant GTZC_MPCBB1_B1612              \ [0x0c] B1612
+    $0d constant GTZC_MPCBB1_B1613              \ [0x0d] B1613
+    $0e constant GTZC_MPCBB1_B1614              \ [0x0e] B1614
+    $0f constant GTZC_MPCBB1_B1615              \ [0x0f] B1615
+    $10 constant GTZC_MPCBB1_B1616              \ [0x10] B1616
+    $11 constant GTZC_MPCBB1_B1617              \ [0x11] B1617
+    $12 constant GTZC_MPCBB1_B1618              \ [0x12] B1618
+    $13 constant GTZC_MPCBB1_B1619              \ [0x13] B1619
+    $14 constant GTZC_MPCBB1_B1620              \ [0x14] B1620
+    $15 constant GTZC_MPCBB1_B1621              \ [0x15] B1621
+    $16 constant GTZC_MPCBB1_B1622              \ [0x16] B1622
+    $17 constant GTZC_MPCBB1_B1623              \ [0x17] B1623
+    $18 constant GTZC_MPCBB1_B1624              \ [0x18] B1624
+    $19 constant GTZC_MPCBB1_B1625              \ [0x19] B1625
+    $1a constant GTZC_MPCBB1_B1626              \ [0x1a] B1626
+    $1b constant GTZC_MPCBB1_B1627              \ [0x1b] B1627
+    $1c constant GTZC_MPCBB1_B1628              \ [0x1c] B1628
+    $1d constant GTZC_MPCBB1_B1629              \ [0x1d] B1629
+    $1e constant GTZC_MPCBB1_B1630              \ [0x1e] B1630
+    $1f constant GTZC_MPCBB1_B1631              \ [0x1f] B1631
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR51_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1CC
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1632              \ [0x00] B1632
+    $01 constant GTZC_MPCBB1_B1633              \ [0x01] B1633
+    $02 constant GTZC_MPCBB1_B1634              \ [0x02] B1634
+    $03 constant GTZC_MPCBB1_B1635              \ [0x03] B1635
+    $04 constant GTZC_MPCBB1_B1636              \ [0x04] B1636
+    $05 constant GTZC_MPCBB1_B1637              \ [0x05] B1637
+    $06 constant GTZC_MPCBB1_B1638              \ [0x06] B1638
+    $07 constant GTZC_MPCBB1_B1639              \ [0x07] B1639
+    $08 constant GTZC_MPCBB1_B1640              \ [0x08] B1640
+    $09 constant GTZC_MPCBB1_B1641              \ [0x09] B1641
+    $0a constant GTZC_MPCBB1_B1642              \ [0x0a] B1642
+    $0b constant GTZC_MPCBB1_B1643              \ [0x0b] B1643
+    $0c constant GTZC_MPCBB1_B1644              \ [0x0c] B1644
+    $0d constant GTZC_MPCBB1_B1645              \ [0x0d] B1645
+    $0e constant GTZC_MPCBB1_B1646              \ [0x0e] B1646
+    $0f constant GTZC_MPCBB1_B1647              \ [0x0f] B1647
+    $10 constant GTZC_MPCBB1_B1648              \ [0x10] B1648
+    $11 constant GTZC_MPCBB1_B1649              \ [0x11] B1649
+    $12 constant GTZC_MPCBB1_B1650              \ [0x12] B1650
+    $13 constant GTZC_MPCBB1_B1651              \ [0x13] B1651
+    $14 constant GTZC_MPCBB1_B1652              \ [0x14] B1652
+    $15 constant GTZC_MPCBB1_B1653              \ [0x15] B1653
+    $16 constant GTZC_MPCBB1_B1654              \ [0x16] B1654
+    $17 constant GTZC_MPCBB1_B1655              \ [0x17] B1655
+    $18 constant GTZC_MPCBB1_B1656              \ [0x18] B1656
+    $19 constant GTZC_MPCBB1_B1657              \ [0x19] B1657
+    $1a constant GTZC_MPCBB1_B1658              \ [0x1a] B1658
+    $1b constant GTZC_MPCBB1_B1659              \ [0x1b] B1659
+    $1c constant GTZC_MPCBB1_B1660              \ [0x1c] B1660
+    $1d constant GTZC_MPCBB1_B1661              \ [0x1d] B1661
+    $1e constant GTZC_MPCBB1_B1662              \ [0x1e] B1662
+    $1f constant GTZC_MPCBB1_B1663              \ [0x1f] B1663
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR52_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1D0
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1664              \ [0x00] B1664
+    $01 constant GTZC_MPCBB1_B1665              \ [0x01] B1665
+    $02 constant GTZC_MPCBB1_B1666              \ [0x02] B1666
+    $03 constant GTZC_MPCBB1_B1667              \ [0x03] B1667
+    $04 constant GTZC_MPCBB1_B1668              \ [0x04] B1668
+    $05 constant GTZC_MPCBB1_B1669              \ [0x05] B1669
+    $06 constant GTZC_MPCBB1_B1670              \ [0x06] B1670
+    $07 constant GTZC_MPCBB1_B1671              \ [0x07] B1671
+    $08 constant GTZC_MPCBB1_B1672              \ [0x08] B1672
+    $09 constant GTZC_MPCBB1_B1673              \ [0x09] B1673
+    $0a constant GTZC_MPCBB1_B1674              \ [0x0a] B1674
+    $0b constant GTZC_MPCBB1_B1675              \ [0x0b] B1675
+    $0c constant GTZC_MPCBB1_B1676              \ [0x0c] B1676
+    $0d constant GTZC_MPCBB1_B1677              \ [0x0d] B1677
+    $0e constant GTZC_MPCBB1_B1678              \ [0x0e] B1678
+    $0f constant GTZC_MPCBB1_B1679              \ [0x0f] B1679
+    $10 constant GTZC_MPCBB1_B1680              \ [0x10] B1680
+    $11 constant GTZC_MPCBB1_B1681              \ [0x11] B1681
+    $12 constant GTZC_MPCBB1_B1682              \ [0x12] B1682
+    $13 constant GTZC_MPCBB1_B1683              \ [0x13] B1683
+    $14 constant GTZC_MPCBB1_B1684              \ [0x14] B1684
+    $15 constant GTZC_MPCBB1_B1685              \ [0x15] B1685
+    $16 constant GTZC_MPCBB1_B1686              \ [0x16] B1686
+    $17 constant GTZC_MPCBB1_B1687              \ [0x17] B1687
+    $18 constant GTZC_MPCBB1_B1688              \ [0x18] B1688
+    $19 constant GTZC_MPCBB1_B1689              \ [0x19] B1689
+    $1a constant GTZC_MPCBB1_B1690              \ [0x1a] B1690
+    $1b constant GTZC_MPCBB1_B1691              \ [0x1b] B1691
+    $1c constant GTZC_MPCBB1_B1692              \ [0x1c] B1692
+    $1d constant GTZC_MPCBB1_B1693              \ [0x1d] B1693
+    $1e constant GTZC_MPCBB1_B1694              \ [0x1e] B1694
+    $1f constant GTZC_MPCBB1_B1695              \ [0x1f] B1695
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR53_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1D4
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1696              \ [0x00] B1696
+    $01 constant GTZC_MPCBB1_B1697              \ [0x01] B1697
+    $02 constant GTZC_MPCBB1_B1698              \ [0x02] B1698
+    $03 constant GTZC_MPCBB1_B1699              \ [0x03] B1699
+    $04 constant GTZC_MPCBB1_B1700              \ [0x04] B1700
+    $05 constant GTZC_MPCBB1_B1701              \ [0x05] B1701
+    $06 constant GTZC_MPCBB1_B1702              \ [0x06] B1702
+    $07 constant GTZC_MPCBB1_B1703              \ [0x07] B1703
+    $08 constant GTZC_MPCBB1_B1704              \ [0x08] B1704
+    $09 constant GTZC_MPCBB1_B1705              \ [0x09] B1705
+    $0a constant GTZC_MPCBB1_B1706              \ [0x0a] B1706
+    $0b constant GTZC_MPCBB1_B1707              \ [0x0b] B1707
+    $0c constant GTZC_MPCBB1_B1708              \ [0x0c] B1708
+    $0d constant GTZC_MPCBB1_B1709              \ [0x0d] B1709
+    $0e constant GTZC_MPCBB1_B1710              \ [0x0e] B1710
+    $0f constant GTZC_MPCBB1_B1711              \ [0x0f] B1711
+    $10 constant GTZC_MPCBB1_B1712              \ [0x10] B1712
+    $11 constant GTZC_MPCBB1_B1713              \ [0x11] B1713
+    $12 constant GTZC_MPCBB1_B1714              \ [0x12] B1714
+    $13 constant GTZC_MPCBB1_B1715              \ [0x13] B1715
+    $14 constant GTZC_MPCBB1_B1716              \ [0x14] B1716
+    $15 constant GTZC_MPCBB1_B1717              \ [0x15] B1717
+    $16 constant GTZC_MPCBB1_B1718              \ [0x16] B1718
+    $17 constant GTZC_MPCBB1_B1719              \ [0x17] B1719
+    $18 constant GTZC_MPCBB1_B1720              \ [0x18] B1720
+    $19 constant GTZC_MPCBB1_B1721              \ [0x19] B1721
+    $1a constant GTZC_MPCBB1_B1722              \ [0x1a] B1722
+    $1b constant GTZC_MPCBB1_B1723              \ [0x1b] B1723
+    $1c constant GTZC_MPCBB1_B1724              \ [0x1c] B1724
+    $1d constant GTZC_MPCBB1_B1725              \ [0x1d] B1725
+    $1e constant GTZC_MPCBB1_B1726              \ [0x1e] B1726
+    $1f constant GTZC_MPCBB1_B1727              \ [0x1f] B1727
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR54_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1D8
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1728              \ [0x00] B1728
+    $01 constant GTZC_MPCBB1_B1729              \ [0x01] B1729
+    $02 constant GTZC_MPCBB1_B1730              \ [0x02] B1730
+    $03 constant GTZC_MPCBB1_B1731              \ [0x03] B1731
+    $04 constant GTZC_MPCBB1_B1732              \ [0x04] B1732
+    $05 constant GTZC_MPCBB1_B1733              \ [0x05] B1733
+    $06 constant GTZC_MPCBB1_B1734              \ [0x06] B1734
+    $07 constant GTZC_MPCBB1_B1735              \ [0x07] B1735
+    $08 constant GTZC_MPCBB1_B1736              \ [0x08] B1736
+    $09 constant GTZC_MPCBB1_B1737              \ [0x09] B1737
+    $0a constant GTZC_MPCBB1_B1738              \ [0x0a] B1738
+    $0b constant GTZC_MPCBB1_B1739              \ [0x0b] B1739
+    $0c constant GTZC_MPCBB1_B1740              \ [0x0c] B1740
+    $0d constant GTZC_MPCBB1_B1741              \ [0x0d] B1741
+    $0e constant GTZC_MPCBB1_B1742              \ [0x0e] B1742
+    $0f constant GTZC_MPCBB1_B1743              \ [0x0f] B1743
+    $10 constant GTZC_MPCBB1_B1744              \ [0x10] B1744
+    $11 constant GTZC_MPCBB1_B1745              \ [0x11] B1745
+    $12 constant GTZC_MPCBB1_B1746              \ [0x12] B1746
+    $13 constant GTZC_MPCBB1_B1747              \ [0x13] B1747
+    $14 constant GTZC_MPCBB1_B1748              \ [0x14] B1748
+    $15 constant GTZC_MPCBB1_B1749              \ [0x15] B1749
+    $16 constant GTZC_MPCBB1_B1750              \ [0x16] B1750
+    $17 constant GTZC_MPCBB1_B1751              \ [0x17] B1751
+    $18 constant GTZC_MPCBB1_B1752              \ [0x18] B1752
+    $19 constant GTZC_MPCBB1_B1753              \ [0x19] B1753
+    $1a constant GTZC_MPCBB1_B1754              \ [0x1a] B1754
+    $1b constant GTZC_MPCBB1_B1755              \ [0x1b] B1755
+    $1c constant GTZC_MPCBB1_B1756              \ [0x1c] B1756
+    $1d constant GTZC_MPCBB1_B1757              \ [0x1d] B1757
+    $1e constant GTZC_MPCBB1_B1758              \ [0x1e] B1758
+    $1f constant GTZC_MPCBB1_B1759              \ [0x1f] B1759
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR55_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1DC
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1760              \ [0x00] B1760
+    $01 constant GTZC_MPCBB1_B1761              \ [0x01] B1761
+    $02 constant GTZC_MPCBB1_B1762              \ [0x02] B1762
+    $03 constant GTZC_MPCBB1_B1763              \ [0x03] B1763
+    $04 constant GTZC_MPCBB1_B1764              \ [0x04] B1764
+    $05 constant GTZC_MPCBB1_B1765              \ [0x05] B1765
+    $06 constant GTZC_MPCBB1_B1766              \ [0x06] B1766
+    $07 constant GTZC_MPCBB1_B1767              \ [0x07] B1767
+    $08 constant GTZC_MPCBB1_B1768              \ [0x08] B1768
+    $09 constant GTZC_MPCBB1_B1769              \ [0x09] B1769
+    $0a constant GTZC_MPCBB1_B1770              \ [0x0a] B1770
+    $0b constant GTZC_MPCBB1_B1771              \ [0x0b] B1771
+    $0c constant GTZC_MPCBB1_B1772              \ [0x0c] B1772
+    $0d constant GTZC_MPCBB1_B1773              \ [0x0d] B1773
+    $0e constant GTZC_MPCBB1_B1774              \ [0x0e] B1774
+    $0f constant GTZC_MPCBB1_B1775              \ [0x0f] B1775
+    $10 constant GTZC_MPCBB1_B1776              \ [0x10] B1776
+    $11 constant GTZC_MPCBB1_B1777              \ [0x11] B1777
+    $12 constant GTZC_MPCBB1_B1778              \ [0x12] B1778
+    $13 constant GTZC_MPCBB1_B1779              \ [0x13] B1779
+    $14 constant GTZC_MPCBB1_B1780              \ [0x14] B1780
+    $15 constant GTZC_MPCBB1_B1781              \ [0x15] B1781
+    $16 constant GTZC_MPCBB1_B1782              \ [0x16] B1782
+    $17 constant GTZC_MPCBB1_B1783              \ [0x17] B1783
+    $18 constant GTZC_MPCBB1_B1784              \ [0x18] B1784
+    $19 constant GTZC_MPCBB1_B1785              \ [0x19] B1785
+    $1a constant GTZC_MPCBB1_B1786              \ [0x1a] B1786
+    $1b constant GTZC_MPCBB1_B1787              \ [0x1b] B1787
+    $1c constant GTZC_MPCBB1_B1788              \ [0x1c] B1788
+    $1d constant GTZC_MPCBB1_B1789              \ [0x1d] B1789
+    $1e constant GTZC_MPCBB1_B1790              \ [0x1e] B1790
+    $1f constant GTZC_MPCBB1_B1791              \ [0x1f] B1791
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR56_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1E0
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1792              \ [0x00] B1792
+    $01 constant GTZC_MPCBB1_B1793              \ [0x01] B1793
+    $02 constant GTZC_MPCBB1_B1794              \ [0x02] B1794
+    $03 constant GTZC_MPCBB1_B1795              \ [0x03] B1795
+    $04 constant GTZC_MPCBB1_B1796              \ [0x04] B1796
+    $05 constant GTZC_MPCBB1_B1797              \ [0x05] B1797
+    $06 constant GTZC_MPCBB1_B1798              \ [0x06] B1798
+    $07 constant GTZC_MPCBB1_B1799              \ [0x07] B1799
+    $08 constant GTZC_MPCBB1_B1800              \ [0x08] B1800
+    $09 constant GTZC_MPCBB1_B1801              \ [0x09] B1801
+    $0a constant GTZC_MPCBB1_B1802              \ [0x0a] B1802
+    $0b constant GTZC_MPCBB1_B1803              \ [0x0b] B1803
+    $0c constant GTZC_MPCBB1_B1804              \ [0x0c] B1804
+    $0d constant GTZC_MPCBB1_B1805              \ [0x0d] B1805
+    $0e constant GTZC_MPCBB1_B1806              \ [0x0e] B1806
+    $0f constant GTZC_MPCBB1_B1807              \ [0x0f] B1807
+    $10 constant GTZC_MPCBB1_B1808              \ [0x10] B1808
+    $11 constant GTZC_MPCBB1_B1809              \ [0x11] B1809
+    $12 constant GTZC_MPCBB1_B1810              \ [0x12] B1810
+    $13 constant GTZC_MPCBB1_B1811              \ [0x13] B1811
+    $14 constant GTZC_MPCBB1_B1812              \ [0x14] B1812
+    $15 constant GTZC_MPCBB1_B1813              \ [0x15] B1813
+    $16 constant GTZC_MPCBB1_B1814              \ [0x16] B1814
+    $17 constant GTZC_MPCBB1_B1815              \ [0x17] B1815
+    $18 constant GTZC_MPCBB1_B1816              \ [0x18] B1816
+    $19 constant GTZC_MPCBB1_B1817              \ [0x19] B1817
+    $1a constant GTZC_MPCBB1_B1818              \ [0x1a] B1818
+    $1b constant GTZC_MPCBB1_B1819              \ [0x1b] B1819
+    $1c constant GTZC_MPCBB1_B1820              \ [0x1c] B1820
+    $1d constant GTZC_MPCBB1_B1821              \ [0x1d] B1821
+    $1e constant GTZC_MPCBB1_B1822              \ [0x1e] B1822
+    $1f constant GTZC_MPCBB1_B1823              \ [0x1f] B1823
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR57_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1E4
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1824              \ [0x00] B1824
+    $01 constant GTZC_MPCBB1_B1825              \ [0x01] B1825
+    $02 constant GTZC_MPCBB1_B1826              \ [0x02] B1826
+    $03 constant GTZC_MPCBB1_B1827              \ [0x03] B1827
+    $04 constant GTZC_MPCBB1_B1828              \ [0x04] B1828
+    $05 constant GTZC_MPCBB1_B1829              \ [0x05] B1829
+    $06 constant GTZC_MPCBB1_B1830              \ [0x06] B1830
+    $07 constant GTZC_MPCBB1_B1831              \ [0x07] B1831
+    $08 constant GTZC_MPCBB1_B1832              \ [0x08] B1832
+    $09 constant GTZC_MPCBB1_B1833              \ [0x09] B1833
+    $0a constant GTZC_MPCBB1_B1834              \ [0x0a] B1834
+    $0b constant GTZC_MPCBB1_B1835              \ [0x0b] B1835
+    $0c constant GTZC_MPCBB1_B1836              \ [0x0c] B1836
+    $0d constant GTZC_MPCBB1_B1837              \ [0x0d] B1837
+    $0e constant GTZC_MPCBB1_B1838              \ [0x0e] B1838
+    $0f constant GTZC_MPCBB1_B1839              \ [0x0f] B1839
+    $10 constant GTZC_MPCBB1_B1840              \ [0x10] B1840
+    $11 constant GTZC_MPCBB1_B1841              \ [0x11] B1841
+    $12 constant GTZC_MPCBB1_B1842              \ [0x12] B1842
+    $13 constant GTZC_MPCBB1_B1843              \ [0x13] B1843
+    $14 constant GTZC_MPCBB1_B1844              \ [0x14] B1844
+    $15 constant GTZC_MPCBB1_B1845              \ [0x15] B1845
+    $16 constant GTZC_MPCBB1_B1846              \ [0x16] B1846
+    $17 constant GTZC_MPCBB1_B1847              \ [0x17] B1847
+    $18 constant GTZC_MPCBB1_B1848              \ [0x18] B1848
+    $19 constant GTZC_MPCBB1_B1849              \ [0x19] B1849
+    $1a constant GTZC_MPCBB1_B1850              \ [0x1a] B1850
+    $1b constant GTZC_MPCBB1_B1851              \ [0x1b] B1851
+    $1c constant GTZC_MPCBB1_B1852              \ [0x1c] B1852
+    $1d constant GTZC_MPCBB1_B1853              \ [0x1d] B1853
+    $1e constant GTZC_MPCBB1_B1854              \ [0x1e] B1854
+    $1f constant GTZC_MPCBB1_B1855              \ [0x1f] B1855
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR58_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1E8
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1856              \ [0x00] B1856
+    $01 constant GTZC_MPCBB1_B1857              \ [0x01] B1857
+    $02 constant GTZC_MPCBB1_B1858              \ [0x02] B1858
+    $03 constant GTZC_MPCBB1_B1859              \ [0x03] B1859
+    $04 constant GTZC_MPCBB1_B1860              \ [0x04] B1860
+    $05 constant GTZC_MPCBB1_B1861              \ [0x05] B1861
+    $06 constant GTZC_MPCBB1_B1862              \ [0x06] B1862
+    $07 constant GTZC_MPCBB1_B1863              \ [0x07] B1863
+    $08 constant GTZC_MPCBB1_B1864              \ [0x08] B1864
+    $09 constant GTZC_MPCBB1_B1865              \ [0x09] B1865
+    $0a constant GTZC_MPCBB1_B1866              \ [0x0a] B1866
+    $0b constant GTZC_MPCBB1_B1867              \ [0x0b] B1867
+    $0c constant GTZC_MPCBB1_B1868              \ [0x0c] B1868
+    $0d constant GTZC_MPCBB1_B1869              \ [0x0d] B1869
+    $0e constant GTZC_MPCBB1_B1870              \ [0x0e] B1870
+    $0f constant GTZC_MPCBB1_B1871              \ [0x0f] B1871
+    $10 constant GTZC_MPCBB1_B1872              \ [0x10] B1872
+    $11 constant GTZC_MPCBB1_B1873              \ [0x11] B1873
+    $12 constant GTZC_MPCBB1_B1874              \ [0x12] B1874
+    $13 constant GTZC_MPCBB1_B1875              \ [0x13] B1875
+    $14 constant GTZC_MPCBB1_B1876              \ [0x14] B1876
+    $15 constant GTZC_MPCBB1_B1877              \ [0x15] B1877
+    $16 constant GTZC_MPCBB1_B1878              \ [0x16] B1878
+    $17 constant GTZC_MPCBB1_B1879              \ [0x17] B1879
+    $18 constant GTZC_MPCBB1_B1880              \ [0x18] B1880
+    $19 constant GTZC_MPCBB1_B1881              \ [0x19] B1881
+    $1a constant GTZC_MPCBB1_B1882              \ [0x1a] B1882
+    $1b constant GTZC_MPCBB1_B1883              \ [0x1b] B1883
+    $1c constant GTZC_MPCBB1_B1884              \ [0x1c] B1884
+    $1d constant GTZC_MPCBB1_B1885              \ [0x1d] B1885
+    $1e constant GTZC_MPCBB1_B1886              \ [0x1e] B1886
+    $1f constant GTZC_MPCBB1_B1887              \ [0x1f] B1887
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR59_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1EC
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1888              \ [0x00] B1888
+    $01 constant GTZC_MPCBB1_B1889              \ [0x01] B1889
+    $02 constant GTZC_MPCBB1_B1890              \ [0x02] B1890
+    $03 constant GTZC_MPCBB1_B1891              \ [0x03] B1891
+    $04 constant GTZC_MPCBB1_B1892              \ [0x04] B1892
+    $05 constant GTZC_MPCBB1_B1893              \ [0x05] B1893
+    $06 constant GTZC_MPCBB1_B1894              \ [0x06] B1894
+    $07 constant GTZC_MPCBB1_B1895              \ [0x07] B1895
+    $08 constant GTZC_MPCBB1_B1896              \ [0x08] B1896
+    $09 constant GTZC_MPCBB1_B1897              \ [0x09] B1897
+    $0a constant GTZC_MPCBB1_B1898              \ [0x0a] B1898
+    $0b constant GTZC_MPCBB1_B1899              \ [0x0b] B1899
+    $0c constant GTZC_MPCBB1_B1900              \ [0x0c] B1900
+    $0d constant GTZC_MPCBB1_B1901              \ [0x0d] B1901
+    $0e constant GTZC_MPCBB1_B1902              \ [0x0e] B1902
+    $0f constant GTZC_MPCBB1_B1903              \ [0x0f] B1903
+    $10 constant GTZC_MPCBB1_B1904              \ [0x10] B1904
+    $11 constant GTZC_MPCBB1_B1905              \ [0x11] B1905
+    $12 constant GTZC_MPCBB1_B1906              \ [0x12] B1906
+    $13 constant GTZC_MPCBB1_B1907              \ [0x13] B1907
+    $14 constant GTZC_MPCBB1_B1908              \ [0x14] B1908
+    $15 constant GTZC_MPCBB1_B1909              \ [0x15] B1909
+    $16 constant GTZC_MPCBB1_B1910              \ [0x16] B1910
+    $17 constant GTZC_MPCBB1_B1911              \ [0x17] B1911
+    $18 constant GTZC_MPCBB1_B1912              \ [0x18] B1912
+    $19 constant GTZC_MPCBB1_B1913              \ [0x19] B1913
+    $1a constant GTZC_MPCBB1_B1914              \ [0x1a] B1914
+    $1b constant GTZC_MPCBB1_B1915              \ [0x1b] B1915
+    $1c constant GTZC_MPCBB1_B1916              \ [0x1c] B1916
+    $1d constant GTZC_MPCBB1_B1917              \ [0x1d] B1917
+    $1e constant GTZC_MPCBB1_B1918              \ [0x1e] B1918
+    $1f constant GTZC_MPCBB1_B1919              \ [0x1f] B1919
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR60_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1F0
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1920              \ [0x00] B1920
+    $01 constant GTZC_MPCBB1_B1921              \ [0x01] B1921
+    $02 constant GTZC_MPCBB1_B1922              \ [0x02] B1922
+    $03 constant GTZC_MPCBB1_B1923              \ [0x03] B1923
+    $04 constant GTZC_MPCBB1_B1924              \ [0x04] B1924
+    $05 constant GTZC_MPCBB1_B1925              \ [0x05] B1925
+    $06 constant GTZC_MPCBB1_B1926              \ [0x06] B1926
+    $07 constant GTZC_MPCBB1_B1927              \ [0x07] B1927
+    $08 constant GTZC_MPCBB1_B1928              \ [0x08] B1928
+    $09 constant GTZC_MPCBB1_B1929              \ [0x09] B1929
+    $0a constant GTZC_MPCBB1_B1930              \ [0x0a] B1930
+    $0b constant GTZC_MPCBB1_B1931              \ [0x0b] B1931
+    $0c constant GTZC_MPCBB1_B1932              \ [0x0c] B1932
+    $0d constant GTZC_MPCBB1_B1933              \ [0x0d] B1933
+    $0e constant GTZC_MPCBB1_B1934              \ [0x0e] B1934
+    $0f constant GTZC_MPCBB1_B1935              \ [0x0f] B1935
+    $10 constant GTZC_MPCBB1_B1936              \ [0x10] B1936
+    $11 constant GTZC_MPCBB1_B1937              \ [0x11] B1937
+    $12 constant GTZC_MPCBB1_B1938              \ [0x12] B1938
+    $13 constant GTZC_MPCBB1_B1939              \ [0x13] B1939
+    $14 constant GTZC_MPCBB1_B1940              \ [0x14] B1940
+    $15 constant GTZC_MPCBB1_B1941              \ [0x15] B1941
+    $16 constant GTZC_MPCBB1_B1942              \ [0x16] B1942
+    $17 constant GTZC_MPCBB1_B1943              \ [0x17] B1943
+    $18 constant GTZC_MPCBB1_B1944              \ [0x18] B1944
+    $19 constant GTZC_MPCBB1_B1945              \ [0x19] B1945
+    $1a constant GTZC_MPCBB1_B1946              \ [0x1a] B1946
+    $1b constant GTZC_MPCBB1_B1947              \ [0x1b] B1947
+    $1c constant GTZC_MPCBB1_B1948              \ [0x1c] B1948
+    $1d constant GTZC_MPCBB1_B1949              \ [0x1d] B1949
+    $1e constant GTZC_MPCBB1_B1950              \ [0x1e] B1950
+    $1f constant GTZC_MPCBB1_B1951              \ [0x1f] B1951
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR61_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1F4
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1952              \ [0x00] B1952
+    $01 constant GTZC_MPCBB1_B1953              \ [0x01] B1953
+    $02 constant GTZC_MPCBB1_B1954              \ [0x02] B1954
+    $03 constant GTZC_MPCBB1_B1955              \ [0x03] B1955
+    $04 constant GTZC_MPCBB1_B1956              \ [0x04] B1956
+    $05 constant GTZC_MPCBB1_B1957              \ [0x05] B1957
+    $06 constant GTZC_MPCBB1_B1958              \ [0x06] B1958
+    $07 constant GTZC_MPCBB1_B1959              \ [0x07] B1959
+    $08 constant GTZC_MPCBB1_B1960              \ [0x08] B1960
+    $09 constant GTZC_MPCBB1_B1961              \ [0x09] B1961
+    $0a constant GTZC_MPCBB1_B1962              \ [0x0a] B1962
+    $0b constant GTZC_MPCBB1_B1963              \ [0x0b] B1963
+    $0c constant GTZC_MPCBB1_B1964              \ [0x0c] B1964
+    $0d constant GTZC_MPCBB1_B1965              \ [0x0d] B1965
+    $0e constant GTZC_MPCBB1_B1966              \ [0x0e] B1966
+    $0f constant GTZC_MPCBB1_B1967              \ [0x0f] B1967
+    $10 constant GTZC_MPCBB1_B1968              \ [0x10] B1968
+    $11 constant GTZC_MPCBB1_B1969              \ [0x11] B1969
+    $12 constant GTZC_MPCBB1_B1970              \ [0x12] B1970
+    $13 constant GTZC_MPCBB1_B1971              \ [0x13] B1971
+    $14 constant GTZC_MPCBB1_B1972              \ [0x14] B1972
+    $15 constant GTZC_MPCBB1_B1973              \ [0x15] B1973
+    $16 constant GTZC_MPCBB1_B1974              \ [0x16] B1974
+    $17 constant GTZC_MPCBB1_B1975              \ [0x17] B1975
+    $18 constant GTZC_MPCBB1_B1976              \ [0x18] B1976
+    $19 constant GTZC_MPCBB1_B1977              \ [0x19] B1977
+    $1a constant GTZC_MPCBB1_B1978              \ [0x1a] B1978
+    $1b constant GTZC_MPCBB1_B1979              \ [0x1b] B1979
+    $1c constant GTZC_MPCBB1_B1980              \ [0x1c] B1980
+    $1d constant GTZC_MPCBB1_B1981              \ [0x1d] B1981
+    $1e constant GTZC_MPCBB1_B1982              \ [0x1e] B1982
+    $1f constant GTZC_MPCBB1_B1983              \ [0x1f] B1983
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR62_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1F8
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B1984              \ [0x00] B1984
+    $01 constant GTZC_MPCBB1_B1985              \ [0x01] B1985
+    $02 constant GTZC_MPCBB1_B1986              \ [0x02] B1986
+    $03 constant GTZC_MPCBB1_B1987              \ [0x03] B1987
+    $04 constant GTZC_MPCBB1_B1988              \ [0x04] B1988
+    $05 constant GTZC_MPCBB1_B1989              \ [0x05] B1989
+    $06 constant GTZC_MPCBB1_B1990              \ [0x06] B1990
+    $07 constant GTZC_MPCBB1_B1991              \ [0x07] B1991
+    $08 constant GTZC_MPCBB1_B1992              \ [0x08] B1992
+    $09 constant GTZC_MPCBB1_B1993              \ [0x09] B1993
+    $0a constant GTZC_MPCBB1_B1994              \ [0x0a] B1994
+    $0b constant GTZC_MPCBB1_B1995              \ [0x0b] B1995
+    $0c constant GTZC_MPCBB1_B1996              \ [0x0c] B1996
+    $0d constant GTZC_MPCBB1_B1997              \ [0x0d] B1997
+    $0e constant GTZC_MPCBB1_B1998              \ [0x0e] B1998
+    $0f constant GTZC_MPCBB1_B1999              \ [0x0f] B1999
+    $10 constant GTZC_MPCBB1_B2000              \ [0x10] B2000
+    $11 constant GTZC_MPCBB1_B2001              \ [0x11] B2001
+    $12 constant GTZC_MPCBB1_B2002              \ [0x12] B2002
+    $13 constant GTZC_MPCBB1_B2003              \ [0x13] B2003
+    $14 constant GTZC_MPCBB1_B2004              \ [0x14] B2004
+    $15 constant GTZC_MPCBB1_B2005              \ [0x15] B2005
+    $16 constant GTZC_MPCBB1_B2006              \ [0x16] B2006
+    $17 constant GTZC_MPCBB1_B2007              \ [0x17] B2007
+    $18 constant GTZC_MPCBB1_B2008              \ [0x18] B2008
+    $19 constant GTZC_MPCBB1_B2009              \ [0x19] B2009
+    $1a constant GTZC_MPCBB1_B2010              \ [0x1a] B2010
+    $1b constant GTZC_MPCBB1_B2011              \ [0x1b] B2011
+    $1c constant GTZC_MPCBB1_B2012              \ [0x1c] B2012
+    $1d constant GTZC_MPCBB1_B2013              \ [0x1d] B2013
+    $1e constant GTZC_MPCBB1_B2014              \ [0x1e] B2014
+    $1f constant GTZC_MPCBB1_B2015              \ [0x1f] B2015
+  [then]
+
+
+  [ifdef] GTZC_MPCBB1_MPCBB1_VCTR63_DEF
+    \
+    \ @brief MPCBBx vector register
+    \ Address offset: 0x1FC
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC_MPCBB1_B2016              \ [0x00] B2016
+    $01 constant GTZC_MPCBB1_B2017              \ [0x01] B2017
+    $02 constant GTZC_MPCBB1_B2018              \ [0x02] B2018
+    $03 constant GTZC_MPCBB1_B2019              \ [0x03] B2019
+    $04 constant GTZC_MPCBB1_B2020              \ [0x04] B2020
+    $05 constant GTZC_MPCBB1_B2021              \ [0x05] B2021
+    $06 constant GTZC_MPCBB1_B2022              \ [0x06] B2022
+    $07 constant GTZC_MPCBB1_B2023              \ [0x07] B2023
+    $08 constant GTZC_MPCBB1_B2024              \ [0x08] B2024
+    $09 constant GTZC_MPCBB1_B2025              \ [0x09] B2025
+    $0a constant GTZC_MPCBB1_B2026              \ [0x0a] B2026
+    $0b constant GTZC_MPCBB1_B2027              \ [0x0b] B2027
+    $0c constant GTZC_MPCBB1_B2028              \ [0x0c] B2028
+    $0d constant GTZC_MPCBB1_B2029              \ [0x0d] B2029
+    $0e constant GTZC_MPCBB1_B2030              \ [0x0e] B2030
+    $0f constant GTZC_MPCBB1_B2031              \ [0x0f] B2031
+    $10 constant GTZC_MPCBB1_B2032              \ [0x10] B2032
+    $11 constant GTZC_MPCBB1_B2033              \ [0x11] B2033
+    $12 constant GTZC_MPCBB1_B2034              \ [0x12] B2034
+    $13 constant GTZC_MPCBB1_B2035              \ [0x13] B2035
+    $14 constant GTZC_MPCBB1_B2036              \ [0x14] B2036
+    $15 constant GTZC_MPCBB1_B2037              \ [0x15] B2037
+    $16 constant GTZC_MPCBB1_B2038              \ [0x16] B2038
+    $17 constant GTZC_MPCBB1_B2039              \ [0x17] B2039
+    $18 constant GTZC_MPCBB1_B2040              \ [0x18] B2040
+    $19 constant GTZC_MPCBB1_B2041              \ [0x19] B2041
+    $1a constant GTZC_MPCBB1_B2042              \ [0x1a] B2042
+    $1b constant GTZC_MPCBB1_B2043              \ [0x1b] B2043
+    $1c constant GTZC_MPCBB1_B2044              \ [0x1c] B2044
+    $1d constant GTZC_MPCBB1_B2045              \ [0x1d] B2045
+    $1e constant GTZC_MPCBB1_B2046              \ [0x1e] B2046
+    $1f constant GTZC_MPCBB1_B2047              \ [0x1f] B2047
+  [then]
+
+  \
+  \ @brief GTZC_MPCBB1
+  \
+  $00 constant GTZC_MPCBB1_MPCBB1_CR    \ MPCBB control register
+  $10 constant GTZC_MPCBB1_MPCBB1_LCKVTR1    \ MPCBB control register
+  $14 constant GTZC_MPCBB1_MPCBB1_LCKVTR2    \ MPCBB control register
+  $100 constant GTZC_MPCBB1_MPCBB1_VCTR0    \ MPCBBx vector register
+  $104 constant GTZC_MPCBB1_MPCBB1_VCTR1    \ MPCBBx vector register
+  $108 constant GTZC_MPCBB1_MPCBB1_VCTR2    \ MPCBBx vector register
+  $10C constant GTZC_MPCBB1_MPCBB1_VCTR3    \ MPCBBx vector register
+  $110 constant GTZC_MPCBB1_MPCBB1_VCTR4    \ MPCBBx vector register
+  $114 constant GTZC_MPCBB1_MPCBB1_VCTR5    \ MPCBBx vector register
+  $118 constant GTZC_MPCBB1_MPCBB1_VCTR6    \ MPCBBx vector register
+  $11C constant GTZC_MPCBB1_MPCBB1_VCTR7    \ MPCBBx vector register
+  $120 constant GTZC_MPCBB1_MPCBB1_VCTR8    \ MPCBBx vector register
+  $124 constant GTZC_MPCBB1_MPCBB1_VCTR9    \ MPCBBx vector register
+  $128 constant GTZC_MPCBB1_MPCBB1_VCTR10    \ MPCBBx vector register
+  $12C constant GTZC_MPCBB1_MPCBB1_VCTR11    \ MPCBBx vector register
+  $130 constant GTZC_MPCBB1_MPCBB1_VCTR12    \ MPCBBx vector register
+  $134 constant GTZC_MPCBB1_MPCBB1_VCTR13    \ MPCBBx vector register
+  $138 constant GTZC_MPCBB1_MPCBB1_VCTR14    \ MPCBBx vector register
+  $13C constant GTZC_MPCBB1_MPCBB1_VCTR15    \ MPCBBx vector register
+  $140 constant GTZC_MPCBB1_MPCBB1_VCTR16    \ MPCBBx vector register
+  $144 constant GTZC_MPCBB1_MPCBB1_VCTR17    \ MPCBBx vector register
+  $148 constant GTZC_MPCBB1_MPCBB1_VCTR18    \ MPCBBx vector register
+  $14C constant GTZC_MPCBB1_MPCBB1_VCTR19    \ MPCBBx vector register
+  $150 constant GTZC_MPCBB1_MPCBB1_VCTR20    \ MPCBBx vector register
+  $154 constant GTZC_MPCBB1_MPCBB1_VCTR21    \ MPCBBx vector register
+  $158 constant GTZC_MPCBB1_MPCBB1_VCTR22    \ MPCBBx vector register
+  $15C constant GTZC_MPCBB1_MPCBB1_VCTR23    \ MPCBBx vector register
+  $160 constant GTZC_MPCBB1_MPCBB1_VCTR24    \ MPCBBx vector register
+  $164 constant GTZC_MPCBB1_MPCBB1_VCTR25    \ MPCBBx vector register
+  $168 constant GTZC_MPCBB1_MPCBB1_VCTR26    \ MPCBBx vector register
+  $16C constant GTZC_MPCBB1_MPCBB1_VCTR27    \ MPCBBx vector register
+  $170 constant GTZC_MPCBB1_MPCBB1_VCTR28    \ MPCBBx vector register
+  $174 constant GTZC_MPCBB1_MPCBB1_VCTR29    \ MPCBBx vector register
+  $178 constant GTZC_MPCBB1_MPCBB1_VCTR30    \ MPCBBx vector register
+  $17C constant GTZC_MPCBB1_MPCBB1_VCTR31    \ MPCBBx vector register
+  $180 constant GTZC_MPCBB1_MPCBB1_VCTR32    \ MPCBBx vector register
+  $184 constant GTZC_MPCBB1_MPCBB1_VCTR33    \ MPCBBx vector register
+  $188 constant GTZC_MPCBB1_MPCBB1_VCTR34    \ MPCBBx vector register
+  $18C constant GTZC_MPCBB1_MPCBB1_VCTR35    \ MPCBBx vector register
+  $190 constant GTZC_MPCBB1_MPCBB1_VCTR36    \ MPCBBx vector register
+  $194 constant GTZC_MPCBB1_MPCBB1_VCTR37    \ MPCBBx vector register
+  $198 constant GTZC_MPCBB1_MPCBB1_VCTR38    \ MPCBBx vector register
+  $19C constant GTZC_MPCBB1_MPCBB1_VCTR39    \ MPCBBx vector register
+  $1A0 constant GTZC_MPCBB1_MPCBB1_VCTR40    \ MPCBBx vector register
+  $1A4 constant GTZC_MPCBB1_MPCBB1_VCTR41    \ MPCBBx vector register
+  $1A8 constant GTZC_MPCBB1_MPCBB1_VCTR42    \ MPCBBx vector register
+  $1AC constant GTZC_MPCBB1_MPCBB1_VCTR43    \ MPCBBx vector register
+  $1B0 constant GTZC_MPCBB1_MPCBB1_VCTR44    \ MPCBBx vector register
+  $1B4 constant GTZC_MPCBB1_MPCBB1_VCTR45    \ MPCBBx vector register
+  $1B8 constant GTZC_MPCBB1_MPCBB1_VCTR46    \ MPCBBx vector register
+  $1BC constant GTZC_MPCBB1_MPCBB1_VCTR47    \ MPCBBx vector register
+  $1C0 constant GTZC_MPCBB1_MPCBB1_VCTR48    \ MPCBBx vector register
+  $1C4 constant GTZC_MPCBB1_MPCBB1_VCTR49    \ MPCBBx vector register
+  $1C8 constant GTZC_MPCBB1_MPCBB1_VCTR50    \ MPCBBx vector register
+  $1CC constant GTZC_MPCBB1_MPCBB1_VCTR51    \ MPCBBx vector register
+  $1D0 constant GTZC_MPCBB1_MPCBB1_VCTR52    \ MPCBBx vector register
+  $1D4 constant GTZC_MPCBB1_MPCBB1_VCTR53    \ MPCBBx vector register
+  $1D8 constant GTZC_MPCBB1_MPCBB1_VCTR54    \ MPCBBx vector register
+  $1DC constant GTZC_MPCBB1_MPCBB1_VCTR55    \ MPCBBx vector register
+  $1E0 constant GTZC_MPCBB1_MPCBB1_VCTR56    \ MPCBBx vector register
+  $1E4 constant GTZC_MPCBB1_MPCBB1_VCTR57    \ MPCBBx vector register
+  $1E8 constant GTZC_MPCBB1_MPCBB1_VCTR58    \ MPCBBx vector register
+  $1EC constant GTZC_MPCBB1_MPCBB1_VCTR59    \ MPCBBx vector register
+  $1F0 constant GTZC_MPCBB1_MPCBB1_VCTR60    \ MPCBBx vector register
+  $1F4 constant GTZC_MPCBB1_MPCBB1_VCTR61    \ MPCBBx vector register
+  $1F8 constant GTZC_MPCBB1_MPCBB1_VCTR62    \ MPCBBx vector register
+  $1FC constant GTZC_MPCBB1_MPCBB1_VCTR63    \ MPCBBx vector register
+
+: GTZC_MPCBB1_DEF ; [then]

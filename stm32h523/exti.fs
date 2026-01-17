@@ -6,567 +6,590 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief EXTI rising trigger selection register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_RTSR1_RT0                              \ Rising trigger event configuration bit of configurable event input x
-$00000002 constant EXTI_EXTI_RTSR1_RT1                              \ Rising trigger event configuration bit of configurable event input x
-$00000004 constant EXTI_EXTI_RTSR1_RT2                              \ Rising trigger event configuration bit of configurable event input x
-$00000008 constant EXTI_EXTI_RTSR1_RT3                              \ Rising trigger event configuration bit of configurable event input x
-$00000010 constant EXTI_EXTI_RTSR1_RT4                              \ Rising trigger event configuration bit of configurable event input x
-$00000020 constant EXTI_EXTI_RTSR1_RT5                              \ Rising trigger event configuration bit of configurable event input x
-$00000040 constant EXTI_EXTI_RTSR1_RT6                              \ Rising trigger event configuration bit of configurable event input x
-$00000080 constant EXTI_EXTI_RTSR1_RT7                              \ Rising trigger event configuration bit of configurable event input x
-$00000100 constant EXTI_EXTI_RTSR1_RT8                              \ Rising trigger event configuration bit of configurable event input x
-$00000200 constant EXTI_EXTI_RTSR1_RT9                              \ Rising trigger event configuration bit of configurable event input x
-$00000400 constant EXTI_EXTI_RTSR1_RT10                             \ Rising trigger event configuration bit of configurable event input x
-$00000800 constant EXTI_EXTI_RTSR1_RT11                             \ Rising trigger event configuration bit of configurable event input x
-$00001000 constant EXTI_EXTI_RTSR1_RT12                             \ Rising trigger event configuration bit of configurable event input x
-$00002000 constant EXTI_EXTI_RTSR1_RT13                             \ Rising trigger event configuration bit of configurable event input x
-$00004000 constant EXTI_EXTI_RTSR1_RT14                             \ Rising trigger event configuration bit of configurable event input x
-$00008000 constant EXTI_EXTI_RTSR1_RT15                             \ Rising trigger event configuration bit of configurable event input x
-$00010000 constant EXTI_EXTI_RTSR1_RT16                             \ Rising trigger event configuration bit of configurable event input x
-
-
-\
-\ @brief EXTI falling trigger selection register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_FTSR1_FT0                              \ Falling trigger event configuration bit of configurable event input x
-$00000002 constant EXTI_EXTI_FTSR1_FT1                              \ Falling trigger event configuration bit of configurable event input x
-$00000004 constant EXTI_EXTI_FTSR1_FT2                              \ Falling trigger event configuration bit of configurable event input x
-$00000008 constant EXTI_EXTI_FTSR1_FT3                              \ Falling trigger event configuration bit of configurable event input x
-$00000010 constant EXTI_EXTI_FTSR1_FT4                              \ Falling trigger event configuration bit of configurable event input x
-$00000020 constant EXTI_EXTI_FTSR1_FT5                              \ Falling trigger event configuration bit of configurable event input x
-$00000040 constant EXTI_EXTI_FTSR1_FT6                              \ Falling trigger event configuration bit of configurable event input x
-$00000080 constant EXTI_EXTI_FTSR1_FT7                              \ Falling trigger event configuration bit of configurable event input x
-$00000100 constant EXTI_EXTI_FTSR1_FT8                              \ Falling trigger event configuration bit of configurable event input x
-$00000200 constant EXTI_EXTI_FTSR1_FT9                              \ Falling trigger event configuration bit of configurable event input x
-$00000400 constant EXTI_EXTI_FTSR1_FT10                             \ Falling trigger event configuration bit of configurable event input x
-$00000800 constant EXTI_EXTI_FTSR1_FT11                             \ Falling trigger event configuration bit of configurable event input x
-$00001000 constant EXTI_EXTI_FTSR1_FT12                             \ Falling trigger event configuration bit of configurable event input x
-$00002000 constant EXTI_EXTI_FTSR1_FT13                             \ Falling trigger event configuration bit of configurable event input x
-$00004000 constant EXTI_EXTI_FTSR1_FT14                             \ Falling trigger event configuration bit of configurable event input x
-$00008000 constant EXTI_EXTI_FTSR1_FT15                             \ Falling trigger event configuration bit of configurable event input x
-$00010000 constant EXTI_EXTI_FTSR1_FT16                             \ Falling trigger event configuration bit of configurable event input x
-
-
-\
-\ @brief EXTI software interrupt event register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_SWIER1_SWI0                            \ Software interrupt on event x
-$00000002 constant EXTI_EXTI_SWIER1_SWI1                            \ Software interrupt on event x
-$00000004 constant EXTI_EXTI_SWIER1_SWI2                            \ Software interrupt on event x
-$00000008 constant EXTI_EXTI_SWIER1_SWI3                            \ Software interrupt on event x
-$00000010 constant EXTI_EXTI_SWIER1_SWI4                            \ Software interrupt on event x
-$00000020 constant EXTI_EXTI_SWIER1_SWI5                            \ Software interrupt on event x
-$00000040 constant EXTI_EXTI_SWIER1_SWI6                            \ Software interrupt on event x
-$00000080 constant EXTI_EXTI_SWIER1_SWI7                            \ Software interrupt on event x
-$00000100 constant EXTI_EXTI_SWIER1_SWI8                            \ Software interrupt on event x
-$00000200 constant EXTI_EXTI_SWIER1_SWI9                            \ Software interrupt on event x
-$00000400 constant EXTI_EXTI_SWIER1_SWI10                           \ Software interrupt on event x
-$00000800 constant EXTI_EXTI_SWIER1_SWI11                           \ Software interrupt on event x
-$00001000 constant EXTI_EXTI_SWIER1_SWI12                           \ Software interrupt on event x
-$00002000 constant EXTI_EXTI_SWIER1_SWI13                           \ Software interrupt on event x
-$00004000 constant EXTI_EXTI_SWIER1_SWI14                           \ Software interrupt on event x
-$00008000 constant EXTI_EXTI_SWIER1_SWI15                           \ Software interrupt on event x
-$00010000 constant EXTI_EXTI_SWIER1_SWI16                           \ Software interrupt on event x
-
-
-\
-\ @brief EXTI rising edge pending register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_RPR1_RPIF0                             \ configurable event inputs x rising edge pending bit
-$00000002 constant EXTI_EXTI_RPR1_RPIF1                             \ configurable event inputs x rising edge pending bit
-$00000004 constant EXTI_EXTI_RPR1_RPIF2                             \ configurable event inputs x rising edge pending bit
-$00000008 constant EXTI_EXTI_RPR1_RPIF3                             \ configurable event inputs x rising edge pending bit
-$00000010 constant EXTI_EXTI_RPR1_RPIF4                             \ configurable event inputs x rising edge pending bit
-$00000020 constant EXTI_EXTI_RPR1_RPIF5                             \ configurable event inputs x rising edge pending bit
-$00000040 constant EXTI_EXTI_RPR1_RPIF6                             \ configurable event inputs x rising edge pending bit
-$00000080 constant EXTI_EXTI_RPR1_RPIF7                             \ configurable event inputs x rising edge pending bit
-$00000100 constant EXTI_EXTI_RPR1_RPIF8                             \ configurable event inputs x rising edge pending bit
-$00000200 constant EXTI_EXTI_RPR1_RPIF9                             \ configurable event inputs x rising edge pending bit
-$00000400 constant EXTI_EXTI_RPR1_RPIF10                            \ configurable event inputs x rising edge pending bit
-$00000800 constant EXTI_EXTI_RPR1_RPIF11                            \ configurable event inputs x rising edge pending bit
-$00001000 constant EXTI_EXTI_RPR1_RPIF12                            \ configurable event inputs x rising edge pending bit
-$00002000 constant EXTI_EXTI_RPR1_RPIF13                            \ configurable event inputs x rising edge pending bit
-$00004000 constant EXTI_EXTI_RPR1_RPIF14                            \ configurable event inputs x rising edge pending bit
-$00008000 constant EXTI_EXTI_RPR1_RPIF15                            \ configurable event inputs x rising edge pending bit
-$00010000 constant EXTI_EXTI_RPR1_RPIF16                            \ configurable event inputs x rising edge pending bit
-
-
-\
-\ @brief EXTI falling edge pending register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_FPR1_FPIF0                             \ configurable event inputs x falling edge pending bit
-$00000002 constant EXTI_EXTI_FPR1_FPIF1                             \ configurable event inputs x falling edge pending bit
-$00000004 constant EXTI_EXTI_FPR1_FPIF2                             \ configurable event inputs x falling edge pending bit
-$00000008 constant EXTI_EXTI_FPR1_FPIF3                             \ configurable event inputs x falling edge pending bit
-$00000010 constant EXTI_EXTI_FPR1_FPIF4                             \ configurable event inputs x falling edge pending bit
-$00000020 constant EXTI_EXTI_FPR1_FPIF5                             \ configurable event inputs x falling edge pending bit
-$00000040 constant EXTI_EXTI_FPR1_FPIF6                             \ configurable event inputs x falling edge pending bit
-$00000080 constant EXTI_EXTI_FPR1_FPIF7                             \ configurable event inputs x falling edge pending bit
-$00000100 constant EXTI_EXTI_FPR1_FPIF8                             \ configurable event inputs x falling edge pending bit
-$00000200 constant EXTI_EXTI_FPR1_FPIF9                             \ configurable event inputs x falling edge pending bit
-$00000400 constant EXTI_EXTI_FPR1_FPIF10                            \ configurable event inputs x falling edge pending bit
-$00000800 constant EXTI_EXTI_FPR1_FPIF11                            \ configurable event inputs x falling edge pending bit
-$00001000 constant EXTI_EXTI_FPR1_FPIF12                            \ configurable event inputs x falling edge pending bit
-$00002000 constant EXTI_EXTI_FPR1_FPIF13                            \ configurable event inputs x falling edge pending bit
-$00004000 constant EXTI_EXTI_FPR1_FPIF14                            \ configurable event inputs x falling edge pending bit
-$00008000 constant EXTI_EXTI_FPR1_FPIF15                            \ configurable event inputs x falling edge pending bit
-$00010000 constant EXTI_EXTI_FPR1_FPIF16                            \ configurable event inputs x falling edge pending bit
-
-
-\
-\ @brief EXTI security configuration register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_SECCFGR1_SEC0                          \ Security enable on event input x
-$00000002 constant EXTI_EXTI_SECCFGR1_SEC1                          \ Security enable on event input x
-$00000004 constant EXTI_EXTI_SECCFGR1_SEC2                          \ Security enable on event input x
-$00000008 constant EXTI_EXTI_SECCFGR1_SEC3                          \ Security enable on event input x
-$00000010 constant EXTI_EXTI_SECCFGR1_SEC4                          \ Security enable on event input x
-$00000020 constant EXTI_EXTI_SECCFGR1_SEC5                          \ Security enable on event input x
-$00000040 constant EXTI_EXTI_SECCFGR1_SEC6                          \ Security enable on event input x
-$00000080 constant EXTI_EXTI_SECCFGR1_SEC7                          \ Security enable on event input x
-$00000100 constant EXTI_EXTI_SECCFGR1_SEC8                          \ Security enable on event input x
-$00000200 constant EXTI_EXTI_SECCFGR1_SEC9                          \ Security enable on event input x
-$00000400 constant EXTI_EXTI_SECCFGR1_SEC10                         \ Security enable on event input x
-$00000800 constant EXTI_EXTI_SECCFGR1_SEC11                         \ Security enable on event input x
-$00001000 constant EXTI_EXTI_SECCFGR1_SEC12                         \ Security enable on event input x
-$00002000 constant EXTI_EXTI_SECCFGR1_SEC13                         \ Security enable on event input x
-$00004000 constant EXTI_EXTI_SECCFGR1_SEC14                         \ Security enable on event input x
-$00008000 constant EXTI_EXTI_SECCFGR1_SEC15                         \ Security enable on event input x
-$00010000 constant EXTI_EXTI_SECCFGR1_SEC16                         \ Security enable on event input x
-$00020000 constant EXTI_EXTI_SECCFGR1_SEC17                         \ Security enable on event input x
-$00040000 constant EXTI_EXTI_SECCFGR1_SEC18                         \ Security enable on event input x
-$00080000 constant EXTI_EXTI_SECCFGR1_SEC19                         \ Security enable on event input x
-$00100000 constant EXTI_EXTI_SECCFGR1_SEC20                         \ Security enable on event input x
-$00200000 constant EXTI_EXTI_SECCFGR1_SEC21                         \ Security enable on event input x
-$00400000 constant EXTI_EXTI_SECCFGR1_SEC22                         \ Security enable on event input x
-$00800000 constant EXTI_EXTI_SECCFGR1_SEC23                         \ Security enable on event input x
-$01000000 constant EXTI_EXTI_SECCFGR1_SEC24                         \ Security enable on event input x
-$02000000 constant EXTI_EXTI_SECCFGR1_SEC25                         \ Security enable on event input x
-$04000000 constant EXTI_EXTI_SECCFGR1_SEC26                         \ Security enable on event input x
-$08000000 constant EXTI_EXTI_SECCFGR1_SEC27                         \ Security enable on event input x
-$10000000 constant EXTI_EXTI_SECCFGR1_SEC28                         \ Security enable on event input x
-$20000000 constant EXTI_EXTI_SECCFGR1_SEC29                         \ Security enable on event input x
-$40000000 constant EXTI_EXTI_SECCFGR1_SEC30                         \ Security enable on event input x
-$80000000 constant EXTI_EXTI_SECCFGR1_SEC31                         \ Security enable on event input x
-
-
-\
-\ @brief EXTI privilege configuration register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_PRIVCFGR1_PRIV0                        \ Security enable on event input x
-$00000002 constant EXTI_EXTI_PRIVCFGR1_PRIV1                        \ Security enable on event input x
-$00000004 constant EXTI_EXTI_PRIVCFGR1_PRIV2                        \ Security enable on event input x
-$00000008 constant EXTI_EXTI_PRIVCFGR1_PRIV3                        \ Security enable on event input x
-$00000010 constant EXTI_EXTI_PRIVCFGR1_PRIV4                        \ Security enable on event input x
-$00000020 constant EXTI_EXTI_PRIVCFGR1_PRIV5                        \ Security enable on event input x
-$00000040 constant EXTI_EXTI_PRIVCFGR1_PRIV6                        \ Security enable on event input x
-$00000080 constant EXTI_EXTI_PRIVCFGR1_PRIV7                        \ Security enable on event input x
-$00000100 constant EXTI_EXTI_PRIVCFGR1_PRIV8                        \ Security enable on event input x
-$00000200 constant EXTI_EXTI_PRIVCFGR1_PRIV9                        \ Security enable on event input x
-$00000400 constant EXTI_EXTI_PRIVCFGR1_PRIV10                       \ Security enable on event input x
-$00000800 constant EXTI_EXTI_PRIVCFGR1_PRIV11                       \ Security enable on event input x
-$00001000 constant EXTI_EXTI_PRIVCFGR1_PRIV12                       \ Security enable on event input x
-$00002000 constant EXTI_EXTI_PRIVCFGR1_PRIV13                       \ Security enable on event input x
-$00004000 constant EXTI_EXTI_PRIVCFGR1_PRIV14                       \ Security enable on event input x
-$00008000 constant EXTI_EXTI_PRIVCFGR1_PRIV15                       \ Security enable on event input x
-$00010000 constant EXTI_EXTI_PRIVCFGR1_PRIV16                       \ Security enable on event input x
-$00020000 constant EXTI_EXTI_PRIVCFGR1_PRIV17                       \ Security enable on event input x
-$00040000 constant EXTI_EXTI_PRIVCFGR1_PRIV18                       \ Security enable on event input x
-$00080000 constant EXTI_EXTI_PRIVCFGR1_PRIV19                       \ Security enable on event input x
-$00100000 constant EXTI_EXTI_PRIVCFGR1_PRIV20                       \ Security enable on event input x
-$00200000 constant EXTI_EXTI_PRIVCFGR1_PRIV21                       \ Security enable on event input x
-$00400000 constant EXTI_EXTI_PRIVCFGR1_PRIV22                       \ Security enable on event input x
-$00800000 constant EXTI_EXTI_PRIVCFGR1_PRIV23                       \ Security enable on event input x
-$01000000 constant EXTI_EXTI_PRIVCFGR1_PRIV24                       \ Security enable on event input x
-$02000000 constant EXTI_EXTI_PRIVCFGR1_PRIV25                       \ Security enable on event input x
-$04000000 constant EXTI_EXTI_PRIVCFGR1_PRIV26                       \ Security enable on event input x
-$08000000 constant EXTI_EXTI_PRIVCFGR1_PRIV27                       \ Security enable on event input x
-$10000000 constant EXTI_EXTI_PRIVCFGR1_PRIV28                       \ Security enable on event input x
-$20000000 constant EXTI_EXTI_PRIVCFGR1_PRIV29                       \ Security enable on event input x
-$40000000 constant EXTI_EXTI_PRIVCFGR1_PRIV30                       \ Security enable on event input x
-$80000000 constant EXTI_EXTI_PRIVCFGR1_PRIV31                       \ Security enable on event input x
-
-
-\
-\ @brief EXTI rising trigger selection register 2
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00004000 constant EXTI_EXTI_RTSR2_RT46                             \ Rising trigger event configuration bit of configurable event input xless thansup>(1)less than/sup>
-$00040000 constant EXTI_EXTI_RTSR2_RT50                             \ Rising trigger event configuration bit of configurable event input xless thansup>(1)less than/sup>
-$00200000 constant EXTI_EXTI_RTSR2_RT53                             \ Rising trigger event configuration bit of configurable event input x
-
-
-\
-\ @brief EXTI falling trigger selection register 2
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00004000 constant EXTI_EXTI_FTSR2_FT46                             \ Falling trigger event configuration bit of configurable event input x less thansup>(1)less than/sup>
-$00040000 constant EXTI_EXTI_FTSR2_FT50                             \ Falling trigger event configuration bit of configurable event input x less thansup>(1)less than/sup>
-$00200000 constant EXTI_EXTI_FTSR2_FT53                             \ Falling trigger event configuration bit of configurable event input x
-
-
-\
-\ @brief EXTI software interrupt event register 2
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00004000 constant EXTI_EXTI_SWIER2_SWI46                           \ Software interrupt on event x
-$00040000 constant EXTI_EXTI_SWIER2_SWI50                           \ Software interrupt on event x
-$00200000 constant EXTI_EXTI_SWIER2_SWI53                           \ Software interrupt on event x
-
-
-\
-\ @brief EXTI rising edge pending register 2
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00004000 constant EXTI_EXTI_RPR2_RPIF46                            \ configurable event inputs x rising edge pending bit
-$00040000 constant EXTI_EXTI_RPR2_RPIF50                            \ configurable event inputs x rising edge pending bit
-$00200000 constant EXTI_EXTI_RPR2_RPIF53                            \ configurable event inputs x rising edge pending bit
-
-
-\
-\ @brief EXTI falling edge pending register 2
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00004000 constant EXTI_EXTI_FPR2_FPIF46                            \ configurable event inputs x falling edge pending bit
-$00040000 constant EXTI_EXTI_FPR2_FPIF50                            \ configurable event inputs x falling edge pending bit
-$00200000 constant EXTI_EXTI_FPR2_FPIF53                            \ configurable event inputs x falling edge pending bit
-
-
-\
-\ @brief EXTI security configuration register 2
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_SECCFGR2_SEC32                         \ Security enable on event input x
-$00000002 constant EXTI_EXTI_SECCFGR2_SEC33                         \ Security enable on event input x
-$00000004 constant EXTI_EXTI_SECCFGR2_SEC34                         \ Security enable on event input x
-$00000008 constant EXTI_EXTI_SECCFGR2_SEC35                         \ Security enable on event input x
-$00000010 constant EXTI_EXTI_SECCFGR2_SEC36                         \ Security enable on event input x
-$00000020 constant EXTI_EXTI_SECCFGR2_SEC37                         \ Security enable on event input x
-$00000040 constant EXTI_EXTI_SECCFGR2_SEC38                         \ Security enable on event input x
-$00000080 constant EXTI_EXTI_SECCFGR2_SEC39                         \ Security enable on event input x
-$00000100 constant EXTI_EXTI_SECCFGR2_SEC40                         \ Security enable on event input x
-$00000200 constant EXTI_EXTI_SECCFGR2_SEC41                         \ Security enable on event input x
-$00000400 constant EXTI_EXTI_SECCFGR2_SEC42                         \ Security enable on event input x
-$00000800 constant EXTI_EXTI_SECCFGR2_SEC43                         \ Security enable on event input x
-$00001000 constant EXTI_EXTI_SECCFGR2_SEC44                         \ Security enable on event input x
-$00002000 constant EXTI_EXTI_SECCFGR2_SEC45                         \ Security enable on event input x
-$00004000 constant EXTI_EXTI_SECCFGR2_SEC46                         \ Security enable on event input x
-$00008000 constant EXTI_EXTI_SECCFGR2_SEC47                         \ Security enable on event input x
-$00010000 constant EXTI_EXTI_SECCFGR2_SEC48                         \ Security enable on event input x
-$00020000 constant EXTI_EXTI_SECCFGR2_SEC49                         \ Security enable on event input x
-$00040000 constant EXTI_EXTI_SECCFGR2_SEC50                         \ Security enable on event input x
-$00080000 constant EXTI_EXTI_SECCFGR2_SEC51                         \ Security enable on event input x
-$00100000 constant EXTI_EXTI_SECCFGR2_SEC52                         \ Security enable on event input x
-$00200000 constant EXTI_EXTI_SECCFGR2_SEC53                         \ Security enable on event input x
-$00400000 constant EXTI_EXTI_SECCFGR2_SEC54                         \ Security enable on event input x
-$00800000 constant EXTI_EXTI_SECCFGR2_SEC55                         \ Security enable on event input x
-$01000000 constant EXTI_EXTI_SECCFGR2_SEC56                         \ Security enable on event input x
-$02000000 constant EXTI_EXTI_SECCFGR2_SEC57                         \ Security enable on event input x
-
-
-\
-\ @brief EXTI privilege configuration register 2
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_PRIVCFGR2_PRIV32                       \ Security enable on event input x
-$00000002 constant EXTI_EXTI_PRIVCFGR2_PRIV33                       \ Security enable on event input x
-$00000004 constant EXTI_EXTI_PRIVCFGR2_PRIV34                       \ Security enable on event input x
-$00000008 constant EXTI_EXTI_PRIVCFGR2_PRIV35                       \ Security enable on event input x
-$00000010 constant EXTI_EXTI_PRIVCFGR2_PRIV36                       \ Security enable on event input x
-$00000020 constant EXTI_EXTI_PRIVCFGR2_PRIV37                       \ Security enable on event input x
-$00000040 constant EXTI_EXTI_PRIVCFGR2_PRIV38                       \ Security enable on event input x
-$00000080 constant EXTI_EXTI_PRIVCFGR2_PRIV39                       \ Security enable on event input x
-$00000100 constant EXTI_EXTI_PRIVCFGR2_PRIV40                       \ Security enable on event input x
-$00000200 constant EXTI_EXTI_PRIVCFGR2_PRIV41                       \ Security enable on event input x
-$00000400 constant EXTI_EXTI_PRIVCFGR2_PRIV42                       \ Security enable on event input x
-$00000800 constant EXTI_EXTI_PRIVCFGR2_PRIV43                       \ Security enable on event input x
-$00001000 constant EXTI_EXTI_PRIVCFGR2_PRIV44                       \ Security enable on event input x
-$00002000 constant EXTI_EXTI_PRIVCFGR2_PRIV45                       \ Security enable on event input x
-$00004000 constant EXTI_EXTI_PRIVCFGR2_PRIV46                       \ Security enable on event input x
-$00008000 constant EXTI_EXTI_PRIVCFGR2_PRIV47                       \ Security enable on event input x
-$00010000 constant EXTI_EXTI_PRIVCFGR2_PRIV48                       \ Security enable on event input x
-$00020000 constant EXTI_EXTI_PRIVCFGR2_PRIV49                       \ Security enable on event input x
-$00040000 constant EXTI_EXTI_PRIVCFGR2_PRIV50                       \ Security enable on event input x
-$00080000 constant EXTI_EXTI_PRIVCFGR2_PRIV51                       \ Security enable on event input x
-$00100000 constant EXTI_EXTI_PRIVCFGR2_PRIV52                       \ Security enable on event input x
-$00200000 constant EXTI_EXTI_PRIVCFGR2_PRIV53                       \ Security enable on event input x
-$00400000 constant EXTI_EXTI_PRIVCFGR2_PRIV54                       \ Security enable on event input x
-$00800000 constant EXTI_EXTI_PRIVCFGR2_PRIV55                       \ Security enable on event input x
-$01000000 constant EXTI_EXTI_PRIVCFGR2_PRIV56                       \ Security enable on event input x
-$02000000 constant EXTI_EXTI_PRIVCFGR2_PRIV57                       \ Security enable on event input x
-
-
-\
-\ @brief EXTI external interrupt selection register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$000000ff constant EXTI_EXTI_EXTICR1_EXTI0                          \ EXTI0 GPIO port selection
-$0000ff00 constant EXTI_EXTI_EXTICR1_EXTI1                          \ EXTI1 GPIO port selection
-$00ff0000 constant EXTI_EXTI_EXTICR1_EXTI2                          \ EXTI2 GPIO port selection
-$ff000000 constant EXTI_EXTI_EXTICR1_EXTI3                          \ EXTI3 GPIO port selection
-
-
-\
-\ @brief EXTI external interrupt selection register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$000000ff constant EXTI_EXTI_EXTICR4_EXTI12                         \ EXTI12 GPIO port selection
-$0000ff00 constant EXTI_EXTI_EXTICR4_EXTI13                         \ EXTI13 GPIO port selection
-$00ff0000 constant EXTI_EXTI_EXTICR4_EXTI14                         \ EXTI14 GPIO port selection
-$ff000000 constant EXTI_EXTI_EXTICR4_EXTI15                         \ EXTI15 GPIO port selection
-
-
-\
-\ @brief EXTI external interrupt selection register
-\ Address offset: 0x64
-\ Reset value: 0x00000000
-\
-
-$000000ff constant EXTI_EXTI_EXTICR2_EXTI4                          \ EXTI4 GPIO port selection
-$0000ff00 constant EXTI_EXTI_EXTICR2_EXTI5                          \ EXTI5 GPIO port selection
-$00ff0000 constant EXTI_EXTI_EXTICR2_EXTI6                          \ EXTI6 GPIO port selection
-$ff000000 constant EXTI_EXTI_EXTICR2_EXTI7                          \ EXTI7 GPIO port selection
-
-
-\
-\ @brief EXTI external interrupt selection register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$000000ff constant EXTI_EXTI_EXTICR3_EXTI8                          \ EXTI8 GPIO port selection
-$0000ff00 constant EXTI_EXTI_EXTICR3_EXTI9                          \ EXTI9 GPIO port selection
-$00ff0000 constant EXTI_EXTI_EXTICR3_EXTI10                         \ EXTI10 GPIO port selection
-$ff000000 constant EXTI_EXTI_EXTICR3_EXTI11                         \ EXTI11 GPIO port selection
-
-
-\
-\ @brief EXTI lock register
-\ Address offset: 0x70
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_LOCKR_LOCK                             \ Global security and privilege configuration registers (EXTI_SECCFGR and EXTI_PRIVCFGR) lock
-
-
-\
-\ @brief EXTI CPU wake-up with interrupt mask register
-\ Address offset: 0x80
-\ Reset value: 0xFFFE0000
-\
-
-$00000001 constant EXTI_EXTI_IMR1_IM0                               \ CPU wake-up with interrupt mask on event input x
-$00000002 constant EXTI_EXTI_IMR1_IM1                               \ CPU wake-up with interrupt mask on event input x
-$00000004 constant EXTI_EXTI_IMR1_IM2                               \ CPU wake-up with interrupt mask on event input x
-$00000008 constant EXTI_EXTI_IMR1_IM3                               \ CPU wake-up with interrupt mask on event input x
-$00000010 constant EXTI_EXTI_IMR1_IM4                               \ CPU wake-up with interrupt mask on event input x
-$00000020 constant EXTI_EXTI_IMR1_IM5                               \ CPU wake-up with interrupt mask on event input x
-$00000040 constant EXTI_EXTI_IMR1_IM6                               \ CPU wake-up with interrupt mask on event input x
-$00000080 constant EXTI_EXTI_IMR1_IM7                               \ CPU wake-up with interrupt mask on event input x
-$00000100 constant EXTI_EXTI_IMR1_IM8                               \ CPU wake-up with interrupt mask on event input x
-$00000200 constant EXTI_EXTI_IMR1_IM9                               \ CPU wake-up with interrupt mask on event input x
-$00000400 constant EXTI_EXTI_IMR1_IM10                              \ CPU wake-up with interrupt mask on event input x
-$00000800 constant EXTI_EXTI_IMR1_IM11                              \ CPU wake-up with interrupt mask on event input x
-$00001000 constant EXTI_EXTI_IMR1_IM12                              \ CPU wake-up with interrupt mask on event input x
-$00002000 constant EXTI_EXTI_IMR1_IM13                              \ CPU wake-up with interrupt mask on event input x
-$00004000 constant EXTI_EXTI_IMR1_IM14                              \ CPU wake-up with interrupt mask on event input x
-$00008000 constant EXTI_EXTI_IMR1_IM15                              \ CPU wake-up with interrupt mask on event input x
-$00010000 constant EXTI_EXTI_IMR1_IM16                              \ CPU wake-up with interrupt mask on event input x
-$00020000 constant EXTI_EXTI_IMR1_IM17                              \ CPU wake-up with interrupt mask on event input x
-$00040000 constant EXTI_EXTI_IMR1_IM18                              \ CPU wake-up with interrupt mask on event input x
-$00080000 constant EXTI_EXTI_IMR1_IM19                              \ CPU wake-up with interrupt mask on event input x
-$00100000 constant EXTI_EXTI_IMR1_IM20                              \ CPU wake-up with interrupt mask on event input x
-$00200000 constant EXTI_EXTI_IMR1_IM21                              \ CPU wake-up with interrupt mask on event input x
-$00400000 constant EXTI_EXTI_IMR1_IM22                              \ CPU wake-up with interrupt mask on event input x
-$00800000 constant EXTI_EXTI_IMR1_IM23                              \ CPU wake-up with interrupt mask on event input x
-$01000000 constant EXTI_EXTI_IMR1_IM24                              \ CPU wake-up with interrupt mask on event input x
-$02000000 constant EXTI_EXTI_IMR1_IM25                              \ CPU wake-up with interrupt mask on event input x
-$04000000 constant EXTI_EXTI_IMR1_IM26                              \ CPU wake-up with interrupt mask on event input x
-$08000000 constant EXTI_EXTI_IMR1_IM27                              \ CPU wake-up with interrupt mask on event input x
-$10000000 constant EXTI_EXTI_IMR1_IM28                              \ CPU wake-up with interrupt mask on event input x
-$20000000 constant EXTI_EXTI_IMR1_IM29                              \ CPU wake-up with interrupt mask on event input x
-$40000000 constant EXTI_EXTI_IMR1_IM30                              \ CPU wake-up with interrupt mask on event input x
-$80000000 constant EXTI_EXTI_IMR1_IM31                              \ CPU wake-up with interrupt mask on event input x
-
-
-\
-\ @brief EXTI CPU wake-up with event mask register
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_EMR1_EM0                               \ CPU wake-up with event generation mask on event input x
-$00000002 constant EXTI_EXTI_EMR1_EM1                               \ CPU wake-up with event generation mask on event input x
-$00000004 constant EXTI_EXTI_EMR1_EM2                               \ CPU wake-up with event generation mask on event input x
-$00000008 constant EXTI_EXTI_EMR1_EM3                               \ CPU wake-up with event generation mask on event input x
-$00000010 constant EXTI_EXTI_EMR1_EM4                               \ CPU wake-up with event generation mask on event input x
-$00000020 constant EXTI_EXTI_EMR1_EM5                               \ CPU wake-up with event generation mask on event input x
-$00000040 constant EXTI_EXTI_EMR1_EM6                               \ CPU wake-up with event generation mask on event input x
-$00000080 constant EXTI_EXTI_EMR1_EM7                               \ CPU wake-up with event generation mask on event input x
-$00000100 constant EXTI_EXTI_EMR1_EM8                               \ CPU wake-up with event generation mask on event input x
-$00000200 constant EXTI_EXTI_EMR1_EM9                               \ CPU wake-up with event generation mask on event input x
-$00000400 constant EXTI_EXTI_EMR1_EM10                              \ CPU wake-up with event generation mask on event input x
-$00000800 constant EXTI_EXTI_EMR1_EM11                              \ CPU wake-up with event generation mask on event input x
-$00001000 constant EXTI_EXTI_EMR1_EM12                              \ CPU wake-up with event generation mask on event input x
-$00002000 constant EXTI_EXTI_EMR1_EM13                              \ CPU wake-up with event generation mask on event input x
-$00004000 constant EXTI_EXTI_EMR1_EM14                              \ CPU wake-up with event generation mask on event input x
-$00008000 constant EXTI_EXTI_EMR1_EM15                              \ CPU wake-up with event generation mask on event input x
-$00010000 constant EXTI_EXTI_EMR1_EM16                              \ CPU wake-up with event generation mask on event input x
-$00020000 constant EXTI_EXTI_EMR1_EM17                              \ CPU wake-up with event generation mask on event input x
-$00040000 constant EXTI_EXTI_EMR1_EM18                              \ CPU wake-up with event generation mask on event input x
-$00080000 constant EXTI_EXTI_EMR1_EM19                              \ CPU wake-up with event generation mask on event input x
-$00100000 constant EXTI_EXTI_EMR1_EM20                              \ CPU wake-up with event generation mask on event input x
-$00200000 constant EXTI_EXTI_EMR1_EM21                              \ CPU wake-up with event generation mask on event input x
-$00400000 constant EXTI_EXTI_EMR1_EM22                              \ CPU wake-up with event generation mask on event input x
-$00800000 constant EXTI_EXTI_EMR1_EM23                              \ CPU wake-up with event generation mask on event input x
-$01000000 constant EXTI_EXTI_EMR1_EM24                              \ CPU wake-up with event generation mask on event input x
-$02000000 constant EXTI_EXTI_EMR1_EM25                              \ CPU wake-up with event generation mask on event input x
-$04000000 constant EXTI_EXTI_EMR1_EM26                              \ CPU wake-up with event generation mask on event input x
-$08000000 constant EXTI_EXTI_EMR1_EM27                              \ CPU wake-up with event generation mask on event input x
-$10000000 constant EXTI_EXTI_EMR1_EM28                              \ CPU wake-up with event generation mask on event input x
-$20000000 constant EXTI_EXTI_EMR1_EM29                              \ CPU wake-up with event generation mask on event input x
-$40000000 constant EXTI_EXTI_EMR1_EM30                              \ CPU wake-up with event generation mask on event input x
-$80000000 constant EXTI_EXTI_EMR1_EM31                              \ CPU wake-up with event generation mask on event input x
-
-
-\
-\ @brief EXTI CPU wake-up with interrupt mask register 2
-\ Address offset: 0x90
-\ Reset value: 0x07DBBFFF
-\
-
-$00000001 constant EXTI_EXTI_IMR2_IM32                              \ CPU wake-up with interrupt mask on event input x
-$00000002 constant EXTI_EXTI_IMR2_IM33                              \ CPU wake-up with interrupt mask on event input x
-$00000004 constant EXTI_EXTI_IMR2_IM34                              \ CPU wake-up with interrupt mask on event input x
-$00000008 constant EXTI_EXTI_IMR2_IM35                              \ CPU wake-up with interrupt mask on event input x
-$00000010 constant EXTI_EXTI_IMR2_IM36                              \ CPU wake-up with interrupt mask on event input x
-$00000020 constant EXTI_EXTI_IMR2_IM37                              \ CPU wake-up with interrupt mask on event input x
-$00000040 constant EXTI_EXTI_IMR2_IM38                              \ CPU wake-up with interrupt mask on event input x
-$00000080 constant EXTI_EXTI_IMR2_IM39                              \ CPU wake-up with interrupt mask on event input x
-$00000100 constant EXTI_EXTI_IMR2_IM40                              \ CPU wake-up with interrupt mask on event input x
-$00000200 constant EXTI_EXTI_IMR2_IM41                              \ CPU wake-up with interrupt mask on event input x
-$00000400 constant EXTI_EXTI_IMR2_IM42                              \ CPU wake-up with interrupt mask on event input x
-$00000800 constant EXTI_EXTI_IMR2_IM43                              \ CPU wake-up with interrupt mask on event input x
-$00001000 constant EXTI_EXTI_IMR2_IM44                              \ CPU wake-up with interrupt mask on event input x
-$00002000 constant EXTI_EXTI_IMR2_IM45                              \ CPU wake-up with interrupt mask on event input x
-$00004000 constant EXTI_EXTI_IMR2_IM46                              \ CPU wake-up with interrupt mask on event input x
-$00008000 constant EXTI_EXTI_IMR2_IM47                              \ CPU wake-up with interrupt mask on event input x
-$00010000 constant EXTI_EXTI_IMR2_IM48                              \ CPU wake-up with interrupt mask on event input x
-$00020000 constant EXTI_EXTI_IMR2_IM49                              \ CPU wake-up with interrupt mask on event input x
-$00040000 constant EXTI_EXTI_IMR2_IM50                              \ CPU wake-up with interrupt mask on event input x
-$00080000 constant EXTI_EXTI_IMR2_IM51                              \ CPU wake-up with interrupt mask on event input x
-$00100000 constant EXTI_EXTI_IMR2_IM52                              \ CPU wake-up with interrupt mask on event input x
-$00200000 constant EXTI_EXTI_IMR2_IM53                              \ CPU wake-up with interrupt mask on event input x
-$00400000 constant EXTI_EXTI_IMR2_IM54                              \ CPU wake-up with interrupt mask on event input x
-$00800000 constant EXTI_EXTI_IMR2_IM55                              \ CPU wake-up with interrupt mask on event input x
-$01000000 constant EXTI_EXTI_IMR2_IM56                              \ CPU wake-up with interrupt mask on event input x
-$02000000 constant EXTI_EXTI_IMR2_IM57                              \ CPU wake-up with interrupt mask on event input x
-$04000000 constant EXTI_EXTI_IMR2_IM58                              \ CPU wake-up with interrupt mask on event input x
-
-
-\
-\ @brief EXTI CPU wake-up with event mask register 2
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00000001 constant EXTI_EXTI_EMR2_EM32                              \ CPU wake-up with event generation mask on event input x
-$00000002 constant EXTI_EXTI_EMR2_EM33                              \ CPU wake-up with event generation mask on event input x
-$00000004 constant EXTI_EXTI_EMR2_EM34                              \ CPU wake-up with event generation mask on event input x
-$00000008 constant EXTI_EXTI_EMR2_EM35                              \ CPU wake-up with event generation mask on event input x
-$00000010 constant EXTI_EXTI_EMR2_EM36                              \ CPU wake-up with event generation mask on event input x
-$00000020 constant EXTI_EXTI_EMR2_EM37                              \ CPU wake-up with event generation mask on event input x
-$00000040 constant EXTI_EXTI_EMR2_EM38                              \ CPU wake-up with event generation mask on event input x
-$00000080 constant EXTI_EXTI_EMR2_EM39                              \ CPU wake-up with event generation mask on event input x
-$00000100 constant EXTI_EXTI_EMR2_EM40                              \ CPU wake-up with event generation mask on event input x
-$00000200 constant EXTI_EXTI_EMR2_EM41                              \ CPU wake-up with event generation mask on event input x
-$00000400 constant EXTI_EXTI_EMR2_EM42                              \ CPU wake-up with event generation mask on event input x
-$00000800 constant EXTI_EXTI_EMR2_EM43                              \ CPU wake-up with event generation mask on event input x
-$00001000 constant EXTI_EXTI_EMR2_EM44                              \ CPU wake-up with event generation mask on event input x
-$00002000 constant EXTI_EXTI_EMR2_EM45                              \ CPU wake-up with event generation mask on event input x
-$00004000 constant EXTI_EXTI_EMR2_EM46                              \ CPU wake-up with event generation mask on event input x
-$00008000 constant EXTI_EXTI_EMR2_EM47                              \ CPU wake-up with event generation mask on event input x
-$00010000 constant EXTI_EXTI_EMR2_EM48                              \ CPU wake-up with event generation mask on event input x
-$00020000 constant EXTI_EXTI_EMR2_EM49                              \ CPU wake-up with event generation mask on event input x
-$00040000 constant EXTI_EXTI_EMR2_EM50                              \ CPU wake-up with event generation mask on event input x
-$00080000 constant EXTI_EXTI_EMR2_EM51                              \ CPU wake-up with event generation mask on event input x
-$00100000 constant EXTI_EXTI_EMR2_EM52                              \ CPU wake-up with event generation mask on event input x
-$00200000 constant EXTI_EXTI_EMR2_EM53                              \ CPU wake-up with event generation mask on event input x
-$00400000 constant EXTI_EXTI_EMR2_EM54                              \ CPU wake-up with event generation mask on event input x
-$00800000 constant EXTI_EXTI_EMR2_EM55                              \ CPU wake-up with event generation mask on event input x
-$01000000 constant EXTI_EXTI_EMR2_EM56                              \ CPU wake-up with event generation mask on event input x
-$02000000 constant EXTI_EXTI_EMR2_EM57                              \ CPU wake-up with event generation mask on event input x
-$04000000 constant EXTI_EXTI_EMR2_EM58                              \ CPU wake-up with event generation mask on event input x
-
-
-\
-\ @brief EXTI address block description
-\
-$44022000 constant EXTI_EXTI_RTSR1  \ offset: 0x00 : EXTI rising trigger selection register
-$44022004 constant EXTI_EXTI_FTSR1  \ offset: 0x04 : EXTI falling trigger selection register
-$44022008 constant EXTI_EXTI_SWIER1  \ offset: 0x08 : EXTI software interrupt event register
-$4402200c constant EXTI_EXTI_RPR1  \ offset: 0x0C : EXTI rising edge pending register
-$44022010 constant EXTI_EXTI_FPR1  \ offset: 0x10 : EXTI falling edge pending register
-$44022014 constant EXTI_EXTI_SECCFGR1  \ offset: 0x14 : EXTI security configuration register
-$44022018 constant EXTI_EXTI_PRIVCFGR1  \ offset: 0x18 : EXTI privilege configuration register
-$44022020 constant EXTI_EXTI_RTSR2  \ offset: 0x20 : EXTI rising trigger selection register 2
-$44022024 constant EXTI_EXTI_FTSR2  \ offset: 0x24 : EXTI falling trigger selection register 2
-$44022028 constant EXTI_EXTI_SWIER2  \ offset: 0x28 : EXTI software interrupt event register 2
-$4402202c constant EXTI_EXTI_RPR2  \ offset: 0x2C : EXTI rising edge pending register 2
-$44022030 constant EXTI_EXTI_FPR2  \ offset: 0x30 : EXTI falling edge pending register 2
-$44022034 constant EXTI_EXTI_SECCFGR2  \ offset: 0x34 : EXTI security configuration register 2
-$44022038 constant EXTI_EXTI_PRIVCFGR2  \ offset: 0x38 : EXTI privilege configuration register 2
-$44022060 constant EXTI_EXTI_EXTICR1  \ offset: 0x60 : EXTI external interrupt selection register
-$44022060 constant EXTI_EXTI_EXTICR4  \ offset: 0x60 : EXTI external interrupt selection register
-$44022064 constant EXTI_EXTI_EXTICR2  \ offset: 0x64 : EXTI external interrupt selection register
-$44022068 constant EXTI_EXTI_EXTICR3  \ offset: 0x68 : EXTI external interrupt selection register
-$44022070 constant EXTI_EXTI_LOCKR  \ offset: 0x70 : EXTI lock register
-$44022080 constant EXTI_EXTI_IMR1  \ offset: 0x80 : EXTI CPU wake-up with interrupt mask register
-$44022084 constant EXTI_EXTI_EMR1  \ offset: 0x84 : EXTI CPU wake-up with event mask register
-$44022090 constant EXTI_EXTI_IMR2  \ offset: 0x90 : EXTI CPU wake-up with interrupt mask register 2
-$44022094 constant EXTI_EXTI_EMR2  \ offset: 0x94 : EXTI CPU wake-up with event mask register 2
-
+[ifndef] EXTI_DEF
+
+  [ifdef] EXTI_EXTI_RTSR1_DEF
+    \
+    \ @brief EXTI rising trigger selection register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_RT0                       \ [0x00] Rising trigger event configuration bit of configurable event input x
+    $01 constant EXTI_RT1                       \ [0x01] Rising trigger event configuration bit of configurable event input x
+    $02 constant EXTI_RT2                       \ [0x02] Rising trigger event configuration bit of configurable event input x
+    $03 constant EXTI_RT3                       \ [0x03] Rising trigger event configuration bit of configurable event input x
+    $04 constant EXTI_RT4                       \ [0x04] Rising trigger event configuration bit of configurable event input x
+    $05 constant EXTI_RT5                       \ [0x05] Rising trigger event configuration bit of configurable event input x
+    $06 constant EXTI_RT6                       \ [0x06] Rising trigger event configuration bit of configurable event input x
+    $07 constant EXTI_RT7                       \ [0x07] Rising trigger event configuration bit of configurable event input x
+    $08 constant EXTI_RT8                       \ [0x08] Rising trigger event configuration bit of configurable event input x
+    $09 constant EXTI_RT9                       \ [0x09] Rising trigger event configuration bit of configurable event input x
+    $0a constant EXTI_RT10                      \ [0x0a] Rising trigger event configuration bit of configurable event input x
+    $0b constant EXTI_RT11                      \ [0x0b] Rising trigger event configuration bit of configurable event input x
+    $0c constant EXTI_RT12                      \ [0x0c] Rising trigger event configuration bit of configurable event input x
+    $0d constant EXTI_RT13                      \ [0x0d] Rising trigger event configuration bit of configurable event input x
+    $0e constant EXTI_RT14                      \ [0x0e] Rising trigger event configuration bit of configurable event input x
+    $0f constant EXTI_RT15                      \ [0x0f] Rising trigger event configuration bit of configurable event input x
+    $10 constant EXTI_RT16                      \ [0x10] Rising trigger event configuration bit of configurable event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FTSR1_DEF
+    \
+    \ @brief EXTI falling trigger selection register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_FT0                       \ [0x00] Falling trigger event configuration bit of configurable event input x
+    $01 constant EXTI_FT1                       \ [0x01] Falling trigger event configuration bit of configurable event input x
+    $02 constant EXTI_FT2                       \ [0x02] Falling trigger event configuration bit of configurable event input x
+    $03 constant EXTI_FT3                       \ [0x03] Falling trigger event configuration bit of configurable event input x
+    $04 constant EXTI_FT4                       \ [0x04] Falling trigger event configuration bit of configurable event input x
+    $05 constant EXTI_FT5                       \ [0x05] Falling trigger event configuration bit of configurable event input x
+    $06 constant EXTI_FT6                       \ [0x06] Falling trigger event configuration bit of configurable event input x
+    $07 constant EXTI_FT7                       \ [0x07] Falling trigger event configuration bit of configurable event input x
+    $08 constant EXTI_FT8                       \ [0x08] Falling trigger event configuration bit of configurable event input x
+    $09 constant EXTI_FT9                       \ [0x09] Falling trigger event configuration bit of configurable event input x
+    $0a constant EXTI_FT10                      \ [0x0a] Falling trigger event configuration bit of configurable event input x
+    $0b constant EXTI_FT11                      \ [0x0b] Falling trigger event configuration bit of configurable event input x
+    $0c constant EXTI_FT12                      \ [0x0c] Falling trigger event configuration bit of configurable event input x
+    $0d constant EXTI_FT13                      \ [0x0d] Falling trigger event configuration bit of configurable event input x
+    $0e constant EXTI_FT14                      \ [0x0e] Falling trigger event configuration bit of configurable event input x
+    $0f constant EXTI_FT15                      \ [0x0f] Falling trigger event configuration bit of configurable event input x
+    $10 constant EXTI_FT16                      \ [0x10] Falling trigger event configuration bit of configurable event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_SWIER1_DEF
+    \
+    \ @brief EXTI software interrupt event register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_SWI0                      \ [0x00] Software interrupt on event x
+    $01 constant EXTI_SWI1                      \ [0x01] Software interrupt on event x
+    $02 constant EXTI_SWI2                      \ [0x02] Software interrupt on event x
+    $03 constant EXTI_SWI3                      \ [0x03] Software interrupt on event x
+    $04 constant EXTI_SWI4                      \ [0x04] Software interrupt on event x
+    $05 constant EXTI_SWI5                      \ [0x05] Software interrupt on event x
+    $06 constant EXTI_SWI6                      \ [0x06] Software interrupt on event x
+    $07 constant EXTI_SWI7                      \ [0x07] Software interrupt on event x
+    $08 constant EXTI_SWI8                      \ [0x08] Software interrupt on event x
+    $09 constant EXTI_SWI9                      \ [0x09] Software interrupt on event x
+    $0a constant EXTI_SWI10                     \ [0x0a] Software interrupt on event x
+    $0b constant EXTI_SWI11                     \ [0x0b] Software interrupt on event x
+    $0c constant EXTI_SWI12                     \ [0x0c] Software interrupt on event x
+    $0d constant EXTI_SWI13                     \ [0x0d] Software interrupt on event x
+    $0e constant EXTI_SWI14                     \ [0x0e] Software interrupt on event x
+    $0f constant EXTI_SWI15                     \ [0x0f] Software interrupt on event x
+    $10 constant EXTI_SWI16                     \ [0x10] Software interrupt on event x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_RPR1_DEF
+    \
+    \ @brief EXTI rising edge pending register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_RPIF0                     \ [0x00] configurable event inputs x rising edge pending bit
+    $01 constant EXTI_RPIF1                     \ [0x01] configurable event inputs x rising edge pending bit
+    $02 constant EXTI_RPIF2                     \ [0x02] configurable event inputs x rising edge pending bit
+    $03 constant EXTI_RPIF3                     \ [0x03] configurable event inputs x rising edge pending bit
+    $04 constant EXTI_RPIF4                     \ [0x04] configurable event inputs x rising edge pending bit
+    $05 constant EXTI_RPIF5                     \ [0x05] configurable event inputs x rising edge pending bit
+    $06 constant EXTI_RPIF6                     \ [0x06] configurable event inputs x rising edge pending bit
+    $07 constant EXTI_RPIF7                     \ [0x07] configurable event inputs x rising edge pending bit
+    $08 constant EXTI_RPIF8                     \ [0x08] configurable event inputs x rising edge pending bit
+    $09 constant EXTI_RPIF9                     \ [0x09] configurable event inputs x rising edge pending bit
+    $0a constant EXTI_RPIF10                    \ [0x0a] configurable event inputs x rising edge pending bit
+    $0b constant EXTI_RPIF11                    \ [0x0b] configurable event inputs x rising edge pending bit
+    $0c constant EXTI_RPIF12                    \ [0x0c] configurable event inputs x rising edge pending bit
+    $0d constant EXTI_RPIF13                    \ [0x0d] configurable event inputs x rising edge pending bit
+    $0e constant EXTI_RPIF14                    \ [0x0e] configurable event inputs x rising edge pending bit
+    $0f constant EXTI_RPIF15                    \ [0x0f] configurable event inputs x rising edge pending bit
+    $10 constant EXTI_RPIF16                    \ [0x10] configurable event inputs x rising edge pending bit
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FPR1_DEF
+    \
+    \ @brief EXTI falling edge pending register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_FPIF0                     \ [0x00] configurable event inputs x falling edge pending bit
+    $01 constant EXTI_FPIF1                     \ [0x01] configurable event inputs x falling edge pending bit
+    $02 constant EXTI_FPIF2                     \ [0x02] configurable event inputs x falling edge pending bit
+    $03 constant EXTI_FPIF3                     \ [0x03] configurable event inputs x falling edge pending bit
+    $04 constant EXTI_FPIF4                     \ [0x04] configurable event inputs x falling edge pending bit
+    $05 constant EXTI_FPIF5                     \ [0x05] configurable event inputs x falling edge pending bit
+    $06 constant EXTI_FPIF6                     \ [0x06] configurable event inputs x falling edge pending bit
+    $07 constant EXTI_FPIF7                     \ [0x07] configurable event inputs x falling edge pending bit
+    $08 constant EXTI_FPIF8                     \ [0x08] configurable event inputs x falling edge pending bit
+    $09 constant EXTI_FPIF9                     \ [0x09] configurable event inputs x falling edge pending bit
+    $0a constant EXTI_FPIF10                    \ [0x0a] configurable event inputs x falling edge pending bit
+    $0b constant EXTI_FPIF11                    \ [0x0b] configurable event inputs x falling edge pending bit
+    $0c constant EXTI_FPIF12                    \ [0x0c] configurable event inputs x falling edge pending bit
+    $0d constant EXTI_FPIF13                    \ [0x0d] configurable event inputs x falling edge pending bit
+    $0e constant EXTI_FPIF14                    \ [0x0e] configurable event inputs x falling edge pending bit
+    $0f constant EXTI_FPIF15                    \ [0x0f] configurable event inputs x falling edge pending bit
+    $10 constant EXTI_FPIF16                    \ [0x10] configurable event inputs x falling edge pending bit
+  [then]
+
+
+  [ifdef] EXTI_EXTI_SECCFGR1_DEF
+    \
+    \ @brief EXTI security configuration register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_SEC0                      \ [0x00] Security enable on event input x
+    $01 constant EXTI_SEC1                      \ [0x01] Security enable on event input x
+    $02 constant EXTI_SEC2                      \ [0x02] Security enable on event input x
+    $03 constant EXTI_SEC3                      \ [0x03] Security enable on event input x
+    $04 constant EXTI_SEC4                      \ [0x04] Security enable on event input x
+    $05 constant EXTI_SEC5                      \ [0x05] Security enable on event input x
+    $06 constant EXTI_SEC6                      \ [0x06] Security enable on event input x
+    $07 constant EXTI_SEC7                      \ [0x07] Security enable on event input x
+    $08 constant EXTI_SEC8                      \ [0x08] Security enable on event input x
+    $09 constant EXTI_SEC9                      \ [0x09] Security enable on event input x
+    $0a constant EXTI_SEC10                     \ [0x0a] Security enable on event input x
+    $0b constant EXTI_SEC11                     \ [0x0b] Security enable on event input x
+    $0c constant EXTI_SEC12                     \ [0x0c] Security enable on event input x
+    $0d constant EXTI_SEC13                     \ [0x0d] Security enable on event input x
+    $0e constant EXTI_SEC14                     \ [0x0e] Security enable on event input x
+    $0f constant EXTI_SEC15                     \ [0x0f] Security enable on event input x
+    $10 constant EXTI_SEC16                     \ [0x10] Security enable on event input x
+    $11 constant EXTI_SEC17                     \ [0x11] Security enable on event input x
+    $12 constant EXTI_SEC18                     \ [0x12] Security enable on event input x
+    $13 constant EXTI_SEC19                     \ [0x13] Security enable on event input x
+    $14 constant EXTI_SEC20                     \ [0x14] Security enable on event input x
+    $15 constant EXTI_SEC21                     \ [0x15] Security enable on event input x
+    $16 constant EXTI_SEC22                     \ [0x16] Security enable on event input x
+    $17 constant EXTI_SEC23                     \ [0x17] Security enable on event input x
+    $18 constant EXTI_SEC24                     \ [0x18] Security enable on event input x
+    $19 constant EXTI_SEC25                     \ [0x19] Security enable on event input x
+    $1a constant EXTI_SEC26                     \ [0x1a] Security enable on event input x
+    $1b constant EXTI_SEC27                     \ [0x1b] Security enable on event input x
+    $1c constant EXTI_SEC28                     \ [0x1c] Security enable on event input x
+    $1d constant EXTI_SEC29                     \ [0x1d] Security enable on event input x
+    $1e constant EXTI_SEC30                     \ [0x1e] Security enable on event input x
+    $1f constant EXTI_SEC31                     \ [0x1f] Security enable on event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_PRIVCFGR1_DEF
+    \
+    \ @brief EXTI privilege configuration register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_PRIV0                     \ [0x00] Security enable on event input x
+    $01 constant EXTI_PRIV1                     \ [0x01] Security enable on event input x
+    $02 constant EXTI_PRIV2                     \ [0x02] Security enable on event input x
+    $03 constant EXTI_PRIV3                     \ [0x03] Security enable on event input x
+    $04 constant EXTI_PRIV4                     \ [0x04] Security enable on event input x
+    $05 constant EXTI_PRIV5                     \ [0x05] Security enable on event input x
+    $06 constant EXTI_PRIV6                     \ [0x06] Security enable on event input x
+    $07 constant EXTI_PRIV7                     \ [0x07] Security enable on event input x
+    $08 constant EXTI_PRIV8                     \ [0x08] Security enable on event input x
+    $09 constant EXTI_PRIV9                     \ [0x09] Security enable on event input x
+    $0a constant EXTI_PRIV10                    \ [0x0a] Security enable on event input x
+    $0b constant EXTI_PRIV11                    \ [0x0b] Security enable on event input x
+    $0c constant EXTI_PRIV12                    \ [0x0c] Security enable on event input x
+    $0d constant EXTI_PRIV13                    \ [0x0d] Security enable on event input x
+    $0e constant EXTI_PRIV14                    \ [0x0e] Security enable on event input x
+    $0f constant EXTI_PRIV15                    \ [0x0f] Security enable on event input x
+    $10 constant EXTI_PRIV16                    \ [0x10] Security enable on event input x
+    $11 constant EXTI_PRIV17                    \ [0x11] Security enable on event input x
+    $12 constant EXTI_PRIV18                    \ [0x12] Security enable on event input x
+    $13 constant EXTI_PRIV19                    \ [0x13] Security enable on event input x
+    $14 constant EXTI_PRIV20                    \ [0x14] Security enable on event input x
+    $15 constant EXTI_PRIV21                    \ [0x15] Security enable on event input x
+    $16 constant EXTI_PRIV22                    \ [0x16] Security enable on event input x
+    $17 constant EXTI_PRIV23                    \ [0x17] Security enable on event input x
+    $18 constant EXTI_PRIV24                    \ [0x18] Security enable on event input x
+    $19 constant EXTI_PRIV25                    \ [0x19] Security enable on event input x
+    $1a constant EXTI_PRIV26                    \ [0x1a] Security enable on event input x
+    $1b constant EXTI_PRIV27                    \ [0x1b] Security enable on event input x
+    $1c constant EXTI_PRIV28                    \ [0x1c] Security enable on event input x
+    $1d constant EXTI_PRIV29                    \ [0x1d] Security enable on event input x
+    $1e constant EXTI_PRIV30                    \ [0x1e] Security enable on event input x
+    $1f constant EXTI_PRIV31                    \ [0x1f] Security enable on event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_RTSR2_DEF
+    \
+    \ @brief EXTI rising trigger selection register 2
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $0e constant EXTI_RT46                      \ [0x0e] Rising trigger event configuration bit of configurable event input xless thansup>(1)less than/sup>
+    $12 constant EXTI_RT50                      \ [0x12] Rising trigger event configuration bit of configurable event input xless thansup>(1)less than/sup>
+    $15 constant EXTI_RT53                      \ [0x15] Rising trigger event configuration bit of configurable event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FTSR2_DEF
+    \
+    \ @brief EXTI falling trigger selection register 2
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $0e constant EXTI_FT46                      \ [0x0e] Falling trigger event configuration bit of configurable event input x less thansup>(1)less than/sup>
+    $12 constant EXTI_FT50                      \ [0x12] Falling trigger event configuration bit of configurable event input x less thansup>(1)less than/sup>
+    $15 constant EXTI_FT53                      \ [0x15] Falling trigger event configuration bit of configurable event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_SWIER2_DEF
+    \
+    \ @brief EXTI software interrupt event register 2
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $0e constant EXTI_SWI46                     \ [0x0e] Software interrupt on event x
+    $12 constant EXTI_SWI50                     \ [0x12] Software interrupt on event x
+    $15 constant EXTI_SWI53                     \ [0x15] Software interrupt on event x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_RPR2_DEF
+    \
+    \ @brief EXTI rising edge pending register 2
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $0e constant EXTI_RPIF46                    \ [0x0e] configurable event inputs x rising edge pending bit
+    $12 constant EXTI_RPIF50                    \ [0x12] configurable event inputs x rising edge pending bit
+    $15 constant EXTI_RPIF53                    \ [0x15] configurable event inputs x rising edge pending bit
+  [then]
+
+
+  [ifdef] EXTI_EXTI_FPR2_DEF
+    \
+    \ @brief EXTI falling edge pending register 2
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $0e constant EXTI_FPIF46                    \ [0x0e] configurable event inputs x falling edge pending bit
+    $12 constant EXTI_FPIF50                    \ [0x12] configurable event inputs x falling edge pending bit
+    $15 constant EXTI_FPIF53                    \ [0x15] configurable event inputs x falling edge pending bit
+  [then]
+
+
+  [ifdef] EXTI_EXTI_SECCFGR2_DEF
+    \
+    \ @brief EXTI security configuration register 2
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_SEC32                     \ [0x00] Security enable on event input x
+    $01 constant EXTI_SEC33                     \ [0x01] Security enable on event input x
+    $02 constant EXTI_SEC34                     \ [0x02] Security enable on event input x
+    $03 constant EXTI_SEC35                     \ [0x03] Security enable on event input x
+    $04 constant EXTI_SEC36                     \ [0x04] Security enable on event input x
+    $05 constant EXTI_SEC37                     \ [0x05] Security enable on event input x
+    $06 constant EXTI_SEC38                     \ [0x06] Security enable on event input x
+    $07 constant EXTI_SEC39                     \ [0x07] Security enable on event input x
+    $08 constant EXTI_SEC40                     \ [0x08] Security enable on event input x
+    $09 constant EXTI_SEC41                     \ [0x09] Security enable on event input x
+    $0a constant EXTI_SEC42                     \ [0x0a] Security enable on event input x
+    $0b constant EXTI_SEC43                     \ [0x0b] Security enable on event input x
+    $0c constant EXTI_SEC44                     \ [0x0c] Security enable on event input x
+    $0d constant EXTI_SEC45                     \ [0x0d] Security enable on event input x
+    $0e constant EXTI_SEC46                     \ [0x0e] Security enable on event input x
+    $0f constant EXTI_SEC47                     \ [0x0f] Security enable on event input x
+    $10 constant EXTI_SEC48                     \ [0x10] Security enable on event input x
+    $11 constant EXTI_SEC49                     \ [0x11] Security enable on event input x
+    $12 constant EXTI_SEC50                     \ [0x12] Security enable on event input x
+    $13 constant EXTI_SEC51                     \ [0x13] Security enable on event input x
+    $14 constant EXTI_SEC52                     \ [0x14] Security enable on event input x
+    $15 constant EXTI_SEC53                     \ [0x15] Security enable on event input x
+    $16 constant EXTI_SEC54                     \ [0x16] Security enable on event input x
+    $17 constant EXTI_SEC55                     \ [0x17] Security enable on event input x
+    $18 constant EXTI_SEC56                     \ [0x18] Security enable on event input x
+    $19 constant EXTI_SEC57                     \ [0x19] Security enable on event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_PRIVCFGR2_DEF
+    \
+    \ @brief EXTI privilege configuration register 2
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_PRIV32                    \ [0x00] Security enable on event input x
+    $01 constant EXTI_PRIV33                    \ [0x01] Security enable on event input x
+    $02 constant EXTI_PRIV34                    \ [0x02] Security enable on event input x
+    $03 constant EXTI_PRIV35                    \ [0x03] Security enable on event input x
+    $04 constant EXTI_PRIV36                    \ [0x04] Security enable on event input x
+    $05 constant EXTI_PRIV37                    \ [0x05] Security enable on event input x
+    $06 constant EXTI_PRIV38                    \ [0x06] Security enable on event input x
+    $07 constant EXTI_PRIV39                    \ [0x07] Security enable on event input x
+    $08 constant EXTI_PRIV40                    \ [0x08] Security enable on event input x
+    $09 constant EXTI_PRIV41                    \ [0x09] Security enable on event input x
+    $0a constant EXTI_PRIV42                    \ [0x0a] Security enable on event input x
+    $0b constant EXTI_PRIV43                    \ [0x0b] Security enable on event input x
+    $0c constant EXTI_PRIV44                    \ [0x0c] Security enable on event input x
+    $0d constant EXTI_PRIV45                    \ [0x0d] Security enable on event input x
+    $0e constant EXTI_PRIV46                    \ [0x0e] Security enable on event input x
+    $0f constant EXTI_PRIV47                    \ [0x0f] Security enable on event input x
+    $10 constant EXTI_PRIV48                    \ [0x10] Security enable on event input x
+    $11 constant EXTI_PRIV49                    \ [0x11] Security enable on event input x
+    $12 constant EXTI_PRIV50                    \ [0x12] Security enable on event input x
+    $13 constant EXTI_PRIV51                    \ [0x13] Security enable on event input x
+    $14 constant EXTI_PRIV52                    \ [0x14] Security enable on event input x
+    $15 constant EXTI_PRIV53                    \ [0x15] Security enable on event input x
+    $16 constant EXTI_PRIV54                    \ [0x16] Security enable on event input x
+    $17 constant EXTI_PRIV55                    \ [0x17] Security enable on event input x
+    $18 constant EXTI_PRIV56                    \ [0x18] Security enable on event input x
+    $19 constant EXTI_PRIV57                    \ [0x19] Security enable on event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EXTICR1_DEF
+    \
+    \ @brief EXTI external interrupt selection register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EXTI0                     \ [0x00 : 8] EXTI0 GPIO port selection
+    $08 constant EXTI_EXTI1                     \ [0x08 : 8] EXTI1 GPIO port selection
+    $10 constant EXTI_EXTI2                     \ [0x10 : 8] EXTI2 GPIO port selection
+    $18 constant EXTI_EXTI3                     \ [0x18 : 8] EXTI3 GPIO port selection
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EXTICR4_DEF
+    \
+    \ @brief EXTI external interrupt selection register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EXTI12                    \ [0x00 : 8] EXTI12 GPIO port selection
+    $08 constant EXTI_EXTI13                    \ [0x08 : 8] EXTI13 GPIO port selection
+    $10 constant EXTI_EXTI14                    \ [0x10 : 8] EXTI14 GPIO port selection
+    $18 constant EXTI_EXTI15                    \ [0x18 : 8] EXTI15 GPIO port selection
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EXTICR2_DEF
+    \
+    \ @brief EXTI external interrupt selection register
+    \ Address offset: 0x64
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EXTI4                     \ [0x00 : 8] EXTI4 GPIO port selection
+    $08 constant EXTI_EXTI5                     \ [0x08 : 8] EXTI5 GPIO port selection
+    $10 constant EXTI_EXTI6                     \ [0x10 : 8] EXTI6 GPIO port selection
+    $18 constant EXTI_EXTI7                     \ [0x18 : 8] EXTI7 GPIO port selection
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EXTICR3_DEF
+    \
+    \ @brief EXTI external interrupt selection register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EXTI8                     \ [0x00 : 8] EXTI8 GPIO port selection
+    $08 constant EXTI_EXTI9                     \ [0x08 : 8] EXTI9 GPIO port selection
+    $10 constant EXTI_EXTI10                    \ [0x10 : 8] EXTI10 GPIO port selection
+    $18 constant EXTI_EXTI11                    \ [0x18 : 8] EXTI11 GPIO port selection
+  [then]
+
+
+  [ifdef] EXTI_EXTI_LOCKR_DEF
+    \
+    \ @brief EXTI lock register
+    \ Address offset: 0x70
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_LOCK                      \ [0x00] Global security and privilege configuration registers (EXTI_SECCFGR and EXTI_PRIVCFGR) lock
+  [then]
+
+
+  [ifdef] EXTI_EXTI_IMR1_DEF
+    \
+    \ @brief EXTI CPU wake-up with interrupt mask register
+    \ Address offset: 0x80
+    \ Reset value: 0xFFFE0000
+    \
+    $00 constant EXTI_IM0                       \ [0x00] CPU wake-up with interrupt mask on event input x
+    $01 constant EXTI_IM1                       \ [0x01] CPU wake-up with interrupt mask on event input x
+    $02 constant EXTI_IM2                       \ [0x02] CPU wake-up with interrupt mask on event input x
+    $03 constant EXTI_IM3                       \ [0x03] CPU wake-up with interrupt mask on event input x
+    $04 constant EXTI_IM4                       \ [0x04] CPU wake-up with interrupt mask on event input x
+    $05 constant EXTI_IM5                       \ [0x05] CPU wake-up with interrupt mask on event input x
+    $06 constant EXTI_IM6                       \ [0x06] CPU wake-up with interrupt mask on event input x
+    $07 constant EXTI_IM7                       \ [0x07] CPU wake-up with interrupt mask on event input x
+    $08 constant EXTI_IM8                       \ [0x08] CPU wake-up with interrupt mask on event input x
+    $09 constant EXTI_IM9                       \ [0x09] CPU wake-up with interrupt mask on event input x
+    $0a constant EXTI_IM10                      \ [0x0a] CPU wake-up with interrupt mask on event input x
+    $0b constant EXTI_IM11                      \ [0x0b] CPU wake-up with interrupt mask on event input x
+    $0c constant EXTI_IM12                      \ [0x0c] CPU wake-up with interrupt mask on event input x
+    $0d constant EXTI_IM13                      \ [0x0d] CPU wake-up with interrupt mask on event input x
+    $0e constant EXTI_IM14                      \ [0x0e] CPU wake-up with interrupt mask on event input x
+    $0f constant EXTI_IM15                      \ [0x0f] CPU wake-up with interrupt mask on event input x
+    $10 constant EXTI_IM16                      \ [0x10] CPU wake-up with interrupt mask on event input x
+    $11 constant EXTI_IM17                      \ [0x11] CPU wake-up with interrupt mask on event input x
+    $12 constant EXTI_IM18                      \ [0x12] CPU wake-up with interrupt mask on event input x
+    $13 constant EXTI_IM19                      \ [0x13] CPU wake-up with interrupt mask on event input x
+    $14 constant EXTI_IM20                      \ [0x14] CPU wake-up with interrupt mask on event input x
+    $15 constant EXTI_IM21                      \ [0x15] CPU wake-up with interrupt mask on event input x
+    $16 constant EXTI_IM22                      \ [0x16] CPU wake-up with interrupt mask on event input x
+    $17 constant EXTI_IM23                      \ [0x17] CPU wake-up with interrupt mask on event input x
+    $18 constant EXTI_IM24                      \ [0x18] CPU wake-up with interrupt mask on event input x
+    $19 constant EXTI_IM25                      \ [0x19] CPU wake-up with interrupt mask on event input x
+    $1a constant EXTI_IM26                      \ [0x1a] CPU wake-up with interrupt mask on event input x
+    $1b constant EXTI_IM27                      \ [0x1b] CPU wake-up with interrupt mask on event input x
+    $1c constant EXTI_IM28                      \ [0x1c] CPU wake-up with interrupt mask on event input x
+    $1d constant EXTI_IM29                      \ [0x1d] CPU wake-up with interrupt mask on event input x
+    $1e constant EXTI_IM30                      \ [0x1e] CPU wake-up with interrupt mask on event input x
+    $1f constant EXTI_IM31                      \ [0x1f] CPU wake-up with interrupt mask on event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EMR1_DEF
+    \
+    \ @brief EXTI CPU wake-up with event mask register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EM0                       \ [0x00] CPU wake-up with event generation mask on event input x
+    $01 constant EXTI_EM1                       \ [0x01] CPU wake-up with event generation mask on event input x
+    $02 constant EXTI_EM2                       \ [0x02] CPU wake-up with event generation mask on event input x
+    $03 constant EXTI_EM3                       \ [0x03] CPU wake-up with event generation mask on event input x
+    $04 constant EXTI_EM4                       \ [0x04] CPU wake-up with event generation mask on event input x
+    $05 constant EXTI_EM5                       \ [0x05] CPU wake-up with event generation mask on event input x
+    $06 constant EXTI_EM6                       \ [0x06] CPU wake-up with event generation mask on event input x
+    $07 constant EXTI_EM7                       \ [0x07] CPU wake-up with event generation mask on event input x
+    $08 constant EXTI_EM8                       \ [0x08] CPU wake-up with event generation mask on event input x
+    $09 constant EXTI_EM9                       \ [0x09] CPU wake-up with event generation mask on event input x
+    $0a constant EXTI_EM10                      \ [0x0a] CPU wake-up with event generation mask on event input x
+    $0b constant EXTI_EM11                      \ [0x0b] CPU wake-up with event generation mask on event input x
+    $0c constant EXTI_EM12                      \ [0x0c] CPU wake-up with event generation mask on event input x
+    $0d constant EXTI_EM13                      \ [0x0d] CPU wake-up with event generation mask on event input x
+    $0e constant EXTI_EM14                      \ [0x0e] CPU wake-up with event generation mask on event input x
+    $0f constant EXTI_EM15                      \ [0x0f] CPU wake-up with event generation mask on event input x
+    $10 constant EXTI_EM16                      \ [0x10] CPU wake-up with event generation mask on event input x
+    $11 constant EXTI_EM17                      \ [0x11] CPU wake-up with event generation mask on event input x
+    $12 constant EXTI_EM18                      \ [0x12] CPU wake-up with event generation mask on event input x
+    $13 constant EXTI_EM19                      \ [0x13] CPU wake-up with event generation mask on event input x
+    $14 constant EXTI_EM20                      \ [0x14] CPU wake-up with event generation mask on event input x
+    $15 constant EXTI_EM21                      \ [0x15] CPU wake-up with event generation mask on event input x
+    $16 constant EXTI_EM22                      \ [0x16] CPU wake-up with event generation mask on event input x
+    $17 constant EXTI_EM23                      \ [0x17] CPU wake-up with event generation mask on event input x
+    $18 constant EXTI_EM24                      \ [0x18] CPU wake-up with event generation mask on event input x
+    $19 constant EXTI_EM25                      \ [0x19] CPU wake-up with event generation mask on event input x
+    $1a constant EXTI_EM26                      \ [0x1a] CPU wake-up with event generation mask on event input x
+    $1b constant EXTI_EM27                      \ [0x1b] CPU wake-up with event generation mask on event input x
+    $1c constant EXTI_EM28                      \ [0x1c] CPU wake-up with event generation mask on event input x
+    $1d constant EXTI_EM29                      \ [0x1d] CPU wake-up with event generation mask on event input x
+    $1e constant EXTI_EM30                      \ [0x1e] CPU wake-up with event generation mask on event input x
+    $1f constant EXTI_EM31                      \ [0x1f] CPU wake-up with event generation mask on event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_IMR2_DEF
+    \
+    \ @brief EXTI CPU wake-up with interrupt mask register 2
+    \ Address offset: 0x90
+    \ Reset value: 0x07DBBFFF
+    \
+    $00 constant EXTI_IM32                      \ [0x00] CPU wake-up with interrupt mask on event input x
+    $01 constant EXTI_IM33                      \ [0x01] CPU wake-up with interrupt mask on event input x
+    $02 constant EXTI_IM34                      \ [0x02] CPU wake-up with interrupt mask on event input x
+    $03 constant EXTI_IM35                      \ [0x03] CPU wake-up with interrupt mask on event input x
+    $04 constant EXTI_IM36                      \ [0x04] CPU wake-up with interrupt mask on event input x
+    $05 constant EXTI_IM37                      \ [0x05] CPU wake-up with interrupt mask on event input x
+    $06 constant EXTI_IM38                      \ [0x06] CPU wake-up with interrupt mask on event input x
+    $07 constant EXTI_IM39                      \ [0x07] CPU wake-up with interrupt mask on event input x
+    $08 constant EXTI_IM40                      \ [0x08] CPU wake-up with interrupt mask on event input x
+    $09 constant EXTI_IM41                      \ [0x09] CPU wake-up with interrupt mask on event input x
+    $0a constant EXTI_IM42                      \ [0x0a] CPU wake-up with interrupt mask on event input x
+    $0b constant EXTI_IM43                      \ [0x0b] CPU wake-up with interrupt mask on event input x
+    $0c constant EXTI_IM44                      \ [0x0c] CPU wake-up with interrupt mask on event input x
+    $0d constant EXTI_IM45                      \ [0x0d] CPU wake-up with interrupt mask on event input x
+    $0e constant EXTI_IM46                      \ [0x0e] CPU wake-up with interrupt mask on event input x
+    $0f constant EXTI_IM47                      \ [0x0f] CPU wake-up with interrupt mask on event input x
+    $10 constant EXTI_IM48                      \ [0x10] CPU wake-up with interrupt mask on event input x
+    $11 constant EXTI_IM49                      \ [0x11] CPU wake-up with interrupt mask on event input x
+    $12 constant EXTI_IM50                      \ [0x12] CPU wake-up with interrupt mask on event input x
+    $13 constant EXTI_IM51                      \ [0x13] CPU wake-up with interrupt mask on event input x
+    $14 constant EXTI_IM52                      \ [0x14] CPU wake-up with interrupt mask on event input x
+    $15 constant EXTI_IM53                      \ [0x15] CPU wake-up with interrupt mask on event input x
+    $16 constant EXTI_IM54                      \ [0x16] CPU wake-up with interrupt mask on event input x
+    $17 constant EXTI_IM55                      \ [0x17] CPU wake-up with interrupt mask on event input x
+    $18 constant EXTI_IM56                      \ [0x18] CPU wake-up with interrupt mask on event input x
+    $19 constant EXTI_IM57                      \ [0x19] CPU wake-up with interrupt mask on event input x
+    $1a constant EXTI_IM58                      \ [0x1a] CPU wake-up with interrupt mask on event input x
+  [then]
+
+
+  [ifdef] EXTI_EXTI_EMR2_DEF
+    \
+    \ @brief EXTI CPU wake-up with event mask register 2
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant EXTI_EM32                      \ [0x00] CPU wake-up with event generation mask on event input x
+    $01 constant EXTI_EM33                      \ [0x01] CPU wake-up with event generation mask on event input x
+    $02 constant EXTI_EM34                      \ [0x02] CPU wake-up with event generation mask on event input x
+    $03 constant EXTI_EM35                      \ [0x03] CPU wake-up with event generation mask on event input x
+    $04 constant EXTI_EM36                      \ [0x04] CPU wake-up with event generation mask on event input x
+    $05 constant EXTI_EM37                      \ [0x05] CPU wake-up with event generation mask on event input x
+    $06 constant EXTI_EM38                      \ [0x06] CPU wake-up with event generation mask on event input x
+    $07 constant EXTI_EM39                      \ [0x07] CPU wake-up with event generation mask on event input x
+    $08 constant EXTI_EM40                      \ [0x08] CPU wake-up with event generation mask on event input x
+    $09 constant EXTI_EM41                      \ [0x09] CPU wake-up with event generation mask on event input x
+    $0a constant EXTI_EM42                      \ [0x0a] CPU wake-up with event generation mask on event input x
+    $0b constant EXTI_EM43                      \ [0x0b] CPU wake-up with event generation mask on event input x
+    $0c constant EXTI_EM44                      \ [0x0c] CPU wake-up with event generation mask on event input x
+    $0d constant EXTI_EM45                      \ [0x0d] CPU wake-up with event generation mask on event input x
+    $0e constant EXTI_EM46                      \ [0x0e] CPU wake-up with event generation mask on event input x
+    $0f constant EXTI_EM47                      \ [0x0f] CPU wake-up with event generation mask on event input x
+    $10 constant EXTI_EM48                      \ [0x10] CPU wake-up with event generation mask on event input x
+    $11 constant EXTI_EM49                      \ [0x11] CPU wake-up with event generation mask on event input x
+    $12 constant EXTI_EM50                      \ [0x12] CPU wake-up with event generation mask on event input x
+    $13 constant EXTI_EM51                      \ [0x13] CPU wake-up with event generation mask on event input x
+    $14 constant EXTI_EM52                      \ [0x14] CPU wake-up with event generation mask on event input x
+    $15 constant EXTI_EM53                      \ [0x15] CPU wake-up with event generation mask on event input x
+    $16 constant EXTI_EM54                      \ [0x16] CPU wake-up with event generation mask on event input x
+    $17 constant EXTI_EM55                      \ [0x17] CPU wake-up with event generation mask on event input x
+    $18 constant EXTI_EM56                      \ [0x18] CPU wake-up with event generation mask on event input x
+    $19 constant EXTI_EM57                      \ [0x19] CPU wake-up with event generation mask on event input x
+    $1a constant EXTI_EM58                      \ [0x1a] CPU wake-up with event generation mask on event input x
+  [then]
+
+  \
+  \ @brief EXTI address block description
+  \
+  $00 constant EXTI_EXTI_RTSR1          \ EXTI rising trigger selection register
+  $04 constant EXTI_EXTI_FTSR1          \ EXTI falling trigger selection register
+  $08 constant EXTI_EXTI_SWIER1         \ EXTI software interrupt event register
+  $0C constant EXTI_EXTI_RPR1           \ EXTI rising edge pending register
+  $10 constant EXTI_EXTI_FPR1           \ EXTI falling edge pending register
+  $14 constant EXTI_EXTI_SECCFGR1       \ EXTI security configuration register
+  $18 constant EXTI_EXTI_PRIVCFGR1      \ EXTI privilege configuration register
+  $20 constant EXTI_EXTI_RTSR2          \ EXTI rising trigger selection register 2
+  $24 constant EXTI_EXTI_FTSR2          \ EXTI falling trigger selection register 2
+  $28 constant EXTI_EXTI_SWIER2         \ EXTI software interrupt event register 2
+  $2C constant EXTI_EXTI_RPR2           \ EXTI rising edge pending register 2
+  $30 constant EXTI_EXTI_FPR2           \ EXTI falling edge pending register 2
+  $34 constant EXTI_EXTI_SECCFGR2       \ EXTI security configuration register 2
+  $38 constant EXTI_EXTI_PRIVCFGR2      \ EXTI privilege configuration register 2
+  $60 constant EXTI_EXTI_EXTICR1        \ EXTI external interrupt selection register
+  $60 constant EXTI_EXTI_EXTICR4        \ EXTI external interrupt selection register
+  $64 constant EXTI_EXTI_EXTICR2        \ EXTI external interrupt selection register
+  $68 constant EXTI_EXTI_EXTICR3        \ EXTI external interrupt selection register
+  $70 constant EXTI_EXTI_LOCKR          \ EXTI lock register
+  $80 constant EXTI_EXTI_IMR1           \ EXTI CPU wake-up with interrupt mask register
+  $84 constant EXTI_EXTI_EMR1           \ EXTI CPU wake-up with event mask register
+  $90 constant EXTI_EXTI_IMR2           \ EXTI CPU wake-up with interrupt mask register 2
+  $94 constant EXTI_EXTI_EMR2           \ EXTI CPU wake-up with event mask register 2
+
+: EXTI_DEF ; [then]

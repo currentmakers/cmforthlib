@@ -6,175 +6,188 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] QUADSPI_DEF
 
-\
-\ @brief control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant QUADSPI_CR_EN                                    \ Enable
-$00000002 constant QUADSPI_CR_ABORT                                 \ Abort request
-$00000004 constant QUADSPI_CR_DMAEN                                 \ DMA enable
-$00000008 constant QUADSPI_CR_TCEN                                  \ Timeout counter enable
-$00000010 constant QUADSPI_CR_SSHIFT                                \ Sample shift
-$00000040 constant QUADSPI_CR_DFM                                   \ DFM
-$00000080 constant QUADSPI_CR_FSEL                                  \ FSEL
-$00001f00 constant QUADSPI_CR_FTHRES                                \ IFO threshold level
-$00010000 constant QUADSPI_CR_TEIE                                  \ Transfer error interrupt enable
-$00020000 constant QUADSPI_CR_TCIE                                  \ Transfer complete interrupt enable
-$00040000 constant QUADSPI_CR_FTIE                                  \ FIFO threshold interrupt enable
-$00080000 constant QUADSPI_CR_SMIE                                  \ Status match interrupt enable
-$00100000 constant QUADSPI_CR_TOIE                                  \ TimeOut interrupt enable
-$00400000 constant QUADSPI_CR_APMS                                  \ Automatic poll mode stop
-$00800000 constant QUADSPI_CR_PMM                                   \ Polling match mode
-$ff000000 constant QUADSPI_CR_PRESCALER                             \ Clock prescaler
-
-
-\
-\ @brief device configuration register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant QUADSPI_DCR_CKMODE                               \ Mode 0 / mode 3
-$00000700 constant QUADSPI_DCR_CSHT                                 \ Chip select high time
-$001f0000 constant QUADSPI_DCR_FSIZE                                \ FLASH memory size
+  [ifdef] QUADSPI_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_EN                     \ [0x00] Enable
+    $01 constant QUADSPI_ABORT                  \ [0x01] Abort request
+    $02 constant QUADSPI_DMAEN                  \ [0x02] DMA enable
+    $03 constant QUADSPI_TCEN                   \ [0x03] Timeout counter enable
+    $04 constant QUADSPI_SSHIFT                 \ [0x04] Sample shift
+    $06 constant QUADSPI_DFM                    \ [0x06] DFM
+    $07 constant QUADSPI_FSEL                   \ [0x07] FSEL
+    $08 constant QUADSPI_FTHRES                 \ [0x08 : 5] IFO threshold level
+    $10 constant QUADSPI_TEIE                   \ [0x10] Transfer error interrupt enable
+    $11 constant QUADSPI_TCIE                   \ [0x11] Transfer complete interrupt enable
+    $12 constant QUADSPI_FTIE                   \ [0x12] FIFO threshold interrupt enable
+    $13 constant QUADSPI_SMIE                   \ [0x13] Status match interrupt enable
+    $14 constant QUADSPI_TOIE                   \ [0x14] TimeOut interrupt enable
+    $16 constant QUADSPI_APMS                   \ [0x16] Automatic poll mode stop
+    $17 constant QUADSPI_PMM                    \ [0x17] Polling match mode
+    $18 constant QUADSPI_PRESCALER              \ [0x18 : 8] Clock prescaler
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant QUADSPI_SR_TEF                                   \ Transfer error flag
-$00000002 constant QUADSPI_SR_TCF                                   \ Transfer complete flag
-$00000004 constant QUADSPI_SR_FTF                                   \ FIFO threshold flag
-$00000008 constant QUADSPI_SR_SMF                                   \ Status match flag
-$00000010 constant QUADSPI_SR_TOF                                   \ Timeout flag
-$00000020 constant QUADSPI_SR_BUSY                                  \ Busy
-$00001f00 constant QUADSPI_SR_FLEVEL                                \ FIFO level
+  [ifdef] QUADSPI_DCR_DEF
+    \
+    \ @brief device configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_CKMODE                 \ [0x00] Mode 0 / mode 3
+    $08 constant QUADSPI_CSHT                   \ [0x08 : 3] Chip select high time
+    $10 constant QUADSPI_FSIZE                  \ [0x10 : 5] FLASH memory size
+  [then]
 
 
-\
-\ @brief flag clear register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant QUADSPI_FCR_CTEF                                 \ Clear transfer error flag
-$00000002 constant QUADSPI_FCR_CTCF                                 \ Clear transfer complete flag
-$00000008 constant QUADSPI_FCR_CSMF                                 \ Clear status match flag
-$00000010 constant QUADSPI_FCR_CTOF                                 \ Clear timeout flag
-
-
-\
-\ @brief data length register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant QUADSPI_DLR_DL                                   \ Data length
+  [ifdef] QUADSPI_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_TEF                    \ [0x00] Transfer error flag
+    $01 constant QUADSPI_TCF                    \ [0x01] Transfer complete flag
+    $02 constant QUADSPI_FTF                    \ [0x02] FIFO threshold flag
+    $03 constant QUADSPI_SMF                    \ [0x03] Status match flag
+    $04 constant QUADSPI_TOF                    \ [0x04] Timeout flag
+    $05 constant QUADSPI_BUSY                   \ [0x05] Busy
+    $08 constant QUADSPI_FLEVEL                 \ [0x08 : 5] FIFO level
+  [then]
 
 
-\
-\ @brief communication configuration register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$000000ff constant QUADSPI_CCR_INSTRUCTION                          \ Instruction
-$00000300 constant QUADSPI_CCR_IMODE                                \ Instruction mode
-$00000c00 constant QUADSPI_CCR_ADMODE                               \ Address mode
-$00003000 constant QUADSPI_CCR_ADSIZE                               \ Address size
-$0000c000 constant QUADSPI_CCR_ABMODE                               \ Alternate bytes mode
-$00030000 constant QUADSPI_CCR_ABSIZE                               \ Alternate bytes size
-$007c0000 constant QUADSPI_CCR_DCYC                                 \ Number of dummy cycles
-$03000000 constant QUADSPI_CCR_DMODE                                \ Data mode
-$0c000000 constant QUADSPI_CCR_FMODE                                \ Functional mode
-$10000000 constant QUADSPI_CCR_SIOO                                 \ Send instruction only once mode
-$80000000 constant QUADSPI_CCR_DDRM                                 \ Double data rate mode
+  [ifdef] QUADSPI_FCR_DEF
+    \
+    \ @brief flag clear register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_CTEF                   \ [0x00] Clear transfer error flag
+    $01 constant QUADSPI_CTCF                   \ [0x01] Clear transfer complete flag
+    $03 constant QUADSPI_CSMF                   \ [0x03] Clear status match flag
+    $04 constant QUADSPI_CTOF                   \ [0x04] Clear timeout flag
+  [then]
 
 
-\
-\ @brief address register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000000 constant QUADSPI_AR_ADDRESS                               \ Address
-
-
-\
-\ @brief ABR
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant QUADSPI_ABR_ALTERNATE                            \ ALTERNATE
+  [ifdef] QUADSPI_DLR_DEF
+    \
+    \ @brief data length register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_DL                     \ [0x00 : 32] Data length
+  [then]
 
 
-\
-\ @brief data register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant QUADSPI_DR_DATA                                  \ Data
-
-
-\
-\ @brief polling status mask register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000000 constant QUADSPI_PSMKR_MASK                               \ Status mask
-
-
-\
-\ @brief polling status match register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000000 constant QUADSPI_PSMAR_MATCH                              \ Status match
+  [ifdef] QUADSPI_CCR_DEF
+    \
+    \ @brief communication configuration register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_INSTRUCTION            \ [0x00 : 8] Instruction
+    $08 constant QUADSPI_IMODE                  \ [0x08 : 2] Instruction mode
+    $0a constant QUADSPI_ADMODE                 \ [0x0a : 2] Address mode
+    $0c constant QUADSPI_ADSIZE                 \ [0x0c : 2] Address size
+    $0e constant QUADSPI_ABMODE                 \ [0x0e : 2] Alternate bytes mode
+    $10 constant QUADSPI_ABSIZE                 \ [0x10 : 2] Alternate bytes size
+    $12 constant QUADSPI_DCYC                   \ [0x12 : 5] Number of dummy cycles
+    $18 constant QUADSPI_DMODE                  \ [0x18 : 2] Data mode
+    $1a constant QUADSPI_FMODE                  \ [0x1a : 2] Functional mode
+    $1c constant QUADSPI_SIOO                   \ [0x1c] Send instruction only once mode
+    $1f constant QUADSPI_DDRM                   \ [0x1f] Double data rate mode
+  [then]
 
 
-\
-\ @brief polling interval register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant QUADSPI_PIR_INTERVAL                             \ Polling interval
-
-
-\
-\ @brief low-power timeout register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant QUADSPI_LPTR_TIMEOUT                             \ Timeout period
+  [ifdef] QUADSPI_AR_DEF
+    \
+    \ @brief address register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_ADDRESS                \ [0x00 : 32] Address
+  [then]
 
 
-\
-\ @brief QuadSPI interface
-\
-$a0001000 constant QUADSPI_CR     \ offset: 0x00 : control register
-$a0001004 constant QUADSPI_DCR    \ offset: 0x04 : device configuration register
-$a0001008 constant QUADSPI_SR     \ offset: 0x08 : status register
-$a000100c constant QUADSPI_FCR    \ offset: 0x0C : flag clear register
-$a0001010 constant QUADSPI_DLR    \ offset: 0x10 : data length register
-$a0001014 constant QUADSPI_CCR    \ offset: 0x14 : communication configuration register
-$a0001018 constant QUADSPI_AR     \ offset: 0x18 : address register
-$a000101c constant QUADSPI_ABR    \ offset: 0x1C : ABR
-$a0001020 constant QUADSPI_DR     \ offset: 0x20 : data register
-$a0001024 constant QUADSPI_PSMKR  \ offset: 0x24 : polling status mask register
-$a0001028 constant QUADSPI_PSMAR  \ offset: 0x28 : polling status match register
-$a000102c constant QUADSPI_PIR    \ offset: 0x2C : polling interval register
-$a0001030 constant QUADSPI_LPTR   \ offset: 0x30 : low-power timeout register
+  [ifdef] QUADSPI_ABR_DEF
+    \
+    \ @brief ABR
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_ALTERNATE              \ [0x00 : 32] ALTERNATE
+  [then]
 
+
+  [ifdef] QUADSPI_DR_DEF
+    \
+    \ @brief data register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_DATA                   \ [0x00 : 32] Data
+  [then]
+
+
+  [ifdef] QUADSPI_PSMKR_DEF
+    \
+    \ @brief polling status mask register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_MASK                   \ [0x00 : 32] Status mask
+  [then]
+
+
+  [ifdef] QUADSPI_PSMAR_DEF
+    \
+    \ @brief polling status match register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_MATCH                  \ [0x00 : 32] Status match
+  [then]
+
+
+  [ifdef] QUADSPI_PIR_DEF
+    \
+    \ @brief polling interval register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_INTERVAL               \ [0x00 : 16] Polling interval
+  [then]
+
+
+  [ifdef] QUADSPI_LPTR_DEF
+    \
+    \ @brief low-power timeout register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant QUADSPI_TIMEOUT                \ [0x00 : 16] Timeout period
+  [then]
+
+  \
+  \ @brief QuadSPI interface
+  \
+  $00 constant QUADSPI_CR               \ control register
+  $04 constant QUADSPI_DCR              \ device configuration register
+  $08 constant QUADSPI_SR               \ status register
+  $0C constant QUADSPI_FCR              \ flag clear register
+  $10 constant QUADSPI_DLR              \ data length register
+  $14 constant QUADSPI_CCR              \ communication configuration register
+  $18 constant QUADSPI_AR               \ address register
+  $1C constant QUADSPI_ABR              \ ABR
+  $20 constant QUADSPI_DR               \ data register
+  $24 constant QUADSPI_PSMKR            \ polling status mask register
+  $28 constant QUADSPI_PSMAR            \ polling status match register
+  $2C constant QUADSPI_PIR              \ polling interval register
+  $30 constant QUADSPI_LPTR             \ low-power timeout register
+
+: QUADSPI_DEF ; [then]

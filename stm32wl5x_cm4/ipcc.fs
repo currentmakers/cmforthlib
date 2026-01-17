@@ -1,191 +1,203 @@
 \
 \ @file ipcc.fs
-\ @brief Inter Processor communication       controller
+\ @brief Inter Processor communication controller
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] IPCC_DEF
 
-\
-\ @brief IPCC Processor 1 control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant IPCC_C1CR_RXOIE                                  \ RXOIE
-$00010000 constant IPCC_C1CR_TXFIE                                  \ TXFIE
-
-
-\
-\ @brief IPCC Processor 1 mask register
-\ Address offset: 0x04
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant IPCC_C1MR_CH1OM                                  \ CH1OM
-$00000002 constant IPCC_C1MR_CH2OM                                  \ CH2OM
-$00000004 constant IPCC_C1MR_CH3OM                                  \ CH3OM
-$00000008 constant IPCC_C1MR_CH4OM                                  \ CH4OM
-$00000010 constant IPCC_C1MR_CH5OM                                  \ CH5OM
-$00000020 constant IPCC_C1MR_CH6OM                                  \ CH6OM
-$00010000 constant IPCC_C1MR_CH1FM                                  \ CH1FM
-$00020000 constant IPCC_C1MR_CH2FM                                  \ CH2FM
-$00040000 constant IPCC_C1MR_CH3FM                                  \ CH3FM
-$00080000 constant IPCC_C1MR_CH4FM                                  \ CH4FM
-$00100000 constant IPCC_C1MR_CH5FM                                  \ CH5FM
-$00200000 constant IPCC_C1MR_CH6FM                                  \ CH6FM
+  [ifdef] IPCC_C1CR_DEF
+    \
+    \ @brief IPCC Processor 1 control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant IPCC_RXOIE                     \ [0x00] RXOIE
+    $10 constant IPCC_TXFIE                     \ [0x10] TXFIE
+  [then]
 
 
-\
-\ @brief Reading this register will always return 0x0000 0000.
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant IPCC_C1SCR_CH1C                                  \ CH1C
-$00000002 constant IPCC_C1SCR_CH2C                                  \ CH2C
-$00000004 constant IPCC_C1SCR_CH3C                                  \ CH3C
-$00000008 constant IPCC_C1SCR_CH4C                                  \ CH4C
-$00000010 constant IPCC_C1SCR_CH5C                                  \ CH5C
-$00000020 constant IPCC_C1SCR_CH6C                                  \ CH6C
-$00010000 constant IPCC_C1SCR_CH1S                                  \ CH1S
-$00020000 constant IPCC_C1SCR_CH2S                                  \ CH2S
-$00040000 constant IPCC_C1SCR_CH3S                                  \ CH3S
-$00080000 constant IPCC_C1SCR_CH4S                                  \ CH4S
-$00100000 constant IPCC_C1SCR_CH5S                                  \ CH5S
-$00200000 constant IPCC_C1SCR_CH6S                                  \ CH6S
-
-
-\
-\ @brief IPCC processor 1 to processor 2 status register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant IPCC_IC1TOC2SR_CH1F                              \ CH1F
-$00000002 constant IPCC_IC1TOC2SR_CH2F                              \ CH2F
-$00000004 constant IPCC_IC1TOC2SR_CH3F                              \ CH3F
-$00000008 constant IPCC_IC1TOC2SR_CH4F                              \ CH4F
-$00000010 constant IPCC_IC1TOC2SR_CH5F                              \ CH5F
-$00000020 constant IPCC_IC1TOC2SR_CH6F                              \ CH6F
+  [ifdef] IPCC_C1MR_DEF
+    \
+    \ @brief IPCC Processor 1 mask register
+    \ Address offset: 0x04
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant IPCC_CH1OM                     \ [0x00] CH1OM
+    $01 constant IPCC_CH2OM                     \ [0x01] CH2OM
+    $02 constant IPCC_CH3OM                     \ [0x02] CH3OM
+    $03 constant IPCC_CH4OM                     \ [0x03] CH4OM
+    $04 constant IPCC_CH5OM                     \ [0x04] CH5OM
+    $05 constant IPCC_CH6OM                     \ [0x05] CH6OM
+    $10 constant IPCC_CH1FM                     \ [0x10] CH1FM
+    $11 constant IPCC_CH2FM                     \ [0x11] CH2FM
+    $12 constant IPCC_CH3FM                     \ [0x12] CH3FM
+    $13 constant IPCC_CH4FM                     \ [0x13] CH4FM
+    $14 constant IPCC_CH5FM                     \ [0x14] CH5FM
+    $15 constant IPCC_CH6FM                     \ [0x15] CH6FM
+  [then]
 
 
-\
-\ @brief IPCC Processor 2 control register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant IPCC_C2CR_RXOIE                                  \ RXOIE
-$00010000 constant IPCC_C2CR_TXFIE                                  \ TXFIE
-
-
-\
-\ @brief IPCC Processor 2 mask register
-\ Address offset: 0x14
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant IPCC_C2MR_CH1OM                                  \ CH1OM
-$00000002 constant IPCC_C2MR_CH2OM                                  \ CH2OM
-$00000004 constant IPCC_C2MR_CH3OM                                  \ CH3OM
-$00000008 constant IPCC_C2MR_CH4OM                                  \ CH4OM
-$00000010 constant IPCC_C2MR_CH5OM                                  \ CH5OM
-$00000020 constant IPCC_C2MR_CH6OM                                  \ CH6OM
-$00010000 constant IPCC_C2MR_CH1FM                                  \ CH1FM
-$00020000 constant IPCC_C2MR_CH2FM                                  \ CH2FM
-$00040000 constant IPCC_C2MR_CH3FM                                  \ CH3FM
-$00080000 constant IPCC_C2MR_CH4FM                                  \ CH4FM
-$00100000 constant IPCC_C2MR_CH5FM                                  \ CH5FM
-$00200000 constant IPCC_C2MR_CH6FM                                  \ CH6FM
+  [ifdef] IPCC_C1SCR_DEF
+    \
+    \ @brief Reading this register will always return 0x0000 0000.
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant IPCC_CH1C                      \ [0x00] CH1C
+    $01 constant IPCC_CH2C                      \ [0x01] CH2C
+    $02 constant IPCC_CH3C                      \ [0x02] CH3C
+    $03 constant IPCC_CH4C                      \ [0x03] CH4C
+    $04 constant IPCC_CH5C                      \ [0x04] CH5C
+    $05 constant IPCC_CH6C                      \ [0x05] CH6C
+    $10 constant IPCC_CH1S                      \ [0x10] CH1S
+    $11 constant IPCC_CH2S                      \ [0x11] CH2S
+    $12 constant IPCC_CH3S                      \ [0x12] CH3S
+    $13 constant IPCC_CH4S                      \ [0x13] CH4S
+    $14 constant IPCC_CH5S                      \ [0x14] CH5S
+    $15 constant IPCC_CH6S                      \ [0x15] CH6S
+  [then]
 
 
-\
-\ @brief Reading this register will always return 0x0000 0000.
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant IPCC_C2SCR_CH1C                                  \ CH1C
-$00000002 constant IPCC_C2SCR_CH2C                                  \ CH2C
-$00000004 constant IPCC_C2SCR_CH3C                                  \ CH3C
-$00000008 constant IPCC_C2SCR_CH4C                                  \ CH4C
-$00000010 constant IPCC_C2SCR_CH5C                                  \ CH5C
-$00000020 constant IPCC_C2SCR_CH6C                                  \ CH6C
-$00010000 constant IPCC_C2SCR_CH1S                                  \ CH1S
-$00020000 constant IPCC_C2SCR_CH2S                                  \ CH2S
-$00040000 constant IPCC_C2SCR_CH3S                                  \ CH3S
-$00080000 constant IPCC_C2SCR_CH4S                                  \ CH4S
-$00100000 constant IPCC_C2SCR_CH5S                                  \ CH5S
-$00200000 constant IPCC_C2SCR_CH6S                                  \ CH6S
+  [ifdef] IPCC_IC1TOC2SR_DEF
+    \
+    \ @brief IPCC processor 1 to processor 2 status register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant IPCC_CH1F                      \ [0x00] CH1F
+    $01 constant IPCC_CH2F                      \ [0x01] CH2F
+    $02 constant IPCC_CH3F                      \ [0x02] CH3F
+    $03 constant IPCC_CH4F                      \ [0x03] CH4F
+    $04 constant IPCC_CH5F                      \ [0x04] CH5F
+    $05 constant IPCC_CH6F                      \ [0x05] CH6F
+  [then]
 
 
-\
-\ @brief IPCC processor 2 to processor 1 status register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant IPCC_C2TOC1SR_CH1F                               \ CH1F
-$00000002 constant IPCC_C2TOC1SR_CH2F                               \ CH2F
-$00000004 constant IPCC_C2TOC1SR_CH3F                               \ CH3F
-$00000008 constant IPCC_C2TOC1SR_CH4F                               \ CH4F
-$00000010 constant IPCC_C2TOC1SR_CH5F                               \ CH5F
-$00000020 constant IPCC_C2TOC1SR_CH6F                               \ CH6F
+  [ifdef] IPCC_C2CR_DEF
+    \
+    \ @brief IPCC Processor 2 control register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant IPCC_RXOIE                     \ [0x00] RXOIE
+    $10 constant IPCC_TXFIE                     \ [0x10] TXFIE
+  [then]
 
 
-\
-\ @brief IPCC Hardware configuration register
-\ Address offset: 0x3F0
-\ Reset value: 0x00000006
-\
-
-$000000ff constant IPCC_HWCFGR_CHANNELS                             \ CHANNELS
-
-
-\
-\ @brief IPCC IP Version register
-\ Address offset: 0x3F4
-\ Reset value: 0x00000010
-\
-
-$0000000f constant IPCC_VERR_MINREV                                 \ MINREV
-$000000f0 constant IPCC_VERR_MAJREV                                 \ MAJREV
-
-
-\
-\ @brief IPCC IP Identification register
-\ Address offset: 0x3F8
-\ Reset value: 0x00100071
-\
-
-$00000000 constant IPCC_IPIDR_ID                                    \ ID
+  [ifdef] IPCC_C2MR_DEF
+    \
+    \ @brief IPCC Processor 2 mask register
+    \ Address offset: 0x14
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant IPCC_CH1OM                     \ [0x00] CH1OM
+    $01 constant IPCC_CH2OM                     \ [0x01] CH2OM
+    $02 constant IPCC_CH3OM                     \ [0x02] CH3OM
+    $03 constant IPCC_CH4OM                     \ [0x03] CH4OM
+    $04 constant IPCC_CH5OM                     \ [0x04] CH5OM
+    $05 constant IPCC_CH6OM                     \ [0x05] CH6OM
+    $10 constant IPCC_CH1FM                     \ [0x10] CH1FM
+    $11 constant IPCC_CH2FM                     \ [0x11] CH2FM
+    $12 constant IPCC_CH3FM                     \ [0x12] CH3FM
+    $13 constant IPCC_CH4FM                     \ [0x13] CH4FM
+    $14 constant IPCC_CH5FM                     \ [0x14] CH5FM
+    $15 constant IPCC_CH6FM                     \ [0x15] CH6FM
+  [then]
 
 
-\
-\ @brief IPCC Size ID register
-\ Address offset: 0x3FC
-\ Reset value: 0xA3C5DD01
-\
+  [ifdef] IPCC_C2SCR_DEF
+    \
+    \ @brief Reading this register will always return 0x0000 0000.
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant IPCC_CH1C                      \ [0x00] CH1C
+    $01 constant IPCC_CH2C                      \ [0x01] CH2C
+    $02 constant IPCC_CH3C                      \ [0x02] CH3C
+    $03 constant IPCC_CH4C                      \ [0x03] CH4C
+    $04 constant IPCC_CH5C                      \ [0x04] CH5C
+    $05 constant IPCC_CH6C                      \ [0x05] CH6C
+    $10 constant IPCC_CH1S                      \ [0x10] CH1S
+    $11 constant IPCC_CH2S                      \ [0x11] CH2S
+    $12 constant IPCC_CH3S                      \ [0x12] CH3S
+    $13 constant IPCC_CH4S                      \ [0x13] CH4S
+    $14 constant IPCC_CH5S                      \ [0x14] CH5S
+    $15 constant IPCC_CH6S                      \ [0x15] CH6S
+  [then]
 
-$00000000 constant IPCC_SIDR_SID                                    \ SID
+
+  [ifdef] IPCC_C2TOC1SR_DEF
+    \
+    \ @brief IPCC processor 2 to processor 1 status register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant IPCC_CH1F                      \ [0x00] CH1F
+    $01 constant IPCC_CH2F                      \ [0x01] CH2F
+    $02 constant IPCC_CH3F                      \ [0x02] CH3F
+    $03 constant IPCC_CH4F                      \ [0x03] CH4F
+    $04 constant IPCC_CH5F                      \ [0x04] CH5F
+    $05 constant IPCC_CH6F                      \ [0x05] CH6F
+  [then]
 
 
-\
-\ @brief Inter Processor communication controller
-\
-$58000c00 constant IPCC_C1CR      \ offset: 0x00 : IPCC Processor 1 control register
-$58000c04 constant IPCC_C1MR      \ offset: 0x04 : IPCC Processor 1 mask register
-$58000c08 constant IPCC_C1SCR     \ offset: 0x08 : Reading this register will always return 0x0000 0000.
-$58000c0c constant IPCC_IC1TOC2SR  \ offset: 0x0C : IPCC processor 1 to processor 2 status register
-$58000c10 constant IPCC_C2CR      \ offset: 0x10 : IPCC Processor 2 control register
-$58000c14 constant IPCC_C2MR      \ offset: 0x14 : IPCC Processor 2 mask register
-$58000c18 constant IPCC_C2SCR     \ offset: 0x18 : Reading this register will always return 0x0000 0000.
-$58000c1c constant IPCC_C2TOC1SR  \ offset: 0x1C : IPCC processor 2 to processor 1 status register
-$58000ff0 constant IPCC_HWCFGR    \ offset: 0x3F0 : IPCC Hardware configuration register
-$58000ff4 constant IPCC_VERR      \ offset: 0x3F4 : IPCC IP Version register
-$58000ff8 constant IPCC_IPIDR     \ offset: 0x3F8 : IPCC IP Identification register
-$58000ffc constant IPCC_SIDR      \ offset: 0x3FC : IPCC Size ID register
+  [ifdef] IPCC_HWCFGR_DEF
+    \
+    \ @brief IPCC Hardware configuration register
+    \ Address offset: 0x3F0
+    \ Reset value: 0x00000006
+    \
+    $00 constant IPCC_CHANNELS                  \ [0x00 : 8] CHANNELS
+  [then]
 
+
+  [ifdef] IPCC_VERR_DEF
+    \
+    \ @brief IPCC IP Version register
+    \ Address offset: 0x3F4
+    \ Reset value: 0x00000010
+    \
+    $00 constant IPCC_MINREV                    \ [0x00 : 4] MINREV
+    $04 constant IPCC_MAJREV                    \ [0x04 : 4] MAJREV
+  [then]
+
+
+  [ifdef] IPCC_IPIDR_DEF
+    \
+    \ @brief IPCC IP Identification register
+    \ Address offset: 0x3F8
+    \ Reset value: 0x00100071
+    \
+    $00 constant IPCC_ID                        \ [0x00 : 32] ID
+  [then]
+
+
+  [ifdef] IPCC_SIDR_DEF
+    \
+    \ @brief IPCC Size ID register
+    \ Address offset: 0x3FC
+    \ Reset value: 0xA3C5DD01
+    \
+    $00 constant IPCC_SID                       \ [0x00 : 32] SID
+  [then]
+
+  \
+  \ @brief Inter Processor communication controller
+  \
+  $00 constant IPCC_C1CR                \ IPCC Processor 1 control register
+  $04 constant IPCC_C1MR                \ IPCC Processor 1 mask register
+  $08 constant IPCC_C1SCR               \ Reading this register will always return 0x0000 0000.
+  $0C constant IPCC_IC1TOC2SR           \ IPCC processor 1 to processor 2 status register
+  $10 constant IPCC_C2CR                \ IPCC Processor 2 control register
+  $14 constant IPCC_C2MR                \ IPCC Processor 2 mask register
+  $18 constant IPCC_C2SCR               \ Reading this register will always return 0x0000 0000.
+  $1C constant IPCC_C2TOC1SR            \ IPCC processor 2 to processor 1 status register
+  $3F0 constant IPCC_HWCFGR             \ IPCC Hardware configuration register
+  $3F4 constant IPCC_VERR               \ IPCC IP Version register
+  $3F8 constant IPCC_IPIDR              \ IPCC IP Identification register
+  $3FC constant IPCC_SIDR               \ IPCC Size ID register
+
+: IPCC_DEF ; [then]

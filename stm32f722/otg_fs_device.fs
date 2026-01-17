@@ -6,769 +6,821 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief OTG_FS device configuration register (OTG_FS_DCFG)
-\ Address offset: 0x00
-\ Reset value: 0x02200000
-\
-
-$00000003 constant OTG_FS_DEVICE_OTG_FS_DCFG_DSPD                   \ Device speed
-$00000004 constant OTG_FS_DEVICE_OTG_FS_DCFG_NZLSOHSK               \ Non-zero-length status OUT handshake
-$000007f0 constant OTG_FS_DEVICE_OTG_FS_DCFG_DAD                    \ Device address
-$00001800 constant OTG_FS_DEVICE_OTG_FS_DCFG_PFIVL                  \ Periodic frame interval
-
-
-\
-\ @brief OTG_FS device control register (OTG_FS_DCTL)
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DCTL_RWUSIG                 \ Remote wakeup signaling
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DCTL_SDIS                   \ Soft disconnect
-$00000004 constant OTG_FS_DEVICE_OTG_FS_DCTL_GINSTS                 \ Global IN NAK status
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DCTL_GONSTS                 \ Global OUT NAK status
-$00000070 constant OTG_FS_DEVICE_OTG_FS_DCTL_TCTL                   \ Test control
-$00000080 constant OTG_FS_DEVICE_OTG_FS_DCTL_SGINAK                 \ Set global IN NAK
-$00000100 constant OTG_FS_DEVICE_OTG_FS_DCTL_CGINAK                 \ Clear global IN NAK
-$00000200 constant OTG_FS_DEVICE_OTG_FS_DCTL_SGONAK                 \ Set global OUT NAK
-$00000400 constant OTG_FS_DEVICE_OTG_FS_DCTL_CGONAK                 \ Clear global OUT NAK
-$00000800 constant OTG_FS_DEVICE_OTG_FS_DCTL_POPRGDNE               \ Power-on programming done
-
-
-\
-\ @brief OTG_FS device status register (OTG_FS_DSTS)
-\ Address offset: 0x08
-\ Reset value: 0x00000010
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DSTS_SUSPSTS                \ Suspend status
-$00000006 constant OTG_FS_DEVICE_OTG_FS_DSTS_ENUMSPD                \ Enumerated speed
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DSTS_EERR                   \ Erratic error
-$003fff00 constant OTG_FS_DEVICE_OTG_FS_DSTS_FNSOF                  \ Frame number of the received SOF
-
-
-\
-\ @brief OTG_FS device IN endpoint common interrupt mask register (OTG_FS_DIEPMSK)
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DIEPMSK_XFRCM               \ Transfer completed interrupt mask
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DIEPMSK_EPDM                \ Endpoint disabled interrupt mask
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DIEPMSK_TOM                 \ Timeout condition mask (Non-isochronous endpoints)
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DIEPMSK_ITTXFEMSK           \ IN token received when TxFIFO empty mask
-$00000020 constant OTG_FS_DEVICE_OTG_FS_DIEPMSK_INEPNMM             \ IN token received with EP mismatch mask
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DIEPMSK_INEPNEM             \ IN endpoint NAK effective mask
-
-
-\
-\ @brief OTG_FS device OUT endpoint common interrupt mask register (OTG_FS_DOEPMSK)
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DOEPMSK_XFRCM               \ Transfer completed interrupt mask
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DOEPMSK_EPDM                \ Endpoint disabled interrupt mask
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DOEPMSK_STUPM               \ SETUP phase done mask
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DOEPMSK_OTEPDM              \ OUT token received when endpoint disabled mask
-
-
-\
-\ @brief OTG_FS device all endpoints interrupt register (OTG_FS_DAINT)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DAINT_IEPINT                \ IN endpoint interrupt bits
-$ffff0000 constant OTG_FS_DEVICE_OTG_FS_DAINT_OEPINT                \ OUT endpoint interrupt bits
-
-
-\
-\ @brief OTG_FS all endpoints interrupt mask register (OTG_FS_DAINTMSK)
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DAINTMSK_IEPM               \ IN EP interrupt mask bits
-$ffff0000 constant OTG_FS_DEVICE_OTG_FS_DAINTMSK_OEPINT             \ OUT endpoint interrupt bits
-
-
-\
-\ @brief OTG_FS device VBUS discharge time register
-\ Address offset: 0x28
-\ Reset value: 0x000017D7
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DVBUSDIS_VBUSDT             \ Device VBUS discharge time
-
-
-\
-\ @brief OTG_FS device VBUS pulsing time register
-\ Address offset: 0x2C
-\ Reset value: 0x000005B8
-\
-
-$00000fff constant OTG_FS_DEVICE_OTG_FS_DVBUSPULSE_DVBUSP           \ Device VBUS pulsing time
-
-
-\
-\ @brief OTG_FS device IN endpoint FIFO empty interrupt mask register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DIEPEMPMSK_INEPTXFEM        \ IN EP Tx FIFO empty interrupt mask bits
-
-
-\
-\ @brief OTG_FS device control IN endpoint 0 control register (OTG_FS_DIEPCTL0)
-\ Address offset: 0x100
-\ Reset value: 0x00000000
-\
-
-$00000003 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_USBAEP             \ USB active endpoint
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_NAKSTS             \ NAK status
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_EPTYP              \ Endpoint type
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_STALL              \ STALL handshake
-$03c00000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_CNAK               \ Clear NAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_SNAK               \ Set NAK
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_EPDIS              \ Endpoint disable
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0_EPENA              \ Endpoint enable
-
-
-\
-\ @brief device endpoint-x interrupt register
-\ Address offset: 0x108
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DIEPINT0_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DIEPINT0_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DIEPINT0_TOC                \ TOC
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DIEPINT0_ITTXFE             \ ITTXFE
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DIEPINT0_INEPNE             \ INEPNE
-$00000080 constant OTG_FS_DEVICE_OTG_FS_DIEPINT0_TXFE               \ TXFE
-
-
-\
-\ @brief device endpoint-0 transfer size register
-\ Address offset: 0x110
-\ Reset value: 0x00000000
-\
-
-$0000007f constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ0_XFRSIZ            \ Transfer size
-$00180000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ0_PKTCNT            \ Packet count
-
-
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO status register
-\ Address offset: 0x118
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DTXFSTS0_INEPTFSAV          \ IN endpoint TxFIFO space available
-
-
-\
-\ @brief OTG device endpoint-1 control register
-\ Address offset: 0x120
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_EPTYP              \ EPTYP
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_STALL              \ Stall
-$03c00000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_TXFNUM             \ TXFNUM
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_SODDFRM_SD1PID     \ SODDFRM/SD1PID
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-1 interrupt register
-\ Address offset: 0x128
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DIEPINT1_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DIEPINT1_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DIEPINT1_TOC                \ TOC
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DIEPINT1_ITTXFE             \ ITTXFE
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DIEPINT1_INEPNE             \ INEPNE
-$00000080 constant OTG_FS_DEVICE_OTG_FS_DIEPINT1_TXFE               \ TXFE
-
-
-\
-\ @brief device endpoint-1 transfer size register
-\ Address offset: 0x130
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ1_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ1_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ1_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO status register
-\ Address offset: 0x138
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DTXFSTS1_INEPTFSAV          \ IN endpoint TxFIFO space available
-
-
-\
-\ @brief OTG device endpoint-2 control register
-\ Address offset: 0x140
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_EPTYP              \ EPTYP
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_STALL              \ Stall
-$03c00000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_TXFNUM             \ TXFNUM
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-2 interrupt register
-\ Address offset: 0x148
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DIEPINT2_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DIEPINT2_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DIEPINT2_TOC                \ TOC
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DIEPINT2_ITTXFE             \ ITTXFE
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DIEPINT2_INEPNE             \ INEPNE
-$00000080 constant OTG_FS_DEVICE_OTG_FS_DIEPINT2_TXFE               \ TXFE
-
-
-\
-\ @brief device endpoint-2 transfer size register
-\ Address offset: 0x150
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ2_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ2_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ2_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO status register
-\ Address offset: 0x158
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DTXFSTS2_INEPTFSAV          \ IN endpoint TxFIFO space available
-
-
-\
-\ @brief OTG device endpoint-3 control register
-\ Address offset: 0x160
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_EPTYP              \ EPTYP
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_STALL              \ Stall
-$03c00000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_TXFNUM             \ TXFNUM
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-3 interrupt register
-\ Address offset: 0x168
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DIEPINT3_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DIEPINT3_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DIEPINT3_TOC                \ TOC
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DIEPINT3_ITTXFE             \ ITTXFE
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DIEPINT3_INEPNE             \ INEPNE
-$00000080 constant OTG_FS_DEVICE_OTG_FS_DIEPINT3_TXFE               \ TXFE
-
-
-\
-\ @brief device endpoint-3 transfer size register
-\ Address offset: 0x170
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ3_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ3_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ3_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO status register
-\ Address offset: 0x178
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DTXFSTS3_INEPTFSAV          \ IN endpoint TxFIFO space available
-
-
-\
-\ @brief OTG device endpoint-4 control register
-\ Address offset: 0x180
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_EPTYP              \ EPTYP
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_STALL              \ Stall
-$03c00000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_TXFNUM             \ TXFNUM
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-4 interrupt register
-\ Address offset: 0x188
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DIEPINT4_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DIEPINT4_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DIEPINT4_TOC                \ TOC
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DIEPINT4_ITTXFE             \ ITTXFE
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DIEPINT4_INEPNE             \ INEPNE
-$00000080 constant OTG_FS_DEVICE_OTG_FS_DIEPINT4_TXFE               \ TXFE
-
-
-\
-\ @brief device endpoint-4 transfer size register
-\ Address offset: 0x190
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ4_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ4_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ4_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO status register
-\ Address offset: 0x198
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DTXFSTS4_INEPTFSAV          \ IN endpoint TxFIFO space available
-
-
-\
-\ @brief OTG device endpoint-5 control register
-\ Address offset: 0x1A0
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_EPTYP              \ EPTYP
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_STALL              \ Stall
-$03c00000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_TXFNUM             \ TXFNUM
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-5 interrupt register
-\ Address offset: 0x1A8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DIEPINT5_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DIEPINT5_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DIEPINT5_TOC                \ TOC
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DIEPINT5_ITTXFE             \ ITTXFE
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DIEPINT5_INEPNE             \ INEPNE
-$00000080 constant OTG_FS_DEVICE_OTG_FS_DIEPINT5_TXFE               \ TXFE
-
-
-\
-\ @brief device endpoint-5 transfer size register
-\ Address offset: 0x1B0
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ5_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ5_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ5_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO status register
-\ Address offset: 0x1B8
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_FS_DEVICE_OTG_FS_DTXFSTS5_INEPTFSAV          \ IN endpoint TxFIFO space available
-
-
-\
-\ @brief device endpoint-0 control register
-\ Address offset: 0x300
-\ Reset value: 0x00008000
-\
-
-$00000003 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_USBAEP             \ USBAEP
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_EPTYP              \ EPTYP
-$00100000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_SNPM               \ SNPM
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_STALL              \ Stall
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_SNAK               \ SNAK
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-0 interrupt register
-\ Address offset: 0x308
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DOEPINT0_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DOEPINT0_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DOEPINT0_STUP               \ STUP
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DOEPINT0_OTEPDIS            \ OTEPDIS
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DOEPINT0_B2BSTUP            \ B2BSTUP
-
-
-\
-\ @brief device OUT endpoint-0 transfer size register
-\ Address offset: 0x310
-\ Reset value: 0x00000000
-\
-
-$0000007f constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ0_XFRSIZ            \ Transfer size
-$00080000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ0_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ0_STUPCNT           \ SETUP packet count
-
-
-\
-\ @brief device endpoint-1 control register
-\ Address offset: 0x320
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_EPTYP              \ EPTYP
-$00100000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_SNPM               \ SNPM
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_STALL              \ Stall
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-1 interrupt register
-\ Address offset: 0x328
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DOEPINT1_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DOEPINT1_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DOEPINT1_STUP               \ STUP
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DOEPINT1_OTEPDIS            \ OTEPDIS
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DOEPINT1_B2BSTUP            \ B2BSTUP
-
-
-\
-\ @brief device OUT endpoint-1 transfer size register
-\ Address offset: 0x330
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ1_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ1_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ1_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief device endpoint-2 control register
-\ Address offset: 0x340
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_EPTYP              \ EPTYP
-$00100000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_SNPM               \ SNPM
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_STALL              \ Stall
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-2 interrupt register
-\ Address offset: 0x348
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DOEPINT2_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DOEPINT2_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DOEPINT2_STUP               \ STUP
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DOEPINT2_OTEPDIS            \ OTEPDIS
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DOEPINT2_B2BSTUP            \ B2BSTUP
-
-
-\
-\ @brief device OUT endpoint-2 transfer size register
-\ Address offset: 0x350
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ2_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ2_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ2_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief device endpoint-3 control register
-\ Address offset: 0x360
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_EPTYP              \ EPTYP
-$00100000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_SNPM               \ SNPM
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_STALL              \ Stall
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-3 interrupt register
-\ Address offset: 0x368
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DOEPINT3_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DOEPINT3_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DOEPINT3_STUP               \ STUP
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DOEPINT3_OTEPDIS            \ OTEPDIS
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DOEPINT3_B2BSTUP            \ B2BSTUP
-
-
-\
-\ @brief device OUT endpoint-3 transfer size register
-\ Address offset: 0x370
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ3_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ3_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ3_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief device endpoint-4 control register
-\ Address offset: 0x380
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_EPTYP              \ EPTYP
-$00100000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_SNPM               \ SNPM
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_STALL              \ Stall
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-4 interrupt register
-\ Address offset: 0x388
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DOEPINT4_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DOEPINT4_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DOEPINT4_STUP               \ STUP
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DOEPINT4_OTEPDIS            \ OTEPDIS
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DOEPINT4_B2BSTUP            \ B2BSTUP
-
-
-\
-\ @brief device OUT endpoint-4 transfer size register
-\ Address offset: 0x390
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ4_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ4_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ4_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief device endpoint-5 control register
-\ Address offset: 0x3A0
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_MPSIZ              \ MPSIZ
-$00008000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_USBAEP             \ USBAEP
-$00010000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_EONUM_DPID         \ EONUM/DPID
-$00020000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_NAKSTS             \ NAKSTS
-$000c0000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_EPTYP              \ EPTYP
-$00100000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_SNPM               \ SNPM
-$00200000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_STALL              \ Stall
-$04000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_CNAK               \ CNAK
-$08000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_SNAK               \ SNAK
-$10000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_SD0PID_SEVNFRM     \ SD0PID/SEVNFRM
-$20000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_SODDFRM            \ SODDFRM
-$40000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_EPDIS              \ EPDIS
-$80000000 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5_EPENA              \ EPENA
-
-
-\
-\ @brief device endpoint-5 interrupt register
-\ Address offset: 0x3A8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_FS_DEVICE_OTG_FS_DOEPINT5_XFRC               \ XFRC
-$00000002 constant OTG_FS_DEVICE_OTG_FS_DOEPINT5_EPDISD             \ EPDISD
-$00000008 constant OTG_FS_DEVICE_OTG_FS_DOEPINT5_STUP               \ STUP
-$00000010 constant OTG_FS_DEVICE_OTG_FS_DOEPINT5_OTEPDIS            \ OTEPDIS
-$00000040 constant OTG_FS_DEVICE_OTG_FS_DOEPINT5_B2BSTUP            \ B2BSTUP
-
-
-\
-\ @brief device OUT endpoint-5 transfer size register
-\ Address offset: 0x3B0
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ5_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ5_PKTCNT            \ Packet count
-$60000000 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ5_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief USB on the go full speed
-\
-$50000800 constant OTG_FS_DEVICE_OTG_FS_DCFG  \ offset: 0x00 : OTG_FS device configuration register (OTG_FS_DCFG)
-$50000804 constant OTG_FS_DEVICE_OTG_FS_DCTL  \ offset: 0x04 : OTG_FS device control register (OTG_FS_DCTL)
-$50000808 constant OTG_FS_DEVICE_OTG_FS_DSTS  \ offset: 0x08 : OTG_FS device status register (OTG_FS_DSTS)
-$50000810 constant OTG_FS_DEVICE_OTG_FS_DIEPMSK  \ offset: 0x10 : OTG_FS device IN endpoint common interrupt mask register (OTG_FS_DIEPMSK)
-$50000814 constant OTG_FS_DEVICE_OTG_FS_DOEPMSK  \ offset: 0x14 : OTG_FS device OUT endpoint common interrupt mask register (OTG_FS_DOEPMSK)
-$50000818 constant OTG_FS_DEVICE_OTG_FS_DAINT  \ offset: 0x18 : OTG_FS device all endpoints interrupt register (OTG_FS_DAINT)
-$5000081c constant OTG_FS_DEVICE_OTG_FS_DAINTMSK  \ offset: 0x1C : OTG_FS all endpoints interrupt mask register (OTG_FS_DAINTMSK)
-$50000828 constant OTG_FS_DEVICE_OTG_FS_DVBUSDIS  \ offset: 0x28 : OTG_FS device VBUS discharge time register
-$5000082c constant OTG_FS_DEVICE_OTG_FS_DVBUSPULSE  \ offset: 0x2C : OTG_FS device VBUS pulsing time register
-$50000834 constant OTG_FS_DEVICE_OTG_FS_DIEPEMPMSK  \ offset: 0x34 : OTG_FS device IN endpoint FIFO empty interrupt mask register
-$50000900 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0  \ offset: 0x100 : OTG_FS device control IN endpoint 0 control register (OTG_FS_DIEPCTL0)
-$50000908 constant OTG_FS_DEVICE_OTG_FS_DIEPINT0  \ offset: 0x108 : device endpoint-x interrupt register
-$50000910 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ0  \ offset: 0x110 : device endpoint-0 transfer size register
-$50000918 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS0  \ offset: 0x118 : OTG_FS device IN endpoint transmit FIFO status register
-$50000920 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1  \ offset: 0x120 : OTG device endpoint-1 control register
-$50000928 constant OTG_FS_DEVICE_OTG_FS_DIEPINT1  \ offset: 0x128 : device endpoint-1 interrupt register
-$50000930 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ1  \ offset: 0x130 : device endpoint-1 transfer size register
-$50000938 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS1  \ offset: 0x138 : OTG_FS device IN endpoint transmit FIFO status register
-$50000940 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2  \ offset: 0x140 : OTG device endpoint-2 control register
-$50000948 constant OTG_FS_DEVICE_OTG_FS_DIEPINT2  \ offset: 0x148 : device endpoint-2 interrupt register
-$50000950 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ2  \ offset: 0x150 : device endpoint-2 transfer size register
-$50000958 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS2  \ offset: 0x158 : OTG_FS device IN endpoint transmit FIFO status register
-$50000960 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3  \ offset: 0x160 : OTG device endpoint-3 control register
-$50000968 constant OTG_FS_DEVICE_OTG_FS_DIEPINT3  \ offset: 0x168 : device endpoint-3 interrupt register
-$50000970 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ3  \ offset: 0x170 : device endpoint-3 transfer size register
-$50000978 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS3  \ offset: 0x178 : OTG_FS device IN endpoint transmit FIFO status register
-$50000980 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4  \ offset: 0x180 : OTG device endpoint-4 control register
-$50000988 constant OTG_FS_DEVICE_OTG_FS_DIEPINT4  \ offset: 0x188 : device endpoint-4 interrupt register
-$50000990 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ4  \ offset: 0x190 : device endpoint-4 transfer size register
-$50000998 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS4  \ offset: 0x198 : OTG_FS device IN endpoint transmit FIFO status register
-$500009a0 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5  \ offset: 0x1A0 : OTG device endpoint-5 control register
-$500009a8 constant OTG_FS_DEVICE_OTG_FS_DIEPINT5  \ offset: 0x1A8 : device endpoint-5 interrupt register
-$500009b0 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ5  \ offset: 0x1B0 : device endpoint-5 transfer size register
-$500009b8 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS5  \ offset: 0x1B8 : OTG_FS device IN endpoint transmit FIFO status register
-$50000b00 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0  \ offset: 0x300 : device endpoint-0 control register
-$50000b08 constant OTG_FS_DEVICE_OTG_FS_DOEPINT0  \ offset: 0x308 : device endpoint-0 interrupt register
-$50000b10 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ0  \ offset: 0x310 : device OUT endpoint-0 transfer size register
-$50000b20 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1  \ offset: 0x320 : device endpoint-1 control register
-$50000b28 constant OTG_FS_DEVICE_OTG_FS_DOEPINT1  \ offset: 0x328 : device endpoint-1 interrupt register
-$50000b30 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ1  \ offset: 0x330 : device OUT endpoint-1 transfer size register
-$50000b40 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2  \ offset: 0x340 : device endpoint-2 control register
-$50000b48 constant OTG_FS_DEVICE_OTG_FS_DOEPINT2  \ offset: 0x348 : device endpoint-2 interrupt register
-$50000b50 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ2  \ offset: 0x350 : device OUT endpoint-2 transfer size register
-$50000b60 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3  \ offset: 0x360 : device endpoint-3 control register
-$50000b68 constant OTG_FS_DEVICE_OTG_FS_DOEPINT3  \ offset: 0x368 : device endpoint-3 interrupt register
-$50000b70 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ3  \ offset: 0x370 : device OUT endpoint-3 transfer size register
-$50000b80 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4  \ offset: 0x380 : device endpoint-4 control register
-$50000b88 constant OTG_FS_DEVICE_OTG_FS_DOEPINT4  \ offset: 0x388 : device endpoint-4 interrupt register
-$50000b90 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ4  \ offset: 0x390 : device OUT endpoint-4 transfer size register
-$50000ba0 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5  \ offset: 0x3A0 : device endpoint-5 control register
-$50000ba8 constant OTG_FS_DEVICE_OTG_FS_DOEPINT5  \ offset: 0x3A8 : device endpoint-5 interrupt register
-$50000bb0 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ5  \ offset: 0x3B0 : device OUT endpoint-5 transfer size register
-
+[ifndef] OTG_FS_DEVICE_DEF
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DCFG_DEF
+    \
+    \ @brief OTG_FS device configuration register (OTG_FS_DCFG)
+    \ Address offset: 0x00
+    \ Reset value: 0x02200000
+    \
+    $00 constant OTG_FS_DEVICE_DSPD             \ [0x00 : 2] Device speed
+    $02 constant OTG_FS_DEVICE_NZLSOHSK         \ [0x02] Non-zero-length status OUT handshake
+    $04 constant OTG_FS_DEVICE_DAD              \ [0x04 : 7] Device address
+    $0b constant OTG_FS_DEVICE_PFIVL            \ [0x0b : 2] Periodic frame interval
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DCTL_DEF
+    \
+    \ @brief OTG_FS device control register (OTG_FS_DCTL)
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_RWUSIG           \ [0x00] Remote wakeup signaling
+    $01 constant OTG_FS_DEVICE_SDIS             \ [0x01] Soft disconnect
+    $02 constant OTG_FS_DEVICE_GINSTS           \ [0x02] Global IN NAK status
+    $03 constant OTG_FS_DEVICE_GONSTS           \ [0x03] Global OUT NAK status
+    $04 constant OTG_FS_DEVICE_TCTL             \ [0x04 : 3] Test control
+    $07 constant OTG_FS_DEVICE_SGINAK           \ [0x07] Set global IN NAK
+    $08 constant OTG_FS_DEVICE_CGINAK           \ [0x08] Clear global IN NAK
+    $09 constant OTG_FS_DEVICE_SGONAK           \ [0x09] Set global OUT NAK
+    $0a constant OTG_FS_DEVICE_CGONAK           \ [0x0a] Clear global OUT NAK
+    $0b constant OTG_FS_DEVICE_POPRGDNE         \ [0x0b] Power-on programming done
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DSTS_DEF
+    \
+    \ @brief OTG_FS device status register (OTG_FS_DSTS)
+    \ Address offset: 0x08
+    \ Reset value: 0x00000010
+    \
+    $00 constant OTG_FS_DEVICE_SUSPSTS          \ [0x00] Suspend status
+    $01 constant OTG_FS_DEVICE_ENUMSPD          \ [0x01 : 2] Enumerated speed
+    $03 constant OTG_FS_DEVICE_EERR             \ [0x03] Erratic error
+    $08 constant OTG_FS_DEVICE_FNSOF            \ [0x08 : 14] Frame number of the received SOF
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPMSK_DEF
+    \
+    \ @brief OTG_FS device IN endpoint common interrupt mask register (OTG_FS_DIEPMSK)
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRCM            \ [0x00] Transfer completed interrupt mask
+    $01 constant OTG_FS_DEVICE_EPDM             \ [0x01] Endpoint disabled interrupt mask
+    $03 constant OTG_FS_DEVICE_TOM              \ [0x03] Timeout condition mask (Non-isochronous endpoints)
+    $04 constant OTG_FS_DEVICE_ITTXFEMSK        \ [0x04] IN token received when TxFIFO empty mask
+    $05 constant OTG_FS_DEVICE_INEPNMM          \ [0x05] IN token received with EP mismatch mask
+    $06 constant OTG_FS_DEVICE_INEPNEM          \ [0x06] IN endpoint NAK effective mask
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPMSK_DEF
+    \
+    \ @brief OTG_FS device OUT endpoint common interrupt mask register (OTG_FS_DOEPMSK)
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRCM            \ [0x00] Transfer completed interrupt mask
+    $01 constant OTG_FS_DEVICE_EPDM             \ [0x01] Endpoint disabled interrupt mask
+    $03 constant OTG_FS_DEVICE_STUPM            \ [0x03] SETUP phase done mask
+    $04 constant OTG_FS_DEVICE_OTEPDM           \ [0x04] OUT token received when endpoint disabled mask
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DAINT_DEF
+    \
+    \ @brief OTG_FS device all endpoints interrupt register (OTG_FS_DAINT)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_IEPINT           \ [0x00 : 16] IN endpoint interrupt bits
+    $10 constant OTG_FS_DEVICE_OEPINT           \ [0x10 : 16] OUT endpoint interrupt bits
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DAINTMSK_DEF
+    \
+    \ @brief OTG_FS all endpoints interrupt mask register (OTG_FS_DAINTMSK)
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_IEPM             \ [0x00 : 16] IN EP interrupt mask bits
+    $10 constant OTG_FS_DEVICE_OEPINT           \ [0x10 : 16] OUT endpoint interrupt bits
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DVBUSDIS_DEF
+    \
+    \ @brief OTG_FS device VBUS discharge time register
+    \ Address offset: 0x28
+    \ Reset value: 0x000017D7
+    \
+    $00 constant OTG_FS_DEVICE_VBUSDT           \ [0x00 : 16] Device VBUS discharge time
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DVBUSPULSE_DEF
+    \
+    \ @brief OTG_FS device VBUS pulsing time register
+    \ Address offset: 0x2C
+    \ Reset value: 0x000005B8
+    \
+    $00 constant OTG_FS_DEVICE_DVBUSP           \ [0x00 : 12] Device VBUS pulsing time
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPEMPMSK_DEF
+    \
+    \ @brief OTG_FS device IN endpoint FIFO empty interrupt mask register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_INEPTXFEM        \ [0x00 : 16] IN EP Tx FIFO empty interrupt mask bits
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPCTL0_DEF
+    \
+    \ @brief OTG_FS device control IN endpoint 0 control register (OTG_FS_DIEPCTL0)
+    \ Address offset: 0x100
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 2] Maximum packet size
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_FS_DEVICE_STALL            \ [0x15] STALL handshake
+    $16 constant OTG_FS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPINT0_DEF
+    \
+    \ @brief device endpoint-x interrupt register
+    \ Address offset: 0x108
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_TOC              \ [0x03] TOC
+    $04 constant OTG_FS_DEVICE_ITTXFE           \ [0x04] ITTXFE
+    $06 constant OTG_FS_DEVICE_INEPNE           \ [0x06] INEPNE
+    $07 constant OTG_FS_DEVICE_TXFE             \ [0x07] TXFE
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPTSIZ0_DEF
+    \
+    \ @brief device endpoint-0 transfer size register
+    \ Address offset: 0x110
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 7] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 2] Packet count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DTXFSTS0_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x118
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space available
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPCTL1_DEF
+    \
+    \ @brief OTG device endpoint-1 control register
+    \ Address offset: 0x120
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $16 constant OTG_FS_DEVICE_TXFNUM           \ [0x16 : 4] TXFNUM
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM_SD1PID   \ [0x1d] SODDFRM/SD1PID
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPINT1_DEF
+    \
+    \ @brief device endpoint-1 interrupt register
+    \ Address offset: 0x128
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_TOC              \ [0x03] TOC
+    $04 constant OTG_FS_DEVICE_ITTXFE           \ [0x04] ITTXFE
+    $06 constant OTG_FS_DEVICE_INEPNE           \ [0x06] INEPNE
+    $07 constant OTG_FS_DEVICE_TXFE             \ [0x07] TXFE
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPTSIZ1_DEF
+    \
+    \ @brief device endpoint-1 transfer size register
+    \ Address offset: 0x130
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DTXFSTS1_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x138
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space available
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPCTL2_DEF
+    \
+    \ @brief OTG device endpoint-2 control register
+    \ Address offset: 0x140
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $16 constant OTG_FS_DEVICE_TXFNUM           \ [0x16 : 4] TXFNUM
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPINT2_DEF
+    \
+    \ @brief device endpoint-2 interrupt register
+    \ Address offset: 0x148
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_TOC              \ [0x03] TOC
+    $04 constant OTG_FS_DEVICE_ITTXFE           \ [0x04] ITTXFE
+    $06 constant OTG_FS_DEVICE_INEPNE           \ [0x06] INEPNE
+    $07 constant OTG_FS_DEVICE_TXFE             \ [0x07] TXFE
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPTSIZ2_DEF
+    \
+    \ @brief device endpoint-2 transfer size register
+    \ Address offset: 0x150
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DTXFSTS2_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x158
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space available
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPCTL3_DEF
+    \
+    \ @brief OTG device endpoint-3 control register
+    \ Address offset: 0x160
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $16 constant OTG_FS_DEVICE_TXFNUM           \ [0x16 : 4] TXFNUM
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPINT3_DEF
+    \
+    \ @brief device endpoint-3 interrupt register
+    \ Address offset: 0x168
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_TOC              \ [0x03] TOC
+    $04 constant OTG_FS_DEVICE_ITTXFE           \ [0x04] ITTXFE
+    $06 constant OTG_FS_DEVICE_INEPNE           \ [0x06] INEPNE
+    $07 constant OTG_FS_DEVICE_TXFE             \ [0x07] TXFE
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPTSIZ3_DEF
+    \
+    \ @brief device endpoint-3 transfer size register
+    \ Address offset: 0x170
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DTXFSTS3_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x178
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space available
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPCTL4_DEF
+    \
+    \ @brief OTG device endpoint-4 control register
+    \ Address offset: 0x180
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $16 constant OTG_FS_DEVICE_TXFNUM           \ [0x16 : 4] TXFNUM
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPINT4_DEF
+    \
+    \ @brief device endpoint-4 interrupt register
+    \ Address offset: 0x188
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_TOC              \ [0x03] TOC
+    $04 constant OTG_FS_DEVICE_ITTXFE           \ [0x04] ITTXFE
+    $06 constant OTG_FS_DEVICE_INEPNE           \ [0x06] INEPNE
+    $07 constant OTG_FS_DEVICE_TXFE             \ [0x07] TXFE
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPTSIZ4_DEF
+    \
+    \ @brief device endpoint-4 transfer size register
+    \ Address offset: 0x190
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DTXFSTS4_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x198
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space available
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPCTL5_DEF
+    \
+    \ @brief OTG device endpoint-5 control register
+    \ Address offset: 0x1A0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $16 constant OTG_FS_DEVICE_TXFNUM           \ [0x16 : 4] TXFNUM
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPINT5_DEF
+    \
+    \ @brief device endpoint-5 interrupt register
+    \ Address offset: 0x1A8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_TOC              \ [0x03] TOC
+    $04 constant OTG_FS_DEVICE_ITTXFE           \ [0x04] ITTXFE
+    $06 constant OTG_FS_DEVICE_INEPNE           \ [0x06] INEPNE
+    $07 constant OTG_FS_DEVICE_TXFE             \ [0x07] TXFE
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DIEPTSIZ5_DEF
+    \
+    \ @brief device endpoint-5 transfer size register
+    \ Address offset: 0x1B0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DTXFSTS5_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x1B8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space available
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPCTL0_DEF
+    \
+    \ @brief device endpoint-0 control register
+    \ Address offset: 0x300
+    \ Reset value: 0x00008000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 2] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $14 constant OTG_FS_DEVICE_SNPM             \ [0x14] SNPM
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPINT0_DEF
+    \
+    \ @brief device endpoint-0 interrupt register
+    \ Address offset: 0x308
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_STUP             \ [0x03] STUP
+    $04 constant OTG_FS_DEVICE_OTEPDIS          \ [0x04] OTEPDIS
+    $06 constant OTG_FS_DEVICE_B2BSTUP          \ [0x06] B2BSTUP
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPTSIZ0_DEF
+    \
+    \ @brief device OUT endpoint-0 transfer size register
+    \ Address offset: 0x310
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 7] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13] Packet count
+    $1d constant OTG_FS_DEVICE_STUPCNT          \ [0x1d : 2] SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPCTL1_DEF
+    \
+    \ @brief device endpoint-1 control register
+    \ Address offset: 0x320
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $14 constant OTG_FS_DEVICE_SNPM             \ [0x14] SNPM
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPINT1_DEF
+    \
+    \ @brief device endpoint-1 interrupt register
+    \ Address offset: 0x328
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_STUP             \ [0x03] STUP
+    $04 constant OTG_FS_DEVICE_OTEPDIS          \ [0x04] OTEPDIS
+    $06 constant OTG_FS_DEVICE_B2BSTUP          \ [0x06] B2BSTUP
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPTSIZ1_DEF
+    \
+    \ @brief device OUT endpoint-1 transfer size register
+    \ Address offset: 0x330
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPCTL2_DEF
+    \
+    \ @brief device endpoint-2 control register
+    \ Address offset: 0x340
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $14 constant OTG_FS_DEVICE_SNPM             \ [0x14] SNPM
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPINT2_DEF
+    \
+    \ @brief device endpoint-2 interrupt register
+    \ Address offset: 0x348
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_STUP             \ [0x03] STUP
+    $04 constant OTG_FS_DEVICE_OTEPDIS          \ [0x04] OTEPDIS
+    $06 constant OTG_FS_DEVICE_B2BSTUP          \ [0x06] B2BSTUP
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPTSIZ2_DEF
+    \
+    \ @brief device OUT endpoint-2 transfer size register
+    \ Address offset: 0x350
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPCTL3_DEF
+    \
+    \ @brief device endpoint-3 control register
+    \ Address offset: 0x360
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $14 constant OTG_FS_DEVICE_SNPM             \ [0x14] SNPM
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPINT3_DEF
+    \
+    \ @brief device endpoint-3 interrupt register
+    \ Address offset: 0x368
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_STUP             \ [0x03] STUP
+    $04 constant OTG_FS_DEVICE_OTEPDIS          \ [0x04] OTEPDIS
+    $06 constant OTG_FS_DEVICE_B2BSTUP          \ [0x06] B2BSTUP
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPTSIZ3_DEF
+    \
+    \ @brief device OUT endpoint-3 transfer size register
+    \ Address offset: 0x370
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPCTL4_DEF
+    \
+    \ @brief device endpoint-4 control register
+    \ Address offset: 0x380
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $14 constant OTG_FS_DEVICE_SNPM             \ [0x14] SNPM
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPINT4_DEF
+    \
+    \ @brief device endpoint-4 interrupt register
+    \ Address offset: 0x388
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_STUP             \ [0x03] STUP
+    $04 constant OTG_FS_DEVICE_OTEPDIS          \ [0x04] OTEPDIS
+    $06 constant OTG_FS_DEVICE_B2BSTUP          \ [0x06] B2BSTUP
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPTSIZ4_DEF
+    \
+    \ @brief device OUT endpoint-4 transfer size register
+    \ Address offset: 0x390
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPCTL5_DEF
+    \
+    \ @brief device endpoint-5 control register
+    \ Address offset: 0x3A0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_MPSIZ            \ [0x00 : 11] MPSIZ
+    $0f constant OTG_FS_DEVICE_USBAEP           \ [0x0f] USBAEP
+    $10 constant OTG_FS_DEVICE_EONUM_DPID       \ [0x10] EONUM/DPID
+    $11 constant OTG_FS_DEVICE_NAKSTS           \ [0x11] NAKSTS
+    $12 constant OTG_FS_DEVICE_EPTYP            \ [0x12 : 2] EPTYP
+    $14 constant OTG_FS_DEVICE_SNPM             \ [0x14] SNPM
+    $15 constant OTG_FS_DEVICE_Stall            \ [0x15] Stall
+    $1a constant OTG_FS_DEVICE_CNAK             \ [0x1a] CNAK
+    $1b constant OTG_FS_DEVICE_SNAK             \ [0x1b] SNAK
+    $1c constant OTG_FS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] SD0PID/SEVNFRM
+    $1d constant OTG_FS_DEVICE_SODDFRM          \ [0x1d] SODDFRM
+    $1e constant OTG_FS_DEVICE_EPDIS            \ [0x1e] EPDIS
+    $1f constant OTG_FS_DEVICE_EPENA            \ [0x1f] EPENA
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPINT5_DEF
+    \
+    \ @brief device endpoint-5 interrupt register
+    \ Address offset: 0x3A8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRC             \ [0x00] XFRC
+    $01 constant OTG_FS_DEVICE_EPDISD           \ [0x01] EPDISD
+    $03 constant OTG_FS_DEVICE_STUP             \ [0x03] STUP
+    $04 constant OTG_FS_DEVICE_OTEPDIS          \ [0x04] OTEPDIS
+    $06 constant OTG_FS_DEVICE_B2BSTUP          \ [0x06] B2BSTUP
+  [then]
+
+
+  [ifdef] OTG_FS_DEVICE_OTG_FS_DOEPTSIZ5_DEF
+    \
+    \ @brief device OUT endpoint-5 transfer size register
+    \ Address offset: 0x3B0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_FS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_FS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+  \
+  \ @brief USB on the go full speed
+  \
+  $00 constant OTG_FS_DEVICE_OTG_FS_DCFG    \ OTG_FS device configuration register (OTG_FS_DCFG)
+  $04 constant OTG_FS_DEVICE_OTG_FS_DCTL    \ OTG_FS device control register (OTG_FS_DCTL)
+  $08 constant OTG_FS_DEVICE_OTG_FS_DSTS    \ OTG_FS device status register (OTG_FS_DSTS)
+  $10 constant OTG_FS_DEVICE_OTG_FS_DIEPMSK    \ OTG_FS device IN endpoint common interrupt mask register (OTG_FS_DIEPMSK)
+  $14 constant OTG_FS_DEVICE_OTG_FS_DOEPMSK    \ OTG_FS device OUT endpoint common interrupt mask register (OTG_FS_DOEPMSK)
+  $18 constant OTG_FS_DEVICE_OTG_FS_DAINT    \ OTG_FS device all endpoints interrupt register (OTG_FS_DAINT)
+  $1C constant OTG_FS_DEVICE_OTG_FS_DAINTMSK    \ OTG_FS all endpoints interrupt mask register (OTG_FS_DAINTMSK)
+  $28 constant OTG_FS_DEVICE_OTG_FS_DVBUSDIS    \ OTG_FS device VBUS discharge time register
+  $2C constant OTG_FS_DEVICE_OTG_FS_DVBUSPULSE    \ OTG_FS device VBUS pulsing time register
+  $34 constant OTG_FS_DEVICE_OTG_FS_DIEPEMPMSK    \ OTG_FS device IN endpoint FIFO empty interrupt mask register
+  $100 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL0    \ OTG_FS device control IN endpoint 0 control register (OTG_FS_DIEPCTL0)
+  $108 constant OTG_FS_DEVICE_OTG_FS_DIEPINT0    \ device endpoint-x interrupt register
+  $110 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ0    \ device endpoint-0 transfer size register
+  $118 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS0    \ OTG_FS device IN endpoint transmit FIFO status register
+  $120 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL1    \ OTG device endpoint-1 control register
+  $128 constant OTG_FS_DEVICE_OTG_FS_DIEPINT1    \ device endpoint-1 interrupt register
+  $130 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ1    \ device endpoint-1 transfer size register
+  $138 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS1    \ OTG_FS device IN endpoint transmit FIFO status register
+  $140 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL2    \ OTG device endpoint-2 control register
+  $148 constant OTG_FS_DEVICE_OTG_FS_DIEPINT2    \ device endpoint-2 interrupt register
+  $150 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ2    \ device endpoint-2 transfer size register
+  $158 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS2    \ OTG_FS device IN endpoint transmit FIFO status register
+  $160 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL3    \ OTG device endpoint-3 control register
+  $168 constant OTG_FS_DEVICE_OTG_FS_DIEPINT3    \ device endpoint-3 interrupt register
+  $170 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ3    \ device endpoint-3 transfer size register
+  $178 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS3    \ OTG_FS device IN endpoint transmit FIFO status register
+  $180 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL4    \ OTG device endpoint-4 control register
+  $188 constant OTG_FS_DEVICE_OTG_FS_DIEPINT4    \ device endpoint-4 interrupt register
+  $190 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ4    \ device endpoint-4 transfer size register
+  $198 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS4    \ OTG_FS device IN endpoint transmit FIFO status register
+  $1A0 constant OTG_FS_DEVICE_OTG_FS_DIEPCTL5    \ OTG device endpoint-5 control register
+  $1A8 constant OTG_FS_DEVICE_OTG_FS_DIEPINT5    \ device endpoint-5 interrupt register
+  $1B0 constant OTG_FS_DEVICE_OTG_FS_DIEPTSIZ5    \ device endpoint-5 transfer size register
+  $1B8 constant OTG_FS_DEVICE_OTG_FS_DTXFSTS5    \ OTG_FS device IN endpoint transmit FIFO status register
+  $300 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL0    \ device endpoint-0 control register
+  $308 constant OTG_FS_DEVICE_OTG_FS_DOEPINT0    \ device endpoint-0 interrupt register
+  $310 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ0    \ device OUT endpoint-0 transfer size register
+  $320 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL1    \ device endpoint-1 control register
+  $328 constant OTG_FS_DEVICE_OTG_FS_DOEPINT1    \ device endpoint-1 interrupt register
+  $330 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ1    \ device OUT endpoint-1 transfer size register
+  $340 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL2    \ device endpoint-2 control register
+  $348 constant OTG_FS_DEVICE_OTG_FS_DOEPINT2    \ device endpoint-2 interrupt register
+  $350 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ2    \ device OUT endpoint-2 transfer size register
+  $360 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL3    \ device endpoint-3 control register
+  $368 constant OTG_FS_DEVICE_OTG_FS_DOEPINT3    \ device endpoint-3 interrupt register
+  $370 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ3    \ device OUT endpoint-3 transfer size register
+  $380 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL4    \ device endpoint-4 control register
+  $388 constant OTG_FS_DEVICE_OTG_FS_DOEPINT4    \ device endpoint-4 interrupt register
+  $390 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ4    \ device OUT endpoint-4 transfer size register
+  $3A0 constant OTG_FS_DEVICE_OTG_FS_DOEPCTL5    \ device endpoint-5 control register
+  $3A8 constant OTG_FS_DEVICE_OTG_FS_DOEPINT5    \ device endpoint-5 interrupt register
+  $3B0 constant OTG_FS_DEVICE_OTG_FS_DOEPTSIZ5    \ device OUT endpoint-5 transfer size register
+
+: OTG_FS_DEVICE_DEF ; [then]

@@ -6,74 +6,78 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DBG_DEF
 
-\
-\ @brief IDCODE
-\ Address offset: 0x00
-\ Reset value: 0x10006411
-\
-
-$00000fff constant DBG_DBGMCU_IDCODE_DEV_ID                         \ DEV_ID
-$ffff0000 constant DBG_DBGMCU_IDCODE_REV_ID                         \ REV_ID
-
-
-\
-\ @brief Control Register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBG_DBGMCU_CR_DBG_SLEEP                          \ DBG_SLEEP
-$00000002 constant DBG_DBGMCU_CR_DBG_STOP                           \ DBG_STOP
-$00000004 constant DBG_DBGMCU_CR_DBG_STANDBY                        \ DBG_STANDBY
-$00000020 constant DBG_DBGMCU_CR_TRACE_IOEN                         \ TRACE_IOEN
-$000000c0 constant DBG_DBGMCU_CR_TRACE_MODE                         \ TRACE_MODE
+  [ifdef] DBG_DBGMCU_IDCODE_DEF
+    \
+    \ @brief IDCODE
+    \ Address offset: 0x00
+    \ Reset value: 0x10006411
+    \
+    $00 constant DBG_DEV_ID                     \ [0x00 : 12] DEV_ID
+    $10 constant DBG_REV_ID                     \ [0x10 : 16] REV_ID
+  [then]
 
 
-\
-\ @brief Debug MCU APB1 Freeze registe
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBG_DBGMCU_APB1_FZ_DBG_TIM2_STOP                 \ DBG_TIM2_STOP
-$00000002 constant DBG_DBGMCU_APB1_FZ_DBG_TIM3_STOP                 \ DBG_TIM3 _STOP
-$00000004 constant DBG_DBGMCU_APB1_FZ_DBG_TIM4_STOP                 \ DBG_TIM4_STOP
-$00000008 constant DBG_DBGMCU_APB1_FZ_DBG_TIM5_STOP                 \ DBG_TIM5_STOP
-$00000010 constant DBG_DBGMCU_APB1_FZ_DBG_TIM6_STOP                 \ DBG_TIM6_STOP
-$00000020 constant DBG_DBGMCU_APB1_FZ_DBG_TIM7_STOP                 \ DBG_TIM7_STOP
-$00000040 constant DBG_DBGMCU_APB1_FZ_DBG_TIM12_STOP                \ DBG_TIM12_STOP
-$00000080 constant DBG_DBGMCU_APB1_FZ_DBG_TIM13_STOP                \ DBG_TIM13_STOP
-$00000100 constant DBG_DBGMCU_APB1_FZ_DBG_TIM14_STOP                \ DBG_TIM14_STOP
-$00000400 constant DBG_DBGMCU_APB1_FZ_DBG_RTC_STOP                  \ DBG_RTC_STOP
-$00000800 constant DBG_DBGMCU_APB1_FZ_DBG_WWDG_STOP                 \ DBG_WWDG_STOP
-$00001000 constant DBG_DBGMCU_APB1_FZ_DBG_IWDEG_STOP                \ DBG_IWDEG_STOP
-$00200000 constant DBG_DBGMCU_APB1_FZ_DBG_J2C1_SMBUS_TIMEOUT        \ DBG_J2C1_SMBUS_TIMEOUT
-$00400000 constant DBG_DBGMCU_APB1_FZ_DBG_J2C2_SMBUS_TIMEOUT        \ DBG_J2C2_SMBUS_TIMEOUT
-$00800000 constant DBG_DBGMCU_APB1_FZ_DBG_J2C3SMBUS_TIMEOUT         \ DBG_J2C3SMBUS_TIMEOUT
-$02000000 constant DBG_DBGMCU_APB1_FZ_DBG_CAN1_STOP                 \ DBG_CAN1_STOP
-$04000000 constant DBG_DBGMCU_APB1_FZ_DBG_CAN2_STOP                 \ DBG_CAN2_STOP
+  [ifdef] DBG_DBGMCU_CR_DEF
+    \
+    \ @brief Control Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBG_DBG_SLEEP                  \ [0x00] DBG_SLEEP
+    $01 constant DBG_DBG_STOP                   \ [0x01] DBG_STOP
+    $02 constant DBG_DBG_STANDBY                \ [0x02] DBG_STANDBY
+    $05 constant DBG_TRACE_IOEN                 \ [0x05] TRACE_IOEN
+    $06 constant DBG_TRACE_MODE                 \ [0x06 : 2] TRACE_MODE
+  [then]
 
 
-\
-\ @brief Debug MCU APB2 Freeze registe
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
+  [ifdef] DBG_DBGMCU_APB1_FZ_DEF
+    \
+    \ @brief Debug MCU APB1 Freeze registe
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBG_DBG_TIM2_STOP              \ [0x00] DBG_TIM2_STOP
+    $01 constant DBG_DBG_TIM3_STOP              \ [0x01] DBG_TIM3 _STOP
+    $02 constant DBG_DBG_TIM4_STOP              \ [0x02] DBG_TIM4_STOP
+    $03 constant DBG_DBG_TIM5_STOP              \ [0x03] DBG_TIM5_STOP
+    $04 constant DBG_DBG_TIM6_STOP              \ [0x04] DBG_TIM6_STOP
+    $05 constant DBG_DBG_TIM7_STOP              \ [0x05] DBG_TIM7_STOP
+    $06 constant DBG_DBG_TIM12_STOP             \ [0x06] DBG_TIM12_STOP
+    $07 constant DBG_DBG_TIM13_STOP             \ [0x07] DBG_TIM13_STOP
+    $08 constant DBG_DBG_TIM14_STOP             \ [0x08] DBG_TIM14_STOP
+    $0a constant DBG_DBG_RTC_STOP               \ [0x0a] DBG_RTC_STOP
+    $0b constant DBG_DBG_WWDG_STOP              \ [0x0b] DBG_WWDG_STOP
+    $0c constant DBG_DBG_IWDEG_STOP             \ [0x0c] DBG_IWDEG_STOP
+    $15 constant DBG_DBG_J2C1_SMBUS_TIMEOUT     \ [0x15] DBG_J2C1_SMBUS_TIMEOUT
+    $16 constant DBG_DBG_J2C2_SMBUS_TIMEOUT     \ [0x16] DBG_J2C2_SMBUS_TIMEOUT
+    $17 constant DBG_DBG_J2C3SMBUS_TIMEOUT      \ [0x17] DBG_J2C3SMBUS_TIMEOUT
+    $19 constant DBG_DBG_CAN1_STOP              \ [0x19] DBG_CAN1_STOP
+    $1a constant DBG_DBG_CAN2_STOP              \ [0x1a] DBG_CAN2_STOP
+  [then]
 
-$00000001 constant DBG_DBGMCU_APB2_FZ_DBG_TIM1_STOP                 \ TIM1 counter stopped when core is halted
-$00000002 constant DBG_DBGMCU_APB2_FZ_DBG_TIM8_STOP                 \ TIM8 counter stopped when core is halted
-$00010000 constant DBG_DBGMCU_APB2_FZ_DBG_TIM9_STOP                 \ TIM9 counter stopped when core is halted
-$00020000 constant DBG_DBGMCU_APB2_FZ_DBG_TIM10_STOP                \ TIM10 counter stopped when core is halted
-$00040000 constant DBG_DBGMCU_APB2_FZ_DBG_TIM11_STOP                \ TIM11 counter stopped when core is halted
 
+  [ifdef] DBG_DBGMCU_APB2_FZ_DEF
+    \
+    \ @brief Debug MCU APB2 Freeze registe
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBG_DBG_TIM1_STOP              \ [0x00] TIM1 counter stopped when core is halted
+    $01 constant DBG_DBG_TIM8_STOP              \ [0x01] TIM8 counter stopped when core is halted
+    $10 constant DBG_DBG_TIM9_STOP              \ [0x10] TIM9 counter stopped when core is halted
+    $11 constant DBG_DBG_TIM10_STOP             \ [0x11] TIM10 counter stopped when core is halted
+    $12 constant DBG_DBG_TIM11_STOP             \ [0x12] TIM11 counter stopped when core is halted
+  [then]
 
-\
-\ @brief Debug support
-\
-$e0042000 constant DBG_DBGMCU_IDCODE  \ offset: 0x00 : IDCODE
-$e0042004 constant DBG_DBGMCU_CR  \ offset: 0x04 : Control Register
-$e0042008 constant DBG_DBGMCU_APB1_FZ  \ offset: 0x08 : Debug MCU APB1 Freeze registe
-$e004200c constant DBG_DBGMCU_APB2_FZ  \ offset: 0x0C : Debug MCU APB2 Freeze registe
+  \
+  \ @brief Debug support
+  \
+  $00 constant DBG_DBGMCU_IDCODE        \ IDCODE
+  $04 constant DBG_DBGMCU_CR            \ Control Register
+  $08 constant DBG_DBGMCU_APB1_FZ       \ Debug MCU APB1 Freeze registe
+  $0C constant DBG_DBGMCU_APB2_FZ       \ Debug MCU APB2 Freeze registe
 
+: DBG_DEF ; [then]

@@ -6,594 +6,614 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] CRYP_DEF
 
-\
-\ @brief control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000004 constant CRYP_CR_ALGODIR                                  \ Algorithm direction
-$00000038 constant CRYP_CR_ALGOMODE                                 \ Algorithm mode
-$000000c0 constant CRYP_CR_DATATYPE                                 \ Data type selection
-$00000300 constant CRYP_CR_KEYSIZE                                  \ Key size selection (AES mode only)
-$00004000 constant CRYP_CR_FFLUSH                                   \ FIFO flush
-$00008000 constant CRYP_CR_CRYPEN                                   \ Cryptographic processor enable
-
-
-\
-\ @brief status register
-\ Address offset: 0x04
-\ Reset value: 0x00000003
-\
-
-$00000001 constant CRYP_SR_IFEM                                     \ Input FIFO empty
-$00000002 constant CRYP_SR_IFNF                                     \ Input FIFO not full
-$00000004 constant CRYP_SR_OFNE                                     \ Output FIFO not empty
-$00000008 constant CRYP_SR_OFFU                                     \ Output FIFO full
-$00000010 constant CRYP_SR_BUSY                                     \ Busy bit
+  [ifdef] CRYP_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $02 constant CRYP_ALGODIR                   \ [0x02] Algorithm direction
+    $03 constant CRYP_ALGOMODE                  \ [0x03 : 3] Algorithm mode
+    $06 constant CRYP_DATATYPE                  \ [0x06 : 2] Data type selection
+    $08 constant CRYP_KEYSIZE                   \ [0x08 : 2] Key size selection (AES mode only)
+    $0e constant CRYP_FFLUSH                    \ [0x0e] FIFO flush
+    $0f constant CRYP_CRYPEN                    \ [0x0f] Cryptographic processor enable
+  [then]
 
 
-\
-\ @brief data input register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_DIN_DATAIN                                  \ Data input
-
-
-\
-\ @brief data output register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant CRYP_DOUT_DATAOUT                                \ Data output
+  [ifdef] CRYP_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000003
+    \
+    $00 constant CRYP_IFEM                      \ [0x00] Input FIFO empty
+    $01 constant CRYP_IFNF                      \ [0x01] Input FIFO not full
+    $02 constant CRYP_OFNE                      \ [0x02] Output FIFO not empty
+    $03 constant CRYP_OFFU                      \ [0x03] Output FIFO full
+    $04 constant CRYP_BUSY                      \ [0x04] Busy bit
+  [then]
 
 
-\
-\ @brief DMA control register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_DMACR_DIEN                                  \ DMA input enable
-$00000002 constant CRYP_DMACR_DOEN                                  \ DMA output enable
-
-
-\
-\ @brief interrupt mask set/clear register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_IMSCR_INIM                                  \ Input FIFO service interrupt mask
-$00000002 constant CRYP_IMSCR_OUTIM                                 \ Output FIFO service interrupt mask
+  [ifdef] CRYP_DIN_DEF
+    \
+    \ @brief data input register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_DATAIN                    \ [0x00 : 32] Data input
+  [then]
 
 
-\
-\ @brief raw interrupt status register
-\ Address offset: 0x18
-\ Reset value: 0x00000001
-\
-
-$00000001 constant CRYP_RISR_INRIS                                  \ Input FIFO service raw interrupt status
-$00000002 constant CRYP_RISR_OUTRIS                                 \ Output FIFO service raw interrupt status
-
-
-\
-\ @brief masked interrupt status register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_MISR_INMIS                                  \ Input FIFO service masked interrupt status
-$00000002 constant CRYP_MISR_OUTMIS                                 \ Output FIFO service masked interrupt status
+  [ifdef] CRYP_DOUT_DEF
+    \
+    \ @brief data output register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_DATAOUT                   \ [0x00 : 32] Data output
+  [then]
 
 
-\
-\ @brief key registers
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_K0LR_B224                                   \ b224
-$00000002 constant CRYP_K0LR_B225                                   \ b225
-$00000004 constant CRYP_K0LR_B226                                   \ b226
-$00000008 constant CRYP_K0LR_B227                                   \ b227
-$00000010 constant CRYP_K0LR_B228                                   \ b228
-$00000020 constant CRYP_K0LR_B229                                   \ b229
-$00000040 constant CRYP_K0LR_B230                                   \ b230
-$00000080 constant CRYP_K0LR_B231                                   \ b231
-$00000100 constant CRYP_K0LR_B232                                   \ b232
-$00000200 constant CRYP_K0LR_B233                                   \ b233
-$00000400 constant CRYP_K0LR_B234                                   \ b234
-$00000800 constant CRYP_K0LR_B235                                   \ b235
-$00001000 constant CRYP_K0LR_B236                                   \ b236
-$00002000 constant CRYP_K0LR_B237                                   \ b237
-$00004000 constant CRYP_K0LR_B238                                   \ b238
-$00008000 constant CRYP_K0LR_B239                                   \ b239
-$00010000 constant CRYP_K0LR_B240                                   \ b240
-$00020000 constant CRYP_K0LR_B241                                   \ b241
-$00040000 constant CRYP_K0LR_B242                                   \ b242
-$00080000 constant CRYP_K0LR_B243                                   \ b243
-$00100000 constant CRYP_K0LR_B244                                   \ b244
-$00200000 constant CRYP_K0LR_B245                                   \ b245
-$00400000 constant CRYP_K0LR_B246                                   \ b246
-$00800000 constant CRYP_K0LR_B247                                   \ b247
-$01000000 constant CRYP_K0LR_B248                                   \ b248
-$02000000 constant CRYP_K0LR_B249                                   \ b249
-$04000000 constant CRYP_K0LR_B250                                   \ b250
-$08000000 constant CRYP_K0LR_B251                                   \ b251
-$10000000 constant CRYP_K0LR_B252                                   \ b252
-$20000000 constant CRYP_K0LR_B253                                   \ b253
-$40000000 constant CRYP_K0LR_B254                                   \ b254
-$80000000 constant CRYP_K0LR_B255                                   \ b255
+  [ifdef] CRYP_DMACR_DEF
+    \
+    \ @brief DMA control register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_DIEN                      \ [0x00] DMA input enable
+    $01 constant CRYP_DOEN                      \ [0x01] DMA output enable
+  [then]
 
 
-\
-\ @brief key registers
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_K0RR_B192                                   \ b192
-$00000002 constant CRYP_K0RR_B193                                   \ b193
-$00000004 constant CRYP_K0RR_B194                                   \ b194
-$00000008 constant CRYP_K0RR_B195                                   \ b195
-$00000010 constant CRYP_K0RR_B196                                   \ b196
-$00000020 constant CRYP_K0RR_B197                                   \ b197
-$00000040 constant CRYP_K0RR_B198                                   \ b198
-$00000080 constant CRYP_K0RR_B199                                   \ b199
-$00000100 constant CRYP_K0RR_B200                                   \ b200
-$00000200 constant CRYP_K0RR_B201                                   \ b201
-$00000400 constant CRYP_K0RR_B202                                   \ b202
-$00000800 constant CRYP_K0RR_B203                                   \ b203
-$00001000 constant CRYP_K0RR_B204                                   \ b204
-$00002000 constant CRYP_K0RR_B205                                   \ b205
-$00004000 constant CRYP_K0RR_B206                                   \ b206
-$00008000 constant CRYP_K0RR_B207                                   \ b207
-$00010000 constant CRYP_K0RR_B208                                   \ b208
-$00020000 constant CRYP_K0RR_B209                                   \ b209
-$00040000 constant CRYP_K0RR_B210                                   \ b210
-$00080000 constant CRYP_K0RR_B211                                   \ b211
-$00100000 constant CRYP_K0RR_B212                                   \ b212
-$00200000 constant CRYP_K0RR_B213                                   \ b213
-$00400000 constant CRYP_K0RR_B214                                   \ b214
-$00800000 constant CRYP_K0RR_B215                                   \ b215
-$01000000 constant CRYP_K0RR_B216                                   \ b216
-$02000000 constant CRYP_K0RR_B217                                   \ b217
-$04000000 constant CRYP_K0RR_B218                                   \ b218
-$08000000 constant CRYP_K0RR_B219                                   \ b219
-$10000000 constant CRYP_K0RR_B220                                   \ b220
-$20000000 constant CRYP_K0RR_B221                                   \ b221
-$40000000 constant CRYP_K0RR_B222                                   \ b222
-$80000000 constant CRYP_K0RR_B223                                   \ b223
+  [ifdef] CRYP_IMSCR_DEF
+    \
+    \ @brief interrupt mask set/clear register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_INIM                      \ [0x00] Input FIFO service interrupt mask
+    $01 constant CRYP_OUTIM                     \ [0x01] Output FIFO service interrupt mask
+  [then]
 
 
-\
-\ @brief key registers
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_K1LR_B160                                   \ b160
-$00000002 constant CRYP_K1LR_B161                                   \ b161
-$00000004 constant CRYP_K1LR_B162                                   \ b162
-$00000008 constant CRYP_K1LR_B163                                   \ b163
-$00000010 constant CRYP_K1LR_B164                                   \ b164
-$00000020 constant CRYP_K1LR_B165                                   \ b165
-$00000040 constant CRYP_K1LR_B166                                   \ b166
-$00000080 constant CRYP_K1LR_B167                                   \ b167
-$00000100 constant CRYP_K1LR_B168                                   \ b168
-$00000200 constant CRYP_K1LR_B169                                   \ b169
-$00000400 constant CRYP_K1LR_B170                                   \ b170
-$00000800 constant CRYP_K1LR_B171                                   \ b171
-$00001000 constant CRYP_K1LR_B172                                   \ b172
-$00002000 constant CRYP_K1LR_B173                                   \ b173
-$00004000 constant CRYP_K1LR_B174                                   \ b174
-$00008000 constant CRYP_K1LR_B175                                   \ b175
-$00010000 constant CRYP_K1LR_B176                                   \ b176
-$00020000 constant CRYP_K1LR_B177                                   \ b177
-$00040000 constant CRYP_K1LR_B178                                   \ b178
-$00080000 constant CRYP_K1LR_B179                                   \ b179
-$00100000 constant CRYP_K1LR_B180                                   \ b180
-$00200000 constant CRYP_K1LR_B181                                   \ b181
-$00400000 constant CRYP_K1LR_B182                                   \ b182
-$00800000 constant CRYP_K1LR_B183                                   \ b183
-$01000000 constant CRYP_K1LR_B184                                   \ b184
-$02000000 constant CRYP_K1LR_B185                                   \ b185
-$04000000 constant CRYP_K1LR_B186                                   \ b186
-$08000000 constant CRYP_K1LR_B187                                   \ b187
-$10000000 constant CRYP_K1LR_B188                                   \ b188
-$20000000 constant CRYP_K1LR_B189                                   \ b189
-$40000000 constant CRYP_K1LR_B190                                   \ b190
-$80000000 constant CRYP_K1LR_B191                                   \ b191
+  [ifdef] CRYP_RISR_DEF
+    \
+    \ @brief raw interrupt status register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000001
+    \
+    $00 constant CRYP_INRIS                     \ [0x00] Input FIFO service raw interrupt status
+    $01 constant CRYP_OUTRIS                    \ [0x01] Output FIFO service raw interrupt status
+  [then]
 
 
-\
-\ @brief key registers
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_K1RR_B128                                   \ b128
-$00000002 constant CRYP_K1RR_B129                                   \ b129
-$00000004 constant CRYP_K1RR_B130                                   \ b130
-$00000008 constant CRYP_K1RR_B131                                   \ b131
-$00000010 constant CRYP_K1RR_B132                                   \ b132
-$00000020 constant CRYP_K1RR_B133                                   \ b133
-$00000040 constant CRYP_K1RR_B134                                   \ b134
-$00000080 constant CRYP_K1RR_B135                                   \ b135
-$00000100 constant CRYP_K1RR_B136                                   \ b136
-$00000200 constant CRYP_K1RR_B137                                   \ b137
-$00000400 constant CRYP_K1RR_B138                                   \ b138
-$00000800 constant CRYP_K1RR_B139                                   \ b139
-$00001000 constant CRYP_K1RR_B140                                   \ b140
-$00002000 constant CRYP_K1RR_B141                                   \ b141
-$00004000 constant CRYP_K1RR_B142                                   \ b142
-$00008000 constant CRYP_K1RR_B143                                   \ b143
-$00010000 constant CRYP_K1RR_B144                                   \ b144
-$00020000 constant CRYP_K1RR_B145                                   \ b145
-$00040000 constant CRYP_K1RR_B146                                   \ b146
-$00080000 constant CRYP_K1RR_B147                                   \ b147
-$00100000 constant CRYP_K1RR_B148                                   \ b148
-$00200000 constant CRYP_K1RR_B149                                   \ b149
-$00400000 constant CRYP_K1RR_B150                                   \ b150
-$00800000 constant CRYP_K1RR_B151                                   \ b151
-$01000000 constant CRYP_K1RR_B152                                   \ b152
-$02000000 constant CRYP_K1RR_B153                                   \ b153
-$04000000 constant CRYP_K1RR_B154                                   \ b154
-$08000000 constant CRYP_K1RR_B155                                   \ b155
-$10000000 constant CRYP_K1RR_B156                                   \ b156
-$20000000 constant CRYP_K1RR_B157                                   \ b157
-$40000000 constant CRYP_K1RR_B158                                   \ b158
-$80000000 constant CRYP_K1RR_B159                                   \ b159
+  [ifdef] CRYP_MISR_DEF
+    \
+    \ @brief masked interrupt status register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_INMIS                     \ [0x00] Input FIFO service masked interrupt status
+    $01 constant CRYP_OUTMIS                    \ [0x01] Output FIFO service masked interrupt status
+  [then]
 
 
-\
-\ @brief key registers
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_K2LR_B96                                    \ b96
-$00000002 constant CRYP_K2LR_B97                                    \ b97
-$00000004 constant CRYP_K2LR_B98                                    \ b98
-$00000008 constant CRYP_K2LR_B99                                    \ b99
-$00000010 constant CRYP_K2LR_B100                                   \ b100
-$00000020 constant CRYP_K2LR_B101                                   \ b101
-$00000040 constant CRYP_K2LR_B102                                   \ b102
-$00000080 constant CRYP_K2LR_B103                                   \ b103
-$00000100 constant CRYP_K2LR_B104                                   \ b104
-$00000200 constant CRYP_K2LR_B105                                   \ b105
-$00000400 constant CRYP_K2LR_B106                                   \ b106
-$00000800 constant CRYP_K2LR_B107                                   \ b107
-$00001000 constant CRYP_K2LR_B108                                   \ b108
-$00002000 constant CRYP_K2LR_B109                                   \ b109
-$00004000 constant CRYP_K2LR_B110                                   \ b110
-$00008000 constant CRYP_K2LR_B111                                   \ b111
-$00010000 constant CRYP_K2LR_B112                                   \ b112
-$00020000 constant CRYP_K2LR_B113                                   \ b113
-$00040000 constant CRYP_K2LR_B114                                   \ b114
-$00080000 constant CRYP_K2LR_B115                                   \ b115
-$00100000 constant CRYP_K2LR_B116                                   \ b116
-$00200000 constant CRYP_K2LR_B117                                   \ b117
-$00400000 constant CRYP_K2LR_B118                                   \ b118
-$00800000 constant CRYP_K2LR_B119                                   \ b119
-$01000000 constant CRYP_K2LR_B120                                   \ b120
-$02000000 constant CRYP_K2LR_B121                                   \ b121
-$04000000 constant CRYP_K2LR_B122                                   \ b122
-$08000000 constant CRYP_K2LR_B123                                   \ b123
-$10000000 constant CRYP_K2LR_B124                                   \ b124
-$20000000 constant CRYP_K2LR_B125                                   \ b125
-$40000000 constant CRYP_K2LR_B126                                   \ b126
-$80000000 constant CRYP_K2LR_B127                                   \ b127
-
-
-\
-\ @brief key registers
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_K2RR_B64                                    \ b64
-$00000002 constant CRYP_K2RR_B65                                    \ b65
-$00000004 constant CRYP_K2RR_B66                                    \ b66
-$00000008 constant CRYP_K2RR_B67                                    \ b67
-$00000010 constant CRYP_K2RR_B68                                    \ b68
-$00000020 constant CRYP_K2RR_B69                                    \ b69
-$00000040 constant CRYP_K2RR_B70                                    \ b70
-$00000080 constant CRYP_K2RR_B71                                    \ b71
-$00000100 constant CRYP_K2RR_B72                                    \ b72
-$00000200 constant CRYP_K2RR_B73                                    \ b73
-$00000400 constant CRYP_K2RR_B74                                    \ b74
-$00000800 constant CRYP_K2RR_B75                                    \ b75
-$00001000 constant CRYP_K2RR_B76                                    \ b76
-$00002000 constant CRYP_K2RR_B77                                    \ b77
-$00004000 constant CRYP_K2RR_B78                                    \ b78
-$00008000 constant CRYP_K2RR_B79                                    \ b79
-$00010000 constant CRYP_K2RR_B80                                    \ b80
-$00020000 constant CRYP_K2RR_B81                                    \ b81
-$00040000 constant CRYP_K2RR_B82                                    \ b82
-$00080000 constant CRYP_K2RR_B83                                    \ b83
-$00100000 constant CRYP_K2RR_B84                                    \ b84
-$00200000 constant CRYP_K2RR_B85                                    \ b85
-$00400000 constant CRYP_K2RR_B86                                    \ b86
-$00800000 constant CRYP_K2RR_B87                                    \ b87
-$01000000 constant CRYP_K2RR_B88                                    \ b88
-$02000000 constant CRYP_K2RR_B89                                    \ b89
-$04000000 constant CRYP_K2RR_B90                                    \ b90
-$08000000 constant CRYP_K2RR_B91                                    \ b91
-$10000000 constant CRYP_K2RR_B92                                    \ b92
-$20000000 constant CRYP_K2RR_B93                                    \ b93
-$40000000 constant CRYP_K2RR_B94                                    \ b94
-$80000000 constant CRYP_K2RR_B95                                    \ b95
+  [ifdef] CRYP_K0LR_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_b224                      \ [0x00] b224
+    $01 constant CRYP_b225                      \ [0x01] b225
+    $02 constant CRYP_b226                      \ [0x02] b226
+    $03 constant CRYP_b227                      \ [0x03] b227
+    $04 constant CRYP_b228                      \ [0x04] b228
+    $05 constant CRYP_b229                      \ [0x05] b229
+    $06 constant CRYP_b230                      \ [0x06] b230
+    $07 constant CRYP_b231                      \ [0x07] b231
+    $08 constant CRYP_b232                      \ [0x08] b232
+    $09 constant CRYP_b233                      \ [0x09] b233
+    $0a constant CRYP_b234                      \ [0x0a] b234
+    $0b constant CRYP_b235                      \ [0x0b] b235
+    $0c constant CRYP_b236                      \ [0x0c] b236
+    $0d constant CRYP_b237                      \ [0x0d] b237
+    $0e constant CRYP_b238                      \ [0x0e] b238
+    $0f constant CRYP_b239                      \ [0x0f] b239
+    $10 constant CRYP_b240                      \ [0x10] b240
+    $11 constant CRYP_b241                      \ [0x11] b241
+    $12 constant CRYP_b242                      \ [0x12] b242
+    $13 constant CRYP_b243                      \ [0x13] b243
+    $14 constant CRYP_b244                      \ [0x14] b244
+    $15 constant CRYP_b245                      \ [0x15] b245
+    $16 constant CRYP_b246                      \ [0x16] b246
+    $17 constant CRYP_b247                      \ [0x17] b247
+    $18 constant CRYP_b248                      \ [0x18] b248
+    $19 constant CRYP_b249                      \ [0x19] b249
+    $1a constant CRYP_b250                      \ [0x1a] b250
+    $1b constant CRYP_b251                      \ [0x1b] b251
+    $1c constant CRYP_b252                      \ [0x1c] b252
+    $1d constant CRYP_b253                      \ [0x1d] b253
+    $1e constant CRYP_b254                      \ [0x1e] b254
+    $1f constant CRYP_b255                      \ [0x1f] b255
+  [then]
 
 
-\
-\ @brief key registers
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_K3LR_B32                                    \ b32
-$00000002 constant CRYP_K3LR_B33                                    \ b33
-$00000004 constant CRYP_K3LR_B34                                    \ b34
-$00000008 constant CRYP_K3LR_B35                                    \ b35
-$00000010 constant CRYP_K3LR_B36                                    \ b36
-$00000020 constant CRYP_K3LR_B37                                    \ b37
-$00000040 constant CRYP_K3LR_B38                                    \ b38
-$00000080 constant CRYP_K3LR_B39                                    \ b39
-$00000100 constant CRYP_K3LR_B40                                    \ b40
-$00000200 constant CRYP_K3LR_B41                                    \ b41
-$00000400 constant CRYP_K3LR_B42                                    \ b42
-$00000800 constant CRYP_K3LR_B43                                    \ b43
-$00001000 constant CRYP_K3LR_B44                                    \ b44
-$00002000 constant CRYP_K3LR_B45                                    \ b45
-$00004000 constant CRYP_K3LR_B46                                    \ b46
-$00008000 constant CRYP_K3LR_B47                                    \ b47
-$00010000 constant CRYP_K3LR_B48                                    \ b48
-$00020000 constant CRYP_K3LR_B49                                    \ b49
-$00040000 constant CRYP_K3LR_B50                                    \ b50
-$00080000 constant CRYP_K3LR_B51                                    \ b51
-$00100000 constant CRYP_K3LR_B52                                    \ b52
-$00200000 constant CRYP_K3LR_B53                                    \ b53
-$00400000 constant CRYP_K3LR_B54                                    \ b54
-$00800000 constant CRYP_K3LR_B55                                    \ b55
-$01000000 constant CRYP_K3LR_B56                                    \ b56
-$02000000 constant CRYP_K3LR_B57                                    \ b57
-$04000000 constant CRYP_K3LR_B58                                    \ b58
-$08000000 constant CRYP_K3LR_B59                                    \ b59
-$10000000 constant CRYP_K3LR_B60                                    \ b60
-$20000000 constant CRYP_K3LR_B61                                    \ b61
-$40000000 constant CRYP_K3LR_B62                                    \ b62
-$80000000 constant CRYP_K3LR_B63                                    \ b63
-
-
-\
-\ @brief key registers
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_K3RR_B0                                     \ b0
-$00000002 constant CRYP_K3RR_B1                                     \ b1
-$00000004 constant CRYP_K3RR_B2                                     \ b2
-$00000008 constant CRYP_K3RR_B3                                     \ b3
-$00000010 constant CRYP_K3RR_B4                                     \ b4
-$00000020 constant CRYP_K3RR_B5                                     \ b5
-$00000040 constant CRYP_K3RR_B6                                     \ b6
-$00000080 constant CRYP_K3RR_B7                                     \ b7
-$00000100 constant CRYP_K3RR_B8                                     \ b8
-$00000200 constant CRYP_K3RR_B9                                     \ b9
-$00000400 constant CRYP_K3RR_B10                                    \ b10
-$00000800 constant CRYP_K3RR_B11                                    \ b11
-$00001000 constant CRYP_K3RR_B12                                    \ b12
-$00002000 constant CRYP_K3RR_B13                                    \ b13
-$00004000 constant CRYP_K3RR_B14                                    \ b14
-$00008000 constant CRYP_K3RR_B15                                    \ b15
-$00010000 constant CRYP_K3RR_B16                                    \ b16
-$00020000 constant CRYP_K3RR_B17                                    \ b17
-$00040000 constant CRYP_K3RR_B18                                    \ b18
-$00080000 constant CRYP_K3RR_B19                                    \ b19
-$00100000 constant CRYP_K3RR_B20                                    \ b20
-$00200000 constant CRYP_K3RR_B21                                    \ b21
-$00400000 constant CRYP_K3RR_B22                                    \ b22
-$00800000 constant CRYP_K3RR_B23                                    \ b23
-$01000000 constant CRYP_K3RR_B24                                    \ b24
-$02000000 constant CRYP_K3RR_B25                                    \ b25
-$04000000 constant CRYP_K3RR_B26                                    \ b26
-$08000000 constant CRYP_K3RR_B27                                    \ b27
-$10000000 constant CRYP_K3RR_B28                                    \ b28
-$20000000 constant CRYP_K3RR_B29                                    \ b29
-$40000000 constant CRYP_K3RR_B30                                    \ b30
-$80000000 constant CRYP_K3RR_B31                                    \ b31
+  [ifdef] CRYP_K0RR_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_b192                      \ [0x00] b192
+    $01 constant CRYP_b193                      \ [0x01] b193
+    $02 constant CRYP_b194                      \ [0x02] b194
+    $03 constant CRYP_b195                      \ [0x03] b195
+    $04 constant CRYP_b196                      \ [0x04] b196
+    $05 constant CRYP_b197                      \ [0x05] b197
+    $06 constant CRYP_b198                      \ [0x06] b198
+    $07 constant CRYP_b199                      \ [0x07] b199
+    $08 constant CRYP_b200                      \ [0x08] b200
+    $09 constant CRYP_b201                      \ [0x09] b201
+    $0a constant CRYP_b202                      \ [0x0a] b202
+    $0b constant CRYP_b203                      \ [0x0b] b203
+    $0c constant CRYP_b204                      \ [0x0c] b204
+    $0d constant CRYP_b205                      \ [0x0d] b205
+    $0e constant CRYP_b206                      \ [0x0e] b206
+    $0f constant CRYP_b207                      \ [0x0f] b207
+    $10 constant CRYP_b208                      \ [0x10] b208
+    $11 constant CRYP_b209                      \ [0x11] b209
+    $12 constant CRYP_b210                      \ [0x12] b210
+    $13 constant CRYP_b211                      \ [0x13] b211
+    $14 constant CRYP_b212                      \ [0x14] b212
+    $15 constant CRYP_b213                      \ [0x15] b213
+    $16 constant CRYP_b214                      \ [0x16] b214
+    $17 constant CRYP_b215                      \ [0x17] b215
+    $18 constant CRYP_b216                      \ [0x18] b216
+    $19 constant CRYP_b217                      \ [0x19] b217
+    $1a constant CRYP_b218                      \ [0x1a] b218
+    $1b constant CRYP_b219                      \ [0x1b] b219
+    $1c constant CRYP_b220                      \ [0x1c] b220
+    $1d constant CRYP_b221                      \ [0x1d] b221
+    $1e constant CRYP_b222                      \ [0x1e] b222
+    $1f constant CRYP_b223                      \ [0x1f] b223
+  [then]
 
 
-\
-\ @brief initialization vector registers
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_IV0LR_IV31                                  \ IV31
-$00000002 constant CRYP_IV0LR_IV30                                  \ IV30
-$00000004 constant CRYP_IV0LR_IV29                                  \ IV29
-$00000008 constant CRYP_IV0LR_IV28                                  \ IV28
-$00000010 constant CRYP_IV0LR_IV27                                  \ IV27
-$00000020 constant CRYP_IV0LR_IV26                                  \ IV26
-$00000040 constant CRYP_IV0LR_IV25                                  \ IV25
-$00000080 constant CRYP_IV0LR_IV24                                  \ IV24
-$00000100 constant CRYP_IV0LR_IV23                                  \ IV23
-$00000200 constant CRYP_IV0LR_IV22                                  \ IV22
-$00000400 constant CRYP_IV0LR_IV21                                  \ IV21
-$00000800 constant CRYP_IV0LR_IV20                                  \ IV20
-$00001000 constant CRYP_IV0LR_IV19                                  \ IV19
-$00002000 constant CRYP_IV0LR_IV18                                  \ IV18
-$00004000 constant CRYP_IV0LR_IV17                                  \ IV17
-$00008000 constant CRYP_IV0LR_IV16                                  \ IV16
-$00010000 constant CRYP_IV0LR_IV15                                  \ IV15
-$00020000 constant CRYP_IV0LR_IV14                                  \ IV14
-$00040000 constant CRYP_IV0LR_IV13                                  \ IV13
-$00080000 constant CRYP_IV0LR_IV12                                  \ IV12
-$00100000 constant CRYP_IV0LR_IV11                                  \ IV11
-$00200000 constant CRYP_IV0LR_IV10                                  \ IV10
-$00400000 constant CRYP_IV0LR_IV9                                   \ IV9
-$00800000 constant CRYP_IV0LR_IV8                                   \ IV8
-$01000000 constant CRYP_IV0LR_IV7                                   \ IV7
-$02000000 constant CRYP_IV0LR_IV6                                   \ IV6
-$04000000 constant CRYP_IV0LR_IV5                                   \ IV5
-$08000000 constant CRYP_IV0LR_IV4                                   \ IV4
-$10000000 constant CRYP_IV0LR_IV3                                   \ IV3
-$20000000 constant CRYP_IV0LR_IV2                                   \ IV2
-$40000000 constant CRYP_IV0LR_IV1                                   \ IV1
-$80000000 constant CRYP_IV0LR_IV0                                   \ IV0
-
-
-\
-\ @brief initialization vector registers
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_IV0RR_IV63                                  \ IV63
-$00000002 constant CRYP_IV0RR_IV62                                  \ IV62
-$00000004 constant CRYP_IV0RR_IV61                                  \ IV61
-$00000008 constant CRYP_IV0RR_IV60                                  \ IV60
-$00000010 constant CRYP_IV0RR_IV59                                  \ IV59
-$00000020 constant CRYP_IV0RR_IV58                                  \ IV58
-$00000040 constant CRYP_IV0RR_IV57                                  \ IV57
-$00000080 constant CRYP_IV0RR_IV56                                  \ IV56
-$00000100 constant CRYP_IV0RR_IV55                                  \ IV55
-$00000200 constant CRYP_IV0RR_IV54                                  \ IV54
-$00000400 constant CRYP_IV0RR_IV53                                  \ IV53
-$00000800 constant CRYP_IV0RR_IV52                                  \ IV52
-$00001000 constant CRYP_IV0RR_IV51                                  \ IV51
-$00002000 constant CRYP_IV0RR_IV50                                  \ IV50
-$00004000 constant CRYP_IV0RR_IV49                                  \ IV49
-$00008000 constant CRYP_IV0RR_IV48                                  \ IV48
-$00010000 constant CRYP_IV0RR_IV47                                  \ IV47
-$00020000 constant CRYP_IV0RR_IV46                                  \ IV46
-$00040000 constant CRYP_IV0RR_IV45                                  \ IV45
-$00080000 constant CRYP_IV0RR_IV44                                  \ IV44
-$00100000 constant CRYP_IV0RR_IV43                                  \ IV43
-$00200000 constant CRYP_IV0RR_IV42                                  \ IV42
-$00400000 constant CRYP_IV0RR_IV41                                  \ IV41
-$00800000 constant CRYP_IV0RR_IV40                                  \ IV40
-$01000000 constant CRYP_IV0RR_IV39                                  \ IV39
-$02000000 constant CRYP_IV0RR_IV38                                  \ IV38
-$04000000 constant CRYP_IV0RR_IV37                                  \ IV37
-$08000000 constant CRYP_IV0RR_IV36                                  \ IV36
-$10000000 constant CRYP_IV0RR_IV35                                  \ IV35
-$20000000 constant CRYP_IV0RR_IV34                                  \ IV34
-$40000000 constant CRYP_IV0RR_IV33                                  \ IV33
-$80000000 constant CRYP_IV0RR_IV32                                  \ IV32
+  [ifdef] CRYP_K1LR_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_b160                      \ [0x00] b160
+    $01 constant CRYP_b161                      \ [0x01] b161
+    $02 constant CRYP_b162                      \ [0x02] b162
+    $03 constant CRYP_b163                      \ [0x03] b163
+    $04 constant CRYP_b164                      \ [0x04] b164
+    $05 constant CRYP_b165                      \ [0x05] b165
+    $06 constant CRYP_b166                      \ [0x06] b166
+    $07 constant CRYP_b167                      \ [0x07] b167
+    $08 constant CRYP_b168                      \ [0x08] b168
+    $09 constant CRYP_b169                      \ [0x09] b169
+    $0a constant CRYP_b170                      \ [0x0a] b170
+    $0b constant CRYP_b171                      \ [0x0b] b171
+    $0c constant CRYP_b172                      \ [0x0c] b172
+    $0d constant CRYP_b173                      \ [0x0d] b173
+    $0e constant CRYP_b174                      \ [0x0e] b174
+    $0f constant CRYP_b175                      \ [0x0f] b175
+    $10 constant CRYP_b176                      \ [0x10] b176
+    $11 constant CRYP_b177                      \ [0x11] b177
+    $12 constant CRYP_b178                      \ [0x12] b178
+    $13 constant CRYP_b179                      \ [0x13] b179
+    $14 constant CRYP_b180                      \ [0x14] b180
+    $15 constant CRYP_b181                      \ [0x15] b181
+    $16 constant CRYP_b182                      \ [0x16] b182
+    $17 constant CRYP_b183                      \ [0x17] b183
+    $18 constant CRYP_b184                      \ [0x18] b184
+    $19 constant CRYP_b185                      \ [0x19] b185
+    $1a constant CRYP_b186                      \ [0x1a] b186
+    $1b constant CRYP_b187                      \ [0x1b] b187
+    $1c constant CRYP_b188                      \ [0x1c] b188
+    $1d constant CRYP_b189                      \ [0x1d] b189
+    $1e constant CRYP_b190                      \ [0x1e] b190
+    $1f constant CRYP_b191                      \ [0x1f] b191
+  [then]
 
 
-\
-\ @brief initialization vector registers
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_IV1LR_IV95                                  \ IV95
-$00000002 constant CRYP_IV1LR_IV94                                  \ IV94
-$00000004 constant CRYP_IV1LR_IV93                                  \ IV93
-$00000008 constant CRYP_IV1LR_IV92                                  \ IV92
-$00000010 constant CRYP_IV1LR_IV91                                  \ IV91
-$00000020 constant CRYP_IV1LR_IV90                                  \ IV90
-$00000040 constant CRYP_IV1LR_IV89                                  \ IV89
-$00000080 constant CRYP_IV1LR_IV88                                  \ IV88
-$00000100 constant CRYP_IV1LR_IV87                                  \ IV87
-$00000200 constant CRYP_IV1LR_IV86                                  \ IV86
-$00000400 constant CRYP_IV1LR_IV85                                  \ IV85
-$00000800 constant CRYP_IV1LR_IV84                                  \ IV84
-$00001000 constant CRYP_IV1LR_IV83                                  \ IV83
-$00002000 constant CRYP_IV1LR_IV82                                  \ IV82
-$00004000 constant CRYP_IV1LR_IV81                                  \ IV81
-$00008000 constant CRYP_IV1LR_IV80                                  \ IV80
-$00010000 constant CRYP_IV1LR_IV79                                  \ IV79
-$00020000 constant CRYP_IV1LR_IV78                                  \ IV78
-$00040000 constant CRYP_IV1LR_IV77                                  \ IV77
-$00080000 constant CRYP_IV1LR_IV76                                  \ IV76
-$00100000 constant CRYP_IV1LR_IV75                                  \ IV75
-$00200000 constant CRYP_IV1LR_IV74                                  \ IV74
-$00400000 constant CRYP_IV1LR_IV73                                  \ IV73
-$00800000 constant CRYP_IV1LR_IV72                                  \ IV72
-$01000000 constant CRYP_IV1LR_IV71                                  \ IV71
-$02000000 constant CRYP_IV1LR_IV70                                  \ IV70
-$04000000 constant CRYP_IV1LR_IV69                                  \ IV69
-$08000000 constant CRYP_IV1LR_IV68                                  \ IV68
-$10000000 constant CRYP_IV1LR_IV67                                  \ IV67
-$20000000 constant CRYP_IV1LR_IV66                                  \ IV66
-$40000000 constant CRYP_IV1LR_IV65                                  \ IV65
-$80000000 constant CRYP_IV1LR_IV64                                  \ IV64
-
-
-\
-\ @brief initialization vector registers
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRYP_IV1RR_IV127                                 \ IV127
-$00000002 constant CRYP_IV1RR_IV126                                 \ IV126
-$00000004 constant CRYP_IV1RR_IV125                                 \ IV125
-$00000008 constant CRYP_IV1RR_IV124                                 \ IV124
-$00000010 constant CRYP_IV1RR_IV123                                 \ IV123
-$00000020 constant CRYP_IV1RR_IV122                                 \ IV122
-$00000040 constant CRYP_IV1RR_IV121                                 \ IV121
-$00000080 constant CRYP_IV1RR_IV120                                 \ IV120
-$00000100 constant CRYP_IV1RR_IV119                                 \ IV119
-$00000200 constant CRYP_IV1RR_IV118                                 \ IV118
-$00000400 constant CRYP_IV1RR_IV117                                 \ IV117
-$00000800 constant CRYP_IV1RR_IV116                                 \ IV116
-$00001000 constant CRYP_IV1RR_IV115                                 \ IV115
-$00002000 constant CRYP_IV1RR_IV114                                 \ IV114
-$00004000 constant CRYP_IV1RR_IV113                                 \ IV113
-$00008000 constant CRYP_IV1RR_IV112                                 \ IV112
-$00010000 constant CRYP_IV1RR_IV111                                 \ IV111
-$00020000 constant CRYP_IV1RR_IV110                                 \ IV110
-$00040000 constant CRYP_IV1RR_IV109                                 \ IV109
-$00080000 constant CRYP_IV1RR_IV108                                 \ IV108
-$00100000 constant CRYP_IV1RR_IV107                                 \ IV107
-$00200000 constant CRYP_IV1RR_IV106                                 \ IV106
-$00400000 constant CRYP_IV1RR_IV105                                 \ IV105
-$00800000 constant CRYP_IV1RR_IV104                                 \ IV104
-$01000000 constant CRYP_IV1RR_IV103                                 \ IV103
-$02000000 constant CRYP_IV1RR_IV102                                 \ IV102
-$04000000 constant CRYP_IV1RR_IV101                                 \ IV101
-$08000000 constant CRYP_IV1RR_IV100                                 \ IV100
-$10000000 constant CRYP_IV1RR_IV99                                  \ IV99
-$20000000 constant CRYP_IV1RR_IV98                                  \ IV98
-$40000000 constant CRYP_IV1RR_IV97                                  \ IV97
-$80000000 constant CRYP_IV1RR_IV96                                  \ IV96
+  [ifdef] CRYP_K1RR_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_b128                      \ [0x00] b128
+    $01 constant CRYP_b129                      \ [0x01] b129
+    $02 constant CRYP_b130                      \ [0x02] b130
+    $03 constant CRYP_b131                      \ [0x03] b131
+    $04 constant CRYP_b132                      \ [0x04] b132
+    $05 constant CRYP_b133                      \ [0x05] b133
+    $06 constant CRYP_b134                      \ [0x06] b134
+    $07 constant CRYP_b135                      \ [0x07] b135
+    $08 constant CRYP_b136                      \ [0x08] b136
+    $09 constant CRYP_b137                      \ [0x09] b137
+    $0a constant CRYP_b138                      \ [0x0a] b138
+    $0b constant CRYP_b139                      \ [0x0b] b139
+    $0c constant CRYP_b140                      \ [0x0c] b140
+    $0d constant CRYP_b141                      \ [0x0d] b141
+    $0e constant CRYP_b142                      \ [0x0e] b142
+    $0f constant CRYP_b143                      \ [0x0f] b143
+    $10 constant CRYP_b144                      \ [0x10] b144
+    $11 constant CRYP_b145                      \ [0x11] b145
+    $12 constant CRYP_b146                      \ [0x12] b146
+    $13 constant CRYP_b147                      \ [0x13] b147
+    $14 constant CRYP_b148                      \ [0x14] b148
+    $15 constant CRYP_b149                      \ [0x15] b149
+    $16 constant CRYP_b150                      \ [0x16] b150
+    $17 constant CRYP_b151                      \ [0x17] b151
+    $18 constant CRYP_b152                      \ [0x18] b152
+    $19 constant CRYP_b153                      \ [0x19] b153
+    $1a constant CRYP_b154                      \ [0x1a] b154
+    $1b constant CRYP_b155                      \ [0x1b] b155
+    $1c constant CRYP_b156                      \ [0x1c] b156
+    $1d constant CRYP_b157                      \ [0x1d] b157
+    $1e constant CRYP_b158                      \ [0x1e] b158
+    $1f constant CRYP_b159                      \ [0x1f] b159
+  [then]
 
 
-\
-\ @brief Cryptographic processor
-\
-$50060000 constant CRYP_CR        \ offset: 0x00 : control register
-$50060004 constant CRYP_SR        \ offset: 0x04 : status register
-$50060008 constant CRYP_DIN       \ offset: 0x08 : data input register
-$5006000c constant CRYP_DOUT      \ offset: 0x0C : data output register
-$50060010 constant CRYP_DMACR     \ offset: 0x10 : DMA control register
-$50060014 constant CRYP_IMSCR     \ offset: 0x14 : interrupt mask set/clear register
-$50060018 constant CRYP_RISR      \ offset: 0x18 : raw interrupt status register
-$5006001c constant CRYP_MISR      \ offset: 0x1C : masked interrupt status register
-$50060020 constant CRYP_K0LR      \ offset: 0x20 : key registers
-$50060024 constant CRYP_K0RR      \ offset: 0x24 : key registers
-$50060028 constant CRYP_K1LR      \ offset: 0x28 : key registers
-$5006002c constant CRYP_K1RR      \ offset: 0x2C : key registers
-$50060030 constant CRYP_K2LR      \ offset: 0x30 : key registers
-$50060034 constant CRYP_K2RR      \ offset: 0x34 : key registers
-$50060038 constant CRYP_K3LR      \ offset: 0x38 : key registers
-$5006003c constant CRYP_K3RR      \ offset: 0x3C : key registers
-$50060040 constant CRYP_IV0LR     \ offset: 0x40 : initialization vector registers
-$50060044 constant CRYP_IV0RR     \ offset: 0x44 : initialization vector registers
-$50060048 constant CRYP_IV1LR     \ offset: 0x48 : initialization vector registers
-$5006004c constant CRYP_IV1RR     \ offset: 0x4C : initialization vector registers
+  [ifdef] CRYP_K2LR_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_b96                       \ [0x00] b96
+    $01 constant CRYP_b97                       \ [0x01] b97
+    $02 constant CRYP_b98                       \ [0x02] b98
+    $03 constant CRYP_b99                       \ [0x03] b99
+    $04 constant CRYP_b100                      \ [0x04] b100
+    $05 constant CRYP_b101                      \ [0x05] b101
+    $06 constant CRYP_b102                      \ [0x06] b102
+    $07 constant CRYP_b103                      \ [0x07] b103
+    $08 constant CRYP_b104                      \ [0x08] b104
+    $09 constant CRYP_b105                      \ [0x09] b105
+    $0a constant CRYP_b106                      \ [0x0a] b106
+    $0b constant CRYP_b107                      \ [0x0b] b107
+    $0c constant CRYP_b108                      \ [0x0c] b108
+    $0d constant CRYP_b109                      \ [0x0d] b109
+    $0e constant CRYP_b110                      \ [0x0e] b110
+    $0f constant CRYP_b111                      \ [0x0f] b111
+    $10 constant CRYP_b112                      \ [0x10] b112
+    $11 constant CRYP_b113                      \ [0x11] b113
+    $12 constant CRYP_b114                      \ [0x12] b114
+    $13 constant CRYP_b115                      \ [0x13] b115
+    $14 constant CRYP_b116                      \ [0x14] b116
+    $15 constant CRYP_b117                      \ [0x15] b117
+    $16 constant CRYP_b118                      \ [0x16] b118
+    $17 constant CRYP_b119                      \ [0x17] b119
+    $18 constant CRYP_b120                      \ [0x18] b120
+    $19 constant CRYP_b121                      \ [0x19] b121
+    $1a constant CRYP_b122                      \ [0x1a] b122
+    $1b constant CRYP_b123                      \ [0x1b] b123
+    $1c constant CRYP_b124                      \ [0x1c] b124
+    $1d constant CRYP_b125                      \ [0x1d] b125
+    $1e constant CRYP_b126                      \ [0x1e] b126
+    $1f constant CRYP_b127                      \ [0x1f] b127
+  [then]
 
+
+  [ifdef] CRYP_K2RR_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_b64                       \ [0x00] b64
+    $01 constant CRYP_b65                       \ [0x01] b65
+    $02 constant CRYP_b66                       \ [0x02] b66
+    $03 constant CRYP_b67                       \ [0x03] b67
+    $04 constant CRYP_b68                       \ [0x04] b68
+    $05 constant CRYP_b69                       \ [0x05] b69
+    $06 constant CRYP_b70                       \ [0x06] b70
+    $07 constant CRYP_b71                       \ [0x07] b71
+    $08 constant CRYP_b72                       \ [0x08] b72
+    $09 constant CRYP_b73                       \ [0x09] b73
+    $0a constant CRYP_b74                       \ [0x0a] b74
+    $0b constant CRYP_b75                       \ [0x0b] b75
+    $0c constant CRYP_b76                       \ [0x0c] b76
+    $0d constant CRYP_b77                       \ [0x0d] b77
+    $0e constant CRYP_b78                       \ [0x0e] b78
+    $0f constant CRYP_b79                       \ [0x0f] b79
+    $10 constant CRYP_b80                       \ [0x10] b80
+    $11 constant CRYP_b81                       \ [0x11] b81
+    $12 constant CRYP_b82                       \ [0x12] b82
+    $13 constant CRYP_b83                       \ [0x13] b83
+    $14 constant CRYP_b84                       \ [0x14] b84
+    $15 constant CRYP_b85                       \ [0x15] b85
+    $16 constant CRYP_b86                       \ [0x16] b86
+    $17 constant CRYP_b87                       \ [0x17] b87
+    $18 constant CRYP_b88                       \ [0x18] b88
+    $19 constant CRYP_b89                       \ [0x19] b89
+    $1a constant CRYP_b90                       \ [0x1a] b90
+    $1b constant CRYP_b91                       \ [0x1b] b91
+    $1c constant CRYP_b92                       \ [0x1c] b92
+    $1d constant CRYP_b93                       \ [0x1d] b93
+    $1e constant CRYP_b94                       \ [0x1e] b94
+    $1f constant CRYP_b95                       \ [0x1f] b95
+  [then]
+
+
+  [ifdef] CRYP_K3LR_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_b32                       \ [0x00] b32
+    $01 constant CRYP_b33                       \ [0x01] b33
+    $02 constant CRYP_b34                       \ [0x02] b34
+    $03 constant CRYP_b35                       \ [0x03] b35
+    $04 constant CRYP_b36                       \ [0x04] b36
+    $05 constant CRYP_b37                       \ [0x05] b37
+    $06 constant CRYP_b38                       \ [0x06] b38
+    $07 constant CRYP_b39                       \ [0x07] b39
+    $08 constant CRYP_b40                       \ [0x08] b40
+    $09 constant CRYP_b41                       \ [0x09] b41
+    $0a constant CRYP_b42                       \ [0x0a] b42
+    $0b constant CRYP_b43                       \ [0x0b] b43
+    $0c constant CRYP_b44                       \ [0x0c] b44
+    $0d constant CRYP_b45                       \ [0x0d] b45
+    $0e constant CRYP_b46                       \ [0x0e] b46
+    $0f constant CRYP_b47                       \ [0x0f] b47
+    $10 constant CRYP_b48                       \ [0x10] b48
+    $11 constant CRYP_b49                       \ [0x11] b49
+    $12 constant CRYP_b50                       \ [0x12] b50
+    $13 constant CRYP_b51                       \ [0x13] b51
+    $14 constant CRYP_b52                       \ [0x14] b52
+    $15 constant CRYP_b53                       \ [0x15] b53
+    $16 constant CRYP_b54                       \ [0x16] b54
+    $17 constant CRYP_b55                       \ [0x17] b55
+    $18 constant CRYP_b56                       \ [0x18] b56
+    $19 constant CRYP_b57                       \ [0x19] b57
+    $1a constant CRYP_b58                       \ [0x1a] b58
+    $1b constant CRYP_b59                       \ [0x1b] b59
+    $1c constant CRYP_b60                       \ [0x1c] b60
+    $1d constant CRYP_b61                       \ [0x1d] b61
+    $1e constant CRYP_b62                       \ [0x1e] b62
+    $1f constant CRYP_b63                       \ [0x1f] b63
+  [then]
+
+
+  [ifdef] CRYP_K3RR_DEF
+    \
+    \ @brief key registers
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_b0                        \ [0x00] b0
+    $01 constant CRYP_b1                        \ [0x01] b1
+    $02 constant CRYP_b2                        \ [0x02] b2
+    $03 constant CRYP_b3                        \ [0x03] b3
+    $04 constant CRYP_b4                        \ [0x04] b4
+    $05 constant CRYP_b5                        \ [0x05] b5
+    $06 constant CRYP_b6                        \ [0x06] b6
+    $07 constant CRYP_b7                        \ [0x07] b7
+    $08 constant CRYP_b8                        \ [0x08] b8
+    $09 constant CRYP_b9                        \ [0x09] b9
+    $0a constant CRYP_b10                       \ [0x0a] b10
+    $0b constant CRYP_b11                       \ [0x0b] b11
+    $0c constant CRYP_b12                       \ [0x0c] b12
+    $0d constant CRYP_b13                       \ [0x0d] b13
+    $0e constant CRYP_b14                       \ [0x0e] b14
+    $0f constant CRYP_b15                       \ [0x0f] b15
+    $10 constant CRYP_b16                       \ [0x10] b16
+    $11 constant CRYP_b17                       \ [0x11] b17
+    $12 constant CRYP_b18                       \ [0x12] b18
+    $13 constant CRYP_b19                       \ [0x13] b19
+    $14 constant CRYP_b20                       \ [0x14] b20
+    $15 constant CRYP_b21                       \ [0x15] b21
+    $16 constant CRYP_b22                       \ [0x16] b22
+    $17 constant CRYP_b23                       \ [0x17] b23
+    $18 constant CRYP_b24                       \ [0x18] b24
+    $19 constant CRYP_b25                       \ [0x19] b25
+    $1a constant CRYP_b26                       \ [0x1a] b26
+    $1b constant CRYP_b27                       \ [0x1b] b27
+    $1c constant CRYP_b28                       \ [0x1c] b28
+    $1d constant CRYP_b29                       \ [0x1d] b29
+    $1e constant CRYP_b30                       \ [0x1e] b30
+    $1f constant CRYP_b31                       \ [0x1f] b31
+  [then]
+
+
+  [ifdef] CRYP_IV0LR_DEF
+    \
+    \ @brief initialization vector registers
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_IV31                      \ [0x00] IV31
+    $01 constant CRYP_IV30                      \ [0x01] IV30
+    $02 constant CRYP_IV29                      \ [0x02] IV29
+    $03 constant CRYP_IV28                      \ [0x03] IV28
+    $04 constant CRYP_IV27                      \ [0x04] IV27
+    $05 constant CRYP_IV26                      \ [0x05] IV26
+    $06 constant CRYP_IV25                      \ [0x06] IV25
+    $07 constant CRYP_IV24                      \ [0x07] IV24
+    $08 constant CRYP_IV23                      \ [0x08] IV23
+    $09 constant CRYP_IV22                      \ [0x09] IV22
+    $0a constant CRYP_IV21                      \ [0x0a] IV21
+    $0b constant CRYP_IV20                      \ [0x0b] IV20
+    $0c constant CRYP_IV19                      \ [0x0c] IV19
+    $0d constant CRYP_IV18                      \ [0x0d] IV18
+    $0e constant CRYP_IV17                      \ [0x0e] IV17
+    $0f constant CRYP_IV16                      \ [0x0f] IV16
+    $10 constant CRYP_IV15                      \ [0x10] IV15
+    $11 constant CRYP_IV14                      \ [0x11] IV14
+    $12 constant CRYP_IV13                      \ [0x12] IV13
+    $13 constant CRYP_IV12                      \ [0x13] IV12
+    $14 constant CRYP_IV11                      \ [0x14] IV11
+    $15 constant CRYP_IV10                      \ [0x15] IV10
+    $16 constant CRYP_IV9                       \ [0x16] IV9
+    $17 constant CRYP_IV8                       \ [0x17] IV8
+    $18 constant CRYP_IV7                       \ [0x18] IV7
+    $19 constant CRYP_IV6                       \ [0x19] IV6
+    $1a constant CRYP_IV5                       \ [0x1a] IV5
+    $1b constant CRYP_IV4                       \ [0x1b] IV4
+    $1c constant CRYP_IV3                       \ [0x1c] IV3
+    $1d constant CRYP_IV2                       \ [0x1d] IV2
+    $1e constant CRYP_IV1                       \ [0x1e] IV1
+    $1f constant CRYP_IV0                       \ [0x1f] IV0
+  [then]
+
+
+  [ifdef] CRYP_IV0RR_DEF
+    \
+    \ @brief initialization vector registers
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_IV63                      \ [0x00] IV63
+    $01 constant CRYP_IV62                      \ [0x01] IV62
+    $02 constant CRYP_IV61                      \ [0x02] IV61
+    $03 constant CRYP_IV60                      \ [0x03] IV60
+    $04 constant CRYP_IV59                      \ [0x04] IV59
+    $05 constant CRYP_IV58                      \ [0x05] IV58
+    $06 constant CRYP_IV57                      \ [0x06] IV57
+    $07 constant CRYP_IV56                      \ [0x07] IV56
+    $08 constant CRYP_IV55                      \ [0x08] IV55
+    $09 constant CRYP_IV54                      \ [0x09] IV54
+    $0a constant CRYP_IV53                      \ [0x0a] IV53
+    $0b constant CRYP_IV52                      \ [0x0b] IV52
+    $0c constant CRYP_IV51                      \ [0x0c] IV51
+    $0d constant CRYP_IV50                      \ [0x0d] IV50
+    $0e constant CRYP_IV49                      \ [0x0e] IV49
+    $0f constant CRYP_IV48                      \ [0x0f] IV48
+    $10 constant CRYP_IV47                      \ [0x10] IV47
+    $11 constant CRYP_IV46                      \ [0x11] IV46
+    $12 constant CRYP_IV45                      \ [0x12] IV45
+    $13 constant CRYP_IV44                      \ [0x13] IV44
+    $14 constant CRYP_IV43                      \ [0x14] IV43
+    $15 constant CRYP_IV42                      \ [0x15] IV42
+    $16 constant CRYP_IV41                      \ [0x16] IV41
+    $17 constant CRYP_IV40                      \ [0x17] IV40
+    $18 constant CRYP_IV39                      \ [0x18] IV39
+    $19 constant CRYP_IV38                      \ [0x19] IV38
+    $1a constant CRYP_IV37                      \ [0x1a] IV37
+    $1b constant CRYP_IV36                      \ [0x1b] IV36
+    $1c constant CRYP_IV35                      \ [0x1c] IV35
+    $1d constant CRYP_IV34                      \ [0x1d] IV34
+    $1e constant CRYP_IV33                      \ [0x1e] IV33
+    $1f constant CRYP_IV32                      \ [0x1f] IV32
+  [then]
+
+
+  [ifdef] CRYP_IV1LR_DEF
+    \
+    \ @brief initialization vector registers
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_IV95                      \ [0x00] IV95
+    $01 constant CRYP_IV94                      \ [0x01] IV94
+    $02 constant CRYP_IV93                      \ [0x02] IV93
+    $03 constant CRYP_IV92                      \ [0x03] IV92
+    $04 constant CRYP_IV91                      \ [0x04] IV91
+    $05 constant CRYP_IV90                      \ [0x05] IV90
+    $06 constant CRYP_IV89                      \ [0x06] IV89
+    $07 constant CRYP_IV88                      \ [0x07] IV88
+    $08 constant CRYP_IV87                      \ [0x08] IV87
+    $09 constant CRYP_IV86                      \ [0x09] IV86
+    $0a constant CRYP_IV85                      \ [0x0a] IV85
+    $0b constant CRYP_IV84                      \ [0x0b] IV84
+    $0c constant CRYP_IV83                      \ [0x0c] IV83
+    $0d constant CRYP_IV82                      \ [0x0d] IV82
+    $0e constant CRYP_IV81                      \ [0x0e] IV81
+    $0f constant CRYP_IV80                      \ [0x0f] IV80
+    $10 constant CRYP_IV79                      \ [0x10] IV79
+    $11 constant CRYP_IV78                      \ [0x11] IV78
+    $12 constant CRYP_IV77                      \ [0x12] IV77
+    $13 constant CRYP_IV76                      \ [0x13] IV76
+    $14 constant CRYP_IV75                      \ [0x14] IV75
+    $15 constant CRYP_IV74                      \ [0x15] IV74
+    $16 constant CRYP_IV73                      \ [0x16] IV73
+    $17 constant CRYP_IV72                      \ [0x17] IV72
+    $18 constant CRYP_IV71                      \ [0x18] IV71
+    $19 constant CRYP_IV70                      \ [0x19] IV70
+    $1a constant CRYP_IV69                      \ [0x1a] IV69
+    $1b constant CRYP_IV68                      \ [0x1b] IV68
+    $1c constant CRYP_IV67                      \ [0x1c] IV67
+    $1d constant CRYP_IV66                      \ [0x1d] IV66
+    $1e constant CRYP_IV65                      \ [0x1e] IV65
+    $1f constant CRYP_IV64                      \ [0x1f] IV64
+  [then]
+
+
+  [ifdef] CRYP_IV1RR_DEF
+    \
+    \ @brief initialization vector registers
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRYP_IV127                     \ [0x00] IV127
+    $01 constant CRYP_IV126                     \ [0x01] IV126
+    $02 constant CRYP_IV125                     \ [0x02] IV125
+    $03 constant CRYP_IV124                     \ [0x03] IV124
+    $04 constant CRYP_IV123                     \ [0x04] IV123
+    $05 constant CRYP_IV122                     \ [0x05] IV122
+    $06 constant CRYP_IV121                     \ [0x06] IV121
+    $07 constant CRYP_IV120                     \ [0x07] IV120
+    $08 constant CRYP_IV119                     \ [0x08] IV119
+    $09 constant CRYP_IV118                     \ [0x09] IV118
+    $0a constant CRYP_IV117                     \ [0x0a] IV117
+    $0b constant CRYP_IV116                     \ [0x0b] IV116
+    $0c constant CRYP_IV115                     \ [0x0c] IV115
+    $0d constant CRYP_IV114                     \ [0x0d] IV114
+    $0e constant CRYP_IV113                     \ [0x0e] IV113
+    $0f constant CRYP_IV112                     \ [0x0f] IV112
+    $10 constant CRYP_IV111                     \ [0x10] IV111
+    $11 constant CRYP_IV110                     \ [0x11] IV110
+    $12 constant CRYP_IV109                     \ [0x12] IV109
+    $13 constant CRYP_IV108                     \ [0x13] IV108
+    $14 constant CRYP_IV107                     \ [0x14] IV107
+    $15 constant CRYP_IV106                     \ [0x15] IV106
+    $16 constant CRYP_IV105                     \ [0x16] IV105
+    $17 constant CRYP_IV104                     \ [0x17] IV104
+    $18 constant CRYP_IV103                     \ [0x18] IV103
+    $19 constant CRYP_IV102                     \ [0x19] IV102
+    $1a constant CRYP_IV101                     \ [0x1a] IV101
+    $1b constant CRYP_IV100                     \ [0x1b] IV100
+    $1c constant CRYP_IV99                      \ [0x1c] IV99
+    $1d constant CRYP_IV98                      \ [0x1d] IV98
+    $1e constant CRYP_IV97                      \ [0x1e] IV97
+    $1f constant CRYP_IV96                      \ [0x1f] IV96
+  [then]
+
+  \
+  \ @brief Cryptographic processor
+  \
+  $00 constant CRYP_CR                  \ control register
+  $04 constant CRYP_SR                  \ status register
+  $08 constant CRYP_DIN                 \ data input register
+  $0C constant CRYP_DOUT                \ data output register
+  $10 constant CRYP_DMACR               \ DMA control register
+  $14 constant CRYP_IMSCR               \ interrupt mask set/clear register
+  $18 constant CRYP_RISR                \ raw interrupt status register
+  $1C constant CRYP_MISR                \ masked interrupt status register
+  $20 constant CRYP_K0LR                \ key registers
+  $24 constant CRYP_K0RR                \ key registers
+  $28 constant CRYP_K1LR                \ key registers
+  $2C constant CRYP_K1RR                \ key registers
+  $30 constant CRYP_K2LR                \ key registers
+  $34 constant CRYP_K2RR                \ key registers
+  $38 constant CRYP_K3LR                \ key registers
+  $3C constant CRYP_K3RR                \ key registers
+  $40 constant CRYP_IV0LR               \ initialization vector registers
+  $44 constant CRYP_IV0RR               \ initialization vector registers
+  $48 constant CRYP_IV1LR               \ initialization vector registers
+  $4C constant CRYP_IV1RR               \ initialization vector registers
+
+: CRYP_DEF ; [then]

@@ -6,181 +6,195 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM9_DEF
 
-\
-\ @brief control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM9_CR1_CEN                                     \ Counter enable
-$00000002 constant TIM9_CR1_UDIS                                    \ Update disable
-$00000004 constant TIM9_CR1_URS                                     \ Update request source
-$00000008 constant TIM9_CR1_OMP                                     \ One-pulse mode
-$00000080 constant TIM9_CR1_ARPE                                    \ Auto-reload preload enable
-$00000300 constant TIM9_CR1_CKD                                     \ Clock division
-
-
-\
-\ @brief control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000070 constant TIM9_CR2_MMS                                     \ Master mode selection
+  [ifdef] TIM9_CR1_DEF
+    \
+    \ @brief control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_CEN                       \ [0x00] Counter enable
+    $01 constant TIM9_UDIS                      \ [0x01] Update disable
+    $02 constant TIM9_URS                       \ [0x02] Update request source
+    $03 constant TIM9_OMP                       \ [0x03] One-pulse mode
+    $07 constant TIM9_ARPE                      \ [0x07] Auto-reload preload enable
+    $08 constant TIM9_CKD                       \ [0x08 : 2] Clock division
+  [then]
 
 
-\
-\ @brief slave mode control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000007 constant TIM9_SMCR_SMS                                    \ Slave mode selection
-$00000070 constant TIM9_SMCR_TS                                     \ Trigger selection
-$00000080 constant TIM9_SMCR_MSM                                    \ Master/Slave mode
-
-
-\
-\ @brief Interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM9_DIER_UIE                                    \ Update interrupt enable
-$00000002 constant TIM9_DIER_CC1IE                                  \ Capture/Compare 1 interrupt enable
-$00000004 constant TIM9_DIER_CC2IE                                  \ Capture/Compare 2 interrupt enable
-$00000040 constant TIM9_DIER_TIE                                    \ Trigger interrupt enable
+  [ifdef] TIM9_CR2_DEF
+    \
+    \ @brief control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $04 constant TIM9_MMS                       \ [0x04 : 3] Master mode selection
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM9_SR_UIF                                      \ Update interrupt flag
-$00000002 constant TIM9_SR_CC1IF                                    \ Capture/Compare 1 interrupt flag
-$00000004 constant TIM9_SR_CC2IF                                    \ Capture/Compare 2 interrupt flag
-$00000040 constant TIM9_SR_TIF                                      \ Trigger interrupt flag
-$00000200 constant TIM9_SR_CC1OF                                    \ Capture/compare 1 overcapture flag
-$00000400 constant TIM9_SR_CC2OF                                    \ Capture/compare 2 overcapture flag
+  [ifdef] TIM9_SMCR_DEF
+    \
+    \ @brief slave mode control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_SMS                       \ [0x00 : 3] Slave mode selection
+    $04 constant TIM9_TS                        \ [0x04 : 3] Trigger selection
+    $07 constant TIM9_MSM                       \ [0x07] Master/Slave mode
+  [then]
 
 
-\
-\ @brief event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM9_EGR_UG                                      \ Update generation
-$00000002 constant TIM9_EGR_CC1G                                    \ Capture/Compare 1 generation
-$00000004 constant TIM9_EGR_CC2G                                    \ Capture/Compare 2 generation
-$00000040 constant TIM9_EGR_TG                                      \ Trigger generation
-
-
-\
-\ @brief capture/compare mode register 1
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM9_CCMR1_OUTPUT_CC1S                           \ Capture/Compare 1 selection
-$00000004 constant TIM9_CCMR1_OUTPUT_OC1FE                          \ Output compare 1 fast enable
-$00000008 constant TIM9_CCMR1_OUTPUT_OC1PE                          \ Output compare 1 preload enable
-$00000070 constant TIM9_CCMR1_OUTPUT_OC1M                           \ Output compare 1 mode
-$00000080 constant TIM9_CCMR1_OUTPUT_OC1CE                          \ Output compare 1 clear enable
-$00000100 constant TIM9_CCMR1_OUTPUT_CC2S                           \ Capture/Compare 2 selection
-$00000400 constant TIM9_CCMR1_OUTPUT_OC2FE                          \ Output compare 2 fast enable
-$00000800 constant TIM9_CCMR1_OUTPUT_OC2PE                          \ Output compare 2 preload enable
-$00007000 constant TIM9_CCMR1_OUTPUT_OC2M                           \ Output compare 2 mode
-$00008000 constant TIM9_CCMR1_OUTPUT_OC2CE                          \ Output compare 2 clear enable
+  [ifdef] TIM9_DIER_DEF
+    \
+    \ @brief Interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_UIE                       \ [0x00] Update interrupt enable
+    $01 constant TIM9_CC1IE                     \ [0x01] Capture/Compare 1 interrupt enable
+    $02 constant TIM9_CC2IE                     \ [0x02] Capture/Compare 2 interrupt enable
+    $06 constant TIM9_TIE                       \ [0x06] Trigger interrupt enable
+  [then]
 
 
-\
-\ @brief capture/compare mode register 1 (input mode)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM9_CCMR1_INPUT_CC1S                            \ Capture/Compare 1 selection
-$0000000c constant TIM9_CCMR1_INPUT_ICPCS                           \ Input capture 1 prescaler
-$000000f0 constant TIM9_CCMR1_INPUT_IC1F                            \ Input capture 1 filter
-$00000300 constant TIM9_CCMR1_INPUT_CC2S                            \ Capture/Compare 2 selection
-$00000c00 constant TIM9_CCMR1_INPUT_IC2PCS                          \ Input capture 2 prescaler
-$0000f000 constant TIM9_CCMR1_INPUT_IC2F                            \ Input capture 2 filter
-
-
-\
-\ @brief counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM9_CNT_CNT                                     \ TIM9 counter
+  [ifdef] TIM9_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_UIF                       \ [0x00] Update interrupt flag
+    $01 constant TIM9_CC1IF                     \ [0x01] Capture/Compare 1 interrupt flag
+    $02 constant TIM9_CC2IF                     \ [0x02] Capture/Compare 2 interrupt flag
+    $06 constant TIM9_TIF                       \ [0x06] Trigger interrupt flag
+    $09 constant TIM9_CC1OF                     \ [0x09] Capture/compare 1 overcapture flag
+    $0a constant TIM9_CC2OF                     \ [0x0a] Capture/compare 2 overcapture flag
+  [then]
 
 
-\
-\ @brief prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM9_PSC_PSC                                     \ TIM9 prescaler
-
-
-\
-\ @brief auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM9_ARR_ARR                                     \ Auto-reload value
+  [ifdef] TIM9_EGR_DEF
+    \
+    \ @brief event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_UG                        \ [0x00] Update generation
+    $01 constant TIM9_CC1G                      \ [0x01] Capture/Compare 1 generation
+    $02 constant TIM9_CC2G                      \ [0x02] Capture/Compare 2 generation
+    $06 constant TIM9_TG                        \ [0x06] Trigger generation
+  [then]
 
 
-\
-\ @brief capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM9_CCR1_CCR1                                   \ Capture/Compare 1 value
-
-
-\
-\ @brief capture/compare register 2
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM9_CCR2_CCR2                                   \ Capture/Compare 2 value
-
-
-\
-\ @brief option register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM9_OR_TI1_RMP                                  \ TIM9 Input 1 remapping capability
+  [ifdef] TIM9_CCMR1_Output_DEF
+    \
+    \ @brief capture/compare mode register 1
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_CC1S                      \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM9_OC1FE                     \ [0x02] Output compare 1 fast enable
+    $03 constant TIM9_OC1PE                     \ [0x03] Output compare 1 preload enable
+    $04 constant TIM9_OC1M                      \ [0x04 : 3] Output compare 1 mode
+    $07 constant TIM9_OC1CE                     \ [0x07] Output compare 1 clear enable
+    $08 constant TIM9_CC2S                      \ [0x08] Capture/Compare 2 selection
+    $0a constant TIM9_OC2FE                     \ [0x0a] Output compare 2 fast enable
+    $0b constant TIM9_OC2PE                     \ [0x0b] Output compare 2 preload enable
+    $0c constant TIM9_OC2M                      \ [0x0c : 3] Output compare 2 mode
+    $0f constant TIM9_OC2CE                     \ [0x0f] Output compare 2 clear enable
+  [then]
 
 
-\
-\ @brief General-purpose timers
-\
-$40010800 constant TIM9_CR1       \ offset: 0x00 : control register 1
-$40010804 constant TIM9_CR2       \ offset: 0x04 : control register 2
-$40010808 constant TIM9_SMCR      \ offset: 0x08 : slave mode control register
-$4001080c constant TIM9_DIER      \ offset: 0x0C : Interrupt enable register
-$40010810 constant TIM9_SR        \ offset: 0x10 : status register
-$40010814 constant TIM9_EGR       \ offset: 0x14 : event generation register
-$40010818 constant TIM9_CCMR1_OUTPUT  \ offset: 0x18 : capture/compare mode register 1
-$40010818 constant TIM9_CCMR1_INPUT  \ offset: 0x18 : capture/compare mode register 1 (input mode)
-$40010824 constant TIM9_CNT       \ offset: 0x24 : counter
-$40010828 constant TIM9_PSC       \ offset: 0x28 : prescaler
-$4001082c constant TIM9_ARR       \ offset: 0x2C : auto-reload register
-$40010834 constant TIM9_CCR1      \ offset: 0x34 : capture/compare register 1
-$40010838 constant TIM9_CCR2      \ offset: 0x38 : capture/compare register 2
-$40010850 constant TIM9_OR        \ offset: 0x50 : option register
+  [ifdef] TIM9_CCMR1_Input_DEF
+    \
+    \ @brief capture/compare mode register 1 (input mode)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_CC1S                      \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM9_ICPCS                     \ [0x02 : 2] Input capture 1 prescaler
+    $04 constant TIM9_IC1F                      \ [0x04 : 4] Input capture 1 filter
+    $08 constant TIM9_CC2S                      \ [0x08 : 2] Capture/Compare 2 selection
+    $0a constant TIM9_IC2PCS                    \ [0x0a : 2] Input capture 2 prescaler
+    $0c constant TIM9_IC2F                      \ [0x0c : 4] Input capture 2 filter
+  [then]
 
+
+  [ifdef] TIM9_CNT_DEF
+    \
+    \ @brief counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_CNT                       \ [0x00 : 16] TIM9 counter
+  [then]
+
+
+  [ifdef] TIM9_PSC_DEF
+    \
+    \ @brief prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_PSC                       \ [0x00 : 16] TIM9 prescaler
+  [then]
+
+
+  [ifdef] TIM9_ARR_DEF
+    \
+    \ @brief auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_ARR                       \ [0x00 : 16] Auto-reload value
+  [then]
+
+
+  [ifdef] TIM9_CCR1_DEF
+    \
+    \ @brief capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_CCR1                      \ [0x00 : 16] Capture/Compare 1 value
+  [then]
+
+
+  [ifdef] TIM9_CCR2_DEF
+    \
+    \ @brief capture/compare register 2
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_CCR2                      \ [0x00 : 16] Capture/Compare 2 value
+  [then]
+
+
+  [ifdef] TIM9_OR_DEF
+    \
+    \ @brief option register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM9_TI1_RMP                   \ [0x00 : 2] TIM9 Input 1 remapping capability
+  [then]
+
+  \
+  \ @brief General-purpose timers
+  \
+  $00 constant TIM9_CR1                 \ control register 1
+  $04 constant TIM9_CR2                 \ control register 2
+  $08 constant TIM9_SMCR                \ slave mode control register
+  $0C constant TIM9_DIER                \ Interrupt enable register
+  $10 constant TIM9_SR                  \ status register
+  $14 constant TIM9_EGR                 \ event generation register
+  $18 constant TIM9_CCMR1_OUTPUT        \ capture/compare mode register 1
+  $18 constant TIM9_CCMR1_INPUT         \ capture/compare mode register 1 (input mode)
+  $24 constant TIM9_CNT                 \ counter
+  $28 constant TIM9_PSC                 \ prescaler
+  $2C constant TIM9_ARR                 \ auto-reload register
+  $34 constant TIM9_CCR1                \ capture/compare register 1
+  $38 constant TIM9_CCR2                \ capture/compare register 2
+  $50 constant TIM9_OR                  \ option register
+
+: TIM9_DEF ; [then]

@@ -6,4496 +6,4746 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief RCC control register
-\ Address offset: 0x00
-\ Reset value: 0x00000008
-\
-
-$00000001 constant RCC_RCC_CR_LSION                                 \ LSI oscillator enable in Run/Sleep mode.
-$00000002 constant RCC_RCC_CR_LSEON                                 \ LSE oscillator enable in Run/Sleep mode.
-$00000004 constant RCC_RCC_CR_MSION                                 \ MSI oscillator enable in Run/Sleep mode.
-$00000008 constant RCC_RCC_CR_HSION                                 \ HSI oscillator enable in Run/Sleep mode.
-$00000010 constant RCC_RCC_CR_HSEON                                 \ HSE oscillator enable in Run/Sleep mode.
-$00000100 constant RCC_RCC_CR_PLL1ON                                \ PLL1 enable in Run/Sleep mode.
-$00000200 constant RCC_RCC_CR_PLL2ON                                \ PLL2 enable in Run/Sleep mode.
-$00000400 constant RCC_RCC_CR_PLL3ON                                \ PLL3 enable in Run/Sleep mode.
-$00000800 constant RCC_RCC_CR_PLL4ON                                \ PLL4 enable in Run/Sleep mode.
-
-
-\
-\ @brief RCC status register
-\ Address offset: 0x04
-\ Reset value: 0x00000008
-\
-
-$00000001 constant RCC_RCC_SR_LSIRDY                                \ LSI clock ready flag
-$00000002 constant RCC_RCC_SR_LSERDY                                \ LSE clock ready flag
-$00000004 constant RCC_RCC_SR_MSIRDY                                \ MSI clock ready flag
-$00000008 constant RCC_RCC_SR_HSIRDY                                \ HSI clock ready flag
-$00000010 constant RCC_RCC_SR_HSERDY                                \ HSE clock ready flag
-$00000100 constant RCC_RCC_SR_PLL1RDY                               \ PLL1 clock ready flag
-$00000200 constant RCC_RCC_SR_PLL2RDY                               \ PLL2 clock ready flag
-$00000400 constant RCC_RCC_SR_PLL3RDY                               \ PLL3 clock ready flag
-$00000800 constant RCC_RCC_SR_PLL4RDY                               \ PLL4 clock ready flag
-
-
-\
-\ @brief RCC Stop mode control register
-\ Address offset: 0x08
-\ Reset value: 0x00000008
-\
-
-$00000001 constant RCC_RCC_STOPCR_LSISTOPEN                         \ LSI oscillator enable in Stop mode.
-$00000002 constant RCC_RCC_STOPCR_LSESTOPEN                         \ LSE oscillator enable in Stop mode.
-$00000004 constant RCC_RCC_STOPCR_MSISTOPEN                         \ MSI oscillator enable in Stop mode.
-$00000008 constant RCC_RCC_STOPCR_HSISTOPEN                         \ HSI oscillator enable in Stop mode.
-
-
-\
-\ @brief RCC configuration register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_CFGR1_STOPWUCK                           \ System clock selection after a wake up from system Stop.
-$00030000 constant RCC_RCC_CFGR1_CPUSW                              \ CPU clock switch selection
-$00300000 constant RCC_RCC_CFGR1_CPUSWS                             \ CPU clock switch status
-$03000000 constant RCC_RCC_CFGR1_SYSSW                              \ System clock switch selection
-$30000000 constant RCC_RCC_CFGR1_SYSSWS                             \ System clock switch status
-
-
-\
-\ @brief RCC configuration register 2
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RCC_RCC_CFGR2_PPRE1                              \ CPU domain APB1 prescaler
-$00000070 constant RCC_RCC_CFGR2_PPRE2                              \ CPU domain APB2 prescaler
-$00007000 constant RCC_RCC_CFGR2_PPRE4                              \ CPU domain APB4 prescaler
-$00070000 constant RCC_RCC_CFGR2_PPRE5                              \ CPU domain APB5 prescaler
-$00700000 constant RCC_RCC_CFGR2_HPRE                               \ AHB clock prescaler
-$03000000 constant RCC_RCC_CFGR2_TIMPRE                             \ Timers clocks prescaler selection
-
-
-\
-\ @brief RCC clock protection register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00030000 constant RCC_RCC_CKPROTR_XSPI3SELS                        \ XSPI3 clock selection current status
-$00300000 constant RCC_RCC_CKPROTR_XSPI2SELS                        \ XSPI2 clock selection current status
-$03000000 constant RCC_RCC_CKPROTR_XSPI1SELS                        \ XSPI1 clock selection current status
-$30000000 constant RCC_RCC_CKPROTR_FMCSELS                          \ FMC clock selection current status
-
-
-\
-\ @brief RCC backup domain protection register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$80000000 constant RCC_RCC_BDCR_VSWRST                              \ VSW domain software reset.
-
-
-\
-\ @brief RCC reset status register for hardware
-\ Address offset: 0x30
-\ Reset value: 0x00E00000
-\
-
-$00010000 constant RCC_RCC_HWRSR_RMVF                               \ Remove reset flag
-$00020000 constant RCC_RCC_HWRSR_LCKRSTF                            \ CPU lockup reset flag.
-$00200000 constant RCC_RCC_HWRSR_BORRSTF                            \ BOR flag
-$00400000 constant RCC_RCC_HWRSR_PINRSTF                            \ Pin reset flag (NRST)
-$00800000 constant RCC_RCC_HWRSR_PORRSTF                            \ POR/PDR flag.
-$01000000 constant RCC_RCC_HWRSR_SFTRSTF                            \ Software system reset flag (1)
-$04000000 constant RCC_RCC_HWRSR_IWDGRSTF                           \ Independent Watchdog reset flag.
-$10000000 constant RCC_RCC_HWRSR_WWDGRSTF                           \ Window watchdog reset flag
-$40000000 constant RCC_RCC_HWRSR_LPWRRSTF                           \ Illegal Stop or Standby flag.
-
-
-\
-\ @brief RCC reset register
-\ Address offset: 0x34
-\ Reset value: 0x00E00000
-\
-
-$00010000 constant RCC_RCC_RSR_RMVF                                 \ Remove reset flag
-$00020000 constant RCC_RCC_RSR_LCKRSTF                              \ CPU lockup reset flag.
-$00200000 constant RCC_RCC_RSR_BORRSTF                              \ BOR flag
-$00400000 constant RCC_RCC_RSR_PINRSTF                              \ Pin reset flag (NRST)
-$00800000 constant RCC_RCC_RSR_PORRSTF                              \ POR/PDR flag.
-$01000000 constant RCC_RCC_RSR_SFTRSTF                              \ Software System reset flag (1)
-$04000000 constant RCC_RCC_RSR_IWDGRSTF                             \ Independent Watchdog reset flag.
-$10000000 constant RCC_RCC_RSR_WWDGRSTF                             \ Window Watchdog reset flag
-$40000000 constant RCC_RCC_RSR_LPWRRSTF                             \ Illegal Stop or Standby flag.
-
-
-\
-\ @brief RCC LSE configuration register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000080 constant RCC_RCC_LSECFGR_LSECSSON                         \ LSE clock security system (CSS) enable
-$00000100 constant RCC_RCC_LSECFGR_LSECSSRA                         \ LSE clock security system (CSS) re-arm function
-$00000200 constant RCC_RCC_LSECFGR_LSECSSD                          \ LSE clock security system (CSS) failure detection
-$00008000 constant RCC_RCC_LSECFGR_LSEBYP                           \ LSE clock bypass
-$00010000 constant RCC_RCC_LSECFGR_LSEEXT                           \ LSE clock type in Bypass mode
-$00020000 constant RCC_RCC_LSECFGR_LSEGFON                          \ LSE clock glitch filter enable
-$000c0000 constant RCC_RCC_LSECFGR_LSEDRV                           \ LSE oscillator driving capability
-
-
-\
-\ @brief RCC MSI configuration register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000200 constant RCC_RCC_MSICFGR_MSIFREQSEL                       \ MSI oscillator frequency select
-$001f0000 constant RCC_RCC_MSICFGR_MSITRIM                          \ MSI clock trimming
-$7f800000 constant RCC_RCC_MSICFGR_MSICAL                           \ MSI clock calibration
-
-
-\
-\ @brief RCC HSI configuration register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000180 constant RCC_RCC_HSICFGR_HSIDIV                           \ HSI clock divider
-$007f0000 constant RCC_RCC_HSICFGR_HSITRIM                          \ HSI clock trimming
-$ff800000 constant RCC_RCC_HSICFGR_HSICAL                           \ HSI clock calibration
-
-
-\
-\ @brief RCC HSI monitor control register
-\ Address offset: 0x4C
-\ Reset value: 0x001F07A1
-\
-
-$000007ff constant RCC_RCC_HSIMCR_HSIREF                            \ HSI clock cycle counter reference value.
-$003f0000 constant RCC_RCC_HSIMCR_HSIDEV                            \ HSI clock count deviation value
-$80000000 constant RCC_RCC_HSIMCR_HSIMONEN                          \ HSI clock period monitor enable
-
-
-\
-\ @brief RCC HSI monitor status register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$000007ff constant RCC_RCC_HSIMSR_HSIVAL                            \ HSI clock cycle counter measured value.
-
-
-\
-\ @brief RCC HSE configuration register
-\ Address offset: 0x54
-\ Reset value: 0x00000800
-\
-
-$00000040 constant RCC_RCC_HSECFGR_HSEDIV2BYP                       \ HSE div2 oscillator clock in Bypass mode
-$00000080 constant RCC_RCC_HSECFGR_HSECSSON                         \ HSE clock security system (CSS) enable
-$00000100 constant RCC_RCC_HSECFGR_HSECSSRA                         \ HSE clock security system (CSS) re-arm function
-$00000200 constant RCC_RCC_HSECFGR_HSECSSD                          \ HSE clock security system (CSS) failure detection
-$00000400 constant RCC_RCC_HSECFGR_HSECSSBYP                        \ HSE clock security system (CSS) bypass enable
-$00007800 constant RCC_RCC_HSECFGR_HSECSSBPRE                       \ HSE clock security system (CSS) bypass divider
-$00008000 constant RCC_RCC_HSECFGR_HSEBYP                           \ HSE clock bypass
-$00010000 constant RCC_RCC_HSECFGR_HSEEXT                           \ HSE clock type in Bypass mode
-$00020000 constant RCC_RCC_HSECFGR_HSEGFON                          \ HSE clock glitch filter enable
-$000c0000 constant RCC_RCC_HSECFGR_HSEDRV                           \ HSE oscillator driving capability
-
-
-\
-\ @brief RCC PLL1 configuration register 1
-\ Address offset: 0x80
-\ Reset value: 0x08202500
-\
-
-$000fff00 constant RCC_RCC_PLL1CFGR1_PLL1DIVN                       \ PLL1 Integer part for the VCO multiplication factor
-$03f00000 constant RCC_RCC_PLL1CFGR1_PLL1DIVM                       \ PLL1 reference input clock divide frequency ratio
-$08000000 constant RCC_RCC_PLL1CFGR1_PLL1BYP                        \ PLL1 bypass
-$70000000 constant RCC_RCC_PLL1CFGR1_PLL1SEL                        \ PLL1 source selection of the reference clock
-
-
-\
-\ @brief RCC PLL1 configuration register 2
-\ Address offset: 0x84
-\ Reset value: 0x00800000
-\
-
-$00ffffff constant RCC_RCC_PLL1CFGR2_PLL1DIVNFRAC                   \ PLL1 Fractional part of the VCO multiplication factor
-
-
-\
-\ @brief RCC PLL1 configuration register 3
-\ Address offset: 0x88
-\ Reset value: 0x4900000D
-\
-
-$00000001 constant RCC_RCC_PLL1CFGR3_PLL1MODSSRST                   \ PLL1 Modulation Spread Spectrum reset
-$00000002 constant RCC_RCC_PLL1CFGR3_PLL1DACEN                      \ PLL1 noise canceling DAC enable in fractional mode.
-$00000004 constant RCC_RCC_PLL1CFGR3_PLL1MODSSDIS                   \ PLL1 Modulation Spread-Spectrum Disable
-$00000008 constant RCC_RCC_PLL1CFGR3_PLL1MODDSEN                    \ PLL1 Modulation Spread-Spectrum (and Fractional Divide) enable
-$00000010 constant RCC_RCC_PLL1CFGR3_PLL1MODSPRDW                   \ PLL1 Modulation Spread-Spectrum Down
-$00000f00 constant RCC_RCC_PLL1CFGR3_PLL1MODDIV                     \ PLL1 Modulation Division frequency adjustment
-$001f0000 constant RCC_RCC_PLL1CFGR3_PLL1MODSPR                     \ PLL1 Modulation Spread depth adjustment
-$07000000 constant RCC_RCC_PLL1CFGR3_PLL1PDIV2                      \ PLL1 VCO frequency divider level 2
-$38000000 constant RCC_RCC_PLL1CFGR3_PLL1PDIV1                      \ PLL1 VCO frequency divider level 1
-$40000000 constant RCC_RCC_PLL1CFGR3_PLL1PDIVEN                     \ PLL1 post divider POSTDIV1, POSTDIV2, and PLL clock output enable
-
-
-\
-\ @brief RCC PLL2 configuration register 1
-\ Address offset: 0x90
-\ Reset value: 0x08000000
-\
-
-$000fff00 constant RCC_RCC_PLL2CFGR1_PLL2DIVN                       \ PLL2 Integer part for the VCO multiplication factor
-$03f00000 constant RCC_RCC_PLL2CFGR1_PLL2DIVM                       \ PLL2 reference input clock divide frequency ratio
-$08000000 constant RCC_RCC_PLL2CFGR1_PLL2BYP                        \ PLL2 bypass
-$70000000 constant RCC_RCC_PLL2CFGR1_PLL2SEL                        \ PLL2 source selection of the reference clock
-
-
-\
-\ @brief RCC PLL2 configuration register 2
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00ffffff constant RCC_RCC_PLL2CFGR2_PLL2DIVNFRAC                   \ PLL2 Fractional part of the VCO multiplication factor
-
-
-\
-\ @brief RCC PLL2 configuration register 3
-\ Address offset: 0x98
-\ Reset value: 0x49000005
-\
-
-$00000001 constant RCC_RCC_PLL2CFGR3_PLL2MODSSRST                   \ PLL2 Modulation Spread Spectrum reset
-$00000002 constant RCC_RCC_PLL2CFGR3_PLL2DACEN                      \ PLL2 noise canceling DAC enable in fractional mode.
-$00000004 constant RCC_RCC_PLL2CFGR3_PLL2MODSSDIS                   \ PLL2 Modulation Spread-Spectrum Disable
-$00000008 constant RCC_RCC_PLL2CFGR3_PLL2MODDSEN                    \ PLL2 Modulation Spread-Spectrum (and Fractional Divide) enable
-$00000010 constant RCC_RCC_PLL2CFGR3_PLL2MODSPRDW                   \ PLL2 Modulation Down Spread
-$00000f00 constant RCC_RCC_PLL2CFGR3_PLL2MODDIV                     \ PLL2 Modulation Division frequency adjustment
-$001f0000 constant RCC_RCC_PLL2CFGR3_PLL2MODSPR                     \ PLL2 Modulation Spread depth adjustment
-$07000000 constant RCC_RCC_PLL2CFGR3_PLL2PDIV2                      \ PLL2 VCO frequency divider level 2
-$38000000 constant RCC_RCC_PLL2CFGR3_PLL2PDIV1                      \ PLL2 VCO frequency divider level 1
-$40000000 constant RCC_RCC_PLL2CFGR3_PLL2PDIVEN                     \ PLL2 post divider POSTDIV1, POSTDIV2, and PLL clock output enable
-
-
-\
-\ @brief RCC PLL3 configuration register 1
-\ Address offset: 0xA0
-\ Reset value: 0x08000000
-\
-
-$000fff00 constant RCC_RCC_PLL3CFGR1_PLL3DIVN                       \ PLL3 Integer part for the VCO multiplication factor
-$03f00000 constant RCC_RCC_PLL3CFGR1_PLL3DIVM                       \ PLL3 reference input clock divide frequency ratio
-$08000000 constant RCC_RCC_PLL3CFGR1_PLL3BYP                        \ PLL3 bypass
-$70000000 constant RCC_RCC_PLL3CFGR1_PLL3SEL                        \ PLL3 source selection of the reference clock
-
-
-\
-\ @brief RCC PLL3 configuration register 2
-\ Address offset: 0xA4
-\ Reset value: 0x00000000
-\
-
-$00ffffff constant RCC_RCC_PLL3CFGR2_PLL3DIVNFRAC                   \ PLL3 Fractional part of the VCO multiplication factor
-
-
-\
-\ @brief RCC PLL3 configuration register 3
-\ Address offset: 0xA8
-\ Reset value: 0x49000005
-\
-
-$00000001 constant RCC_RCC_PLL3CFGR3_PLL3MODSSRST                   \ PLL3 Modulation Spread Spectrum reset
-$00000002 constant RCC_RCC_PLL3CFGR3_PLL3DACEN                      \ PLL3 noise canceling DAC enable in fractional mode.
-$00000004 constant RCC_RCC_PLL3CFGR3_PLL3MODSSDIS                   \ PLL3 Modulation Spread-Spectrum Disable
-$00000008 constant RCC_RCC_PLL3CFGR3_PLL3MODDSEN                    \ PLL3 Modulation Spread-Spectrum (and Fractional Divide) enable
-$00000010 constant RCC_RCC_PLL3CFGR3_PLL3MODSPRDW                   \ PLL3 Modulation Down Spread
-$00000f00 constant RCC_RCC_PLL3CFGR3_PLL3MODDIV                     \ PLL3 Modulation Division frequency adjustment
-$001f0000 constant RCC_RCC_PLL3CFGR3_PLL3MODSPR                     \ PLL3 Modulation Spread depth adjustment
-$07000000 constant RCC_RCC_PLL3CFGR3_PLL3PDIV2                      \ PLL3 VCO frequency divider level 2
-$38000000 constant RCC_RCC_PLL3CFGR3_PLL3PDIV1                      \ PLL3 VCO frequency divider level 1
-$40000000 constant RCC_RCC_PLL3CFGR3_PLL3PDIVEN                     \ PLL3 post divider POSTDIV1, POSTDIV2, and PLL clock output enable
-
-
-\
-\ @brief RCC PLL4 configuration register 1
-\ Address offset: 0xB0
-\ Reset value: 0x08000000
-\
-
-$000fff00 constant RCC_RCC_PLL4CFGR1_PLL4DIVN                       \ PLL4 Integer part for the VCO multiplication factor
-$03f00000 constant RCC_RCC_PLL4CFGR1_PLL4DIVM                       \ PLL4 reference input clock divide frequency ratio
-$08000000 constant RCC_RCC_PLL4CFGR1_PLL4BYP                        \ PLL4 bypass
-$70000000 constant RCC_RCC_PLL4CFGR1_PLL4SEL                        \ PLL4 source selection of the reference clock
-
-
-\
-\ @brief RCC PLL4 configuration register 2
-\ Address offset: 0xB4
-\ Reset value: 0x00000000
-\
-
-$00ffffff constant RCC_RCC_PLL4CFGR2_PLL4DIVNFRAC                   \ PLL4 Fractional part of the VCO multiplication factor
-
-
-\
-\ @brief RCC PLL4 configuration register 3
-\ Address offset: 0xB8
-\ Reset value: 0x49000005
-\
-
-$00000001 constant RCC_RCC_PLL4CFGR3_PLL4MODSSRST                   \ PLL4 Modulation Spread Spectrum reset
-$00000002 constant RCC_RCC_PLL4CFGR3_PLL4DACEN                      \ PLL4 noise canceling DAC enable in fractional mode.
-$00000004 constant RCC_RCC_PLL4CFGR3_PLL4MODSSDIS                   \ PLL4 Modulation Spread-Spectrum Disable
-$00000008 constant RCC_RCC_PLL4CFGR3_PLL4MODDSEN                    \ PLL4 Modulation Spread-Spectrum (and Fractional Divide) enable
-$00000010 constant RCC_RCC_PLL4CFGR3_PLL4MODSPRDW                   \ PLL4 Modulation Down Spread
-$00000f00 constant RCC_RCC_PLL4CFGR3_PLL4MODDIV                     \ PLL4 Modulation Division frequency adjustment
-$001f0000 constant RCC_RCC_PLL4CFGR3_PLL4MODSPR                     \ PLL4 Modulation Spread depth adjustment
-$07000000 constant RCC_RCC_PLL4CFGR3_PLL4PDIV2                      \ PLL4 VCO frequency divider level 2
-$38000000 constant RCC_RCC_PLL4CFGR3_PLL4PDIV1                      \ PLL4 VCO frequency divider level 1
-$40000000 constant RCC_RCC_PLL4CFGR3_PLL4PDIVEN                     \ PLL4 post divider POSTDIV1, POSTDIV2, and PLL clock output enable
-
-
-\
-\ @brief RCC IC1 configuration register
-\ Address offset: 0xC4
-\ Reset value: 0x00020000
-\
-
-$00ff0000 constant RCC_RCC_IC1CFGR_IC1INT                           \ Divider IC1 integer division factor
-$30000000 constant RCC_RCC_IC1CFGR_IC1SEL                           \ Divider IC1 Source Selection
-
-
-\
-\ @brief RCC IC2 configuration register
-\ Address offset: 0xC8
-\ Reset value: 0x00030000
-\
-
-$00ff0000 constant RCC_RCC_IC2CFGR_IC2INT                           \ Divider IC2 integer division factor
-$30000000 constant RCC_RCC_IC2CFGR_IC2SEL                           \ Divider IC2 Source Selection
-
-
-\
-\ @brief RCC IC3 configuration register
-\ Address offset: 0xCC
-\ Reset value: 0x00000000
-\
-
-$00ff0000 constant RCC_RCC_IC3CFGR_IC3INT                           \ Divider IC3 integer division factor
-$30000000 constant RCC_RCC_IC3CFGR_IC3SEL                           \ Divider IC3 Source Selection
-
-
-\
-\ @brief RCC IC4 configuration register
-\ Address offset: 0xD0
-\ Reset value: 0x00000000
-\
-
-$00ff0000 constant RCC_RCC_IC4CFGR_IC4INT                           \ Divider IC4 integer division factor
-$30000000 constant RCC_RCC_IC4CFGR_IC4SEL                           \ Divider IC4 Source Selection
-
-
-\
-\ @brief RCC IC5 configuration register
-\ Address offset: 0xD4
-\ Reset value: 0x00000000
-\
-
-$00ff0000 constant RCC_RCC_IC5CFGR_IC5INT                           \ Divider IC5 integer division factor
-$30000000 constant RCC_RCC_IC5CFGR_IC5SEL                           \ Divider IC5 Source Selection
-
-
-\
-\ @brief RCC IC6 configuration register
-\ Address offset: 0xD8
-\ Reset value: 0x00030000
-\
-
-$00ff0000 constant RCC_RCC_IC6CFGR_IC6INT                           \ Divider IC6 integer division factor
-$30000000 constant RCC_RCC_IC6CFGR_IC6SEL                           \ Divider IC6 Source Selection
-
-
-\
-\ @brief RCC IC7 configuration register
-\ Address offset: 0xDC
-\ Reset value: 0x10000000
-\
-
-$00ff0000 constant RCC_RCC_IC7CFGR_IC7INT                           \ Divider IC7 integer division factor
-$30000000 constant RCC_RCC_IC7CFGR_IC7SEL                           \ Divider IC7 Source Selection
-
-
-\
-\ @brief RCC IC8 configuration register
-\ Address offset: 0xE0
-\ Reset value: 0x10000000
-\
-
-$00ff0000 constant RCC_RCC_IC8CFGR_IC8INT                           \ Divider IC8 integer division factor
-$30000000 constant RCC_RCC_IC8CFGR_IC8SEL                           \ Divider IC8 Source Selection
-
-
-\
-\ @brief RCC IC9 configuration register
-\ Address offset: 0xE4
-\ Reset value: 0x10000000
-\
-
-$00ff0000 constant RCC_RCC_IC9CFGR_IC9INT                           \ Divider IC9 integer division factor
-$30000000 constant RCC_RCC_IC9CFGR_IC9SEL                           \ Divider IC9 Source Selection
-
-
-\
-\ @brief RCC IC10 configuration register
-\ Address offset: 0xE8
-\ Reset value: 0x10000000
-\
-
-$00ff0000 constant RCC_RCC_IC10CFGR_IC10INT                         \ Divider IC10 integer division factor
-$30000000 constant RCC_RCC_IC10CFGR_IC10SEL                         \ Divider IC10 Source Selection
-
-
-\
-\ @brief RCC IC11 configuration register
-\ Address offset: 0xEC
-\ Reset value: 0x00030000
-\
-
-$00ff0000 constant RCC_RCC_IC11CFGR_IC11INT                         \ Divider IC11 integer division factor
-$30000000 constant RCC_RCC_IC11CFGR_IC11SEL                         \ Divider IC11 Source Selection
-
-
-\
-\ @brief RCC IC12 configuration register
-\ Address offset: 0xF0
-\ Reset value: 0x20000000
-\
-
-$00ff0000 constant RCC_RCC_IC12CFGR_IC12INT                         \ Divider IC12 integer division factor
-$30000000 constant RCC_RCC_IC12CFGR_IC12SEL                         \ Divider IC12 Source Selection
-
-
-\
-\ @brief RCC IC13 configuration register
-\ Address offset: 0xF4
-\ Reset value: 0x20000000
-\
-
-$00ff0000 constant RCC_RCC_IC13CFGR_IC13INT                         \ Divider IC13 integer division factor
-$30000000 constant RCC_RCC_IC13CFGR_IC13SEL                         \ Divider IC13 Source Selection
-
-
-\
-\ @brief RCC IC14 configuration register
-\ Address offset: 0xF8
-\ Reset value: 0x20000000
-\
-
-$00ff0000 constant RCC_RCC_IC14CFGR_IC14INT                         \ Divider IC14 integer division factor
-$30000000 constant RCC_RCC_IC14CFGR_IC14SEL                         \ Divider IC14 Source Selection
-
-
-\
-\ @brief RCC IC15 configuration register
-\ Address offset: 0xFC
-\ Reset value: 0x20000000
-\
-
-$00ff0000 constant RCC_RCC_IC15CFGR_IC15INT                         \ Divider IC15 integer division factor
-$30000000 constant RCC_RCC_IC15CFGR_IC15SEL                         \ Divider IC15 Source Selection
-
-
-\
-\ @brief RCC IC16 configuration register
-\ Address offset: 0x100
-\ Reset value: 0x30000000
-\
-
-$00ff0000 constant RCC_RCC_IC16CFGR_IC16INT                         \ Divider IC16 integer division factor
-$30000000 constant RCC_RCC_IC16CFGR_IC16SEL                         \ Divider IC16 Source Selection
-
-
-\
-\ @brief RCC IC17 configuration register
-\ Address offset: 0x104
-\ Reset value: 0x30000000
-\
-
-$00ff0000 constant RCC_RCC_IC17CFGR_IC17INT                         \ Divider IC17 integer division factor
-$30000000 constant RCC_RCC_IC17CFGR_IC17SEL                         \ Divider IC17 Source Selection
-
-
-\
-\ @brief RCC IC18 configuration register
-\ Address offset: 0x108
-\ Reset value: 0x30000000
-\
-
-$00ff0000 constant RCC_RCC_IC18CFGR_IC18INT                         \ Divider IC18 integer division factor
-$30000000 constant RCC_RCC_IC18CFGR_IC18SEL                         \ Divider IC18 Source Selection
-
-
-\
-\ @brief RCC IC19 configuration register
-\ Address offset: 0x10C
-\ Reset value: 0x30000000
-\
-
-$00ff0000 constant RCC_RCC_IC19CFGR_IC19INT                         \ Divider IC19 integer division factor
-$30000000 constant RCC_RCC_IC19CFGR_IC19SEL                         \ Divider IC19 Source Selection
-
-
-\
-\ @brief RCC IC20 configuration register
-\ Address offset: 0x110
-\ Reset value: 0x30000000
-\
-
-$00ff0000 constant RCC_RCC_IC20CFGR_IC20INT                         \ Divider IC20 integer division factor
-$30000000 constant RCC_RCC_IC20CFGR_IC20SEL                         \ Divider IC20 Source Selection
-
-
-\
-\ @brief RCC clock-source interrupt enable register
-\ Address offset: 0x124
-\ Reset value: 0x00020000
-\
-
-$00000001 constant RCC_RCC_CIER_LSIRDYIE                            \ LSI ready interrupt enable
-$00000002 constant RCC_RCC_CIER_LSERDYIE                            \ LSE ready interrupt enable
-$00000004 constant RCC_RCC_CIER_MSIRDYIE                            \ MSI ready interrupt enable
-$00000008 constant RCC_RCC_CIER_HSIRDYIE                            \ HSI ready interrupt enable
-$00000010 constant RCC_RCC_CIER_HSERDYIE                            \ HSE ready interrupt enable
-$00000100 constant RCC_RCC_CIER_PLL1RDYIE                           \ PLL1 ready interrupt enable
-$00000200 constant RCC_RCC_CIER_PLL2RDYIE                           \ PLL2 ready interrupt enable
-$00000400 constant RCC_RCC_CIER_PLL3RDYIE                           \ PLL3 ready interrupt enable
-$00000800 constant RCC_RCC_CIER_PLL4RDYIE                           \ PLL4 ready interrupt enable
-$00010000 constant RCC_RCC_CIER_LSECSSIE                            \ LSE clock security system (CSS) interrupt enable
-$00020000 constant RCC_RCC_CIER_HSECSSIE                            \ HSE clock security system (CSS) interrupt enable
-$01000000 constant RCC_RCC_CIER_WKUPIE                              \ CPU wakeup from Stop interrupt enable
-
-
-\
-\ @brief RCC clock-source interrupt flag register
-\ Address offset: 0x128
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_CIFR_LSIRDYF                             \ LSI ready interrupt flag
-$00000002 constant RCC_RCC_CIFR_LSERDYF                             \ LSE ready interrupt flag
-$00000004 constant RCC_RCC_CIFR_MSIRDYF                             \ MSI ready interrupt flag
-$00000008 constant RCC_RCC_CIFR_HSIRDYF                             \ HSI ready interrupt flag
-$00000010 constant RCC_RCC_CIFR_HSERDYF                             \ HSE ready interrupt flag
-$00000100 constant RCC_RCC_CIFR_PLL1RDYF                            \ PLL1 ready interrupt flag
-$00000200 constant RCC_RCC_CIFR_PLL2RDYF                            \ PLL2 ready interrupt flag
-$00000400 constant RCC_RCC_CIFR_PLL3RDYF                            \ PLL3 ready interrupt flag
-$00000800 constant RCC_RCC_CIFR_PLL4RDYF                            \ PLL4 ready interrupt flag
-$00010000 constant RCC_RCC_CIFR_LSECSSF                             \ LSE ready interrupt flag
-$00020000 constant RCC_RCC_CIFR_HSECSSF                             \ HSE ready interrupt flag
-$01000000 constant RCC_RCC_CIFR_WKUPF                               \ CPU wakeup from Stop interrupt flag
-
-
-\
-\ @brief RCC clock-source interrupt Clear register
-\ Address offset: 0x12C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_CICR_LSIRDYC                             \ LSI ready interrupt clear
-$00000002 constant RCC_RCC_CICR_LSERDYC                             \ LSE ready interrupt clear
-$00000004 constant RCC_RCC_CICR_MSIRDYC                             \ MSI ready interrupt clear
-$00000008 constant RCC_RCC_CICR_HSIRDYC                             \ HSI ready interrupt clear
-$00000010 constant RCC_RCC_CICR_HSERDYC                             \ HSE ready interrupt clear
-$00000100 constant RCC_RCC_CICR_PLL1RDYC                            \ PLL1 ready interrupt clear
-$00000200 constant RCC_RCC_CICR_PLL2RDYC                            \ PLL2 ready interrupt clear
-$00000400 constant RCC_RCC_CICR_PLL3RDYC                            \ PLL3 ready interrupt clear
-$00000800 constant RCC_RCC_CICR_PLL4RDYC                            \ PLL4 ready interrupt clear
-$00010000 constant RCC_RCC_CICR_LSECSSC                             \ LSE ready interrupt clear
-$00020000 constant RCC_RCC_CICR_HSECSSC                             \ HSE ready interrupt clear
-$01000000 constant RCC_RCC_CICR_WKUPFC                              \ CPU Wakeup ready interrupt clear
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register1
-\ Address offset: 0x144
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RCC_RCC_CCIPR1_ADF1SEL                           \ Source selection for the ADF1 kernel clock
-$00000070 constant RCC_RCC_CCIPR1_ADC12SEL                          \ Source selection for the ADC12 kernel clock
-$0000ff00 constant RCC_RCC_CCIPR1_ADCPRE                            \ ADC12 Prog clock divider selection (for clock ck_icn_p_adf1)
-$00300000 constant RCC_RCC_CCIPR1_DCMIPPSEL                         \ Source selection for the DCMIPP kernel clock
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register 2
-\ Address offset: 0x148
-\ Reset value: 0x00000000
-\
-
-$00000003 constant RCC_RCC_CCIPR2_ETH1PTPSEL                        \ Source selection for the ETH1 kernel clock
-$000000f0 constant RCC_RCC_CCIPR2_ETH1PTPDIV                        \ ETH1 Kernel clock divider selection (for clock ck_ker_eth1ptp)
-$00000100 constant RCC_RCC_CCIPR2_ETH1PWRDOWNACK                    \ Set and reset by software.
-$00003000 constant RCC_RCC_CCIPR2_ETH1CLKSEL                        \ Source selection for the ETH1 kernel clock
-$00070000 constant RCC_RCC_CCIPR2_ETH1SEL                           \ Set and reset by software
-$00100000 constant RCC_RCC_CCIPR2_ETH1REFCLKSEL                     \ Set and reset by software
-$01000000 constant RCC_RCC_CCIPR2_ETH1GTXCLKSEL                     \ Set and reset by software.
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register3
-\ Address offset: 0x14C
-\ Reset value: 0x00000001
-\
-
-$00000003 constant RCC_RCC_CCIPR3_FDCANSEL                          \ Source selection for the FDCAN kernel clock
-$00000030 constant RCC_RCC_CCIPR3_FMCSEL                            \ Source selection for the FMC kernel clock
-$00000100 constant RCC_RCC_CCIPR3_DFTSEL                            \ Source selection for the DFT kernel clock
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register4
-\ Address offset: 0x150
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RCC_RCC_CCIPR4_I2C1SEL                           \ Source selection for the I2C1 kernel clock
-$00000070 constant RCC_RCC_CCIPR4_I2C2SEL                           \ Source selection for the I2C2 kernel clock
-$00000700 constant RCC_RCC_CCIPR4_I2C3SEL                           \ Source selection for the I2C3 kernel clock
-$00007000 constant RCC_RCC_CCIPR4_I2C4SEL                           \ Source selection for the I2C4 kernel clock
-$00070000 constant RCC_RCC_CCIPR4_I3C1SEL                           \ Source selection for the I3C1 kernel clock
-$00700000 constant RCC_RCC_CCIPR4_I3C2SEL                           \ Source selection for the I3C2 kernel clock
-$03000000 constant RCC_RCC_CCIPR4_LTDCSEL                           \ Source selection for the LTDC kernel clock
-
-
-\
-\ @brief RCC lock configuration for independent peripheral register5
-\ Address offset: 0x154
-\ Reset value: 0x0000F0F0
-\
-
-$00000007 constant RCC_RCC_CCIPR5_MCO1SEL                           \ Source selection for the MCO1 kernel clock
-$000000f0 constant RCC_RCC_CCIPR5_MCO1PRE                           \ MCO1 Prog clock divider selection (for clock ck_icn_p_mce3)
-$00000700 constant RCC_RCC_CCIPR5_MCO2SEL                           \ Source selection for the MCO2 kernel clock
-$0000f000 constant RCC_RCC_CCIPR5_MCO2PRE                           \ MCO2 Prog clock divider selection (for clock ck_icn_p_mce4)
-$00070000 constant RCC_RCC_CCIPR5_MDF1SEL                           \ Source selection for the MDF1 kernel clock
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register6
-\ Address offset: 0x158
-\ Reset value: 0x00000000
-\
-
-$00000003 constant RCC_RCC_CCIPR6_XSPI1SEL                          \ Source selection for the XSPI1 kernel clock
-$00000030 constant RCC_RCC_CCIPR6_XSPI2SEL                          \ Source selection for the XSPI2 kernel clock
-$00000300 constant RCC_RCC_CCIPR6_XSPI3SEL                          \ Source selection for the XSPI3 kernel clock
-$00003000 constant RCC_RCC_CCIPR6_OTGPHY1SEL                        \ Source selection for the OTGPHY1 kernel clock
-$00010000 constant RCC_RCC_CCIPR6_OTGPHY1CKREFSEL                   \ Set and reset by software
-$00300000 constant RCC_RCC_CCIPR6_OTGPHY2SEL                        \ Source selection for the OTGPHY2 kernel clock
-$01000000 constant RCC_RCC_CCIPR6_OTGPHY2CKREFSEL                   \ Set and reset by software
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register7
-\ Address offset: 0x15C
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RCC_RCC_CCIPR7_PERSEL                            \ Source selection for the PER kernel clock
-$00000030 constant RCC_RCC_CCIPR7_PSSISEL                           \ Source selection for the PSSI kernel clock
-$00000300 constant RCC_RCC_CCIPR7_RTCSEL                            \ Source selection for the RTC kernel clock
-$0003f000 constant RCC_RCC_CCIPR7_RTCPRE                            \ RTC Prog clock divider selection (for clock ck_icn_p_risaf)
-$00700000 constant RCC_RCC_CCIPR7_SAI1SEL                           \ Source selection for the SAI1 kernel clock
-$07000000 constant RCC_RCC_CCIPR7_SAI2SEL                           \ Source selection for the SAI2 kernel clock
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register8
-\ Address offset: 0x160
-\ Reset value: 0x00000000
-\
-
-$00000003 constant RCC_RCC_CCIPR8_SDMMC1SEL                         \ Source selection for the SDMMC1 kernel clock
-$00000030 constant RCC_RCC_CCIPR8_SDMMC2SEL                         \ Source selection for the SDMMC2 kernel clock
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register9
-\ Address offset: 0x164
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RCC_RCC_CCIPR9_SPDIFRX1SEL                       \ Source selection for the SPDIFRX1 kernel clock
-$00000070 constant RCC_RCC_CCIPR9_SPI1SEL                           \ Source selection for the SPI1 kernel clock
-$00000700 constant RCC_RCC_CCIPR9_SPI2SEL                           \ Source selection for the SPI2 kernel clock
-$00007000 constant RCC_RCC_CCIPR9_SPI3SEL                           \ Source selection for the SPI3 kernel clock
-$00070000 constant RCC_RCC_CCIPR9_SPI4SEL                           \ Source selection for the SPI4 kernel clock
-$00700000 constant RCC_RCC_CCIPR9_SPI5SEL                           \ Source selection for the SPI5 kernel clock
-$07000000 constant RCC_RCC_CCIPR9_SPI6SEL                           \ Source selection for the SPI6 kernel clock
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register12
-\ Address offset: 0x170
-\ Reset value: 0x00000000
-\
-
-$00000700 constant RCC_RCC_CCIPR12_LPTIM1SEL                        \ Source selection for the LPTIM1 kernel clock
-$00007000 constant RCC_RCC_CCIPR12_LPTIM2SEL                        \ Source selection for the LPTIM2 kernel clock
-$00070000 constant RCC_RCC_CCIPR12_LPTIM3SEL                        \ Source selection for the LPTIM3 kernel clock
-$00700000 constant RCC_RCC_CCIPR12_LPTIM4SEL                        \ Source selection for the LPTIM4 kernel clock
-$07000000 constant RCC_RCC_CCIPR12_LPTIM5SEL                        \ Source selection for the LPTIM5 kernel clock
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register13
-\ Address offset: 0x174
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RCC_RCC_CCIPR13_USART1SEL                        \ Source selection for the USART1 kernel clock
-$00000070 constant RCC_RCC_CCIPR13_USART2SEL                        \ Source selection for the USART2 kernel clock
-$00000700 constant RCC_RCC_CCIPR13_USART3SEL                        \ Source selection for the USART3 kernel clock
-$00007000 constant RCC_RCC_CCIPR13_UART4SEL                         \ Source selection for the UART4 kernel clock
-$00070000 constant RCC_RCC_CCIPR13_UART5SEL                         \ Source selection for the UART5 kernel clock
-$00700000 constant RCC_RCC_CCIPR13_USART6SEL                        \ Source selection for the USART6 kernel clock
-$07000000 constant RCC_RCC_CCIPR13_UART7SEL                         \ Source selection for the UART7 kernel clock
-$70000000 constant RCC_RCC_CCIPR13_UART8SEL                         \ Source selection for the UART8 kernel clock
-
-
-\
-\ @brief RCC clock configuration for independent peripheral register14
-\ Address offset: 0x178
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RCC_RCC_CCIPR14_UART9SEL                         \ Source selection for the UART9 kernel clock
-$00000070 constant RCC_RCC_CCIPR14_USART10SEL                       \ Source selection for the USART10 kernel clock
-$00000700 constant RCC_RCC_CCIPR14_LPUART1SEL                       \ Source selection for the LPUART1 kernel clock
-
-
-\
-\ @brief RCC SoC buses reset register
-\ Address offset: 0x204
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_BUSRSTR_ACLKNRST                         \ ACLKN reset
-$00000004 constant RCC_RCC_BUSRSTR_AHBMRST                          \ AHBM reset
-$00000008 constant RCC_RCC_BUSRSTR_AHB1RST                          \ AHB1 reset
-$00000010 constant RCC_RCC_BUSRSTR_AHB2RST                          \ AHB2 reset
-$00000020 constant RCC_RCC_BUSRSTR_AHB3RST                          \ AHB3 reset
-$00000040 constant RCC_RCC_BUSRSTR_AHB4RST                          \ AHB4 reset
-$00000080 constant RCC_RCC_BUSRSTR_AHB5RST                          \ AHB5 reset
-$00000100 constant RCC_RCC_BUSRSTR_APB1RST                          \ APB1 reset
-$00000200 constant RCC_RCC_BUSRSTR_APB2RST                          \ APB2 reset
-$00000400 constant RCC_RCC_BUSRSTR_APB3RST                          \ APB3 reset
-$00000800 constant RCC_RCC_BUSRSTR_APB4RST                          \ APB4 reset
-$00001000 constant RCC_RCC_BUSRSTR_APB5RST                          \ APB5 reset
-$00002000 constant RCC_RCC_BUSRSTR_NOCRST                           \ NOC reset
-
-
-\
-\ @brief RCC miscellaneous configurations reset register
-\ Address offset: 0x208
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCRSTR_DBGRST                          \ DBG reset
-$00000010 constant RCC_RCC_MISCRSTR_XSPIPHY1RST                     \ XSPIPHY1 reset
-$00000020 constant RCC_RCC_MISCRSTR_XSPIPHY2RST                     \ XSPIPHY2 reset
-$00000080 constant RCC_RCC_MISCRSTR_SDMMC1DLLRST                    \ SDMMC1DLL reset
-$00000100 constant RCC_RCC_MISCRSTR_SDMMC2DLLRST                    \ SDMMC2DLL reset
-
-
-\
-\ @brief RCC memories reset register
-\ Address offset: 0x20C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MEMRSTR_AXISRAM3RST                      \ AXISRAM3 reset
-$00000002 constant RCC_RCC_MEMRSTR_AXISRAM4RST                      \ AXISRAM4reset
-$00000004 constant RCC_RCC_MEMRSTR_AXISRAM5RST                      \ AXISRAM5 reset
-$00000008 constant RCC_RCC_MEMRSTR_AXISRAM6RST                      \ AXISRAM6 reset
-$00000010 constant RCC_RCC_MEMRSTR_AHBSRAM1RST                      \ AHBSRAM1 reset
-$00000020 constant RCC_RCC_MEMRSTR_AHBSRAM2RST                      \ AHBSRAM2 reset
-$00000080 constant RCC_RCC_MEMRSTR_AXISRAM1RST                      \ AXISRAM1 reset
-$00000100 constant RCC_RCC_MEMRSTR_AXISRAM2RST                      \ AXISRAM2 reset
-$00000200 constant RCC_RCC_MEMRSTR_FLEXRAMRST                       \ FLEXRAM reset
-$00000400 constant RCC_RCC_MEMRSTR_NPUCACHERAMRST                   \ NPUCACHERAM reset
-$00000800 constant RCC_RCC_MEMRSTR_VENCRAMRST                       \ VENCRAM reset
-$00001000 constant RCC_RCC_MEMRSTR_BOOTROMRST                       \ BOOTROM reset
-
-
-\
-\ @brief RCC AHB1 Reset register
-\ Address offset: 0x210
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1RSTR_GPDMA1RST                       \ GPDMA1 reset
-$00000020 constant RCC_RCC_AHB1RSTR_ADC12RST                        \ ADC12 reset
-
-
-\
-\ @brief RCC AHB2 reset register
-\ Address offset: 0x214
-\ Reset value: 0x00000000
-\
-
-$00001000 constant RCC_RCC_AHB2RSTR_RAMCFGRST                       \ RAMCFG reset
-$00010000 constant RCC_RCC_AHB2RSTR_MDF1RST                         \ MDF1 reset
-$00020000 constant RCC_RCC_AHB2RSTR_ADF1RST                         \ ADF1 reset
-
-
-\
-\ @brief RCC AHB3 reset register
-\ Address offset: 0x218
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB3RSTR_RNGRST                          \ RNG reset
-$00000002 constant RCC_RCC_AHB3RSTR_HASHRST                         \ HASH reset
-$00000004 constant RCC_RCC_AHB3RSTR_CRYPRST                         \ CRYP reset
-$00000010 constant RCC_RCC_AHB3RSTR_SAESRST                         \ SAES reset
-$00000100 constant RCC_RCC_AHB3RSTR_PKARST                          \ PKA reset
-$00000400 constant RCC_RCC_AHB3RSTR_IACRST                          \ IAC reset
-
-
-\
-\ @brief RCC AHB4 reset register
-\ Address offset: 0x21C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB4RSTR_GPIOARST                        \ GPIOA reset
-$00000002 constant RCC_RCC_AHB4RSTR_GPIOBRST                        \ GPIOB reset
-$00000004 constant RCC_RCC_AHB4RSTR_GPIOCRST                        \ GPIOC reset
-$00000008 constant RCC_RCC_AHB4RSTR_GPIODRST                        \ GPIOD reset
-$00000010 constant RCC_RCC_AHB4RSTR_GPIOERST                        \ GPIOE reset
-$00000020 constant RCC_RCC_AHB4RSTR_GPIOFRST                        \ GPIOF reset
-$00000040 constant RCC_RCC_AHB4RSTR_GPIOGRST                        \ GPIOG reset
-$00000080 constant RCC_RCC_AHB4RSTR_GPIOHRST                        \ GPIOH reset
-$00002000 constant RCC_RCC_AHB4RSTR_GPIONRST                        \ GPION reset
-$00004000 constant RCC_RCC_AHB4RSTR_GPIOORST                        \ GPIOO reset
-$00008000 constant RCC_RCC_AHB4RSTR_GPIOPRST                        \ GPIOP reset
-$00010000 constant RCC_RCC_AHB4RSTR_GPIOQRST                        \ GPIOQ reset
-$00040000 constant RCC_RCC_AHB4RSTR_PWRRST                          \ PWR reset
-$00080000 constant RCC_RCC_AHB4RSTR_CRCRST                          \ CRC reset
-
-
-\
-\ @brief RCC AHB5 reset register
-\ Address offset: 0x220
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5RSTR_HPDMA1RST                       \ HPDMA1 reset
-$00000002 constant RCC_RCC_AHB5RSTR_DMA2DRST                        \ DMA2D reset
-$00000008 constant RCC_RCC_AHB5RSTR_JPEGRST                         \ JPEG reset
-$00000010 constant RCC_RCC_AHB5RSTR_FMCRST                          \ FMC reset
-$00000020 constant RCC_RCC_AHB5RSTR_XSPI1RST                        \ XSPI1 reset
-$00000040 constant RCC_RCC_AHB5RSTR_PSSIRST                         \ PSSI reset
-$00000080 constant RCC_RCC_AHB5RSTR_SDMMC2RST                       \ SDMMC2 reset
-$00000100 constant RCC_RCC_AHB5RSTR_SDMMC1RST                       \ SDMMC1 reset
-$00001000 constant RCC_RCC_AHB5RSTR_XSPI2RST                        \ XSPI2 reset
-$00002000 constant RCC_RCC_AHB5RSTR_XSPIMRST                        \ XSPIM reset
-$00020000 constant RCC_RCC_AHB5RSTR_XSPI3RST                        \ XSPI3 reset
-$00040000 constant RCC_RCC_AHB5RSTR_MCE4RST                         \ MCE4 reset
-$00080000 constant RCC_RCC_AHB5RSTR_GFXMMURST                       \ GFXMMU reset
-$00100000 constant RCC_RCC_AHB5RSTR_GPURST                          \ GPU reset
-$00800000 constant RCC_RCC_AHB5RSTR_SYSCFGOTGHSPHY1RST              \ SYSCFGOTGHSPHY1 reset
-$01000000 constant RCC_RCC_AHB5RSTR_SYSCFGOTGHSPHY2RST              \ SYSCFGOTGHSPHY2 reset
-$02000000 constant RCC_RCC_AHB5RSTR_ETH1RST                         \ ETH1 reset
-$04000000 constant RCC_RCC_AHB5RSTR_OTG1RST                         \ OTG1 reset
-$08000000 constant RCC_RCC_AHB5RSTR_OTGPHY1RST                      \ OTGPHY1 reset
-$10000000 constant RCC_RCC_AHB5RSTR_OTGPHY2RST                      \ OTGPHY2 reset
-$20000000 constant RCC_RCC_AHB5RSTR_OTG2RST                         \ OTG2 reset
-$40000000 constant RCC_RCC_AHB5RSTR_NPUCACHERST                     \ NPUCACHE reset
-$80000000 constant RCC_RCC_AHB5RSTR_NPURST                          \ NPU reset
-
-
-\
-\ @brief RCC APB1L reset register
-\ Address offset: 0x224
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LRSTR_TIM2RST                        \ TIM2 reset
-$00000002 constant RCC_RCC_APB1LRSTR_TIM3RST                        \ TIM3 reset
-$00000004 constant RCC_RCC_APB1LRSTR_TIM4RST                        \ TIM4 reset
-$00000008 constant RCC_RCC_APB1LRSTR_TIM5RST                        \ TIM5 reset
-$00000010 constant RCC_RCC_APB1LRSTR_TIM6RST                        \ TIM6 reset
-$00000020 constant RCC_RCC_APB1LRSTR_TIM7RST                        \ TIM7 reset
-$00000040 constant RCC_RCC_APB1LRSTR_TIM12RST                       \ TIM12 reset
-$00000080 constant RCC_RCC_APB1LRSTR_TIM13RST                       \ TIM13 reset
-$00000100 constant RCC_RCC_APB1LRSTR_TIM14RST                       \ TIM14 reset
-$00000200 constant RCC_RCC_APB1LRSTR_LPTIM1RST                      \ LPTIM1 reset
-$00000800 constant RCC_RCC_APB1LRSTR_WWDGRST                        \ WWDG reset
-$00001000 constant RCC_RCC_APB1LRSTR_TIM10RST                       \ TIM10 reset
-$00002000 constant RCC_RCC_APB1LRSTR_TIM11RST                       \ TIM11 reset
-$00004000 constant RCC_RCC_APB1LRSTR_SPI2RST                        \ SPI2 reset
-$00008000 constant RCC_RCC_APB1LRSTR_SPI3RST                        \ SPI3 reset
-$00010000 constant RCC_RCC_APB1LRSTR_SPDIFRX1RST                    \ SPDIFRX1 reset
-$00020000 constant RCC_RCC_APB1LRSTR_USART2RST                      \ USART2 reset
-$00040000 constant RCC_RCC_APB1LRSTR_USART3RST                      \ USART3 reset
-$00080000 constant RCC_RCC_APB1LRSTR_UART4RST                       \ UART4 reset
-$00100000 constant RCC_RCC_APB1LRSTR_UART5RST                       \ UART5 reset
-$00200000 constant RCC_RCC_APB1LRSTR_I2C1RST                        \ I2C1 reset
-$00400000 constant RCC_RCC_APB1LRSTR_I2C2RST                        \ I2C2 reset
-$00800000 constant RCC_RCC_APB1LRSTR_I2C3RST                        \ I2C3 reset
-$01000000 constant RCC_RCC_APB1LRSTR_I3C1RST                        \ I3C1 reset
-$02000000 constant RCC_RCC_APB1LRSTR_I3C2RST                        \ I3C2 reset
-$40000000 constant RCC_RCC_APB1LRSTR_UART7RST                       \ UART7 reset
-$80000000 constant RCC_RCC_APB1LRSTR_UART8RST                       \ UART8 reset
-
-
-\
-\ @brief RCC APB1H reset register
-\ Address offset: 0x228
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HRSTR_MDIOSRST                       \ MDIOS reset
-$00000100 constant RCC_RCC_APB1HRSTR_FDCANRST                       \ FDCAN reset
-$00040000 constant RCC_RCC_APB1HRSTR_UCPD1RST                       \ UCPD1 reset
-
-
-\
-\ @brief RCC APB2 reset register
-\ Address offset: 0x22C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2RSTR_TIM1RST                         \ TIM1 reset
-$00000002 constant RCC_RCC_APB2RSTR_TIM8RST                         \ TIM8 reset
-$00000010 constant RCC_RCC_APB2RSTR_USART1RST                       \ USART1 reset
-$00000020 constant RCC_RCC_APB2RSTR_USART6RST                       \ USART6 reset
-$00000040 constant RCC_RCC_APB2RSTR_UART9RST                        \ UART9 reset
-$00000080 constant RCC_RCC_APB2RSTR_USART10RST                      \ USART10 reset
-$00001000 constant RCC_RCC_APB2RSTR_SPI1RST                         \ SPI1 reset
-$00002000 constant RCC_RCC_APB2RSTR_SPI4RST                         \ SPI4 reset
-$00008000 constant RCC_RCC_APB2RSTR_TIM18RST                        \ TIM18 reset
-$00010000 constant RCC_RCC_APB2RSTR_TIM15RST                        \ TIM15 reset
-$00020000 constant RCC_RCC_APB2RSTR_TIM16RST                        \ TIM16 reset
-$00040000 constant RCC_RCC_APB2RSTR_TIM17RST                        \ TIM17 reset
-$00080000 constant RCC_RCC_APB2RSTR_TIM9RST                         \ TIM9 reset
-$00100000 constant RCC_RCC_APB2RSTR_SPI5RST                         \ SPI5 reset
-$00200000 constant RCC_RCC_APB2RSTR_SAI1RST                         \ SAI1 reset
-$00400000 constant RCC_RCC_APB2RSTR_SAI2RST                         \ SAI2 reset
-
-
-\
-\ @brief RCC APB4L reset register
-\ Address offset: 0x234
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LRSTR_HDPRST                         \ HDP reset
-$00000008 constant RCC_RCC_APB4LRSTR_LPUART1RST                     \ LPUART1 reset
-$00000020 constant RCC_RCC_APB4LRSTR_SPI6RST                        \ SPI6 reset
-$00000080 constant RCC_RCC_APB4LRSTR_I2C4RST                        \ I2C4 reset
-$00000200 constant RCC_RCC_APB4LRSTR_LPTIM2RST                      \ LPTIM2 reset
-$00000400 constant RCC_RCC_APB4LRSTR_LPTIM3RST                      \ LPTIM3 reset
-$00000800 constant RCC_RCC_APB4LRSTR_LPTIM4RST                      \ LPTIM4 reset
-$00001000 constant RCC_RCC_APB4LRSTR_LPTIM5RST                      \ LPTIM5 reset
-$00008000 constant RCC_RCC_APB4LRSTR_VREFBUFRST                     \ VREFBUF reset
-$00010000 constant RCC_RCC_APB4LRSTR_RTCRST                         \ RTC reset
-$00400000 constant RCC_RCC_APB4LRSTR_R2GRETRST                      \ R2GRET reset
-$00800000 constant RCC_RCC_APB4LRSTR_R2GNPURST                      \ R2GNPU reset
-$80000000 constant RCC_RCC_APB4LRSTR_SERFRST                        \ SERF reset
-
-
-\
-\ @brief RCC APB4H reset register
-\ Address offset: 0x238
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB4HRSTR_SYSCFGRST                      \ SYSCFG reset
-$00000004 constant RCC_RCC_APB4HRSTR_DTSRST                         \ DTS reset
-$00000010 constant RCC_RCC_APB4HRSTR_BUSPERFMRST                    \ BUSPERFM reset
-
-
-\
-\ @brief RCC APB5 reset register
-\ Address offset: 0x23C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5RSTR_LTDCRST                         \ LTDC reset
-$00000004 constant RCC_RCC_APB5RSTR_DCMIPPRST                       \ DCMIPP reset
-$00000010 constant RCC_RCC_APB5RSTR_GFXTIMRST                       \ GFXTIM reset
-$00000020 constant RCC_RCC_APB5RSTR_VENCRST                         \ VENC reset
-$00000040 constant RCC_RCC_APB5RSTR_CSIRST                          \ CSI reset
-
-
-\
-\ @brief RCC IC dividers enable register
-\ Address offset: 0x240
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_DIVENR_IC1EN                             \ IC1 enable
-$00000002 constant RCC_RCC_DIVENR_IC2EN                             \ IC2 enable
-$00000004 constant RCC_RCC_DIVENR_IC3EN                             \ IC3 enable
-$00000008 constant RCC_RCC_DIVENR_IC4EN                             \ IC4 enable
-$00000010 constant RCC_RCC_DIVENR_IC5EN                             \ IC5 enable
-$00000020 constant RCC_RCC_DIVENR_IC6EN                             \ IC6 enable
-$00000040 constant RCC_RCC_DIVENR_IC7EN                             \ IC7 enable
-$00000080 constant RCC_RCC_DIVENR_IC8EN                             \ IC8 enable
-$00000100 constant RCC_RCC_DIVENR_IC9EN                             \ IC9 enable
-$00000200 constant RCC_RCC_DIVENR_IC10EN                            \ IC10 enable
-$00000400 constant RCC_RCC_DIVENR_IC11EN                            \ IC11 enable
-$00000800 constant RCC_RCC_DIVENR_IC12EN                            \ IC12 enable
-$00001000 constant RCC_RCC_DIVENR_IC13EN                            \ IC13 enable
-$00002000 constant RCC_RCC_DIVENR_IC14EN                            \ IC14 enable
-$00004000 constant RCC_RCC_DIVENR_IC15EN                            \ IC15 enable
-$00008000 constant RCC_RCC_DIVENR_IC16EN                            \ IC16 enable
-$00010000 constant RCC_RCC_DIVENR_IC17EN                            \ IC17 enable
-$00020000 constant RCC_RCC_DIVENR_IC18EN                            \ IC18 enable
-$00040000 constant RCC_RCC_DIVENR_IC19EN                            \ IC19 enable
-$00080000 constant RCC_RCC_DIVENR_IC20EN                            \ IC20 enable
-
-
-\
-\ @brief RCC SoC buses enable register
-\ Address offset: 0x244
-\ Reset value: 0x00000003
-\
-
-$00000001 constant RCC_RCC_BUSENR_ACLKNEN                           \ ACLKN enable
-$00000002 constant RCC_RCC_BUSENR_ACLKNCEN                          \ ACLKNC enable
-$00000004 constant RCC_RCC_BUSENR_AHBMEN                            \ AHBM enable
-$00000008 constant RCC_RCC_BUSENR_AHB1EN                            \ AHB1 enable
-$00000010 constant RCC_RCC_BUSENR_AHB2EN                            \ AHB2 enable
-$00000020 constant RCC_RCC_BUSENR_AHB3EN                            \ AHB3 enable
-$00000040 constant RCC_RCC_BUSENR_AHB4EN                            \ AHB4 enable
-$00000080 constant RCC_RCC_BUSENR_AHB5EN                            \ AHB5 enable
-$00000100 constant RCC_RCC_BUSENR_APB1EN                            \ APB1 enable
-$00000200 constant RCC_RCC_BUSENR_APB2EN                            \ APB2 enable
-$00000400 constant RCC_RCC_BUSENR_APB3EN                            \ APB3 enable
-$00000800 constant RCC_RCC_BUSENR_APB4EN                            \ APB4 enable
-$00001000 constant RCC_RCC_BUSENR_APB5EN                            \ APB5 enable
-
-
-\
-\ @brief RCC miscellaneous configuration enable register
-\ Address offset: 0x248
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCENR_DBGEN                            \ DBG enable
-$00000002 constant RCC_RCC_MISCENR_MCO1EN                           \ MCO1 enable
-$00000004 constant RCC_RCC_MISCENR_MCO2EN                           \ MCO2 enable
-$00000008 constant RCC_RCC_MISCENR_XSPIPHYCOMPEN                    \ XSPIPHYCOMP enable
-$00000040 constant RCC_RCC_MISCENR_PEREN                            \ PER enable
-
-
-\
-\ @brief RCC memory enable register
-\ Address offset: 0x24C
-\ Reset value: 0x000013FF
-\
-
-$00000001 constant RCC_RCC_MEMENR_AXISRAM3EN                        \ AXISRAM3 enable
-$00000002 constant RCC_RCC_MEMENR_AXISRAM4EN                        \ AXISRAM4 enable
-$00000004 constant RCC_RCC_MEMENR_AXISRAM5EN                        \ AXISRAM5 enable
-$00000008 constant RCC_RCC_MEMENR_AXISRAM6EN                        \ AXISRAM6 enable
-$00000010 constant RCC_RCC_MEMENR_AHBSRAM1EN                        \ AHBSRAM1 enable
-$00000020 constant RCC_RCC_MEMENR_AHBSRAM2EN                        \ AHBSRAM2 enable
-$00000040 constant RCC_RCC_MEMENR_BKPSRAMEN                         \ BKPSRAM enable
-$00000080 constant RCC_RCC_MEMENR_AXISRAM1EN                        \ AXISRAM1 enable
-$00000100 constant RCC_RCC_MEMENR_AXISRAM2EN                        \ AXISRAM2 enable
-$00000200 constant RCC_RCC_MEMENR_FLEXRAMEN                         \ FLEXRAM enable
-$00000400 constant RCC_RCC_MEMENR_NPUCACHERAMEN                     \ NPUCACHERAM enable
-$00000800 constant RCC_RCC_MEMENR_VENCRAMEN                         \ VENCRAM enable
-$00001000 constant RCC_RCC_MEMENR_BOOTROMEN                         \ BOOTROM enable
-
-
-\
-\ @brief RCC AHB1 enable register
-\ Address offset: 0x250
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1ENR_GPDMA1EN                         \ GPDMA1 enable
-$00000020 constant RCC_RCC_AHB1ENR_ADC12EN                          \ ADC12 enable
-
-
-\
-\ @brief RCC AHB2 enable register
-\ Address offset: 0x254
-\ Reset value: 0x00001000
-\
-
-$00001000 constant RCC_RCC_AHB2ENR_RAMCFGEN                         \ RAMCFG enable
-$00010000 constant RCC_RCC_AHB2ENR_MDF1EN                           \ MDF1 enable
-$00020000 constant RCC_RCC_AHB2ENR_ADF1EN                           \ ADF enable
-
-
-\
-\ @brief RCC AHB3 enable register
-\ Address offset: 0x258
-\ Reset value: 0x00004600
-\
-
-$00000001 constant RCC_RCC_AHB3ENR_RNGEN                            \ RNG enable
-$00000002 constant RCC_RCC_AHB3ENR_HASHEN                           \ HASH enable
-$00000004 constant RCC_RCC_AHB3ENR_CRYPEN                           \ CRYP enable
-$00000010 constant RCC_RCC_AHB3ENR_SAESEN                           \ SAES enable
-$00000100 constant RCC_RCC_AHB3ENR_PKAEN                            \ PKA enable
-$00000200 constant RCC_RCC_AHB3ENR_RIFSCEN                          \ RIFSC enable
-$00000400 constant RCC_RCC_AHB3ENR_IACEN                            \ IAC enable
-$00004000 constant RCC_RCC_AHB3ENR_RISAFEN                          \ RISAF enable
-
-
-\
-\ @brief RCC AHB4 enable register
-\ Address offset: 0x25C
-\ Reset value: 0x00040000
-\
-
-$00000001 constant RCC_RCC_AHB4ENR_GPIOAEN                          \ GPIOA enable
-$00000002 constant RCC_RCC_AHB4ENR_GPIOBEN                          \ GPIOB enable
-$00000004 constant RCC_RCC_AHB4ENR_GPIOCEN                          \ GPIOC enable
-$00000008 constant RCC_RCC_AHB4ENR_GPIODEN                          \ GPIOD enable
-$00000010 constant RCC_RCC_AHB4ENR_GPIOEEN                          \ GPIOE enable
-$00000020 constant RCC_RCC_AHB4ENR_GPIOFEN                          \ GPIOF enable
-$00000040 constant RCC_RCC_AHB4ENR_GPIOGEN                          \ GPIOG enable
-$00000080 constant RCC_RCC_AHB4ENR_GPIOHEN                          \ GPIOH enable
-$00002000 constant RCC_RCC_AHB4ENR_GPIONEN                          \ GPION enable
-$00004000 constant RCC_RCC_AHB4ENR_GPIOOEN                          \ GPIOO enable
-$00008000 constant RCC_RCC_AHB4ENR_GPIOPEN                          \ GPIOP enable
-$00010000 constant RCC_RCC_AHB4ENR_GPIOQEN                          \ GPIOQ enable
-$00040000 constant RCC_RCC_AHB4ENR_PWREN                            \ PWR enable
-$00080000 constant RCC_RCC_AHB4ENR_CRCEN                            \ CRC enable
-
-
-\
-\ @brief RCC AHB5 enable register
-\ Address offset: 0x260
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5ENR_HPDMA1EN                         \ HPDMA1 enable
-$00000002 constant RCC_RCC_AHB5ENR_DMA2DEN                          \ DMA2D enable
-$00000008 constant RCC_RCC_AHB5ENR_JPEGEN                           \ JPEG enable
-$00000010 constant RCC_RCC_AHB5ENR_FMCEN                            \ FMC enable
-$00000020 constant RCC_RCC_AHB5ENR_XSPI1EN                          \ XSPI1 enable
-$00000040 constant RCC_RCC_AHB5ENR_PSSIEN                           \ PSSI enable
-$00000080 constant RCC_RCC_AHB5ENR_SDMMC2EN                         \ SDMMC2 enable
-$00000100 constant RCC_RCC_AHB5ENR_SDMMC1EN                         \ SDMMC1 enable
-$00001000 constant RCC_RCC_AHB5ENR_XSPI2EN                          \ XSPI2 enable
-$00002000 constant RCC_RCC_AHB5ENR_XSPIMEN                          \ XSPIM enable
-$00004000 constant RCC_RCC_AHB5ENR_MCE1EN                           \ MCE1 enable
-$00008000 constant RCC_RCC_AHB5ENR_MCE2EN                           \ MCE2 enable
-$00010000 constant RCC_RCC_AHB5ENR_MCE3EN                           \ MCE3 enable
-$00020000 constant RCC_RCC_AHB5ENR_XSPI3EN                          \ XSPI3 enable
-$00040000 constant RCC_RCC_AHB5ENR_MCE4EN                           \ MCE4 enable
-$00080000 constant RCC_RCC_AHB5ENR_GFXMMUEN                         \ GFXMMU enable
-$00100000 constant RCC_RCC_AHB5ENR_GPUEN                            \ GPU enable
-$00400000 constant RCC_RCC_AHB5ENR_ETH1MACEN                        \ ETH1MAC enable
-$00800000 constant RCC_RCC_AHB5ENR_ETH1TXEN                         \ ETH1TX enable
-$01000000 constant RCC_RCC_AHB5ENR_ETH1RXEN                         \ ETH1RX enable
-$02000000 constant RCC_RCC_AHB5ENR_ETH1EN                           \ ETH1 enable
-$04000000 constant RCC_RCC_AHB5ENR_OTG1EN                           \ OTG1 enable
-$08000000 constant RCC_RCC_AHB5ENR_OTGPHY1EN                        \ OTGPHY1 enable
-$10000000 constant RCC_RCC_AHB5ENR_OTGPHY2EN                        \ OTGPHY2 enable
-$20000000 constant RCC_RCC_AHB5ENR_OTG2EN                           \ OTG2 enable
-$40000000 constant RCC_RCC_AHB5ENR_NPUCACHEEN                       \ NPUCACHE enable
-$80000000 constant RCC_RCC_AHB5ENR_NPUEN                            \ NPU enable
-
-
-\
-\ @brief RCC APB1L enable register
-\ Address offset: 0x264
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LENR_TIM2EN                          \ TIM2 enable
-$00000002 constant RCC_RCC_APB1LENR_TIM3EN                          \ TIM3 enable
-$00000004 constant RCC_RCC_APB1LENR_TIM4EN                          \ TIM4 enable
-$00000008 constant RCC_RCC_APB1LENR_TIM5EN                          \ TIM5 enable
-$00000010 constant RCC_RCC_APB1LENR_TIM6EN                          \ TIM6 enable
-$00000020 constant RCC_RCC_APB1LENR_TIM7EN                          \ TIM7 enable
-$00000040 constant RCC_RCC_APB1LENR_TIM12EN                         \ TIM12 enable
-$00000080 constant RCC_RCC_APB1LENR_TIM13EN                         \ TIM13 enable
-$00000100 constant RCC_RCC_APB1LENR_TIM14EN                         \ TIM14 enable
-$00000200 constant RCC_RCC_APB1LENR_LPTIM1EN                        \ LPTIM1 enable
-$00000800 constant RCC_RCC_APB1LENR_WWDGEN                          \ WWDG enable
-$00001000 constant RCC_RCC_APB1LENR_TIM10EN                         \ TIM10 enable
-$00002000 constant RCC_RCC_APB1LENR_TIM11EN                         \ TIM11 enable
-$00004000 constant RCC_RCC_APB1LENR_SPI2EN                          \ SPI2 enable
-$00008000 constant RCC_RCC_APB1LENR_SPI3EN                          \ SPI3 enable
-$00010000 constant RCC_RCC_APB1LENR_SPDIFRX1EN                      \ SPDIFRX1 enable
-$00020000 constant RCC_RCC_APB1LENR_USART2EN                        \ USART2 enable
-$00040000 constant RCC_RCC_APB1LENR_USART3EN                        \ USART3 enable
-$00080000 constant RCC_RCC_APB1LENR_UART4EN                         \ UART4 enable
-$00100000 constant RCC_RCC_APB1LENR_UART5EN                         \ UART5 enable
-$00200000 constant RCC_RCC_APB1LENR_I2C1EN                          \ I2C1 enable
-$00400000 constant RCC_RCC_APB1LENR_I2C2EN                          \ I2C2 enable
-$00800000 constant RCC_RCC_APB1LENR_I2C3EN                          \ I2C3 enable
-$01000000 constant RCC_RCC_APB1LENR_I3C1EN                          \ I3C1 enable
-$02000000 constant RCC_RCC_APB1LENR_I3C2EN                          \ I3C2 enable
-$40000000 constant RCC_RCC_APB1LENR_UART7EN                         \ UART7 enable
-$80000000 constant RCC_RCC_APB1LENR_UART8EN                         \ UART8 enable
-
-
-\
-\ @brief RCC APB1H enable register
-\ Address offset: 0x268
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HENR_MDIOSEN                         \ MDIOS enable
-$00000100 constant RCC_RCC_APB1HENR_FDCANEN                         \ FDCAN enable
-$00040000 constant RCC_RCC_APB1HENR_UCPD1EN                         \ UCPD1 enable
-
-
-\
-\ @brief RCC APB2 enable register
-\ Address offset: 0x26C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2ENR_TIM1EN                           \ TIM1 enable
-$00000002 constant RCC_RCC_APB2ENR_TIM8EN                           \ TIM8 enable
-$00000010 constant RCC_RCC_APB2ENR_USART1EN                         \ USART1 enable
-$00000020 constant RCC_RCC_APB2ENR_USART6EN                         \ USART6 enable
-$00000040 constant RCC_RCC_APB2ENR_UART9EN                          \ UART9 enable
-$00000080 constant RCC_RCC_APB2ENR_USART10EN                        \ USART10 enable
-$00001000 constant RCC_RCC_APB2ENR_SPI1EN                           \ SPI1 enable
-$00002000 constant RCC_RCC_APB2ENR_SPI4EN                           \ SPI4 enable
-$00008000 constant RCC_RCC_APB2ENR_TIM18EN                          \ TIM18 enable
-$00010000 constant RCC_RCC_APB2ENR_TIM15EN                          \ TIM15 enable
-$00020000 constant RCC_RCC_APB2ENR_TIM16EN                          \ TIM16 enable
-$00040000 constant RCC_RCC_APB2ENR_TIM17EN                          \ TIM17 enable
-$00080000 constant RCC_RCC_APB2ENR_TIM9EN                           \ TIM9 enable
-$00100000 constant RCC_RCC_APB2ENR_SPI5EN                           \ SPI5 enable
-$00200000 constant RCC_RCC_APB2ENR_SAI1EN                           \ SAI1 enable
-$00400000 constant RCC_RCC_APB2ENR_SAI2EN                           \ SAI2 enable
-
-
-\
-\ @brief RCC APB3 enable register
-\ Address offset: 0x270
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB3ENR_DFTEN                            \ DFT enable
-
-
-\
-\ @brief RCC APB4L enable register
-\ Address offset: 0x274
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LENR_HDPEN                           \ HDP enable
-$00000008 constant RCC_RCC_APB4LENR_LPUART1EN                       \ LPUART1 enable
-$00000020 constant RCC_RCC_APB4LENR_SPI6EN                          \ SPI6 enable
-$00000080 constant RCC_RCC_APB4LENR_I2C4EN                          \ I2C4 enable
-$00000200 constant RCC_RCC_APB4LENR_LPTIM2EN                        \ LPTIM2 enable
-$00000400 constant RCC_RCC_APB4LENR_LPTIM3EN                        \ LPTIM3 enable
-$00000800 constant RCC_RCC_APB4LENR_LPTIM4EN                        \ LPTIM4 enable
-$00001000 constant RCC_RCC_APB4LENR_LPTIM5EN                        \ LPTIM5 enable
-$00008000 constant RCC_RCC_APB4LENR_VREFBUFEN                       \ VREFBUF enable
-$00010000 constant RCC_RCC_APB4LENR_RTCEN                           \ RTC enable
-$00020000 constant RCC_RCC_APB4LENR_RTCAPBEN                        \ RTCAPB enable
-$00400000 constant RCC_RCC_APB4LENR_R2GRETEN                        \ R2GRET enable
-$00800000 constant RCC_RCC_APB4LENR_R2GNPUEN                        \ R2GNPU enable
-$80000000 constant RCC_RCC_APB4LENR_SERFEN                          \ SERF enable
-
-
-\
-\ @brief RCC APB4H enable register
-\ Address offset: 0x278
-\ Reset value: 0x00000002
-\
-
-$00000001 constant RCC_RCC_APB4HENR_SYSCFGEN                        \ SYSCFG enable
-$00000002 constant RCC_RCC_APB4HENR_BSECEN                          \ BSEC enable
-$00000004 constant RCC_RCC_APB4HENR_DTSEN                           \ DTS enable
-$00000010 constant RCC_RCC_APB4HENR_BUSPERFMEN                      \ BUSPERFM enable
-
-
-\
-\ @brief RCC APB5 enable register
-\ Address offset: 0x27C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5ENR_LTDCEN                           \ LTDC enable
-$00000004 constant RCC_RCC_APB5ENR_DCMIPPEN                         \ DCMIPP enable
-$00000010 constant RCC_RCC_APB5ENR_GFXTIMEN                         \ GFXTIM enable
-$00000020 constant RCC_RCC_APB5ENR_VENCEN                           \ VENC enable
-$00000040 constant RCC_RCC_APB5ENR_CSIEN                            \ CSI enable
-
-
-\
-\ @brief RCC dividers Sleep enable register
-\ Address offset: 0x280
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_DIVLPENR_IC1LPEN                         \ IC1 sleep enable
-$00000002 constant RCC_RCC_DIVLPENR_IC2LPEN                         \ IC2 sleep enable
-$00000004 constant RCC_RCC_DIVLPENR_IC3LPEN                         \ IC3 sleep enable
-$00000008 constant RCC_RCC_DIVLPENR_IC4LPEN                         \ IC4 sleep enable
-$00000010 constant RCC_RCC_DIVLPENR_IC5LPEN                         \ IC5 sleep enable
-$00000020 constant RCC_RCC_DIVLPENR_IC6LPEN                         \ IC6 sleep enable
-$00000040 constant RCC_RCC_DIVLPENR_IC7LPEN                         \ IC7 sleep enable
-$00000080 constant RCC_RCC_DIVLPENR_IC8LPEN                         \ IC8 sleep enable
-$00000100 constant RCC_RCC_DIVLPENR_IC9LPEN                         \ IC9 sleep enable
-$00000200 constant RCC_RCC_DIVLPENR_IC10LPEN                        \ IC10 sleep enable
-$00000400 constant RCC_RCC_DIVLPENR_IC11LPEN                        \ IC11 sleep enable
-$00000800 constant RCC_RCC_DIVLPENR_IC12LPEN                        \ IC12 sleep enable
-$00001000 constant RCC_RCC_DIVLPENR_IC13LPEN                        \ IC13 sleep enable
-$00002000 constant RCC_RCC_DIVLPENR_IC14LPEN                        \ IC14 sleep enable
-$00004000 constant RCC_RCC_DIVLPENR_IC15LPEN                        \ IC15 sleep enable
-$00008000 constant RCC_RCC_DIVLPENR_IC16LPEN                        \ IC16 sleep enable
-$00010000 constant RCC_RCC_DIVLPENR_IC17LPEN                        \ IC17 sleep enable
-$00020000 constant RCC_RCC_DIVLPENR_IC18LPEN                        \ IC18 sleep enable
-$00040000 constant RCC_RCC_DIVLPENR_IC19LPEN                        \ IC19 sleep enable
-$00080000 constant RCC_RCC_DIVLPENR_IC20LPEN                        \ IC20 sleep enable
-
-
-\
-\ @brief RCC SoC buses Sleep enable register
-\ Address offset: 0x284
-\ Reset value: 0x00000003
-\
-
-$00000001 constant RCC_RCC_BUSLPENR_ACLKNLPEN                       \ ACLKN sleep enable
-$00000002 constant RCC_RCC_BUSLPENR_ACLKNCLPEN                      \ ACLKNC sleep enable
-$00000004 constant RCC_RCC_BUSLPENR_AHBMLPEN                        \ AHBM sleep enable
-$00000008 constant RCC_RCC_BUSLPENR_AHB1LPEN                        \ AHB1 sleep enable
-$00000010 constant RCC_RCC_BUSLPENR_AHB2LPEN                        \ AHB2 sleep enable
-$00000020 constant RCC_RCC_BUSLPENR_AHB3LPEN                        \ AHB3 sleep enable
-$00000040 constant RCC_RCC_BUSLPENR_AHB4LPEN                        \ AHB4 sleep enable
-$00000080 constant RCC_RCC_BUSLPENR_AHB5LPEN                        \ AHB5 sleep enable
-$00000100 constant RCC_RCC_BUSLPENR_APB1LPEN                        \ APB1 sleep enable
-$00000200 constant RCC_RCC_BUSLPENR_APB2LPEN                        \ APB2 sleep enable
-$00000400 constant RCC_RCC_BUSLPENR_APB3LPEN                        \ APB3 sleep enable
-$00000800 constant RCC_RCC_BUSLPENR_APB4LPEN                        \ APB4 sleep enable
-$00001000 constant RCC_RCC_BUSLPENR_APB5LPEN                        \ APB5 sleep enable
-
-
-\
-\ @brief RCC miscellaneous configurations Sleep enable register
-\ Address offset: 0x288
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCLPENR_DBGLPEN                        \ DBG sleep enable
-$00000008 constant RCC_RCC_MISCLPENR_XSPIPHYCOMPLPEN                \ XSPIPHYCOMP sleep enable
-$00000040 constant RCC_RCC_MISCLPENR_PERLPEN                        \ PER sleep enable
-
-
-\
-\ @brief RCC memory Sleep enable register
-\ Address offset: 0x28C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MEMLPENR_AXISRAM3LPEN                    \ AXISRAM3 sleep enable
-$00000002 constant RCC_RCC_MEMLPENR_AXISRAM4LPEN                    \ AXISRAM4 sleep enable
-$00000004 constant RCC_RCC_MEMLPENR_AXISRAM5LPEN                    \ AXISRAM5 sleep enable
-$00000008 constant RCC_RCC_MEMLPENR_AXISRAM6LPEN                    \ AXISRAM6 sleep enable
-$00000010 constant RCC_RCC_MEMLPENR_AHBSRAM1LPEN                    \ AHBSRAM1 sleep enable
-$00000020 constant RCC_RCC_MEMLPENR_AHBSRAM2LPEN                    \ AHBSRAM2 sleep enable
-$00000040 constant RCC_RCC_MEMLPENR_BKPSRAMLPEN                     \ BKPSRAM sleep enable
-$00000080 constant RCC_RCC_MEMLPENR_AXISRAM1LPEN                    \ AXISRAM1 sleep enable
-$00000100 constant RCC_RCC_MEMLPENR_AXISRAM2LPEN                    \ AXISRAM2 sleep enable
-$00000200 constant RCC_RCC_MEMLPENR_FLEXRAMLPEN                     \ FLEXRAM sleep enable
-$00000400 constant RCC_RCC_MEMLPENR_NPUCACHERAMLPEN                 \ NPUCACHERAM sleep enable
-$00000800 constant RCC_RCC_MEMLPENR_VENCRAMLPEN                     \ VENCRAM sleep enable
-$00001000 constant RCC_RCC_MEMLPENR_BOOTROMLPEN                     \ BOOTROM sleep enable
-
-
-\
-\ @brief RCC AHB1 Sleep enable register
-\ Address offset: 0x290
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1LPENR_GPDMA1LPEN                     \ GPDMA1 sleep enable
-$00000020 constant RCC_RCC_AHB1LPENR_ADC12LPEN                      \ ADC12 sleep enable
-
-
-\
-\ @brief RCC AHB2 Sleep enable register
-\ Address offset: 0x294
-\ Reset value: 0x00000000
-\
-
-$00001000 constant RCC_RCC_AHB2LPENR_RAMCFGLPEN                     \ RAMCFG sleep enable
-$00010000 constant RCC_RCC_AHB2LPENR_MDF1LPEN                       \ MDF1 sleep enable
-$00020000 constant RCC_RCC_AHB2LPENR_ADF1LPEN                       \ ADF1 sleep enable
-
-
-\
-\ @brief RCC AHB3 Sleep enable register
-\ Address offset: 0x298
-\ Reset value: 0x00000400
-\
-
-$00000001 constant RCC_RCC_AHB3LPENR_RNGLPEN                        \ RNG sleep enable
-$00000002 constant RCC_RCC_AHB3LPENR_HASHLPEN                       \ HASH sleep enable
-$00000004 constant RCC_RCC_AHB3LPENR_CRYPLPEN                       \ CRYP sleep enable
-$00000010 constant RCC_RCC_AHB3LPENR_SAESLPEN                       \ SAES sleep enable
-$00000100 constant RCC_RCC_AHB3LPENR_PKALPEN                        \ PKA sleep enable
-$00000200 constant RCC_RCC_AHB3LPENR_RIFSCLPEN                      \ RIFSC sleep enable
-$00000400 constant RCC_RCC_AHB3LPENR_IACLPEN                        \ IAC sleep enable
-$00004000 constant RCC_RCC_AHB3LPENR_RISAFLPEN                      \ RISAF sleep enable
-
-
-\
-\ @brief RCC AHB4 Sleep enable register
-\ Address offset: 0x29C
-\ Reset value: 0x00040000
-\
-
-$00000001 constant RCC_RCC_AHB4LPENR_GPIOALPEN                      \ GPIOA sleep enable
-$00000002 constant RCC_RCC_AHB4LPENR_GPIOBLPEN                      \ GPIOB sleep enable
-$00000004 constant RCC_RCC_AHB4LPENR_GPIOCLPEN                      \ GPIOC sleep enable
-$00000008 constant RCC_RCC_AHB4LPENR_GPIODLPEN                      \ GPIOD sleep enable
-$00000010 constant RCC_RCC_AHB4LPENR_GPIOELPEN                      \ GPIOE sleep enable
-$00000020 constant RCC_RCC_AHB4LPENR_GPIOFLPEN                      \ GPIOF sleep enable
-$00000040 constant RCC_RCC_AHB4LPENR_GPIOGLPEN                      \ GPIOG sleep enable
-$00000080 constant RCC_RCC_AHB4LPENR_GPIOHLPEN                      \ GPIOH sleep enable
-$00002000 constant RCC_RCC_AHB4LPENR_GPIONLPEN                      \ GPION sleep enable
-$00004000 constant RCC_RCC_AHB4LPENR_GPIOOLPEN                      \ GPIOO sleep enable
-$00008000 constant RCC_RCC_AHB4LPENR_GPIOPLPEN                      \ GPIOP sleep enable
-$00010000 constant RCC_RCC_AHB4LPENR_GPIOQLPEN                      \ GPIOQ sleep enable
-$00040000 constant RCC_RCC_AHB4LPENR_PWRLPEN                        \ PWR sleep enable
-$00080000 constant RCC_RCC_AHB4LPENR_CRCLPEN                        \ CRC sleep enable
-
-
-\
-\ @brief RCC AHB5 Sleep enable register
-\ Address offset: 0x2A0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5LPENR_HPDMA1LPEN                     \ HPDMA1 sleep enable
-$00000002 constant RCC_RCC_AHB5LPENR_DMA2DLPEN                      \ DMA2D sleep enable
-$00000008 constant RCC_RCC_AHB5LPENR_JPEGLPEN                       \ JPEG sleep enable
-$00000010 constant RCC_RCC_AHB5LPENR_FMCLPEN                        \ FMC sleep enable
-$00000020 constant RCC_RCC_AHB5LPENR_XSPI1LPEN                      \ XSPI1 sleep enable
-$00000040 constant RCC_RCC_AHB5LPENR_PSSILPEN                       \ PSSI sleep enable
-$00000080 constant RCC_RCC_AHB5LPENR_SDMMC2LPEN                     \ SDMMC2 sleep enable
-$00000100 constant RCC_RCC_AHB5LPENR_SDMMC1LPEN                     \ SDMMC1 sleep enable
-$00001000 constant RCC_RCC_AHB5LPENR_XSPI2LPEN                      \ XSPI2 sleep enable
-$00002000 constant RCC_RCC_AHB5LPENR_XSPIMLPEN                      \ XSPIM sleep enable
-$00004000 constant RCC_RCC_AHB5LPENR_MCE1LPEN                       \ MCE1 sleep enable
-$00008000 constant RCC_RCC_AHB5LPENR_MCE2LPEN                       \ MCE2 sleep enable
-$00010000 constant RCC_RCC_AHB5LPENR_MCE3LPEN                       \ MCE3 sleep enable
-$00020000 constant RCC_RCC_AHB5LPENR_XSPI3LPEN                      \ XSPI3 sleep enable
-$00040000 constant RCC_RCC_AHB5LPENR_MCE4LPEN                       \ MCE4 sleep enable
-$00080000 constant RCC_RCC_AHB5LPENR_GFXMMULPEN                     \ GFXMMU sleep enable
-$00100000 constant RCC_RCC_AHB5LPENR_GPULPEN                        \ GPU sleep enable
-$00400000 constant RCC_RCC_AHB5LPENR_ETH1MACLPEN                    \ ETH1MAC sleep enable
-$00800000 constant RCC_RCC_AHB5LPENR_ETH1TXLPEN                     \ ETH1TX sleep enable
-$01000000 constant RCC_RCC_AHB5LPENR_ETH1RXLPEN                     \ ETH1RX sleep enable
-$02000000 constant RCC_RCC_AHB5LPENR_ETH1LPEN                       \ ETH1 sleep enable
-$04000000 constant RCC_RCC_AHB5LPENR_OTG1LPEN                       \ OTG1 sleep enable
-$08000000 constant RCC_RCC_AHB5LPENR_OTGPHY1LPEN                    \ OTGPHY1 sleep enable
-$10000000 constant RCC_RCC_AHB5LPENR_OTGPHY2LPEN                    \ OTGPHY2 sleep enable
-$20000000 constant RCC_RCC_AHB5LPENR_OTG2LPEN                       \ OTG2 sleep enable
-$40000000 constant RCC_RCC_AHB5LPENR_NPUCACHELPEN                   \ NPUCACHE sleep enable
-$80000000 constant RCC_RCC_AHB5LPENR_NPULPEN                        \ NPU sleep enable
-
-
-\
-\ @brief RCC APB1L Sleep enable register
-\ Address offset: 0x2A4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LLPENR_TIM2LPEN                      \ TIM2 sleep enable
-$00000002 constant RCC_RCC_APB1LLPENR_TIM3LPEN                      \ TIM3 sleep enable
-$00000004 constant RCC_RCC_APB1LLPENR_TIM4LPEN                      \ TIM4 sleep enable
-$00000008 constant RCC_RCC_APB1LLPENR_TIM5LPEN                      \ TIM5 sleep enable
-$00000010 constant RCC_RCC_APB1LLPENR_TIM6LPEN                      \ TIM6 sleep enable
-$00000020 constant RCC_RCC_APB1LLPENR_TIM7LPEN                      \ TIM7 sleep enable
-$00000040 constant RCC_RCC_APB1LLPENR_TIM12LPEN                     \ TIM12 sleep enable
-$00000080 constant RCC_RCC_APB1LLPENR_TIM13LPEN                     \ TIM13 sleep enable
-$00000100 constant RCC_RCC_APB1LLPENR_TIM14LPEN                     \ TIM14 sleep enable
-$00000200 constant RCC_RCC_APB1LLPENR_LPTIM1LPEN                    \ LPTIM1 sleep enable
-$00000800 constant RCC_RCC_APB1LLPENR_WWDGLPEN                      \ WWDG sleep enable
-$00001000 constant RCC_RCC_APB1LLPENR_TIM10LPEN                     \ TIM10 sleep enable
-$00002000 constant RCC_RCC_APB1LLPENR_TIM11LPEN                     \ TIM11 sleep enable
-$00004000 constant RCC_RCC_APB1LLPENR_SPI2LPEN                      \ SPI2 sleep enable
-$00008000 constant RCC_RCC_APB1LLPENR_SPI3LPEN                      \ SPI3 sleep enable
-$00010000 constant RCC_RCC_APB1LLPENR_SPDIFRX1LPEN                  \ SPDIFRX1 sleep enable
-$00020000 constant RCC_RCC_APB1LLPENR_USART2LPEN                    \ USART2 sleep enable
-$00040000 constant RCC_RCC_APB1LLPENR_USART3LPEN                    \ USART3 sleep enable
-$00080000 constant RCC_RCC_APB1LLPENR_UART4LPEN                     \ UART4 sleep enable
-$00100000 constant RCC_RCC_APB1LLPENR_UART5LPEN                     \ UART5 sleep enable
-$00200000 constant RCC_RCC_APB1LLPENR_I2C1LPEN                      \ I2C1 sleep enable
-$00400000 constant RCC_RCC_APB1LLPENR_I2C2LPEN                      \ I2C2 sleep enable
-$00800000 constant RCC_RCC_APB1LLPENR_I2C3LPEN                      \ I2C3 sleep enable
-$01000000 constant RCC_RCC_APB1LLPENR_I3C1LPEN                      \ I3C1 sleep enable
-$02000000 constant RCC_RCC_APB1LLPENR_I3C2LPEN                      \ I3C2 sleep enable
-$40000000 constant RCC_RCC_APB1LLPENR_UART7LPEN                     \ UART7 sleep enable
-$80000000 constant RCC_RCC_APB1LLPENR_UART8LPEN                     \ UART8 sleep enable
-
-
-\
-\ @brief RCC APB1H Sleep enable register
-\ Address offset: 0x2A8
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HLPENR_MDIOSLPEN                     \ MDIOS sleep enable
-$00000100 constant RCC_RCC_APB1HLPENR_FDCANLPEN                     \ FDCAN sleep enable
-$00040000 constant RCC_RCC_APB1HLPENR_UCPD1LPEN                     \ UCPD1 sleep enable
-
-
-\
-\ @brief RCC APB2 Sleep enable register
-\ Address offset: 0x2AC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2LPENR_TIM1LPEN                       \ TIM1 sleep enable
-$00000002 constant RCC_RCC_APB2LPENR_TIM8LPEN                       \ TIM8 sleep enable
-$00000010 constant RCC_RCC_APB2LPENR_USART1LPEN                     \ USART1 sleep enable
-$00000020 constant RCC_RCC_APB2LPENR_USART6LPEN                     \ USART6 sleep enable
-$00000040 constant RCC_RCC_APB2LPENR_UART9LPEN                      \ UART9 sleep enable
-$00000080 constant RCC_RCC_APB2LPENR_USART10LPEN                    \ USART10 sleep enable
-$00001000 constant RCC_RCC_APB2LPENR_SPI1LPEN                       \ SPI1 sleep enable
-$00002000 constant RCC_RCC_APB2LPENR_SPI4LPEN                       \ SPI4 sleep enable
-$00008000 constant RCC_RCC_APB2LPENR_TIM18LPEN                      \ TIM18 sleep enable
-$00010000 constant RCC_RCC_APB2LPENR_TIM15LPEN                      \ TIM15 sleep enable
-$00020000 constant RCC_RCC_APB2LPENR_TIM16LPEN                      \ TIM16 sleep enable
-$00040000 constant RCC_RCC_APB2LPENR_TIM17LPEN                      \ TIM17 sleep enable
-$00080000 constant RCC_RCC_APB2LPENR_TIM9LPEN                       \ TIM9 sleep enable
-$00100000 constant RCC_RCC_APB2LPENR_SPI5LPEN                       \ SPI5 sleep enable
-$00200000 constant RCC_RCC_APB2LPENR_SAI1LPEN                       \ SAI1 sleep enable
-$00400000 constant RCC_RCC_APB2LPENR_SAI2LPEN                       \ SAI2 sleep enable
-
-
-\
-\ @brief RCC APB3 Sleep enable register
-\ Address offset: 0x2B0
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB3LPENR_DFTLPEN                        \ DFT sleep enable
-
-
-\
-\ @brief RCC APB4L Sleep enable register
-\ Address offset: 0x2B4
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LLPENR_HDPLPEN                       \ HDP sleep enable
-$00000008 constant RCC_RCC_APB4LLPENR_LPUART1LPEN                   \ LPUART1 sleep enable
-$00000020 constant RCC_RCC_APB4LLPENR_SPI6LPEN                      \ SPI6 sleep enable
-$00000080 constant RCC_RCC_APB4LLPENR_I2C4LPEN                      \ I2C4 sleep enable
-$00000200 constant RCC_RCC_APB4LLPENR_LPTIM2LPEN                    \ LPTIM2 sleep enable
-$00000400 constant RCC_RCC_APB4LLPENR_LPTIM3LPEN                    \ LPTIM3 sleep enable
-$00000800 constant RCC_RCC_APB4LLPENR_LPTIM4LPEN                    \ LPTIM4 sleep enable
-$00001000 constant RCC_RCC_APB4LLPENR_LPTIM5LPEN                    \ LPTIM5 sleep enable
-$00008000 constant RCC_RCC_APB4LLPENR_VREFBUFLPEN                   \ VREFBUF sleep enable
-$00010000 constant RCC_RCC_APB4LLPENR_RTCLPEN                       \ RTC sleep enable
-$00020000 constant RCC_RCC_APB4LLPENR_RTCAPBLPEN                    \ RTCAPB sleep enable
-$00400000 constant RCC_RCC_APB4LLPENR_R2GRETLPEN                    \ R2GRET sleep enable
-$00800000 constant RCC_RCC_APB4LLPENR_R2GNPULPEN                    \ R2GNPU sleep enable
-$80000000 constant RCC_RCC_APB4LLPENR_SERFLPEN                      \ SERF sleep enable
-
-
-\
-\ @brief RCC APB4H Sleep enable register
-\ Address offset: 0x2B8
-\ Reset value: 0x00000002
-\
-
-$00000001 constant RCC_RCC_APB4HLPENR_SYSCFGLPEN                    \ SYSCFG sleep enable
-$00000002 constant RCC_RCC_APB4HLPENR_BSECLPEN                      \ BSEC sleep enable
-$00000004 constant RCC_RCC_APB4HLPENR_DTSLPEN                       \ DTS sleep enable
-$00000010 constant RCC_RCC_APB4HLPENR_BUSPERFMLPEN                  \ BUSPERFM sleep enable
-
-
-\
-\ @brief RCC APB5 Sleep enable register
-\ Address offset: 0x2BC
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5LPENR_LTDCLPEN                       \ LTDC sleep enable
-$00000004 constant RCC_RCC_APB5LPENR_DCMIPPLPEN                     \ DCMIPP sleep enable
-$00000010 constant RCC_RCC_APB5LPENR_GFXTIMLPEN                     \ GFXTIM sleep enable
-$00000020 constant RCC_RCC_APB5LPENR_VENCLPEN                       \ VENC sleep enable
-$00000040 constant RCC_RCC_APB5LPENR_CSILPEN                        \ CSI sleep enable
-
-
-\
-\ @brief RCC APB5 Sleep enable register
-\ Address offset: 0x44C
-\ Reset value: 0x00060000
-\
-
-$001f0000 constant RCC_RCC_RDCR_MRD                                 \ BOOTROM sleep enable
-$0f000000 constant RCC_RCC_RDCR_EADLY                               \ BOOTROM sleep enable
-
-
-\
-\ @brief RCC oscillator secure configuration register0
-\ Address offset: 0x780
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_SECCFGR0_LSISEC                          \ Defines the secure protection of the LSI oscillator configuration bits.
-$00000002 constant RCC_RCC_SECCFGR0_LSESEC                          \ Defines the secure protection of the LSE oscillator configuration bits.
-$00000004 constant RCC_RCC_SECCFGR0_MSISEC                          \ Defines the secure protection of the MSI oscillator configuration bits.
-$00000008 constant RCC_RCC_SECCFGR0_HSISEC                          \ Defines the secure protection of the HSI oscillator configuration bits.
-$00000010 constant RCC_RCC_SECCFGR0_HSESEC                          \ Defines the secure protection of the HSE oscillator configuration bits.
-
-
-\
-\ @brief RCC oscillator privilege configuration register0
-\ Address offset: 0x784
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGR0_LSIPV                          \ Defines the privilege protection of the LSI oscillator configuration bits.
-$00000002 constant RCC_RCC_PRIVCFGR0_LSEPV                          \ Defines the privilege protection of the LSE oscillator configuration bits.
-$00000004 constant RCC_RCC_PRIVCFGR0_MSIPV                          \ Defines the privilege protection of the MSI oscillator configuration bits.
-$00000008 constant RCC_RCC_PRIVCFGR0_HSIPV                          \ Defines the privilege protection of the HSI oscillator configuration bits.
-$00000010 constant RCC_RCC_PRIVCFGR0_HSEPV                          \ Defines the privilege protection of the HSE oscillator configuration bits.
-
-
-\
-\ @brief RCC oscillator lock configuration register0
-\ Address offset: 0x788
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_LOCKCFGR0_LSILOCK                        \ Defines the lock protection of the LSI oscillator configuration bits.
-$00000002 constant RCC_RCC_LOCKCFGR0_LSELOCK                        \ Defines the lock protection of the LSE oscillator configuration bits.
-$00000004 constant RCC_RCC_LOCKCFGR0_MSILOCK                        \ Defines the lock protection of the MSI oscillator configuration bits.
-$00000008 constant RCC_RCC_LOCKCFGR0_HSILOCK                        \ Defines the lock protection of the HSI oscillator configuration bits.
-$00000010 constant RCC_RCC_LOCKCFGR0_HSELOCK                        \ Defines the lock protection of the HSE oscillator configuration bits.
-
-
-\
-\ @brief RCC oscillator public configuration register0
-\ Address offset: 0x78C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGR0_LSIPUB                          \ Defines the public protection of the LSI oscillator configuration bits.
-$00000002 constant RCC_RCC_PUBCFGR0_LSEPUB                          \ Defines the public protection of the LSE oscillator configuration bits.
-$00000004 constant RCC_RCC_PUBCFGR0_MSIPUB                          \ Defines the public protection of the MSI oscillator configuration bits.
-$00000008 constant RCC_RCC_PUBCFGR0_HSIPUB                          \ Defines the public protection of the HSI oscillator configuration bits.
-$00000010 constant RCC_RCC_PUBCFGR0_HSEPUB                          \ Defines the public protection of the HSE oscillator configuration bits.
-
-
-\
-\ @brief RCC PLL secure configuration register1
-\ Address offset: 0x790
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_SECCFGR1_PLL1SEC                         \ Defines the secure protection of the PLL1 PLL configuration bits.
-$00000002 constant RCC_RCC_SECCFGR1_PLL2SEC                         \ Defines the secure protection of the PLL2 PLL configuration bits.
-$00000004 constant RCC_RCC_SECCFGR1_PLL3SEC                         \ Defines the secure protection of the PLL3 PLL configuration bits.
-$00000008 constant RCC_RCC_SECCFGR1_PLL4SEC                         \ Defines the secure protection of the PLL4 PLL configuration bits.
-
-
-\
-\ @brief RCC PLL privilege configuration register1
-\ Address offset: 0x794
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGR1_PLL1PV                         \ Defines the privilege protection of the PLL1 PLL configuration bits.
-$00000002 constant RCC_RCC_PRIVCFGR1_PLL2PV                         \ Defines the privilege protection of the PLL2 PLL configuration bits.
-$00000004 constant RCC_RCC_PRIVCFGR1_PLL3PV                         \ Defines the privilege protection of the PLL3 PLL configuration bits.
-$00000008 constant RCC_RCC_PRIVCFGR1_PLL4PV                         \ Defines the privilege protection of the PLL4 PLL configuration bits.
-
-
-\
-\ @brief RCC PLL lock configuration register1
-\ Address offset: 0x798
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_LOCKCFGR1_PLL1LOCK                       \ Defines the lock protection of the PLL1 PLL configuration bits.
-$00000002 constant RCC_RCC_LOCKCFGR1_PLL2LOCK                       \ Defines the lock protection of the PLL2 PLL configuration bits.
-$00000004 constant RCC_RCC_LOCKCFGR1_PLL3LOCK                       \ Defines the lock protection of the PLL3 PLL configuration bits.
-$00000008 constant RCC_RCC_LOCKCFGR1_PLL4LOCK                       \ Defines the lock protection of the PLL4 PLL configuration bits.
-
-
-\
-\ @brief RCC PLL public configuration register1
-\ Address offset: 0x79C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGR1_PLL1PUB                         \ Defines the public protection of the PLL1 PLL configuration bits.
-$00000002 constant RCC_RCC_PUBCFGR1_PLL2PUB                         \ Defines the public protection of the PLL2 PLL configuration bits.
-$00000004 constant RCC_RCC_PUBCFGR1_PLL3PUB                         \ Defines the public protection of the PLL3 PLL configuration bits.
-$00000008 constant RCC_RCC_PUBCFGR1_PLL4PUB                         \ Defines the public protection of the PLL4 PLL configuration bits.
-
-
-\
-\ @brief RCC divider secure configuration register2
-\ Address offset: 0x7A0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_SECCFGR2_IC1SEC                          \ Defines the secure protection of the IC1 divider configuration bits.
-$00000002 constant RCC_RCC_SECCFGR2_IC2SEC                          \ Defines the secure protection of the IC2 divider configuration bits.
-$00000004 constant RCC_RCC_SECCFGR2_IC3SEC                          \ Defines the secure protection of the IC3 divider configuration bits.
-$00000008 constant RCC_RCC_SECCFGR2_IC4SEC                          \ Defines the secure protection of the IC4 divider configuration bits.
-$00000010 constant RCC_RCC_SECCFGR2_IC5SEC                          \ Defines the secure protection of the IC5 divider configuration bits.
-$00000020 constant RCC_RCC_SECCFGR2_IC6SEC                          \ Defines the secure protection of the IC6 divider configuration bits.
-$00000040 constant RCC_RCC_SECCFGR2_IC7SEC                          \ Defines the secure protection of the IC7 divider configuration bits.
-$00000080 constant RCC_RCC_SECCFGR2_IC8SEC                          \ Defines the secure protection of the IC8 divider configuration bits.
-$00000100 constant RCC_RCC_SECCFGR2_IC9SEC                          \ Defines the secure protection of the IC9 divider configuration bits.
-$00000200 constant RCC_RCC_SECCFGR2_IC10SEC                         \ Defines the secure protection of the IC10 divider configuration bits.
-$00000400 constant RCC_RCC_SECCFGR2_IC11SEC                         \ Defines the secure protection of the IC11 divider configuration bits.
-$00000800 constant RCC_RCC_SECCFGR2_IC12SEC                         \ Defines the secure protection of the IC12 divider configuration bits.
-$00001000 constant RCC_RCC_SECCFGR2_IC13SEC                         \ Defines the secure protection of the IC13 divider configuration bits.
-$00002000 constant RCC_RCC_SECCFGR2_IC14SEC                         \ Defines the secure protection of the IC14 divider configuration bits.
-$00004000 constant RCC_RCC_SECCFGR2_IC15SEC                         \ Defines the secure protection of the IC15 divider configuration bits.
-$00008000 constant RCC_RCC_SECCFGR2_IC16SEC                         \ Defines the secure protection of the IC16 divider configuration bits.
-$00010000 constant RCC_RCC_SECCFGR2_IC17SEC                         \ Defines the secure protection of the IC17 divider configuration bits.
-$00020000 constant RCC_RCC_SECCFGR2_IC18SEC                         \ Defines the secure protection of the IC18 divider configuration bits.
-$00040000 constant RCC_RCC_SECCFGR2_IC19SEC                         \ Defines the secure protection of the IC19 divider configuration bits.
-$00080000 constant RCC_RCC_SECCFGR2_IC20SEC                         \ Defines the secure protection of the IC20 divider configuration bits.
-
-
-\
-\ @brief RCC divider privilege configuration register2
-\ Address offset: 0x7A4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGR2_IC1PV                          \ Defines the privilege protection of the IC1 divider configuration bits.
-$00000002 constant RCC_RCC_PRIVCFGR2_IC2PV                          \ Defines the privilege protection of the IC2 divider configuration bits.
-$00000004 constant RCC_RCC_PRIVCFGR2_IC3PV                          \ Defines the privilege protection of the IC3 divider configuration bits.
-$00000008 constant RCC_RCC_PRIVCFGR2_IC4PV                          \ Defines the privilege protection of the IC4 divider configuration bits.
-$00000010 constant RCC_RCC_PRIVCFGR2_IC5PV                          \ Defines the privilege protection of the IC5 divider configuration bits.
-$00000020 constant RCC_RCC_PRIVCFGR2_IC6PV                          \ Defines the privilege protection of the IC6 divider configuration bits.
-$00000040 constant RCC_RCC_PRIVCFGR2_IC7PV                          \ Defines the privilege protection of the IC7 divider configuration bits.
-$00000080 constant RCC_RCC_PRIVCFGR2_IC8PV                          \ Defines the privilege protection of the IC8 divider configuration bits.
-$00000100 constant RCC_RCC_PRIVCFGR2_IC9PV                          \ Defines the privilege protection of the IC9 divider configuration bits.
-$00000200 constant RCC_RCC_PRIVCFGR2_IC10PV                         \ Defines the privilege protection of the IC10 divider configuration bits.
-$00000400 constant RCC_RCC_PRIVCFGR2_IC11PV                         \ Defines the privilege protection of the IC11 divider configuration bits.
-$00000800 constant RCC_RCC_PRIVCFGR2_IC12PV                         \ Defines the privilege protection of the IC12 divider configuration bits.
-$00001000 constant RCC_RCC_PRIVCFGR2_IC13PV                         \ Defines the privilege protection of the IC13 divider configuration bits.
-$00002000 constant RCC_RCC_PRIVCFGR2_IC14PV                         \ Defines the privilege protection of the IC14 divider configuration bits.
-$00004000 constant RCC_RCC_PRIVCFGR2_IC15PV                         \ Defines the privilege protection of the IC15 divider configuration bits.
-$00008000 constant RCC_RCC_PRIVCFGR2_IC16PV                         \ Defines the privilege protection of the IC16 divider configuration bits.
-$00010000 constant RCC_RCC_PRIVCFGR2_IC17PV                         \ Defines the privilege protection of the IC17 divider configuration bits.
-$00020000 constant RCC_RCC_PRIVCFGR2_IC18PV                         \ Defines the privilege protection of the IC18 divider configuration bits.
-$00040000 constant RCC_RCC_PRIVCFGR2_IC19PV                         \ Defines the privilege protection of the IC19 divider configuration bits.
-$00080000 constant RCC_RCC_PRIVCFGR2_IC20PV                         \ Defines the privilege protection of the IC20 divider configuration bits.
-
-
-\
-\ @brief RCC divider lock configuration register2
-\ Address offset: 0x7A8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_LOCKCFGR2_IC1LOCK                        \ Defines the lock protection of the IC1 divider configuration bits.
-$00000002 constant RCC_RCC_LOCKCFGR2_IC2LOCK                        \ Defines the lock protection of the IC2 divider configuration bits.
-$00000004 constant RCC_RCC_LOCKCFGR2_IC3LOCK                        \ Defines the lock protection of the IC3 divider configuration bits.
-$00000008 constant RCC_RCC_LOCKCFGR2_IC4LOCK                        \ Defines the lock protection of the IC4 divider configuration bits.
-$00000010 constant RCC_RCC_LOCKCFGR2_IC5LOCK                        \ Defines the lock protection of the IC5 divider configuration bits.
-$00000020 constant RCC_RCC_LOCKCFGR2_IC6LOCK                        \ Defines the lock protection of the IC6 divider configuration bits.
-$00000040 constant RCC_RCC_LOCKCFGR2_IC7LOCK                        \ Defines the lock protection of the IC7 divider configuration bits.
-$00000080 constant RCC_RCC_LOCKCFGR2_IC8LOCK                        \ Defines the lock protection of the IC8 divider configuration bits.
-$00000100 constant RCC_RCC_LOCKCFGR2_IC9LOCK                        \ Defines the lock protection of the IC9 divider configuration bits.
-$00000200 constant RCC_RCC_LOCKCFGR2_IC10LOCK                       \ Defines the lock protection of the IC10 divider configuration bits.
-$00000400 constant RCC_RCC_LOCKCFGR2_IC11LOCK                       \ Defines the lock protection of the IC11 divider configuration bits.
-$00000800 constant RCC_RCC_LOCKCFGR2_IC12LOCK                       \ Defines the lock protection of the IC12 divider configuration bits.
-$00001000 constant RCC_RCC_LOCKCFGR2_IC13LOCK                       \ Defines the lock protection of the IC13 divider configuration bits.
-$00002000 constant RCC_RCC_LOCKCFGR2_IC14LOCK                       \ Defines the lock protection of the IC14 divider configuration bits.
-$00004000 constant RCC_RCC_LOCKCFGR2_IC15LOCK                       \ Defines the lock protection of the IC15 divider configuration bits.
-$00008000 constant RCC_RCC_LOCKCFGR2_IC16LOCK                       \ Defines the lock protection of the IC16 divider configuration bits.
-$00010000 constant RCC_RCC_LOCKCFGR2_IC17LOCK                       \ Defines the lock protection of the IC17 divider configuration bits.
-$00020000 constant RCC_RCC_LOCKCFGR2_IC18LOCK                       \ Defines the lock protection of the IC18 divider configuration bits.
-$00040000 constant RCC_RCC_LOCKCFGR2_IC19LOCK                       \ Defines the lock protection of the IC19 divider configuration bits.
-$00080000 constant RCC_RCC_LOCKCFGR2_IC20LOCK                       \ Defines the lock protection of the IC20 divider configuration bits.
-
-
-\
-\ @brief RCC divider public configuration register2
-\ Address offset: 0x7AC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGR2_IC1PUB                          \ Defines the public protection of the IC1 divider configuration bits.
-$00000002 constant RCC_RCC_PUBCFGR2_IC2PUB                          \ Defines the public protection of the IC2 divider configuration bits.
-$00000004 constant RCC_RCC_PUBCFGR2_IC3PUB                          \ Defines the public protection of the IC3 divider configuration bits.
-$00000008 constant RCC_RCC_PUBCFGR2_IC4PUB                          \ Defines the public protection of the IC4 divider configuration bits.
-$00000010 constant RCC_RCC_PUBCFGR2_IC5PUB                          \ Defines the public protection of the IC5 divider configuration bits.
-$00000020 constant RCC_RCC_PUBCFGR2_IC6PUB                          \ Defines the public protection of the IC6 divider configuration bits.
-$00000040 constant RCC_RCC_PUBCFGR2_IC7PUB                          \ Defines the public protection of the IC7 divider configuration bits.
-$00000080 constant RCC_RCC_PUBCFGR2_IC8PUB                          \ Defines the public protection of the IC8 divider configuration bits.
-$00000100 constant RCC_RCC_PUBCFGR2_IC9PUB                          \ Defines the public protection of the IC9 divider configuration bits.
-$00000200 constant RCC_RCC_PUBCFGR2_IC10PUB                         \ Defines the public protection of the IC10 divider configuration bits.
-$00000400 constant RCC_RCC_PUBCFGR2_IC11PUB                         \ Defines the public protection of the IC11 divider configuration bits.
-$00000800 constant RCC_RCC_PUBCFGR2_IC12PUB                         \ Defines the public protection of the IC12 divider configuration bits.
-$00001000 constant RCC_RCC_PUBCFGR2_IC13PUB                         \ Defines the public protection of the IC13 divider configuration bits.
-$00002000 constant RCC_RCC_PUBCFGR2_IC14PUB                         \ Defines the public protection of the IC14 divider configuration bits.
-$00004000 constant RCC_RCC_PUBCFGR2_IC15PUB                         \ Defines the public protection of the IC15 divider configuration bits.
-$00008000 constant RCC_RCC_PUBCFGR2_IC16PUB                         \ Defines the public protection of the IC16 divider configuration bits.
-$00010000 constant RCC_RCC_PUBCFGR2_IC17PUB                         \ Defines the public protection of the IC17 divider configuration bits.
-$00020000 constant RCC_RCC_PUBCFGR2_IC18PUB                         \ Defines the public protection of the IC18 divider configuration bits.
-$00040000 constant RCC_RCC_PUBCFGR2_IC19PUB                         \ Defines the public protection of the IC19 divider configuration bits.
-$00080000 constant RCC_RCC_PUBCFGR2_IC20PUB                         \ Defines the public protection of the IC20 divider configuration bits.
-
-
-\
-\ @brief RCC system secure configuration register3
-\ Address offset: 0x7B0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_SECCFGR3_MODSEC                          \ Defines the secure protection of the MOD system configuration bits.
-$00000002 constant RCC_RCC_SECCFGR3_SYSSEC                          \ Defines the secure protection of the SYS system configuration bits.
-$00000004 constant RCC_RCC_SECCFGR3_BUSSEC                          \ Defines the secure protection of the BUS system configuration bits.
-$00000008 constant RCC_RCC_SECCFGR3_PERSEC                          \ Defines the secure protection of the PER system configuration bits.
-$00000010 constant RCC_RCC_SECCFGR3_INTSEC                          \ Defines the secure protection of the INT system configuration bits.
-$00000020 constant RCC_RCC_SECCFGR3_RSTSEC                          \ Defines the secure protection of the RST system configuration bits.
-$00000040 constant RCC_RCC_SECCFGR3_DFTSEC                          \ Defines the secure protection of the DFT system configuration bits.
-
-
-\
-\ @brief RCC system privilege configuration register3
-\ Address offset: 0x7B4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGR3_MODPV                          \ Defines the privilege protection of the MOD system configuration bits.
-$00000002 constant RCC_RCC_PRIVCFGR3_SYSPV                          \ Defines the privilege protection of the SYS system configuration bits.
-$00000004 constant RCC_RCC_PRIVCFGR3_BUSPV                          \ Defines the privilege protection of the BUS system configuration bits.
-$00000008 constant RCC_RCC_PRIVCFGR3_PERPV                          \ Defines the privilege protection of the PER system configuration bits.
-$00000010 constant RCC_RCC_PRIVCFGR3_INTPV                          \ Defines the privilege protection of the INT system configuration bits.
-$00000020 constant RCC_RCC_PRIVCFGR3_RSTPV                          \ Defines the privilege protection of the RST system configuration bits.
-$00000040 constant RCC_RCC_PRIVCFGR3_DFTPV                          \ Defines the privilege protection of the DFT system configuration bits.
-
-
-\
-\ @brief RCC system lock configuration register3
-\ Address offset: 0x7B8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_LOCKCFGR3_MODLOCK                        \ Defines the lock protection of the MOD system configuration bits.
-$00000002 constant RCC_RCC_LOCKCFGR3_SYSLOCK                        \ Defines the lock protection of the SYS system configuration bits.
-$00000004 constant RCC_RCC_LOCKCFGR3_BUSLOCK                        \ Defines the lock protection of the BUS system configuration bits.
-$00000008 constant RCC_RCC_LOCKCFGR3_PERLOCK                        \ Defines the lock protection of the PER system configuration bits.
-$00000010 constant RCC_RCC_LOCKCFGR3_INTLOCK                        \ Defines the lock protection of the INT system configuration bits.
-$00000020 constant RCC_RCC_LOCKCFGR3_RSTLOCK                        \ Defines the lock protection of the RST system configuration bits.
-$00000040 constant RCC_RCC_LOCKCFGR3_DFTLOCK                        \ Defines the lock protection of the DFT system configuration bits.
-
-
-\
-\ @brief RCC system public configuration register3
-\ Address offset: 0x7BC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGR3_MODPUB                          \ Defines the public protection of the MOD system configuration bits.
-$00000002 constant RCC_RCC_PUBCFGR3_SYSPUB                          \ Defines the public protection of the SYS system configuration bits.
-$00000004 constant RCC_RCC_PUBCFGR3_BUSPUB                          \ Defines the public protection of the BUS system configuration bits.
-$00000008 constant RCC_RCC_PUBCFGR3_PERPUB                          \ Defines the public protection of the PER system configuration bits.
-$00000010 constant RCC_RCC_PUBCFGR3_INTPUB                          \ Defines the public protection of the INT system configuration bits.
-$00000020 constant RCC_RCC_PUBCFGR3_RSTPUB                          \ Defines the public protection of the RST system configuration bits.
-$00000040 constant RCC_RCC_PUBCFGR3_DFTPUB                          \ Defines the public protection of the DFT system configuration bits.
-
-
-\
-\ @brief RCC bus secure configuration register4
-\ Address offset: 0x7C0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_SECCFGR4_ACLKNSEC                        \ Defines the secure protection of the ACLKN bus configuration bits.
-$00000002 constant RCC_RCC_SECCFGR4_ACLKNCSEC                       \ Defines the secure protection of the ACLKNC bus configuration bits.
-$00000004 constant RCC_RCC_SECCFGR4_AHBMSEC                         \ Defines the secure protection of the AHBM bus configuration bits.
-$00000008 constant RCC_RCC_SECCFGR4_AHB1SEC                         \ Defines the secure protection of the AHB1 bus configuration bits.
-$00000010 constant RCC_RCC_SECCFGR4_AHB2SEC                         \ Defines the secure protection of the AHB2 bus configuration bits.
-$00000020 constant RCC_RCC_SECCFGR4_AHB3SEC                         \ Defines the secure protection of the AHB3 bus configuration bits.
-$00000040 constant RCC_RCC_SECCFGR4_AHB4SEC                         \ Defines the secure protection of the AHB4 bus configuration bits.
-$00000080 constant RCC_RCC_SECCFGR4_AHB5SEC                         \ Defines the secure protection of the AHB5 bus configuration bits.
-$00000100 constant RCC_RCC_SECCFGR4_APB1SEC                         \ Defines the secure protection of the APB1 bus configuration bits.
-$00000200 constant RCC_RCC_SECCFGR4_APB2SEC                         \ Defines the secure protection of the APB2 bus configuration bits.
-$00000400 constant RCC_RCC_SECCFGR4_APB3SEC                         \ Defines the secure protection of the APB3 bus configuration bits.
-$00000800 constant RCC_RCC_SECCFGR4_APB4SEC                         \ Defines the secure protection of the APB4 bus configuration bits.
-$00001000 constant RCC_RCC_SECCFGR4_APB5SEC                         \ Defines the secure protection of the APB5 bus configuration bits.
-$00002000 constant RCC_RCC_SECCFGR4_NOCSEC                          \ Defines the secure protection of the NOC bus configuration bits.
-
-
-\
-\ @brief RCC bus privilege configuration register4
-\ Address offset: 0x7C4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGR4_ACLKNPV                        \ Defines the privilege protection of the ACLKN bus configuration bits.
-$00000002 constant RCC_RCC_PRIVCFGR4_ACLKNCPV                       \ Defines the privilege protection of the ACLKNC bus configuration bits.
-$00000004 constant RCC_RCC_PRIVCFGR4_AHBMPV                         \ Defines the privilege protection of the AHBM bus configuration bits.
-$00000008 constant RCC_RCC_PRIVCFGR4_AHB1PV                         \ Defines the privilege protection of the AHB1 bus configuration bits.
-$00000010 constant RCC_RCC_PRIVCFGR4_AHB2PV                         \ Defines the privilege protection of the AHB2 bus configuration bits.
-$00000020 constant RCC_RCC_PRIVCFGR4_AHB3PV                         \ Defines the privilege protection of the AHB3 bus configuration bits.
-$00000040 constant RCC_RCC_PRIVCFGR4_AHB4PV                         \ Defines the privilege protection of the AHB4 bus configuration bits.
-$00000080 constant RCC_RCC_PRIVCFGR4_AHB5PV                         \ Defines the privilege protection of the AHB5 bus configuration bits.
-$00000100 constant RCC_RCC_PRIVCFGR4_APB1PV                         \ Defines the privilege protection of the APB1 bus configuration bits.
-$00000200 constant RCC_RCC_PRIVCFGR4_APB2PV                         \ Defines the privilege protection of the APB2 bus configuration bits.
-$00000400 constant RCC_RCC_PRIVCFGR4_APB3PV                         \ Defines the privilege protection of the APB3 bus configuration bits.
-$00000800 constant RCC_RCC_PRIVCFGR4_APB4PV                         \ Defines the privilege protection of the APB4 bus configuration bits.
-$00001000 constant RCC_RCC_PRIVCFGR4_APB5PV                         \ Defines the privilege protection of the APB5 bus configuration bits.
-$00002000 constant RCC_RCC_PRIVCFGR4_NOCPV                          \ Defines the privilege protection of the NOC bus configuration bits.
-
-
-\
-\ @brief RCC bus lock configuration register4
-\ Address offset: 0x7C8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_LOCKCFGR4_ACLKNLOCK                      \ Defines the lock protection of the ACLKN bus configuration bits.
-$00000002 constant RCC_RCC_LOCKCFGR4_ACLKNCLOCK                     \ Defines the lock protection of the ACLKNC bus configuration bits.
-$00000004 constant RCC_RCC_LOCKCFGR4_AHBMLOCK                       \ Defines the lock protection of the AHBM bus configuration bits.
-$00000008 constant RCC_RCC_LOCKCFGR4_AHB1LOCK                       \ Defines the lock protection of the AHB1 bus configuration bits.
-$00000010 constant RCC_RCC_LOCKCFGR4_AHB2LOCK                       \ Defines the lock protection of the AHB2 bus configuration bits.
-$00000020 constant RCC_RCC_LOCKCFGR4_AHB3LOCK                       \ Defines the lock protection of the AHB3 bus configuration bits.
-$00000040 constant RCC_RCC_LOCKCFGR4_AHB4LOCK                       \ Defines the lock protection of the AHB4 bus configuration bits.
-$00000080 constant RCC_RCC_LOCKCFGR4_AHB5LOCK                       \ Defines the lock protection of the AHB5 bus configuration bits.
-$00000100 constant RCC_RCC_LOCKCFGR4_APB1LOCK                       \ Defines the lock protection of the APB1 bus configuration bits.
-$00000200 constant RCC_RCC_LOCKCFGR4_APB2LOCK                       \ Defines the lock protection of the APB2 bus configuration bits.
-$00000400 constant RCC_RCC_LOCKCFGR4_APB3LOCK                       \ Defines the lock protection of the APB3 bus configuration bits.
-$00000800 constant RCC_RCC_LOCKCFGR4_APB4LOCK                       \ Defines the lock protection of the APB4 bus configuration bits.
-$00001000 constant RCC_RCC_LOCKCFGR4_APB5LOCK                       \ Defines the lock protection of the APB5 bus configuration bits.
-$00002000 constant RCC_RCC_LOCKCFGR4_NOCLOCK                        \ Defines the lock protection of the NOC bus configuration bits.
-
-
-\
-\ @brief RCC bus public configuration register4
-\ Address offset: 0x7CC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGR4_ACLKNPUB                        \ Defines the public protection of the ACLKN bus configuration bits.
-$00000002 constant RCC_RCC_PUBCFGR4_ACLKNCPUB                       \ Defines the public protection of the ACLKNC bus configuration bits.
-$00000004 constant RCC_RCC_PUBCFGR4_AHBMPUB                         \ Defines the public protection of the AHBM bus configuration bits.
-$00000008 constant RCC_RCC_PUBCFGR4_AHB1PUB                         \ Defines the public protection of the AHB1 bus configuration bits.
-$00000010 constant RCC_RCC_PUBCFGR4_AHB2PUB                         \ Defines the public protection of the AHB2 bus configuration bits.
-$00000020 constant RCC_RCC_PUBCFGR4_AHB3PUB                         \ Defines the public protection of the AHB3 bus configuration bits.
-$00000040 constant RCC_RCC_PUBCFGR4_AHB4PUB                         \ Defines the public protection of the AHB4 bus configuration bits.
-$00000080 constant RCC_RCC_PUBCFGR4_AHB5PUB                         \ Defines the public protection of the AHB5 bus configuration bits.
-$00000100 constant RCC_RCC_PUBCFGR4_APB1PUB                         \ Defines the public protection of the APB1 bus configuration bits.
-$00000200 constant RCC_RCC_PUBCFGR4_APB2PUB                         \ Defines the public protection of the APB2 bus configuration bits.
-$00000400 constant RCC_RCC_PUBCFGR4_APB3PUB                         \ Defines the public protection of the APB3 bus configuration bits.
-$00000800 constant RCC_RCC_PUBCFGR4_APB4PUB                         \ Defines the public protection of the APB4 bus configuration bits.
-$00001000 constant RCC_RCC_PUBCFGR4_APB5PUB                         \ Defines the public protection of the APB5 bus configuration bits.
-$00002000 constant RCC_RCC_PUBCFGR4_NOCPUB                          \ Defines the public protection of the NOC bus configuration bits.
-
-
-\
-\ @brief RCC bus public configuration register4
-\ Address offset: 0x7D0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGR5_AXISRAM3PUB                     \ Defines the public protection of the AXISRAM3 bus configuration bits.
-$00000002 constant RCC_RCC_PUBCFGR5_AXISRAM4PUB                     \ Defines the public protection of the AXISRAM4 bus configuration bits.
-$00000004 constant RCC_RCC_PUBCFGR5_AXISRAM5PUB                     \ Defines the public protection of the AXISRAM5 bus configuration bits.
-$00000008 constant RCC_RCC_PUBCFGR5_AXISRAM6PUB                     \ Defines the public protection of the AXISRAM6 bus configuration bits.
-$00000010 constant RCC_RCC_PUBCFGR5_AHBSRAM1PUB                     \ Defines the public protection of the AHBSRAM1 bus configuration bits.
-$00000020 constant RCC_RCC_PUBCFGR5_AHBSRAM2PUB                     \ Defines the public protection of the AHBSRAM2 bus configuration bits.
-$00000040 constant RCC_RCC_PUBCFGR5_BKPSRAMPUB                      \ Defines the public protection of the BKPSRAM bus configuration bits.
-$00000080 constant RCC_RCC_PUBCFGR5_AXISRAM1PUB                     \ Defines the public protection of the AXISRAM1 bus configuration bits.
-$00000100 constant RCC_RCC_PUBCFGR5_AXISRAM2PUB                     \ Defines the public protection of the AXISRAM2 bus configuration bits.
-$00000200 constant RCC_RCC_PUBCFGR5_FLEXRAMPUB                      \ Defines the public protection of the FLEXRAM bus configuration bits.
-$00000400 constant RCC_RCC_PUBCFGR5_NPUCACHERAMPUB                  \ Defines the public protection of the NPUCACHERAM bus configuration bits.
-$00000800 constant RCC_RCC_PUBCFGR5_VENCRAMPUB                      \ Defines the public protection of the VENCRAM bus configuration bits.
-
-
-\
-\ @brief RCC control set register
-\ Address offset: 0x800
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_CSR_LSIONS                               \ LSI oscillator enable in Run/Sleep mode.
-$00000002 constant RCC_RCC_CSR_LSEONS                               \ LSE oscillator enable in Run/Sleep mode.
-$00000004 constant RCC_RCC_CSR_MSIONS                               \ MSI oscillator enable in Run/Sleep mode.
-$00000008 constant RCC_RCC_CSR_HSIONS                               \ HSI oscillator enable in Run/Sleep mode.
-$00000010 constant RCC_RCC_CSR_HSEONS                               \ HSE oscillator enable in Run/Sleep mode.
-$00000100 constant RCC_RCC_CSR_PLL1ONS                              \ PLL1 oscillator enable in Run/Sleep mode.
-$00000200 constant RCC_RCC_CSR_PLL2ONS                              \ PLL2 oscillator enable in Run/Sleep mode.
-$00000400 constant RCC_RCC_CSR_PLL3ONS                              \ PLL3 oscillator enable in Run/Sleep mode.
-$00000800 constant RCC_RCC_CSR_PLL4ONS                              \ PLL4 oscillator enable in Run/Sleep mode.
-
-
-\
-\ @brief RCC Stop configuration register
-\ Address offset: 0x808
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_STOPCSR_MSISTOPENS                       \ MSISTOPENS
-$00000002 constant RCC_RCC_STOPCSR_HSISTOPENS                       \ HSISTOPENS
-
-
-\
-\ @brief RCC bus reset set register
-\ Address offset: 0xA04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_BUSRSTSR_ACLKNRSTS                       \ ACLKN reset
-$00000004 constant RCC_RCC_BUSRSTSR_AHBMRSTS                        \ AHBM reset
-$00000008 constant RCC_RCC_BUSRSTSR_AHB1RSTS                        \ AHB1 reset
-$00000010 constant RCC_RCC_BUSRSTSR_AHB2RSTS                        \ AHB2 reset
-$00000020 constant RCC_RCC_BUSRSTSR_AHB3RSTS                        \ AHB3 reset
-$00000040 constant RCC_RCC_BUSRSTSR_AHB4RSTS                        \ AHB4 reset
-$00000080 constant RCC_RCC_BUSRSTSR_AHB5RSTS                        \ AHB5 reset
-$00000100 constant RCC_RCC_BUSRSTSR_APB1RSTS                        \ APB1 reset
-$00000200 constant RCC_RCC_BUSRSTSR_APB2RSTS                        \ APB2 reset
-$00000400 constant RCC_RCC_BUSRSTSR_APB3RSTS                        \ APB3 reset
-$00000800 constant RCC_RCC_BUSRSTSR_APB4RSTS                        \ APB4 reset
-$00001000 constant RCC_RCC_BUSRSTSR_APB5RSTS                        \ APB5 reset
-$00002000 constant RCC_RCC_BUSRSTSR_NOCRSTS                         \ NOC reset
-
-
-\
-\ @brief RCC miscellaneous reset register
-\ Address offset: 0xA08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCRSTSR_DBGRSTS                        \ DBG reset
-$00000010 constant RCC_RCC_MISCRSTSR_XSPIPHY1RSTS                   \ XSPIPHY1 reset
-$00000020 constant RCC_RCC_MISCRSTSR_XSPIPHY2RSTS                   \ XSPIPHY2 reset
-$00000080 constant RCC_RCC_MISCRSTSR_SDMMC1DLLRSTS                  \ SDMMC1DLL reset
-$00000100 constant RCC_RCC_MISCRSTSR_SDMMC2DLLRSTS                  \ SDMMC2DLL reset
-
-
-\
-\ @brief RCC memory reset register
-\ Address offset: 0xA0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MEMRSTSR_AXISRAM3RSTS                    \ AXISRAM3 reset
-$00000002 constant RCC_RCC_MEMRSTSR_AXISRAM4RSTS                    \ AXISRAM4 reset
-$00000004 constant RCC_RCC_MEMRSTSR_AXISRAM5RSTS                    \ AXISRAM5 reset
-$00000008 constant RCC_RCC_MEMRSTSR_AXISRAM6RSTS                    \ AXISRAM6 reset
-$00000010 constant RCC_RCC_MEMRSTSR_AHBSRAM1RSTS                    \ AHBSRAM1 reset
-$00000020 constant RCC_RCC_MEMRSTSR_AHBSRAM2RSTS                    \ AHBSRAM2 reset
-$00000080 constant RCC_RCC_MEMRSTSR_AXISRAM1RSTS                    \ AXISRAM1 reset
-$00000100 constant RCC_RCC_MEMRSTSR_AXISRAM2RSTS                    \ AXISRAM2 reset
-$00000200 constant RCC_RCC_MEMRSTSR_FLEXRAMRSTS                     \ FLEXRAM reset
-$00000400 constant RCC_RCC_MEMRSTSR_NPUCACHERAMRSTS                 \ NPUCACHERAM reset
-$00000800 constant RCC_RCC_MEMRSTSR_VENCRAMRSTS                     \ VENCRAM reset
-$00001000 constant RCC_RCC_MEMRSTSR_BOOTROMRSTS                     \ BOOTROM reset
-
-
-\
-\ @brief RCC AHB1 reset register
-\ Address offset: 0xA10
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1RSTSR_GPDMA1RSTS                     \ GPDMA1 reset
-$00000020 constant RCC_RCC_AHB1RSTSR_ADC12RSTS                      \ ADC12 reset
-
-
-\
-\ @brief RCC AHB2 reset register
-\ Address offset: 0xA14
-\ Reset value: 0x00000000
-\
-
-$00001000 constant RCC_RCC_AHB2RSTSR_RAMCFGRSTS                     \ RAMCFG reset
-$00010000 constant RCC_RCC_AHB2RSTSR_MDF1RSTS                       \ MDF1 reset
-$00020000 constant RCC_RCC_AHB2RSTSR_ADF1RSTS                       \ ADF1 reset
-
-
-\
-\ @brief RCC AHB3 reset register
-\ Address offset: 0xA18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB3RSTSR_RNGRSTS                        \ RNG reset
-$00000002 constant RCC_RCC_AHB3RSTSR_HASHRSTS                       \ HASH reset
-$00000004 constant RCC_RCC_AHB3RSTSR_CRYPRSTS                       \ CRYP reset
-$00000010 constant RCC_RCC_AHB3RSTSR_SAESRSTS                       \ SAES reset
-$00000100 constant RCC_RCC_AHB3RSTSR_PKARSTS                        \ PKA reset
-$00000400 constant RCC_RCC_AHB3RSTSR_IACRSTS                        \ IAC reset
-
-
-\
-\ @brief RCC AHB4 reset register
-\ Address offset: 0xA1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB4RSTSR_GPIOARSTS                      \ GPIOA reset
-$00000002 constant RCC_RCC_AHB4RSTSR_GPIOBRSTS                      \ GPIOB reset
-$00000004 constant RCC_RCC_AHB4RSTSR_GPIOCRSTS                      \ GPIOC reset
-$00000008 constant RCC_RCC_AHB4RSTSR_GPIODRSTS                      \ GPIOD reset
-$00000010 constant RCC_RCC_AHB4RSTSR_GPIOERSTS                      \ GPIOE reset
-$00000020 constant RCC_RCC_AHB4RSTSR_GPIOFRSTS                      \ GPIOF reset
-$00000040 constant RCC_RCC_AHB4RSTSR_GPIOGRSTS                      \ GPIOG reset
-$00000080 constant RCC_RCC_AHB4RSTSR_GPIOHRSTS                      \ GPIOH reset
-$00002000 constant RCC_RCC_AHB4RSTSR_GPIONRSTS                      \ GPION reset
-$00004000 constant RCC_RCC_AHB4RSTSR_GPIOORSTS                      \ GPIOO reset
-$00008000 constant RCC_RCC_AHB4RSTSR_GPIOPRSTS                      \ GPIOP reset
-$00010000 constant RCC_RCC_AHB4RSTSR_GPIOQRSTS                      \ GPIOQ reset
-$00040000 constant RCC_RCC_AHB4RSTSR_PWRRSTS                        \ PWR reset
-$00080000 constant RCC_RCC_AHB4RSTSR_CRCRSTS                        \ CRC reset
-
-
-\
-\ @brief RCC AHB5 reset register
-\ Address offset: 0xA20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5RSTSR_HPDMA1RSTS                     \ HPDMA1 reset
-$00000002 constant RCC_RCC_AHB5RSTSR_DMA2DRSTS                      \ DMA2D reset
-$00000008 constant RCC_RCC_AHB5RSTSR_JPEGRSTS                       \ JPEG reset
-$00000010 constant RCC_RCC_AHB5RSTSR_FMCRSTS                        \ FMC reset
-$00000020 constant RCC_RCC_AHB5RSTSR_XSPI1RSTS                      \ XSPI1 reset
-$00000040 constant RCC_RCC_AHB5RSTSR_PSSIRSTS                       \ PSSI reset
-$00000080 constant RCC_RCC_AHB5RSTSR_SDMMC2RSTS                     \ SDMMC2 reset
-$00000100 constant RCC_RCC_AHB5RSTSR_SDMMC1RSTS                     \ SDMMC1 reset
-$00001000 constant RCC_RCC_AHB5RSTSR_XSPI2RSTS                      \ XSPI2 reset
-$00002000 constant RCC_RCC_AHB5RSTSR_XSPIMRSTS                      \ XSPIM reset
-$00020000 constant RCC_RCC_AHB5RSTSR_XSPI3RSTS                      \ XSPI3 reset
-$00040000 constant RCC_RCC_AHB5RSTSR_MCE4RSTS                       \ MCE4 reset
-$00080000 constant RCC_RCC_AHB5RSTSR_GFXMMURSTS                     \ GFXMMU reset
-$00100000 constant RCC_RCC_AHB5RSTSR_GPURSTS                        \ GPU reset
-$00800000 constant RCC_RCC_AHB5RSTSR_SYSCFGOTGHSPHY1RSTS            \ SYSCFGOTGHSPHY1 reset
-$01000000 constant RCC_RCC_AHB5RSTSR_SYSCFGOTGHSPHY2RSTS            \ SYSCFGOTGHSPHY2 reset
-$02000000 constant RCC_RCC_AHB5RSTSR_ETH1RSTS                       \ ETH1 reset
-$04000000 constant RCC_RCC_AHB5RSTSR_OTG1RSTS                       \ OTG1 reset
-$08000000 constant RCC_RCC_AHB5RSTSR_OTGPHY1RSTS                    \ OTGPHY1 reset
-$10000000 constant RCC_RCC_AHB5RSTSR_OTGPHY2RSTS                    \ OTGPHY2 reset
-$20000000 constant RCC_RCC_AHB5RSTSR_OTG2RSTS                       \ OTG2 reset
-$40000000 constant RCC_RCC_AHB5RSTSR_NPUCACHERSTS                   \ NPUCACHE reset
-$80000000 constant RCC_RCC_AHB5RSTSR_NPURSTS                        \ NPU reset
-
-
-\
-\ @brief RCC APB1L reset register
-\ Address offset: 0xA24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LRSTSR_TIM2RSTS                      \ TIM2 reset
-$00000002 constant RCC_RCC_APB1LRSTSR_TIM3RSTS                      \ TIM3 reset
-$00000004 constant RCC_RCC_APB1LRSTSR_TIM4RSTS                      \ TIM4 reset
-$00000008 constant RCC_RCC_APB1LRSTSR_TIM5RSTS                      \ TIM5 reset
-$00000010 constant RCC_RCC_APB1LRSTSR_TIM6RSTS                      \ TIM6 reset
-$00000020 constant RCC_RCC_APB1LRSTSR_TIM7RSTS                      \ TIM7 reset
-$00000040 constant RCC_RCC_APB1LRSTSR_TIM12RSTS                     \ TIM12 reset
-$00000080 constant RCC_RCC_APB1LRSTSR_TIM13RSTS                     \ TIM13 reset
-$00000100 constant RCC_RCC_APB1LRSTSR_TIM14RSTS                     \ TIM14 reset
-$00000200 constant RCC_RCC_APB1LRSTSR_LPTIM1RSTS                    \ LPTIM1 reset
-$00000800 constant RCC_RCC_APB1LRSTSR_WWDGRSTS                      \ WWDG reset
-$00001000 constant RCC_RCC_APB1LRSTSR_TIM10RSTS                     \ TIM10 reset
-$00002000 constant RCC_RCC_APB1LRSTSR_TIM11RSTS                     \ TIM11 reset
-$00004000 constant RCC_RCC_APB1LRSTSR_SPI2RSTS                      \ SPI2 reset
-$00008000 constant RCC_RCC_APB1LRSTSR_SPI3RSTS                      \ SPI3 reset
-$00010000 constant RCC_RCC_APB1LRSTSR_SPDIFRX1RSTS                  \ SPDIFRX1 reset
-$00020000 constant RCC_RCC_APB1LRSTSR_USART2RSTS                    \ USART2 reset
-$00040000 constant RCC_RCC_APB1LRSTSR_USART3RSTS                    \ USART3 reset
-$00080000 constant RCC_RCC_APB1LRSTSR_UART4RSTS                     \ UART4 reset
-$00100000 constant RCC_RCC_APB1LRSTSR_UART5RSTS                     \ UART5 reset
-$00200000 constant RCC_RCC_APB1LRSTSR_I2C1RSTS                      \ I2C1 reset
-$00400000 constant RCC_RCC_APB1LRSTSR_I2C2RSTS                      \ I2C2 reset
-$00800000 constant RCC_RCC_APB1LRSTSR_I2C3RSTS                      \ I2C3 reset
-$01000000 constant RCC_RCC_APB1LRSTSR_I3C1RSTS                      \ I3C1 reset
-$02000000 constant RCC_RCC_APB1LRSTSR_I3C2RSTS                      \ I3C2 reset
-$40000000 constant RCC_RCC_APB1LRSTSR_UART7RSTS                     \ UART7 reset
-$80000000 constant RCC_RCC_APB1LRSTSR_UART8RSTS                     \ UART8 reset
-
-
-\
-\ @brief RCC APB1H reset register
-\ Address offset: 0xA28
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HRSTSR_MDIOSRSTS                     \ MDIOS reset
-$00000100 constant RCC_RCC_APB1HRSTSR_FDCANRSTS                     \ FDCAN reset
-$00040000 constant RCC_RCC_APB1HRSTSR_UCPD1RSTS                     \ UCPD1 reset
-
-
-\
-\ @brief RCC APB2 reset register
-\ Address offset: 0xA2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2RSTSR_TIM1RSTS                       \ TIM1 reset
-$00000002 constant RCC_RCC_APB2RSTSR_TIM8RSTS                       \ TIM8 reset
-$00000010 constant RCC_RCC_APB2RSTSR_USART1RSTS                     \ USART1 reset
-$00000020 constant RCC_RCC_APB2RSTSR_USART6RSTS                     \ USART6 reset
-$00000040 constant RCC_RCC_APB2RSTSR_UART9RSTS                      \ UART9 reset
-$00000080 constant RCC_RCC_APB2RSTSR_USART10RSTS                    \ USART10 reset
-$00001000 constant RCC_RCC_APB2RSTSR_SPI1RSTS                       \ SPI1 reset
-$00002000 constant RCC_RCC_APB2RSTSR_SPI4RSTS                       \ SPI4 reset
-$00008000 constant RCC_RCC_APB2RSTSR_TIM18RSTS                      \ TIM18 reset
-$00010000 constant RCC_RCC_APB2RSTSR_TIM15RSTS                      \ TIM15 reset
-$00020000 constant RCC_RCC_APB2RSTSR_TIM16RSTS                      \ TIM16 reset
-$00040000 constant RCC_RCC_APB2RSTSR_TIM17RSTS                      \ TIM17 reset
-$00080000 constant RCC_RCC_APB2RSTSR_TIM9RSTS                       \ TIM9 reset
-$00100000 constant RCC_RCC_APB2RSTSR_SPI5RSTS                       \ SPI5 reset
-$00200000 constant RCC_RCC_APB2RSTSR_SAI1RSTS                       \ SAI1 reset
-$00400000 constant RCC_RCC_APB2RSTSR_SAI2RSTS                       \ SAI2 reset
-
-
-\
-\ @brief RCC APB4L reset register
-\ Address offset: 0xA34
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LRSTSR_HDPRSTS                       \ HDP reset
-$00000008 constant RCC_RCC_APB4LRSTSR_LPUART1RSTS                   \ LPUART1 reset
-$00000020 constant RCC_RCC_APB4LRSTSR_SPI6RSTS                      \ SPI6 reset
-$00000080 constant RCC_RCC_APB4LRSTSR_I2C4RSTS                      \ I2C4 reset
-$00000200 constant RCC_RCC_APB4LRSTSR_LPTIM2RSTS                    \ LPTIM2 reset
-$00000400 constant RCC_RCC_APB4LRSTSR_LPTIM3RSTS                    \ LPTIM3 reset
-$00000800 constant RCC_RCC_APB4LRSTSR_LPTIM4RSTS                    \ LPTIM4 reset
-$00001000 constant RCC_RCC_APB4LRSTSR_LPTIM5RSTS                    \ LPTIM5 reset
-$00008000 constant RCC_RCC_APB4LRSTSR_VREFBUFRSTS                   \ VREFBUF reset
-$00010000 constant RCC_RCC_APB4LRSTSR_RTCRSTS                       \ RTC reset
-$00400000 constant RCC_RCC_APB4LRSTSR_R2GRETRSTS                    \ R2GRET reset
-$00800000 constant RCC_RCC_APB4LRSTSR_R2GNPURSTS                    \ R2GNPU reset
-$80000000 constant RCC_RCC_APB4LRSTSR_SERFRSTS                      \ SERF reset
-
-
-\
-\ @brief RCC APB4H reset register
-\ Address offset: 0xA38
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB4HRSTSR_SYSCFGRSTS                    \ SYSCFG reset
-$00000004 constant RCC_RCC_APB4HRSTSR_DTSRSTS                       \ DTS reset
-$00000010 constant RCC_RCC_APB4HRSTSR_BUSPERFMRSTS                  \ BUSPERFM reset
-
-
-\
-\ @brief RCC APB5 reset register
-\ Address offset: 0xA3C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5RSTSR_LTDCRSTS                       \ LTDC reset
-$00000004 constant RCC_RCC_APB5RSTSR_DCMIPPRSTS                     \ DCMIPP reset
-$00000010 constant RCC_RCC_APB5RSTSR_GFXTIMRSTS                     \ GFXTIM reset
-$00000020 constant RCC_RCC_APB5RSTSR_VENCRSTS                       \ VENC reset
-$00000040 constant RCC_RCC_APB5RSTSR_CSIRSTS                        \ CSI reset
-
-
-\
-\ @brief RCC Divider enable register
-\ Address offset: 0xA40
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_DIVENSR_IC1ENS                           \ IC1 enable
-$00000002 constant RCC_RCC_DIVENSR_IC2ENS                           \ IC2 enable
-$00000004 constant RCC_RCC_DIVENSR_IC3ENS                           \ IC3 enable
-$00000008 constant RCC_RCC_DIVENSR_IC4ENS                           \ IC4 enable
-$00000010 constant RCC_RCC_DIVENSR_IC5ENS                           \ IC5 enable
-$00000020 constant RCC_RCC_DIVENSR_IC6ENS                           \ IC6 enable
-$00000040 constant RCC_RCC_DIVENSR_IC7ENS                           \ IC7 enable
-$00000080 constant RCC_RCC_DIVENSR_IC8ENS                           \ IC8 enable
-$00000100 constant RCC_RCC_DIVENSR_IC9ENS                           \ IC9 enable
-$00000200 constant RCC_RCC_DIVENSR_IC10ENS                          \ IC10 enable
-$00000400 constant RCC_RCC_DIVENSR_IC11ENS                          \ IC11 enable
-$00000800 constant RCC_RCC_DIVENSR_IC12ENS                          \ IC12 enable
-$00001000 constant RCC_RCC_DIVENSR_IC13ENS                          \ IC13 enable
-$00002000 constant RCC_RCC_DIVENSR_IC14ENS                          \ IC14 enable
-$00004000 constant RCC_RCC_DIVENSR_IC15ENS                          \ IC15 enable
-$00008000 constant RCC_RCC_DIVENSR_IC16ENS                          \ IC16 enable
-$00010000 constant RCC_RCC_DIVENSR_IC17ENS                          \ IC17 enable
-$00020000 constant RCC_RCC_DIVENSR_IC18ENS                          \ IC18 enable
-$00040000 constant RCC_RCC_DIVENSR_IC19ENS                          \ IC19 enable
-$00080000 constant RCC_RCC_DIVENSR_IC20ENS                          \ IC20 enable
-
-
-\
-\ @brief RCC bus enable register
-\ Address offset: 0xA44
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_BUSENSR_ACLKNENS                         \ ACLKN enable
-$00000002 constant RCC_RCC_BUSENSR_ACLKNCENS                        \ ACLKNC enable
-$00000004 constant RCC_RCC_BUSENSR_AHBMENS                          \ AHBM enable
-$00000008 constant RCC_RCC_BUSENSR_AHB1ENS                          \ AHB1 enable
-$00000010 constant RCC_RCC_BUSENSR_AHB2ENS                          \ AHB2 enable
-$00000020 constant RCC_RCC_BUSENSR_AHB3ENS                          \ AHB3 enable
-$00000040 constant RCC_RCC_BUSENSR_AHB4ENS                          \ AHB4 enable
-$00000080 constant RCC_RCC_BUSENSR_AHB5ENS                          \ AHB5 enable
-$00000100 constant RCC_RCC_BUSENSR_APB1ENS                          \ APB1 enable
-$00000200 constant RCC_RCC_BUSENSR_APB2ENS                          \ APB2 enable
-$00000400 constant RCC_RCC_BUSENSR_APB3ENS                          \ APB3 enable
-$00000800 constant RCC_RCC_BUSENSR_APB4ENS                          \ APB4 enable
-$00001000 constant RCC_RCC_BUSENSR_APB5ENS                          \ APB5 enable
-
-
-\
-\ @brief RCC miscellaneous enable register
-\ Address offset: 0xA48
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCENSR_DBGENS                          \ DBG enable
-$00000002 constant RCC_RCC_MISCENSR_MCO1ENS                         \ MCO1 enable
-$00000004 constant RCC_RCC_MISCENSR_MCO2ENS                         \ MCO2 enable
-$00000008 constant RCC_RCC_MISCENSR_XSPIPHYCOMPENS                  \ XSPIPHYCOMP enable
-$00000040 constant RCC_RCC_MISCENSR_PERENS                          \ PER enable
-
-
-\
-\ @brief RCC memory enable register
-\ Address offset: 0xA4C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MEMENSR_AXISRAM3ENS                      \ AXISRAM3 enable
-$00000002 constant RCC_RCC_MEMENSR_AXISRAM4ENS                      \ AXISRAM4 enable
-$00000004 constant RCC_RCC_MEMENSR_AXISRAM5ENS                      \ AXISRAM5 enable
-$00000008 constant RCC_RCC_MEMENSR_AXISRAM6ENS                      \ AXISRAM6 enable
-$00000010 constant RCC_RCC_MEMENSR_AHBSRAM1ENS                      \ AHBSRAM1 enable
-$00000020 constant RCC_RCC_MEMENSR_AHBSRAM2ENS                      \ AHBSRAM2 enable
-$00000040 constant RCC_RCC_MEMENSR_BKPSRAMENS                       \ BKPSRAM enable
-$00000080 constant RCC_RCC_MEMENSR_AXISRAM1ENS                      \ AXISRAM1 enable
-$00000100 constant RCC_RCC_MEMENSR_AXISRAM2ENS                      \ AXISRAM2 enable
-$00000200 constant RCC_RCC_MEMENSR_FLEXRAMENS                       \ FLEXRAM enable
-$00000400 constant RCC_RCC_MEMENSR_NPUCACHERAMENS                   \ NPUCACHERAM enable
-$00000800 constant RCC_RCC_MEMENSR_VENCRAMENS                       \ VENCRAM enable
-$00001000 constant RCC_RCC_MEMENSR_BOOTROMENS                       \ BOOTROM enable
-
-
-\
-\ @brief RCC AHB1 enable register
-\ Address offset: 0xA50
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1ENSR_GPDMA1ENS                       \ GPDMA1 enable
-$00000020 constant RCC_RCC_AHB1ENSR_ADC12ENS                        \ ADC12 enable
-
-
-\
-\ @brief RCC AHB2 enable register
-\ Address offset: 0xA54
-\ Reset value: 0x00000000
-\
-
-$00001000 constant RCC_RCC_AHB2ENSR_RAMCFGENS                       \ RAMCFG enable
-$00010000 constant RCC_RCC_AHB2ENSR_MDF1ENS                         \ MDF1 enable
-$00020000 constant RCC_RCC_AHB2ENSR_ADF1ENS                         \ ADF1 enable
-
-
-\
-\ @brief RCC AHB3 enable register
-\ Address offset: 0xA58
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB3ENSR_RNGENS                          \ RNG enable
-$00000002 constant RCC_RCC_AHB3ENSR_HASHENS                         \ HASH enable
-$00000004 constant RCC_RCC_AHB3ENSR_CRYPENS                         \ CRYP enable
-$00000010 constant RCC_RCC_AHB3ENSR_SAESENS                         \ SAES enable
-$00000100 constant RCC_RCC_AHB3ENSR_PKAENS                          \ PKA enable
-$00000200 constant RCC_RCC_AHB3ENSR_RIFSCENS                        \ RIFSC enable
-$00000400 constant RCC_RCC_AHB3ENSR_IACENS                          \ IAC enable
-$00004000 constant RCC_RCC_AHB3ENSR_RISAFENS                        \ RISAF enable
-
-
-\
-\ @brief RCC AHB4 enable register
-\ Address offset: 0xA5C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB4ENSR_GPIOAENS                        \ GPIOA enable
-$00000002 constant RCC_RCC_AHB4ENSR_GPIOBENS                        \ GPIOB enable
-$00000004 constant RCC_RCC_AHB4ENSR_GPIOCENS                        \ GPIOC enable
-$00000008 constant RCC_RCC_AHB4ENSR_GPIODENS                        \ GPIOD enable
-$00000010 constant RCC_RCC_AHB4ENSR_GPIOEENS                        \ GPIOE enable
-$00000020 constant RCC_RCC_AHB4ENSR_GPIOFENS                        \ GPIOF enable
-$00000040 constant RCC_RCC_AHB4ENSR_GPIOGENS                        \ GPIOG enable
-$00000080 constant RCC_RCC_AHB4ENSR_GPIOHENS                        \ GPIOH enable
-$00002000 constant RCC_RCC_AHB4ENSR_GPIONENS                        \ GPION enable
-$00004000 constant RCC_RCC_AHB4ENSR_GPIOOENS                        \ GPIOO enable
-$00008000 constant RCC_RCC_AHB4ENSR_GPIOPENS                        \ GPIOP enable
-$00010000 constant RCC_RCC_AHB4ENSR_GPIOQENS                        \ GPIOQ enable
-$00040000 constant RCC_RCC_AHB4ENSR_PWRENS                          \ PWR enable
-$00080000 constant RCC_RCC_AHB4ENSR_CRCENS                          \ CRC enable
-
-
-\
-\ @brief RCC AHB5 enable register
-\ Address offset: 0xA60
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5ENSR_HPDMA1ENS                       \ HPDMA1 enable
-$00000002 constant RCC_RCC_AHB5ENSR_DMA2DENS                        \ DMA2D enable
-$00000008 constant RCC_RCC_AHB5ENSR_JPEGENS                         \ JPEG enable
-$00000010 constant RCC_RCC_AHB5ENSR_FMCENS                          \ FMC enable
-$00000020 constant RCC_RCC_AHB5ENSR_XSPI1ENS                        \ XSPI1 enable
-$00000040 constant RCC_RCC_AHB5ENSR_PSSIENS                         \ PSSI enable
-$00000080 constant RCC_RCC_AHB5ENSR_SDMMC2ENS                       \ SDMMC2 enable
-$00000100 constant RCC_RCC_AHB5ENSR_SDMMC1ENS                       \ SDMMC1 enable
-$00001000 constant RCC_RCC_AHB5ENSR_XSPI2ENS                        \ XSPI2 enable
-$00002000 constant RCC_RCC_AHB5ENSR_XSPIMENS                        \ XSPIM enable
-$00004000 constant RCC_RCC_AHB5ENSR_MCE1ENS                         \ MCE1 enable
-$00008000 constant RCC_RCC_AHB5ENSR_MCE2ENS                         \ MCE2 enable
-$00010000 constant RCC_RCC_AHB5ENSR_MCE3ENS                         \ MCE3 enable
-$00020000 constant RCC_RCC_AHB5ENSR_XSPI3ENS                        \ XSPI3 enable
-$00040000 constant RCC_RCC_AHB5ENSR_MCE4ENS                         \ MCE4 enable
-$00080000 constant RCC_RCC_AHB5ENSR_GFXMMUENS                       \ GFXMMU enable
-$00100000 constant RCC_RCC_AHB5ENSR_GPUENS                          \ GPU enable
-$00400000 constant RCC_RCC_AHB5ENSR_ETH1MACENS                      \ ETH1MAC enable
-$00800000 constant RCC_RCC_AHB5ENSR_ETH1TXENS                       \ ETH1TX enable
-$01000000 constant RCC_RCC_AHB5ENSR_ETH1RXENS                       \ ETH1RX enable
-$02000000 constant RCC_RCC_AHB5ENSR_ETH1ENS                         \ ETH1 enable
-$04000000 constant RCC_RCC_AHB5ENSR_OTG1ENS                         \ OTG1 enable
-$08000000 constant RCC_RCC_AHB5ENSR_OTGPHY1ENS                      \ OTGPHY1 enable
-$10000000 constant RCC_RCC_AHB5ENSR_OTGPHY2ENS                      \ OTGPHY2 enable
-$20000000 constant RCC_RCC_AHB5ENSR_OTG2ENS                         \ OTG2 enable
-$40000000 constant RCC_RCC_AHB5ENSR_NPUCACHEENS                     \ NPUCACHE enable
-$80000000 constant RCC_RCC_AHB5ENSR_NPUENS                          \ NPU enable
-
-
-\
-\ @brief RCC APB1L enable register
-\ Address offset: 0xA64
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LENSR_TIM2ENS                        \ TIM2 enable
-$00000002 constant RCC_RCC_APB1LENSR_TIM3ENS                        \ TIM3 enable
-$00000004 constant RCC_RCC_APB1LENSR_TIM4ENS                        \ TIM4 enable
-$00000008 constant RCC_RCC_APB1LENSR_TIM5ENS                        \ TIM5 enable
-$00000010 constant RCC_RCC_APB1LENSR_TIM6ENS                        \ TIM6 enable
-$00000020 constant RCC_RCC_APB1LENSR_TIM7ENS                        \ TIM7 enable
-$00000040 constant RCC_RCC_APB1LENSR_TIM12ENS                       \ TIM12 enable
-$00000080 constant RCC_RCC_APB1LENSR_TIM13ENS                       \ TIM13 enable
-$00000100 constant RCC_RCC_APB1LENSR_TIM14ENS                       \ TIM14 enable
-$00000200 constant RCC_RCC_APB1LENSR_LPTIM1ENS                      \ LPTIM1 enable
-$00000800 constant RCC_RCC_APB1LENSR_WWDGENS                        \ WWDG enable
-$00001000 constant RCC_RCC_APB1LENSR_TIM10ENS                       \ TIM10 enable
-$00002000 constant RCC_RCC_APB1LENSR_TIM11ENS                       \ TIM11 enable
-$00004000 constant RCC_RCC_APB1LENSR_SPI2ENS                        \ SPI2 enable
-$00008000 constant RCC_RCC_APB1LENSR_SPI3ENS                        \ SPI3 enable
-$00010000 constant RCC_RCC_APB1LENSR_SPDIFRX1ENS                    \ SPDIFRX1 enable
-$00020000 constant RCC_RCC_APB1LENSR_USART2ENS                      \ USART2 enable
-$00040000 constant RCC_RCC_APB1LENSR_USART3ENS                      \ USART3 enable
-$00080000 constant RCC_RCC_APB1LENSR_UART4ENS                       \ UART4 enable
-$00100000 constant RCC_RCC_APB1LENSR_UART5ENS                       \ UART5 enable
-$00200000 constant RCC_RCC_APB1LENSR_I2C1ENS                        \ I2C1 enable
-$00400000 constant RCC_RCC_APB1LENSR_I2C2ENS                        \ I2C2 enable
-$00800000 constant RCC_RCC_APB1LENSR_I2C3ENS                        \ I2C3 enable
-$01000000 constant RCC_RCC_APB1LENSR_I3C1ENS                        \ I3C1 enable
-$02000000 constant RCC_RCC_APB1LENSR_I3C2ENS                        \ I3C2 enable
-$40000000 constant RCC_RCC_APB1LENSR_UART7ENS                       \ UART7 enable
-$80000000 constant RCC_RCC_APB1LENSR_UART8ENS                       \ UART8 enable
-
-
-\
-\ @brief RCC APB1H enable register
-\ Address offset: 0xA68
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HENSR_MDIOSENS                       \ MDIOS enable
-$00000100 constant RCC_RCC_APB1HENSR_FDCANENS                       \ FDCAN enable
-$00040000 constant RCC_RCC_APB1HENSR_UCPD1ENS                       \ UCPD1 enable
-
-
-\
-\ @brief RCC APB2 enable register
-\ Address offset: 0xA6C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2ENSR_TIM1ENS                         \ TIM1 enable
-$00000002 constant RCC_RCC_APB2ENSR_TIM8ENS                         \ TIM8 enable
-$00000010 constant RCC_RCC_APB2ENSR_USART1ENS                       \ USART1 enable
-$00000020 constant RCC_RCC_APB2ENSR_USART6ENS                       \ USART6 enable
-$00000040 constant RCC_RCC_APB2ENSR_UART9ENS                        \ UART9 enable
-$00000080 constant RCC_RCC_APB2ENSR_USART10ENS                      \ USART10 enable
-$00001000 constant RCC_RCC_APB2ENSR_SPI1ENS                         \ SPI1 enable
-$00002000 constant RCC_RCC_APB2ENSR_SPI4ENS                         \ SPI4 enable
-$00008000 constant RCC_RCC_APB2ENSR_TIM18ENS                        \ TIM18 enable
-$00010000 constant RCC_RCC_APB2ENSR_TIM15ENS                        \ TIM15 enable
-$00020000 constant RCC_RCC_APB2ENSR_TIM16ENS                        \ TIM16 enable
-$00040000 constant RCC_RCC_APB2ENSR_TIM17ENS                        \ TIM17 enable
-$00080000 constant RCC_RCC_APB2ENSR_TIM9ENS                         \ TIM9 enable
-$00100000 constant RCC_RCC_APB2ENSR_SPI5ENS                         \ SPI5 enable
-$00200000 constant RCC_RCC_APB2ENSR_SAI1ENS                         \ SAI1 enable
-$00400000 constant RCC_RCC_APB2ENSR_SAI2ENS                         \ SAI2 enable
-
-
-\
-\ @brief RCC APB3 enable register
-\ Address offset: 0xA70
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB3ENSR_DFTENS                          \ DFT enable
-
-
-\
-\ @brief RCC APB4L enable register
-\ Address offset: 0xA74
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LENSR_HDPENS                         \ HDP enable
-$00000008 constant RCC_RCC_APB4LENSR_LPUART1ENS                     \ LPUART1 enable
-$00000020 constant RCC_RCC_APB4LENSR_SPI6ENS                        \ SPI6 enable
-$00000080 constant RCC_RCC_APB4LENSR_I2C4ENS                        \ I2C4 enable
-$00000200 constant RCC_RCC_APB4LENSR_LPTIM2ENS                      \ LPTIM2 enable
-$00000400 constant RCC_RCC_APB4LENSR_LPTIM3ENS                      \ LPTIM3 enable
-$00000800 constant RCC_RCC_APB4LENSR_LPTIM4ENS                      \ LPTIM4 enable
-$00001000 constant RCC_RCC_APB4LENSR_LPTIM5ENS                      \ LPTIM5 enable
-$00008000 constant RCC_RCC_APB4LENSR_VREFBUFENS                     \ VREFBUF enable
-$00010000 constant RCC_RCC_APB4LENSR_RTCENS                         \ RTC enable
-$00020000 constant RCC_RCC_APB4LENSR_RTCAPBENS                      \ RTCAPB enable
-$00400000 constant RCC_RCC_APB4LENSR_R2GRETENS                      \ R2GRET enable
-$00800000 constant RCC_RCC_APB4LENSR_R2GNPUENS                      \ R2GNPU enable
-$80000000 constant RCC_RCC_APB4LENSR_SERFENS                        \ SERF enable
-
-
-\
-\ @brief RCC APB4H enable register
-\ Address offset: 0xA78
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB4HENSR_SYSCFGENS                      \ SYSCFG enable
-$00000002 constant RCC_RCC_APB4HENSR_BSECENS                        \ BSEC enable
-$00000004 constant RCC_RCC_APB4HENSR_DTSENS                         \ DTS enable
-$00000010 constant RCC_RCC_APB4HENSR_BUSPERFMENS                    \ BUSPERFM enable
-
-
-\
-\ @brief RCC APB5 enable register
-\ Address offset: 0xA7C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5ENSR_LTDCENS                         \ LTDC enable
-$00000004 constant RCC_RCC_APB5ENSR_DCMIPPENS                       \ DCMIPP enable
-$00000010 constant RCC_RCC_APB5ENSR_GFXTIMENS                       \ GFXTIM enable
-$00000020 constant RCC_RCC_APB5ENSR_VENCENS                         \ VENC enable
-$00000040 constant RCC_RCC_APB5ENSR_CSIENS                          \ CSI enable
-
-
-\
-\ @brief RCC divider Sleep enable register
-\ Address offset: 0xA80
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_DIVLPENSR_IC1LPENS                       \ IC1 sleep enable
-$00000002 constant RCC_RCC_DIVLPENSR_IC2LPENS                       \ IC2 sleep enable
-$00000004 constant RCC_RCC_DIVLPENSR_IC3LPENS                       \ IC3 sleep enable
-$00000008 constant RCC_RCC_DIVLPENSR_IC4LPENS                       \ IC4 sleep enable
-$00000010 constant RCC_RCC_DIVLPENSR_IC5LPENS                       \ IC5 sleep enable
-$00000020 constant RCC_RCC_DIVLPENSR_IC6LPENS                       \ IC6 sleep enable
-$00000040 constant RCC_RCC_DIVLPENSR_IC7LPENS                       \ IC7 sleep enable
-$00000080 constant RCC_RCC_DIVLPENSR_IC8LPENS                       \ IC8 sleep enable
-$00000100 constant RCC_RCC_DIVLPENSR_IC9LPENS                       \ IC9 sleep enable
-$00000200 constant RCC_RCC_DIVLPENSR_IC10LPENS                      \ IC10 sleep enable
-$00000400 constant RCC_RCC_DIVLPENSR_IC11LPENS                      \ IC11 sleep enable
-$00000800 constant RCC_RCC_DIVLPENSR_IC12LPENS                      \ IC12 sleep enable
-$00001000 constant RCC_RCC_DIVLPENSR_IC13LPENS                      \ IC13 sleep enable
-$00002000 constant RCC_RCC_DIVLPENSR_IC14LPENS                      \ IC14 sleep enable
-$00004000 constant RCC_RCC_DIVLPENSR_IC15LPENS                      \ IC15 sleep enable
-$00008000 constant RCC_RCC_DIVLPENSR_IC16LPENS                      \ IC16 sleep enable
-$00010000 constant RCC_RCC_DIVLPENSR_IC17LPENS                      \ IC17 sleep enable
-$00020000 constant RCC_RCC_DIVLPENSR_IC18LPENS                      \ IC18 sleep enable
-$00040000 constant RCC_RCC_DIVLPENSR_IC19LPENS                      \ IC19 sleep enable
-$00080000 constant RCC_RCC_DIVLPENSR_IC20LPENS                      \ IC20 sleep enable
-
-
-\
-\ @brief RCC bus Sleep enable register
-\ Address offset: 0xA84
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_BUSLPENSR_ACLKNLPENS                     \ ACLKN sleep enable
-$00000002 constant RCC_RCC_BUSLPENSR_ACLKNCLPENS                    \ ACLKNC sleep enable
-$00000004 constant RCC_RCC_BUSLPENSR_AHBMLPENS                      \ AHBM sleep enable
-$00000008 constant RCC_RCC_BUSLPENSR_AHB1LPENS                      \ AHB1 sleep enable
-$00000010 constant RCC_RCC_BUSLPENSR_AHB2LPENS                      \ AHB2 sleep enable
-$00000020 constant RCC_RCC_BUSLPENSR_AHB3LPENS                      \ AHB3 sleep enable
-$00000040 constant RCC_RCC_BUSLPENSR_AHB4LPENS                      \ AHB4 sleep enable
-$00000080 constant RCC_RCC_BUSLPENSR_AHB5LPENS                      \ AHB5 sleep enable
-$00000100 constant RCC_RCC_BUSLPENSR_APB1LPENS                      \ APB1 sleep enable
-$00000200 constant RCC_RCC_BUSLPENSR_APB2LPENS                      \ APB2 sleep enable
-$00000400 constant RCC_RCC_BUSLPENSR_APB3LPENS                      \ APB3 sleep enable
-$00000800 constant RCC_RCC_BUSLPENSR_APB4LPENS                      \ APB4 sleep enable
-$00001000 constant RCC_RCC_BUSLPENSR_APB5LPENS                      \ APB5 sleep enable
-
-
-\
-\ @brief RCC miscellaneous Sleep enable register
-\ Address offset: 0xA88
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCLPENSR_DBGLPENS                      \ DBG sleep enable
-$00000008 constant RCC_RCC_MISCLPENSR_XSPIPHYCOMPLPENS              \ XSPIPHYCOMP sleep enable
-$00000040 constant RCC_RCC_MISCLPENSR_PERLPENS                      \ PER sleep enable
-
-
-\
-\ @brief RCC memory sleep enable register
-\ Address offset: 0xA8C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MEMLPENSR_AXISRAM3LPENS                  \ AXISRAM3 sleep enable
-$00000002 constant RCC_RCC_MEMLPENSR_AXISRAM4LPENS                  \ AXISRAM4 sleep enable
-$00000004 constant RCC_RCC_MEMLPENSR_AXISRAM5LPENS                  \ AXISRAM5 sleep enable
-$00000008 constant RCC_RCC_MEMLPENSR_AXISRAM6LPENS                  \ AXISRAM6 sleep enable
-$00000010 constant RCC_RCC_MEMLPENSR_AHBSRAM1LPENS                  \ AHBSRAM1 sleep enable
-$00000020 constant RCC_RCC_MEMLPENSR_AHBSRAM2LPENS                  \ AHBSRAM2 sleep enable
-$00000040 constant RCC_RCC_MEMLPENSR_BKPSRAMLPENS                   \ BKPSRAM sleep enable
-$00000080 constant RCC_RCC_MEMLPENSR_AXISRAM1LPENS                  \ AXISRAM1 sleep enable
-$00000100 constant RCC_RCC_MEMLPENSR_AXISRAM2LPENS                  \ AXISRAM2 sleep enable
-$00000200 constant RCC_RCC_MEMLPENSR_FLEXRAMLPENS                   \ FLEXRAM sleep enable
-$00000400 constant RCC_RCC_MEMLPENSR_NPUCACHERAMLPENS               \ NPUCACHERAM sleep enable
-$00000800 constant RCC_RCC_MEMLPENSR_VENCRAMLPENS                   \ VENCRAM sleep enable
-$00001000 constant RCC_RCC_MEMLPENSR_BOOTROMLPENS                   \ BOOTROM sleep enable
-
-
-\
-\ @brief RCC AHB1 Sleep enable register
-\ Address offset: 0xA90
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1LPENSR_GPDMA1LPENS                   \ GPDMA1 sleep enable
-$00000020 constant RCC_RCC_AHB1LPENSR_ADC12LPENS                    \ ADC12 sleep enable
-
-
-\
-\ @brief RCC AHB2 Sleep enable register
-\ Address offset: 0xA94
-\ Reset value: 0x00000000
-\
-
-$00001000 constant RCC_RCC_AHB2LPENSR_RAMCFGLPENS                   \ RAMCFG sleep enable
-$00010000 constant RCC_RCC_AHB2LPENSR_MDF1LPENS                     \ MDF1 sleep enable
-$00020000 constant RCC_RCC_AHB2LPENSR_ADF1LPENS                     \ ADF1 sleep enable
-
-
-\
-\ @brief RCC AHB3 Sleep enable register
-\ Address offset: 0xA98
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB3LPENSR_RNGLPENS                      \ RNG sleep enable
-$00000002 constant RCC_RCC_AHB3LPENSR_HASHLPENS                     \ HASH sleep enable
-$00000004 constant RCC_RCC_AHB3LPENSR_CRYPLPENS                     \ CRYP sleep enable
-$00000010 constant RCC_RCC_AHB3LPENSR_SAESLPENS                     \ SAES sleep enable
-$00000100 constant RCC_RCC_AHB3LPENSR_PKALPENS                      \ PKA sleep enable
-$00000200 constant RCC_RCC_AHB3LPENSR_RIFSCLPENS                    \ RIFSC sleep enable
-$00000400 constant RCC_RCC_AHB3LPENSR_IACLPENS                      \ IAC sleep enable
-$00004000 constant RCC_RCC_AHB3LPENSR_RISAFLPENS                    \ RISAF sleep enable
-
-
-\
-\ @brief RCC AHB4 Sleep enable register
-\ Address offset: 0xA9C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB4LPENSR_GPIOALPENS                    \ GPIOA sleep enable
-$00000002 constant RCC_RCC_AHB4LPENSR_GPIOBLPENS                    \ GPIOB sleep enable
-$00000004 constant RCC_RCC_AHB4LPENSR_GPIOCLPENS                    \ GPIOC sleep enable
-$00000008 constant RCC_RCC_AHB4LPENSR_GPIODLPENS                    \ GPIOD sleep enable
-$00000010 constant RCC_RCC_AHB4LPENSR_GPIOELPENS                    \ GPIOE sleep enable
-$00000020 constant RCC_RCC_AHB4LPENSR_GPIOFLPENS                    \ GPIOF sleep enable
-$00000040 constant RCC_RCC_AHB4LPENSR_GPIOGLPENS                    \ GPIOG sleep enable
-$00000080 constant RCC_RCC_AHB4LPENSR_GPIOHLPENS                    \ GPIOH sleep enable
-$00002000 constant RCC_RCC_AHB4LPENSR_GPIONLPENS                    \ GPION sleep enable
-$00004000 constant RCC_RCC_AHB4LPENSR_GPIOOLPENS                    \ GPIOO sleep enable
-$00008000 constant RCC_RCC_AHB4LPENSR_GPIOPLPENS                    \ GPIOP sleep enable
-$00010000 constant RCC_RCC_AHB4LPENSR_GPIOQLPENS                    \ GPIOQ sleep enable
-$00040000 constant RCC_RCC_AHB4LPENSR_PWRLPENS                      \ PWR sleep enable
-$00080000 constant RCC_RCC_AHB4LPENSR_CRCLPENS                      \ CRC sleep enable
-
-
-\
-\ @brief RCC AHB5 Sleep enable register
-\ Address offset: 0xAA0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5LPENSR_HPDMA1LPENS                   \ HPDMA1 sleep enable
-$00000002 constant RCC_RCC_AHB5LPENSR_DMA2DLPENS                    \ DMA2D sleep enable
-$00000008 constant RCC_RCC_AHB5LPENSR_JPEGLPENS                     \ JPEG sleep enable
-$00000010 constant RCC_RCC_AHB5LPENSR_FMCLPENS                      \ FMC sleep enable
-$00000020 constant RCC_RCC_AHB5LPENSR_XSPI1LPENS                    \ XSPI1 sleep enable
-$00000040 constant RCC_RCC_AHB5LPENSR_PSSILPENS                     \ PSSI sleep enable
-$00000080 constant RCC_RCC_AHB5LPENSR_SDMMC2LPENS                   \ SDMMC2 sleep enable
-$00000100 constant RCC_RCC_AHB5LPENSR_SDMMC1LPENS                   \ SDMMC1 sleep enable
-$00001000 constant RCC_RCC_AHB5LPENSR_XSPI2LPENS                    \ XSPI2 sleep enable
-$00002000 constant RCC_RCC_AHB5LPENSR_XSPIMLPENS                    \ XSPIM sleep enable
-$00004000 constant RCC_RCC_AHB5LPENSR_MCE1LPENS                     \ MCE1 sleep enable
-$00008000 constant RCC_RCC_AHB5LPENSR_MCE2LPENS                     \ MCE2 sleep enable
-$00010000 constant RCC_RCC_AHB5LPENSR_MCE3LPENS                     \ MCE3 sleep enable
-$00020000 constant RCC_RCC_AHB5LPENSR_XSPI3LPENS                    \ XSPI3 sleep enable
-$00040000 constant RCC_RCC_AHB5LPENSR_MCE4LPENS                     \ MCE4 sleep enable
-$00080000 constant RCC_RCC_AHB5LPENSR_GFXMMULPENS                   \ GFXMMU sleep enable
-$00100000 constant RCC_RCC_AHB5LPENSR_GPULPENS                      \ GPU sleep enable
-$00400000 constant RCC_RCC_AHB5LPENSR_ETH1MACLPENS                  \ ETH1MAC sleep enable
-$00800000 constant RCC_RCC_AHB5LPENSR_ETH1TXLPENS                   \ ETH1TX sleep enable
-$01000000 constant RCC_RCC_AHB5LPENSR_ETH1RXLPENS                   \ ETH1RX sleep enable
-$02000000 constant RCC_RCC_AHB5LPENSR_ETH1LPENS                     \ ETH1 sleep enable
-$04000000 constant RCC_RCC_AHB5LPENSR_OTG1LPENS                     \ OTG1 sleep enable
-$08000000 constant RCC_RCC_AHB5LPENSR_OTGPHY1LPENS                  \ OTGPHY1 sleep enable
-$10000000 constant RCC_RCC_AHB5LPENSR_OTGPHY2LPENS                  \ OTGPHY2 sleep enable
-$20000000 constant RCC_RCC_AHB5LPENSR_OTG2LPENS                     \ OTG2 sleep enable
-$40000000 constant RCC_RCC_AHB5LPENSR_NPUCACHELPENS                 \ NPUCACHE sleep enable
-$80000000 constant RCC_RCC_AHB5LPENSR_NPULPENS                      \ NPU sleep enable
-
-
-\
-\ @brief RCC APB1L Sleep enable register
-\ Address offset: 0xAA4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LLPENSR_TIM2LPENS                    \ TIM2 sleep enable
-$00000002 constant RCC_RCC_APB1LLPENSR_TIM3LPENS                    \ TIM3 sleep enable
-$00000004 constant RCC_RCC_APB1LLPENSR_TIM4LPENS                    \ TIM4 sleep enable
-$00000008 constant RCC_RCC_APB1LLPENSR_TIM5LPENS                    \ TIM5 sleep enable
-$00000010 constant RCC_RCC_APB1LLPENSR_TIM6LPENS                    \ TIM6 sleep enable
-$00000020 constant RCC_RCC_APB1LLPENSR_TIM7LPENS                    \ TIM7 sleep enable
-$00000040 constant RCC_RCC_APB1LLPENSR_TIM12LPENS                   \ TIM12 sleep enable
-$00000080 constant RCC_RCC_APB1LLPENSR_TIM13LPENS                   \ TIM13 sleep enable
-$00000100 constant RCC_RCC_APB1LLPENSR_TIM14LPENS                   \ TIM14 sleep enable
-$00000200 constant RCC_RCC_APB1LLPENSR_LPTIM1LPENS                  \ LPTIM1 sleep enable
-$00000800 constant RCC_RCC_APB1LLPENSR_WWDGLPENS                    \ WWDG sleep enable
-$00001000 constant RCC_RCC_APB1LLPENSR_TIM10LPENS                   \ TIM10 sleep enable
-$00002000 constant RCC_RCC_APB1LLPENSR_TIM11LPENS                   \ TIM11 sleep enable
-$00004000 constant RCC_RCC_APB1LLPENSR_SPI2LPENS                    \ SPI2 sleep enable
-$00008000 constant RCC_RCC_APB1LLPENSR_SPI3LPENS                    \ SPI3 sleep enable
-$00010000 constant RCC_RCC_APB1LLPENSR_SPDIFRX1LPENS                \ SPDIFRX1 sleep enable
-$00020000 constant RCC_RCC_APB1LLPENSR_USART2LPENS                  \ USART2 sleep enable
-$00040000 constant RCC_RCC_APB1LLPENSR_USART3LPENS                  \ USART3 sleep enable
-$00080000 constant RCC_RCC_APB1LLPENSR_UART4LPENS                   \ UART4 sleep enable
-$00100000 constant RCC_RCC_APB1LLPENSR_UART5LPENS                   \ UART5 sleep enable
-$00200000 constant RCC_RCC_APB1LLPENSR_I2C1LPENS                    \ I2C1 sleep enable
-$00400000 constant RCC_RCC_APB1LLPENSR_I2C2LPENS                    \ I2C2 sleep enable
-$00800000 constant RCC_RCC_APB1LLPENSR_I2C3LPENS                    \ I2C3 sleep enable
-$01000000 constant RCC_RCC_APB1LLPENSR_I3C1LPENS                    \ I3C1 sleep enable
-$02000000 constant RCC_RCC_APB1LLPENSR_I3C2LPENS                    \ I3C2 sleep enable
-$40000000 constant RCC_RCC_APB1LLPENSR_UART7LPENS                   \ UART7 sleep enable
-$80000000 constant RCC_RCC_APB1LLPENSR_UART8LPENS                   \ UART8 sleep enable
-
-
-\
-\ @brief RCC APB1H Sleep enable register
-\ Address offset: 0xAA8
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HLPENSR_MDIOSLPENS                   \ MDIOS sleep enable
-$00000100 constant RCC_RCC_APB1HLPENSR_FDCANLPENS                   \ FDCAN sleep enable
-$00040000 constant RCC_RCC_APB1HLPENSR_UCPD1LPENS                   \ UCPD1 sleep enable
-
-
-\
-\ @brief RCC APB2 Sleep enable register
-\ Address offset: 0xAAC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2LPENSR_TIM1LPENS                     \ TIM1 sleep enable
-$00000002 constant RCC_RCC_APB2LPENSR_TIM8LPENS                     \ TIM8 sleep enable
-$00000010 constant RCC_RCC_APB2LPENSR_USART1LPENS                   \ USART1 sleep enable
-$00000020 constant RCC_RCC_APB2LPENSR_USART6LPENS                   \ USART6 sleep enable
-$00000040 constant RCC_RCC_APB2LPENSR_UART9LPENS                    \ UART9 sleep enable
-$00000080 constant RCC_RCC_APB2LPENSR_USART10LPENS                  \ USART10 sleep enable
-$00001000 constant RCC_RCC_APB2LPENSR_SPI1LPENS                     \ SPI1 sleep enable
-$00002000 constant RCC_RCC_APB2LPENSR_SPI4LPENS                     \ SPI4 sleep enable
-$00008000 constant RCC_RCC_APB2LPENSR_TIM18LPENS                    \ TIM18 sleep enable
-$00010000 constant RCC_RCC_APB2LPENSR_TIM15LPENS                    \ TIM15 sleep enable
-$00020000 constant RCC_RCC_APB2LPENSR_TIM16LPENS                    \ TIM16 sleep enable
-$00040000 constant RCC_RCC_APB2LPENSR_TIM17LPENS                    \ TIM17 sleep enable
-$00080000 constant RCC_RCC_APB2LPENSR_TIM9LPENS                     \ TIM9 sleep enable
-$00100000 constant RCC_RCC_APB2LPENSR_SPI5LPENS                     \ SPI5 sleep enable
-$00200000 constant RCC_RCC_APB2LPENSR_SAI1LPENS                     \ SAI1 sleep enable
-$00400000 constant RCC_RCC_APB2LPENSR_SAI2LPENS                     \ SAI2 sleep enable
-
-
-\
-\ @brief RCC APB3 Sleep enable register
-\ Address offset: 0xAB0
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB3LPENSR_DFTLPENS                      \ DFT sleep enable
-
-
-\
-\ @brief RCC APB4L Sleep enable register
-\ Address offset: 0xAB4
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LLPENSR_HDPLPENS                     \ HDP sleep enable
-$00000008 constant RCC_RCC_APB4LLPENSR_LPUART1LPENS                 \ LPUART1 sleep enable
-$00000020 constant RCC_RCC_APB4LLPENSR_SPI6LPENS                    \ SPI6 sleep enable
-$00000080 constant RCC_RCC_APB4LLPENSR_I2C4LPENS                    \ I2C4 sleep enable
-$00000200 constant RCC_RCC_APB4LLPENSR_LPTIM2LPENS                  \ LPTIM2 sleep enable
-$00000400 constant RCC_RCC_APB4LLPENSR_LPTIM3LPENS                  \ LPTIM3 sleep enable
-$00000800 constant RCC_RCC_APB4LLPENSR_LPTIM4LPENS                  \ LPTIM4 sleep enable
-$00001000 constant RCC_RCC_APB4LLPENSR_LPTIM5LPENS                  \ LPTIM5 sleep enable
-$00008000 constant RCC_RCC_APB4LLPENSR_VREFBUFLPENS                 \ VREFBUF sleep enable
-$00010000 constant RCC_RCC_APB4LLPENSR_RTCLPENS                     \ RTC sleep enable
-$00020000 constant RCC_RCC_APB4LLPENSR_RTCAPBLPENS                  \ RTCAPB sleep enable
-$00400000 constant RCC_RCC_APB4LLPENSR_R2GRETLPENS                  \ R2GRET sleep enable
-$00800000 constant RCC_RCC_APB4LLPENSR_R2GNPULPENS                  \ R2GNPU sleep enable
-$80000000 constant RCC_RCC_APB4LLPENSR_SERFLPENS                    \ SERF sleep enable
-
-
-\
-\ @brief RCC APB4H Sleep enable register
-\ Address offset: 0xAB8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB4HLPENSR_SYSCFGLPENS                  \ SYSCFG sleep enable
-$00000002 constant RCC_RCC_APB4HLPENSR_BSECLPENS                    \ BSEC sleep enable
-$00000004 constant RCC_RCC_APB4HLPENSR_DTSLPENS                     \ DTS sleep enable
-$00000010 constant RCC_RCC_APB4HLPENSR_BUSPERFMLPENS                \ BUSPERFM sleep enable
-
-
-\
-\ @brief RCC APB5 Sleep enable register
-\ Address offset: 0xABC
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5LPENSR_LTDCLPENS                     \ LTDC sleep enable
-$00000004 constant RCC_RCC_APB5LPENSR_DCMIPPLPENS                   \ DCMIPP sleep enable
-$00000010 constant RCC_RCC_APB5LPENSR_GFXTIMLPENS                   \ GFXTIM sleep enable
-$00000020 constant RCC_RCC_APB5LPENSR_VENCLPENS                     \ VENC sleep enable
-$00000040 constant RCC_RCC_APB5LPENSR_CSILPENS                      \ CSI sleep enable
-
-
-\
-\ @brief RCC oscillator privilege configuration register0
-\ Address offset: 0xF84
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGSR0_LSIPVS                        \ Defines the privilege protection of the LSI configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGSR0_LSEPVS                        \ Defines the privilege protection of the LSE configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGSR0_MSIPVS                        \ Defines the privilege protection of the MSI configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGSR0_HSIPVS                        \ Defines the privilege protection of the HSI configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PRIVCFGSR0_HSEPVS                        \ Defines the privilege protection of the HSE configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC oscillator public configuration register0
-\ Address offset: 0xF8C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGSR0_LSIPUBS                        \ Defines the public protection of the LSI configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGSR0_LSEPUBS                        \ Defines the public protection of the LSE configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGSR0_MSIPUBS                        \ Defines the public protection of the MSI configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGSR0_HSIPUBS                        \ Defines the public protection of the HSI configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGSR0_HSEPUBS                        \ Defines the public protection of the HSE configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC PLL privilege configuration register1
-\ Address offset: 0xF94
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGSR1_PLL1PVS                       \ Defines the privilege protection of the PLL1 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGSR1_PLL2PVS                       \ Defines the privilege protection of the PLL2 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGSR1_PLL3PVS                       \ Defines the privilege protection of the PLL3 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGSR1_PLL4PVS                       \ Defines the privilege protection of the PLL4 configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC PLL public configuration register1
-\ Address offset: 0xF9C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGSR1_PLL1PUBS                       \ Defines the public protection of the PLL1 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGSR1_PLL2PUBS                       \ Defines the public protection of the PLL2 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGSR1_PLL3PUBS                       \ Defines the public protection of the PLL3 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGSR1_PLL4PUBS                       \ Defines the public protection of the PLL4 configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC divider privilege configuration register2
-\ Address offset: 0xFA4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGSR2_IC1PVS                        \ Defines the privilege protection of the IC1 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGSR2_IC2PVS                        \ Defines the privilege protection of the IC2 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGSR2_IC3PVS                        \ Defines the privilege protection of the IC3 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGSR2_IC4PVS                        \ Defines the privilege protection of the IC4 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PRIVCFGSR2_IC5PVS                        \ Defines the privilege protection of the IC5 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PRIVCFGSR2_IC6PVS                        \ Defines the privilege protection of the IC6 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PRIVCFGSR2_IC7PVS                        \ Defines the privilege protection of the IC7 configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PRIVCFGSR2_IC8PVS                        \ Defines the privilege protection of the IC8 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PRIVCFGSR2_IC9PVS                        \ Defines the privilege protection of the IC9 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PRIVCFGSR2_IC10PVS                       \ Defines the privilege protection of the IC10 configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PRIVCFGSR2_IC11PVS                       \ Defines the privilege protection of the IC11 configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PRIVCFGSR2_IC12PVS                       \ Defines the privilege protection of the IC12 configuration bits (enable, ready, divider).
-$00001000 constant RCC_RCC_PRIVCFGSR2_IC13PVS                       \ Defines the privilege protection of the IC13 configuration bits (enable, ready, divider).
-$00002000 constant RCC_RCC_PRIVCFGSR2_IC14PVS                       \ Defines the privilege protection of the IC14 configuration bits (enable, ready, divider).
-$00004000 constant RCC_RCC_PRIVCFGSR2_IC15PVS                       \ Defines the privilege protection of the IC15 configuration bits (enable, ready, divider).
-$00008000 constant RCC_RCC_PRIVCFGSR2_IC16PVS                       \ Defines the privilege protection of the IC16 configuration bits (enable, ready, divider).
-$00010000 constant RCC_RCC_PRIVCFGSR2_IC17PVS                       \ Defines the privilege protection of the IC17 configuration bits (enable, ready, divider).
-$00020000 constant RCC_RCC_PRIVCFGSR2_IC18PVS                       \ Defines the privilege protection of the IC18 configuration bits (enable, ready, divider).
-$00040000 constant RCC_RCC_PRIVCFGSR2_IC19PVS                       \ Defines the privilege protection of the IC19 configuration bits (enable, ready, divider).
-$00080000 constant RCC_RCC_PRIVCFGSR2_IC20PVS                       \ Defines the privilege protection of the IC20 configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC divider public configuration register2
-\ Address offset: 0xFAC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGSR2_IC1PUBS                        \ Defines the public protection of the IC1 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGSR2_IC2PUBS                        \ Defines the public protection of the IC2 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGSR2_IC3PUBS                        \ Defines the public protection of the IC3 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGSR2_IC4PUBS                        \ Defines the public protection of the IC4 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGSR2_IC5PUBS                        \ Defines the public protection of the IC5 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PUBCFGSR2_IC6PUBS                        \ Defines the public protection of the IC6 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PUBCFGSR2_IC7PUBS                        \ Defines the public protection of the IC7 configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PUBCFGSR2_IC8PUBS                        \ Defines the public protection of the IC8 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PUBCFGSR2_IC9PUBS                        \ Defines the public protection of the IC9 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PUBCFGSR2_IC10PUBS                       \ Defines the public protection of the IC10 configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PUBCFGSR2_IC11PUBS                       \ Defines the public protection of the IC11 configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PUBCFGSR2_IC12PUBS                       \ Defines the public protection of the IC12 configuration bits (enable, ready, divider).
-$00001000 constant RCC_RCC_PUBCFGSR2_IC13PUBS                       \ Defines the public protection of the IC13 configuration bits (enable, ready, divider).
-$00002000 constant RCC_RCC_PUBCFGSR2_IC14PUBS                       \ Defines the public protection of the IC14 configuration bits (enable, ready, divider).
-$00004000 constant RCC_RCC_PUBCFGSR2_IC15PUBS                       \ Defines the public protection of the IC15 configuration bits (enable, ready, divider).
-$00008000 constant RCC_RCC_PUBCFGSR2_IC16PUBS                       \ Defines the public protection of the IC16 configuration bits (enable, ready, divider).
-$00010000 constant RCC_RCC_PUBCFGSR2_IC17PUBS                       \ Defines the public protection of the IC17 configuration bits (enable, ready, divider).
-$00020000 constant RCC_RCC_PUBCFGSR2_IC18PUBS                       \ Defines the public protection of the IC18 configuration bits (enable, ready, divider).
-$00040000 constant RCC_RCC_PUBCFGSR2_IC19PUBS                       \ Defines the public protection of the IC19 configuration bits (enable, ready, divider).
-$00080000 constant RCC_RCC_PUBCFGSR2_IC20PUBS                       \ Defines the public protection of the IC20 configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC system secure configuration register3
-\ Address offset: 0xFB0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_SECCFGSR3_MODSECS                        \ Defines the secure protection of the MOD configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_SECCFGSR3_SYSSECS                        \ Defines the secure protection of the SYS configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_SECCFGSR3_BUSSECS                        \ Defines the secure protection of the BUS configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_SECCFGSR3_PERSECS                        \ Defines the secure protection of the PER configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_SECCFGSR3_INTSECS                        \ Defines the secure protection of the INT configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_SECCFGSR3_RSTSECS                        \ Defines the secure protection of the RST configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_SECCFGSR3_DFTSECS                        \ Defines the secure protection of the DFT configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC system privilege configuration register3
-\ Address offset: 0xFB4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGSR3_MODPVS                        \ Defines the privilege protection of the MOD configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGSR3_SYSPVS                        \ Defines the privilege protection of the SYS configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGSR3_BUSPVS                        \ Defines the privilege protection of the BUS configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGSR3_PERPVS                        \ Defines the privilege protection of the PER configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PRIVCFGSR3_INTPVS                        \ Defines the privilege protection of the INT configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PRIVCFGSR3_RSTPVS                        \ Defines the privilege protection of the RST configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PRIVCFGSR3_DFTPVS                        \ Defines the privilege protection of the DFT configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC system lock configuration register3
-\ Address offset: 0xFB8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_LOCKCFGSR3_MODLOCKS                      \ Defines the lock protection of the MOD configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_LOCKCFGSR3_SYSLOCKS                      \ Defines the lock protection of the SYS configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_LOCKCFGSR3_BUSLOCKS                      \ Defines the lock protection of the BUS configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_LOCKCFGSR3_PERLOCKS                      \ Defines the lock protection of the PER configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_LOCKCFGSR3_INTLOCKS                      \ Defines the lock protection of the INT configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_LOCKCFGSR3_RSTLOCKS                      \ Defines the lock protection of the RST configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_LOCKCFGSR3_DFTLOCKS                      \ Defines the lock protection of the DFT configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC system public configuration register3
-\ Address offset: 0xFBC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGSR3_MODPUBS                        \ Defines the public protection of the MOD configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGSR3_SYSPUBS                        \ Defines the public protection of the SYS configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGSR3_BUSPUBS                        \ Defines the public protection of the BUS configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGSR3_PERPUBS                        \ Defines the public protection of the PER configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGSR3_INTPUBS                        \ Defines the public protection of the INT configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PUBCFGSR3_RSTPUBS                        \ Defines the public protection of the RST configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PUBCFGSR3_DFTPUBS                        \ Defines the public protection of the DFT configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC privilege configuration register4
-\ Address offset: 0xFC4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGSR4_ACLKNPVS                      \ Defines the privilege protection of the ACLKN configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGSR4_ACLKNCPVS                     \ Defines the privilege protection of the ACLKNC configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGSR4_AHBMPVS                       \ Defines the privilege protection of the AHBM configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGSR4_AHB1PVS                       \ Defines the privilege protection of the AHB1 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PRIVCFGSR4_AHB2PVS                       \ Defines the privilege protection of the AHB2 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PRIVCFGSR4_AHB3PVS                       \ Defines the privilege protection of the AHB3 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PRIVCFGSR4_AHB4PVS                       \ Defines the privilege protection of the AHB4 configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PRIVCFGSR4_AHB5PVS                       \ Defines the privilege protection of the AHB5 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PRIVCFGSR4_APB1PVS                       \ Defines the privilege protection of the APB1 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PRIVCFGSR4_APB2PVS                       \ Defines the privilege protection of the APB2 configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PRIVCFGSR4_APB3PVS                       \ Defines the privilege protection of the APB3 configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PRIVCFGSR4_APB4PVS                       \ Defines the privilege protection of the APB4 configuration bits (enable, ready, divider).
-$00001000 constant RCC_RCC_PRIVCFGSR4_APB5PVS                       \ Defines the privilege protection of the APB5 configuration bits (enable, ready, divider).
-$00002000 constant RCC_RCC_PRIVCFGSR4_NOCPVS                        \ Defines the privilege protection of the NOC configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC public configuration register4
-\ Address offset: 0xFCC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGSR4_ACLKNPUBS                      \ Defines the public protection of the ACLKN configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGSR4_ACLKNCPUBS                     \ Defines the public protection of the ACLKNC configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGSR4_AHBMPUBS                       \ Defines the public protection of the AHBM configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGSR4_AHB1PUBS                       \ Defines the public protection of the AHB1 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGSR4_AHB2PUBS                       \ Defines the public protection of the AHB2 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PUBCFGSR4_AHB3PUBS                       \ Defines the public protection of the AHB3 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PUBCFGSR4_AHB4PUBS                       \ Defines the public protection of the AHB4 configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PUBCFGSR4_AHB5PUBS                       \ Defines the public protection of the AHB5 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PUBCFGSR4_APB1PUBS                       \ Defines the public protection of the APB1 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PUBCFGSR4_APB2PUBS                       \ Defines the public protection of the APB2 configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PUBCFGSR4_APB3PUBS                       \ Defines the public protection of the APB3 configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PUBCFGSR4_APB4PUBS                       \ Defines the public protection of the APB4 configuration bits (enable, ready, divider).
-$00001000 constant RCC_RCC_PUBCFGSR4_APB5PUBS                       \ Defines the public protection of the APB5 configuration bits (enable, ready, divider).
-$00002000 constant RCC_RCC_PUBCFGSR4_NOCPUBS                        \ Defines the public protection of the NOC configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC public configuration register4
-\ Address offset: 0xFD0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGSR5_AXISRAM3PUBS                   \ Defines the public protection of the AXISRAM3 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGSR5_AXISRAM4PUBS                   \ Defines the public protection of the AXISRAM4 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGSR5_AXISRAM5PUBS                   \ Defines the public protection of the AXISRAM5 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGSR5_AXISRAM6PUBS                   \ Defines the public protection of the AXISRAM6 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGSR5_AHBSRAM1PUBS                   \ Defines the public protection of the AHBSRAM1 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PUBCFGSR5_AHBSRAM2PUBS                   \ Defines the public protection of the AHBSRAM2 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PUBCFGSR5_BKPSRAMPUBS                    \ Defines the public protection of the BKPSRAM configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PUBCFGSR5_AXISRAM1PUBS                   \ Defines the public protection of the AXISRAM1 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PUBCFGSR5_AXISRAM2PUBS                   \ Defines the public protection of the AXISRAM2 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PUBCFGSR5_FLEXRAMPUBS                    \ Defines the public protection of the FLEXRAM configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PUBCFGSR5_NPUCACHERAMPUBS                \ Defines the public protection of the NPUCACHERAM configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PUBCFGSR5_VENCRAMPUBS                    \ Defines the public protection of the VENCRAM configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC control Clear register
-\ Address offset: 0x1000
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_CCR_LSIONC                               \ LSI oscillator enable in Run/Sleep mode.
-$00000002 constant RCC_RCC_CCR_LSEONC                               \ LSE oscillator enable in Run/Sleep mode.
-$00000004 constant RCC_RCC_CCR_MSIONC                               \ MSI oscillator enable in Run/Sleep mode.
-$00000008 constant RCC_RCC_CCR_HSIONC                               \ HSI oscillator enable in Run/Sleep mode.
-$00000010 constant RCC_RCC_CCR_HSEONC                               \ HSE oscillator enable in Run/Sleep mode.
-$00000100 constant RCC_RCC_CCR_PLL1ONC                              \ PLL1 oscillator enable in Run/Sleep mode.
-$00000200 constant RCC_RCC_CCR_PLL2ONC                              \ PLL2 oscillator enable in Run/Sleep mode.
-$00000400 constant RCC_RCC_CCR_PLL3ONC                              \ PLL3 oscillator enable in Run/Sleep mode.
-$00000800 constant RCC_RCC_CCR_PLL4ONC                              \ PLL4 oscillator enable in Run/Sleep mode.
-
-
-\
-\ @brief RCC StopCCR configuration register
-\ Address offset: 0x1008
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_STOPCCR_LSISTOPENC                       \ LSI oscillator enable in Run/Sleep mode.
-$00000002 constant RCC_RCC_STOPCCR_LSESTOPENC                       \ LSE oscillator enable in Run/Sleep mode.
-$00000004 constant RCC_RCC_STOPCCR_MSISTOPENC                       \ MSI oscillator enable in Run/Sleep mode.
-$00000008 constant RCC_RCC_STOPCCR_HSISTOPENC                       \ HSI oscillator enable in Run/Sleep mode.
-
-
-\
-\ @brief RCC bus reset register
-\ Address offset: 0x1204
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_BUSRSTCR_ACLKNRSTC                       \ ACLKN reset
-$00000004 constant RCC_RCC_BUSRSTCR_AHBMRSTC                        \ AHBM reset
-$00000008 constant RCC_RCC_BUSRSTCR_AHB1RSTC                        \ AHB1 reset
-$00000010 constant RCC_RCC_BUSRSTCR_AHB2RSTC                        \ AHB2 reset
-$00000020 constant RCC_RCC_BUSRSTCR_AHB3RSTC                        \ AHB3 reset
-$00000040 constant RCC_RCC_BUSRSTCR_AHB4RSTC                        \ AHB4 reset
-$00000080 constant RCC_RCC_BUSRSTCR_AHB5RSTC                        \ AHB5 reset
-$00000100 constant RCC_RCC_BUSRSTCR_APB1RSTC                        \ APB1 reset
-$00000200 constant RCC_RCC_BUSRSTCR_APB2RSTC                        \ APB2 reset
-$00000400 constant RCC_RCC_BUSRSTCR_APB3RSTC                        \ APB3 reset
-$00000800 constant RCC_RCC_BUSRSTCR_APB4RSTC                        \ APB4 reset
-$00001000 constant RCC_RCC_BUSRSTCR_APB5RSTC                        \ APB5 reset
-$00002000 constant RCC_RCC_BUSRSTCR_NOCRSTC                         \ NOC reset
-
-
-\
-\ @brief RCC miscellaneous reset register
-\ Address offset: 0x1208
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCRSTCR_DBGRSTC                        \ DBG reset
-$00000010 constant RCC_RCC_MISCRSTCR_XSPIPHY1RSTC                   \ XSPIPHY1 reset
-$00000020 constant RCC_RCC_MISCRSTCR_XSPIPHY2RSTC                   \ XSPIPHY2 reset
-$00000080 constant RCC_RCC_MISCRSTCR_SDMMC1DLLRSTC                  \ SDMMC1DLL reset
-$00000100 constant RCC_RCC_MISCRSTCR_SDMMC2DLLRSTC                  \ SDMMC2DLL reset
-
-
-\
-\ @brief RCC memory reset register
-\ Address offset: 0x120C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MEMRSTCR_AXISRAM3RSTC                    \ AXISRAM3 reset
-$00000002 constant RCC_RCC_MEMRSTCR_AXISRAM4RSTC                    \ AXISRAM4 reset
-$00000004 constant RCC_RCC_MEMRSTCR_AXISRAM5RSTC                    \ AXISRAM5 reset
-$00000008 constant RCC_RCC_MEMRSTCR_AXISRAM6RSTC                    \ AXISRAM6 reset
-$00000010 constant RCC_RCC_MEMRSTCR_AHBSRAM1RSTC                    \ AHBSRAM1 reset
-$00000020 constant RCC_RCC_MEMRSTCR_AHBSRAM2RSTC                    \ AHBSRAM2 reset
-$00000080 constant RCC_RCC_MEMRSTCR_AXISRAM1RSTC                    \ AXISRAM1 reset
-$00000100 constant RCC_RCC_MEMRSTCR_AXISRAM2RSTC                    \ AXISRAM2 reset
-$00000200 constant RCC_RCC_MEMRSTCR_FLEXRAMRSTC                     \ FLEXRAM reset
-$00000400 constant RCC_RCC_MEMRSTCR_NPUCACHERAMRSTC                 \ NPUCACHERAM reset
-$00000800 constant RCC_RCC_MEMRSTCR_VENCRAMRSTC                     \ VENCRAM reset
-$00001000 constant RCC_RCC_MEMRSTCR_BOOTROMRSTC                     \ BOOTROM reset
-
-
-\
-\ @brief RCC AHB1 reset register
-\ Address offset: 0x1210
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1RSTCR_GPDMA1RSTC                     \ GPDMA1 reset
-$00000020 constant RCC_RCC_AHB1RSTCR_ADC12RSTC                      \ ADC12 reset
-
-
-\
-\ @brief RCC AHB2 Reset register
-\ Address offset: 0x1214
-\ Reset value: 0x00000000
-\
-
-$00001000 constant RCC_RCC_AHB2RSTCR_RAMCFGRSTC                     \ RAMCFG reset
-$00010000 constant RCC_RCC_AHB2RSTCR_MDF1RSTC                       \ MDF1 reset
-$00020000 constant RCC_RCC_AHB2RSTCR_ADF1RSTC                       \ ADF1 reset
-
-
-\
-\ @brief RCC AHB3 reset register
-\ Address offset: 0x1218
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB3RSTCR_RNGRSTC                        \ RNG reset
-$00000002 constant RCC_RCC_AHB3RSTCR_HASHRSTC                       \ HASH reset
-$00000004 constant RCC_RCC_AHB3RSTCR_CRYPRSTC                       \ CRYP reset
-$00000010 constant RCC_RCC_AHB3RSTCR_SAESRSTC                       \ SAES reset
-$00000100 constant RCC_RCC_AHB3RSTCR_PKARSTC                        \ PKA reset
-$00000400 constant RCC_RCC_AHB3RSTCR_IACRSTC                        \ IAC reset
-
-
-\
-\ @brief RCC AHB4 reset register
-\ Address offset: 0x121C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB4RSTCR_GPIOARSTC                      \ GPIOA reset
-$00000002 constant RCC_RCC_AHB4RSTCR_GPIOBRSTC                      \ GPIOB reset
-$00000004 constant RCC_RCC_AHB4RSTCR_GPIOCRSTC                      \ GPIOC reset
-$00000008 constant RCC_RCC_AHB4RSTCR_GPIODRSTC                      \ GPIOD reset
-$00000010 constant RCC_RCC_AHB4RSTCR_GPIOERSTC                      \ GPIOE reset
-$00000020 constant RCC_RCC_AHB4RSTCR_GPIOFRSTC                      \ GPIOF reset
-$00000040 constant RCC_RCC_AHB4RSTCR_GPIOGRSTC                      \ GPIOG reset
-$00000080 constant RCC_RCC_AHB4RSTCR_GPIOHRSTC                      \ GPIOH reset
-$00002000 constant RCC_RCC_AHB4RSTCR_GPIONRSTC                      \ GPION reset
-$00004000 constant RCC_RCC_AHB4RSTCR_GPIOORSTC                      \ GPIOO reset
-$00008000 constant RCC_RCC_AHB4RSTCR_GPIOPRSTC                      \ GPIOP reset
-$00010000 constant RCC_RCC_AHB4RSTCR_GPIOQRSTC                      \ GPIOQ reset
-$00040000 constant RCC_RCC_AHB4RSTCR_PWRRSTC                        \ PWR reset
-$00080000 constant RCC_RCC_AHB4RSTCR_CRCRSTC                        \ CRC reset
-
-
-\
-\ @brief RCC AHB5 reset register
-\ Address offset: 0x1220
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5RSTCR_HPDMA1RSTC                     \ HPDMA1 reset
-$00000002 constant RCC_RCC_AHB5RSTCR_DMA2DRSTC                      \ DMA2D reset
-$00000008 constant RCC_RCC_AHB5RSTCR_JPEGRSTC                       \ JPEG reset
-$00000010 constant RCC_RCC_AHB5RSTCR_FMCRSTC                        \ FMC reset
-$00000020 constant RCC_RCC_AHB5RSTCR_XSPI1RSTC                      \ XSPI1 reset
-$00000040 constant RCC_RCC_AHB5RSTCR_PSSIRSTC                       \ PSSI reset
-$00000080 constant RCC_RCC_AHB5RSTCR_SDMMC2RSTC                     \ SDMMC2 reset
-$00000100 constant RCC_RCC_AHB5RSTCR_SDMMC1RSTC                     \ SDMMC1 reset
-$00001000 constant RCC_RCC_AHB5RSTCR_XSPI2RSTC                      \ XSPI2 reset
-$00002000 constant RCC_RCC_AHB5RSTCR_XSPIMRSTC                      \ XSPIM reset
-$00020000 constant RCC_RCC_AHB5RSTCR_XSPI3RSTC                      \ XSPI3 reset
-$00040000 constant RCC_RCC_AHB5RSTCR_MCE4RSTC                       \ MCE4 reset
-$00080000 constant RCC_RCC_AHB5RSTCR_GFXMMURSTC                     \ GFXMMU reset
-$00100000 constant RCC_RCC_AHB5RSTCR_GPURSTC                        \ GPU reset
-$00800000 constant RCC_RCC_AHB5RSTCR_SYSCFGOTGHSPHY1RSTC            \ SYSCFGOTGHSPHY1 reset
-$01000000 constant RCC_RCC_AHB5RSTCR_SYSCFGOTGHSPHY2RSTC            \ SYSCFGOTGHSPHY2 reset
-$02000000 constant RCC_RCC_AHB5RSTCR_ETH1RSTC                       \ ETH1 reset
-$04000000 constant RCC_RCC_AHB5RSTCR_OTG1RSTC                       \ OTG1 reset
-$08000000 constant RCC_RCC_AHB5RSTCR_OTGPHY1RSTC                    \ OTGPHY1 reset
-$10000000 constant RCC_RCC_AHB5RSTCR_OTGPHY2RSTC                    \ OTGPHY2 reset
-$20000000 constant RCC_RCC_AHB5RSTCR_OTG2RSTC                       \ OTG2 reset
-$40000000 constant RCC_RCC_AHB5RSTCR_NPUCACHERSTC                   \ NPUCACHE reset
-$80000000 constant RCC_RCC_AHB5RSTCR_NPURSTC                        \ NPU reset
-
-
-\
-\ @brief RCC APB1L reset register
-\ Address offset: 0x1224
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LRSTCR_TIM2RSTC                      \ TIM2 reset
-$00000002 constant RCC_RCC_APB1LRSTCR_TIM3RSTC                      \ TIM3 reset
-$00000004 constant RCC_RCC_APB1LRSTCR_TIM4RSTC                      \ TIM4 reset
-$00000008 constant RCC_RCC_APB1LRSTCR_TIM5RSTC                      \ TIM5 reset
-$00000010 constant RCC_RCC_APB1LRSTCR_TIM6RSTC                      \ TIM6 reset
-$00000020 constant RCC_RCC_APB1LRSTCR_TIM7RSTC                      \ TIM7 reset
-$00000040 constant RCC_RCC_APB1LRSTCR_TIM12RSTC                     \ TIM12 reset
-$00000080 constant RCC_RCC_APB1LRSTCR_TIM13RSTC                     \ TIM13 reset
-$00000100 constant RCC_RCC_APB1LRSTCR_TIM14RSTC                     \ TIM14 reset
-$00000200 constant RCC_RCC_APB1LRSTCR_LPTIM1RSTC                    \ LPTIM1 reset
-$00000800 constant RCC_RCC_APB1LRSTCR_WWDGRSTC                      \ WWDG reset
-$00001000 constant RCC_RCC_APB1LRSTCR_TIM10RSTC                     \ TIM10 reset
-$00002000 constant RCC_RCC_APB1LRSTCR_TIM11RSTC                     \ TIM11 reset
-$00004000 constant RCC_RCC_APB1LRSTCR_SPI2RSTC                      \ SPI2 reset
-$00008000 constant RCC_RCC_APB1LRSTCR_SPI3RSTC                      \ SPI3 reset
-$00010000 constant RCC_RCC_APB1LRSTCR_SPDIFRX1RSTC                  \ SPDIFRX1 reset
-$00020000 constant RCC_RCC_APB1LRSTCR_USART2RSTC                    \ USART2 reset
-$00040000 constant RCC_RCC_APB1LRSTCR_USART3RSTC                    \ USART3 reset
-$00080000 constant RCC_RCC_APB1LRSTCR_UART4RSTC                     \ UART4 reset
-$00100000 constant RCC_RCC_APB1LRSTCR_UART5RSTC                     \ UART5 reset
-$00200000 constant RCC_RCC_APB1LRSTCR_I2C1RSTC                      \ I2C1 reset
-$00400000 constant RCC_RCC_APB1LRSTCR_I2C2RSTC                      \ I2C2 reset
-$00800000 constant RCC_RCC_APB1LRSTCR_I2C3RSTC                      \ I2C3 reset
-$01000000 constant RCC_RCC_APB1LRSTCR_I3C1RSTC                      \ I3C1 reset
-$02000000 constant RCC_RCC_APB1LRSTCR_I3C2RSTC                      \ I3C2 reset
-$40000000 constant RCC_RCC_APB1LRSTCR_UART7RSTC                     \ UART7 reset
-$80000000 constant RCC_RCC_APB1LRSTCR_UART8RSTC                     \ UART8 reset
-
-
-\
-\ @brief RCC APB1H reset register
-\ Address offset: 0x1228
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HRSTCR_MDIOSRSTC                     \ MDIOS reset
-$00000100 constant RCC_RCC_APB1HRSTCR_FDCANRSTC                     \ FDCAN reset
-$00040000 constant RCC_RCC_APB1HRSTCR_UCPD1RSTC                     \ UCPD1 reset
-
-
-\
-\ @brief RCC APB2 reset register
-\ Address offset: 0x122C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2RSTCR_TIM1RSTC                       \ TIM1 reset
-$00000002 constant RCC_RCC_APB2RSTCR_TIM8RSTC                       \ TIM8 reset
-$00000010 constant RCC_RCC_APB2RSTCR_USART1RSTC                     \ USART1 reset
-$00000020 constant RCC_RCC_APB2RSTCR_USART6RSTC                     \ USART6 reset
-$00000040 constant RCC_RCC_APB2RSTCR_UART9RSTC                      \ UART9 reset
-$00000080 constant RCC_RCC_APB2RSTCR_USART10RSTC                    \ USART10 reset
-$00001000 constant RCC_RCC_APB2RSTCR_SPI1RSTC                       \ SPI1 reset
-$00002000 constant RCC_RCC_APB2RSTCR_SPI4RSTC                       \ SPI4 reset
-$00008000 constant RCC_RCC_APB2RSTCR_TIM18RSTC                      \ TIM18 reset
-$00010000 constant RCC_RCC_APB2RSTCR_TIM15RSTC                      \ TIM15 reset
-$00020000 constant RCC_RCC_APB2RSTCR_TIM16RSTC                      \ TIM16 reset
-$00040000 constant RCC_RCC_APB2RSTCR_TIM17RSTC                      \ TIM17 reset
-$00080000 constant RCC_RCC_APB2RSTCR_TIM9RSTC                       \ TIM9 reset
-$00100000 constant RCC_RCC_APB2RSTCR_SPI5RSTC                       \ SPI5 reset
-$00200000 constant RCC_RCC_APB2RSTCR_SAI1RSTC                       \ SAI1 reset
-$00400000 constant RCC_RCC_APB2RSTCR_SAI2RSTC                       \ SAI2 reset
-
-
-\
-\ @brief RCC APB4L reset register
-\ Address offset: 0x1234
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LRSTCR_HDPRSTC                       \ HDP reset
-$00000008 constant RCC_RCC_APB4LRSTCR_LPUART1RSTC                   \ LPUART1 reset
-$00000020 constant RCC_RCC_APB4LRSTCR_SPI6RSTC                      \ SPI6 reset
-$00000080 constant RCC_RCC_APB4LRSTCR_I2C4RSTC                      \ I2C4 reset
-$00000200 constant RCC_RCC_APB4LRSTCR_LPTIM2RSTC                    \ LPTIM2 reset
-$00000400 constant RCC_RCC_APB4LRSTCR_LPTIM3RSTC                    \ LPTIM3 reset
-$00000800 constant RCC_RCC_APB4LRSTCR_LPTIM4RSTC                    \ LPTIM4 reset
-$00001000 constant RCC_RCC_APB4LRSTCR_LPTIM5RSTC                    \ LPTIM5 reset
-$00008000 constant RCC_RCC_APB4LRSTCR_VREFBUFRSTC                   \ VREFBUF reset
-$00010000 constant RCC_RCC_APB4LRSTCR_RTCRSTC                       \ RTC reset
-$00400000 constant RCC_RCC_APB4LRSTCR_R2GRETRSTC                    \ R2GRET reset
-$00800000 constant RCC_RCC_APB4LRSTCR_R2GNPURSTC                    \ R2GNPU reset
-$80000000 constant RCC_RCC_APB4LRSTCR_SERFRSTC                      \ SERF reset
-
-
-\
-\ @brief RCC APB4H reset register
-\ Address offset: 0x1238
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB4HRSTCR_SYSCFGRSTC                    \ SYSCFG reset
-$00000004 constant RCC_RCC_APB4HRSTCR_DTSRSTC                       \ DTS reset
-$00000010 constant RCC_RCC_APB4HRSTCR_BUSPERFMRSTC                  \ BUSPERFM reset
-
-
-\
-\ @brief RCC APB5 reset register
-\ Address offset: 0x123C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5RSTCR_LTDCRSTC                       \ LTDC reset
-$00000004 constant RCC_RCC_APB5RSTCR_DCMIPPRSTC                     \ DCMIPP reset
-$00000010 constant RCC_RCC_APB5RSTCR_GFXTIMRSTC                     \ GFXTIM reset
-$00000020 constant RCC_RCC_APB5RSTCR_VENCRSTC                       \ VENC reset
-$00000040 constant RCC_RCC_APB5RSTCR_CSIRSTC                        \ CSI reset
-
-
-\
-\ @brief RCC divider enable register
-\ Address offset: 0x1240
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_DIVENCR_IC1ENC                           \ IC1 enable
-$00000002 constant RCC_RCC_DIVENCR_IC2ENC                           \ IC2 enable
-$00000004 constant RCC_RCC_DIVENCR_IC3ENC                           \ IC3 enable
-$00000008 constant RCC_RCC_DIVENCR_IC4ENC                           \ IC4 enable
-$00000010 constant RCC_RCC_DIVENCR_IC5ENC                           \ IC5 enable
-$00000020 constant RCC_RCC_DIVENCR_IC6ENC                           \ IC6 enable
-$00000040 constant RCC_RCC_DIVENCR_IC7ENC                           \ IC7 enable
-$00000080 constant RCC_RCC_DIVENCR_IC8ENC                           \ IC8 enable
-$00000100 constant RCC_RCC_DIVENCR_IC9ENC                           \ IC9 enable
-$00000200 constant RCC_RCC_DIVENCR_IC10ENC                          \ IC10 enable
-$00000400 constant RCC_RCC_DIVENCR_IC11ENC                          \ IC11 enable
-$00000800 constant RCC_RCC_DIVENCR_IC12ENC                          \ IC12 enable
-$00001000 constant RCC_RCC_DIVENCR_IC13ENC                          \ IC13 enable
-$00002000 constant RCC_RCC_DIVENCR_IC14ENC                          \ IC14 enable
-$00004000 constant RCC_RCC_DIVENCR_IC15ENC                          \ IC15 enable
-$00008000 constant RCC_RCC_DIVENCR_IC16ENC                          \ IC16 enable
-$00010000 constant RCC_RCC_DIVENCR_IC17ENC                          \ IC17 enable
-$00020000 constant RCC_RCC_DIVENCR_IC18ENC                          \ IC18 enable
-$00040000 constant RCC_RCC_DIVENCR_IC19ENC                          \ IC19 enable
-$00080000 constant RCC_RCC_DIVENCR_IC20ENC                          \ IC20 enable
-
-
-\
-\ @brief RCC bus enable register
-\ Address offset: 0x1244
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_BUSENCR_ACLKNENC                         \ ACLKN enable
-$00000002 constant RCC_RCC_BUSENCR_ACLKNCENC                        \ ACLKNC enable
-$00000004 constant RCC_RCC_BUSENCR_AHBMENC                          \ AHBM enable
-$00000008 constant RCC_RCC_BUSENCR_AHB1ENC                          \ AHB1 enable
-$00000010 constant RCC_RCC_BUSENCR_AHB2ENC                          \ AHB2 enable
-$00000020 constant RCC_RCC_BUSENCR_AHB3ENC                          \ AHB3 enable
-$00000040 constant RCC_RCC_BUSENCR_AHB4ENC                          \ AHB4 enable
-$00000080 constant RCC_RCC_BUSENCR_AHB5ENC                          \ AHB5 enable
-$00000100 constant RCC_RCC_BUSENCR_APB1ENC                          \ APB1 enable
-$00000200 constant RCC_RCC_BUSENCR_APB2ENC                          \ APB2 enable
-$00000400 constant RCC_RCC_BUSENCR_APB3ENC                          \ APB3 enable
-$00000800 constant RCC_RCC_BUSENCR_APB4ENC                          \ APB4 enable
-$00001000 constant RCC_RCC_BUSENCR_APB5ENC                          \ APB5 enable
-
-
-\
-\ @brief RCC miscellaneous enable register
-\ Address offset: 0x1248
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCENCR_DBGENC                          \ DBG enable
-$00000002 constant RCC_RCC_MISCENCR_MCO1ENC                         \ MCO1 enable
-$00000004 constant RCC_RCC_MISCENCR_MCO2ENC                         \ MCO2 enable
-$00000008 constant RCC_RCC_MISCENCR_XSPIPHYCOMPENC                  \ XSPIPHYCOMP enable
-$00000040 constant RCC_RCC_MISCENCR_PERENC                          \ PER enable
-
-
-\
-\ @brief RCC memory enable register
-\ Address offset: 0x124C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MEMENCR_AXISRAM3ENC                      \ AXISRAM3 enable
-$00000002 constant RCC_RCC_MEMENCR_AXISRAM4ENC                      \ AXISRAM4 enable
-$00000004 constant RCC_RCC_MEMENCR_AXISRAM5ENC                      \ AXISRAM5 enable
-$00000008 constant RCC_RCC_MEMENCR_AXISRAM6ENC                      \ AXISRAM6 enable
-$00000010 constant RCC_RCC_MEMENCR_AHBSRAM1ENC                      \ AHBSRAM1 enable
-$00000020 constant RCC_RCC_MEMENCR_AHBSRAM2ENC                      \ AHBSRAM2 enable
-$00000040 constant RCC_RCC_MEMENCR_BKPSRAMENC                       \ BKPSRAM enable
-$00000080 constant RCC_RCC_MEMENCR_AXISRAM1ENC                      \ AXISRAM1 enable
-$00000100 constant RCC_RCC_MEMENCR_AXISRAM2ENC                      \ AXISRAM2 enable
-$00000200 constant RCC_RCC_MEMENCR_FLEXRAMENC                       \ FLEXRAM enable
-$00000400 constant RCC_RCC_MEMENCR_NPUCACHERAMENC                   \ NPUCACHERAM enable
-$00000800 constant RCC_RCC_MEMENCR_VENCRAMENC                       \ VENCRAM enable
-$00001000 constant RCC_RCC_MEMENCR_BOOTROMENC                       \ BOOTROM enable
-
-
-\
-\ @brief RCC AHB1 enable register
-\ Address offset: 0x1250
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1ENCR_GPDMA1ENC                       \ GPDMA1 enable
-$00000020 constant RCC_RCC_AHB1ENCR_ADC12ENC                        \ ADC12 enable
-
-
-\
-\ @brief RCC AHB2 enable register
-\ Address offset: 0x1254
-\ Reset value: 0x00000000
-\
-
-$00001000 constant RCC_RCC_AHB2ENCR_RAMCFGENC                       \ RAMCFG enable
-$00010000 constant RCC_RCC_AHB2ENCR_MDF1ENC                         \ MDF1 enable
-$00020000 constant RCC_RCC_AHB2ENCR_ADF1ENC                         \ ADF1 enable
-
-
-\
-\ @brief RCC AHB3 enable register
-\ Address offset: 0x1258
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB3ENCR_RNGENC                          \ RNG enable
-$00000002 constant RCC_RCC_AHB3ENCR_HASHENC                         \ HASH enable
-$00000004 constant RCC_RCC_AHB3ENCR_CRYPENC                         \ CRYP enable
-$00000010 constant RCC_RCC_AHB3ENCR_SAESENC                         \ SAES enable
-$00000100 constant RCC_RCC_AHB3ENCR_PKAENC                          \ PKA enable
-$00000200 constant RCC_RCC_AHB3ENCR_RIFSCENC                        \ RIFSC enable
-$00000400 constant RCC_RCC_AHB3ENCR_IACENC                          \ IAC enable
-$00004000 constant RCC_RCC_AHB3ENCR_RISAFENC                        \ RISAF enable
-
-
-\
-\ @brief RCC AHB4 enable register
-\ Address offset: 0x125C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB4ENCR_GPIOAENC                        \ GPIOA enable
-$00000002 constant RCC_RCC_AHB4ENCR_GPIOBENC                        \ GPIOB enable
-$00000004 constant RCC_RCC_AHB4ENCR_GPIOCENC                        \ GPIOC enable
-$00000008 constant RCC_RCC_AHB4ENCR_GPIODENC                        \ GPIOD enable
-$00000010 constant RCC_RCC_AHB4ENCR_GPIOEENC                        \ GPIOE enable
-$00000020 constant RCC_RCC_AHB4ENCR_GPIOFENC                        \ GPIOF enable
-$00000040 constant RCC_RCC_AHB4ENCR_GPIOGENC                        \ GPIOG enable
-$00000080 constant RCC_RCC_AHB4ENCR_GPIOHENC                        \ GPIOH enable
-$00002000 constant RCC_RCC_AHB4ENCR_GPIONENC                        \ GPION enable
-$00004000 constant RCC_RCC_AHB4ENCR_GPIOOENC                        \ GPIOO enable
-$00008000 constant RCC_RCC_AHB4ENCR_GPIOPENC                        \ GPIOP enable
-$00010000 constant RCC_RCC_AHB4ENCR_GPIOQENC                        \ GPIOQ enable
-$00040000 constant RCC_RCC_AHB4ENCR_PWRENC                          \ PWR enable
-$00080000 constant RCC_RCC_AHB4ENCR_CRCENC                          \ CRC enable
-
-
-\
-\ @brief RCC AHB5 enable register
-\ Address offset: 0x1260
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5ENCR_HPDMA1ENC                       \ HPDMA1 enable
-$00000002 constant RCC_RCC_AHB5ENCR_DMA2DENC                        \ DMA2D enable
-$00000008 constant RCC_RCC_AHB5ENCR_JPEGENC                         \ JPEG enable
-$00000010 constant RCC_RCC_AHB5ENCR_FMCENC                          \ FMC enable
-$00000020 constant RCC_RCC_AHB5ENCR_XSPI1ENC                        \ XSPI1 enable
-$00000040 constant RCC_RCC_AHB5ENCR_PSSIENC                         \ PSSI enable
-$00000080 constant RCC_RCC_AHB5ENCR_SDMMC2ENC                       \ SDMMC2 enable
-$00000100 constant RCC_RCC_AHB5ENCR_SDMMC1ENC                       \ SDMMC1 enable
-$00001000 constant RCC_RCC_AHB5ENCR_XSPI2ENC                        \ XSPI2 enable
-$00002000 constant RCC_RCC_AHB5ENCR_XSPIMENC                        \ XSPIM enable
-$00004000 constant RCC_RCC_AHB5ENCR_MCE1ENC                         \ MCE1 enable
-$00008000 constant RCC_RCC_AHB5ENCR_MCE2ENC                         \ MCE2 enable
-$00010000 constant RCC_RCC_AHB5ENCR_MCE3ENC                         \ MCE3 enable
-$00020000 constant RCC_RCC_AHB5ENCR_XSPI3ENC                        \ XSPI3 enable
-$00040000 constant RCC_RCC_AHB5ENCR_MCE4ENC                         \ MCE4 enable
-$00080000 constant RCC_RCC_AHB5ENCR_GFXMMUENC                       \ GFXMMU enable
-$00100000 constant RCC_RCC_AHB5ENCR_GPUENC                          \ GPU enable
-$00400000 constant RCC_RCC_AHB5ENCR_ETH1MACENC                      \ ETH1MAC enable
-$00800000 constant RCC_RCC_AHB5ENCR_ETH1TXENC                       \ ETH1TX enable
-$01000000 constant RCC_RCC_AHB5ENCR_ETH1RXENC                       \ ETH1RX enable
-$02000000 constant RCC_RCC_AHB5ENCR_ETH1ENC                         \ ETH1 enable
-$04000000 constant RCC_RCC_AHB5ENCR_OTG1ENC                         \ OTG1 enable
-$08000000 constant RCC_RCC_AHB5ENCR_OTGPHY1ENC                      \ OTGPHY1 enable
-$10000000 constant RCC_RCC_AHB5ENCR_OTGPHY2ENC                      \ OTGPHY2 enable
-$20000000 constant RCC_RCC_AHB5ENCR_OTG2ENC                         \ OTG2 enable
-$40000000 constant RCC_RCC_AHB5ENCR_NPUCACHEENC                     \ NPUCACHE enable
-$80000000 constant RCC_RCC_AHB5ENCR_NPUENC                          \ NPU enable
-
-
-\
-\ @brief RCC APB1L enable register
-\ Address offset: 0x1264
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LENCR_TIM2ENC                        \ TIM2 enable
-$00000002 constant RCC_RCC_APB1LENCR_TIM3ENC                        \ TIM3 enable
-$00000004 constant RCC_RCC_APB1LENCR_TIM4ENC                        \ TIM4 enable
-$00000008 constant RCC_RCC_APB1LENCR_TIM5ENC                        \ TIM5 enable
-$00000010 constant RCC_RCC_APB1LENCR_TIM6ENC                        \ TIM6 enable
-$00000020 constant RCC_RCC_APB1LENCR_TIM7ENC                        \ TIM7 enable
-$00000040 constant RCC_RCC_APB1LENCR_TIM12ENC                       \ TIM12 enable
-$00000080 constant RCC_RCC_APB1LENCR_TIM13ENC                       \ TIM13 enable
-$00000100 constant RCC_RCC_APB1LENCR_TIM14ENC                       \ TIM14 enable
-$00000200 constant RCC_RCC_APB1LENCR_LPTIM1ENC                      \ LPTIM1 enable
-$00001000 constant RCC_RCC_APB1LENCR_TIM10ENC                       \ TIM10 enable
-$00002000 constant RCC_RCC_APB1LENCR_TIM11ENC                       \ TIM11 enable
-$00004000 constant RCC_RCC_APB1LENCR_SPI2ENC                        \ SPI2 enable
-$00008000 constant RCC_RCC_APB1LENCR_SPI3ENC                        \ SPI3 enable
-$00010000 constant RCC_RCC_APB1LENCR_SPDIFRX1ENC                    \ SPDIFRX1 enable
-$00020000 constant RCC_RCC_APB1LENCR_USART2ENC                      \ USART2 enable
-$00040000 constant RCC_RCC_APB1LENCR_USART3ENC                      \ USART3 enable
-$00080000 constant RCC_RCC_APB1LENCR_UART4ENC                       \ UART4 enable
-$00100000 constant RCC_RCC_APB1LENCR_UART5ENC                       \ UART5 enable
-$00200000 constant RCC_RCC_APB1LENCR_I2C1ENC                        \ I2C1 enable
-$00400000 constant RCC_RCC_APB1LENCR_I2C2ENC                        \ I2C2 enable
-$00800000 constant RCC_RCC_APB1LENCR_I2C3ENC                        \ I2C3 enable
-$01000000 constant RCC_RCC_APB1LENCR_I3C1ENC                        \ I3C1 enable
-$02000000 constant RCC_RCC_APB1LENCR_I3C2ENC                        \ I3C2 enable
-$40000000 constant RCC_RCC_APB1LENCR_UART7ENC                       \ UART7 enable
-$80000000 constant RCC_RCC_APB1LENCR_UART8ENC                       \ UART8 enable
-
-
-\
-\ @brief RCC APB1H enable register
-\ Address offset: 0x1268
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HENCR_MDIOSENC                       \ MDIOS enable
-$00000100 constant RCC_RCC_APB1HENCR_FDCANENC                       \ FDCAN enable
-$00040000 constant RCC_RCC_APB1HENCR_UCPD1ENC                       \ UCPD1 enable
-
-
-\
-\ @brief RCC APB2 enable register
-\ Address offset: 0x126C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2ENCR_TIM1ENC                         \ TIM1 enable
-$00000002 constant RCC_RCC_APB2ENCR_TIM8ENC                         \ TIM8 enable
-$00000010 constant RCC_RCC_APB2ENCR_USART1ENC                       \ USART1 enable
-$00000020 constant RCC_RCC_APB2ENCR_USART6ENC                       \ USART6 enable
-$00000040 constant RCC_RCC_APB2ENCR_UART9ENC                        \ UART9 enable
-$00000080 constant RCC_RCC_APB2ENCR_USART10ENC                      \ USART10 enable
-$00001000 constant RCC_RCC_APB2ENCR_SPI1ENC                         \ SPI1 enable
-$00002000 constant RCC_RCC_APB2ENCR_SPI4ENC                         \ SPI4 enable
-$00008000 constant RCC_RCC_APB2ENCR_TIM18ENC                        \ TIM18 enable
-$00010000 constant RCC_RCC_APB2ENCR_TIM15ENC                        \ TIM15 enable
-$00020000 constant RCC_RCC_APB2ENCR_TIM16ENC                        \ TIM16 enable
-$00040000 constant RCC_RCC_APB2ENCR_TIM17ENC                        \ TIM17 enable
-$00080000 constant RCC_RCC_APB2ENCR_TIM9ENC                         \ TIM9 enable
-$00100000 constant RCC_RCC_APB2ENCR_SPI5ENC                         \ SPI5 enable
-$00200000 constant RCC_RCC_APB2ENCR_SAI1ENC                         \ SAI1 enable
-$00400000 constant RCC_RCC_APB2ENCR_SAI2ENC                         \ SAI2 enable
-
-
-\
-\ @brief RCC APB3 enable register
-\ Address offset: 0x1270
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB3ENCR_DFTENC                          \ DFT enable
-
-
-\
-\ @brief RCC APB4L enable register
-\ Address offset: 0x1274
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LENCR_HDPENC                         \ HDP enable
-$00000008 constant RCC_RCC_APB4LENCR_LPUART1ENC                     \ LPUART1 enable
-$00000020 constant RCC_RCC_APB4LENCR_SPI6ENC                        \ SPI6 enable
-$00000080 constant RCC_RCC_APB4LENCR_I2C4ENC                        \ I2C4 enable
-$00000200 constant RCC_RCC_APB4LENCR_LPTIM2ENC                      \ LPTIM2 enable
-$00000400 constant RCC_RCC_APB4LENCR_LPTIM3ENC                      \ LPTIM3 enable
-$00000800 constant RCC_RCC_APB4LENCR_LPTIM4ENC                      \ LPTIM4 enable
-$00001000 constant RCC_RCC_APB4LENCR_LPTIM5ENC                      \ LPTIM5 enable
-$00008000 constant RCC_RCC_APB4LENCR_VREFBUFENC                     \ VREFBUF enable
-$00010000 constant RCC_RCC_APB4LENCR_RTCENC                         \ RTC enable
-$00020000 constant RCC_RCC_APB4LENCR_RTCAPBENC                      \ RTCAPB enable
-$00400000 constant RCC_RCC_APB4LENCR_R2GRETENC                      \ R2GRET enable
-$00800000 constant RCC_RCC_APB4LENCR_R2GNPUENC                      \ R2GNPU enable
-$80000000 constant RCC_RCC_APB4LENCR_SERFENC                        \ SERF enable
-
-
-\
-\ @brief RCC APB4H enable register
-\ Address offset: 0x1278
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB4HENCR_SYSCFGENC                      \ SYSCFG enable
-$00000002 constant RCC_RCC_APB4HENCR_BSECENC                        \ BSEC enable
-$00000004 constant RCC_RCC_APB4HENCR_DTSENC                         \ DTS enable
-$00000010 constant RCC_RCC_APB4HENCR_BUSPERFMENC                    \ BUSPERFM enable
-
-
-\
-\ @brief RCC APB5 enable register
-\ Address offset: 0x127C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5ENCR_LTDCENC                         \ LTDC enable
-$00000004 constant RCC_RCC_APB5ENCR_DCMIPPENC                       \ DCMIPP enable
-$00000010 constant RCC_RCC_APB5ENCR_GFXTIMENC                       \ GFXTIM enable
-$00000020 constant RCC_RCC_APB5ENCR_VENCENC                         \ VENC enable
-$00000040 constant RCC_RCC_APB5ENCR_CSIENC                          \ CSI enable
-
-
-\
-\ @brief RCC divider Sleep enable register
-\ Address offset: 0x1280
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_DIVLPENCR_IC1LPENC                       \ IC1 sleep enable
-$00000002 constant RCC_RCC_DIVLPENCR_IC2LPENC                       \ IC2 sleep enable
-$00000004 constant RCC_RCC_DIVLPENCR_IC3LPENC                       \ IC3 sleep enable
-$00000008 constant RCC_RCC_DIVLPENCR_IC4LPENC                       \ IC4 sleep enable
-$00000010 constant RCC_RCC_DIVLPENCR_IC5LPENC                       \ IC5 sleep enable
-$00000020 constant RCC_RCC_DIVLPENCR_IC6LPENC                       \ IC6 sleep enable
-$00000040 constant RCC_RCC_DIVLPENCR_IC7LPENC                       \ IC7 sleep enable
-$00000080 constant RCC_RCC_DIVLPENCR_IC8LPENC                       \ IC8 sleep enable
-$00000100 constant RCC_RCC_DIVLPENCR_IC9LPENC                       \ IC9 sleep enable
-$00000200 constant RCC_RCC_DIVLPENCR_IC10LPENC                      \ IC10 sleep enable
-$00000400 constant RCC_RCC_DIVLPENCR_IC11LPENC                      \ IC11 sleep enable
-$00000800 constant RCC_RCC_DIVLPENCR_IC12LPENC                      \ IC12 sleep enable
-$00001000 constant RCC_RCC_DIVLPENCR_IC13LPENC                      \ IC13 sleep enable
-$00002000 constant RCC_RCC_DIVLPENCR_IC14LPENC                      \ IC14 sleep enable
-$00004000 constant RCC_RCC_DIVLPENCR_IC15LPENC                      \ IC15 sleep enable
-$00008000 constant RCC_RCC_DIVLPENCR_IC16LPENC                      \ IC16 sleep enable
-$00010000 constant RCC_RCC_DIVLPENCR_IC17LPENC                      \ IC17 sleep enable
-$00020000 constant RCC_RCC_DIVLPENCR_IC18LPENC                      \ IC18 sleep enable
-$00040000 constant RCC_RCC_DIVLPENCR_IC19LPENC                      \ IC19 sleep enable
-$00080000 constant RCC_RCC_DIVLPENCR_IC20LPENC                      \ IC20 sleep enable
-
-
-\
-\ @brief RCC bus Sleep enable register
-\ Address offset: 0x1284
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_BUSLPENCR_ACLKNLPENC                     \ ACLKN sleep enable
-$00000002 constant RCC_RCC_BUSLPENCR_ACLKNCLPENC                    \ ACLKNC sleep enable
-$00000004 constant RCC_RCC_BUSLPENCR_AHBMLPENC                      \ AHBM sleep enable
-$00000008 constant RCC_RCC_BUSLPENCR_AHB1LPENC                      \ AHB1 sleep enable
-$00000010 constant RCC_RCC_BUSLPENCR_AHB2LPENC                      \ AHB2 sleep enable
-$00000020 constant RCC_RCC_BUSLPENCR_AHB3LPENC                      \ AHB3 sleep enable
-$00000040 constant RCC_RCC_BUSLPENCR_AHB4LPENC                      \ AHB4 sleep enable
-$00000080 constant RCC_RCC_BUSLPENCR_AHB5LPENC                      \ AHB5 sleep enable
-$00000100 constant RCC_RCC_BUSLPENCR_APB1LPENC                      \ APB1 sleep enable
-$00000200 constant RCC_RCC_BUSLPENCR_APB2LPENC                      \ APB2 sleep enable
-$00000400 constant RCC_RCC_BUSLPENCR_APB3LPENC                      \ APB3 sleep enable
-$00000800 constant RCC_RCC_BUSLPENCR_APB4LPENC                      \ APB4 sleep enable
-$00001000 constant RCC_RCC_BUSLPENCR_APB5LPENC                      \ APB5 sleep enable
-
-
-\
-\ @brief RCC miscellaneous Sleep enable register
-\ Address offset: 0x1288
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MISCLPENCR_DBGLPENC                      \ DBG sleep enable
-$00000008 constant RCC_RCC_MISCLPENCR_XSPIPHYCOMPLPENC              \ XSPIPHYCOMP sleep enable
-$00000040 constant RCC_RCC_MISCLPENCR_PERLPENC                      \ PER sleep enable
-
-
-\
-\ @brief RCC memory Sleep enable register
-\ Address offset: 0x128C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_MEMLPENCR_AXISRAM3LPENC                  \ AXISRAM3 sleep enable
-$00000002 constant RCC_RCC_MEMLPENCR_AXISRAM4LPENC                  \ AXISRAM4 sleep enable
-$00000004 constant RCC_RCC_MEMLPENCR_AXISRAM5LPENC                  \ AXISRAM5 sleep enable
-$00000008 constant RCC_RCC_MEMLPENCR_AXISRAM6LPENC                  \ AXISRAM6 sleep enable
-$00000010 constant RCC_RCC_MEMLPENCR_AHBSRAM1LPENC                  \ AHBSRAM1 sleep enable
-$00000020 constant RCC_RCC_MEMLPENCR_AHBSRAM2LPENC                  \ AHBSRAM2 sleep enable
-$00000040 constant RCC_RCC_MEMLPENCR_BKPSRAMLPENC                   \ BKPSRAM sleep enable
-$00000080 constant RCC_RCC_MEMLPENCR_AXISRAM1LPENC                  \ AXISRAM1 sleep enable
-$00000100 constant RCC_RCC_MEMLPENCR_AXISRAM2LPENC                  \ AXISRAM2 sleep enable
-$00000200 constant RCC_RCC_MEMLPENCR_FLEXRAMLPENC                   \ FLEXRAM sleep enable
-$00000400 constant RCC_RCC_MEMLPENCR_NPUCACHERAMLPENC               \ NPUCACHERAM sleep enable
-$00000800 constant RCC_RCC_MEMLPENCR_VENCRAMLPENC                   \ VENCRAM sleep enable
-$00001000 constant RCC_RCC_MEMLPENCR_BOOTROMLPENC                   \ BOOTROM sleep enable
-
-
-\
-\ @brief RCC AHB1 Sleep enable register
-\ Address offset: 0x1290
-\ Reset value: 0x00000000
-\
-
-$00000010 constant RCC_RCC_AHB1LPENCR_GPDMA1LPENC                   \ GPDMA1 sleep enable
-$00000020 constant RCC_RCC_AHB1LPENCR_ADC12LPENC                    \ ADC12 sleep enable
-
-
-\
-\ @brief RCC AHB2 Sleep enable register
-\ Address offset: 0x1294
-\ Reset value: 0x00000000
-\
-
-$00001000 constant RCC_RCC_AHB2LPENCR_RAMCFGLPENC                   \ RAMCFG sleep enable
-$00010000 constant RCC_RCC_AHB2LPENCR_MDF1LPENC                     \ MDF1 sleep enable
-$00020000 constant RCC_RCC_AHB2LPENCR_ADF1LPENC                     \ ADF1 sleep enable
-
-
-\
-\ @brief RCC AHB3 Sleep enable register
-\ Address offset: 0x1298
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB3LPENCR_RNGLPENC                      \ RNG sleep enable
-$00000002 constant RCC_RCC_AHB3LPENCR_HASHLPENC                     \ HASH sleep enable
-$00000004 constant RCC_RCC_AHB3LPENCR_CRYPLPENC                     \ CRYP sleep enable
-$00000010 constant RCC_RCC_AHB3LPENCR_SAESLPENC                     \ SAES sleep enable
-$00000100 constant RCC_RCC_AHB3LPENCR_PKALPENC                      \ PKA sleep enable
-$00000200 constant RCC_RCC_AHB3LPENCR_RIFSCLPENC                    \ RIFSC sleep enable
-$00000400 constant RCC_RCC_AHB3LPENCR_IACLPENC                      \ IAC sleep enable
-$00004000 constant RCC_RCC_AHB3LPENCR_RISAFLPENC                    \ RISAF sleep enable
-
-
-\
-\ @brief RCC AHB4 Sleep enable register
-\ Address offset: 0x129C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB4LPENCR_GPIOALPENC                    \ GPIOA sleep enable
-$00000002 constant RCC_RCC_AHB4LPENCR_GPIOBLPENC                    \ GPIOB sleep enable
-$00000004 constant RCC_RCC_AHB4LPENCR_GPIOCLPENC                    \ GPIOC sleep enable
-$00000008 constant RCC_RCC_AHB4LPENCR_GPIODLPENC                    \ GPIOD sleep enable
-$00000010 constant RCC_RCC_AHB4LPENCR_GPIOELPENC                    \ GPIOE sleep enable
-$00000020 constant RCC_RCC_AHB4LPENCR_GPIOFLPENC                    \ GPIOF sleep enable
-$00000040 constant RCC_RCC_AHB4LPENCR_GPIOGLPENC                    \ GPIOG sleep enable
-$00000080 constant RCC_RCC_AHB4LPENCR_GPIOHLPENC                    \ GPIOH sleep enable
-$00002000 constant RCC_RCC_AHB4LPENCR_GPIONLPENC                    \ GPION sleep enable
-$00004000 constant RCC_RCC_AHB4LPENCR_GPIOOLPENC                    \ GPIOO sleep enable
-$00008000 constant RCC_RCC_AHB4LPENCR_GPIOPLPENC                    \ GPIOP sleep enable
-$00010000 constant RCC_RCC_AHB4LPENCR_GPIOQLPENC                    \ GPIOQ sleep enable
-$00040000 constant RCC_RCC_AHB4LPENCR_PWRLPENC                      \ PWR sleep enable
-$00080000 constant RCC_RCC_AHB4LPENCR_CRCLPENC                      \ CRC sleep enable
-
-
-\
-\ @brief RCC AHB5 Sleep enable register
-\ Address offset: 0x12A0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_AHB5LPENCR_HPDMA1LPENC                   \ HPDMA1 sleep enable
-$00000002 constant RCC_RCC_AHB5LPENCR_DMA2DLPENC                    \ DMA2D sleep enable
-$00000008 constant RCC_RCC_AHB5LPENCR_JPEGLPENC                     \ JPEG sleep enable
-$00000010 constant RCC_RCC_AHB5LPENCR_FMCLPENC                      \ FMC sleep enable
-$00000020 constant RCC_RCC_AHB5LPENCR_XSPI1LPENC                    \ XSPI1 sleep enable
-$00000040 constant RCC_RCC_AHB5LPENCR_PSSILPENC                     \ PSSI sleep enable
-$00000080 constant RCC_RCC_AHB5LPENCR_SDMMC2LPENC                   \ SDMMC2 sleep enable
-$00000100 constant RCC_RCC_AHB5LPENCR_SDMMC1LPENC                   \ SDMMC1 sleep enable
-$00001000 constant RCC_RCC_AHB5LPENCR_XSPI2LPENC                    \ XSPI2 sleep enable
-$00002000 constant RCC_RCC_AHB5LPENCR_XSPIMLPENC                    \ XSPIM sleep enable
-$00004000 constant RCC_RCC_AHB5LPENCR_MCE1LPENC                     \ MCE1 sleep enable
-$00008000 constant RCC_RCC_AHB5LPENCR_MCE2LPENC                     \ MCE2 sleep enable
-$00010000 constant RCC_RCC_AHB5LPENCR_MCE3LPENC                     \ MCE3 sleep enable
-$00020000 constant RCC_RCC_AHB5LPENCR_XSPI3LPENC                    \ XSPI3 sleep enable
-$00040000 constant RCC_RCC_AHB5LPENCR_MCE4LPENC                     \ MCE4 sleep enable
-$00080000 constant RCC_RCC_AHB5LPENCR_GFXMMULPENC                   \ GFXMMU sleep enable
-$00100000 constant RCC_RCC_AHB5LPENCR_GPULPENC                      \ GPU sleep enable
-$00400000 constant RCC_RCC_AHB5LPENCR_ETH1MACLPENC                  \ ETH1MAC sleep enable
-$00800000 constant RCC_RCC_AHB5LPENCR_ETH1TXLPENC                   \ ETH1TX sleep enable
-$01000000 constant RCC_RCC_AHB5LPENCR_ETH1RXLPENC                   \ ETH1RX sleep enable
-$02000000 constant RCC_RCC_AHB5LPENCR_ETH1LPENC                     \ ETH1 sleep enable
-$04000000 constant RCC_RCC_AHB5LPENCR_OTG1LPENC                     \ OTG1 sleep enable
-$08000000 constant RCC_RCC_AHB5LPENCR_OTGPHY1LPENC                  \ OTGPHY1 sleep enable
-$10000000 constant RCC_RCC_AHB5LPENCR_OTGPHY2LPENC                  \ OTGPHY2 sleep enable
-$20000000 constant RCC_RCC_AHB5LPENCR_OTG2LPENC                     \ OTG2 sleep enable
-$40000000 constant RCC_RCC_AHB5LPENCR_NPUCACHELPENC                 \ NPUCACHE sleep enable
-$80000000 constant RCC_RCC_AHB5LPENCR_NPULPENC                      \ NPU sleep enable
-
-
-\
-\ @brief RCC APB1L Sleep enable register
-\ Address offset: 0x12A4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB1LLPENCR_TIM2LPENC                    \ TIM2 sleep enable
-$00000002 constant RCC_RCC_APB1LLPENCR_TIM3LPENC                    \ TIM3 sleep enable
-$00000004 constant RCC_RCC_APB1LLPENCR_TIM4LPENC                    \ TIM4 sleep enable
-$00000008 constant RCC_RCC_APB1LLPENCR_TIM5LPENC                    \ TIM5 sleep enable
-$00000010 constant RCC_RCC_APB1LLPENCR_TIM6LPENC                    \ TIM6 sleep enable
-$00000020 constant RCC_RCC_APB1LLPENCR_TIM7LPENC                    \ TIM7 sleep enable
-$00000040 constant RCC_RCC_APB1LLPENCR_TIM12LPENC                   \ TIM12 sleep enable
-$00000080 constant RCC_RCC_APB1LLPENCR_TIM13LPENC                   \ TIM13 sleep enable
-$00000100 constant RCC_RCC_APB1LLPENCR_TIM14LPENC                   \ TIM14 sleep enable
-$00000200 constant RCC_RCC_APB1LLPENCR_LPTIM1LPENC                  \ LPTIM1 sleep enable
-$00000800 constant RCC_RCC_APB1LLPENCR_WWDGLPENC                    \ WWDG sleep enable
-$00001000 constant RCC_RCC_APB1LLPENCR_TIM10LPENC                   \ TIM10 sleep enable
-$00002000 constant RCC_RCC_APB1LLPENCR_TIM11LPENC                   \ TIM11 sleep enable
-$00004000 constant RCC_RCC_APB1LLPENCR_SPI2LPENC                    \ SPI2 sleep enable
-$00008000 constant RCC_RCC_APB1LLPENCR_SPI3LPENC                    \ SPI3 sleep enable
-$00010000 constant RCC_RCC_APB1LLPENCR_SPDIFRX1LPENC                \ SPDIFRX1 sleep enable
-$00020000 constant RCC_RCC_APB1LLPENCR_USART2LPENC                  \ USART2 sleep enable
-$00040000 constant RCC_RCC_APB1LLPENCR_USART3LPENC                  \ USART3 sleep enable
-$00080000 constant RCC_RCC_APB1LLPENCR_UART4LPENC                   \ UART4 sleep enable
-$00100000 constant RCC_RCC_APB1LLPENCR_UART5LPENC                   \ UART5 sleep enable
-$00200000 constant RCC_RCC_APB1LLPENCR_I2C1LPENC                    \ I2C1 sleep enable
-$00400000 constant RCC_RCC_APB1LLPENCR_I2C2LPENC                    \ I2C2 sleep enable
-$00800000 constant RCC_RCC_APB1LLPENCR_I2C3LPENC                    \ I2C3 sleep enable
-$01000000 constant RCC_RCC_APB1LLPENCR_I3C1LPENC                    \ I3C1 sleep enable
-$02000000 constant RCC_RCC_APB1LLPENCR_I3C2LPENC                    \ I3C2 sleep enable
-$40000000 constant RCC_RCC_APB1LLPENCR_UART7LPENC                   \ UART7 sleep enable
-$80000000 constant RCC_RCC_APB1LLPENCR_UART8LPENC                   \ UART8 sleep enable
-
-
-\
-\ @brief RCC APB1H Sleep enable register
-\ Address offset: 0x12A8
-\ Reset value: 0x00000000
-\
-
-$00000020 constant RCC_RCC_APB1HLPENCR_MDIOSLPENC                   \ MDIOS sleep enable
-$00000100 constant RCC_RCC_APB1HLPENCR_FDCANLPENC                   \ FDCAN sleep enable
-$00040000 constant RCC_RCC_APB1HLPENCR_UCPD1LPENC                   \ UCPD1 sleep enable
-
-
-\
-\ @brief RCC APB2 Sleep enable register
-\ Address offset: 0x12AC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB2LPENCR_TIM1LPENC                     \ TIM1 sleep enable
-$00000002 constant RCC_RCC_APB2LPENCR_TIM8LPENC                     \ TIM8 sleep enable
-$00000010 constant RCC_RCC_APB2LPENCR_USART1LPENC                   \ USART1 sleep enable
-$00000020 constant RCC_RCC_APB2LPENCR_USART6LPENC                   \ USART6 sleep enable
-$00000040 constant RCC_RCC_APB2LPENCR_UART9LPENC                    \ UART9 sleep enable
-$00000080 constant RCC_RCC_APB2LPENCR_USART10LPENC                  \ USART10 sleep enable
-$00001000 constant RCC_RCC_APB2LPENCR_SPI1LPENC                     \ SPI1 sleep enable
-$00002000 constant RCC_RCC_APB2LPENCR_SPI4LPENC                     \ SPI4 sleep enable
-$00008000 constant RCC_RCC_APB2LPENCR_TIM18LPENC                    \ TIM18 sleep enable
-$00010000 constant RCC_RCC_APB2LPENCR_TIM15LPENC                    \ TIM15 sleep enable
-$00020000 constant RCC_RCC_APB2LPENCR_TIM16LPENC                    \ TIM16 sleep enable
-$00040000 constant RCC_RCC_APB2LPENCR_TIM17LPENC                    \ TIM17 sleep enable
-$00080000 constant RCC_RCC_APB2LPENCR_TIM9LPENC                     \ TIM9 sleep enable
-$00100000 constant RCC_RCC_APB2LPENCR_SPI5LPENC                     \ SPI5 sleep enable
-$00200000 constant RCC_RCC_APB2LPENCR_SAI1LPENC                     \ SAI1 sleep enable
-$00400000 constant RCC_RCC_APB2LPENCR_SAI2LPENC                     \ SAI2 sleep enable
-
-
-\
-\ @brief RCC APB3 Sleep enable register
-\ Address offset: 0x12B0
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB3LPENCR_DFTLPENC                      \ DFT sleep enable
-
-
-\
-\ @brief RCC APB4L Sleep enable register
-\ Address offset: 0x12B4
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RCC_RCC_APB4LLPENCR_HDPLPENC                     \ HDP sleep enable
-$00000008 constant RCC_RCC_APB4LLPENCR_LPUART1LPENC                 \ LPUART1 sleep enable
-$00000020 constant RCC_RCC_APB4LLPENCR_SPI6LPENC                    \ SPI6 sleep enable
-$00000080 constant RCC_RCC_APB4LLPENCR_I2C4LPENC                    \ I2C4 sleep enable
-$00000200 constant RCC_RCC_APB4LLPENCR_LPTIM2LPENC                  \ LPTIM2 sleep enable
-$00000400 constant RCC_RCC_APB4LLPENCR_LPTIM3LPENC                  \ LPTIM3 sleep enable
-$00000800 constant RCC_RCC_APB4LLPENCR_LPTIM4LPENC                  \ LPTIM4 sleep enable
-$00001000 constant RCC_RCC_APB4LLPENCR_LPTIM5LPENC                  \ LPTIM5 sleep enable
-$00008000 constant RCC_RCC_APB4LLPENCR_VREFBUFLPENC                 \ VREFBUF sleep enable
-$00010000 constant RCC_RCC_APB4LLPENCR_RTCLPENC                     \ RTC sleep enable
-$00020000 constant RCC_RCC_APB4LLPENCR_RTCAPBLPENC                  \ RTCAPB sleep enable
-$00400000 constant RCC_RCC_APB4LLPENCR_R2GRETLPENC                  \ R2GRET sleep enable
-$00800000 constant RCC_RCC_APB4LLPENCR_R2GNPULPENC                  \ R2GNPU sleep enable
-$80000000 constant RCC_RCC_APB4LLPENCR_SERFLPENC                    \ SERF sleep enable
-
-
-\
-\ @brief RCC APB4H Sleep enable register
-\ Address offset: 0x12B8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_APB4HLPENCR_SYSCFGLPENC                  \ SYSCFG sleep enable
-$00000002 constant RCC_RCC_APB4HLPENCR_BSECLPENC                    \ BSEC sleep enable
-$00000004 constant RCC_RCC_APB4HLPENCR_DTSLPENC                     \ DTS sleep enable
-$00000010 constant RCC_RCC_APB4HLPENCR_BUSPERFMLPENC                \ BUSPERFM sleep enable
-
-
-\
-\ @brief RCC APB5 Sleep enable register
-\ Address offset: 0x12BC
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RCC_RCC_APB5LPENCR_LTDCLPENC                     \ LTDC sleep enable
-$00000004 constant RCC_RCC_APB5LPENCR_DCMIPPLPENC                   \ DCMIPP sleep enable
-$00000010 constant RCC_RCC_APB5LPENCR_GFXTIMLPENC                   \ GFXTIM sleep enable
-$00000020 constant RCC_RCC_APB5LPENCR_VENCLPENC                     \ VENC sleep enable
-$00000040 constant RCC_RCC_APB5LPENCR_CSILPENC                      \ CSI sleep enable
-
-
-\
-\ @brief RCC oscillator privilege configuration register0
-\ Address offset: 0x1784
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGCR0_LSIPVC                        \ Defines the privilege protection of the LSI configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGCR0_LSEPVC                        \ Defines the privilege protection of the LSE configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGCR0_MSIPVC                        \ Defines the privilege protection of the MSI configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGCR0_HSIPVC                        \ Defines the privilege protection of the HSI configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PRIVCFGCR0_HSEPVC                        \ Defines the privilege protection of the HSE configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC oscillator public configuration register0
-\ Address offset: 0x178C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGCR0_LSIPUBC                        \ Defines the public protection of the LSI configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGCR0_LSEPUBC                        \ Defines the public protection of the LSE configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGCR0_MSIPUBC                        \ Defines the public protection of the MSI configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGCR0_HSIPUBC                        \ Defines the public protection of the HSI configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGCR0_HSEPUBC                        \ Defines the public protection of the HSE configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC PLL privilege configuration register1
-\ Address offset: 0x1794
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGCR1_PLL1PVC                       \ Defines the privilege protection of the PLL1 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGCR1_PLL2PVC                       \ Defines the privilege protection of the PLL2 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGCR1_PLL3PVC                       \ Defines the privilege protection of the PLL3 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGCR1_PLL4PVC                       \ Defines the privilege protection of the PLL4 configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC PLL public configuration register1
-\ Address offset: 0x179C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGCR1_PLL1PUBC                       \ Defines the public protection of the PLL1 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGCR1_PLL2PUBC                       \ Defines the public protection of the PLL2 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGCR1_PLL3PUBC                       \ Defines the public protection of the PLL3 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGCR1_PLL4PUBC                       \ Defines the public protection of the PLL4 configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC divider privilege configuration register2
-\ Address offset: 0x17A4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGCR2_IC1PVC                        \ Defines the privilege protection of the IC1 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGCR2_IC2PVC                        \ Defines the privilege protection of the IC2 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGCR2_IC3PVC                        \ Defines the privilege protection of the IC3 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGCR2_IC4PVC                        \ Defines the privilege protection of the IC4 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PRIVCFGCR2_IC5PVC                        \ Defines the privilege protection of the IC5 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PRIVCFGCR2_IC6PVC                        \ Defines the privilege protection of the IC6 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PRIVCFGCR2_IC7PVC                        \ Defines the privilege protection of the IC7 configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PRIVCFGCR2_IC8PVC                        \ Defines the privilege protection of the IC8 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PRIVCFGCR2_IC9PVC                        \ Defines the privilege protection of the IC9 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PRIVCFGCR2_IC10PVC                       \ Defines the privilege protection of the IC10 configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PRIVCFGCR2_IC11PVC                       \ Defines the privilege protection of the IC11 configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PRIVCFGCR2_IC12PVC                       \ Defines the privilege protection of the IC12 configuration bits (enable, ready, divider).
-$00001000 constant RCC_RCC_PRIVCFGCR2_IC13PVC                       \ Defines the privilege protection of the IC13 configuration bits (enable, ready, divider).
-$00002000 constant RCC_RCC_PRIVCFGCR2_IC14PVC                       \ Defines the privilege protection of the IC14 configuration bits (enable, ready, divider).
-$00004000 constant RCC_RCC_PRIVCFGCR2_IC15PVC                       \ Defines the privilege protection of the IC15 configuration bits (enable, ready, divider).
-$00008000 constant RCC_RCC_PRIVCFGCR2_IC16PVC                       \ Defines the privilege protection of the IC16 configuration bits (enable, ready, divider).
-$00010000 constant RCC_RCC_PRIVCFGCR2_IC17PVC                       \ Defines the privilege protection of the IC17 configuration bits (enable, ready, divider).
-$00020000 constant RCC_RCC_PRIVCFGCR2_IC18PVC                       \ Defines the privilege protection of the IC18 configuration bits (enable, ready, divider).
-$00040000 constant RCC_RCC_PRIVCFGCR2_IC19PVC                       \ Defines the privilege protection of the IC19 configuration bits (enable, ready, divider).
-$00080000 constant RCC_RCC_PRIVCFGCR2_IC20PVC                       \ Defines the privilege protection of the IC20 configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC divider public configuration register2
-\ Address offset: 0x17AC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGCR2_IC1PUBC                        \ Defines the public protection of the IC1 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGCR2_IC2PUBC                        \ Defines the public protection of the IC2 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGCR2_IC3PUBC                        \ Defines the public protection of the IC3 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGCR2_IC4PUBC                        \ Defines the public protection of the IC4 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGCR2_IC5PUBC                        \ Defines the public protection of the IC5 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PUBCFGCR2_IC6PUBC                        \ Defines the public protection of the IC6 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PUBCFGCR2_IC7PUBC                        \ Defines the public protection of the IC7 configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PUBCFGCR2_IC8PUBC                        \ Defines the public protection of the IC8 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PUBCFGCR2_IC9PUBC                        \ Defines the public protection of the IC9 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PUBCFGCR2_IC10PUBC                       \ Defines the public protection of the IC10 configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PUBCFGCR2_IC11PUBC                       \ Defines the public protection of the IC11 configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PUBCFGCR2_IC12PUBC                       \ Defines the public protection of the IC12 configuration bits (enable, ready, divider).
-$00001000 constant RCC_RCC_PUBCFGCR2_IC13PUBC                       \ Defines the public protection of the IC13 configuration bits (enable, ready, divider).
-$00002000 constant RCC_RCC_PUBCFGCR2_IC14PUBC                       \ Defines the public protection of the IC14 configuration bits (enable, ready, divider).
-$00004000 constant RCC_RCC_PUBCFGCR2_IC15PUBC                       \ Defines the public protection of the IC15 configuration bits (enable, ready, divider).
-$00008000 constant RCC_RCC_PUBCFGCR2_IC16PUBC                       \ Defines the public protection of the IC16 configuration bits (enable, ready, divider).
-$00010000 constant RCC_RCC_PUBCFGCR2_IC17PUBC                       \ Defines the public protection of the IC17 configuration bits (enable, ready, divider).
-$00020000 constant RCC_RCC_PUBCFGCR2_IC18PUBC                       \ Defines the public protection of the IC18 configuration bits (enable, ready, divider).
-$00040000 constant RCC_RCC_PUBCFGCR2_IC19PUBC                       \ Defines the public protection of the IC19 configuration bits (enable, ready, divider).
-$00080000 constant RCC_RCC_PUBCFGCR2_IC20PUBC                       \ Defines the public protection of the IC20 configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC system privilege configuration register3
-\ Address offset: 0x17B4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGCR3_MODPVC                        \ Defines the privilege protection of the MOD configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGCR3_SYSPVC                        \ Defines the privilege protection of the SYS configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGCR3_BUSPVC                        \ Defines the privilege protection of the BUS configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGCR3_PERPVC                        \ Defines the privilege protection of the PER configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PRIVCFGCR3_INTPVC                        \ Defines the privilege protection of the INT configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PRIVCFGCR3_RSTPVC                        \ Defines the privilege protection of the RST configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PRIVCFGCR3_DFTPVC                        \ Defines the privilege protection of the DFT configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC system public configuration register3
-\ Address offset: 0x17BC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGCR3_MODPUBC                        \ Defines the public protection of the MOD configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGCR3_SYSPUBC                        \ Defines the public protection of the SYS configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGCR3_BUSPUBC                        \ Defines the public protection of the BUS configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGCR3_PERPUBC                        \ Defines the public protection of the PER configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGCR3_INTPUBC                        \ Defines the public protection of the INT configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PUBCFGCR3_RSTPUBC                        \ Defines the public protection of the RST configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PUBCFGCR3_DFTPUBC                        \ Defines the public protection of the DFT configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC privilege configuration register4
-\ Address offset: 0x17C4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PRIVCFGCR4_ACLKNPVC                      \ Defines the privilege protection of the ACLKN configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PRIVCFGCR4_ACLKNCPVC                     \ Defines the privilege protection of the ACLKNC configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PRIVCFGCR4_AHBMPVC                       \ Defines the privilege protection of the AHBM configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PRIVCFGCR4_AHB1PVC                       \ Defines the privilege protection of the AHB1 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PRIVCFGCR4_AHB2PVC                       \ Defines the privilege protection of the AHB2 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PRIVCFGCR4_AHB3PVC                       \ Defines the privilege protection of the AHB3 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PRIVCFGCR4_AHB4PVC                       \ Defines the privilege protection of the AHB4 configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PRIVCFGCR4_AHB5PVC                       \ Defines the privilege protection of the AHB5 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PRIVCFGCR4_APB1PVC                       \ Defines the privilege protection of the APB1 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PRIVCFGCR4_APB2PVC                       \ Defines the privilege protection of the APB2 configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PRIVCFGCR4_APB3PVC                       \ Defines the privilege protection of the APB3 configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PRIVCFGCR4_APB4PVC                       \ Defines the privilege protection of the APB4 configuration bits (enable, ready, divider).
-$00001000 constant RCC_RCC_PRIVCFGCR4_APB5PVC                       \ Defines the privilege protection of the APB5 configuration bits (enable, ready, divider).
-$00002000 constant RCC_RCC_PRIVCFGCR4_NOCPVC                        \ Defines the privilege protection of the NOC configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC public configuration register4
-\ Address offset: 0x17CC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGCR4_ACLKNPUBC                      \ Defines the public protection of the ACLKN configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGCR4_ACLKNCPUBC                     \ Defines the public protection of the ACLKNC configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGCR4_AHBMPUBC                       \ Defines the public protection of the AHBM configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGCR4_AHB1PUBC                       \ Defines the public protection of the AHB1 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGCR4_AHB2PUBC                       \ Defines the public protection of the AHB2 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PUBCFGCR4_AHB3PUBC                       \ Defines the public protection of the AHB3 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PUBCFGCR4_AHB4PUBC                       \ Defines the public protection of the AHB4 configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PUBCFGCR4_AHB5PUBC                       \ Defines the public protection of the AHB5 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PUBCFGCR4_APB1PUBC                       \ Defines the public protection of the APB1 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PUBCFGCR4_APB2PUBC                       \ Defines the public protection of the APB2 configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PUBCFGCR4_APB3PUBC                       \ Defines the public protection of the APB3 configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PUBCFGCR4_APB4PUBC                       \ Defines the public protection of the APB4 configuration bits (enable, ready, divider).
-$00001000 constant RCC_RCC_PUBCFGCR4_APB5PUBC                       \ Defines the public protection of the APB5 configuration bits (enable, ready, divider).
-$00002000 constant RCC_RCC_PUBCFGCR4_NOCPUBC                        \ Defines the public protection of the NOC configuration bits (enable, ready, divider).
-
-
-\
-\ @brief RCC public configuration register4
-\ Address offset: 0x17D0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RCC_RCC_PUBCFGCR5_AXISRAM3PUBC                   \ Defines the public protection of the AXISRAM3 configuration bits (enable, ready, divider).
-$00000002 constant RCC_RCC_PUBCFGCR5_AXISRAM4PUBC                   \ Defines the public protection of the AXISRAM4 configuration bits (enable, ready, divider).
-$00000004 constant RCC_RCC_PUBCFGCR5_AXISRAM5PUBC                   \ Defines the public protection of the AXISRAM5 configuration bits (enable, ready, divider).
-$00000008 constant RCC_RCC_PUBCFGCR5_AXISRAM6PUBC                   \ Defines the public protection of the AXISRAM6 configuration bits (enable, ready, divider).
-$00000010 constant RCC_RCC_PUBCFGCR5_AHBSRAM1PUBC                   \ Defines the public protection of the AHBSRAM1 configuration bits (enable, ready, divider).
-$00000020 constant RCC_RCC_PUBCFGCR5_AHBSRAM2PUBC                   \ Defines the public protection of the AHBSRAM2 configuration bits (enable, ready, divider).
-$00000040 constant RCC_RCC_PUBCFGCR5_BKPSRAMPUBC                    \ Defines the public protection of the BKPSRAM configuration bits (enable, ready, divider).
-$00000080 constant RCC_RCC_PUBCFGCR5_AXISRAM1PUBC                   \ Defines the public protection of the AXISRAM1 configuration bits (enable, ready, divider).
-$00000100 constant RCC_RCC_PUBCFGCR5_AXISRAM2PUBC                   \ Defines the public protection of the AXISRAM2 configuration bits (enable, ready, divider).
-$00000200 constant RCC_RCC_PUBCFGCR5_FLEXRAMPUBC                    \ Defines the public protection of the FLEXRAM configuration bits (enable, ready, divider).
-$00000400 constant RCC_RCC_PUBCFGCR5_CACHEAXIRAMPUBC                \ Defines the public protection of the NPUCACHERAM configuration bits (enable, ready, divider).
-$00000800 constant RCC_RCC_PUBCFGCR5_VENCRAMPUBC                    \ Defines the public protection of the VENCRAM configuration bits (enable, ready, divider).
-
-
-\
-\ @brief Reset and clock control
-\
-$46028000 constant RCC_RCC_CR     \ offset: 0x00 : RCC control register
-$46028004 constant RCC_RCC_SR     \ offset: 0x04 : RCC status register
-$46028008 constant RCC_RCC_STOPCR  \ offset: 0x08 : RCC Stop mode control register
-$46028020 constant RCC_RCC_CFGR1  \ offset: 0x20 : RCC configuration register 1
-$46028024 constant RCC_RCC_CFGR2  \ offset: 0x24 : RCC configuration register 2
-$46028028 constant RCC_RCC_CKPROTR  \ offset: 0x28 : RCC clock protection register
-$4602802c constant RCC_RCC_BDCR   \ offset: 0x2C : RCC backup domain protection register
-$46028030 constant RCC_RCC_HWRSR  \ offset: 0x30 : RCC reset status register for hardware
-$46028034 constant RCC_RCC_RSR    \ offset: 0x34 : RCC reset register
-$46028040 constant RCC_RCC_LSECFGR  \ offset: 0x40 : RCC LSE configuration register
-$46028044 constant RCC_RCC_MSICFGR  \ offset: 0x44 : RCC MSI configuration register
-$46028048 constant RCC_RCC_HSICFGR  \ offset: 0x48 : RCC HSI configuration register
-$4602804c constant RCC_RCC_HSIMCR  \ offset: 0x4C : RCC HSI monitor control register
-$46028050 constant RCC_RCC_HSIMSR  \ offset: 0x50 : RCC HSI monitor status register
-$46028054 constant RCC_RCC_HSECFGR  \ offset: 0x54 : RCC HSE configuration register
-$46028080 constant RCC_RCC_PLL1CFGR1  \ offset: 0x80 : RCC PLL1 configuration register 1
-$46028084 constant RCC_RCC_PLL1CFGR2  \ offset: 0x84 : RCC PLL1 configuration register 2
-$46028088 constant RCC_RCC_PLL1CFGR3  \ offset: 0x88 : RCC PLL1 configuration register 3
-$46028090 constant RCC_RCC_PLL2CFGR1  \ offset: 0x90 : RCC PLL2 configuration register 1
-$46028094 constant RCC_RCC_PLL2CFGR2  \ offset: 0x94 : RCC PLL2 configuration register 2
-$46028098 constant RCC_RCC_PLL2CFGR3  \ offset: 0x98 : RCC PLL2 configuration register 3
-$460280a0 constant RCC_RCC_PLL3CFGR1  \ offset: 0xA0 : RCC PLL3 configuration register 1
-$460280a4 constant RCC_RCC_PLL3CFGR2  \ offset: 0xA4 : RCC PLL3 configuration register 2
-$460280a8 constant RCC_RCC_PLL3CFGR3  \ offset: 0xA8 : RCC PLL3 configuration register 3
-$460280b0 constant RCC_RCC_PLL4CFGR1  \ offset: 0xB0 : RCC PLL4 configuration register 1
-$460280b4 constant RCC_RCC_PLL4CFGR2  \ offset: 0xB4 : RCC PLL4 configuration register 2
-$460280b8 constant RCC_RCC_PLL4CFGR3  \ offset: 0xB8 : RCC PLL4 configuration register 3
-$460280c4 constant RCC_RCC_IC1CFGR  \ offset: 0xC4 : RCC IC1 configuration register
-$460280c8 constant RCC_RCC_IC2CFGR  \ offset: 0xC8 : RCC IC2 configuration register
-$460280cc constant RCC_RCC_IC3CFGR  \ offset: 0xCC : RCC IC3 configuration register
-$460280d0 constant RCC_RCC_IC4CFGR  \ offset: 0xD0 : RCC IC4 configuration register
-$460280d4 constant RCC_RCC_IC5CFGR  \ offset: 0xD4 : RCC IC5 configuration register
-$460280d8 constant RCC_RCC_IC6CFGR  \ offset: 0xD8 : RCC IC6 configuration register
-$460280dc constant RCC_RCC_IC7CFGR  \ offset: 0xDC : RCC IC7 configuration register
-$460280e0 constant RCC_RCC_IC8CFGR  \ offset: 0xE0 : RCC IC8 configuration register
-$460280e4 constant RCC_RCC_IC9CFGR  \ offset: 0xE4 : RCC IC9 configuration register
-$460280e8 constant RCC_RCC_IC10CFGR  \ offset: 0xE8 : RCC IC10 configuration register
-$460280ec constant RCC_RCC_IC11CFGR  \ offset: 0xEC : RCC IC11 configuration register
-$460280f0 constant RCC_RCC_IC12CFGR  \ offset: 0xF0 : RCC IC12 configuration register
-$460280f4 constant RCC_RCC_IC13CFGR  \ offset: 0xF4 : RCC IC13 configuration register
-$460280f8 constant RCC_RCC_IC14CFGR  \ offset: 0xF8 : RCC IC14 configuration register
-$460280fc constant RCC_RCC_IC15CFGR  \ offset: 0xFC : RCC IC15 configuration register
-$46028100 constant RCC_RCC_IC16CFGR  \ offset: 0x100 : RCC IC16 configuration register
-$46028104 constant RCC_RCC_IC17CFGR  \ offset: 0x104 : RCC IC17 configuration register
-$46028108 constant RCC_RCC_IC18CFGR  \ offset: 0x108 : RCC IC18 configuration register
-$4602810c constant RCC_RCC_IC19CFGR  \ offset: 0x10C : RCC IC19 configuration register
-$46028110 constant RCC_RCC_IC20CFGR  \ offset: 0x110 : RCC IC20 configuration register
-$46028124 constant RCC_RCC_CIER   \ offset: 0x124 : RCC clock-source interrupt enable register
-$46028128 constant RCC_RCC_CIFR   \ offset: 0x128 : RCC clock-source interrupt flag register
-$4602812c constant RCC_RCC_CICR   \ offset: 0x12C : RCC clock-source interrupt Clear register
-$46028144 constant RCC_RCC_CCIPR1  \ offset: 0x144 : RCC clock configuration for independent peripheral register1
-$46028148 constant RCC_RCC_CCIPR2  \ offset: 0x148 : RCC clock configuration for independent peripheral register 2
-$4602814c constant RCC_RCC_CCIPR3  \ offset: 0x14C : RCC clock configuration for independent peripheral register3
-$46028150 constant RCC_RCC_CCIPR4  \ offset: 0x150 : RCC clock configuration for independent peripheral register4
-$46028154 constant RCC_RCC_CCIPR5  \ offset: 0x154 : RCC lock configuration for independent peripheral register5
-$46028158 constant RCC_RCC_CCIPR6  \ offset: 0x158 : RCC clock configuration for independent peripheral register6
-$4602815c constant RCC_RCC_CCIPR7  \ offset: 0x15C : RCC clock configuration for independent peripheral register7
-$46028160 constant RCC_RCC_CCIPR8  \ offset: 0x160 : RCC clock configuration for independent peripheral register8
-$46028164 constant RCC_RCC_CCIPR9  \ offset: 0x164 : RCC clock configuration for independent peripheral register9
-$46028170 constant RCC_RCC_CCIPR12  \ offset: 0x170 : RCC clock configuration for independent peripheral register12
-$46028174 constant RCC_RCC_CCIPR13  \ offset: 0x174 : RCC clock configuration for independent peripheral register13
-$46028178 constant RCC_RCC_CCIPR14  \ offset: 0x178 : RCC clock configuration for independent peripheral register14
-$46028204 constant RCC_RCC_BUSRSTR  \ offset: 0x204 : RCC SoC buses reset register
-$46028208 constant RCC_RCC_MISCRSTR  \ offset: 0x208 : RCC miscellaneous configurations reset register
-$4602820c constant RCC_RCC_MEMRSTR  \ offset: 0x20C : RCC memories reset register
-$46028210 constant RCC_RCC_AHB1RSTR  \ offset: 0x210 : RCC AHB1 Reset register
-$46028214 constant RCC_RCC_AHB2RSTR  \ offset: 0x214 : RCC AHB2 reset register
-$46028218 constant RCC_RCC_AHB3RSTR  \ offset: 0x218 : RCC AHB3 reset register
-$4602821c constant RCC_RCC_AHB4RSTR  \ offset: 0x21C : RCC AHB4 reset register
-$46028220 constant RCC_RCC_AHB5RSTR  \ offset: 0x220 : RCC AHB5 reset register
-$46028224 constant RCC_RCC_APB1LRSTR  \ offset: 0x224 : RCC APB1L reset register
-$46028228 constant RCC_RCC_APB1HRSTR  \ offset: 0x228 : RCC APB1H reset register
-$4602822c constant RCC_RCC_APB2RSTR  \ offset: 0x22C : RCC APB2 reset register
-$46028234 constant RCC_RCC_APB4LRSTR  \ offset: 0x234 : RCC APB4L reset register
-$46028238 constant RCC_RCC_APB4HRSTR  \ offset: 0x238 : RCC APB4H reset register
-$4602823c constant RCC_RCC_APB5RSTR  \ offset: 0x23C : RCC APB5 reset register
-$46028240 constant RCC_RCC_DIVENR  \ offset: 0x240 : RCC IC dividers enable register
-$46028244 constant RCC_RCC_BUSENR  \ offset: 0x244 : RCC SoC buses enable register
-$46028248 constant RCC_RCC_MISCENR  \ offset: 0x248 : RCC miscellaneous configuration enable register
-$4602824c constant RCC_RCC_MEMENR  \ offset: 0x24C : RCC memory enable register
-$46028250 constant RCC_RCC_AHB1ENR  \ offset: 0x250 : RCC AHB1 enable register
-$46028254 constant RCC_RCC_AHB2ENR  \ offset: 0x254 : RCC AHB2 enable register
-$46028258 constant RCC_RCC_AHB3ENR  \ offset: 0x258 : RCC AHB3 enable register
-$4602825c constant RCC_RCC_AHB4ENR  \ offset: 0x25C : RCC AHB4 enable register
-$46028260 constant RCC_RCC_AHB5ENR  \ offset: 0x260 : RCC AHB5 enable register
-$46028264 constant RCC_RCC_APB1LENR  \ offset: 0x264 : RCC APB1L enable register
-$46028268 constant RCC_RCC_APB1HENR  \ offset: 0x268 : RCC APB1H enable register
-$4602826c constant RCC_RCC_APB2ENR  \ offset: 0x26C : RCC APB2 enable register
-$46028270 constant RCC_RCC_APB3ENR  \ offset: 0x270 : RCC APB3 enable register
-$46028274 constant RCC_RCC_APB4LENR  \ offset: 0x274 : RCC APB4L enable register
-$46028278 constant RCC_RCC_APB4HENR  \ offset: 0x278 : RCC APB4H enable register
-$4602827c constant RCC_RCC_APB5ENR  \ offset: 0x27C : RCC APB5 enable register
-$46028280 constant RCC_RCC_DIVLPENR  \ offset: 0x280 : RCC dividers Sleep enable register
-$46028284 constant RCC_RCC_BUSLPENR  \ offset: 0x284 : RCC SoC buses Sleep enable register
-$46028288 constant RCC_RCC_MISCLPENR  \ offset: 0x288 : RCC miscellaneous configurations Sleep enable register
-$4602828c constant RCC_RCC_MEMLPENR  \ offset: 0x28C : RCC memory Sleep enable register
-$46028290 constant RCC_RCC_AHB1LPENR  \ offset: 0x290 : RCC AHB1 Sleep enable register
-$46028294 constant RCC_RCC_AHB2LPENR  \ offset: 0x294 : RCC AHB2 Sleep enable register
-$46028298 constant RCC_RCC_AHB3LPENR  \ offset: 0x298 : RCC AHB3 Sleep enable register
-$4602829c constant RCC_RCC_AHB4LPENR  \ offset: 0x29C : RCC AHB4 Sleep enable register
-$460282a0 constant RCC_RCC_AHB5LPENR  \ offset: 0x2A0 : RCC AHB5 Sleep enable register
-$460282a4 constant RCC_RCC_APB1LLPENR  \ offset: 0x2A4 : RCC APB1L Sleep enable register
-$460282a8 constant RCC_RCC_APB1HLPENR  \ offset: 0x2A8 : RCC APB1H Sleep enable register
-$460282ac constant RCC_RCC_APB2LPENR  \ offset: 0x2AC : RCC APB2 Sleep enable register
-$460282b0 constant RCC_RCC_APB3LPENR  \ offset: 0x2B0 : RCC APB3 Sleep enable register
-$460282b4 constant RCC_RCC_APB4LLPENR  \ offset: 0x2B4 : RCC APB4L Sleep enable register
-$460282b8 constant RCC_RCC_APB4HLPENR  \ offset: 0x2B8 : RCC APB4H Sleep enable register
-$460282bc constant RCC_RCC_APB5LPENR  \ offset: 0x2BC : RCC APB5 Sleep enable register
-$4602844c constant RCC_RCC_RDCR   \ offset: 0x44C : RCC APB5 Sleep enable register
-$46028780 constant RCC_RCC_SECCFGR0  \ offset: 0x780 : RCC oscillator secure configuration register0
-$46028784 constant RCC_RCC_PRIVCFGR0  \ offset: 0x784 : RCC oscillator privilege configuration register0
-$46028788 constant RCC_RCC_LOCKCFGR0  \ offset: 0x788 : RCC oscillator lock configuration register0
-$4602878c constant RCC_RCC_PUBCFGR0  \ offset: 0x78C : RCC oscillator public configuration register0
-$46028790 constant RCC_RCC_SECCFGR1  \ offset: 0x790 : RCC PLL secure configuration register1
-$46028794 constant RCC_RCC_PRIVCFGR1  \ offset: 0x794 : RCC PLL privilege configuration register1
-$46028798 constant RCC_RCC_LOCKCFGR1  \ offset: 0x798 : RCC PLL lock configuration register1
-$4602879c constant RCC_RCC_PUBCFGR1  \ offset: 0x79C : RCC PLL public configuration register1
-$460287a0 constant RCC_RCC_SECCFGR2  \ offset: 0x7A0 : RCC divider secure configuration register2
-$460287a4 constant RCC_RCC_PRIVCFGR2  \ offset: 0x7A4 : RCC divider privilege configuration register2
-$460287a8 constant RCC_RCC_LOCKCFGR2  \ offset: 0x7A8 : RCC divider lock configuration register2
-$460287ac constant RCC_RCC_PUBCFGR2  \ offset: 0x7AC : RCC divider public configuration register2
-$460287b0 constant RCC_RCC_SECCFGR3  \ offset: 0x7B0 : RCC system secure configuration register3
-$460287b4 constant RCC_RCC_PRIVCFGR3  \ offset: 0x7B4 : RCC system privilege configuration register3
-$460287b8 constant RCC_RCC_LOCKCFGR3  \ offset: 0x7B8 : RCC system lock configuration register3
-$460287bc constant RCC_RCC_PUBCFGR3  \ offset: 0x7BC : RCC system public configuration register3
-$460287c0 constant RCC_RCC_SECCFGR4  \ offset: 0x7C0 : RCC bus secure configuration register4
-$460287c4 constant RCC_RCC_PRIVCFGR4  \ offset: 0x7C4 : RCC bus privilege configuration register4
-$460287c8 constant RCC_RCC_LOCKCFGR4  \ offset: 0x7C8 : RCC bus lock configuration register4
-$460287cc constant RCC_RCC_PUBCFGR4  \ offset: 0x7CC : RCC bus public configuration register4
-$460287d0 constant RCC_RCC_PUBCFGR5  \ offset: 0x7D0 : RCC bus public configuration register4
-$46028800 constant RCC_RCC_CSR    \ offset: 0x800 : RCC control set register
-$46028808 constant RCC_RCC_STOPCSR  \ offset: 0x808 : RCC Stop configuration register
-$46028a04 constant RCC_RCC_BUSRSTSR  \ offset: 0xA04 : RCC bus reset set register
-$46028a08 constant RCC_RCC_MISCRSTSR  \ offset: 0xA08 : RCC miscellaneous reset register
-$46028a0c constant RCC_RCC_MEMRSTSR  \ offset: 0xA0C : RCC memory reset register
-$46028a10 constant RCC_RCC_AHB1RSTSR  \ offset: 0xA10 : RCC AHB1 reset register
-$46028a14 constant RCC_RCC_AHB2RSTSR  \ offset: 0xA14 : RCC AHB2 reset register
-$46028a18 constant RCC_RCC_AHB3RSTSR  \ offset: 0xA18 : RCC AHB3 reset register
-$46028a1c constant RCC_RCC_AHB4RSTSR  \ offset: 0xA1C : RCC AHB4 reset register
-$46028a20 constant RCC_RCC_AHB5RSTSR  \ offset: 0xA20 : RCC AHB5 reset register
-$46028a24 constant RCC_RCC_APB1LRSTSR  \ offset: 0xA24 : RCC APB1L reset register
-$46028a28 constant RCC_RCC_APB1HRSTSR  \ offset: 0xA28 : RCC APB1H reset register
-$46028a2c constant RCC_RCC_APB2RSTSR  \ offset: 0xA2C : RCC APB2 reset register
-$46028a34 constant RCC_RCC_APB4LRSTSR  \ offset: 0xA34 : RCC APB4L reset register
-$46028a38 constant RCC_RCC_APB4HRSTSR  \ offset: 0xA38 : RCC APB4H reset register
-$46028a3c constant RCC_RCC_APB5RSTSR  \ offset: 0xA3C : RCC APB5 reset register
-$46028a40 constant RCC_RCC_DIVENSR  \ offset: 0xA40 : RCC Divider enable register
-$46028a44 constant RCC_RCC_BUSENSR  \ offset: 0xA44 : RCC bus enable register
-$46028a48 constant RCC_RCC_MISCENSR  \ offset: 0xA48 : RCC miscellaneous enable register
-$46028a4c constant RCC_RCC_MEMENSR  \ offset: 0xA4C : RCC memory enable register
-$46028a50 constant RCC_RCC_AHB1ENSR  \ offset: 0xA50 : RCC AHB1 enable register
-$46028a54 constant RCC_RCC_AHB2ENSR  \ offset: 0xA54 : RCC AHB2 enable register
-$46028a58 constant RCC_RCC_AHB3ENSR  \ offset: 0xA58 : RCC AHB3 enable register
-$46028a5c constant RCC_RCC_AHB4ENSR  \ offset: 0xA5C : RCC AHB4 enable register
-$46028a60 constant RCC_RCC_AHB5ENSR  \ offset: 0xA60 : RCC AHB5 enable register
-$46028a64 constant RCC_RCC_APB1LENSR  \ offset: 0xA64 : RCC APB1L enable register
-$46028a68 constant RCC_RCC_APB1HENSR  \ offset: 0xA68 : RCC APB1H enable register
-$46028a6c constant RCC_RCC_APB2ENSR  \ offset: 0xA6C : RCC APB2 enable register
-$46028a70 constant RCC_RCC_APB3ENSR  \ offset: 0xA70 : RCC APB3 enable register
-$46028a74 constant RCC_RCC_APB4LENSR  \ offset: 0xA74 : RCC APB4L enable register
-$46028a78 constant RCC_RCC_APB4HENSR  \ offset: 0xA78 : RCC APB4H enable register
-$46028a7c constant RCC_RCC_APB5ENSR  \ offset: 0xA7C : RCC APB5 enable register
-$46028a80 constant RCC_RCC_DIVLPENSR  \ offset: 0xA80 : RCC divider Sleep enable register
-$46028a84 constant RCC_RCC_BUSLPENSR  \ offset: 0xA84 : RCC bus Sleep enable register
-$46028a88 constant RCC_RCC_MISCLPENSR  \ offset: 0xA88 : RCC miscellaneous Sleep enable register
-$46028a8c constant RCC_RCC_MEMLPENSR  \ offset: 0xA8C : RCC memory sleep enable register
-$46028a90 constant RCC_RCC_AHB1LPENSR  \ offset: 0xA90 : RCC AHB1 Sleep enable register
-$46028a94 constant RCC_RCC_AHB2LPENSR  \ offset: 0xA94 : RCC AHB2 Sleep enable register
-$46028a98 constant RCC_RCC_AHB3LPENSR  \ offset: 0xA98 : RCC AHB3 Sleep enable register
-$46028a9c constant RCC_RCC_AHB4LPENSR  \ offset: 0xA9C : RCC AHB4 Sleep enable register
-$46028aa0 constant RCC_RCC_AHB5LPENSR  \ offset: 0xAA0 : RCC AHB5 Sleep enable register
-$46028aa4 constant RCC_RCC_APB1LLPENSR  \ offset: 0xAA4 : RCC APB1L Sleep enable register
-$46028aa8 constant RCC_RCC_APB1HLPENSR  \ offset: 0xAA8 : RCC APB1H Sleep enable register
-$46028aac constant RCC_RCC_APB2LPENSR  \ offset: 0xAAC : RCC APB2 Sleep enable register
-$46028ab0 constant RCC_RCC_APB3LPENSR  \ offset: 0xAB0 : RCC APB3 Sleep enable register
-$46028ab4 constant RCC_RCC_APB4LLPENSR  \ offset: 0xAB4 : RCC APB4L Sleep enable register
-$46028ab8 constant RCC_RCC_APB4HLPENSR  \ offset: 0xAB8 : RCC APB4H Sleep enable register
-$46028abc constant RCC_RCC_APB5LPENSR  \ offset: 0xABC : RCC APB5 Sleep enable register
-$46028f84 constant RCC_RCC_PRIVCFGSR0  \ offset: 0xF84 : RCC oscillator privilege configuration register0
-$46028f8c constant RCC_RCC_PUBCFGSR0  \ offset: 0xF8C : RCC oscillator public configuration register0
-$46028f94 constant RCC_RCC_PRIVCFGSR1  \ offset: 0xF94 : RCC PLL privilege configuration register1
-$46028f9c constant RCC_RCC_PUBCFGSR1  \ offset: 0xF9C : RCC PLL public configuration register1
-$46028fa4 constant RCC_RCC_PRIVCFGSR2  \ offset: 0xFA4 : RCC divider privilege configuration register2
-$46028fac constant RCC_RCC_PUBCFGSR2  \ offset: 0xFAC : RCC divider public configuration register2
-$46028fb0 constant RCC_RCC_SECCFGSR3  \ offset: 0xFB0 : RCC system secure configuration register3
-$46028fb4 constant RCC_RCC_PRIVCFGSR3  \ offset: 0xFB4 : RCC system privilege configuration register3
-$46028fb8 constant RCC_RCC_LOCKCFGSR3  \ offset: 0xFB8 : RCC system lock configuration register3
-$46028fbc constant RCC_RCC_PUBCFGSR3  \ offset: 0xFBC : RCC system public configuration register3
-$46028fc4 constant RCC_RCC_PRIVCFGSR4  \ offset: 0xFC4 : RCC privilege configuration register4
-$46028fcc constant RCC_RCC_PUBCFGSR4  \ offset: 0xFCC : RCC public configuration register4
-$46028fd0 constant RCC_RCC_PUBCFGSR5  \ offset: 0xFD0 : RCC public configuration register4
-$46029000 constant RCC_RCC_CCR    \ offset: 0x1000 : RCC control Clear register
-$46029008 constant RCC_RCC_STOPCCR  \ offset: 0x1008 : RCC StopCCR configuration register
-$46029204 constant RCC_RCC_BUSRSTCR  \ offset: 0x1204 : RCC bus reset register
-$46029208 constant RCC_RCC_MISCRSTCR  \ offset: 0x1208 : RCC miscellaneous reset register
-$4602920c constant RCC_RCC_MEMRSTCR  \ offset: 0x120C : RCC memory reset register
-$46029210 constant RCC_RCC_AHB1RSTCR  \ offset: 0x1210 : RCC AHB1 reset register
-$46029214 constant RCC_RCC_AHB2RSTCR  \ offset: 0x1214 : RCC AHB2 Reset register
-$46029218 constant RCC_RCC_AHB3RSTCR  \ offset: 0x1218 : RCC AHB3 reset register
-$4602921c constant RCC_RCC_AHB4RSTCR  \ offset: 0x121C : RCC AHB4 reset register
-$46029220 constant RCC_RCC_AHB5RSTCR  \ offset: 0x1220 : RCC AHB5 reset register
-$46029224 constant RCC_RCC_APB1LRSTCR  \ offset: 0x1224 : RCC APB1L reset register
-$46029228 constant RCC_RCC_APB1HRSTCR  \ offset: 0x1228 : RCC APB1H reset register
-$4602922c constant RCC_RCC_APB2RSTCR  \ offset: 0x122C : RCC APB2 reset register
-$46029234 constant RCC_RCC_APB4LRSTCR  \ offset: 0x1234 : RCC APB4L reset register
-$46029238 constant RCC_RCC_APB4HRSTCR  \ offset: 0x1238 : RCC APB4H reset register
-$4602923c constant RCC_RCC_APB5RSTCR  \ offset: 0x123C : RCC APB5 reset register
-$46029240 constant RCC_RCC_DIVENCR  \ offset: 0x1240 : RCC divider enable register
-$46029244 constant RCC_RCC_BUSENCR  \ offset: 0x1244 : RCC bus enable register
-$46029248 constant RCC_RCC_MISCENCR  \ offset: 0x1248 : RCC miscellaneous enable register
-$4602924c constant RCC_RCC_MEMENCR  \ offset: 0x124C : RCC memory enable register
-$46029250 constant RCC_RCC_AHB1ENCR  \ offset: 0x1250 : RCC AHB1 enable register
-$46029254 constant RCC_RCC_AHB2ENCR  \ offset: 0x1254 : RCC AHB2 enable register
-$46029258 constant RCC_RCC_AHB3ENCR  \ offset: 0x1258 : RCC AHB3 enable register
-$4602925c constant RCC_RCC_AHB4ENCR  \ offset: 0x125C : RCC AHB4 enable register
-$46029260 constant RCC_RCC_AHB5ENCR  \ offset: 0x1260 : RCC AHB5 enable register
-$46029264 constant RCC_RCC_APB1LENCR  \ offset: 0x1264 : RCC APB1L enable register
-$46029268 constant RCC_RCC_APB1HENCR  \ offset: 0x1268 : RCC APB1H enable register
-$4602926c constant RCC_RCC_APB2ENCR  \ offset: 0x126C : RCC APB2 enable register
-$46029270 constant RCC_RCC_APB3ENCR  \ offset: 0x1270 : RCC APB3 enable register
-$46029274 constant RCC_RCC_APB4LENCR  \ offset: 0x1274 : RCC APB4L enable register
-$46029278 constant RCC_RCC_APB4HENCR  \ offset: 0x1278 : RCC APB4H enable register
-$4602927c constant RCC_RCC_APB5ENCR  \ offset: 0x127C : RCC APB5 enable register
-$46029280 constant RCC_RCC_DIVLPENCR  \ offset: 0x1280 : RCC divider Sleep enable register
-$46029284 constant RCC_RCC_BUSLPENCR  \ offset: 0x1284 : RCC bus Sleep enable register
-$46029288 constant RCC_RCC_MISCLPENCR  \ offset: 0x1288 : RCC miscellaneous Sleep enable register
-$4602928c constant RCC_RCC_MEMLPENCR  \ offset: 0x128C : RCC memory Sleep enable register
-$46029290 constant RCC_RCC_AHB1LPENCR  \ offset: 0x1290 : RCC AHB1 Sleep enable register
-$46029294 constant RCC_RCC_AHB2LPENCR  \ offset: 0x1294 : RCC AHB2 Sleep enable register
-$46029298 constant RCC_RCC_AHB3LPENCR  \ offset: 0x1298 : RCC AHB3 Sleep enable register
-$4602929c constant RCC_RCC_AHB4LPENCR  \ offset: 0x129C : RCC AHB4 Sleep enable register
-$460292a0 constant RCC_RCC_AHB5LPENCR  \ offset: 0x12A0 : RCC AHB5 Sleep enable register
-$460292a4 constant RCC_RCC_APB1LLPENCR  \ offset: 0x12A4 : RCC APB1L Sleep enable register
-$460292a8 constant RCC_RCC_APB1HLPENCR  \ offset: 0x12A8 : RCC APB1H Sleep enable register
-$460292ac constant RCC_RCC_APB2LPENCR  \ offset: 0x12AC : RCC APB2 Sleep enable register
-$460292b0 constant RCC_RCC_APB3LPENCR  \ offset: 0x12B0 : RCC APB3 Sleep enable register
-$460292b4 constant RCC_RCC_APB4LLPENCR  \ offset: 0x12B4 : RCC APB4L Sleep enable register
-$460292b8 constant RCC_RCC_APB4HLPENCR  \ offset: 0x12B8 : RCC APB4H Sleep enable register
-$460292bc constant RCC_RCC_APB5LPENCR  \ offset: 0x12BC : RCC APB5 Sleep enable register
-$46029784 constant RCC_RCC_PRIVCFGCR0  \ offset: 0x1784 : RCC oscillator privilege configuration register0
-$4602978c constant RCC_RCC_PUBCFGCR0  \ offset: 0x178C : RCC oscillator public configuration register0
-$46029794 constant RCC_RCC_PRIVCFGCR1  \ offset: 0x1794 : RCC PLL privilege configuration register1
-$4602979c constant RCC_RCC_PUBCFGCR1  \ offset: 0x179C : RCC PLL public configuration register1
-$460297a4 constant RCC_RCC_PRIVCFGCR2  \ offset: 0x17A4 : RCC divider privilege configuration register2
-$460297ac constant RCC_RCC_PUBCFGCR2  \ offset: 0x17AC : RCC divider public configuration register2
-$460297b4 constant RCC_RCC_PRIVCFGCR3  \ offset: 0x17B4 : RCC system privilege configuration register3
-$460297bc constant RCC_RCC_PUBCFGCR3  \ offset: 0x17BC : RCC system public configuration register3
-$460297c4 constant RCC_RCC_PRIVCFGCR4  \ offset: 0x17C4 : RCC privilege configuration register4
-$460297cc constant RCC_RCC_PUBCFGCR4  \ offset: 0x17CC : RCC public configuration register4
-$460297d0 constant RCC_RCC_PUBCFGCR5  \ offset: 0x17D0 : RCC public configuration register4
-
+[ifndef] RCC_DEF
+
+  [ifdef] RCC_RCC_CR_DEF
+    \
+    \ @brief RCC control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000008
+    \
+    $00 constant RCC_LSION                      \ [0x00] LSI oscillator enable in Run/Sleep mode.
+    $01 constant RCC_LSEON                      \ [0x01] LSE oscillator enable in Run/Sleep mode.
+    $02 constant RCC_MSION                      \ [0x02] MSI oscillator enable in Run/Sleep mode.
+    $03 constant RCC_HSION                      \ [0x03] HSI oscillator enable in Run/Sleep mode.
+    $04 constant RCC_HSEON                      \ [0x04] HSE oscillator enable in Run/Sleep mode.
+    $08 constant RCC_PLL1ON                     \ [0x08] PLL1 enable in Run/Sleep mode.
+    $09 constant RCC_PLL2ON                     \ [0x09] PLL2 enable in Run/Sleep mode.
+    $0a constant RCC_PLL3ON                     \ [0x0a] PLL3 enable in Run/Sleep mode.
+    $0b constant RCC_PLL4ON                     \ [0x0b] PLL4 enable in Run/Sleep mode.
+  [then]
+
+
+  [ifdef] RCC_RCC_SR_DEF
+    \
+    \ @brief RCC status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000008
+    \
+    $00 constant RCC_LSIRDY                     \ [0x00] LSI clock ready flag
+    $01 constant RCC_LSERDY                     \ [0x01] LSE clock ready flag
+    $02 constant RCC_MSIRDY                     \ [0x02] MSI clock ready flag
+    $03 constant RCC_HSIRDY                     \ [0x03] HSI clock ready flag
+    $04 constant RCC_HSERDY                     \ [0x04] HSE clock ready flag
+    $08 constant RCC_PLL1RDY                    \ [0x08] PLL1 clock ready flag
+    $09 constant RCC_PLL2RDY                    \ [0x09] PLL2 clock ready flag
+    $0a constant RCC_PLL3RDY                    \ [0x0a] PLL3 clock ready flag
+    $0b constant RCC_PLL4RDY                    \ [0x0b] PLL4 clock ready flag
+  [then]
+
+
+  [ifdef] RCC_RCC_STOPCR_DEF
+    \
+    \ @brief RCC Stop mode control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000008
+    \
+    $00 constant RCC_LSISTOPEN                  \ [0x00] LSI oscillator enable in Stop mode.
+    $01 constant RCC_LSESTOPEN                  \ [0x01] LSE oscillator enable in Stop mode.
+    $02 constant RCC_MSISTOPEN                  \ [0x02] MSI oscillator enable in Stop mode.
+    $03 constant RCC_HSISTOPEN                  \ [0x03] HSI oscillator enable in Stop mode.
+  [then]
+
+
+  [ifdef] RCC_RCC_CFGR1_DEF
+    \
+    \ @brief RCC configuration register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_STOPWUCK                   \ [0x00] System clock selection after a wake up from system Stop.
+    $10 constant RCC_CPUSW                      \ [0x10 : 2] CPU clock switch selection
+    $14 constant RCC_CPUSWS                     \ [0x14 : 2] CPU clock switch status
+    $18 constant RCC_SYSSW                      \ [0x18 : 2] System clock switch selection
+    $1c constant RCC_SYSSWS                     \ [0x1c : 2] System clock switch status
+  [then]
+
+
+  [ifdef] RCC_RCC_CFGR2_DEF
+    \
+    \ @brief RCC configuration register 2
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PPRE1                      \ [0x00 : 3] CPU domain APB1 prescaler
+    $04 constant RCC_PPRE2                      \ [0x04 : 3] CPU domain APB2 prescaler
+    $0c constant RCC_PPRE4                      \ [0x0c : 3] CPU domain APB4 prescaler
+    $10 constant RCC_PPRE5                      \ [0x10 : 3] CPU domain APB5 prescaler
+    $14 constant RCC_HPRE                       \ [0x14 : 3] AHB clock prescaler
+    $18 constant RCC_TIMPRE                     \ [0x18 : 2] Timers clocks prescaler selection
+  [then]
+
+
+  [ifdef] RCC_RCC_CKPROTR_DEF
+    \
+    \ @brief RCC clock protection register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $10 constant RCC_XSPI3SELS                  \ [0x10 : 2] XSPI3 clock selection current status
+    $14 constant RCC_XSPI2SELS                  \ [0x14 : 2] XSPI2 clock selection current status
+    $18 constant RCC_XSPI1SELS                  \ [0x18 : 2] XSPI1 clock selection current status
+    $1c constant RCC_FMCSELS                    \ [0x1c : 2] FMC clock selection current status
+  [then]
+
+
+  [ifdef] RCC_RCC_BDCR_DEF
+    \
+    \ @brief RCC backup domain protection register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $1f constant RCC_VSWRST                     \ [0x1f] VSW domain software reset.
+  [then]
+
+
+  [ifdef] RCC_RCC_HWRSR_DEF
+    \
+    \ @brief RCC reset status register for hardware
+    \ Address offset: 0x30
+    \ Reset value: 0x00E00000
+    \
+    $10 constant RCC_RMVF                       \ [0x10] Remove reset flag
+    $11 constant RCC_LCKRSTF                    \ [0x11] CPU lockup reset flag.
+    $15 constant RCC_BORRSTF                    \ [0x15] BOR flag
+    $16 constant RCC_PINRSTF                    \ [0x16] Pin reset flag (NRST)
+    $17 constant RCC_PORRSTF                    \ [0x17] POR/PDR flag.
+    $18 constant RCC_SFTRSTF                    \ [0x18] Software system reset flag (1)
+    $1a constant RCC_IWDGRSTF                   \ [0x1a] Independent Watchdog reset flag.
+    $1c constant RCC_WWDGRSTF                   \ [0x1c] Window watchdog reset flag
+    $1e constant RCC_LPWRRSTF                   \ [0x1e] Illegal Stop or Standby flag.
+  [then]
+
+
+  [ifdef] RCC_RCC_RSR_DEF
+    \
+    \ @brief RCC reset register
+    \ Address offset: 0x34
+    \ Reset value: 0x00E00000
+    \
+    $10 constant RCC_RMVF                       \ [0x10] Remove reset flag
+    $11 constant RCC_LCKRSTF                    \ [0x11] CPU lockup reset flag.
+    $15 constant RCC_BORRSTF                    \ [0x15] BOR flag
+    $16 constant RCC_PINRSTF                    \ [0x16] Pin reset flag (NRST)
+    $17 constant RCC_PORRSTF                    \ [0x17] POR/PDR flag.
+    $18 constant RCC_SFTRSTF                    \ [0x18] Software System reset flag (1)
+    $1a constant RCC_IWDGRSTF                   \ [0x1a] Independent Watchdog reset flag.
+    $1c constant RCC_WWDGRSTF                   \ [0x1c] Window Watchdog reset flag
+    $1e constant RCC_LPWRRSTF                   \ [0x1e] Illegal Stop or Standby flag.
+  [then]
+
+
+  [ifdef] RCC_RCC_LSECFGR_DEF
+    \
+    \ @brief RCC LSE configuration register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $07 constant RCC_LSECSSON                   \ [0x07] LSE clock security system (CSS) enable
+    $08 constant RCC_LSECSSRA                   \ [0x08] LSE clock security system (CSS) re-arm function
+    $09 constant RCC_LSECSSD                    \ [0x09] LSE clock security system (CSS) failure detection
+    $0f constant RCC_LSEBYP                     \ [0x0f] LSE clock bypass
+    $10 constant RCC_LSEEXT                     \ [0x10] LSE clock type in Bypass mode
+    $11 constant RCC_LSEGFON                    \ [0x11] LSE clock glitch filter enable
+    $12 constant RCC_LSEDRV                     \ [0x12 : 2] LSE oscillator driving capability
+  [then]
+
+
+  [ifdef] RCC_RCC_MSICFGR_DEF
+    \
+    \ @brief RCC MSI configuration register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $09 constant RCC_MSIFREQSEL                 \ [0x09] MSI oscillator frequency select
+    $10 constant RCC_MSITRIM                    \ [0x10 : 5] MSI clock trimming
+    $17 constant RCC_MSICAL                     \ [0x17 : 8] MSI clock calibration
+  [then]
+
+
+  [ifdef] RCC_RCC_HSICFGR_DEF
+    \
+    \ @brief RCC HSI configuration register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $07 constant RCC_HSIDIV                     \ [0x07 : 2] HSI clock divider
+    $10 constant RCC_HSITRIM                    \ [0x10 : 7] HSI clock trimming
+    $17 constant RCC_HSICAL                     \ [0x17 : 9] HSI clock calibration
+  [then]
+
+
+  [ifdef] RCC_RCC_HSIMCR_DEF
+    \
+    \ @brief RCC HSI monitor control register
+    \ Address offset: 0x4C
+    \ Reset value: 0x001F07A1
+    \
+    $00 constant RCC_HSIREF                     \ [0x00 : 11] HSI clock cycle counter reference value.
+    $10 constant RCC_HSIDEV                     \ [0x10 : 6] HSI clock count deviation value
+    $1f constant RCC_HSIMONEN                   \ [0x1f] HSI clock period monitor enable
+  [then]
+
+
+  [ifdef] RCC_RCC_HSIMSR_DEF
+    \
+    \ @brief RCC HSI monitor status register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HSIVAL                     \ [0x00 : 11] HSI clock cycle counter measured value.
+  [then]
+
+
+  [ifdef] RCC_RCC_HSECFGR_DEF
+    \
+    \ @brief RCC HSE configuration register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000800
+    \
+    $06 constant RCC_HSEDIV2BYP                 \ [0x06] HSE div2 oscillator clock in Bypass mode
+    $07 constant RCC_HSECSSON                   \ [0x07] HSE clock security system (CSS) enable
+    $08 constant RCC_HSECSSRA                   \ [0x08] HSE clock security system (CSS) re-arm function
+    $09 constant RCC_HSECSSD                    \ [0x09] HSE clock security system (CSS) failure detection
+    $0a constant RCC_HSECSSBYP                  \ [0x0a] HSE clock security system (CSS) bypass enable
+    $0b constant RCC_HSECSSBPRE                 \ [0x0b : 4] HSE clock security system (CSS) bypass divider
+    $0f constant RCC_HSEBYP                     \ [0x0f] HSE clock bypass
+    $10 constant RCC_HSEEXT                     \ [0x10] HSE clock type in Bypass mode
+    $11 constant RCC_HSEGFON                    \ [0x11] HSE clock glitch filter enable
+    $12 constant RCC_HSEDRV                     \ [0x12 : 2] HSE oscillator driving capability
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL1CFGR1_DEF
+    \
+    \ @brief RCC PLL1 configuration register 1
+    \ Address offset: 0x80
+    \ Reset value: 0x08202500
+    \
+    $08 constant RCC_PLL1DIVN                   \ [0x08 : 12] PLL1 Integer part for the VCO multiplication factor
+    $14 constant RCC_PLL1DIVM                   \ [0x14 : 6] PLL1 reference input clock divide frequency ratio
+    $1b constant RCC_PLL1BYP                    \ [0x1b] PLL1 bypass
+    $1c constant RCC_PLL1SEL                    \ [0x1c : 3] PLL1 source selection of the reference clock
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL1CFGR2_DEF
+    \
+    \ @brief RCC PLL1 configuration register 2
+    \ Address offset: 0x84
+    \ Reset value: 0x00800000
+    \
+    $00 constant RCC_PLL1DIVNFRAC               \ [0x00 : 24] PLL1 Fractional part of the VCO multiplication factor
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL1CFGR3_DEF
+    \
+    \ @brief RCC PLL1 configuration register 3
+    \ Address offset: 0x88
+    \ Reset value: 0x4900000D
+    \
+    $00 constant RCC_PLL1MODSSRST               \ [0x00] PLL1 Modulation Spread Spectrum reset
+    $01 constant RCC_PLL1DACEN                  \ [0x01] PLL1 noise canceling DAC enable in fractional mode.
+    $02 constant RCC_PLL1MODSSDIS               \ [0x02] PLL1 Modulation Spread-Spectrum Disable
+    $03 constant RCC_PLL1MODDSEN                \ [0x03] PLL1 Modulation Spread-Spectrum (and Fractional Divide) enable
+    $04 constant RCC_PLL1MODSPRDW               \ [0x04] PLL1 Modulation Spread-Spectrum Down
+    $08 constant RCC_PLL1MODDIV                 \ [0x08 : 4] PLL1 Modulation Division frequency adjustment
+    $10 constant RCC_PLL1MODSPR                 \ [0x10 : 5] PLL1 Modulation Spread depth adjustment
+    $18 constant RCC_PLL1PDIV2                  \ [0x18 : 3] PLL1 VCO frequency divider level 2
+    $1b constant RCC_PLL1PDIV1                  \ [0x1b : 3] PLL1 VCO frequency divider level 1
+    $1e constant RCC_PLL1PDIVEN                 \ [0x1e] PLL1 post divider POSTDIV1, POSTDIV2, and PLL clock output enable
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL2CFGR1_DEF
+    \
+    \ @brief RCC PLL2 configuration register 1
+    \ Address offset: 0x90
+    \ Reset value: 0x08000000
+    \
+    $08 constant RCC_PLL2DIVN                   \ [0x08 : 12] PLL2 Integer part for the VCO multiplication factor
+    $14 constant RCC_PLL2DIVM                   \ [0x14 : 6] PLL2 reference input clock divide frequency ratio
+    $1b constant RCC_PLL2BYP                    \ [0x1b] PLL2 bypass
+    $1c constant RCC_PLL2SEL                    \ [0x1c : 3] PLL2 source selection of the reference clock
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL2CFGR2_DEF
+    \
+    \ @brief RCC PLL2 configuration register 2
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL2DIVNFRAC               \ [0x00 : 24] PLL2 Fractional part of the VCO multiplication factor
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL2CFGR3_DEF
+    \
+    \ @brief RCC PLL2 configuration register 3
+    \ Address offset: 0x98
+    \ Reset value: 0x49000005
+    \
+    $00 constant RCC_PLL2MODSSRST               \ [0x00] PLL2 Modulation Spread Spectrum reset
+    $01 constant RCC_PLL2DACEN                  \ [0x01] PLL2 noise canceling DAC enable in fractional mode.
+    $02 constant RCC_PLL2MODSSDIS               \ [0x02] PLL2 Modulation Spread-Spectrum Disable
+    $03 constant RCC_PLL2MODDSEN                \ [0x03] PLL2 Modulation Spread-Spectrum (and Fractional Divide) enable
+    $04 constant RCC_PLL2MODSPRDW               \ [0x04] PLL2 Modulation Down Spread
+    $08 constant RCC_PLL2MODDIV                 \ [0x08 : 4] PLL2 Modulation Division frequency adjustment
+    $10 constant RCC_PLL2MODSPR                 \ [0x10 : 5] PLL2 Modulation Spread depth adjustment
+    $18 constant RCC_PLL2PDIV2                  \ [0x18 : 3] PLL2 VCO frequency divider level 2
+    $1b constant RCC_PLL2PDIV1                  \ [0x1b : 3] PLL2 VCO frequency divider level 1
+    $1e constant RCC_PLL2PDIVEN                 \ [0x1e] PLL2 post divider POSTDIV1, POSTDIV2, and PLL clock output enable
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL3CFGR1_DEF
+    \
+    \ @brief RCC PLL3 configuration register 1
+    \ Address offset: 0xA0
+    \ Reset value: 0x08000000
+    \
+    $08 constant RCC_PLL3DIVN                   \ [0x08 : 12] PLL3 Integer part for the VCO multiplication factor
+    $14 constant RCC_PLL3DIVM                   \ [0x14 : 6] PLL3 reference input clock divide frequency ratio
+    $1b constant RCC_PLL3BYP                    \ [0x1b] PLL3 bypass
+    $1c constant RCC_PLL3SEL                    \ [0x1c : 3] PLL3 source selection of the reference clock
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL3CFGR2_DEF
+    \
+    \ @brief RCC PLL3 configuration register 2
+    \ Address offset: 0xA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL3DIVNFRAC               \ [0x00 : 24] PLL3 Fractional part of the VCO multiplication factor
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL3CFGR3_DEF
+    \
+    \ @brief RCC PLL3 configuration register 3
+    \ Address offset: 0xA8
+    \ Reset value: 0x49000005
+    \
+    $00 constant RCC_PLL3MODSSRST               \ [0x00] PLL3 Modulation Spread Spectrum reset
+    $01 constant RCC_PLL3DACEN                  \ [0x01] PLL3 noise canceling DAC enable in fractional mode.
+    $02 constant RCC_PLL3MODSSDIS               \ [0x02] PLL3 Modulation Spread-Spectrum Disable
+    $03 constant RCC_PLL3MODDSEN                \ [0x03] PLL3 Modulation Spread-Spectrum (and Fractional Divide) enable
+    $04 constant RCC_PLL3MODSPRDW               \ [0x04] PLL3 Modulation Down Spread
+    $08 constant RCC_PLL3MODDIV                 \ [0x08 : 4] PLL3 Modulation Division frequency adjustment
+    $10 constant RCC_PLL3MODSPR                 \ [0x10 : 5] PLL3 Modulation Spread depth adjustment
+    $18 constant RCC_PLL3PDIV2                  \ [0x18 : 3] PLL3 VCO frequency divider level 2
+    $1b constant RCC_PLL3PDIV1                  \ [0x1b : 3] PLL3 VCO frequency divider level 1
+    $1e constant RCC_PLL3PDIVEN                 \ [0x1e] PLL3 post divider POSTDIV1, POSTDIV2, and PLL clock output enable
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL4CFGR1_DEF
+    \
+    \ @brief RCC PLL4 configuration register 1
+    \ Address offset: 0xB0
+    \ Reset value: 0x08000000
+    \
+    $08 constant RCC_PLL4DIVN                   \ [0x08 : 12] PLL4 Integer part for the VCO multiplication factor
+    $14 constant RCC_PLL4DIVM                   \ [0x14 : 6] PLL4 reference input clock divide frequency ratio
+    $1b constant RCC_PLL4BYP                    \ [0x1b] PLL4 bypass
+    $1c constant RCC_PLL4SEL                    \ [0x1c : 3] PLL4 source selection of the reference clock
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL4CFGR2_DEF
+    \
+    \ @brief RCC PLL4 configuration register 2
+    \ Address offset: 0xB4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL4DIVNFRAC               \ [0x00 : 24] PLL4 Fractional part of the VCO multiplication factor
+  [then]
+
+
+  [ifdef] RCC_RCC_PLL4CFGR3_DEF
+    \
+    \ @brief RCC PLL4 configuration register 3
+    \ Address offset: 0xB8
+    \ Reset value: 0x49000005
+    \
+    $00 constant RCC_PLL4MODSSRST               \ [0x00] PLL4 Modulation Spread Spectrum reset
+    $01 constant RCC_PLL4DACEN                  \ [0x01] PLL4 noise canceling DAC enable in fractional mode.
+    $02 constant RCC_PLL4MODSSDIS               \ [0x02] PLL4 Modulation Spread-Spectrum Disable
+    $03 constant RCC_PLL4MODDSEN                \ [0x03] PLL4 Modulation Spread-Spectrum (and Fractional Divide) enable
+    $04 constant RCC_PLL4MODSPRDW               \ [0x04] PLL4 Modulation Down Spread
+    $08 constant RCC_PLL4MODDIV                 \ [0x08 : 4] PLL4 Modulation Division frequency adjustment
+    $10 constant RCC_PLL4MODSPR                 \ [0x10 : 5] PLL4 Modulation Spread depth adjustment
+    $18 constant RCC_PLL4PDIV2                  \ [0x18 : 3] PLL4 VCO frequency divider level 2
+    $1b constant RCC_PLL4PDIV1                  \ [0x1b : 3] PLL4 VCO frequency divider level 1
+    $1e constant RCC_PLL4PDIVEN                 \ [0x1e] PLL4 post divider POSTDIV1, POSTDIV2, and PLL clock output enable
+  [then]
+
+
+  [ifdef] RCC_RCC_IC1CFGR_DEF
+    \
+    \ @brief RCC IC1 configuration register
+    \ Address offset: 0xC4
+    \ Reset value: 0x00020000
+    \
+    $10 constant RCC_IC1INT                     \ [0x10 : 8] Divider IC1 integer division factor
+    $1c constant RCC_IC1SEL                     \ [0x1c : 2] Divider IC1 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC2CFGR_DEF
+    \
+    \ @brief RCC IC2 configuration register
+    \ Address offset: 0xC8
+    \ Reset value: 0x00030000
+    \
+    $10 constant RCC_IC2INT                     \ [0x10 : 8] Divider IC2 integer division factor
+    $1c constant RCC_IC2SEL                     \ [0x1c : 2] Divider IC2 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC3CFGR_DEF
+    \
+    \ @brief RCC IC3 configuration register
+    \ Address offset: 0xCC
+    \ Reset value: 0x00000000
+    \
+    $10 constant RCC_IC3INT                     \ [0x10 : 8] Divider IC3 integer division factor
+    $1c constant RCC_IC3SEL                     \ [0x1c : 2] Divider IC3 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC4CFGR_DEF
+    \
+    \ @brief RCC IC4 configuration register
+    \ Address offset: 0xD0
+    \ Reset value: 0x00000000
+    \
+    $10 constant RCC_IC4INT                     \ [0x10 : 8] Divider IC4 integer division factor
+    $1c constant RCC_IC4SEL                     \ [0x1c : 2] Divider IC4 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC5CFGR_DEF
+    \
+    \ @brief RCC IC5 configuration register
+    \ Address offset: 0xD4
+    \ Reset value: 0x00000000
+    \
+    $10 constant RCC_IC5INT                     \ [0x10 : 8] Divider IC5 integer division factor
+    $1c constant RCC_IC5SEL                     \ [0x1c : 2] Divider IC5 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC6CFGR_DEF
+    \
+    \ @brief RCC IC6 configuration register
+    \ Address offset: 0xD8
+    \ Reset value: 0x00030000
+    \
+    $10 constant RCC_IC6INT                     \ [0x10 : 8] Divider IC6 integer division factor
+    $1c constant RCC_IC6SEL                     \ [0x1c : 2] Divider IC6 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC7CFGR_DEF
+    \
+    \ @brief RCC IC7 configuration register
+    \ Address offset: 0xDC
+    \ Reset value: 0x10000000
+    \
+    $10 constant RCC_IC7INT                     \ [0x10 : 8] Divider IC7 integer division factor
+    $1c constant RCC_IC7SEL                     \ [0x1c : 2] Divider IC7 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC8CFGR_DEF
+    \
+    \ @brief RCC IC8 configuration register
+    \ Address offset: 0xE0
+    \ Reset value: 0x10000000
+    \
+    $10 constant RCC_IC8INT                     \ [0x10 : 8] Divider IC8 integer division factor
+    $1c constant RCC_IC8SEL                     \ [0x1c : 2] Divider IC8 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC9CFGR_DEF
+    \
+    \ @brief RCC IC9 configuration register
+    \ Address offset: 0xE4
+    \ Reset value: 0x10000000
+    \
+    $10 constant RCC_IC9INT                     \ [0x10 : 8] Divider IC9 integer division factor
+    $1c constant RCC_IC9SEL                     \ [0x1c : 2] Divider IC9 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC10CFGR_DEF
+    \
+    \ @brief RCC IC10 configuration register
+    \ Address offset: 0xE8
+    \ Reset value: 0x10000000
+    \
+    $10 constant RCC_IC10INT                    \ [0x10 : 8] Divider IC10 integer division factor
+    $1c constant RCC_IC10SEL                    \ [0x1c : 2] Divider IC10 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC11CFGR_DEF
+    \
+    \ @brief RCC IC11 configuration register
+    \ Address offset: 0xEC
+    \ Reset value: 0x00030000
+    \
+    $10 constant RCC_IC11INT                    \ [0x10 : 8] Divider IC11 integer division factor
+    $1c constant RCC_IC11SEL                    \ [0x1c : 2] Divider IC11 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC12CFGR_DEF
+    \
+    \ @brief RCC IC12 configuration register
+    \ Address offset: 0xF0
+    \ Reset value: 0x20000000
+    \
+    $10 constant RCC_IC12INT                    \ [0x10 : 8] Divider IC12 integer division factor
+    $1c constant RCC_IC12SEL                    \ [0x1c : 2] Divider IC12 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC13CFGR_DEF
+    \
+    \ @brief RCC IC13 configuration register
+    \ Address offset: 0xF4
+    \ Reset value: 0x20000000
+    \
+    $10 constant RCC_IC13INT                    \ [0x10 : 8] Divider IC13 integer division factor
+    $1c constant RCC_IC13SEL                    \ [0x1c : 2] Divider IC13 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC14CFGR_DEF
+    \
+    \ @brief RCC IC14 configuration register
+    \ Address offset: 0xF8
+    \ Reset value: 0x20000000
+    \
+    $10 constant RCC_IC14INT                    \ [0x10 : 8] Divider IC14 integer division factor
+    $1c constant RCC_IC14SEL                    \ [0x1c : 2] Divider IC14 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC15CFGR_DEF
+    \
+    \ @brief RCC IC15 configuration register
+    \ Address offset: 0xFC
+    \ Reset value: 0x20000000
+    \
+    $10 constant RCC_IC15INT                    \ [0x10 : 8] Divider IC15 integer division factor
+    $1c constant RCC_IC15SEL                    \ [0x1c : 2] Divider IC15 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC16CFGR_DEF
+    \
+    \ @brief RCC IC16 configuration register
+    \ Address offset: 0x100
+    \ Reset value: 0x30000000
+    \
+    $10 constant RCC_IC16INT                    \ [0x10 : 8] Divider IC16 integer division factor
+    $1c constant RCC_IC16SEL                    \ [0x1c : 2] Divider IC16 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC17CFGR_DEF
+    \
+    \ @brief RCC IC17 configuration register
+    \ Address offset: 0x104
+    \ Reset value: 0x30000000
+    \
+    $10 constant RCC_IC17INT                    \ [0x10 : 8] Divider IC17 integer division factor
+    $1c constant RCC_IC17SEL                    \ [0x1c : 2] Divider IC17 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC18CFGR_DEF
+    \
+    \ @brief RCC IC18 configuration register
+    \ Address offset: 0x108
+    \ Reset value: 0x30000000
+    \
+    $10 constant RCC_IC18INT                    \ [0x10 : 8] Divider IC18 integer division factor
+    $1c constant RCC_IC18SEL                    \ [0x1c : 2] Divider IC18 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC19CFGR_DEF
+    \
+    \ @brief RCC IC19 configuration register
+    \ Address offset: 0x10C
+    \ Reset value: 0x30000000
+    \
+    $10 constant RCC_IC19INT                    \ [0x10 : 8] Divider IC19 integer division factor
+    $1c constant RCC_IC19SEL                    \ [0x1c : 2] Divider IC19 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_IC20CFGR_DEF
+    \
+    \ @brief RCC IC20 configuration register
+    \ Address offset: 0x110
+    \ Reset value: 0x30000000
+    \
+    $10 constant RCC_IC20INT                    \ [0x10 : 8] Divider IC20 integer division factor
+    $1c constant RCC_IC20SEL                    \ [0x1c : 2] Divider IC20 Source Selection
+  [then]
+
+
+  [ifdef] RCC_RCC_CIER_DEF
+    \
+    \ @brief RCC clock-source interrupt enable register
+    \ Address offset: 0x124
+    \ Reset value: 0x00020000
+    \
+    $00 constant RCC_LSIRDYIE                   \ [0x00] LSI ready interrupt enable
+    $01 constant RCC_LSERDYIE                   \ [0x01] LSE ready interrupt enable
+    $02 constant RCC_MSIRDYIE                   \ [0x02] MSI ready interrupt enable
+    $03 constant RCC_HSIRDYIE                   \ [0x03] HSI ready interrupt enable
+    $04 constant RCC_HSERDYIE                   \ [0x04] HSE ready interrupt enable
+    $08 constant RCC_PLL1RDYIE                  \ [0x08] PLL1 ready interrupt enable
+    $09 constant RCC_PLL2RDYIE                  \ [0x09] PLL2 ready interrupt enable
+    $0a constant RCC_PLL3RDYIE                  \ [0x0a] PLL3 ready interrupt enable
+    $0b constant RCC_PLL4RDYIE                  \ [0x0b] PLL4 ready interrupt enable
+    $10 constant RCC_LSECSSIE                   \ [0x10] LSE clock security system (CSS) interrupt enable
+    $11 constant RCC_HSECSSIE                   \ [0x11] HSE clock security system (CSS) interrupt enable
+    $18 constant RCC_WKUPIE                     \ [0x18] CPU wakeup from Stop interrupt enable
+  [then]
+
+
+  [ifdef] RCC_RCC_CIFR_DEF
+    \
+    \ @brief RCC clock-source interrupt flag register
+    \ Address offset: 0x128
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIRDYF                    \ [0x00] LSI ready interrupt flag
+    $01 constant RCC_LSERDYF                    \ [0x01] LSE ready interrupt flag
+    $02 constant RCC_MSIRDYF                    \ [0x02] MSI ready interrupt flag
+    $03 constant RCC_HSIRDYF                    \ [0x03] HSI ready interrupt flag
+    $04 constant RCC_HSERDYF                    \ [0x04] HSE ready interrupt flag
+    $08 constant RCC_PLL1RDYF                   \ [0x08] PLL1 ready interrupt flag
+    $09 constant RCC_PLL2RDYF                   \ [0x09] PLL2 ready interrupt flag
+    $0a constant RCC_PLL3RDYF                   \ [0x0a] PLL3 ready interrupt flag
+    $0b constant RCC_PLL4RDYF                   \ [0x0b] PLL4 ready interrupt flag
+    $10 constant RCC_LSECSSF                    \ [0x10] LSE ready interrupt flag
+    $11 constant RCC_HSECSSF                    \ [0x11] HSE ready interrupt flag
+    $18 constant RCC_WKUPF                      \ [0x18] CPU wakeup from Stop interrupt flag
+  [then]
+
+
+  [ifdef] RCC_RCC_CICR_DEF
+    \
+    \ @brief RCC clock-source interrupt Clear register
+    \ Address offset: 0x12C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIRDYC                    \ [0x00] LSI ready interrupt clear
+    $01 constant RCC_LSERDYC                    \ [0x01] LSE ready interrupt clear
+    $02 constant RCC_MSIRDYC                    \ [0x02] MSI ready interrupt clear
+    $03 constant RCC_HSIRDYC                    \ [0x03] HSI ready interrupt clear
+    $04 constant RCC_HSERDYC                    \ [0x04] HSE ready interrupt clear
+    $08 constant RCC_PLL1RDYC                   \ [0x08] PLL1 ready interrupt clear
+    $09 constant RCC_PLL2RDYC                   \ [0x09] PLL2 ready interrupt clear
+    $0a constant RCC_PLL3RDYC                   \ [0x0a] PLL3 ready interrupt clear
+    $0b constant RCC_PLL4RDYC                   \ [0x0b] PLL4 ready interrupt clear
+    $10 constant RCC_LSECSSC                    \ [0x10] LSE ready interrupt clear
+    $11 constant RCC_HSECSSC                    \ [0x11] HSE ready interrupt clear
+    $18 constant RCC_WKUPFC                     \ [0x18] CPU Wakeup ready interrupt clear
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR1_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register1
+    \ Address offset: 0x144
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ADF1SEL                    \ [0x00 : 3] Source selection for the ADF1 kernel clock
+    $04 constant RCC_ADC12SEL                   \ [0x04 : 3] Source selection for the ADC12 kernel clock
+    $08 constant RCC_ADCPRE                     \ [0x08 : 8] ADC12 Prog clock divider selection (for clock ck_icn_p_adf1)
+    $14 constant RCC_DCMIPPSEL                  \ [0x14 : 2] Source selection for the DCMIPP kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR2_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register 2
+    \ Address offset: 0x148
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ETH1PTPSEL                 \ [0x00 : 2] Source selection for the ETH1 kernel clock
+    $04 constant RCC_ETH1PTPDIV                 \ [0x04 : 4] ETH1 Kernel clock divider selection (for clock ck_ker_eth1ptp)
+    $08 constant RCC_ETH1PWRDOWNACK             \ [0x08] Set and reset by software.
+    $0c constant RCC_ETH1CLKSEL                 \ [0x0c : 2] Source selection for the ETH1 kernel clock
+    $10 constant RCC_ETH1SEL                    \ [0x10 : 3] Set and reset by software
+    $14 constant RCC_ETH1REFCLKSEL              \ [0x14] Set and reset by software
+    $18 constant RCC_ETH1GTXCLKSEL              \ [0x18] Set and reset by software.
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR3_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register3
+    \ Address offset: 0x14C
+    \ Reset value: 0x00000001
+    \
+    $00 constant RCC_FDCANSEL                   \ [0x00 : 2] Source selection for the FDCAN kernel clock
+    $04 constant RCC_FMCSEL                     \ [0x04 : 2] Source selection for the FMC kernel clock
+    $08 constant RCC_DFTSEL                     \ [0x08] Source selection for the DFT kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR4_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register4
+    \ Address offset: 0x150
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_I2C1SEL                    \ [0x00 : 3] Source selection for the I2C1 kernel clock
+    $04 constant RCC_I2C2SEL                    \ [0x04 : 3] Source selection for the I2C2 kernel clock
+    $08 constant RCC_I2C3SEL                    \ [0x08 : 3] Source selection for the I2C3 kernel clock
+    $0c constant RCC_I2C4SEL                    \ [0x0c : 3] Source selection for the I2C4 kernel clock
+    $10 constant RCC_I3C1SEL                    \ [0x10 : 3] Source selection for the I3C1 kernel clock
+    $14 constant RCC_I3C2SEL                    \ [0x14 : 3] Source selection for the I3C2 kernel clock
+    $18 constant RCC_LTDCSEL                    \ [0x18 : 2] Source selection for the LTDC kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR5_DEF
+    \
+    \ @brief RCC lock configuration for independent peripheral register5
+    \ Address offset: 0x154
+    \ Reset value: 0x0000F0F0
+    \
+    $00 constant RCC_MCO1SEL                    \ [0x00 : 3] Source selection for the MCO1 kernel clock
+    $04 constant RCC_MCO1PRE                    \ [0x04 : 4] MCO1 Prog clock divider selection (for clock ck_icn_p_mce3)
+    $08 constant RCC_MCO2SEL                    \ [0x08 : 3] Source selection for the MCO2 kernel clock
+    $0c constant RCC_MCO2PRE                    \ [0x0c : 4] MCO2 Prog clock divider selection (for clock ck_icn_p_mce4)
+    $10 constant RCC_MDF1SEL                    \ [0x10 : 3] Source selection for the MDF1 kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR6_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register6
+    \ Address offset: 0x158
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_XSPI1SEL                   \ [0x00 : 2] Source selection for the XSPI1 kernel clock
+    $04 constant RCC_XSPI2SEL                   \ [0x04 : 2] Source selection for the XSPI2 kernel clock
+    $08 constant RCC_XSPI3SEL                   \ [0x08 : 2] Source selection for the XSPI3 kernel clock
+    $0c constant RCC_OTGPHY1SEL                 \ [0x0c : 2] Source selection for the OTGPHY1 kernel clock
+    $10 constant RCC_OTGPHY1CKREFSEL            \ [0x10] Set and reset by software
+    $14 constant RCC_OTGPHY2SEL                 \ [0x14 : 2] Source selection for the OTGPHY2 kernel clock
+    $18 constant RCC_OTGPHY2CKREFSEL            \ [0x18] Set and reset by software
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR7_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register7
+    \ Address offset: 0x15C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PERSEL                     \ [0x00 : 3] Source selection for the PER kernel clock
+    $04 constant RCC_PSSISEL                    \ [0x04 : 2] Source selection for the PSSI kernel clock
+    $08 constant RCC_RTCSEL                     \ [0x08 : 2] Source selection for the RTC kernel clock
+    $0c constant RCC_RTCPRE                     \ [0x0c : 6] RTC Prog clock divider selection (for clock ck_icn_p_risaf)
+    $14 constant RCC_SAI1SEL                    \ [0x14 : 3] Source selection for the SAI1 kernel clock
+    $18 constant RCC_SAI2SEL                    \ [0x18 : 3] Source selection for the SAI2 kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR8_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register8
+    \ Address offset: 0x160
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SDMMC1SEL                  \ [0x00 : 2] Source selection for the SDMMC1 kernel clock
+    $04 constant RCC_SDMMC2SEL                  \ [0x04 : 2] Source selection for the SDMMC2 kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR9_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register9
+    \ Address offset: 0x164
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SPDIFRX1SEL                \ [0x00 : 3] Source selection for the SPDIFRX1 kernel clock
+    $04 constant RCC_SPI1SEL                    \ [0x04 : 3] Source selection for the SPI1 kernel clock
+    $08 constant RCC_SPI2SEL                    \ [0x08 : 3] Source selection for the SPI2 kernel clock
+    $0c constant RCC_SPI3SEL                    \ [0x0c : 3] Source selection for the SPI3 kernel clock
+    $10 constant RCC_SPI4SEL                    \ [0x10 : 3] Source selection for the SPI4 kernel clock
+    $14 constant RCC_SPI5SEL                    \ [0x14 : 3] Source selection for the SPI5 kernel clock
+    $18 constant RCC_SPI6SEL                    \ [0x18 : 3] Source selection for the SPI6 kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR12_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register12
+    \ Address offset: 0x170
+    \ Reset value: 0x00000000
+    \
+    $08 constant RCC_LPTIM1SEL                  \ [0x08 : 3] Source selection for the LPTIM1 kernel clock
+    $0c constant RCC_LPTIM2SEL                  \ [0x0c : 3] Source selection for the LPTIM2 kernel clock
+    $10 constant RCC_LPTIM3SEL                  \ [0x10 : 3] Source selection for the LPTIM3 kernel clock
+    $14 constant RCC_LPTIM4SEL                  \ [0x14 : 3] Source selection for the LPTIM4 kernel clock
+    $18 constant RCC_LPTIM5SEL                  \ [0x18 : 3] Source selection for the LPTIM5 kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR13_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register13
+    \ Address offset: 0x174
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_USART1SEL                  \ [0x00 : 3] Source selection for the USART1 kernel clock
+    $04 constant RCC_USART2SEL                  \ [0x04 : 3] Source selection for the USART2 kernel clock
+    $08 constant RCC_USART3SEL                  \ [0x08 : 3] Source selection for the USART3 kernel clock
+    $0c constant RCC_UART4SEL                   \ [0x0c : 3] Source selection for the UART4 kernel clock
+    $10 constant RCC_UART5SEL                   \ [0x10 : 3] Source selection for the UART5 kernel clock
+    $14 constant RCC_USART6SEL                  \ [0x14 : 3] Source selection for the USART6 kernel clock
+    $18 constant RCC_UART7SEL                   \ [0x18 : 3] Source selection for the UART7 kernel clock
+    $1c constant RCC_UART8SEL                   \ [0x1c : 3] Source selection for the UART8 kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_CCIPR14_DEF
+    \
+    \ @brief RCC clock configuration for independent peripheral register14
+    \ Address offset: 0x178
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_UART9SEL                   \ [0x00 : 3] Source selection for the UART9 kernel clock
+    $04 constant RCC_USART10SEL                 \ [0x04 : 3] Source selection for the USART10 kernel clock
+    $08 constant RCC_LPUART1SEL                 \ [0x08 : 3] Source selection for the LPUART1 kernel clock
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSRSTR_DEF
+    \
+    \ @brief RCC SoC buses reset register
+    \ Address offset: 0x204
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNRST                   \ [0x00] ACLKN reset
+    $02 constant RCC_AHBMRST                    \ [0x02] AHBM reset
+    $03 constant RCC_AHB1RST                    \ [0x03] AHB1 reset
+    $04 constant RCC_AHB2RST                    \ [0x04] AHB2 reset
+    $05 constant RCC_AHB3RST                    \ [0x05] AHB3 reset
+    $06 constant RCC_AHB4RST                    \ [0x06] AHB4 reset
+    $07 constant RCC_AHB5RST                    \ [0x07] AHB5 reset
+    $08 constant RCC_APB1RST                    \ [0x08] APB1 reset
+    $09 constant RCC_APB2RST                    \ [0x09] APB2 reset
+    $0a constant RCC_APB3RST                    \ [0x0a] APB3 reset
+    $0b constant RCC_APB4RST                    \ [0x0b] APB4 reset
+    $0c constant RCC_APB5RST                    \ [0x0c] APB5 reset
+    $0d constant RCC_NOCRST                     \ [0x0d] NOC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCRSTR_DEF
+    \
+    \ @brief RCC miscellaneous configurations reset register
+    \ Address offset: 0x208
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGRST                     \ [0x00] DBG reset
+    $04 constant RCC_XSPIPHY1RST                \ [0x04] XSPIPHY1 reset
+    $05 constant RCC_XSPIPHY2RST                \ [0x05] XSPIPHY2 reset
+    $07 constant RCC_SDMMC1DLLRST               \ [0x07] SDMMC1DLL reset
+    $08 constant RCC_SDMMC2DLLRST               \ [0x08] SDMMC2DLL reset
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMRSTR_DEF
+    \
+    \ @brief RCC memories reset register
+    \ Address offset: 0x20C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3RST                \ [0x00] AXISRAM3 reset
+    $01 constant RCC_AXISRAM4RST                \ [0x01] AXISRAM4reset
+    $02 constant RCC_AXISRAM5RST                \ [0x02] AXISRAM5 reset
+    $03 constant RCC_AXISRAM6RST                \ [0x03] AXISRAM6 reset
+    $04 constant RCC_AHBSRAM1RST                \ [0x04] AHBSRAM1 reset
+    $05 constant RCC_AHBSRAM2RST                \ [0x05] AHBSRAM2 reset
+    $07 constant RCC_AXISRAM1RST                \ [0x07] AXISRAM1 reset
+    $08 constant RCC_AXISRAM2RST                \ [0x08] AXISRAM2 reset
+    $09 constant RCC_FLEXRAMRST                 \ [0x09] FLEXRAM reset
+    $0a constant RCC_NPUCACHERAMRST             \ [0x0a] NPUCACHERAM reset
+    $0b constant RCC_VENCRAMRST                 \ [0x0b] VENCRAM reset
+    $0c constant RCC_BOOTROMRST                 \ [0x0c] BOOTROM reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1RSTR_DEF
+    \
+    \ @brief RCC AHB1 Reset register
+    \ Address offset: 0x210
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1RST                  \ [0x04] GPDMA1 reset
+    $05 constant RCC_ADC12RST                   \ [0x05] ADC12 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2RSTR_DEF
+    \
+    \ @brief RCC AHB2 reset register
+    \ Address offset: 0x214
+    \ Reset value: 0x00000000
+    \
+    $0c constant RCC_RAMCFGRST                  \ [0x0c] RAMCFG reset
+    $10 constant RCC_MDF1RST                    \ [0x10] MDF1 reset
+    $11 constant RCC_ADF1RST                    \ [0x11] ADF1 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3RSTR_DEF
+    \
+    \ @brief RCC AHB3 reset register
+    \ Address offset: 0x218
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_RNGRST                     \ [0x00] RNG reset
+    $01 constant RCC_HASHRST                    \ [0x01] HASH reset
+    $02 constant RCC_CRYPRST                    \ [0x02] CRYP reset
+    $04 constant RCC_SAESRST                    \ [0x04] SAES reset
+    $08 constant RCC_PKARST                     \ [0x08] PKA reset
+    $0a constant RCC_IACRST                     \ [0x0a] IAC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4RSTR_DEF
+    \
+    \ @brief RCC AHB4 reset register
+    \ Address offset: 0x21C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOARST                   \ [0x00] GPIOA reset
+    $01 constant RCC_GPIOBRST                   \ [0x01] GPIOB reset
+    $02 constant RCC_GPIOCRST                   \ [0x02] GPIOC reset
+    $03 constant RCC_GPIODRST                   \ [0x03] GPIOD reset
+    $04 constant RCC_GPIOERST                   \ [0x04] GPIOE reset
+    $05 constant RCC_GPIOFRST                   \ [0x05] GPIOF reset
+    $06 constant RCC_GPIOGRST                   \ [0x06] GPIOG reset
+    $07 constant RCC_GPIOHRST                   \ [0x07] GPIOH reset
+    $0d constant RCC_GPIONRST                   \ [0x0d] GPION reset
+    $0e constant RCC_GPIOORST                   \ [0x0e] GPIOO reset
+    $0f constant RCC_GPIOPRST                   \ [0x0f] GPIOP reset
+    $10 constant RCC_GPIOQRST                   \ [0x10] GPIOQ reset
+    $12 constant RCC_PWRRST                     \ [0x12] PWR reset
+    $13 constant RCC_CRCRST                     \ [0x13] CRC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5RSTR_DEF
+    \
+    \ @brief RCC AHB5 reset register
+    \ Address offset: 0x220
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1RST                  \ [0x00] HPDMA1 reset
+    $01 constant RCC_DMA2DRST                   \ [0x01] DMA2D reset
+    $03 constant RCC_JPEGRST                    \ [0x03] JPEG reset
+    $04 constant RCC_FMCRST                     \ [0x04] FMC reset
+    $05 constant RCC_XSPI1RST                   \ [0x05] XSPI1 reset
+    $06 constant RCC_PSSIRST                    \ [0x06] PSSI reset
+    $07 constant RCC_SDMMC2RST                  \ [0x07] SDMMC2 reset
+    $08 constant RCC_SDMMC1RST                  \ [0x08] SDMMC1 reset
+    $0c constant RCC_XSPI2RST                   \ [0x0c] XSPI2 reset
+    $0d constant RCC_XSPIMRST                   \ [0x0d] XSPIM reset
+    $11 constant RCC_XSPI3RST                   \ [0x11] XSPI3 reset
+    $12 constant RCC_MCE4RST                    \ [0x12] MCE4 reset
+    $13 constant RCC_GFXMMURST                  \ [0x13] GFXMMU reset
+    $14 constant RCC_GPURST                     \ [0x14] GPU reset
+    $17 constant RCC_SYSCFGOTGHSPHY1RST         \ [0x17] SYSCFGOTGHSPHY1 reset
+    $18 constant RCC_SYSCFGOTGHSPHY2RST         \ [0x18] SYSCFGOTGHSPHY2 reset
+    $19 constant RCC_ETH1RST                    \ [0x19] ETH1 reset
+    $1a constant RCC_OTG1RST                    \ [0x1a] OTG1 reset
+    $1b constant RCC_OTGPHY1RST                 \ [0x1b] OTGPHY1 reset
+    $1c constant RCC_OTGPHY2RST                 \ [0x1c] OTGPHY2 reset
+    $1d constant RCC_OTG2RST                    \ [0x1d] OTG2 reset
+    $1e constant RCC_NPUCACHERST                \ [0x1e] NPUCACHE reset
+    $1f constant RCC_NPURST                     \ [0x1f] NPU reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LRSTR_DEF
+    \
+    \ @brief RCC APB1L reset register
+    \ Address offset: 0x224
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2RST                    \ [0x00] TIM2 reset
+    $01 constant RCC_TIM3RST                    \ [0x01] TIM3 reset
+    $02 constant RCC_TIM4RST                    \ [0x02] TIM4 reset
+    $03 constant RCC_TIM5RST                    \ [0x03] TIM5 reset
+    $04 constant RCC_TIM6RST                    \ [0x04] TIM6 reset
+    $05 constant RCC_TIM7RST                    \ [0x05] TIM7 reset
+    $06 constant RCC_TIM12RST                   \ [0x06] TIM12 reset
+    $07 constant RCC_TIM13RST                   \ [0x07] TIM13 reset
+    $08 constant RCC_TIM14RST                   \ [0x08] TIM14 reset
+    $09 constant RCC_LPTIM1RST                  \ [0x09] LPTIM1 reset
+    $0b constant RCC_WWDGRST                    \ [0x0b] WWDG reset
+    $0c constant RCC_TIM10RST                   \ [0x0c] TIM10 reset
+    $0d constant RCC_TIM11RST                   \ [0x0d] TIM11 reset
+    $0e constant RCC_SPI2RST                    \ [0x0e] SPI2 reset
+    $0f constant RCC_SPI3RST                    \ [0x0f] SPI3 reset
+    $10 constant RCC_SPDIFRX1RST                \ [0x10] SPDIFRX1 reset
+    $11 constant RCC_USART2RST                  \ [0x11] USART2 reset
+    $12 constant RCC_USART3RST                  \ [0x12] USART3 reset
+    $13 constant RCC_UART4RST                   \ [0x13] UART4 reset
+    $14 constant RCC_UART5RST                   \ [0x14] UART5 reset
+    $15 constant RCC_I2C1RST                    \ [0x15] I2C1 reset
+    $16 constant RCC_I2C2RST                    \ [0x16] I2C2 reset
+    $17 constant RCC_I2C3RST                    \ [0x17] I2C3 reset
+    $18 constant RCC_I3C1RST                    \ [0x18] I3C1 reset
+    $19 constant RCC_I3C2RST                    \ [0x19] I3C2 reset
+    $1e constant RCC_UART7RST                   \ [0x1e] UART7 reset
+    $1f constant RCC_UART8RST                   \ [0x1f] UART8 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HRSTR_DEF
+    \
+    \ @brief RCC APB1H reset register
+    \ Address offset: 0x228
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSRST                   \ [0x05] MDIOS reset
+    $08 constant RCC_FDCANRST                   \ [0x08] FDCAN reset
+    $12 constant RCC_UCPD1RST                   \ [0x12] UCPD1 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2RSTR_DEF
+    \
+    \ @brief RCC APB2 reset register
+    \ Address offset: 0x22C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1RST                    \ [0x00] TIM1 reset
+    $01 constant RCC_TIM8RST                    \ [0x01] TIM8 reset
+    $04 constant RCC_USART1RST                  \ [0x04] USART1 reset
+    $05 constant RCC_USART6RST                  \ [0x05] USART6 reset
+    $06 constant RCC_UART9RST                   \ [0x06] UART9 reset
+    $07 constant RCC_USART10RST                 \ [0x07] USART10 reset
+    $0c constant RCC_SPI1RST                    \ [0x0c] SPI1 reset
+    $0d constant RCC_SPI4RST                    \ [0x0d] SPI4 reset
+    $0f constant RCC_TIM18RST                   \ [0x0f] TIM18 reset
+    $10 constant RCC_TIM15RST                   \ [0x10] TIM15 reset
+    $11 constant RCC_TIM16RST                   \ [0x11] TIM16 reset
+    $12 constant RCC_TIM17RST                   \ [0x12] TIM17 reset
+    $13 constant RCC_TIM9RST                    \ [0x13] TIM9 reset
+    $14 constant RCC_SPI5RST                    \ [0x14] SPI5 reset
+    $15 constant RCC_SAI1RST                    \ [0x15] SAI1 reset
+    $16 constant RCC_SAI2RST                    \ [0x16] SAI2 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LRSTR_DEF
+    \
+    \ @brief RCC APB4L reset register
+    \ Address offset: 0x234
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPRST                     \ [0x02] HDP reset
+    $03 constant RCC_LPUART1RST                 \ [0x03] LPUART1 reset
+    $05 constant RCC_SPI6RST                    \ [0x05] SPI6 reset
+    $07 constant RCC_I2C4RST                    \ [0x07] I2C4 reset
+    $09 constant RCC_LPTIM2RST                  \ [0x09] LPTIM2 reset
+    $0a constant RCC_LPTIM3RST                  \ [0x0a] LPTIM3 reset
+    $0b constant RCC_LPTIM4RST                  \ [0x0b] LPTIM4 reset
+    $0c constant RCC_LPTIM5RST                  \ [0x0c] LPTIM5 reset
+    $0f constant RCC_VREFBUFRST                 \ [0x0f] VREFBUF reset
+    $10 constant RCC_RTCRST                     \ [0x10] RTC reset
+    $16 constant RCC_R2GRETRST                  \ [0x16] R2GRET reset
+    $17 constant RCC_R2GNPURST                  \ [0x17] R2GNPU reset
+    $1f constant RCC_SERFRST                    \ [0x1f] SERF reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HRSTR_DEF
+    \
+    \ @brief RCC APB4H reset register
+    \ Address offset: 0x238
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGRST                  \ [0x00] SYSCFG reset
+    $02 constant RCC_DTSRST                     \ [0x02] DTS reset
+    $04 constant RCC_BUSPERFMRST                \ [0x04] BUSPERFM reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5RSTR_DEF
+    \
+    \ @brief RCC APB5 reset register
+    \ Address offset: 0x23C
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCRST                    \ [0x01] LTDC reset
+    $02 constant RCC_DCMIPPRST                  \ [0x02] DCMIPP reset
+    $04 constant RCC_GFXTIMRST                  \ [0x04] GFXTIM reset
+    $05 constant RCC_VENCRST                    \ [0x05] VENC reset
+    $06 constant RCC_CSIRST                     \ [0x06] CSI reset
+  [then]
+
+
+  [ifdef] RCC_RCC_DIVENR_DEF
+    \
+    \ @brief RCC IC dividers enable register
+    \ Address offset: 0x240
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1EN                      \ [0x00] IC1 enable
+    $01 constant RCC_IC2EN                      \ [0x01] IC2 enable
+    $02 constant RCC_IC3EN                      \ [0x02] IC3 enable
+    $03 constant RCC_IC4EN                      \ [0x03] IC4 enable
+    $04 constant RCC_IC5EN                      \ [0x04] IC5 enable
+    $05 constant RCC_IC6EN                      \ [0x05] IC6 enable
+    $06 constant RCC_IC7EN                      \ [0x06] IC7 enable
+    $07 constant RCC_IC8EN                      \ [0x07] IC8 enable
+    $08 constant RCC_IC9EN                      \ [0x08] IC9 enable
+    $09 constant RCC_IC10EN                     \ [0x09] IC10 enable
+    $0a constant RCC_IC11EN                     \ [0x0a] IC11 enable
+    $0b constant RCC_IC12EN                     \ [0x0b] IC12 enable
+    $0c constant RCC_IC13EN                     \ [0x0c] IC13 enable
+    $0d constant RCC_IC14EN                     \ [0x0d] IC14 enable
+    $0e constant RCC_IC15EN                     \ [0x0e] IC15 enable
+    $0f constant RCC_IC16EN                     \ [0x0f] IC16 enable
+    $10 constant RCC_IC17EN                     \ [0x10] IC17 enable
+    $11 constant RCC_IC18EN                     \ [0x11] IC18 enable
+    $12 constant RCC_IC19EN                     \ [0x12] IC19 enable
+    $13 constant RCC_IC20EN                     \ [0x13] IC20 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSENR_DEF
+    \
+    \ @brief RCC SoC buses enable register
+    \ Address offset: 0x244
+    \ Reset value: 0x00000003
+    \
+    $00 constant RCC_ACLKNEN                    \ [0x00] ACLKN enable
+    $01 constant RCC_ACLKNCEN                   \ [0x01] ACLKNC enable
+    $02 constant RCC_AHBMEN                     \ [0x02] AHBM enable
+    $03 constant RCC_AHB1EN                     \ [0x03] AHB1 enable
+    $04 constant RCC_AHB2EN                     \ [0x04] AHB2 enable
+    $05 constant RCC_AHB3EN                     \ [0x05] AHB3 enable
+    $06 constant RCC_AHB4EN                     \ [0x06] AHB4 enable
+    $07 constant RCC_AHB5EN                     \ [0x07] AHB5 enable
+    $08 constant RCC_APB1EN                     \ [0x08] APB1 enable
+    $09 constant RCC_APB2EN                     \ [0x09] APB2 enable
+    $0a constant RCC_APB3EN                     \ [0x0a] APB3 enable
+    $0b constant RCC_APB4EN                     \ [0x0b] APB4 enable
+    $0c constant RCC_APB5EN                     \ [0x0c] APB5 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCENR_DEF
+    \
+    \ @brief RCC miscellaneous configuration enable register
+    \ Address offset: 0x248
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGEN                      \ [0x00] DBG enable
+    $01 constant RCC_MCO1EN                     \ [0x01] MCO1 enable
+    $02 constant RCC_MCO2EN                     \ [0x02] MCO2 enable
+    $03 constant RCC_XSPIPHYCOMPEN              \ [0x03] XSPIPHYCOMP enable
+    $06 constant RCC_PEREN                      \ [0x06] PER enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMENR_DEF
+    \
+    \ @brief RCC memory enable register
+    \ Address offset: 0x24C
+    \ Reset value: 0x000013FF
+    \
+    $00 constant RCC_AXISRAM3EN                 \ [0x00] AXISRAM3 enable
+    $01 constant RCC_AXISRAM4EN                 \ [0x01] AXISRAM4 enable
+    $02 constant RCC_AXISRAM5EN                 \ [0x02] AXISRAM5 enable
+    $03 constant RCC_AXISRAM6EN                 \ [0x03] AXISRAM6 enable
+    $04 constant RCC_AHBSRAM1EN                 \ [0x04] AHBSRAM1 enable
+    $05 constant RCC_AHBSRAM2EN                 \ [0x05] AHBSRAM2 enable
+    $06 constant RCC_BKPSRAMEN                  \ [0x06] BKPSRAM enable
+    $07 constant RCC_AXISRAM1EN                 \ [0x07] AXISRAM1 enable
+    $08 constant RCC_AXISRAM2EN                 \ [0x08] AXISRAM2 enable
+    $09 constant RCC_FLEXRAMEN                  \ [0x09] FLEXRAM enable
+    $0a constant RCC_NPUCACHERAMEN              \ [0x0a] NPUCACHERAM enable
+    $0b constant RCC_VENCRAMEN                  \ [0x0b] VENCRAM enable
+    $0c constant RCC_BOOTROMEN                  \ [0x0c] BOOTROM enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1ENR_DEF
+    \
+    \ @brief RCC AHB1 enable register
+    \ Address offset: 0x250
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1EN                   \ [0x04] GPDMA1 enable
+    $05 constant RCC_ADC12EN                    \ [0x05] ADC12 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2ENR_DEF
+    \
+    \ @brief RCC AHB2 enable register
+    \ Address offset: 0x254
+    \ Reset value: 0x00001000
+    \
+    $0c constant RCC_RAMCFGEN                   \ [0x0c] RAMCFG enable
+    $10 constant RCC_MDF1EN                     \ [0x10] MDF1 enable
+    $11 constant RCC_ADF1EN                     \ [0x11] ADF enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3ENR_DEF
+    \
+    \ @brief RCC AHB3 enable register
+    \ Address offset: 0x258
+    \ Reset value: 0x00004600
+    \
+    $00 constant RCC_RNGEN                      \ [0x00] RNG enable
+    $01 constant RCC_HASHEN                     \ [0x01] HASH enable
+    $02 constant RCC_CRYPEN                     \ [0x02] CRYP enable
+    $04 constant RCC_SAESEN                     \ [0x04] SAES enable
+    $08 constant RCC_PKAEN                      \ [0x08] PKA enable
+    $09 constant RCC_RIFSCEN                    \ [0x09] RIFSC enable
+    $0a constant RCC_IACEN                      \ [0x0a] IAC enable
+    $0e constant RCC_RISAFEN                    \ [0x0e] RISAF enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4ENR_DEF
+    \
+    \ @brief RCC AHB4 enable register
+    \ Address offset: 0x25C
+    \ Reset value: 0x00040000
+    \
+    $00 constant RCC_GPIOAEN                    \ [0x00] GPIOA enable
+    $01 constant RCC_GPIOBEN                    \ [0x01] GPIOB enable
+    $02 constant RCC_GPIOCEN                    \ [0x02] GPIOC enable
+    $03 constant RCC_GPIODEN                    \ [0x03] GPIOD enable
+    $04 constant RCC_GPIOEEN                    \ [0x04] GPIOE enable
+    $05 constant RCC_GPIOFEN                    \ [0x05] GPIOF enable
+    $06 constant RCC_GPIOGEN                    \ [0x06] GPIOG enable
+    $07 constant RCC_GPIOHEN                    \ [0x07] GPIOH enable
+    $0d constant RCC_GPIONEN                    \ [0x0d] GPION enable
+    $0e constant RCC_GPIOOEN                    \ [0x0e] GPIOO enable
+    $0f constant RCC_GPIOPEN                    \ [0x0f] GPIOP enable
+    $10 constant RCC_GPIOQEN                    \ [0x10] GPIOQ enable
+    $12 constant RCC_PWREN                      \ [0x12] PWR enable
+    $13 constant RCC_CRCEN                      \ [0x13] CRC enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5ENR_DEF
+    \
+    \ @brief RCC AHB5 enable register
+    \ Address offset: 0x260
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1EN                   \ [0x00] HPDMA1 enable
+    $01 constant RCC_DMA2DEN                    \ [0x01] DMA2D enable
+    $03 constant RCC_JPEGEN                     \ [0x03] JPEG enable
+    $04 constant RCC_FMCEN                      \ [0x04] FMC enable
+    $05 constant RCC_XSPI1EN                    \ [0x05] XSPI1 enable
+    $06 constant RCC_PSSIEN                     \ [0x06] PSSI enable
+    $07 constant RCC_SDMMC2EN                   \ [0x07] SDMMC2 enable
+    $08 constant RCC_SDMMC1EN                   \ [0x08] SDMMC1 enable
+    $0c constant RCC_XSPI2EN                    \ [0x0c] XSPI2 enable
+    $0d constant RCC_XSPIMEN                    \ [0x0d] XSPIM enable
+    $0e constant RCC_MCE1EN                     \ [0x0e] MCE1 enable
+    $0f constant RCC_MCE2EN                     \ [0x0f] MCE2 enable
+    $10 constant RCC_MCE3EN                     \ [0x10] MCE3 enable
+    $11 constant RCC_XSPI3EN                    \ [0x11] XSPI3 enable
+    $12 constant RCC_MCE4EN                     \ [0x12] MCE4 enable
+    $13 constant RCC_GFXMMUEN                   \ [0x13] GFXMMU enable
+    $14 constant RCC_GPUEN                      \ [0x14] GPU enable
+    $16 constant RCC_ETH1MACEN                  \ [0x16] ETH1MAC enable
+    $17 constant RCC_ETH1TXEN                   \ [0x17] ETH1TX enable
+    $18 constant RCC_ETH1RXEN                   \ [0x18] ETH1RX enable
+    $19 constant RCC_ETH1EN                     \ [0x19] ETH1 enable
+    $1a constant RCC_OTG1EN                     \ [0x1a] OTG1 enable
+    $1b constant RCC_OTGPHY1EN                  \ [0x1b] OTGPHY1 enable
+    $1c constant RCC_OTGPHY2EN                  \ [0x1c] OTGPHY2 enable
+    $1d constant RCC_OTG2EN                     \ [0x1d] OTG2 enable
+    $1e constant RCC_NPUCACHEEN                 \ [0x1e] NPUCACHE enable
+    $1f constant RCC_NPUEN                      \ [0x1f] NPU enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LENR_DEF
+    \
+    \ @brief RCC APB1L enable register
+    \ Address offset: 0x264
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2EN                     \ [0x00] TIM2 enable
+    $01 constant RCC_TIM3EN                     \ [0x01] TIM3 enable
+    $02 constant RCC_TIM4EN                     \ [0x02] TIM4 enable
+    $03 constant RCC_TIM5EN                     \ [0x03] TIM5 enable
+    $04 constant RCC_TIM6EN                     \ [0x04] TIM6 enable
+    $05 constant RCC_TIM7EN                     \ [0x05] TIM7 enable
+    $06 constant RCC_TIM12EN                    \ [0x06] TIM12 enable
+    $07 constant RCC_TIM13EN                    \ [0x07] TIM13 enable
+    $08 constant RCC_TIM14EN                    \ [0x08] TIM14 enable
+    $09 constant RCC_LPTIM1EN                   \ [0x09] LPTIM1 enable
+    $0b constant RCC_WWDGEN                     \ [0x0b] WWDG enable
+    $0c constant RCC_TIM10EN                    \ [0x0c] TIM10 enable
+    $0d constant RCC_TIM11EN                    \ [0x0d] TIM11 enable
+    $0e constant RCC_SPI2EN                     \ [0x0e] SPI2 enable
+    $0f constant RCC_SPI3EN                     \ [0x0f] SPI3 enable
+    $10 constant RCC_SPDIFRX1EN                 \ [0x10] SPDIFRX1 enable
+    $11 constant RCC_USART2EN                   \ [0x11] USART2 enable
+    $12 constant RCC_USART3EN                   \ [0x12] USART3 enable
+    $13 constant RCC_UART4EN                    \ [0x13] UART4 enable
+    $14 constant RCC_UART5EN                    \ [0x14] UART5 enable
+    $15 constant RCC_I2C1EN                     \ [0x15] I2C1 enable
+    $16 constant RCC_I2C2EN                     \ [0x16] I2C2 enable
+    $17 constant RCC_I2C3EN                     \ [0x17] I2C3 enable
+    $18 constant RCC_I3C1EN                     \ [0x18] I3C1 enable
+    $19 constant RCC_I3C2EN                     \ [0x19] I3C2 enable
+    $1e constant RCC_UART7EN                    \ [0x1e] UART7 enable
+    $1f constant RCC_UART8EN                    \ [0x1f] UART8 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HENR_DEF
+    \
+    \ @brief RCC APB1H enable register
+    \ Address offset: 0x268
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSEN                    \ [0x05] MDIOS enable
+    $08 constant RCC_FDCANEN                    \ [0x08] FDCAN enable
+    $12 constant RCC_UCPD1EN                    \ [0x12] UCPD1 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2ENR_DEF
+    \
+    \ @brief RCC APB2 enable register
+    \ Address offset: 0x26C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1EN                     \ [0x00] TIM1 enable
+    $01 constant RCC_TIM8EN                     \ [0x01] TIM8 enable
+    $04 constant RCC_USART1EN                   \ [0x04] USART1 enable
+    $05 constant RCC_USART6EN                   \ [0x05] USART6 enable
+    $06 constant RCC_UART9EN                    \ [0x06] UART9 enable
+    $07 constant RCC_USART10EN                  \ [0x07] USART10 enable
+    $0c constant RCC_SPI1EN                     \ [0x0c] SPI1 enable
+    $0d constant RCC_SPI4EN                     \ [0x0d] SPI4 enable
+    $0f constant RCC_TIM18EN                    \ [0x0f] TIM18 enable
+    $10 constant RCC_TIM15EN                    \ [0x10] TIM15 enable
+    $11 constant RCC_TIM16EN                    \ [0x11] TIM16 enable
+    $12 constant RCC_TIM17EN                    \ [0x12] TIM17 enable
+    $13 constant RCC_TIM9EN                     \ [0x13] TIM9 enable
+    $14 constant RCC_SPI5EN                     \ [0x14] SPI5 enable
+    $15 constant RCC_SAI1EN                     \ [0x15] SAI1 enable
+    $16 constant RCC_SAI2EN                     \ [0x16] SAI2 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB3ENR_DEF
+    \
+    \ @brief RCC APB3 enable register
+    \ Address offset: 0x270
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_DFTEN                      \ [0x02] DFT enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LENR_DEF
+    \
+    \ @brief RCC APB4L enable register
+    \ Address offset: 0x274
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPEN                      \ [0x02] HDP enable
+    $03 constant RCC_LPUART1EN                  \ [0x03] LPUART1 enable
+    $05 constant RCC_SPI6EN                     \ [0x05] SPI6 enable
+    $07 constant RCC_I2C4EN                     \ [0x07] I2C4 enable
+    $09 constant RCC_LPTIM2EN                   \ [0x09] LPTIM2 enable
+    $0a constant RCC_LPTIM3EN                   \ [0x0a] LPTIM3 enable
+    $0b constant RCC_LPTIM4EN                   \ [0x0b] LPTIM4 enable
+    $0c constant RCC_LPTIM5EN                   \ [0x0c] LPTIM5 enable
+    $0f constant RCC_VREFBUFEN                  \ [0x0f] VREFBUF enable
+    $10 constant RCC_RTCEN                      \ [0x10] RTC enable
+    $11 constant RCC_RTCAPBEN                   \ [0x11] RTCAPB enable
+    $16 constant RCC_R2GRETEN                   \ [0x16] R2GRET enable
+    $17 constant RCC_R2GNPUEN                   \ [0x17] R2GNPU enable
+    $1f constant RCC_SERFEN                     \ [0x1f] SERF enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HENR_DEF
+    \
+    \ @brief RCC APB4H enable register
+    \ Address offset: 0x278
+    \ Reset value: 0x00000002
+    \
+    $00 constant RCC_SYSCFGEN                   \ [0x00] SYSCFG enable
+    $01 constant RCC_BSECEN                     \ [0x01] BSEC enable
+    $02 constant RCC_DTSEN                      \ [0x02] DTS enable
+    $04 constant RCC_BUSPERFMEN                 \ [0x04] BUSPERFM enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5ENR_DEF
+    \
+    \ @brief RCC APB5 enable register
+    \ Address offset: 0x27C
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCEN                     \ [0x01] LTDC enable
+    $02 constant RCC_DCMIPPEN                   \ [0x02] DCMIPP enable
+    $04 constant RCC_GFXTIMEN                   \ [0x04] GFXTIM enable
+    $05 constant RCC_VENCEN                     \ [0x05] VENC enable
+    $06 constant RCC_CSIEN                      \ [0x06] CSI enable
+  [then]
+
+
+  [ifdef] RCC_RCC_DIVLPENR_DEF
+    \
+    \ @brief RCC dividers Sleep enable register
+    \ Address offset: 0x280
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1LPEN                    \ [0x00] IC1 sleep enable
+    $01 constant RCC_IC2LPEN                    \ [0x01] IC2 sleep enable
+    $02 constant RCC_IC3LPEN                    \ [0x02] IC3 sleep enable
+    $03 constant RCC_IC4LPEN                    \ [0x03] IC4 sleep enable
+    $04 constant RCC_IC5LPEN                    \ [0x04] IC5 sleep enable
+    $05 constant RCC_IC6LPEN                    \ [0x05] IC6 sleep enable
+    $06 constant RCC_IC7LPEN                    \ [0x06] IC7 sleep enable
+    $07 constant RCC_IC8LPEN                    \ [0x07] IC8 sleep enable
+    $08 constant RCC_IC9LPEN                    \ [0x08] IC9 sleep enable
+    $09 constant RCC_IC10LPEN                   \ [0x09] IC10 sleep enable
+    $0a constant RCC_IC11LPEN                   \ [0x0a] IC11 sleep enable
+    $0b constant RCC_IC12LPEN                   \ [0x0b] IC12 sleep enable
+    $0c constant RCC_IC13LPEN                   \ [0x0c] IC13 sleep enable
+    $0d constant RCC_IC14LPEN                   \ [0x0d] IC14 sleep enable
+    $0e constant RCC_IC15LPEN                   \ [0x0e] IC15 sleep enable
+    $0f constant RCC_IC16LPEN                   \ [0x0f] IC16 sleep enable
+    $10 constant RCC_IC17LPEN                   \ [0x10] IC17 sleep enable
+    $11 constant RCC_IC18LPEN                   \ [0x11] IC18 sleep enable
+    $12 constant RCC_IC19LPEN                   \ [0x12] IC19 sleep enable
+    $13 constant RCC_IC20LPEN                   \ [0x13] IC20 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSLPENR_DEF
+    \
+    \ @brief RCC SoC buses Sleep enable register
+    \ Address offset: 0x284
+    \ Reset value: 0x00000003
+    \
+    $00 constant RCC_ACLKNLPEN                  \ [0x00] ACLKN sleep enable
+    $01 constant RCC_ACLKNCLPEN                 \ [0x01] ACLKNC sleep enable
+    $02 constant RCC_AHBMLPEN                   \ [0x02] AHBM sleep enable
+    $03 constant RCC_AHB1LPEN                   \ [0x03] AHB1 sleep enable
+    $04 constant RCC_AHB2LPEN                   \ [0x04] AHB2 sleep enable
+    $05 constant RCC_AHB3LPEN                   \ [0x05] AHB3 sleep enable
+    $06 constant RCC_AHB4LPEN                   \ [0x06] AHB4 sleep enable
+    $07 constant RCC_AHB5LPEN                   \ [0x07] AHB5 sleep enable
+    $08 constant RCC_APB1LPEN                   \ [0x08] APB1 sleep enable
+    $09 constant RCC_APB2LPEN                   \ [0x09] APB2 sleep enable
+    $0a constant RCC_APB3LPEN                   \ [0x0a] APB3 sleep enable
+    $0b constant RCC_APB4LPEN                   \ [0x0b] APB4 sleep enable
+    $0c constant RCC_APB5LPEN                   \ [0x0c] APB5 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCLPENR_DEF
+    \
+    \ @brief RCC miscellaneous configurations Sleep enable register
+    \ Address offset: 0x288
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGLPEN                    \ [0x00] DBG sleep enable
+    $03 constant RCC_XSPIPHYCOMPLPEN            \ [0x03] XSPIPHYCOMP sleep enable
+    $06 constant RCC_PERLPEN                    \ [0x06] PER sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMLPENR_DEF
+    \
+    \ @brief RCC memory Sleep enable register
+    \ Address offset: 0x28C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3LPEN               \ [0x00] AXISRAM3 sleep enable
+    $01 constant RCC_AXISRAM4LPEN               \ [0x01] AXISRAM4 sleep enable
+    $02 constant RCC_AXISRAM5LPEN               \ [0x02] AXISRAM5 sleep enable
+    $03 constant RCC_AXISRAM6LPEN               \ [0x03] AXISRAM6 sleep enable
+    $04 constant RCC_AHBSRAM1LPEN               \ [0x04] AHBSRAM1 sleep enable
+    $05 constant RCC_AHBSRAM2LPEN               \ [0x05] AHBSRAM2 sleep enable
+    $06 constant RCC_BKPSRAMLPEN                \ [0x06] BKPSRAM sleep enable
+    $07 constant RCC_AXISRAM1LPEN               \ [0x07] AXISRAM1 sleep enable
+    $08 constant RCC_AXISRAM2LPEN               \ [0x08] AXISRAM2 sleep enable
+    $09 constant RCC_FLEXRAMLPEN                \ [0x09] FLEXRAM sleep enable
+    $0a constant RCC_NPUCACHERAMLPEN            \ [0x0a] NPUCACHERAM sleep enable
+    $0b constant RCC_VENCRAMLPEN                \ [0x0b] VENCRAM sleep enable
+    $0c constant RCC_BOOTROMLPEN                \ [0x0c] BOOTROM sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1LPENR_DEF
+    \
+    \ @brief RCC AHB1 Sleep enable register
+    \ Address offset: 0x290
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1LPEN                 \ [0x04] GPDMA1 sleep enable
+    $05 constant RCC_ADC12LPEN                  \ [0x05] ADC12 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2LPENR_DEF
+    \
+    \ @brief RCC AHB2 Sleep enable register
+    \ Address offset: 0x294
+    \ Reset value: 0x00000000
+    \
+    $0c constant RCC_RAMCFGLPEN                 \ [0x0c] RAMCFG sleep enable
+    $10 constant RCC_MDF1LPEN                   \ [0x10] MDF1 sleep enable
+    $11 constant RCC_ADF1LPEN                   \ [0x11] ADF1 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3LPENR_DEF
+    \
+    \ @brief RCC AHB3 Sleep enable register
+    \ Address offset: 0x298
+    \ Reset value: 0x00000400
+    \
+    $00 constant RCC_RNGLPEN                    \ [0x00] RNG sleep enable
+    $01 constant RCC_HASHLPEN                   \ [0x01] HASH sleep enable
+    $02 constant RCC_CRYPLPEN                   \ [0x02] CRYP sleep enable
+    $04 constant RCC_SAESLPEN                   \ [0x04] SAES sleep enable
+    $08 constant RCC_PKALPEN                    \ [0x08] PKA sleep enable
+    $09 constant RCC_RIFSCLPEN                  \ [0x09] RIFSC sleep enable
+    $0a constant RCC_IACLPEN                    \ [0x0a] IAC sleep enable
+    $0e constant RCC_RISAFLPEN                  \ [0x0e] RISAF sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4LPENR_DEF
+    \
+    \ @brief RCC AHB4 Sleep enable register
+    \ Address offset: 0x29C
+    \ Reset value: 0x00040000
+    \
+    $00 constant RCC_GPIOALPEN                  \ [0x00] GPIOA sleep enable
+    $01 constant RCC_GPIOBLPEN                  \ [0x01] GPIOB sleep enable
+    $02 constant RCC_GPIOCLPEN                  \ [0x02] GPIOC sleep enable
+    $03 constant RCC_GPIODLPEN                  \ [0x03] GPIOD sleep enable
+    $04 constant RCC_GPIOELPEN                  \ [0x04] GPIOE sleep enable
+    $05 constant RCC_GPIOFLPEN                  \ [0x05] GPIOF sleep enable
+    $06 constant RCC_GPIOGLPEN                  \ [0x06] GPIOG sleep enable
+    $07 constant RCC_GPIOHLPEN                  \ [0x07] GPIOH sleep enable
+    $0d constant RCC_GPIONLPEN                  \ [0x0d] GPION sleep enable
+    $0e constant RCC_GPIOOLPEN                  \ [0x0e] GPIOO sleep enable
+    $0f constant RCC_GPIOPLPEN                  \ [0x0f] GPIOP sleep enable
+    $10 constant RCC_GPIOQLPEN                  \ [0x10] GPIOQ sleep enable
+    $12 constant RCC_PWRLPEN                    \ [0x12] PWR sleep enable
+    $13 constant RCC_CRCLPEN                    \ [0x13] CRC sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5LPENR_DEF
+    \
+    \ @brief RCC AHB5 Sleep enable register
+    \ Address offset: 0x2A0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1LPEN                 \ [0x00] HPDMA1 sleep enable
+    $01 constant RCC_DMA2DLPEN                  \ [0x01] DMA2D sleep enable
+    $03 constant RCC_JPEGLPEN                   \ [0x03] JPEG sleep enable
+    $04 constant RCC_FMCLPEN                    \ [0x04] FMC sleep enable
+    $05 constant RCC_XSPI1LPEN                  \ [0x05] XSPI1 sleep enable
+    $06 constant RCC_PSSILPEN                   \ [0x06] PSSI sleep enable
+    $07 constant RCC_SDMMC2LPEN                 \ [0x07] SDMMC2 sleep enable
+    $08 constant RCC_SDMMC1LPEN                 \ [0x08] SDMMC1 sleep enable
+    $0c constant RCC_XSPI2LPEN                  \ [0x0c] XSPI2 sleep enable
+    $0d constant RCC_XSPIMLPEN                  \ [0x0d] XSPIM sleep enable
+    $0e constant RCC_MCE1LPEN                   \ [0x0e] MCE1 sleep enable
+    $0f constant RCC_MCE2LPEN                   \ [0x0f] MCE2 sleep enable
+    $10 constant RCC_MCE3LPEN                   \ [0x10] MCE3 sleep enable
+    $11 constant RCC_XSPI3LPEN                  \ [0x11] XSPI3 sleep enable
+    $12 constant RCC_MCE4LPEN                   \ [0x12] MCE4 sleep enable
+    $13 constant RCC_GFXMMULPEN                 \ [0x13] GFXMMU sleep enable
+    $14 constant RCC_GPULPEN                    \ [0x14] GPU sleep enable
+    $16 constant RCC_ETH1MACLPEN                \ [0x16] ETH1MAC sleep enable
+    $17 constant RCC_ETH1TXLPEN                 \ [0x17] ETH1TX sleep enable
+    $18 constant RCC_ETH1RXLPEN                 \ [0x18] ETH1RX sleep enable
+    $19 constant RCC_ETH1LPEN                   \ [0x19] ETH1 sleep enable
+    $1a constant RCC_OTG1LPEN                   \ [0x1a] OTG1 sleep enable
+    $1b constant RCC_OTGPHY1LPEN                \ [0x1b] OTGPHY1 sleep enable
+    $1c constant RCC_OTGPHY2LPEN                \ [0x1c] OTGPHY2 sleep enable
+    $1d constant RCC_OTG2LPEN                   \ [0x1d] OTG2 sleep enable
+    $1e constant RCC_NPUCACHELPEN               \ [0x1e] NPUCACHE sleep enable
+    $1f constant RCC_NPULPEN                    \ [0x1f] NPU sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LLPENR_DEF
+    \
+    \ @brief RCC APB1L Sleep enable register
+    \ Address offset: 0x2A4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2LPEN                   \ [0x00] TIM2 sleep enable
+    $01 constant RCC_TIM3LPEN                   \ [0x01] TIM3 sleep enable
+    $02 constant RCC_TIM4LPEN                   \ [0x02] TIM4 sleep enable
+    $03 constant RCC_TIM5LPEN                   \ [0x03] TIM5 sleep enable
+    $04 constant RCC_TIM6LPEN                   \ [0x04] TIM6 sleep enable
+    $05 constant RCC_TIM7LPEN                   \ [0x05] TIM7 sleep enable
+    $06 constant RCC_TIM12LPEN                  \ [0x06] TIM12 sleep enable
+    $07 constant RCC_TIM13LPEN                  \ [0x07] TIM13 sleep enable
+    $08 constant RCC_TIM14LPEN                  \ [0x08] TIM14 sleep enable
+    $09 constant RCC_LPTIM1LPEN                 \ [0x09] LPTIM1 sleep enable
+    $0b constant RCC_WWDGLPEN                   \ [0x0b] WWDG sleep enable
+    $0c constant RCC_TIM10LPEN                  \ [0x0c] TIM10 sleep enable
+    $0d constant RCC_TIM11LPEN                  \ [0x0d] TIM11 sleep enable
+    $0e constant RCC_SPI2LPEN                   \ [0x0e] SPI2 sleep enable
+    $0f constant RCC_SPI3LPEN                   \ [0x0f] SPI3 sleep enable
+    $10 constant RCC_SPDIFRX1LPEN               \ [0x10] SPDIFRX1 sleep enable
+    $11 constant RCC_USART2LPEN                 \ [0x11] USART2 sleep enable
+    $12 constant RCC_USART3LPEN                 \ [0x12] USART3 sleep enable
+    $13 constant RCC_UART4LPEN                  \ [0x13] UART4 sleep enable
+    $14 constant RCC_UART5LPEN                  \ [0x14] UART5 sleep enable
+    $15 constant RCC_I2C1LPEN                   \ [0x15] I2C1 sleep enable
+    $16 constant RCC_I2C2LPEN                   \ [0x16] I2C2 sleep enable
+    $17 constant RCC_I2C3LPEN                   \ [0x17] I2C3 sleep enable
+    $18 constant RCC_I3C1LPEN                   \ [0x18] I3C1 sleep enable
+    $19 constant RCC_I3C2LPEN                   \ [0x19] I3C2 sleep enable
+    $1e constant RCC_UART7LPEN                  \ [0x1e] UART7 sleep enable
+    $1f constant RCC_UART8LPEN                  \ [0x1f] UART8 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HLPENR_DEF
+    \
+    \ @brief RCC APB1H Sleep enable register
+    \ Address offset: 0x2A8
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSLPEN                  \ [0x05] MDIOS sleep enable
+    $08 constant RCC_FDCANLPEN                  \ [0x08] FDCAN sleep enable
+    $12 constant RCC_UCPD1LPEN                  \ [0x12] UCPD1 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2LPENR_DEF
+    \
+    \ @brief RCC APB2 Sleep enable register
+    \ Address offset: 0x2AC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1LPEN                   \ [0x00] TIM1 sleep enable
+    $01 constant RCC_TIM8LPEN                   \ [0x01] TIM8 sleep enable
+    $04 constant RCC_USART1LPEN                 \ [0x04] USART1 sleep enable
+    $05 constant RCC_USART6LPEN                 \ [0x05] USART6 sleep enable
+    $06 constant RCC_UART9LPEN                  \ [0x06] UART9 sleep enable
+    $07 constant RCC_USART10LPEN                \ [0x07] USART10 sleep enable
+    $0c constant RCC_SPI1LPEN                   \ [0x0c] SPI1 sleep enable
+    $0d constant RCC_SPI4LPEN                   \ [0x0d] SPI4 sleep enable
+    $0f constant RCC_TIM18LPEN                  \ [0x0f] TIM18 sleep enable
+    $10 constant RCC_TIM15LPEN                  \ [0x10] TIM15 sleep enable
+    $11 constant RCC_TIM16LPEN                  \ [0x11] TIM16 sleep enable
+    $12 constant RCC_TIM17LPEN                  \ [0x12] TIM17 sleep enable
+    $13 constant RCC_TIM9LPEN                   \ [0x13] TIM9 sleep enable
+    $14 constant RCC_SPI5LPEN                   \ [0x14] SPI5 sleep enable
+    $15 constant RCC_SAI1LPEN                   \ [0x15] SAI1 sleep enable
+    $16 constant RCC_SAI2LPEN                   \ [0x16] SAI2 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB3LPENR_DEF
+    \
+    \ @brief RCC APB3 Sleep enable register
+    \ Address offset: 0x2B0
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_DFTLPEN                    \ [0x02] DFT sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LLPENR_DEF
+    \
+    \ @brief RCC APB4L Sleep enable register
+    \ Address offset: 0x2B4
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPLPEN                    \ [0x02] HDP sleep enable
+    $03 constant RCC_LPUART1LPEN                \ [0x03] LPUART1 sleep enable
+    $05 constant RCC_SPI6LPEN                   \ [0x05] SPI6 sleep enable
+    $07 constant RCC_I2C4LPEN                   \ [0x07] I2C4 sleep enable
+    $09 constant RCC_LPTIM2LPEN                 \ [0x09] LPTIM2 sleep enable
+    $0a constant RCC_LPTIM3LPEN                 \ [0x0a] LPTIM3 sleep enable
+    $0b constant RCC_LPTIM4LPEN                 \ [0x0b] LPTIM4 sleep enable
+    $0c constant RCC_LPTIM5LPEN                 \ [0x0c] LPTIM5 sleep enable
+    $0f constant RCC_VREFBUFLPEN                \ [0x0f] VREFBUF sleep enable
+    $10 constant RCC_RTCLPEN                    \ [0x10] RTC sleep enable
+    $11 constant RCC_RTCAPBLPEN                 \ [0x11] RTCAPB sleep enable
+    $16 constant RCC_R2GRETLPEN                 \ [0x16] R2GRET sleep enable
+    $17 constant RCC_R2GNPULPEN                 \ [0x17] R2GNPU sleep enable
+    $1f constant RCC_SERFLPEN                   \ [0x1f] SERF sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HLPENR_DEF
+    \
+    \ @brief RCC APB4H Sleep enable register
+    \ Address offset: 0x2B8
+    \ Reset value: 0x00000002
+    \
+    $00 constant RCC_SYSCFGLPEN                 \ [0x00] SYSCFG sleep enable
+    $01 constant RCC_BSECLPEN                   \ [0x01] BSEC sleep enable
+    $02 constant RCC_DTSLPEN                    \ [0x02] DTS sleep enable
+    $04 constant RCC_BUSPERFMLPEN               \ [0x04] BUSPERFM sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5LPENR_DEF
+    \
+    \ @brief RCC APB5 Sleep enable register
+    \ Address offset: 0x2BC
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCLPEN                   \ [0x01] LTDC sleep enable
+    $02 constant RCC_DCMIPPLPEN                 \ [0x02] DCMIPP sleep enable
+    $04 constant RCC_GFXTIMLPEN                 \ [0x04] GFXTIM sleep enable
+    $05 constant RCC_VENCLPEN                   \ [0x05] VENC sleep enable
+    $06 constant RCC_CSILPEN                    \ [0x06] CSI sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_RDCR_DEF
+    \
+    \ @brief RCC APB5 Sleep enable register
+    \ Address offset: 0x44C
+    \ Reset value: 0x00060000
+    \
+    $10 constant RCC_MRD                        \ [0x10 : 5] BOOTROM sleep enable
+    $18 constant RCC_EADLY                      \ [0x18 : 4] BOOTROM sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_SECCFGR0_DEF
+    \
+    \ @brief RCC oscillator secure configuration register0
+    \ Address offset: 0x780
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSISEC                     \ [0x00] Defines the secure protection of the LSI oscillator configuration bits.
+    $01 constant RCC_LSESEC                     \ [0x01] Defines the secure protection of the LSE oscillator configuration bits.
+    $02 constant RCC_MSISEC                     \ [0x02] Defines the secure protection of the MSI oscillator configuration bits.
+    $03 constant RCC_HSISEC                     \ [0x03] Defines the secure protection of the HSI oscillator configuration bits.
+    $04 constant RCC_HSESEC                     \ [0x04] Defines the secure protection of the HSE oscillator configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGR0_DEF
+    \
+    \ @brief RCC oscillator privilege configuration register0
+    \ Address offset: 0x784
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIPV                      \ [0x00] Defines the privilege protection of the LSI oscillator configuration bits.
+    $01 constant RCC_LSEPV                      \ [0x01] Defines the privilege protection of the LSE oscillator configuration bits.
+    $02 constant RCC_MSIPV                      \ [0x02] Defines the privilege protection of the MSI oscillator configuration bits.
+    $03 constant RCC_HSIPV                      \ [0x03] Defines the privilege protection of the HSI oscillator configuration bits.
+    $04 constant RCC_HSEPV                      \ [0x04] Defines the privilege protection of the HSE oscillator configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_LOCKCFGR0_DEF
+    \
+    \ @brief RCC oscillator lock configuration register0
+    \ Address offset: 0x788
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSILOCK                    \ [0x00] Defines the lock protection of the LSI oscillator configuration bits.
+    $01 constant RCC_LSELOCK                    \ [0x01] Defines the lock protection of the LSE oscillator configuration bits.
+    $02 constant RCC_MSILOCK                    \ [0x02] Defines the lock protection of the MSI oscillator configuration bits.
+    $03 constant RCC_HSILOCK                    \ [0x03] Defines the lock protection of the HSI oscillator configuration bits.
+    $04 constant RCC_HSELOCK                    \ [0x04] Defines the lock protection of the HSE oscillator configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGR0_DEF
+    \
+    \ @brief RCC oscillator public configuration register0
+    \ Address offset: 0x78C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIPUB                     \ [0x00] Defines the public protection of the LSI oscillator configuration bits.
+    $01 constant RCC_LSEPUB                     \ [0x01] Defines the public protection of the LSE oscillator configuration bits.
+    $02 constant RCC_MSIPUB                     \ [0x02] Defines the public protection of the MSI oscillator configuration bits.
+    $03 constant RCC_HSIPUB                     \ [0x03] Defines the public protection of the HSI oscillator configuration bits.
+    $04 constant RCC_HSEPUB                     \ [0x04] Defines the public protection of the HSE oscillator configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_SECCFGR1_DEF
+    \
+    \ @brief RCC PLL secure configuration register1
+    \ Address offset: 0x790
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL1SEC                    \ [0x00] Defines the secure protection of the PLL1 PLL configuration bits.
+    $01 constant RCC_PLL2SEC                    \ [0x01] Defines the secure protection of the PLL2 PLL configuration bits.
+    $02 constant RCC_PLL3SEC                    \ [0x02] Defines the secure protection of the PLL3 PLL configuration bits.
+    $03 constant RCC_PLL4SEC                    \ [0x03] Defines the secure protection of the PLL4 PLL configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGR1_DEF
+    \
+    \ @brief RCC PLL privilege configuration register1
+    \ Address offset: 0x794
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL1PV                     \ [0x00] Defines the privilege protection of the PLL1 PLL configuration bits.
+    $01 constant RCC_PLL2PV                     \ [0x01] Defines the privilege protection of the PLL2 PLL configuration bits.
+    $02 constant RCC_PLL3PV                     \ [0x02] Defines the privilege protection of the PLL3 PLL configuration bits.
+    $03 constant RCC_PLL4PV                     \ [0x03] Defines the privilege protection of the PLL4 PLL configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_LOCKCFGR1_DEF
+    \
+    \ @brief RCC PLL lock configuration register1
+    \ Address offset: 0x798
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL1LOCK                   \ [0x00] Defines the lock protection of the PLL1 PLL configuration bits.
+    $01 constant RCC_PLL2LOCK                   \ [0x01] Defines the lock protection of the PLL2 PLL configuration bits.
+    $02 constant RCC_PLL3LOCK                   \ [0x02] Defines the lock protection of the PLL3 PLL configuration bits.
+    $03 constant RCC_PLL4LOCK                   \ [0x03] Defines the lock protection of the PLL4 PLL configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGR1_DEF
+    \
+    \ @brief RCC PLL public configuration register1
+    \ Address offset: 0x79C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL1PUB                    \ [0x00] Defines the public protection of the PLL1 PLL configuration bits.
+    $01 constant RCC_PLL2PUB                    \ [0x01] Defines the public protection of the PLL2 PLL configuration bits.
+    $02 constant RCC_PLL3PUB                    \ [0x02] Defines the public protection of the PLL3 PLL configuration bits.
+    $03 constant RCC_PLL4PUB                    \ [0x03] Defines the public protection of the PLL4 PLL configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_SECCFGR2_DEF
+    \
+    \ @brief RCC divider secure configuration register2
+    \ Address offset: 0x7A0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1SEC                     \ [0x00] Defines the secure protection of the IC1 divider configuration bits.
+    $01 constant RCC_IC2SEC                     \ [0x01] Defines the secure protection of the IC2 divider configuration bits.
+    $02 constant RCC_IC3SEC                     \ [0x02] Defines the secure protection of the IC3 divider configuration bits.
+    $03 constant RCC_IC4SEC                     \ [0x03] Defines the secure protection of the IC4 divider configuration bits.
+    $04 constant RCC_IC5SEC                     \ [0x04] Defines the secure protection of the IC5 divider configuration bits.
+    $05 constant RCC_IC6SEC                     \ [0x05] Defines the secure protection of the IC6 divider configuration bits.
+    $06 constant RCC_IC7SEC                     \ [0x06] Defines the secure protection of the IC7 divider configuration bits.
+    $07 constant RCC_IC8SEC                     \ [0x07] Defines the secure protection of the IC8 divider configuration bits.
+    $08 constant RCC_IC9SEC                     \ [0x08] Defines the secure protection of the IC9 divider configuration bits.
+    $09 constant RCC_IC10SEC                    \ [0x09] Defines the secure protection of the IC10 divider configuration bits.
+    $0a constant RCC_IC11SEC                    \ [0x0a] Defines the secure protection of the IC11 divider configuration bits.
+    $0b constant RCC_IC12SEC                    \ [0x0b] Defines the secure protection of the IC12 divider configuration bits.
+    $0c constant RCC_IC13SEC                    \ [0x0c] Defines the secure protection of the IC13 divider configuration bits.
+    $0d constant RCC_IC14SEC                    \ [0x0d] Defines the secure protection of the IC14 divider configuration bits.
+    $0e constant RCC_IC15SEC                    \ [0x0e] Defines the secure protection of the IC15 divider configuration bits.
+    $0f constant RCC_IC16SEC                    \ [0x0f] Defines the secure protection of the IC16 divider configuration bits.
+    $10 constant RCC_IC17SEC                    \ [0x10] Defines the secure protection of the IC17 divider configuration bits.
+    $11 constant RCC_IC18SEC                    \ [0x11] Defines the secure protection of the IC18 divider configuration bits.
+    $12 constant RCC_IC19SEC                    \ [0x12] Defines the secure protection of the IC19 divider configuration bits.
+    $13 constant RCC_IC20SEC                    \ [0x13] Defines the secure protection of the IC20 divider configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGR2_DEF
+    \
+    \ @brief RCC divider privilege configuration register2
+    \ Address offset: 0x7A4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1PV                      \ [0x00] Defines the privilege protection of the IC1 divider configuration bits.
+    $01 constant RCC_IC2PV                      \ [0x01] Defines the privilege protection of the IC2 divider configuration bits.
+    $02 constant RCC_IC3PV                      \ [0x02] Defines the privilege protection of the IC3 divider configuration bits.
+    $03 constant RCC_IC4PV                      \ [0x03] Defines the privilege protection of the IC4 divider configuration bits.
+    $04 constant RCC_IC5PV                      \ [0x04] Defines the privilege protection of the IC5 divider configuration bits.
+    $05 constant RCC_IC6PV                      \ [0x05] Defines the privilege protection of the IC6 divider configuration bits.
+    $06 constant RCC_IC7PV                      \ [0x06] Defines the privilege protection of the IC7 divider configuration bits.
+    $07 constant RCC_IC8PV                      \ [0x07] Defines the privilege protection of the IC8 divider configuration bits.
+    $08 constant RCC_IC9PV                      \ [0x08] Defines the privilege protection of the IC9 divider configuration bits.
+    $09 constant RCC_IC10PV                     \ [0x09] Defines the privilege protection of the IC10 divider configuration bits.
+    $0a constant RCC_IC11PV                     \ [0x0a] Defines the privilege protection of the IC11 divider configuration bits.
+    $0b constant RCC_IC12PV                     \ [0x0b] Defines the privilege protection of the IC12 divider configuration bits.
+    $0c constant RCC_IC13PV                     \ [0x0c] Defines the privilege protection of the IC13 divider configuration bits.
+    $0d constant RCC_IC14PV                     \ [0x0d] Defines the privilege protection of the IC14 divider configuration bits.
+    $0e constant RCC_IC15PV                     \ [0x0e] Defines the privilege protection of the IC15 divider configuration bits.
+    $0f constant RCC_IC16PV                     \ [0x0f] Defines the privilege protection of the IC16 divider configuration bits.
+    $10 constant RCC_IC17PV                     \ [0x10] Defines the privilege protection of the IC17 divider configuration bits.
+    $11 constant RCC_IC18PV                     \ [0x11] Defines the privilege protection of the IC18 divider configuration bits.
+    $12 constant RCC_IC19PV                     \ [0x12] Defines the privilege protection of the IC19 divider configuration bits.
+    $13 constant RCC_IC20PV                     \ [0x13] Defines the privilege protection of the IC20 divider configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_LOCKCFGR2_DEF
+    \
+    \ @brief RCC divider lock configuration register2
+    \ Address offset: 0x7A8
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1LOCK                    \ [0x00] Defines the lock protection of the IC1 divider configuration bits.
+    $01 constant RCC_IC2LOCK                    \ [0x01] Defines the lock protection of the IC2 divider configuration bits.
+    $02 constant RCC_IC3LOCK                    \ [0x02] Defines the lock protection of the IC3 divider configuration bits.
+    $03 constant RCC_IC4LOCK                    \ [0x03] Defines the lock protection of the IC4 divider configuration bits.
+    $04 constant RCC_IC5LOCK                    \ [0x04] Defines the lock protection of the IC5 divider configuration bits.
+    $05 constant RCC_IC6LOCK                    \ [0x05] Defines the lock protection of the IC6 divider configuration bits.
+    $06 constant RCC_IC7LOCK                    \ [0x06] Defines the lock protection of the IC7 divider configuration bits.
+    $07 constant RCC_IC8LOCK                    \ [0x07] Defines the lock protection of the IC8 divider configuration bits.
+    $08 constant RCC_IC9LOCK                    \ [0x08] Defines the lock protection of the IC9 divider configuration bits.
+    $09 constant RCC_IC10LOCK                   \ [0x09] Defines the lock protection of the IC10 divider configuration bits.
+    $0a constant RCC_IC11LOCK                   \ [0x0a] Defines the lock protection of the IC11 divider configuration bits.
+    $0b constant RCC_IC12LOCK                   \ [0x0b] Defines the lock protection of the IC12 divider configuration bits.
+    $0c constant RCC_IC13LOCK                   \ [0x0c] Defines the lock protection of the IC13 divider configuration bits.
+    $0d constant RCC_IC14LOCK                   \ [0x0d] Defines the lock protection of the IC14 divider configuration bits.
+    $0e constant RCC_IC15LOCK                   \ [0x0e] Defines the lock protection of the IC15 divider configuration bits.
+    $0f constant RCC_IC16LOCK                   \ [0x0f] Defines the lock protection of the IC16 divider configuration bits.
+    $10 constant RCC_IC17LOCK                   \ [0x10] Defines the lock protection of the IC17 divider configuration bits.
+    $11 constant RCC_IC18LOCK                   \ [0x11] Defines the lock protection of the IC18 divider configuration bits.
+    $12 constant RCC_IC19LOCK                   \ [0x12] Defines the lock protection of the IC19 divider configuration bits.
+    $13 constant RCC_IC20LOCK                   \ [0x13] Defines the lock protection of the IC20 divider configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGR2_DEF
+    \
+    \ @brief RCC divider public configuration register2
+    \ Address offset: 0x7AC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1PUB                     \ [0x00] Defines the public protection of the IC1 divider configuration bits.
+    $01 constant RCC_IC2PUB                     \ [0x01] Defines the public protection of the IC2 divider configuration bits.
+    $02 constant RCC_IC3PUB                     \ [0x02] Defines the public protection of the IC3 divider configuration bits.
+    $03 constant RCC_IC4PUB                     \ [0x03] Defines the public protection of the IC4 divider configuration bits.
+    $04 constant RCC_IC5PUB                     \ [0x04] Defines the public protection of the IC5 divider configuration bits.
+    $05 constant RCC_IC6PUB                     \ [0x05] Defines the public protection of the IC6 divider configuration bits.
+    $06 constant RCC_IC7PUB                     \ [0x06] Defines the public protection of the IC7 divider configuration bits.
+    $07 constant RCC_IC8PUB                     \ [0x07] Defines the public protection of the IC8 divider configuration bits.
+    $08 constant RCC_IC9PUB                     \ [0x08] Defines the public protection of the IC9 divider configuration bits.
+    $09 constant RCC_IC10PUB                    \ [0x09] Defines the public protection of the IC10 divider configuration bits.
+    $0a constant RCC_IC11PUB                    \ [0x0a] Defines the public protection of the IC11 divider configuration bits.
+    $0b constant RCC_IC12PUB                    \ [0x0b] Defines the public protection of the IC12 divider configuration bits.
+    $0c constant RCC_IC13PUB                    \ [0x0c] Defines the public protection of the IC13 divider configuration bits.
+    $0d constant RCC_IC14PUB                    \ [0x0d] Defines the public protection of the IC14 divider configuration bits.
+    $0e constant RCC_IC15PUB                    \ [0x0e] Defines the public protection of the IC15 divider configuration bits.
+    $0f constant RCC_IC16PUB                    \ [0x0f] Defines the public protection of the IC16 divider configuration bits.
+    $10 constant RCC_IC17PUB                    \ [0x10] Defines the public protection of the IC17 divider configuration bits.
+    $11 constant RCC_IC18PUB                    \ [0x11] Defines the public protection of the IC18 divider configuration bits.
+    $12 constant RCC_IC19PUB                    \ [0x12] Defines the public protection of the IC19 divider configuration bits.
+    $13 constant RCC_IC20PUB                    \ [0x13] Defines the public protection of the IC20 divider configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_SECCFGR3_DEF
+    \
+    \ @brief RCC system secure configuration register3
+    \ Address offset: 0x7B0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODSEC                     \ [0x00] Defines the secure protection of the MOD system configuration bits.
+    $01 constant RCC_SYSSEC                     \ [0x01] Defines the secure protection of the SYS system configuration bits.
+    $02 constant RCC_BUSSEC                     \ [0x02] Defines the secure protection of the BUS system configuration bits.
+    $03 constant RCC_PERSEC                     \ [0x03] Defines the secure protection of the PER system configuration bits.
+    $04 constant RCC_INTSEC                     \ [0x04] Defines the secure protection of the INT system configuration bits.
+    $05 constant RCC_RSTSEC                     \ [0x05] Defines the secure protection of the RST system configuration bits.
+    $06 constant RCC_DFTSEC                     \ [0x06] Defines the secure protection of the DFT system configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGR3_DEF
+    \
+    \ @brief RCC system privilege configuration register3
+    \ Address offset: 0x7B4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODPV                      \ [0x00] Defines the privilege protection of the MOD system configuration bits.
+    $01 constant RCC_SYSPV                      \ [0x01] Defines the privilege protection of the SYS system configuration bits.
+    $02 constant RCC_BUSPV                      \ [0x02] Defines the privilege protection of the BUS system configuration bits.
+    $03 constant RCC_PERPV                      \ [0x03] Defines the privilege protection of the PER system configuration bits.
+    $04 constant RCC_INTPV                      \ [0x04] Defines the privilege protection of the INT system configuration bits.
+    $05 constant RCC_RSTPV                      \ [0x05] Defines the privilege protection of the RST system configuration bits.
+    $06 constant RCC_DFTPV                      \ [0x06] Defines the privilege protection of the DFT system configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_LOCKCFGR3_DEF
+    \
+    \ @brief RCC system lock configuration register3
+    \ Address offset: 0x7B8
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODLOCK                    \ [0x00] Defines the lock protection of the MOD system configuration bits.
+    $01 constant RCC_SYSLOCK                    \ [0x01] Defines the lock protection of the SYS system configuration bits.
+    $02 constant RCC_BUSLOCK                    \ [0x02] Defines the lock protection of the BUS system configuration bits.
+    $03 constant RCC_PERLOCK                    \ [0x03] Defines the lock protection of the PER system configuration bits.
+    $04 constant RCC_INTLOCK                    \ [0x04] Defines the lock protection of the INT system configuration bits.
+    $05 constant RCC_RSTLOCK                    \ [0x05] Defines the lock protection of the RST system configuration bits.
+    $06 constant RCC_DFTLOCK                    \ [0x06] Defines the lock protection of the DFT system configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGR3_DEF
+    \
+    \ @brief RCC system public configuration register3
+    \ Address offset: 0x7BC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODPUB                     \ [0x00] Defines the public protection of the MOD system configuration bits.
+    $01 constant RCC_SYSPUB                     \ [0x01] Defines the public protection of the SYS system configuration bits.
+    $02 constant RCC_BUSPUB                     \ [0x02] Defines the public protection of the BUS system configuration bits.
+    $03 constant RCC_PERPUB                     \ [0x03] Defines the public protection of the PER system configuration bits.
+    $04 constant RCC_INTPUB                     \ [0x04] Defines the public protection of the INT system configuration bits.
+    $05 constant RCC_RSTPUB                     \ [0x05] Defines the public protection of the RST system configuration bits.
+    $06 constant RCC_DFTPUB                     \ [0x06] Defines the public protection of the DFT system configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_SECCFGR4_DEF
+    \
+    \ @brief RCC bus secure configuration register4
+    \ Address offset: 0x7C0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNSEC                   \ [0x00] Defines the secure protection of the ACLKN bus configuration bits.
+    $01 constant RCC_ACLKNCSEC                  \ [0x01] Defines the secure protection of the ACLKNC bus configuration bits.
+    $02 constant RCC_AHBMSEC                    \ [0x02] Defines the secure protection of the AHBM bus configuration bits.
+    $03 constant RCC_AHB1SEC                    \ [0x03] Defines the secure protection of the AHB1 bus configuration bits.
+    $04 constant RCC_AHB2SEC                    \ [0x04] Defines the secure protection of the AHB2 bus configuration bits.
+    $05 constant RCC_AHB3SEC                    \ [0x05] Defines the secure protection of the AHB3 bus configuration bits.
+    $06 constant RCC_AHB4SEC                    \ [0x06] Defines the secure protection of the AHB4 bus configuration bits.
+    $07 constant RCC_AHB5SEC                    \ [0x07] Defines the secure protection of the AHB5 bus configuration bits.
+    $08 constant RCC_APB1SEC                    \ [0x08] Defines the secure protection of the APB1 bus configuration bits.
+    $09 constant RCC_APB2SEC                    \ [0x09] Defines the secure protection of the APB2 bus configuration bits.
+    $0a constant RCC_APB3SEC                    \ [0x0a] Defines the secure protection of the APB3 bus configuration bits.
+    $0b constant RCC_APB4SEC                    \ [0x0b] Defines the secure protection of the APB4 bus configuration bits.
+    $0c constant RCC_APB5SEC                    \ [0x0c] Defines the secure protection of the APB5 bus configuration bits.
+    $0d constant RCC_NOCSEC                     \ [0x0d] Defines the secure protection of the NOC bus configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGR4_DEF
+    \
+    \ @brief RCC bus privilege configuration register4
+    \ Address offset: 0x7C4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNPV                    \ [0x00] Defines the privilege protection of the ACLKN bus configuration bits.
+    $01 constant RCC_ACLKNCPV                   \ [0x01] Defines the privilege protection of the ACLKNC bus configuration bits.
+    $02 constant RCC_AHBMPV                     \ [0x02] Defines the privilege protection of the AHBM bus configuration bits.
+    $03 constant RCC_AHB1PV                     \ [0x03] Defines the privilege protection of the AHB1 bus configuration bits.
+    $04 constant RCC_AHB2PV                     \ [0x04] Defines the privilege protection of the AHB2 bus configuration bits.
+    $05 constant RCC_AHB3PV                     \ [0x05] Defines the privilege protection of the AHB3 bus configuration bits.
+    $06 constant RCC_AHB4PV                     \ [0x06] Defines the privilege protection of the AHB4 bus configuration bits.
+    $07 constant RCC_AHB5PV                     \ [0x07] Defines the privilege protection of the AHB5 bus configuration bits.
+    $08 constant RCC_APB1PV                     \ [0x08] Defines the privilege protection of the APB1 bus configuration bits.
+    $09 constant RCC_APB2PV                     \ [0x09] Defines the privilege protection of the APB2 bus configuration bits.
+    $0a constant RCC_APB3PV                     \ [0x0a] Defines the privilege protection of the APB3 bus configuration bits.
+    $0b constant RCC_APB4PV                     \ [0x0b] Defines the privilege protection of the APB4 bus configuration bits.
+    $0c constant RCC_APB5PV                     \ [0x0c] Defines the privilege protection of the APB5 bus configuration bits.
+    $0d constant RCC_NOCPV                      \ [0x0d] Defines the privilege protection of the NOC bus configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_LOCKCFGR4_DEF
+    \
+    \ @brief RCC bus lock configuration register4
+    \ Address offset: 0x7C8
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNLOCK                  \ [0x00] Defines the lock protection of the ACLKN bus configuration bits.
+    $01 constant RCC_ACLKNCLOCK                 \ [0x01] Defines the lock protection of the ACLKNC bus configuration bits.
+    $02 constant RCC_AHBMLOCK                   \ [0x02] Defines the lock protection of the AHBM bus configuration bits.
+    $03 constant RCC_AHB1LOCK                   \ [0x03] Defines the lock protection of the AHB1 bus configuration bits.
+    $04 constant RCC_AHB2LOCK                   \ [0x04] Defines the lock protection of the AHB2 bus configuration bits.
+    $05 constant RCC_AHB3LOCK                   \ [0x05] Defines the lock protection of the AHB3 bus configuration bits.
+    $06 constant RCC_AHB4LOCK                   \ [0x06] Defines the lock protection of the AHB4 bus configuration bits.
+    $07 constant RCC_AHB5LOCK                   \ [0x07] Defines the lock protection of the AHB5 bus configuration bits.
+    $08 constant RCC_APB1LOCK                   \ [0x08] Defines the lock protection of the APB1 bus configuration bits.
+    $09 constant RCC_APB2LOCK                   \ [0x09] Defines the lock protection of the APB2 bus configuration bits.
+    $0a constant RCC_APB3LOCK                   \ [0x0a] Defines the lock protection of the APB3 bus configuration bits.
+    $0b constant RCC_APB4LOCK                   \ [0x0b] Defines the lock protection of the APB4 bus configuration bits.
+    $0c constant RCC_APB5LOCK                   \ [0x0c] Defines the lock protection of the APB5 bus configuration bits.
+    $0d constant RCC_NOCLOCK                    \ [0x0d] Defines the lock protection of the NOC bus configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGR4_DEF
+    \
+    \ @brief RCC bus public configuration register4
+    \ Address offset: 0x7CC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNPUB                   \ [0x00] Defines the public protection of the ACLKN bus configuration bits.
+    $01 constant RCC_ACLKNCPUB                  \ [0x01] Defines the public protection of the ACLKNC bus configuration bits.
+    $02 constant RCC_AHBMPUB                    \ [0x02] Defines the public protection of the AHBM bus configuration bits.
+    $03 constant RCC_AHB1PUB                    \ [0x03] Defines the public protection of the AHB1 bus configuration bits.
+    $04 constant RCC_AHB2PUB                    \ [0x04] Defines the public protection of the AHB2 bus configuration bits.
+    $05 constant RCC_AHB3PUB                    \ [0x05] Defines the public protection of the AHB3 bus configuration bits.
+    $06 constant RCC_AHB4PUB                    \ [0x06] Defines the public protection of the AHB4 bus configuration bits.
+    $07 constant RCC_AHB5PUB                    \ [0x07] Defines the public protection of the AHB5 bus configuration bits.
+    $08 constant RCC_APB1PUB                    \ [0x08] Defines the public protection of the APB1 bus configuration bits.
+    $09 constant RCC_APB2PUB                    \ [0x09] Defines the public protection of the APB2 bus configuration bits.
+    $0a constant RCC_APB3PUB                    \ [0x0a] Defines the public protection of the APB3 bus configuration bits.
+    $0b constant RCC_APB4PUB                    \ [0x0b] Defines the public protection of the APB4 bus configuration bits.
+    $0c constant RCC_APB5PUB                    \ [0x0c] Defines the public protection of the APB5 bus configuration bits.
+    $0d constant RCC_NOCPUB                     \ [0x0d] Defines the public protection of the NOC bus configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGR5_DEF
+    \
+    \ @brief RCC bus public configuration register4
+    \ Address offset: 0x7D0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3PUB                \ [0x00] Defines the public protection of the AXISRAM3 bus configuration bits.
+    $01 constant RCC_AXISRAM4PUB                \ [0x01] Defines the public protection of the AXISRAM4 bus configuration bits.
+    $02 constant RCC_AXISRAM5PUB                \ [0x02] Defines the public protection of the AXISRAM5 bus configuration bits.
+    $03 constant RCC_AXISRAM6PUB                \ [0x03] Defines the public protection of the AXISRAM6 bus configuration bits.
+    $04 constant RCC_AHBSRAM1PUB                \ [0x04] Defines the public protection of the AHBSRAM1 bus configuration bits.
+    $05 constant RCC_AHBSRAM2PUB                \ [0x05] Defines the public protection of the AHBSRAM2 bus configuration bits.
+    $06 constant RCC_BKPSRAMPUB                 \ [0x06] Defines the public protection of the BKPSRAM bus configuration bits.
+    $07 constant RCC_AXISRAM1PUB                \ [0x07] Defines the public protection of the AXISRAM1 bus configuration bits.
+    $08 constant RCC_AXISRAM2PUB                \ [0x08] Defines the public protection of the AXISRAM2 bus configuration bits.
+    $09 constant RCC_FLEXRAMPUB                 \ [0x09] Defines the public protection of the FLEXRAM bus configuration bits.
+    $0a constant RCC_NPUCACHERAMPUB             \ [0x0a] Defines the public protection of the NPUCACHERAM bus configuration bits.
+    $0b constant RCC_VENCRAMPUB                 \ [0x0b] Defines the public protection of the VENCRAM bus configuration bits.
+  [then]
+
+
+  [ifdef] RCC_RCC_CSR_DEF
+    \
+    \ @brief RCC control set register
+    \ Address offset: 0x800
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIONS                     \ [0x00] LSI oscillator enable in Run/Sleep mode.
+    $01 constant RCC_LSEONS                     \ [0x01] LSE oscillator enable in Run/Sleep mode.
+    $02 constant RCC_MSIONS                     \ [0x02] MSI oscillator enable in Run/Sleep mode.
+    $03 constant RCC_HSIONS                     \ [0x03] HSI oscillator enable in Run/Sleep mode.
+    $04 constant RCC_HSEONS                     \ [0x04] HSE oscillator enable in Run/Sleep mode.
+    $08 constant RCC_PLL1ONS                    \ [0x08] PLL1 oscillator enable in Run/Sleep mode.
+    $09 constant RCC_PLL2ONS                    \ [0x09] PLL2 oscillator enable in Run/Sleep mode.
+    $0a constant RCC_PLL3ONS                    \ [0x0a] PLL3 oscillator enable in Run/Sleep mode.
+    $0b constant RCC_PLL4ONS                    \ [0x0b] PLL4 oscillator enable in Run/Sleep mode.
+  [then]
+
+
+  [ifdef] RCC_RCC_STOPCSR_DEF
+    \
+    \ @brief RCC Stop configuration register
+    \ Address offset: 0x808
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MSISTOPENS                 \ [0x00] MSISTOPENS
+    $01 constant RCC_HSISTOPENS                 \ [0x01] HSISTOPENS
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSRSTSR_DEF
+    \
+    \ @brief RCC bus reset set register
+    \ Address offset: 0xA04
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNRSTS                  \ [0x00] ACLKN reset
+    $02 constant RCC_AHBMRSTS                   \ [0x02] AHBM reset
+    $03 constant RCC_AHB1RSTS                   \ [0x03] AHB1 reset
+    $04 constant RCC_AHB2RSTS                   \ [0x04] AHB2 reset
+    $05 constant RCC_AHB3RSTS                   \ [0x05] AHB3 reset
+    $06 constant RCC_AHB4RSTS                   \ [0x06] AHB4 reset
+    $07 constant RCC_AHB5RSTS                   \ [0x07] AHB5 reset
+    $08 constant RCC_APB1RSTS                   \ [0x08] APB1 reset
+    $09 constant RCC_APB2RSTS                   \ [0x09] APB2 reset
+    $0a constant RCC_APB3RSTS                   \ [0x0a] APB3 reset
+    $0b constant RCC_APB4RSTS                   \ [0x0b] APB4 reset
+    $0c constant RCC_APB5RSTS                   \ [0x0c] APB5 reset
+    $0d constant RCC_NOCRSTS                    \ [0x0d] NOC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCRSTSR_DEF
+    \
+    \ @brief RCC miscellaneous reset register
+    \ Address offset: 0xA08
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGRSTS                    \ [0x00] DBG reset
+    $04 constant RCC_XSPIPHY1RSTS               \ [0x04] XSPIPHY1 reset
+    $05 constant RCC_XSPIPHY2RSTS               \ [0x05] XSPIPHY2 reset
+    $07 constant RCC_SDMMC1DLLRSTS              \ [0x07] SDMMC1DLL reset
+    $08 constant RCC_SDMMC2DLLRSTS              \ [0x08] SDMMC2DLL reset
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMRSTSR_DEF
+    \
+    \ @brief RCC memory reset register
+    \ Address offset: 0xA0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3RSTS               \ [0x00] AXISRAM3 reset
+    $01 constant RCC_AXISRAM4RSTS               \ [0x01] AXISRAM4 reset
+    $02 constant RCC_AXISRAM5RSTS               \ [0x02] AXISRAM5 reset
+    $03 constant RCC_AXISRAM6RSTS               \ [0x03] AXISRAM6 reset
+    $04 constant RCC_AHBSRAM1RSTS               \ [0x04] AHBSRAM1 reset
+    $05 constant RCC_AHBSRAM2RSTS               \ [0x05] AHBSRAM2 reset
+    $07 constant RCC_AXISRAM1RSTS               \ [0x07] AXISRAM1 reset
+    $08 constant RCC_AXISRAM2RSTS               \ [0x08] AXISRAM2 reset
+    $09 constant RCC_FLEXRAMRSTS                \ [0x09] FLEXRAM reset
+    $0a constant RCC_NPUCACHERAMRSTS            \ [0x0a] NPUCACHERAM reset
+    $0b constant RCC_VENCRAMRSTS                \ [0x0b] VENCRAM reset
+    $0c constant RCC_BOOTROMRSTS                \ [0x0c] BOOTROM reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1RSTSR_DEF
+    \
+    \ @brief RCC AHB1 reset register
+    \ Address offset: 0xA10
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1RSTS                 \ [0x04] GPDMA1 reset
+    $05 constant RCC_ADC12RSTS                  \ [0x05] ADC12 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2RSTSR_DEF
+    \
+    \ @brief RCC AHB2 reset register
+    \ Address offset: 0xA14
+    \ Reset value: 0x00000000
+    \
+    $0c constant RCC_RAMCFGRSTS                 \ [0x0c] RAMCFG reset
+    $10 constant RCC_MDF1RSTS                   \ [0x10] MDF1 reset
+    $11 constant RCC_ADF1RSTS                   \ [0x11] ADF1 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3RSTSR_DEF
+    \
+    \ @brief RCC AHB3 reset register
+    \ Address offset: 0xA18
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_RNGRSTS                    \ [0x00] RNG reset
+    $01 constant RCC_HASHRSTS                   \ [0x01] HASH reset
+    $02 constant RCC_CRYPRSTS                   \ [0x02] CRYP reset
+    $04 constant RCC_SAESRSTS                   \ [0x04] SAES reset
+    $08 constant RCC_PKARSTS                    \ [0x08] PKA reset
+    $0a constant RCC_IACRSTS                    \ [0x0a] IAC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4RSTSR_DEF
+    \
+    \ @brief RCC AHB4 reset register
+    \ Address offset: 0xA1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOARSTS                  \ [0x00] GPIOA reset
+    $01 constant RCC_GPIOBRSTS                  \ [0x01] GPIOB reset
+    $02 constant RCC_GPIOCRSTS                  \ [0x02] GPIOC reset
+    $03 constant RCC_GPIODRSTS                  \ [0x03] GPIOD reset
+    $04 constant RCC_GPIOERSTS                  \ [0x04] GPIOE reset
+    $05 constant RCC_GPIOFRSTS                  \ [0x05] GPIOF reset
+    $06 constant RCC_GPIOGRSTS                  \ [0x06] GPIOG reset
+    $07 constant RCC_GPIOHRSTS                  \ [0x07] GPIOH reset
+    $0d constant RCC_GPIONRSTS                  \ [0x0d] GPION reset
+    $0e constant RCC_GPIOORSTS                  \ [0x0e] GPIOO reset
+    $0f constant RCC_GPIOPRSTS                  \ [0x0f] GPIOP reset
+    $10 constant RCC_GPIOQRSTS                  \ [0x10] GPIOQ reset
+    $12 constant RCC_PWRRSTS                    \ [0x12] PWR reset
+    $13 constant RCC_CRCRSTS                    \ [0x13] CRC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5RSTSR_DEF
+    \
+    \ @brief RCC AHB5 reset register
+    \ Address offset: 0xA20
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1RSTS                 \ [0x00] HPDMA1 reset
+    $01 constant RCC_DMA2DRSTS                  \ [0x01] DMA2D reset
+    $03 constant RCC_JPEGRSTS                   \ [0x03] JPEG reset
+    $04 constant RCC_FMCRSTS                    \ [0x04] FMC reset
+    $05 constant RCC_XSPI1RSTS                  \ [0x05] XSPI1 reset
+    $06 constant RCC_PSSIRSTS                   \ [0x06] PSSI reset
+    $07 constant RCC_SDMMC2RSTS                 \ [0x07] SDMMC2 reset
+    $08 constant RCC_SDMMC1RSTS                 \ [0x08] SDMMC1 reset
+    $0c constant RCC_XSPI2RSTS                  \ [0x0c] XSPI2 reset
+    $0d constant RCC_XSPIMRSTS                  \ [0x0d] XSPIM reset
+    $11 constant RCC_XSPI3RSTS                  \ [0x11] XSPI3 reset
+    $12 constant RCC_MCE4RSTS                   \ [0x12] MCE4 reset
+    $13 constant RCC_GFXMMURSTS                 \ [0x13] GFXMMU reset
+    $14 constant RCC_GPURSTS                    \ [0x14] GPU reset
+    $17 constant RCC_SYSCFGOTGHSPHY1RSTS        \ [0x17] SYSCFGOTGHSPHY1 reset
+    $18 constant RCC_SYSCFGOTGHSPHY2RSTS        \ [0x18] SYSCFGOTGHSPHY2 reset
+    $19 constant RCC_ETH1RSTS                   \ [0x19] ETH1 reset
+    $1a constant RCC_OTG1RSTS                   \ [0x1a] OTG1 reset
+    $1b constant RCC_OTGPHY1RSTS                \ [0x1b] OTGPHY1 reset
+    $1c constant RCC_OTGPHY2RSTS                \ [0x1c] OTGPHY2 reset
+    $1d constant RCC_OTG2RSTS                   \ [0x1d] OTG2 reset
+    $1e constant RCC_NPUCACHERSTS               \ [0x1e] NPUCACHE reset
+    $1f constant RCC_NPURSTS                    \ [0x1f] NPU reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LRSTSR_DEF
+    \
+    \ @brief RCC APB1L reset register
+    \ Address offset: 0xA24
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2RSTS                   \ [0x00] TIM2 reset
+    $01 constant RCC_TIM3RSTS                   \ [0x01] TIM3 reset
+    $02 constant RCC_TIM4RSTS                   \ [0x02] TIM4 reset
+    $03 constant RCC_TIM5RSTS                   \ [0x03] TIM5 reset
+    $04 constant RCC_TIM6RSTS                   \ [0x04] TIM6 reset
+    $05 constant RCC_TIM7RSTS                   \ [0x05] TIM7 reset
+    $06 constant RCC_TIM12RSTS                  \ [0x06] TIM12 reset
+    $07 constant RCC_TIM13RSTS                  \ [0x07] TIM13 reset
+    $08 constant RCC_TIM14RSTS                  \ [0x08] TIM14 reset
+    $09 constant RCC_LPTIM1RSTS                 \ [0x09] LPTIM1 reset
+    $0b constant RCC_WWDGRSTS                   \ [0x0b] WWDG reset
+    $0c constant RCC_TIM10RSTS                  \ [0x0c] TIM10 reset
+    $0d constant RCC_TIM11RSTS                  \ [0x0d] TIM11 reset
+    $0e constant RCC_SPI2RSTS                   \ [0x0e] SPI2 reset
+    $0f constant RCC_SPI3RSTS                   \ [0x0f] SPI3 reset
+    $10 constant RCC_SPDIFRX1RSTS               \ [0x10] SPDIFRX1 reset
+    $11 constant RCC_USART2RSTS                 \ [0x11] USART2 reset
+    $12 constant RCC_USART3RSTS                 \ [0x12] USART3 reset
+    $13 constant RCC_UART4RSTS                  \ [0x13] UART4 reset
+    $14 constant RCC_UART5RSTS                  \ [0x14] UART5 reset
+    $15 constant RCC_I2C1RSTS                   \ [0x15] I2C1 reset
+    $16 constant RCC_I2C2RSTS                   \ [0x16] I2C2 reset
+    $17 constant RCC_I2C3RSTS                   \ [0x17] I2C3 reset
+    $18 constant RCC_I3C1RSTS                   \ [0x18] I3C1 reset
+    $19 constant RCC_I3C2RSTS                   \ [0x19] I3C2 reset
+    $1e constant RCC_UART7RSTS                  \ [0x1e] UART7 reset
+    $1f constant RCC_UART8RSTS                  \ [0x1f] UART8 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HRSTSR_DEF
+    \
+    \ @brief RCC APB1H reset register
+    \ Address offset: 0xA28
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSRSTS                  \ [0x05] MDIOS reset
+    $08 constant RCC_FDCANRSTS                  \ [0x08] FDCAN reset
+    $12 constant RCC_UCPD1RSTS                  \ [0x12] UCPD1 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2RSTSR_DEF
+    \
+    \ @brief RCC APB2 reset register
+    \ Address offset: 0xA2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1RSTS                   \ [0x00] TIM1 reset
+    $01 constant RCC_TIM8RSTS                   \ [0x01] TIM8 reset
+    $04 constant RCC_USART1RSTS                 \ [0x04] USART1 reset
+    $05 constant RCC_USART6RSTS                 \ [0x05] USART6 reset
+    $06 constant RCC_UART9RSTS                  \ [0x06] UART9 reset
+    $07 constant RCC_USART10RSTS                \ [0x07] USART10 reset
+    $0c constant RCC_SPI1RSTS                   \ [0x0c] SPI1 reset
+    $0d constant RCC_SPI4RSTS                   \ [0x0d] SPI4 reset
+    $0f constant RCC_TIM18RSTS                  \ [0x0f] TIM18 reset
+    $10 constant RCC_TIM15RSTS                  \ [0x10] TIM15 reset
+    $11 constant RCC_TIM16RSTS                  \ [0x11] TIM16 reset
+    $12 constant RCC_TIM17RSTS                  \ [0x12] TIM17 reset
+    $13 constant RCC_TIM9RSTS                   \ [0x13] TIM9 reset
+    $14 constant RCC_SPI5RSTS                   \ [0x14] SPI5 reset
+    $15 constant RCC_SAI1RSTS                   \ [0x15] SAI1 reset
+    $16 constant RCC_SAI2RSTS                   \ [0x16] SAI2 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LRSTSR_DEF
+    \
+    \ @brief RCC APB4L reset register
+    \ Address offset: 0xA34
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPRSTS                    \ [0x02] HDP reset
+    $03 constant RCC_LPUART1RSTS                \ [0x03] LPUART1 reset
+    $05 constant RCC_SPI6RSTS                   \ [0x05] SPI6 reset
+    $07 constant RCC_I2C4RSTS                   \ [0x07] I2C4 reset
+    $09 constant RCC_LPTIM2RSTS                 \ [0x09] LPTIM2 reset
+    $0a constant RCC_LPTIM3RSTS                 \ [0x0a] LPTIM3 reset
+    $0b constant RCC_LPTIM4RSTS                 \ [0x0b] LPTIM4 reset
+    $0c constant RCC_LPTIM5RSTS                 \ [0x0c] LPTIM5 reset
+    $0f constant RCC_VREFBUFRSTS                \ [0x0f] VREFBUF reset
+    $10 constant RCC_RTCRSTS                    \ [0x10] RTC reset
+    $16 constant RCC_R2GRETRSTS                 \ [0x16] R2GRET reset
+    $17 constant RCC_R2GNPURSTS                 \ [0x17] R2GNPU reset
+    $1f constant RCC_SERFRSTS                   \ [0x1f] SERF reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HRSTSR_DEF
+    \
+    \ @brief RCC APB4H reset register
+    \ Address offset: 0xA38
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGRSTS                 \ [0x00] SYSCFG reset
+    $02 constant RCC_DTSRSTS                    \ [0x02] DTS reset
+    $04 constant RCC_BUSPERFMRSTS               \ [0x04] BUSPERFM reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5RSTSR_DEF
+    \
+    \ @brief RCC APB5 reset register
+    \ Address offset: 0xA3C
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCRSTS                   \ [0x01] LTDC reset
+    $02 constant RCC_DCMIPPRSTS                 \ [0x02] DCMIPP reset
+    $04 constant RCC_GFXTIMRSTS                 \ [0x04] GFXTIM reset
+    $05 constant RCC_VENCRSTS                   \ [0x05] VENC reset
+    $06 constant RCC_CSIRSTS                    \ [0x06] CSI reset
+  [then]
+
+
+  [ifdef] RCC_RCC_DIVENSR_DEF
+    \
+    \ @brief RCC Divider enable register
+    \ Address offset: 0xA40
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1ENS                     \ [0x00] IC1 enable
+    $01 constant RCC_IC2ENS                     \ [0x01] IC2 enable
+    $02 constant RCC_IC3ENS                     \ [0x02] IC3 enable
+    $03 constant RCC_IC4ENS                     \ [0x03] IC4 enable
+    $04 constant RCC_IC5ENS                     \ [0x04] IC5 enable
+    $05 constant RCC_IC6ENS                     \ [0x05] IC6 enable
+    $06 constant RCC_IC7ENS                     \ [0x06] IC7 enable
+    $07 constant RCC_IC8ENS                     \ [0x07] IC8 enable
+    $08 constant RCC_IC9ENS                     \ [0x08] IC9 enable
+    $09 constant RCC_IC10ENS                    \ [0x09] IC10 enable
+    $0a constant RCC_IC11ENS                    \ [0x0a] IC11 enable
+    $0b constant RCC_IC12ENS                    \ [0x0b] IC12 enable
+    $0c constant RCC_IC13ENS                    \ [0x0c] IC13 enable
+    $0d constant RCC_IC14ENS                    \ [0x0d] IC14 enable
+    $0e constant RCC_IC15ENS                    \ [0x0e] IC15 enable
+    $0f constant RCC_IC16ENS                    \ [0x0f] IC16 enable
+    $10 constant RCC_IC17ENS                    \ [0x10] IC17 enable
+    $11 constant RCC_IC18ENS                    \ [0x11] IC18 enable
+    $12 constant RCC_IC19ENS                    \ [0x12] IC19 enable
+    $13 constant RCC_IC20ENS                    \ [0x13] IC20 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSENSR_DEF
+    \
+    \ @brief RCC bus enable register
+    \ Address offset: 0xA44
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNENS                   \ [0x00] ACLKN enable
+    $01 constant RCC_ACLKNCENS                  \ [0x01] ACLKNC enable
+    $02 constant RCC_AHBMENS                    \ [0x02] AHBM enable
+    $03 constant RCC_AHB1ENS                    \ [0x03] AHB1 enable
+    $04 constant RCC_AHB2ENS                    \ [0x04] AHB2 enable
+    $05 constant RCC_AHB3ENS                    \ [0x05] AHB3 enable
+    $06 constant RCC_AHB4ENS                    \ [0x06] AHB4 enable
+    $07 constant RCC_AHB5ENS                    \ [0x07] AHB5 enable
+    $08 constant RCC_APB1ENS                    \ [0x08] APB1 enable
+    $09 constant RCC_APB2ENS                    \ [0x09] APB2 enable
+    $0a constant RCC_APB3ENS                    \ [0x0a] APB3 enable
+    $0b constant RCC_APB4ENS                    \ [0x0b] APB4 enable
+    $0c constant RCC_APB5ENS                    \ [0x0c] APB5 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCENSR_DEF
+    \
+    \ @brief RCC miscellaneous enable register
+    \ Address offset: 0xA48
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGENS                     \ [0x00] DBG enable
+    $01 constant RCC_MCO1ENS                    \ [0x01] MCO1 enable
+    $02 constant RCC_MCO2ENS                    \ [0x02] MCO2 enable
+    $03 constant RCC_XSPIPHYCOMPENS             \ [0x03] XSPIPHYCOMP enable
+    $06 constant RCC_PERENS                     \ [0x06] PER enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMENSR_DEF
+    \
+    \ @brief RCC memory enable register
+    \ Address offset: 0xA4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3ENS                \ [0x00] AXISRAM3 enable
+    $01 constant RCC_AXISRAM4ENS                \ [0x01] AXISRAM4 enable
+    $02 constant RCC_AXISRAM5ENS                \ [0x02] AXISRAM5 enable
+    $03 constant RCC_AXISRAM6ENS                \ [0x03] AXISRAM6 enable
+    $04 constant RCC_AHBSRAM1ENS                \ [0x04] AHBSRAM1 enable
+    $05 constant RCC_AHBSRAM2ENS                \ [0x05] AHBSRAM2 enable
+    $06 constant RCC_BKPSRAMENS                 \ [0x06] BKPSRAM enable
+    $07 constant RCC_AXISRAM1ENS                \ [0x07] AXISRAM1 enable
+    $08 constant RCC_AXISRAM2ENS                \ [0x08] AXISRAM2 enable
+    $09 constant RCC_FLEXRAMENS                 \ [0x09] FLEXRAM enable
+    $0a constant RCC_NPUCACHERAMENS             \ [0x0a] NPUCACHERAM enable
+    $0b constant RCC_VENCRAMENS                 \ [0x0b] VENCRAM enable
+    $0c constant RCC_BOOTROMENS                 \ [0x0c] BOOTROM enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1ENSR_DEF
+    \
+    \ @brief RCC AHB1 enable register
+    \ Address offset: 0xA50
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1ENS                  \ [0x04] GPDMA1 enable
+    $05 constant RCC_ADC12ENS                   \ [0x05] ADC12 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2ENSR_DEF
+    \
+    \ @brief RCC AHB2 enable register
+    \ Address offset: 0xA54
+    \ Reset value: 0x00000000
+    \
+    $0c constant RCC_RAMCFGENS                  \ [0x0c] RAMCFG enable
+    $10 constant RCC_MDF1ENS                    \ [0x10] MDF1 enable
+    $11 constant RCC_ADF1ENS                    \ [0x11] ADF1 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3ENSR_DEF
+    \
+    \ @brief RCC AHB3 enable register
+    \ Address offset: 0xA58
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_RNGENS                     \ [0x00] RNG enable
+    $01 constant RCC_HASHENS                    \ [0x01] HASH enable
+    $02 constant RCC_CRYPENS                    \ [0x02] CRYP enable
+    $04 constant RCC_SAESENS                    \ [0x04] SAES enable
+    $08 constant RCC_PKAENS                     \ [0x08] PKA enable
+    $09 constant RCC_RIFSCENS                   \ [0x09] RIFSC enable
+    $0a constant RCC_IACENS                     \ [0x0a] IAC enable
+    $0e constant RCC_RISAFENS                   \ [0x0e] RISAF enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4ENSR_DEF
+    \
+    \ @brief RCC AHB4 enable register
+    \ Address offset: 0xA5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOAENS                   \ [0x00] GPIOA enable
+    $01 constant RCC_GPIOBENS                   \ [0x01] GPIOB enable
+    $02 constant RCC_GPIOCENS                   \ [0x02] GPIOC enable
+    $03 constant RCC_GPIODENS                   \ [0x03] GPIOD enable
+    $04 constant RCC_GPIOEENS                   \ [0x04] GPIOE enable
+    $05 constant RCC_GPIOFENS                   \ [0x05] GPIOF enable
+    $06 constant RCC_GPIOGENS                   \ [0x06] GPIOG enable
+    $07 constant RCC_GPIOHENS                   \ [0x07] GPIOH enable
+    $0d constant RCC_GPIONENS                   \ [0x0d] GPION enable
+    $0e constant RCC_GPIOOENS                   \ [0x0e] GPIOO enable
+    $0f constant RCC_GPIOPENS                   \ [0x0f] GPIOP enable
+    $10 constant RCC_GPIOQENS                   \ [0x10] GPIOQ enable
+    $12 constant RCC_PWRENS                     \ [0x12] PWR enable
+    $13 constant RCC_CRCENS                     \ [0x13] CRC enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5ENSR_DEF
+    \
+    \ @brief RCC AHB5 enable register
+    \ Address offset: 0xA60
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1ENS                  \ [0x00] HPDMA1 enable
+    $01 constant RCC_DMA2DENS                   \ [0x01] DMA2D enable
+    $03 constant RCC_JPEGENS                    \ [0x03] JPEG enable
+    $04 constant RCC_FMCENS                     \ [0x04] FMC enable
+    $05 constant RCC_XSPI1ENS                   \ [0x05] XSPI1 enable
+    $06 constant RCC_PSSIENS                    \ [0x06] PSSI enable
+    $07 constant RCC_SDMMC2ENS                  \ [0x07] SDMMC2 enable
+    $08 constant RCC_SDMMC1ENS                  \ [0x08] SDMMC1 enable
+    $0c constant RCC_XSPI2ENS                   \ [0x0c] XSPI2 enable
+    $0d constant RCC_XSPIMENS                   \ [0x0d] XSPIM enable
+    $0e constant RCC_MCE1ENS                    \ [0x0e] MCE1 enable
+    $0f constant RCC_MCE2ENS                    \ [0x0f] MCE2 enable
+    $10 constant RCC_MCE3ENS                    \ [0x10] MCE3 enable
+    $11 constant RCC_XSPI3ENS                   \ [0x11] XSPI3 enable
+    $12 constant RCC_MCE4ENS                    \ [0x12] MCE4 enable
+    $13 constant RCC_GFXMMUENS                  \ [0x13] GFXMMU enable
+    $14 constant RCC_GPUENS                     \ [0x14] GPU enable
+    $16 constant RCC_ETH1MACENS                 \ [0x16] ETH1MAC enable
+    $17 constant RCC_ETH1TXENS                  \ [0x17] ETH1TX enable
+    $18 constant RCC_ETH1RXENS                  \ [0x18] ETH1RX enable
+    $19 constant RCC_ETH1ENS                    \ [0x19] ETH1 enable
+    $1a constant RCC_OTG1ENS                    \ [0x1a] OTG1 enable
+    $1b constant RCC_OTGPHY1ENS                 \ [0x1b] OTGPHY1 enable
+    $1c constant RCC_OTGPHY2ENS                 \ [0x1c] OTGPHY2 enable
+    $1d constant RCC_OTG2ENS                    \ [0x1d] OTG2 enable
+    $1e constant RCC_NPUCACHEENS                \ [0x1e] NPUCACHE enable
+    $1f constant RCC_NPUENS                     \ [0x1f] NPU enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LENSR_DEF
+    \
+    \ @brief RCC APB1L enable register
+    \ Address offset: 0xA64
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2ENS                    \ [0x00] TIM2 enable
+    $01 constant RCC_TIM3ENS                    \ [0x01] TIM3 enable
+    $02 constant RCC_TIM4ENS                    \ [0x02] TIM4 enable
+    $03 constant RCC_TIM5ENS                    \ [0x03] TIM5 enable
+    $04 constant RCC_TIM6ENS                    \ [0x04] TIM6 enable
+    $05 constant RCC_TIM7ENS                    \ [0x05] TIM7 enable
+    $06 constant RCC_TIM12ENS                   \ [0x06] TIM12 enable
+    $07 constant RCC_TIM13ENS                   \ [0x07] TIM13 enable
+    $08 constant RCC_TIM14ENS                   \ [0x08] TIM14 enable
+    $09 constant RCC_LPTIM1ENS                  \ [0x09] LPTIM1 enable
+    $0b constant RCC_WWDGENS                    \ [0x0b] WWDG enable
+    $0c constant RCC_TIM10ENS                   \ [0x0c] TIM10 enable
+    $0d constant RCC_TIM11ENS                   \ [0x0d] TIM11 enable
+    $0e constant RCC_SPI2ENS                    \ [0x0e] SPI2 enable
+    $0f constant RCC_SPI3ENS                    \ [0x0f] SPI3 enable
+    $10 constant RCC_SPDIFRX1ENS                \ [0x10] SPDIFRX1 enable
+    $11 constant RCC_USART2ENS                  \ [0x11] USART2 enable
+    $12 constant RCC_USART3ENS                  \ [0x12] USART3 enable
+    $13 constant RCC_UART4ENS                   \ [0x13] UART4 enable
+    $14 constant RCC_UART5ENS                   \ [0x14] UART5 enable
+    $15 constant RCC_I2C1ENS                    \ [0x15] I2C1 enable
+    $16 constant RCC_I2C2ENS                    \ [0x16] I2C2 enable
+    $17 constant RCC_I2C3ENS                    \ [0x17] I2C3 enable
+    $18 constant RCC_I3C1ENS                    \ [0x18] I3C1 enable
+    $19 constant RCC_I3C2ENS                    \ [0x19] I3C2 enable
+    $1e constant RCC_UART7ENS                   \ [0x1e] UART7 enable
+    $1f constant RCC_UART8ENS                   \ [0x1f] UART8 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HENSR_DEF
+    \
+    \ @brief RCC APB1H enable register
+    \ Address offset: 0xA68
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSENS                   \ [0x05] MDIOS enable
+    $08 constant RCC_FDCANENS                   \ [0x08] FDCAN enable
+    $12 constant RCC_UCPD1ENS                   \ [0x12] UCPD1 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2ENSR_DEF
+    \
+    \ @brief RCC APB2 enable register
+    \ Address offset: 0xA6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1ENS                    \ [0x00] TIM1 enable
+    $01 constant RCC_TIM8ENS                    \ [0x01] TIM8 enable
+    $04 constant RCC_USART1ENS                  \ [0x04] USART1 enable
+    $05 constant RCC_USART6ENS                  \ [0x05] USART6 enable
+    $06 constant RCC_UART9ENS                   \ [0x06] UART9 enable
+    $07 constant RCC_USART10ENS                 \ [0x07] USART10 enable
+    $0c constant RCC_SPI1ENS                    \ [0x0c] SPI1 enable
+    $0d constant RCC_SPI4ENS                    \ [0x0d] SPI4 enable
+    $0f constant RCC_TIM18ENS                   \ [0x0f] TIM18 enable
+    $10 constant RCC_TIM15ENS                   \ [0x10] TIM15 enable
+    $11 constant RCC_TIM16ENS                   \ [0x11] TIM16 enable
+    $12 constant RCC_TIM17ENS                   \ [0x12] TIM17 enable
+    $13 constant RCC_TIM9ENS                    \ [0x13] TIM9 enable
+    $14 constant RCC_SPI5ENS                    \ [0x14] SPI5 enable
+    $15 constant RCC_SAI1ENS                    \ [0x15] SAI1 enable
+    $16 constant RCC_SAI2ENS                    \ [0x16] SAI2 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB3ENSR_DEF
+    \
+    \ @brief RCC APB3 enable register
+    \ Address offset: 0xA70
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_DFTENS                     \ [0x02] DFT enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LENSR_DEF
+    \
+    \ @brief RCC APB4L enable register
+    \ Address offset: 0xA74
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPENS                     \ [0x02] HDP enable
+    $03 constant RCC_LPUART1ENS                 \ [0x03] LPUART1 enable
+    $05 constant RCC_SPI6ENS                    \ [0x05] SPI6 enable
+    $07 constant RCC_I2C4ENS                    \ [0x07] I2C4 enable
+    $09 constant RCC_LPTIM2ENS                  \ [0x09] LPTIM2 enable
+    $0a constant RCC_LPTIM3ENS                  \ [0x0a] LPTIM3 enable
+    $0b constant RCC_LPTIM4ENS                  \ [0x0b] LPTIM4 enable
+    $0c constant RCC_LPTIM5ENS                  \ [0x0c] LPTIM5 enable
+    $0f constant RCC_VREFBUFENS                 \ [0x0f] VREFBUF enable
+    $10 constant RCC_RTCENS                     \ [0x10] RTC enable
+    $11 constant RCC_RTCAPBENS                  \ [0x11] RTCAPB enable
+    $16 constant RCC_R2GRETENS                  \ [0x16] R2GRET enable
+    $17 constant RCC_R2GNPUENS                  \ [0x17] R2GNPU enable
+    $1f constant RCC_SERFENS                    \ [0x1f] SERF enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HENSR_DEF
+    \
+    \ @brief RCC APB4H enable register
+    \ Address offset: 0xA78
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGENS                  \ [0x00] SYSCFG enable
+    $01 constant RCC_BSECENS                    \ [0x01] BSEC enable
+    $02 constant RCC_DTSENS                     \ [0x02] DTS enable
+    $04 constant RCC_BUSPERFMENS                \ [0x04] BUSPERFM enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5ENSR_DEF
+    \
+    \ @brief RCC APB5 enable register
+    \ Address offset: 0xA7C
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCENS                    \ [0x01] LTDC enable
+    $02 constant RCC_DCMIPPENS                  \ [0x02] DCMIPP enable
+    $04 constant RCC_GFXTIMENS                  \ [0x04] GFXTIM enable
+    $05 constant RCC_VENCENS                    \ [0x05] VENC enable
+    $06 constant RCC_CSIENS                     \ [0x06] CSI enable
+  [then]
+
+
+  [ifdef] RCC_RCC_DIVLPENSR_DEF
+    \
+    \ @brief RCC divider Sleep enable register
+    \ Address offset: 0xA80
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1LPENS                   \ [0x00] IC1 sleep enable
+    $01 constant RCC_IC2LPENS                   \ [0x01] IC2 sleep enable
+    $02 constant RCC_IC3LPENS                   \ [0x02] IC3 sleep enable
+    $03 constant RCC_IC4LPENS                   \ [0x03] IC4 sleep enable
+    $04 constant RCC_IC5LPENS                   \ [0x04] IC5 sleep enable
+    $05 constant RCC_IC6LPENS                   \ [0x05] IC6 sleep enable
+    $06 constant RCC_IC7LPENS                   \ [0x06] IC7 sleep enable
+    $07 constant RCC_IC8LPENS                   \ [0x07] IC8 sleep enable
+    $08 constant RCC_IC9LPENS                   \ [0x08] IC9 sleep enable
+    $09 constant RCC_IC10LPENS                  \ [0x09] IC10 sleep enable
+    $0a constant RCC_IC11LPENS                  \ [0x0a] IC11 sleep enable
+    $0b constant RCC_IC12LPENS                  \ [0x0b] IC12 sleep enable
+    $0c constant RCC_IC13LPENS                  \ [0x0c] IC13 sleep enable
+    $0d constant RCC_IC14LPENS                  \ [0x0d] IC14 sleep enable
+    $0e constant RCC_IC15LPENS                  \ [0x0e] IC15 sleep enable
+    $0f constant RCC_IC16LPENS                  \ [0x0f] IC16 sleep enable
+    $10 constant RCC_IC17LPENS                  \ [0x10] IC17 sleep enable
+    $11 constant RCC_IC18LPENS                  \ [0x11] IC18 sleep enable
+    $12 constant RCC_IC19LPENS                  \ [0x12] IC19 sleep enable
+    $13 constant RCC_IC20LPENS                  \ [0x13] IC20 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSLPENSR_DEF
+    \
+    \ @brief RCC bus Sleep enable register
+    \ Address offset: 0xA84
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNLPENS                 \ [0x00] ACLKN sleep enable
+    $01 constant RCC_ACLKNCLPENS                \ [0x01] ACLKNC sleep enable
+    $02 constant RCC_AHBMLPENS                  \ [0x02] AHBM sleep enable
+    $03 constant RCC_AHB1LPENS                  \ [0x03] AHB1 sleep enable
+    $04 constant RCC_AHB2LPENS                  \ [0x04] AHB2 sleep enable
+    $05 constant RCC_AHB3LPENS                  \ [0x05] AHB3 sleep enable
+    $06 constant RCC_AHB4LPENS                  \ [0x06] AHB4 sleep enable
+    $07 constant RCC_AHB5LPENS                  \ [0x07] AHB5 sleep enable
+    $08 constant RCC_APB1LPENS                  \ [0x08] APB1 sleep enable
+    $09 constant RCC_APB2LPENS                  \ [0x09] APB2 sleep enable
+    $0a constant RCC_APB3LPENS                  \ [0x0a] APB3 sleep enable
+    $0b constant RCC_APB4LPENS                  \ [0x0b] APB4 sleep enable
+    $0c constant RCC_APB5LPENS                  \ [0x0c] APB5 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCLPENSR_DEF
+    \
+    \ @brief RCC miscellaneous Sleep enable register
+    \ Address offset: 0xA88
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGLPENS                   \ [0x00] DBG sleep enable
+    $03 constant RCC_XSPIPHYCOMPLPENS           \ [0x03] XSPIPHYCOMP sleep enable
+    $06 constant RCC_PERLPENS                   \ [0x06] PER sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMLPENSR_DEF
+    \
+    \ @brief RCC memory sleep enable register
+    \ Address offset: 0xA8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3LPENS              \ [0x00] AXISRAM3 sleep enable
+    $01 constant RCC_AXISRAM4LPENS              \ [0x01] AXISRAM4 sleep enable
+    $02 constant RCC_AXISRAM5LPENS              \ [0x02] AXISRAM5 sleep enable
+    $03 constant RCC_AXISRAM6LPENS              \ [0x03] AXISRAM6 sleep enable
+    $04 constant RCC_AHBSRAM1LPENS              \ [0x04] AHBSRAM1 sleep enable
+    $05 constant RCC_AHBSRAM2LPENS              \ [0x05] AHBSRAM2 sleep enable
+    $06 constant RCC_BKPSRAMLPENS               \ [0x06] BKPSRAM sleep enable
+    $07 constant RCC_AXISRAM1LPENS              \ [0x07] AXISRAM1 sleep enable
+    $08 constant RCC_AXISRAM2LPENS              \ [0x08] AXISRAM2 sleep enable
+    $09 constant RCC_FLEXRAMLPENS               \ [0x09] FLEXRAM sleep enable
+    $0a constant RCC_NPUCACHERAMLPENS           \ [0x0a] NPUCACHERAM sleep enable
+    $0b constant RCC_VENCRAMLPENS               \ [0x0b] VENCRAM sleep enable
+    $0c constant RCC_BOOTROMLPENS               \ [0x0c] BOOTROM sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1LPENSR_DEF
+    \
+    \ @brief RCC AHB1 Sleep enable register
+    \ Address offset: 0xA90
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1LPENS                \ [0x04] GPDMA1 sleep enable
+    $05 constant RCC_ADC12LPENS                 \ [0x05] ADC12 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2LPENSR_DEF
+    \
+    \ @brief RCC AHB2 Sleep enable register
+    \ Address offset: 0xA94
+    \ Reset value: 0x00000000
+    \
+    $0c constant RCC_RAMCFGLPENS                \ [0x0c] RAMCFG sleep enable
+    $10 constant RCC_MDF1LPENS                  \ [0x10] MDF1 sleep enable
+    $11 constant RCC_ADF1LPENS                  \ [0x11] ADF1 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3LPENSR_DEF
+    \
+    \ @brief RCC AHB3 Sleep enable register
+    \ Address offset: 0xA98
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_RNGLPENS                   \ [0x00] RNG sleep enable
+    $01 constant RCC_HASHLPENS                  \ [0x01] HASH sleep enable
+    $02 constant RCC_CRYPLPENS                  \ [0x02] CRYP sleep enable
+    $04 constant RCC_SAESLPENS                  \ [0x04] SAES sleep enable
+    $08 constant RCC_PKALPENS                   \ [0x08] PKA sleep enable
+    $09 constant RCC_RIFSCLPENS                 \ [0x09] RIFSC sleep enable
+    $0a constant RCC_IACLPENS                   \ [0x0a] IAC sleep enable
+    $0e constant RCC_RISAFLPENS                 \ [0x0e] RISAF sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4LPENSR_DEF
+    \
+    \ @brief RCC AHB4 Sleep enable register
+    \ Address offset: 0xA9C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOALPENS                 \ [0x00] GPIOA sleep enable
+    $01 constant RCC_GPIOBLPENS                 \ [0x01] GPIOB sleep enable
+    $02 constant RCC_GPIOCLPENS                 \ [0x02] GPIOC sleep enable
+    $03 constant RCC_GPIODLPENS                 \ [0x03] GPIOD sleep enable
+    $04 constant RCC_GPIOELPENS                 \ [0x04] GPIOE sleep enable
+    $05 constant RCC_GPIOFLPENS                 \ [0x05] GPIOF sleep enable
+    $06 constant RCC_GPIOGLPENS                 \ [0x06] GPIOG sleep enable
+    $07 constant RCC_GPIOHLPENS                 \ [0x07] GPIOH sleep enable
+    $0d constant RCC_GPIONLPENS                 \ [0x0d] GPION sleep enable
+    $0e constant RCC_GPIOOLPENS                 \ [0x0e] GPIOO sleep enable
+    $0f constant RCC_GPIOPLPENS                 \ [0x0f] GPIOP sleep enable
+    $10 constant RCC_GPIOQLPENS                 \ [0x10] GPIOQ sleep enable
+    $12 constant RCC_PWRLPENS                   \ [0x12] PWR sleep enable
+    $13 constant RCC_CRCLPENS                   \ [0x13] CRC sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5LPENSR_DEF
+    \
+    \ @brief RCC AHB5 Sleep enable register
+    \ Address offset: 0xAA0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1LPENS                \ [0x00] HPDMA1 sleep enable
+    $01 constant RCC_DMA2DLPENS                 \ [0x01] DMA2D sleep enable
+    $03 constant RCC_JPEGLPENS                  \ [0x03] JPEG sleep enable
+    $04 constant RCC_FMCLPENS                   \ [0x04] FMC sleep enable
+    $05 constant RCC_XSPI1LPENS                 \ [0x05] XSPI1 sleep enable
+    $06 constant RCC_PSSILPENS                  \ [0x06] PSSI sleep enable
+    $07 constant RCC_SDMMC2LPENS                \ [0x07] SDMMC2 sleep enable
+    $08 constant RCC_SDMMC1LPENS                \ [0x08] SDMMC1 sleep enable
+    $0c constant RCC_XSPI2LPENS                 \ [0x0c] XSPI2 sleep enable
+    $0d constant RCC_XSPIMLPENS                 \ [0x0d] XSPIM sleep enable
+    $0e constant RCC_MCE1LPENS                  \ [0x0e] MCE1 sleep enable
+    $0f constant RCC_MCE2LPENS                  \ [0x0f] MCE2 sleep enable
+    $10 constant RCC_MCE3LPENS                  \ [0x10] MCE3 sleep enable
+    $11 constant RCC_XSPI3LPENS                 \ [0x11] XSPI3 sleep enable
+    $12 constant RCC_MCE4LPENS                  \ [0x12] MCE4 sleep enable
+    $13 constant RCC_GFXMMULPENS                \ [0x13] GFXMMU sleep enable
+    $14 constant RCC_GPULPENS                   \ [0x14] GPU sleep enable
+    $16 constant RCC_ETH1MACLPENS               \ [0x16] ETH1MAC sleep enable
+    $17 constant RCC_ETH1TXLPENS                \ [0x17] ETH1TX sleep enable
+    $18 constant RCC_ETH1RXLPENS                \ [0x18] ETH1RX sleep enable
+    $19 constant RCC_ETH1LPENS                  \ [0x19] ETH1 sleep enable
+    $1a constant RCC_OTG1LPENS                  \ [0x1a] OTG1 sleep enable
+    $1b constant RCC_OTGPHY1LPENS               \ [0x1b] OTGPHY1 sleep enable
+    $1c constant RCC_OTGPHY2LPENS               \ [0x1c] OTGPHY2 sleep enable
+    $1d constant RCC_OTG2LPENS                  \ [0x1d] OTG2 sleep enable
+    $1e constant RCC_NPUCACHELPENS              \ [0x1e] NPUCACHE sleep enable
+    $1f constant RCC_NPULPENS                   \ [0x1f] NPU sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LLPENSR_DEF
+    \
+    \ @brief RCC APB1L Sleep enable register
+    \ Address offset: 0xAA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2LPENS                  \ [0x00] TIM2 sleep enable
+    $01 constant RCC_TIM3LPENS                  \ [0x01] TIM3 sleep enable
+    $02 constant RCC_TIM4LPENS                  \ [0x02] TIM4 sleep enable
+    $03 constant RCC_TIM5LPENS                  \ [0x03] TIM5 sleep enable
+    $04 constant RCC_TIM6LPENS                  \ [0x04] TIM6 sleep enable
+    $05 constant RCC_TIM7LPENS                  \ [0x05] TIM7 sleep enable
+    $06 constant RCC_TIM12LPENS                 \ [0x06] TIM12 sleep enable
+    $07 constant RCC_TIM13LPENS                 \ [0x07] TIM13 sleep enable
+    $08 constant RCC_TIM14LPENS                 \ [0x08] TIM14 sleep enable
+    $09 constant RCC_LPTIM1LPENS                \ [0x09] LPTIM1 sleep enable
+    $0b constant RCC_WWDGLPENS                  \ [0x0b] WWDG sleep enable
+    $0c constant RCC_TIM10LPENS                 \ [0x0c] TIM10 sleep enable
+    $0d constant RCC_TIM11LPENS                 \ [0x0d] TIM11 sleep enable
+    $0e constant RCC_SPI2LPENS                  \ [0x0e] SPI2 sleep enable
+    $0f constant RCC_SPI3LPENS                  \ [0x0f] SPI3 sleep enable
+    $10 constant RCC_SPDIFRX1LPENS              \ [0x10] SPDIFRX1 sleep enable
+    $11 constant RCC_USART2LPENS                \ [0x11] USART2 sleep enable
+    $12 constant RCC_USART3LPENS                \ [0x12] USART3 sleep enable
+    $13 constant RCC_UART4LPENS                 \ [0x13] UART4 sleep enable
+    $14 constant RCC_UART5LPENS                 \ [0x14] UART5 sleep enable
+    $15 constant RCC_I2C1LPENS                  \ [0x15] I2C1 sleep enable
+    $16 constant RCC_I2C2LPENS                  \ [0x16] I2C2 sleep enable
+    $17 constant RCC_I2C3LPENS                  \ [0x17] I2C3 sleep enable
+    $18 constant RCC_I3C1LPENS                  \ [0x18] I3C1 sleep enable
+    $19 constant RCC_I3C2LPENS                  \ [0x19] I3C2 sleep enable
+    $1e constant RCC_UART7LPENS                 \ [0x1e] UART7 sleep enable
+    $1f constant RCC_UART8LPENS                 \ [0x1f] UART8 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HLPENSR_DEF
+    \
+    \ @brief RCC APB1H Sleep enable register
+    \ Address offset: 0xAA8
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSLPENS                 \ [0x05] MDIOS sleep enable
+    $08 constant RCC_FDCANLPENS                 \ [0x08] FDCAN sleep enable
+    $12 constant RCC_UCPD1LPENS                 \ [0x12] UCPD1 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2LPENSR_DEF
+    \
+    \ @brief RCC APB2 Sleep enable register
+    \ Address offset: 0xAAC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1LPENS                  \ [0x00] TIM1 sleep enable
+    $01 constant RCC_TIM8LPENS                  \ [0x01] TIM8 sleep enable
+    $04 constant RCC_USART1LPENS                \ [0x04] USART1 sleep enable
+    $05 constant RCC_USART6LPENS                \ [0x05] USART6 sleep enable
+    $06 constant RCC_UART9LPENS                 \ [0x06] UART9 sleep enable
+    $07 constant RCC_USART10LPENS               \ [0x07] USART10 sleep enable
+    $0c constant RCC_SPI1LPENS                  \ [0x0c] SPI1 sleep enable
+    $0d constant RCC_SPI4LPENS                  \ [0x0d] SPI4 sleep enable
+    $0f constant RCC_TIM18LPENS                 \ [0x0f] TIM18 sleep enable
+    $10 constant RCC_TIM15LPENS                 \ [0x10] TIM15 sleep enable
+    $11 constant RCC_TIM16LPENS                 \ [0x11] TIM16 sleep enable
+    $12 constant RCC_TIM17LPENS                 \ [0x12] TIM17 sleep enable
+    $13 constant RCC_TIM9LPENS                  \ [0x13] TIM9 sleep enable
+    $14 constant RCC_SPI5LPENS                  \ [0x14] SPI5 sleep enable
+    $15 constant RCC_SAI1LPENS                  \ [0x15] SAI1 sleep enable
+    $16 constant RCC_SAI2LPENS                  \ [0x16] SAI2 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB3LPENSR_DEF
+    \
+    \ @brief RCC APB3 Sleep enable register
+    \ Address offset: 0xAB0
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_DFTLPENS                   \ [0x02] DFT sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LLPENSR_DEF
+    \
+    \ @brief RCC APB4L Sleep enable register
+    \ Address offset: 0xAB4
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPLPENS                   \ [0x02] HDP sleep enable
+    $03 constant RCC_LPUART1LPENS               \ [0x03] LPUART1 sleep enable
+    $05 constant RCC_SPI6LPENS                  \ [0x05] SPI6 sleep enable
+    $07 constant RCC_I2C4LPENS                  \ [0x07] I2C4 sleep enable
+    $09 constant RCC_LPTIM2LPENS                \ [0x09] LPTIM2 sleep enable
+    $0a constant RCC_LPTIM3LPENS                \ [0x0a] LPTIM3 sleep enable
+    $0b constant RCC_LPTIM4LPENS                \ [0x0b] LPTIM4 sleep enable
+    $0c constant RCC_LPTIM5LPENS                \ [0x0c] LPTIM5 sleep enable
+    $0f constant RCC_VREFBUFLPENS               \ [0x0f] VREFBUF sleep enable
+    $10 constant RCC_RTCLPENS                   \ [0x10] RTC sleep enable
+    $11 constant RCC_RTCAPBLPENS                \ [0x11] RTCAPB sleep enable
+    $16 constant RCC_R2GRETLPENS                \ [0x16] R2GRET sleep enable
+    $17 constant RCC_R2GNPULPENS                \ [0x17] R2GNPU sleep enable
+    $1f constant RCC_SERFLPENS                  \ [0x1f] SERF sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HLPENSR_DEF
+    \
+    \ @brief RCC APB4H Sleep enable register
+    \ Address offset: 0xAB8
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGLPENS                \ [0x00] SYSCFG sleep enable
+    $01 constant RCC_BSECLPENS                  \ [0x01] BSEC sleep enable
+    $02 constant RCC_DTSLPENS                   \ [0x02] DTS sleep enable
+    $04 constant RCC_BUSPERFMLPENS              \ [0x04] BUSPERFM sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5LPENSR_DEF
+    \
+    \ @brief RCC APB5 Sleep enable register
+    \ Address offset: 0xABC
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCLPENS                  \ [0x01] LTDC sleep enable
+    $02 constant RCC_DCMIPPLPENS                \ [0x02] DCMIPP sleep enable
+    $04 constant RCC_GFXTIMLPENS                \ [0x04] GFXTIM sleep enable
+    $05 constant RCC_VENCLPENS                  \ [0x05] VENC sleep enable
+    $06 constant RCC_CSILPENS                   \ [0x06] CSI sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGSR0_DEF
+    \
+    \ @brief RCC oscillator privilege configuration register0
+    \ Address offset: 0xF84
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIPVS                     \ [0x00] Defines the privilege protection of the LSI configuration bits (enable, ready, divider).
+    $01 constant RCC_LSEPVS                     \ [0x01] Defines the privilege protection of the LSE configuration bits (enable, ready, divider).
+    $02 constant RCC_MSIPVS                     \ [0x02] Defines the privilege protection of the MSI configuration bits (enable, ready, divider).
+    $03 constant RCC_HSIPVS                     \ [0x03] Defines the privilege protection of the HSI configuration bits (enable, ready, divider).
+    $04 constant RCC_HSEPVS                     \ [0x04] Defines the privilege protection of the HSE configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGSR0_DEF
+    \
+    \ @brief RCC oscillator public configuration register0
+    \ Address offset: 0xF8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIPUBS                    \ [0x00] Defines the public protection of the LSI configuration bits (enable, ready, divider).
+    $01 constant RCC_LSEPUBS                    \ [0x01] Defines the public protection of the LSE configuration bits (enable, ready, divider).
+    $02 constant RCC_MSIPUBS                    \ [0x02] Defines the public protection of the MSI configuration bits (enable, ready, divider).
+    $03 constant RCC_HSIPUBS                    \ [0x03] Defines the public protection of the HSI configuration bits (enable, ready, divider).
+    $04 constant RCC_HSEPUBS                    \ [0x04] Defines the public protection of the HSE configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGSR1_DEF
+    \
+    \ @brief RCC PLL privilege configuration register1
+    \ Address offset: 0xF94
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL1PVS                    \ [0x00] Defines the privilege protection of the PLL1 configuration bits (enable, ready, divider).
+    $01 constant RCC_PLL2PVS                    \ [0x01] Defines the privilege protection of the PLL2 configuration bits (enable, ready, divider).
+    $02 constant RCC_PLL3PVS                    \ [0x02] Defines the privilege protection of the PLL3 configuration bits (enable, ready, divider).
+    $03 constant RCC_PLL4PVS                    \ [0x03] Defines the privilege protection of the PLL4 configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGSR1_DEF
+    \
+    \ @brief RCC PLL public configuration register1
+    \ Address offset: 0xF9C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL1PUBS                   \ [0x00] Defines the public protection of the PLL1 configuration bits (enable, ready, divider).
+    $01 constant RCC_PLL2PUBS                   \ [0x01] Defines the public protection of the PLL2 configuration bits (enable, ready, divider).
+    $02 constant RCC_PLL3PUBS                   \ [0x02] Defines the public protection of the PLL3 configuration bits (enable, ready, divider).
+    $03 constant RCC_PLL4PUBS                   \ [0x03] Defines the public protection of the PLL4 configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGSR2_DEF
+    \
+    \ @brief RCC divider privilege configuration register2
+    \ Address offset: 0xFA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1PVS                     \ [0x00] Defines the privilege protection of the IC1 configuration bits (enable, ready, divider).
+    $01 constant RCC_IC2PVS                     \ [0x01] Defines the privilege protection of the IC2 configuration bits (enable, ready, divider).
+    $02 constant RCC_IC3PVS                     \ [0x02] Defines the privilege protection of the IC3 configuration bits (enable, ready, divider).
+    $03 constant RCC_IC4PVS                     \ [0x03] Defines the privilege protection of the IC4 configuration bits (enable, ready, divider).
+    $04 constant RCC_IC5PVS                     \ [0x04] Defines the privilege protection of the IC5 configuration bits (enable, ready, divider).
+    $05 constant RCC_IC6PVS                     \ [0x05] Defines the privilege protection of the IC6 configuration bits (enable, ready, divider).
+    $06 constant RCC_IC7PVS                     \ [0x06] Defines the privilege protection of the IC7 configuration bits (enable, ready, divider).
+    $07 constant RCC_IC8PVS                     \ [0x07] Defines the privilege protection of the IC8 configuration bits (enable, ready, divider).
+    $08 constant RCC_IC9PVS                     \ [0x08] Defines the privilege protection of the IC9 configuration bits (enable, ready, divider).
+    $09 constant RCC_IC10PVS                    \ [0x09] Defines the privilege protection of the IC10 configuration bits (enable, ready, divider).
+    $0a constant RCC_IC11PVS                    \ [0x0a] Defines the privilege protection of the IC11 configuration bits (enable, ready, divider).
+    $0b constant RCC_IC12PVS                    \ [0x0b] Defines the privilege protection of the IC12 configuration bits (enable, ready, divider).
+    $0c constant RCC_IC13PVS                    \ [0x0c] Defines the privilege protection of the IC13 configuration bits (enable, ready, divider).
+    $0d constant RCC_IC14PVS                    \ [0x0d] Defines the privilege protection of the IC14 configuration bits (enable, ready, divider).
+    $0e constant RCC_IC15PVS                    \ [0x0e] Defines the privilege protection of the IC15 configuration bits (enable, ready, divider).
+    $0f constant RCC_IC16PVS                    \ [0x0f] Defines the privilege protection of the IC16 configuration bits (enable, ready, divider).
+    $10 constant RCC_IC17PVS                    \ [0x10] Defines the privilege protection of the IC17 configuration bits (enable, ready, divider).
+    $11 constant RCC_IC18PVS                    \ [0x11] Defines the privilege protection of the IC18 configuration bits (enable, ready, divider).
+    $12 constant RCC_IC19PVS                    \ [0x12] Defines the privilege protection of the IC19 configuration bits (enable, ready, divider).
+    $13 constant RCC_IC20PVS                    \ [0x13] Defines the privilege protection of the IC20 configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGSR2_DEF
+    \
+    \ @brief RCC divider public configuration register2
+    \ Address offset: 0xFAC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1PUBS                    \ [0x00] Defines the public protection of the IC1 configuration bits (enable, ready, divider).
+    $01 constant RCC_IC2PUBS                    \ [0x01] Defines the public protection of the IC2 configuration bits (enable, ready, divider).
+    $02 constant RCC_IC3PUBS                    \ [0x02] Defines the public protection of the IC3 configuration bits (enable, ready, divider).
+    $03 constant RCC_IC4PUBS                    \ [0x03] Defines the public protection of the IC4 configuration bits (enable, ready, divider).
+    $04 constant RCC_IC5PUBS                    \ [0x04] Defines the public protection of the IC5 configuration bits (enable, ready, divider).
+    $05 constant RCC_IC6PUBS                    \ [0x05] Defines the public protection of the IC6 configuration bits (enable, ready, divider).
+    $06 constant RCC_IC7PUBS                    \ [0x06] Defines the public protection of the IC7 configuration bits (enable, ready, divider).
+    $07 constant RCC_IC8PUBS                    \ [0x07] Defines the public protection of the IC8 configuration bits (enable, ready, divider).
+    $08 constant RCC_IC9PUBS                    \ [0x08] Defines the public protection of the IC9 configuration bits (enable, ready, divider).
+    $09 constant RCC_IC10PUBS                   \ [0x09] Defines the public protection of the IC10 configuration bits (enable, ready, divider).
+    $0a constant RCC_IC11PUBS                   \ [0x0a] Defines the public protection of the IC11 configuration bits (enable, ready, divider).
+    $0b constant RCC_IC12PUBS                   \ [0x0b] Defines the public protection of the IC12 configuration bits (enable, ready, divider).
+    $0c constant RCC_IC13PUBS                   \ [0x0c] Defines the public protection of the IC13 configuration bits (enable, ready, divider).
+    $0d constant RCC_IC14PUBS                   \ [0x0d] Defines the public protection of the IC14 configuration bits (enable, ready, divider).
+    $0e constant RCC_IC15PUBS                   \ [0x0e] Defines the public protection of the IC15 configuration bits (enable, ready, divider).
+    $0f constant RCC_IC16PUBS                   \ [0x0f] Defines the public protection of the IC16 configuration bits (enable, ready, divider).
+    $10 constant RCC_IC17PUBS                   \ [0x10] Defines the public protection of the IC17 configuration bits (enable, ready, divider).
+    $11 constant RCC_IC18PUBS                   \ [0x11] Defines the public protection of the IC18 configuration bits (enable, ready, divider).
+    $12 constant RCC_IC19PUBS                   \ [0x12] Defines the public protection of the IC19 configuration bits (enable, ready, divider).
+    $13 constant RCC_IC20PUBS                   \ [0x13] Defines the public protection of the IC20 configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_SECCFGSR3_DEF
+    \
+    \ @brief RCC system secure configuration register3
+    \ Address offset: 0xFB0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODSECS                    \ [0x00] Defines the secure protection of the MOD configuration bits (enable, ready, divider).
+    $01 constant RCC_SYSSECS                    \ [0x01] Defines the secure protection of the SYS configuration bits (enable, ready, divider).
+    $02 constant RCC_BUSSECS                    \ [0x02] Defines the secure protection of the BUS configuration bits (enable, ready, divider).
+    $03 constant RCC_PERSECS                    \ [0x03] Defines the secure protection of the PER configuration bits (enable, ready, divider).
+    $04 constant RCC_INTSECS                    \ [0x04] Defines the secure protection of the INT configuration bits (enable, ready, divider).
+    $05 constant RCC_RSTSECS                    \ [0x05] Defines the secure protection of the RST configuration bits (enable, ready, divider).
+    $06 constant RCC_DFTSECS                    \ [0x06] Defines the secure protection of the DFT configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGSR3_DEF
+    \
+    \ @brief RCC system privilege configuration register3
+    \ Address offset: 0xFB4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODPVS                     \ [0x00] Defines the privilege protection of the MOD configuration bits (enable, ready, divider).
+    $01 constant RCC_SYSPVS                     \ [0x01] Defines the privilege protection of the SYS configuration bits (enable, ready, divider).
+    $02 constant RCC_BUSPVS                     \ [0x02] Defines the privilege protection of the BUS configuration bits (enable, ready, divider).
+    $03 constant RCC_PERPVS                     \ [0x03] Defines the privilege protection of the PER configuration bits (enable, ready, divider).
+    $04 constant RCC_INTPVS                     \ [0x04] Defines the privilege protection of the INT configuration bits (enable, ready, divider).
+    $05 constant RCC_RSTPVS                     \ [0x05] Defines the privilege protection of the RST configuration bits (enable, ready, divider).
+    $06 constant RCC_DFTPVS                     \ [0x06] Defines the privilege protection of the DFT configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_LOCKCFGSR3_DEF
+    \
+    \ @brief RCC system lock configuration register3
+    \ Address offset: 0xFB8
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODLOCKS                   \ [0x00] Defines the lock protection of the MOD configuration bits (enable, ready, divider).
+    $01 constant RCC_SYSLOCKS                   \ [0x01] Defines the lock protection of the SYS configuration bits (enable, ready, divider).
+    $02 constant RCC_BUSLOCKS                   \ [0x02] Defines the lock protection of the BUS configuration bits (enable, ready, divider).
+    $03 constant RCC_PERLOCKS                   \ [0x03] Defines the lock protection of the PER configuration bits (enable, ready, divider).
+    $04 constant RCC_INTLOCKS                   \ [0x04] Defines the lock protection of the INT configuration bits (enable, ready, divider).
+    $05 constant RCC_RSTLOCKS                   \ [0x05] Defines the lock protection of the RST configuration bits (enable, ready, divider).
+    $06 constant RCC_DFTLOCKS                   \ [0x06] Defines the lock protection of the DFT configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGSR3_DEF
+    \
+    \ @brief RCC system public configuration register3
+    \ Address offset: 0xFBC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODPUBS                    \ [0x00] Defines the public protection of the MOD configuration bits (enable, ready, divider).
+    $01 constant RCC_SYSPUBS                    \ [0x01] Defines the public protection of the SYS configuration bits (enable, ready, divider).
+    $02 constant RCC_BUSPUBS                    \ [0x02] Defines the public protection of the BUS configuration bits (enable, ready, divider).
+    $03 constant RCC_PERPUBS                    \ [0x03] Defines the public protection of the PER configuration bits (enable, ready, divider).
+    $04 constant RCC_INTPUBS                    \ [0x04] Defines the public protection of the INT configuration bits (enable, ready, divider).
+    $05 constant RCC_RSTPUBS                    \ [0x05] Defines the public protection of the RST configuration bits (enable, ready, divider).
+    $06 constant RCC_DFTPUBS                    \ [0x06] Defines the public protection of the DFT configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGSR4_DEF
+    \
+    \ @brief RCC privilege configuration register4
+    \ Address offset: 0xFC4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNPVS                   \ [0x00] Defines the privilege protection of the ACLKN configuration bits (enable, ready, divider).
+    $01 constant RCC_ACLKNCPVS                  \ [0x01] Defines the privilege protection of the ACLKNC configuration bits (enable, ready, divider).
+    $02 constant RCC_AHBMPVS                    \ [0x02] Defines the privilege protection of the AHBM configuration bits (enable, ready, divider).
+    $03 constant RCC_AHB1PVS                    \ [0x03] Defines the privilege protection of the AHB1 configuration bits (enable, ready, divider).
+    $04 constant RCC_AHB2PVS                    \ [0x04] Defines the privilege protection of the AHB2 configuration bits (enable, ready, divider).
+    $05 constant RCC_AHB3PVS                    \ [0x05] Defines the privilege protection of the AHB3 configuration bits (enable, ready, divider).
+    $06 constant RCC_AHB4PVS                    \ [0x06] Defines the privilege protection of the AHB4 configuration bits (enable, ready, divider).
+    $07 constant RCC_AHB5PVS                    \ [0x07] Defines the privilege protection of the AHB5 configuration bits (enable, ready, divider).
+    $08 constant RCC_APB1PVS                    \ [0x08] Defines the privilege protection of the APB1 configuration bits (enable, ready, divider).
+    $09 constant RCC_APB2PVS                    \ [0x09] Defines the privilege protection of the APB2 configuration bits (enable, ready, divider).
+    $0a constant RCC_APB3PVS                    \ [0x0a] Defines the privilege protection of the APB3 configuration bits (enable, ready, divider).
+    $0b constant RCC_APB4PVS                    \ [0x0b] Defines the privilege protection of the APB4 configuration bits (enable, ready, divider).
+    $0c constant RCC_APB5PVS                    \ [0x0c] Defines the privilege protection of the APB5 configuration bits (enable, ready, divider).
+    $0d constant RCC_NOCPVS                     \ [0x0d] Defines the privilege protection of the NOC configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGSR4_DEF
+    \
+    \ @brief RCC public configuration register4
+    \ Address offset: 0xFCC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNPUBS                  \ [0x00] Defines the public protection of the ACLKN configuration bits (enable, ready, divider).
+    $01 constant RCC_ACLKNCPUBS                 \ [0x01] Defines the public protection of the ACLKNC configuration bits (enable, ready, divider).
+    $02 constant RCC_AHBMPUBS                   \ [0x02] Defines the public protection of the AHBM configuration bits (enable, ready, divider).
+    $03 constant RCC_AHB1PUBS                   \ [0x03] Defines the public protection of the AHB1 configuration bits (enable, ready, divider).
+    $04 constant RCC_AHB2PUBS                   \ [0x04] Defines the public protection of the AHB2 configuration bits (enable, ready, divider).
+    $05 constant RCC_AHB3PUBS                   \ [0x05] Defines the public protection of the AHB3 configuration bits (enable, ready, divider).
+    $06 constant RCC_AHB4PUBS                   \ [0x06] Defines the public protection of the AHB4 configuration bits (enable, ready, divider).
+    $07 constant RCC_AHB5PUBS                   \ [0x07] Defines the public protection of the AHB5 configuration bits (enable, ready, divider).
+    $08 constant RCC_APB1PUBS                   \ [0x08] Defines the public protection of the APB1 configuration bits (enable, ready, divider).
+    $09 constant RCC_APB2PUBS                   \ [0x09] Defines the public protection of the APB2 configuration bits (enable, ready, divider).
+    $0a constant RCC_APB3PUBS                   \ [0x0a] Defines the public protection of the APB3 configuration bits (enable, ready, divider).
+    $0b constant RCC_APB4PUBS                   \ [0x0b] Defines the public protection of the APB4 configuration bits (enable, ready, divider).
+    $0c constant RCC_APB5PUBS                   \ [0x0c] Defines the public protection of the APB5 configuration bits (enable, ready, divider).
+    $0d constant RCC_NOCPUBS                    \ [0x0d] Defines the public protection of the NOC configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGSR5_DEF
+    \
+    \ @brief RCC public configuration register4
+    \ Address offset: 0xFD0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3PUBS               \ [0x00] Defines the public protection of the AXISRAM3 configuration bits (enable, ready, divider).
+    $01 constant RCC_AXISRAM4PUBS               \ [0x01] Defines the public protection of the AXISRAM4 configuration bits (enable, ready, divider).
+    $02 constant RCC_AXISRAM5PUBS               \ [0x02] Defines the public protection of the AXISRAM5 configuration bits (enable, ready, divider).
+    $03 constant RCC_AXISRAM6PUBS               \ [0x03] Defines the public protection of the AXISRAM6 configuration bits (enable, ready, divider).
+    $04 constant RCC_AHBSRAM1PUBS               \ [0x04] Defines the public protection of the AHBSRAM1 configuration bits (enable, ready, divider).
+    $05 constant RCC_AHBSRAM2PUBS               \ [0x05] Defines the public protection of the AHBSRAM2 configuration bits (enable, ready, divider).
+    $06 constant RCC_BKPSRAMPUBS                \ [0x06] Defines the public protection of the BKPSRAM configuration bits (enable, ready, divider).
+    $07 constant RCC_AXISRAM1PUBS               \ [0x07] Defines the public protection of the AXISRAM1 configuration bits (enable, ready, divider).
+    $08 constant RCC_AXISRAM2PUBS               \ [0x08] Defines the public protection of the AXISRAM2 configuration bits (enable, ready, divider).
+    $09 constant RCC_FLEXRAMPUBS                \ [0x09] Defines the public protection of the FLEXRAM configuration bits (enable, ready, divider).
+    $0a constant RCC_NPUCACHERAMPUBS            \ [0x0a] Defines the public protection of the NPUCACHERAM configuration bits (enable, ready, divider).
+    $0b constant RCC_VENCRAMPUBS                \ [0x0b] Defines the public protection of the VENCRAM configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_CCR_DEF
+    \
+    \ @brief RCC control Clear register
+    \ Address offset: 0x1000
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIONC                     \ [0x00] LSI oscillator enable in Run/Sleep mode.
+    $01 constant RCC_LSEONC                     \ [0x01] LSE oscillator enable in Run/Sleep mode.
+    $02 constant RCC_MSIONC                     \ [0x02] MSI oscillator enable in Run/Sleep mode.
+    $03 constant RCC_HSIONC                     \ [0x03] HSI oscillator enable in Run/Sleep mode.
+    $04 constant RCC_HSEONC                     \ [0x04] HSE oscillator enable in Run/Sleep mode.
+    $08 constant RCC_PLL1ONC                    \ [0x08] PLL1 oscillator enable in Run/Sleep mode.
+    $09 constant RCC_PLL2ONC                    \ [0x09] PLL2 oscillator enable in Run/Sleep mode.
+    $0a constant RCC_PLL3ONC                    \ [0x0a] PLL3 oscillator enable in Run/Sleep mode.
+    $0b constant RCC_PLL4ONC                    \ [0x0b] PLL4 oscillator enable in Run/Sleep mode.
+  [then]
+
+
+  [ifdef] RCC_RCC_STOPCCR_DEF
+    \
+    \ @brief RCC StopCCR configuration register
+    \ Address offset: 0x1008
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSISTOPENC                 \ [0x00] LSI oscillator enable in Run/Sleep mode.
+    $01 constant RCC_LSESTOPENC                 \ [0x01] LSE oscillator enable in Run/Sleep mode.
+    $02 constant RCC_MSISTOPENC                 \ [0x02] MSI oscillator enable in Run/Sleep mode.
+    $03 constant RCC_HSISTOPENC                 \ [0x03] HSI oscillator enable in Run/Sleep mode.
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSRSTCR_DEF
+    \
+    \ @brief RCC bus reset register
+    \ Address offset: 0x1204
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNRSTC                  \ [0x00] ACLKN reset
+    $02 constant RCC_AHBMRSTC                   \ [0x02] AHBM reset
+    $03 constant RCC_AHB1RSTC                   \ [0x03] AHB1 reset
+    $04 constant RCC_AHB2RSTC                   \ [0x04] AHB2 reset
+    $05 constant RCC_AHB3RSTC                   \ [0x05] AHB3 reset
+    $06 constant RCC_AHB4RSTC                   \ [0x06] AHB4 reset
+    $07 constant RCC_AHB5RSTC                   \ [0x07] AHB5 reset
+    $08 constant RCC_APB1RSTC                   \ [0x08] APB1 reset
+    $09 constant RCC_APB2RSTC                   \ [0x09] APB2 reset
+    $0a constant RCC_APB3RSTC                   \ [0x0a] APB3 reset
+    $0b constant RCC_APB4RSTC                   \ [0x0b] APB4 reset
+    $0c constant RCC_APB5RSTC                   \ [0x0c] APB5 reset
+    $0d constant RCC_NOCRSTC                    \ [0x0d] NOC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCRSTCR_DEF
+    \
+    \ @brief RCC miscellaneous reset register
+    \ Address offset: 0x1208
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGRSTC                    \ [0x00] DBG reset
+    $04 constant RCC_XSPIPHY1RSTC               \ [0x04] XSPIPHY1 reset
+    $05 constant RCC_XSPIPHY2RSTC               \ [0x05] XSPIPHY2 reset
+    $07 constant RCC_SDMMC1DLLRSTC              \ [0x07] SDMMC1DLL reset
+    $08 constant RCC_SDMMC2DLLRSTC              \ [0x08] SDMMC2DLL reset
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMRSTCR_DEF
+    \
+    \ @brief RCC memory reset register
+    \ Address offset: 0x120C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3RSTC               \ [0x00] AXISRAM3 reset
+    $01 constant RCC_AXISRAM4RSTC               \ [0x01] AXISRAM4 reset
+    $02 constant RCC_AXISRAM5RSTC               \ [0x02] AXISRAM5 reset
+    $03 constant RCC_AXISRAM6RSTC               \ [0x03] AXISRAM6 reset
+    $04 constant RCC_AHBSRAM1RSTC               \ [0x04] AHBSRAM1 reset
+    $05 constant RCC_AHBSRAM2RSTC               \ [0x05] AHBSRAM2 reset
+    $07 constant RCC_AXISRAM1RSTC               \ [0x07] AXISRAM1 reset
+    $08 constant RCC_AXISRAM2RSTC               \ [0x08] AXISRAM2 reset
+    $09 constant RCC_FLEXRAMRSTC                \ [0x09] FLEXRAM reset
+    $0a constant RCC_NPUCACHERAMRSTC            \ [0x0a] NPUCACHERAM reset
+    $0b constant RCC_VENCRAMRSTC                \ [0x0b] VENCRAM reset
+    $0c constant RCC_BOOTROMRSTC                \ [0x0c] BOOTROM reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1RSTCR_DEF
+    \
+    \ @brief RCC AHB1 reset register
+    \ Address offset: 0x1210
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1RSTC                 \ [0x04] GPDMA1 reset
+    $05 constant RCC_ADC12RSTC                  \ [0x05] ADC12 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2RSTCR_DEF
+    \
+    \ @brief RCC AHB2 Reset register
+    \ Address offset: 0x1214
+    \ Reset value: 0x00000000
+    \
+    $0c constant RCC_RAMCFGRSTC                 \ [0x0c] RAMCFG reset
+    $10 constant RCC_MDF1RSTC                   \ [0x10] MDF1 reset
+    $11 constant RCC_ADF1RSTC                   \ [0x11] ADF1 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3RSTCR_DEF
+    \
+    \ @brief RCC AHB3 reset register
+    \ Address offset: 0x1218
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_RNGRSTC                    \ [0x00] RNG reset
+    $01 constant RCC_HASHRSTC                   \ [0x01] HASH reset
+    $02 constant RCC_CRYPRSTC                   \ [0x02] CRYP reset
+    $04 constant RCC_SAESRSTC                   \ [0x04] SAES reset
+    $08 constant RCC_PKARSTC                    \ [0x08] PKA reset
+    $0a constant RCC_IACRSTC                    \ [0x0a] IAC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4RSTCR_DEF
+    \
+    \ @brief RCC AHB4 reset register
+    \ Address offset: 0x121C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOARSTC                  \ [0x00] GPIOA reset
+    $01 constant RCC_GPIOBRSTC                  \ [0x01] GPIOB reset
+    $02 constant RCC_GPIOCRSTC                  \ [0x02] GPIOC reset
+    $03 constant RCC_GPIODRSTC                  \ [0x03] GPIOD reset
+    $04 constant RCC_GPIOERSTC                  \ [0x04] GPIOE reset
+    $05 constant RCC_GPIOFRSTC                  \ [0x05] GPIOF reset
+    $06 constant RCC_GPIOGRSTC                  \ [0x06] GPIOG reset
+    $07 constant RCC_GPIOHRSTC                  \ [0x07] GPIOH reset
+    $0d constant RCC_GPIONRSTC                  \ [0x0d] GPION reset
+    $0e constant RCC_GPIOORSTC                  \ [0x0e] GPIOO reset
+    $0f constant RCC_GPIOPRSTC                  \ [0x0f] GPIOP reset
+    $10 constant RCC_GPIOQRSTC                  \ [0x10] GPIOQ reset
+    $12 constant RCC_PWRRSTC                    \ [0x12] PWR reset
+    $13 constant RCC_CRCRSTC                    \ [0x13] CRC reset
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5RSTCR_DEF
+    \
+    \ @brief RCC AHB5 reset register
+    \ Address offset: 0x1220
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1RSTC                 \ [0x00] HPDMA1 reset
+    $01 constant RCC_DMA2DRSTC                  \ [0x01] DMA2D reset
+    $03 constant RCC_JPEGRSTC                   \ [0x03] JPEG reset
+    $04 constant RCC_FMCRSTC                    \ [0x04] FMC reset
+    $05 constant RCC_XSPI1RSTC                  \ [0x05] XSPI1 reset
+    $06 constant RCC_PSSIRSTC                   \ [0x06] PSSI reset
+    $07 constant RCC_SDMMC2RSTC                 \ [0x07] SDMMC2 reset
+    $08 constant RCC_SDMMC1RSTC                 \ [0x08] SDMMC1 reset
+    $0c constant RCC_XSPI2RSTC                  \ [0x0c] XSPI2 reset
+    $0d constant RCC_XSPIMRSTC                  \ [0x0d] XSPIM reset
+    $11 constant RCC_XSPI3RSTC                  \ [0x11] XSPI3 reset
+    $12 constant RCC_MCE4RSTC                   \ [0x12] MCE4 reset
+    $13 constant RCC_GFXMMURSTC                 \ [0x13] GFXMMU reset
+    $14 constant RCC_GPURSTC                    \ [0x14] GPU reset
+    $17 constant RCC_SYSCFGOTGHSPHY1RSTC        \ [0x17] SYSCFGOTGHSPHY1 reset
+    $18 constant RCC_SYSCFGOTGHSPHY2RSTC        \ [0x18] SYSCFGOTGHSPHY2 reset
+    $19 constant RCC_ETH1RSTC                   \ [0x19] ETH1 reset
+    $1a constant RCC_OTG1RSTC                   \ [0x1a] OTG1 reset
+    $1b constant RCC_OTGPHY1RSTC                \ [0x1b] OTGPHY1 reset
+    $1c constant RCC_OTGPHY2RSTC                \ [0x1c] OTGPHY2 reset
+    $1d constant RCC_OTG2RSTC                   \ [0x1d] OTG2 reset
+    $1e constant RCC_NPUCACHERSTC               \ [0x1e] NPUCACHE reset
+    $1f constant RCC_NPURSTC                    \ [0x1f] NPU reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LRSTCR_DEF
+    \
+    \ @brief RCC APB1L reset register
+    \ Address offset: 0x1224
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2RSTC                   \ [0x00] TIM2 reset
+    $01 constant RCC_TIM3RSTC                   \ [0x01] TIM3 reset
+    $02 constant RCC_TIM4RSTC                   \ [0x02] TIM4 reset
+    $03 constant RCC_TIM5RSTC                   \ [0x03] TIM5 reset
+    $04 constant RCC_TIM6RSTC                   \ [0x04] TIM6 reset
+    $05 constant RCC_TIM7RSTC                   \ [0x05] TIM7 reset
+    $06 constant RCC_TIM12RSTC                  \ [0x06] TIM12 reset
+    $07 constant RCC_TIM13RSTC                  \ [0x07] TIM13 reset
+    $08 constant RCC_TIM14RSTC                  \ [0x08] TIM14 reset
+    $09 constant RCC_LPTIM1RSTC                 \ [0x09] LPTIM1 reset
+    $0b constant RCC_WWDGRSTC                   \ [0x0b] WWDG reset
+    $0c constant RCC_TIM10RSTC                  \ [0x0c] TIM10 reset
+    $0d constant RCC_TIM11RSTC                  \ [0x0d] TIM11 reset
+    $0e constant RCC_SPI2RSTC                   \ [0x0e] SPI2 reset
+    $0f constant RCC_SPI3RSTC                   \ [0x0f] SPI3 reset
+    $10 constant RCC_SPDIFRX1RSTC               \ [0x10] SPDIFRX1 reset
+    $11 constant RCC_USART2RSTC                 \ [0x11] USART2 reset
+    $12 constant RCC_USART3RSTC                 \ [0x12] USART3 reset
+    $13 constant RCC_UART4RSTC                  \ [0x13] UART4 reset
+    $14 constant RCC_UART5RSTC                  \ [0x14] UART5 reset
+    $15 constant RCC_I2C1RSTC                   \ [0x15] I2C1 reset
+    $16 constant RCC_I2C2RSTC                   \ [0x16] I2C2 reset
+    $17 constant RCC_I2C3RSTC                   \ [0x17] I2C3 reset
+    $18 constant RCC_I3C1RSTC                   \ [0x18] I3C1 reset
+    $19 constant RCC_I3C2RSTC                   \ [0x19] I3C2 reset
+    $1e constant RCC_UART7RSTC                  \ [0x1e] UART7 reset
+    $1f constant RCC_UART8RSTC                  \ [0x1f] UART8 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HRSTCR_DEF
+    \
+    \ @brief RCC APB1H reset register
+    \ Address offset: 0x1228
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSRSTC                  \ [0x05] MDIOS reset
+    $08 constant RCC_FDCANRSTC                  \ [0x08] FDCAN reset
+    $12 constant RCC_UCPD1RSTC                  \ [0x12] UCPD1 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2RSTCR_DEF
+    \
+    \ @brief RCC APB2 reset register
+    \ Address offset: 0x122C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1RSTC                   \ [0x00] TIM1 reset
+    $01 constant RCC_TIM8RSTC                   \ [0x01] TIM8 reset
+    $04 constant RCC_USART1RSTC                 \ [0x04] USART1 reset
+    $05 constant RCC_USART6RSTC                 \ [0x05] USART6 reset
+    $06 constant RCC_UART9RSTC                  \ [0x06] UART9 reset
+    $07 constant RCC_USART10RSTC                \ [0x07] USART10 reset
+    $0c constant RCC_SPI1RSTC                   \ [0x0c] SPI1 reset
+    $0d constant RCC_SPI4RSTC                   \ [0x0d] SPI4 reset
+    $0f constant RCC_TIM18RSTC                  \ [0x0f] TIM18 reset
+    $10 constant RCC_TIM15RSTC                  \ [0x10] TIM15 reset
+    $11 constant RCC_TIM16RSTC                  \ [0x11] TIM16 reset
+    $12 constant RCC_TIM17RSTC                  \ [0x12] TIM17 reset
+    $13 constant RCC_TIM9RSTC                   \ [0x13] TIM9 reset
+    $14 constant RCC_SPI5RSTC                   \ [0x14] SPI5 reset
+    $15 constant RCC_SAI1RSTC                   \ [0x15] SAI1 reset
+    $16 constant RCC_SAI2RSTC                   \ [0x16] SAI2 reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LRSTCR_DEF
+    \
+    \ @brief RCC APB4L reset register
+    \ Address offset: 0x1234
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPRSTC                    \ [0x02] HDP reset
+    $03 constant RCC_LPUART1RSTC                \ [0x03] LPUART1 reset
+    $05 constant RCC_SPI6RSTC                   \ [0x05] SPI6 reset
+    $07 constant RCC_I2C4RSTC                   \ [0x07] I2C4 reset
+    $09 constant RCC_LPTIM2RSTC                 \ [0x09] LPTIM2 reset
+    $0a constant RCC_LPTIM3RSTC                 \ [0x0a] LPTIM3 reset
+    $0b constant RCC_LPTIM4RSTC                 \ [0x0b] LPTIM4 reset
+    $0c constant RCC_LPTIM5RSTC                 \ [0x0c] LPTIM5 reset
+    $0f constant RCC_VREFBUFRSTC                \ [0x0f] VREFBUF reset
+    $10 constant RCC_RTCRSTC                    \ [0x10] RTC reset
+    $16 constant RCC_R2GRETRSTC                 \ [0x16] R2GRET reset
+    $17 constant RCC_R2GNPURSTC                 \ [0x17] R2GNPU reset
+    $1f constant RCC_SERFRSTC                   \ [0x1f] SERF reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HRSTCR_DEF
+    \
+    \ @brief RCC APB4H reset register
+    \ Address offset: 0x1238
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGRSTC                 \ [0x00] SYSCFG reset
+    $02 constant RCC_DTSRSTC                    \ [0x02] DTS reset
+    $04 constant RCC_BUSPERFMRSTC               \ [0x04] BUSPERFM reset
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5RSTCR_DEF
+    \
+    \ @brief RCC APB5 reset register
+    \ Address offset: 0x123C
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCRSTC                   \ [0x01] LTDC reset
+    $02 constant RCC_DCMIPPRSTC                 \ [0x02] DCMIPP reset
+    $04 constant RCC_GFXTIMRSTC                 \ [0x04] GFXTIM reset
+    $05 constant RCC_VENCRSTC                   \ [0x05] VENC reset
+    $06 constant RCC_CSIRSTC                    \ [0x06] CSI reset
+  [then]
+
+
+  [ifdef] RCC_RCC_DIVENCR_DEF
+    \
+    \ @brief RCC divider enable register
+    \ Address offset: 0x1240
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1ENC                     \ [0x00] IC1 enable
+    $01 constant RCC_IC2ENC                     \ [0x01] IC2 enable
+    $02 constant RCC_IC3ENC                     \ [0x02] IC3 enable
+    $03 constant RCC_IC4ENC                     \ [0x03] IC4 enable
+    $04 constant RCC_IC5ENC                     \ [0x04] IC5 enable
+    $05 constant RCC_IC6ENC                     \ [0x05] IC6 enable
+    $06 constant RCC_IC7ENC                     \ [0x06] IC7 enable
+    $07 constant RCC_IC8ENC                     \ [0x07] IC8 enable
+    $08 constant RCC_IC9ENC                     \ [0x08] IC9 enable
+    $09 constant RCC_IC10ENC                    \ [0x09] IC10 enable
+    $0a constant RCC_IC11ENC                    \ [0x0a] IC11 enable
+    $0b constant RCC_IC12ENC                    \ [0x0b] IC12 enable
+    $0c constant RCC_IC13ENC                    \ [0x0c] IC13 enable
+    $0d constant RCC_IC14ENC                    \ [0x0d] IC14 enable
+    $0e constant RCC_IC15ENC                    \ [0x0e] IC15 enable
+    $0f constant RCC_IC16ENC                    \ [0x0f] IC16 enable
+    $10 constant RCC_IC17ENC                    \ [0x10] IC17 enable
+    $11 constant RCC_IC18ENC                    \ [0x11] IC18 enable
+    $12 constant RCC_IC19ENC                    \ [0x12] IC19 enable
+    $13 constant RCC_IC20ENC                    \ [0x13] IC20 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSENCR_DEF
+    \
+    \ @brief RCC bus enable register
+    \ Address offset: 0x1244
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNENC                   \ [0x00] ACLKN enable
+    $01 constant RCC_ACLKNCENC                  \ [0x01] ACLKNC enable
+    $02 constant RCC_AHBMENC                    \ [0x02] AHBM enable
+    $03 constant RCC_AHB1ENC                    \ [0x03] AHB1 enable
+    $04 constant RCC_AHB2ENC                    \ [0x04] AHB2 enable
+    $05 constant RCC_AHB3ENC                    \ [0x05] AHB3 enable
+    $06 constant RCC_AHB4ENC                    \ [0x06] AHB4 enable
+    $07 constant RCC_AHB5ENC                    \ [0x07] AHB5 enable
+    $08 constant RCC_APB1ENC                    \ [0x08] APB1 enable
+    $09 constant RCC_APB2ENC                    \ [0x09] APB2 enable
+    $0a constant RCC_APB3ENC                    \ [0x0a] APB3 enable
+    $0b constant RCC_APB4ENC                    \ [0x0b] APB4 enable
+    $0c constant RCC_APB5ENC                    \ [0x0c] APB5 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCENCR_DEF
+    \
+    \ @brief RCC miscellaneous enable register
+    \ Address offset: 0x1248
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGENC                     \ [0x00] DBG enable
+    $01 constant RCC_MCO1ENC                    \ [0x01] MCO1 enable
+    $02 constant RCC_MCO2ENC                    \ [0x02] MCO2 enable
+    $03 constant RCC_XSPIPHYCOMPENC             \ [0x03] XSPIPHYCOMP enable
+    $06 constant RCC_PERENC                     \ [0x06] PER enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMENCR_DEF
+    \
+    \ @brief RCC memory enable register
+    \ Address offset: 0x124C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3ENC                \ [0x00] AXISRAM3 enable
+    $01 constant RCC_AXISRAM4ENC                \ [0x01] AXISRAM4 enable
+    $02 constant RCC_AXISRAM5ENC                \ [0x02] AXISRAM5 enable
+    $03 constant RCC_AXISRAM6ENC                \ [0x03] AXISRAM6 enable
+    $04 constant RCC_AHBSRAM1ENC                \ [0x04] AHBSRAM1 enable
+    $05 constant RCC_AHBSRAM2ENC                \ [0x05] AHBSRAM2 enable
+    $06 constant RCC_BKPSRAMENC                 \ [0x06] BKPSRAM enable
+    $07 constant RCC_AXISRAM1ENC                \ [0x07] AXISRAM1 enable
+    $08 constant RCC_AXISRAM2ENC                \ [0x08] AXISRAM2 enable
+    $09 constant RCC_FLEXRAMENC                 \ [0x09] FLEXRAM enable
+    $0a constant RCC_NPUCACHERAMENC             \ [0x0a] NPUCACHERAM enable
+    $0b constant RCC_VENCRAMENC                 \ [0x0b] VENCRAM enable
+    $0c constant RCC_BOOTROMENC                 \ [0x0c] BOOTROM enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1ENCR_DEF
+    \
+    \ @brief RCC AHB1 enable register
+    \ Address offset: 0x1250
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1ENC                  \ [0x04] GPDMA1 enable
+    $05 constant RCC_ADC12ENC                   \ [0x05] ADC12 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2ENCR_DEF
+    \
+    \ @brief RCC AHB2 enable register
+    \ Address offset: 0x1254
+    \ Reset value: 0x00000000
+    \
+    $0c constant RCC_RAMCFGENC                  \ [0x0c] RAMCFG enable
+    $10 constant RCC_MDF1ENC                    \ [0x10] MDF1 enable
+    $11 constant RCC_ADF1ENC                    \ [0x11] ADF1 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3ENCR_DEF
+    \
+    \ @brief RCC AHB3 enable register
+    \ Address offset: 0x1258
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_RNGENC                     \ [0x00] RNG enable
+    $01 constant RCC_HASHENC                    \ [0x01] HASH enable
+    $02 constant RCC_CRYPENC                    \ [0x02] CRYP enable
+    $04 constant RCC_SAESENC                    \ [0x04] SAES enable
+    $08 constant RCC_PKAENC                     \ [0x08] PKA enable
+    $09 constant RCC_RIFSCENC                   \ [0x09] RIFSC enable
+    $0a constant RCC_IACENC                     \ [0x0a] IAC enable
+    $0e constant RCC_RISAFENC                   \ [0x0e] RISAF enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4ENCR_DEF
+    \
+    \ @brief RCC AHB4 enable register
+    \ Address offset: 0x125C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOAENC                   \ [0x00] GPIOA enable
+    $01 constant RCC_GPIOBENC                   \ [0x01] GPIOB enable
+    $02 constant RCC_GPIOCENC                   \ [0x02] GPIOC enable
+    $03 constant RCC_GPIODENC                   \ [0x03] GPIOD enable
+    $04 constant RCC_GPIOEENC                   \ [0x04] GPIOE enable
+    $05 constant RCC_GPIOFENC                   \ [0x05] GPIOF enable
+    $06 constant RCC_GPIOGENC                   \ [0x06] GPIOG enable
+    $07 constant RCC_GPIOHENC                   \ [0x07] GPIOH enable
+    $0d constant RCC_GPIONENC                   \ [0x0d] GPION enable
+    $0e constant RCC_GPIOOENC                   \ [0x0e] GPIOO enable
+    $0f constant RCC_GPIOPENC                   \ [0x0f] GPIOP enable
+    $10 constant RCC_GPIOQENC                   \ [0x10] GPIOQ enable
+    $12 constant RCC_PWRENC                     \ [0x12] PWR enable
+    $13 constant RCC_CRCENC                     \ [0x13] CRC enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5ENCR_DEF
+    \
+    \ @brief RCC AHB5 enable register
+    \ Address offset: 0x1260
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1ENC                  \ [0x00] HPDMA1 enable
+    $01 constant RCC_DMA2DENC                   \ [0x01] DMA2D enable
+    $03 constant RCC_JPEGENC                    \ [0x03] JPEG enable
+    $04 constant RCC_FMCENC                     \ [0x04] FMC enable
+    $05 constant RCC_XSPI1ENC                   \ [0x05] XSPI1 enable
+    $06 constant RCC_PSSIENC                    \ [0x06] PSSI enable
+    $07 constant RCC_SDMMC2ENC                  \ [0x07] SDMMC2 enable
+    $08 constant RCC_SDMMC1ENC                  \ [0x08] SDMMC1 enable
+    $0c constant RCC_XSPI2ENC                   \ [0x0c] XSPI2 enable
+    $0d constant RCC_XSPIMENC                   \ [0x0d] XSPIM enable
+    $0e constant RCC_MCE1ENC                    \ [0x0e] MCE1 enable
+    $0f constant RCC_MCE2ENC                    \ [0x0f] MCE2 enable
+    $10 constant RCC_MCE3ENC                    \ [0x10] MCE3 enable
+    $11 constant RCC_XSPI3ENC                   \ [0x11] XSPI3 enable
+    $12 constant RCC_MCE4ENC                    \ [0x12] MCE4 enable
+    $13 constant RCC_GFXMMUENC                  \ [0x13] GFXMMU enable
+    $14 constant RCC_GPUENC                     \ [0x14] GPU enable
+    $16 constant RCC_ETH1MACENC                 \ [0x16] ETH1MAC enable
+    $17 constant RCC_ETH1TXENC                  \ [0x17] ETH1TX enable
+    $18 constant RCC_ETH1RXENC                  \ [0x18] ETH1RX enable
+    $19 constant RCC_ETH1ENC                    \ [0x19] ETH1 enable
+    $1a constant RCC_OTG1ENC                    \ [0x1a] OTG1 enable
+    $1b constant RCC_OTGPHY1ENC                 \ [0x1b] OTGPHY1 enable
+    $1c constant RCC_OTGPHY2ENC                 \ [0x1c] OTGPHY2 enable
+    $1d constant RCC_OTG2ENC                    \ [0x1d] OTG2 enable
+    $1e constant RCC_NPUCACHEENC                \ [0x1e] NPUCACHE enable
+    $1f constant RCC_NPUENC                     \ [0x1f] NPU enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LENCR_DEF
+    \
+    \ @brief RCC APB1L enable register
+    \ Address offset: 0x1264
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2ENC                    \ [0x00] TIM2 enable
+    $01 constant RCC_TIM3ENC                    \ [0x01] TIM3 enable
+    $02 constant RCC_TIM4ENC                    \ [0x02] TIM4 enable
+    $03 constant RCC_TIM5ENC                    \ [0x03] TIM5 enable
+    $04 constant RCC_TIM6ENC                    \ [0x04] TIM6 enable
+    $05 constant RCC_TIM7ENC                    \ [0x05] TIM7 enable
+    $06 constant RCC_TIM12ENC                   \ [0x06] TIM12 enable
+    $07 constant RCC_TIM13ENC                   \ [0x07] TIM13 enable
+    $08 constant RCC_TIM14ENC                   \ [0x08] TIM14 enable
+    $09 constant RCC_LPTIM1ENC                  \ [0x09] LPTIM1 enable
+    $0c constant RCC_TIM10ENC                   \ [0x0c] TIM10 enable
+    $0d constant RCC_TIM11ENC                   \ [0x0d] TIM11 enable
+    $0e constant RCC_SPI2ENC                    \ [0x0e] SPI2 enable
+    $0f constant RCC_SPI3ENC                    \ [0x0f] SPI3 enable
+    $10 constant RCC_SPDIFRX1ENC                \ [0x10] SPDIFRX1 enable
+    $11 constant RCC_USART2ENC                  \ [0x11] USART2 enable
+    $12 constant RCC_USART3ENC                  \ [0x12] USART3 enable
+    $13 constant RCC_UART4ENC                   \ [0x13] UART4 enable
+    $14 constant RCC_UART5ENC                   \ [0x14] UART5 enable
+    $15 constant RCC_I2C1ENC                    \ [0x15] I2C1 enable
+    $16 constant RCC_I2C2ENC                    \ [0x16] I2C2 enable
+    $17 constant RCC_I2C3ENC                    \ [0x17] I2C3 enable
+    $18 constant RCC_I3C1ENC                    \ [0x18] I3C1 enable
+    $19 constant RCC_I3C2ENC                    \ [0x19] I3C2 enable
+    $1e constant RCC_UART7ENC                   \ [0x1e] UART7 enable
+    $1f constant RCC_UART8ENC                   \ [0x1f] UART8 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HENCR_DEF
+    \
+    \ @brief RCC APB1H enable register
+    \ Address offset: 0x1268
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSENC                   \ [0x05] MDIOS enable
+    $08 constant RCC_FDCANENC                   \ [0x08] FDCAN enable
+    $12 constant RCC_UCPD1ENC                   \ [0x12] UCPD1 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2ENCR_DEF
+    \
+    \ @brief RCC APB2 enable register
+    \ Address offset: 0x126C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1ENC                    \ [0x00] TIM1 enable
+    $01 constant RCC_TIM8ENC                    \ [0x01] TIM8 enable
+    $04 constant RCC_USART1ENC                  \ [0x04] USART1 enable
+    $05 constant RCC_USART6ENC                  \ [0x05] USART6 enable
+    $06 constant RCC_UART9ENC                   \ [0x06] UART9 enable
+    $07 constant RCC_USART10ENC                 \ [0x07] USART10 enable
+    $0c constant RCC_SPI1ENC                    \ [0x0c] SPI1 enable
+    $0d constant RCC_SPI4ENC                    \ [0x0d] SPI4 enable
+    $0f constant RCC_TIM18ENC                   \ [0x0f] TIM18 enable
+    $10 constant RCC_TIM15ENC                   \ [0x10] TIM15 enable
+    $11 constant RCC_TIM16ENC                   \ [0x11] TIM16 enable
+    $12 constant RCC_TIM17ENC                   \ [0x12] TIM17 enable
+    $13 constant RCC_TIM9ENC                    \ [0x13] TIM9 enable
+    $14 constant RCC_SPI5ENC                    \ [0x14] SPI5 enable
+    $15 constant RCC_SAI1ENC                    \ [0x15] SAI1 enable
+    $16 constant RCC_SAI2ENC                    \ [0x16] SAI2 enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB3ENCR_DEF
+    \
+    \ @brief RCC APB3 enable register
+    \ Address offset: 0x1270
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_DFTENC                     \ [0x02] DFT enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LENCR_DEF
+    \
+    \ @brief RCC APB4L enable register
+    \ Address offset: 0x1274
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPENC                     \ [0x02] HDP enable
+    $03 constant RCC_LPUART1ENC                 \ [0x03] LPUART1 enable
+    $05 constant RCC_SPI6ENC                    \ [0x05] SPI6 enable
+    $07 constant RCC_I2C4ENC                    \ [0x07] I2C4 enable
+    $09 constant RCC_LPTIM2ENC                  \ [0x09] LPTIM2 enable
+    $0a constant RCC_LPTIM3ENC                  \ [0x0a] LPTIM3 enable
+    $0b constant RCC_LPTIM4ENC                  \ [0x0b] LPTIM4 enable
+    $0c constant RCC_LPTIM5ENC                  \ [0x0c] LPTIM5 enable
+    $0f constant RCC_VREFBUFENC                 \ [0x0f] VREFBUF enable
+    $10 constant RCC_RTCENC                     \ [0x10] RTC enable
+    $11 constant RCC_RTCAPBENC                  \ [0x11] RTCAPB enable
+    $16 constant RCC_R2GRETENC                  \ [0x16] R2GRET enable
+    $17 constant RCC_R2GNPUENC                  \ [0x17] R2GNPU enable
+    $1f constant RCC_SERFENC                    \ [0x1f] SERF enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HENCR_DEF
+    \
+    \ @brief RCC APB4H enable register
+    \ Address offset: 0x1278
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGENC                  \ [0x00] SYSCFG enable
+    $01 constant RCC_BSECENC                    \ [0x01] BSEC enable
+    $02 constant RCC_DTSENC                     \ [0x02] DTS enable
+    $04 constant RCC_BUSPERFMENC                \ [0x04] BUSPERFM enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5ENCR_DEF
+    \
+    \ @brief RCC APB5 enable register
+    \ Address offset: 0x127C
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCENC                    \ [0x01] LTDC enable
+    $02 constant RCC_DCMIPPENC                  \ [0x02] DCMIPP enable
+    $04 constant RCC_GFXTIMENC                  \ [0x04] GFXTIM enable
+    $05 constant RCC_VENCENC                    \ [0x05] VENC enable
+    $06 constant RCC_CSIENC                     \ [0x06] CSI enable
+  [then]
+
+
+  [ifdef] RCC_RCC_DIVLPENCR_DEF
+    \
+    \ @brief RCC divider Sleep enable register
+    \ Address offset: 0x1280
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1LPENC                   \ [0x00] IC1 sleep enable
+    $01 constant RCC_IC2LPENC                   \ [0x01] IC2 sleep enable
+    $02 constant RCC_IC3LPENC                   \ [0x02] IC3 sleep enable
+    $03 constant RCC_IC4LPENC                   \ [0x03] IC4 sleep enable
+    $04 constant RCC_IC5LPENC                   \ [0x04] IC5 sleep enable
+    $05 constant RCC_IC6LPENC                   \ [0x05] IC6 sleep enable
+    $06 constant RCC_IC7LPENC                   \ [0x06] IC7 sleep enable
+    $07 constant RCC_IC8LPENC                   \ [0x07] IC8 sleep enable
+    $08 constant RCC_IC9LPENC                   \ [0x08] IC9 sleep enable
+    $09 constant RCC_IC10LPENC                  \ [0x09] IC10 sleep enable
+    $0a constant RCC_IC11LPENC                  \ [0x0a] IC11 sleep enable
+    $0b constant RCC_IC12LPENC                  \ [0x0b] IC12 sleep enable
+    $0c constant RCC_IC13LPENC                  \ [0x0c] IC13 sleep enable
+    $0d constant RCC_IC14LPENC                  \ [0x0d] IC14 sleep enable
+    $0e constant RCC_IC15LPENC                  \ [0x0e] IC15 sleep enable
+    $0f constant RCC_IC16LPENC                  \ [0x0f] IC16 sleep enable
+    $10 constant RCC_IC17LPENC                  \ [0x10] IC17 sleep enable
+    $11 constant RCC_IC18LPENC                  \ [0x11] IC18 sleep enable
+    $12 constant RCC_IC19LPENC                  \ [0x12] IC19 sleep enable
+    $13 constant RCC_IC20LPENC                  \ [0x13] IC20 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_BUSLPENCR_DEF
+    \
+    \ @brief RCC bus Sleep enable register
+    \ Address offset: 0x1284
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNLPENC                 \ [0x00] ACLKN sleep enable
+    $01 constant RCC_ACLKNCLPENC                \ [0x01] ACLKNC sleep enable
+    $02 constant RCC_AHBMLPENC                  \ [0x02] AHBM sleep enable
+    $03 constant RCC_AHB1LPENC                  \ [0x03] AHB1 sleep enable
+    $04 constant RCC_AHB2LPENC                  \ [0x04] AHB2 sleep enable
+    $05 constant RCC_AHB3LPENC                  \ [0x05] AHB3 sleep enable
+    $06 constant RCC_AHB4LPENC                  \ [0x06] AHB4 sleep enable
+    $07 constant RCC_AHB5LPENC                  \ [0x07] AHB5 sleep enable
+    $08 constant RCC_APB1LPENC                  \ [0x08] APB1 sleep enable
+    $09 constant RCC_APB2LPENC                  \ [0x09] APB2 sleep enable
+    $0a constant RCC_APB3LPENC                  \ [0x0a] APB3 sleep enable
+    $0b constant RCC_APB4LPENC                  \ [0x0b] APB4 sleep enable
+    $0c constant RCC_APB5LPENC                  \ [0x0c] APB5 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MISCLPENCR_DEF
+    \
+    \ @brief RCC miscellaneous Sleep enable register
+    \ Address offset: 0x1288
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_DBGLPENC                   \ [0x00] DBG sleep enable
+    $03 constant RCC_XSPIPHYCOMPLPENC           \ [0x03] XSPIPHYCOMP sleep enable
+    $06 constant RCC_PERLPENC                   \ [0x06] PER sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_MEMLPENCR_DEF
+    \
+    \ @brief RCC memory Sleep enable register
+    \ Address offset: 0x128C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3LPENC              \ [0x00] AXISRAM3 sleep enable
+    $01 constant RCC_AXISRAM4LPENC              \ [0x01] AXISRAM4 sleep enable
+    $02 constant RCC_AXISRAM5LPENC              \ [0x02] AXISRAM5 sleep enable
+    $03 constant RCC_AXISRAM6LPENC              \ [0x03] AXISRAM6 sleep enable
+    $04 constant RCC_AHBSRAM1LPENC              \ [0x04] AHBSRAM1 sleep enable
+    $05 constant RCC_AHBSRAM2LPENC              \ [0x05] AHBSRAM2 sleep enable
+    $06 constant RCC_BKPSRAMLPENC               \ [0x06] BKPSRAM sleep enable
+    $07 constant RCC_AXISRAM1LPENC              \ [0x07] AXISRAM1 sleep enable
+    $08 constant RCC_AXISRAM2LPENC              \ [0x08] AXISRAM2 sleep enable
+    $09 constant RCC_FLEXRAMLPENC               \ [0x09] FLEXRAM sleep enable
+    $0a constant RCC_NPUCACHERAMLPENC           \ [0x0a] NPUCACHERAM sleep enable
+    $0b constant RCC_VENCRAMLPENC               \ [0x0b] VENCRAM sleep enable
+    $0c constant RCC_BOOTROMLPENC               \ [0x0c] BOOTROM sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB1LPENCR_DEF
+    \
+    \ @brief RCC AHB1 Sleep enable register
+    \ Address offset: 0x1290
+    \ Reset value: 0x00000000
+    \
+    $04 constant RCC_GPDMA1LPENC                \ [0x04] GPDMA1 sleep enable
+    $05 constant RCC_ADC12LPENC                 \ [0x05] ADC12 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB2LPENCR_DEF
+    \
+    \ @brief RCC AHB2 Sleep enable register
+    \ Address offset: 0x1294
+    \ Reset value: 0x00000000
+    \
+    $0c constant RCC_RAMCFGLPENC                \ [0x0c] RAMCFG sleep enable
+    $10 constant RCC_MDF1LPENC                  \ [0x10] MDF1 sleep enable
+    $11 constant RCC_ADF1LPENC                  \ [0x11] ADF1 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB3LPENCR_DEF
+    \
+    \ @brief RCC AHB3 Sleep enable register
+    \ Address offset: 0x1298
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_RNGLPENC                   \ [0x00] RNG sleep enable
+    $01 constant RCC_HASHLPENC                  \ [0x01] HASH sleep enable
+    $02 constant RCC_CRYPLPENC                  \ [0x02] CRYP sleep enable
+    $04 constant RCC_SAESLPENC                  \ [0x04] SAES sleep enable
+    $08 constant RCC_PKALPENC                   \ [0x08] PKA sleep enable
+    $09 constant RCC_RIFSCLPENC                 \ [0x09] RIFSC sleep enable
+    $0a constant RCC_IACLPENC                   \ [0x0a] IAC sleep enable
+    $0e constant RCC_RISAFLPENC                 \ [0x0e] RISAF sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB4LPENCR_DEF
+    \
+    \ @brief RCC AHB4 Sleep enable register
+    \ Address offset: 0x129C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_GPIOALPENC                 \ [0x00] GPIOA sleep enable
+    $01 constant RCC_GPIOBLPENC                 \ [0x01] GPIOB sleep enable
+    $02 constant RCC_GPIOCLPENC                 \ [0x02] GPIOC sleep enable
+    $03 constant RCC_GPIODLPENC                 \ [0x03] GPIOD sleep enable
+    $04 constant RCC_GPIOELPENC                 \ [0x04] GPIOE sleep enable
+    $05 constant RCC_GPIOFLPENC                 \ [0x05] GPIOF sleep enable
+    $06 constant RCC_GPIOGLPENC                 \ [0x06] GPIOG sleep enable
+    $07 constant RCC_GPIOHLPENC                 \ [0x07] GPIOH sleep enable
+    $0d constant RCC_GPIONLPENC                 \ [0x0d] GPION sleep enable
+    $0e constant RCC_GPIOOLPENC                 \ [0x0e] GPIOO sleep enable
+    $0f constant RCC_GPIOPLPENC                 \ [0x0f] GPIOP sleep enable
+    $10 constant RCC_GPIOQLPENC                 \ [0x10] GPIOQ sleep enable
+    $12 constant RCC_PWRLPENC                   \ [0x12] PWR sleep enable
+    $13 constant RCC_CRCLPENC                   \ [0x13] CRC sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_AHB5LPENCR_DEF
+    \
+    \ @brief RCC AHB5 Sleep enable register
+    \ Address offset: 0x12A0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_HPDMA1LPENC                \ [0x00] HPDMA1 sleep enable
+    $01 constant RCC_DMA2DLPENC                 \ [0x01] DMA2D sleep enable
+    $03 constant RCC_JPEGLPENC                  \ [0x03] JPEG sleep enable
+    $04 constant RCC_FMCLPENC                   \ [0x04] FMC sleep enable
+    $05 constant RCC_XSPI1LPENC                 \ [0x05] XSPI1 sleep enable
+    $06 constant RCC_PSSILPENC                  \ [0x06] PSSI sleep enable
+    $07 constant RCC_SDMMC2LPENC                \ [0x07] SDMMC2 sleep enable
+    $08 constant RCC_SDMMC1LPENC                \ [0x08] SDMMC1 sleep enable
+    $0c constant RCC_XSPI2LPENC                 \ [0x0c] XSPI2 sleep enable
+    $0d constant RCC_XSPIMLPENC                 \ [0x0d] XSPIM sleep enable
+    $0e constant RCC_MCE1LPENC                  \ [0x0e] MCE1 sleep enable
+    $0f constant RCC_MCE2LPENC                  \ [0x0f] MCE2 sleep enable
+    $10 constant RCC_MCE3LPENC                  \ [0x10] MCE3 sleep enable
+    $11 constant RCC_XSPI3LPENC                 \ [0x11] XSPI3 sleep enable
+    $12 constant RCC_MCE4LPENC                  \ [0x12] MCE4 sleep enable
+    $13 constant RCC_GFXMMULPENC                \ [0x13] GFXMMU sleep enable
+    $14 constant RCC_GPULPENC                   \ [0x14] GPU sleep enable
+    $16 constant RCC_ETH1MACLPENC               \ [0x16] ETH1MAC sleep enable
+    $17 constant RCC_ETH1TXLPENC                \ [0x17] ETH1TX sleep enable
+    $18 constant RCC_ETH1RXLPENC                \ [0x18] ETH1RX sleep enable
+    $19 constant RCC_ETH1LPENC                  \ [0x19] ETH1 sleep enable
+    $1a constant RCC_OTG1LPENC                  \ [0x1a] OTG1 sleep enable
+    $1b constant RCC_OTGPHY1LPENC               \ [0x1b] OTGPHY1 sleep enable
+    $1c constant RCC_OTGPHY2LPENC               \ [0x1c] OTGPHY2 sleep enable
+    $1d constant RCC_OTG2LPENC                  \ [0x1d] OTG2 sleep enable
+    $1e constant RCC_NPUCACHELPENC              \ [0x1e] NPUCACHE sleep enable
+    $1f constant RCC_NPULPENC                   \ [0x1f] NPU sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1LLPENCR_DEF
+    \
+    \ @brief RCC APB1L Sleep enable register
+    \ Address offset: 0x12A4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM2LPENC                  \ [0x00] TIM2 sleep enable
+    $01 constant RCC_TIM3LPENC                  \ [0x01] TIM3 sleep enable
+    $02 constant RCC_TIM4LPENC                  \ [0x02] TIM4 sleep enable
+    $03 constant RCC_TIM5LPENC                  \ [0x03] TIM5 sleep enable
+    $04 constant RCC_TIM6LPENC                  \ [0x04] TIM6 sleep enable
+    $05 constant RCC_TIM7LPENC                  \ [0x05] TIM7 sleep enable
+    $06 constant RCC_TIM12LPENC                 \ [0x06] TIM12 sleep enable
+    $07 constant RCC_TIM13LPENC                 \ [0x07] TIM13 sleep enable
+    $08 constant RCC_TIM14LPENC                 \ [0x08] TIM14 sleep enable
+    $09 constant RCC_LPTIM1LPENC                \ [0x09] LPTIM1 sleep enable
+    $0b constant RCC_WWDGLPENC                  \ [0x0b] WWDG sleep enable
+    $0c constant RCC_TIM10LPENC                 \ [0x0c] TIM10 sleep enable
+    $0d constant RCC_TIM11LPENC                 \ [0x0d] TIM11 sleep enable
+    $0e constant RCC_SPI2LPENC                  \ [0x0e] SPI2 sleep enable
+    $0f constant RCC_SPI3LPENC                  \ [0x0f] SPI3 sleep enable
+    $10 constant RCC_SPDIFRX1LPENC              \ [0x10] SPDIFRX1 sleep enable
+    $11 constant RCC_USART2LPENC                \ [0x11] USART2 sleep enable
+    $12 constant RCC_USART3LPENC                \ [0x12] USART3 sleep enable
+    $13 constant RCC_UART4LPENC                 \ [0x13] UART4 sleep enable
+    $14 constant RCC_UART5LPENC                 \ [0x14] UART5 sleep enable
+    $15 constant RCC_I2C1LPENC                  \ [0x15] I2C1 sleep enable
+    $16 constant RCC_I2C2LPENC                  \ [0x16] I2C2 sleep enable
+    $17 constant RCC_I2C3LPENC                  \ [0x17] I2C3 sleep enable
+    $18 constant RCC_I3C1LPENC                  \ [0x18] I3C1 sleep enable
+    $19 constant RCC_I3C2LPENC                  \ [0x19] I3C2 sleep enable
+    $1e constant RCC_UART7LPENC                 \ [0x1e] UART7 sleep enable
+    $1f constant RCC_UART8LPENC                 \ [0x1f] UART8 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB1HLPENCR_DEF
+    \
+    \ @brief RCC APB1H Sleep enable register
+    \ Address offset: 0x12A8
+    \ Reset value: 0x00000000
+    \
+    $05 constant RCC_MDIOSLPENC                 \ [0x05] MDIOS sleep enable
+    $08 constant RCC_FDCANLPENC                 \ [0x08] FDCAN sleep enable
+    $12 constant RCC_UCPD1LPENC                 \ [0x12] UCPD1 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB2LPENCR_DEF
+    \
+    \ @brief RCC APB2 Sleep enable register
+    \ Address offset: 0x12AC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_TIM1LPENC                  \ [0x00] TIM1 sleep enable
+    $01 constant RCC_TIM8LPENC                  \ [0x01] TIM8 sleep enable
+    $04 constant RCC_USART1LPENC                \ [0x04] USART1 sleep enable
+    $05 constant RCC_USART6LPENC                \ [0x05] USART6 sleep enable
+    $06 constant RCC_UART9LPENC                 \ [0x06] UART9 sleep enable
+    $07 constant RCC_USART10LPENC               \ [0x07] USART10 sleep enable
+    $0c constant RCC_SPI1LPENC                  \ [0x0c] SPI1 sleep enable
+    $0d constant RCC_SPI4LPENC                  \ [0x0d] SPI4 sleep enable
+    $0f constant RCC_TIM18LPENC                 \ [0x0f] TIM18 sleep enable
+    $10 constant RCC_TIM15LPENC                 \ [0x10] TIM15 sleep enable
+    $11 constant RCC_TIM16LPENC                 \ [0x11] TIM16 sleep enable
+    $12 constant RCC_TIM17LPENC                 \ [0x12] TIM17 sleep enable
+    $13 constant RCC_TIM9LPENC                  \ [0x13] TIM9 sleep enable
+    $14 constant RCC_SPI5LPENC                  \ [0x14] SPI5 sleep enable
+    $15 constant RCC_SAI1LPENC                  \ [0x15] SAI1 sleep enable
+    $16 constant RCC_SAI2LPENC                  \ [0x16] SAI2 sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB3LPENCR_DEF
+    \
+    \ @brief RCC APB3 Sleep enable register
+    \ Address offset: 0x12B0
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_DFTLPENC                   \ [0x02] DFT sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4LLPENCR_DEF
+    \
+    \ @brief RCC APB4L Sleep enable register
+    \ Address offset: 0x12B4
+    \ Reset value: 0x00000000
+    \
+    $02 constant RCC_HDPLPENC                   \ [0x02] HDP sleep enable
+    $03 constant RCC_LPUART1LPENC               \ [0x03] LPUART1 sleep enable
+    $05 constant RCC_SPI6LPENC                  \ [0x05] SPI6 sleep enable
+    $07 constant RCC_I2C4LPENC                  \ [0x07] I2C4 sleep enable
+    $09 constant RCC_LPTIM2LPENC                \ [0x09] LPTIM2 sleep enable
+    $0a constant RCC_LPTIM3LPENC                \ [0x0a] LPTIM3 sleep enable
+    $0b constant RCC_LPTIM4LPENC                \ [0x0b] LPTIM4 sleep enable
+    $0c constant RCC_LPTIM5LPENC                \ [0x0c] LPTIM5 sleep enable
+    $0f constant RCC_VREFBUFLPENC               \ [0x0f] VREFBUF sleep enable
+    $10 constant RCC_RTCLPENC                   \ [0x10] RTC sleep enable
+    $11 constant RCC_RTCAPBLPENC                \ [0x11] RTCAPB sleep enable
+    $16 constant RCC_R2GRETLPENC                \ [0x16] R2GRET sleep enable
+    $17 constant RCC_R2GNPULPENC                \ [0x17] R2GNPU sleep enable
+    $1f constant RCC_SERFLPENC                  \ [0x1f] SERF sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB4HLPENCR_DEF
+    \
+    \ @brief RCC APB4H Sleep enable register
+    \ Address offset: 0x12B8
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_SYSCFGLPENC                \ [0x00] SYSCFG sleep enable
+    $01 constant RCC_BSECLPENC                  \ [0x01] BSEC sleep enable
+    $02 constant RCC_DTSLPENC                   \ [0x02] DTS sleep enable
+    $04 constant RCC_BUSPERFMLPENC              \ [0x04] BUSPERFM sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_APB5LPENCR_DEF
+    \
+    \ @brief RCC APB5 Sleep enable register
+    \ Address offset: 0x12BC
+    \ Reset value: 0x00000000
+    \
+    $01 constant RCC_LTDCLPENC                  \ [0x01] LTDC sleep enable
+    $02 constant RCC_DCMIPPLPENC                \ [0x02] DCMIPP sleep enable
+    $04 constant RCC_GFXTIMLPENC                \ [0x04] GFXTIM sleep enable
+    $05 constant RCC_VENCLPENC                  \ [0x05] VENC sleep enable
+    $06 constant RCC_CSILPENC                   \ [0x06] CSI sleep enable
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGCR0_DEF
+    \
+    \ @brief RCC oscillator privilege configuration register0
+    \ Address offset: 0x1784
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIPVC                     \ [0x00] Defines the privilege protection of the LSI configuration bits (enable, ready, divider).
+    $01 constant RCC_LSEPVC                     \ [0x01] Defines the privilege protection of the LSE configuration bits (enable, ready, divider).
+    $02 constant RCC_MSIPVC                     \ [0x02] Defines the privilege protection of the MSI configuration bits (enable, ready, divider).
+    $03 constant RCC_HSIPVC                     \ [0x03] Defines the privilege protection of the HSI configuration bits (enable, ready, divider).
+    $04 constant RCC_HSEPVC                     \ [0x04] Defines the privilege protection of the HSE configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGCR0_DEF
+    \
+    \ @brief RCC oscillator public configuration register0
+    \ Address offset: 0x178C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_LSIPUBC                    \ [0x00] Defines the public protection of the LSI configuration bits (enable, ready, divider).
+    $01 constant RCC_LSEPUBC                    \ [0x01] Defines the public protection of the LSE configuration bits (enable, ready, divider).
+    $02 constant RCC_MSIPUBC                    \ [0x02] Defines the public protection of the MSI configuration bits (enable, ready, divider).
+    $03 constant RCC_HSIPUBC                    \ [0x03] Defines the public protection of the HSI configuration bits (enable, ready, divider).
+    $04 constant RCC_HSEPUBC                    \ [0x04] Defines the public protection of the HSE configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGCR1_DEF
+    \
+    \ @brief RCC PLL privilege configuration register1
+    \ Address offset: 0x1794
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL1PVC                    \ [0x00] Defines the privilege protection of the PLL1 configuration bits (enable, ready, divider).
+    $01 constant RCC_PLL2PVC                    \ [0x01] Defines the privilege protection of the PLL2 configuration bits (enable, ready, divider).
+    $02 constant RCC_PLL3PVC                    \ [0x02] Defines the privilege protection of the PLL3 configuration bits (enable, ready, divider).
+    $03 constant RCC_PLL4PVC                    \ [0x03] Defines the privilege protection of the PLL4 configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGCR1_DEF
+    \
+    \ @brief RCC PLL public configuration register1
+    \ Address offset: 0x179C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_PLL1PUBC                   \ [0x00] Defines the public protection of the PLL1 configuration bits (enable, ready, divider).
+    $01 constant RCC_PLL2PUBC                   \ [0x01] Defines the public protection of the PLL2 configuration bits (enable, ready, divider).
+    $02 constant RCC_PLL3PUBC                   \ [0x02] Defines the public protection of the PLL3 configuration bits (enable, ready, divider).
+    $03 constant RCC_PLL4PUBC                   \ [0x03] Defines the public protection of the PLL4 configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGCR2_DEF
+    \
+    \ @brief RCC divider privilege configuration register2
+    \ Address offset: 0x17A4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1PVC                     \ [0x00] Defines the privilege protection of the IC1 configuration bits (enable, ready, divider).
+    $01 constant RCC_IC2PVC                     \ [0x01] Defines the privilege protection of the IC2 configuration bits (enable, ready, divider).
+    $02 constant RCC_IC3PVC                     \ [0x02] Defines the privilege protection of the IC3 configuration bits (enable, ready, divider).
+    $03 constant RCC_IC4PVC                     \ [0x03] Defines the privilege protection of the IC4 configuration bits (enable, ready, divider).
+    $04 constant RCC_IC5PVC                     \ [0x04] Defines the privilege protection of the IC5 configuration bits (enable, ready, divider).
+    $05 constant RCC_IC6PVC                     \ [0x05] Defines the privilege protection of the IC6 configuration bits (enable, ready, divider).
+    $06 constant RCC_IC7PVC                     \ [0x06] Defines the privilege protection of the IC7 configuration bits (enable, ready, divider).
+    $07 constant RCC_IC8PVC                     \ [0x07] Defines the privilege protection of the IC8 configuration bits (enable, ready, divider).
+    $08 constant RCC_IC9PVC                     \ [0x08] Defines the privilege protection of the IC9 configuration bits (enable, ready, divider).
+    $09 constant RCC_IC10PVC                    \ [0x09] Defines the privilege protection of the IC10 configuration bits (enable, ready, divider).
+    $0a constant RCC_IC11PVC                    \ [0x0a] Defines the privilege protection of the IC11 configuration bits (enable, ready, divider).
+    $0b constant RCC_IC12PVC                    \ [0x0b] Defines the privilege protection of the IC12 configuration bits (enable, ready, divider).
+    $0c constant RCC_IC13PVC                    \ [0x0c] Defines the privilege protection of the IC13 configuration bits (enable, ready, divider).
+    $0d constant RCC_IC14PVC                    \ [0x0d] Defines the privilege protection of the IC14 configuration bits (enable, ready, divider).
+    $0e constant RCC_IC15PVC                    \ [0x0e] Defines the privilege protection of the IC15 configuration bits (enable, ready, divider).
+    $0f constant RCC_IC16PVC                    \ [0x0f] Defines the privilege protection of the IC16 configuration bits (enable, ready, divider).
+    $10 constant RCC_IC17PVC                    \ [0x10] Defines the privilege protection of the IC17 configuration bits (enable, ready, divider).
+    $11 constant RCC_IC18PVC                    \ [0x11] Defines the privilege protection of the IC18 configuration bits (enable, ready, divider).
+    $12 constant RCC_IC19PVC                    \ [0x12] Defines the privilege protection of the IC19 configuration bits (enable, ready, divider).
+    $13 constant RCC_IC20PVC                    \ [0x13] Defines the privilege protection of the IC20 configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGCR2_DEF
+    \
+    \ @brief RCC divider public configuration register2
+    \ Address offset: 0x17AC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_IC1PUBC                    \ [0x00] Defines the public protection of the IC1 configuration bits (enable, ready, divider).
+    $01 constant RCC_IC2PUBC                    \ [0x01] Defines the public protection of the IC2 configuration bits (enable, ready, divider).
+    $02 constant RCC_IC3PUBC                    \ [0x02] Defines the public protection of the IC3 configuration bits (enable, ready, divider).
+    $03 constant RCC_IC4PUBC                    \ [0x03] Defines the public protection of the IC4 configuration bits (enable, ready, divider).
+    $04 constant RCC_IC5PUBC                    \ [0x04] Defines the public protection of the IC5 configuration bits (enable, ready, divider).
+    $05 constant RCC_IC6PUBC                    \ [0x05] Defines the public protection of the IC6 configuration bits (enable, ready, divider).
+    $06 constant RCC_IC7PUBC                    \ [0x06] Defines the public protection of the IC7 configuration bits (enable, ready, divider).
+    $07 constant RCC_IC8PUBC                    \ [0x07] Defines the public protection of the IC8 configuration bits (enable, ready, divider).
+    $08 constant RCC_IC9PUBC                    \ [0x08] Defines the public protection of the IC9 configuration bits (enable, ready, divider).
+    $09 constant RCC_IC10PUBC                   \ [0x09] Defines the public protection of the IC10 configuration bits (enable, ready, divider).
+    $0a constant RCC_IC11PUBC                   \ [0x0a] Defines the public protection of the IC11 configuration bits (enable, ready, divider).
+    $0b constant RCC_IC12PUBC                   \ [0x0b] Defines the public protection of the IC12 configuration bits (enable, ready, divider).
+    $0c constant RCC_IC13PUBC                   \ [0x0c] Defines the public protection of the IC13 configuration bits (enable, ready, divider).
+    $0d constant RCC_IC14PUBC                   \ [0x0d] Defines the public protection of the IC14 configuration bits (enable, ready, divider).
+    $0e constant RCC_IC15PUBC                   \ [0x0e] Defines the public protection of the IC15 configuration bits (enable, ready, divider).
+    $0f constant RCC_IC16PUBC                   \ [0x0f] Defines the public protection of the IC16 configuration bits (enable, ready, divider).
+    $10 constant RCC_IC17PUBC                   \ [0x10] Defines the public protection of the IC17 configuration bits (enable, ready, divider).
+    $11 constant RCC_IC18PUBC                   \ [0x11] Defines the public protection of the IC18 configuration bits (enable, ready, divider).
+    $12 constant RCC_IC19PUBC                   \ [0x12] Defines the public protection of the IC19 configuration bits (enable, ready, divider).
+    $13 constant RCC_IC20PUBC                   \ [0x13] Defines the public protection of the IC20 configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGCR3_DEF
+    \
+    \ @brief RCC system privilege configuration register3
+    \ Address offset: 0x17B4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODPVC                     \ [0x00] Defines the privilege protection of the MOD configuration bits (enable, ready, divider).
+    $01 constant RCC_SYSPVC                     \ [0x01] Defines the privilege protection of the SYS configuration bits (enable, ready, divider).
+    $02 constant RCC_BUSPVC                     \ [0x02] Defines the privilege protection of the BUS configuration bits (enable, ready, divider).
+    $03 constant RCC_PERPVC                     \ [0x03] Defines the privilege protection of the PER configuration bits (enable, ready, divider).
+    $04 constant RCC_INTPVC                     \ [0x04] Defines the privilege protection of the INT configuration bits (enable, ready, divider).
+    $05 constant RCC_RSTPVC                     \ [0x05] Defines the privilege protection of the RST configuration bits (enable, ready, divider).
+    $06 constant RCC_DFTPVC                     \ [0x06] Defines the privilege protection of the DFT configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGCR3_DEF
+    \
+    \ @brief RCC system public configuration register3
+    \ Address offset: 0x17BC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_MODPUBC                    \ [0x00] Defines the public protection of the MOD configuration bits (enable, ready, divider).
+    $01 constant RCC_SYSPUBC                    \ [0x01] Defines the public protection of the SYS configuration bits (enable, ready, divider).
+    $02 constant RCC_BUSPUBC                    \ [0x02] Defines the public protection of the BUS configuration bits (enable, ready, divider).
+    $03 constant RCC_PERPUBC                    \ [0x03] Defines the public protection of the PER configuration bits (enable, ready, divider).
+    $04 constant RCC_INTPUBC                    \ [0x04] Defines the public protection of the INT configuration bits (enable, ready, divider).
+    $05 constant RCC_RSTPUBC                    \ [0x05] Defines the public protection of the RST configuration bits (enable, ready, divider).
+    $06 constant RCC_DFTPUBC                    \ [0x06] Defines the public protection of the DFT configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PRIVCFGCR4_DEF
+    \
+    \ @brief RCC privilege configuration register4
+    \ Address offset: 0x17C4
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNPVC                   \ [0x00] Defines the privilege protection of the ACLKN configuration bits (enable, ready, divider).
+    $01 constant RCC_ACLKNCPVC                  \ [0x01] Defines the privilege protection of the ACLKNC configuration bits (enable, ready, divider).
+    $02 constant RCC_AHBMPVC                    \ [0x02] Defines the privilege protection of the AHBM configuration bits (enable, ready, divider).
+    $03 constant RCC_AHB1PVC                    \ [0x03] Defines the privilege protection of the AHB1 configuration bits (enable, ready, divider).
+    $04 constant RCC_AHB2PVC                    \ [0x04] Defines the privilege protection of the AHB2 configuration bits (enable, ready, divider).
+    $05 constant RCC_AHB3PVC                    \ [0x05] Defines the privilege protection of the AHB3 configuration bits (enable, ready, divider).
+    $06 constant RCC_AHB4PVC                    \ [0x06] Defines the privilege protection of the AHB4 configuration bits (enable, ready, divider).
+    $07 constant RCC_AHB5PVC                    \ [0x07] Defines the privilege protection of the AHB5 configuration bits (enable, ready, divider).
+    $08 constant RCC_APB1PVC                    \ [0x08] Defines the privilege protection of the APB1 configuration bits (enable, ready, divider).
+    $09 constant RCC_APB2PVC                    \ [0x09] Defines the privilege protection of the APB2 configuration bits (enable, ready, divider).
+    $0a constant RCC_APB3PVC                    \ [0x0a] Defines the privilege protection of the APB3 configuration bits (enable, ready, divider).
+    $0b constant RCC_APB4PVC                    \ [0x0b] Defines the privilege protection of the APB4 configuration bits (enable, ready, divider).
+    $0c constant RCC_APB5PVC                    \ [0x0c] Defines the privilege protection of the APB5 configuration bits (enable, ready, divider).
+    $0d constant RCC_NOCPVC                     \ [0x0d] Defines the privilege protection of the NOC configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGCR4_DEF
+    \
+    \ @brief RCC public configuration register4
+    \ Address offset: 0x17CC
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_ACLKNPUBC                  \ [0x00] Defines the public protection of the ACLKN configuration bits (enable, ready, divider).
+    $01 constant RCC_ACLKNCPUBC                 \ [0x01] Defines the public protection of the ACLKNC configuration bits (enable, ready, divider).
+    $02 constant RCC_AHBMPUBC                   \ [0x02] Defines the public protection of the AHBM configuration bits (enable, ready, divider).
+    $03 constant RCC_AHB1PUBC                   \ [0x03] Defines the public protection of the AHB1 configuration bits (enable, ready, divider).
+    $04 constant RCC_AHB2PUBC                   \ [0x04] Defines the public protection of the AHB2 configuration bits (enable, ready, divider).
+    $05 constant RCC_AHB3PUBC                   \ [0x05] Defines the public protection of the AHB3 configuration bits (enable, ready, divider).
+    $06 constant RCC_AHB4PUBC                   \ [0x06] Defines the public protection of the AHB4 configuration bits (enable, ready, divider).
+    $07 constant RCC_AHB5PUBC                   \ [0x07] Defines the public protection of the AHB5 configuration bits (enable, ready, divider).
+    $08 constant RCC_APB1PUBC                   \ [0x08] Defines the public protection of the APB1 configuration bits (enable, ready, divider).
+    $09 constant RCC_APB2PUBC                   \ [0x09] Defines the public protection of the APB2 configuration bits (enable, ready, divider).
+    $0a constant RCC_APB3PUBC                   \ [0x0a] Defines the public protection of the APB3 configuration bits (enable, ready, divider).
+    $0b constant RCC_APB4PUBC                   \ [0x0b] Defines the public protection of the APB4 configuration bits (enable, ready, divider).
+    $0c constant RCC_APB5PUBC                   \ [0x0c] Defines the public protection of the APB5 configuration bits (enable, ready, divider).
+    $0d constant RCC_NOCPUBC                    \ [0x0d] Defines the public protection of the NOC configuration bits (enable, ready, divider).
+  [then]
+
+
+  [ifdef] RCC_RCC_PUBCFGCR5_DEF
+    \
+    \ @brief RCC public configuration register4
+    \ Address offset: 0x17D0
+    \ Reset value: 0x00000000
+    \
+    $00 constant RCC_AXISRAM3PUBC               \ [0x00] Defines the public protection of the AXISRAM3 configuration bits (enable, ready, divider).
+    $01 constant RCC_AXISRAM4PUBC               \ [0x01] Defines the public protection of the AXISRAM4 configuration bits (enable, ready, divider).
+    $02 constant RCC_AXISRAM5PUBC               \ [0x02] Defines the public protection of the AXISRAM5 configuration bits (enable, ready, divider).
+    $03 constant RCC_AXISRAM6PUBC               \ [0x03] Defines the public protection of the AXISRAM6 configuration bits (enable, ready, divider).
+    $04 constant RCC_AHBSRAM1PUBC               \ [0x04] Defines the public protection of the AHBSRAM1 configuration bits (enable, ready, divider).
+    $05 constant RCC_AHBSRAM2PUBC               \ [0x05] Defines the public protection of the AHBSRAM2 configuration bits (enable, ready, divider).
+    $06 constant RCC_BKPSRAMPUBC                \ [0x06] Defines the public protection of the BKPSRAM configuration bits (enable, ready, divider).
+    $07 constant RCC_AXISRAM1PUBC               \ [0x07] Defines the public protection of the AXISRAM1 configuration bits (enable, ready, divider).
+    $08 constant RCC_AXISRAM2PUBC               \ [0x08] Defines the public protection of the AXISRAM2 configuration bits (enable, ready, divider).
+    $09 constant RCC_FLEXRAMPUBC                \ [0x09] Defines the public protection of the FLEXRAM configuration bits (enable, ready, divider).
+    $0a constant RCC_CACHEAXIRAMPUBC            \ [0x0a] Defines the public protection of the NPUCACHERAM configuration bits (enable, ready, divider).
+    $0b constant RCC_VENCRAMPUBC                \ [0x0b] Defines the public protection of the VENCRAM configuration bits (enable, ready, divider).
+  [then]
+
+  \
+  \ @brief Reset and clock control
+  \
+  $00 constant RCC_RCC_CR               \ RCC control register
+  $04 constant RCC_RCC_SR               \ RCC status register
+  $08 constant RCC_RCC_STOPCR           \ RCC Stop mode control register
+  $20 constant RCC_RCC_CFGR1            \ RCC configuration register 1
+  $24 constant RCC_RCC_CFGR2            \ RCC configuration register 2
+  $28 constant RCC_RCC_CKPROTR          \ RCC clock protection register
+  $2C constant RCC_RCC_BDCR             \ RCC backup domain protection register
+  $30 constant RCC_RCC_HWRSR            \ RCC reset status register for hardware
+  $34 constant RCC_RCC_RSR              \ RCC reset register
+  $40 constant RCC_RCC_LSECFGR          \ RCC LSE configuration register
+  $44 constant RCC_RCC_MSICFGR          \ RCC MSI configuration register
+  $48 constant RCC_RCC_HSICFGR          \ RCC HSI configuration register
+  $4C constant RCC_RCC_HSIMCR           \ RCC HSI monitor control register
+  $50 constant RCC_RCC_HSIMSR           \ RCC HSI monitor status register
+  $54 constant RCC_RCC_HSECFGR          \ RCC HSE configuration register
+  $80 constant RCC_RCC_PLL1CFGR1        \ RCC PLL1 configuration register 1
+  $84 constant RCC_RCC_PLL1CFGR2        \ RCC PLL1 configuration register 2
+  $88 constant RCC_RCC_PLL1CFGR3        \ RCC PLL1 configuration register 3
+  $90 constant RCC_RCC_PLL2CFGR1        \ RCC PLL2 configuration register 1
+  $94 constant RCC_RCC_PLL2CFGR2        \ RCC PLL2 configuration register 2
+  $98 constant RCC_RCC_PLL2CFGR3        \ RCC PLL2 configuration register 3
+  $A0 constant RCC_RCC_PLL3CFGR1        \ RCC PLL3 configuration register 1
+  $A4 constant RCC_RCC_PLL3CFGR2        \ RCC PLL3 configuration register 2
+  $A8 constant RCC_RCC_PLL3CFGR3        \ RCC PLL3 configuration register 3
+  $B0 constant RCC_RCC_PLL4CFGR1        \ RCC PLL4 configuration register 1
+  $B4 constant RCC_RCC_PLL4CFGR2        \ RCC PLL4 configuration register 2
+  $B8 constant RCC_RCC_PLL4CFGR3        \ RCC PLL4 configuration register 3
+  $C4 constant RCC_RCC_IC1CFGR          \ RCC IC1 configuration register
+  $C8 constant RCC_RCC_IC2CFGR          \ RCC IC2 configuration register
+  $CC constant RCC_RCC_IC3CFGR          \ RCC IC3 configuration register
+  $D0 constant RCC_RCC_IC4CFGR          \ RCC IC4 configuration register
+  $D4 constant RCC_RCC_IC5CFGR          \ RCC IC5 configuration register
+  $D8 constant RCC_RCC_IC6CFGR          \ RCC IC6 configuration register
+  $DC constant RCC_RCC_IC7CFGR          \ RCC IC7 configuration register
+  $E0 constant RCC_RCC_IC8CFGR          \ RCC IC8 configuration register
+  $E4 constant RCC_RCC_IC9CFGR          \ RCC IC9 configuration register
+  $E8 constant RCC_RCC_IC10CFGR         \ RCC IC10 configuration register
+  $EC constant RCC_RCC_IC11CFGR         \ RCC IC11 configuration register
+  $F0 constant RCC_RCC_IC12CFGR         \ RCC IC12 configuration register
+  $F4 constant RCC_RCC_IC13CFGR         \ RCC IC13 configuration register
+  $F8 constant RCC_RCC_IC14CFGR         \ RCC IC14 configuration register
+  $FC constant RCC_RCC_IC15CFGR         \ RCC IC15 configuration register
+  $100 constant RCC_RCC_IC16CFGR        \ RCC IC16 configuration register
+  $104 constant RCC_RCC_IC17CFGR        \ RCC IC17 configuration register
+  $108 constant RCC_RCC_IC18CFGR        \ RCC IC18 configuration register
+  $10C constant RCC_RCC_IC19CFGR        \ RCC IC19 configuration register
+  $110 constant RCC_RCC_IC20CFGR        \ RCC IC20 configuration register
+  $124 constant RCC_RCC_CIER            \ RCC clock-source interrupt enable register
+  $128 constant RCC_RCC_CIFR            \ RCC clock-source interrupt flag register
+  $12C constant RCC_RCC_CICR            \ RCC clock-source interrupt Clear register
+  $144 constant RCC_RCC_CCIPR1          \ RCC clock configuration for independent peripheral register1
+  $148 constant RCC_RCC_CCIPR2          \ RCC clock configuration for independent peripheral register 2
+  $14C constant RCC_RCC_CCIPR3          \ RCC clock configuration for independent peripheral register3
+  $150 constant RCC_RCC_CCIPR4          \ RCC clock configuration for independent peripheral register4
+  $154 constant RCC_RCC_CCIPR5          \ RCC lock configuration for independent peripheral register5
+  $158 constant RCC_RCC_CCIPR6          \ RCC clock configuration for independent peripheral register6
+  $15C constant RCC_RCC_CCIPR7          \ RCC clock configuration for independent peripheral register7
+  $160 constant RCC_RCC_CCIPR8          \ RCC clock configuration for independent peripheral register8
+  $164 constant RCC_RCC_CCIPR9          \ RCC clock configuration for independent peripheral register9
+  $170 constant RCC_RCC_CCIPR12         \ RCC clock configuration for independent peripheral register12
+  $174 constant RCC_RCC_CCIPR13         \ RCC clock configuration for independent peripheral register13
+  $178 constant RCC_RCC_CCIPR14         \ RCC clock configuration for independent peripheral register14
+  $204 constant RCC_RCC_BUSRSTR         \ RCC SoC buses reset register
+  $208 constant RCC_RCC_MISCRSTR        \ RCC miscellaneous configurations reset register
+  $20C constant RCC_RCC_MEMRSTR         \ RCC memories reset register
+  $210 constant RCC_RCC_AHB1RSTR        \ RCC AHB1 Reset register
+  $214 constant RCC_RCC_AHB2RSTR        \ RCC AHB2 reset register
+  $218 constant RCC_RCC_AHB3RSTR        \ RCC AHB3 reset register
+  $21C constant RCC_RCC_AHB4RSTR        \ RCC AHB4 reset register
+  $220 constant RCC_RCC_AHB5RSTR        \ RCC AHB5 reset register
+  $224 constant RCC_RCC_APB1LRSTR       \ RCC APB1L reset register
+  $228 constant RCC_RCC_APB1HRSTR       \ RCC APB1H reset register
+  $22C constant RCC_RCC_APB2RSTR        \ RCC APB2 reset register
+  $234 constant RCC_RCC_APB4LRSTR       \ RCC APB4L reset register
+  $238 constant RCC_RCC_APB4HRSTR       \ RCC APB4H reset register
+  $23C constant RCC_RCC_APB5RSTR        \ RCC APB5 reset register
+  $240 constant RCC_RCC_DIVENR          \ RCC IC dividers enable register
+  $244 constant RCC_RCC_BUSENR          \ RCC SoC buses enable register
+  $248 constant RCC_RCC_MISCENR         \ RCC miscellaneous configuration enable register
+  $24C constant RCC_RCC_MEMENR          \ RCC memory enable register
+  $250 constant RCC_RCC_AHB1ENR         \ RCC AHB1 enable register
+  $254 constant RCC_RCC_AHB2ENR         \ RCC AHB2 enable register
+  $258 constant RCC_RCC_AHB3ENR         \ RCC AHB3 enable register
+  $25C constant RCC_RCC_AHB4ENR         \ RCC AHB4 enable register
+  $260 constant RCC_RCC_AHB5ENR         \ RCC AHB5 enable register
+  $264 constant RCC_RCC_APB1LENR        \ RCC APB1L enable register
+  $268 constant RCC_RCC_APB1HENR        \ RCC APB1H enable register
+  $26C constant RCC_RCC_APB2ENR         \ RCC APB2 enable register
+  $270 constant RCC_RCC_APB3ENR         \ RCC APB3 enable register
+  $274 constant RCC_RCC_APB4LENR        \ RCC APB4L enable register
+  $278 constant RCC_RCC_APB4HENR        \ RCC APB4H enable register
+  $27C constant RCC_RCC_APB5ENR         \ RCC APB5 enable register
+  $280 constant RCC_RCC_DIVLPENR        \ RCC dividers Sleep enable register
+  $284 constant RCC_RCC_BUSLPENR        \ RCC SoC buses Sleep enable register
+  $288 constant RCC_RCC_MISCLPENR       \ RCC miscellaneous configurations Sleep enable register
+  $28C constant RCC_RCC_MEMLPENR        \ RCC memory Sleep enable register
+  $290 constant RCC_RCC_AHB1LPENR       \ RCC AHB1 Sleep enable register
+  $294 constant RCC_RCC_AHB2LPENR       \ RCC AHB2 Sleep enable register
+  $298 constant RCC_RCC_AHB3LPENR       \ RCC AHB3 Sleep enable register
+  $29C constant RCC_RCC_AHB4LPENR       \ RCC AHB4 Sleep enable register
+  $2A0 constant RCC_RCC_AHB5LPENR       \ RCC AHB5 Sleep enable register
+  $2A4 constant RCC_RCC_APB1LLPENR      \ RCC APB1L Sleep enable register
+  $2A8 constant RCC_RCC_APB1HLPENR      \ RCC APB1H Sleep enable register
+  $2AC constant RCC_RCC_APB2LPENR       \ RCC APB2 Sleep enable register
+  $2B0 constant RCC_RCC_APB3LPENR       \ RCC APB3 Sleep enable register
+  $2B4 constant RCC_RCC_APB4LLPENR      \ RCC APB4L Sleep enable register
+  $2B8 constant RCC_RCC_APB4HLPENR      \ RCC APB4H Sleep enable register
+  $2BC constant RCC_RCC_APB5LPENR       \ RCC APB5 Sleep enable register
+  $44C constant RCC_RCC_RDCR            \ RCC APB5 Sleep enable register
+  $780 constant RCC_RCC_SECCFGR0        \ RCC oscillator secure configuration register0
+  $784 constant RCC_RCC_PRIVCFGR0       \ RCC oscillator privilege configuration register0
+  $788 constant RCC_RCC_LOCKCFGR0       \ RCC oscillator lock configuration register0
+  $78C constant RCC_RCC_PUBCFGR0        \ RCC oscillator public configuration register0
+  $790 constant RCC_RCC_SECCFGR1        \ RCC PLL secure configuration register1
+  $794 constant RCC_RCC_PRIVCFGR1       \ RCC PLL privilege configuration register1
+  $798 constant RCC_RCC_LOCKCFGR1       \ RCC PLL lock configuration register1
+  $79C constant RCC_RCC_PUBCFGR1        \ RCC PLL public configuration register1
+  $7A0 constant RCC_RCC_SECCFGR2        \ RCC divider secure configuration register2
+  $7A4 constant RCC_RCC_PRIVCFGR2       \ RCC divider privilege configuration register2
+  $7A8 constant RCC_RCC_LOCKCFGR2       \ RCC divider lock configuration register2
+  $7AC constant RCC_RCC_PUBCFGR2        \ RCC divider public configuration register2
+  $7B0 constant RCC_RCC_SECCFGR3        \ RCC system secure configuration register3
+  $7B4 constant RCC_RCC_PRIVCFGR3       \ RCC system privilege configuration register3
+  $7B8 constant RCC_RCC_LOCKCFGR3       \ RCC system lock configuration register3
+  $7BC constant RCC_RCC_PUBCFGR3        \ RCC system public configuration register3
+  $7C0 constant RCC_RCC_SECCFGR4        \ RCC bus secure configuration register4
+  $7C4 constant RCC_RCC_PRIVCFGR4       \ RCC bus privilege configuration register4
+  $7C8 constant RCC_RCC_LOCKCFGR4       \ RCC bus lock configuration register4
+  $7CC constant RCC_RCC_PUBCFGR4        \ RCC bus public configuration register4
+  $7D0 constant RCC_RCC_PUBCFGR5        \ RCC bus public configuration register4
+  $800 constant RCC_RCC_CSR             \ RCC control set register
+  $808 constant RCC_RCC_STOPCSR         \ RCC Stop configuration register
+  $A04 constant RCC_RCC_BUSRSTSR        \ RCC bus reset set register
+  $A08 constant RCC_RCC_MISCRSTSR       \ RCC miscellaneous reset register
+  $A0C constant RCC_RCC_MEMRSTSR        \ RCC memory reset register
+  $A10 constant RCC_RCC_AHB1RSTSR       \ RCC AHB1 reset register
+  $A14 constant RCC_RCC_AHB2RSTSR       \ RCC AHB2 reset register
+  $A18 constant RCC_RCC_AHB3RSTSR       \ RCC AHB3 reset register
+  $A1C constant RCC_RCC_AHB4RSTSR       \ RCC AHB4 reset register
+  $A20 constant RCC_RCC_AHB5RSTSR       \ RCC AHB5 reset register
+  $A24 constant RCC_RCC_APB1LRSTSR      \ RCC APB1L reset register
+  $A28 constant RCC_RCC_APB1HRSTSR      \ RCC APB1H reset register
+  $A2C constant RCC_RCC_APB2RSTSR       \ RCC APB2 reset register
+  $A34 constant RCC_RCC_APB4LRSTSR      \ RCC APB4L reset register
+  $A38 constant RCC_RCC_APB4HRSTSR      \ RCC APB4H reset register
+  $A3C constant RCC_RCC_APB5RSTSR       \ RCC APB5 reset register
+  $A40 constant RCC_RCC_DIVENSR         \ RCC Divider enable register
+  $A44 constant RCC_RCC_BUSENSR         \ RCC bus enable register
+  $A48 constant RCC_RCC_MISCENSR        \ RCC miscellaneous enable register
+  $A4C constant RCC_RCC_MEMENSR         \ RCC memory enable register
+  $A50 constant RCC_RCC_AHB1ENSR        \ RCC AHB1 enable register
+  $A54 constant RCC_RCC_AHB2ENSR        \ RCC AHB2 enable register
+  $A58 constant RCC_RCC_AHB3ENSR        \ RCC AHB3 enable register
+  $A5C constant RCC_RCC_AHB4ENSR        \ RCC AHB4 enable register
+  $A60 constant RCC_RCC_AHB5ENSR        \ RCC AHB5 enable register
+  $A64 constant RCC_RCC_APB1LENSR       \ RCC APB1L enable register
+  $A68 constant RCC_RCC_APB1HENSR       \ RCC APB1H enable register
+  $A6C constant RCC_RCC_APB2ENSR        \ RCC APB2 enable register
+  $A70 constant RCC_RCC_APB3ENSR        \ RCC APB3 enable register
+  $A74 constant RCC_RCC_APB4LENSR       \ RCC APB4L enable register
+  $A78 constant RCC_RCC_APB4HENSR       \ RCC APB4H enable register
+  $A7C constant RCC_RCC_APB5ENSR        \ RCC APB5 enable register
+  $A80 constant RCC_RCC_DIVLPENSR       \ RCC divider Sleep enable register
+  $A84 constant RCC_RCC_BUSLPENSR       \ RCC bus Sleep enable register
+  $A88 constant RCC_RCC_MISCLPENSR      \ RCC miscellaneous Sleep enable register
+  $A8C constant RCC_RCC_MEMLPENSR       \ RCC memory sleep enable register
+  $A90 constant RCC_RCC_AHB1LPENSR      \ RCC AHB1 Sleep enable register
+  $A94 constant RCC_RCC_AHB2LPENSR      \ RCC AHB2 Sleep enable register
+  $A98 constant RCC_RCC_AHB3LPENSR      \ RCC AHB3 Sleep enable register
+  $A9C constant RCC_RCC_AHB4LPENSR      \ RCC AHB4 Sleep enable register
+  $AA0 constant RCC_RCC_AHB5LPENSR      \ RCC AHB5 Sleep enable register
+  $AA4 constant RCC_RCC_APB1LLPENSR     \ RCC APB1L Sleep enable register
+  $AA8 constant RCC_RCC_APB1HLPENSR     \ RCC APB1H Sleep enable register
+  $AAC constant RCC_RCC_APB2LPENSR      \ RCC APB2 Sleep enable register
+  $AB0 constant RCC_RCC_APB3LPENSR      \ RCC APB3 Sleep enable register
+  $AB4 constant RCC_RCC_APB4LLPENSR     \ RCC APB4L Sleep enable register
+  $AB8 constant RCC_RCC_APB4HLPENSR     \ RCC APB4H Sleep enable register
+  $ABC constant RCC_RCC_APB5LPENSR      \ RCC APB5 Sleep enable register
+  $F84 constant RCC_RCC_PRIVCFGSR0      \ RCC oscillator privilege configuration register0
+  $F8C constant RCC_RCC_PUBCFGSR0       \ RCC oscillator public configuration register0
+  $F94 constant RCC_RCC_PRIVCFGSR1      \ RCC PLL privilege configuration register1
+  $F9C constant RCC_RCC_PUBCFGSR1       \ RCC PLL public configuration register1
+  $FA4 constant RCC_RCC_PRIVCFGSR2      \ RCC divider privilege configuration register2
+  $FAC constant RCC_RCC_PUBCFGSR2       \ RCC divider public configuration register2
+  $FB0 constant RCC_RCC_SECCFGSR3       \ RCC system secure configuration register3
+  $FB4 constant RCC_RCC_PRIVCFGSR3      \ RCC system privilege configuration register3
+  $FB8 constant RCC_RCC_LOCKCFGSR3      \ RCC system lock configuration register3
+  $FBC constant RCC_RCC_PUBCFGSR3       \ RCC system public configuration register3
+  $FC4 constant RCC_RCC_PRIVCFGSR4      \ RCC privilege configuration register4
+  $FCC constant RCC_RCC_PUBCFGSR4       \ RCC public configuration register4
+  $FD0 constant RCC_RCC_PUBCFGSR5       \ RCC public configuration register4
+  $1000 constant RCC_RCC_CCR            \ RCC control Clear register
+  $1008 constant RCC_RCC_STOPCCR        \ RCC StopCCR configuration register
+  $1204 constant RCC_RCC_BUSRSTCR       \ RCC bus reset register
+  $1208 constant RCC_RCC_MISCRSTCR      \ RCC miscellaneous reset register
+  $120C constant RCC_RCC_MEMRSTCR       \ RCC memory reset register
+  $1210 constant RCC_RCC_AHB1RSTCR      \ RCC AHB1 reset register
+  $1214 constant RCC_RCC_AHB2RSTCR      \ RCC AHB2 Reset register
+  $1218 constant RCC_RCC_AHB3RSTCR      \ RCC AHB3 reset register
+  $121C constant RCC_RCC_AHB4RSTCR      \ RCC AHB4 reset register
+  $1220 constant RCC_RCC_AHB5RSTCR      \ RCC AHB5 reset register
+  $1224 constant RCC_RCC_APB1LRSTCR     \ RCC APB1L reset register
+  $1228 constant RCC_RCC_APB1HRSTCR     \ RCC APB1H reset register
+  $122C constant RCC_RCC_APB2RSTCR      \ RCC APB2 reset register
+  $1234 constant RCC_RCC_APB4LRSTCR     \ RCC APB4L reset register
+  $1238 constant RCC_RCC_APB4HRSTCR     \ RCC APB4H reset register
+  $123C constant RCC_RCC_APB5RSTCR      \ RCC APB5 reset register
+  $1240 constant RCC_RCC_DIVENCR        \ RCC divider enable register
+  $1244 constant RCC_RCC_BUSENCR        \ RCC bus enable register
+  $1248 constant RCC_RCC_MISCENCR       \ RCC miscellaneous enable register
+  $124C constant RCC_RCC_MEMENCR        \ RCC memory enable register
+  $1250 constant RCC_RCC_AHB1ENCR       \ RCC AHB1 enable register
+  $1254 constant RCC_RCC_AHB2ENCR       \ RCC AHB2 enable register
+  $1258 constant RCC_RCC_AHB3ENCR       \ RCC AHB3 enable register
+  $125C constant RCC_RCC_AHB4ENCR       \ RCC AHB4 enable register
+  $1260 constant RCC_RCC_AHB5ENCR       \ RCC AHB5 enable register
+  $1264 constant RCC_RCC_APB1LENCR      \ RCC APB1L enable register
+  $1268 constant RCC_RCC_APB1HENCR      \ RCC APB1H enable register
+  $126C constant RCC_RCC_APB2ENCR       \ RCC APB2 enable register
+  $1270 constant RCC_RCC_APB3ENCR       \ RCC APB3 enable register
+  $1274 constant RCC_RCC_APB4LENCR      \ RCC APB4L enable register
+  $1278 constant RCC_RCC_APB4HENCR      \ RCC APB4H enable register
+  $127C constant RCC_RCC_APB5ENCR       \ RCC APB5 enable register
+  $1280 constant RCC_RCC_DIVLPENCR      \ RCC divider Sleep enable register
+  $1284 constant RCC_RCC_BUSLPENCR      \ RCC bus Sleep enable register
+  $1288 constant RCC_RCC_MISCLPENCR     \ RCC miscellaneous Sleep enable register
+  $128C constant RCC_RCC_MEMLPENCR      \ RCC memory Sleep enable register
+  $1290 constant RCC_RCC_AHB1LPENCR     \ RCC AHB1 Sleep enable register
+  $1294 constant RCC_RCC_AHB2LPENCR     \ RCC AHB2 Sleep enable register
+  $1298 constant RCC_RCC_AHB3LPENCR     \ RCC AHB3 Sleep enable register
+  $129C constant RCC_RCC_AHB4LPENCR     \ RCC AHB4 Sleep enable register
+  $12A0 constant RCC_RCC_AHB5LPENCR     \ RCC AHB5 Sleep enable register
+  $12A4 constant RCC_RCC_APB1LLPENCR    \ RCC APB1L Sleep enable register
+  $12A8 constant RCC_RCC_APB1HLPENCR    \ RCC APB1H Sleep enable register
+  $12AC constant RCC_RCC_APB2LPENCR     \ RCC APB2 Sleep enable register
+  $12B0 constant RCC_RCC_APB3LPENCR     \ RCC APB3 Sleep enable register
+  $12B4 constant RCC_RCC_APB4LLPENCR    \ RCC APB4L Sleep enable register
+  $12B8 constant RCC_RCC_APB4HLPENCR    \ RCC APB4H Sleep enable register
+  $12BC constant RCC_RCC_APB5LPENCR     \ RCC APB5 Sleep enable register
+  $1784 constant RCC_RCC_PRIVCFGCR0     \ RCC oscillator privilege configuration register0
+  $178C constant RCC_RCC_PUBCFGCR0      \ RCC oscillator public configuration register0
+  $1794 constant RCC_RCC_PRIVCFGCR1     \ RCC PLL privilege configuration register1
+  $179C constant RCC_RCC_PUBCFGCR1      \ RCC PLL public configuration register1
+  $17A4 constant RCC_RCC_PRIVCFGCR2     \ RCC divider privilege configuration register2
+  $17AC constant RCC_RCC_PUBCFGCR2      \ RCC divider public configuration register2
+  $17B4 constant RCC_RCC_PRIVCFGCR3     \ RCC system privilege configuration register3
+  $17BC constant RCC_RCC_PUBCFGCR3      \ RCC system public configuration register3
+  $17C4 constant RCC_RCC_PRIVCFGCR4     \ RCC privilege configuration register4
+  $17CC constant RCC_RCC_PUBCFGCR4      \ RCC public configuration register4
+  $17D0 constant RCC_RCC_PUBCFGCR5      \ RCC public configuration register4
+
+: RCC_DEF ; [then]

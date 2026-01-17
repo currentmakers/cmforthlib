@@ -1,114 +1,101 @@
 \
-\ @file stm32h503.h
-\ @brief Loader for all peripherals in a STM32H503
+\ @file stm32h503.fload
+\ @brief Device header for STM32H503
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include comp.fs
-.include crc.fs
-.include crs.fs
-.include dac.fs
-.include dbgmcu.fs
-.include dts.fs
-.include exti.fs
-.include fdcan1.fs
-.include flash.fs
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpiod.fs
-.include gpioh.fs
-.include gtzc1.fs
-.include gpdma1.fs
-.include gpdma2.fs
-.include hash.fs
-.include icache.fs
-.include iwdg.fs
-.include i2c1.fs
-.include i2c2.fs
-.include i3c1.fs
-.include i3c2.fs
-.include lptim1.fs
-.include lptim2.fs
-.include lpuart.fs
-.include opamp1.fs
-.include pwr.fs
-.include ramcfg.fs
-.include rcc.fs
-.include rng.fs
-.include rtc.fs
-.include sbs.fs
-.include spi1.fs
-.include spi2.fs
-.include spi3.fs
-.include tamp.fs
-.include tim1.fs
-.include tim2.fs
-.include tim3.fs
-.include tim6.fs
-.include tim7.fs
-.include usart1.fs
-.include usart2.fs
-.include usart3.fs
-.include usb.fs
-.include wwdg.fs
+[ifndef] STM32H503_LOADER
+  .include "adc.fs"
+  .include "comp.fs"
+  .include "crc.fs"
+  .include "crs.fs"
+  .include "dac.fs"
+  .include "dbgmcu.fs"
+  .include "dts.fs"
+  .include "exti.fs"
+  .include "fdcan1.fs"
+  .include "flash.fs"
+  .include "gpioa.fs"
+  .include "gpiob.fs"
+  .include "gpio.fs"
+  .include "gpioh.fs"
+  .include "gtzc1.fs"
+  .include "gpdma.fs"
+  .include "hash.fs"
+  .include "icache.fs"
+  .include "iwdg.fs"
+  .include "i2c.fs"
+  .include "i3c.fs"
+  .include "lptim.fs"
+  .include "lpuart.fs"
+  .include "opamp1.fs"
+  .include "pwr.fs"
+  .include "ramcfg.fs"
+  .include "rcc.fs"
+  .include "rng.fs"
+  .include "rtc.fs"
+  .include "sbs.fs"
+  .include "spi.fs"
+  .include "tamp.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim3.fs"
+  .include "tim6.fs"
+  .include "tim7.fs"
+  .include "usart.fs"
+  .include "usb.fs"
+  .include "wwdg.fs"
 
-decimal
+  $0x42028000 constant ADC              \ See adc.fs
+  $0x40004000 constant COMP             \ See comp.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40006000 constant CRS              \ See crs.fs
+  $0x42028400 constant DAC              \ See dac.fs
+  $0x44024000 constant DBGMCU           \ See dbgmcu.fs
+  $0x40008C00 constant DTS              \ See dts.fs
+  $0x44022000 constant EXTI             \ See exti.fs
+  $0x4000A400 constant FDCAN1           \ See fdcan1.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x42020000 constant GPIOA            \ See gpioa.fs
+  $0x42020400 constant GPIOB            \ See gpiob.fs
+  $0x42020800 constant GPIOC            \ See gpio.fs
+  $0x42020C00 constant GPIOD            \ See gpio.fs
+  $0x42021C00 constant GPIOH            \ See gpioh.fs
+  $0x40032400 constant GTZC1            \ See gtzc1.fs
+  $0x40020000 constant GPDMA1           \ See gpdma.fs
+  $0x40021000 constant GPDMA2           \ See gpdma.fs
+  $0x420C0400 constant HASH             \ See hash.fs
+  $0x40030400 constant ICACHE           \ See icache.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40005C00 constant I3C1             \ See i3c.fs
+  $0x44003000 constant I3C2             \ See i3c.fs
+  $0x44004400 constant LPTIM1           \ See lptim.fs
+  $0x40009400 constant LPTIM2           \ See lptim.fs
+  $0x44002400 constant LPUART           \ See lpuart.fs
+  $0x40003400 constant OPAMP1           \ See opamp1.fs
+  $0x44020800 constant PWR              \ See pwr.fs
+  $0x40026000 constant RAMCFG           \ See ramcfg.fs
+  $0x44020C00 constant RCC              \ See rcc.fs
+  $0x420C0800 constant RNG              \ See rng.fs
+  $0x44007800 constant RTC              \ See rtc.fs
+  $0x44000400 constant SBS              \ See sbs.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x40003C00 constant SPI3             \ See spi.fs
+  $0x44007C00 constant TAMP             \ See tamp.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim3.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim7.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x40016000 constant USB              \ See usb.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ Analog to digital converter
-.include COMP                   \ Comparator
-.include CRC                    \ Cyclic redundancy check calculation unit
-.include CRS                    \ Clock recovery system
-.include DAC                    \ Digital to analog converter
-.include DBGMCU                 \ Microcontroller debug unit
-.include DTS                    \ Digital temperature sensor
-.include EXTI                   \ Extended interrupt/event controller
-.include FDCAN1                 \ Controller area network
-.include FLASH                  \ FLASH address block description
-.include GPIOA                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOD                  \ General-purpose I/Os
-.include GPIOH                  \ General-purpose I/Os
-.include GTZC1                  \ Global privilege controller
-.include GPDMA1                 \ General purpose direct memory access controller
-.include GPDMA2                 \ GPDMA2 channel 0 global interrupt
-.include HASH                   \ Hash processor
-.include ICACHE                 \ Instruction cache
-.include IWDG                   \ Independent watchdog
-.include I2C1                   \ Inter-integrated circuit
-.include I2C2                   \ I2C2 event interrupt
-.include I3C1                   \ Improved inter-integrated circuit
-.include I3C2                   \ I3C2 event interrupt
-.include LPTIM1                 \ Low power timer
-.include LPTIM2                 \ LPTIM2 global interrupt
-.include LPUART                 \ Universal synchronous asynchronous receiver transmitter
-.include OPAMP1                 \ Operational amplifiers
-.include PWR                    \ Power control
-.include RAMCFG                 \ RAMs configuration controller
-.include RCC                    \ Reset and clock controller
-.include RNG                    \ True random number generator
-.include RTC                    \ Real-time clock
-.include SBS                    \ System configuration, boot and security
-.include SPI1                   \ Serial peripheral interface
-.include SPI2                   \ SPI2 global interrupt
-.include SPI3                   \ SPI3 global interrupt
-.include TAMP                   \ Tamper and backup registers
-.include TIM1                   \ Advanced-control timers
-.include TIM2                   \ General-purpose timers
-.include TIM3                   \ General-purpose timers
-.include TIM6                   \ Basic timers
-.include TIM7                   \ Basic timers
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include USART2                 \ USART2 global interrupt
-.include USART3                 \ USART3 global interrupt
-.include USB                    \ USB full speed
-.include WWDG                   \ System window watchdog
-
-compiletoram
-
+: STM32H503_LOADER ; [then]

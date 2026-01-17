@@ -6,40 +6,42 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] PWR_DEF
 
-\
-\ @brief power control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_CR_LPDS                                      \ Low-power deep sleep
-$00000002 constant PWR_CR_PDDS                                      \ Power down deepsleep
-$00000004 constant PWR_CR_CWUF                                      \ Clear wakeup flag
-$00000008 constant PWR_CR_CSBF                                      \ Clear standby flag
-$00000100 constant PWR_CR_DBP                                       \ Disable backup domain write protection
-
-
-\
-\ @brief power control/status register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_CSR_WUF                                      \ Wakeup flag
-$00000002 constant PWR_CSR_SBF                                      \ Standby flag
-$00000100 constant PWR_CSR_EWUP1                                    \ Enable WKUP pin 1
-$00000200 constant PWR_CSR_EWUP2                                    \ Enable WKUP pin 2
-$00000800 constant PWR_CSR_EWUP4                                    \ Enable WKUP pin 4
-$00001000 constant PWR_CSR_EWUP5                                    \ Enable WKUP pin 5
-$00002000 constant PWR_CSR_EWUP6                                    \ Enable WKUP pin 6
-$00004000 constant PWR_CSR_EWUP7                                    \ Enable WKUP pin 7
+  [ifdef] PWR_CR_DEF
+    \
+    \ @brief power control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_LPDS                       \ [0x00] Low-power deep sleep
+    $01 constant PWR_PDDS                       \ [0x01] Power down deepsleep
+    $02 constant PWR_CWUF                       \ [0x02] Clear wakeup flag
+    $03 constant PWR_CSBF                       \ [0x03] Clear standby flag
+    $08 constant PWR_DBP                        \ [0x08] Disable backup domain write protection
+  [then]
 
 
-\
-\ @brief Power control
-\
-$40007000 constant PWR_CR         \ offset: 0x00 : power control register
-$40007004 constant PWR_CSR        \ offset: 0x04 : power control/status register
+  [ifdef] PWR_CSR_DEF
+    \
+    \ @brief power control/status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_WUF                        \ [0x00] Wakeup flag
+    $01 constant PWR_SBF                        \ [0x01] Standby flag
+    $08 constant PWR_EWUP1                      \ [0x08] Enable WKUP pin 1
+    $09 constant PWR_EWUP2                      \ [0x09] Enable WKUP pin 2
+    $0b constant PWR_EWUP4                      \ [0x0b] Enable WKUP pin 4
+    $0c constant PWR_EWUP5                      \ [0x0c] Enable WKUP pin 5
+    $0d constant PWR_EWUP6                      \ [0x0d] Enable WKUP pin 6
+    $0e constant PWR_EWUP7                      \ [0x0e] Enable WKUP pin 7
+  [then]
 
+  \
+  \ @brief Power control
+  \
+  $00 constant PWR_CR                   \ power control register
+  $04 constant PWR_CSR                  \ power control/status register
+
+: PWR_DEF ; [then]

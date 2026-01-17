@@ -6,997 +6,1062 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief OTG_HS device configuration register
-\ Address offset: 0x00
-\ Reset value: 0x02200000
-\
-
-$00000003 constant OTG_HS_DEVICE_OTG_HS_DCFG_DSPD                   \ Device speed
-$00000004 constant OTG_HS_DEVICE_OTG_HS_DCFG_NZLSOHSK               \ Nonzero-length status OUT handshake
-$000007f0 constant OTG_HS_DEVICE_OTG_HS_DCFG_DAD                    \ Device address
-$00001800 constant OTG_HS_DEVICE_OTG_HS_DCFG_PFIVL                  \ Periodic (micro)frame interval
-$03000000 constant OTG_HS_DEVICE_OTG_HS_DCFG_PERSCHIVL              \ Periodic scheduling interval
-
-
-\
-\ @brief OTG_HS device control register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DCTL_RWUSIG                 \ Remote wakeup signaling
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DCTL_SDIS                   \ Soft disconnect
-$00000004 constant OTG_HS_DEVICE_OTG_HS_DCTL_GINSTS                 \ Global IN NAK status
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DCTL_GONSTS                 \ Global OUT NAK status
-$00000070 constant OTG_HS_DEVICE_OTG_HS_DCTL_TCTL                   \ Test control
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DCTL_SGINAK                 \ Set global IN NAK
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DCTL_CGINAK                 \ Clear global IN NAK
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DCTL_SGONAK                 \ Set global OUT NAK
-$00000400 constant OTG_HS_DEVICE_OTG_HS_DCTL_CGONAK                 \ Clear global OUT NAK
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DCTL_POPRGDNE               \ Power-on programming done
-
-
-\
-\ @brief OTG_HS device status register
-\ Address offset: 0x08
-\ Reset value: 0x00000010
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DSTS_SUSPSTS                \ Suspend status
-$00000006 constant OTG_HS_DEVICE_OTG_HS_DSTS_ENUMSPD                \ Enumerated speed
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DSTS_EERR                   \ Erratic error
-$003fff00 constant OTG_HS_DEVICE_OTG_HS_DSTS_FNSOF                  \ Frame number of the received SOF
-
-
-\
-\ @brief OTG_HS device IN endpoint common interrupt mask register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK_XFRCM               \ Transfer completed interrupt mask
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK_EPDM                \ Endpoint disabled interrupt mask
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK_TOM                 \ Timeout condition mask (nonisochronous endpoints)
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK_ITTXFEMSK           \ IN token received when TxFIFO empty mask
-$00000020 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK_INEPNMM             \ IN token received with EP mismatch mask
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK_INEPNEM             \ IN endpoint NAK effective mask
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK_TXFURM              \ FIFO underrun mask
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK_BIM                 \ BNA interrupt mask
-
-
-\
-\ @brief OTG_HS device OUT endpoint common interrupt mask register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK_XFRCM               \ Transfer completed interrupt mask
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK_EPDM                \ Endpoint disabled interrupt mask
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK_STUPM               \ SETUP phase done mask
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK_OTEPDM              \ OUT token received when endpoint disabled mask
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK_B2BSTUP             \ Back-to-back SETUP packets received mask
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK_OPEM                \ OUT packet error mask
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK_BOIM                \ BNA interrupt mask
-
-
-\
-\ @brief OTG_HS device all endpoints interrupt register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DAINT_IEPINT                \ IN endpoint interrupt bits
-$ffff0000 constant OTG_HS_DEVICE_OTG_HS_DAINT_OEPINT                \ OUT endpoint interrupt bits
-
-
-\
-\ @brief OTG_HS all endpoints interrupt mask register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DAINTMSK_IEPM               \ IN EP interrupt mask bits
-$ffff0000 constant OTG_HS_DEVICE_OTG_HS_DAINTMSK_OEPM               \ OUT EP interrupt mask bits
-
-
-\
-\ @brief OTG_HS device VBUS discharge time register
-\ Address offset: 0x28
-\ Reset value: 0x000017D7
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DVBUSDIS_VBUSDT             \ Device VBUS discharge time
-
-
-\
-\ @brief OTG_HS device VBUS pulsing time register
-\ Address offset: 0x2C
-\ Reset value: 0x000005B8
-\
-
-$00000fff constant OTG_HS_DEVICE_OTG_HS_DVBUSPULSE_DVBUSP           \ Device VBUS pulsing time
-
-
-\
-\ @brief OTG_HS Device threshold control register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DTHRCTL_NONISOTHREN         \ Nonisochronous IN endpoints threshold enable
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DTHRCTL_ISOTHREN            \ ISO IN endpoint threshold enable
-$000007fc constant OTG_HS_DEVICE_OTG_HS_DTHRCTL_TXTHRLEN            \ Transmit threshold length
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DTHRCTL_RXTHREN             \ Receive threshold enable
-$03fe0000 constant OTG_HS_DEVICE_OTG_HS_DTHRCTL_RXTHRLEN            \ Receive threshold length
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DTHRCTL_ARPEN               \ Arbiter parking enable
-
-
-\
-\ @brief OTG_HS device IN endpoint FIFO empty interrupt mask register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DIEPEMPMSK_INEPTXFEM        \ IN EP Tx FIFO empty interrupt mask bits
-
-
-\
-\ @brief OTG_HS device each endpoint interrupt register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DEACHINT_IEP1INT            \ IN endpoint 1interrupt bit
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DEACHINT_OEP1INT            \ OUT endpoint 1 interrupt bit
-
-
-\
-\ @brief OTG_HS device each endpoint interrupt register mask
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DEACHINTMSK_IEP1INTM        \ IN Endpoint 1 interrupt mask bit
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DEACHINTMSK_OEP1INTM        \ OUT Endpoint 1 interrupt mask bit
-
-
-\
-\ @brief OTG_HS device each in endpoint-1 interrupt register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_XFRCM          \ Transfer completed interrupt mask
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_EPDM           \ Endpoint disabled interrupt mask
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_TOM            \ Timeout condition mask (nonisochronous endpoints)
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_ITTXFEMSK      \ IN token received when TxFIFO empty mask
-$00000020 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_INEPNMM        \ IN token received with EP mismatch mask
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_INEPNEM        \ IN endpoint NAK effective mask
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_TXFURM         \ FIFO underrun mask
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_BIM            \ BNA interrupt mask
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_NAKM           \ NAK interrupt mask
-
-
-\
-\ @brief OTG_HS device each OUT endpoint-1 interrupt register
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_XFRCM          \ Transfer completed interrupt mask
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_EPDM           \ Endpoint disabled interrupt mask
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_TOM            \ Timeout condition mask
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_ITTXFEMSK      \ IN token received when TxFIFO empty mask
-$00000020 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_INEPNMM        \ IN token received with EP mismatch mask
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_INEPNEM        \ IN endpoint NAK effective mask
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_TXFURM         \ OUT packet error mask
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_BIM            \ BNA interrupt mask
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_BERRM          \ Bubble error interrupt mask
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_NAKM           \ NAK interrupt mask
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_NYETM          \ NYET interrupt mask
-
-
-\
-\ @brief OTG device endpoint-0 control register
-\ Address offset: 0x100
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_EONUM_DPID         \ Even/odd frame
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_EPTYP              \ Endpoint type
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_STALL              \ STALL handshake
-$03c00000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_SD0PID_SEVNFRM     \ Set DATA0 PID
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG device endpoint-0 interrupt register
-\ Address offset: 0x108
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_TOC                \ Timeout condition
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_ITTXFE             \ IN token received when TxFIFO is empty
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_INEPNE             \ IN endpoint NAK effective
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_TXFE               \ Transmit FIFO empty
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_TXFIFOUDRN         \ Transmit Fifo Underrun
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_BNA                \ Buffer not available interrupt
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_PKTDRPSTS          \ Packet dropped status
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_BERR               \ Babble error interrupt
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0_NAK                \ NAK interrupt
-
-
-\
-\ @brief OTG_HS device IN endpoint 0 transfer size register
-\ Address offset: 0x110
-\ Reset value: 0x00000000
-\
-
-$0000007f constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ0_XFRSIZ            \ Transfer size
-$00180000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ0_PKTCNT            \ Packet count
-
-
-\
-\ @brief OTG_HS device endpoint-1 DMA address register
-\ Address offset: 0x114
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA1_DMAADDR            \ DMA address
-
-
-\
-\ @brief OTG_HS device IN endpoint transmit FIFO status register
-\ Address offset: 0x118
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DTXFSTS0_INEPTFSAV          \ IN endpoint TxFIFO space avail
-
-
-\
-\ @brief OTG device endpoint-1 control register
-\ Address offset: 0x120
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_EONUM_DPID         \ Even/odd frame
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_EPTYP              \ Endpoint type
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_STALL              \ STALL handshake
-$03c00000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_SD0PID_SEVNFRM     \ Set DATA0 PID
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG device endpoint-1 interrupt register
-\ Address offset: 0x128
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_TOC                \ Timeout condition
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_ITTXFE             \ IN token received when TxFIFO is empty
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_INEPNE             \ IN endpoint NAK effective
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_TXFE               \ Transmit FIFO empty
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_TXFIFOUDRN         \ Transmit Fifo Underrun
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_BNA                \ Buffer not available interrupt
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_PKTDRPSTS          \ Packet dropped status
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_BERR               \ Babble error interrupt
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1_NAK                \ NAK interrupt
-
-
-\
-\ @brief OTG_HS device endpoint transfer size register
-\ Address offset: 0x130
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ1_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ1_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ1_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_HS device endpoint-2 DMA address register
-\ Address offset: 0x134
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA2_DMAADDR            \ DMA address
-
-
-\
-\ @brief OTG_HS device IN endpoint transmit FIFO status register
-\ Address offset: 0x138
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DTXFSTS1_INEPTFSAV          \ IN endpoint TxFIFO space avail
-
-
-\
-\ @brief OTG device endpoint-2 control register
-\ Address offset: 0x140
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_EONUM_DPID         \ Even/odd frame
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_EPTYP              \ Endpoint type
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_STALL              \ STALL handshake
-$03c00000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_SD0PID_SEVNFRM     \ Set DATA0 PID
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG device endpoint-2 interrupt register
-\ Address offset: 0x148
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_TOC                \ Timeout condition
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_ITTXFE             \ IN token received when TxFIFO is empty
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_INEPNE             \ IN endpoint NAK effective
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_TXFE               \ Transmit FIFO empty
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_TXFIFOUDRN         \ Transmit Fifo Underrun
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_BNA                \ Buffer not available interrupt
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_PKTDRPSTS          \ Packet dropped status
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_BERR               \ Babble error interrupt
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2_NAK                \ NAK interrupt
-
-
-\
-\ @brief OTG_HS device endpoint transfer size register
-\ Address offset: 0x150
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ2_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ2_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ2_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_HS device endpoint-3 DMA address register
-\ Address offset: 0x154
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA3_DMAADDR            \ DMA address
-
-
-\
-\ @brief OTG_HS device IN endpoint transmit FIFO status register
-\ Address offset: 0x158
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DTXFSTS2_INEPTFSAV          \ IN endpoint TxFIFO space avail
-
-
-\
-\ @brief OTG device endpoint-3 control register
-\ Address offset: 0x160
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_EONUM_DPID         \ Even/odd frame
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_EPTYP              \ Endpoint type
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_STALL              \ STALL handshake
-$03c00000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_SD0PID_SEVNFRM     \ Set DATA0 PID
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG device endpoint-3 interrupt register
-\ Address offset: 0x168
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_TOC                \ Timeout condition
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_ITTXFE             \ IN token received when TxFIFO is empty
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_INEPNE             \ IN endpoint NAK effective
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_TXFE               \ Transmit FIFO empty
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_TXFIFOUDRN         \ Transmit Fifo Underrun
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_BNA                \ Buffer not available interrupt
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_PKTDRPSTS          \ Packet dropped status
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_BERR               \ Babble error interrupt
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3_NAK                \ NAK interrupt
-
-
-\
-\ @brief OTG_HS device endpoint transfer size register
-\ Address offset: 0x170
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ3_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ3_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ3_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_HS device endpoint-4 DMA address register
-\ Address offset: 0x174
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA4_DMAADDR            \ DMA address
-
-
-\
-\ @brief OTG_HS device IN endpoint transmit FIFO status register
-\ Address offset: 0x178
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DTXFSTS3_INEPTFSAV          \ IN endpoint TxFIFO space avail
-
-
-\
-\ @brief OTG device endpoint-4 control register
-\ Address offset: 0x180
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_EONUM_DPID         \ Even/odd frame
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_EPTYP              \ Endpoint type
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_STALL              \ STALL handshake
-$03c00000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_SD0PID_SEVNFRM     \ Set DATA0 PID
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG device endpoint-4 interrupt register
-\ Address offset: 0x188
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_TOC                \ Timeout condition
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_ITTXFE             \ IN token received when TxFIFO is empty
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_INEPNE             \ IN endpoint NAK effective
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_TXFE               \ Transmit FIFO empty
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_TXFIFOUDRN         \ Transmit Fifo Underrun
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_BNA                \ Buffer not available interrupt
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_PKTDRPSTS          \ Packet dropped status
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_BERR               \ Babble error interrupt
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4_NAK                \ NAK interrupt
-
-
-\
-\ @brief OTG_HS device endpoint transfer size register
-\ Address offset: 0x190
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ4_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ4_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ4_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_HS device endpoint-5 DMA address register
-\ Address offset: 0x194
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA5_DMAADDR            \ DMA address
-
-
-\
-\ @brief OTG_HS device IN endpoint transmit FIFO status register
-\ Address offset: 0x198
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DTXFSTS4_INEPTFSAV          \ IN endpoint TxFIFO space avail
-
-
-\
-\ @brief OTG device endpoint-5 control register
-\ Address offset: 0x1A0
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_EONUM_DPID         \ Even/odd frame
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_EPTYP              \ Endpoint type
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_STALL              \ STALL handshake
-$03c00000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_SD0PID_SEVNFRM     \ Set DATA0 PID
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG device endpoint-5 interrupt register
-\ Address offset: 0x1A8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_TOC                \ Timeout condition
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_ITTXFE             \ IN token received when TxFIFO is empty
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_INEPNE             \ IN endpoint NAK effective
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_TXFE               \ Transmit FIFO empty
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_TXFIFOUDRN         \ Transmit Fifo Underrun
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_BNA                \ Buffer not available interrupt
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_PKTDRPSTS          \ Packet dropped status
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_BERR               \ Babble error interrupt
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5_NAK                \ NAK interrupt
-
-
-\
-\ @brief OTG_HS device endpoint transfer size register
-\ Address offset: 0x1B0
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ5_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ5_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ5_MCNT              \ Multi count
-
-
-\
-\ @brief OTG_HS device IN endpoint transmit FIFO status register
-\ Address offset: 0x1B8
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OTG_HS_DEVICE_OTG_HS_DTXFSTS5_INEPTFSAV          \ IN endpoint TxFIFO space avail
-
-
-\
-\ @brief OTG device endpoint-6 control register
-\ Address offset: 0x1C0
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_EONUM_DPID         \ Even/odd frame
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_EPTYP              \ Endpoint type
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_STALL              \ STALL handshake
-$03c00000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_SD0PID_SEVNFRM     \ Set DATA0 PID
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG device endpoint-6 interrupt register
-\ Address offset: 0x1C8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_TOC                \ Timeout condition
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_ITTXFE             \ IN token received when TxFIFO is empty
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_INEPNE             \ IN endpoint NAK effective
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_TXFE               \ Transmit FIFO empty
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_TXFIFOUDRN         \ Transmit Fifo Underrun
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_BNA                \ Buffer not available interrupt
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_PKTDRPSTS          \ Packet dropped status
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_BERR               \ Babble error interrupt
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6_NAK                \ NAK interrupt
-
-
-\
-\ @brief OTG device endpoint-7 control register
-\ Address offset: 0x1E0
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_EONUM_DPID         \ Even/odd frame
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_EPTYP              \ Endpoint type
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_STALL              \ STALL handshake
-$03c00000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_TXFNUM             \ TxFIFO number
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_SD0PID_SEVNFRM     \ Set DATA0 PID
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG device endpoint-7 interrupt register
-\ Address offset: 0x1E8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_TOC                \ Timeout condition
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_ITTXFE             \ IN token received when TxFIFO is empty
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_INEPNE             \ IN endpoint NAK effective
-$00000080 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_TXFE               \ Transmit FIFO empty
-$00000100 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_TXFIFOUDRN         \ Transmit Fifo Underrun
-$00000200 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_BNA                \ Buffer not available interrupt
-$00000800 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_PKTDRPSTS          \ Packet dropped status
-$00001000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_BERR               \ Babble error interrupt
-$00002000 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7_NAK                \ NAK interrupt
-
-
-\
-\ @brief OTG_HS device control OUT endpoint 0 control register
-\ Address offset: 0x300
-\ Reset value: 0x00008000
-\
-
-$00000003 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_USBAEP             \ USB active endpoint
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_EPTYP              \ Endpoint type
-$00100000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_SNPM               \ Snoop mode
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_STALL              \ STALL handshake
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_SNAK               \ Set NAK
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG_HS device endpoint-0 interrupt register
-\ Address offset: 0x308
-\ Reset value: 0x00000080
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPINT0_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPINT0_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPINT0_STUP               \ SETUP phase done
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPINT0_OTEPDIS            \ OUT token received when endpoint disabled
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPINT0_B2BSTUP            \ Back-to-back SETUP packets received
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPINT0_NYET               \ NYET interrupt
-
-
-\
-\ @brief OTG_HS device endpoint-1 transfer size register
-\ Address offset: 0x310
-\ Reset value: 0x00000000
-\
-
-$0000007f constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ0_XFRSIZ            \ Transfer size
-$00080000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ0_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ0_STUPCNT           \ SETUP packet count
-
-
-\
-\ @brief OTG device endpoint-1 control register
-\ Address offset: 0x320
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_EONUM_DPID         \ Even odd frame/Endpoint data PID
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_EPTYP              \ Endpoint type
-$00100000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_SNPM               \ Snoop mode
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_STALL              \ STALL handshake
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_SD0PID_SEVNFRM     \ Set DATA0 PID/Set even frame
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG_HS device endpoint-1 interrupt register
-\ Address offset: 0x328
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPINT1_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPINT1_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPINT1_STUP               \ SETUP phase done
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPINT1_OTEPDIS            \ OUT token received when endpoint disabled
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPINT1_B2BSTUP            \ Back-to-back SETUP packets received
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPINT1_NYET               \ NYET interrupt
-
-
-\
-\ @brief OTG_HS device endpoint-2 transfer size register
-\ Address offset: 0x330
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ1_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ1_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ1_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief OTG device endpoint-2 control register
-\ Address offset: 0x340
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_EONUM_DPID         \ Even odd frame/Endpoint data PID
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_EPTYP              \ Endpoint type
-$00100000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_SNPM               \ Snoop mode
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_STALL              \ STALL handshake
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_SD0PID_SEVNFRM     \ Set DATA0 PID/Set even frame
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG_HS device endpoint-2 interrupt register
-\ Address offset: 0x348
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPINT2_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPINT2_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPINT2_STUP               \ SETUP phase done
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPINT2_OTEPDIS            \ OUT token received when endpoint disabled
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPINT2_B2BSTUP            \ Back-to-back SETUP packets received
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPINT2_NYET               \ NYET interrupt
-
-
-\
-\ @brief OTG_HS device endpoint-3 transfer size register
-\ Address offset: 0x350
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ2_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ2_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ2_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief OTG device endpoint-3 control register
-\ Address offset: 0x360
-\ Reset value: 0x00000000
-\
-
-$000007ff constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_MPSIZ              \ Maximum packet size
-$00008000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_USBAEP             \ USB active endpoint
-$00010000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_EONUM_DPID         \ Even odd frame/Endpoint data PID
-$00020000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_NAKSTS             \ NAK status
-$000c0000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_EPTYP              \ Endpoint type
-$00100000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_SNPM               \ Snoop mode
-$00200000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_STALL              \ STALL handshake
-$04000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_CNAK               \ Clear NAK
-$08000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_SNAK               \ Set NAK
-$10000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_SD0PID_SEVNFRM     \ Set DATA0 PID/Set even frame
-$20000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_SODDFRM            \ Set odd frame
-$40000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_EPDIS              \ Endpoint disable
-$80000000 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3_EPENA              \ Endpoint enable
-
-
-\
-\ @brief OTG_HS device endpoint-3 interrupt register
-\ Address offset: 0x368
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPINT3_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPINT3_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPINT3_STUP               \ SETUP phase done
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPINT3_OTEPDIS            \ OUT token received when endpoint disabled
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPINT3_B2BSTUP            \ Back-to-back SETUP packets received
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPINT3_NYET               \ NYET interrupt
-
-
-\
-\ @brief OTG_HS device endpoint-4 transfer size register
-\ Address offset: 0x370
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ3_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ3_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ3_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief OTG_HS device endpoint-4 interrupt register
-\ Address offset: 0x388
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPINT4_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPINT4_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPINT4_STUP               \ SETUP phase done
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPINT4_OTEPDIS            \ OUT token received when endpoint disabled
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPINT4_B2BSTUP            \ Back-to-back SETUP packets received
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPINT4_NYET               \ NYET interrupt
-
-
-\
-\ @brief OTG_HS device endpoint-5 transfer size register
-\ Address offset: 0x390
-\ Reset value: 0x00000000
-\
-
-$0007ffff constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ4_XFRSIZ            \ Transfer size
-$1ff80000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ4_PKTCNT            \ Packet count
-$60000000 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ4_RXDPID_STUPCNT    \ Received data PID/SETUP packet count
-
-
-\
-\ @brief OTG_HS device endpoint-5 interrupt register
-\ Address offset: 0x3A8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPINT5_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPINT5_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPINT5_STUP               \ SETUP phase done
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPINT5_OTEPDIS            \ OUT token received when endpoint disabled
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPINT5_B2BSTUP            \ Back-to-back SETUP packets received
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPINT5_NYET               \ NYET interrupt
-
-
-\
-\ @brief OTG_HS device endpoint-6 interrupt register
-\ Address offset: 0x3C8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPINT6_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPINT6_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPINT6_STUP               \ SETUP phase done
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPINT6_OTEPDIS            \ OUT token received when endpoint disabled
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPINT6_B2BSTUP            \ Back-to-back SETUP packets received
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPINT6_NYET               \ NYET interrupt
-
-
-\
-\ @brief OTG_HS device endpoint-7 interrupt register
-\ Address offset: 0x3E8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_HS_DEVICE_OTG_HS_DOEPINT7_XFRC               \ Transfer completed interrupt
-$00000002 constant OTG_HS_DEVICE_OTG_HS_DOEPINT7_EPDISD             \ Endpoint disabled interrupt
-$00000008 constant OTG_HS_DEVICE_OTG_HS_DOEPINT7_STUP               \ SETUP phase done
-$00000010 constant OTG_HS_DEVICE_OTG_HS_DOEPINT7_OTEPDIS            \ OUT token received when endpoint disabled
-$00000040 constant OTG_HS_DEVICE_OTG_HS_DOEPINT7_B2BSTUP            \ Back-to-back SETUP packets received
-$00004000 constant OTG_HS_DEVICE_OTG_HS_DOEPINT7_NYET               \ NYET interrupt
-
-
-\
-\ @brief USB on the go high speed
-\
-$40040800 constant OTG_HS_DEVICE_OTG_HS_DCFG  \ offset: 0x00 : OTG_HS device configuration register
-$40040804 constant OTG_HS_DEVICE_OTG_HS_DCTL  \ offset: 0x04 : OTG_HS device control register
-$40040808 constant OTG_HS_DEVICE_OTG_HS_DSTS  \ offset: 0x08 : OTG_HS device status register
-$40040810 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK  \ offset: 0x10 : OTG_HS device IN endpoint common interrupt mask register
-$40040814 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK  \ offset: 0x14 : OTG_HS device OUT endpoint common interrupt mask register
-$40040818 constant OTG_HS_DEVICE_OTG_HS_DAINT  \ offset: 0x18 : OTG_HS device all endpoints interrupt register
-$4004081c constant OTG_HS_DEVICE_OTG_HS_DAINTMSK  \ offset: 0x1C : OTG_HS all endpoints interrupt mask register
-$40040828 constant OTG_HS_DEVICE_OTG_HS_DVBUSDIS  \ offset: 0x28 : OTG_HS device VBUS discharge time register
-$4004082c constant OTG_HS_DEVICE_OTG_HS_DVBUSPULSE  \ offset: 0x2C : OTG_HS device VBUS pulsing time register
-$40040830 constant OTG_HS_DEVICE_OTG_HS_DTHRCTL  \ offset: 0x30 : OTG_HS Device threshold control register
-$40040834 constant OTG_HS_DEVICE_OTG_HS_DIEPEMPMSK  \ offset: 0x34 : OTG_HS device IN endpoint FIFO empty interrupt mask register
-$40040838 constant OTG_HS_DEVICE_OTG_HS_DEACHINT  \ offset: 0x38 : OTG_HS device each endpoint interrupt register
-$4004083c constant OTG_HS_DEVICE_OTG_HS_DEACHINTMSK  \ offset: 0x3C : OTG_HS device each endpoint interrupt register mask
-$40040840 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1  \ offset: 0x40 : OTG_HS device each in endpoint-1 interrupt register
-$40040880 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1  \ offset: 0x80 : OTG_HS device each OUT endpoint-1 interrupt register
-$40040900 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0  \ offset: 0x100 : OTG device endpoint-0 control register
-$40040908 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0  \ offset: 0x108 : OTG device endpoint-0 interrupt register
-$40040910 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ0  \ offset: 0x110 : OTG_HS device IN endpoint 0 transfer size register
-$40040914 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA1  \ offset: 0x114 : OTG_HS device endpoint-1 DMA address register
-$40040918 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS0  \ offset: 0x118 : OTG_HS device IN endpoint transmit FIFO status register
-$40040920 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1  \ offset: 0x120 : OTG device endpoint-1 control register
-$40040928 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1  \ offset: 0x128 : OTG device endpoint-1 interrupt register
-$40040930 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ1  \ offset: 0x130 : OTG_HS device endpoint transfer size register
-$40040934 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA2  \ offset: 0x134 : OTG_HS device endpoint-2 DMA address register
-$40040938 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS1  \ offset: 0x138 : OTG_HS device IN endpoint transmit FIFO status register
-$40040940 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2  \ offset: 0x140 : OTG device endpoint-2 control register
-$40040948 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2  \ offset: 0x148 : OTG device endpoint-2 interrupt register
-$40040950 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ2  \ offset: 0x150 : OTG_HS device endpoint transfer size register
-$40040954 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA3  \ offset: 0x154 : OTG_HS device endpoint-3 DMA address register
-$40040958 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS2  \ offset: 0x158 : OTG_HS device IN endpoint transmit FIFO status register
-$40040960 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3  \ offset: 0x160 : OTG device endpoint-3 control register
-$40040968 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3  \ offset: 0x168 : OTG device endpoint-3 interrupt register
-$40040970 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ3  \ offset: 0x170 : OTG_HS device endpoint transfer size register
-$40040974 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA4  \ offset: 0x174 : OTG_HS device endpoint-4 DMA address register
-$40040978 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS3  \ offset: 0x178 : OTG_HS device IN endpoint transmit FIFO status register
-$40040980 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4  \ offset: 0x180 : OTG device endpoint-4 control register
-$40040988 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4  \ offset: 0x188 : OTG device endpoint-4 interrupt register
-$40040990 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ4  \ offset: 0x190 : OTG_HS device endpoint transfer size register
-$40040994 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA5  \ offset: 0x194 : OTG_HS device endpoint-5 DMA address register
-$40040998 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS4  \ offset: 0x198 : OTG_HS device IN endpoint transmit FIFO status register
-$400409a0 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5  \ offset: 0x1A0 : OTG device endpoint-5 control register
-$400409a8 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5  \ offset: 0x1A8 : OTG device endpoint-5 interrupt register
-$400409b0 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ5  \ offset: 0x1B0 : OTG_HS device endpoint transfer size register
-$400409b8 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS5  \ offset: 0x1B8 : OTG_HS device IN endpoint transmit FIFO status register
-$400409c0 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6  \ offset: 0x1C0 : OTG device endpoint-6 control register
-$400409c8 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6  \ offset: 0x1C8 : OTG device endpoint-6 interrupt register
-$400409e0 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7  \ offset: 0x1E0 : OTG device endpoint-7 control register
-$400409e8 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7  \ offset: 0x1E8 : OTG device endpoint-7 interrupt register
-$40040b00 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0  \ offset: 0x300 : OTG_HS device control OUT endpoint 0 control register
-$40040b08 constant OTG_HS_DEVICE_OTG_HS_DOEPINT0  \ offset: 0x308 : OTG_HS device endpoint-0 interrupt register
-$40040b10 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ0  \ offset: 0x310 : OTG_HS device endpoint-1 transfer size register
-$40040b20 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1  \ offset: 0x320 : OTG device endpoint-1 control register
-$40040b28 constant OTG_HS_DEVICE_OTG_HS_DOEPINT1  \ offset: 0x328 : OTG_HS device endpoint-1 interrupt register
-$40040b30 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ1  \ offset: 0x330 : OTG_HS device endpoint-2 transfer size register
-$40040b40 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2  \ offset: 0x340 : OTG device endpoint-2 control register
-$40040b48 constant OTG_HS_DEVICE_OTG_HS_DOEPINT2  \ offset: 0x348 : OTG_HS device endpoint-2 interrupt register
-$40040b50 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ2  \ offset: 0x350 : OTG_HS device endpoint-3 transfer size register
-$40040b60 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3  \ offset: 0x360 : OTG device endpoint-3 control register
-$40040b68 constant OTG_HS_DEVICE_OTG_HS_DOEPINT3  \ offset: 0x368 : OTG_HS device endpoint-3 interrupt register
-$40040b70 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ3  \ offset: 0x370 : OTG_HS device endpoint-4 transfer size register
-$40040b88 constant OTG_HS_DEVICE_OTG_HS_DOEPINT4  \ offset: 0x388 : OTG_HS device endpoint-4 interrupt register
-$40040b90 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ4  \ offset: 0x390 : OTG_HS device endpoint-5 transfer size register
-$40040ba8 constant OTG_HS_DEVICE_OTG_HS_DOEPINT5  \ offset: 0x3A8 : OTG_HS device endpoint-5 interrupt register
-$40040bc8 constant OTG_HS_DEVICE_OTG_HS_DOEPINT6  \ offset: 0x3C8 : OTG_HS device endpoint-6 interrupt register
-$40040be8 constant OTG_HS_DEVICE_OTG_HS_DOEPINT7  \ offset: 0x3E8 : OTG_HS device endpoint-7 interrupt register
-
+[ifndef] OTG_HS_DEVICE_DEF
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DCFG_DEF
+    \
+    \ @brief OTG_HS device configuration register
+    \ Address offset: 0x00
+    \ Reset value: 0x02200000
+    \
+    $00 constant OTG_HS_DEVICE_DSPD             \ [0x00 : 2] Device speed
+    $02 constant OTG_HS_DEVICE_NZLSOHSK         \ [0x02] Nonzero-length status OUT handshake
+    $04 constant OTG_HS_DEVICE_DAD              \ [0x04 : 7] Device address
+    $0b constant OTG_HS_DEVICE_PFIVL            \ [0x0b : 2] Periodic (micro)frame interval
+    $18 constant OTG_HS_DEVICE_PERSCHIVL        \ [0x18 : 2] Periodic scheduling interval
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DCTL_DEF
+    \
+    \ @brief OTG_HS device control register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_RWUSIG           \ [0x00] Remote wakeup signaling
+    $01 constant OTG_HS_DEVICE_SDIS             \ [0x01] Soft disconnect
+    $02 constant OTG_HS_DEVICE_GINSTS           \ [0x02] Global IN NAK status
+    $03 constant OTG_HS_DEVICE_GONSTS           \ [0x03] Global OUT NAK status
+    $04 constant OTG_HS_DEVICE_TCTL             \ [0x04 : 3] Test control
+    $07 constant OTG_HS_DEVICE_SGINAK           \ [0x07] Set global IN NAK
+    $08 constant OTG_HS_DEVICE_CGINAK           \ [0x08] Clear global IN NAK
+    $09 constant OTG_HS_DEVICE_SGONAK           \ [0x09] Set global OUT NAK
+    $0a constant OTG_HS_DEVICE_CGONAK           \ [0x0a] Clear global OUT NAK
+    $0b constant OTG_HS_DEVICE_POPRGDNE         \ [0x0b] Power-on programming done
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DSTS_DEF
+    \
+    \ @brief OTG_HS device status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000010
+    \
+    $00 constant OTG_HS_DEVICE_SUSPSTS          \ [0x00] Suspend status
+    $01 constant OTG_HS_DEVICE_ENUMSPD          \ [0x01 : 2] Enumerated speed
+    $03 constant OTG_HS_DEVICE_EERR             \ [0x03] Erratic error
+    $08 constant OTG_HS_DEVICE_FNSOF            \ [0x08 : 14] Frame number of the received SOF
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPMSK_DEF
+    \
+    \ @brief OTG_HS device IN endpoint common interrupt mask register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRCM            \ [0x00] Transfer completed interrupt mask
+    $01 constant OTG_HS_DEVICE_EPDM             \ [0x01] Endpoint disabled interrupt mask
+    $03 constant OTG_HS_DEVICE_TOM              \ [0x03] Timeout condition mask (nonisochronous endpoints)
+    $04 constant OTG_HS_DEVICE_ITTXFEMSK        \ [0x04] IN token received when TxFIFO empty mask
+    $05 constant OTG_HS_DEVICE_INEPNMM          \ [0x05] IN token received with EP mismatch mask
+    $06 constant OTG_HS_DEVICE_INEPNEM          \ [0x06] IN endpoint NAK effective mask
+    $08 constant OTG_HS_DEVICE_TXFURM           \ [0x08] FIFO underrun mask
+    $09 constant OTG_HS_DEVICE_BIM              \ [0x09] BNA interrupt mask
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPMSK_DEF
+    \
+    \ @brief OTG_HS device OUT endpoint common interrupt mask register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRCM            \ [0x00] Transfer completed interrupt mask
+    $01 constant OTG_HS_DEVICE_EPDM             \ [0x01] Endpoint disabled interrupt mask
+    $03 constant OTG_HS_DEVICE_STUPM            \ [0x03] SETUP phase done mask
+    $04 constant OTG_HS_DEVICE_OTEPDM           \ [0x04] OUT token received when endpoint disabled mask
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received mask
+    $08 constant OTG_HS_DEVICE_OPEM             \ [0x08] OUT packet error mask
+    $09 constant OTG_HS_DEVICE_BOIM             \ [0x09] BNA interrupt mask
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DAINT_DEF
+    \
+    \ @brief OTG_HS device all endpoints interrupt register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_IEPINT           \ [0x00 : 16] IN endpoint interrupt bits
+    $10 constant OTG_HS_DEVICE_OEPINT           \ [0x10 : 16] OUT endpoint interrupt bits
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DAINTMSK_DEF
+    \
+    \ @brief OTG_HS all endpoints interrupt mask register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_IEPM             \ [0x00 : 16] IN EP interrupt mask bits
+    $10 constant OTG_HS_DEVICE_OEPM             \ [0x10 : 16] OUT EP interrupt mask bits
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DVBUSDIS_DEF
+    \
+    \ @brief OTG_HS device VBUS discharge time register
+    \ Address offset: 0x28
+    \ Reset value: 0x000017D7
+    \
+    $00 constant OTG_HS_DEVICE_VBUSDT           \ [0x00 : 16] Device VBUS discharge time
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DVBUSPULSE_DEF
+    \
+    \ @brief OTG_HS device VBUS pulsing time register
+    \ Address offset: 0x2C
+    \ Reset value: 0x000005B8
+    \
+    $00 constant OTG_HS_DEVICE_DVBUSP           \ [0x00 : 12] Device VBUS pulsing time
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DTHRCTL_DEF
+    \
+    \ @brief OTG_HS Device threshold control register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_NONISOTHREN      \ [0x00] Nonisochronous IN endpoints threshold enable
+    $01 constant OTG_HS_DEVICE_ISOTHREN         \ [0x01] ISO IN endpoint threshold enable
+    $02 constant OTG_HS_DEVICE_TXTHRLEN         \ [0x02 : 9] Transmit threshold length
+    $10 constant OTG_HS_DEVICE_RXTHREN          \ [0x10] Receive threshold enable
+    $11 constant OTG_HS_DEVICE_RXTHRLEN         \ [0x11 : 9] Receive threshold length
+    $1b constant OTG_HS_DEVICE_ARPEN            \ [0x1b] Arbiter parking enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPEMPMSK_DEF
+    \
+    \ @brief OTG_HS device IN endpoint FIFO empty interrupt mask register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_INEPTXFEM        \ [0x00 : 16] IN EP Tx FIFO empty interrupt mask bits
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DEACHINT_DEF
+    \
+    \ @brief OTG_HS device each endpoint interrupt register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $01 constant OTG_HS_DEVICE_IEP1INT          \ [0x01] IN endpoint 1interrupt bit
+    $11 constant OTG_HS_DEVICE_OEP1INT          \ [0x11] OUT endpoint 1 interrupt bit
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DEACHINTMSK_DEF
+    \
+    \ @brief OTG_HS device each endpoint interrupt register mask
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $01 constant OTG_HS_DEVICE_IEP1INTM         \ [0x01] IN Endpoint 1 interrupt mask bit
+    $11 constant OTG_HS_DEVICE_OEP1INTM         \ [0x11] OUT Endpoint 1 interrupt mask bit
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1_DEF
+    \
+    \ @brief OTG_HS device each in endpoint-1 interrupt register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRCM            \ [0x00] Transfer completed interrupt mask
+    $01 constant OTG_HS_DEVICE_EPDM             \ [0x01] Endpoint disabled interrupt mask
+    $03 constant OTG_HS_DEVICE_TOM              \ [0x03] Timeout condition mask (nonisochronous endpoints)
+    $04 constant OTG_HS_DEVICE_ITTXFEMSK        \ [0x04] IN token received when TxFIFO empty mask
+    $05 constant OTG_HS_DEVICE_INEPNMM          \ [0x05] IN token received with EP mismatch mask
+    $06 constant OTG_HS_DEVICE_INEPNEM          \ [0x06] IN endpoint NAK effective mask
+    $08 constant OTG_HS_DEVICE_TXFURM           \ [0x08] FIFO underrun mask
+    $09 constant OTG_HS_DEVICE_BIM              \ [0x09] BNA interrupt mask
+    $0d constant OTG_HS_DEVICE_NAKM             \ [0x0d] NAK interrupt mask
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1_DEF
+    \
+    \ @brief OTG_HS device each OUT endpoint-1 interrupt register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRCM            \ [0x00] Transfer completed interrupt mask
+    $01 constant OTG_HS_DEVICE_EPDM             \ [0x01] Endpoint disabled interrupt mask
+    $03 constant OTG_HS_DEVICE_TOM              \ [0x03] Timeout condition mask
+    $04 constant OTG_HS_DEVICE_ITTXFEMSK        \ [0x04] IN token received when TxFIFO empty mask
+    $05 constant OTG_HS_DEVICE_INEPNMM          \ [0x05] IN token received with EP mismatch mask
+    $06 constant OTG_HS_DEVICE_INEPNEM          \ [0x06] IN endpoint NAK effective mask
+    $08 constant OTG_HS_DEVICE_TXFURM           \ [0x08] OUT packet error mask
+    $09 constant OTG_HS_DEVICE_BIM              \ [0x09] BNA interrupt mask
+    $0c constant OTG_HS_DEVICE_BERRM            \ [0x0c] Bubble error interrupt mask
+    $0d constant OTG_HS_DEVICE_NAKM             \ [0x0d] NAK interrupt mask
+    $0e constant OTG_HS_DEVICE_NYETM            \ [0x0e] NYET interrupt mask
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPCTL0_DEF
+    \
+    \ @brief OTG device endpoint-0 control register
+    \ Address offset: 0x100
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even/odd frame
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $16 constant OTG_HS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPINT0_DEF
+    \
+    \ @brief OTG device endpoint-0 interrupt register
+    \ Address offset: 0x108
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_TOC              \ [0x03] Timeout condition
+    $04 constant OTG_HS_DEVICE_ITTXFE           \ [0x04] IN token received when TxFIFO is empty
+    $06 constant OTG_HS_DEVICE_INEPNE           \ [0x06] IN endpoint NAK effective
+    $07 constant OTG_HS_DEVICE_TXFE             \ [0x07] Transmit FIFO empty
+    $08 constant OTG_HS_DEVICE_TXFIFOUDRN       \ [0x08] Transmit Fifo Underrun
+    $09 constant OTG_HS_DEVICE_BNA              \ [0x09] Buffer not available interrupt
+    $0b constant OTG_HS_DEVICE_PKTDRPSTS        \ [0x0b] Packet dropped status
+    $0c constant OTG_HS_DEVICE_BERR             \ [0x0c] Babble error interrupt
+    $0d constant OTG_HS_DEVICE_NAK              \ [0x0d] NAK interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPTSIZ0_DEF
+    \
+    \ @brief OTG_HS device IN endpoint 0 transfer size register
+    \ Address offset: 0x110
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 7] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 2] Packet count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPDMA1_DEF
+    \
+    \ @brief OTG_HS device endpoint-1 DMA address register
+    \ Address offset: 0x114
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_DMAADDR          \ [0x00 : 32] DMA address
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DTXFSTS0_DEF
+    \
+    \ @brief OTG_HS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x118
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space avail
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPCTL1_DEF
+    \
+    \ @brief OTG device endpoint-1 control register
+    \ Address offset: 0x120
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even/odd frame
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $16 constant OTG_HS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPINT1_DEF
+    \
+    \ @brief OTG device endpoint-1 interrupt register
+    \ Address offset: 0x128
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_TOC              \ [0x03] Timeout condition
+    $04 constant OTG_HS_DEVICE_ITTXFE           \ [0x04] IN token received when TxFIFO is empty
+    $06 constant OTG_HS_DEVICE_INEPNE           \ [0x06] IN endpoint NAK effective
+    $07 constant OTG_HS_DEVICE_TXFE             \ [0x07] Transmit FIFO empty
+    $08 constant OTG_HS_DEVICE_TXFIFOUDRN       \ [0x08] Transmit Fifo Underrun
+    $09 constant OTG_HS_DEVICE_BNA              \ [0x09] Buffer not available interrupt
+    $0b constant OTG_HS_DEVICE_PKTDRPSTS        \ [0x0b] Packet dropped status
+    $0c constant OTG_HS_DEVICE_BERR             \ [0x0c] Babble error interrupt
+    $0d constant OTG_HS_DEVICE_NAK              \ [0x0d] NAK interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPTSIZ1_DEF
+    \
+    \ @brief OTG_HS device endpoint transfer size register
+    \ Address offset: 0x130
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPDMA2_DEF
+    \
+    \ @brief OTG_HS device endpoint-2 DMA address register
+    \ Address offset: 0x134
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_DMAADDR          \ [0x00 : 32] DMA address
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DTXFSTS1_DEF
+    \
+    \ @brief OTG_HS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x138
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space avail
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPCTL2_DEF
+    \
+    \ @brief OTG device endpoint-2 control register
+    \ Address offset: 0x140
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even/odd frame
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $16 constant OTG_HS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPINT2_DEF
+    \
+    \ @brief OTG device endpoint-2 interrupt register
+    \ Address offset: 0x148
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_TOC              \ [0x03] Timeout condition
+    $04 constant OTG_HS_DEVICE_ITTXFE           \ [0x04] IN token received when TxFIFO is empty
+    $06 constant OTG_HS_DEVICE_INEPNE           \ [0x06] IN endpoint NAK effective
+    $07 constant OTG_HS_DEVICE_TXFE             \ [0x07] Transmit FIFO empty
+    $08 constant OTG_HS_DEVICE_TXFIFOUDRN       \ [0x08] Transmit Fifo Underrun
+    $09 constant OTG_HS_DEVICE_BNA              \ [0x09] Buffer not available interrupt
+    $0b constant OTG_HS_DEVICE_PKTDRPSTS        \ [0x0b] Packet dropped status
+    $0c constant OTG_HS_DEVICE_BERR             \ [0x0c] Babble error interrupt
+    $0d constant OTG_HS_DEVICE_NAK              \ [0x0d] NAK interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPTSIZ2_DEF
+    \
+    \ @brief OTG_HS device endpoint transfer size register
+    \ Address offset: 0x150
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPDMA3_DEF
+    \
+    \ @brief OTG_HS device endpoint-3 DMA address register
+    \ Address offset: 0x154
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_DMAADDR          \ [0x00 : 32] DMA address
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DTXFSTS2_DEF
+    \
+    \ @brief OTG_HS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x158
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space avail
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPCTL3_DEF
+    \
+    \ @brief OTG device endpoint-3 control register
+    \ Address offset: 0x160
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even/odd frame
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $16 constant OTG_HS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPINT3_DEF
+    \
+    \ @brief OTG device endpoint-3 interrupt register
+    \ Address offset: 0x168
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_TOC              \ [0x03] Timeout condition
+    $04 constant OTG_HS_DEVICE_ITTXFE           \ [0x04] IN token received when TxFIFO is empty
+    $06 constant OTG_HS_DEVICE_INEPNE           \ [0x06] IN endpoint NAK effective
+    $07 constant OTG_HS_DEVICE_TXFE             \ [0x07] Transmit FIFO empty
+    $08 constant OTG_HS_DEVICE_TXFIFOUDRN       \ [0x08] Transmit Fifo Underrun
+    $09 constant OTG_HS_DEVICE_BNA              \ [0x09] Buffer not available interrupt
+    $0b constant OTG_HS_DEVICE_PKTDRPSTS        \ [0x0b] Packet dropped status
+    $0c constant OTG_HS_DEVICE_BERR             \ [0x0c] Babble error interrupt
+    $0d constant OTG_HS_DEVICE_NAK              \ [0x0d] NAK interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPTSIZ3_DEF
+    \
+    \ @brief OTG_HS device endpoint transfer size register
+    \ Address offset: 0x170
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPDMA4_DEF
+    \
+    \ @brief OTG_HS device endpoint-4 DMA address register
+    \ Address offset: 0x174
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_DMAADDR          \ [0x00 : 32] DMA address
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DTXFSTS3_DEF
+    \
+    \ @brief OTG_HS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x178
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space avail
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPCTL4_DEF
+    \
+    \ @brief OTG device endpoint-4 control register
+    \ Address offset: 0x180
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even/odd frame
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $16 constant OTG_HS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPINT4_DEF
+    \
+    \ @brief OTG device endpoint-4 interrupt register
+    \ Address offset: 0x188
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_TOC              \ [0x03] Timeout condition
+    $04 constant OTG_HS_DEVICE_ITTXFE           \ [0x04] IN token received when TxFIFO is empty
+    $06 constant OTG_HS_DEVICE_INEPNE           \ [0x06] IN endpoint NAK effective
+    $07 constant OTG_HS_DEVICE_TXFE             \ [0x07] Transmit FIFO empty
+    $08 constant OTG_HS_DEVICE_TXFIFOUDRN       \ [0x08] Transmit Fifo Underrun
+    $09 constant OTG_HS_DEVICE_BNA              \ [0x09] Buffer not available interrupt
+    $0b constant OTG_HS_DEVICE_PKTDRPSTS        \ [0x0b] Packet dropped status
+    $0c constant OTG_HS_DEVICE_BERR             \ [0x0c] Babble error interrupt
+    $0d constant OTG_HS_DEVICE_NAK              \ [0x0d] NAK interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPTSIZ4_DEF
+    \
+    \ @brief OTG_HS device endpoint transfer size register
+    \ Address offset: 0x190
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPDMA5_DEF
+    \
+    \ @brief OTG_HS device endpoint-5 DMA address register
+    \ Address offset: 0x194
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_DMAADDR          \ [0x00 : 32] DMA address
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DTXFSTS4_DEF
+    \
+    \ @brief OTG_HS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x198
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space avail
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPCTL5_DEF
+    \
+    \ @brief OTG device endpoint-5 control register
+    \ Address offset: 0x1A0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even/odd frame
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $16 constant OTG_HS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPINT5_DEF
+    \
+    \ @brief OTG device endpoint-5 interrupt register
+    \ Address offset: 0x1A8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_TOC              \ [0x03] Timeout condition
+    $04 constant OTG_HS_DEVICE_ITTXFE           \ [0x04] IN token received when TxFIFO is empty
+    $06 constant OTG_HS_DEVICE_INEPNE           \ [0x06] IN endpoint NAK effective
+    $07 constant OTG_HS_DEVICE_TXFE             \ [0x07] Transmit FIFO empty
+    $08 constant OTG_HS_DEVICE_TXFIFOUDRN       \ [0x08] Transmit Fifo Underrun
+    $09 constant OTG_HS_DEVICE_BNA              \ [0x09] Buffer not available interrupt
+    $0b constant OTG_HS_DEVICE_PKTDRPSTS        \ [0x0b] Packet dropped status
+    $0c constant OTG_HS_DEVICE_BERR             \ [0x0c] Babble error interrupt
+    $0d constant OTG_HS_DEVICE_NAK              \ [0x0d] NAK interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPTSIZ5_DEF
+    \
+    \ @brief OTG_HS device endpoint transfer size register
+    \ Address offset: 0x1B0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_MCNT             \ [0x1d : 2] Multi count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DTXFSTS5_DEF
+    \
+    \ @brief OTG_HS device IN endpoint transmit FIFO status register
+    \ Address offset: 0x1B8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_INEPTFSAV        \ [0x00 : 16] IN endpoint TxFIFO space avail
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPCTL6_DEF
+    \
+    \ @brief OTG device endpoint-6 control register
+    \ Address offset: 0x1C0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even/odd frame
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $16 constant OTG_HS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPINT6_DEF
+    \
+    \ @brief OTG device endpoint-6 interrupt register
+    \ Address offset: 0x1C8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_TOC              \ [0x03] Timeout condition
+    $04 constant OTG_HS_DEVICE_ITTXFE           \ [0x04] IN token received when TxFIFO is empty
+    $06 constant OTG_HS_DEVICE_INEPNE           \ [0x06] IN endpoint NAK effective
+    $07 constant OTG_HS_DEVICE_TXFE             \ [0x07] Transmit FIFO empty
+    $08 constant OTG_HS_DEVICE_TXFIFOUDRN       \ [0x08] Transmit Fifo Underrun
+    $09 constant OTG_HS_DEVICE_BNA              \ [0x09] Buffer not available interrupt
+    $0b constant OTG_HS_DEVICE_PKTDRPSTS        \ [0x0b] Packet dropped status
+    $0c constant OTG_HS_DEVICE_BERR             \ [0x0c] Babble error interrupt
+    $0d constant OTG_HS_DEVICE_NAK              \ [0x0d] NAK interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPCTL7_DEF
+    \
+    \ @brief OTG device endpoint-7 control register
+    \ Address offset: 0x1E0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even/odd frame
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $16 constant OTG_HS_DEVICE_TXFNUM           \ [0x16 : 4] TxFIFO number
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DIEPINT7_DEF
+    \
+    \ @brief OTG device endpoint-7 interrupt register
+    \ Address offset: 0x1E8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_TOC              \ [0x03] Timeout condition
+    $04 constant OTG_HS_DEVICE_ITTXFE           \ [0x04] IN token received when TxFIFO is empty
+    $06 constant OTG_HS_DEVICE_INEPNE           \ [0x06] IN endpoint NAK effective
+    $07 constant OTG_HS_DEVICE_TXFE             \ [0x07] Transmit FIFO empty
+    $08 constant OTG_HS_DEVICE_TXFIFOUDRN       \ [0x08] Transmit Fifo Underrun
+    $09 constant OTG_HS_DEVICE_BNA              \ [0x09] Buffer not available interrupt
+    $0b constant OTG_HS_DEVICE_PKTDRPSTS        \ [0x0b] Packet dropped status
+    $0c constant OTG_HS_DEVICE_BERR             \ [0x0c] Babble error interrupt
+    $0d constant OTG_HS_DEVICE_NAK              \ [0x0d] NAK interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPCTL0_DEF
+    \
+    \ @brief OTG_HS device control OUT endpoint 0 control register
+    \ Address offset: 0x300
+    \ Reset value: 0x00008000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 2] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $14 constant OTG_HS_DEVICE_SNPM             \ [0x14] Snoop mode
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPINT0_DEF
+    \
+    \ @brief OTG_HS device endpoint-0 interrupt register
+    \ Address offset: 0x308
+    \ Reset value: 0x00000080
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_STUP             \ [0x03] SETUP phase done
+    $04 constant OTG_HS_DEVICE_OTEPDIS          \ [0x04] OUT token received when endpoint disabled
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received
+    $0e constant OTG_HS_DEVICE_NYET             \ [0x0e] NYET interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPTSIZ0_DEF
+    \
+    \ @brief OTG_HS device endpoint-1 transfer size register
+    \ Address offset: 0x310
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 7] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13] Packet count
+    $1d constant OTG_HS_DEVICE_STUPCNT          \ [0x1d : 2] SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPCTL1_DEF
+    \
+    \ @brief OTG device endpoint-1 control register
+    \ Address offset: 0x320
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even odd frame/Endpoint data PID
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $14 constant OTG_HS_DEVICE_SNPM             \ [0x14] Snoop mode
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID/Set even frame
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPINT1_DEF
+    \
+    \ @brief OTG_HS device endpoint-1 interrupt register
+    \ Address offset: 0x328
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_STUP             \ [0x03] SETUP phase done
+    $04 constant OTG_HS_DEVICE_OTEPDIS          \ [0x04] OUT token received when endpoint disabled
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received
+    $0e constant OTG_HS_DEVICE_NYET             \ [0x0e] NYET interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPTSIZ1_DEF
+    \
+    \ @brief OTG_HS device endpoint-2 transfer size register
+    \ Address offset: 0x330
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPCTL2_DEF
+    \
+    \ @brief OTG device endpoint-2 control register
+    \ Address offset: 0x340
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even odd frame/Endpoint data PID
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $14 constant OTG_HS_DEVICE_SNPM             \ [0x14] Snoop mode
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID/Set even frame
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPINT2_DEF
+    \
+    \ @brief OTG_HS device endpoint-2 interrupt register
+    \ Address offset: 0x348
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_STUP             \ [0x03] SETUP phase done
+    $04 constant OTG_HS_DEVICE_OTEPDIS          \ [0x04] OUT token received when endpoint disabled
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received
+    $0e constant OTG_HS_DEVICE_NYET             \ [0x0e] NYET interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPTSIZ2_DEF
+    \
+    \ @brief OTG_HS device endpoint-3 transfer size register
+    \ Address offset: 0x350
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPCTL3_DEF
+    \
+    \ @brief OTG device endpoint-3 control register
+    \ Address offset: 0x360
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_MPSIZ            \ [0x00 : 11] Maximum packet size
+    $0f constant OTG_HS_DEVICE_USBAEP           \ [0x0f] USB active endpoint
+    $10 constant OTG_HS_DEVICE_EONUM_DPID       \ [0x10] Even odd frame/Endpoint data PID
+    $11 constant OTG_HS_DEVICE_NAKSTS           \ [0x11] NAK status
+    $12 constant OTG_HS_DEVICE_EPTYP            \ [0x12 : 2] Endpoint type
+    $14 constant OTG_HS_DEVICE_SNPM             \ [0x14] Snoop mode
+    $15 constant OTG_HS_DEVICE_Stall            \ [0x15] STALL handshake
+    $1a constant OTG_HS_DEVICE_CNAK             \ [0x1a] Clear NAK
+    $1b constant OTG_HS_DEVICE_SNAK             \ [0x1b] Set NAK
+    $1c constant OTG_HS_DEVICE_SD0PID_SEVNFRM   \ [0x1c] Set DATA0 PID/Set even frame
+    $1d constant OTG_HS_DEVICE_SODDFRM          \ [0x1d] Set odd frame
+    $1e constant OTG_HS_DEVICE_EPDIS            \ [0x1e] Endpoint disable
+    $1f constant OTG_HS_DEVICE_EPENA            \ [0x1f] Endpoint enable
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPINT3_DEF
+    \
+    \ @brief OTG_HS device endpoint-3 interrupt register
+    \ Address offset: 0x368
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_STUP             \ [0x03] SETUP phase done
+    $04 constant OTG_HS_DEVICE_OTEPDIS          \ [0x04] OUT token received when endpoint disabled
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received
+    $0e constant OTG_HS_DEVICE_NYET             \ [0x0e] NYET interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPTSIZ3_DEF
+    \
+    \ @brief OTG_HS device endpoint-4 transfer size register
+    \ Address offset: 0x370
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPINT4_DEF
+    \
+    \ @brief OTG_HS device endpoint-4 interrupt register
+    \ Address offset: 0x388
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_STUP             \ [0x03] SETUP phase done
+    $04 constant OTG_HS_DEVICE_OTEPDIS          \ [0x04] OUT token received when endpoint disabled
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received
+    $0e constant OTG_HS_DEVICE_NYET             \ [0x0e] NYET interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPTSIZ4_DEF
+    \
+    \ @brief OTG_HS device endpoint-5 transfer size register
+    \ Address offset: 0x390
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRSIZ           \ [0x00 : 19] Transfer size
+    $13 constant OTG_HS_DEVICE_PKTCNT           \ [0x13 : 10] Packet count
+    $1d constant OTG_HS_DEVICE_RXDPID_STUPCNT   \ [0x1d : 2] Received data PID/SETUP packet count
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPINT5_DEF
+    \
+    \ @brief OTG_HS device endpoint-5 interrupt register
+    \ Address offset: 0x3A8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_STUP             \ [0x03] SETUP phase done
+    $04 constant OTG_HS_DEVICE_OTEPDIS          \ [0x04] OUT token received when endpoint disabled
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received
+    $0e constant OTG_HS_DEVICE_NYET             \ [0x0e] NYET interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPINT6_DEF
+    \
+    \ @brief OTG_HS device endpoint-6 interrupt register
+    \ Address offset: 0x3C8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_STUP             \ [0x03] SETUP phase done
+    $04 constant OTG_HS_DEVICE_OTEPDIS          \ [0x04] OUT token received when endpoint disabled
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received
+    $0e constant OTG_HS_DEVICE_NYET             \ [0x0e] NYET interrupt
+  [then]
+
+
+  [ifdef] OTG_HS_DEVICE_OTG_HS_DOEPINT7_DEF
+    \
+    \ @brief OTG_HS device endpoint-7 interrupt register
+    \ Address offset: 0x3E8
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_HS_DEVICE_XFRC             \ [0x00] Transfer completed interrupt
+    $01 constant OTG_HS_DEVICE_EPDISD           \ [0x01] Endpoint disabled interrupt
+    $03 constant OTG_HS_DEVICE_STUP             \ [0x03] SETUP phase done
+    $04 constant OTG_HS_DEVICE_OTEPDIS          \ [0x04] OUT token received when endpoint disabled
+    $06 constant OTG_HS_DEVICE_B2BSTUP          \ [0x06] Back-to-back SETUP packets received
+    $0e constant OTG_HS_DEVICE_NYET             \ [0x0e] NYET interrupt
+  [then]
+
+  \
+  \ @brief USB on the go high speed
+  \
+  $00 constant OTG_HS_DEVICE_OTG_HS_DCFG    \ OTG_HS device configuration register
+  $04 constant OTG_HS_DEVICE_OTG_HS_DCTL    \ OTG_HS device control register
+  $08 constant OTG_HS_DEVICE_OTG_HS_DSTS    \ OTG_HS device status register
+  $10 constant OTG_HS_DEVICE_OTG_HS_DIEPMSK    \ OTG_HS device IN endpoint common interrupt mask register
+  $14 constant OTG_HS_DEVICE_OTG_HS_DOEPMSK    \ OTG_HS device OUT endpoint common interrupt mask register
+  $18 constant OTG_HS_DEVICE_OTG_HS_DAINT    \ OTG_HS device all endpoints interrupt register
+  $1C constant OTG_HS_DEVICE_OTG_HS_DAINTMSK    \ OTG_HS all endpoints interrupt mask register
+  $28 constant OTG_HS_DEVICE_OTG_HS_DVBUSDIS    \ OTG_HS device VBUS discharge time register
+  $2C constant OTG_HS_DEVICE_OTG_HS_DVBUSPULSE    \ OTG_HS device VBUS pulsing time register
+  $30 constant OTG_HS_DEVICE_OTG_HS_DTHRCTL    \ OTG_HS Device threshold control register
+  $34 constant OTG_HS_DEVICE_OTG_HS_DIEPEMPMSK    \ OTG_HS device IN endpoint FIFO empty interrupt mask register
+  $38 constant OTG_HS_DEVICE_OTG_HS_DEACHINT    \ OTG_HS device each endpoint interrupt register
+  $3C constant OTG_HS_DEVICE_OTG_HS_DEACHINTMSK    \ OTG_HS device each endpoint interrupt register mask
+  $40 constant OTG_HS_DEVICE_OTG_HS_DIEPEACHMSK1    \ OTG_HS device each in endpoint-1 interrupt register
+  $80 constant OTG_HS_DEVICE_OTG_HS_DOEPEACHMSK1    \ OTG_HS device each OUT endpoint-1 interrupt register
+  $100 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL0    \ OTG device endpoint-0 control register
+  $108 constant OTG_HS_DEVICE_OTG_HS_DIEPINT0    \ OTG device endpoint-0 interrupt register
+  $110 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ0    \ OTG_HS device IN endpoint 0 transfer size register
+  $114 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA1    \ OTG_HS device endpoint-1 DMA address register
+  $118 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS0    \ OTG_HS device IN endpoint transmit FIFO status register
+  $120 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL1    \ OTG device endpoint-1 control register
+  $128 constant OTG_HS_DEVICE_OTG_HS_DIEPINT1    \ OTG device endpoint-1 interrupt register
+  $130 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ1    \ OTG_HS device endpoint transfer size register
+  $134 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA2    \ OTG_HS device endpoint-2 DMA address register
+  $138 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS1    \ OTG_HS device IN endpoint transmit FIFO status register
+  $140 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL2    \ OTG device endpoint-2 control register
+  $148 constant OTG_HS_DEVICE_OTG_HS_DIEPINT2    \ OTG device endpoint-2 interrupt register
+  $150 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ2    \ OTG_HS device endpoint transfer size register
+  $154 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA3    \ OTG_HS device endpoint-3 DMA address register
+  $158 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS2    \ OTG_HS device IN endpoint transmit FIFO status register
+  $160 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL3    \ OTG device endpoint-3 control register
+  $168 constant OTG_HS_DEVICE_OTG_HS_DIEPINT3    \ OTG device endpoint-3 interrupt register
+  $170 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ3    \ OTG_HS device endpoint transfer size register
+  $174 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA4    \ OTG_HS device endpoint-4 DMA address register
+  $178 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS3    \ OTG_HS device IN endpoint transmit FIFO status register
+  $180 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL4    \ OTG device endpoint-4 control register
+  $188 constant OTG_HS_DEVICE_OTG_HS_DIEPINT4    \ OTG device endpoint-4 interrupt register
+  $190 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ4    \ OTG_HS device endpoint transfer size register
+  $194 constant OTG_HS_DEVICE_OTG_HS_DIEPDMA5    \ OTG_HS device endpoint-5 DMA address register
+  $198 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS4    \ OTG_HS device IN endpoint transmit FIFO status register
+  $1A0 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL5    \ OTG device endpoint-5 control register
+  $1A8 constant OTG_HS_DEVICE_OTG_HS_DIEPINT5    \ OTG device endpoint-5 interrupt register
+  $1B0 constant OTG_HS_DEVICE_OTG_HS_DIEPTSIZ5    \ OTG_HS device endpoint transfer size register
+  $1B8 constant OTG_HS_DEVICE_OTG_HS_DTXFSTS5    \ OTG_HS device IN endpoint transmit FIFO status register
+  $1C0 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL6    \ OTG device endpoint-6 control register
+  $1C8 constant OTG_HS_DEVICE_OTG_HS_DIEPINT6    \ OTG device endpoint-6 interrupt register
+  $1E0 constant OTG_HS_DEVICE_OTG_HS_DIEPCTL7    \ OTG device endpoint-7 control register
+  $1E8 constant OTG_HS_DEVICE_OTG_HS_DIEPINT7    \ OTG device endpoint-7 interrupt register
+  $300 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL0    \ OTG_HS device control OUT endpoint 0 control register
+  $308 constant OTG_HS_DEVICE_OTG_HS_DOEPINT0    \ OTG_HS device endpoint-0 interrupt register
+  $310 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ0    \ OTG_HS device endpoint-1 transfer size register
+  $320 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL1    \ OTG device endpoint-1 control register
+  $328 constant OTG_HS_DEVICE_OTG_HS_DOEPINT1    \ OTG_HS device endpoint-1 interrupt register
+  $330 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ1    \ OTG_HS device endpoint-2 transfer size register
+  $340 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL2    \ OTG device endpoint-2 control register
+  $348 constant OTG_HS_DEVICE_OTG_HS_DOEPINT2    \ OTG_HS device endpoint-2 interrupt register
+  $350 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ2    \ OTG_HS device endpoint-3 transfer size register
+  $360 constant OTG_HS_DEVICE_OTG_HS_DOEPCTL3    \ OTG device endpoint-3 control register
+  $368 constant OTG_HS_DEVICE_OTG_HS_DOEPINT3    \ OTG_HS device endpoint-3 interrupt register
+  $370 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ3    \ OTG_HS device endpoint-4 transfer size register
+  $388 constant OTG_HS_DEVICE_OTG_HS_DOEPINT4    \ OTG_HS device endpoint-4 interrupt register
+  $390 constant OTG_HS_DEVICE_OTG_HS_DOEPTSIZ4    \ OTG_HS device endpoint-5 transfer size register
+  $3A8 constant OTG_HS_DEVICE_OTG_HS_DOEPINT5    \ OTG_HS device endpoint-5 interrupt register
+  $3C8 constant OTG_HS_DEVICE_OTG_HS_DOEPINT6    \ OTG_HS device endpoint-6 interrupt register
+  $3E8 constant OTG_HS_DEVICE_OTG_HS_DOEPINT7    \ OTG_HS device endpoint-7 interrupt register
+
+: OTG_HS_DEVICE_DEF ; [then]

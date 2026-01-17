@@ -1,456 +1,305 @@
 \
-\ @file stm32u5fx.h
-\ @brief Loader for all peripherals in a STM32U5Fx
+\ @file stm32u5fx.fload
+\ @brief Device header for STM32U5Fx
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc1.fs
-.include sec_adc1.fs
-.include adc2.fs
-.include sec_adc2.fs
-.include adc12_common.fs
-.include sec_adc12_common.fs
-.include adc4.fs
-.include sec_adc4.fs
-.include adf1.fs
-.include sec_adf1.fs
-.include comp.fs
-.include sec_comp.fs
-.include cordic.fs
-.include sec_cordic.fs
-.include crc.fs
-.include sec_crc.fs
-.include crs.fs
-.include sec_crs.fs
-.include dac1.fs
-.include sec_dac1.fs
-.include dbgmcu.fs
-.include dcache1.fs
-.include sec_dcache1.fs
-.include dcache2.fs
-.include sec_dcache2.fs
-.include dcmi.fs
-.include sec_dcmi.fs
-.include dlybos1.fs
-.include sec_dlybos1.fs
-.include dlybos2.fs
-.include sec_dlybos2.fs
-.include dlybsd1.fs
-.include sec_dlybsd1.fs
-.include dlybsd2.fs
-.include sec_dlybsd2.fs
-.include dma2d.fs
-.include sec_dma2d.fs
-.include dsi.fs
-.include sec_dsi.fs
-.include exti.fs
-.include sec_exti.fs
-.include fdcan1_ram.fs
-.include sec_fdcan1_ram.fs
-.include fdcan1.fs
-.include sec_fdcan1.fs
-.include flash.fs
-.include sec_flash.fs
-.include fmac.fs
-.include sec_fmac.fs
-.include fmc.fs
-.include sec_fmc.fs
-.include gfxmmu.fs
-.include sec_gfxmmu.fs
-.include gfxtim.fs
-.include sec_gfxtim.fs
-.include gpdma1.fs
-.include sec_gpdma1.fs
-.include gpioa.fs
-.include sec_gpioa.fs
-.include gpiob.fs
-.include sec_gpiob.fs
-.include gpioc.fs
-.include sec_gpioc.fs
-.include gpiod.fs
-.include sec_gpiod.fs
-.include gpioe.fs
-.include sec_gpioe.fs
-.include gpiof.fs
-.include sec_gpiof.fs
-.include gpiog.fs
-.include sec_gpiog.fs
-.include gpioh.fs
-.include sec_gpioh.fs
-.include gpioi.fs
-.include sec_gpioi.fs
-.include gpioj.fs
-.include sec_gpioj.fs
-.include gtzc1_mpcbb1.fs
-.include sec_gtzc1_mpcbb1.fs
-.include gtzc1_mpcbb2.fs
-.include sec_gtzc1_mpcbb2.fs
-.include gtzc1_mpcbb3.fs
-.include sec_gtzc1_mpcbb3.fs
-.include gtzc1_mpcbb5.fs
-.include sec_gtzc1_mpcbb5.fs
-.include gtzc1_mpcbb6.fs
-.include sec_gtzc1_mpcbb6.fs
-.include gtzc1_tzic.fs
-.include sec_gtzc1_tzic.fs
-.include gtzc1_tzsc.fs
-.include sec_gtzc1_tzsc.fs
-.include gtzc2_mpcbb4.fs
-.include sec_gtzc2_mpcbb4.fs
-.include gtzc2_tzic.fs
-.include sec_gtzc2_tzic.fs
-.include gtzc2_tzsc.fs
-.include sec_gtzc2_tzsc.fs
-.include hash.fs
-.include sec_hash.fs
-.include hspi1.fs
-.include sec_hspi1.fs
-.include i2c1.fs
-.include sec_i2c1.fs
-.include i2c2.fs
-.include sec_i2c2.fs
-.include i2c3.fs
-.include sec_i2c3.fs
-.include i2c4.fs
-.include sec_i2c4.fs
-.include i2c5.fs
-.include sec_i2c5.fs
-.include i2c6.fs
-.include sec_i2c6.fs
-.include icache.fs
-.include sec_icache.fs
-.include iwdg.fs
-.include sec_iwdg.fs
-.include jpeg.fs
-.include sec_jpeg.fs
-.include lpdma1.fs
-.include sec_lpdma1.fs
-.include lpgpio1.fs
-.include sec_lpgpio1.fs
-.include lptim1.fs
-.include sec_lptim1.fs
-.include lptim2.fs
-.include sec_lptim2.fs
-.include lptim3.fs
-.include sec_lptim3.fs
-.include lptim4.fs
-.include sec_lptim4.fs
-.include lpuart1.fs
-.include sec_lpuart1.fs
-.include ltdc.fs
-.include sec_ltdc.fs
-.include mdf1.fs
-.include sec_mdf1.fs
-.include octospi1.fs
-.include sec_octospi1.fs
-.include octospi2.fs
-.include sec_octospi2.fs
-.include octospim.fs
-.include sec_octospim.fs
-.include opamp.fs
-.include sec_opamp.fs
-.include otg_hs.fs
-.include sec_otg_hs.fs
-.include pssi.fs
-.include sec_pssi.fs
-.include pwr.fs
-.include sec_pwr.fs
-.include ramcfg.fs
-.include sec_ramcfg.fs
-.include rcc.fs
-.include sec_rcc.fs
-.include rng.fs
-.include sec_rng.fs
-.include rtc.fs
-.include sec_rtc.fs
-.include sai1.fs
-.include sec_sai1.fs
-.include sai2.fs
-.include sec_sai2.fs
-.include sdmmc1.fs
-.include sec_sdmmc1.fs
-.include sdmmc2.fs
-.include sec_sdmmc2.fs
-.include spi1.fs
-.include sec_spi1.fs
-.include spi2.fs
-.include sec_spi2.fs
-.include spi3.fs
-.include sec_spi3.fs
-.include syscfg.fs
-.include sec_syscfg.fs
-.include tamp.fs
-.include sec_tamp.fs
-.include tim1.fs
-.include sec_tim1.fs
-.include tim2.fs
-.include sec_tim2.fs
-.include tim3.fs
-.include sec_tim3.fs
-.include tim4.fs
-.include sec_tim4.fs
-.include tim5.fs
-.include sec_tim5.fs
-.include tim6.fs
-.include sec_tim6.fs
-.include tim7.fs
-.include sec_tim7.fs
-.include tim8.fs
-.include sec_tim8.fs
-.include tim15.fs
-.include sec_tim15.fs
-.include tim16.fs
-.include sec_tim16.fs
-.include tim17.fs
-.include sec_tim17.fs
-.include tsc.fs
-.include sec_tsc.fs
-.include ucpd1.fs
-.include sec_ucpd1.fs
-.include usart1.fs
-.include sec_usart1.fs
-.include usart2.fs
-.include sec_usart2.fs
-.include usart3.fs
-.include sec_usart3.fs
-.include uart4.fs
-.include sec_uart4.fs
-.include uart5.fs
-.include sec_uart5.fs
-.include usart6.fs
-.include sec_usart6.fs
-.include vrefbuf.fs
-.include sec_vrefbuf.fs
-.include wwdg.fs
-.include sec_wwdg.fs
-.include dcb.fs
+[ifndef] STM32U5FX_LOADER
+  .include "adc1.fs"
+  .include "adc12_common.fs"
+  .include "adc4.fs"
+  .include "adf1.fs"
+  .include "comp.fs"
+  .include "cordic.fs"
+  .include "crc.fs"
+  .include "crs.fs"
+  .include "dac1.fs"
+  .include "dbgmcu.fs"
+  .include "dcache1.fs"
+  .include "dcmi.fs"
+  .include "dlybos1.fs"
+  .include "dma2d.fs"
+  .include "dsi.fs"
+  .include "exti.fs"
+  .include "fdcan1_ram.fs"
+  .include "flash.fs"
+  .include "fmac.fs"
+  .include "fmc.fs"
+  .include "gfxmmu.fs"
+  .include "gfxtim.fs"
+  .include "gpdma1.fs"
+  .include "gpioa.fs"
+  .include "gtzc1_mpcbb1.fs"
+  .include "gtzc1_mpcbb2.fs"
+  .include "gtzc1_mpcbb3.fs"
+  .include "gtzc1_mpcbb5.fs"
+  .include "gtzc1_mpcbb6.fs"
+  .include "gtzc1_tzic.fs"
+  .include "gtzc1_tzsc.fs"
+  .include "gtzc2_mpcbb4.fs"
+  .include "gtzc2_tzic.fs"
+  .include "gtzc2_tzsc.fs"
+  .include "hash.fs"
+  .include "hspi1.fs"
+  .include "i2c1.fs"
+  .include "icache.fs"
+  .include "iwdg.fs"
+  .include "jpeg.fs"
+  .include "lpdma1.fs"
+  .include "lpgpio1.fs"
+  .include "lptim1.fs"
+  .include "lptim4.fs"
+  .include "lpuart1.fs"
+  .include "ltdc.fs"
+  .include "mdf1.fs"
+  .include "octospi1.fs"
+  .include "octospim.fs"
+  .include "opamp.fs"
+  .include "otg_hs.fs"
+  .include "pssi.fs"
+  .include "pwr.fs"
+  .include "ramcfg.fs"
+  .include "rcc.fs"
+  .include "rng.fs"
+  .include "rtc.fs"
+  .include "sai1.fs"
+  .include "sdmmc1.fs"
+  .include "spi1.fs"
+  .include "syscfg.fs"
+  .include "tamp.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim6.fs"
+  .include "tim15.fs"
+  .include "tim16.fs"
+  .include "tsc.fs"
+  .include "ucpd1.fs"
+  .include "usart1.fs"
+  .include "vrefbuf.fs"
+  .include "wwdg.fs"
+  .include "dcb.fs"
 
-decimal
+  $0x42028000 constant ADC1             \ See adc1.fs
+  $0x52028000 constant SEC_ADC1         \ See adc1.fs
+  $0x42028100 constant ADC2             \ See adc1.fs
+  $0x52028100 constant SEC_ADC2         \ See adc1.fs
+  $0x42028300 constant ADC12_COMMON     \ See adc12_common.fs
+  $0x52028300 constant SEC_ADC12_COMMON \ See adc12_common.fs
+  $0x46021000 constant ADC4             \ See adc4.fs
+  $0x56021000 constant SEC_ADC4         \ See adc4.fs
+  $0x46024000 constant ADF1             \ See adf1.fs
+  $0x56024000 constant SEC_ADF1         \ See adf1.fs
+  $0x46005400 constant COMP             \ See comp.fs
+  $0x56005400 constant SEC_COMP         \ See comp.fs
+  $0x40021000 constant CORDIC           \ See cordic.fs
+  $0x50021000 constant SEC_CORDIC       \ See cordic.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x50023000 constant SEC_CRC          \ See crc.fs
+  $0x40006000 constant CRS              \ See crs.fs
+  $0x50006000 constant SEC_CRS          \ See crs.fs
+  $0x46021800 constant DAC1             \ See dac1.fs
+  $0x56021800 constant SEC_DAC1         \ See dac1.fs
+  $0xE0044000 constant DBGMCU           \ See dbgmcu.fs
+  $0x40031400 constant DCACHE1          \ See dcache1.fs
+  $0x50031400 constant SEC_DCACHE1      \ See dcache1.fs
+  $0x40031800 constant DCACHE2          \ See dcache1.fs
+  $0x50031800 constant SEC_DCACHE2      \ See dcache1.fs
+  $0x4202C000 constant DCMI             \ See dcmi.fs
+  $0x5202C000 constant SEC_DCMI         \ See dcmi.fs
+  $0x420CF000 constant DLYBOS1          \ See dlybos1.fs
+  $0x520CF000 constant SEC_DLYBOS1      \ See dlybos1.fs
+  $0x420CF400 constant DLYBOS2          \ See dlybos1.fs
+  $0x520CF400 constant SEC_DLYBOS2      \ See dlybos1.fs
+  $0x420C8400 constant DLYBSD1          \ See dlybos1.fs
+  $0x520C8400 constant SEC_DLYBSD1      \ See dlybos1.fs
+  $0x420C8800 constant DLYBSD2          \ See dlybos1.fs
+  $0x520C8800 constant SEC_DLYBSD2      \ See dlybos1.fs
+  $0x4002B000 constant DMA2D            \ See dma2d.fs
+  $0x5002B000 constant SEC_DMA2D        \ See dma2d.fs
+  $0x40016C00 constant DSI              \ See dsi.fs
+  $0x50016C00 constant SEC_DSI          \ See dsi.fs
+  $0x46022000 constant EXTI             \ See exti.fs
+  $0x56022000 constant SEC_EXTI         \ See exti.fs
+  $0x4000AC00 constant FDCAN1_RAM       \ See fdcan1_ram.fs
+  $0x5000AC00 constant SEC_FDCAN1_RAM   \ See fdcan1_ram.fs
+  $0x4000A400 constant FDCAN1           \ See fdcan1_ram.fs
+  $0x5000A400 constant SEC_FDCAN1       \ See fdcan1_ram.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x50022000 constant SEC_FLASH        \ See flash.fs
+  $0x40021400 constant FMAC             \ See fmac.fs
+  $0x50021400 constant SEC_FMAC         \ See fmac.fs
+  $0x420D0400 constant FMC              \ See fmc.fs
+  $0x520D0400 constant SEC_FMC          \ See fmc.fs
+  $0x4002C000 constant GFXMMU           \ See gfxmmu.fs
+  $0x5002C000 constant SEC_GFXMMU       \ See gfxmmu.fs
+  $0x40016400 constant GFXTIM           \ See gfxtim.fs
+  $0x50016400 constant SEC_GFXTIM       \ See gfxtim.fs
+  $0x40020000 constant GPDMA1           \ See gpdma1.fs
+  $0x50020000 constant SEC_GPDMA1       \ See gpdma1.fs
+  $0x42020000 constant GPIOA            \ See gpioa.fs
+  $0x52020000 constant SEC_GPIOA        \ See gpioa.fs
+  $0x42020400 constant GPIOB            \ See gpioa.fs
+  $0x52020400 constant SEC_GPIOB        \ See gpioa.fs
+  $0x42020800 constant GPIOC            \ See gpioa.fs
+  $0x52020800 constant SEC_GPIOC        \ See gpioa.fs
+  $0x42020C00 constant GPIOD            \ See gpioa.fs
+  $0x52020C00 constant SEC_GPIOD        \ See gpioa.fs
+  $0x42021000 constant GPIOE            \ See gpioa.fs
+  $0x52021000 constant SEC_GPIOE        \ See gpioa.fs
+  $0x42021400 constant GPIOF            \ See gpioa.fs
+  $0x52021400 constant SEC_GPIOF        \ See gpioa.fs
+  $0x42021800 constant GPIOG            \ See gpioa.fs
+  $0x52021800 constant SEC_GPIOG        \ See gpioa.fs
+  $0x42021C00 constant GPIOH            \ See gpioa.fs
+  $0x52021C00 constant SEC_GPIOH        \ See gpioa.fs
+  $0x42022000 constant GPIOI            \ See gpioa.fs
+  $0x52022000 constant SEC_GPIOI        \ See gpioa.fs
+  $0x42022400 constant GPIOJ            \ See gpioa.fs
+  $0x52022400 constant SEC_GPIOJ        \ See gpioa.fs
+  $0x40032C00 constant GTZC1_MPCBB1     \ See gtzc1_mpcbb1.fs
+  $0x50032C00 constant SEC_GTZC1_MPCBB1 \ See gtzc1_mpcbb1.fs
+  $0x40033000 constant GTZC1_MPCBB2     \ See gtzc1_mpcbb2.fs
+  $0x50033000 constant SEC_GTZC1_MPCBB2 \ See gtzc1_mpcbb2.fs
+  $0x40033400 constant GTZC1_MPCBB3     \ See gtzc1_mpcbb3.fs
+  $0x50033400 constant SEC_GTZC1_MPCBB3 \ See gtzc1_mpcbb3.fs
+  $0x40033800 constant GTZC1_MPCBB5     \ See gtzc1_mpcbb5.fs
+  $0x50033800 constant SEC_GTZC1_MPCBB5 \ See gtzc1_mpcbb5.fs
+  $0x40033C00 constant GTZC1_MPCBB6     \ See gtzc1_mpcbb6.fs
+  $0x50033C00 constant SEC_GTZC1_MPCBB6 \ See gtzc1_mpcbb6.fs
+  $0x40032800 constant GTZC1_TZIC       \ See gtzc1_tzic.fs
+  $0x50032800 constant SEC_GTZC1_TZIC   \ See gtzc1_tzic.fs
+  $0x40032400 constant GTZC1_TZSC       \ See gtzc1_tzsc.fs
+  $0x50032400 constant SEC_GTZC1_TZSC   \ See gtzc1_tzsc.fs
+  $0x46023800 constant GTZC2_MPCBB4     \ See gtzc2_mpcbb4.fs
+  $0x56023800 constant SEC_GTZC2_MPCBB4 \ See gtzc2_mpcbb4.fs
+  $0x46023400 constant GTZC2_TZIC       \ See gtzc2_tzic.fs
+  $0x56023400 constant SEC_GTZC2_TZIC   \ See gtzc2_tzic.fs
+  $0x46023000 constant GTZC2_TZSC       \ See gtzc2_tzsc.fs
+  $0x56023000 constant SEC_GTZC2_TZSC   \ See gtzc2_tzsc.fs
+  $0x420C0400 constant HASH             \ See hash.fs
+  $0x520C0400 constant SEC_HASH         \ See hash.fs
+  $0x420D3400 constant HSPI1            \ See hspi1.fs
+  $0x520D3400 constant SEC_HSPI1        \ See hspi1.fs
+  $0x40005400 constant I2C1             \ See i2c1.fs
+  $0x50005400 constant SEC_I2C1         \ See i2c1.fs
+  $0x40005800 constant I2C2             \ See i2c1.fs
+  $0x50005800 constant SEC_I2C2         \ See i2c1.fs
+  $0x46002800 constant I2C3             \ See i2c1.fs
+  $0x56002800 constant SEC_I2C3         \ See i2c1.fs
+  $0x40008400 constant I2C4             \ See i2c1.fs
+  $0x50008400 constant SEC_I2C4         \ See i2c1.fs
+  $0x40009800 constant I2C5             \ See i2c1.fs
+  $0x50009800 constant SEC_I2C5         \ See i2c1.fs
+  $0x40009C00 constant I2C6             \ See i2c1.fs
+  $0x50009C00 constant SEC_I2C6         \ See i2c1.fs
+  $0x40030400 constant ICACHE           \ See icache.fs
+  $0x50030400 constant SEC_ICACHE       \ See icache.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x50003000 constant SEC_IWDG         \ See iwdg.fs
+  $0x4002A000 constant JPEG             \ See jpeg.fs
+  $0x5002A000 constant SEC_JPEG         \ See jpeg.fs
+  $0x46025000 constant LPDMA1           \ See lpdma1.fs
+  $0x56025000 constant SEC_LPDMA1       \ See lpdma1.fs
+  $0x46020000 constant LPGPIO1          \ See lpgpio1.fs
+  $0x56020000 constant SEC_LPGPIO1      \ See lpgpio1.fs
+  $0x46004400 constant LPTIM1           \ See lptim1.fs
+  $0x56004400 constant SEC_LPTIM1       \ See lptim1.fs
+  $0x40009400 constant LPTIM2           \ See lptim1.fs
+  $0x50009400 constant SEC_LPTIM2       \ See lptim1.fs
+  $0x46004800 constant LPTIM3           \ See lptim1.fs
+  $0x56004800 constant SEC_LPTIM3       \ See lptim1.fs
+  $0x46004C00 constant LPTIM4           \ See lptim4.fs
+  $0x56004C00 constant SEC_LPTIM4       \ See lptim4.fs
+  $0x46002400 constant LPUART1          \ See lpuart1.fs
+  $0x56002400 constant SEC_LPUART1      \ See lpuart1.fs
+  $0x40016800 constant LTDC             \ See ltdc.fs
+  $0x50016800 constant SEC_LTDC         \ See ltdc.fs
+  $0x40025000 constant MDF1             \ See mdf1.fs
+  $0x50025000 constant SEC_MDF1         \ See mdf1.fs
+  $0x420D1400 constant OCTOSPI1         \ See octospi1.fs
+  $0x520D1400 constant SEC_OCTOSPI1     \ See octospi1.fs
+  $0x420D2400 constant OCTOSPI2         \ See octospi1.fs
+  $0x520D2400 constant SEC_OCTOSPI2     \ See octospi1.fs
+  $0x420C4000 constant OCTOSPIM         \ See octospim.fs
+  $0x520C4000 constant SEC_OCTOSPIM     \ See octospim.fs
+  $0x46005000 constant OPAMP            \ See opamp.fs
+  $0x56005000 constant SEC_OPAMP        \ See opamp.fs
+  $0x42040000 constant OTG_HS           \ See otg_hs.fs
+  $0x52040000 constant SEC_OTG_HS       \ See otg_hs.fs
+  $0x4202C400 constant PSSI             \ See pssi.fs
+  $0x5202C400 constant SEC_PSSI         \ See pssi.fs
+  $0x46020800 constant PWR              \ See pwr.fs
+  $0x56020800 constant SEC_PWR          \ See pwr.fs
+  $0x40026000 constant RAMCFG           \ See ramcfg.fs
+  $0x50026000 constant SEC_RAMCFG       \ See ramcfg.fs
+  $0x46020C00 constant RCC              \ See rcc.fs
+  $0x56020C00 constant SEC_RCC          \ See rcc.fs
+  $0x420C0800 constant RNG              \ See rng.fs
+  $0x520C0800 constant SEC_RNG          \ See rng.fs
+  $0x46007800 constant RTC              \ See rtc.fs
+  $0x56007800 constant SEC_RTC          \ See rtc.fs
+  $0x40015400 constant SAI1             \ See sai1.fs
+  $0x50015400 constant SEC_SAI1         \ See sai1.fs
+  $0x40015800 constant SAI2             \ See sai1.fs
+  $0x50015800 constant SEC_SAI2         \ See sai1.fs
+  $0x420C8000 constant SDMMC1           \ See sdmmc1.fs
+  $0x520C8000 constant SEC_SDMMC1       \ See sdmmc1.fs
+  $0x420C8C00 constant SDMMC2           \ See sdmmc1.fs
+  $0x520C8C00 constant SEC_SDMMC2       \ See sdmmc1.fs
+  $0x40013000 constant SPI1             \ See spi1.fs
+  $0x50013000 constant SEC_SPI1         \ See spi1.fs
+  $0x40003800 constant SPI2             \ See spi1.fs
+  $0x50003800 constant SEC_SPI2         \ See spi1.fs
+  $0x46002000 constant SPI3             \ See spi1.fs
+  $0x56002000 constant SEC_SPI3         \ See spi1.fs
+  $0x46000400 constant SYSCFG           \ See syscfg.fs
+  $0x56000400 constant SEC_SYSCFG       \ See syscfg.fs
+  $0x46007C00 constant TAMP             \ See tamp.fs
+  $0x56007C00 constant SEC_TAMP         \ See tamp.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x50012C00 constant SEC_TIM1         \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x50000000 constant SEC_TIM2         \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim2.fs
+  $0x50000400 constant SEC_TIM3         \ See tim2.fs
+  $0x40000800 constant TIM4             \ See tim2.fs
+  $0x50000800 constant SEC_TIM4         \ See tim2.fs
+  $0x40000C00 constant TIM5             \ See tim2.fs
+  $0x50000C00 constant SEC_TIM5         \ See tim2.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x50001000 constant SEC_TIM6         \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim6.fs
+  $0x50001400 constant SEC_TIM7         \ See tim6.fs
+  $0x40013400 constant TIM8             \ See tim1.fs
+  $0x50013400 constant SEC_TIM8         \ See tim1.fs
+  $0x40014000 constant TIM15            \ See tim15.fs
+  $0x50014000 constant SEC_TIM15        \ See tim15.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x50014400 constant SEC_TIM16        \ See tim16.fs
+  $0x40014800 constant TIM17            \ See tim16.fs
+  $0x50014800 constant SEC_TIM17        \ See tim16.fs
+  $0x40024000 constant TSC              \ See tsc.fs
+  $0x50024000 constant SEC_TSC          \ See tsc.fs
+  $0x4000DC00 constant UCPD1            \ See ucpd1.fs
+  $0x5000DC00 constant SEC_UCPD1        \ See ucpd1.fs
+  $0x40013800 constant USART1           \ See usart1.fs
+  $0x50013800 constant SEC_USART1       \ See usart1.fs
+  $0x40004400 constant USART2           \ See usart1.fs
+  $0x50004400 constant SEC_USART2       \ See usart1.fs
+  $0x40004800 constant USART3           \ See usart1.fs
+  $0x50004800 constant SEC_USART3       \ See usart1.fs
+  $0x40004C00 constant UART4            \ See usart1.fs
+  $0x50004C00 constant SEC_UART4        \ See usart1.fs
+  $0x40005000 constant UART5            \ See usart1.fs
+  $0x50005000 constant SEC_UART5        \ See usart1.fs
+  $0x40006400 constant USART6           \ See usart1.fs
+  $0x50006400 constant SEC_USART6       \ See usart1.fs
+  $0x46007400 constant VREFBUF          \ See vrefbuf.fs
+  $0x56007400 constant SEC_VREFBUF      \ See vrefbuf.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
+  $0x50002C00 constant SEC_WWDG         \ See wwdg.fs
+  $0xE000EE08 constant DCB              \ See dcb.fs
 
-\ Peripheral Instance Definitions
-.include ADC1                   \ ADC1
-.include SEC_ADC1               \ ADC1
-.include ADC2                   \ ADC1
-.include SEC_ADC2               \ ADC1
-.include ADC12_COMMON           \ Analog-to-Digital Converter
-.include SEC_ADC12_COMMON       \ Analog-to-Digital Converter
-.include ADC4                   \ ADC4
-.include SEC_ADC4               \ ADC4
-.include ADF1                   \ ADF1
-.include SEC_ADF1               \ ADF1
-.include COMP                   \ Comparator
-.include SEC_COMP               \ Comparator
-.include CORDIC                 \ CORDIC Co-processor
-.include SEC_CORDIC             \ CORDIC Co-processor
-.include CRC                    \ Cyclic redundancy check calculation unit
-.include SEC_CRC                \ Cyclic redundancy check calculation unit
-.include CRS                    \ Clock recovery system
-.include SEC_CRS                \ Clock recovery system
-.include DAC1                   \ Digital-to-analog converter
-.include SEC_DAC1               \ Digital-to-analog converter
-.include DBGMCU                 \ MCU debug component
-.include DCACHE1                \ DCACHE1
-.include SEC_DCACHE1            \ DCACHE1
-.include DCACHE2                \ Data cache 2 global interrupt
-.include SEC_DCACHE2            \ DCACHE1
-.include DCMI                   \ Digital camera interface
-.include SEC_DCMI               \ Digital camera interface
-.include DLYBOS1                \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-.include SEC_DLYBOS1            \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-.include DLYBOS2                \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-.include SEC_DLYBOS2            \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-.include DLYBSD1                \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-.include SEC_DLYBSD1            \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-.include DLYBSD2                \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-.include SEC_DLYBSD2            \ The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-.include DMA2D                  \ DMA2D controller
-.include SEC_DMA2D              \ DMA2D controller
-.include DSI                    \ DSI
-.include SEC_DSI                \ DSI
-.include EXTI                   \ External interrupt/event controller
-.include SEC_EXTI               \ External interrupt/event controller
-.include FDCAN1_RAM             \ FDCAN1_RAM
-.include SEC_FDCAN1_RAM         \ FDCAN1_RAM
-.include FDCAN1                 \ FDCAN1_RAM
-.include SEC_FDCAN1             \ FDCAN1_RAM
-.include FLASH                  \ Flash
-.include SEC_FLASH              \ Flash
-.include FMAC                   \ Filter Math Accelerator
-.include SEC_FMAC               \ Filter Math Accelerator
-.include FMC                    \ FMC
-.include SEC_FMC                \ FMC
-.include GFXMMU                 \ GFXMMU
-.include SEC_GFXMMU             \ GFXMMU
-.include GFXTIM                 \ GFXTIM register block
-.include SEC_GFXTIM             \ GFXTIM register block
-.include GPDMA1                 \ GPDMA1
-.include SEC_GPDMA1             \ GPDMA1
-.include GPIOA                  \ General-purpose I/Os
-.include SEC_GPIOA              \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include SEC_GPIOB              \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include SEC_GPIOC              \ General-purpose I/Os
-.include GPIOD                  \ General-purpose I/Os
-.include SEC_GPIOD              \ General-purpose I/Os
-.include GPIOE                  \ General-purpose I/Os
-.include SEC_GPIOE              \ General-purpose I/Os
-.include GPIOF                  \ General-purpose I/Os
-.include SEC_GPIOF              \ General-purpose I/Os
-.include GPIOG                  \ General-purpose I/Os
-.include SEC_GPIOG              \ General-purpose I/Os
-.include GPIOH                  \ General-purpose I/Os
-.include SEC_GPIOH              \ General-purpose I/Os
-.include GPIOI                  \ General-purpose I/Os
-.include SEC_GPIOI              \ General-purpose I/Os
-.include GPIOJ                  \ General-purpose I/Os
-.include SEC_GPIOJ              \ General-purpose I/Os
-.include GTZC1_MPCBB1           \ GTZC1_MPCBB1
-.include SEC_GTZC1_MPCBB1       \ GTZC1_MPCBB1
-.include GTZC1_MPCBB2           \ GTZC1_MPCBB2
-.include SEC_GTZC1_MPCBB2       \ GTZC1_MPCBB2
-.include GTZC1_MPCBB3           \ GTZC1_MPCBB3
-.include SEC_GTZC1_MPCBB3       \ GTZC1_MPCBB3
-.include GTZC1_MPCBB5           \ GTZC1_MPCBB5
-.include SEC_GTZC1_MPCBB5       \ GTZC1_MPCBB5
-.include GTZC1_MPCBB6           \ GTZC1_MPCBB6
-.include SEC_GTZC1_MPCBB6       \ GTZC1_MPCBB6
-.include GTZC1_TZIC             \ GTZC1_TZIC
-.include SEC_GTZC1_TZIC         \ GTZC1_TZIC
-.include GTZC1_TZSC             \ GTZC1_TZSC
-.include SEC_GTZC1_TZSC         \ GTZC1_TZSC
-.include GTZC2_MPCBB4           \ GTZC2_MPCBB4
-.include SEC_GTZC2_MPCBB4       \ GTZC2_MPCBB4
-.include GTZC2_TZIC             \ GTZC2_TZIC
-.include SEC_GTZC2_TZIC         \ GTZC2_TZIC
-.include GTZC2_TZSC             \ GTZC2_TZSC
-.include SEC_GTZC2_TZSC         \ GTZC2_TZSC
-.include HASH                   \ Hash processor
-.include SEC_HASH               \ Hash processor
-.include HSPI1                  \ HSPI1
-.include SEC_HSPI1              \ HSPI1
-.include I2C1                   \ Inter-integrated circuit
-.include SEC_I2C1               \ Inter-integrated circuit
-.include I2C2                   \ I2C2 event interrupt
-.include SEC_I2C2               \ Inter-integrated circuit
-.include I2C3                   \ I2C3 event interrupt
-.include SEC_I2C3               \ Inter-integrated circuit
-.include I2C4                   \ I2C4 error interrupt
-.include SEC_I2C4               \ Inter-integrated circuit
-.include I2C5                   \ I2C5 error interrupt
-.include SEC_I2C5               \ I2C5 error interrupt
-.include I2C6                   \ I2C6 error interrupt
-.include SEC_I2C6               \ I2C6 error interrupt
-.include ICACHE                 \ ICache
-.include SEC_ICACHE             \ ICache
-.include IWDG                   \ Independent watchdog
-.include SEC_IWDG               \ Independent watchdog
-.include JPEG                   \ JPEG address block description
-.include SEC_JPEG               \ JPEG address block description
-.include LPDMA1                 \ LPDMA1
-.include SEC_LPDMA1             \ LPDMA1
-.include LPGPIO1                \ LPGPIO1
-.include SEC_LPGPIO1            \ LPGPIO1
-.include LPTIM1                 \ Low power timer
-.include SEC_LPTIM1             \ Low power timer
-.include LPTIM2                 \ LPTIM2 global interrupt
-.include SEC_LPTIM2             \ Low power timer
-.include LPTIM3                 \ LPTIM3 global interrupt
-.include SEC_LPTIM3             \ Low power timer
-.include LPTIM4                 \ Low power timer
-.include SEC_LPTIM4             \ Low power timer
-.include LPUART1                \ Universal synchronous asynchronous receiver transmitter
-.include SEC_LPUART1            \ Universal synchronous asynchronous receiver transmitter
-.include LTDC                   \ LTDC
-.include SEC_LTDC               \ LTDC
-.include MDF1                   \ Multi-function digital filter
-.include SEC_MDF1               \ Multi-function digital filter
-.include OCTOSPI1               \ OctoSPI
-.include SEC_OCTOSPI1           \ OctoSPI
-.include OCTOSPI2               \ OCTOSPI2 global interrupt
-.include SEC_OCTOSPI2           \ OctoSPI
-.include OCTOSPIM               \ OCTOSPI I/O manager
-.include SEC_OCTOSPIM           \ OCTOSPI I/O manager
-.include OPAMP                  \ Operational amplifiers
-.include SEC_OPAMP              \ Operational amplifiers
-.include OTG_HS                 \ OTG_HS
-.include SEC_OTG_HS             \ OTG_HS
-.include PSSI                   \ PSSI
-.include SEC_PSSI               \ PSSI
-.include PWR                    \ Power control
-.include SEC_PWR                \ Power control
-.include RAMCFG                 \ RAMCFG
-.include SEC_RAMCFG             \ RAMCFG
-.include RCC                    \ Reset and clock control
-.include SEC_RCC                \ Reset and clock control
-.include RNG                    \ Random number generator
-.include SEC_RNG                \ Random number generator
-.include RTC                    \ Real-time clock
-.include SEC_RTC                \ Real-time clock
-.include SAI1                   \ Serial audio interface
-.include SEC_SAI1               \ Serial audio interface
-.include SAI2                   \ SAI2 global interrupt
-.include SEC_SAI2               \ Serial audio interface
-.include SDMMC1                 \ Secure digital input/output MultiMediaCard interface
-.include SEC_SDMMC1             \ Secure digital input/output MultiMediaCard interface
-.include SDMMC2                 \ SDMMC2 global interrupt
-.include SEC_SDMMC2             \ Secure digital input/output MultiMediaCard interface
-.include SPI1                   \ Serial peripheral interface
-.include SEC_SPI1               \ Serial peripheral interface
-.include SPI2                   \ SPI2 global interrupt
-.include SEC_SPI2               \ Serial peripheral interface
-.include SPI3                   \ SPI3 global interrupt
-.include SEC_SPI3               \ Serial peripheral interface
-.include SYSCFG                 \ System configuration controller
-.include SEC_SYSCFG             \ System configuration controller
-.include TAMP                   \ Tamper and backup registers
-.include SEC_TAMP               \ Tamper and backup registers
-.include TIM1                   \ Advanced-timers
-.include SEC_TIM1               \ Advanced-timers
-.include TIM2                   \ General-purpose-timers
-.include SEC_TIM2               \ General-purpose-timers
-.include TIM3                   \ TIM3 global interrupt
-.include SEC_TIM3               \ General-purpose-timers
-.include TIM4                   \ TIM4 global interrupt
-.include SEC_TIM4               \ General-purpose-timers
-.include TIM5                   \ TIM5 global interrupt
-.include SEC_TIM5               \ General-purpose-timers
-.include TIM6                   \ General-purpose-timers
-.include SEC_TIM6               \ General-purpose-timers
-.include TIM7                   \ TIM7 global interrupt
-.include SEC_TIM7               \ General-purpose-timers
-.include TIM8                   \ TIM8 Break Interrupt
-.include SEC_TIM8               \ Advanced-timers
-.include TIM15                  \ General purpose timers
-.include SEC_TIM15              \ General purpose timers
-.include TIM16                  \ General purpose timers
-.include SEC_TIM16              \ General purpose timers
-.include TIM17                  \ TIM17 global interrupt
-.include SEC_TIM17              \ General purpose timers
-.include TSC                    \ Touch sensing controller
-.include SEC_TSC                \ Touch sensing controller
-.include UCPD1                  \ USB Power Delivery interface
-.include SEC_UCPD1              \ USB Power Delivery interface
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include SEC_USART1             \ Universal synchronous asynchronous receiver transmitter
-.include USART2                 \ USART2 global interrupt
-.include SEC_USART2             \ Universal synchronous asynchronous receiver transmitter
-.include USART3                 \ USART3 global interrupt
-.include SEC_USART3             \ Universal synchronous asynchronous receiver transmitter
-.include UART4                  \ UART4 global interrupt
-.include SEC_UART4              \ Universal synchronous asynchronous receiver transmitter
-.include UART5                  \ UART5 global interrupt
-.include SEC_UART5              \ Universal synchronous asynchronous receiver transmitter
-.include USART6                 \ USART6 global interrupt
-.include SEC_USART6             \ Universal synchronous asynchronous receiver transmitter
-.include VREFBUF                \ Voltage reference buffer
-.include SEC_VREFBUF            \ Voltage reference buffer
-.include WWDG                   \ System window watchdog
-.include SEC_WWDG               \ System window watchdog
-.include DCB                    \ Debug Control Block
-
-compiletoram
-
+: STM32U5FX_LOADER ; [then]

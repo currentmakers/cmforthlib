@@ -6,47 +6,49 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] OCTOSPIM_DEF
 
-\
-\ @brief OctoSPI IO Manager Port 1 Configuration Register
-\ Address offset: 0x04
-\ Reset value: 0x03010111
-\
-
-$00000001 constant OCTOSPIM_P1CR_CLKEN                              \ CLK/CLK Enable for Port
-$00000002 constant OCTOSPIM_P1CR_CLKSRC                             \ CLK/CLK Source for Port
-$00000010 constant OCTOSPIM_P1CR_DQSEN                              \ DQS Enable for Port
-$00000020 constant OCTOSPIM_P1CR_DQSSRC                             \ DQS Source for Port
-$00000100 constant OCTOSPIM_P1CR_NCSEN                              \ CS Enable for Port
-$00000200 constant OCTOSPIM_P1CR_NCSSRC                             \ CS Source for Port
-$00010000 constant OCTOSPIM_P1CR_IOLEN                              \ Enable for Port
-$00060000 constant OCTOSPIM_P1CR_IOLSRC                             \ Source for Port
-$01000000 constant OCTOSPIM_P1CR_IOHEN                              \ Enable for Port n
-$06000000 constant OCTOSPIM_P1CR_IOHSRC                             \ Source for Port
-
-
-\
-\ @brief OctoSPI IO Manager Port 2 Configuration Register
-\ Address offset: 0x08
-\ Reset value: 0x07050333
-\
-
-$00000001 constant OCTOSPIM_P2CR_CLKEN                              \ CLK/CLK Enable for Port
-$00000002 constant OCTOSPIM_P2CR_CLKSRC                             \ CLK/CLK Source for Port
-$00000010 constant OCTOSPIM_P2CR_DQSEN                              \ DQS Enable for Port
-$00000020 constant OCTOSPIM_P2CR_DQSSRC                             \ DQS Source for Port
-$00000100 constant OCTOSPIM_P2CR_NCSEN                              \ CS Enable for Port
-$00000200 constant OCTOSPIM_P2CR_NCSSRC                             \ CS Source for Port
-$00010000 constant OCTOSPIM_P2CR_IOLEN                              \ Enable for Port
-$00060000 constant OCTOSPIM_P2CR_IOLSRC                             \ Source for Port
-$01000000 constant OCTOSPIM_P2CR_IOHEN                              \ Enable for Port n
-$06000000 constant OCTOSPIM_P2CR_IOHSRC                             \ Source for Port
+  [ifdef] OCTOSPIM_P1CR_DEF
+    \
+    \ @brief OctoSPI IO Manager Port 1 Configuration Register
+    \ Address offset: 0x04
+    \ Reset value: 0x03010111
+    \
+    $00 constant OCTOSPIM_CLKEN                 \ [0x00] CLK/CLK Enable for Port
+    $01 constant OCTOSPIM_CLKSRC                \ [0x01] CLK/CLK Source for Port
+    $04 constant OCTOSPIM_DQSEN                 \ [0x04] DQS Enable for Port
+    $05 constant OCTOSPIM_DQSSRC                \ [0x05] DQS Source for Port
+    $08 constant OCTOSPIM_NCSEN                 \ [0x08] CS Enable for Port
+    $09 constant OCTOSPIM_NCSSRC                \ [0x09] CS Source for Port
+    $10 constant OCTOSPIM_IOLEN                 \ [0x10] Enable for Port
+    $11 constant OCTOSPIM_IOLSRC                \ [0x11 : 2] Source for Port
+    $18 constant OCTOSPIM_IOHEN                 \ [0x18] Enable for Port n
+    $19 constant OCTOSPIM_IOHSRC                \ [0x19 : 2] Source for Port
+  [then]
 
 
-\
-\ @brief OctoSPI IO Manager
-\
-$50061c04 constant OCTOSPIM_P1CR  \ offset: 0x04 : OctoSPI IO Manager Port 1 Configuration Register
-$50061c08 constant OCTOSPIM_P2CR  \ offset: 0x08 : OctoSPI IO Manager Port 2 Configuration Register
+  [ifdef] OCTOSPIM_P2CR_DEF
+    \
+    \ @brief OctoSPI IO Manager Port 2 Configuration Register
+    \ Address offset: 0x08
+    \ Reset value: 0x07050333
+    \
+    $00 constant OCTOSPIM_CLKEN                 \ [0x00] CLK/CLK Enable for Port
+    $01 constant OCTOSPIM_CLKSRC                \ [0x01] CLK/CLK Source for Port
+    $04 constant OCTOSPIM_DQSEN                 \ [0x04] DQS Enable for Port
+    $05 constant OCTOSPIM_DQSSRC                \ [0x05] DQS Source for Port
+    $08 constant OCTOSPIM_NCSEN                 \ [0x08] CS Enable for Port
+    $09 constant OCTOSPIM_NCSSRC                \ [0x09] CS Source for Port
+    $10 constant OCTOSPIM_IOLEN                 \ [0x10] Enable for Port
+    $11 constant OCTOSPIM_IOLSRC                \ [0x11 : 2] Source for Port
+    $18 constant OCTOSPIM_IOHEN                 \ [0x18] Enable for Port n
+    $19 constant OCTOSPIM_IOHSRC                \ [0x19 : 2] Source for Port
+  [then]
 
+  \
+  \ @brief OctoSPI IO Manager
+  \
+  $04 constant OCTOSPIM_P1CR            \ OctoSPI IO Manager Port 1 Configuration Register
+  $08 constant OCTOSPIM_P2CR            \ OctoSPI IO Manager Port 2 Configuration Register
+
+: OCTOSPIM_DEF ; [then]

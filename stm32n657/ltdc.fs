@@ -6,930 +6,1000 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief LTDC synchronization size configuration register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_SSCR_VSH                               \ vertical synchronization height (in units of horizontal scan line)
-$ffff0000 constant LTDC_LTDC_SSCR_HSW                               \ horizontal synchronization width (in units of pixel clock period)
-
-
-\
-\ @brief LTDC back porch configuration register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_BPCR_AVBP                              \ accumulated Vertical back porch (in units of horizontal scan line)
-$ffff0000 constant LTDC_LTDC_BPCR_AHBP                              \ accumulated horizontal back porch (in units of pixel clock period)
-
-
-\
-\ @brief LTDC active width configuration register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_AWCR_AAH                               \ accumulated active height (in units of horizontal scan line)
-$ffff0000 constant LTDC_LTDC_AWCR_AAW                               \ accumulated active width (in units of pixel clock period)
-
-
-\
-\ @brief LTDC total width configuration register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_TWCR_TOTALH                            \ total height (in units of horizontal scan line)
-$ffff0000 constant LTDC_LTDC_TWCR_TOTALW                            \ total width (in units of pixel clock period)
-
-
-\
-\ @brief LTDC global control register
-\ Address offset: 0x18
-\ Reset value: 0x00002220
-\
-
-$00000001 constant LTDC_LTDC_GCR_LTDCEN                             \ LTDC global enable
-$00000002 constant LTDC_LTDC_GCR_GAMEN                              \ Gamma correction enable
-$00000070 constant LTDC_LTDC_GCR_DBW                                \ dither blue width
-$00000700 constant LTDC_LTDC_GCR_DGW                                \ dither green width
-$00007000 constant LTDC_LTDC_GCR_DRW                                \ dither red width
-$00010000 constant LTDC_LTDC_GCR_DEN                                \ dither enable
-$00080000 constant LTDC_LTDC_GCR_CRCEN                              \ CRC enable
-$01000000 constant LTDC_LTDC_GCR_SFEN                               \ single-frame mode: mode enable
-$02000000 constant LTDC_LTDC_GCR_SFSWTR                             \ single-frame mode: software trigger
-$10000000 constant LTDC_LTDC_GCR_PCPOL                              \ pixel clock polarity
-$20000000 constant LTDC_LTDC_GCR_DEPOL                              \ blanking (no data/pixel) polarity
-$40000000 constant LTDC_LTDC_GCR_VSPOL                              \ vertical synchronization polarity
-$80000000 constant LTDC_LTDC_GCR_HSPOL                              \ horizontal synchronization polarity
-
-
-\
-\ @brief LTDC global configuration 1 register
-\ Address offset: 0x1C
-\ Reset value: 0x6BE4D888
-\
-
-$0000000f constant LTDC_LTDC_GC1R_WBCH                              \ width of blue channel output
-$000000f0 constant LTDC_LTDC_GC1R_WGCH                              \ width of green channel output
-$00000f00 constant LTDC_LTDC_GC1R_WRCH                              \ width of red channel output
-$00001000 constant LTDC_LTDC_GC1R_PRBA                              \ precise blending ability
-$0000c000 constant LTDC_LTDC_GC1R_DT                                \ dithering technique implemented
-$000e0000 constant LTDC_LTDC_GC1R_GCT                               \ gamma correction technique implemented
-$00200000 constant LTDC_LTDC_GC1R_SHRA                              \ shadow registers ability
-$00400000 constant LTDC_LTDC_GC1R_BCP                               \ background color programmability (unique color blended as background)
-$00800000 constant LTDC_LTDC_GC1R_BBA                               \ background blending ability
-$01000000 constant LTDC_LTDC_GC1R_LNIP                              \ line-IRQ: line position programmability
-$02000000 constant LTDC_LTDC_GC1R_TP                                \ timing programmability
-$08000000 constant LTDC_LTDC_GC1R_SPP                               \ sync polarity programmability
-$10000000 constant LTDC_LTDC_GC1R_DWP                               \ dither width programmability
-$20000000 constant LTDC_LTDC_GC1R_STRA                              \ status register ability
-$40000000 constant LTDC_LTDC_GC1R_CRMA                              \ configuration reading mode ability
-$80000000 constant LTDC_LTDC_GC1R_BMA                               \ blind mode ability
-
-
-\
-\ @brief LTDC global configuration 2 register
-\ Address offset: 0x20
-\ Reset value: 0x0000BB30
-\
-
-$00000001 constant LTDC_LTDC_GC2R_BLA                               \ background layer ability (pixels of background layer are read from memory)
-$00000002 constant LTDC_LTDC_GC2R_STSA                              \ slave timings synchronization ability
-$00000004 constant LTDC_LTDC_GC2R_DVA                               \ dual-view ability
-$00000008 constant LTDC_LTDC_GC2R_DPA                               \ secondary RGB output port ability
-$00000070 constant LTDC_LTDC_GC2R_BW                                \ bus width (log2 of number of bytes)
-$00000080 constant LTDC_LTDC_GC2R_EDCA                              \ external display control ability
-$00000100 constant LTDC_LTDC_GC2R_OCA                               \ output conversion ability (RGB to YCbCr)
-$00000200 constant LTDC_LTDC_GC2R_AXIIDA                            \ AXIID ability
-$00000400 constant LTDC_LTDC_GC2R_ROTA                              \ rotation support ability
-$00000800 constant LTDC_LTDC_GC2R_SISA                              \ second interrupt set ability
-$00001000 constant LTDC_LTDC_GC2R_SFA                               \ single frame mode ability
-$00002000 constant LTDC_LTDC_GC2R_CRCA                              \ CRC ability
-$00008000 constant LTDC_LTDC_GC2R_BOA                               \ blending order ability
-
-
-\
-\ @brief LTDC shadow reload configuration register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_SRCR_IMR                               \ immediate reload trigger
-$00000002 constant LTDC_LTDC_SRCR_VBR                               \ vertical blanking reload request
-
-
-\
-\ @brief LTDC gamma correction configuration register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_GCCR_ADDR                              \ address of the R,G,B table where the COMP component is written
-$0000ff00 constant LTDC_LTDC_GCCR_COMP                              \ color component to be written, in either (or all) the R,G,B tables
-$00010000 constant LTDC_LTDC_GCCR_BEN                               \ write trigger to the blue table
-$00020000 constant LTDC_LTDC_GCCR_GEN                               \ write trigger to the green table
-$00040000 constant LTDC_LTDC_GCCR_REN                               \ write trigger to the red table
-
-
-\
-\ @brief LTDC background color configuration register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_BCCR_BCBLUE                            \ background color blue value
-$0000ff00 constant LTDC_LTDC_BCCR_BCGREEN                           \ background color green value
-$00ff0000 constant LTDC_LTDC_BCCR_BCRED                             \ background color red value
-
-
-\
-\ @brief LTDC interrupt enable register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_IER_LIE                                \ Line interrupt enable
-$00000002 constant LTDC_LTDC_IER_FUWIE                              \ FIFO underrun warning interrupt enable
-$00000004 constant LTDC_LTDC_IER_TERRIE                             \ Transfer Error interrupt enable
-$00000008 constant LTDC_LTDC_IER_RRIE                               \ Register reload interrupt enable
-$00000040 constant LTDC_LTDC_IER_FUIE                               \ FIFO underrun interrupt enable
-$00000080 constant LTDC_LTDC_IER_CRCIE                              \ CRC error interrupt enable
-
-
-\
-\ @brief LTDC interrupt status register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_ISR_LIF                                \ Line interrupt flag
-$00000002 constant LTDC_LTDC_ISR_FUWIF                              \ FIFO underrun warning interrupt flag
-$00000004 constant LTDC_LTDC_ISR_TERRIF                             \ Transfer error interrupt flag
-$00000008 constant LTDC_LTDC_ISR_RRIF                               \ Register reload interrupt flag
-$00000040 constant LTDC_LTDC_ISR_FUIF                               \ FIFO underrun interrupt flag
-$00000080 constant LTDC_LTDC_ISR_CRCIF                              \ CRC error interrupt flag
-
-
-\
-\ @brief LTDC interrupt clear register
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_ICR_CLIF                               \ clears the line interrupt flag
-$00000002 constant LTDC_LTDC_ICR_CFUWIF                             \ clears the FIFO underrun warning interrupt flag
-$00000004 constant LTDC_LTDC_ICR_CTERRIF                            \ clears the transfer error interrupt flag
-$00000008 constant LTDC_LTDC_ICR_CRRIF                              \ clears register reload interrupt flag
-$00000040 constant LTDC_LTDC_ICR_CFUIF                              \ clears the FIFO underrun interrupt flag
-$00000080 constant LTDC_LTDC_ICR_CCRCIF                             \ clears the CRC error interrupt flag
-
-
-\
-\ @brief LTDC line interrupt position configuration register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_LIPCR_LIPOS                            \ line interrupt position
-
-
-\
-\ @brief LTDC current position status register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_CPSR_CYPOS                             \ current Y position
-$ffff0000 constant LTDC_LTDC_CPSR_CXPOS                             \ current X position
-
-
-\
-\ @brief LTDC current display status register
-\ Address offset: 0x48
-\ Reset value: 0x00000003
-\
-
-$00000001 constant LTDC_LTDC_CDSR_VDES                              \ vertical data enable display status
-$00000002 constant LTDC_LTDC_CDSR_HDES                              \ horizontal data enable display status
-$00000004 constant LTDC_LTDC_CDSR_VSYNCS                            \ vertical synchronization display status
-$00000008 constant LTDC_LTDC_CDSR_HSYNCS                            \ horizontal synchronization display status
-
-
-\
-\ @brief LTDC external display control register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$02000000 constant LTDC_LTDC_EDCR_OCYEN                             \ output conversion to YCbCr 422 enable
-$04000000 constant LTDC_LTDC_EDCR_OCYSEL                            \ output conversion to YCbCr 422
-$08000000 constant LTDC_LTDC_EDCR_OCYCO                             \ output conversion to YCbCr 422
-
-
-\
-\ @brief LTDC interrupt enable register 2
-\ Address offset: 0x64
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_IER2_LIE                               \ Line interrupt enable
-$00000002 constant LTDC_LTDC_IER2_FUWIE                             \ FIFO underrun warning interrupt enable
-$00000004 constant LTDC_LTDC_IER2_TERRIE                            \ Transfer error interrupt enable
-$00000008 constant LTDC_LTDC_IER2_RRIE                              \ Register reload interrupt enable
-$00000040 constant LTDC_LTDC_IER2_FUIE                              \ FIFO underrun interrupt enable
-$00000080 constant LTDC_LTDC_IER2_CRCIE                             \ CRC error interrupt enable
-
-
-\
-\ @brief LTDC interrupt status register 2
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_ISR2_LIF                               \ Line interrupt flag
-$00000002 constant LTDC_LTDC_ISR2_FUWIF                             \ FIFO underrun warning interrupt flag
-$00000004 constant LTDC_LTDC_ISR2_TERRIF                            \ Transfer error interrupt flag
-$00000008 constant LTDC_LTDC_ISR2_RRIF                              \ Register reload interrupt flag
-$00000040 constant LTDC_LTDC_ISR2_FUIF                              \ FIFO underrun interrupt flag
-$00000080 constant LTDC_LTDC_ISR2_CRCIF                             \ CRC Error interrupt flag
-
-
-\
-\ @brief LTDC interrupt clear register 2
-\ Address offset: 0x6C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_ICR2_CLIF                              \ clears the Line interrupt flag
-$00000002 constant LTDC_LTDC_ICR2_CFUWIF                            \ clears the FIFO underrun warning interrupt flag
-$00000004 constant LTDC_LTDC_ICR2_CTERRIF                           \ clears the Transfer Error interrupt flag
-$00000008 constant LTDC_LTDC_ICR2_CRRIF                             \ clears register reload interrupt flag
-$00000040 constant LTDC_LTDC_ICR2_CFUIF                             \ clears the FIFO underrun interrupt flag
-$00000080 constant LTDC_LTDC_ICR2_CCRCIF                            \ clears the CRC error interrupt flag
-
-
-\
-\ @brief LTDC line interrupt position configuration register 2
-\ Address offset: 0x70
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_LIPCR2_LIPOS                           \ line interrupt position
-
-
-\
-\ @brief LTDC expected CRC register
-\ Address offset: 0x78
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_ECRCR_ECRC                             \ expected CRC of frame
-
-
-\
-\ @brief LTDC computed CRC register
-\ Address offset: 0x7C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_CCRCR_CCRC                             \ computed CRC of frame
-
-
-\
-\ @brief LTDC FIFO underrun threshold register
-\ Address offset: 0x90
-\ Reset value: 0x00000010
-\
-
-$0000ffff constant LTDC_LTDC_FUTR_THRE                              \ threshold to trigger a FIFO underrun interrupt (per FIFO word, 64 bits)
-
-
-\
-\ @brief LTDC layerx configuration 0 register
-\ Address offset: 0x100
-\ Reset value: 0xFF50A076
-\
-
-$00000001 constant LTDC_LTDC_L1C0R_CKTA                             \ color key transparency ability
-$00000002 constant LTDC_LTDC_L1C0R_CFBDA                            \ color frame buffer duplication ability
-$00000004 constant LTDC_LTDC_L1C0R_CFBPA                            \ color frame buffer pitch ability
-$00000008 constant LTDC_LTDC_L1C0R_APA                              \ alpha plane ability
-$00000010 constant LTDC_LTDC_L1C0R_DCP                              \ default color programmability
-$00000020 constant LTDC_LTDC_L1C0R_WINA                             \ windowing ability
-$00000040 constant LTDC_LTDC_L1C0R_CLUTA                            \ CLUT ability
-$00000080 constant LTDC_LTDC_L1C0R_CKRA                             \ color key replace ability
-$00000100 constant LTDC_LTDC_L1C0R_F21                              \ blending factor 2, ability for: 1.0
-$00000200 constant LTDC_LTDC_L1C0R_F20                              \ blending factor 2, ability for: 0.0
-$00000400 constant LTDC_LTDC_L1C0R_F2P                              \ blending factor 2, ability for: pixel_alpha
-$00000800 constant LTDC_LTDC_L1C0R_F21P                             \ blending factor 2, ability for: 1.0 - pixel_alpha
-$00001000 constant LTDC_LTDC_L1C0R_F2C                              \ blending factor 2, ability for: constant_alpha
-$00002000 constant LTDC_LTDC_L1C0R_F21C                             \ blending factor 2, ability for: 1.0 - constant_alpha
-$00004000 constant LTDC_LTDC_L1C0R_F2PC                             \ blending factor 2, ability for: pixel_alpha * constant_alpha
-$00008000 constant LTDC_LTDC_L1C0R_F21PC                            \ blending factor 2, ability for: 1.0 - (pixel_alpha * constant_alpha)
-$00010000 constant LTDC_LTDC_L1C0R_F11                              \ blending factor 1, ability for: 1.0
-$00020000 constant LTDC_LTDC_L1C0R_F10                              \ blending factor 1,ability for: 0.0
-$00040000 constant LTDC_LTDC_L1C0R_F1P                              \ blending factor 1, ability for: pixel_alpha
-$00080000 constant LTDC_LTDC_L1C0R_F11P                             \ blending factor 1, ability for: 1.0 - pixel_alpha
-$00100000 constant LTDC_LTDC_L1C0R_F1C                              \ blending factor 1, ability for: constant_alpha
-$00200000 constant LTDC_LTDC_L1C0R_F11C                             \ blending factor 1, ability for: 1.0 - constant_alpha
-$00400000 constant LTDC_LTDC_L1C0R_F1PC                             \ blending factor 1, ability for: pixel_alpha * constant_alpha
-$00800000 constant LTDC_LTDC_L1C0R_F11PC                            \ blending factor 1, ability for: 1.0 - (pixel_alpha * constant_alpha)
-$01000000 constant LTDC_LTDC_L1C0R_FF                               \ flexible pixel format, ability
-$02000000 constant LTDC_LTDC_L1C0R_RGB888                           \ pixel format, ability for rgb888
-$04000000 constant LTDC_LTDC_L1C0R_BGR565                           \ pixel format, ability for bgr565
-$08000000 constant LTDC_LTDC_L1C0R_RGB565                           \ pixel format, ability for rgb565
-$10000000 constant LTDC_LTDC_L1C0R_BGRA888                          \ pixel format, ability for bgra8888
-$20000000 constant LTDC_LTDC_L1C0R_RGBA8888                         \ pixel format, ability for rgba8888
-$40000000 constant LTDC_LTDC_L1C0R_ABGR8888                         \ pixel format, ability for abgr8888
-$80000000 constant LTDC_LTDC_L1C0R_ARGB8888                         \ pixel format, ability for argb8888
-
-
-\
-\ @brief LTDC layerx configuration 1 register
-\ Address offset: 0x104
-\ Reset value: 0x80000007
-\
-
-$00000001 constant LTDC_LTDC_L1C1R_YIA                              \ YCbCr 422 interleaved ability for that layer
-$00000002 constant LTDC_LTDC_L1C1R_YSPA                             \ YCbCr 420 semi-planar ability for that layer
-$00000004 constant LTDC_LTDC_L1C1R_YFPA                             \ YCbCr 420 full-planar ability for that layer
-$80000000 constant LTDC_LTDC_L1C1R_SCA                              \ scaling ability for that layer
-
-
-\
-\ @brief LTDC layerx reload control register
-\ Address offset: 0x108
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_L1RCR_IMR                              \ immediate reload trigger
-$00000002 constant LTDC_LTDC_L1RCR_VBR                              \ vertical blanking reload request
-$00000004 constant LTDC_LTDC_L1RCR_GRMSK                            \ shadow reload control, global (centralized) reload masked
-
-
-\
-\ @brief LTDC layerx control register
-\ Address offset: 0x10C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_L1CR_LEN                               \ layer enable
-$00000002 constant LTDC_LTDC_L1CR_CKEN                              \ color keying enable
-$00000010 constant LTDC_LTDC_L1CR_CLUTEN                            \ color look-up table enable
-$00000100 constant LTDC_LTDC_L1CR_HMEN                              \ horizontal mirroring enable
-$00000200 constant LTDC_LTDC_L1CR_DCBEN                             \ default color blending enable
-
-
-\
-\ @brief LTDC layerx window horizontal position configuration register
-\ Address offset: 0x110
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L1WHPCR_WHSTPOS                        \ window horizontal start position
-$ffff0000 constant LTDC_LTDC_L1WHPCR_WHSPPOS                        \ window horizontal stop position
-
-
-\
-\ @brief LTDC layerx window vertical position configuration register
-\ Address offset: 0x114
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L1WVPCR_WVSTPOS                        \ window vertical start position
-$ffff0000 constant LTDC_LTDC_L1WVPCR_WVSPPOS                        \ window vertical stop position
-
-
-\
-\ @brief LTDC layerx color keying configuration register
-\ Address offset: 0x118
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_L1CKCR_CKBLUE                          \ color key blue value
-$0000ff00 constant LTDC_LTDC_L1CKCR_CKGREEN                         \ color key green value
-$00ff0000 constant LTDC_LTDC_L1CKCR_CKRED                           \ color key red value
-
-
-\
-\ @brief LTDC layerx pixel format configuration register
-\ Address offset: 0x11C
-\ Reset value: 0x00000000
-\
-
-$00000007 constant LTDC_LTDC_L1PFCR_PF                              \ pixel format
-
-
-\
-\ @brief LTDC layerx constant alpha configuration register
-\ Address offset: 0x120
-\ Reset value: 0x000000FF
-\
-
-$000000ff constant LTDC_LTDC_L1CACR_CONSTA                          \ constant alpha
-
-
-\
-\ @brief LTDC layerx default color configuration register
-\ Address offset: 0x124
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_L1DCCR_DCBLUE                          \ default color blue
-$0000ff00 constant LTDC_LTDC_L1DCCR_DCGREEN                         \ default color green
-$00ff0000 constant LTDC_LTDC_L1DCCR_DCRED                           \ default color red
-$ff000000 constant LTDC_LTDC_L1DCCR_DCALPHA                         \ default color alpha
-
-
-\
-\ @brief LTDC layerx blending factors configuration register
-\ Address offset: 0x128
-\ Reset value: 0x00000607
-\
-
-$00000007 constant LTDC_LTDC_L1BFCR_BF2                             \ blending factor 2
-$00000700 constant LTDC_LTDC_L1BFCR_BF1                             \ blending factor 1
-$00010000 constant LTDC_LTDC_L1BFCR_BOR                             \ blending order
-
-
-\
-\ @brief LTDC layerx burst length configuration register
-\ Address offset: 0x12C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_L1BLCR_BL                              \ burst length
-
-
-\
-\ @brief LTDC layerx planar configuration register
-\ Address offset: 0x130
-\ Reset value: 0x00000000
-\
-
-$00000008 constant LTDC_LTDC_L1PCR_YCEN                             \ YCbCr-to-RGB conversion enable
-$00000030 constant LTDC_LTDC_L1PCR_YCM                              \ YCbCr conversion mode
-$00000040 constant LTDC_LTDC_L1PCR_YF                               \ Y component first
-$00000080 constant LTDC_LTDC_L1PCR_CBF                              \ Cb component first
-$00000100 constant LTDC_LTDC_L1PCR_OF                               \ Odd pixel first
-$00000200 constant LTDC_LTDC_L1PCR_YREN                             \ Y rescale enable for the color dynamic range
-
-
-\
-\ @brief LTDC layerx color frame buffer address register
-\ Address offset: 0x134
-\ Reset value: 0x00000000
-\
-
-$00000000 constant LTDC_LTDC_L1CFBAR_CFBADD                         \ color frame buffer start address
-
-
-\
-\ @brief LTDC layerx color frame buffer length register
-\ Address offset: 0x138
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L1CFBLR_CFBLL                          \ color frame buffer line length
-$ffff0000 constant LTDC_LTDC_L1CFBLR_CFBP                           \ color frame buffer pitch in bytes
-
-
-\
-\ @brief LTDC layerx color frame buffer line number register
-\ Address offset: 0x13C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L1CFBLNR_CFBLNBR                       \ frame buffer line number
-
-
-\
-\ @brief LTDC layer1 auxiliary frame buffer address 0 register
-\ Address offset: 0x140
-\ Reset value: 0x00000000
-\
-
-$00000000 constant LTDC_LTDC_L1AFBA0R_AFBADD0                       \ frame buffer start address
-
-
-\
-\ @brief LTDC layer1 auxiliary frame buffer address 1 register
-\ Address offset: 0x144
-\ Reset value: 0x00000000
-\
-
-$00000000 constant LTDC_LTDC_L1AFBA1R_AFBADD1                       \ auxiliary frame buffer start address
-
-
-\
-\ @brief LTDC layer1 auxiliary frame buffer length register
-\ Address offset: 0x148
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L1AFBLR_AFBLL                          \ auxiliary frame buffer line length
-$ffff0000 constant LTDC_LTDC_L1AFBLR_AFBP                           \ auxiliary frame buffer pitch in bytes
-
-
-\
-\ @brief LTDC layer1 auxiliary frame buffer line number register
-\ Address offset: 0x14C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L1AFBLNR_AFBLNBR                       \ auxiliary frame buffer line number
-
-
-\
-\ @brief LTDC layerx CLUT write register
-\ Address offset: 0x150
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_L1CLUTWR_BLUE                          \ blue value
-$0000ff00 constant LTDC_LTDC_L1CLUTWR_GREEN                         \ green value
-$00ff0000 constant LTDC_LTDC_L1CLUTWR_RED                           \ red value
-$ff000000 constant LTDC_LTDC_L1CLUTWR_CLUTADD                       \ CLUT address
-
-
-\
-\ @brief LTDC layerx conversion YCbCr RGB 0 register
-\ Address offset: 0x16C
-\ Reset value: 0x00000000
-\
-
-$000003ff constant LTDC_LTDC_L1CYR0R_CR2R                           \ Cr-to-Red coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
-$03ff0000 constant LTDC_LTDC_L1CYR0R_CB2B                           \ Cb-to-Blue coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
-
-
-\
-\ @brief LTDC layerx conversion YCbCr RGB 1 register
-\ Address offset: 0x170
-\ Reset value: 0x00000000
-\
-
-$000003ff constant LTDC_LTDC_L1CYR1R_CR2G                           \ Cr-to-Green coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
-$03ff0000 constant LTDC_LTDC_L1CYR1R_CB2G                           \ Cb-to-Green coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
-
-
-\
-\ @brief LTDC layerx flexible pixel format 0 register
-\ Address offset: 0x174
-\ Reset value: 0x00011100
-\
-
-$0000001f constant LTDC_LTDC_L1FPF0R_APOS                           \ Location of the Alpha component inside the pixel memory word (in bits)
-$000001e0 constant LTDC_LTDC_L1FPF0R_ALEN                           \ Width of the Alpha component (in bits)
-$00003e00 constant LTDC_LTDC_L1FPF0R_RPOS                           \ Location of the Red component inside the pixel memory word (in bits)
-$0003c000 constant LTDC_LTDC_L1FPF0R_RLEN                           \ Width of the Red component (in bits)
-
-
-\
-\ @brief LTDC layerx flexible pixel format 1 register
-\ Address offset: 0x178
-\ Reset value: 0x00093110
-\
-
-$0000001f constant LTDC_LTDC_L1FPF1R_GPOS                           \ Location of the Green component inside the pixel memory word (in bits)
-$000001e0 constant LTDC_LTDC_L1FPF1R_GLEN                           \ Width of the Green component (in bits)
-$00003e00 constant LTDC_LTDC_L1FPF1R_BPOS                           \ Location of the Blue component inside the pixel memory word (in bits)
-$0003c000 constant LTDC_LTDC_L1FPF1R_BLEN                           \ Width of the Blue component (in bits)
-$001c0000 constant LTDC_LTDC_L1FPF1R_PSIZE                          \ Pixel size (in bytes)
-
-
-\
-\ @brief LTDC layerx configuration 0 register
-\ Address offset: 0x200
-\ Reset value: 0xFF50A076
-\
-
-$00000001 constant LTDC_LTDC_L2C0R_CKTA                             \ color key transparency ability
-$00000002 constant LTDC_LTDC_L2C0R_CFBDA                            \ color frame buffer duplication ability
-$00000004 constant LTDC_LTDC_L2C0R_CFBPA                            \ color frame buffer pitch ability
-$00000008 constant LTDC_LTDC_L2C0R_APA                              \ alpha plane ability
-$00000010 constant LTDC_LTDC_L2C0R_DCP                              \ default color programmability
-$00000020 constant LTDC_LTDC_L2C0R_WINA                             \ windowing ability
-$00000040 constant LTDC_LTDC_L2C0R_CLUTA                            \ CLUT ability
-$00000080 constant LTDC_LTDC_L2C0R_CKRA                             \ color key replace ability
-$00000100 constant LTDC_LTDC_L2C0R_F21                              \ blending factor 2, ability for: 1.0
-$00000200 constant LTDC_LTDC_L2C0R_F20                              \ blending factor 2, ability for: 0.0
-$00000400 constant LTDC_LTDC_L2C0R_F2P                              \ blending factor 2, ability for: pixel_alpha
-$00000800 constant LTDC_LTDC_L2C0R_F21P                             \ blending factor 2, ability for: 1.0 - pixel_alpha
-$00001000 constant LTDC_LTDC_L2C0R_F2C                              \ blending factor 2, ability for: constant_alpha
-$00002000 constant LTDC_LTDC_L2C0R_F21C                             \ blending factor 2, ability for: 1.0 - constant_alpha
-$00004000 constant LTDC_LTDC_L2C0R_F2PC                             \ blending factor 2, ability for: pixel_alpha * constant_alpha
-$00008000 constant LTDC_LTDC_L2C0R_F21PC                            \ blending factor 2, ability for: 1.0 - (pixel_alpha * constant_alpha)
-$00010000 constant LTDC_LTDC_L2C0R_F11                              \ blending factor 1, ability for: 1.0
-$00020000 constant LTDC_LTDC_L2C0R_F10                              \ blending factor 1,ability for: 0.0
-$00040000 constant LTDC_LTDC_L2C0R_F1P                              \ blending factor 1, ability for: pixel_alpha
-$00080000 constant LTDC_LTDC_L2C0R_F11P                             \ blending factor 1, ability for: 1.0 - pixel_alpha
-$00100000 constant LTDC_LTDC_L2C0R_F1C                              \ blending factor 1, ability for: constant_alpha
-$00200000 constant LTDC_LTDC_L2C0R_F11C                             \ blending factor 1, ability for: 1.0 - constant_alpha
-$00400000 constant LTDC_LTDC_L2C0R_F1PC                             \ blending factor 1, ability for: pixel_alpha * constant_alpha
-$00800000 constant LTDC_LTDC_L2C0R_F11PC                            \ blending factor 1, ability for: 1.0 - (pixel_alpha * constant_alpha)
-$01000000 constant LTDC_LTDC_L2C0R_FF                               \ flexible pixel format, ability
-$02000000 constant LTDC_LTDC_L2C0R_RGB888                           \ pixel format, ability for rgb888
-$04000000 constant LTDC_LTDC_L2C0R_BGR565                           \ pixel format, ability for bgr565
-$08000000 constant LTDC_LTDC_L2C0R_RGB565                           \ pixel format, ability for rgb565
-$10000000 constant LTDC_LTDC_L2C0R_BGRA888                          \ pixel format, ability for bgra8888
-$20000000 constant LTDC_LTDC_L2C0R_RGBA8888                         \ pixel format, ability for rgba8888
-$40000000 constant LTDC_LTDC_L2C0R_ABGR8888                         \ pixel format, ability for abgr8888
-$80000000 constant LTDC_LTDC_L2C0R_ARGB8888                         \ pixel format, ability for argb8888
-
-
-\
-\ @brief LTDC layerx configuration 1 register
-\ Address offset: 0x204
-\ Reset value: 0x80000001
-\
-
-$00000001 constant LTDC_LTDC_L2C1R_YIA                              \ YCbCr 422 interleaved ability for that layer
-$00000002 constant LTDC_LTDC_L2C1R_YSPA                             \ YCbCr 420 semi-planar ability for that layer
-$00000004 constant LTDC_LTDC_L2C1R_YFPA                             \ YCbCr 420 full-planar ability for that layer
-$80000000 constant LTDC_LTDC_L2C1R_SCA                              \ scaling ability for that layer
-
-
-\
-\ @brief LTDC layerx reload control register
-\ Address offset: 0x208
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_L2RCR_IMR                              \ immediate reload trigger
-$00000002 constant LTDC_LTDC_L2RCR_VBR                              \ vertical blanking reload request
-$00000004 constant LTDC_LTDC_L2RCR_GRMSK                            \ shadow reload control, global (centralized) reload masked
-
-
-\
-\ @brief LTDC layerx control register
-\ Address offset: 0x20C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LTDC_LTDC_L2CR_LEN                               \ layer enable
-$00000002 constant LTDC_LTDC_L2CR_CKEN                              \ color keying enable
-$00000010 constant LTDC_LTDC_L2CR_CLUTEN                            \ color look-up table enable
-$00000100 constant LTDC_LTDC_L2CR_HMEN                              \ horizontal mirroring enable
-$00000200 constant LTDC_LTDC_L2CR_DCBEN                             \ default color blending enable
-
-
-\
-\ @brief LTDC layerx window horizontal position configuration register
-\ Address offset: 0x210
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L2WHPCR_WHSTPOS                        \ window horizontal start position
-$ffff0000 constant LTDC_LTDC_L2WHPCR_WHSPPOS                        \ window horizontal stop position
-
-
-\
-\ @brief LTDC layerx window vertical position configuration register
-\ Address offset: 0x214
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L2WVPCR_WVSTPOS                        \ window vertical start position
-$ffff0000 constant LTDC_LTDC_L2WVPCR_WVSPPOS                        \ window vertical stop position
-
-
-\
-\ @brief LTDC layerx color keying configuration register
-\ Address offset: 0x218
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_L2CKCR_CKBLUE                          \ color key blue value
-$0000ff00 constant LTDC_LTDC_L2CKCR_CKGREEN                         \ color key green value
-$00ff0000 constant LTDC_LTDC_L2CKCR_CKRED                           \ color key red value
-
-
-\
-\ @brief LTDC layerx pixel format configuration register
-\ Address offset: 0x21C
-\ Reset value: 0x00000000
-\
-
-$00000007 constant LTDC_LTDC_L2PFCR_PF                              \ pixel format
-
-
-\
-\ @brief LTDC layerx constant alpha configuration register
-\ Address offset: 0x220
-\ Reset value: 0x000000FF
-\
-
-$000000ff constant LTDC_LTDC_L2CACR_CONSTA                          \ constant alpha
-
-
-\
-\ @brief LTDC layerx default color configuration register
-\ Address offset: 0x224
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_L2DCCR_DCBLUE                          \ default color blue
-$0000ff00 constant LTDC_LTDC_L2DCCR_DCGREEN                         \ default color green
-$00ff0000 constant LTDC_LTDC_L2DCCR_DCRED                           \ default color red
-$ff000000 constant LTDC_LTDC_L2DCCR_DCALPHA                         \ default color alpha
-
-
-\
-\ @brief LTDC layerx blending factors configuration register
-\ Address offset: 0x228
-\ Reset value: 0x00010607
-\
-
-$00000007 constant LTDC_LTDC_L2BFCR_BF2                             \ blending factor 2
-$00000700 constant LTDC_LTDC_L2BFCR_BF1                             \ blending factor 1
-$00010000 constant LTDC_LTDC_L2BFCR_BOR                             \ blending order
-
-
-\
-\ @brief LTDC layerx burst length configuration register
-\ Address offset: 0x22C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_L2BLCR_BL                              \ burst length
-
-
-\
-\ @brief LTDC layerx planar configuration register
-\ Address offset: 0x230
-\ Reset value: 0x00000000
-\
-
-$00000008 constant LTDC_LTDC_L2PCR_YCEN                             \ YCbCr-to-RGB conversion enable
-$00000030 constant LTDC_LTDC_L2PCR_YCM                              \ YCbCr conversion mode
-$00000040 constant LTDC_LTDC_L2PCR_YF                               \ Y component first
-$00000080 constant LTDC_LTDC_L2PCR_CBF                              \ Cb component first
-$00000100 constant LTDC_LTDC_L2PCR_OF                               \ Odd pixel first
-$00000200 constant LTDC_LTDC_L2PCR_YREN                             \ Y rescale enable for the color dynamic range
-
-
-\
-\ @brief LTDC layerx color frame buffer address register
-\ Address offset: 0x234
-\ Reset value: 0x00000000
-\
-
-$00000000 constant LTDC_LTDC_L2CFBAR_CFBADD                         \ color frame buffer start address
-
-
-\
-\ @brief LTDC layerx color frame buffer length register
-\ Address offset: 0x238
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L2CFBLR_CFBLL                          \ color frame buffer line length
-$ffff0000 constant LTDC_LTDC_L2CFBLR_CFBP                           \ color frame buffer pitch in bytes
-
-
-\
-\ @brief LTDC layerx color frame buffer line number register
-\ Address offset: 0x23C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LTDC_LTDC_L2CFBLNR_CFBLNBR                       \ frame buffer line number
-
-
-\
-\ @brief LTDC layerx CLUT write register
-\ Address offset: 0x250
-\ Reset value: 0x00000000
-\
-
-$000000ff constant LTDC_LTDC_L2CLUTWR_BLUE                          \ blue value
-$0000ff00 constant LTDC_LTDC_L2CLUTWR_GREEN                         \ green value
-$00ff0000 constant LTDC_LTDC_L2CLUTWR_RED                           \ red value
-$ff000000 constant LTDC_LTDC_L2CLUTWR_CLUTADD                       \ CLUT address
-
-
-\
-\ @brief LTDC layerx conversion YCbCr RGB 0 register
-\ Address offset: 0x26C
-\ Reset value: 0x00000000
-\
-
-$000003ff constant LTDC_LTDC_L2CYR0R_CR2R                           \ Cr-to-Red coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
-$03ff0000 constant LTDC_LTDC_L2CYR0R_CB2B                           \ Cb-to-Blue coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
-
-
-\
-\ @brief LTDC layerx conversion YCbCr RGB 1 register
-\ Address offset: 0x270
-\ Reset value: 0x00000000
-\
-
-$000003ff constant LTDC_LTDC_L2CYR1R_CR2G                           \ Cr-to-Green coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
-$03ff0000 constant LTDC_LTDC_L2CYR1R_CB2G                           \ Cb-to-Green coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
-
-
-\
-\ @brief LTDC layerx flexible pixel format 0 register
-\ Address offset: 0x274
-\ Reset value: 0x00011100
-\
-
-$0000001f constant LTDC_LTDC_L2FPF0R_APOS                           \ Location of the Alpha component inside the pixel memory word (in bits)
-$000001e0 constant LTDC_LTDC_L2FPF0R_ALEN                           \ Width of the Alpha component (in bits)
-$00003e00 constant LTDC_LTDC_L2FPF0R_RPOS                           \ Location of the Red component inside the pixel memory word (in bits)
-$0003c000 constant LTDC_LTDC_L2FPF0R_RLEN                           \ Width of the Red component (in bits)
-
-
-\
-\ @brief LTDC layerx flexible pixel format 1 register
-\ Address offset: 0x278
-\ Reset value: 0x00093110
-\
-
-$0000001f constant LTDC_LTDC_L2FPF1R_GPOS                           \ Location of the Green component inside the pixel memory word (in bits)
-$000001e0 constant LTDC_LTDC_L2FPF1R_GLEN                           \ Width of the Green component (in bits)
-$00003e00 constant LTDC_LTDC_L2FPF1R_BPOS                           \ Location of the Blue component inside the pixel memory word (in bits)
-$0003c000 constant LTDC_LTDC_L2FPF1R_BLEN                           \ Width of the Blue component (in bits)
-$001c0000 constant LTDC_LTDC_L2FPF1R_PSIZE                          \ Pixel size (in bytes)
-
-
-\
-\ @brief LCD-TFT display controller
-\
-$48001008 constant LTDC_LTDC_SSCR  \ offset: 0x08 : LTDC synchronization size configuration register
-$4800100c constant LTDC_LTDC_BPCR  \ offset: 0x0C : LTDC back porch configuration register
-$48001010 constant LTDC_LTDC_AWCR  \ offset: 0x10 : LTDC active width configuration register
-$48001014 constant LTDC_LTDC_TWCR  \ offset: 0x14 : LTDC total width configuration register
-$48001018 constant LTDC_LTDC_GCR  \ offset: 0x18 : LTDC global control register
-$4800101c constant LTDC_LTDC_GC1R  \ offset: 0x1C : LTDC global configuration 1 register
-$48001020 constant LTDC_LTDC_GC2R  \ offset: 0x20 : LTDC global configuration 2 register
-$48001024 constant LTDC_LTDC_SRCR  \ offset: 0x24 : LTDC shadow reload configuration register
-$48001028 constant LTDC_LTDC_GCCR  \ offset: 0x28 : LTDC gamma correction configuration register
-$4800102c constant LTDC_LTDC_BCCR  \ offset: 0x2C : LTDC background color configuration register
-$48001034 constant LTDC_LTDC_IER  \ offset: 0x34 : LTDC interrupt enable register
-$48001038 constant LTDC_LTDC_ISR  \ offset: 0x38 : LTDC interrupt status register
-$4800103c constant LTDC_LTDC_ICR  \ offset: 0x3C : LTDC interrupt clear register
-$48001040 constant LTDC_LTDC_LIPCR  \ offset: 0x40 : LTDC line interrupt position configuration register
-$48001044 constant LTDC_LTDC_CPSR  \ offset: 0x44 : LTDC current position status register
-$48001048 constant LTDC_LTDC_CDSR  \ offset: 0x48 : LTDC current display status register
-$48001060 constant LTDC_LTDC_EDCR  \ offset: 0x60 : LTDC external display control register
-$48001064 constant LTDC_LTDC_IER2  \ offset: 0x64 : LTDC interrupt enable register 2
-$48001068 constant LTDC_LTDC_ISR2  \ offset: 0x68 : LTDC interrupt status register 2
-$4800106c constant LTDC_LTDC_ICR2  \ offset: 0x6C : LTDC interrupt clear register 2
-$48001070 constant LTDC_LTDC_LIPCR2  \ offset: 0x70 : LTDC line interrupt position configuration register 2
-$48001078 constant LTDC_LTDC_ECRCR  \ offset: 0x78 : LTDC expected CRC register
-$4800107c constant LTDC_LTDC_CCRCR  \ offset: 0x7C : LTDC computed CRC register
-$48001090 constant LTDC_LTDC_FUTR  \ offset: 0x90 : LTDC FIFO underrun threshold register
-$48001100 constant LTDC_LTDC_L1C0R  \ offset: 0x100 : LTDC layerx configuration 0 register
-$48001104 constant LTDC_LTDC_L1C1R  \ offset: 0x104 : LTDC layerx configuration 1 register
-$48001108 constant LTDC_LTDC_L1RCR  \ offset: 0x108 : LTDC layerx reload control register
-$4800110c constant LTDC_LTDC_L1CR  \ offset: 0x10C : LTDC layerx control register
-$48001110 constant LTDC_LTDC_L1WHPCR  \ offset: 0x110 : LTDC layerx window horizontal position configuration register
-$48001114 constant LTDC_LTDC_L1WVPCR  \ offset: 0x114 : LTDC layerx window vertical position configuration register
-$48001118 constant LTDC_LTDC_L1CKCR  \ offset: 0x118 : LTDC layerx color keying configuration register
-$4800111c constant LTDC_LTDC_L1PFCR  \ offset: 0x11C : LTDC layerx pixel format configuration register
-$48001120 constant LTDC_LTDC_L1CACR  \ offset: 0x120 : LTDC layerx constant alpha configuration register
-$48001124 constant LTDC_LTDC_L1DCCR  \ offset: 0x124 : LTDC layerx default color configuration register
-$48001128 constant LTDC_LTDC_L1BFCR  \ offset: 0x128 : LTDC layerx blending factors configuration register
-$4800112c constant LTDC_LTDC_L1BLCR  \ offset: 0x12C : LTDC layerx burst length configuration register
-$48001130 constant LTDC_LTDC_L1PCR  \ offset: 0x130 : LTDC layerx planar configuration register
-$48001134 constant LTDC_LTDC_L1CFBAR  \ offset: 0x134 : LTDC layerx color frame buffer address register
-$48001138 constant LTDC_LTDC_L1CFBLR  \ offset: 0x138 : LTDC layerx color frame buffer length register
-$4800113c constant LTDC_LTDC_L1CFBLNR  \ offset: 0x13C : LTDC layerx color frame buffer line number register
-$48001140 constant LTDC_LTDC_L1AFBA0R  \ offset: 0x140 : LTDC layer1 auxiliary frame buffer address 0 register
-$48001144 constant LTDC_LTDC_L1AFBA1R  \ offset: 0x144 : LTDC layer1 auxiliary frame buffer address 1 register
-$48001148 constant LTDC_LTDC_L1AFBLR  \ offset: 0x148 : LTDC layer1 auxiliary frame buffer length register
-$4800114c constant LTDC_LTDC_L1AFBLNR  \ offset: 0x14C : LTDC layer1 auxiliary frame buffer line number register
-$48001150 constant LTDC_LTDC_L1CLUTWR  \ offset: 0x150 : LTDC layerx CLUT write register
-$4800116c constant LTDC_LTDC_L1CYR0R  \ offset: 0x16C : LTDC layerx conversion YCbCr RGB 0 register
-$48001170 constant LTDC_LTDC_L1CYR1R  \ offset: 0x170 : LTDC layerx conversion YCbCr RGB 1 register
-$48001174 constant LTDC_LTDC_L1FPF0R  \ offset: 0x174 : LTDC layerx flexible pixel format 0 register
-$48001178 constant LTDC_LTDC_L1FPF1R  \ offset: 0x178 : LTDC layerx flexible pixel format 1 register
-$48001200 constant LTDC_LTDC_L2C0R  \ offset: 0x200 : LTDC layerx configuration 0 register
-$48001204 constant LTDC_LTDC_L2C1R  \ offset: 0x204 : LTDC layerx configuration 1 register
-$48001208 constant LTDC_LTDC_L2RCR  \ offset: 0x208 : LTDC layerx reload control register
-$4800120c constant LTDC_LTDC_L2CR  \ offset: 0x20C : LTDC layerx control register
-$48001210 constant LTDC_LTDC_L2WHPCR  \ offset: 0x210 : LTDC layerx window horizontal position configuration register
-$48001214 constant LTDC_LTDC_L2WVPCR  \ offset: 0x214 : LTDC layerx window vertical position configuration register
-$48001218 constant LTDC_LTDC_L2CKCR  \ offset: 0x218 : LTDC layerx color keying configuration register
-$4800121c constant LTDC_LTDC_L2PFCR  \ offset: 0x21C : LTDC layerx pixel format configuration register
-$48001220 constant LTDC_LTDC_L2CACR  \ offset: 0x220 : LTDC layerx constant alpha configuration register
-$48001224 constant LTDC_LTDC_L2DCCR  \ offset: 0x224 : LTDC layerx default color configuration register
-$48001228 constant LTDC_LTDC_L2BFCR  \ offset: 0x228 : LTDC layerx blending factors configuration register
-$4800122c constant LTDC_LTDC_L2BLCR  \ offset: 0x22C : LTDC layerx burst length configuration register
-$48001230 constant LTDC_LTDC_L2PCR  \ offset: 0x230 : LTDC layerx planar configuration register
-$48001234 constant LTDC_LTDC_L2CFBAR  \ offset: 0x234 : LTDC layerx color frame buffer address register
-$48001238 constant LTDC_LTDC_L2CFBLR  \ offset: 0x238 : LTDC layerx color frame buffer length register
-$4800123c constant LTDC_LTDC_L2CFBLNR  \ offset: 0x23C : LTDC layerx color frame buffer line number register
-$48001250 constant LTDC_LTDC_L2CLUTWR  \ offset: 0x250 : LTDC layerx CLUT write register
-$4800126c constant LTDC_LTDC_L2CYR0R  \ offset: 0x26C : LTDC layerx conversion YCbCr RGB 0 register
-$48001270 constant LTDC_LTDC_L2CYR1R  \ offset: 0x270 : LTDC layerx conversion YCbCr RGB 1 register
-$48001274 constant LTDC_LTDC_L2FPF0R  \ offset: 0x274 : LTDC layerx flexible pixel format 0 register
-$48001278 constant LTDC_LTDC_L2FPF1R  \ offset: 0x278 : LTDC layerx flexible pixel format 1 register
-
+[ifndef] LTDC_DEF
+
+  [ifdef] LTDC_LTDC_SSCR_DEF
+    \
+    \ @brief LTDC synchronization size configuration register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_VSH                       \ [0x00 : 16] vertical synchronization height (in units of horizontal scan line)
+    $10 constant LTDC_HSW                       \ [0x10 : 16] horizontal synchronization width (in units of pixel clock period)
+  [then]
+
+
+  [ifdef] LTDC_LTDC_BPCR_DEF
+    \
+    \ @brief LTDC back porch configuration register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_AVBP                      \ [0x00 : 16] accumulated Vertical back porch (in units of horizontal scan line)
+    $10 constant LTDC_AHBP                      \ [0x10 : 16] accumulated horizontal back porch (in units of pixel clock period)
+  [then]
+
+
+  [ifdef] LTDC_LTDC_AWCR_DEF
+    \
+    \ @brief LTDC active width configuration register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_AAH                       \ [0x00 : 16] accumulated active height (in units of horizontal scan line)
+    $10 constant LTDC_AAW                       \ [0x10 : 16] accumulated active width (in units of pixel clock period)
+  [then]
+
+
+  [ifdef] LTDC_LTDC_TWCR_DEF
+    \
+    \ @brief LTDC total width configuration register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_TOTALH                    \ [0x00 : 16] total height (in units of horizontal scan line)
+    $10 constant LTDC_TOTALW                    \ [0x10 : 16] total width (in units of pixel clock period)
+  [then]
+
+
+  [ifdef] LTDC_LTDC_GCR_DEF
+    \
+    \ @brief LTDC global control register
+    \ Address offset: 0x18
+    \ Reset value: 0x00002220
+    \
+    $00 constant LTDC_LTDCEN                    \ [0x00] LTDC global enable
+    $01 constant LTDC_GAMEN                     \ [0x01] Gamma correction enable
+    $04 constant LTDC_DBW                       \ [0x04 : 3] dither blue width
+    $08 constant LTDC_DGW                       \ [0x08 : 3] dither green width
+    $0c constant LTDC_DRW                       \ [0x0c : 3] dither red width
+    $10 constant LTDC_DEN                       \ [0x10] dither enable
+    $13 constant LTDC_CRCEN                     \ [0x13] CRC enable
+    $18 constant LTDC_SFEN                      \ [0x18] single-frame mode: mode enable
+    $19 constant LTDC_SFSWTR                    \ [0x19] single-frame mode: software trigger
+    $1c constant LTDC_PCPOL                     \ [0x1c] pixel clock polarity
+    $1d constant LTDC_DEPOL                     \ [0x1d] blanking (no data/pixel) polarity
+    $1e constant LTDC_VSPOL                     \ [0x1e] vertical synchronization polarity
+    $1f constant LTDC_HSPOL                     \ [0x1f] horizontal synchronization polarity
+  [then]
+
+
+  [ifdef] LTDC_LTDC_GC1R_DEF
+    \
+    \ @brief LTDC global configuration 1 register
+    \ Address offset: 0x1C
+    \ Reset value: 0x6BE4D888
+    \
+    $00 constant LTDC_WBCH                      \ [0x00 : 4] width of blue channel output
+    $04 constant LTDC_WGCH                      \ [0x04 : 4] width of green channel output
+    $08 constant LTDC_WRCH                      \ [0x08 : 4] width of red channel output
+    $0c constant LTDC_PRBA                      \ [0x0c] precise blending ability
+    $0e constant LTDC_DT                        \ [0x0e : 2] dithering technique implemented
+    $11 constant LTDC_GCT                       \ [0x11 : 3] gamma correction technique implemented
+    $15 constant LTDC_SHRA                      \ [0x15] shadow registers ability
+    $16 constant LTDC_BCP                       \ [0x16] background color programmability (unique color blended as background)
+    $17 constant LTDC_BBA                       \ [0x17] background blending ability
+    $18 constant LTDC_LNIP                      \ [0x18] line-IRQ: line position programmability
+    $19 constant LTDC_TP                        \ [0x19] timing programmability
+    $1b constant LTDC_SPP                       \ [0x1b] sync polarity programmability
+    $1c constant LTDC_DWP                       \ [0x1c] dither width programmability
+    $1d constant LTDC_STRA                      \ [0x1d] status register ability
+    $1e constant LTDC_CRMA                      \ [0x1e] configuration reading mode ability
+    $1f constant LTDC_BMA                       \ [0x1f] blind mode ability
+  [then]
+
+
+  [ifdef] LTDC_LTDC_GC2R_DEF
+    \
+    \ @brief LTDC global configuration 2 register
+    \ Address offset: 0x20
+    \ Reset value: 0x0000BB30
+    \
+    $00 constant LTDC_BLA                       \ [0x00] background layer ability (pixels of background layer are read from memory)
+    $01 constant LTDC_STSA                      \ [0x01] slave timings synchronization ability
+    $02 constant LTDC_DVA                       \ [0x02] dual-view ability
+    $03 constant LTDC_DPA                       \ [0x03] secondary RGB output port ability
+    $04 constant LTDC_BW                        \ [0x04 : 3] bus width (log2 of number of bytes)
+    $07 constant LTDC_EDCA                      \ [0x07] external display control ability
+    $08 constant LTDC_OCA                       \ [0x08] output conversion ability (RGB to YCbCr)
+    $09 constant LTDC_AXIIDA                    \ [0x09] AXIID ability
+    $0a constant LTDC_ROTA                      \ [0x0a] rotation support ability
+    $0b constant LTDC_SISA                      \ [0x0b] second interrupt set ability
+    $0c constant LTDC_SFA                       \ [0x0c] single frame mode ability
+    $0d constant LTDC_CRCA                      \ [0x0d] CRC ability
+    $0f constant LTDC_BOA                       \ [0x0f] blending order ability
+  [then]
+
+
+  [ifdef] LTDC_LTDC_SRCR_DEF
+    \
+    \ @brief LTDC shadow reload configuration register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_IMR                       \ [0x00] immediate reload trigger
+    $01 constant LTDC_VBR                       \ [0x01] vertical blanking reload request
+  [then]
+
+
+  [ifdef] LTDC_LTDC_GCCR_DEF
+    \
+    \ @brief LTDC gamma correction configuration register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_ADDR                      \ [0x00 : 8] address of the R,G,B table where the COMP component is written
+    $08 constant LTDC_COMP                      \ [0x08 : 8] color component to be written, in either (or all) the R,G,B tables
+    $10 constant LTDC_BEN                       \ [0x10] write trigger to the blue table
+    $11 constant LTDC_GEN                       \ [0x11] write trigger to the green table
+    $12 constant LTDC_REN                       \ [0x12] write trigger to the red table
+  [then]
+
+
+  [ifdef] LTDC_LTDC_BCCR_DEF
+    \
+    \ @brief LTDC background color configuration register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_BCBLUE                    \ [0x00 : 8] background color blue value
+    $08 constant LTDC_BCGREEN                   \ [0x08 : 8] background color green value
+    $10 constant LTDC_BCRED                     \ [0x10 : 8] background color red value
+  [then]
+
+
+  [ifdef] LTDC_LTDC_IER_DEF
+    \
+    \ @brief LTDC interrupt enable register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_LIE                       \ [0x00] Line interrupt enable
+    $01 constant LTDC_FUWIE                     \ [0x01] FIFO underrun warning interrupt enable
+    $02 constant LTDC_TERRIE                    \ [0x02] Transfer Error interrupt enable
+    $03 constant LTDC_RRIE                      \ [0x03] Register reload interrupt enable
+    $06 constant LTDC_FUIE                      \ [0x06] FIFO underrun interrupt enable
+    $07 constant LTDC_CRCIE                     \ [0x07] CRC error interrupt enable
+  [then]
+
+
+  [ifdef] LTDC_LTDC_ISR_DEF
+    \
+    \ @brief LTDC interrupt status register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_LIF                       \ [0x00] Line interrupt flag
+    $01 constant LTDC_FUWIF                     \ [0x01] FIFO underrun warning interrupt flag
+    $02 constant LTDC_TERRIF                    \ [0x02] Transfer error interrupt flag
+    $03 constant LTDC_RRIF                      \ [0x03] Register reload interrupt flag
+    $06 constant LTDC_FUIF                      \ [0x06] FIFO underrun interrupt flag
+    $07 constant LTDC_CRCIF                     \ [0x07] CRC error interrupt flag
+  [then]
+
+
+  [ifdef] LTDC_LTDC_ICR_DEF
+    \
+    \ @brief LTDC interrupt clear register
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CLIF                      \ [0x00] clears the line interrupt flag
+    $01 constant LTDC_CFUWIF                    \ [0x01] clears the FIFO underrun warning interrupt flag
+    $02 constant LTDC_CTERRIF                   \ [0x02] clears the transfer error interrupt flag
+    $03 constant LTDC_CRRIF                     \ [0x03] clears register reload interrupt flag
+    $06 constant LTDC_CFUIF                     \ [0x06] clears the FIFO underrun interrupt flag
+    $07 constant LTDC_CCRCIF                    \ [0x07] clears the CRC error interrupt flag
+  [then]
+
+
+  [ifdef] LTDC_LTDC_LIPCR_DEF
+    \
+    \ @brief LTDC line interrupt position configuration register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_LIPOS                     \ [0x00 : 16] line interrupt position
+  [then]
+
+
+  [ifdef] LTDC_LTDC_CPSR_DEF
+    \
+    \ @brief LTDC current position status register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CYPOS                     \ [0x00 : 16] current Y position
+    $10 constant LTDC_CXPOS                     \ [0x10 : 16] current X position
+  [then]
+
+
+  [ifdef] LTDC_LTDC_CDSR_DEF
+    \
+    \ @brief LTDC current display status register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000003
+    \
+    $00 constant LTDC_VDES                      \ [0x00] vertical data enable display status
+    $01 constant LTDC_HDES                      \ [0x01] horizontal data enable display status
+    $02 constant LTDC_VSYNCS                    \ [0x02] vertical synchronization display status
+    $03 constant LTDC_HSYNCS                    \ [0x03] horizontal synchronization display status
+  [then]
+
+
+  [ifdef] LTDC_LTDC_EDCR_DEF
+    \
+    \ @brief LTDC external display control register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $19 constant LTDC_OCYEN                     \ [0x19] output conversion to YCbCr 422 enable
+    $1a constant LTDC_OCYSEL                    \ [0x1a] output conversion to YCbCr 422
+    $1b constant LTDC_OCYCO                     \ [0x1b] output conversion to YCbCr 422
+  [then]
+
+
+  [ifdef] LTDC_LTDC_IER2_DEF
+    \
+    \ @brief LTDC interrupt enable register 2
+    \ Address offset: 0x64
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_LIE                       \ [0x00] Line interrupt enable
+    $01 constant LTDC_FUWIE                     \ [0x01] FIFO underrun warning interrupt enable
+    $02 constant LTDC_TERRIE                    \ [0x02] Transfer error interrupt enable
+    $03 constant LTDC_RRIE                      \ [0x03] Register reload interrupt enable
+    $06 constant LTDC_FUIE                      \ [0x06] FIFO underrun interrupt enable
+    $07 constant LTDC_CRCIE                     \ [0x07] CRC error interrupt enable
+  [then]
+
+
+  [ifdef] LTDC_LTDC_ISR2_DEF
+    \
+    \ @brief LTDC interrupt status register 2
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_LIF                       \ [0x00] Line interrupt flag
+    $01 constant LTDC_FUWIF                     \ [0x01] FIFO underrun warning interrupt flag
+    $02 constant LTDC_TERRIF                    \ [0x02] Transfer error interrupt flag
+    $03 constant LTDC_RRIF                      \ [0x03] Register reload interrupt flag
+    $06 constant LTDC_FUIF                      \ [0x06] FIFO underrun interrupt flag
+    $07 constant LTDC_CRCIF                     \ [0x07] CRC Error interrupt flag
+  [then]
+
+
+  [ifdef] LTDC_LTDC_ICR2_DEF
+    \
+    \ @brief LTDC interrupt clear register 2
+    \ Address offset: 0x6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CLIF                      \ [0x00] clears the Line interrupt flag
+    $01 constant LTDC_CFUWIF                    \ [0x01] clears the FIFO underrun warning interrupt flag
+    $02 constant LTDC_CTERRIF                   \ [0x02] clears the Transfer Error interrupt flag
+    $03 constant LTDC_CRRIF                     \ [0x03] clears register reload interrupt flag
+    $06 constant LTDC_CFUIF                     \ [0x06] clears the FIFO underrun interrupt flag
+    $07 constant LTDC_CCRCIF                    \ [0x07] clears the CRC error interrupt flag
+  [then]
+
+
+  [ifdef] LTDC_LTDC_LIPCR2_DEF
+    \
+    \ @brief LTDC line interrupt position configuration register 2
+    \ Address offset: 0x70
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_LIPOS                     \ [0x00 : 16] line interrupt position
+  [then]
+
+
+  [ifdef] LTDC_LTDC_ECRCR_DEF
+    \
+    \ @brief LTDC expected CRC register
+    \ Address offset: 0x78
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_ECRC                      \ [0x00 : 16] expected CRC of frame
+  [then]
+
+
+  [ifdef] LTDC_LTDC_CCRCR_DEF
+    \
+    \ @brief LTDC computed CRC register
+    \ Address offset: 0x7C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CCRC                      \ [0x00 : 16] computed CRC of frame
+  [then]
+
+
+  [ifdef] LTDC_LTDC_FUTR_DEF
+    \
+    \ @brief LTDC FIFO underrun threshold register
+    \ Address offset: 0x90
+    \ Reset value: 0x00000010
+    \
+    $00 constant LTDC_THRE                      \ [0x00 : 16] threshold to trigger a FIFO underrun interrupt (per FIFO word, 64 bits)
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1C0R_DEF
+    \
+    \ @brief LTDC layerx configuration 0 register
+    \ Address offset: 0x100
+    \ Reset value: 0xFF50A076
+    \
+    $00 constant LTDC_CKTA                      \ [0x00] color key transparency ability
+    $01 constant LTDC_CFBDA                     \ [0x01] color frame buffer duplication ability
+    $02 constant LTDC_CFBPA                     \ [0x02] color frame buffer pitch ability
+    $03 constant LTDC_APA                       \ [0x03] alpha plane ability
+    $04 constant LTDC_DCP                       \ [0x04] default color programmability
+    $05 constant LTDC_WINA                      \ [0x05] windowing ability
+    $06 constant LTDC_CLUTA                     \ [0x06] CLUT ability
+    $07 constant LTDC_CKRA                      \ [0x07] color key replace ability
+    $08 constant LTDC_F21                       \ [0x08] blending factor 2, ability for: 1.0
+    $09 constant LTDC_F20                       \ [0x09] blending factor 2, ability for: 0.0
+    $0a constant LTDC_F2P                       \ [0x0a] blending factor 2, ability for: pixel_alpha
+    $0b constant LTDC_F21P                      \ [0x0b] blending factor 2, ability for: 1.0 - pixel_alpha
+    $0c constant LTDC_F2C                       \ [0x0c] blending factor 2, ability for: constant_alpha
+    $0d constant LTDC_F21C                      \ [0x0d] blending factor 2, ability for: 1.0 - constant_alpha
+    $0e constant LTDC_F2PC                      \ [0x0e] blending factor 2, ability for: pixel_alpha * constant_alpha
+    $0f constant LTDC_F21PC                     \ [0x0f] blending factor 2, ability for: 1.0 - (pixel_alpha * constant_alpha)
+    $10 constant LTDC_F11                       \ [0x10] blending factor 1, ability for: 1.0
+    $11 constant LTDC_F10                       \ [0x11] blending factor 1,ability for: 0.0
+    $12 constant LTDC_F1P                       \ [0x12] blending factor 1, ability for: pixel_alpha
+    $13 constant LTDC_F11P                      \ [0x13] blending factor 1, ability for: 1.0 - pixel_alpha
+    $14 constant LTDC_F1C                       \ [0x14] blending factor 1, ability for: constant_alpha
+    $15 constant LTDC_F11C                      \ [0x15] blending factor 1, ability for: 1.0 - constant_alpha
+    $16 constant LTDC_F1PC                      \ [0x16] blending factor 1, ability for: pixel_alpha * constant_alpha
+    $17 constant LTDC_F11PC                     \ [0x17] blending factor 1, ability for: 1.0 - (pixel_alpha * constant_alpha)
+    $18 constant LTDC_FF                        \ [0x18] flexible pixel format, ability
+    $19 constant LTDC_RGB888                    \ [0x19] pixel format, ability for rgb888
+    $1a constant LTDC_BGR565                    \ [0x1a] pixel format, ability for bgr565
+    $1b constant LTDC_RGB565                    \ [0x1b] pixel format, ability for rgb565
+    $1c constant LTDC_BGRA888                   \ [0x1c] pixel format, ability for bgra8888
+    $1d constant LTDC_RGBA8888                  \ [0x1d] pixel format, ability for rgba8888
+    $1e constant LTDC_ABGR8888                  \ [0x1e] pixel format, ability for abgr8888
+    $1f constant LTDC_ARGB8888                  \ [0x1f] pixel format, ability for argb8888
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1C1R_DEF
+    \
+    \ @brief LTDC layerx configuration 1 register
+    \ Address offset: 0x104
+    \ Reset value: 0x80000007
+    \
+    $00 constant LTDC_YIA                       \ [0x00] YCbCr 422 interleaved ability for that layer
+    $01 constant LTDC_YSPA                      \ [0x01] YCbCr 420 semi-planar ability for that layer
+    $02 constant LTDC_YFPA                      \ [0x02] YCbCr 420 full-planar ability for that layer
+    $1f constant LTDC_SCA                       \ [0x1f] scaling ability for that layer
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1RCR_DEF
+    \
+    \ @brief LTDC layerx reload control register
+    \ Address offset: 0x108
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_IMR                       \ [0x00] immediate reload trigger
+    $01 constant LTDC_VBR                       \ [0x01] vertical blanking reload request
+    $02 constant LTDC_GRMSK                     \ [0x02] shadow reload control, global (centralized) reload masked
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CR_DEF
+    \
+    \ @brief LTDC layerx control register
+    \ Address offset: 0x10C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_LEN                       \ [0x00] layer enable
+    $01 constant LTDC_CKEN                      \ [0x01] color keying enable
+    $04 constant LTDC_CLUTEN                    \ [0x04] color look-up table enable
+    $08 constant LTDC_HMEN                      \ [0x08] horizontal mirroring enable
+    $09 constant LTDC_DCBEN                     \ [0x09] default color blending enable
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1WHPCR_DEF
+    \
+    \ @brief LTDC layerx window horizontal position configuration register
+    \ Address offset: 0x110
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_WHSTPOS                   \ [0x00 : 16] window horizontal start position
+    $10 constant LTDC_WHSPPOS                   \ [0x10 : 16] window horizontal stop position
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1WVPCR_DEF
+    \
+    \ @brief LTDC layerx window vertical position configuration register
+    \ Address offset: 0x114
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_WVSTPOS                   \ [0x00 : 16] window vertical start position
+    $10 constant LTDC_WVSPPOS                   \ [0x10 : 16] window vertical stop position
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CKCR_DEF
+    \
+    \ @brief LTDC layerx color keying configuration register
+    \ Address offset: 0x118
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CKBLUE                    \ [0x00 : 8] color key blue value
+    $08 constant LTDC_CKGREEN                   \ [0x08 : 8] color key green value
+    $10 constant LTDC_CKRED                     \ [0x10 : 8] color key red value
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1PFCR_DEF
+    \
+    \ @brief LTDC layerx pixel format configuration register
+    \ Address offset: 0x11C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_PF                        \ [0x00 : 3] pixel format
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CACR_DEF
+    \
+    \ @brief LTDC layerx constant alpha configuration register
+    \ Address offset: 0x120
+    \ Reset value: 0x000000FF
+    \
+    $00 constant LTDC_CONSTA                    \ [0x00 : 8] constant alpha
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1DCCR_DEF
+    \
+    \ @brief LTDC layerx default color configuration register
+    \ Address offset: 0x124
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_DCBLUE                    \ [0x00 : 8] default color blue
+    $08 constant LTDC_DCGREEN                   \ [0x08 : 8] default color green
+    $10 constant LTDC_DCRED                     \ [0x10 : 8] default color red
+    $18 constant LTDC_DCALPHA                   \ [0x18 : 8] default color alpha
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1BFCR_DEF
+    \
+    \ @brief LTDC layerx blending factors configuration register
+    \ Address offset: 0x128
+    \ Reset value: 0x00000607
+    \
+    $00 constant LTDC_BF2                       \ [0x00 : 3] blending factor 2
+    $08 constant LTDC_BF1                       \ [0x08 : 3] blending factor 1
+    $10 constant LTDC_BOR                       \ [0x10] blending order
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1BLCR_DEF
+    \
+    \ @brief LTDC layerx burst length configuration register
+    \ Address offset: 0x12C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_BL                        \ [0x00 : 8] burst length
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1PCR_DEF
+    \
+    \ @brief LTDC layerx planar configuration register
+    \ Address offset: 0x130
+    \ Reset value: 0x00000000
+    \
+    $03 constant LTDC_YCEN                      \ [0x03] YCbCr-to-RGB conversion enable
+    $04 constant LTDC_YCM                       \ [0x04 : 2] YCbCr conversion mode
+    $06 constant LTDC_YF                        \ [0x06] Y component first
+    $07 constant LTDC_CBF                       \ [0x07] Cb component first
+    $08 constant LTDC_OF                        \ [0x08] Odd pixel first
+    $09 constant LTDC_YREN                      \ [0x09] Y rescale enable for the color dynamic range
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CFBAR_DEF
+    \
+    \ @brief LTDC layerx color frame buffer address register
+    \ Address offset: 0x134
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CFBADD                    \ [0x00 : 32] color frame buffer start address
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CFBLR_DEF
+    \
+    \ @brief LTDC layerx color frame buffer length register
+    \ Address offset: 0x138
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CFBLL                     \ [0x00 : 16] color frame buffer line length
+    $10 constant LTDC_CFBP                      \ [0x10 : 16] color frame buffer pitch in bytes
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CFBLNR_DEF
+    \
+    \ @brief LTDC layerx color frame buffer line number register
+    \ Address offset: 0x13C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CFBLNBR                   \ [0x00 : 16] frame buffer line number
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1AFBA0R_DEF
+    \
+    \ @brief LTDC layer1 auxiliary frame buffer address 0 register
+    \ Address offset: 0x140
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_AFBADD0                   \ [0x00 : 32] frame buffer start address
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1AFBA1R_DEF
+    \
+    \ @brief LTDC layer1 auxiliary frame buffer address 1 register
+    \ Address offset: 0x144
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_AFBADD1                   \ [0x00 : 32] auxiliary frame buffer start address
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1AFBLR_DEF
+    \
+    \ @brief LTDC layer1 auxiliary frame buffer length register
+    \ Address offset: 0x148
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_AFBLL                     \ [0x00 : 16] auxiliary frame buffer line length
+    $10 constant LTDC_AFBP                      \ [0x10 : 16] auxiliary frame buffer pitch in bytes
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1AFBLNR_DEF
+    \
+    \ @brief LTDC layer1 auxiliary frame buffer line number register
+    \ Address offset: 0x14C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_AFBLNBR                   \ [0x00 : 16] auxiliary frame buffer line number
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CLUTWR_DEF
+    \
+    \ @brief LTDC layerx CLUT write register
+    \ Address offset: 0x150
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_BLUE                      \ [0x00 : 8] blue value
+    $08 constant LTDC_GREEN                     \ [0x08 : 8] green value
+    $10 constant LTDC_RED                       \ [0x10 : 8] red value
+    $18 constant LTDC_CLUTADD                   \ [0x18 : 8] CLUT address
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CYR0R_DEF
+    \
+    \ @brief LTDC layerx conversion YCbCr RGB 0 register
+    \ Address offset: 0x16C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CR2R                      \ [0x00 : 10] Cr-to-Red coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
+    $10 constant LTDC_CB2B                      \ [0x10 : 10] Cb-to-Blue coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1CYR1R_DEF
+    \
+    \ @brief LTDC layerx conversion YCbCr RGB 1 register
+    \ Address offset: 0x170
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CR2G                      \ [0x00 : 10] Cr-to-Green coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
+    $10 constant LTDC_CB2G                      \ [0x10 : 10] Cb-to-Green coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1FPF0R_DEF
+    \
+    \ @brief LTDC layerx flexible pixel format 0 register
+    \ Address offset: 0x174
+    \ Reset value: 0x00011100
+    \
+    $00 constant LTDC_APOS                      \ [0x00 : 5] Location of the Alpha component inside the pixel memory word (in bits)
+    $05 constant LTDC_ALEN                      \ [0x05 : 4] Width of the Alpha component (in bits)
+    $09 constant LTDC_RPOS                      \ [0x09 : 5] Location of the Red component inside the pixel memory word (in bits)
+    $0e constant LTDC_RLEN                      \ [0x0e : 4] Width of the Red component (in bits)
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L1FPF1R_DEF
+    \
+    \ @brief LTDC layerx flexible pixel format 1 register
+    \ Address offset: 0x178
+    \ Reset value: 0x00093110
+    \
+    $00 constant LTDC_GPOS                      \ [0x00 : 5] Location of the Green component inside the pixel memory word (in bits)
+    $05 constant LTDC_GLEN                      \ [0x05 : 4] Width of the Green component (in bits)
+    $09 constant LTDC_BPOS                      \ [0x09 : 5] Location of the Blue component inside the pixel memory word (in bits)
+    $0e constant LTDC_BLEN                      \ [0x0e : 4] Width of the Blue component (in bits)
+    $12 constant LTDC_PSIZE                     \ [0x12 : 3] Pixel size (in bytes)
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2C0R_DEF
+    \
+    \ @brief LTDC layerx configuration 0 register
+    \ Address offset: 0x200
+    \ Reset value: 0xFF50A076
+    \
+    $00 constant LTDC_CKTA                      \ [0x00] color key transparency ability
+    $01 constant LTDC_CFBDA                     \ [0x01] color frame buffer duplication ability
+    $02 constant LTDC_CFBPA                     \ [0x02] color frame buffer pitch ability
+    $03 constant LTDC_APA                       \ [0x03] alpha plane ability
+    $04 constant LTDC_DCP                       \ [0x04] default color programmability
+    $05 constant LTDC_WINA                      \ [0x05] windowing ability
+    $06 constant LTDC_CLUTA                     \ [0x06] CLUT ability
+    $07 constant LTDC_CKRA                      \ [0x07] color key replace ability
+    $08 constant LTDC_F21                       \ [0x08] blending factor 2, ability for: 1.0
+    $09 constant LTDC_F20                       \ [0x09] blending factor 2, ability for: 0.0
+    $0a constant LTDC_F2P                       \ [0x0a] blending factor 2, ability for: pixel_alpha
+    $0b constant LTDC_F21P                      \ [0x0b] blending factor 2, ability for: 1.0 - pixel_alpha
+    $0c constant LTDC_F2C                       \ [0x0c] blending factor 2, ability for: constant_alpha
+    $0d constant LTDC_F21C                      \ [0x0d] blending factor 2, ability for: 1.0 - constant_alpha
+    $0e constant LTDC_F2PC                      \ [0x0e] blending factor 2, ability for: pixel_alpha * constant_alpha
+    $0f constant LTDC_F21PC                     \ [0x0f] blending factor 2, ability for: 1.0 - (pixel_alpha * constant_alpha)
+    $10 constant LTDC_F11                       \ [0x10] blending factor 1, ability for: 1.0
+    $11 constant LTDC_F10                       \ [0x11] blending factor 1,ability for: 0.0
+    $12 constant LTDC_F1P                       \ [0x12] blending factor 1, ability for: pixel_alpha
+    $13 constant LTDC_F11P                      \ [0x13] blending factor 1, ability for: 1.0 - pixel_alpha
+    $14 constant LTDC_F1C                       \ [0x14] blending factor 1, ability for: constant_alpha
+    $15 constant LTDC_F11C                      \ [0x15] blending factor 1, ability for: 1.0 - constant_alpha
+    $16 constant LTDC_F1PC                      \ [0x16] blending factor 1, ability for: pixel_alpha * constant_alpha
+    $17 constant LTDC_F11PC                     \ [0x17] blending factor 1, ability for: 1.0 - (pixel_alpha * constant_alpha)
+    $18 constant LTDC_FF                        \ [0x18] flexible pixel format, ability
+    $19 constant LTDC_RGB888                    \ [0x19] pixel format, ability for rgb888
+    $1a constant LTDC_BGR565                    \ [0x1a] pixel format, ability for bgr565
+    $1b constant LTDC_RGB565                    \ [0x1b] pixel format, ability for rgb565
+    $1c constant LTDC_BGRA888                   \ [0x1c] pixel format, ability for bgra8888
+    $1d constant LTDC_RGBA8888                  \ [0x1d] pixel format, ability for rgba8888
+    $1e constant LTDC_ABGR8888                  \ [0x1e] pixel format, ability for abgr8888
+    $1f constant LTDC_ARGB8888                  \ [0x1f] pixel format, ability for argb8888
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2C1R_DEF
+    \
+    \ @brief LTDC layerx configuration 1 register
+    \ Address offset: 0x204
+    \ Reset value: 0x80000001
+    \
+    $00 constant LTDC_YIA                       \ [0x00] YCbCr 422 interleaved ability for that layer
+    $01 constant LTDC_YSPA                      \ [0x01] YCbCr 420 semi-planar ability for that layer
+    $02 constant LTDC_YFPA                      \ [0x02] YCbCr 420 full-planar ability for that layer
+    $1f constant LTDC_SCA                       \ [0x1f] scaling ability for that layer
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2RCR_DEF
+    \
+    \ @brief LTDC layerx reload control register
+    \ Address offset: 0x208
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_IMR                       \ [0x00] immediate reload trigger
+    $01 constant LTDC_VBR                       \ [0x01] vertical blanking reload request
+    $02 constant LTDC_GRMSK                     \ [0x02] shadow reload control, global (centralized) reload masked
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CR_DEF
+    \
+    \ @brief LTDC layerx control register
+    \ Address offset: 0x20C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_LEN                       \ [0x00] layer enable
+    $01 constant LTDC_CKEN                      \ [0x01] color keying enable
+    $04 constant LTDC_CLUTEN                    \ [0x04] color look-up table enable
+    $08 constant LTDC_HMEN                      \ [0x08] horizontal mirroring enable
+    $09 constant LTDC_DCBEN                     \ [0x09] default color blending enable
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2WHPCR_DEF
+    \
+    \ @brief LTDC layerx window horizontal position configuration register
+    \ Address offset: 0x210
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_WHSTPOS                   \ [0x00 : 16] window horizontal start position
+    $10 constant LTDC_WHSPPOS                   \ [0x10 : 16] window horizontal stop position
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2WVPCR_DEF
+    \
+    \ @brief LTDC layerx window vertical position configuration register
+    \ Address offset: 0x214
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_WVSTPOS                   \ [0x00 : 16] window vertical start position
+    $10 constant LTDC_WVSPPOS                   \ [0x10 : 16] window vertical stop position
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CKCR_DEF
+    \
+    \ @brief LTDC layerx color keying configuration register
+    \ Address offset: 0x218
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CKBLUE                    \ [0x00 : 8] color key blue value
+    $08 constant LTDC_CKGREEN                   \ [0x08 : 8] color key green value
+    $10 constant LTDC_CKRED                     \ [0x10 : 8] color key red value
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2PFCR_DEF
+    \
+    \ @brief LTDC layerx pixel format configuration register
+    \ Address offset: 0x21C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_PF                        \ [0x00 : 3] pixel format
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CACR_DEF
+    \
+    \ @brief LTDC layerx constant alpha configuration register
+    \ Address offset: 0x220
+    \ Reset value: 0x000000FF
+    \
+    $00 constant LTDC_CONSTA                    \ [0x00 : 8] constant alpha
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2DCCR_DEF
+    \
+    \ @brief LTDC layerx default color configuration register
+    \ Address offset: 0x224
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_DCBLUE                    \ [0x00 : 8] default color blue
+    $08 constant LTDC_DCGREEN                   \ [0x08 : 8] default color green
+    $10 constant LTDC_DCRED                     \ [0x10 : 8] default color red
+    $18 constant LTDC_DCALPHA                   \ [0x18 : 8] default color alpha
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2BFCR_DEF
+    \
+    \ @brief LTDC layerx blending factors configuration register
+    \ Address offset: 0x228
+    \ Reset value: 0x00010607
+    \
+    $00 constant LTDC_BF2                       \ [0x00 : 3] blending factor 2
+    $08 constant LTDC_BF1                       \ [0x08 : 3] blending factor 1
+    $10 constant LTDC_BOR                       \ [0x10] blending order
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2BLCR_DEF
+    \
+    \ @brief LTDC layerx burst length configuration register
+    \ Address offset: 0x22C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_BL                        \ [0x00 : 8] burst length
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2PCR_DEF
+    \
+    \ @brief LTDC layerx planar configuration register
+    \ Address offset: 0x230
+    \ Reset value: 0x00000000
+    \
+    $03 constant LTDC_YCEN                      \ [0x03] YCbCr-to-RGB conversion enable
+    $04 constant LTDC_YCM                       \ [0x04 : 2] YCbCr conversion mode
+    $06 constant LTDC_YF                        \ [0x06] Y component first
+    $07 constant LTDC_CBF                       \ [0x07] Cb component first
+    $08 constant LTDC_OF                        \ [0x08] Odd pixel first
+    $09 constant LTDC_YREN                      \ [0x09] Y rescale enable for the color dynamic range
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CFBAR_DEF
+    \
+    \ @brief LTDC layerx color frame buffer address register
+    \ Address offset: 0x234
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CFBADD                    \ [0x00 : 32] color frame buffer start address
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CFBLR_DEF
+    \
+    \ @brief LTDC layerx color frame buffer length register
+    \ Address offset: 0x238
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CFBLL                     \ [0x00 : 16] color frame buffer line length
+    $10 constant LTDC_CFBP                      \ [0x10 : 16] color frame buffer pitch in bytes
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CFBLNR_DEF
+    \
+    \ @brief LTDC layerx color frame buffer line number register
+    \ Address offset: 0x23C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CFBLNBR                   \ [0x00 : 16] frame buffer line number
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CLUTWR_DEF
+    \
+    \ @brief LTDC layerx CLUT write register
+    \ Address offset: 0x250
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_BLUE                      \ [0x00 : 8] blue value
+    $08 constant LTDC_GREEN                     \ [0x08 : 8] green value
+    $10 constant LTDC_RED                       \ [0x10 : 8] red value
+    $18 constant LTDC_CLUTADD                   \ [0x18 : 8] CLUT address
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CYR0R_DEF
+    \
+    \ @brief LTDC layerx conversion YCbCr RGB 0 register
+    \ Address offset: 0x26C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CR2R                      \ [0x00 : 10] Cr-to-Red coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
+    $10 constant LTDC_CB2B                      \ [0x10 : 10] Cb-to-Blue coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2CYR1R_DEF
+    \
+    \ @brief LTDC layerx conversion YCbCr RGB 1 register
+    \ Address offset: 0x270
+    \ Reset value: 0x00000000
+    \
+    $00 constant LTDC_CR2G                      \ [0x00 : 10] Cr-to-Green coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
+    $10 constant LTDC_CB2G                      \ [0x10 : 10] Cb-to-Green coefficient, with bits 9:8 as positive integer and 7:0 as decimals.
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2FPF0R_DEF
+    \
+    \ @brief LTDC layerx flexible pixel format 0 register
+    \ Address offset: 0x274
+    \ Reset value: 0x00011100
+    \
+    $00 constant LTDC_APOS                      \ [0x00 : 5] Location of the Alpha component inside the pixel memory word (in bits)
+    $05 constant LTDC_ALEN                      \ [0x05 : 4] Width of the Alpha component (in bits)
+    $09 constant LTDC_RPOS                      \ [0x09 : 5] Location of the Red component inside the pixel memory word (in bits)
+    $0e constant LTDC_RLEN                      \ [0x0e : 4] Width of the Red component (in bits)
+  [then]
+
+
+  [ifdef] LTDC_LTDC_L2FPF1R_DEF
+    \
+    \ @brief LTDC layerx flexible pixel format 1 register
+    \ Address offset: 0x278
+    \ Reset value: 0x00093110
+    \
+    $00 constant LTDC_GPOS                      \ [0x00 : 5] Location of the Green component inside the pixel memory word (in bits)
+    $05 constant LTDC_GLEN                      \ [0x05 : 4] Width of the Green component (in bits)
+    $09 constant LTDC_BPOS                      \ [0x09 : 5] Location of the Blue component inside the pixel memory word (in bits)
+    $0e constant LTDC_BLEN                      \ [0x0e : 4] Width of the Blue component (in bits)
+    $12 constant LTDC_PSIZE                     \ [0x12 : 3] Pixel size (in bytes)
+  [then]
+
+  \
+  \ @brief LCD-TFT display controller
+  \
+  $08 constant LTDC_LTDC_SSCR           \ LTDC synchronization size configuration register
+  $0C constant LTDC_LTDC_BPCR           \ LTDC back porch configuration register
+  $10 constant LTDC_LTDC_AWCR           \ LTDC active width configuration register
+  $14 constant LTDC_LTDC_TWCR           \ LTDC total width configuration register
+  $18 constant LTDC_LTDC_GCR            \ LTDC global control register
+  $1C constant LTDC_LTDC_GC1R           \ LTDC global configuration 1 register
+  $20 constant LTDC_LTDC_GC2R           \ LTDC global configuration 2 register
+  $24 constant LTDC_LTDC_SRCR           \ LTDC shadow reload configuration register
+  $28 constant LTDC_LTDC_GCCR           \ LTDC gamma correction configuration register
+  $2C constant LTDC_LTDC_BCCR           \ LTDC background color configuration register
+  $34 constant LTDC_LTDC_IER            \ LTDC interrupt enable register
+  $38 constant LTDC_LTDC_ISR            \ LTDC interrupt status register
+  $3C constant LTDC_LTDC_ICR            \ LTDC interrupt clear register
+  $40 constant LTDC_LTDC_LIPCR          \ LTDC line interrupt position configuration register
+  $44 constant LTDC_LTDC_CPSR           \ LTDC current position status register
+  $48 constant LTDC_LTDC_CDSR           \ LTDC current display status register
+  $60 constant LTDC_LTDC_EDCR           \ LTDC external display control register
+  $64 constant LTDC_LTDC_IER2           \ LTDC interrupt enable register 2
+  $68 constant LTDC_LTDC_ISR2           \ LTDC interrupt status register 2
+  $6C constant LTDC_LTDC_ICR2           \ LTDC interrupt clear register 2
+  $70 constant LTDC_LTDC_LIPCR2         \ LTDC line interrupt position configuration register 2
+  $78 constant LTDC_LTDC_ECRCR          \ LTDC expected CRC register
+  $7C constant LTDC_LTDC_CCRCR          \ LTDC computed CRC register
+  $90 constant LTDC_LTDC_FUTR           \ LTDC FIFO underrun threshold register
+  $100 constant LTDC_LTDC_L1C0R         \ LTDC layerx configuration 0 register
+  $104 constant LTDC_LTDC_L1C1R         \ LTDC layerx configuration 1 register
+  $108 constant LTDC_LTDC_L1RCR         \ LTDC layerx reload control register
+  $10C constant LTDC_LTDC_L1CR          \ LTDC layerx control register
+  $110 constant LTDC_LTDC_L1WHPCR       \ LTDC layerx window horizontal position configuration register
+  $114 constant LTDC_LTDC_L1WVPCR       \ LTDC layerx window vertical position configuration register
+  $118 constant LTDC_LTDC_L1CKCR        \ LTDC layerx color keying configuration register
+  $11C constant LTDC_LTDC_L1PFCR        \ LTDC layerx pixel format configuration register
+  $120 constant LTDC_LTDC_L1CACR        \ LTDC layerx constant alpha configuration register
+  $124 constant LTDC_LTDC_L1DCCR        \ LTDC layerx default color configuration register
+  $128 constant LTDC_LTDC_L1BFCR        \ LTDC layerx blending factors configuration register
+  $12C constant LTDC_LTDC_L1BLCR        \ LTDC layerx burst length configuration register
+  $130 constant LTDC_LTDC_L1PCR         \ LTDC layerx planar configuration register
+  $134 constant LTDC_LTDC_L1CFBAR       \ LTDC layerx color frame buffer address register
+  $138 constant LTDC_LTDC_L1CFBLR       \ LTDC layerx color frame buffer length register
+  $13C constant LTDC_LTDC_L1CFBLNR      \ LTDC layerx color frame buffer line number register
+  $140 constant LTDC_LTDC_L1AFBA0R      \ LTDC layer1 auxiliary frame buffer address 0 register
+  $144 constant LTDC_LTDC_L1AFBA1R      \ LTDC layer1 auxiliary frame buffer address 1 register
+  $148 constant LTDC_LTDC_L1AFBLR       \ LTDC layer1 auxiliary frame buffer length register
+  $14C constant LTDC_LTDC_L1AFBLNR      \ LTDC layer1 auxiliary frame buffer line number register
+  $150 constant LTDC_LTDC_L1CLUTWR      \ LTDC layerx CLUT write register
+  $16C constant LTDC_LTDC_L1CYR0R       \ LTDC layerx conversion YCbCr RGB 0 register
+  $170 constant LTDC_LTDC_L1CYR1R       \ LTDC layerx conversion YCbCr RGB 1 register
+  $174 constant LTDC_LTDC_L1FPF0R       \ LTDC layerx flexible pixel format 0 register
+  $178 constant LTDC_LTDC_L1FPF1R       \ LTDC layerx flexible pixel format 1 register
+  $200 constant LTDC_LTDC_L2C0R         \ LTDC layerx configuration 0 register
+  $204 constant LTDC_LTDC_L2C1R         \ LTDC layerx configuration 1 register
+  $208 constant LTDC_LTDC_L2RCR         \ LTDC layerx reload control register
+  $20C constant LTDC_LTDC_L2CR          \ LTDC layerx control register
+  $210 constant LTDC_LTDC_L2WHPCR       \ LTDC layerx window horizontal position configuration register
+  $214 constant LTDC_LTDC_L2WVPCR       \ LTDC layerx window vertical position configuration register
+  $218 constant LTDC_LTDC_L2CKCR        \ LTDC layerx color keying configuration register
+  $21C constant LTDC_LTDC_L2PFCR        \ LTDC layerx pixel format configuration register
+  $220 constant LTDC_LTDC_L2CACR        \ LTDC layerx constant alpha configuration register
+  $224 constant LTDC_LTDC_L2DCCR        \ LTDC layerx default color configuration register
+  $228 constant LTDC_LTDC_L2BFCR        \ LTDC layerx blending factors configuration register
+  $22C constant LTDC_LTDC_L2BLCR        \ LTDC layerx burst length configuration register
+  $230 constant LTDC_LTDC_L2PCR         \ LTDC layerx planar configuration register
+  $234 constant LTDC_LTDC_L2CFBAR       \ LTDC layerx color frame buffer address register
+  $238 constant LTDC_LTDC_L2CFBLR       \ LTDC layerx color frame buffer length register
+  $23C constant LTDC_LTDC_L2CFBLNR      \ LTDC layerx color frame buffer line number register
+  $250 constant LTDC_LTDC_L2CLUTWR      \ LTDC layerx CLUT write register
+  $26C constant LTDC_LTDC_L2CYR0R       \ LTDC layerx conversion YCbCr RGB 0 register
+  $270 constant LTDC_LTDC_L2CYR1R       \ LTDC layerx conversion YCbCr RGB 1 register
+  $274 constant LTDC_LTDC_L2FPF0R       \ LTDC layerx flexible pixel format 0 register
+  $278 constant LTDC_LTDC_L2FPF1R       \ LTDC layerx flexible pixel format 1 register
+
+: LTDC_DEF ; [then]

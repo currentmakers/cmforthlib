@@ -6,312 +6,327 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TSC_DEF
 
-\
-\ @brief control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TSC_CR_TSCE                                      \ Touch sensing controller enable
-$00000002 constant TSC_CR_START                                     \ Start a new acquisition
-$00000004 constant TSC_CR_AM                                        \ Acquisition mode
-$00000008 constant TSC_CR_SYNCPOL                                   \ Synchronization pin polarity
-$00000010 constant TSC_CR_IODEF                                     \ I/O Default mode
-$000000e0 constant TSC_CR_MCV                                       \ Max count value
-$00007000 constant TSC_CR_PGPSC                                     \ pulse generator prescaler
-$00008000 constant TSC_CR_SSPSC                                     \ Spread spectrum prescaler
-$00010000 constant TSC_CR_SSE                                       \ Spread spectrum enable
-$00fe0000 constant TSC_CR_SSD                                       \ Spread spectrum deviation
-$0f000000 constant TSC_CR_CTPL                                      \ Charge transfer pulse low
-$f0000000 constant TSC_CR_CTPH                                      \ Charge transfer pulse high
-
-
-\
-\ @brief interrupt enable register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TSC_IER_EOAIE                                    \ End of acquisition interrupt enable
-$00000002 constant TSC_IER_MCEIE                                    \ Max count error interrupt enable
+  [ifdef] TSC_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_TSCE                       \ [0x00] Touch sensing controller enable
+    $01 constant TSC_START                      \ [0x01] Start a new acquisition
+    $02 constant TSC_AM                         \ [0x02] Acquisition mode
+    $03 constant TSC_SYNCPOL                    \ [0x03] Synchronization pin polarity
+    $04 constant TSC_IODEF                      \ [0x04] I/O Default mode
+    $05 constant TSC_MCV                        \ [0x05 : 3] Max count value
+    $0c constant TSC_PGPSC                      \ [0x0c : 3] pulse generator prescaler
+    $0f constant TSC_SSPSC                      \ [0x0f] Spread spectrum prescaler
+    $10 constant TSC_SSE                        \ [0x10] Spread spectrum enable
+    $11 constant TSC_SSD                        \ [0x11 : 7] Spread spectrum deviation
+    $18 constant TSC_CTPL                       \ [0x18 : 4] Charge transfer pulse low
+    $1c constant TSC_CTPH                       \ [0x1c : 4] Charge transfer pulse high
+  [then]
 
 
-\
-\ @brief interrupt clear register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TSC_ICR_EOAIC                                    \ End of acquisition interrupt clear
-$00000002 constant TSC_ICR_MCEIC                                    \ Max count error interrupt clear
-
-
-\
-\ @brief interrupt status register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TSC_ISR_EOAF                                     \ End of acquisition flag
-$00000002 constant TSC_ISR_MCEF                                     \ Max count error flag
+  [ifdef] TSC_IER_DEF
+    \
+    \ @brief interrupt enable register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_EOAIE                      \ [0x00] End of acquisition interrupt enable
+    $01 constant TSC_MCEIE                      \ [0x01] Max count error interrupt enable
+  [then]
 
 
-\
-\ @brief I/O hysteresis control register
-\ Address offset: 0x10
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant TSC_IOHCR_G1_IO1                                 \ G1_IO1 Schmitt trigger hysteresis mode
-$00000002 constant TSC_IOHCR_G1_IO2                                 \ G1_IO2 Schmitt trigger hysteresis mode
-$00000004 constant TSC_IOHCR_G1_IO3                                 \ G1_IO3 Schmitt trigger hysteresis mode
-$00000008 constant TSC_IOHCR_G1_IO4                                 \ G1_IO4 Schmitt trigger hysteresis mode
-$00000010 constant TSC_IOHCR_G2_IO1                                 \ G2_IO1 Schmitt trigger hysteresis mode
-$00000020 constant TSC_IOHCR_G2_IO2                                 \ G2_IO2 Schmitt trigger hysteresis mode
-$00000040 constant TSC_IOHCR_G2_IO3                                 \ G2_IO3 Schmitt trigger hysteresis mode
-$00000080 constant TSC_IOHCR_G2_IO4                                 \ G2_IO4 Schmitt trigger hysteresis mode
-$00000100 constant TSC_IOHCR_G3_IO1                                 \ G3_IO1 Schmitt trigger hysteresis mode
-$00000200 constant TSC_IOHCR_G3_IO2                                 \ G3_IO2 Schmitt trigger hysteresis mode
-$00000400 constant TSC_IOHCR_G3_IO3                                 \ G3_IO3 Schmitt trigger hysteresis mode
-$00000800 constant TSC_IOHCR_G3_IO4                                 \ G3_IO4 Schmitt trigger hysteresis mode
-$00001000 constant TSC_IOHCR_G4_IO1                                 \ G4_IO1 Schmitt trigger hysteresis mode
-$00002000 constant TSC_IOHCR_G4_IO2                                 \ G4_IO2 Schmitt trigger hysteresis mode
-$00004000 constant TSC_IOHCR_G4_IO3                                 \ G4_IO3 Schmitt trigger hysteresis mode
-$00008000 constant TSC_IOHCR_G4_IO4                                 \ G4_IO4 Schmitt trigger hysteresis mode
-$00010000 constant TSC_IOHCR_G5_IO1                                 \ G5_IO1 Schmitt trigger hysteresis mode
-$00020000 constant TSC_IOHCR_G5_IO2                                 \ G5_IO2 Schmitt trigger hysteresis mode
-$00040000 constant TSC_IOHCR_G5_IO3                                 \ G5_IO3 Schmitt trigger hysteresis mode
-$00080000 constant TSC_IOHCR_G5_IO4                                 \ G5_IO4 Schmitt trigger hysteresis mode
-$00100000 constant TSC_IOHCR_G6_IO1                                 \ G6_IO1 Schmitt trigger hysteresis mode
-$00200000 constant TSC_IOHCR_G6_IO2                                 \ G6_IO2 Schmitt trigger hysteresis mode
-$00400000 constant TSC_IOHCR_G6_IO3                                 \ G6_IO3 Schmitt trigger hysteresis mode
-$00800000 constant TSC_IOHCR_G6_IO4                                 \ G6_IO4 Schmitt trigger hysteresis mode
-$01000000 constant TSC_IOHCR_G7_IO1                                 \ G7_IO1 Schmitt trigger hysteresis mode
-$02000000 constant TSC_IOHCR_G7_IO2                                 \ G7_IO2 Schmitt trigger hysteresis mode
-$04000000 constant TSC_IOHCR_G7_IO3                                 \ G7_IO3 Schmitt trigger hysteresis mode
-$08000000 constant TSC_IOHCR_G7_IO4                                 \ G7_IO4 Schmitt trigger hysteresis mode
-$10000000 constant TSC_IOHCR_G8_IO1                                 \ G8_IO1 Schmitt trigger hysteresis mode
-$20000000 constant TSC_IOHCR_G8_IO2                                 \ G8_IO2 Schmitt trigger hysteresis mode
-$40000000 constant TSC_IOHCR_G8_IO3                                 \ G8_IO3 Schmitt trigger hysteresis mode
-$80000000 constant TSC_IOHCR_G8_IO4                                 \ G8_IO4 Schmitt trigger hysteresis mode
+  [ifdef] TSC_ICR_DEF
+    \
+    \ @brief interrupt clear register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_EOAIC                      \ [0x00] End of acquisition interrupt clear
+    $01 constant TSC_MCEIC                      \ [0x01] Max count error interrupt clear
+  [then]
 
 
-\
-\ @brief I/O analog switch control register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TSC_IOASCR_G1_IO1                                \ G1_IO1 analog switch enable
-$00000002 constant TSC_IOASCR_G1_IO2                                \ G1_IO2 analog switch enable
-$00000004 constant TSC_IOASCR_G1_IO3                                \ G1_IO3 analog switch enable
-$00000008 constant TSC_IOASCR_G1_IO4                                \ G1_IO4 analog switch enable
-$00000010 constant TSC_IOASCR_G2_IO1                                \ G2_IO1 analog switch enable
-$00000020 constant TSC_IOASCR_G2_IO2                                \ G2_IO2 analog switch enable
-$00000040 constant TSC_IOASCR_G2_IO3                                \ G2_IO3 analog switch enable
-$00000080 constant TSC_IOASCR_G2_IO4                                \ G2_IO4 analog switch enable
-$00000100 constant TSC_IOASCR_G3_IO1                                \ G3_IO1 analog switch enable
-$00000200 constant TSC_IOASCR_G3_IO2                                \ G3_IO2 analog switch enable
-$00000400 constant TSC_IOASCR_G3_IO3                                \ G3_IO3 analog switch enable
-$00000800 constant TSC_IOASCR_G3_IO4                                \ G3_IO4 analog switch enable
-$00001000 constant TSC_IOASCR_G4_IO1                                \ G4_IO1 analog switch enable
-$00002000 constant TSC_IOASCR_G4_IO2                                \ G4_IO2 analog switch enable
-$00004000 constant TSC_IOASCR_G4_IO3                                \ G4_IO3 analog switch enable
-$00008000 constant TSC_IOASCR_G4_IO4                                \ G4_IO4 analog switch enable
-$00010000 constant TSC_IOASCR_G5_IO1                                \ G5_IO1 analog switch enable
-$00020000 constant TSC_IOASCR_G5_IO2                                \ G5_IO2 analog switch enable
-$00040000 constant TSC_IOASCR_G5_IO3                                \ G5_IO3 analog switch enable
-$00080000 constant TSC_IOASCR_G5_IO4                                \ G5_IO4 analog switch enable
-$00100000 constant TSC_IOASCR_G6_IO1                                \ G6_IO1 analog switch enable
-$00200000 constant TSC_IOASCR_G6_IO2                                \ G6_IO2 analog switch enable
-$00400000 constant TSC_IOASCR_G6_IO3                                \ G6_IO3 analog switch enable
-$00800000 constant TSC_IOASCR_G6_IO4                                \ G6_IO4 analog switch enable
-$01000000 constant TSC_IOASCR_G7_IO1                                \ G7_IO1 analog switch enable
-$02000000 constant TSC_IOASCR_G7_IO2                                \ G7_IO2 analog switch enable
-$04000000 constant TSC_IOASCR_G7_IO3                                \ G7_IO3 analog switch enable
-$08000000 constant TSC_IOASCR_G7_IO4                                \ G7_IO4 analog switch enable
-$10000000 constant TSC_IOASCR_G8_IO1                                \ G8_IO1 analog switch enable
-$20000000 constant TSC_IOASCR_G8_IO2                                \ G8_IO2 analog switch enable
-$40000000 constant TSC_IOASCR_G8_IO3                                \ G8_IO3 analog switch enable
-$80000000 constant TSC_IOASCR_G8_IO4                                \ G8_IO4 analog switch enable
+  [ifdef] TSC_ISR_DEF
+    \
+    \ @brief interrupt status register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_EOAF                       \ [0x00] End of acquisition flag
+    $01 constant TSC_MCEF                       \ [0x01] Max count error flag
+  [then]
 
 
-\
-\ @brief I/O sampling control register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TSC_IOSCR_G1_IO1                                 \ G1_IO1 sampling mode
-$00000002 constant TSC_IOSCR_G1_IO2                                 \ G1_IO2 sampling mode
-$00000004 constant TSC_IOSCR_G1_IO3                                 \ G1_IO3 sampling mode
-$00000008 constant TSC_IOSCR_G1_IO4                                 \ G1_IO4 sampling mode
-$00000010 constant TSC_IOSCR_G2_IO1                                 \ G2_IO1 sampling mode
-$00000020 constant TSC_IOSCR_G2_IO2                                 \ G2_IO2 sampling mode
-$00000040 constant TSC_IOSCR_G2_IO3                                 \ G2_IO3 sampling mode
-$00000080 constant TSC_IOSCR_G2_IO4                                 \ G2_IO4 sampling mode
-$00000100 constant TSC_IOSCR_G3_IO1                                 \ G3_IO1 sampling mode
-$00000200 constant TSC_IOSCR_G3_IO2                                 \ G3_IO2 sampling mode
-$00000400 constant TSC_IOSCR_G3_IO3                                 \ G3_IO3 sampling mode
-$00000800 constant TSC_IOSCR_G3_IO4                                 \ G3_IO4 sampling mode
-$00001000 constant TSC_IOSCR_G4_IO1                                 \ G4_IO1 sampling mode
-$00002000 constant TSC_IOSCR_G4_IO2                                 \ G4_IO2 sampling mode
-$00004000 constant TSC_IOSCR_G4_IO3                                 \ G4_IO3 sampling mode
-$00008000 constant TSC_IOSCR_G4_IO4                                 \ G4_IO4 sampling mode
-$00010000 constant TSC_IOSCR_G5_IO1                                 \ G5_IO1 sampling mode
-$00020000 constant TSC_IOSCR_G5_IO2                                 \ G5_IO2 sampling mode
-$00040000 constant TSC_IOSCR_G5_IO3                                 \ G5_IO3 sampling mode
-$00080000 constant TSC_IOSCR_G5_IO4                                 \ G5_IO4 sampling mode
-$00100000 constant TSC_IOSCR_G6_IO1                                 \ G6_IO1 sampling mode
-$00200000 constant TSC_IOSCR_G6_IO2                                 \ G6_IO2 sampling mode
-$00400000 constant TSC_IOSCR_G6_IO3                                 \ G6_IO3 sampling mode
-$00800000 constant TSC_IOSCR_G6_IO4                                 \ G6_IO4 sampling mode
-$01000000 constant TSC_IOSCR_G7_IO1                                 \ G7_IO1 sampling mode
-$02000000 constant TSC_IOSCR_G7_IO2                                 \ G7_IO2 sampling mode
-$04000000 constant TSC_IOSCR_G7_IO3                                 \ G7_IO3 sampling mode
-$08000000 constant TSC_IOSCR_G7_IO4                                 \ G7_IO4 sampling mode
-$10000000 constant TSC_IOSCR_G8_IO1                                 \ G8_IO1 sampling mode
-$20000000 constant TSC_IOSCR_G8_IO2                                 \ G8_IO2 sampling mode
-$40000000 constant TSC_IOSCR_G8_IO3                                 \ G8_IO3 sampling mode
-$80000000 constant TSC_IOSCR_G8_IO4                                 \ G8_IO4 sampling mode
-
-
-\
-\ @brief I/O channel control register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TSC_IOCCR_G1_IO1                                 \ G1_IO1 channel mode
-$00000002 constant TSC_IOCCR_G1_IO2                                 \ G1_IO2 channel mode
-$00000004 constant TSC_IOCCR_G1_IO3                                 \ G1_IO3 channel mode
-$00000008 constant TSC_IOCCR_G1_IO4                                 \ G1_IO4 channel mode
-$00000010 constant TSC_IOCCR_G2_IO1                                 \ G2_IO1 channel mode
-$00000020 constant TSC_IOCCR_G2_IO2                                 \ G2_IO2 channel mode
-$00000040 constant TSC_IOCCR_G2_IO3                                 \ G2_IO3 channel mode
-$00000080 constant TSC_IOCCR_G2_IO4                                 \ G2_IO4 channel mode
-$00000100 constant TSC_IOCCR_G3_IO1                                 \ G3_IO1 channel mode
-$00000200 constant TSC_IOCCR_G3_IO2                                 \ G3_IO2 channel mode
-$00000400 constant TSC_IOCCR_G3_IO3                                 \ G3_IO3 channel mode
-$00000800 constant TSC_IOCCR_G3_IO4                                 \ G3_IO4 channel mode
-$00001000 constant TSC_IOCCR_G4_IO1                                 \ G4_IO1 channel mode
-$00002000 constant TSC_IOCCR_G4_IO2                                 \ G4_IO2 channel mode
-$00004000 constant TSC_IOCCR_G4_IO3                                 \ G4_IO3 channel mode
-$00008000 constant TSC_IOCCR_G4_IO4                                 \ G4_IO4 channel mode
-$00010000 constant TSC_IOCCR_G5_IO1                                 \ G5_IO1 channel mode
-$00020000 constant TSC_IOCCR_G5_IO2                                 \ G5_IO2 channel mode
-$00040000 constant TSC_IOCCR_G5_IO3                                 \ G5_IO3 channel mode
-$00080000 constant TSC_IOCCR_G5_IO4                                 \ G5_IO4 channel mode
-$00100000 constant TSC_IOCCR_G6_IO1                                 \ G6_IO1 channel mode
-$00200000 constant TSC_IOCCR_G6_IO2                                 \ G6_IO2 channel mode
-$00400000 constant TSC_IOCCR_G6_IO3                                 \ G6_IO3 channel mode
-$00800000 constant TSC_IOCCR_G6_IO4                                 \ G6_IO4 channel mode
-$01000000 constant TSC_IOCCR_G7_IO1                                 \ G7_IO1 channel mode
-$02000000 constant TSC_IOCCR_G7_IO2                                 \ G7_IO2 channel mode
-$04000000 constant TSC_IOCCR_G7_IO3                                 \ G7_IO3 channel mode
-$08000000 constant TSC_IOCCR_G7_IO4                                 \ G7_IO4 channel mode
-$10000000 constant TSC_IOCCR_G8_IO1                                 \ G8_IO1 channel mode
-$20000000 constant TSC_IOCCR_G8_IO2                                 \ G8_IO2 channel mode
-$40000000 constant TSC_IOCCR_G8_IO3                                 \ G8_IO3 channel mode
-$80000000 constant TSC_IOCCR_G8_IO4                                 \ G8_IO4 channel mode
+  [ifdef] TSC_IOHCR_DEF
+    \
+    \ @brief I/O hysteresis control register
+    \ Address offset: 0x10
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant TSC_G1_IO1                     \ [0x00] G1_IO1 Schmitt trigger hysteresis mode
+    $01 constant TSC_G1_IO2                     \ [0x01] G1_IO2 Schmitt trigger hysteresis mode
+    $02 constant TSC_G1_IO3                     \ [0x02] G1_IO3 Schmitt trigger hysteresis mode
+    $03 constant TSC_G1_IO4                     \ [0x03] G1_IO4 Schmitt trigger hysteresis mode
+    $04 constant TSC_G2_IO1                     \ [0x04] G2_IO1 Schmitt trigger hysteresis mode
+    $05 constant TSC_G2_IO2                     \ [0x05] G2_IO2 Schmitt trigger hysteresis mode
+    $06 constant TSC_G2_IO3                     \ [0x06] G2_IO3 Schmitt trigger hysteresis mode
+    $07 constant TSC_G2_IO4                     \ [0x07] G2_IO4 Schmitt trigger hysteresis mode
+    $08 constant TSC_G3_IO1                     \ [0x08] G3_IO1 Schmitt trigger hysteresis mode
+    $09 constant TSC_G3_IO2                     \ [0x09] G3_IO2 Schmitt trigger hysteresis mode
+    $0a constant TSC_G3_IO3                     \ [0x0a] G3_IO3 Schmitt trigger hysteresis mode
+    $0b constant TSC_G3_IO4                     \ [0x0b] G3_IO4 Schmitt trigger hysteresis mode
+    $0c constant TSC_G4_IO1                     \ [0x0c] G4_IO1 Schmitt trigger hysteresis mode
+    $0d constant TSC_G4_IO2                     \ [0x0d] G4_IO2 Schmitt trigger hysteresis mode
+    $0e constant TSC_G4_IO3                     \ [0x0e] G4_IO3 Schmitt trigger hysteresis mode
+    $0f constant TSC_G4_IO4                     \ [0x0f] G4_IO4 Schmitt trigger hysteresis mode
+    $10 constant TSC_G5_IO1                     \ [0x10] G5_IO1 Schmitt trigger hysteresis mode
+    $11 constant TSC_G5_IO2                     \ [0x11] G5_IO2 Schmitt trigger hysteresis mode
+    $12 constant TSC_G5_IO3                     \ [0x12] G5_IO3 Schmitt trigger hysteresis mode
+    $13 constant TSC_G5_IO4                     \ [0x13] G5_IO4 Schmitt trigger hysteresis mode
+    $14 constant TSC_G6_IO1                     \ [0x14] G6_IO1 Schmitt trigger hysteresis mode
+    $15 constant TSC_G6_IO2                     \ [0x15] G6_IO2 Schmitt trigger hysteresis mode
+    $16 constant TSC_G6_IO3                     \ [0x16] G6_IO3 Schmitt trigger hysteresis mode
+    $17 constant TSC_G6_IO4                     \ [0x17] G6_IO4 Schmitt trigger hysteresis mode
+    $18 constant TSC_G7_IO1                     \ [0x18] G7_IO1 Schmitt trigger hysteresis mode
+    $19 constant TSC_G7_IO2                     \ [0x19] G7_IO2 Schmitt trigger hysteresis mode
+    $1a constant TSC_G7_IO3                     \ [0x1a] G7_IO3 Schmitt trigger hysteresis mode
+    $1b constant TSC_G7_IO4                     \ [0x1b] G7_IO4 Schmitt trigger hysteresis mode
+    $1c constant TSC_G8_IO1                     \ [0x1c] G8_IO1 Schmitt trigger hysteresis mode
+    $1d constant TSC_G8_IO2                     \ [0x1d] G8_IO2 Schmitt trigger hysteresis mode
+    $1e constant TSC_G8_IO3                     \ [0x1e] G8_IO3 Schmitt trigger hysteresis mode
+    $1f constant TSC_G8_IO4                     \ [0x1f] G8_IO4 Schmitt trigger hysteresis mode
+  [then]
 
 
-\
-\ @brief I/O group control status register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TSC_IOGCSR_G1E                                   \ Analog I/O group x enable
-$00000002 constant TSC_IOGCSR_G2E                                   \ Analog I/O group x enable
-$00000004 constant TSC_IOGCSR_G3E                                   \ Analog I/O group x enable
-$00000008 constant TSC_IOGCSR_G4E                                   \ Analog I/O group x enable
-$00000010 constant TSC_IOGCSR_G5E                                   \ Analog I/O group x enable
-$00000020 constant TSC_IOGCSR_G6E                                   \ Analog I/O group x enable
-$00000040 constant TSC_IOGCSR_G7E                                   \ Analog I/O group x enable
-$00000080 constant TSC_IOGCSR_G8E                                   \ Analog I/O group x enable
-$00010000 constant TSC_IOGCSR_G1S                                   \ Analog I/O group x status
-$00020000 constant TSC_IOGCSR_G2S                                   \ Analog I/O group x status
-$00040000 constant TSC_IOGCSR_G3S                                   \ Analog I/O group x status
-$00080000 constant TSC_IOGCSR_G4S                                   \ Analog I/O group x status
-$00100000 constant TSC_IOGCSR_G5S                                   \ Analog I/O group x status
-$00200000 constant TSC_IOGCSR_G6S                                   \ Analog I/O group x status
-$00400000 constant TSC_IOGCSR_G7S                                   \ Analog I/O group x status
-$00800000 constant TSC_IOGCSR_G8S                                   \ Analog I/O group x status
-
-
-\
-\ @brief I/O group x counter register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00003fff constant TSC_IOG1CR_CNT                                   \ Counter value
-
-
-\
-\ @brief I/O group x counter register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00003fff constant TSC_IOG2CR_CNT                                   \ Counter value
-
-
-\
-\ @brief I/O group x counter register
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00003fff constant TSC_IOG3CR_CNT                                   \ Counter value
+  [ifdef] TSC_IOASCR_DEF
+    \
+    \ @brief I/O analog switch control register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_G1_IO1                     \ [0x00] G1_IO1 analog switch enable
+    $01 constant TSC_G1_IO2                     \ [0x01] G1_IO2 analog switch enable
+    $02 constant TSC_G1_IO3                     \ [0x02] G1_IO3 analog switch enable
+    $03 constant TSC_G1_IO4                     \ [0x03] G1_IO4 analog switch enable
+    $04 constant TSC_G2_IO1                     \ [0x04] G2_IO1 analog switch enable
+    $05 constant TSC_G2_IO2                     \ [0x05] G2_IO2 analog switch enable
+    $06 constant TSC_G2_IO3                     \ [0x06] G2_IO3 analog switch enable
+    $07 constant TSC_G2_IO4                     \ [0x07] G2_IO4 analog switch enable
+    $08 constant TSC_G3_IO1                     \ [0x08] G3_IO1 analog switch enable
+    $09 constant TSC_G3_IO2                     \ [0x09] G3_IO2 analog switch enable
+    $0a constant TSC_G3_IO3                     \ [0x0a] G3_IO3 analog switch enable
+    $0b constant TSC_G3_IO4                     \ [0x0b] G3_IO4 analog switch enable
+    $0c constant TSC_G4_IO1                     \ [0x0c] G4_IO1 analog switch enable
+    $0d constant TSC_G4_IO2                     \ [0x0d] G4_IO2 analog switch enable
+    $0e constant TSC_G4_IO3                     \ [0x0e] G4_IO3 analog switch enable
+    $0f constant TSC_G4_IO4                     \ [0x0f] G4_IO4 analog switch enable
+    $10 constant TSC_G5_IO1                     \ [0x10] G5_IO1 analog switch enable
+    $11 constant TSC_G5_IO2                     \ [0x11] G5_IO2 analog switch enable
+    $12 constant TSC_G5_IO3                     \ [0x12] G5_IO3 analog switch enable
+    $13 constant TSC_G5_IO4                     \ [0x13] G5_IO4 analog switch enable
+    $14 constant TSC_G6_IO1                     \ [0x14] G6_IO1 analog switch enable
+    $15 constant TSC_G6_IO2                     \ [0x15] G6_IO2 analog switch enable
+    $16 constant TSC_G6_IO3                     \ [0x16] G6_IO3 analog switch enable
+    $17 constant TSC_G6_IO4                     \ [0x17] G6_IO4 analog switch enable
+    $18 constant TSC_G7_IO1                     \ [0x18] G7_IO1 analog switch enable
+    $19 constant TSC_G7_IO2                     \ [0x19] G7_IO2 analog switch enable
+    $1a constant TSC_G7_IO3                     \ [0x1a] G7_IO3 analog switch enable
+    $1b constant TSC_G7_IO4                     \ [0x1b] G7_IO4 analog switch enable
+    $1c constant TSC_G8_IO1                     \ [0x1c] G8_IO1 analog switch enable
+    $1d constant TSC_G8_IO2                     \ [0x1d] G8_IO2 analog switch enable
+    $1e constant TSC_G8_IO3                     \ [0x1e] G8_IO3 analog switch enable
+    $1f constant TSC_G8_IO4                     \ [0x1f] G8_IO4 analog switch enable
+  [then]
 
 
-\
-\ @brief I/O group x counter register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
+  [ifdef] TSC_IOSCR_DEF
+    \
+    \ @brief I/O sampling control register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_G1_IO1                     \ [0x00] G1_IO1 sampling mode
+    $01 constant TSC_G1_IO2                     \ [0x01] G1_IO2 sampling mode
+    $02 constant TSC_G1_IO3                     \ [0x02] G1_IO3 sampling mode
+    $03 constant TSC_G1_IO4                     \ [0x03] G1_IO4 sampling mode
+    $04 constant TSC_G2_IO1                     \ [0x04] G2_IO1 sampling mode
+    $05 constant TSC_G2_IO2                     \ [0x05] G2_IO2 sampling mode
+    $06 constant TSC_G2_IO3                     \ [0x06] G2_IO3 sampling mode
+    $07 constant TSC_G2_IO4                     \ [0x07] G2_IO4 sampling mode
+    $08 constant TSC_G3_IO1                     \ [0x08] G3_IO1 sampling mode
+    $09 constant TSC_G3_IO2                     \ [0x09] G3_IO2 sampling mode
+    $0a constant TSC_G3_IO3                     \ [0x0a] G3_IO3 sampling mode
+    $0b constant TSC_G3_IO4                     \ [0x0b] G3_IO4 sampling mode
+    $0c constant TSC_G4_IO1                     \ [0x0c] G4_IO1 sampling mode
+    $0d constant TSC_G4_IO2                     \ [0x0d] G4_IO2 sampling mode
+    $0e constant TSC_G4_IO3                     \ [0x0e] G4_IO3 sampling mode
+    $0f constant TSC_G4_IO4                     \ [0x0f] G4_IO4 sampling mode
+    $10 constant TSC_G5_IO1                     \ [0x10] G5_IO1 sampling mode
+    $11 constant TSC_G5_IO2                     \ [0x11] G5_IO2 sampling mode
+    $12 constant TSC_G5_IO3                     \ [0x12] G5_IO3 sampling mode
+    $13 constant TSC_G5_IO4                     \ [0x13] G5_IO4 sampling mode
+    $14 constant TSC_G6_IO1                     \ [0x14] G6_IO1 sampling mode
+    $15 constant TSC_G6_IO2                     \ [0x15] G6_IO2 sampling mode
+    $16 constant TSC_G6_IO3                     \ [0x16] G6_IO3 sampling mode
+    $17 constant TSC_G6_IO4                     \ [0x17] G6_IO4 sampling mode
+    $18 constant TSC_G7_IO1                     \ [0x18] G7_IO1 sampling mode
+    $19 constant TSC_G7_IO2                     \ [0x19] G7_IO2 sampling mode
+    $1a constant TSC_G7_IO3                     \ [0x1a] G7_IO3 sampling mode
+    $1b constant TSC_G7_IO4                     \ [0x1b] G7_IO4 sampling mode
+    $1c constant TSC_G8_IO1                     \ [0x1c] G8_IO1 sampling mode
+    $1d constant TSC_G8_IO2                     \ [0x1d] G8_IO2 sampling mode
+    $1e constant TSC_G8_IO3                     \ [0x1e] G8_IO3 sampling mode
+    $1f constant TSC_G8_IO4                     \ [0x1f] G8_IO4 sampling mode
+  [then]
 
-$00003fff constant TSC_IOG4CR_CNT                                   \ Counter value
+
+  [ifdef] TSC_IOCCR_DEF
+    \
+    \ @brief I/O channel control register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_G1_IO1                     \ [0x00] G1_IO1 channel mode
+    $01 constant TSC_G1_IO2                     \ [0x01] G1_IO2 channel mode
+    $02 constant TSC_G1_IO3                     \ [0x02] G1_IO3 channel mode
+    $03 constant TSC_G1_IO4                     \ [0x03] G1_IO4 channel mode
+    $04 constant TSC_G2_IO1                     \ [0x04] G2_IO1 channel mode
+    $05 constant TSC_G2_IO2                     \ [0x05] G2_IO2 channel mode
+    $06 constant TSC_G2_IO3                     \ [0x06] G2_IO3 channel mode
+    $07 constant TSC_G2_IO4                     \ [0x07] G2_IO4 channel mode
+    $08 constant TSC_G3_IO1                     \ [0x08] G3_IO1 channel mode
+    $09 constant TSC_G3_IO2                     \ [0x09] G3_IO2 channel mode
+    $0a constant TSC_G3_IO3                     \ [0x0a] G3_IO3 channel mode
+    $0b constant TSC_G3_IO4                     \ [0x0b] G3_IO4 channel mode
+    $0c constant TSC_G4_IO1                     \ [0x0c] G4_IO1 channel mode
+    $0d constant TSC_G4_IO2                     \ [0x0d] G4_IO2 channel mode
+    $0e constant TSC_G4_IO3                     \ [0x0e] G4_IO3 channel mode
+    $0f constant TSC_G4_IO4                     \ [0x0f] G4_IO4 channel mode
+    $10 constant TSC_G5_IO1                     \ [0x10] G5_IO1 channel mode
+    $11 constant TSC_G5_IO2                     \ [0x11] G5_IO2 channel mode
+    $12 constant TSC_G5_IO3                     \ [0x12] G5_IO3 channel mode
+    $13 constant TSC_G5_IO4                     \ [0x13] G5_IO4 channel mode
+    $14 constant TSC_G6_IO1                     \ [0x14] G6_IO1 channel mode
+    $15 constant TSC_G6_IO2                     \ [0x15] G6_IO2 channel mode
+    $16 constant TSC_G6_IO3                     \ [0x16] G6_IO3 channel mode
+    $17 constant TSC_G6_IO4                     \ [0x17] G6_IO4 channel mode
+    $18 constant TSC_G7_IO1                     \ [0x18] G7_IO1 channel mode
+    $19 constant TSC_G7_IO2                     \ [0x19] G7_IO2 channel mode
+    $1a constant TSC_G7_IO3                     \ [0x1a] G7_IO3 channel mode
+    $1b constant TSC_G7_IO4                     \ [0x1b] G7_IO4 channel mode
+    $1c constant TSC_G8_IO1                     \ [0x1c] G8_IO1 channel mode
+    $1d constant TSC_G8_IO2                     \ [0x1d] G8_IO2 channel mode
+    $1e constant TSC_G8_IO3                     \ [0x1e] G8_IO3 channel mode
+    $1f constant TSC_G8_IO4                     \ [0x1f] G8_IO4 channel mode
+  [then]
 
 
-\
-\ @brief I/O group x counter register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
+  [ifdef] TSC_IOGCSR_DEF
+    \
+    \ @brief I/O group control status register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_G1E                        \ [0x00] Analog I/O group x enable
+    $01 constant TSC_G2E                        \ [0x01] Analog I/O group x enable
+    $02 constant TSC_G3E                        \ [0x02] Analog I/O group x enable
+    $03 constant TSC_G4E                        \ [0x03] Analog I/O group x enable
+    $04 constant TSC_G5E                        \ [0x04] Analog I/O group x enable
+    $05 constant TSC_G6E                        \ [0x05] Analog I/O group x enable
+    $06 constant TSC_G7E                        \ [0x06] Analog I/O group x enable
+    $07 constant TSC_G8E                        \ [0x07] Analog I/O group x enable
+    $10 constant TSC_G1S                        \ [0x10] Analog I/O group x status
+    $11 constant TSC_G2S                        \ [0x11] Analog I/O group x status
+    $12 constant TSC_G3S                        \ [0x12] Analog I/O group x status
+    $13 constant TSC_G4S                        \ [0x13] Analog I/O group x status
+    $14 constant TSC_G5S                        \ [0x14] Analog I/O group x status
+    $15 constant TSC_G6S                        \ [0x15] Analog I/O group x status
+    $16 constant TSC_G7S                        \ [0x16] Analog I/O group x status
+    $17 constant TSC_G8S                        \ [0x17] Analog I/O group x status
+  [then]
 
-$00003fff constant TSC_IOG5CR_CNT                                   \ Counter value
+
+  [ifdef] TSC_IOG1CR_DEF
+    \
+    \ @brief I/O group x counter register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_CNT                        \ [0x00 : 14] Counter value
+  [then]
 
 
-\
-\ @brief I/O group x counter register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
+  [ifdef] TSC_IOG2CR_DEF
+    \
+    \ @brief I/O group x counter register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_CNT                        \ [0x00 : 14] Counter value
+  [then]
 
-$00003fff constant TSC_IOG6CR_CNT                                   \ Counter value
+
+  [ifdef] TSC_IOG3CR_DEF
+    \
+    \ @brief I/O group x counter register
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_CNT                        \ [0x00 : 14] Counter value
+  [then]
 
 
-\
-\ @brief Touch sensing controller
-\
-$40024000 constant TSC_CR         \ offset: 0x00 : control register
-$40024004 constant TSC_IER        \ offset: 0x04 : interrupt enable register
-$40024008 constant TSC_ICR        \ offset: 0x08 : interrupt clear register
-$4002400c constant TSC_ISR        \ offset: 0x0C : interrupt status register
-$40024010 constant TSC_IOHCR      \ offset: 0x10 : I/O hysteresis control register
-$40024018 constant TSC_IOASCR     \ offset: 0x18 : I/O analog switch control register
-$40024020 constant TSC_IOSCR      \ offset: 0x20 : I/O sampling control register
-$40024028 constant TSC_IOCCR      \ offset: 0x28 : I/O channel control register
-$40024030 constant TSC_IOGCSR     \ offset: 0x30 : I/O group control status register
-$40024034 constant TSC_IOG1CR     \ offset: 0x34 : I/O group x counter register
-$40024038 constant TSC_IOG2CR     \ offset: 0x38 : I/O group x counter register
-$4002403c constant TSC_IOG3CR     \ offset: 0x3C : I/O group x counter register
-$40024040 constant TSC_IOG4CR     \ offset: 0x40 : I/O group x counter register
-$40024044 constant TSC_IOG5CR     \ offset: 0x44 : I/O group x counter register
-$40024048 constant TSC_IOG6CR     \ offset: 0x48 : I/O group x counter register
+  [ifdef] TSC_IOG4CR_DEF
+    \
+    \ @brief I/O group x counter register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_CNT                        \ [0x00 : 14] Counter value
+  [then]
 
+
+  [ifdef] TSC_IOG5CR_DEF
+    \
+    \ @brief I/O group x counter register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_CNT                        \ [0x00 : 14] Counter value
+  [then]
+
+
+  [ifdef] TSC_IOG6CR_DEF
+    \
+    \ @brief I/O group x counter register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant TSC_CNT                        \ [0x00 : 14] Counter value
+  [then]
+
+  \
+  \ @brief Touch sensing controller
+  \
+  $00 constant TSC_CR                   \ control register
+  $04 constant TSC_IER                  \ interrupt enable register
+  $08 constant TSC_ICR                  \ interrupt clear register
+  $0C constant TSC_ISR                  \ interrupt status register
+  $10 constant TSC_IOHCR                \ I/O hysteresis control register
+  $18 constant TSC_IOASCR               \ I/O analog switch control register
+  $20 constant TSC_IOSCR                \ I/O sampling control register
+  $28 constant TSC_IOCCR                \ I/O channel control register
+  $30 constant TSC_IOGCSR               \ I/O group control status register
+  $34 constant TSC_IOG1CR               \ I/O group x counter register
+  $38 constant TSC_IOG2CR               \ I/O group x counter register
+  $3C constant TSC_IOG3CR               \ I/O group x counter register
+  $40 constant TSC_IOG4CR               \ I/O group x counter register
+  $44 constant TSC_IOG5CR               \ I/O group x counter register
+  $48 constant TSC_IOG6CR               \ I/O group x counter register
+
+: TSC_DEF ; [then]

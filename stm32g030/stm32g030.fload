@@ -1,82 +1,68 @@
 \
-\ @file stm32g030.h
-\ @brief Loader for all peripherals in a STM32G030
+\ @file stm32g030.fload
+\ @brief Device header for STM32G030
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include iwdg.fs
-.include wwdg.fs
-.include flash.fs
-.include rcc.fs
-.include pwr.fs
-.include dma1.fs
-.include dma2.fs
-.include dmamux.fs
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpiod.fs
-.include gpiof.fs
-.include crc.fs
-.include exti.fs
-.include tim16.fs
-.include tim17.fs
-.include usart1.fs
-.include usart2.fs
-.include spi1.fs
-.include spi2.fs
-.include tim1.fs
-.include syscfg.fs
-.include tamp.fs
-.include i2c1.fs
-.include i2c2.fs
-.include rtc.fs
-.include tim14.fs
-.include tim2.fs
-.include tim3.fs
-.include vrefbuf.fs
-.include dbg.fs
+[ifndef] STM32G030_LOADER
+  .include "adc.fs"
+  .include "iwdg.fs"
+  .include "wwdg.fs"
+  .include "flash.fs"
+  .include "rcc.fs"
+  .include "pwr.fs"
+  .include "dma.fs"
+  .include "dmamux.fs"
+  .include "gpio.fs"
+  .include "crc.fs"
+  .include "exti.fs"
+  .include "tim16.fs"
+  .include "usart.fs"
+  .include "spi.fs"
+  .include "tim1.fs"
+  .include "syscfg.fs"
+  .include "tamp.fs"
+  .include "i2c.fs"
+  .include "rtc.fs"
+  .include "tim14.fs"
+  .include "tim.fs"
+  .include "vrefbuf.fs"
+  .include "dbg.fs"
 
-decimal
+  $0x40012400 constant ADC              \ See adc.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x40021000 constant RCC              \ See rcc.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40020000 constant DMA1             \ See dma.fs
+  $0x40020400 constant DMA2             \ See dma.fs
+  $0x40020800 constant DMAMUX           \ See dmamux.fs
+  $0x50000000 constant GPIOA            \ See gpio.fs
+  $0x50000400 constant GPIOB            \ See gpio.fs
+  $0x50000800 constant GPIOC            \ See gpio.fs
+  $0x50000C00 constant GPIOD            \ See gpio.fs
+  $0x50001400 constant GPIOF            \ See gpio.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40021800 constant EXTI             \ See exti.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x40014800 constant TIM17            \ See tim16.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40010000 constant SYSCFG           \ See syscfg.fs
+  $0x4000B000 constant TAMP             \ See tamp.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40002000 constant TIM14            \ See tim14.fs
+  $0x40000000 constant TIM2             \ See tim.fs
+  $0x40000400 constant TIM3             \ See tim.fs
+  $0x40010030 constant VREFBUF          \ See vrefbuf.fs
+  $0x40015800 constant DBG              \ See dbg.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ Analog to Digital ConverteR
-.include IWDG                   \ Independent watchdog
-.include WWDG                   \ System window watchdog
-.include FLASH                  \ Flash
-.include RCC                    \ Reset and clock control
-.include PWR                    \ Power control
-.include DMA1                   \ DMA controller
-.include DMA2                   \ DMA controller
-.include DMAMUX                 \ DMAMUX
-.include GPIOA                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOD                  \ General-purpose I/Os
-.include GPIOF                  \ General-purpose I/Os
-.include CRC                    \ Cyclic redundancy check calculation unit
-.include EXTI                   \ External interrupt/event controller
-.include TIM16                  \ General purpose timers
-.include TIM17                  \ TIM17 global interrupt
-.include USART1                 \ Universal synchronous asynchronous receiver transmitter
-.include USART2                 \ USART2 global interrupt
-.include SPI1                   \ Serial peripheral interface/Inter-IC sound
-.include SPI2                   \ SPI2 global interrupt
-.include TIM1                   \ Advanced-timers
-.include SYSCFG                 \ System configuration controller
-.include TAMP                   \ Tamper and backup registers
-.include I2C1                   \ Inter-integrated circuit
-.include I2C2                   \ I2C2 global interrupt
-.include RTC                    \ Real-time clock
-.include TIM14                  \ General purpose timers
-.include TIM2                   \ General-purpose-timers
-.include TIM3                   \ General-purpose-timers
-.include VREFBUF                \ System configuration controller
-.include DBG                    \ MCU debug component
-
-compiletoram
-
+: STM32G030_LOADER ; [then]

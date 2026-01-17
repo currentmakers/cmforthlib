@@ -6,72 +6,76 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DBGMCU_DEF
 
-\
-\ @brief MCU Device ID Code Register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DBGMCU_IDCODE_DEV_ID                             \ Device Identifier
-$ffff0000 constant DBGMCU_IDCODE_REV_ID                             \ Revision Identifier
-
-
-\
-\ @brief Debug MCU Configuration Register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBGMCU_CR_DBG_SLEEP                              \ Debug Sleep mode
-$00000002 constant DBGMCU_CR_DBG_STOP                               \ Debug Stop Mode
-$00000004 constant DBGMCU_CR_DBG_STANDBY                            \ Debug Standby Mode
-$00000020 constant DBGMCU_CR_TRACE_IOEN                             \ Trace pin assignment control
-$000000c0 constant DBGMCU_CR_TRACE_MODE                             \ Trace pin assignment control
+  [ifdef] DBGMCU_IDCODE_DEF
+    \
+    \ @brief MCU Device ID Code Register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_DEV_ID                  \ [0x00 : 12] Device Identifier
+    $10 constant DBGMCU_REV_ID                  \ [0x10 : 16] Revision Identifier
+  [then]
 
 
-\
-\ @brief APB Low Freeze Register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBGMCU_APB1FZ_DBG_TIM2_STOP                      \ Debug Timer 2 stopped when Core is halted
-$00000002 constant DBGMCU_APB1FZ_DBG_TIM3_STOP                      \ Debug Timer 3 stopped when Core is halted
-$00000004 constant DBGMCU_APB1FZ_DBG_TIM4_STOP                      \ Debug Timer 4 stopped when Core is halted
-$00000008 constant DBGMCU_APB1FZ_DBG_TIM5_STOP                      \ Debug Timer 5 stopped when Core is halted
-$00000010 constant DBGMCU_APB1FZ_DBG_TIM6_STOP                      \ Debug Timer 6 stopped when Core is halted
-$00000020 constant DBGMCU_APB1FZ_DBG_TIM7_STOP                      \ Debug Timer 7 stopped when Core is halted
-$00000040 constant DBGMCU_APB1FZ_DBG_TIM12_STOP                     \ Debug Timer 12 stopped when Core is halted
-$00000080 constant DBGMCU_APB1FZ_DBG_TIM13_STOP                     \ Debug Timer 13 stopped when Core is halted
-$00000100 constant DBGMCU_APB1FZ_DBG_TIMER14_STOP                   \ Debug Timer 14 stopped when Core is halted
-$00000200 constant DBGMCU_APB1FZ_DBG_TIM18_STOP                     \ Debug Timer 18 stopped when Core is halted
-$00000400 constant DBGMCU_APB1FZ_DBG_RTC_STOP                       \ Debug RTC stopped when Core is halted
-$00000800 constant DBGMCU_APB1FZ_DBG_WWDG_STOP                      \ Debug Window Wachdog stopped when Core is halted
-$00001000 constant DBGMCU_APB1FZ_DBG_IWDG_STOP                      \ Debug Independent Wachdog stopped when Core is halted
-$00200000 constant DBGMCU_APB1FZ_I2C1_SMBUS_TIMEOUT                 \ SMBUS timeout mode stopped when Core is halted
-$00400000 constant DBGMCU_APB1FZ_I2C2_SMBUS_TIMEOUT                 \ SMBUS timeout mode stopped when Core is halted
-$02000000 constant DBGMCU_APB1FZ_DBG_CAN_STOP                       \ Debug CAN stopped when core is halted
+  [ifdef] DBGMCU_CR_DEF
+    \
+    \ @brief Debug MCU Configuration Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_DBG_SLEEP               \ [0x00] Debug Sleep mode
+    $01 constant DBGMCU_DBG_STOP                \ [0x01] Debug Stop Mode
+    $02 constant DBGMCU_DBG_STANDBY             \ [0x02] Debug Standby Mode
+    $05 constant DBGMCU_TRACE_IOEN              \ [0x05] Trace pin assignment control
+    $06 constant DBGMCU_TRACE_MODE              \ [0x06 : 2] Trace pin assignment control
+  [then]
 
 
-\
-\ @brief APB High Freeze Register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
+  [ifdef] DBGMCU_APB1FZ_DEF
+    \
+    \ @brief APB Low Freeze Register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_DBG_TIM2_STOP           \ [0x00] Debug Timer 2 stopped when Core is halted
+    $01 constant DBGMCU_DBG_TIM3_STOP           \ [0x01] Debug Timer 3 stopped when Core is halted
+    $02 constant DBGMCU_DBG_TIM4_STOP           \ [0x02] Debug Timer 4 stopped when Core is halted
+    $03 constant DBGMCU_DBG_TIM5_STOP           \ [0x03] Debug Timer 5 stopped when Core is halted
+    $04 constant DBGMCU_DBG_TIM6_STOP           \ [0x04] Debug Timer 6 stopped when Core is halted
+    $05 constant DBGMCU_DBG_TIM7_STOP           \ [0x05] Debug Timer 7 stopped when Core is halted
+    $06 constant DBGMCU_DBG_TIM12_STOP          \ [0x06] Debug Timer 12 stopped when Core is halted
+    $07 constant DBGMCU_DBG_TIM13_STOP          \ [0x07] Debug Timer 13 stopped when Core is halted
+    $08 constant DBGMCU_DBG_TIMER14_STOP        \ [0x08] Debug Timer 14 stopped when Core is halted
+    $09 constant DBGMCU_DBG_TIM18_STOP          \ [0x09] Debug Timer 18 stopped when Core is halted
+    $0a constant DBGMCU_DBG_RTC_STOP            \ [0x0a] Debug RTC stopped when Core is halted
+    $0b constant DBGMCU_DBG_WWDG_STOP           \ [0x0b] Debug Window Wachdog stopped when Core is halted
+    $0c constant DBGMCU_DBG_IWDG_STOP           \ [0x0c] Debug Independent Wachdog stopped when Core is halted
+    $15 constant DBGMCU_I2C1_SMBUS_TIMEOUT      \ [0x15] SMBUS timeout mode stopped when Core is halted
+    $16 constant DBGMCU_I2C2_SMBUS_TIMEOUT      \ [0x16] SMBUS timeout mode stopped when Core is halted
+    $19 constant DBGMCU_DBG_CAN_STOP            \ [0x19] Debug CAN stopped when core is halted
+  [then]
 
-$00000004 constant DBGMCU_APB2FZ_DBG_TIM15_STOP                     \ Debug Timer 15 stopped when Core is halted
-$00000008 constant DBGMCU_APB2FZ_DBG_TIM16_STOP                     \ Debug Timer 16 stopped when Core is halted
-$00000010 constant DBGMCU_APB2FZ_DBG_TIM17_STO                      \ Debug Timer 17 stopped when Core is halted
-$00000020 constant DBGMCU_APB2FZ_DBG_TIM19_STOP                     \ Debug Timer 19 stopped when Core is halted
 
+  [ifdef] DBGMCU_APB2FZ_DEF
+    \
+    \ @brief APB High Freeze Register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $02 constant DBGMCU_DBG_TIM15_STOP          \ [0x02] Debug Timer 15 stopped when Core is halted
+    $03 constant DBGMCU_DBG_TIM16_STOP          \ [0x03] Debug Timer 16 stopped when Core is halted
+    $04 constant DBGMCU_DBG_TIM17_STO           \ [0x04] Debug Timer 17 stopped when Core is halted
+    $05 constant DBGMCU_DBG_TIM19_STOP          \ [0x05] Debug Timer 19 stopped when Core is halted
+  [then]
 
-\
-\ @brief Debug support
-\
-$e0042000 constant DBGMCU_IDCODE  \ offset: 0x00 : MCU Device ID Code Register
-$e0042004 constant DBGMCU_CR      \ offset: 0x04 : Debug MCU Configuration Register
-$e0042008 constant DBGMCU_APB1FZ  \ offset: 0x08 : APB Low Freeze Register
-$e004200c constant DBGMCU_APB2FZ  \ offset: 0x0C : APB High Freeze Register
+  \
+  \ @brief Debug support
+  \
+  $00 constant DBGMCU_IDCODE            \ MCU Device ID Code Register
+  $04 constant DBGMCU_CR                \ Debug MCU Configuration Register
+  $08 constant DBGMCU_APB1FZ            \ APB Low Freeze Register
+  $0C constant DBGMCU_APB2FZ            \ APB High Freeze Register
 
+: DBGMCU_DEF ; [then]

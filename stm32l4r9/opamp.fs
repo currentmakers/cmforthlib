@@ -6,92 +6,98 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] OPAMP_DEF
 
-\
-\ @brief OPAMP1 control/status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP_OPAMP1_CSR_OPAEN                           \ Operational amplifier Enable
-$00000002 constant OPAMP_OPAMP1_CSR_OPALPM                          \ Operational amplifier Low Power Mode
-$0000000c constant OPAMP_OPAMP1_CSR_OPAMODE                         \ Operational amplifier PGA mode
-$00000030 constant OPAMP_OPAMP1_CSR_PGA_GAIN                        \ Operational amplifier Programmable amplifier gain value
-$00000300 constant OPAMP_OPAMP1_CSR_VM_SEL                          \ Inverting input selection
-$00000400 constant OPAMP_OPAMP1_CSR_VP_SEL                          \ Non inverted input selection
-$00001000 constant OPAMP_OPAMP1_CSR_CALON                           \ Calibration mode enabled
-$00002000 constant OPAMP_OPAMP1_CSR_CALSEL                          \ Calibration selection
-$00004000 constant OPAMP_OPAMP1_CSR_USERTRIM                        \ allows to switch from AOP offset trimmed values to AOP offset
-$00008000 constant OPAMP_OPAMP1_CSR_CALOUT                          \ Operational amplifier calibration output
-$80000000 constant OPAMP_OPAMP1_CSR_OPA_RANGE                       \ Operational amplifier power supply range for stability
-
-
-\
-\ @brief OPAMP1 offset trimming register in normal mode
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OPAMP_OPAMP1_OTR_TRIMOFFSETN                     \ Trim for NMOS differential pairs
-$00001f00 constant OPAMP_OPAMP1_OTR_TRIMOFFSETP                     \ Trim for PMOS differential pairs
+  [ifdef] OPAMP_OPAMP1_CSR_DEF
+    \
+    \ @brief OPAMP1 control/status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_OPAEN                    \ [0x00] Operational amplifier Enable
+    $01 constant OPAMP_OPALPM                   \ [0x01] Operational amplifier Low Power Mode
+    $02 constant OPAMP_OPAMODE                  \ [0x02 : 2] Operational amplifier PGA mode
+    $04 constant OPAMP_PGA_GAIN                 \ [0x04 : 2] Operational amplifier Programmable amplifier gain value
+    $08 constant OPAMP_VM_SEL                   \ [0x08 : 2] Inverting input selection
+    $0a constant OPAMP_VP_SEL                   \ [0x0a] Non inverted input selection
+    $0c constant OPAMP_CALON                    \ [0x0c] Calibration mode enabled
+    $0d constant OPAMP_CALSEL                   \ [0x0d] Calibration selection
+    $0e constant OPAMP_USERTRIM                 \ [0x0e] allows to switch from AOP offset trimmed values to AOP offset
+    $0f constant OPAMP_CALOUT                   \ [0x0f] Operational amplifier calibration output
+    $1f constant OPAMP_OPA_RANGE                \ [0x1f] Operational amplifier power supply range for stability
+  [then]
 
 
-\
-\ @brief OPAMP1 offset trimming register in low-power mode
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OPAMP_OPAMP1_LPOTR_TRIMLPOFFSETN                 \ Trim for NMOS differential pairs
-$00001f00 constant OPAMP_OPAMP1_LPOTR_TRIMLPOFFSETP                 \ Trim for PMOS differential pairs
-
-
-\
-\ @brief OPAMP2 control/status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP_OPAMP2_CSR_OPAEN                           \ Operational amplifier Enable
-$00000002 constant OPAMP_OPAMP2_CSR_OPALPM                          \ Operational amplifier Low Power Mode
-$0000000c constant OPAMP_OPAMP2_CSR_OPAMODE                         \ Operational amplifier PGA mode
-$00000030 constant OPAMP_OPAMP2_CSR_PGA_GAIN                        \ Operational amplifier Programmable amplifier gain value
-$00000300 constant OPAMP_OPAMP2_CSR_VM_SEL                          \ Inverting input selection
-$00000400 constant OPAMP_OPAMP2_CSR_VP_SEL                          \ Non inverted input selection
-$00001000 constant OPAMP_OPAMP2_CSR_CALON                           \ Calibration mode enabled
-$00002000 constant OPAMP_OPAMP2_CSR_CALSEL                          \ Calibration selection
-$00004000 constant OPAMP_OPAMP2_CSR_USERTRIM                        \ allows to switch from AOP offset trimmed values to AOP offset
-$00008000 constant OPAMP_OPAMP2_CSR_CALOUT                          \ Operational amplifier calibration output
+  [ifdef] OPAMP_OPAMP1_OTR_DEF
+    \
+    \ @brief OPAMP1 offset trimming register in normal mode
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_TRIMOFFSETN              \ [0x00 : 5] Trim for NMOS differential pairs
+    $08 constant OPAMP_TRIMOFFSETP              \ [0x08 : 5] Trim for PMOS differential pairs
+  [then]
 
 
-\
-\ @brief OPAMP2 offset trimming register in normal mode
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OPAMP_OPAMP2_OTR_TRIMOFFSETN                     \ Trim for NMOS differential pairs
-$00001f00 constant OPAMP_OPAMP2_OTR_TRIMOFFSETP                     \ Trim for PMOS differential pairs
-
-
-\
-\ @brief OPAMP2 offset trimming register in low-power mode
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OPAMP_OPAMP2_LPOTR_TRIMLPOFFSETN                 \ Trim for NMOS differential pairs
-$00001f00 constant OPAMP_OPAMP2_LPOTR_TRIMLPOFFSETP                 \ Trim for PMOS differential pairs
+  [ifdef] OPAMP_OPAMP1_LPOTR_DEF
+    \
+    \ @brief OPAMP1 offset trimming register in low-power mode
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_TRIMLPOFFSETN            \ [0x00 : 5] Trim for NMOS differential pairs
+    $08 constant OPAMP_TRIMLPOFFSETP            \ [0x08 : 5] Trim for PMOS differential pairs
+  [then]
 
 
-\
-\ @brief Operational amplifiers
-\
-$40007800 constant OPAMP_OPAMP1_CSR  \ offset: 0x00 : OPAMP1 control/status register
-$40007804 constant OPAMP_OPAMP1_OTR  \ offset: 0x04 : OPAMP1 offset trimming register in normal mode
-$40007808 constant OPAMP_OPAMP1_LPOTR  \ offset: 0x08 : OPAMP1 offset trimming register in low-power mode
-$40007810 constant OPAMP_OPAMP2_CSR  \ offset: 0x10 : OPAMP2 control/status register
-$40007814 constant OPAMP_OPAMP2_OTR  \ offset: 0x14 : OPAMP2 offset trimming register in normal mode
-$40007818 constant OPAMP_OPAMP2_LPOTR  \ offset: 0x18 : OPAMP2 offset trimming register in low-power mode
+  [ifdef] OPAMP_OPAMP2_CSR_DEF
+    \
+    \ @brief OPAMP2 control/status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_OPAEN                    \ [0x00] Operational amplifier Enable
+    $01 constant OPAMP_OPALPM                   \ [0x01] Operational amplifier Low Power Mode
+    $02 constant OPAMP_OPAMODE                  \ [0x02 : 2] Operational amplifier PGA mode
+    $04 constant OPAMP_PGA_GAIN                 \ [0x04 : 2] Operational amplifier Programmable amplifier gain value
+    $08 constant OPAMP_VM_SEL                   \ [0x08 : 2] Inverting input selection
+    $0a constant OPAMP_VP_SEL                   \ [0x0a] Non inverted input selection
+    $0c constant OPAMP_CALON                    \ [0x0c] Calibration mode enabled
+    $0d constant OPAMP_CALSEL                   \ [0x0d] Calibration selection
+    $0e constant OPAMP_USERTRIM                 \ [0x0e] allows to switch from AOP offset trimmed values to AOP offset
+    $0f constant OPAMP_CALOUT                   \ [0x0f] Operational amplifier calibration output
+  [then]
 
+
+  [ifdef] OPAMP_OPAMP2_OTR_DEF
+    \
+    \ @brief OPAMP2 offset trimming register in normal mode
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_TRIMOFFSETN              \ [0x00 : 5] Trim for NMOS differential pairs
+    $08 constant OPAMP_TRIMOFFSETP              \ [0x08 : 5] Trim for PMOS differential pairs
+  [then]
+
+
+  [ifdef] OPAMP_OPAMP2_LPOTR_DEF
+    \
+    \ @brief OPAMP2 offset trimming register in low-power mode
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_TRIMLPOFFSETN            \ [0x00 : 5] Trim for NMOS differential pairs
+    $08 constant OPAMP_TRIMLPOFFSETP            \ [0x08 : 5] Trim for PMOS differential pairs
+  [then]
+
+  \
+  \ @brief Operational amplifiers
+  \
+  $00 constant OPAMP_OPAMP1_CSR         \ OPAMP1 control/status register
+  $04 constant OPAMP_OPAMP1_OTR         \ OPAMP1 offset trimming register in normal mode
+  $08 constant OPAMP_OPAMP1_LPOTR       \ OPAMP1 offset trimming register in low-power mode
+  $10 constant OPAMP_OPAMP2_CSR         \ OPAMP2 control/status register
+  $14 constant OPAMP_OPAMP2_OTR         \ OPAMP2 offset trimming register in normal mode
+  $18 constant OPAMP_OPAMP2_LPOTR       \ OPAMP2 offset trimming register in low-power mode
+
+: OPAMP_DEF ; [then]

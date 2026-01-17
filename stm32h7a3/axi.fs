@@ -6,493 +6,539 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief AXI interconnect - peripheral ID4 register
-\ Address offset: 0x1FD0
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_PERIPH_ID_4_JEP106CON                    \ JEP106 continuation code
-$000000f0 constant AXI_AXI_PERIPH_ID_4_KCOUNT4                      \ Register file size
-
-
-\
-\ @brief AXI interconnect - peripheral ID0 register
-\ Address offset: 0x1FE0
-\ Reset value: 0x00000004
-\
-
-$000000ff constant AXI_AXI_PERIPH_ID_0_PARTNUM                      \ Peripheral part number bits 0 to 7
-
-
-\
-\ @brief AXI interconnect - peripheral ID1 register
-\ Address offset: 0x1FE4
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_PERIPH_ID_1_PARTNUM                      \ Peripheral part number bits 8 to 11
-$000000f0 constant AXI_AXI_PERIPH_ID_1_JEP106I                      \ JEP106 identity bits 0 to 3
-
-
-\
-\ @brief AXI interconnect - peripheral ID2 register
-\ Address offset: 0x1FE8
-\ Reset value: 0x00000004
-\
-
-$00000007 constant AXI_AXI_PERIPH_ID_2_JEP106ID                     \ JEP106 Identity bits 4 to 6
-$00000008 constant AXI_AXI_PERIPH_ID_2_JEDEC                        \ JEP106 code flag
-$000000f0 constant AXI_AXI_PERIPH_ID_2_REVISION                     \ Peripheral revision number
-
-
-\
-\ @brief AXI interconnect - peripheral ID3 register
-\ Address offset: 0x1FEC
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_PERIPH_ID_3_CUST_MOD_NUM                 \ Customer modification
-$000000f0 constant AXI_AXI_PERIPH_ID_3_REV_AND                      \ Customer version
-
-
-\
-\ @brief AXI interconnect - component ID0 register
-\ Address offset: 0x1FF0
-\ Reset value: 0x00000004
-\
-
-$000000ff constant AXI_AXI_COMP_ID_0_PREAMBLE                       \ Preamble bits 0 to 7
-
-
-\
-\ @brief AXI interconnect - component ID1 register
-\ Address offset: 0x1FF4
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_COMP_ID_1_PREAMBLE                       \ Preamble bits 8 to 11
-$000000f0 constant AXI_AXI_COMP_ID_1_CLASS                          \ Component class
-
-
-\
-\ @brief AXI interconnect - component ID2 register
-\ Address offset: 0x1FF8
-\ Reset value: 0x00000004
-\
-
-$000000ff constant AXI_AXI_COMP_ID_2_PREAMBLE                       \ Preamble bits 12 to 19
-
-
-\
-\ @brief AXI interconnect - component ID3 register
-\ Address offset: 0x1FFC
-\ Reset value: 0x00000004
-\
-
-$000000ff constant AXI_AXI_COMP_ID_3_PREAMBLE                       \ Preamble bits 20 to 27
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix issuing functionality register
-\ Address offset: 0x2008
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG1_FN_MOD_ISS_BM_READ_ISS_OVERRIDE    \ READ_ISS_OVERRIDE
-$00000002 constant AXI_AXI_TARG1_FN_MOD_ISS_BM_WRITE_ISS_OVERRIDE    \ Switch matrix write issuing override for target
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix functionality 2 register
-\ Address offset: 0x2024
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG1_FN_MOD2_BYPASS_MERGE               \ Disable packing of beats to match the output data width
-
-
-\
-\ @brief AXI interconnect - TARG x long burst functionality modification
-\ Address offset: 0x202C
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG1_FN_MOD_LB_FN_MOD_LB                \ Controls burst breaking of long bursts
-
-
-\
-\ @brief AXI interconnect - TARG x long burst functionality modification
-\ Address offset: 0x2108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG1_FN_MOD_READ_ISS_OVERRIDE           \ Override AMIB read issuing capability
-$00000002 constant AXI_AXI_TARG1_FN_MOD_WRITE_ISS_OVERRIDE          \ Override AMIB write issuing capability
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix issuing functionality register
-\ Address offset: 0x3008
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG2_FN_MOD_ISS_BM_READ_ISS_OVERRIDE    \ READ_ISS_OVERRIDE
-$00000002 constant AXI_AXI_TARG2_FN_MOD_ISS_BM_WRITE_ISS_OVERRIDE    \ Switch matrix write issuing override for target
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix functionality 2 register
-\ Address offset: 0x3024
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG2_FN_MOD2_BYPASS_MERGE               \ Disable packing of beats to match the output data width
-
-
-\
-\ @brief AXI interconnect - TARG x long burst functionality modification
-\ Address offset: 0x302C
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG2_FN_MOD_LB_FN_MOD_LB                \ Controls burst breaking of long bursts
-
-
-\
-\ @brief AXI interconnect - TARG x long burst functionality modification
-\ Address offset: 0x3108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG2_FN_MOD_READ_ISS_OVERRIDE           \ Override AMIB read issuing capability
-$00000002 constant AXI_AXI_TARG2_FN_MOD_WRITE_ISS_OVERRIDE          \ Override AMIB write issuing capability
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix issuing functionality register
-\ Address offset: 0x4008
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG3_FN_MOD_ISS_BM_READ_ISS_OVERRIDE    \ READ_ISS_OVERRIDE
-$00000002 constant AXI_AXI_TARG3_FN_MOD_ISS_BM_WRITE_ISS_OVERRIDE    \ Switch matrix write issuing override for target
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix issuing functionality register
-\ Address offset: 0x5008
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG4_FN_MOD_ISS_BM_READ_ISS_OVERRIDE    \ READ_ISS_OVERRIDE
-$00000002 constant AXI_AXI_TARG4_FN_MOD_ISS_BM_WRITE_ISS_OVERRIDE    \ Switch matrix write issuing override for target
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix issuing functionality register
-\ Address offset: 0x6008
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG5_FN_MOD_ISS_BM_READ_ISS_OVERRIDE    \ READ_ISS_OVERRIDE
-$00000002 constant AXI_AXI_TARG5_FN_MOD_ISS_BM_WRITE_ISS_OVERRIDE    \ Switch matrix write issuing override for target
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix issuing functionality register
-\ Address offset: 0x7008
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG6_FN_MOD_ISS_BM_READ_ISS_OVERRIDE    \ READ_ISS_OVERRIDE
-$00000002 constant AXI_AXI_TARG6_FN_MOD_ISS_BM_WRITE_ISS_OVERRIDE    \ Switch matrix write issuing override for target
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix issuing functionality register
-\ Address offset: 0x800C
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG7_FN_MOD_ISS_BM_READ_ISS_OVERRIDE    \ READ_ISS_OVERRIDE
-$00000002 constant AXI_AXI_TARG7_FN_MOD_ISS_BM_WRITE_ISS_OVERRIDE    \ Switch matrix write issuing override for target
-
-
-\
-\ @brief AXI interconnect - TARG x bus matrix functionality 2 register
-\ Address offset: 0x8024
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG7_FN_MOD2_BYPASS_MERGE               \ Disable packing of beats to match the output data width
-
-
-\
-\ @brief AXI interconnect - TARG x long burst functionality modification
-\ Address offset: 0x8108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_TARG7_FN_MOD_READ_ISS_OVERRIDE           \ Override AMIB read issuing capability
-$00000002 constant AXI_AXI_TARG7_FN_MOD_WRITE_ISS_OVERRIDE          \ Override AMIB write issuing capability
-
-
-\
-\ @brief AXI interconnect - INI x functionality modification 2 register
-\ Address offset: 0x42024
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI1_FN_MOD2_BYPASS_MERGE                \ Disables alteration of transactions by the up-sizer unless required by the protocol
-
-
-\
-\ @brief AXI interconnect - INI x AHB functionality modification register
-\ Address offset: 0x42028
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI1_FN_MOD_AHB_RD_INC_OVERRIDE          \ Converts all AHB-Lite write transactions to a series of single beat AXI
-$00000002 constant AXI_AXI_INI1_FN_MOD_AHB_WR_INC_OVERRIDE          \ Converts all AHB-Lite read transactions to a series of single beat AXI
-
-
-\
-\ @brief AXI interconnect - INI x read QoS register
-\ Address offset: 0x42100
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI1_READ_QOS_AR_QOS                     \ Read channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x write QoS register
-\ Address offset: 0x42104
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI1_WRITE_QOS_AW_QOS                    \ Write channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x issuing functionality modification register
-\ Address offset: 0x42108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI1_FN_MOD_READ_ISS_OVERRIDE            \ Override ASIB read issuing capability
-$00000002 constant AXI_AXI_INI1_FN_MOD_WRITE_ISS_OVERRIDE           \ Override ASIB write issuing capability
-
-
-\
-\ @brief AXI interconnect - INI x read QoS register
-\ Address offset: 0x43100
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI2_READ_QOS_AR_QOS                     \ Read channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x write QoS register
-\ Address offset: 0x43104
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI2_WRITE_QOS_AW_QOS                    \ Write channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x issuing functionality modification register
-\ Address offset: 0x43108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI2_FN_MOD_READ_ISS_OVERRIDE            \ Override ASIB read issuing capability
-$00000002 constant AXI_AXI_INI2_FN_MOD_WRITE_ISS_OVERRIDE           \ Override ASIB write issuing capability
-
-
-\
-\ @brief AXI interconnect - INI x functionality modification 2 register
-\ Address offset: 0x44024
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI3_FN_MOD2_BYPASS_MERGE                \ Disables alteration of transactions by the up-sizer unless required by the protocol
-
-
-\
-\ @brief AXI interconnect - INI x AHB functionality modification register
-\ Address offset: 0x44028
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI3_FN_MOD_AHB_RD_INC_OVERRIDE          \ Converts all AHB-Lite write transactions to a series of single beat AXI
-$00000002 constant AXI_AXI_INI3_FN_MOD_AHB_WR_INC_OVERRIDE          \ Converts all AHB-Lite read transactions to a series of single beat AXI
-
-
-\
-\ @brief AXI interconnect - INI x read QoS register
-\ Address offset: 0x44100
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI3_READ_QOS_AR_QOS                     \ Read channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x write QoS register
-\ Address offset: 0x44104
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI3_WRITE_QOS_AW_QOS                    \ Write channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x issuing functionality modification register
-\ Address offset: 0x44108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI3_FN_MOD_READ_ISS_OVERRIDE            \ Override ASIB read issuing capability
-$00000002 constant AXI_AXI_INI3_FN_MOD_WRITE_ISS_OVERRIDE           \ Override ASIB write issuing capability
-
-
-\
-\ @brief AXI interconnect - INI x read QoS register
-\ Address offset: 0x45100
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI4_READ_QOS_AR_QOS                     \ Read channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x write QoS register
-\ Address offset: 0x45104
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI4_WRITE_QOS_AW_QOS                    \ Write channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x issuing functionality modification register
-\ Address offset: 0x45108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI4_FN_MOD_READ_ISS_OVERRIDE            \ Override ASIB read issuing capability
-$00000002 constant AXI_AXI_INI4_FN_MOD_WRITE_ISS_OVERRIDE           \ Override ASIB write issuing capability
-
-
-\
-\ @brief AXI interconnect - INI x read QoS register
-\ Address offset: 0x46100
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI5_READ_QOS_AR_QOS                     \ Read channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x write QoS register
-\ Address offset: 0x46104
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI5_WRITE_QOS_AW_QOS                    \ Write channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x issuing functionality modification register
-\ Address offset: 0x46108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI5_FN_MOD_READ_ISS_OVERRIDE            \ Override ASIB read issuing capability
-$00000002 constant AXI_AXI_INI5_FN_MOD_WRITE_ISS_OVERRIDE           \ Override ASIB write issuing capability
-
-
-\
-\ @brief AXI interconnect - INI x read QoS register
-\ Address offset: 0x47100
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI6_READ_QOS_AR_QOS                     \ Read channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x write QoS register
-\ Address offset: 0x47104
-\ Reset value: 0x00000004
-\
-
-$0000000f constant AXI_AXI_INI6_WRITE_QOS_AW_QOS                    \ Write channel QoS setting
-
-
-\
-\ @brief AXI interconnect - INI x issuing functionality modification register
-\ Address offset: 0x47108
-\ Reset value: 0x00000004
-\
-
-$00000001 constant AXI_AXI_INI6_FN_MOD_READ_ISS_OVERRIDE            \ Override ASIB read issuing capability
-$00000002 constant AXI_AXI_INI6_FN_MOD_WRITE_ISS_OVERRIDE           \ Override ASIB write issuing capability
-
-
-\
-\ @brief AXI interconnect registers
-\
-$51001fd0 constant AXI_AXI_PERIPH_ID_4  \ offset: 0x1FD0 : AXI interconnect - peripheral ID4 register
-$51001fe0 constant AXI_AXI_PERIPH_ID_0  \ offset: 0x1FE0 : AXI interconnect - peripheral ID0 register
-$51001fe4 constant AXI_AXI_PERIPH_ID_1  \ offset: 0x1FE4 : AXI interconnect - peripheral ID1 register
-$51001fe8 constant AXI_AXI_PERIPH_ID_2  \ offset: 0x1FE8 : AXI interconnect - peripheral ID2 register
-$51001fec constant AXI_AXI_PERIPH_ID_3  \ offset: 0x1FEC : AXI interconnect - peripheral ID3 register
-$51001ff0 constant AXI_AXI_COMP_ID_0  \ offset: 0x1FF0 : AXI interconnect - component ID0 register
-$51001ff4 constant AXI_AXI_COMP_ID_1  \ offset: 0x1FF4 : AXI interconnect - component ID1 register
-$51001ff8 constant AXI_AXI_COMP_ID_2  \ offset: 0x1FF8 : AXI interconnect - component ID2 register
-$51001ffc constant AXI_AXI_COMP_ID_3  \ offset: 0x1FFC : AXI interconnect - component ID3 register
-$51002008 constant AXI_AXI_TARG1_FN_MOD_ISS_BM  \ offset: 0x2008 : AXI interconnect - TARG x bus matrix issuing functionality register
-$51002024 constant AXI_AXI_TARG1_FN_MOD2  \ offset: 0x2024 : AXI interconnect - TARG x bus matrix functionality 2 register
-$5100202c constant AXI_AXI_TARG1_FN_MOD_LB  \ offset: 0x202C : AXI interconnect - TARG x long burst functionality modification
-$51002108 constant AXI_AXI_TARG1_FN_MOD  \ offset: 0x2108 : AXI interconnect - TARG x long burst functionality modification
-$51003008 constant AXI_AXI_TARG2_FN_MOD_ISS_BM  \ offset: 0x3008 : AXI interconnect - TARG x bus matrix issuing functionality register
-$51003024 constant AXI_AXI_TARG2_FN_MOD2  \ offset: 0x3024 : AXI interconnect - TARG x bus matrix functionality 2 register
-$5100302c constant AXI_AXI_TARG2_FN_MOD_LB  \ offset: 0x302C : AXI interconnect - TARG x long burst functionality modification
-$51003108 constant AXI_AXI_TARG2_FN_MOD  \ offset: 0x3108 : AXI interconnect - TARG x long burst functionality modification
-$51004008 constant AXI_AXI_TARG3_FN_MOD_ISS_BM  \ offset: 0x4008 : AXI interconnect - TARG x bus matrix issuing functionality register
-$51005008 constant AXI_AXI_TARG4_FN_MOD_ISS_BM  \ offset: 0x5008 : AXI interconnect - TARG x bus matrix issuing functionality register
-$51006008 constant AXI_AXI_TARG5_FN_MOD_ISS_BM  \ offset: 0x6008 : AXI interconnect - TARG x bus matrix issuing functionality register
-$51007008 constant AXI_AXI_TARG6_FN_MOD_ISS_BM  \ offset: 0x7008 : AXI interconnect - TARG x bus matrix issuing functionality register
-$5100800c constant AXI_AXI_TARG7_FN_MOD_ISS_BM  \ offset: 0x800C : AXI interconnect - TARG x bus matrix issuing functionality register
-$51008024 constant AXI_AXI_TARG7_FN_MOD2  \ offset: 0x8024 : AXI interconnect - TARG x bus matrix functionality 2 register
-$51008108 constant AXI_AXI_TARG7_FN_MOD  \ offset: 0x8108 : AXI interconnect - TARG x long burst functionality modification
-$51042024 constant AXI_AXI_INI1_FN_MOD2  \ offset: 0x42024 : AXI interconnect - INI x functionality modification 2 register
-$51042028 constant AXI_AXI_INI1_FN_MOD_AHB  \ offset: 0x42028 : AXI interconnect - INI x AHB functionality modification register
-$51042100 constant AXI_AXI_INI1_READ_QOS  \ offset: 0x42100 : AXI interconnect - INI x read QoS register
-$51042104 constant AXI_AXI_INI1_WRITE_QOS  \ offset: 0x42104 : AXI interconnect - INI x write QoS register
-$51042108 constant AXI_AXI_INI1_FN_MOD  \ offset: 0x42108 : AXI interconnect - INI x issuing functionality modification register
-$51043100 constant AXI_AXI_INI2_READ_QOS  \ offset: 0x43100 : AXI interconnect - INI x read QoS register
-$51043104 constant AXI_AXI_INI2_WRITE_QOS  \ offset: 0x43104 : AXI interconnect - INI x write QoS register
-$51043108 constant AXI_AXI_INI2_FN_MOD  \ offset: 0x43108 : AXI interconnect - INI x issuing functionality modification register
-$51044024 constant AXI_AXI_INI3_FN_MOD2  \ offset: 0x44024 : AXI interconnect - INI x functionality modification 2 register
-$51044028 constant AXI_AXI_INI3_FN_MOD_AHB  \ offset: 0x44028 : AXI interconnect - INI x AHB functionality modification register
-$51044100 constant AXI_AXI_INI3_READ_QOS  \ offset: 0x44100 : AXI interconnect - INI x read QoS register
-$51044104 constant AXI_AXI_INI3_WRITE_QOS  \ offset: 0x44104 : AXI interconnect - INI x write QoS register
-$51044108 constant AXI_AXI_INI3_FN_MOD  \ offset: 0x44108 : AXI interconnect - INI x issuing functionality modification register
-$51045100 constant AXI_AXI_INI4_READ_QOS  \ offset: 0x45100 : AXI interconnect - INI x read QoS register
-$51045104 constant AXI_AXI_INI4_WRITE_QOS  \ offset: 0x45104 : AXI interconnect - INI x write QoS register
-$51045108 constant AXI_AXI_INI4_FN_MOD  \ offset: 0x45108 : AXI interconnect - INI x issuing functionality modification register
-$51046100 constant AXI_AXI_INI5_READ_QOS  \ offset: 0x46100 : AXI interconnect - INI x read QoS register
-$51046104 constant AXI_AXI_INI5_WRITE_QOS  \ offset: 0x46104 : AXI interconnect - INI x write QoS register
-$51046108 constant AXI_AXI_INI5_FN_MOD  \ offset: 0x46108 : AXI interconnect - INI x issuing functionality modification register
-$51047100 constant AXI_AXI_INI6_READ_QOS  \ offset: 0x47100 : AXI interconnect - INI x read QoS register
-$51047104 constant AXI_AXI_INI6_WRITE_QOS  \ offset: 0x47104 : AXI interconnect - INI x write QoS register
-$51047108 constant AXI_AXI_INI6_FN_MOD  \ offset: 0x47108 : AXI interconnect - INI x issuing functionality modification register
-
+[ifndef] AXI_DEF
+
+  [ifdef] AXI_AXI_PERIPH_ID_4_DEF
+    \
+    \ @brief AXI interconnect - peripheral ID4 register
+    \ Address offset: 0x1FD0
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_JEP106CON                  \ [0x00 : 4] JEP106 continuation code
+    $04 constant AXI_KCOUNT4                    \ [0x04 : 4] Register file size
+  [then]
+
+
+  [ifdef] AXI_AXI_PERIPH_ID_0_DEF
+    \
+    \ @brief AXI interconnect - peripheral ID0 register
+    \ Address offset: 0x1FE0
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_PARTNUM                    \ [0x00 : 8] Peripheral part number bits 0 to 7
+  [then]
+
+
+  [ifdef] AXI_AXI_PERIPH_ID_1_DEF
+    \
+    \ @brief AXI interconnect - peripheral ID1 register
+    \ Address offset: 0x1FE4
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_PARTNUM                    \ [0x00 : 4] Peripheral part number bits 8 to 11
+    $04 constant AXI_JEP106I                    \ [0x04 : 4] JEP106 identity bits 0 to 3
+  [then]
+
+
+  [ifdef] AXI_AXI_PERIPH_ID_2_DEF
+    \
+    \ @brief AXI interconnect - peripheral ID2 register
+    \ Address offset: 0x1FE8
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_JEP106ID                   \ [0x00 : 3] JEP106 Identity bits 4 to 6
+    $03 constant AXI_JEDEC                      \ [0x03] JEP106 code flag
+    $04 constant AXI_REVISION                   \ [0x04 : 4] Peripheral revision number
+  [then]
+
+
+  [ifdef] AXI_AXI_PERIPH_ID_3_DEF
+    \
+    \ @brief AXI interconnect - peripheral ID3 register
+    \ Address offset: 0x1FEC
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_CUST_MOD_NUM               \ [0x00 : 4] Customer modification
+    $04 constant AXI_REV_AND                    \ [0x04 : 4] Customer version
+  [then]
+
+
+  [ifdef] AXI_AXI_COMP_ID_0_DEF
+    \
+    \ @brief AXI interconnect - component ID0 register
+    \ Address offset: 0x1FF0
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_PREAMBLE                   \ [0x00 : 8] Preamble bits 0 to 7
+  [then]
+
+
+  [ifdef] AXI_AXI_COMP_ID_1_DEF
+    \
+    \ @brief AXI interconnect - component ID1 register
+    \ Address offset: 0x1FF4
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_PREAMBLE                   \ [0x00 : 4] Preamble bits 8 to 11
+    $04 constant AXI_CLASS                      \ [0x04 : 4] Component class
+  [then]
+
+
+  [ifdef] AXI_AXI_COMP_ID_2_DEF
+    \
+    \ @brief AXI interconnect - component ID2 register
+    \ Address offset: 0x1FF8
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_PREAMBLE                   \ [0x00 : 8] Preamble bits 12 to 19
+  [then]
+
+
+  [ifdef] AXI_AXI_COMP_ID_3_DEF
+    \
+    \ @brief AXI interconnect - component ID3 register
+    \ Address offset: 0x1FFC
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_PREAMBLE                   \ [0x00 : 8] Preamble bits 20 to 27
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG1_FN_MOD_ISS_BM_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix issuing functionality register
+    \ Address offset: 0x2008
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] READ_ISS_OVERRIDE
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Switch matrix write issuing override for target
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG1_FN_MOD2_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix functionality 2 register
+    \ Address offset: 0x2024
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_BYPASS_MERGE               \ [0x00] Disable packing of beats to match the output data width
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG1_FN_MOD_LB_DEF
+    \
+    \ @brief AXI interconnect - TARG x long burst functionality modification
+    \ Address offset: 0x202C
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_FN_MOD_LB                  \ [0x00] Controls burst breaking of long bursts
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG1_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - TARG x long burst functionality modification
+    \ Address offset: 0x2108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override AMIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override AMIB write issuing capability
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG2_FN_MOD_ISS_BM_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix issuing functionality register
+    \ Address offset: 0x3008
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] READ_ISS_OVERRIDE
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Switch matrix write issuing override for target
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG2_FN_MOD2_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix functionality 2 register
+    \ Address offset: 0x3024
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_BYPASS_MERGE               \ [0x00] Disable packing of beats to match the output data width
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG2_FN_MOD_LB_DEF
+    \
+    \ @brief AXI interconnect - TARG x long burst functionality modification
+    \ Address offset: 0x302C
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_FN_MOD_LB                  \ [0x00] Controls burst breaking of long bursts
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG2_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - TARG x long burst functionality modification
+    \ Address offset: 0x3108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override AMIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override AMIB write issuing capability
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG3_FN_MOD_ISS_BM_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix issuing functionality register
+    \ Address offset: 0x4008
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] READ_ISS_OVERRIDE
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Switch matrix write issuing override for target
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG4_FN_MOD_ISS_BM_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix issuing functionality register
+    \ Address offset: 0x5008
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] READ_ISS_OVERRIDE
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Switch matrix write issuing override for target
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG5_FN_MOD_ISS_BM_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix issuing functionality register
+    \ Address offset: 0x6008
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] READ_ISS_OVERRIDE
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Switch matrix write issuing override for target
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG6_FN_MOD_ISS_BM_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix issuing functionality register
+    \ Address offset: 0x7008
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] READ_ISS_OVERRIDE
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Switch matrix write issuing override for target
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG7_FN_MOD_ISS_BM_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix issuing functionality register
+    \ Address offset: 0x800C
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] READ_ISS_OVERRIDE
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Switch matrix write issuing override for target
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG7_FN_MOD2_DEF
+    \
+    \ @brief AXI interconnect - TARG x bus matrix functionality 2 register
+    \ Address offset: 0x8024
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_BYPASS_MERGE               \ [0x00] Disable packing of beats to match the output data width
+  [then]
+
+
+  [ifdef] AXI_AXI_TARG7_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - TARG x long burst functionality modification
+    \ Address offset: 0x8108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override AMIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override AMIB write issuing capability
+  [then]
+
+
+  [ifdef] AXI_AXI_INI1_FN_MOD2_DEF
+    \
+    \ @brief AXI interconnect - INI x functionality modification 2 register
+    \ Address offset: 0x42024
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_BYPASS_MERGE               \ [0x00] Disables alteration of transactions by the up-sizer unless required by the protocol
+  [then]
+
+
+  [ifdef] AXI_AXI_INI1_FN_MOD_AHB_DEF
+    \
+    \ @brief AXI interconnect - INI x AHB functionality modification register
+    \ Address offset: 0x42028
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_RD_INC_OVERRIDE            \ [0x00] Converts all AHB-Lite write transactions to a series of single beat AXI
+    $01 constant AXI_WR_INC_OVERRIDE            \ [0x01] Converts all AHB-Lite read transactions to a series of single beat AXI
+  [then]
+
+
+  [ifdef] AXI_AXI_INI1_READ_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x read QoS register
+    \ Address offset: 0x42100
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AR_QOS                     \ [0x00 : 4] Read channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI1_WRITE_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x write QoS register
+    \ Address offset: 0x42104
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AW_QOS                     \ [0x00 : 4] Write channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI1_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - INI x issuing functionality modification register
+    \ Address offset: 0x42108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override ASIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override ASIB write issuing capability
+  [then]
+
+
+  [ifdef] AXI_AXI_INI2_READ_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x read QoS register
+    \ Address offset: 0x43100
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AR_QOS                     \ [0x00 : 4] Read channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI2_WRITE_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x write QoS register
+    \ Address offset: 0x43104
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AW_QOS                     \ [0x00 : 4] Write channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI2_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - INI x issuing functionality modification register
+    \ Address offset: 0x43108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override ASIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override ASIB write issuing capability
+  [then]
+
+
+  [ifdef] AXI_AXI_INI3_FN_MOD2_DEF
+    \
+    \ @brief AXI interconnect - INI x functionality modification 2 register
+    \ Address offset: 0x44024
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_BYPASS_MERGE               \ [0x00] Disables alteration of transactions by the up-sizer unless required by the protocol
+  [then]
+
+
+  [ifdef] AXI_AXI_INI3_FN_MOD_AHB_DEF
+    \
+    \ @brief AXI interconnect - INI x AHB functionality modification register
+    \ Address offset: 0x44028
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_RD_INC_OVERRIDE            \ [0x00] Converts all AHB-Lite write transactions to a series of single beat AXI
+    $01 constant AXI_WR_INC_OVERRIDE            \ [0x01] Converts all AHB-Lite read transactions to a series of single beat AXI
+  [then]
+
+
+  [ifdef] AXI_AXI_INI3_READ_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x read QoS register
+    \ Address offset: 0x44100
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AR_QOS                     \ [0x00 : 4] Read channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI3_WRITE_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x write QoS register
+    \ Address offset: 0x44104
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AW_QOS                     \ [0x00 : 4] Write channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI3_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - INI x issuing functionality modification register
+    \ Address offset: 0x44108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override ASIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override ASIB write issuing capability
+  [then]
+
+
+  [ifdef] AXI_AXI_INI4_READ_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x read QoS register
+    \ Address offset: 0x45100
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AR_QOS                     \ [0x00 : 4] Read channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI4_WRITE_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x write QoS register
+    \ Address offset: 0x45104
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AW_QOS                     \ [0x00 : 4] Write channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI4_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - INI x issuing functionality modification register
+    \ Address offset: 0x45108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override ASIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override ASIB write issuing capability
+  [then]
+
+
+  [ifdef] AXI_AXI_INI5_READ_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x read QoS register
+    \ Address offset: 0x46100
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AR_QOS                     \ [0x00 : 4] Read channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI5_WRITE_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x write QoS register
+    \ Address offset: 0x46104
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AW_QOS                     \ [0x00 : 4] Write channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI5_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - INI x issuing functionality modification register
+    \ Address offset: 0x46108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override ASIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override ASIB write issuing capability
+  [then]
+
+
+  [ifdef] AXI_AXI_INI6_READ_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x read QoS register
+    \ Address offset: 0x47100
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AR_QOS                     \ [0x00 : 4] Read channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI6_WRITE_QOS_DEF
+    \
+    \ @brief AXI interconnect - INI x write QoS register
+    \ Address offset: 0x47104
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_AW_QOS                     \ [0x00 : 4] Write channel QoS setting
+  [then]
+
+
+  [ifdef] AXI_AXI_INI6_FN_MOD_DEF
+    \
+    \ @brief AXI interconnect - INI x issuing functionality modification register
+    \ Address offset: 0x47108
+    \ Reset value: 0x00000004
+    \
+    $00 constant AXI_READ_ISS_OVERRIDE          \ [0x00] Override ASIB read issuing capability
+    $01 constant AXI_WRITE_ISS_OVERRIDE         \ [0x01] Override ASIB write issuing capability
+  [then]
+
+  \
+  \ @brief AXI interconnect registers
+  \
+  $1FD0 constant AXI_AXI_PERIPH_ID_4    \ AXI interconnect - peripheral ID4 register
+  $1FE0 constant AXI_AXI_PERIPH_ID_0    \ AXI interconnect - peripheral ID0 register
+  $1FE4 constant AXI_AXI_PERIPH_ID_1    \ AXI interconnect - peripheral ID1 register
+  $1FE8 constant AXI_AXI_PERIPH_ID_2    \ AXI interconnect - peripheral ID2 register
+  $1FEC constant AXI_AXI_PERIPH_ID_3    \ AXI interconnect - peripheral ID3 register
+  $1FF0 constant AXI_AXI_COMP_ID_0      \ AXI interconnect - component ID0 register
+  $1FF4 constant AXI_AXI_COMP_ID_1      \ AXI interconnect - component ID1 register
+  $1FF8 constant AXI_AXI_COMP_ID_2      \ AXI interconnect - component ID2 register
+  $1FFC constant AXI_AXI_COMP_ID_3      \ AXI interconnect - component ID3 register
+  $2008 constant AXI_AXI_TARG1_FN_MOD_ISS_BM    \ AXI interconnect - TARG x bus matrix issuing functionality register
+  $2024 constant AXI_AXI_TARG1_FN_MOD2  \ AXI interconnect - TARG x bus matrix functionality 2 register
+  $202C constant AXI_AXI_TARG1_FN_MOD_LB    \ AXI interconnect - TARG x long burst functionality modification
+  $2108 constant AXI_AXI_TARG1_FN_MOD   \ AXI interconnect - TARG x long burst functionality modification
+  $3008 constant AXI_AXI_TARG2_FN_MOD_ISS_BM    \ AXI interconnect - TARG x bus matrix issuing functionality register
+  $3024 constant AXI_AXI_TARG2_FN_MOD2  \ AXI interconnect - TARG x bus matrix functionality 2 register
+  $302C constant AXI_AXI_TARG2_FN_MOD_LB    \ AXI interconnect - TARG x long burst functionality modification
+  $3108 constant AXI_AXI_TARG2_FN_MOD   \ AXI interconnect - TARG x long burst functionality modification
+  $4008 constant AXI_AXI_TARG3_FN_MOD_ISS_BM    \ AXI interconnect - TARG x bus matrix issuing functionality register
+  $5008 constant AXI_AXI_TARG4_FN_MOD_ISS_BM    \ AXI interconnect - TARG x bus matrix issuing functionality register
+  $6008 constant AXI_AXI_TARG5_FN_MOD_ISS_BM    \ AXI interconnect - TARG x bus matrix issuing functionality register
+  $7008 constant AXI_AXI_TARG6_FN_MOD_ISS_BM    \ AXI interconnect - TARG x bus matrix issuing functionality register
+  $800C constant AXI_AXI_TARG7_FN_MOD_ISS_BM    \ AXI interconnect - TARG x bus matrix issuing functionality register
+  $8024 constant AXI_AXI_TARG7_FN_MOD2  \ AXI interconnect - TARG x bus matrix functionality 2 register
+  $8108 constant AXI_AXI_TARG7_FN_MOD   \ AXI interconnect - TARG x long burst functionality modification
+  $42024 constant AXI_AXI_INI1_FN_MOD2  \ AXI interconnect - INI x functionality modification 2 register
+  $42028 constant AXI_AXI_INI1_FN_MOD_AHB    \ AXI interconnect - INI x AHB functionality modification register
+  $42100 constant AXI_AXI_INI1_READ_QOS \ AXI interconnect - INI x read QoS register
+  $42104 constant AXI_AXI_INI1_WRITE_QOS    \ AXI interconnect - INI x write QoS register
+  $42108 constant AXI_AXI_INI1_FN_MOD   \ AXI interconnect - INI x issuing functionality modification register
+  $43100 constant AXI_AXI_INI2_READ_QOS \ AXI interconnect - INI x read QoS register
+  $43104 constant AXI_AXI_INI2_WRITE_QOS    \ AXI interconnect - INI x write QoS register
+  $43108 constant AXI_AXI_INI2_FN_MOD   \ AXI interconnect - INI x issuing functionality modification register
+  $44024 constant AXI_AXI_INI3_FN_MOD2  \ AXI interconnect - INI x functionality modification 2 register
+  $44028 constant AXI_AXI_INI3_FN_MOD_AHB    \ AXI interconnect - INI x AHB functionality modification register
+  $44100 constant AXI_AXI_INI3_READ_QOS \ AXI interconnect - INI x read QoS register
+  $44104 constant AXI_AXI_INI3_WRITE_QOS    \ AXI interconnect - INI x write QoS register
+  $44108 constant AXI_AXI_INI3_FN_MOD   \ AXI interconnect - INI x issuing functionality modification register
+  $45100 constant AXI_AXI_INI4_READ_QOS \ AXI interconnect - INI x read QoS register
+  $45104 constant AXI_AXI_INI4_WRITE_QOS    \ AXI interconnect - INI x write QoS register
+  $45108 constant AXI_AXI_INI4_FN_MOD   \ AXI interconnect - INI x issuing functionality modification register
+  $46100 constant AXI_AXI_INI5_READ_QOS \ AXI interconnect - INI x read QoS register
+  $46104 constant AXI_AXI_INI5_WRITE_QOS    \ AXI interconnect - INI x write QoS register
+  $46108 constant AXI_AXI_INI5_FN_MOD   \ AXI interconnect - INI x issuing functionality modification register
+  $47100 constant AXI_AXI_INI6_READ_QOS \ AXI interconnect - INI x read QoS register
+  $47104 constant AXI_AXI_INI6_WRITE_QOS    \ AXI interconnect - INI x write QoS register
+  $47108 constant AXI_AXI_INI6_FN_MOD   \ AXI interconnect - INI x issuing functionality modification register
+
+: AXI_DEF ; [then]

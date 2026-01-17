@@ -6,20 +6,21 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DBGMCU_DEF
 
-\
-\ @brief DBGMCU_IDCODE
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
+  [ifdef] DBGMCU_IDCODE_DEF
+    \
+    \ @brief DBGMCU_IDCODE
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_DEV_ID                  \ [0x00 : 12] Device identifier
+    $10 constant DBGMCU_REV_ID                  \ [0x10 : 16] Revision identifie
+  [then]
 
-$00000fff constant DBGMCU_IDCODE_DEV_ID                             \ Device identifier
-$ffff0000 constant DBGMCU_IDCODE_REV_ID                             \ Revision identifie
+  \
+  \ @brief MCU debug component
+  \
+  $00 constant DBGMCU_IDCODE            \ DBGMCU_IDCODE
 
-
-\
-\ @brief MCU debug component
-\
-$e0042000 constant DBGMCU_IDCODE  \ offset: 0x00 : DBGMCU_IDCODE
-
+: DBGMCU_DEF ; [then]

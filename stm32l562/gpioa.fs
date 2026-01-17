@@ -6,310 +6,322 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GPIOA_DEF
 
-\
-\ @brief GPIO port mode register
-\ Address offset: 0x00
-\ Reset value: 0xABFFFFFF
-\
-
-$00000003 constant GPIOA_MODER_MODER0                               \ Port x configuration bits (y = 0..15)
-$0000000c constant GPIOA_MODER_MODER1                               \ Port x configuration bits (y = 0..15)
-$00000030 constant GPIOA_MODER_MODER2                               \ Port x configuration bits (y = 0..15)
-$000000c0 constant GPIOA_MODER_MODER3                               \ Port x configuration bits (y = 0..15)
-$00000300 constant GPIOA_MODER_MODER4                               \ Port x configuration bits (y = 0..15)
-$00000c00 constant GPIOA_MODER_MODER5                               \ Port x configuration bits (y = 0..15)
-$00003000 constant GPIOA_MODER_MODER6                               \ Port x configuration bits (y = 0..15)
-$0000c000 constant GPIOA_MODER_MODER7                               \ Port x configuration bits (y = 0..15)
-$00030000 constant GPIOA_MODER_MODER8                               \ Port x configuration bits (y = 0..15)
-$000c0000 constant GPIOA_MODER_MODER9                               \ Port x configuration bits (y = 0..15)
-$00300000 constant GPIOA_MODER_MODER10                              \ Port x configuration bits (y = 0..15)
-$00c00000 constant GPIOA_MODER_MODER11                              \ Port x configuration bits (y = 0..15)
-$03000000 constant GPIOA_MODER_MODER12                              \ Port x configuration bits (y = 0..15)
-$0c000000 constant GPIOA_MODER_MODER13                              \ Port x configuration bits (y = 0..15)
-$30000000 constant GPIOA_MODER_MODER14                              \ Port x configuration bits (y = 0..15)
-$c0000000 constant GPIOA_MODER_MODER15                              \ Port x configuration bits (y = 0..15)
-
-
-\
-\ @brief GPIO port output type register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_OTYPER_OT0                                 \ Port x configuration bits (y = 0..15)
-$00000002 constant GPIOA_OTYPER_OT1                                 \ Port x configuration bits (y = 0..15)
-$00000004 constant GPIOA_OTYPER_OT2                                 \ Port x configuration bits (y = 0..15)
-$00000008 constant GPIOA_OTYPER_OT3                                 \ Port x configuration bits (y = 0..15)
-$00000010 constant GPIOA_OTYPER_OT4                                 \ Port x configuration bits (y = 0..15)
-$00000020 constant GPIOA_OTYPER_OT5                                 \ Port x configuration bits (y = 0..15)
-$00000040 constant GPIOA_OTYPER_OT6                                 \ Port x configuration bits (y = 0..15)
-$00000080 constant GPIOA_OTYPER_OT7                                 \ Port x configuration bits (y = 0..15)
-$00000100 constant GPIOA_OTYPER_OT8                                 \ Port x configuration bits (y = 0..15)
-$00000200 constant GPIOA_OTYPER_OT9                                 \ Port x configuration bits (y = 0..15)
-$00000400 constant GPIOA_OTYPER_OT10                                \ Port x configuration bits (y = 0..15)
-$00000800 constant GPIOA_OTYPER_OT11                                \ Port x configuration bits (y = 0..15)
-$00001000 constant GPIOA_OTYPER_OT12                                \ Port x configuration bits (y = 0..15)
-$00002000 constant GPIOA_OTYPER_OT13                                \ Port x configuration bits (y = 0..15)
-$00004000 constant GPIOA_OTYPER_OT14                                \ Port x configuration bits (y = 0..15)
-$00008000 constant GPIOA_OTYPER_OT15                                \ Port x configuration bits (y = 0..15)
+  [ifdef] GPIOA_MODER_DEF
+    \
+    \ @brief GPIO port mode register
+    \ Address offset: 0x00
+    \ Reset value: 0xABFFFFFF
+    \
+    $00 constant GPIOA_MODER0                   \ [0x00 : 2] Port x configuration bits (y = 0..15)
+    $02 constant GPIOA_MODER1                   \ [0x02 : 2] Port x configuration bits (y = 0..15)
+    $04 constant GPIOA_MODER2                   \ [0x04 : 2] Port x configuration bits (y = 0..15)
+    $06 constant GPIOA_MODER3                   \ [0x06 : 2] Port x configuration bits (y = 0..15)
+    $08 constant GPIOA_MODER4                   \ [0x08 : 2] Port x configuration bits (y = 0..15)
+    $0a constant GPIOA_MODER5                   \ [0x0a : 2] Port x configuration bits (y = 0..15)
+    $0c constant GPIOA_MODER6                   \ [0x0c : 2] Port x configuration bits (y = 0..15)
+    $0e constant GPIOA_MODER7                   \ [0x0e : 2] Port x configuration bits (y = 0..15)
+    $10 constant GPIOA_MODER8                   \ [0x10 : 2] Port x configuration bits (y = 0..15)
+    $12 constant GPIOA_MODER9                   \ [0x12 : 2] Port x configuration bits (y = 0..15)
+    $14 constant GPIOA_MODER10                  \ [0x14 : 2] Port x configuration bits (y = 0..15)
+    $16 constant GPIOA_MODER11                  \ [0x16 : 2] Port x configuration bits (y = 0..15)
+    $18 constant GPIOA_MODER12                  \ [0x18 : 2] Port x configuration bits (y = 0..15)
+    $1a constant GPIOA_MODER13                  \ [0x1a : 2] Port x configuration bits (y = 0..15)
+    $1c constant GPIOA_MODER14                  \ [0x1c : 2] Port x configuration bits (y = 0..15)
+    $1e constant GPIOA_MODER15                  \ [0x1e : 2] Port x configuration bits (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO port output speed register
-\ Address offset: 0x08
-\ Reset value: 0x0C000000
-\
-
-$00000003 constant GPIOA_OSPEEDR_OSPEEDR0                           \ Port x configuration bits (y = 0..15)
-$0000000c constant GPIOA_OSPEEDR_OSPEEDR1                           \ Port x configuration bits (y = 0..15)
-$00000030 constant GPIOA_OSPEEDR_OSPEEDR2                           \ Port x configuration bits (y = 0..15)
-$000000c0 constant GPIOA_OSPEEDR_OSPEEDR3                           \ Port x configuration bits (y = 0..15)
-$00000300 constant GPIOA_OSPEEDR_OSPEEDR4                           \ Port x configuration bits (y = 0..15)
-$00000c00 constant GPIOA_OSPEEDR_OSPEEDR5                           \ Port x configuration bits (y = 0..15)
-$00003000 constant GPIOA_OSPEEDR_OSPEEDR6                           \ Port x configuration bits (y = 0..15)
-$0000c000 constant GPIOA_OSPEEDR_OSPEEDR7                           \ Port x configuration bits (y = 0..15)
-$00030000 constant GPIOA_OSPEEDR_OSPEEDR8                           \ Port x configuration bits (y = 0..15)
-$000c0000 constant GPIOA_OSPEEDR_OSPEEDR9                           \ Port x configuration bits (y = 0..15)
-$00300000 constant GPIOA_OSPEEDR_OSPEEDR10                          \ Port x configuration bits (y = 0..15)
-$00c00000 constant GPIOA_OSPEEDR_OSPEEDR11                          \ Port x configuration bits (y = 0..15)
-$03000000 constant GPIOA_OSPEEDR_OSPEEDR12                          \ Port x configuration bits (y = 0..15)
-$0c000000 constant GPIOA_OSPEEDR_OSPEEDR13                          \ Port x configuration bits (y = 0..15)
-$30000000 constant GPIOA_OSPEEDR_OSPEEDR14                          \ Port x configuration bits (y = 0..15)
-$c0000000 constant GPIOA_OSPEEDR_OSPEEDR15                          \ Port x configuration bits (y = 0..15)
-
-
-\
-\ @brief GPIO port pull-up/pull-down register
-\ Address offset: 0x0C
-\ Reset value: 0x64000000
-\
-
-$00000003 constant GPIOA_PUPDR_PUPDR0                               \ Port x configuration bits (y = 0..15)
-$0000000c constant GPIOA_PUPDR_PUPDR1                               \ Port x configuration bits (y = 0..15)
-$00000030 constant GPIOA_PUPDR_PUPDR2                               \ Port x configuration bits (y = 0..15)
-$000000c0 constant GPIOA_PUPDR_PUPDR3                               \ Port x configuration bits (y = 0..15)
-$00000300 constant GPIOA_PUPDR_PUPDR4                               \ Port x configuration bits (y = 0..15)
-$00000c00 constant GPIOA_PUPDR_PUPDR5                               \ Port x configuration bits (y = 0..15)
-$00003000 constant GPIOA_PUPDR_PUPDR6                               \ Port x configuration bits (y = 0..15)
-$0000c000 constant GPIOA_PUPDR_PUPDR7                               \ Port x configuration bits (y = 0..15)
-$00030000 constant GPIOA_PUPDR_PUPDR8                               \ Port x configuration bits (y = 0..15)
-$000c0000 constant GPIOA_PUPDR_PUPDR9                               \ Port x configuration bits (y = 0..15)
-$00300000 constant GPIOA_PUPDR_PUPDR10                              \ Port x configuration bits (y = 0..15)
-$00c00000 constant GPIOA_PUPDR_PUPDR11                              \ Port x configuration bits (y = 0..15)
-$03000000 constant GPIOA_PUPDR_PUPDR12                              \ Port x configuration bits (y = 0..15)
-$0c000000 constant GPIOA_PUPDR_PUPDR13                              \ Port x configuration bits (y = 0..15)
-$30000000 constant GPIOA_PUPDR_PUPDR14                              \ Port x configuration bits (y = 0..15)
-$c0000000 constant GPIOA_PUPDR_PUPDR15                              \ Port x configuration bits (y = 0..15)
+  [ifdef] GPIOA_OTYPER_DEF
+    \
+    \ @brief GPIO port output type register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_OT0                      \ [0x00] Port x configuration bits (y = 0..15)
+    $01 constant GPIOA_OT1                      \ [0x01] Port x configuration bits (y = 0..15)
+    $02 constant GPIOA_OT2                      \ [0x02] Port x configuration bits (y = 0..15)
+    $03 constant GPIOA_OT3                      \ [0x03] Port x configuration bits (y = 0..15)
+    $04 constant GPIOA_OT4                      \ [0x04] Port x configuration bits (y = 0..15)
+    $05 constant GPIOA_OT5                      \ [0x05] Port x configuration bits (y = 0..15)
+    $06 constant GPIOA_OT6                      \ [0x06] Port x configuration bits (y = 0..15)
+    $07 constant GPIOA_OT7                      \ [0x07] Port x configuration bits (y = 0..15)
+    $08 constant GPIOA_OT8                      \ [0x08] Port x configuration bits (y = 0..15)
+    $09 constant GPIOA_OT9                      \ [0x09] Port x configuration bits (y = 0..15)
+    $0a constant GPIOA_OT10                     \ [0x0a] Port x configuration bits (y = 0..15)
+    $0b constant GPIOA_OT11                     \ [0x0b] Port x configuration bits (y = 0..15)
+    $0c constant GPIOA_OT12                     \ [0x0c] Port x configuration bits (y = 0..15)
+    $0d constant GPIOA_OT13                     \ [0x0d] Port x configuration bits (y = 0..15)
+    $0e constant GPIOA_OT14                     \ [0x0e] Port x configuration bits (y = 0..15)
+    $0f constant GPIOA_OT15                     \ [0x0f] Port x configuration bits (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO port input data register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_IDR_IDR0                                   \ Port input data (y = 0..15)
-$00000002 constant GPIOA_IDR_IDR1                                   \ Port input data (y = 0..15)
-$00000004 constant GPIOA_IDR_IDR2                                   \ Port input data (y = 0..15)
-$00000008 constant GPIOA_IDR_IDR3                                   \ Port input data (y = 0..15)
-$00000010 constant GPIOA_IDR_IDR4                                   \ Port input data (y = 0..15)
-$00000020 constant GPIOA_IDR_IDR5                                   \ Port input data (y = 0..15)
-$00000040 constant GPIOA_IDR_IDR6                                   \ Port input data (y = 0..15)
-$00000080 constant GPIOA_IDR_IDR7                                   \ Port input data (y = 0..15)
-$00000100 constant GPIOA_IDR_IDR8                                   \ Port input data (y = 0..15)
-$00000200 constant GPIOA_IDR_IDR9                                   \ Port input data (y = 0..15)
-$00000400 constant GPIOA_IDR_IDR10                                  \ Port input data (y = 0..15)
-$00000800 constant GPIOA_IDR_IDR11                                  \ Port input data (y = 0..15)
-$00001000 constant GPIOA_IDR_IDR12                                  \ Port input data (y = 0..15)
-$00002000 constant GPIOA_IDR_IDR13                                  \ Port input data (y = 0..15)
-$00004000 constant GPIOA_IDR_IDR14                                  \ Port input data (y = 0..15)
-$00008000 constant GPIOA_IDR_IDR15                                  \ Port input data (y = 0..15)
-
-
-\
-\ @brief GPIO port output data register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_ODR_ODR0                                   \ Port output data (y = 0..15)
-$00000002 constant GPIOA_ODR_ODR1                                   \ Port output data (y = 0..15)
-$00000004 constant GPIOA_ODR_ODR2                                   \ Port output data (y = 0..15)
-$00000008 constant GPIOA_ODR_ODR3                                   \ Port output data (y = 0..15)
-$00000010 constant GPIOA_ODR_ODR4                                   \ Port output data (y = 0..15)
-$00000020 constant GPIOA_ODR_ODR5                                   \ Port output data (y = 0..15)
-$00000040 constant GPIOA_ODR_ODR6                                   \ Port output data (y = 0..15)
-$00000080 constant GPIOA_ODR_ODR7                                   \ Port output data (y = 0..15)
-$00000100 constant GPIOA_ODR_ODR8                                   \ Port output data (y = 0..15)
-$00000200 constant GPIOA_ODR_ODR9                                   \ Port output data (y = 0..15)
-$00000400 constant GPIOA_ODR_ODR10                                  \ Port output data (y = 0..15)
-$00000800 constant GPIOA_ODR_ODR11                                  \ Port output data (y = 0..15)
-$00001000 constant GPIOA_ODR_ODR12                                  \ Port output data (y = 0..15)
-$00002000 constant GPIOA_ODR_ODR13                                  \ Port output data (y = 0..15)
-$00004000 constant GPIOA_ODR_ODR14                                  \ Port output data (y = 0..15)
-$00008000 constant GPIOA_ODR_ODR15                                  \ Port output data (y = 0..15)
+  [ifdef] GPIOA_OSPEEDR_DEF
+    \
+    \ @brief GPIO port output speed register
+    \ Address offset: 0x08
+    \ Reset value: 0x0C000000
+    \
+    $00 constant GPIOA_OSPEEDR0                 \ [0x00 : 2] Port x configuration bits (y = 0..15)
+    $02 constant GPIOA_OSPEEDR1                 \ [0x02 : 2] Port x configuration bits (y = 0..15)
+    $04 constant GPIOA_OSPEEDR2                 \ [0x04 : 2] Port x configuration bits (y = 0..15)
+    $06 constant GPIOA_OSPEEDR3                 \ [0x06 : 2] Port x configuration bits (y = 0..15)
+    $08 constant GPIOA_OSPEEDR4                 \ [0x08 : 2] Port x configuration bits (y = 0..15)
+    $0a constant GPIOA_OSPEEDR5                 \ [0x0a : 2] Port x configuration bits (y = 0..15)
+    $0c constant GPIOA_OSPEEDR6                 \ [0x0c : 2] Port x configuration bits (y = 0..15)
+    $0e constant GPIOA_OSPEEDR7                 \ [0x0e : 2] Port x configuration bits (y = 0..15)
+    $10 constant GPIOA_OSPEEDR8                 \ [0x10 : 2] Port x configuration bits (y = 0..15)
+    $12 constant GPIOA_OSPEEDR9                 \ [0x12 : 2] Port x configuration bits (y = 0..15)
+    $14 constant GPIOA_OSPEEDR10                \ [0x14 : 2] Port x configuration bits (y = 0..15)
+    $16 constant GPIOA_OSPEEDR11                \ [0x16 : 2] Port x configuration bits (y = 0..15)
+    $18 constant GPIOA_OSPEEDR12                \ [0x18 : 2] Port x configuration bits (y = 0..15)
+    $1a constant GPIOA_OSPEEDR13                \ [0x1a : 2] Port x configuration bits (y = 0..15)
+    $1c constant GPIOA_OSPEEDR14                \ [0x1c : 2] Port x configuration bits (y = 0..15)
+    $1e constant GPIOA_OSPEEDR15                \ [0x1e : 2] Port x configuration bits (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO port bit set/reset register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_BSRR_BS0                                   \ Port x set bit y (y= 0..15)
-$00000002 constant GPIOA_BSRR_BS1                                   \ Port x set bit y (y= 0..15)
-$00000004 constant GPIOA_BSRR_BS2                                   \ Port x set bit y (y= 0..15)
-$00000008 constant GPIOA_BSRR_BS3                                   \ Port x set bit y (y= 0..15)
-$00000010 constant GPIOA_BSRR_BS4                                   \ Port x set bit y (y= 0..15)
-$00000020 constant GPIOA_BSRR_BS5                                   \ Port x set bit y (y= 0..15)
-$00000040 constant GPIOA_BSRR_BS6                                   \ Port x set bit y (y= 0..15)
-$00000080 constant GPIOA_BSRR_BS7                                   \ Port x set bit y (y= 0..15)
-$00000100 constant GPIOA_BSRR_BS8                                   \ Port x set bit y (y= 0..15)
-$00000200 constant GPIOA_BSRR_BS9                                   \ Port x set bit y (y= 0..15)
-$00000400 constant GPIOA_BSRR_BS10                                  \ Port x set bit y (y= 0..15)
-$00000800 constant GPIOA_BSRR_BS11                                  \ Port x set bit y (y= 0..15)
-$00001000 constant GPIOA_BSRR_BS12                                  \ Port x set bit y (y= 0..15)
-$00002000 constant GPIOA_BSRR_BS13                                  \ Port x set bit y (y= 0..15)
-$00004000 constant GPIOA_BSRR_BS14                                  \ Port x set bit y (y= 0..15)
-$00008000 constant GPIOA_BSRR_BS15                                  \ Port x set bit y (y= 0..15)
-$00010000 constant GPIOA_BSRR_BR0                                   \ Port x set bit y (y= 0..15)
-$00020000 constant GPIOA_BSRR_BR1                                   \ Port x reset bit y (y = 0..15)
-$00040000 constant GPIOA_BSRR_BR2                                   \ Port x reset bit y (y = 0..15)
-$00080000 constant GPIOA_BSRR_BR3                                   \ Port x reset bit y (y = 0..15)
-$00100000 constant GPIOA_BSRR_BR4                                   \ Port x reset bit y (y = 0..15)
-$00200000 constant GPIOA_BSRR_BR5                                   \ Port x reset bit y (y = 0..15)
-$00400000 constant GPIOA_BSRR_BR6                                   \ Port x reset bit y (y = 0..15)
-$00800000 constant GPIOA_BSRR_BR7                                   \ Port x reset bit y (y = 0..15)
-$01000000 constant GPIOA_BSRR_BR8                                   \ Port x reset bit y (y = 0..15)
-$02000000 constant GPIOA_BSRR_BR9                                   \ Port x reset bit y (y = 0..15)
-$04000000 constant GPIOA_BSRR_BR10                                  \ Port x reset bit y (y = 0..15)
-$08000000 constant GPIOA_BSRR_BR11                                  \ Port x reset bit y (y = 0..15)
-$10000000 constant GPIOA_BSRR_BR12                                  \ Port x reset bit y (y = 0..15)
-$20000000 constant GPIOA_BSRR_BR13                                  \ Port x reset bit y (y = 0..15)
-$40000000 constant GPIOA_BSRR_BR14                                  \ Port x reset bit y (y = 0..15)
-$80000000 constant GPIOA_BSRR_BR15                                  \ Port x reset bit y (y = 0..15)
+  [ifdef] GPIOA_PUPDR_DEF
+    \
+    \ @brief GPIO port pull-up/pull-down register
+    \ Address offset: 0x0C
+    \ Reset value: 0x64000000
+    \
+    $00 constant GPIOA_PUPDR0                   \ [0x00 : 2] Port x configuration bits (y = 0..15)
+    $02 constant GPIOA_PUPDR1                   \ [0x02 : 2] Port x configuration bits (y = 0..15)
+    $04 constant GPIOA_PUPDR2                   \ [0x04 : 2] Port x configuration bits (y = 0..15)
+    $06 constant GPIOA_PUPDR3                   \ [0x06 : 2] Port x configuration bits (y = 0..15)
+    $08 constant GPIOA_PUPDR4                   \ [0x08 : 2] Port x configuration bits (y = 0..15)
+    $0a constant GPIOA_PUPDR5                   \ [0x0a : 2] Port x configuration bits (y = 0..15)
+    $0c constant GPIOA_PUPDR6                   \ [0x0c : 2] Port x configuration bits (y = 0..15)
+    $0e constant GPIOA_PUPDR7                   \ [0x0e : 2] Port x configuration bits (y = 0..15)
+    $10 constant GPIOA_PUPDR8                   \ [0x10 : 2] Port x configuration bits (y = 0..15)
+    $12 constant GPIOA_PUPDR9                   \ [0x12 : 2] Port x configuration bits (y = 0..15)
+    $14 constant GPIOA_PUPDR10                  \ [0x14 : 2] Port x configuration bits (y = 0..15)
+    $16 constant GPIOA_PUPDR11                  \ [0x16 : 2] Port x configuration bits (y = 0..15)
+    $18 constant GPIOA_PUPDR12                  \ [0x18 : 2] Port x configuration bits (y = 0..15)
+    $1a constant GPIOA_PUPDR13                  \ [0x1a : 2] Port x configuration bits (y = 0..15)
+    $1c constant GPIOA_PUPDR14                  \ [0x1c : 2] Port x configuration bits (y = 0..15)
+    $1e constant GPIOA_PUPDR15                  \ [0x1e : 2] Port x configuration bits (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO port configuration lock register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_LCKR_LCK0                                  \ Port x lock bit y (y= 0..15)
-$00000002 constant GPIOA_LCKR_LCK1                                  \ Port x lock bit y (y= 0..15)
-$00000004 constant GPIOA_LCKR_LCK2                                  \ Port x lock bit y (y= 0..15)
-$00000008 constant GPIOA_LCKR_LCK3                                  \ Port x lock bit y (y= 0..15)
-$00000010 constant GPIOA_LCKR_LCK4                                  \ Port x lock bit y (y= 0..15)
-$00000020 constant GPIOA_LCKR_LCK5                                  \ Port x lock bit y (y= 0..15)
-$00000040 constant GPIOA_LCKR_LCK6                                  \ Port x lock bit y (y= 0..15)
-$00000080 constant GPIOA_LCKR_LCK7                                  \ Port x lock bit y (y= 0..15)
-$00000100 constant GPIOA_LCKR_LCK8                                  \ Port x lock bit y (y= 0..15)
-$00000200 constant GPIOA_LCKR_LCK9                                  \ Port x lock bit y (y= 0..15)
-$00000400 constant GPIOA_LCKR_LCK10                                 \ Port x lock bit y (y= 0..15)
-$00000800 constant GPIOA_LCKR_LCK11                                 \ Port x lock bit y (y= 0..15)
-$00001000 constant GPIOA_LCKR_LCK12                                 \ Port x lock bit y (y= 0..15)
-$00002000 constant GPIOA_LCKR_LCK13                                 \ Port x lock bit y (y= 0..15)
-$00004000 constant GPIOA_LCKR_LCK14                                 \ Port x lock bit y (y= 0..15)
-$00008000 constant GPIOA_LCKR_LCK15                                 \ Port x lock bit y (y= 0..15)
-$00010000 constant GPIOA_LCKR_LCKK                                  \ Port x lock bit y (y= 0..15)
-
-
-\
-\ @brief GPIO alternate function low register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOA_AFRL_AFSEL0                                \ Alternate function selection for port x bit y (y = 0..7)
-$000000f0 constant GPIOA_AFRL_AFSEL1                                \ Alternate function selection for port x bit y (y = 0..7)
-$00000f00 constant GPIOA_AFRL_AFSEL2                                \ Alternate function selection for port x bit y (y = 0..7)
-$0000f000 constant GPIOA_AFRL_AFSEL3                                \ Alternate function selection for port x bit y (y = 0..7)
-$000f0000 constant GPIOA_AFRL_AFSEL4                                \ Alternate function selection for port x bit y (y = 0..7)
-$00f00000 constant GPIOA_AFRL_AFSEL5                                \ Alternate function selection for port x bit y (y = 0..7)
-$0f000000 constant GPIOA_AFRL_AFSEL6                                \ Alternate function selection for port x bit y (y = 0..7)
-$f0000000 constant GPIOA_AFRL_AFSEL7                                \ Alternate function selection for port x bit y (y = 0..7)
+  [ifdef] GPIOA_IDR_DEF
+    \
+    \ @brief GPIO port input data register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_IDR0                     \ [0x00] Port input data (y = 0..15)
+    $01 constant GPIOA_IDR1                     \ [0x01] Port input data (y = 0..15)
+    $02 constant GPIOA_IDR2                     \ [0x02] Port input data (y = 0..15)
+    $03 constant GPIOA_IDR3                     \ [0x03] Port input data (y = 0..15)
+    $04 constant GPIOA_IDR4                     \ [0x04] Port input data (y = 0..15)
+    $05 constant GPIOA_IDR5                     \ [0x05] Port input data (y = 0..15)
+    $06 constant GPIOA_IDR6                     \ [0x06] Port input data (y = 0..15)
+    $07 constant GPIOA_IDR7                     \ [0x07] Port input data (y = 0..15)
+    $08 constant GPIOA_IDR8                     \ [0x08] Port input data (y = 0..15)
+    $09 constant GPIOA_IDR9                     \ [0x09] Port input data (y = 0..15)
+    $0a constant GPIOA_IDR10                    \ [0x0a] Port input data (y = 0..15)
+    $0b constant GPIOA_IDR11                    \ [0x0b] Port input data (y = 0..15)
+    $0c constant GPIOA_IDR12                    \ [0x0c] Port input data (y = 0..15)
+    $0d constant GPIOA_IDR13                    \ [0x0d] Port input data (y = 0..15)
+    $0e constant GPIOA_IDR14                    \ [0x0e] Port input data (y = 0..15)
+    $0f constant GPIOA_IDR15                    \ [0x0f] Port input data (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO alternate function high register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOA_AFRH_AFSEL8                                \ Alternate function selection for port x bit y (y = 8..15)
-$000000f0 constant GPIOA_AFRH_AFSEL9                                \ Alternate function selection for port x bit y (y = 8..15)
-$00000f00 constant GPIOA_AFRH_AFSEL10                               \ Alternate function selection for port x bit y (y = 8..15)
-$0000f000 constant GPIOA_AFRH_AFSEL11                               \ Alternate function selection for port x bit y (y = 8..15)
-$000f0000 constant GPIOA_AFRH_AFSEL12                               \ Alternate function selection for port x bit y (y = 8..15)
-$00f00000 constant GPIOA_AFRH_AFSEL13                               \ Alternate function selection for port x bit y (y = 8..15)
-$0f000000 constant GPIOA_AFRH_AFSEL14                               \ Alternate function selection for port x bit y (y = 8..15)
-$f0000000 constant GPIOA_AFRH_AFSEL15                               \ Alternate function selection for port x bit y (y = 8..15)
-
-
-\
-\ @brief GPIO port bit reset register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_BRR_BR0                                    \ Port x reset IO pin y
-$00000002 constant GPIOA_BRR_BR1                                    \ Port x reset IO pin y
-$00000004 constant GPIOA_BRR_BR2                                    \ Port x reset IO pin y
-$00000008 constant GPIOA_BRR_BR3                                    \ Port x reset IO pin y
-$00000010 constant GPIOA_BRR_BR4                                    \ Port x reset IO pin y
-$00000020 constant GPIOA_BRR_BR5                                    \ Port x reset IO pin y
-$00000040 constant GPIOA_BRR_BR6                                    \ Port x reset IO pin y
-$00000080 constant GPIOA_BRR_BR7                                    \ Port x reset IO pin y
-$00000100 constant GPIOA_BRR_BR8                                    \ Port x reset IO pin y
-$00000200 constant GPIOA_BRR_BR9                                    \ Port x reset IO pin y
-$00000400 constant GPIOA_BRR_BR10                                   \ Port x reset IO pin y
-$00000800 constant GPIOA_BRR_BR11                                   \ Port x reset IO pin y
-$00001000 constant GPIOA_BRR_BR12                                   \ Port x reset IO pin y
-$00002000 constant GPIOA_BRR_BR13                                   \ Port x reset IO pin y
-$00004000 constant GPIOA_BRR_BR14                                   \ Port x reset IO pin y
-$00008000 constant GPIOA_BRR_BR15                                   \ Port x reset IO pin y
+  [ifdef] GPIOA_ODR_DEF
+    \
+    \ @brief GPIO port output data register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_ODR0                     \ [0x00] Port output data (y = 0..15)
+    $01 constant GPIOA_ODR1                     \ [0x01] Port output data (y = 0..15)
+    $02 constant GPIOA_ODR2                     \ [0x02] Port output data (y = 0..15)
+    $03 constant GPIOA_ODR3                     \ [0x03] Port output data (y = 0..15)
+    $04 constant GPIOA_ODR4                     \ [0x04] Port output data (y = 0..15)
+    $05 constant GPIOA_ODR5                     \ [0x05] Port output data (y = 0..15)
+    $06 constant GPIOA_ODR6                     \ [0x06] Port output data (y = 0..15)
+    $07 constant GPIOA_ODR7                     \ [0x07] Port output data (y = 0..15)
+    $08 constant GPIOA_ODR8                     \ [0x08] Port output data (y = 0..15)
+    $09 constant GPIOA_ODR9                     \ [0x09] Port output data (y = 0..15)
+    $0a constant GPIOA_ODR10                    \ [0x0a] Port output data (y = 0..15)
+    $0b constant GPIOA_ODR11                    \ [0x0b] Port output data (y = 0..15)
+    $0c constant GPIOA_ODR12                    \ [0x0c] Port output data (y = 0..15)
+    $0d constant GPIOA_ODR13                    \ [0x0d] Port output data (y = 0..15)
+    $0e constant GPIOA_ODR14                    \ [0x0e] Port output data (y = 0..15)
+    $0f constant GPIOA_ODR15                    \ [0x0f] Port output data (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO secure configuration register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
+  [ifdef] GPIOA_BSRR_DEF
+    \
+    \ @brief GPIO port bit set/reset register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_BS0                      \ [0x00] Port x set bit y (y= 0..15)
+    $01 constant GPIOA_BS1                      \ [0x01] Port x set bit y (y= 0..15)
+    $02 constant GPIOA_BS2                      \ [0x02] Port x set bit y (y= 0..15)
+    $03 constant GPIOA_BS3                      \ [0x03] Port x set bit y (y= 0..15)
+    $04 constant GPIOA_BS4                      \ [0x04] Port x set bit y (y= 0..15)
+    $05 constant GPIOA_BS5                      \ [0x05] Port x set bit y (y= 0..15)
+    $06 constant GPIOA_BS6                      \ [0x06] Port x set bit y (y= 0..15)
+    $07 constant GPIOA_BS7                      \ [0x07] Port x set bit y (y= 0..15)
+    $08 constant GPIOA_BS8                      \ [0x08] Port x set bit y (y= 0..15)
+    $09 constant GPIOA_BS9                      \ [0x09] Port x set bit y (y= 0..15)
+    $0a constant GPIOA_BS10                     \ [0x0a] Port x set bit y (y= 0..15)
+    $0b constant GPIOA_BS11                     \ [0x0b] Port x set bit y (y= 0..15)
+    $0c constant GPIOA_BS12                     \ [0x0c] Port x set bit y (y= 0..15)
+    $0d constant GPIOA_BS13                     \ [0x0d] Port x set bit y (y= 0..15)
+    $0e constant GPIOA_BS14                     \ [0x0e] Port x set bit y (y= 0..15)
+    $0f constant GPIOA_BS15                     \ [0x0f] Port x set bit y (y= 0..15)
+    $10 constant GPIOA_BR0                      \ [0x10] Port x set bit y (y= 0..15)
+    $11 constant GPIOA_BR1                      \ [0x11] Port x reset bit y (y = 0..15)
+    $12 constant GPIOA_BR2                      \ [0x12] Port x reset bit y (y = 0..15)
+    $13 constant GPIOA_BR3                      \ [0x13] Port x reset bit y (y = 0..15)
+    $14 constant GPIOA_BR4                      \ [0x14] Port x reset bit y (y = 0..15)
+    $15 constant GPIOA_BR5                      \ [0x15] Port x reset bit y (y = 0..15)
+    $16 constant GPIOA_BR6                      \ [0x16] Port x reset bit y (y = 0..15)
+    $17 constant GPIOA_BR7                      \ [0x17] Port x reset bit y (y = 0..15)
+    $18 constant GPIOA_BR8                      \ [0x18] Port x reset bit y (y = 0..15)
+    $19 constant GPIOA_BR9                      \ [0x19] Port x reset bit y (y = 0..15)
+    $1a constant GPIOA_BR10                     \ [0x1a] Port x reset bit y (y = 0..15)
+    $1b constant GPIOA_BR11                     \ [0x1b] Port x reset bit y (y = 0..15)
+    $1c constant GPIOA_BR12                     \ [0x1c] Port x reset bit y (y = 0..15)
+    $1d constant GPIOA_BR13                     \ [0x1d] Port x reset bit y (y = 0..15)
+    $1e constant GPIOA_BR14                     \ [0x1e] Port x reset bit y (y = 0..15)
+    $1f constant GPIOA_BR15                     \ [0x1f] Port x reset bit y (y = 0..15)
+  [then]
 
-$00000001 constant GPIOA_SECCFGR_SEC0                               \ I/O pin of Port x secure bit enable
-$00000002 constant GPIOA_SECCFGR_SEC1                               \ I/O pin of Port x secure bit enable
-$00000004 constant GPIOA_SECCFGR_SEC2                               \ I/O pin of Port x secure bit enable
-$00000008 constant GPIOA_SECCFGR_SEC3                               \ I/O pin of Port x secure bit enable
-$00000010 constant GPIOA_SECCFGR_SEC4                               \ I/O pin of Port x secure bit enable
-$00000020 constant GPIOA_SECCFGR_SEC5                               \ I/O pin of Port x secure bit enable
-$00000040 constant GPIOA_SECCFGR_SEC6                               \ I/O pin of Port x secure bit enable
-$00000080 constant GPIOA_SECCFGR_SEC7                               \ I/O pin of Port x secure bit enable
-$00000100 constant GPIOA_SECCFGR_SEC8                               \ I/O pin of Port x secure bit enable
-$00000200 constant GPIOA_SECCFGR_SEC9                               \ I/O pin of Port x secure bit enable
-$00000400 constant GPIOA_SECCFGR_SEC10                              \ I/O pin of Port x secure bit enable
-$00000800 constant GPIOA_SECCFGR_SEC11                              \ I/O pin of Port x secure bit enable
-$00001000 constant GPIOA_SECCFGR_SEC12                              \ I/O pin of Port x secure bit enable
-$00002000 constant GPIOA_SECCFGR_SEC13                              \ I/O pin of Port x secure bit enable
-$00004000 constant GPIOA_SECCFGR_SEC14                              \ I/O pin of Port x secure bit enable
-$00008000 constant GPIOA_SECCFGR_SEC15                              \ I/O pin of Port x secure bit enable
+
+  [ifdef] GPIOA_LCKR_DEF
+    \
+    \ @brief GPIO port configuration lock register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_LCK0                     \ [0x00] Port x lock bit y (y= 0..15)
+    $01 constant GPIOA_LCK1                     \ [0x01] Port x lock bit y (y= 0..15)
+    $02 constant GPIOA_LCK2                     \ [0x02] Port x lock bit y (y= 0..15)
+    $03 constant GPIOA_LCK3                     \ [0x03] Port x lock bit y (y= 0..15)
+    $04 constant GPIOA_LCK4                     \ [0x04] Port x lock bit y (y= 0..15)
+    $05 constant GPIOA_LCK5                     \ [0x05] Port x lock bit y (y= 0..15)
+    $06 constant GPIOA_LCK6                     \ [0x06] Port x lock bit y (y= 0..15)
+    $07 constant GPIOA_LCK7                     \ [0x07] Port x lock bit y (y= 0..15)
+    $08 constant GPIOA_LCK8                     \ [0x08] Port x lock bit y (y= 0..15)
+    $09 constant GPIOA_LCK9                     \ [0x09] Port x lock bit y (y= 0..15)
+    $0a constant GPIOA_LCK10                    \ [0x0a] Port x lock bit y (y= 0..15)
+    $0b constant GPIOA_LCK11                    \ [0x0b] Port x lock bit y (y= 0..15)
+    $0c constant GPIOA_LCK12                    \ [0x0c] Port x lock bit y (y= 0..15)
+    $0d constant GPIOA_LCK13                    \ [0x0d] Port x lock bit y (y= 0..15)
+    $0e constant GPIOA_LCK14                    \ [0x0e] Port x lock bit y (y= 0..15)
+    $0f constant GPIOA_LCK15                    \ [0x0f] Port x lock bit y (y= 0..15)
+    $10 constant GPIOA_LCKK                     \ [0x10] Port x lock bit y (y= 0..15)
+  [then]
 
 
-\
-\ @brief General-purpose I/Os
-\
-$42020000 constant GPIOA_MODER    \ offset: 0x00 : GPIO port mode register
-$42020004 constant GPIOA_OTYPER   \ offset: 0x04 : GPIO port output type register
-$42020008 constant GPIOA_OSPEEDR  \ offset: 0x08 : GPIO port output speed register
-$4202000c constant GPIOA_PUPDR    \ offset: 0x0C : GPIO port pull-up/pull-down register
-$42020010 constant GPIOA_IDR      \ offset: 0x10 : GPIO port input data register
-$42020014 constant GPIOA_ODR      \ offset: 0x14 : GPIO port output data register
-$42020018 constant GPIOA_BSRR     \ offset: 0x18 : GPIO port bit set/reset register
-$4202001c constant GPIOA_LCKR     \ offset: 0x1C : GPIO port configuration lock register
-$42020020 constant GPIOA_AFRL     \ offset: 0x20 : GPIO alternate function low register
-$42020024 constant GPIOA_AFRH     \ offset: 0x24 : GPIO alternate function high register
-$42020028 constant GPIOA_BRR      \ offset: 0x28 : GPIO port bit reset register
-$42020030 constant GPIOA_SECCFGR  \ offset: 0x30 : GPIO secure configuration register
+  [ifdef] GPIOA_AFRL_DEF
+    \
+    \ @brief GPIO alternate function low register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_AFSEL0                   \ [0x00 : 4] Alternate function selection for port x bit y (y = 0..7)
+    $04 constant GPIOA_AFSEL1                   \ [0x04 : 4] Alternate function selection for port x bit y (y = 0..7)
+    $08 constant GPIOA_AFSEL2                   \ [0x08 : 4] Alternate function selection for port x bit y (y = 0..7)
+    $0c constant GPIOA_AFSEL3                   \ [0x0c : 4] Alternate function selection for port x bit y (y = 0..7)
+    $10 constant GPIOA_AFSEL4                   \ [0x10 : 4] Alternate function selection for port x bit y (y = 0..7)
+    $14 constant GPIOA_AFSEL5                   \ [0x14 : 4] Alternate function selection for port x bit y (y = 0..7)
+    $18 constant GPIOA_AFSEL6                   \ [0x18 : 4] Alternate function selection for port x bit y (y = 0..7)
+    $1c constant GPIOA_AFSEL7                   \ [0x1c : 4] Alternate function selection for port x bit y (y = 0..7)
+  [then]
 
+
+  [ifdef] GPIOA_AFRH_DEF
+    \
+    \ @brief GPIO alternate function high register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_AFSEL8                   \ [0x00 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $04 constant GPIOA_AFSEL9                   \ [0x04 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $08 constant GPIOA_AFSEL10                  \ [0x08 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $0c constant GPIOA_AFSEL11                  \ [0x0c : 4] Alternate function selection for port x bit y (y = 8..15)
+    $10 constant GPIOA_AFSEL12                  \ [0x10 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $14 constant GPIOA_AFSEL13                  \ [0x14 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $18 constant GPIOA_AFSEL14                  \ [0x18 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $1c constant GPIOA_AFSEL15                  \ [0x1c : 4] Alternate function selection for port x bit y (y = 8..15)
+  [then]
+
+
+  [ifdef] GPIOA_BRR_DEF
+    \
+    \ @brief GPIO port bit reset register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_BR0                      \ [0x00] Port x reset IO pin y
+    $01 constant GPIOA_BR1                      \ [0x01] Port x reset IO pin y
+    $02 constant GPIOA_BR2                      \ [0x02] Port x reset IO pin y
+    $03 constant GPIOA_BR3                      \ [0x03] Port x reset IO pin y
+    $04 constant GPIOA_BR4                      \ [0x04] Port x reset IO pin y
+    $05 constant GPIOA_BR5                      \ [0x05] Port x reset IO pin y
+    $06 constant GPIOA_BR6                      \ [0x06] Port x reset IO pin y
+    $07 constant GPIOA_BR7                      \ [0x07] Port x reset IO pin y
+    $08 constant GPIOA_BR8                      \ [0x08] Port x reset IO pin y
+    $09 constant GPIOA_BR9                      \ [0x09] Port x reset IO pin y
+    $0a constant GPIOA_BR10                     \ [0x0a] Port x reset IO pin y
+    $0b constant GPIOA_BR11                     \ [0x0b] Port x reset IO pin y
+    $0c constant GPIOA_BR12                     \ [0x0c] Port x reset IO pin y
+    $0d constant GPIOA_BR13                     \ [0x0d] Port x reset IO pin y
+    $0e constant GPIOA_BR14                     \ [0x0e] Port x reset IO pin y
+    $0f constant GPIOA_BR15                     \ [0x0f] Port x reset IO pin y
+  [then]
+
+
+  [ifdef] GPIOA_SECCFGR_DEF
+    \
+    \ @brief GPIO secure configuration register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_SEC0                     \ [0x00] I/O pin of Port x secure bit enable
+    $01 constant GPIOA_SEC1                     \ [0x01] I/O pin of Port x secure bit enable
+    $02 constant GPIOA_SEC2                     \ [0x02] I/O pin of Port x secure bit enable
+    $03 constant GPIOA_SEC3                     \ [0x03] I/O pin of Port x secure bit enable
+    $04 constant GPIOA_SEC4                     \ [0x04] I/O pin of Port x secure bit enable
+    $05 constant GPIOA_SEC5                     \ [0x05] I/O pin of Port x secure bit enable
+    $06 constant GPIOA_SEC6                     \ [0x06] I/O pin of Port x secure bit enable
+    $07 constant GPIOA_SEC7                     \ [0x07] I/O pin of Port x secure bit enable
+    $08 constant GPIOA_SEC8                     \ [0x08] I/O pin of Port x secure bit enable
+    $09 constant GPIOA_SEC9                     \ [0x09] I/O pin of Port x secure bit enable
+    $0a constant GPIOA_SEC10                    \ [0x0a] I/O pin of Port x secure bit enable
+    $0b constant GPIOA_SEC11                    \ [0x0b] I/O pin of Port x secure bit enable
+    $0c constant GPIOA_SEC12                    \ [0x0c] I/O pin of Port x secure bit enable
+    $0d constant GPIOA_SEC13                    \ [0x0d] I/O pin of Port x secure bit enable
+    $0e constant GPIOA_SEC14                    \ [0x0e] I/O pin of Port x secure bit enable
+    $0f constant GPIOA_SEC15                    \ [0x0f] I/O pin of Port x secure bit enable
+  [then]
+
+  \
+  \ @brief General-purpose I/Os
+  \
+  $00 constant GPIOA_MODER              \ GPIO port mode register
+  $04 constant GPIOA_OTYPER             \ GPIO port output type register
+  $08 constant GPIOA_OSPEEDR            \ GPIO port output speed register
+  $0C constant GPIOA_PUPDR              \ GPIO port pull-up/pull-down register
+  $10 constant GPIOA_IDR                \ GPIO port input data register
+  $14 constant GPIOA_ODR                \ GPIO port output data register
+  $18 constant GPIOA_BSRR               \ GPIO port bit set/reset register
+  $1C constant GPIOA_LCKR               \ GPIO port configuration lock register
+  $20 constant GPIOA_AFRL               \ GPIO alternate function low register
+  $24 constant GPIOA_AFRH               \ GPIO alternate function high register
+  $28 constant GPIOA_BRR                \ GPIO port bit reset register
+  $30 constant GPIOA_SECCFGR            \ GPIO secure configuration register
+
+: GPIOA_DEF ; [then]

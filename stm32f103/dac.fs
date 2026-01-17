@@ -6,156 +6,169 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DAC_DEF
 
-\
-\ @brief Control register (DAC_CR)
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DAC_CR_EN1                                       \ DAC channel1 enable
-$00000002 constant DAC_CR_BOFF1                                     \ DAC channel1 output buffer disable
-$00000004 constant DAC_CR_TEN1                                      \ DAC channel1 trigger enable
-$00000038 constant DAC_CR_TSEL1                                     \ DAC channel1 trigger selection
-$000000c0 constant DAC_CR_WAVE1                                     \ DAC channel1 noise/triangle wave generation enable
-$00000f00 constant DAC_CR_MAMP1                                     \ DAC channel1 mask/amplitude selector
-$00001000 constant DAC_CR_DMAEN1                                    \ DAC channel1 DMA enable
-$00010000 constant DAC_CR_EN2                                       \ DAC channel2 enable
-$00020000 constant DAC_CR_BOFF2                                     \ DAC channel2 output buffer disable
-$00040000 constant DAC_CR_TEN2                                      \ DAC channel2 trigger enable
-$00380000 constant DAC_CR_TSEL2                                     \ DAC channel2 trigger selection
-$00c00000 constant DAC_CR_WAVE2                                     \ DAC channel2 noise/triangle wave generation enable
-$0f000000 constant DAC_CR_MAMP2                                     \ DAC channel2 mask/amplitude selector
-$10000000 constant DAC_CR_DMAEN2                                    \ DAC channel2 DMA enable
-
-
-\
-\ @brief DAC software trigger register (DAC_SWTRIGR)
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DAC_SWTRIGR_SWTRIG1                              \ DAC channel1 software trigger
-$00000002 constant DAC_SWTRIGR_SWTRIG2                              \ DAC channel2 software trigger
+  [ifdef] DAC_CR_DEF
+    \
+    \ @brief Control register (DAC_CR)
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_EN1                        \ [0x00] DAC channel1 enable
+    $01 constant DAC_BOFF1                      \ [0x01] DAC channel1 output buffer disable
+    $02 constant DAC_TEN1                       \ [0x02] DAC channel1 trigger enable
+    $03 constant DAC_TSEL1                      \ [0x03 : 3] DAC channel1 trigger selection
+    $06 constant DAC_WAVE1                      \ [0x06 : 2] DAC channel1 noise/triangle wave generation enable
+    $08 constant DAC_MAMP1                      \ [0x08 : 4] DAC channel1 mask/amplitude selector
+    $0c constant DAC_DMAEN1                     \ [0x0c] DAC channel1 DMA enable
+    $10 constant DAC_EN2                        \ [0x10] DAC channel2 enable
+    $11 constant DAC_BOFF2                      \ [0x11] DAC channel2 output buffer disable
+    $12 constant DAC_TEN2                       \ [0x12] DAC channel2 trigger enable
+    $13 constant DAC_TSEL2                      \ [0x13 : 3] DAC channel2 trigger selection
+    $16 constant DAC_WAVE2                      \ [0x16 : 2] DAC channel2 noise/triangle wave generation enable
+    $18 constant DAC_MAMP2                      \ [0x18 : 4] DAC channel2 mask/amplitude selector
+    $1c constant DAC_DMAEN2                     \ [0x1c] DAC channel2 DMA enable
+  [then]
 
 
-\
-\ @brief DAC channel1 12-bit right-aligned data holding register(DAC_DHR12R1)
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DAC_DHR12R1_DACC1DHR                             \ DAC channel1 12-bit right-aligned data
-
-
-\
-\ @brief DAC channel1 12-bit left aligned data holding register (DAC_DHR12L1)
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000fff0 constant DAC_DHR12L1_DACC1DHR                             \ DAC channel1 12-bit left-aligned data
+  [ifdef] DAC_SWTRIGR_DEF
+    \
+    \ @brief DAC software trigger register (DAC_SWTRIGR)
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_SWTRIG1                    \ [0x00] DAC channel1 software trigger
+    $01 constant DAC_SWTRIG2                    \ [0x01] DAC channel2 software trigger
+  [then]
 
 
-\
-\ @brief DAC channel1 8-bit right aligned data holding register (DAC_DHR8R1)
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DAC_DHR8R1_DACC1DHR                              \ DAC channel1 8-bit right-aligned data
-
-
-\
-\ @brief DAC channel2 12-bit right aligned data holding register (DAC_DHR12R2)
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DAC_DHR12R2_DACC2DHR                             \ DAC channel2 12-bit right-aligned data
+  [ifdef] DAC_DHR12R1_DEF
+    \
+    \ @brief DAC channel1 12-bit right-aligned data holding register(DAC_DHR12R1)
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_DACC1DHR                   \ [0x00 : 12] DAC channel1 12-bit right-aligned data
+  [then]
 
 
-\
-\ @brief DAC channel2 12-bit left aligned data holding register (DAC_DHR12L2)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000fff0 constant DAC_DHR12L2_DACC2DHR                             \ DAC channel2 12-bit left-aligned data
-
-
-\
-\ @brief DAC channel2 8-bit right-aligned data holding register (DAC_DHR8R2)
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DAC_DHR8R2_DACC2DHR                              \ DAC channel2 8-bit right-aligned data
+  [ifdef] DAC_DHR12L1_DEF
+    \
+    \ @brief DAC channel1 12-bit left aligned data holding register (DAC_DHR12L1)
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $04 constant DAC_DACC1DHR                   \ [0x04 : 12] DAC channel1 12-bit left-aligned data
+  [then]
 
 
-\
-\ @brief Dual DAC 12-bit right-aligned data holding register (DAC_DHR12RD), Bits 31:28 Reserved, Bits 15:12 Reserved
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DAC_DHR12RD_DACC1DHR                             \ DAC channel1 12-bit right-aligned data
-$0fff0000 constant DAC_DHR12RD_DACC2DHR                             \ DAC channel2 12-bit right-aligned data
-
-
-\
-\ @brief DUAL DAC 12-bit left aligned data holding register (DAC_DHR12LD), Bits 19:16 Reserved, Bits 3:0 Reserved
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000fff0 constant DAC_DHR12LD_DACC1DHR                             \ DAC channel1 12-bit left-aligned data
-$fff00000 constant DAC_DHR12LD_DACC2DHR                             \ DAC channel2 12-bit right-aligned data
+  [ifdef] DAC_DHR8R1_DEF
+    \
+    \ @brief DAC channel1 8-bit right aligned data holding register (DAC_DHR8R1)
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_DACC1DHR                   \ [0x00 : 8] DAC channel1 8-bit right-aligned data
+  [then]
 
 
-\
-\ @brief DUAL DAC 8-bit right aligned data holding register (DAC_DHR8RD), Bits 31:16 Reserved
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DAC_DHR8RD_DACC1DHR                              \ DAC channel1 8-bit right-aligned data
-$0000ff00 constant DAC_DHR8RD_DACC2DHR                              \ DAC channel2 8-bit right-aligned data
-
-
-\
-\ @brief DAC channel1 data output register (DAC_DOR1)
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DAC_DOR1_DACC1DOR                                \ DAC channel1 data output
+  [ifdef] DAC_DHR12R2_DEF
+    \
+    \ @brief DAC channel2 12-bit right aligned data holding register (DAC_DHR12R2)
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_DACC2DHR                   \ [0x00 : 12] DAC channel2 12-bit right-aligned data
+  [then]
 
 
-\
-\ @brief DAC channel2 data output register (DAC_DOR2)
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
+  [ifdef] DAC_DHR12L2_DEF
+    \
+    \ @brief DAC channel2 12-bit left aligned data holding register (DAC_DHR12L2)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $04 constant DAC_DACC2DHR                   \ [0x04 : 12] DAC channel2 12-bit left-aligned data
+  [then]
 
-$00000fff constant DAC_DOR2_DACC2DOR                                \ DAC channel2 data output
+
+  [ifdef] DAC_DHR8R2_DEF
+    \
+    \ @brief DAC channel2 8-bit right-aligned data holding register (DAC_DHR8R2)
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_DACC2DHR                   \ [0x00 : 8] DAC channel2 8-bit right-aligned data
+  [then]
 
 
-\
-\ @brief Digital to analog converter
-\
-$40007400 constant DAC_CR         \ offset: 0x00 : Control register (DAC_CR)
-$40007404 constant DAC_SWTRIGR    \ offset: 0x04 : DAC software trigger register (DAC_SWTRIGR)
-$40007408 constant DAC_DHR12R1    \ offset: 0x08 : DAC channel1 12-bit right-aligned data holding register(DAC_DHR12R1)
-$4000740c constant DAC_DHR12L1    \ offset: 0x0C : DAC channel1 12-bit left aligned data holding register (DAC_DHR12L1)
-$40007410 constant DAC_DHR8R1     \ offset: 0x10 : DAC channel1 8-bit right aligned data holding register (DAC_DHR8R1)
-$40007414 constant DAC_DHR12R2    \ offset: 0x14 : DAC channel2 12-bit right aligned data holding register (DAC_DHR12R2)
-$40007418 constant DAC_DHR12L2    \ offset: 0x18 : DAC channel2 12-bit left aligned data holding register (DAC_DHR12L2)
-$4000741c constant DAC_DHR8R2     \ offset: 0x1C : DAC channel2 8-bit right-aligned data holding register (DAC_DHR8R2)
-$40007420 constant DAC_DHR12RD    \ offset: 0x20 : Dual DAC 12-bit right-aligned data holding register (DAC_DHR12RD), Bits 31:28 Reserved, Bits 15:12 Reserved
-$40007424 constant DAC_DHR12LD    \ offset: 0x24 : DUAL DAC 12-bit left aligned data holding register (DAC_DHR12LD), Bits 19:16 Reserved, Bits 3:0 Reserved
-$40007428 constant DAC_DHR8RD     \ offset: 0x28 : DUAL DAC 8-bit right aligned data holding register (DAC_DHR8RD), Bits 31:16 Reserved
-$4000742c constant DAC_DOR1       \ offset: 0x2C : DAC channel1 data output register (DAC_DOR1)
-$40007430 constant DAC_DOR2       \ offset: 0x30 : DAC channel2 data output register (DAC_DOR2)
+  [ifdef] DAC_DHR12RD_DEF
+    \
+    \ @brief Dual DAC 12-bit right-aligned data holding register (DAC_DHR12RD), Bits 31:28 Reserved, Bits 15:12 Reserved
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_DACC1DHR                   \ [0x00 : 12] DAC channel1 12-bit right-aligned data
+    $10 constant DAC_DACC2DHR                   \ [0x10 : 12] DAC channel2 12-bit right-aligned data
+  [then]
 
+
+  [ifdef] DAC_DHR12LD_DEF
+    \
+    \ @brief DUAL DAC 12-bit left aligned data holding register (DAC_DHR12LD), Bits 19:16 Reserved, Bits 3:0 Reserved
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $04 constant DAC_DACC1DHR                   \ [0x04 : 12] DAC channel1 12-bit left-aligned data
+    $14 constant DAC_DACC2DHR                   \ [0x14 : 12] DAC channel2 12-bit right-aligned data
+  [then]
+
+
+  [ifdef] DAC_DHR8RD_DEF
+    \
+    \ @brief DUAL DAC 8-bit right aligned data holding register (DAC_DHR8RD), Bits 31:16 Reserved
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_DACC1DHR                   \ [0x00 : 8] DAC channel1 8-bit right-aligned data
+    $08 constant DAC_DACC2DHR                   \ [0x08 : 8] DAC channel2 8-bit right-aligned data
+  [then]
+
+
+  [ifdef] DAC_DOR1_DEF
+    \
+    \ @brief DAC channel1 data output register (DAC_DOR1)
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_DACC1DOR                   \ [0x00 : 12] DAC channel1 data output
+  [then]
+
+
+  [ifdef] DAC_DOR2_DEF
+    \
+    \ @brief DAC channel2 data output register (DAC_DOR2)
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant DAC_DACC2DOR                   \ [0x00 : 12] DAC channel2 data output
+  [then]
+
+  \
+  \ @brief Digital to analog converter
+  \
+  $00 constant DAC_CR                   \ Control register (DAC_CR)
+  $04 constant DAC_SWTRIGR              \ DAC software trigger register (DAC_SWTRIGR)
+  $08 constant DAC_DHR12R1              \ DAC channel1 12-bit right-aligned data holding register(DAC_DHR12R1)
+  $0C constant DAC_DHR12L1              \ DAC channel1 12-bit left aligned data holding register (DAC_DHR12L1)
+  $10 constant DAC_DHR8R1               \ DAC channel1 8-bit right aligned data holding register (DAC_DHR8R1)
+  $14 constant DAC_DHR12R2              \ DAC channel2 12-bit right aligned data holding register (DAC_DHR12R2)
+  $18 constant DAC_DHR12L2              \ DAC channel2 12-bit left aligned data holding register (DAC_DHR12L2)
+  $1C constant DAC_DHR8R2               \ DAC channel2 8-bit right-aligned data holding register (DAC_DHR8R2)
+  $20 constant DAC_DHR12RD              \ Dual DAC 12-bit right-aligned data holding register (DAC_DHR12RD), Bits 31:28 Reserved, Bits 15:12 Reserved
+  $24 constant DAC_DHR12LD              \ DUAL DAC 12-bit left aligned data holding register (DAC_DHR12LD), Bits 19:16 Reserved, Bits 3:0 Reserved
+  $28 constant DAC_DHR8RD               \ DUAL DAC 8-bit right aligned data holding register (DAC_DHR8RD), Bits 31:16 Reserved
+  $2C constant DAC_DOR1                 \ DAC channel1 data output register (DAC_DOR1)
+  $30 constant DAC_DOR2                 \ DAC channel2 data output register (DAC_DOR2)
+
+: DAC_DEF ; [then]

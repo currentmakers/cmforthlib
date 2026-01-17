@@ -6,139 +6,149 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ICACHE_DEF
 
-\
-\ @brief ICACHE control register
-\ Address offset: 0x00
-\ Reset value: 0x00000004
-\
-
-$00000001 constant ICACHE_ICACHE_CR_EN                              \ EN
-$00000002 constant ICACHE_ICACHE_CR_CACHEINV                        \ CACHEINV
-$00000004 constant ICACHE_ICACHE_CR_WAYSEL                          \ WAYSEL
-$00010000 constant ICACHE_ICACHE_CR_HITMEN                          \ HITMEN
-$00020000 constant ICACHE_ICACHE_CR_MISSMEN                         \ MISSMEN
-$00040000 constant ICACHE_ICACHE_CR_HITMRST                         \ HITMRST
-$00080000 constant ICACHE_ICACHE_CR_MISSMRST                        \ MISSMRST
-
-
-\
-\ @brief ICACHE status register
-\ Address offset: 0x04
-\ Reset value: 0x00000001
-\
-
-$00000001 constant ICACHE_ICACHE_SR_BUSYF                           \ BUSYF
-$00000002 constant ICACHE_ICACHE_SR_BSYENDF                         \ BSYENDF
-$00000004 constant ICACHE_ICACHE_SR_ERRF                            \ ERRF
+  [ifdef] ICACHE_ICACHE_CR_DEF
+    \
+    \ @brief ICACHE control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000004
+    \
+    $00 constant ICACHE_EN                      \ [0x00] EN
+    $01 constant ICACHE_CACHEINV                \ [0x01] CACHEINV
+    $02 constant ICACHE_WAYSEL                  \ [0x02] WAYSEL
+    $10 constant ICACHE_HITMEN                  \ [0x10] HITMEN
+    $11 constant ICACHE_MISSMEN                 \ [0x11] MISSMEN
+    $12 constant ICACHE_HITMRST                 \ [0x12] HITMRST
+    $13 constant ICACHE_MISSMRST                \ [0x13] MISSMRST
+  [then]
 
 
-\
-\ @brief ICACHE interrupt enable register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000002 constant ICACHE_ICACHE_IER_BSYENDIE                       \ BSYENDIE
-$00000004 constant ICACHE_ICACHE_IER_ERRIE                          \ ERRIE
-
-
-\
-\ @brief ICACHE flag clear register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant ICACHE_ICACHE_FCR_CBSYENDF                       \ CBSYENDF
-$00000004 constant ICACHE_ICACHE_FCR_CERRF                          \ CERRF
+  [ifdef] ICACHE_ICACHE_SR_DEF
+    \
+    \ @brief ICACHE status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000001
+    \
+    $00 constant ICACHE_BUSYF                   \ [0x00] BUSYF
+    $01 constant ICACHE_BSYENDF                 \ [0x01] BSYENDF
+    $02 constant ICACHE_ERRF                    \ [0x02] ERRF
+  [then]
 
 
-\
-\ @brief ICACHE hit monitor register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ICACHE_ICACHE_HMONR_HITMON                       \ HITMON
-
-
-\
-\ @brief ICACHE miss monitor register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ICACHE_ICACHE_MMONR_MISSMON                      \ MISSMON
+  [ifdef] ICACHE_ICACHE_IER_DEF
+    \
+    \ @brief ICACHE interrupt enable register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $01 constant ICACHE_BSYENDIE                \ [0x01] BSYENDIE
+    $02 constant ICACHE_ERRIE                   \ [0x02] ERRIE
+  [then]
 
 
-\
-\ @brief ICACHE region configuration register
-\ Address offset: 0x20
-\ Reset value: 0x00000200
-\
-
-$000000ff constant ICACHE_ICACHE_CRR0_BASEADDR                      \ BASEADDR
-$00000e00 constant ICACHE_ICACHE_CRR0_RSIZE                         \ RSIZE
-$00008000 constant ICACHE_ICACHE_CRR0_REN                           \ REN
-$07ff0000 constant ICACHE_ICACHE_CRR0_REMAPADDR                     \ REMAPADDR
-$10000000 constant ICACHE_ICACHE_CRR0_MSTSEL                        \ MSTSEL
-$80000000 constant ICACHE_ICACHE_CRR0_HBURST                        \ HBURST
+  [ifdef] ICACHE_ICACHE_FCR_DEF
+    \
+    \ @brief ICACHE flag clear register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $01 constant ICACHE_CBSYENDF                \ [0x01] CBSYENDF
+    $02 constant ICACHE_CERRF                   \ [0x02] CERRF
+  [then]
 
 
-\
-\ @brief ICACHE region configuration register
-\ Address offset: 0x24
-\ Reset value: 0x00000200
-\
-
-$000000ff constant ICACHE_ICACHE_CRR1_BASEADDR                      \ BASEADDR
-$00000e00 constant ICACHE_ICACHE_CRR1_RSIZE                         \ RSIZE
-$00008000 constant ICACHE_ICACHE_CRR1_REN                           \ REN
-$07ff0000 constant ICACHE_ICACHE_CRR1_REMAPADDR                     \ REMAPADDR
-$10000000 constant ICACHE_ICACHE_CRR1_MSTSEL                        \ MSTSEL
-$80000000 constant ICACHE_ICACHE_CRR1_HBURST                        \ HBURST
+  [ifdef] ICACHE_ICACHE_HMONR_DEF
+    \
+    \ @brief ICACHE hit monitor register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant ICACHE_HITMON                  \ [0x00 : 32] HITMON
+  [then]
 
 
-\
-\ @brief ICACHE region configuration register
-\ Address offset: 0x28
-\ Reset value: 0x00000200
-\
-
-$000000ff constant ICACHE_ICACHE_CRR2_BASEADDR                      \ BASEADDR
-$00000e00 constant ICACHE_ICACHE_CRR2_RSIZE                         \ RSIZE
-$00008000 constant ICACHE_ICACHE_CRR2_REN                           \ REN
-$07ff0000 constant ICACHE_ICACHE_CRR2_REMAPADDR                     \ REMAPADDR
-$10000000 constant ICACHE_ICACHE_CRR2_MSTSEL                        \ MSTSEL
-$80000000 constant ICACHE_ICACHE_CRR2_HBURST                        \ HBURST
+  [ifdef] ICACHE_ICACHE_MMONR_DEF
+    \
+    \ @brief ICACHE miss monitor register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant ICACHE_MISSMON                 \ [0x00 : 16] MISSMON
+  [then]
 
 
-\
-\ @brief ICACHE region configuration register
-\ Address offset: 0x2C
-\ Reset value: 0x00000200
-\
+  [ifdef] ICACHE_ICACHE_CRR0_DEF
+    \
+    \ @brief ICACHE region configuration register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000200
+    \
+    $00 constant ICACHE_BASEADDR                \ [0x00 : 8] BASEADDR
+    $09 constant ICACHE_RSIZE                   \ [0x09 : 3] RSIZE
+    $0f constant ICACHE_REN                     \ [0x0f] REN
+    $10 constant ICACHE_REMAPADDR               \ [0x10 : 11] REMAPADDR
+    $1c constant ICACHE_MSTSEL                  \ [0x1c] MSTSEL
+    $1f constant ICACHE_HBURST                  \ [0x1f] HBURST
+  [then]
 
-$000000ff constant ICACHE_ICACHE_CRR3_BASEADDR                      \ BASEADDR
-$00000e00 constant ICACHE_ICACHE_CRR3_RSIZE                         \ RSIZE
-$00008000 constant ICACHE_ICACHE_CRR3_REN                           \ REN
-$07ff0000 constant ICACHE_ICACHE_CRR3_REMAPADDR                     \ REMAPADDR
-$10000000 constant ICACHE_ICACHE_CRR3_MSTSEL                        \ MSTSEL
-$80000000 constant ICACHE_ICACHE_CRR3_HBURST                        \ HBURST
+
+  [ifdef] ICACHE_ICACHE_CRR1_DEF
+    \
+    \ @brief ICACHE region configuration register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000200
+    \
+    $00 constant ICACHE_BASEADDR                \ [0x00 : 8] BASEADDR
+    $09 constant ICACHE_RSIZE                   \ [0x09 : 3] RSIZE
+    $0f constant ICACHE_REN                     \ [0x0f] REN
+    $10 constant ICACHE_REMAPADDR               \ [0x10 : 11] REMAPADDR
+    $1c constant ICACHE_MSTSEL                  \ [0x1c] MSTSEL
+    $1f constant ICACHE_HBURST                  \ [0x1f] HBURST
+  [then]
 
 
-\
-\ @brief ICache
-\
-$40030400 constant ICACHE_ICACHE_CR  \ offset: 0x00 : ICACHE control register
-$40030404 constant ICACHE_ICACHE_SR  \ offset: 0x04 : ICACHE status register
-$40030408 constant ICACHE_ICACHE_IER  \ offset: 0x08 : ICACHE interrupt enable register
-$4003040c constant ICACHE_ICACHE_FCR  \ offset: 0x0C : ICACHE flag clear register
-$40030410 constant ICACHE_ICACHE_HMONR  \ offset: 0x10 : ICACHE hit monitor register
-$40030414 constant ICACHE_ICACHE_MMONR  \ offset: 0x14 : ICACHE miss monitor register
-$40030420 constant ICACHE_ICACHE_CRR0  \ offset: 0x20 : ICACHE region configuration register
-$40030424 constant ICACHE_ICACHE_CRR1  \ offset: 0x24 : ICACHE region configuration register
-$40030428 constant ICACHE_ICACHE_CRR2  \ offset: 0x28 : ICACHE region configuration register
-$4003042c constant ICACHE_ICACHE_CRR3  \ offset: 0x2C : ICACHE region configuration register
+  [ifdef] ICACHE_ICACHE_CRR2_DEF
+    \
+    \ @brief ICACHE region configuration register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000200
+    \
+    $00 constant ICACHE_BASEADDR                \ [0x00 : 8] BASEADDR
+    $09 constant ICACHE_RSIZE                   \ [0x09 : 3] RSIZE
+    $0f constant ICACHE_REN                     \ [0x0f] REN
+    $10 constant ICACHE_REMAPADDR               \ [0x10 : 11] REMAPADDR
+    $1c constant ICACHE_MSTSEL                  \ [0x1c] MSTSEL
+    $1f constant ICACHE_HBURST                  \ [0x1f] HBURST
+  [then]
 
+
+  [ifdef] ICACHE_ICACHE_CRR3_DEF
+    \
+    \ @brief ICACHE region configuration register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000200
+    \
+    $00 constant ICACHE_BASEADDR                \ [0x00 : 8] BASEADDR
+    $09 constant ICACHE_RSIZE                   \ [0x09 : 3] RSIZE
+    $0f constant ICACHE_REN                     \ [0x0f] REN
+    $10 constant ICACHE_REMAPADDR               \ [0x10 : 11] REMAPADDR
+    $1c constant ICACHE_MSTSEL                  \ [0x1c] MSTSEL
+    $1f constant ICACHE_HBURST                  \ [0x1f] HBURST
+  [then]
+
+  \
+  \ @brief ICache
+  \
+  $00 constant ICACHE_ICACHE_CR         \ ICACHE control register
+  $04 constant ICACHE_ICACHE_SR         \ ICACHE status register
+  $08 constant ICACHE_ICACHE_IER        \ ICACHE interrupt enable register
+  $0C constant ICACHE_ICACHE_FCR        \ ICACHE flag clear register
+  $10 constant ICACHE_ICACHE_HMONR      \ ICACHE hit monitor register
+  $14 constant ICACHE_ICACHE_MMONR      \ ICACHE miss monitor register
+  $20 constant ICACHE_ICACHE_CRR0       \ ICACHE region configuration register
+  $24 constant ICACHE_ICACHE_CRR1       \ ICACHE region configuration register
+  $28 constant ICACHE_ICACHE_CRR2       \ ICACHE region configuration register
+  $2C constant ICACHE_ICACHE_CRR3       \ ICACHE region configuration register
+
+: ICACHE_DEF ; [then]

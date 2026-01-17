@@ -6,231 +6,246 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] UCPD_DEF
 
-\
-\ @brief UCPD configuration register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000003f constant UCPD_UCPD_CFGR1_HBITCLKDIV                       \ Division ratio for producing half-bit clock
-$000007c0 constant UCPD_UCPD_CFGR1_IFRGAP                           \ Division ratio for producing inter-frame gap timer clock
-$0000f800 constant UCPD_UCPD_CFGR1_TRANSWIN                         \ Transition window duration
-$000e0000 constant UCPD_UCPD_CFGR1_PSC_USBPDCLK                     \ Pre-scaler division ratio for generating ucpd_clk
-$1ff00000 constant UCPD_UCPD_CFGR1_RXORDSETEN                       \ Receiver ordered set enable
-$20000000 constant UCPD_UCPD_CFGR1_TXDMAEN                          \ Transmission DMA mode enable
-$40000000 constant UCPD_UCPD_CFGR1_RXDMAEN                          \ Reception DMA mode enable
-$80000000 constant UCPD_UCPD_CFGR1_UCPDEN                           \ UCPD peripheral enable
-
-
-\
-\ @brief UCPD configuration register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD_UCPD_CFGR2_RXFILTDIS                        \ BMC decoder Rx pre-filter enable
-$00000002 constant UCPD_UCPD_CFGR2_RXFILT2N3                        \ BMC decoder Rx pre-filter sampling method
-$00000004 constant UCPD_UCPD_CFGR2_FORCECLK                         \ Force ClkReq clock request
-$00000008 constant UCPD_UCPD_CFGR2_WUPEN                            \ Wake-up from Stop mode enable
-$00000100 constant UCPD_UCPD_CFGR2_RXAFILTEN                        \ Rx analog filter enable
+  [ifdef] UCPD_UCPD_CFGR1_DEF
+    \
+    \ @brief UCPD configuration register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_HBITCLKDIV                \ [0x00 : 6] Division ratio for producing half-bit clock
+    $06 constant UCPD_IFRGAP                    \ [0x06 : 5] Division ratio for producing inter-frame gap timer clock
+    $0b constant UCPD_TRANSWIN                  \ [0x0b : 5] Transition window duration
+    $11 constant UCPD_PSC_USBPDCLK              \ [0x11 : 3] Pre-scaler division ratio for generating ucpd_clk
+    $14 constant UCPD_RXORDSETEN                \ [0x14 : 9] Receiver ordered set enable
+    $1d constant UCPD_TXDMAEN                   \ [0x1d] Transmission DMA mode enable
+    $1e constant UCPD_RXDMAEN                   \ [0x1e] Reception DMA mode enable
+    $1f constant UCPD_UCPDEN                    \ [0x1f] UCPD peripheral enable
+  [then]
 
 
-\
-\ @brief UCPD configuration register 3
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant UCPD_UCPD_CFGR3_TRIM_CC1_RD                      \ SW trim value for Rd resistor on the CC1 line
-$00001e00 constant UCPD_UCPD_CFGR3_TRIM_CC1_RP                      \ SW trim value for Rp current sources on the CC1 line
-$000f0000 constant UCPD_UCPD_CFGR3_TRIM_CC2_RD                      \ SW trim value for Rd resistor on the CC2 line
-$1e000000 constant UCPD_UCPD_CFGR3_TRIM_CC2_RP                      \ SW trim value for Rp current sources on the CC2 line
-
-
-\
-\ @brief UCPD control register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant UCPD_UCPD_CR_TXMODE                              \ Type of Tx packet
-$00000004 constant UCPD_UCPD_CR_TXSEND                              \ Command to send a Tx packet
-$00000008 constant UCPD_UCPD_CR_TXHRST                              \ Command to send a Tx Hard Reset
-$00000010 constant UCPD_UCPD_CR_RXMODE                              \ Receiver mode
-$00000020 constant UCPD_UCPD_CR_PHYRXEN                             \ USB Power Delivery receiver enable
-$00000040 constant UCPD_UCPD_CR_PHYCCSEL                            \ CC1/CC2 line selector for USB Power Delivery signaling
-$00000180 constant UCPD_UCPD_CR_ANASUBMODE                          \ Analog PHY sub-mode
-$00000200 constant UCPD_UCPD_CR_ANAMODE                             \ Analog PHY operating mode
-$00000c00 constant UCPD_UCPD_CR_CCENABLE                            \ CC line enable
-$00010000 constant UCPD_UCPD_CR_FRSRXEN                             \ FRS event detection enable
-$00020000 constant UCPD_UCPD_CR_FRSTX                               \ FRS Tx signaling enable.
-$00040000 constant UCPD_UCPD_CR_RDCH                                \ Rdch condition drive
-$00100000 constant UCPD_UCPD_CR_CC1TCDIS                            \ CC1 Type-C detector disable
-$00200000 constant UCPD_UCPD_CR_CC2TCDIS                            \ CC2 Type-C detector disable
+  [ifdef] UCPD_UCPD_CFGR2_DEF
+    \
+    \ @brief UCPD configuration register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXFILTDIS                 \ [0x00] BMC decoder Rx pre-filter enable
+    $01 constant UCPD_RXFILT2N3                 \ [0x01] BMC decoder Rx pre-filter sampling method
+    $02 constant UCPD_FORCECLK                  \ [0x02] Force ClkReq clock request
+    $03 constant UCPD_WUPEN                     \ [0x03] Wake-up from Stop mode enable
+    $08 constant UCPD_RXAFILTEN                 \ [0x08] Rx analog filter enable
+  [then]
 
 
-\
-\ @brief UCPD interrupt mask register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD_UCPD_IMR_TXISIE                             \ TXIS interrupt enable
-$00000002 constant UCPD_UCPD_IMR_TXMSGDISCIE                        \ TXMSGDISC interrupt enable
-$00000004 constant UCPD_UCPD_IMR_TXMSGSENTIE                        \ TXMSGSENT interrupt enable
-$00000008 constant UCPD_UCPD_IMR_TXMSGABTIE                         \ TXMSGABT interrupt enable
-$00000010 constant UCPD_UCPD_IMR_HRSTDISCIE                         \ HRSTDISC interrupt enable
-$00000020 constant UCPD_UCPD_IMR_HRSTSENTIE                         \ HRSTSENT interrupt enable
-$00000040 constant UCPD_UCPD_IMR_TXUNDIE                            \ TXUND interrupt enable
-$00000100 constant UCPD_UCPD_IMR_RXNEIE                             \ RXNE interrupt enable
-$00000200 constant UCPD_UCPD_IMR_RXORDDETIE                         \ RXORDDET interrupt enable
-$00000400 constant UCPD_UCPD_IMR_RXHRSTDETIE                        \ RXHRSTDET interrupt enable
-$00000800 constant UCPD_UCPD_IMR_RXOVRIE                            \ RXOVR interrupt enable
-$00001000 constant UCPD_UCPD_IMR_RXMSGENDIE                         \ RXMSGEND interrupt enable
-$00004000 constant UCPD_UCPD_IMR_TYPECEVT1IE                        \ TYPECEVT1 interrupt enable
-$00008000 constant UCPD_UCPD_IMR_TYPECEVT2IE                        \ TYPECEVT2 interrupt enable
-$00100000 constant UCPD_UCPD_IMR_FRSEVTIE                           \ FRSEVT interrupt enable
+  [ifdef] UCPD_UCPD_CFGR3_DEF
+    \
+    \ @brief UCPD configuration register 3
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TRIM_CC1_RD               \ [0x00 : 4] SW trim value for Rd resistor on the CC1 line
+    $09 constant UCPD_TRIM_CC1_RP               \ [0x09 : 4] SW trim value for Rp current sources on the CC1 line
+    $10 constant UCPD_TRIM_CC2_RD               \ [0x10 : 4] SW trim value for Rd resistor on the CC2 line
+    $19 constant UCPD_TRIM_CC2_RP               \ [0x19 : 4] SW trim value for Rp current sources on the CC2 line
+  [then]
 
 
-\
-\ @brief UCPD status register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD_UCPD_SR_TXIS                                \ Transmit interrupt status
-$00000002 constant UCPD_UCPD_SR_TXMSGDISC                           \ Message transmission discarded
-$00000004 constant UCPD_UCPD_SR_TXMSGSENT                           \ Message transmission completed
-$00000008 constant UCPD_UCPD_SR_TXMSGABT                            \ Transmit message abort
-$00000010 constant UCPD_UCPD_SR_HRSTDISC                            \ Hard Reset discarded
-$00000020 constant UCPD_UCPD_SR_HRSTSENT                            \ Hard Reset message sent
-$00000040 constant UCPD_UCPD_SR_TXUND                               \ Tx data underrun detection
-$00000100 constant UCPD_UCPD_SR_RXNE                                \ Receive data register not empty detection
-$00000200 constant UCPD_UCPD_SR_RXORDDET                            \ Rx ordered set (4 K-codes) detection
-$00000400 constant UCPD_UCPD_SR_RXHRSTDET                           \ Rx Hard Reset receipt detection
-$00000800 constant UCPD_UCPD_SR_RXOVR                               \ Rx data overflow detection
-$00001000 constant UCPD_UCPD_SR_RXMSGEND                            \ Rx message received
-$00002000 constant UCPD_UCPD_SR_RXERR                               \ Receive message error
-$00004000 constant UCPD_UCPD_SR_TYPECEVT1                           \ Type-C voltage level event on CC1 line
-$00008000 constant UCPD_UCPD_SR_TYPECEVT2                           \ Type-C voltage level event on CC2 line
-$00030000 constant UCPD_UCPD_SR_TYPEC_VSTATE_CC1                    \ The status bitfield indicates the voltage level on the CC1 line in its steady state.
-$000c0000 constant UCPD_UCPD_SR_TYPEC_VSTATE_CC2                    \ CC2 line voltage level
-$00100000 constant UCPD_UCPD_SR_FRSEVT                              \ FRS detection event
+  [ifdef] UCPD_UCPD_CR_DEF
+    \
+    \ @brief UCPD control register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXMODE                    \ [0x00 : 2] Type of Tx packet
+    $02 constant UCPD_TXSEND                    \ [0x02] Command to send a Tx packet
+    $03 constant UCPD_TXHRST                    \ [0x03] Command to send a Tx Hard Reset
+    $04 constant UCPD_RXMODE                    \ [0x04] Receiver mode
+    $05 constant UCPD_PHYRXEN                   \ [0x05] USB Power Delivery receiver enable
+    $06 constant UCPD_PHYCCSEL                  \ [0x06] CC1/CC2 line selector for USB Power Delivery signaling
+    $07 constant UCPD_ANASUBMODE                \ [0x07 : 2] Analog PHY sub-mode
+    $09 constant UCPD_ANAMODE                   \ [0x09] Analog PHY operating mode
+    $0a constant UCPD_CCENABLE                  \ [0x0a : 2] CC line enable
+    $10 constant UCPD_FRSRXEN                   \ [0x10] FRS event detection enable
+    $11 constant UCPD_FRSTX                     \ [0x11] FRS Tx signaling enable.
+    $12 constant UCPD_RDCH                      \ [0x12] Rdch condition drive
+    $14 constant UCPD_CC1TCDIS                  \ [0x14] CC1 Type-C detector disable
+    $15 constant UCPD_CC2TCDIS                  \ [0x15] CC2 Type-C detector disable
+  [then]
 
 
-\
-\ @brief UCPD interrupt clear register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000002 constant UCPD_UCPD_ICR_TXMSGDISCCF                        \ Tx message discard flag (TXMSGDISC) clear
-$00000004 constant UCPD_UCPD_ICR_TXMSGSENTCF                        \ Tx message send flag (TXMSGSENT) clear
-$00000008 constant UCPD_UCPD_ICR_TXMSGABTCF                         \ Tx message abort flag (TXMSGABT) clear
-$00000010 constant UCPD_UCPD_ICR_HRSTDISCCF                         \ Hard reset discard flag (HRSTDISC) clear
-$00000020 constant UCPD_UCPD_ICR_HRSTSENTCF                         \ Hard reset send flag (HRSTSENT) clear
-$00000040 constant UCPD_UCPD_ICR_TXUNDCF                            \ Tx underflow flag (TXUND) clear
-$00000200 constant UCPD_UCPD_ICR_RXORDDETCF                         \ Rx ordered set detect flag (RXORDDET) clear
-$00000400 constant UCPD_UCPD_ICR_RXHRSTDETCF                        \ Rx Hard Reset detect flag (RXHRSTDET) clear
-$00000800 constant UCPD_UCPD_ICR_RXOVRCF                            \ Rx overflow flag (RXOVR) clear
-$00001000 constant UCPD_UCPD_ICR_RXMSGENDCF                         \ Rx message received flag (RXMSGEND) clear
-$00004000 constant UCPD_UCPD_ICR_TYPECEVT1CF                        \ Type-C CC1 event flag (TYPECEVT1) clear
-$00008000 constant UCPD_UCPD_ICR_TYPECEVT2CF                        \ Type-C CC2 line event flag (TYPECEVT2) clear
-$00100000 constant UCPD_UCPD_ICR_FRSEVTCF                           \ FRS event flag (FRSEVT) clear
-
-
-\
-\ @brief UCPD Tx ordered set type register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$000fffff constant UCPD_UCPD_TX_ORDSETR_TXORDSET                    \ Ordered set to transmit
+  [ifdef] UCPD_UCPD_IMR_DEF
+    \
+    \ @brief UCPD interrupt mask register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXISIE                    \ [0x00] TXIS interrupt enable
+    $01 constant UCPD_TXMSGDISCIE               \ [0x01] TXMSGDISC interrupt enable
+    $02 constant UCPD_TXMSGSENTIE               \ [0x02] TXMSGSENT interrupt enable
+    $03 constant UCPD_TXMSGABTIE                \ [0x03] TXMSGABT interrupt enable
+    $04 constant UCPD_HRSTDISCIE                \ [0x04] HRSTDISC interrupt enable
+    $05 constant UCPD_HRSTSENTIE                \ [0x05] HRSTSENT interrupt enable
+    $06 constant UCPD_TXUNDIE                   \ [0x06] TXUND interrupt enable
+    $08 constant UCPD_RXNEIE                    \ [0x08] RXNE interrupt enable
+    $09 constant UCPD_RXORDDETIE                \ [0x09] RXORDDET interrupt enable
+    $0a constant UCPD_RXHRSTDETIE               \ [0x0a] RXHRSTDET interrupt enable
+    $0b constant UCPD_RXOVRIE                   \ [0x0b] RXOVR interrupt enable
+    $0c constant UCPD_RXMSGENDIE                \ [0x0c] RXMSGEND interrupt enable
+    $0e constant UCPD_TYPECEVT1IE               \ [0x0e] TYPECEVT1 interrupt enable
+    $0f constant UCPD_TYPECEVT2IE               \ [0x0f] TYPECEVT2 interrupt enable
+    $14 constant UCPD_FRSEVTIE                  \ [0x14] FRSEVT interrupt enable
+  [then]
 
 
-\
-\ @brief UCPD Tx payload size register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$000003ff constant UCPD_UCPD_TX_PAYSZR_TXPAYSZ                      \ Payload size yet to transmit
-
-
-\
-\ @brief UCPD Tx data register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000000ff constant UCPD_UCPD_TXDR_TXDATA                            \ Data byte to transmit
-
-
-\
-\ @brief UCPD Rx ordered set register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000007 constant UCPD_UCPD_RX_ORDSETR_RXORDSET                    \ Rx ordered set code detected
-$00000008 constant UCPD_UCPD_RX_ORDSETR_RXSOP3OF4                   \ The bit indicates the number of correct K-codes.
-$00000070 constant UCPD_UCPD_RX_ORDSETR_RXSOPKINVALID               \ The bitfield is for debug purposes only.
+  [ifdef] UCPD_UCPD_SR_DEF
+    \
+    \ @brief UCPD status register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXIS                      \ [0x00] Transmit interrupt status
+    $01 constant UCPD_TXMSGDISC                 \ [0x01] Message transmission discarded
+    $02 constant UCPD_TXMSGSENT                 \ [0x02] Message transmission completed
+    $03 constant UCPD_TXMSGABT                  \ [0x03] Transmit message abort
+    $04 constant UCPD_HRSTDISC                  \ [0x04] Hard Reset discarded
+    $05 constant UCPD_HRSTSENT                  \ [0x05] Hard Reset message sent
+    $06 constant UCPD_TXUND                     \ [0x06] Tx data underrun detection
+    $08 constant UCPD_RXNE                      \ [0x08] Receive data register not empty detection
+    $09 constant UCPD_RXORDDET                  \ [0x09] Rx ordered set (4 K-codes) detection
+    $0a constant UCPD_RXHRSTDET                 \ [0x0a] Rx Hard Reset receipt detection
+    $0b constant UCPD_RXOVR                     \ [0x0b] Rx data overflow detection
+    $0c constant UCPD_RXMSGEND                  \ [0x0c] Rx message received
+    $0d constant UCPD_RXERR                     \ [0x0d] Receive message error
+    $0e constant UCPD_TYPECEVT1                 \ [0x0e] Type-C voltage level event on CC1 line
+    $0f constant UCPD_TYPECEVT2                 \ [0x0f] Type-C voltage level event on CC2 line
+    $10 constant UCPD_TYPEC_VSTATE_CC1          \ [0x10 : 2] The status bitfield indicates the voltage level on the CC1 line in its steady state.
+    $12 constant UCPD_TYPEC_VSTATE_CC2          \ [0x12 : 2] CC2 line voltage level
+    $14 constant UCPD_FRSEVT                    \ [0x14] FRS detection event
+  [then]
 
 
-\
-\ @brief UCPD Rx payload size register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$000003ff constant UCPD_UCPD_RX_PAYSZR_RXPAYSZ                      \ Rx payload size received
-
-
-\
-\ @brief UCPD receive data register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$000000ff constant UCPD_UCPD_RXDR_RXDATA                            \ Data byte received
-
-
-\
-\ @brief UCPD Rx ordered set extension register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$000fffff constant UCPD_UCPD_RX_ORDEXTR1_RXSOPX1                    \ Ordered set 1 received
+  [ifdef] UCPD_UCPD_ICR_DEF
+    \
+    \ @brief UCPD interrupt clear register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $01 constant UCPD_TXMSGDISCCF               \ [0x01] Tx message discard flag (TXMSGDISC) clear
+    $02 constant UCPD_TXMSGSENTCF               \ [0x02] Tx message send flag (TXMSGSENT) clear
+    $03 constant UCPD_TXMSGABTCF                \ [0x03] Tx message abort flag (TXMSGABT) clear
+    $04 constant UCPD_HRSTDISCCF                \ [0x04] Hard reset discard flag (HRSTDISC) clear
+    $05 constant UCPD_HRSTSENTCF                \ [0x05] Hard reset send flag (HRSTSENT) clear
+    $06 constant UCPD_TXUNDCF                   \ [0x06] Tx underflow flag (TXUND) clear
+    $09 constant UCPD_RXORDDETCF                \ [0x09] Rx ordered set detect flag (RXORDDET) clear
+    $0a constant UCPD_RXHRSTDETCF               \ [0x0a] Rx Hard Reset detect flag (RXHRSTDET) clear
+    $0b constant UCPD_RXOVRCF                   \ [0x0b] Rx overflow flag (RXOVR) clear
+    $0c constant UCPD_RXMSGENDCF                \ [0x0c] Rx message received flag (RXMSGEND) clear
+    $0e constant UCPD_TYPECEVT1CF               \ [0x0e] Type-C CC1 event flag (TYPECEVT1) clear
+    $0f constant UCPD_TYPECEVT2CF               \ [0x0f] Type-C CC2 line event flag (TYPECEVT2) clear
+    $14 constant UCPD_FRSEVTCF                  \ [0x14] FRS event flag (FRSEVT) clear
+  [then]
 
 
-\
-\ @brief UCPD Rx ordered set extension register 2
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
+  [ifdef] UCPD_UCPD_TX_ORDSETR_DEF
+    \
+    \ @brief UCPD Tx ordered set type register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXORDSET                  \ [0x00 : 20] Ordered set to transmit
+  [then]
 
-$000fffff constant UCPD_UCPD_RX_ORDEXTR2_RXSOPX2                    \ Ordered set 2 received
+
+  [ifdef] UCPD_UCPD_TX_PAYSZR_DEF
+    \
+    \ @brief UCPD Tx payload size register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXPAYSZ                   \ [0x00 : 10] Payload size yet to transmit
+  [then]
 
 
-\
-\ @brief UCPD register block
-\
-$4000dc00 constant UCPD_UCPD_CFGR1  \ offset: 0x00 : UCPD configuration register 1
-$4000dc04 constant UCPD_UCPD_CFGR2  \ offset: 0x04 : UCPD configuration register 2
-$4000dc08 constant UCPD_UCPD_CFGR3  \ offset: 0x08 : UCPD configuration register 3
-$4000dc0c constant UCPD_UCPD_CR   \ offset: 0x0C : UCPD control register
-$4000dc10 constant UCPD_UCPD_IMR  \ offset: 0x10 : UCPD interrupt mask register
-$4000dc14 constant UCPD_UCPD_SR   \ offset: 0x14 : UCPD status register
-$4000dc18 constant UCPD_UCPD_ICR  \ offset: 0x18 : UCPD interrupt clear register
-$4000dc1c constant UCPD_UCPD_TX_ORDSETR  \ offset: 0x1C : UCPD Tx ordered set type register
-$4000dc20 constant UCPD_UCPD_TX_PAYSZR  \ offset: 0x20 : UCPD Tx payload size register
-$4000dc24 constant UCPD_UCPD_TXDR  \ offset: 0x24 : UCPD Tx data register
-$4000dc28 constant UCPD_UCPD_RX_ORDSETR  \ offset: 0x28 : UCPD Rx ordered set register
-$4000dc2c constant UCPD_UCPD_RX_PAYSZR  \ offset: 0x2C : UCPD Rx payload size register
-$4000dc30 constant UCPD_UCPD_RXDR  \ offset: 0x30 : UCPD receive data register
-$4000dc34 constant UCPD_UCPD_RX_ORDEXTR1  \ offset: 0x34 : UCPD Rx ordered set extension register 1
-$4000dc38 constant UCPD_UCPD_RX_ORDEXTR2  \ offset: 0x38 : UCPD Rx ordered set extension register 2
+  [ifdef] UCPD_UCPD_TXDR_DEF
+    \
+    \ @brief UCPD Tx data register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXDATA                    \ [0x00 : 8] Data byte to transmit
+  [then]
 
+
+  [ifdef] UCPD_UCPD_RX_ORDSETR_DEF
+    \
+    \ @brief UCPD Rx ordered set register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXORDSET                  \ [0x00 : 3] Rx ordered set code detected
+    $03 constant UCPD_RXSOP3OF4                 \ [0x03] The bit indicates the number of correct K-codes.
+    $04 constant UCPD_RXSOPKINVALID             \ [0x04 : 3] The bitfield is for debug purposes only.
+  [then]
+
+
+  [ifdef] UCPD_UCPD_RX_PAYSZR_DEF
+    \
+    \ @brief UCPD Rx payload size register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXPAYSZ                   \ [0x00 : 10] Rx payload size received
+  [then]
+
+
+  [ifdef] UCPD_UCPD_RXDR_DEF
+    \
+    \ @brief UCPD receive data register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXDATA                    \ [0x00 : 8] Data byte received
+  [then]
+
+
+  [ifdef] UCPD_UCPD_RX_ORDEXTR1_DEF
+    \
+    \ @brief UCPD Rx ordered set extension register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXSOPX1                   \ [0x00 : 20] Ordered set 1 received
+  [then]
+
+
+  [ifdef] UCPD_UCPD_RX_ORDEXTR2_DEF
+    \
+    \ @brief UCPD Rx ordered set extension register 2
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXSOPX2                   \ [0x00 : 20] Ordered set 2 received
+  [then]
+
+  \
+  \ @brief UCPD register block
+  \
+  $00 constant UCPD_UCPD_CFGR1          \ UCPD configuration register 1
+  $04 constant UCPD_UCPD_CFGR2          \ UCPD configuration register 2
+  $08 constant UCPD_UCPD_CFGR3          \ UCPD configuration register 3
+  $0C constant UCPD_UCPD_CR             \ UCPD control register
+  $10 constant UCPD_UCPD_IMR            \ UCPD interrupt mask register
+  $14 constant UCPD_UCPD_SR             \ UCPD status register
+  $18 constant UCPD_UCPD_ICR            \ UCPD interrupt clear register
+  $1C constant UCPD_UCPD_TX_ORDSETR     \ UCPD Tx ordered set type register
+  $20 constant UCPD_UCPD_TX_PAYSZR      \ UCPD Tx payload size register
+  $24 constant UCPD_UCPD_TXDR           \ UCPD Tx data register
+  $28 constant UCPD_UCPD_RX_ORDSETR     \ UCPD Rx ordered set register
+  $2C constant UCPD_UCPD_RX_PAYSZR      \ UCPD Rx payload size register
+  $30 constant UCPD_UCPD_RXDR           \ UCPD receive data register
+  $34 constant UCPD_UCPD_RX_ORDEXTR1    \ UCPD Rx ordered set extension register 1
+  $38 constant UCPD_UCPD_RX_ORDEXTR2    \ UCPD Rx ordered set extension register 2
+
+: UCPD_DEF ; [then]

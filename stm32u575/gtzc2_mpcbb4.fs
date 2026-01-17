@@ -6,113 +6,117 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GTZC2_MPCBB4_DEF
 
-\
-\ @brief MPCBB control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC2_MPCBB4_MPCBB4_CR_GLOCK                     \ lock the control register of the MPCBB until next reset
-$40000000 constant GTZC2_MPCBB4_MPCBB4_CR_INVSECSTATE               \ SRAMx clocks security state
-$80000000 constant GTZC2_MPCBB4_MPCBB4_CR_SRWILADIS                 \ secure read/write illegal access disable
-
-
-\
-\ @brief GTZC2 SRAM4 MPCBB configuration lock register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC2_MPCBB4_MPCBB4_CFGLOCK_SPLCK0               \ Security/privilege configuration lock for super-block 0
+  [ifdef] GTZC2_MPCBB4_MPCBB4_CR_DEF
+    \
+    \ @brief MPCBB control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC2_MPCBB4_GLOCK             \ [0x00] lock the control register of the MPCBB until next reset
+    $1e constant GTZC2_MPCBB4_INVSECSTATE       \ [0x1e] SRAMx clocks security state
+    $1f constant GTZC2_MPCBB4_SRWILADIS         \ [0x1f] secure read/write illegal access disable
+  [then]
 
 
-\
-\ @brief MPCBB security configuration for super-block 0 register
-\ Address offset: 0x100
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC0                \ SEC0
-$00000002 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC1                \ SEC1
-$00000004 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC2                \ SEC2
-$00000008 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC3                \ SEC3
-$00000010 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC4                \ SEC4
-$00000020 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC5                \ SEC5
-$00000040 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC6                \ SEC6
-$00000080 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC7                \ SEC7
-$00000100 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC8                \ SEC8
-$00000200 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC9                \ SEC9
-$00000400 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC10               \ SEC10
-$00000800 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC11               \ SEC11
-$00001000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC12               \ SEC12
-$00002000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC13               \ SEC13
-$00004000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC14               \ SEC14
-$00008000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC15               \ SEC15
-$00010000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC16               \ SEC16
-$00020000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC17               \ SEC17
-$00040000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC18               \ SEC18
-$00080000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC19               \ SEC19
-$00100000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC20               \ SEC20
-$00200000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC21               \ SEC21
-$00400000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC22               \ SEC22
-$00800000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC23               \ SEC23
-$01000000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC24               \ SEC24
-$02000000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC25               \ SEC25
-$04000000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC26               \ SEC26
-$08000000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC27               \ SEC27
-$10000000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC28               \ SEC28
-$20000000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC29               \ SEC29
-$40000000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC30               \ SEC30
-$80000000 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0_SEC31               \ SEC31
+  [ifdef] GTZC2_MPCBB4_MPCBB4_CFGLOCK_DEF
+    \
+    \ @brief GTZC2 SRAM4 MPCBB configuration lock register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC2_MPCBB4_SPLCK0            \ [0x00] Security/privilege configuration lock for super-block 0
+  [then]
 
 
-\
-\ @brief MPCBB privileged configuration for super-block 0 register
-\ Address offset: 0x200
-\ Reset value: 0xFFFFFFFF
-\
+  [ifdef] GTZC2_MPCBB4_MPCBB4_SECCFGR0_DEF
+    \
+    \ @brief MPCBB security configuration for super-block 0 register
+    \ Address offset: 0x100
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC2_MPCBB4_SEC0              \ [0x00] SEC0
+    $01 constant GTZC2_MPCBB4_SEC1              \ [0x01] SEC1
+    $02 constant GTZC2_MPCBB4_SEC2              \ [0x02] SEC2
+    $03 constant GTZC2_MPCBB4_SEC3              \ [0x03] SEC3
+    $04 constant GTZC2_MPCBB4_SEC4              \ [0x04] SEC4
+    $05 constant GTZC2_MPCBB4_SEC5              \ [0x05] SEC5
+    $06 constant GTZC2_MPCBB4_SEC6              \ [0x06] SEC6
+    $07 constant GTZC2_MPCBB4_SEC7              \ [0x07] SEC7
+    $08 constant GTZC2_MPCBB4_SEC8              \ [0x08] SEC8
+    $09 constant GTZC2_MPCBB4_SEC9              \ [0x09] SEC9
+    $0a constant GTZC2_MPCBB4_SEC10             \ [0x0a] SEC10
+    $0b constant GTZC2_MPCBB4_SEC11             \ [0x0b] SEC11
+    $0c constant GTZC2_MPCBB4_SEC12             \ [0x0c] SEC12
+    $0d constant GTZC2_MPCBB4_SEC13             \ [0x0d] SEC13
+    $0e constant GTZC2_MPCBB4_SEC14             \ [0x0e] SEC14
+    $0f constant GTZC2_MPCBB4_SEC15             \ [0x0f] SEC15
+    $10 constant GTZC2_MPCBB4_SEC16             \ [0x10] SEC16
+    $11 constant GTZC2_MPCBB4_SEC17             \ [0x11] SEC17
+    $12 constant GTZC2_MPCBB4_SEC18             \ [0x12] SEC18
+    $13 constant GTZC2_MPCBB4_SEC19             \ [0x13] SEC19
+    $14 constant GTZC2_MPCBB4_SEC20             \ [0x14] SEC20
+    $15 constant GTZC2_MPCBB4_SEC21             \ [0x15] SEC21
+    $16 constant GTZC2_MPCBB4_SEC22             \ [0x16] SEC22
+    $17 constant GTZC2_MPCBB4_SEC23             \ [0x17] SEC23
+    $18 constant GTZC2_MPCBB4_SEC24             \ [0x18] SEC24
+    $19 constant GTZC2_MPCBB4_SEC25             \ [0x19] SEC25
+    $1a constant GTZC2_MPCBB4_SEC26             \ [0x1a] SEC26
+    $1b constant GTZC2_MPCBB4_SEC27             \ [0x1b] SEC27
+    $1c constant GTZC2_MPCBB4_SEC28             \ [0x1c] SEC28
+    $1d constant GTZC2_MPCBB4_SEC29             \ [0x1d] SEC29
+    $1e constant GTZC2_MPCBB4_SEC30             \ [0x1e] SEC30
+    $1f constant GTZC2_MPCBB4_SEC31             \ [0x1f] SEC31
+  [then]
 
-$00000001 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV0              \ PRIV0
-$00000002 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV1              \ PRIV1
-$00000004 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV2              \ PRIV2
-$00000008 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV3              \ PRIV3
-$00000010 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV4              \ PRIV4
-$00000020 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV5              \ PRIV5
-$00000040 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV6              \ PRIV6
-$00000080 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV7              \ PRIV7
-$00000100 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV8              \ PRIV8
-$00000200 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV9              \ PRIV9
-$00000400 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV10             \ PRIV10
-$00000800 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV11             \ PRIV11
-$00001000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV12             \ PRIV12
-$00002000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV13             \ PRIV13
-$00004000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV14             \ PRIV14
-$00008000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV15             \ PRIV15
-$00010000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV16             \ PRIV16
-$00020000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV17             \ PRIV17
-$00040000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV18             \ PRIV18
-$00080000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV19             \ PRIV19
-$00100000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV20             \ PRIV20
-$00200000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV21             \ PRIV21
-$00400000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV22             \ PRIV22
-$00800000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV23             \ PRIV23
-$01000000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV24             \ PRIV24
-$02000000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV25             \ PRIV25
-$04000000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV26             \ PRIV26
-$08000000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV27             \ PRIV27
-$10000000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV28             \ PRIV28
-$20000000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV29             \ PRIV29
-$40000000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV30             \ PRIV30
-$80000000 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_PRIV31             \ PRIV31
 
+  [ifdef] GTZC2_MPCBB4_MPCBB4_PRIVCFGR0_DEF
+    \
+    \ @brief MPCBB privileged configuration for super-block 0 register
+    \ Address offset: 0x200
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GTZC2_MPCBB4_PRIV0             \ [0x00] PRIV0
+    $01 constant GTZC2_MPCBB4_PRIV1             \ [0x01] PRIV1
+    $02 constant GTZC2_MPCBB4_PRIV2             \ [0x02] PRIV2
+    $03 constant GTZC2_MPCBB4_PRIV3             \ [0x03] PRIV3
+    $04 constant GTZC2_MPCBB4_PRIV4             \ [0x04] PRIV4
+    $05 constant GTZC2_MPCBB4_PRIV5             \ [0x05] PRIV5
+    $06 constant GTZC2_MPCBB4_PRIV6             \ [0x06] PRIV6
+    $07 constant GTZC2_MPCBB4_PRIV7             \ [0x07] PRIV7
+    $08 constant GTZC2_MPCBB4_PRIV8             \ [0x08] PRIV8
+    $09 constant GTZC2_MPCBB4_PRIV9             \ [0x09] PRIV9
+    $0a constant GTZC2_MPCBB4_PRIV10            \ [0x0a] PRIV10
+    $0b constant GTZC2_MPCBB4_PRIV11            \ [0x0b] PRIV11
+    $0c constant GTZC2_MPCBB4_PRIV12            \ [0x0c] PRIV12
+    $0d constant GTZC2_MPCBB4_PRIV13            \ [0x0d] PRIV13
+    $0e constant GTZC2_MPCBB4_PRIV14            \ [0x0e] PRIV14
+    $0f constant GTZC2_MPCBB4_PRIV15            \ [0x0f] PRIV15
+    $10 constant GTZC2_MPCBB4_PRIV16            \ [0x10] PRIV16
+    $11 constant GTZC2_MPCBB4_PRIV17            \ [0x11] PRIV17
+    $12 constant GTZC2_MPCBB4_PRIV18            \ [0x12] PRIV18
+    $13 constant GTZC2_MPCBB4_PRIV19            \ [0x13] PRIV19
+    $14 constant GTZC2_MPCBB4_PRIV20            \ [0x14] PRIV20
+    $15 constant GTZC2_MPCBB4_PRIV21            \ [0x15] PRIV21
+    $16 constant GTZC2_MPCBB4_PRIV22            \ [0x16] PRIV22
+    $17 constant GTZC2_MPCBB4_PRIV23            \ [0x17] PRIV23
+    $18 constant GTZC2_MPCBB4_PRIV24            \ [0x18] PRIV24
+    $19 constant GTZC2_MPCBB4_PRIV25            \ [0x19] PRIV25
+    $1a constant GTZC2_MPCBB4_PRIV26            \ [0x1a] PRIV26
+    $1b constant GTZC2_MPCBB4_PRIV27            \ [0x1b] PRIV27
+    $1c constant GTZC2_MPCBB4_PRIV28            \ [0x1c] PRIV28
+    $1d constant GTZC2_MPCBB4_PRIV29            \ [0x1d] PRIV29
+    $1e constant GTZC2_MPCBB4_PRIV30            \ [0x1e] PRIV30
+    $1f constant GTZC2_MPCBB4_PRIV31            \ [0x1f] PRIV31
+  [then]
 
-\
-\ @brief GTZC2_MPCBB4
-\
-$46023800 constant GTZC2_MPCBB4_MPCBB4_CR  \ offset: 0x00 : MPCBB control register
-$46023810 constant GTZC2_MPCBB4_MPCBB4_CFGLOCK  \ offset: 0x10 : GTZC2 SRAM4 MPCBB configuration lock register
-$46023900 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0  \ offset: 0x100 : MPCBB security configuration for super-block 0 register
-$46023a00 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0  \ offset: 0x200 : MPCBB privileged configuration for super-block 0 register
+  \
+  \ @brief GTZC2_MPCBB4
+  \
+  $00 constant GTZC2_MPCBB4_MPCBB4_CR   \ MPCBB control register
+  $10 constant GTZC2_MPCBB4_MPCBB4_CFGLOCK    \ GTZC2 SRAM4 MPCBB configuration lock register
+  $100 constant GTZC2_MPCBB4_MPCBB4_SECCFGR0    \ MPCBB security configuration for super-block 0 register
+  $200 constant GTZC2_MPCBB4_MPCBB4_PRIVCFGR0    \ MPCBB privileged configuration for super-block 0 register
 
+: GTZC2_MPCBB4_DEF ; [then]

@@ -1,114 +1,96 @@
 \
-\ @file stm32f3x4.h
-\ @brief Loader for all peripherals in a STM32F3x4
+\ @file stm32f3x4.fload
+\ @brief Device header for STM32F3x4
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpiod.fs
-.include gpiof.fs
-.include tsc.fs
-.include crc.fs
-.include flash.fs
-.include rcc.fs
-.include dma1.fs
-.include tim2.fs
-.include tim15.fs
-.include tim16.fs
-.include tim17.fs
-.include usart1.fs
-.include usart2.fs
-.include usart3.fs
-.include spi2.fs
-.include i2s2ext.fs
-.include i2s3ext.fs
-.include spi3.fs
-.include spi1.fs
-.include exti.fs
-.include pwr.fs
-.include i2c1.fs
-.include i2c2.fs
-.include i2c3.fs
-.include iwdg.fs
-.include wwdg.fs
-.include rtc.fs
-.include tim6.fs
-.include tim7.fs
-.include dac1.fs
-.include dac2.fs
-.include dbgmcu.fs
-.include tim1.fs
-.include adc1.fs
-.include adc2.fs
-.include syscfg_comp_opamp.fs
-.include tim3.fs
-.include can.fs
-.include adc_common.fs
-.include hrtim_master.fs
-.include hrtim_tima.fs
-.include hrtim_timb.fs
-.include hrtim_timc.fs
-.include hrtim_timd.fs
-.include hrtim_time.fs
-.include hrtim_common.fs
+[ifndef] STM32F3X4_LOADER
+  .include "gpio.fs"
+  .include "tsc.fs"
+  .include "crc.fs"
+  .include "flash.fs"
+  .include "rcc.fs"
+  .include "dma1.fs"
+  .include "tim2.fs"
+  .include "tim15.fs"
+  .include "tim16.fs"
+  .include "tim17.fs"
+  .include "usart.fs"
+  .include "spi2.fs"
+  .include "spi.fs"
+  .include "exti.fs"
+  .include "pwr.fs"
+  .include "i2c.fs"
+  .include "iwdg.fs"
+  .include "wwdg.fs"
+  .include "rtc.fs"
+  .include "tim.fs"
+  .include "dac.fs"
+  .include "dbgmcu.fs"
+  .include "tim1.fs"
+  .include "adc.fs"
+  .include "syscfg_comp_opamp.fs"
+  .include "tim3.fs"
+  .include "can.fs"
+  .include "adc_common.fs"
+  .include "hrtim_master.fs"
+  .include "hrtim_tima.fs"
+  .include "hrtim_timb.fs"
+  .include "hrtim_timc.fs"
+  .include "hrtim_timd.fs"
+  .include "hrtim_time.fs"
+  .include "hrtim_common.fs"
 
-decimal
+  $0x48000000 constant GPIOA            \ See gpio.fs
+  $0x48000400 constant GPIOB            \ See gpio.fs
+  $0x48000800 constant GPIOC            \ See gpio.fs
+  $0x48000C00 constant GPIOD            \ See gpio.fs
+  $0x48001400 constant GPIOF            \ See gpio.fs
+  $0x40024000 constant TSC              \ See tsc.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x40021000 constant RCC              \ See rcc.fs
+  $0x40020000 constant DMA1             \ See dma1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40014000 constant TIM15            \ See tim15.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x40014800 constant TIM17            \ See tim17.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x40003800 constant SPI2             \ See spi2.fs
+  $0x40003400 constant I2S2EXT          \ See spi2.fs
+  $0x40004000 constant I2S3EXT          \ See spi2.fs
+  $0x40003C00 constant SPI3             \ See spi.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40010400 constant EXTI             \ See exti.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40007800 constant I2C3             \ See i2c.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40001000 constant TIM6             \ See tim.fs
+  $0x40001400 constant TIM7             \ See tim.fs
+  $0x40007400 constant DAC1             \ See dac.fs
+  $0x40009800 constant DAC2             \ See dac.fs
+  $0xE0042000 constant DBGMCU           \ See dbgmcu.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x50000000 constant ADC1             \ See adc.fs
+  $0x50000100 constant ADC2             \ See adc.fs
+  $0x40010000 constant SYSCFG_COMP_OPAMP    \ See syscfg_comp_opamp.fs
+  $0x40000400 constant TIM3             \ See tim3.fs
+  $0x40006400 constant CAN              \ See can.fs
+  $0x50000300 constant ADC_COMMON       \ See adc_common.fs
+  $0x40017400 constant HRTIM_MASTER     \ See hrtim_master.fs
+  $0x40017480 constant HRTIM_TIMA       \ See hrtim_tima.fs
+  $0x40017500 constant HRTIM_TIMB       \ See hrtim_timb.fs
+  $0x40017580 constant HRTIM_TIMC       \ See hrtim_timc.fs
+  $0x40017600 constant HRTIM_TIMD       \ See hrtim_timd.fs
+  $0x40017680 constant HRTIM_TIME       \ See hrtim_time.fs
+  $0x40017780 constant HRTIM_COMMON     \ See hrtim_common.fs
 
-\ Peripheral Instance Definitions
-.include GPIOA                  \ General-purpose I/Os
-.include GPIOB                  \ General-purpose I/Os
-.include GPIOC                  \ General-purpose I/Os
-.include GPIOD                  \ General-purpose I/Os
-.include GPIOF                  \ General-purpose I/Os
-.include TSC                    \ Touch sensing controller
-.include CRC                    \ cyclic redundancy check calculation unit
-.include FLASH                  \ Flash
-.include RCC                    \ Reset and clock control
-.include DMA1                   \ DMA controller 1
-.include TIM2                   \ General purpose timer
-.include TIM15                  \ General purpose timers
-.include TIM16                  \ General-purpose-timers
-.include TIM17                  \ General purpose timer
-.include USART1                 \ Universal synchronous asynchronous receiver-transmitter
-.include USART2                 \ USART2 global interrupt and EXTI Line 26 interrupt
-.include USART3                 \ USART3 global interrupt and EXTI Line 28 interrupt
-.include SPI2                   \ Serial peripheral interface/Inter-IC2
-.include I2S2EXT                \ Serial peripheral interface/Inter-IC2
-.include I2S3EXT                \ Serial peripheral interface/Inter-IC2
-.include SPI3                   \ Serial peripheral interface/Inter-IC2
-.include SPI1                   \ SPI1 global interrupt
-.include EXTI                   \ External interrupt/event controller
-.include PWR                    \ Power control
-.include I2C1                   \ Inter-integrated circuit
-.include I2C2                   \ Inter-integrated circuit
-.include I2C3                   \ Inter-integrated circuit
-.include IWDG                   \ Independent watchdog
-.include WWDG                   \ Window watchdog
-.include RTC                    \ Real-time clock
-.include TIM6                   \ Basic timers
-.include TIM7                   \ TIM7 global interrupt
-.include DAC1                   \ Digital-to-analog converter
-.include DAC2                   \ Digital-to-analog converter
-.include DBGMCU                 \ Debug support
-.include TIM1                   \ Advanced timer
-.include ADC1                   \ Analog-to-Digital Converter
-.include ADC2                   \ Analog-to-Digital Converter
-.include SYSCFG_COMP_OPAMP      \ System configuration controller
-.include TIM3                   \ General purpose timer
-.include CAN                    \ Controller area network
-.include ADC_COMMON             \ ADC common registers
-.include HRTIM_MASTER           \ High Resolution Timer: Master Timers
-.include HRTIM_TIMA             \ High Resolution Timer: TIMA
-.include HRTIM_TIMB             \ High Resolution Timer: TIMB
-.include HRTIM_TIMC             \ High Resolution Timer: TIMC
-.include HRTIM_TIMD             \ High Resolution Timer: TIMD
-.include HRTIM_TIME             \ High Resolution Timer: TIME
-.include HRTIM_COMMON           \ High Resolution Timer: Common functions
-
-compiletoram
-
+: STM32F3X4_LOADER ; [then]

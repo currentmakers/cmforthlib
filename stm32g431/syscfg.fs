@@ -6,168 +6,178 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SYSCFG_DEF
 
-\
-\ @brief Remap Memory register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000007 constant SYSCFG_MEMRMP_MEM_MODE                           \ Memory mapping selection
-$00000100 constant SYSCFG_MEMRMP_FB_MODE                            \ User Flash Bank mode
-
-
-\
-\ @brief peripheral mode configuration register
-\ Address offset: 0x04
-\ Reset value: 0x7C000001
-\
-
-$00000100 constant SYSCFG_CFGR1_BOOSTEN                             \ BOOSTEN
-$00000200 constant SYSCFG_CFGR1_ANASWVDD                            \ GPIO analog switch control voltage selection
-$00010000 constant SYSCFG_CFGR1_I2C_PB6_FMP                         \ FM+ drive capability on PB6
-$00020000 constant SYSCFG_CFGR1_I2C_PB7_FMP                         \ FM+ drive capability on PB6
-$00040000 constant SYSCFG_CFGR1_I2C_PB8_FMP                         \ FM+ drive capability on PB6
-$00080000 constant SYSCFG_CFGR1_I2C_PB9_FMP                         \ FM+ drive capability on PB6
-$00100000 constant SYSCFG_CFGR1_I2C1_FMP                            \ I2C1 FM+ drive capability enable
-$00200000 constant SYSCFG_CFGR1_I2C2_FMP                            \ I2C1 FM+ drive capability enable
-$00400000 constant SYSCFG_CFGR1_I2C3_FMP                            \ I2C1 FM+ drive capability enable
-$00800000 constant SYSCFG_CFGR1_I2C4_FMP                            \ I2C1 FM+ drive capability enable
-$fc000000 constant SYSCFG_CFGR1_FPU_IE                              \ FPU Interrupts Enable
+  [ifdef] SYSCFG_MEMRMP_DEF
+    \
+    \ @brief Remap Memory register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_MEM_MODE                \ [0x00 : 3] Memory mapping selection
+    $08 constant SYSCFG_FB_mode                 \ [0x08] User Flash Bank mode
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 1
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR1_EXTI0                             \ EXTI x configuration (x = 0 to 3)
-$000000f0 constant SYSCFG_EXTICR1_EXTI1                             \ EXTI x configuration (x = 0 to 3)
-$00000f00 constant SYSCFG_EXTICR1_EXTI2                             \ EXTI x configuration (x = 0 to 3)
-$0000f000 constant SYSCFG_EXTICR1_EXTI3                             \ EXTI x configuration (x = 0 to 3)
-
-
-\
-\ @brief external interrupt configuration register 2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR2_EXTI4                             \ EXTI x configuration (x = 4 to 7)
-$000000f0 constant SYSCFG_EXTICR2_EXTI5                             \ EXTI x configuration (x = 4 to 7)
-$00000f00 constant SYSCFG_EXTICR2_EXTI6                             \ EXTI x configuration (x = 4 to 7)
-$0000f000 constant SYSCFG_EXTICR2_EXTI7                             \ EXTI x configuration (x = 4 to 7)
+  [ifdef] SYSCFG_CFGR1_DEF
+    \
+    \ @brief peripheral mode configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x7C000001
+    \
+    $08 constant SYSCFG_BOOSTEN                 \ [0x08] BOOSTEN
+    $09 constant SYSCFG_ANASWVDD                \ [0x09] GPIO analog switch control voltage selection
+    $10 constant SYSCFG_I2C_PB6_FMP             \ [0x10] FM+ drive capability on PB6
+    $11 constant SYSCFG_I2C_PB7_FMP             \ [0x11] FM+ drive capability on PB6
+    $12 constant SYSCFG_I2C_PB8_FMP             \ [0x12] FM+ drive capability on PB6
+    $13 constant SYSCFG_I2C_PB9_FMP             \ [0x13] FM+ drive capability on PB6
+    $14 constant SYSCFG_I2C1_FMP                \ [0x14] I2C1 FM+ drive capability enable
+    $15 constant SYSCFG_I2C2_FMP                \ [0x15] I2C1 FM+ drive capability enable
+    $16 constant SYSCFG_I2C3_FMP                \ [0x16] I2C1 FM+ drive capability enable
+    $17 constant SYSCFG_I2C4_FMP                \ [0x17] I2C1 FM+ drive capability enable
+    $1a constant SYSCFG_FPU_IE                  \ [0x1a : 6] FPU Interrupts Enable
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 3
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR3_EXTI8                             \ EXTI x configuration (x = 8 to 11)
-$000000f0 constant SYSCFG_EXTICR3_EXTI9                             \ EXTI x configuration (x = 8 to 11)
-$00000f00 constant SYSCFG_EXTICR3_EXTI10                            \ EXTI10
-$0000f000 constant SYSCFG_EXTICR3_EXTI11                            \ EXTI x configuration (x = 8 to 11)
-
-
-\
-\ @brief external interrupt configuration register 4
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR4_EXTI12                            \ EXTI x configuration (x = 12 to 15)
-$000000f0 constant SYSCFG_EXTICR4_EXTI13                            \ EXTI x configuration (x = 12 to 15)
-$00000f00 constant SYSCFG_EXTICR4_EXTI14                            \ EXTI x configuration (x = 12 to 15)
-$0000f000 constant SYSCFG_EXTICR4_EXTI15                            \ EXTI x configuration (x = 12 to 15)
+  [ifdef] SYSCFG_EXTICR1_DEF
+    \
+    \ @brief external interrupt configuration register 1
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI0                   \ [0x00 : 4] EXTI x configuration (x = 0 to 3)
+    $04 constant SYSCFG_EXTI1                   \ [0x04 : 4] EXTI x configuration (x = 0 to 3)
+    $08 constant SYSCFG_EXTI2                   \ [0x08 : 4] EXTI x configuration (x = 0 to 3)
+    $0c constant SYSCFG_EXTI3                   \ [0x0c : 4] EXTI x configuration (x = 0 to 3)
+  [then]
 
 
-\
-\ @brief CCM SRAM control and status register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_SCSR_CCMER                                \ CCM SRAM Erase
-$00000002 constant SYSCFG_SCSR_CCMBSY                               \ CCM SRAM busy by erase operation
-
-
-\
-\ @brief configuration register 2
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CFGR2_CLL                                 \ Core Lockup Lock
-$00000002 constant SYSCFG_CFGR2_SPL                                 \ SRAM Parity Lock
-$00000004 constant SYSCFG_CFGR2_PVDL                                \ PVD Lock
-$00000008 constant SYSCFG_CFGR2_ECCL                                \ ECC Lock
-$00000100 constant SYSCFG_CFGR2_SPF                                 \ SRAM Parity Flag
+  [ifdef] SYSCFG_EXTICR2_DEF
+    \
+    \ @brief external interrupt configuration register 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI4                   \ [0x00 : 4] EXTI x configuration (x = 4 to 7)
+    $04 constant SYSCFG_EXTI5                   \ [0x04 : 4] EXTI x configuration (x = 4 to 7)
+    $08 constant SYSCFG_EXTI6                   \ [0x08 : 4] EXTI x configuration (x = 4 to 7)
+    $0c constant SYSCFG_EXTI7                   \ [0x0c : 4] EXTI x configuration (x = 4 to 7)
+  [then]
 
 
-\
-\ @brief SRAM Write protection register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_SWPR_PAGE0_WP                             \ Write protection
-$00000002 constant SYSCFG_SWPR_PAGE1_WP                             \ Write protection
-$00000004 constant SYSCFG_SWPR_PAGE2_WP                             \ Write protection
-$00000008 constant SYSCFG_SWPR_PAGE3_WP                             \ Write protection
-$00000010 constant SYSCFG_SWPR_PAGE4_WP                             \ Write protection
-$00000020 constant SYSCFG_SWPR_PAGE5_WP                             \ Write protection
-$00000040 constant SYSCFG_SWPR_PAGE6_WP                             \ Write protection
-$00000080 constant SYSCFG_SWPR_PAGE7_WP                             \ Write protection
-$00000100 constant SYSCFG_SWPR_PAGE8_WP                             \ Write protection
-$00000200 constant SYSCFG_SWPR_PAGE9_WP                             \ Write protection
-$00000400 constant SYSCFG_SWPR_PAGE10_WP                            \ Write protection
-$00000800 constant SYSCFG_SWPR_PAGE11_WP                            \ Write protection
-$00001000 constant SYSCFG_SWPR_PAGE12_WP                            \ Write protection
-$00002000 constant SYSCFG_SWPR_PAGE13_WP                            \ Write protection
-$00004000 constant SYSCFG_SWPR_PAGE14_WP                            \ Write protection
-$00008000 constant SYSCFG_SWPR_PAGE15_WP                            \ Write protection
-$00010000 constant SYSCFG_SWPR_PAGE16_WP                            \ Write protection
-$00020000 constant SYSCFG_SWPR_PAGE17_WP                            \ Write protection
-$00040000 constant SYSCFG_SWPR_PAGE18_WP                            \ Write protection
-$00080000 constant SYSCFG_SWPR_PAGE19_WP                            \ Write protection
-$00100000 constant SYSCFG_SWPR_PAGE20_WP                            \ Write protection
-$00200000 constant SYSCFG_SWPR_PAGE21_WP                            \ Write protection
-$00400000 constant SYSCFG_SWPR_PAGE22_WP                            \ Write protection
-$00800000 constant SYSCFG_SWPR_PAGE23_WP                            \ Write protection
-$01000000 constant SYSCFG_SWPR_PAGE24_WP                            \ Write protection
-$02000000 constant SYSCFG_SWPR_PAGE25_WP                            \ Write protection
-$04000000 constant SYSCFG_SWPR_PAGE26_WP                            \ Write protection
-$08000000 constant SYSCFG_SWPR_PAGE27_WP                            \ Write protection
-$10000000 constant SYSCFG_SWPR_PAGE28_WP                            \ Write protection
-$20000000 constant SYSCFG_SWPR_PAGE29_WP                            \ Write protection
-$40000000 constant SYSCFG_SWPR_PAGE30_WP                            \ Write protection
-$80000000 constant SYSCFG_SWPR_PAGE31_WP                            \ Write protection
+  [ifdef] SYSCFG_EXTICR3_DEF
+    \
+    \ @brief external interrupt configuration register 3
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI8                   \ [0x00 : 4] EXTI x configuration (x = 8 to 11)
+    $04 constant SYSCFG_EXTI9                   \ [0x04 : 4] EXTI x configuration (x = 8 to 11)
+    $08 constant SYSCFG_EXTI10                  \ [0x08 : 4] EXTI10
+    $0c constant SYSCFG_EXTI11                  \ [0x0c : 4] EXTI x configuration (x = 8 to 11)
+  [then]
 
 
-\
-\ @brief SRAM2 Key Register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
+  [ifdef] SYSCFG_EXTICR4_DEF
+    \
+    \ @brief external interrupt configuration register 4
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI12                  \ [0x00 : 4] EXTI x configuration (x = 12 to 15)
+    $04 constant SYSCFG_EXTI13                  \ [0x04 : 4] EXTI x configuration (x = 12 to 15)
+    $08 constant SYSCFG_EXTI14                  \ [0x08 : 4] EXTI x configuration (x = 12 to 15)
+    $0c constant SYSCFG_EXTI15                  \ [0x0c : 4] EXTI x configuration (x = 12 to 15)
+  [then]
 
-$000000ff constant SYSCFG_SKR_KEY                                   \ SRAM2 Key for software erase
+
+  [ifdef] SYSCFG_SCSR_DEF
+    \
+    \ @brief CCM SRAM control and status register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_CCMER                   \ [0x00] CCM SRAM Erase
+    $01 constant SYSCFG_CCMBSY                  \ [0x01] CCM SRAM busy by erase operation
+  [then]
 
 
-\
-\ @brief System configuration controller
-\
-$40010000 constant SYSCFG_MEMRMP  \ offset: 0x00 : Remap Memory register
-$40010004 constant SYSCFG_CFGR1   \ offset: 0x04 : peripheral mode configuration register
-$40010008 constant SYSCFG_EXTICR1  \ offset: 0x08 : external interrupt configuration register 1
-$4001000c constant SYSCFG_EXTICR2  \ offset: 0x0C : external interrupt configuration register 2
-$40010010 constant SYSCFG_EXTICR3  \ offset: 0x10 : external interrupt configuration register 3
-$40010014 constant SYSCFG_EXTICR4  \ offset: 0x14 : external interrupt configuration register 4
-$40010018 constant SYSCFG_SCSR    \ offset: 0x18 : CCM SRAM control and status register
-$4001001c constant SYSCFG_CFGR2   \ offset: 0x1C : configuration register 2
-$40010020 constant SYSCFG_SWPR    \ offset: 0x20 : SRAM Write protection register 1
-$40010024 constant SYSCFG_SKR     \ offset: 0x24 : SRAM2 Key Register
+  [ifdef] SYSCFG_CFGR2_DEF
+    \
+    \ @brief configuration register 2
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_CLL                     \ [0x00] Core Lockup Lock
+    $01 constant SYSCFG_SPL                     \ [0x01] SRAM Parity Lock
+    $02 constant SYSCFG_PVDL                    \ [0x02] PVD Lock
+    $03 constant SYSCFG_ECCL                    \ [0x03] ECC Lock
+    $08 constant SYSCFG_SPF                     \ [0x08] SRAM Parity Flag
+  [then]
 
+
+  [ifdef] SYSCFG_SWPR_DEF
+    \
+    \ @brief SRAM Write protection register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_Page0_WP                \ [0x00] Write protection
+    $01 constant SYSCFG_Page1_WP                \ [0x01] Write protection
+    $02 constant SYSCFG_Page2_WP                \ [0x02] Write protection
+    $03 constant SYSCFG_Page3_WP                \ [0x03] Write protection
+    $04 constant SYSCFG_Page4_WP                \ [0x04] Write protection
+    $05 constant SYSCFG_Page5_WP                \ [0x05] Write protection
+    $06 constant SYSCFG_Page6_WP                \ [0x06] Write protection
+    $07 constant SYSCFG_Page7_WP                \ [0x07] Write protection
+    $08 constant SYSCFG_Page8_WP                \ [0x08] Write protection
+    $09 constant SYSCFG_Page9_WP                \ [0x09] Write protection
+    $0a constant SYSCFG_Page10_WP               \ [0x0a] Write protection
+    $0b constant SYSCFG_Page11_WP               \ [0x0b] Write protection
+    $0c constant SYSCFG_Page12_WP               \ [0x0c] Write protection
+    $0d constant SYSCFG_Page13_WP               \ [0x0d] Write protection
+    $0e constant SYSCFG_Page14_WP               \ [0x0e] Write protection
+    $0f constant SYSCFG_Page15_WP               \ [0x0f] Write protection
+    $10 constant SYSCFG_Page16_WP               \ [0x10] Write protection
+    $11 constant SYSCFG_Page17_WP               \ [0x11] Write protection
+    $12 constant SYSCFG_Page18_WP               \ [0x12] Write protection
+    $13 constant SYSCFG_Page19_WP               \ [0x13] Write protection
+    $14 constant SYSCFG_Page20_WP               \ [0x14] Write protection
+    $15 constant SYSCFG_Page21_WP               \ [0x15] Write protection
+    $16 constant SYSCFG_Page22_WP               \ [0x16] Write protection
+    $17 constant SYSCFG_Page23_WP               \ [0x17] Write protection
+    $18 constant SYSCFG_Page24_WP               \ [0x18] Write protection
+    $19 constant SYSCFG_Page25_WP               \ [0x19] Write protection
+    $1a constant SYSCFG_Page26_WP               \ [0x1a] Write protection
+    $1b constant SYSCFG_Page27_WP               \ [0x1b] Write protection
+    $1c constant SYSCFG_Page28_WP               \ [0x1c] Write protection
+    $1d constant SYSCFG_Page29_WP               \ [0x1d] Write protection
+    $1e constant SYSCFG_Page30_WP               \ [0x1e] Write protection
+    $1f constant SYSCFG_Page31_WP               \ [0x1f] Write protection
+  [then]
+
+
+  [ifdef] SYSCFG_SKR_DEF
+    \
+    \ @brief SRAM2 Key Register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_KEY                     \ [0x00 : 8] SRAM2 Key for software erase
+  [then]
+
+  \
+  \ @brief System configuration controller
+  \
+  $00 constant SYSCFG_MEMRMP            \ Remap Memory register
+  $04 constant SYSCFG_CFGR1             \ peripheral mode configuration register
+  $08 constant SYSCFG_EXTICR1           \ external interrupt configuration register 1
+  $0C constant SYSCFG_EXTICR2           \ external interrupt configuration register 2
+  $10 constant SYSCFG_EXTICR3           \ external interrupt configuration register 3
+  $14 constant SYSCFG_EXTICR4           \ external interrupt configuration register 4
+  $18 constant SYSCFG_SCSR              \ CCM SRAM control and status register
+  $1C constant SYSCFG_CFGR2             \ configuration register 2
+  $20 constant SYSCFG_SWPR              \ SRAM Write protection register 1
+  $24 constant SYSCFG_SKR               \ SRAM2 Key Register
+
+: SYSCFG_DEF ; [then]

@@ -6,59 +6,62 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GTZC2_TZSC_DEF
 
-\
-\ @brief TZSC control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC2_TZSC_TZSC_CR_LCK                           \ lock the configuration of GTZC1_TZSC_SECCFGRx and GTZC1_TZSC_PRIVCFGRx registers until next reset
-
-
-\
-\ @brief TZSC secure configuration register 1
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC2_TZSC_TZSC_SECCFGR1_SPI3SEC                 \ secure access mode for SPI3
-$00000002 constant GTZC2_TZSC_TZSC_SECCFGR1_LPUART1SEC              \ secure access mode for LPUART1
-$00000004 constant GTZC2_TZSC_TZSC_SECCFGR1_I2C3SEC                 \ secure access mode for I2C3
-$00000008 constant GTZC2_TZSC_TZSC_SECCFGR1_LPTIM1SEC               \ secure access mode for LPTIM1
-$00000010 constant GTZC2_TZSC_TZSC_SECCFGR1_LPTIM3SEC               \ secure access mode for LPTIM3
-$00000020 constant GTZC2_TZSC_TZSC_SECCFGR1_LPTIM4SEC               \ secure access mode for LPTIM4
-$00000040 constant GTZC2_TZSC_TZSC_SECCFGR1_OPAMPSEC                \ secure access mode for OPAMP
-$00000080 constant GTZC2_TZSC_TZSC_SECCFGR1_COMPSEC                 \ secure access mode for COMP
-$00000200 constant GTZC2_TZSC_TZSC_SECCFGR1_VREFBUFSEC              \ secure access mode for VREFBUF
-$00000800 constant GTZC2_TZSC_TZSC_SECCFGR1_DAC1SEC                 \ secure access mode for DAC1
-$00001000 constant GTZC2_TZSC_TZSC_SECCFGR1_ADF1SEC                 \ secure access mode for ADF1
+  [ifdef] GTZC2_TZSC_TZSC_CR_DEF
+    \
+    \ @brief TZSC control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC2_TZSC_LCK                 \ [0x00] lock the configuration of GTZC1_TZSC_SECCFGRx and GTZC1_TZSC_PRIVCFGRx registers until next reset
+  [then]
 
 
-\
-\ @brief TZSC privilege configuration register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
+  [ifdef] GTZC2_TZSC_TZSC_SECCFGR1_DEF
+    \
+    \ @brief TZSC secure configuration register 1
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC2_TZSC_SPI3SEC             \ [0x00] secure access mode for SPI3
+    $01 constant GTZC2_TZSC_LPUART1SEC          \ [0x01] secure access mode for LPUART1
+    $02 constant GTZC2_TZSC_I2C3SEC             \ [0x02] secure access mode for I2C3
+    $03 constant GTZC2_TZSC_LPTIM1SEC           \ [0x03] secure access mode for LPTIM1
+    $04 constant GTZC2_TZSC_LPTIM3SEC           \ [0x04] secure access mode for LPTIM3
+    $05 constant GTZC2_TZSC_LPTIM4SEC           \ [0x05] secure access mode for LPTIM4
+    $06 constant GTZC2_TZSC_OPAMPSEC            \ [0x06] secure access mode for OPAMP
+    $07 constant GTZC2_TZSC_COMPSEC             \ [0x07] secure access mode for COMP
+    $09 constant GTZC2_TZSC_VREFBUFSEC          \ [0x09] secure access mode for VREFBUF
+    $0b constant GTZC2_TZSC_DAC1SEC             \ [0x0b] secure access mode for DAC1
+    $0c constant GTZC2_TZSC_ADF1SEC             \ [0x0c] secure access mode for ADF1
+  [then]
 
-$00000001 constant GTZC2_TZSC_TZSC_PRIVCFGR1_SPI3PRIV               \ privileged access mode for SPI3
-$00000002 constant GTZC2_TZSC_TZSC_PRIVCFGR1_LPUART1PRIV            \ privileged access mode for LPUART1
-$00000004 constant GTZC2_TZSC_TZSC_PRIVCFGR1_I2C3PRIV               \ privileged access mode for I2C3
-$00000008 constant GTZC2_TZSC_TZSC_PRIVCFGR1_LPTIM1PRIV             \ privileged access mode for LPTIM1
-$00000010 constant GTZC2_TZSC_TZSC_PRIVCFGR1_LPTIM3PRIV             \ privileged access mode for LPTIM3
-$00000020 constant GTZC2_TZSC_TZSC_PRIVCFGR1_LPTIM4PRIV             \ privileged access mode for LPTIM4
-$00000040 constant GTZC2_TZSC_TZSC_PRIVCFGR1_OPAMPPRIV              \ privileged access mode for OPAMP
-$00000080 constant GTZC2_TZSC_TZSC_PRIVCFGR1_COMPPRIV               \ privileged access mode for COMP
-$00000200 constant GTZC2_TZSC_TZSC_PRIVCFGR1_VREFBUFPRIV            \ privileged access mode for VREFBUF
-$00000800 constant GTZC2_TZSC_TZSC_PRIVCFGR1_DAC1PRIV               \ privileged access mode for DAC1
-$00001000 constant GTZC2_TZSC_TZSC_PRIVCFGR1_ADF1PRIV               \ privileged access mode for ADF1
 
+  [ifdef] GTZC2_TZSC_TZSC_PRIVCFGR1_DEF
+    \
+    \ @brief TZSC privilege configuration register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC2_TZSC_SPI3PRIV            \ [0x00] privileged access mode for SPI3
+    $01 constant GTZC2_TZSC_LPUART1PRIV         \ [0x01] privileged access mode for LPUART1
+    $02 constant GTZC2_TZSC_I2C3PRIV            \ [0x02] privileged access mode for I2C3
+    $03 constant GTZC2_TZSC_LPTIM1PRIV          \ [0x03] privileged access mode for LPTIM1
+    $04 constant GTZC2_TZSC_LPTIM3PRIV          \ [0x04] privileged access mode for LPTIM3
+    $05 constant GTZC2_TZSC_LPTIM4PRIV          \ [0x05] privileged access mode for LPTIM4
+    $06 constant GTZC2_TZSC_OPAMPPRIV           \ [0x06] privileged access mode for OPAMP
+    $07 constant GTZC2_TZSC_COMPPRIV            \ [0x07] privileged access mode for COMP
+    $09 constant GTZC2_TZSC_VREFBUFPRIV         \ [0x09] privileged access mode for VREFBUF
+    $0b constant GTZC2_TZSC_DAC1PRIV            \ [0x0b] privileged access mode for DAC1
+    $0c constant GTZC2_TZSC_ADF1PRIV            \ [0x0c] privileged access mode for ADF1
+  [then]
 
-\
-\ @brief GTZC2_TZSC
-\
-$46023000 constant GTZC2_TZSC_TZSC_CR  \ offset: 0x00 : TZSC control register
-$46023010 constant GTZC2_TZSC_TZSC_SECCFGR1  \ offset: 0x10 : TZSC secure configuration register 1
-$46023020 constant GTZC2_TZSC_TZSC_PRIVCFGR1  \ offset: 0x20 : TZSC privilege configuration register 1
+  \
+  \ @brief GTZC2_TZSC
+  \
+  $00 constant GTZC2_TZSC_TZSC_CR       \ TZSC control register
+  $10 constant GTZC2_TZSC_TZSC_SECCFGR1 \ TZSC secure configuration register 1
+  $20 constant GTZC2_TZSC_TZSC_PRIVCFGR1    \ TZSC privilege configuration register 1
 
+: GTZC2_TZSC_DEF ; [then]

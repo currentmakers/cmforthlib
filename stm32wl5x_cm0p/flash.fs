@@ -6,301 +6,321 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] FLASH_DEF
 
-\
-\ @brief Access control register
-\ Address offset: 0x00
-\ Reset value: 0x00000600
-\
-
-$00000007 constant FLASH_ACR_LATENCY                                \ Latency
-$00000100 constant FLASH_ACR_PRFTEN                                 \ Prefetch enable
-$00000200 constant FLASH_ACR_ICEN                                   \ Instruction cache enable
-$00000400 constant FLASH_ACR_DCEN                                   \ Data cache enable
-$00000800 constant FLASH_ACR_ICRST                                  \ Instruction cache reset
-$00001000 constant FLASH_ACR_DCRST                                  \ Data cache reset
-$00008000 constant FLASH_ACR_PES                                    \ CPU1 programm erase suspend request
-$00010000 constant FLASH_ACR_EMPTY                                  \ Flash User area empty
-
-
-\
-\ @brief Flash access control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FLASH_ACR2_PRIVMODE                              \ CFI privileged mode enable
-$00000002 constant FLASH_ACR2_HDPADIS                               \ Flash user hide protection area access disable
-$00000004 constant FLASH_ACR2_C2SWDBGEN                             \ CPU2 Software debug enable
+  [ifdef] FLASH_ACR_DEF
+    \
+    \ @brief Access control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000600
+    \
+    $00 constant FLASH_LATENCY                  \ [0x00 : 3] Latency
+    $08 constant FLASH_PRFTEN                   \ [0x08] Prefetch enable
+    $09 constant FLASH_ICEN                     \ [0x09] Instruction cache enable
+    $0a constant FLASH_DCEN                     \ [0x0a] Data cache enable
+    $0b constant FLASH_ICRST                    \ [0x0b] Instruction cache reset
+    $0c constant FLASH_DCRST                    \ [0x0c] Data cache reset
+    $0f constant FLASH_PES                      \ [0x0f] CPU1 programm erase suspend request
+    $10 constant FLASH_EMPTY                    \ [0x10] Flash User area empty
+  [then]
 
 
-\
-\ @brief Flash key register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_KEYR_KEY                                   \ KEY
-
-
-\
-\ @brief Option byte key register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FLASH_OPTKEYR_OPTKEY                             \ Option byte key
+  [ifdef] FLASH_ACR2_DEF
+    \
+    \ @brief Flash access control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_PRIVMODE                 \ [0x00] CFI privileged mode enable
+    $01 constant FLASH_HDPADIS                  \ [0x01] Flash user hide protection area access disable
+    $02 constant FLASH_C2SWDBGEN                \ [0x02] CPU2 Software debug enable
+  [then]
 
 
-\
-\ @brief Status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FLASH_SR_EOP                                     \ End of operation
-$00000002 constant FLASH_SR_OPERR                                   \ Operation error
-$00000008 constant FLASH_SR_PROGERR                                 \ Programming error
-$00000010 constant FLASH_SR_WRPERR                                  \ Write protected error
-$00000020 constant FLASH_SR_PGAERR                                  \ Programming alignment error
-$00000040 constant FLASH_SR_SIZERR                                  \ Size error
-$00000080 constant FLASH_SR_PGSERR                                  \ Programming sequence error
-$00000100 constant FLASH_SR_MISERR                                  \ Fast programming data miss error
-$00000200 constant FLASH_SR_FASTERR                                 \ Fast programming error
-$00002000 constant FLASH_SR_OPTVN                                   \ User Option OPTIVAL indication
-$00004000 constant FLASH_SR_RDERR                                   \ PCROP read error
-$00008000 constant FLASH_SR_OPTVERR                                 \ Option validity error
-$00010000 constant FLASH_SR_BSY                                     \ Busy
-$00040000 constant FLASH_SR_CFGBSY                                  \ Programming or erase configuration busy
-$00080000 constant FLASH_SR_PESD                                    \ Programming / erase operation suspended
+  [ifdef] FLASH_KEYR_DEF
+    \
+    \ @brief Flash key register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_KEY                      \ [0x00 : 32] KEY
+  [then]
 
 
-\
-\ @brief Flash control register
-\ Address offset: 0x14
-\ Reset value: 0xC0000000
-\
-
-$00000001 constant FLASH_CR_PG                                      \ Programming
-$00000002 constant FLASH_CR_PER                                     \ Page erase
-$00000004 constant FLASH_CR_MER                                     \ Mass erase
-$000003f8 constant FLASH_CR_PNB                                     \ Page number
-$00010000 constant FLASH_CR_STRT                                    \ Start
-$00020000 constant FLASH_CR_OPTSTRT                                 \ Options modification start
-$00040000 constant FLASH_CR_FSTPG                                   \ Fast programming
-$01000000 constant FLASH_CR_EOPIE                                   \ End of operation interrupt enable
-$02000000 constant FLASH_CR_ERRIE                                   \ Error interrupt enable
-$04000000 constant FLASH_CR_RDERRIE                                 \ PCROP read error interrupt enable
-$08000000 constant FLASH_CR_OBL_LAUNCH                              \ Force the option byte loading
-$40000000 constant FLASH_CR_OPTLOCK                                 \ Options Lock
-$80000000 constant FLASH_CR_LOCK                                    \ FLASH_CR Lock
+  [ifdef] FLASH_OPTKEYR_DEF
+    \
+    \ @brief Option byte key register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_OPTKEY                   \ [0x00 : 32] Option byte key
+  [then]
 
 
-\
-\ @brief Flash ECC register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0001ffff constant FLASH_ECCR_ADDR_ECC                              \ ECC fail address
-$00100000 constant FLASH_ECCR_SYSF_ECC                              \ System Flash ECC fail
-$01000000 constant FLASH_ECCR_ECCCIE                                \ ECC correction interrupt enable
-$1c000000 constant FLASH_ECCR_CPUID                                 \ CPU identification
-$40000000 constant FLASH_ECCR_ECCC                                  \ ECC correction
-$80000000 constant FLASH_ECCR_ECCD                                  \ ECC detection
-
-
-\
-\ @brief Flash option register
-\ Address offset: 0x20
-\ Reset value: 0x3FFFF0AA
-\
-
-$000000ff constant FLASH_OPTR_RDP                                   \ Read protection level
-$00000100 constant FLASH_OPTR_ESE                                   \ System security enabled flag
-$00000e00 constant FLASH_OPTR_BOR_LEV                               \ BOR reset Level
-$00001000 constant FLASH_OPTR_NRST_STOP                             \ nRST_STOP
-$00002000 constant FLASH_OPTR_NRST_STDBY                            \ nRST_STDBY
-$00004000 constant FLASH_OPTR_NRST_SHDW                             \ nRSTSHDW
-$00010000 constant FLASH_OPTR_IWDG_SW                               \ Independent watchdog selection
-$00020000 constant FLASH_OPTR_IWDG_STOP                             \ Independent watchdog counter freeze in Stop mode
-$00040000 constant FLASH_OPTR_IWDG_STDBY                            \ Independent watchdog counter freeze in Standby mode
-$00080000 constant FLASH_OPTR_WWDG_SW                               \ Window watchdog selection
-$00800000 constant FLASH_OPTR_NBOOT1                                \ Boot configuration
-$01000000 constant FLASH_OPTR_SRAM2_PE                              \ SRAM2 parity check enable
-$02000000 constant FLASH_OPTR_SRAM2_RST                             \ SRAM2 Erase when system reset
-$04000000 constant FLASH_OPTR_NSWBOOT0                              \ Software BOOT0 selection
-$08000000 constant FLASH_OPTR_NBOOT0                                \ nBOOT0 option bit
-$40000000 constant FLASH_OPTR_BOOT_LOCK                             \ CPU1 CM4 Unique Boot entry enable option bit
-$80000000 constant FLASH_OPTR_C2BOOT_LOCK                           \ CPU2 CM0+ Unique Boot entry enable option bit
+  [ifdef] FLASH_SR_DEF
+    \
+    \ @brief Status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_EOP                      \ [0x00] End of operation
+    $01 constant FLASH_OPERR                    \ [0x01] Operation error
+    $03 constant FLASH_PROGERR                  \ [0x03] Programming error
+    $04 constant FLASH_WRPERR                   \ [0x04] Write protected error
+    $05 constant FLASH_PGAERR                   \ [0x05] Programming alignment error
+    $06 constant FLASH_SIZERR                   \ [0x06] Size error
+    $07 constant FLASH_PGSERR                   \ [0x07] Programming sequence error
+    $08 constant FLASH_MISERR                   \ [0x08] Fast programming data miss error
+    $09 constant FLASH_FASTERR                  \ [0x09] Fast programming error
+    $0d constant FLASH_OPTVN                    \ [0x0d] User Option OPTIVAL indication
+    $0e constant FLASH_RDERR                    \ [0x0e] PCROP read error
+    $0f constant FLASH_OPTVERR                  \ [0x0f] Option validity error
+    $10 constant FLASH_BSY                      \ [0x10] Busy
+    $12 constant FLASH_CFGBSY                   \ [0x12] Programming or erase configuration busy
+    $13 constant FLASH_PESD                     \ [0x13] Programming / erase operation suspended
+  [then]
 
 
-\
-\ @brief Flash PCROP zone A Start address register
-\ Address offset: 0x24
-\ Reset value: 0xFFFFFFFF
-\
-
-$000000ff constant FLASH_PCROP1ASR_PCROP1A_STRT                     \ PCROP1A area start offset
-
-
-\
-\ @brief Flash PCROP zone A End address register
-\ Address offset: 0x28
-\ Reset value: 0xFFFFFF00
-\
-
-$000000ff constant FLASH_PCROP1AER_PCROP1A_END                      \ PCROP area end offset
-$80000000 constant FLASH_PCROP1AER_PCROP_RDP                        \ PCROP area preserved when RDP level decreased
-
-
-\
-\ @brief Flash WRP area A address register
-\ Address offset: 0x2C
-\ Reset value: 0xFF80FFFF
-\
-
-$0000007f constant FLASH_WRP1AR_WRP1A_STRT                          \ Bank 1 WRP first area start offset
-$007f0000 constant FLASH_WRP1AR_WRP1A_END                           \ Bank 1 WRP first area A end offset
+  [ifdef] FLASH_CR_DEF
+    \
+    \ @brief Flash control register
+    \ Address offset: 0x14
+    \ Reset value: 0xC0000000
+    \
+    $00 constant FLASH_PG                       \ [0x00] Programming
+    $01 constant FLASH_PER                      \ [0x01] Page erase
+    $02 constant FLASH_MER                      \ [0x02] Mass erase
+    $03 constant FLASH_PNB                      \ [0x03 : 7] Page number
+    $10 constant FLASH_STRT                     \ [0x10] Start
+    $11 constant FLASH_OPTSTRT                  \ [0x11] Options modification start
+    $12 constant FLASH_FSTPG                    \ [0x12] Fast programming
+    $18 constant FLASH_EOPIE                    \ [0x18] End of operation interrupt enable
+    $19 constant FLASH_ERRIE                    \ [0x19] Error interrupt enable
+    $1a constant FLASH_RDERRIE                  \ [0x1a] PCROP read error interrupt enable
+    $1b constant FLASH_OBL_LAUNCH               \ [0x1b] Force the option byte loading
+    $1e constant FLASH_OPTLOCK                  \ [0x1e] Options Lock
+    $1f constant FLASH_LOCK                     \ [0x1f] FLASH_CR Lock
+  [then]
 
 
-\
-\ @brief Flash WRP area B address register
-\ Address offset: 0x30
-\ Reset value: 0xFF80FFFF
-\
-
-$0000007f constant FLASH_WRP1BR_WRP1B_STRT                          \ Bank 1 WRP second area B end offset
-$007f0000 constant FLASH_WRP1BR_WRP1B_END                           \ Bank 1 WRP second area B start offset
-
-
-\
-\ @brief Flash PCROP zone B Start address register
-\ Address offset: 0x34
-\ Reset value: 0xFFFFFFFF
-\
-
-$000000ff constant FLASH_PCROP1BSR_PCROP1B_STRT                     \ Bank 1 WRP second area B end offset
+  [ifdef] FLASH_ECCR_DEF
+    \
+    \ @brief Flash ECC register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_ADDR_ECC                 \ [0x00 : 17] ECC fail address
+    $14 constant FLASH_SYSF_ECC                 \ [0x14] System Flash ECC fail
+    $18 constant FLASH_ECCCIE                   \ [0x18] ECC correction interrupt enable
+    $1a constant FLASH_CPUID                    \ [0x1a : 3] CPU identification
+    $1e constant FLASH_ECCC                     \ [0x1e] ECC correction
+    $1f constant FLASH_ECCD                     \ [0x1f] ECC detection
+  [then]
 
 
-\
-\ @brief Flash PCROP zone B End address register
-\ Address offset: 0x38
-\ Reset value: 0xFFFFFF00
-\
-
-$000000ff constant FLASH_PCROP1BER_PCROP1B_END                      \ PCROP1B area end offset
-
-
-\
-\ @brief Flash IPCC data buffer address register
-\ Address offset: 0x3C
-\ Reset value: 0xFFFFFFFF
-\
-
-$00003fff constant FLASH_IPCCBR_IPCCDBA                             \ IPCCDBA
-
-
-\
-\ @brief Flash CPU2 access control register
-\ Address offset: 0x5C
-\ Reset value: 0x00000600
-\
-
-$00000100 constant FLASH_C2ACR_PRFTEN                               \ CPU2 Prefetch enable
-$00000200 constant FLASH_C2ACR_ICEN                                 \ CPU2 Instruction cache enable
-$00000800 constant FLASH_C2ACR_ICRST                                \ CPU2 Instruction cache reset
-$00008000 constant FLASH_C2ACR_PES                                  \ CPU2 program / erase suspend request
+  [ifdef] FLASH_OPTR_DEF
+    \
+    \ @brief Flash option register
+    \ Address offset: 0x20
+    \ Reset value: 0x3FFFF0AA
+    \
+    $00 constant FLASH_RDP                      \ [0x00 : 8] Read protection level
+    $08 constant FLASH_ESE                      \ [0x08] System security enabled flag
+    $09 constant FLASH_BOR_LEV                  \ [0x09 : 3] BOR reset Level
+    $0c constant FLASH_nRST_STOP                \ [0x0c] nRST_STOP
+    $0d constant FLASH_nRST_STDBY               \ [0x0d] nRST_STDBY
+    $0e constant FLASH_nRST_SHDW                \ [0x0e] nRSTSHDW
+    $10 constant FLASH_IWDG_SW                  \ [0x10] Independent watchdog selection
+    $11 constant FLASH_IWDG_STOP                \ [0x11] Independent watchdog counter freeze in Stop mode
+    $12 constant FLASH_IWDG_STDBY               \ [0x12] Independent watchdog counter freeze in Standby mode
+    $13 constant FLASH_WWDG_SW                  \ [0x13] Window watchdog selection
+    $17 constant FLASH_nBOOT1                   \ [0x17] Boot configuration
+    $18 constant FLASH_SRAM2_PE                 \ [0x18] SRAM2 parity check enable
+    $19 constant FLASH_SRAM2_RST                \ [0x19] SRAM2 Erase when system reset
+    $1a constant FLASH_nSWBOOT0                 \ [0x1a] Software BOOT0 selection
+    $1b constant FLASH_nBOOT0                   \ [0x1b] nBOOT0 option bit
+    $1e constant FLASH_BOOT_LOCK                \ [0x1e] CPU1 CM4 Unique Boot entry enable option bit
+    $1f constant FLASH_C2BOOT_LOCK              \ [0x1f] CPU2 CM0+ Unique Boot entry enable option bit
+  [then]
 
 
-\
-\ @brief Flash CPU2 status register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FLASH_C2SR_EOP                                   \ End of operation
-$00000002 constant FLASH_C2SR_OPERR                                 \ Operation error
-$00000008 constant FLASH_C2SR_PROGERR                               \ Programming error
-$00000010 constant FLASH_C2SR_WRPERR                                \ WRPERR
-$00000020 constant FLASH_C2SR_PGAERR                                \ PGAERR
-$00000040 constant FLASH_C2SR_SIZERR                                \ Size error
-$00000080 constant FLASH_C2SR_PGSERR                                \ Programming sequence error
-$00000100 constant FLASH_C2SR_MISERR                                \ Fast programming data miss error
-$00000200 constant FLASH_C2SR_FASTERR                               \ Fast programming error
-$00004000 constant FLASH_C2SR_RDERR                                 \ PCROP read error
-$00010000 constant FLASH_C2SR_BSY                                   \ BSY
-$00040000 constant FLASH_C2SR_CFGBSY                                \ CFGBSY
-$00080000 constant FLASH_C2SR_PESD                                  \ PESD
+  [ifdef] FLASH_PCROP1ASR_DEF
+    \
+    \ @brief Flash PCROP zone A Start address register
+    \ Address offset: 0x24
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant FLASH_PCROP1A_STRT             \ [0x00 : 8] PCROP1A area start offset
+  [then]
 
 
-\
-\ @brief Flash CPU2 control register
-\ Address offset: 0x64
-\ Reset value: 0xC0000000
-\
-
-$00000001 constant FLASH_C2CR_PG                                    \ Programming
-$00000002 constant FLASH_C2CR_PER                                   \ Page erase
-$00000004 constant FLASH_C2CR_MER                                   \ Mass erase
-$000003f8 constant FLASH_C2CR_PNB                                   \ Page number selection
-$00010000 constant FLASH_C2CR_STRT                                  \ Start
-$00040000 constant FLASH_C2CR_FSTPG                                 \ Fast programming
-$01000000 constant FLASH_C2CR_EOPIE                                 \ End of operation interrupt enable
-$02000000 constant FLASH_C2CR_ERRIE                                 \ Error interrupt enable
-$04000000 constant FLASH_C2CR_RDERRIE                               \ RDERRIE
+  [ifdef] FLASH_PCROP1AER_DEF
+    \
+    \ @brief Flash PCROP zone A End address register
+    \ Address offset: 0x28
+    \ Reset value: 0xFFFFFF00
+    \
+    $00 constant FLASH_PCROP1A_END              \ [0x00 : 8] PCROP area end offset
+    $1f constant FLASH_PCROP_RDP                \ [0x1f] PCROP area preserved when RDP level decreased
+  [then]
 
 
-\
-\ @brief Flash secure Flash start address register
-\ Address offset: 0x80
-\ Reset value: 0xFFFFEFFF
-\
-
-$0000007f constant FLASH_SFR_SFSA                                   \ Secure Flash start address
-$00000080 constant FLASH_SFR_FSD                                    \ Flash security disabled
-$00001000 constant FLASH_SFR_DDS                                    \ DDS
-$007f0000 constant FLASH_SFR_HDPSA                                  \ User Flash hide protection area start address
-$00800000 constant FLASH_SFR_HDPAD                                  \ User Flash hide protection area disabled
-$80000000 constant FLASH_SFR_SUBGHSPISD                             \ sub-GHz radio SPI security disable
+  [ifdef] FLASH_WRP1AR_DEF
+    \
+    \ @brief Flash WRP area A address register
+    \ Address offset: 0x2C
+    \ Reset value: 0xFF80FFFF
+    \
+    $00 constant FLASH_WRP1A_STRT               \ [0x00 : 7] Bank 1 WRP first area start offset
+    $10 constant FLASH_WRP1A_END                \ [0x10 : 7] Bank 1 WRP first area A end offset
+  [then]
 
 
-\
-\ @brief Flash secure SRAM start address and CPU2 reset vector register
-\ Address offset: 0x84
-\ Reset value: 0xFFFF8000
-\
-
-$0000ffff constant FLASH_SRRVR_SBRV                                 \ CPU2 boot reset vector
-$007c0000 constant FLASH_SRRVR_SBRSA                                \ Secure backup SRAM2 start address
-$00800000 constant FLASH_SRRVR_BRSD                                 \ backup SRAM2 security disable
-$3e000000 constant FLASH_SRRVR_SNBRSA                               \ Secure non-backup SRAM1 start address
-$40000000 constant FLASH_SRRVR_NBRSD                                \ NBRSD
-$80000000 constant FLASH_SRRVR_C2OPT                                \ C2OPT
+  [ifdef] FLASH_WRP1BR_DEF
+    \
+    \ @brief Flash WRP area B address register
+    \ Address offset: 0x30
+    \ Reset value: 0xFF80FFFF
+    \
+    $00 constant FLASH_WRP1B_STRT               \ [0x00 : 7] Bank 1 WRP second area B end offset
+    $10 constant FLASH_WRP1B_END                \ [0x10 : 7] Bank 1 WRP second area B start offset
+  [then]
 
 
-\
-\ @brief Flash
-\
-$58004000 constant FLASH_ACR      \ offset: 0x00 : Access control register
-$58004004 constant FLASH_ACR2     \ offset: 0x04 : Flash access control register 2
-$58004008 constant FLASH_KEYR     \ offset: 0x08 : Flash key register
-$5800400c constant FLASH_OPTKEYR  \ offset: 0x0C : Option byte key register
-$58004010 constant FLASH_SR       \ offset: 0x10 : Status register
-$58004014 constant FLASH_CR       \ offset: 0x14 : Flash control register
-$58004018 constant FLASH_ECCR     \ offset: 0x18 : Flash ECC register
-$58004020 constant FLASH_OPTR     \ offset: 0x20 : Flash option register
-$58004024 constant FLASH_PCROP1ASR  \ offset: 0x24 : Flash PCROP zone A Start address register
-$58004028 constant FLASH_PCROP1AER  \ offset: 0x28 : Flash PCROP zone A End address register
-$5800402c constant FLASH_WRP1AR   \ offset: 0x2C : Flash WRP area A address register
-$58004030 constant FLASH_WRP1BR   \ offset: 0x30 : Flash WRP area B address register
-$58004034 constant FLASH_PCROP1BSR  \ offset: 0x34 : Flash PCROP zone B Start address register
-$58004038 constant FLASH_PCROP1BER  \ offset: 0x38 : Flash PCROP zone B End address register
-$5800403c constant FLASH_IPCCBR   \ offset: 0x3C : Flash IPCC data buffer address register
-$5800405c constant FLASH_C2ACR    \ offset: 0x5C : Flash CPU2 access control register
-$58004060 constant FLASH_C2SR     \ offset: 0x60 : Flash CPU2 status register
-$58004064 constant FLASH_C2CR     \ offset: 0x64 : Flash CPU2 control register
-$58004080 constant FLASH_SFR      \ offset: 0x80 : Flash secure Flash start address register
-$58004084 constant FLASH_SRRVR    \ offset: 0x84 : Flash secure SRAM start address and CPU2 reset vector register
+  [ifdef] FLASH_PCROP1BSR_DEF
+    \
+    \ @brief Flash PCROP zone B Start address register
+    \ Address offset: 0x34
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant FLASH_PCROP1B_STRT             \ [0x00 : 8] Bank 1 WRP second area B end offset
+  [then]
 
+
+  [ifdef] FLASH_PCROP1BER_DEF
+    \
+    \ @brief Flash PCROP zone B End address register
+    \ Address offset: 0x38
+    \ Reset value: 0xFFFFFF00
+    \
+    $00 constant FLASH_PCROP1B_END              \ [0x00 : 8] PCROP1B area end offset
+  [then]
+
+
+  [ifdef] FLASH_IPCCBR_DEF
+    \
+    \ @brief Flash IPCC data buffer address register
+    \ Address offset: 0x3C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant FLASH_IPCCDBA                  \ [0x00 : 14] IPCCDBA
+  [then]
+
+
+  [ifdef] FLASH_C2ACR_DEF
+    \
+    \ @brief Flash CPU2 access control register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000600
+    \
+    $08 constant FLASH_PRFTEN                   \ [0x08] CPU2 Prefetch enable
+    $09 constant FLASH_ICEN                     \ [0x09] CPU2 Instruction cache enable
+    $0b constant FLASH_ICRST                    \ [0x0b] CPU2 Instruction cache reset
+    $0f constant FLASH_PES                      \ [0x0f] CPU2 program / erase suspend request
+  [then]
+
+
+  [ifdef] FLASH_C2SR_DEF
+    \
+    \ @brief Flash CPU2 status register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant FLASH_EOP                      \ [0x00] End of operation
+    $01 constant FLASH_OPERR                    \ [0x01] Operation error
+    $03 constant FLASH_PROGERR                  \ [0x03] Programming error
+    $04 constant FLASH_WRPERR                   \ [0x04] WRPERR
+    $05 constant FLASH_PGAERR                   \ [0x05] PGAERR
+    $06 constant FLASH_SIZERR                   \ [0x06] Size error
+    $07 constant FLASH_PGSERR                   \ [0x07] Programming sequence error
+    $08 constant FLASH_MISERR                   \ [0x08] Fast programming data miss error
+    $09 constant FLASH_FASTERR                  \ [0x09] Fast programming error
+    $0e constant FLASH_RDERR                    \ [0x0e] PCROP read error
+    $10 constant FLASH_BSY                      \ [0x10] BSY
+    $12 constant FLASH_CFGBSY                   \ [0x12] CFGBSY
+    $13 constant FLASH_PESD                     \ [0x13] PESD
+  [then]
+
+
+  [ifdef] FLASH_C2CR_DEF
+    \
+    \ @brief Flash CPU2 control register
+    \ Address offset: 0x64
+    \ Reset value: 0xC0000000
+    \
+    $00 constant FLASH_PG                       \ [0x00] Programming
+    $01 constant FLASH_PER                      \ [0x01] Page erase
+    $02 constant FLASH_MER                      \ [0x02] Mass erase
+    $03 constant FLASH_PNB                      \ [0x03 : 7] Page number selection
+    $10 constant FLASH_STRT                     \ [0x10] Start
+    $12 constant FLASH_FSTPG                    \ [0x12] Fast programming
+    $18 constant FLASH_EOPIE                    \ [0x18] End of operation interrupt enable
+    $19 constant FLASH_ERRIE                    \ [0x19] Error interrupt enable
+    $1a constant FLASH_RDERRIE                  \ [0x1a] RDERRIE
+  [then]
+
+
+  [ifdef] FLASH_SFR_DEF
+    \
+    \ @brief Flash secure Flash start address register
+    \ Address offset: 0x80
+    \ Reset value: 0xFFFFEFFF
+    \
+    $00 constant FLASH_SFSA                     \ [0x00 : 7] Secure Flash start address
+    $07 constant FLASH_FSD                      \ [0x07] Flash security disabled
+    $0c constant FLASH_DDS                      \ [0x0c] DDS
+    $10 constant FLASH_HDPSA                    \ [0x10 : 7] User Flash hide protection area start address
+    $17 constant FLASH_HDPAD                    \ [0x17] User Flash hide protection area disabled
+    $1f constant FLASH_SUBGHSPISD               \ [0x1f] sub-GHz radio SPI security disable
+  [then]
+
+
+  [ifdef] FLASH_SRRVR_DEF
+    \
+    \ @brief Flash secure SRAM start address and CPU2 reset vector register
+    \ Address offset: 0x84
+    \ Reset value: 0xFFFF8000
+    \
+    $00 constant FLASH_SBRV                     \ [0x00 : 16] CPU2 boot reset vector
+    $12 constant FLASH_SBRSA                    \ [0x12 : 5] Secure backup SRAM2 start address
+    $17 constant FLASH_BRSD                     \ [0x17] backup SRAM2 security disable
+    $19 constant FLASH_SNBRSA                   \ [0x19 : 5] Secure non-backup SRAM1 start address
+    $1e constant FLASH_NBRSD                    \ [0x1e] NBRSD
+    $1f constant FLASH_C2OPT                    \ [0x1f] C2OPT
+  [then]
+
+  \
+  \ @brief Flash
+  \
+  $00 constant FLASH_ACR                \ Access control register
+  $04 constant FLASH_ACR2               \ Flash access control register 2
+  $08 constant FLASH_KEYR               \ Flash key register
+  $0C constant FLASH_OPTKEYR            \ Option byte key register
+  $10 constant FLASH_SR                 \ Status register
+  $14 constant FLASH_CR                 \ Flash control register
+  $18 constant FLASH_ECCR               \ Flash ECC register
+  $20 constant FLASH_OPTR               \ Flash option register
+  $24 constant FLASH_PCROP1ASR          \ Flash PCROP zone A Start address register
+  $28 constant FLASH_PCROP1AER          \ Flash PCROP zone A End address register
+  $2C constant FLASH_WRP1AR             \ Flash WRP area A address register
+  $30 constant FLASH_WRP1BR             \ Flash WRP area B address register
+  $34 constant FLASH_PCROP1BSR          \ Flash PCROP zone B Start address register
+  $38 constant FLASH_PCROP1BER          \ Flash PCROP zone B End address register
+  $3C constant FLASH_IPCCBR             \ Flash IPCC data buffer address register
+  $5C constant FLASH_C2ACR              \ Flash CPU2 access control register
+  $60 constant FLASH_C2SR               \ Flash CPU2 status register
+  $64 constant FLASH_C2CR               \ Flash CPU2 control register
+  $80 constant FLASH_SFR                \ Flash secure Flash start address register
+  $84 constant FLASH_SRRVR              \ Flash secure SRAM start address and CPU2 reset vector register
+
+: FLASH_DEF ; [then]

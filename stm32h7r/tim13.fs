@@ -6,149 +6,161 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM13_DEF
 
-\
-\ @brief TIM13 control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_CR1_CEN                              \ Counter enable Note: External clock and gated mode can work only if the CEN bit has been previously set by software. However trigger mode can set the CEN bit automatically by hardware.
-$00000002 constant TIM13_TIM13_CR1_UDIS                             \ Update disable This bit is set and cleared by software to enable/disable update interrupt (UEV) event generation. Counter overflow Setting the UG bit. Buffered registers are then loaded with their preload values.
-$00000004 constant TIM13_TIM13_CR1_URS                              \ Update request source This bit is set and cleared by software to select the update interrupt (UEV) sources. Counter overflow Setting the UG bit
-$00000008 constant TIM13_TIM13_CR1_OPM                              \ One-pulse mode
-$00000080 constant TIM13_TIM13_CR1_ARPE                             \ Auto-reload preload enable
-$00000300 constant TIM13_TIM13_CR1_CKD                              \ Clock division This bit-field indicates the division ratio between the timer clock (tim_ker_ck) frequency and sampling clock used by the digital filters (tim_tix),
-$00000800 constant TIM13_TIM13_CR1_UIFREMAP                         \ UIF status bit remapping
-$00001000 constant TIM13_TIM13_CR1_DITHEN                           \ Dithering enable Note: The DITHEN bit can only be modified when CEN bit is reset.
-
-
-\
-\ @brief TIM13 Interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_DIER_UIE                             \ Update interrupt enable
-$00000002 constant TIM13_TIM13_DIER_CC1IE                           \ Capture/Compare 1 interrupt enable
+  [ifdef] TIM13_TIM13_CR1_DEF
+    \
+    \ @brief TIM13 control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CEN                      \ [0x00] Counter enable Note: External clock and gated mode can work only if the CEN bit has been previously set by software. However trigger mode can set the CEN bit automatically by hardware.
+    $01 constant TIM13_UDIS                     \ [0x01] Update disable This bit is set and cleared by software to enable/disable update interrupt (UEV) event generation. Counter overflow Setting the UG bit. Buffered registers are then loaded with their preload values.
+    $02 constant TIM13_URS                      \ [0x02] Update request source This bit is set and cleared by software to select the update interrupt (UEV) sources. Counter overflow Setting the UG bit
+    $03 constant TIM13_OPM                      \ [0x03] One-pulse mode
+    $07 constant TIM13_ARPE                     \ [0x07] Auto-reload preload enable
+    $08 constant TIM13_CKD                      \ [0x08 : 2] Clock division This bit-field indicates the division ratio between the timer clock (tim_ker_ck) frequency and sampling clock used by the digital filters (tim_tix),
+    $0b constant TIM13_UIFREMAP                 \ [0x0b] UIF status bit remapping
+    $0c constant TIM13_DITHEN                   \ [0x0c] Dithering enable Note: The DITHEN bit can only be modified when CEN bit is reset.
+  [then]
 
 
-\
-\ @brief TIM13 status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_SR_UIF                               \ Update interrupt flag This bit is set by hardware on an update event. It is cleared by software. At overflow and if UDIS=0 in the TIMx_CR1 register. When CNT is reinitialized by software using the UG bit in TIMx_EGR register, if URS=0 and UDIS=0 in the TIMx_CR1 register.
-$00000002 constant TIM13_TIM13_SR_CC1IF                             \ Capture/compare 1 interrupt flag This flag is set by hardware. It is cleared by software (input capture or output compare mode) or by reading the TIMx_CCR1 register (input capture mode only). If channel CC1 is configured as output: this flag is set when he content of the counter TIMx_CNT matches the content of the TIMx_CCR1 register. When the content of TIMx_CCR1 is greater than the content of TIMx_ARR, the CC1IF bit goes high on the counter overflow (in up-counting and up/down-counting modes) or underflow (in down-counting mode). There are 3 possible options for flag setting in center-aligned mode, refer to the CMS bits in the TIMx_CR1 register for the full description. If channel CC1 is configured as input: this bit is set when counter value has been captured in TIMx_CCR1 register (an edge has been detected on tim_ic1, as per the edge sensitivity defined with the CC1P and CC1NP bits setting, in TIMx_CCER).
-$00000200 constant TIM13_TIM13_SR_CC1OF                             \ Capture/Compare 1 overcapture flag This flag is set by hardware only when the corresponding channel is configured in input capture mode. It is cleared by software by writing it to 0.
-
-
-\
-\ @brief TIM13 event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_EGR_UG                               \ Update generation This bit can be set by software, it is automatically cleared by hardware.
-$00000002 constant TIM13_TIM13_EGR_CC1G                             \ Capture/compare 1 generation This bit is set by software in order to generate an event, it is automatically cleared by hardware. If channel CC1 is configured as output: CC1IF flag is set, Corresponding interrupt or is sent if enabled. If channel CC1 is configured as input: The current value of the counter is captured in TIMx_CCR1 register. The CC1IF flag is set, the corresponding interrupt is sent if enabled. The CC1OF flag is set if the CC1IF flag was already high.
+  [ifdef] TIM13_TIM13_DIER_DEF
+    \
+    \ @brief TIM13 Interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UIE                      \ [0x00] Update interrupt enable
+    $01 constant TIM13_CC1IE                    \ [0x01] Capture/Compare 1 interrupt enable
+  [then]
 
 
-\
-\ @brief TIM13 capture/compare mode register 1
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM13_TIM13_CCMR1_INPUT_CC1S                     \ Capture/Compare 1 selection This bit-field defines the direction of the channel (input/output) as well as the used input. Note: CC1S bits are writable only when the channel is OFF (CC1E = 0 in TIMx_CCER).
-$0000000c constant TIM13_TIM13_CCMR1_INPUT_IC1PSC                   \ Input capture 1 prescaler This bit-field defines the ratio of the prescaler acting on CC1 input (tim_ic1). The prescaler is reset as soon as CC1E=0 (TIMx_CCER register).
-$000000f0 constant TIM13_TIM13_CCMR1_INPUT_IC1F                     \ Input capture 1 filter This bit-field defines the frequency used to sample tim_ti1 input and the length of the digital filter applied to tim_ti1. The digital filter is made of an event counter in which N consecutive events are needed to validate a transition on the output:
-
-
-\
-\ @brief TIM13 capture/compare mode register 1
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM13_TIM13_CCMR1_OUTPUT_CC1S                    \ Capture/Compare 1 selection This bit-field defines the direction of the channel (input/output) as well as the used input. Note: CC1S bits are writable only when the channel is OFF (CC1E = 0 in TIMx_CCER).
-$00000004 constant TIM13_TIM13_CCMR1_OUTPUT_OC1FE                   \ Output compare 1 fast enable This bit decreases the latency between a trigger event and a transition on the timer output. It must be used in one-pulse mode (OPM bit set in TIMx_CR1 register), to have the output pulse starting as soon as possible after the starting trigger.
-$00000008 constant TIM13_TIM13_CCMR1_OUTPUT_OC1PE                   \ Output compare 1 preload enable
-$00000070 constant TIM13_TIM13_CCMR1_OUTPUT_OC1M                    \ OC1M[2:0]: Output compare 1 mode (refer to bit 16 for OC1M[3]) These bits define the behavior of the output reference signal tim_oc1ref from which tim_oc1 is derived. tim_oc1ref is active high whereas tim_oc1 active level depends on CC1P bit. Others: Reserved Note: In PWM mode 1 or 2, the OCREF level changes when the result of the comparison changes or when the output compare mode switches from frozen to PWM mode.
-$00010000 constant TIM13_TIM13_CCMR1_OUTPUT_OC1M_1                  \ OC1M[3]
+  [ifdef] TIM13_TIM13_SR_DEF
+    \
+    \ @brief TIM13 status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UIF                      \ [0x00] Update interrupt flag This bit is set by hardware on an update event. It is cleared by software. At overflow and if UDIS=0 in the TIMx_CR1 register. When CNT is reinitialized by software using the UG bit in TIMx_EGR register, if URS=0 and UDIS=0 in the TIMx_CR1 register.
+    $01 constant TIM13_CC1IF                    \ [0x01] Capture/compare 1 interrupt flag This flag is set by hardware. It is cleared by software (input capture or output compare mode) or by reading the TIMx_CCR1 register (input capture mode only). If channel CC1 is configured as output: this flag is set when he content of the counter TIMx_CNT matches the content of the TIMx_CCR1 register. When the content of TIMx_CCR1 is greater than the content of TIMx_ARR, the CC1IF bit goes high on the counter overflow (in up-counting and up/down-counting modes) or underflow (in down-counting mode). There are 3 possible options for flag setting in center-aligned mode, refer to the CMS bits in the TIMx_CR1 register for the full description. If channel CC1 is configured as input: this bit is set when counter value has been captured in TIMx_CCR1 register (an edge has been detected on tim_ic1, as per the edge sensitivity defined with the CC1P and CC1NP bits setting, in TIMx_CCER).
+    $09 constant TIM13_CC1OF                    \ [0x09] Capture/Compare 1 overcapture flag This flag is set by hardware only when the corresponding channel is configured in input capture mode. It is cleared by software by writing it to 0.
+  [then]
 
 
-\
-\ @brief TIM13 capture/compare enable register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM13_TIM13_CCER_CC1E                            \ Capture/Compare 1 output enable.
-$00000002 constant TIM13_TIM13_CCER_CC1P                            \ Capture/Compare 1 output Polarity. When CC1 channel is configured as input, both CC1NP/CC1P bits select the active polarity of tim_ti1fp1 for capture operations. CC1NP=0, CC1P=0: non-inverted/rising edge. The circuit is sensitive to tim_ti1fp1 rising edge (capture or trigger operations in reset, external clock or trigger mode), TIxFP1 is not inverted (trigger operation in gated mode or encoder mode). CC1NP=0, CC1P=1: inverted/falling edge. The circuit is sensitive to tim_ti1fp1 falling edge (capture or trigger operations in reset, external clock or trigger mode), tim_ti1fp1 is inverted (trigger operation in gated mode or encoder mode). CC1NP=1, CC1P=1: non-inverted/both edges/ The circuit is sensitive to both tim_ti1fp1 rising and falling edges (capture or trigger operations in reset, external clock or trigger mode), tim_ti1fp1 not inverted (trigger operation in gated mode). This configuration must not be used in encoder mode. CC1NP=1, CC1P=0: This configuration is reserved, it must not be used.
-$00000008 constant TIM13_TIM13_CCER_CC1NP                           \ Capture/Compare 1 complementary output Polarity. CC1 channel configured as output: CC1NP must be kept cleared. CC1 channel configured as input: CC1NP bit is used in conjunction with CC1P to define tim_ti1fp1 polarity (refer to CC1P description).
-
-
-\
-\ @brief TIM13 counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM13_TIM13_CNT_CNT                              \ Counter value Non-dithering mode (DITHEN = 0) The register holds the counter value. Dithering mode (DITHEN = 1) The register only holds the non-dithered part in CNT[15:0]. The fractional part is not available.
-$80000000 constant TIM13_TIM13_CNT_UIFCPY                           \ UIF Copy This bit is a read-only copy of the UIF bit in the TIMx_ISR register.
+  [ifdef] TIM13_TIM13_EGR_DEF
+    \
+    \ @brief TIM13 event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_UG                       \ [0x00] Update generation This bit can be set by software, it is automatically cleared by hardware.
+    $01 constant TIM13_CC1G                     \ [0x01] Capture/compare 1 generation This bit is set by software in order to generate an event, it is automatically cleared by hardware. If channel CC1 is configured as output: CC1IF flag is set, Corresponding interrupt or is sent if enabled. If channel CC1 is configured as input: The current value of the counter is captured in TIMx_CCR1 register. The CC1IF flag is set, the corresponding interrupt is sent if enabled. The CC1OF flag is set if the CC1IF flag was already high.
+  [then]
 
 
-\
-\ @brief TIM13 prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM13_TIM13_PSC_PSC                              \ Prescaler value The counter clock frequency tim_cnt_ck is equal to f<sub>tim_psc_ck</sub> / (PSC[15:0] + 1). PSC contains the value to be loaded in the active prescaler register at each update event. (including when the counter is cleared through UG bit of TIMx_EGR register or through trigger controller when configured in reset mode).
-
-
-\
-\ @brief TIM13 auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x0000FFFF
-\
-
-$000fffff constant TIM13_TIM13_ARR_ARR                              \ Auto-reload value ARR is the value to be loaded in the actual auto-reload register. Refer to the Section 67.4.3: Time-base unit on page 3951 for more details about ARR update and behavior. The counter is blocked while the auto-reload value is null. Non-dithering mode (DITHEN = 0) The register holds the auto-reload value in ARR[15:0]. The ARR[19:16] bits are reset. Dithering mode (DITHEN = 1) The register holds the integer part in ARR[19:4]. The ARR[3:0] bitfield contains the dithered part.
+  [ifdef] TIM13_TIM13_CCMR1_INPUT_DEF
+    \
+    \ @brief TIM13 capture/compare mode register 1
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection This bit-field defines the direction of the channel (input/output) as well as the used input. Note: CC1S bits are writable only when the channel is OFF (CC1E = 0 in TIMx_CCER).
+    $02 constant TIM13_IC1PSC                   \ [0x02 : 2] Input capture 1 prescaler This bit-field defines the ratio of the prescaler acting on CC1 input (tim_ic1). The prescaler is reset as soon as CC1E=0 (TIMx_CCER register).
+    $04 constant TIM13_IC1F                     \ [0x04 : 4] Input capture 1 filter This bit-field defines the frequency used to sample tim_ti1 input and the length of the digital filter applied to tim_ti1. The digital filter is made of an event counter in which N consecutive events are needed to validate a transition on the output:
+  [then]
 
 
-\
-\ @brief TIM13 capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$000fffff constant TIM13_TIM13_CCR1_CCR1                            \ Capture/compare 1 value If channel CC1 is configured as output: CCR1 is the value to be loaded in the actual capture/compare 1 register (preload value). It is loaded permanently if the preload feature is not selected in the TIMx_CCMR1 register (bit OC1PE). Else the preload value is copied in the active capture/compare 1 register when an update event occurs. The active capture/compare register contains the value to be compared to the counter TIMx_CNT and signaled on tim_oc1 output. Non-dithering mode (DITHEN = 0) The register holds the compare value in CCR1[15:0]. The CCR1[19:16] bits are reset. Dithering mode (DITHEN = 1) The register holds the integer part in CCR1[19:4]. The CCR1[3:0] bitfield contains the dithered part. If channel CC1 is configured as input: CR1 is the counter value transferred by the last input capture 1 event (tim_ic1). The TIMx_CCR1 register is read-only and cannot be programmed. Non-dithering mode (DITHEN = 0) The register holds the capture value in CCR1[15:0]. The CCR1[19:16] bits are reset. Dithering mode (DITHEN = 1) The register holds the capture in CCR1[19:4]. The CCR1[3:0] bits are reset.
-
-
-\
-\ @brief TIM13 timer input selection register
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant TIM13_TIM13_TISEL_TI1SEL                         \ selects tim_ti1_in[15:0] input ... Refer to Table 656: Interconnect to the tim_ti1 input multiplexer for interconnects list.
+  [ifdef] TIM13_TIM13_CCMR1_OUTPUT_DEF
+    \
+    \ @brief TIM13 capture/compare mode register 1
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection This bit-field defines the direction of the channel (input/output) as well as the used input. Note: CC1S bits are writable only when the channel is OFF (CC1E = 0 in TIMx_CCER).
+    $02 constant TIM13_OC1FE                    \ [0x02] Output compare 1 fast enable This bit decreases the latency between a trigger event and a transition on the timer output. It must be used in one-pulse mode (OPM bit set in TIMx_CR1 register), to have the output pulse starting as soon as possible after the starting trigger.
+    $03 constant TIM13_OC1PE                    \ [0x03] Output compare 1 preload enable
+    $04 constant TIM13_OC1M                     \ [0x04 : 3] OC1M[2:0]: Output compare 1 mode (refer to bit 16 for OC1M[3]) These bits define the behavior of the output reference signal tim_oc1ref from which tim_oc1 is derived. tim_oc1ref is active high whereas tim_oc1 active level depends on CC1P bit. Others: Reserved Note: In PWM mode 1 or 2, the OCREF level changes when the result of the comparison changes or when the output compare mode switches from frozen to PWM mode.
+    $10 constant TIM13_OC1M_1                   \ [0x10] OC1M[3]
+  [then]
 
 
-\
-\ @brief General-purpose timers
-\
-$40001c00 constant TIM13_TIM13_CR1  \ offset: 0x00 : TIM13 control register 1
-$40001c0c constant TIM13_TIM13_DIER  \ offset: 0x0C : TIM13 Interrupt enable register
-$40001c10 constant TIM13_TIM13_SR  \ offset: 0x10 : TIM13 status register
-$40001c14 constant TIM13_TIM13_EGR  \ offset: 0x14 : TIM13 event generation register
-$40001c18 constant TIM13_TIM13_CCMR1_INPUT  \ offset: 0x18 : TIM13 capture/compare mode register 1
-$40001c18 constant TIM13_TIM13_CCMR1_OUTPUT  \ offset: 0x18 : TIM13 capture/compare mode register 1
-$40001c20 constant TIM13_TIM13_CCER  \ offset: 0x20 : TIM13 capture/compare enable register
-$40001c24 constant TIM13_TIM13_CNT  \ offset: 0x24 : TIM13 counter
-$40001c28 constant TIM13_TIM13_PSC  \ offset: 0x28 : TIM13 prescaler
-$40001c2c constant TIM13_TIM13_ARR  \ offset: 0x2C : TIM13 auto-reload register
-$40001c34 constant TIM13_TIM13_CCR1  \ offset: 0x34 : TIM13 capture/compare register 1
-$40001c5c constant TIM13_TIM13_TISEL  \ offset: 0x5C : TIM13 timer input selection register
+  [ifdef] TIM13_TIM13_CCER_DEF
+    \
+    \ @brief TIM13 capture/compare enable register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CC1E                     \ [0x00] Capture/Compare 1 output enable.
+    $01 constant TIM13_CC1P                     \ [0x01] Capture/Compare 1 output Polarity. When CC1 channel is configured as input, both CC1NP/CC1P bits select the active polarity of tim_ti1fp1 for capture operations. CC1NP=0, CC1P=0: non-inverted/rising edge. The circuit is sensitive to tim_ti1fp1 rising edge (capture or trigger operations in reset, external clock or trigger mode), TIxFP1 is not inverted (trigger operation in gated mode or encoder mode). CC1NP=0, CC1P=1: inverted/falling edge. The circuit is sensitive to tim_ti1fp1 falling edge (capture or trigger operations in reset, external clock or trigger mode), tim_ti1fp1 is inverted (trigger operation in gated mode or encoder mode). CC1NP=1, CC1P=1: non-inverted/both edges/ The circuit is sensitive to both tim_ti1fp1 rising and falling edges (capture or trigger operations in reset, external clock or trigger mode), tim_ti1fp1 not inverted (trigger operation in gated mode). This configuration must not be used in encoder mode. CC1NP=1, CC1P=0: This configuration is reserved, it must not be used.
+    $03 constant TIM13_CC1NP                    \ [0x03] Capture/Compare 1 complementary output Polarity. CC1 channel configured as output: CC1NP must be kept cleared. CC1 channel configured as input: CC1NP bit is used in conjunction with CC1P to define tim_ti1fp1 polarity (refer to CC1P description).
+  [then]
 
+
+  [ifdef] TIM13_TIM13_CNT_DEF
+    \
+    \ @brief TIM13 counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CNT                      \ [0x00 : 16] Counter value Non-dithering mode (DITHEN = 0) The register holds the counter value. Dithering mode (DITHEN = 1) The register only holds the non-dithered part in CNT[15:0]. The fractional part is not available.
+    $1f constant TIM13_UIFCPY                   \ [0x1f] UIF Copy This bit is a read-only copy of the UIF bit in the TIMx_ISR register.
+  [then]
+
+
+  [ifdef] TIM13_TIM13_PSC_DEF
+    \
+    \ @brief TIM13 prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_PSC                      \ [0x00 : 16] Prescaler value The counter clock frequency tim_cnt_ck is equal to f<sub>tim_psc_ck</sub> / (PSC[15:0] + 1). PSC contains the value to be loaded in the active prescaler register at each update event. (including when the counter is cleared through UG bit of TIMx_EGR register or through trigger controller when configured in reset mode).
+  [then]
+
+
+  [ifdef] TIM13_TIM13_ARR_DEF
+    \
+    \ @brief TIM13 auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant TIM13_ARR                      \ [0x00 : 20] Auto-reload value ARR is the value to be loaded in the actual auto-reload register. Refer to the Section 67.4.3: Time-base unit on page 3951 for more details about ARR update and behavior. The counter is blocked while the auto-reload value is null. Non-dithering mode (DITHEN = 0) The register holds the auto-reload value in ARR[15:0]. The ARR[19:16] bits are reset. Dithering mode (DITHEN = 1) The register holds the integer part in ARR[19:4]. The ARR[3:0] bitfield contains the dithered part.
+  [then]
+
+
+  [ifdef] TIM13_TIM13_CCR1_DEF
+    \
+    \ @brief TIM13 capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_CCR1                     \ [0x00 : 20] Capture/compare 1 value If channel CC1 is configured as output: CCR1 is the value to be loaded in the actual capture/compare 1 register (preload value). It is loaded permanently if the preload feature is not selected in the TIMx_CCMR1 register (bit OC1PE). Else the preload value is copied in the active capture/compare 1 register when an update event occurs. The active capture/compare register contains the value to be compared to the counter TIMx_CNT and signaled on tim_oc1 output. Non-dithering mode (DITHEN = 0) The register holds the compare value in CCR1[15:0]. The CCR1[19:16] bits are reset. Dithering mode (DITHEN = 1) The register holds the integer part in CCR1[19:4]. The CCR1[3:0] bitfield contains the dithered part. If channel CC1 is configured as input: CR1 is the counter value transferred by the last input capture 1 event (tim_ic1). The TIMx_CCR1 register is read-only and cannot be programmed. Non-dithering mode (DITHEN = 0) The register holds the capture value in CCR1[15:0]. The CCR1[19:16] bits are reset. Dithering mode (DITHEN = 1) The register holds the capture in CCR1[19:4]. The CCR1[3:0] bits are reset.
+  [then]
+
+
+  [ifdef] TIM13_TIM13_TISEL_DEF
+    \
+    \ @brief TIM13 timer input selection register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM13_TI1SEL                   \ [0x00 : 4] selects tim_ti1_in[15:0] input ... Refer to Table 656: Interconnect to the tim_ti1 input multiplexer for interconnects list.
+  [then]
+
+  \
+  \ @brief General-purpose timers
+  \
+  $00 constant TIM13_TIM13_CR1          \ TIM13 control register 1
+  $0C constant TIM13_TIM13_DIER         \ TIM13 Interrupt enable register
+  $10 constant TIM13_TIM13_SR           \ TIM13 status register
+  $14 constant TIM13_TIM13_EGR          \ TIM13 event generation register
+  $18 constant TIM13_TIM13_CCMR1_INPUT  \ TIM13 capture/compare mode register 1
+  $18 constant TIM13_TIM13_CCMR1_OUTPUT \ TIM13 capture/compare mode register 1
+  $20 constant TIM13_TIM13_CCER         \ TIM13 capture/compare enable register
+  $24 constant TIM13_TIM13_CNT          \ TIM13 counter
+  $28 constant TIM13_TIM13_PSC          \ TIM13 prescaler
+  $2C constant TIM13_TIM13_ARR          \ TIM13 auto-reload register
+  $34 constant TIM13_TIM13_CCR1         \ TIM13 capture/compare register 1
+  $5C constant TIM13_TIM13_TISEL        \ TIM13 timer input selection register
+
+: TIM13_DEF ; [then]

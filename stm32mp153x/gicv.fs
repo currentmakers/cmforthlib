@@ -6,161 +6,175 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GICV_DEF
 
-\
-\ @brief GICV virtual machine control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GICV_GICV_CTLR_ENABLEGRP0                        \ ENABLEGRP0
-$00000002 constant GICV_GICV_CTLR_ENABLEGRP1                        \ ENABLEGRP1
-$00000004 constant GICV_GICV_CTLR_ACKCTL                            \ ACKCTL
-$00000008 constant GICV_GICV_CTLR_FIQEN                             \ FIQEN
-$00000010 constant GICV_GICV_CTLR_CBPR                              \ CBPR
-$00000200 constant GICV_GICV_CTLR_EOIMODE                           \ EOIMODE
-
-
-\
-\ @brief GICV VM priority mask register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$000000f8 constant GICV_GICV_PMR_PRIORITY                           \ PRIORITY
+  [ifdef] GICV_GICV_CTLR_DEF
+    \
+    \ @brief GICV virtual machine control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICV_ENABLEGRP0                \ [0x00] ENABLEGRP0
+    $01 constant GICV_ENABLEGRP1                \ [0x01] ENABLEGRP1
+    $02 constant GICV_ACKCTL                    \ [0x02] ACKCTL
+    $03 constant GICV_FIQEN                     \ [0x03] FIQEN
+    $04 constant GICV_CBPR                      \ [0x04] CBPR
+    $09 constant GICV_EOIMODE                   \ [0x09] EOIMODE
+  [then]
 
 
-\
-\ @brief GICV VM binary point register
-\ Address offset: 0x08
-\ Reset value: 0x00000002
-\
-
-$00000007 constant GICV_GICV_BPR_BINARY_POINT                       \ BINARY_POINT
-
-
-\
-\ @brief GICV VM interrupt acknowledge register
-\ Address offset: 0x0C
-\ Reset value: 0x000003FF
-\
-
-$000003ff constant GICV_GICV_IAR_INTERRUPT_ID                       \ INTERRUPT_ID
-$00000400 constant GICV_GICV_IAR_CPUID                              \ CPUID
+  [ifdef] GICV_GICV_PMR_DEF
+    \
+    \ @brief GICV VM priority mask register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $03 constant GICV_PRIORITY                  \ [0x03 : 5] PRIORITY
+  [then]
 
 
-\
-\ @brief GICV VM end of interrupt register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$000003ff constant GICV_GICV_EOIR_EOIINTID                          \ EOIINTID
-$00000400 constant GICV_GICV_EOIR_CPUID                             \ CPUID
-
-
-\
-\ @brief GICV VM running priority register
-\ Address offset: 0x14
-\ Reset value: 0x000000FF
-\
-
-$000000f8 constant GICV_GICV_RPR_PRIORITY                           \ PRIORITY
+  [ifdef] GICV_GICV_BPR_DEF
+    \
+    \ @brief GICV VM binary point register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000002
+    \
+    $00 constant GICV_BINARY_POINT              \ [0x00 : 3] BINARY_POINT
+  [then]
 
 
-\
-\ @brief GICV VM highest priority pending interrupt register
-\ Address offset: 0x18
-\ Reset value: 0x000003FF
-\
-
-$000003ff constant GICV_GICV_HPPIR_PENDINTID                        \ PENDINTID
-$00000400 constant GICV_GICV_HPPIR_CPUID                            \ CPUID
-
-
-\
-\ @brief GICV VM aliased binary point register
-\ Address offset: 0x1C
-\ Reset value: 0x00000003
-\
-
-$00000007 constant GICV_GICV_ABPR_BINARY_POINT                      \ BINARY_POINT
+  [ifdef] GICV_GICV_IAR_DEF
+    \
+    \ @brief GICV VM interrupt acknowledge register
+    \ Address offset: 0x0C
+    \ Reset value: 0x000003FF
+    \
+    $00 constant GICV_INTERRUPT_ID              \ [0x00 : 10] INTERRUPT_ID
+    $0a constant GICV_CPUID                     \ [0x0a] CPUID
+  [then]
 
 
-\
-\ @brief GICV VM aliased interrupt register
-\ Address offset: 0x20
-\ Reset value: 0x000003FF
-\
-
-$000003ff constant GICV_GICV_AIAR_INTERRUPT_ID                      \ INTERRUPT_ID
-$00000400 constant GICV_GICV_AIAR_CPUID                             \ CPUID
-
-
-\
-\ @brief GICV VM aliased end of interrupt register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000003ff constant GICV_GICV_AEOIR_EOIINTID                         \ EOIINTID
-$00000400 constant GICV_GICV_AEOIR_CPUID                            \ CPUID
+  [ifdef] GICV_GICV_EOIR_DEF
+    \
+    \ @brief GICV VM end of interrupt register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICV_EOIINTID                  \ [0x00 : 10] EOIINTID
+    $0a constant GICV_CPUID                     \ [0x0a] CPUID
+  [then]
 
 
-\
-\ @brief GICV VM aliased highest priority pending interrupt register
-\ Address offset: 0x28
-\ Reset value: 0x000003FF
-\
-
-$000003ff constant GICV_GICV_AHPPIR_PENDINTID                       \ PENDINTID
-$00000400 constant GICV_GICV_AHPPIR_CPUID                           \ CPUID
-
-
-\
-\ @brief The GICV_APR0 is an alias of GICH_APR.
-\ Address offset: 0xD0
-\ Reset value: 0x00000000
-\
-
-$00000000 constant GICV_GICV_APR0_APR0                              \ APR0
+  [ifdef] GICV_GICV_RPR_DEF
+    \
+    \ @brief GICV VM running priority register
+    \ Address offset: 0x14
+    \ Reset value: 0x000000FF
+    \
+    $03 constant GICV_PRIORITY                  \ [0x03 : 5] PRIORITY
+  [then]
 
 
-\
-\ @brief The GICV_IIDR is an alias of GICC_IIDR.
-\ Address offset: 0xFC
-\ Reset value: 0x0102143B
-\
-
-$00000000 constant GICV_GICV_IIDR_IIDR                              \ IIDR
-
-
-\
-\ @brief GICV VM deactivate interrupt register
-\ Address offset: 0x1000
-\ Reset value: 0x00000000
-\
-
-$000003ff constant GICV_GICV_DIR_INTERRUPT_ID                       \ INTERRUPT_ID
-$00000400 constant GICV_GICV_DIR_CPUID                              \ CPUID
+  [ifdef] GICV_GICV_HPPIR_DEF
+    \
+    \ @brief GICV VM highest priority pending interrupt register
+    \ Address offset: 0x18
+    \ Reset value: 0x000003FF
+    \
+    $00 constant GICV_PENDINTID                 \ [0x00 : 10] PENDINTID
+    $0a constant GICV_CPUID                     \ [0x0a] CPUID
+  [then]
 
 
-\
-\ @brief GICV
-\
-$a0026000 constant GICV_GICV_CTLR  \ offset: 0x00 : GICV virtual machine control register
-$a0026004 constant GICV_GICV_PMR  \ offset: 0x04 : GICV VM priority mask register
-$a0026008 constant GICV_GICV_BPR  \ offset: 0x08 : GICV VM binary point register
-$a002600c constant GICV_GICV_IAR  \ offset: 0x0C : GICV VM interrupt acknowledge register
-$a0026010 constant GICV_GICV_EOIR  \ offset: 0x10 : GICV VM end of interrupt register
-$a0026014 constant GICV_GICV_RPR  \ offset: 0x14 : GICV VM running priority register
-$a0026018 constant GICV_GICV_HPPIR  \ offset: 0x18 : GICV VM highest priority pending interrupt register
-$a002601c constant GICV_GICV_ABPR  \ offset: 0x1C : GICV VM aliased binary point register
-$a0026020 constant GICV_GICV_AIAR  \ offset: 0x20 : GICV VM aliased interrupt register
-$a0026024 constant GICV_GICV_AEOIR  \ offset: 0x24 : GICV VM aliased end of interrupt register
-$a0026028 constant GICV_GICV_AHPPIR  \ offset: 0x28 : GICV VM aliased highest priority pending interrupt register
-$a00260d0 constant GICV_GICV_APR0  \ offset: 0xD0 : The GICV_APR0 is an alias of GICH_APR.
-$a00260fc constant GICV_GICV_IIDR  \ offset: 0xFC : The GICV_IIDR is an alias of GICC_IIDR.
-$a0027000 constant GICV_GICV_DIR  \ offset: 0x1000 : GICV VM deactivate interrupt register
+  [ifdef] GICV_GICV_ABPR_DEF
+    \
+    \ @brief GICV VM aliased binary point register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000003
+    \
+    $00 constant GICV_BINARY_POINT              \ [0x00 : 3] BINARY_POINT
+  [then]
 
+
+  [ifdef] GICV_GICV_AIAR_DEF
+    \
+    \ @brief GICV VM aliased interrupt register
+    \ Address offset: 0x20
+    \ Reset value: 0x000003FF
+    \
+    $00 constant GICV_INTERRUPT_ID              \ [0x00 : 10] INTERRUPT_ID
+    $0a constant GICV_CPUID                     \ [0x0a] CPUID
+  [then]
+
+
+  [ifdef] GICV_GICV_AEOIR_DEF
+    \
+    \ @brief GICV VM aliased end of interrupt register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICV_EOIINTID                  \ [0x00 : 10] EOIINTID
+    $0a constant GICV_CPUID                     \ [0x0a] CPUID
+  [then]
+
+
+  [ifdef] GICV_GICV_AHPPIR_DEF
+    \
+    \ @brief GICV VM aliased highest priority pending interrupt register
+    \ Address offset: 0x28
+    \ Reset value: 0x000003FF
+    \
+    $00 constant GICV_PENDINTID                 \ [0x00 : 10] PENDINTID
+    $0a constant GICV_CPUID                     \ [0x0a] CPUID
+  [then]
+
+
+  [ifdef] GICV_GICV_APR0_DEF
+    \
+    \ @brief The GICV_APR0 is an alias of GICH_APR.
+    \ Address offset: 0xD0
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICV_APR0                      \ [0x00 : 32] APR0
+  [then]
+
+
+  [ifdef] GICV_GICV_IIDR_DEF
+    \
+    \ @brief The GICV_IIDR is an alias of GICC_IIDR.
+    \ Address offset: 0xFC
+    \ Reset value: 0x0102143B
+    \
+    $00 constant GICV_IIDR                      \ [0x00 : 32] IIDR
+  [then]
+
+
+  [ifdef] GICV_GICV_DIR_DEF
+    \
+    \ @brief GICV VM deactivate interrupt register
+    \ Address offset: 0x1000
+    \ Reset value: 0x00000000
+    \
+    $00 constant GICV_INTERRUPT_ID              \ [0x00 : 10] INTERRUPT_ID
+    $0a constant GICV_CPUID                     \ [0x0a] CPUID
+  [then]
+
+  \
+  \ @brief GICV
+  \
+  $00 constant GICV_GICV_CTLR           \ GICV virtual machine control register
+  $04 constant GICV_GICV_PMR            \ GICV VM priority mask register
+  $08 constant GICV_GICV_BPR            \ GICV VM binary point register
+  $0C constant GICV_GICV_IAR            \ GICV VM interrupt acknowledge register
+  $10 constant GICV_GICV_EOIR           \ GICV VM end of interrupt register
+  $14 constant GICV_GICV_RPR            \ GICV VM running priority register
+  $18 constant GICV_GICV_HPPIR          \ GICV VM highest priority pending interrupt register
+  $1C constant GICV_GICV_ABPR           \ GICV VM aliased binary point register
+  $20 constant GICV_GICV_AIAR           \ GICV VM aliased interrupt register
+  $24 constant GICV_GICV_AEOIR          \ GICV VM aliased end of interrupt register
+  $28 constant GICV_GICV_AHPPIR         \ GICV VM aliased highest priority pending interrupt register
+  $D0 constant GICV_GICV_APR0           \ The GICV_APR0 is an alias of GICH_APR.
+  $FC constant GICV_GICV_IIDR           \ The GICV_IIDR is an alias of GICC_IIDR.
+  $1000 constant GICV_GICV_DIR          \ GICV VM deactivate interrupt register
+
+: GICV_DEF ; [then]

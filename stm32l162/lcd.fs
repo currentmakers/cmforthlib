@@ -6,396 +6,408 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] LCD_DEF
 
-\
-\ @brief control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_CR_LCDEN                                     \ LCD controller enable
-$00000002 constant LCD_CR_VSEL                                      \ Voltage source selection
-$0000001c constant LCD_CR_DUTY                                      \ Duty selection
-$00000060 constant LCD_CR_BIAS                                      \ Bias selector
-$00000080 constant LCD_CR_MUX_SEG                                   \ Mux segment enable
-
-
-\
-\ @brief frame control register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_FCR_HD                                       \ High drive enable
-$00000002 constant LCD_FCR_SOFIE                                    \ Start of frame interrupt enable
-$00000008 constant LCD_FCR_UDDIE                                    \ Update display done interrupt enable
-$00000070 constant LCD_FCR_PON                                      \ Pulse ON duration
-$00000380 constant LCD_FCR_DEAD                                     \ Dead time duration
-$00001c00 constant LCD_FCR_CC                                       \ Contrast control
-$0000e000 constant LCD_FCR_BLINKF                                   \ Blink frequency selection
-$00030000 constant LCD_FCR_BLINK                                    \ Blink mode selection
-$003c0000 constant LCD_FCR_DIV                                      \ DIV clock divider
-$03c00000 constant LCD_FCR_PS                                       \ PS 16-bit prescaler
+  [ifdef] LCD_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_LCDEN                      \ [0x00] LCD controller enable
+    $01 constant LCD_VSEL                       \ [0x01] Voltage source selection
+    $02 constant LCD_DUTY                       \ [0x02 : 3] Duty selection
+    $05 constant LCD_BIAS                       \ [0x05 : 2] Bias selector
+    $07 constant LCD_MUX_SEG                    \ [0x07] Mux segment enable
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x08
-\ Reset value: 0x00000020
-\
-
-$00000001 constant LCD_SR_ENS                                       \ LCD enabled status
-$00000002 constant LCD_SR_SOF                                       \ Start of frame flag
-$00000004 constant LCD_SR_UDR                                       \ Update display request
-$00000008 constant LCD_SR_UDD                                       \ Update Display Done
-$00000010 constant LCD_SR_RDY                                       \ Ready flag
-$00000020 constant LCD_SR_FCRSF                                     \ LCD Frame Control Register Synchronization flag
-
-
-\
-\ @brief clear register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000002 constant LCD_CLR_SOFC                                     \ Start of frame flag clear
-$00000008 constant LCD_CLR_UDDC                                     \ Update display done clear
+  [ifdef] LCD_FCR_DEF
+    \
+    \ @brief frame control register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_HD                         \ [0x00] High drive enable
+    $01 constant LCD_SOFIE                      \ [0x01] Start of frame interrupt enable
+    $03 constant LCD_UDDIE                      \ [0x03] Update display done interrupt enable
+    $04 constant LCD_PON                        \ [0x04 : 3] Pulse ON duration
+    $07 constant LCD_DEAD                       \ [0x07 : 3] Dead time duration
+    $0a constant LCD_CC                         \ [0x0a : 3] Contrast control
+    $0d constant LCD_BLINKF                     \ [0x0d : 3] Blink frequency selection
+    $10 constant LCD_BLINK                      \ [0x10 : 2] Blink mode selection
+    $12 constant LCD_DIV                        \ [0x12 : 4] DIV clock divider
+    $16 constant LCD_PS                         \ [0x16 : 4] PS 16-bit prescaler
+  [then]
 
 
-\
-\ @brief display memory
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_RAM_COM0_S00                                 \ S00
-$00000002 constant LCD_RAM_COM0_S01                                 \ S01
-$00000004 constant LCD_RAM_COM0_S02                                 \ S02
-$00000008 constant LCD_RAM_COM0_S03                                 \ S03
-$00000010 constant LCD_RAM_COM0_S04                                 \ S04
-$00000020 constant LCD_RAM_COM0_S05                                 \ S05
-$00000040 constant LCD_RAM_COM0_S06                                 \ S06
-$00000080 constant LCD_RAM_COM0_S07                                 \ S07
-$00000100 constant LCD_RAM_COM0_S08                                 \ S08
-$00000200 constant LCD_RAM_COM0_S09                                 \ S09
-$00000400 constant LCD_RAM_COM0_S10                                 \ S10
-$00000800 constant LCD_RAM_COM0_S11                                 \ S11
-$00001000 constant LCD_RAM_COM0_S12                                 \ S12
-$00002000 constant LCD_RAM_COM0_S13                                 \ S13
-$00004000 constant LCD_RAM_COM0_S14                                 \ S14
-$00008000 constant LCD_RAM_COM0_S15                                 \ S15
-$00010000 constant LCD_RAM_COM0_S16                                 \ S16
-$00020000 constant LCD_RAM_COM0_S17                                 \ S17
-$00040000 constant LCD_RAM_COM0_S18                                 \ S18
-$00080000 constant LCD_RAM_COM0_S19                                 \ S19
-$00100000 constant LCD_RAM_COM0_S20                                 \ S20
-$00200000 constant LCD_RAM_COM0_S21                                 \ S21
-$00400000 constant LCD_RAM_COM0_S22                                 \ S22
-$00800000 constant LCD_RAM_COM0_S23                                 \ S23
-$01000000 constant LCD_RAM_COM0_S24                                 \ S24
-$02000000 constant LCD_RAM_COM0_S25                                 \ S25
-$04000000 constant LCD_RAM_COM0_S26                                 \ S26
-$08000000 constant LCD_RAM_COM0_S27                                 \ S27
-$10000000 constant LCD_RAM_COM0_S28                                 \ S28
-$20000000 constant LCD_RAM_COM0_S29                                 \ S29
-$40000000 constant LCD_RAM_COM0_S30                                 \ S30
-$80000000 constant LCD_RAM_COM0_S31                                 \ S31
+  [ifdef] LCD_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000020
+    \
+    $00 constant LCD_ENS                        \ [0x00] LCD enabled status
+    $01 constant LCD_SOF                        \ [0x01] Start of frame flag
+    $02 constant LCD_UDR                        \ [0x02] Update display request
+    $03 constant LCD_UDD                        \ [0x03] Update Display Done
+    $04 constant LCD_RDY                        \ [0x04] Ready flag
+    $05 constant LCD_FCRSF                      \ [0x05] LCD Frame Control Register Synchronization flag
+  [then]
 
 
-\
-\ @brief display memory
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_RAM_COM1_S00                                 \ S00
-$00000002 constant LCD_RAM_COM1_S01                                 \ S01
-$00000004 constant LCD_RAM_COM1_S02                                 \ S02
-$00000008 constant LCD_RAM_COM1_S03                                 \ S03
-$00000010 constant LCD_RAM_COM1_S04                                 \ S04
-$00000020 constant LCD_RAM_COM1_S05                                 \ S05
-$00000040 constant LCD_RAM_COM1_S06                                 \ S06
-$00000080 constant LCD_RAM_COM1_S07                                 \ S07
-$00000100 constant LCD_RAM_COM1_S08                                 \ S08
-$00000200 constant LCD_RAM_COM1_S09                                 \ S09
-$00000400 constant LCD_RAM_COM1_S10                                 \ S10
-$00000800 constant LCD_RAM_COM1_S11                                 \ S11
-$00001000 constant LCD_RAM_COM1_S12                                 \ S12
-$00002000 constant LCD_RAM_COM1_S13                                 \ S13
-$00004000 constant LCD_RAM_COM1_S14                                 \ S14
-$00008000 constant LCD_RAM_COM1_S15                                 \ S15
-$00010000 constant LCD_RAM_COM1_S16                                 \ S16
-$00020000 constant LCD_RAM_COM1_S17                                 \ S17
-$00040000 constant LCD_RAM_COM1_S18                                 \ S18
-$00080000 constant LCD_RAM_COM1_S19                                 \ S19
-$00100000 constant LCD_RAM_COM1_S20                                 \ S20
-$00200000 constant LCD_RAM_COM1_S21                                 \ S21
-$00400000 constant LCD_RAM_COM1_S22                                 \ S22
-$00800000 constant LCD_RAM_COM1_S23                                 \ S23
-$01000000 constant LCD_RAM_COM1_S24                                 \ S24
-$02000000 constant LCD_RAM_COM1_S25                                 \ S25
-$04000000 constant LCD_RAM_COM1_S26                                 \ S26
-$08000000 constant LCD_RAM_COM1_S27                                 \ S27
-$10000000 constant LCD_RAM_COM1_S28                                 \ S28
-$20000000 constant LCD_RAM_COM1_S29                                 \ S29
-$40000000 constant LCD_RAM_COM1_S30                                 \ S30
-$80000000 constant LCD_RAM_COM1_S31                                 \ S31
+  [ifdef] LCD_CLR_DEF
+    \
+    \ @brief clear register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $01 constant LCD_SOFC                       \ [0x01] Start of frame flag clear
+    $03 constant LCD_UDDC                       \ [0x03] Update display done clear
+  [then]
 
 
-\
-\ @brief display memory
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_RAM_COM2_S00                                 \ S00
-$00000002 constant LCD_RAM_COM2_S01                                 \ S01
-$00000004 constant LCD_RAM_COM2_S02                                 \ S02
-$00000008 constant LCD_RAM_COM2_S03                                 \ S03
-$00000010 constant LCD_RAM_COM2_S04                                 \ S04
-$00000020 constant LCD_RAM_COM2_S05                                 \ S05
-$00000040 constant LCD_RAM_COM2_S06                                 \ S06
-$00000080 constant LCD_RAM_COM2_S07                                 \ S07
-$00000100 constant LCD_RAM_COM2_S08                                 \ S08
-$00000200 constant LCD_RAM_COM2_S09                                 \ S09
-$00000400 constant LCD_RAM_COM2_S10                                 \ S10
-$00000800 constant LCD_RAM_COM2_S11                                 \ S11
-$00001000 constant LCD_RAM_COM2_S12                                 \ S12
-$00002000 constant LCD_RAM_COM2_S13                                 \ S13
-$00004000 constant LCD_RAM_COM2_S14                                 \ S14
-$00008000 constant LCD_RAM_COM2_S15                                 \ S15
-$00010000 constant LCD_RAM_COM2_S16                                 \ S16
-$00020000 constant LCD_RAM_COM2_S17                                 \ S17
-$00040000 constant LCD_RAM_COM2_S18                                 \ S18
-$00080000 constant LCD_RAM_COM2_S19                                 \ S19
-$00100000 constant LCD_RAM_COM2_S20                                 \ S20
-$00200000 constant LCD_RAM_COM2_S21                                 \ S21
-$00400000 constant LCD_RAM_COM2_S22                                 \ S22
-$00800000 constant LCD_RAM_COM2_S23                                 \ S23
-$01000000 constant LCD_RAM_COM2_S24                                 \ S24
-$02000000 constant LCD_RAM_COM2_S25                                 \ S25
-$04000000 constant LCD_RAM_COM2_S26                                 \ S26
-$08000000 constant LCD_RAM_COM2_S27                                 \ S27
-$10000000 constant LCD_RAM_COM2_S28                                 \ S28
-$20000000 constant LCD_RAM_COM2_S29                                 \ S29
-$40000000 constant LCD_RAM_COM2_S30                                 \ S30
-$80000000 constant LCD_RAM_COM2_S31                                 \ S31
-
-
-\
-\ @brief display memory
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_RAM_COM3_S00                                 \ S00
-$00000002 constant LCD_RAM_COM3_S01                                 \ S01
-$00000004 constant LCD_RAM_COM3_S02                                 \ S02
-$00000008 constant LCD_RAM_COM3_S03                                 \ S03
-$00000010 constant LCD_RAM_COM3_S04                                 \ S04
-$00000020 constant LCD_RAM_COM3_S05                                 \ S05
-$00000040 constant LCD_RAM_COM3_S06                                 \ S06
-$00000080 constant LCD_RAM_COM3_S07                                 \ S07
-$00000100 constant LCD_RAM_COM3_S08                                 \ S08
-$00000200 constant LCD_RAM_COM3_S09                                 \ S09
-$00000400 constant LCD_RAM_COM3_S10                                 \ S10
-$00000800 constant LCD_RAM_COM3_S11                                 \ S11
-$00001000 constant LCD_RAM_COM3_S12                                 \ S12
-$00002000 constant LCD_RAM_COM3_S13                                 \ S13
-$00004000 constant LCD_RAM_COM3_S14                                 \ S14
-$00008000 constant LCD_RAM_COM3_S15                                 \ S15
-$00010000 constant LCD_RAM_COM3_S16                                 \ S16
-$00020000 constant LCD_RAM_COM3_S17                                 \ S17
-$00040000 constant LCD_RAM_COM3_S18                                 \ S18
-$00080000 constant LCD_RAM_COM3_S19                                 \ S19
-$00100000 constant LCD_RAM_COM3_S20                                 \ S20
-$00200000 constant LCD_RAM_COM3_S21                                 \ S21
-$00400000 constant LCD_RAM_COM3_S22                                 \ S22
-$00800000 constant LCD_RAM_COM3_S23                                 \ S23
-$01000000 constant LCD_RAM_COM3_S24                                 \ S24
-$02000000 constant LCD_RAM_COM3_S25                                 \ S25
-$04000000 constant LCD_RAM_COM3_S26                                 \ S26
-$08000000 constant LCD_RAM_COM3_S27                                 \ S27
-$10000000 constant LCD_RAM_COM3_S28                                 \ S28
-$20000000 constant LCD_RAM_COM3_S29                                 \ S29
-$40000000 constant LCD_RAM_COM3_S30                                 \ S30
-$80000000 constant LCD_RAM_COM3_S31                                 \ S31
+  [ifdef] LCD_RAM_COM0_DEF
+    \
+    \ @brief display memory
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_S00                        \ [0x00] S00
+    $01 constant LCD_S01                        \ [0x01] S01
+    $02 constant LCD_S02                        \ [0x02] S02
+    $03 constant LCD_S03                        \ [0x03] S03
+    $04 constant LCD_S04                        \ [0x04] S04
+    $05 constant LCD_S05                        \ [0x05] S05
+    $06 constant LCD_S06                        \ [0x06] S06
+    $07 constant LCD_S07                        \ [0x07] S07
+    $08 constant LCD_S08                        \ [0x08] S08
+    $09 constant LCD_S09                        \ [0x09] S09
+    $0a constant LCD_S10                        \ [0x0a] S10
+    $0b constant LCD_S11                        \ [0x0b] S11
+    $0c constant LCD_S12                        \ [0x0c] S12
+    $0d constant LCD_S13                        \ [0x0d] S13
+    $0e constant LCD_S14                        \ [0x0e] S14
+    $0f constant LCD_S15                        \ [0x0f] S15
+    $10 constant LCD_S16                        \ [0x10] S16
+    $11 constant LCD_S17                        \ [0x11] S17
+    $12 constant LCD_S18                        \ [0x12] S18
+    $13 constant LCD_S19                        \ [0x13] S19
+    $14 constant LCD_S20                        \ [0x14] S20
+    $15 constant LCD_S21                        \ [0x15] S21
+    $16 constant LCD_S22                        \ [0x16] S22
+    $17 constant LCD_S23                        \ [0x17] S23
+    $18 constant LCD_S24                        \ [0x18] S24
+    $19 constant LCD_S25                        \ [0x19] S25
+    $1a constant LCD_S26                        \ [0x1a] S26
+    $1b constant LCD_S27                        \ [0x1b] S27
+    $1c constant LCD_S28                        \ [0x1c] S28
+    $1d constant LCD_S29                        \ [0x1d] S29
+    $1e constant LCD_S30                        \ [0x1e] S30
+    $1f constant LCD_S31                        \ [0x1f] S31
+  [then]
 
 
-\
-\ @brief display memory
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_RAM_COM4_S00                                 \ S00
-$00000002 constant LCD_RAM_COM4_S01                                 \ S01
-$00000004 constant LCD_RAM_COM4_S02                                 \ S02
-$00000008 constant LCD_RAM_COM4_S03                                 \ S03
-$00000010 constant LCD_RAM_COM4_S04                                 \ S04
-$00000020 constant LCD_RAM_COM4_S05                                 \ S05
-$00000040 constant LCD_RAM_COM4_S06                                 \ S06
-$00000080 constant LCD_RAM_COM4_S07                                 \ S07
-$00000100 constant LCD_RAM_COM4_S08                                 \ S08
-$00000200 constant LCD_RAM_COM4_S09                                 \ S09
-$00000400 constant LCD_RAM_COM4_S10                                 \ S10
-$00000800 constant LCD_RAM_COM4_S11                                 \ S11
-$00001000 constant LCD_RAM_COM4_S12                                 \ S12
-$00002000 constant LCD_RAM_COM4_S13                                 \ S13
-$00004000 constant LCD_RAM_COM4_S14                                 \ S14
-$00008000 constant LCD_RAM_COM4_S15                                 \ S15
-$00010000 constant LCD_RAM_COM4_S16                                 \ S16
-$00020000 constant LCD_RAM_COM4_S17                                 \ S17
-$00040000 constant LCD_RAM_COM4_S18                                 \ S18
-$00080000 constant LCD_RAM_COM4_S19                                 \ S19
-$00100000 constant LCD_RAM_COM4_S20                                 \ S20
-$00200000 constant LCD_RAM_COM4_S21                                 \ S21
-$00400000 constant LCD_RAM_COM4_S22                                 \ S22
-$00800000 constant LCD_RAM_COM4_S23                                 \ S23
-$01000000 constant LCD_RAM_COM4_S24                                 \ S24
-$02000000 constant LCD_RAM_COM4_S25                                 \ S25
-$04000000 constant LCD_RAM_COM4_S26                                 \ S26
-$08000000 constant LCD_RAM_COM4_S27                                 \ S27
-$10000000 constant LCD_RAM_COM4_S28                                 \ S28
-$20000000 constant LCD_RAM_COM4_S29                                 \ S29
-$40000000 constant LCD_RAM_COM4_S30                                 \ S30
-$80000000 constant LCD_RAM_COM4_S31                                 \ S31
-
-
-\
-\ @brief display memory
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_RAM_COM5_S00                                 \ S00
-$00000002 constant LCD_RAM_COM5_S01                                 \ S01
-$00000004 constant LCD_RAM_COM5_S02                                 \ S02
-$00000008 constant LCD_RAM_COM5_S03                                 \ S03
-$00000010 constant LCD_RAM_COM5_S04                                 \ S04
-$00000020 constant LCD_RAM_COM5_S05                                 \ S05
-$00000040 constant LCD_RAM_COM5_S06                                 \ S06
-$00000080 constant LCD_RAM_COM5_S07                                 \ S07
-$00000100 constant LCD_RAM_COM5_S08                                 \ S08
-$00000200 constant LCD_RAM_COM5_S09                                 \ S09
-$00000400 constant LCD_RAM_COM5_S10                                 \ S10
-$00000800 constant LCD_RAM_COM5_S11                                 \ S11
-$00001000 constant LCD_RAM_COM5_S12                                 \ S12
-$00002000 constant LCD_RAM_COM5_S13                                 \ S13
-$00004000 constant LCD_RAM_COM5_S14                                 \ S14
-$00008000 constant LCD_RAM_COM5_S15                                 \ S15
-$00010000 constant LCD_RAM_COM5_S16                                 \ S16
-$00020000 constant LCD_RAM_COM5_S17                                 \ S17
-$00040000 constant LCD_RAM_COM5_S18                                 \ S18
-$00080000 constant LCD_RAM_COM5_S19                                 \ S19
-$00100000 constant LCD_RAM_COM5_S20                                 \ S20
-$00200000 constant LCD_RAM_COM5_S21                                 \ S21
-$00400000 constant LCD_RAM_COM5_S22                                 \ S22
-$00800000 constant LCD_RAM_COM5_S23                                 \ S23
-$01000000 constant LCD_RAM_COM5_S24                                 \ S24
-$02000000 constant LCD_RAM_COM5_S25                                 \ S25
-$04000000 constant LCD_RAM_COM5_S26                                 \ S26
-$08000000 constant LCD_RAM_COM5_S27                                 \ S27
-$10000000 constant LCD_RAM_COM5_S28                                 \ S28
-$20000000 constant LCD_RAM_COM5_S29                                 \ S29
-$40000000 constant LCD_RAM_COM5_S30                                 \ S30
-$80000000 constant LCD_RAM_COM5_S31                                 \ S31
+  [ifdef] LCD_RAM_COM1_DEF
+    \
+    \ @brief display memory
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_S00                        \ [0x00] S00
+    $01 constant LCD_S01                        \ [0x01] S01
+    $02 constant LCD_S02                        \ [0x02] S02
+    $03 constant LCD_S03                        \ [0x03] S03
+    $04 constant LCD_S04                        \ [0x04] S04
+    $05 constant LCD_S05                        \ [0x05] S05
+    $06 constant LCD_S06                        \ [0x06] S06
+    $07 constant LCD_S07                        \ [0x07] S07
+    $08 constant LCD_S08                        \ [0x08] S08
+    $09 constant LCD_S09                        \ [0x09] S09
+    $0a constant LCD_S10                        \ [0x0a] S10
+    $0b constant LCD_S11                        \ [0x0b] S11
+    $0c constant LCD_S12                        \ [0x0c] S12
+    $0d constant LCD_S13                        \ [0x0d] S13
+    $0e constant LCD_S14                        \ [0x0e] S14
+    $0f constant LCD_S15                        \ [0x0f] S15
+    $10 constant LCD_S16                        \ [0x10] S16
+    $11 constant LCD_S17                        \ [0x11] S17
+    $12 constant LCD_S18                        \ [0x12] S18
+    $13 constant LCD_S19                        \ [0x13] S19
+    $14 constant LCD_S20                        \ [0x14] S20
+    $15 constant LCD_S21                        \ [0x15] S21
+    $16 constant LCD_S22                        \ [0x16] S22
+    $17 constant LCD_S23                        \ [0x17] S23
+    $18 constant LCD_S24                        \ [0x18] S24
+    $19 constant LCD_S25                        \ [0x19] S25
+    $1a constant LCD_S26                        \ [0x1a] S26
+    $1b constant LCD_S27                        \ [0x1b] S27
+    $1c constant LCD_S28                        \ [0x1c] S28
+    $1d constant LCD_S29                        \ [0x1d] S29
+    $1e constant LCD_S30                        \ [0x1e] S30
+    $1f constant LCD_S31                        \ [0x1f] S31
+  [then]
 
 
-\
-\ @brief display memory
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_RAM_COM6_S00                                 \ S00
-$00000002 constant LCD_RAM_COM6_S01                                 \ S01
-$00000004 constant LCD_RAM_COM6_S02                                 \ S02
-$00000008 constant LCD_RAM_COM6_S03                                 \ S03
-$00000010 constant LCD_RAM_COM6_S04                                 \ S04
-$00000020 constant LCD_RAM_COM6_S05                                 \ S05
-$00000040 constant LCD_RAM_COM6_S06                                 \ S06
-$00000080 constant LCD_RAM_COM6_S07                                 \ S07
-$00000100 constant LCD_RAM_COM6_S08                                 \ S08
-$00000200 constant LCD_RAM_COM6_S09                                 \ S09
-$00000400 constant LCD_RAM_COM6_S10                                 \ S10
-$00000800 constant LCD_RAM_COM6_S11                                 \ S11
-$00001000 constant LCD_RAM_COM6_S12                                 \ S12
-$00002000 constant LCD_RAM_COM6_S13                                 \ S13
-$00004000 constant LCD_RAM_COM6_S14                                 \ S14
-$00008000 constant LCD_RAM_COM6_S15                                 \ S15
-$00010000 constant LCD_RAM_COM6_S16                                 \ S16
-$00020000 constant LCD_RAM_COM6_S17                                 \ S17
-$00040000 constant LCD_RAM_COM6_S18                                 \ S18
-$00080000 constant LCD_RAM_COM6_S19                                 \ S19
-$00100000 constant LCD_RAM_COM6_S20                                 \ S20
-$00200000 constant LCD_RAM_COM6_S21                                 \ S21
-$00400000 constant LCD_RAM_COM6_S22                                 \ S22
-$00800000 constant LCD_RAM_COM6_S23                                 \ S23
-$01000000 constant LCD_RAM_COM6_S24                                 \ S24
-$02000000 constant LCD_RAM_COM6_S25                                 \ S25
-$04000000 constant LCD_RAM_COM6_S26                                 \ S26
-$08000000 constant LCD_RAM_COM6_S27                                 \ S27
-$10000000 constant LCD_RAM_COM6_S28                                 \ S28
-$20000000 constant LCD_RAM_COM6_S29                                 \ S29
-$40000000 constant LCD_RAM_COM6_S30                                 \ S30
-$80000000 constant LCD_RAM_COM6_S31                                 \ S31
-
-
-\
-\ @brief display memory
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LCD_RAM_COM7_S00                                 \ S00
-$00000002 constant LCD_RAM_COM7_S01                                 \ S01
-$00000004 constant LCD_RAM_COM7_S02                                 \ S02
-$00000008 constant LCD_RAM_COM7_S03                                 \ S03
-$00000010 constant LCD_RAM_COM7_S04                                 \ S04
-$00000020 constant LCD_RAM_COM7_S05                                 \ S05
-$00000040 constant LCD_RAM_COM7_S06                                 \ S06
-$00000080 constant LCD_RAM_COM7_S07                                 \ S07
-$00000100 constant LCD_RAM_COM7_S08                                 \ S08
-$00000200 constant LCD_RAM_COM7_S09                                 \ S09
-$00000400 constant LCD_RAM_COM7_S10                                 \ S10
-$00000800 constant LCD_RAM_COM7_S11                                 \ S11
-$00001000 constant LCD_RAM_COM7_S12                                 \ S12
-$00002000 constant LCD_RAM_COM7_S13                                 \ S13
-$00004000 constant LCD_RAM_COM7_S14                                 \ S14
-$00008000 constant LCD_RAM_COM7_S15                                 \ S15
-$00010000 constant LCD_RAM_COM7_S16                                 \ S16
-$00020000 constant LCD_RAM_COM7_S17                                 \ S17
-$00040000 constant LCD_RAM_COM7_S18                                 \ S18
-$00080000 constant LCD_RAM_COM7_S19                                 \ S19
-$00100000 constant LCD_RAM_COM7_S20                                 \ S20
-$00200000 constant LCD_RAM_COM7_S21                                 \ S21
-$00400000 constant LCD_RAM_COM7_S22                                 \ S22
-$00800000 constant LCD_RAM_COM7_S23                                 \ S23
-$01000000 constant LCD_RAM_COM7_S24                                 \ S24
-$02000000 constant LCD_RAM_COM7_S25                                 \ S25
-$04000000 constant LCD_RAM_COM7_S26                                 \ S26
-$08000000 constant LCD_RAM_COM7_S27                                 \ S27
-$10000000 constant LCD_RAM_COM7_S28                                 \ S28
-$20000000 constant LCD_RAM_COM7_S29                                 \ S29
-$40000000 constant LCD_RAM_COM7_S30                                 \ S30
-$80000000 constant LCD_RAM_COM7_S31                                 \ S31
+  [ifdef] LCD_RAM_COM2_DEF
+    \
+    \ @brief display memory
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_S00                        \ [0x00] S00
+    $01 constant LCD_S01                        \ [0x01] S01
+    $02 constant LCD_S02                        \ [0x02] S02
+    $03 constant LCD_S03                        \ [0x03] S03
+    $04 constant LCD_S04                        \ [0x04] S04
+    $05 constant LCD_S05                        \ [0x05] S05
+    $06 constant LCD_S06                        \ [0x06] S06
+    $07 constant LCD_S07                        \ [0x07] S07
+    $08 constant LCD_S08                        \ [0x08] S08
+    $09 constant LCD_S09                        \ [0x09] S09
+    $0a constant LCD_S10                        \ [0x0a] S10
+    $0b constant LCD_S11                        \ [0x0b] S11
+    $0c constant LCD_S12                        \ [0x0c] S12
+    $0d constant LCD_S13                        \ [0x0d] S13
+    $0e constant LCD_S14                        \ [0x0e] S14
+    $0f constant LCD_S15                        \ [0x0f] S15
+    $10 constant LCD_S16                        \ [0x10] S16
+    $11 constant LCD_S17                        \ [0x11] S17
+    $12 constant LCD_S18                        \ [0x12] S18
+    $13 constant LCD_S19                        \ [0x13] S19
+    $14 constant LCD_S20                        \ [0x14] S20
+    $15 constant LCD_S21                        \ [0x15] S21
+    $16 constant LCD_S22                        \ [0x16] S22
+    $17 constant LCD_S23                        \ [0x17] S23
+    $18 constant LCD_S24                        \ [0x18] S24
+    $19 constant LCD_S25                        \ [0x19] S25
+    $1a constant LCD_S26                        \ [0x1a] S26
+    $1b constant LCD_S27                        \ [0x1b] S27
+    $1c constant LCD_S28                        \ [0x1c] S28
+    $1d constant LCD_S29                        \ [0x1d] S29
+    $1e constant LCD_S30                        \ [0x1e] S30
+    $1f constant LCD_S31                        \ [0x1f] S31
+  [then]
 
 
-\
-\ @brief Liquid crystal display controller
-\
-$40002400 constant LCD_CR         \ offset: 0x00 : control register
-$40002404 constant LCD_FCR        \ offset: 0x04 : frame control register
-$40002408 constant LCD_SR         \ offset: 0x08 : status register
-$4000240c constant LCD_CLR        \ offset: 0x0C : clear register
-$40002414 constant LCD_RAM_COM0   \ offset: 0x14 : display memory
-$4000241c constant LCD_RAM_COM1   \ offset: 0x1C : display memory
-$40002424 constant LCD_RAM_COM2   \ offset: 0x24 : display memory
-$4000242c constant LCD_RAM_COM3   \ offset: 0x2C : display memory
-$40002434 constant LCD_RAM_COM4   \ offset: 0x34 : display memory
-$4000243c constant LCD_RAM_COM5   \ offset: 0x3C : display memory
-$40002444 constant LCD_RAM_COM6   \ offset: 0x44 : display memory
-$4000244c constant LCD_RAM_COM7   \ offset: 0x4C : display memory
+  [ifdef] LCD_RAM_COM3_DEF
+    \
+    \ @brief display memory
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_S00                        \ [0x00] S00
+    $01 constant LCD_S01                        \ [0x01] S01
+    $02 constant LCD_S02                        \ [0x02] S02
+    $03 constant LCD_S03                        \ [0x03] S03
+    $04 constant LCD_S04                        \ [0x04] S04
+    $05 constant LCD_S05                        \ [0x05] S05
+    $06 constant LCD_S06                        \ [0x06] S06
+    $07 constant LCD_S07                        \ [0x07] S07
+    $08 constant LCD_S08                        \ [0x08] S08
+    $09 constant LCD_S09                        \ [0x09] S09
+    $0a constant LCD_S10                        \ [0x0a] S10
+    $0b constant LCD_S11                        \ [0x0b] S11
+    $0c constant LCD_S12                        \ [0x0c] S12
+    $0d constant LCD_S13                        \ [0x0d] S13
+    $0e constant LCD_S14                        \ [0x0e] S14
+    $0f constant LCD_S15                        \ [0x0f] S15
+    $10 constant LCD_S16                        \ [0x10] S16
+    $11 constant LCD_S17                        \ [0x11] S17
+    $12 constant LCD_S18                        \ [0x12] S18
+    $13 constant LCD_S19                        \ [0x13] S19
+    $14 constant LCD_S20                        \ [0x14] S20
+    $15 constant LCD_S21                        \ [0x15] S21
+    $16 constant LCD_S22                        \ [0x16] S22
+    $17 constant LCD_S23                        \ [0x17] S23
+    $18 constant LCD_S24                        \ [0x18] S24
+    $19 constant LCD_S25                        \ [0x19] S25
+    $1a constant LCD_S26                        \ [0x1a] S26
+    $1b constant LCD_S27                        \ [0x1b] S27
+    $1c constant LCD_S28                        \ [0x1c] S28
+    $1d constant LCD_S29                        \ [0x1d] S29
+    $1e constant LCD_S30                        \ [0x1e] S30
+    $1f constant LCD_S31                        \ [0x1f] S31
+  [then]
 
+
+  [ifdef] LCD_RAM_COM4_DEF
+    \
+    \ @brief display memory
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_S00                        \ [0x00] S00
+    $01 constant LCD_S01                        \ [0x01] S01
+    $02 constant LCD_S02                        \ [0x02] S02
+    $03 constant LCD_S03                        \ [0x03] S03
+    $04 constant LCD_S04                        \ [0x04] S04
+    $05 constant LCD_S05                        \ [0x05] S05
+    $06 constant LCD_S06                        \ [0x06] S06
+    $07 constant LCD_S07                        \ [0x07] S07
+    $08 constant LCD_S08                        \ [0x08] S08
+    $09 constant LCD_S09                        \ [0x09] S09
+    $0a constant LCD_S10                        \ [0x0a] S10
+    $0b constant LCD_S11                        \ [0x0b] S11
+    $0c constant LCD_S12                        \ [0x0c] S12
+    $0d constant LCD_S13                        \ [0x0d] S13
+    $0e constant LCD_S14                        \ [0x0e] S14
+    $0f constant LCD_S15                        \ [0x0f] S15
+    $10 constant LCD_S16                        \ [0x10] S16
+    $11 constant LCD_S17                        \ [0x11] S17
+    $12 constant LCD_S18                        \ [0x12] S18
+    $13 constant LCD_S19                        \ [0x13] S19
+    $14 constant LCD_S20                        \ [0x14] S20
+    $15 constant LCD_S21                        \ [0x15] S21
+    $16 constant LCD_S22                        \ [0x16] S22
+    $17 constant LCD_S23                        \ [0x17] S23
+    $18 constant LCD_S24                        \ [0x18] S24
+    $19 constant LCD_S25                        \ [0x19] S25
+    $1a constant LCD_S26                        \ [0x1a] S26
+    $1b constant LCD_S27                        \ [0x1b] S27
+    $1c constant LCD_S28                        \ [0x1c] S28
+    $1d constant LCD_S29                        \ [0x1d] S29
+    $1e constant LCD_S30                        \ [0x1e] S30
+    $1f constant LCD_S31                        \ [0x1f] S31
+  [then]
+
+
+  [ifdef] LCD_RAM_COM5_DEF
+    \
+    \ @brief display memory
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_S00                        \ [0x00] S00
+    $01 constant LCD_S01                        \ [0x01] S01
+    $02 constant LCD_S02                        \ [0x02] S02
+    $03 constant LCD_S03                        \ [0x03] S03
+    $04 constant LCD_S04                        \ [0x04] S04
+    $05 constant LCD_S05                        \ [0x05] S05
+    $06 constant LCD_S06                        \ [0x06] S06
+    $07 constant LCD_S07                        \ [0x07] S07
+    $08 constant LCD_S08                        \ [0x08] S08
+    $09 constant LCD_S09                        \ [0x09] S09
+    $0a constant LCD_S10                        \ [0x0a] S10
+    $0b constant LCD_S11                        \ [0x0b] S11
+    $0c constant LCD_S12                        \ [0x0c] S12
+    $0d constant LCD_S13                        \ [0x0d] S13
+    $0e constant LCD_S14                        \ [0x0e] S14
+    $0f constant LCD_S15                        \ [0x0f] S15
+    $10 constant LCD_S16                        \ [0x10] S16
+    $11 constant LCD_S17                        \ [0x11] S17
+    $12 constant LCD_S18                        \ [0x12] S18
+    $13 constant LCD_S19                        \ [0x13] S19
+    $14 constant LCD_S20                        \ [0x14] S20
+    $15 constant LCD_S21                        \ [0x15] S21
+    $16 constant LCD_S22                        \ [0x16] S22
+    $17 constant LCD_S23                        \ [0x17] S23
+    $18 constant LCD_S24                        \ [0x18] S24
+    $19 constant LCD_S25                        \ [0x19] S25
+    $1a constant LCD_S26                        \ [0x1a] S26
+    $1b constant LCD_S27                        \ [0x1b] S27
+    $1c constant LCD_S28                        \ [0x1c] S28
+    $1d constant LCD_S29                        \ [0x1d] S29
+    $1e constant LCD_S30                        \ [0x1e] S30
+    $1f constant LCD_S31                        \ [0x1f] S31
+  [then]
+
+
+  [ifdef] LCD_RAM_COM6_DEF
+    \
+    \ @brief display memory
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_S00                        \ [0x00] S00
+    $01 constant LCD_S01                        \ [0x01] S01
+    $02 constant LCD_S02                        \ [0x02] S02
+    $03 constant LCD_S03                        \ [0x03] S03
+    $04 constant LCD_S04                        \ [0x04] S04
+    $05 constant LCD_S05                        \ [0x05] S05
+    $06 constant LCD_S06                        \ [0x06] S06
+    $07 constant LCD_S07                        \ [0x07] S07
+    $08 constant LCD_S08                        \ [0x08] S08
+    $09 constant LCD_S09                        \ [0x09] S09
+    $0a constant LCD_S10                        \ [0x0a] S10
+    $0b constant LCD_S11                        \ [0x0b] S11
+    $0c constant LCD_S12                        \ [0x0c] S12
+    $0d constant LCD_S13                        \ [0x0d] S13
+    $0e constant LCD_S14                        \ [0x0e] S14
+    $0f constant LCD_S15                        \ [0x0f] S15
+    $10 constant LCD_S16                        \ [0x10] S16
+    $11 constant LCD_S17                        \ [0x11] S17
+    $12 constant LCD_S18                        \ [0x12] S18
+    $13 constant LCD_S19                        \ [0x13] S19
+    $14 constant LCD_S20                        \ [0x14] S20
+    $15 constant LCD_S21                        \ [0x15] S21
+    $16 constant LCD_S22                        \ [0x16] S22
+    $17 constant LCD_S23                        \ [0x17] S23
+    $18 constant LCD_S24                        \ [0x18] S24
+    $19 constant LCD_S25                        \ [0x19] S25
+    $1a constant LCD_S26                        \ [0x1a] S26
+    $1b constant LCD_S27                        \ [0x1b] S27
+    $1c constant LCD_S28                        \ [0x1c] S28
+    $1d constant LCD_S29                        \ [0x1d] S29
+    $1e constant LCD_S30                        \ [0x1e] S30
+    $1f constant LCD_S31                        \ [0x1f] S31
+  [then]
+
+
+  [ifdef] LCD_RAM_COM7_DEF
+    \
+    \ @brief display memory
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LCD_S00                        \ [0x00] S00
+    $01 constant LCD_S01                        \ [0x01] S01
+    $02 constant LCD_S02                        \ [0x02] S02
+    $03 constant LCD_S03                        \ [0x03] S03
+    $04 constant LCD_S04                        \ [0x04] S04
+    $05 constant LCD_S05                        \ [0x05] S05
+    $06 constant LCD_S06                        \ [0x06] S06
+    $07 constant LCD_S07                        \ [0x07] S07
+    $08 constant LCD_S08                        \ [0x08] S08
+    $09 constant LCD_S09                        \ [0x09] S09
+    $0a constant LCD_S10                        \ [0x0a] S10
+    $0b constant LCD_S11                        \ [0x0b] S11
+    $0c constant LCD_S12                        \ [0x0c] S12
+    $0d constant LCD_S13                        \ [0x0d] S13
+    $0e constant LCD_S14                        \ [0x0e] S14
+    $0f constant LCD_S15                        \ [0x0f] S15
+    $10 constant LCD_S16                        \ [0x10] S16
+    $11 constant LCD_S17                        \ [0x11] S17
+    $12 constant LCD_S18                        \ [0x12] S18
+    $13 constant LCD_S19                        \ [0x13] S19
+    $14 constant LCD_S20                        \ [0x14] S20
+    $15 constant LCD_S21                        \ [0x15] S21
+    $16 constant LCD_S22                        \ [0x16] S22
+    $17 constant LCD_S23                        \ [0x17] S23
+    $18 constant LCD_S24                        \ [0x18] S24
+    $19 constant LCD_S25                        \ [0x19] S25
+    $1a constant LCD_S26                        \ [0x1a] S26
+    $1b constant LCD_S27                        \ [0x1b] S27
+    $1c constant LCD_S28                        \ [0x1c] S28
+    $1d constant LCD_S29                        \ [0x1d] S29
+    $1e constant LCD_S30                        \ [0x1e] S30
+    $1f constant LCD_S31                        \ [0x1f] S31
+  [then]
+
+  \
+  \ @brief Liquid crystal display controller
+  \
+  $00 constant LCD_CR                   \ control register
+  $04 constant LCD_FCR                  \ frame control register
+  $08 constant LCD_SR                   \ status register
+  $0C constant LCD_CLR                  \ clear register
+  $14 constant LCD_RAM_COM0             \ display memory
+  $1C constant LCD_RAM_COM1             \ display memory
+  $24 constant LCD_RAM_COM2             \ display memory
+  $2C constant LCD_RAM_COM3             \ display memory
+  $34 constant LCD_RAM_COM4             \ display memory
+  $3C constant LCD_RAM_COM5             \ display memory
+  $44 constant LCD_RAM_COM6             \ display memory
+  $4C constant LCD_RAM_COM7             \ display memory
+
+: LCD_DEF ; [then]

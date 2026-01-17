@@ -6,310 +6,338 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief interrupt line 0 status register
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE0_WWDG                       \ Window watchdog interrupt pending flag
-
-
-\
-\ @brief interrupt line 1 status register
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE1_PVDOUT                     \ PVD supply monitoring interrupt request pending (EXTI line 16).
-
-
-\
-\ @brief interrupt line 2 status register
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE2_TAMP                       \ TAMP
-$00000002 constant SYSCFG_ITLINE_ITLINE2_RTC                        \ RTC
-
-
-\
-\ @brief interrupt line 3 status register
-\ Address offset: 0x8C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE3_FLASH_ITF                  \ FLASH_ITF
-$00000002 constant SYSCFG_ITLINE_ITLINE3_FLASH_ECC                  \ FLASH_ECC
-
-
-\
-\ @brief interrupt line 4 status register
-\ Address offset: 0x90
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE4_RCC                        \ RCC
-
-
-\
-\ @brief interrupt line 5 status register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE5_EXTI0                      \ EXTI0
-$00000002 constant SYSCFG_ITLINE_ITLINE5_EXTI1                      \ EXTI1
-
-
-\
-\ @brief interrupt line 6 status register
-\ Address offset: 0x98
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE6_EXTI2                      \ EXTI2
-$00000002 constant SYSCFG_ITLINE_ITLINE6_EXTI3                      \ EXTI3
-
-
-\
-\ @brief interrupt line 7 status register
-\ Address offset: 0x9C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE7_EXTI4                      \ EXTI4
-$00000002 constant SYSCFG_ITLINE_ITLINE7_EXTI5                      \ EXTI5
-$00000004 constant SYSCFG_ITLINE_ITLINE7_EXTI6                      \ EXTI6
-$00000008 constant SYSCFG_ITLINE_ITLINE7_EXTI7                      \ EXTI7
-$00000010 constant SYSCFG_ITLINE_ITLINE7_EXTI8                      \ EXTI8
-$00000020 constant SYSCFG_ITLINE_ITLINE7_EXTI9                      \ EXTI9
-$00000040 constant SYSCFG_ITLINE_ITLINE7_EXTI10                     \ EXTI10
-$00000080 constant SYSCFG_ITLINE_ITLINE7_EXTI11                     \ EXTI11
-$00000100 constant SYSCFG_ITLINE_ITLINE7_EXTI12                     \ EXTI12
-$00000200 constant SYSCFG_ITLINE_ITLINE7_EXTI13                     \ EXTI13
-$00000400 constant SYSCFG_ITLINE_ITLINE7_EXTI14                     \ EXTI14
-$00000800 constant SYSCFG_ITLINE_ITLINE7_EXTI15                     \ EXTI15
-
-
-\
-\ @brief interrupt line 9 status register
-\ Address offset: 0xA4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE9_DMA1_CH1                   \ DMA1_CH1
-
-
-\
-\ @brief interrupt line 10 status register
-\ Address offset: 0xA8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE10_DMA1_CH2                  \ DMA1_CH1
-$00000002 constant SYSCFG_ITLINE_ITLINE10_DMA1_CH3                  \ DMA1_CH3
-
-
-\
-\ @brief interrupt line 11 status register
-\ Address offset: 0xAC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE11_DMAMUX                    \ DMAMUX
-$00000002 constant SYSCFG_ITLINE_ITLINE11_DMA1_CH4                  \ DMA1_CH4
-$00000004 constant SYSCFG_ITLINE_ITLINE11_DMA1_CH5                  \ DMA1_CH5
-
-
-\
-\ @brief interrupt line 12 status register
-\ Address offset: 0xB0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE12_ADC                       \ ADC
-
-
-\
-\ @brief interrupt line 13 status register
-\ Address offset: 0xB4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE13_TIM1_CCU                  \ TIM1_CCU
-$00000002 constant SYSCFG_ITLINE_ITLINE13_TIM1_TRG                  \ TIM1_TRG
-$00000004 constant SYSCFG_ITLINE_ITLINE13_TIM1_UPD                  \ TIM1_UPD
-$00000008 constant SYSCFG_ITLINE_ITLINE13_TIM1_BRK                  \ TIM1_BRK
-
-
-\
-\ @brief interrupt line 14 status register
-\ Address offset: 0xB8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE14_TIM1_CC                   \ TIM1_CC
-
-
-\
-\ @brief interrupt line 15 status register
-\ Address offset: 0xBC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE15_TIM2                      \ TIM2
-
-
-\
-\ @brief interrupt line 16 status register
-\ Address offset: 0xC0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE16_TIM3                      \ TIM3
-
-
-\
-\ @brief interrupt line 17 status register
-\ Address offset: 0xC4
-\ Reset value: 0x00000000
-\
-
-$00000004 constant SYSCFG_ITLINE_ITLINE17_LPTIM1                    \ LPTIM1
-
-
-\
-\ @brief interrupt line 18 status register
-\ Address offset: 0xC8
-\ Reset value: 0x00000000
-\
-
-$00000002 constant SYSCFG_ITLINE_ITLINE18_LPTIM2                    \ LPTIM2
-
-
-\
-\ @brief interrupt line 19 status register
-\ Address offset: 0xCC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE19_TIM14                     \ TIM14
-
-
-\
-\ @brief interrupt line 21 status register
-\ Address offset: 0xD4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE21_TIM16                     \ TIM16
-
-
-\
-\ @brief interrupt line 22 status register
-\ Address offset: 0xD8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE22_TIM17                     \ TIM17
-
-
-\
-\ @brief interrupt line 23 status register
-\ Address offset: 0xDC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE23_I2C1                      \ I2C1
-
-
-\
-\ @brief interrupt line 24 status register
-\ Address offset: 0xE0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE24_I2C2                      \ I2C2
-
-
-\
-\ @brief interrupt line 25 status register
-\ Address offset: 0xE4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE25_SPI1                      \ SPI1
-
-
-\
-\ @brief interrupt line 26 status register
-\ Address offset: 0xE8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE26_SPI2                      \ SPI2
-
-
-\
-\ @brief interrupt line 27 status register
-\ Address offset: 0xEC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE27_USART1                    \ USART1
-
-
-\
-\ @brief interrupt line 28 status register
-\ Address offset: 0xF0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_ITLINE_ITLINE28_USART2                    \ USART2
-
-
-\
-\ @brief interrupt line 29 status register
-\ Address offset: 0xF4
-\ Reset value: 0x00000000
-\
-
-$00000004 constant SYSCFG_ITLINE_ITLINE29_USART5                    \ USART5
-
-
-\
-\ @brief System configuration controller
-\
-$40010100 constant SYSCFG_ITLINE_ITLINE0  \ offset: 0x80 : interrupt line 0 status register
-$40010104 constant SYSCFG_ITLINE_ITLINE1  \ offset: 0x84 : interrupt line 1 status register
-$40010108 constant SYSCFG_ITLINE_ITLINE2  \ offset: 0x88 : interrupt line 2 status register
-$4001010c constant SYSCFG_ITLINE_ITLINE3  \ offset: 0x8C : interrupt line 3 status register
-$40010110 constant SYSCFG_ITLINE_ITLINE4  \ offset: 0x90 : interrupt line 4 status register
-$40010114 constant SYSCFG_ITLINE_ITLINE5  \ offset: 0x94 : interrupt line 5 status register
-$40010118 constant SYSCFG_ITLINE_ITLINE6  \ offset: 0x98 : interrupt line 6 status register
-$4001011c constant SYSCFG_ITLINE_ITLINE7  \ offset: 0x9C : interrupt line 7 status register
-$40010124 constant SYSCFG_ITLINE_ITLINE9  \ offset: 0xA4 : interrupt line 9 status register
-$40010128 constant SYSCFG_ITLINE_ITLINE10  \ offset: 0xA8 : interrupt line 10 status register
-$4001012c constant SYSCFG_ITLINE_ITLINE11  \ offset: 0xAC : interrupt line 11 status register
-$40010130 constant SYSCFG_ITLINE_ITLINE12  \ offset: 0xB0 : interrupt line 12 status register
-$40010134 constant SYSCFG_ITLINE_ITLINE13  \ offset: 0xB4 : interrupt line 13 status register
-$40010138 constant SYSCFG_ITLINE_ITLINE14  \ offset: 0xB8 : interrupt line 14 status register
-$4001013c constant SYSCFG_ITLINE_ITLINE15  \ offset: 0xBC : interrupt line 15 status register
-$40010140 constant SYSCFG_ITLINE_ITLINE16  \ offset: 0xC0 : interrupt line 16 status register
-$40010144 constant SYSCFG_ITLINE_ITLINE17  \ offset: 0xC4 : interrupt line 17 status register
-$40010148 constant SYSCFG_ITLINE_ITLINE18  \ offset: 0xC8 : interrupt line 18 status register
-$4001014c constant SYSCFG_ITLINE_ITLINE19  \ offset: 0xCC : interrupt line 19 status register
-$40010154 constant SYSCFG_ITLINE_ITLINE21  \ offset: 0xD4 : interrupt line 21 status register
-$40010158 constant SYSCFG_ITLINE_ITLINE22  \ offset: 0xD8 : interrupt line 22 status register
-$4001015c constant SYSCFG_ITLINE_ITLINE23  \ offset: 0xDC : interrupt line 23 status register
-$40010160 constant SYSCFG_ITLINE_ITLINE24  \ offset: 0xE0 : interrupt line 24 status register
-$40010164 constant SYSCFG_ITLINE_ITLINE25  \ offset: 0xE4 : interrupt line 25 status register
-$40010168 constant SYSCFG_ITLINE_ITLINE26  \ offset: 0xE8 : interrupt line 26 status register
-$4001016c constant SYSCFG_ITLINE_ITLINE27  \ offset: 0xEC : interrupt line 27 status register
-$40010170 constant SYSCFG_ITLINE_ITLINE28  \ offset: 0xF0 : interrupt line 28 status register
-$40010174 constant SYSCFG_ITLINE_ITLINE29  \ offset: 0xF4 : interrupt line 29 status register
-
+[ifndef] SYSCFG_ITLINE_DEF
+
+  [ifdef] SYSCFG_ITLINE_ITLINE0_DEF
+    \
+    \ @brief interrupt line 0 status register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_WWDG             \ [0x00] Window watchdog interrupt pending flag
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE1_DEF
+    \
+    \ @brief interrupt line 1 status register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_PVDOUT           \ [0x00] PVD supply monitoring interrupt request pending (EXTI line 16).
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE2_DEF
+    \
+    \ @brief interrupt line 2 status register
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_TAMP             \ [0x00] TAMP
+    $01 constant SYSCFG_ITLINE_RTC              \ [0x01] RTC
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE3_DEF
+    \
+    \ @brief interrupt line 3 status register
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_FLASH_ITF        \ [0x00] FLASH_ITF
+    $01 constant SYSCFG_ITLINE_FLASH_ECC        \ [0x01] FLASH_ECC
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE4_DEF
+    \
+    \ @brief interrupt line 4 status register
+    \ Address offset: 0x90
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_RCC              \ [0x00] RCC
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE5_DEF
+    \
+    \ @brief interrupt line 5 status register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_EXTI0            \ [0x00] EXTI0
+    $01 constant SYSCFG_ITLINE_EXTI1            \ [0x01] EXTI1
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE6_DEF
+    \
+    \ @brief interrupt line 6 status register
+    \ Address offset: 0x98
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_EXTI2            \ [0x00] EXTI2
+    $01 constant SYSCFG_ITLINE_EXTI3            \ [0x01] EXTI3
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE7_DEF
+    \
+    \ @brief interrupt line 7 status register
+    \ Address offset: 0x9C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_EXTI4            \ [0x00] EXTI4
+    $01 constant SYSCFG_ITLINE_EXTI5            \ [0x01] EXTI5
+    $02 constant SYSCFG_ITLINE_EXTI6            \ [0x02] EXTI6
+    $03 constant SYSCFG_ITLINE_EXTI7            \ [0x03] EXTI7
+    $04 constant SYSCFG_ITLINE_EXTI8            \ [0x04] EXTI8
+    $05 constant SYSCFG_ITLINE_EXTI9            \ [0x05] EXTI9
+    $06 constant SYSCFG_ITLINE_EXTI10           \ [0x06] EXTI10
+    $07 constant SYSCFG_ITLINE_EXTI11           \ [0x07] EXTI11
+    $08 constant SYSCFG_ITLINE_EXTI12           \ [0x08] EXTI12
+    $09 constant SYSCFG_ITLINE_EXTI13           \ [0x09] EXTI13
+    $0a constant SYSCFG_ITLINE_EXTI14           \ [0x0a] EXTI14
+    $0b constant SYSCFG_ITLINE_EXTI15           \ [0x0b] EXTI15
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE9_DEF
+    \
+    \ @brief interrupt line 9 status register
+    \ Address offset: 0xA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_DMA1_CH1         \ [0x00] DMA1_CH1
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE10_DEF
+    \
+    \ @brief interrupt line 10 status register
+    \ Address offset: 0xA8
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_DMA1_CH2         \ [0x00] DMA1_CH1
+    $01 constant SYSCFG_ITLINE_DMA1_CH3         \ [0x01] DMA1_CH3
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE11_DEF
+    \
+    \ @brief interrupt line 11 status register
+    \ Address offset: 0xAC
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_DMAMUX           \ [0x00] DMAMUX
+    $01 constant SYSCFG_ITLINE_DMA1_CH4         \ [0x01] DMA1_CH4
+    $02 constant SYSCFG_ITLINE_DMA1_CH5         \ [0x02] DMA1_CH5
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE12_DEF
+    \
+    \ @brief interrupt line 12 status register
+    \ Address offset: 0xB0
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_ADC              \ [0x00] ADC
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE13_DEF
+    \
+    \ @brief interrupt line 13 status register
+    \ Address offset: 0xB4
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_TIM1_CCU         \ [0x00] TIM1_CCU
+    $01 constant SYSCFG_ITLINE_TIM1_TRG         \ [0x01] TIM1_TRG
+    $02 constant SYSCFG_ITLINE_TIM1_UPD         \ [0x02] TIM1_UPD
+    $03 constant SYSCFG_ITLINE_TIM1_BRK         \ [0x03] TIM1_BRK
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE14_DEF
+    \
+    \ @brief interrupt line 14 status register
+    \ Address offset: 0xB8
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_TIM1_CC          \ [0x00] TIM1_CC
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE15_DEF
+    \
+    \ @brief interrupt line 15 status register
+    \ Address offset: 0xBC
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_TIM2             \ [0x00] TIM2
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE16_DEF
+    \
+    \ @brief interrupt line 16 status register
+    \ Address offset: 0xC0
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_TIM3             \ [0x00] TIM3
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE17_DEF
+    \
+    \ @brief interrupt line 17 status register
+    \ Address offset: 0xC4
+    \ Reset value: 0x00000000
+    \
+    $02 constant SYSCFG_ITLINE_LPTIM1           \ [0x02] LPTIM1
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE18_DEF
+    \
+    \ @brief interrupt line 18 status register
+    \ Address offset: 0xC8
+    \ Reset value: 0x00000000
+    \
+    $01 constant SYSCFG_ITLINE_LPTIM2           \ [0x01] LPTIM2
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE19_DEF
+    \
+    \ @brief interrupt line 19 status register
+    \ Address offset: 0xCC
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_TIM14            \ [0x00] TIM14
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE21_DEF
+    \
+    \ @brief interrupt line 21 status register
+    \ Address offset: 0xD4
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_TIM16            \ [0x00] TIM16
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE22_DEF
+    \
+    \ @brief interrupt line 22 status register
+    \ Address offset: 0xD8
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_TIM17            \ [0x00] TIM17
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE23_DEF
+    \
+    \ @brief interrupt line 23 status register
+    \ Address offset: 0xDC
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_I2C1             \ [0x00] I2C1
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE24_DEF
+    \
+    \ @brief interrupt line 24 status register
+    \ Address offset: 0xE0
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_I2C2             \ [0x00] I2C2
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE25_DEF
+    \
+    \ @brief interrupt line 25 status register
+    \ Address offset: 0xE4
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_SPI1             \ [0x00] SPI1
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE26_DEF
+    \
+    \ @brief interrupt line 26 status register
+    \ Address offset: 0xE8
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_SPI2             \ [0x00] SPI2
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE27_DEF
+    \
+    \ @brief interrupt line 27 status register
+    \ Address offset: 0xEC
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_USART1           \ [0x00] USART1
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE28_DEF
+    \
+    \ @brief interrupt line 28 status register
+    \ Address offset: 0xF0
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_ITLINE_USART2           \ [0x00] USART2
+  [then]
+
+
+  [ifdef] SYSCFG_ITLINE_ITLINE29_DEF
+    \
+    \ @brief interrupt line 29 status register
+    \ Address offset: 0xF4
+    \ Reset value: 0x00000000
+    \
+    $02 constant SYSCFG_ITLINE_USART5           \ [0x02] USART5
+  [then]
+
+  \
+  \ @brief System configuration controller
+  \
+  $80 constant SYSCFG_ITLINE_ITLINE0    \ interrupt line 0 status register
+  $84 constant SYSCFG_ITLINE_ITLINE1    \ interrupt line 1 status register
+  $88 constant SYSCFG_ITLINE_ITLINE2    \ interrupt line 2 status register
+  $8C constant SYSCFG_ITLINE_ITLINE3    \ interrupt line 3 status register
+  $90 constant SYSCFG_ITLINE_ITLINE4    \ interrupt line 4 status register
+  $94 constant SYSCFG_ITLINE_ITLINE5    \ interrupt line 5 status register
+  $98 constant SYSCFG_ITLINE_ITLINE6    \ interrupt line 6 status register
+  $9C constant SYSCFG_ITLINE_ITLINE7    \ interrupt line 7 status register
+  $A4 constant SYSCFG_ITLINE_ITLINE9    \ interrupt line 9 status register
+  $A8 constant SYSCFG_ITLINE_ITLINE10   \ interrupt line 10 status register
+  $AC constant SYSCFG_ITLINE_ITLINE11   \ interrupt line 11 status register
+  $B0 constant SYSCFG_ITLINE_ITLINE12   \ interrupt line 12 status register
+  $B4 constant SYSCFG_ITLINE_ITLINE13   \ interrupt line 13 status register
+  $B8 constant SYSCFG_ITLINE_ITLINE14   \ interrupt line 14 status register
+  $BC constant SYSCFG_ITLINE_ITLINE15   \ interrupt line 15 status register
+  $C0 constant SYSCFG_ITLINE_ITLINE16   \ interrupt line 16 status register
+  $C4 constant SYSCFG_ITLINE_ITLINE17   \ interrupt line 17 status register
+  $C8 constant SYSCFG_ITLINE_ITLINE18   \ interrupt line 18 status register
+  $CC constant SYSCFG_ITLINE_ITLINE19   \ interrupt line 19 status register
+  $D4 constant SYSCFG_ITLINE_ITLINE21   \ interrupt line 21 status register
+  $D8 constant SYSCFG_ITLINE_ITLINE22   \ interrupt line 22 status register
+  $DC constant SYSCFG_ITLINE_ITLINE23   \ interrupt line 23 status register
+  $E0 constant SYSCFG_ITLINE_ITLINE24   \ interrupt line 24 status register
+  $E4 constant SYSCFG_ITLINE_ITLINE25   \ interrupt line 25 status register
+  $E8 constant SYSCFG_ITLINE_ITLINE26   \ interrupt line 26 status register
+  $EC constant SYSCFG_ITLINE_ITLINE27   \ interrupt line 27 status register
+  $F0 constant SYSCFG_ITLINE_ITLINE28   \ interrupt line 28 status register
+  $F4 constant SYSCFG_ITLINE_ITLINE29   \ interrupt line 29 status register
+
+: SYSCFG_ITLINE_DEF ; [then]

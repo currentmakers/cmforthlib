@@ -6,41 +6,43 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] PWR_DEF
 
-\
-\ @brief power control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_CR_LPDS                                      \ Low-power deep sleep
-$00000002 constant PWR_CR_PDDS                                      \ Power down deepsleep
-$00000004 constant PWR_CR_CWUF                                      \ Clear wakeup flag
-$00000008 constant PWR_CR_CSBF                                      \ Clear standby flag
-$00000010 constant PWR_CR_PVDE                                      \ Power voltage detector enable
-$000000e0 constant PWR_CR_PLS                                       \ PVD level selection
-$00000100 constant PWR_CR_DBP                                       \ Disable backup domain write protection
-$00000200 constant PWR_CR_FPDS                                      \ Flash power down in Stop mode
-
-
-\
-\ @brief power control/status register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_CSR_WUF                                      \ Wakeup flag
-$00000002 constant PWR_CSR_SBF                                      \ Standby flag
-$00000004 constant PWR_CSR_PVDO                                     \ PVD output
-$00000008 constant PWR_CSR_BRR                                      \ Backup regulator ready
-$00000100 constant PWR_CSR_EWUP                                     \ Enable WKUP pin
-$00000200 constant PWR_CSR_BRE                                      \ Backup regulator enable
+  [ifdef] PWR_CR_DEF
+    \
+    \ @brief power control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_LPDS                       \ [0x00] Low-power deep sleep
+    $01 constant PWR_PDDS                       \ [0x01] Power down deepsleep
+    $02 constant PWR_CWUF                       \ [0x02] Clear wakeup flag
+    $03 constant PWR_CSBF                       \ [0x03] Clear standby flag
+    $04 constant PWR_PVDE                       \ [0x04] Power voltage detector enable
+    $05 constant PWR_PLS                        \ [0x05 : 3] PVD level selection
+    $08 constant PWR_DBP                        \ [0x08] Disable backup domain write protection
+    $09 constant PWR_FPDS                       \ [0x09] Flash power down in Stop mode
+  [then]
 
 
-\
-\ @brief Power control
-\
-$40007000 constant PWR_CR         \ offset: 0x00 : power control register
-$40007004 constant PWR_CSR        \ offset: 0x04 : power control/status register
+  [ifdef] PWR_CSR_DEF
+    \
+    \ @brief power control/status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_WUF                        \ [0x00] Wakeup flag
+    $01 constant PWR_SBF                        \ [0x01] Standby flag
+    $02 constant PWR_PVDO                       \ [0x02] PVD output
+    $03 constant PWR_BRR                        \ [0x03] Backup regulator ready
+    $08 constant PWR_EWUP                       \ [0x08] Enable WKUP pin
+    $09 constant PWR_BRE                        \ [0x09] Backup regulator enable
+  [then]
 
+  \
+  \ @brief Power control
+  \
+  $00 constant PWR_CR                   \ power control register
+  $04 constant PWR_CSR                  \ power control/status register
+
+: PWR_DEF ; [then]

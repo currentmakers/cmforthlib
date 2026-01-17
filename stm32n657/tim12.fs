@@ -6,204 +6,219 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM12_DEF
 
-\
-\ @brief TIM12 control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM12_TIM12_CR1_CEN                              \ Counter enable
-$00000002 constant TIM12_TIM12_CR1_UDIS                             \ Update disable
-$00000004 constant TIM12_TIM12_CR1_URS                              \ Update request source
-$00000008 constant TIM12_TIM12_CR1_OPM                              \ One-pulse mode
-$00000080 constant TIM12_TIM12_CR1_ARPE                             \ Auto-reload preload enable
-$00000300 constant TIM12_TIM12_CR1_CKD                              \ Clock division
-$00000800 constant TIM12_TIM12_CR1_UIFREMAP                         \ UIF status bit remapping
-$00001000 constant TIM12_TIM12_CR1_DITHEN                           \ Dithering enable
-
-
-\
-\ @brief TIM12 control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000070 constant TIM12_TIM12_CR2_MMS                              \ Master mode selection
-$00000080 constant TIM12_TIM12_CR2_TI1S                             \ tim_ti1 selection
-$10000000 constant TIM12_TIM12_CR2_ADSYNC                           \ ADC synchronization
+  [ifdef] TIM12_TIM12_CR1_DEF
+    \
+    \ @brief TIM12 control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_CEN                      \ [0x00] Counter enable
+    $01 constant TIM12_UDIS                     \ [0x01] Update disable
+    $02 constant TIM12_URS                      \ [0x02] Update request source
+    $03 constant TIM12_OPM                      \ [0x03] One-pulse mode
+    $07 constant TIM12_ARPE                     \ [0x07] Auto-reload preload enable
+    $08 constant TIM12_CKD                      \ [0x08 : 2] Clock division
+    $0b constant TIM12_UIFREMAP                 \ [0x0b] UIF status bit remapping
+    $0c constant TIM12_DITHEN                   \ [0x0c] Dithering enable
+  [then]
 
 
-\
-\ @brief TIM12 slave mode control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000007 constant TIM12_TIM12_SMCR_SMS                             \ SMS[0]: Slave mode selection
-$00000070 constant TIM12_TIM12_SMCR_TS                              \ TS[0]: Trigger selection
-$00000080 constant TIM12_TIM12_SMCR_MSM                             \ Master/Slave mode
-$00010000 constant TIM12_TIM12_SMCR_SMS_1                           \ SMS[3]
-$00300000 constant TIM12_TIM12_SMCR_TS_1                            \ TS[4:3]
-
-
-\
-\ @brief TIM12 Interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM12_TIM12_DIER_UIE                             \ Update interrupt enable
-$00000002 constant TIM12_TIM12_DIER_CC1IE                           \ Capture/Compare 1 interrupt enable
-$00000004 constant TIM12_TIM12_DIER_CC2IE                           \ Capture/Compare 2 interrupt enable
-$00000040 constant TIM12_TIM12_DIER_TIE                             \ Trigger interrupt enable
+  [ifdef] TIM12_TIM12_CR2_DEF
+    \
+    \ @brief TIM12 control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $04 constant TIM12_MMS                      \ [0x04 : 3] Master mode selection
+    $07 constant TIM12_TI1S                     \ [0x07] tim_ti1 selection
+    $1c constant TIM12_ADSYNC                   \ [0x1c] ADC synchronization
+  [then]
 
 
-\
-\ @brief TIM12 status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM12_TIM12_SR_UIF                               \ Update interrupt flag
-$00000002 constant TIM12_TIM12_SR_CC1IF                             \ Capture/compare 1 interrupt flag
-$00000004 constant TIM12_TIM12_SR_CC2IF                             \ Capture/Compare 2 interrupt flag
-$00000040 constant TIM12_TIM12_SR_TIF                               \ Trigger interrupt flag
-$00000200 constant TIM12_TIM12_SR_CC1OF                             \ Capture/Compare 1 overcapture flag
-$00000400 constant TIM12_TIM12_SR_CC2OF                             \ Capture/compare 2 overcapture flag
-
-
-\
-\ @brief TIM12 event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM12_TIM12_EGR_UG                               \ Update generation
-$00000002 constant TIM12_TIM12_EGR_CC1G                             \ Capture/compare 1 generation
-$00000004 constant TIM12_TIM12_EGR_CC2G                             \ Capture/compare 2 generation
-$00000040 constant TIM12_TIM12_EGR_TG                               \ Trigger generation
+  [ifdef] TIM12_TIM12_SMCR_DEF
+    \
+    \ @brief TIM12 slave mode control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_SMS                      \ [0x00 : 3] SMS[0]: Slave mode selection
+    $04 constant TIM12_TS                       \ [0x04 : 3] TS[0]: Trigger selection
+    $07 constant TIM12_MSM                      \ [0x07] Master/Slave mode
+    $10 constant TIM12_SMS_1                    \ [0x10] SMS[3]
+    $14 constant TIM12_TS_1                     \ [0x14 : 2] TS[4:3]
+  [then]
 
 
-\
-\ @brief TIM12 capture/compare mode register 1 [alternate]
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM12_TIM12_CCMR1_INPUT_CC1S                     \ Capture/Compare 1 selection
-$0000000c constant TIM12_TIM12_CCMR1_INPUT_IC1PSC                   \ Input capture 1 prescaler
-$000000f0 constant TIM12_TIM12_CCMR1_INPUT_IC1F                     \ Input capture 1 filter
-$00000300 constant TIM12_TIM12_CCMR1_INPUT_CC2S                     \ Capture/compare 2 selection
-$00000c00 constant TIM12_TIM12_CCMR1_INPUT_IC2PSC                   \ Input capture 2 prescaler
-$0000f000 constant TIM12_TIM12_CCMR1_INPUT_IC2F                     \ Input capture 2 filter
-
-
-\
-\ @brief TIM12 capture/compare mode register 1 [alternate]
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM12_TIM12_CCMR1_OUTPUT_CC1S                    \ Capture/Compare 1 selection
-$00000004 constant TIM12_TIM12_CCMR1_OUTPUT_OC1FE                   \ Output compare 1 fast enable
-$00000008 constant TIM12_TIM12_CCMR1_OUTPUT_OC1PE                   \ Output compare 1 preload enable
-$00000070 constant TIM12_TIM12_CCMR1_OUTPUT_OC1M                    \ OC1M[2:0]: Output compare 1 mode (refer to bit 16 for OC1M[3])
-$00000300 constant TIM12_TIM12_CCMR1_OUTPUT_CC2S                    \ Capture/Compare 2 selection
-$00000400 constant TIM12_TIM12_CCMR1_OUTPUT_OC2FE                   \ Output compare 2 fast enable
-$00000800 constant TIM12_TIM12_CCMR1_OUTPUT_OC2PE                   \ Output compare 2 preload enable
-$00007000 constant TIM12_TIM12_CCMR1_OUTPUT_OC2M                    \ OC2M[2:0]: Output compare 2 mode
-$00010000 constant TIM12_TIM12_CCMR1_OUTPUT_OC1M_1                  \ OC1M[3]
-$01000000 constant TIM12_TIM12_CCMR1_OUTPUT_OC2M_1                  \ OC2M[3]
+  [ifdef] TIM12_TIM12_DIER_DEF
+    \
+    \ @brief TIM12 Interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_UIE                      \ [0x00] Update interrupt enable
+    $01 constant TIM12_CC1IE                    \ [0x01] Capture/Compare 1 interrupt enable
+    $02 constant TIM12_CC2IE                    \ [0x02] Capture/Compare 2 interrupt enable
+    $06 constant TIM12_TIE                      \ [0x06] Trigger interrupt enable
+  [then]
 
 
-\
-\ @brief TIM12 capture/compare enable register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM12_TIM12_CCER_CC1E                            \ Capture/Compare 1 output enable.
-$00000002 constant TIM12_TIM12_CCER_CC1P                            \ Capture/Compare 1 output Polarity.
-$00000008 constant TIM12_TIM12_CCER_CC1NP                           \ Capture/Compare 1 complementary output Polarity
-$00000010 constant TIM12_TIM12_CCER_CC2E                            \ Capture/Compare 2 output enable
-$00000020 constant TIM12_TIM12_CCER_CC2P                            \ Capture/Compare 2 output Polarity
-$00000080 constant TIM12_TIM12_CCER_CC2NP                           \ Capture/Compare 2 output Polarity
-
-
-\
-\ @brief TIM12 counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM12_TIM12_CNT_CNT                              \ Counter value
-$80000000 constant TIM12_TIM12_CNT_UIFCPY                           \ UIF Copy
+  [ifdef] TIM12_TIM12_SR_DEF
+    \
+    \ @brief TIM12 status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_UIF                      \ [0x00] Update interrupt flag
+    $01 constant TIM12_CC1IF                    \ [0x01] Capture/compare 1 interrupt flag
+    $02 constant TIM12_CC2IF                    \ [0x02] Capture/Compare 2 interrupt flag
+    $06 constant TIM12_TIF                      \ [0x06] Trigger interrupt flag
+    $09 constant TIM12_CC1OF                    \ [0x09] Capture/Compare 1 overcapture flag
+    $0a constant TIM12_CC2OF                    \ [0x0a] Capture/compare 2 overcapture flag
+  [then]
 
 
-\
-\ @brief TIM12 prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM12_TIM12_PSC_PSC                              \ Prescaler value
-
-
-\
-\ @brief TIM12 auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x0000FFFF
-\
-
-$000fffff constant TIM12_TIM12_ARR_ARR                              \ Auto-reload value
+  [ifdef] TIM12_TIM12_EGR_DEF
+    \
+    \ @brief TIM12 event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_UG                       \ [0x00] Update generation
+    $01 constant TIM12_CC1G                     \ [0x01] Capture/compare 1 generation
+    $02 constant TIM12_CC2G                     \ [0x02] Capture/compare 2 generation
+    $06 constant TIM12_TG                       \ [0x06] Trigger generation
+  [then]
 
 
-\
-\ @brief TIM12 capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$000fffff constant TIM12_TIM12_CCR1_CCR1                            \ Capture/compare 1 value
-
-
-\
-\ @brief TIM12 capture/compare register 2
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$000fffff constant TIM12_TIM12_CCR2_CCR2                            \ Capture/compare 2 value
+  [ifdef] TIM12_TIM12_CCMR1_Input_DEF
+    \
+    \ @brief TIM12 capture/compare mode register 1 [alternate]
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM12_IC1PSC                   \ [0x02 : 2] Input capture 1 prescaler
+    $04 constant TIM12_IC1F                     \ [0x04 : 4] Input capture 1 filter
+    $08 constant TIM12_CC2S                     \ [0x08 : 2] Capture/compare 2 selection
+    $0a constant TIM12_IC2PSC                   \ [0x0a : 2] Input capture 2 prescaler
+    $0c constant TIM12_IC2F                     \ [0x0c : 4] Input capture 2 filter
+  [then]
 
 
-\
-\ @brief TIM12 timer input selection register
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
+  [ifdef] TIM12_TIM12_CCMR1_Output_DEF
+    \
+    \ @brief TIM12 capture/compare mode register 1 [alternate]
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM12_OC1FE                    \ [0x02] Output compare 1 fast enable
+    $03 constant TIM12_OC1PE                    \ [0x03] Output compare 1 preload enable
+    $04 constant TIM12_OC1M                     \ [0x04 : 3] OC1M[2:0]: Output compare 1 mode (refer to bit 16 for OC1M[3])
+    $08 constant TIM12_CC2S                     \ [0x08 : 2] Capture/Compare 2 selection
+    $0a constant TIM12_OC2FE                    \ [0x0a] Output compare 2 fast enable
+    $0b constant TIM12_OC2PE                    \ [0x0b] Output compare 2 preload enable
+    $0c constant TIM12_OC2M                     \ [0x0c : 3] OC2M[2:0]: Output compare 2 mode
+    $10 constant TIM12_OC1M_1                   \ [0x10] OC1M[3]
+    $18 constant TIM12_OC2M_1                   \ [0x18] OC2M[3]
+  [then]
 
-$0000000f constant TIM12_TIM12_TISEL_TI1SEL                         \ selects tim_ti1_in[15:0] input
-$00000f00 constant TIM12_TIM12_TISEL_TI2SEL                         \ selects tim_ti2_in[15:0] input
+
+  [ifdef] TIM12_TIM12_CCER_DEF
+    \
+    \ @brief TIM12 capture/compare enable register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_CC1E                     \ [0x00] Capture/Compare 1 output enable.
+    $01 constant TIM12_CC1P                     \ [0x01] Capture/Compare 1 output Polarity.
+    $03 constant TIM12_CC1NP                    \ [0x03] Capture/Compare 1 complementary output Polarity
+    $04 constant TIM12_CC2E                     \ [0x04] Capture/Compare 2 output enable
+    $05 constant TIM12_CC2P                     \ [0x05] Capture/Compare 2 output Polarity
+    $07 constant TIM12_CC2NP                    \ [0x07] Capture/Compare 2 output Polarity
+  [then]
 
 
-\
-\ @brief General-purpose timers
-\
-$40001800 constant TIM12_TIM12_CR1  \ offset: 0x00 : TIM12 control register 1
-$40001804 constant TIM12_TIM12_CR2  \ offset: 0x04 : TIM12 control register 2
-$40001808 constant TIM12_TIM12_SMCR  \ offset: 0x08 : TIM12 slave mode control register
-$4000180c constant TIM12_TIM12_DIER  \ offset: 0x0C : TIM12 Interrupt enable register
-$40001810 constant TIM12_TIM12_SR  \ offset: 0x10 : TIM12 status register
-$40001814 constant TIM12_TIM12_EGR  \ offset: 0x14 : TIM12 event generation register
-$40001818 constant TIM12_TIM12_CCMR1_INPUT  \ offset: 0x18 : TIM12 capture/compare mode register 1 [alternate]
-$40001818 constant TIM12_TIM12_CCMR1_OUTPUT  \ offset: 0x18 : TIM12 capture/compare mode register 1 [alternate]
-$40001820 constant TIM12_TIM12_CCER  \ offset: 0x20 : TIM12 capture/compare enable register
-$40001824 constant TIM12_TIM12_CNT  \ offset: 0x24 : TIM12 counter
-$40001828 constant TIM12_TIM12_PSC  \ offset: 0x28 : TIM12 prescaler
-$4000182c constant TIM12_TIM12_ARR  \ offset: 0x2C : TIM12 auto-reload register
-$40001834 constant TIM12_TIM12_CCR1  \ offset: 0x34 : TIM12 capture/compare register 1
-$40001838 constant TIM12_TIM12_CCR2  \ offset: 0x38 : TIM12 capture/compare register 2
-$4000185c constant TIM12_TIM12_TISEL  \ offset: 0x5C : TIM12 timer input selection register
+  [ifdef] TIM12_TIM12_CNT_DEF
+    \
+    \ @brief TIM12 counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_CNT                      \ [0x00 : 16] Counter value
+    $1f constant TIM12_UIFCPY                   \ [0x1f] UIF Copy
+  [then]
 
+
+  [ifdef] TIM12_TIM12_PSC_DEF
+    \
+    \ @brief TIM12 prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_PSC                      \ [0x00 : 16] Prescaler value
+  [then]
+
+
+  [ifdef] TIM12_TIM12_ARR_DEF
+    \
+    \ @brief TIM12 auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant TIM12_ARR                      \ [0x00 : 20] Auto-reload value
+  [then]
+
+
+  [ifdef] TIM12_TIM12_CCR1_DEF
+    \
+    \ @brief TIM12 capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_CCR1                     \ [0x00 : 20] Capture/compare 1 value
+  [then]
+
+
+  [ifdef] TIM12_TIM12_CCR2_DEF
+    \
+    \ @brief TIM12 capture/compare register 2
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_CCR2                     \ [0x00 : 20] Capture/compare 2 value
+  [then]
+
+
+  [ifdef] TIM12_TIM12_TISEL_DEF
+    \
+    \ @brief TIM12 timer input selection register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM12_TI1SEL                   \ [0x00 : 4] selects tim_ti1_in[15:0] input
+    $08 constant TIM12_TI2SEL                   \ [0x08 : 4] selects tim_ti2_in[15:0] input
+  [then]
+
+  \
+  \ @brief General-purpose timers
+  \
+  $00 constant TIM12_TIM12_CR1          \ TIM12 control register 1
+  $04 constant TIM12_TIM12_CR2          \ TIM12 control register 2
+  $08 constant TIM12_TIM12_SMCR         \ TIM12 slave mode control register
+  $0C constant TIM12_TIM12_DIER         \ TIM12 Interrupt enable register
+  $10 constant TIM12_TIM12_SR           \ TIM12 status register
+  $14 constant TIM12_TIM12_EGR          \ TIM12 event generation register
+  $18 constant TIM12_TIM12_CCMR1_INPUT  \ TIM12 capture/compare mode register 1 [alternate]
+  $18 constant TIM12_TIM12_CCMR1_OUTPUT \ TIM12 capture/compare mode register 1 [alternate]
+  $20 constant TIM12_TIM12_CCER         \ TIM12 capture/compare enable register
+  $24 constant TIM12_TIM12_CNT          \ TIM12 counter
+  $28 constant TIM12_TIM12_PSC          \ TIM12 prescaler
+  $2C constant TIM12_TIM12_ARR          \ TIM12 auto-reload register
+  $34 constant TIM12_TIM12_CCR1         \ TIM12 capture/compare register 1
+  $38 constant TIM12_TIM12_CCR2         \ TIM12 capture/compare register 2
+  $5C constant TIM12_TIM12_TISEL        \ TIM12 timer input selection register
+
+: TIM12_DEF ; [then]

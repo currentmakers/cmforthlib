@@ -6,102 +6,108 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SYSCFG_DEF
 
-\
-\ @brief configuration register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000003 constant SYSCFG_CFGR1_MEM_MODE                            \ Memory mapping selection bits
-$00000100 constant SYSCFG_CFGR1_ADC_DMA_RMP                         \ ADC DMA remapping bit
-$00000200 constant SYSCFG_CFGR1_USART1_TX_DMA_RMP                   \ USART1_TX DMA remapping bit
-$00000400 constant SYSCFG_CFGR1_USART1_RX_DMA_RMP                   \ USART1_RX DMA request remapping bit
-$00000800 constant SYSCFG_CFGR1_TIM16_DMA_RMP                       \ TIM16 DMA request remapping bit
-$00001000 constant SYSCFG_CFGR1_TIM17_DMA_RMP                       \ TIM17 DMA request remapping bit
-$00010000 constant SYSCFG_CFGR1_I2C_PB6_FM                          \ Fast Mode Plus (FM plus) driving capability activation bits.
-$00020000 constant SYSCFG_CFGR1_I2C_PB7_FM                          \ Fast Mode Plus (FM+) driving capability activation bits.
-$00040000 constant SYSCFG_CFGR1_I2C_PB8_FM                          \ Fast Mode Plus (FM+) driving capability activation bits.
-$00080000 constant SYSCFG_CFGR1_I2C_PB9_FM                          \ Fast Mode Plus (FM+) driving capability activation bits.
-$00100000 constant SYSCFG_CFGR1_I2C1_FM_PLUS                        \ FM+ driving capability activation for I2C1
-$00200000 constant SYSCFG_CFGR1_I2C2_FM_PLUS                        \ FM+ driving capability activation for I2C2
-$01000000 constant SYSCFG_CFGR1_SPI2_DMA_RMP                        \ SPI2 DMA request remapping bit
-$02000000 constant SYSCFG_CFGR1_USART2_DMA_RMP                      \ USART2 DMA request remapping bit
-$04000000 constant SYSCFG_CFGR1_USART3_DMA_RMP                      \ USART3 DMA request remapping bit
-$08000000 constant SYSCFG_CFGR1_I2C1_DMA_RMP                        \ I2C1 DMA request remapping bit
-$10000000 constant SYSCFG_CFGR1_TIM1_DMA_RMP                        \ TIM1 DMA request remapping bit
-$20000000 constant SYSCFG_CFGR1_TIM2_DMA_RMP                        \ TIM2 DMA request remapping bit
-$40000000 constant SYSCFG_CFGR1_TIM3_DMA_RMP                        \ TIM3 DMA request remapping bit
-
-
-\
-\ @brief external interrupt configuration register 1
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR1_EXTI0                             \ EXTI 0 configuration bits
-$000000f0 constant SYSCFG_EXTICR1_EXTI1                             \ EXTI 1 configuration bits
-$00000f00 constant SYSCFG_EXTICR1_EXTI2                             \ EXTI 2 configuration bits
-$0000f000 constant SYSCFG_EXTICR1_EXTI3                             \ EXTI 3 configuration bits
+  [ifdef] SYSCFG_CFGR1_DEF
+    \
+    \ @brief configuration register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_MEM_MODE                \ [0x00 : 2] Memory mapping selection bits
+    $08 constant SYSCFG_ADC_DMA_RMP             \ [0x08] ADC DMA remapping bit
+    $09 constant SYSCFG_USART1_TX_DMA_RMP       \ [0x09] USART1_TX DMA remapping bit
+    $0a constant SYSCFG_USART1_RX_DMA_RMP       \ [0x0a] USART1_RX DMA request remapping bit
+    $0b constant SYSCFG_TIM16_DMA_RMP           \ [0x0b] TIM16 DMA request remapping bit
+    $0c constant SYSCFG_TIM17_DMA_RMP           \ [0x0c] TIM17 DMA request remapping bit
+    $10 constant SYSCFG_I2C_PB6_FM              \ [0x10] Fast Mode Plus (FM plus) driving capability activation bits.
+    $11 constant SYSCFG_I2C_PB7_FM              \ [0x11] Fast Mode Plus (FM+) driving capability activation bits.
+    $12 constant SYSCFG_I2C_PB8_FM              \ [0x12] Fast Mode Plus (FM+) driving capability activation bits.
+    $13 constant SYSCFG_I2C_PB9_FM              \ [0x13] Fast Mode Plus (FM+) driving capability activation bits.
+    $14 constant SYSCFG_I2C1_FM_plus            \ [0x14] FM+ driving capability activation for I2C1
+    $15 constant SYSCFG_I2C2_FM_plus            \ [0x15] FM+ driving capability activation for I2C2
+    $18 constant SYSCFG_SPI2_DMA_RMP            \ [0x18] SPI2 DMA request remapping bit
+    $19 constant SYSCFG_USART2_DMA_RMP          \ [0x19] USART2 DMA request remapping bit
+    $1a constant SYSCFG_USART3_DMA_RMP          \ [0x1a] USART3 DMA request remapping bit
+    $1b constant SYSCFG_I2C1_DMA_RMP            \ [0x1b] I2C1 DMA request remapping bit
+    $1c constant SYSCFG_TIM1_DMA_RMP            \ [0x1c] TIM1 DMA request remapping bit
+    $1d constant SYSCFG_TIM2_DMA_RMP            \ [0x1d] TIM2 DMA request remapping bit
+    $1e constant SYSCFG_TIM3_DMA_RMP            \ [0x1e] TIM3 DMA request remapping bit
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR2_EXTI4                             \ EXTI 4 configuration bits
-$000000f0 constant SYSCFG_EXTICR2_EXTI5                             \ EXTI 5 configuration bits
-$00000f00 constant SYSCFG_EXTICR2_EXTI6                             \ EXTI 6 configuration bits
-$0000f000 constant SYSCFG_EXTICR2_EXTI7                             \ EXTI 7 configuration bits
-
-
-\
-\ @brief external interrupt configuration register 3
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR3_EXTI8                             \ EXTI 8 configuration bits
-$000000f0 constant SYSCFG_EXTICR3_EXTI9                             \ EXTI 9 configuration bits
-$00000f00 constant SYSCFG_EXTICR3_EXTI10                            \ EXTI 10 configuration bits
-$0000f000 constant SYSCFG_EXTICR3_EXTI11                            \ EXTI 11 configuration bits
+  [ifdef] SYSCFG_EXTICR1_DEF
+    \
+    \ @brief external interrupt configuration register 1
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI0                   \ [0x00 : 4] EXTI 0 configuration bits
+    $04 constant SYSCFG_EXTI1                   \ [0x04 : 4] EXTI 1 configuration bits
+    $08 constant SYSCFG_EXTI2                   \ [0x08 : 4] EXTI 2 configuration bits
+    $0c constant SYSCFG_EXTI3                   \ [0x0c : 4] EXTI 3 configuration bits
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 4
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR4_EXTI12                            \ EXTI 12 configuration bits
-$000000f0 constant SYSCFG_EXTICR4_EXTI13                            \ EXTI 13 configuration bits
-$00000f00 constant SYSCFG_EXTICR4_EXTI14                            \ EXTI 14 configuration bits
-$0000f000 constant SYSCFG_EXTICR4_EXTI15                            \ EXTI 15 configuration bits
-
-
-\
-\ @brief configuration register 2
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CFGR2_LOCUP_LOCK                          \ Cortex-M0 LOCKUP bit enable bit
-$00000002 constant SYSCFG_CFGR2_SRAM_PARITY_LOCK                    \ SRAM parity lock bit
-$00000004 constant SYSCFG_CFGR2_PVD_LOCK                            \ PVD lock enable bit
-$00000100 constant SYSCFG_CFGR2_SRAM_PEF                            \ SRAM parity flag
+  [ifdef] SYSCFG_EXTICR2_DEF
+    \
+    \ @brief external interrupt configuration register 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI4                   \ [0x00 : 4] EXTI 4 configuration bits
+    $04 constant SYSCFG_EXTI5                   \ [0x04 : 4] EXTI 5 configuration bits
+    $08 constant SYSCFG_EXTI6                   \ [0x08 : 4] EXTI 6 configuration bits
+    $0c constant SYSCFG_EXTI7                   \ [0x0c : 4] EXTI 7 configuration bits
+  [then]
 
 
-\
-\ @brief System configuration controller
-\
-$40010000 constant SYSCFG_CFGR1   \ offset: 0x00 : configuration register 1
-$40010008 constant SYSCFG_EXTICR1  \ offset: 0x08 : external interrupt configuration register 1
-$4001000c constant SYSCFG_EXTICR2  \ offset: 0x0C : external interrupt configuration register 2
-$40010010 constant SYSCFG_EXTICR3  \ offset: 0x10 : external interrupt configuration register 3
-$40010014 constant SYSCFG_EXTICR4  \ offset: 0x14 : external interrupt configuration register 4
-$40010018 constant SYSCFG_CFGR2   \ offset: 0x18 : configuration register 2
+  [ifdef] SYSCFG_EXTICR3_DEF
+    \
+    \ @brief external interrupt configuration register 3
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI8                   \ [0x00 : 4] EXTI 8 configuration bits
+    $04 constant SYSCFG_EXTI9                   \ [0x04 : 4] EXTI 9 configuration bits
+    $08 constant SYSCFG_EXTI10                  \ [0x08 : 4] EXTI 10 configuration bits
+    $0c constant SYSCFG_EXTI11                  \ [0x0c : 4] EXTI 11 configuration bits
+  [then]
 
+
+  [ifdef] SYSCFG_EXTICR4_DEF
+    \
+    \ @brief external interrupt configuration register 4
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI12                  \ [0x00 : 4] EXTI 12 configuration bits
+    $04 constant SYSCFG_EXTI13                  \ [0x04 : 4] EXTI 13 configuration bits
+    $08 constant SYSCFG_EXTI14                  \ [0x08 : 4] EXTI 14 configuration bits
+    $0c constant SYSCFG_EXTI15                  \ [0x0c : 4] EXTI 15 configuration bits
+  [then]
+
+
+  [ifdef] SYSCFG_CFGR2_DEF
+    \
+    \ @brief configuration register 2
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_LOCUP_LOCK              \ [0x00] Cortex-M0 LOCKUP bit enable bit
+    $01 constant SYSCFG_SRAM_PARITY_LOCK        \ [0x01] SRAM parity lock bit
+    $02 constant SYSCFG_PVD_LOCK                \ [0x02] PVD lock enable bit
+    $08 constant SYSCFG_SRAM_PEF                \ [0x08] SRAM parity flag
+  [then]
+
+  \
+  \ @brief System configuration controller
+  \
+  $00 constant SYSCFG_CFGR1             \ configuration register 1
+  $08 constant SYSCFG_EXTICR1           \ external interrupt configuration register 1
+  $0C constant SYSCFG_EXTICR2           \ external interrupt configuration register 2
+  $10 constant SYSCFG_EXTICR3           \ external interrupt configuration register 3
+  $14 constant SYSCFG_EXTICR4           \ external interrupt configuration register 4
+  $18 constant SYSCFG_CFGR2             \ configuration register 2
+
+: SYSCFG_DEF ; [then]

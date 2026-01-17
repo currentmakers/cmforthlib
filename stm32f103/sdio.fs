@@ -1,274 +1,292 @@
 \
 \ @file sdio.fs
-\ @brief Secure digital input/output       interface
+\ @brief Secure digital input/output interface
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SDIO_DEF
 
-\
-\ @brief Bits 1:0 = PWRCTRL: Power supply control bits
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000003 constant SDIO_POWER_PWRCTRL                               \ PWRCTRL
-
-
-\
-\ @brief SDI clock control register (SDIO_CLKCR)
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$000000ff constant SDIO_CLKCR_CLKDIV                                \ Clock divide factor
-$00000100 constant SDIO_CLKCR_CLKEN                                 \ Clock enable bit
-$00000200 constant SDIO_CLKCR_PWRSAV                                \ Power saving configuration bit
-$00000400 constant SDIO_CLKCR_BYPASS                                \ Clock divider bypass enable bit
-$00001800 constant SDIO_CLKCR_WIDBUS                                \ Wide bus mode enable bit
-$00002000 constant SDIO_CLKCR_NEGEDGE                               \ SDIO_CK dephasing selection bit
-$00004000 constant SDIO_CLKCR_HWFC_EN                               \ HW Flow Control enable
+  [ifdef] SDIO_POWER_DEF
+    \
+    \ @brief Bits 1:0 = PWRCTRL: Power supply control bits
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_PWRCTRL                   \ [0x00 : 2] PWRCTRL
+  [then]
 
 
-\
-\ @brief Bits 31:0 = : Command argument
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SDIO_ARG_CMDARG                                  \ Command argument
-
-
-\
-\ @brief SDIO command register (SDIO_CMD)
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000003f constant SDIO_CMD_CMDINDEX                                \ CMDINDEX
-$000000c0 constant SDIO_CMD_WAITRESP                                \ WAITRESP
-$00000100 constant SDIO_CMD_WAITINT                                 \ WAITINT
-$00000200 constant SDIO_CMD_WAITPEND                                \ WAITPEND
-$00000400 constant SDIO_CMD_CPSMEN                                  \ CPSMEN
-$00000800 constant SDIO_CMD_SDIOSUSPEND                             \ SDIOSuspend
-$00001000 constant SDIO_CMD_ENCMDCOMPL                              \ ENCMDcompl
-$00002000 constant SDIO_CMD_NIEN                                    \ nIEN
-$00004000 constant SDIO_CMD_CE_ATACMD                               \ CE_ATACMD
+  [ifdef] SDIO_CLKCR_DEF
+    \
+    \ @brief SDI clock control register (SDIO_CLKCR)
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CLKDIV                    \ [0x00 : 8] Clock divide factor
+    $08 constant SDIO_CLKEN                     \ [0x08] Clock enable bit
+    $09 constant SDIO_PWRSAV                    \ [0x09] Power saving configuration bit
+    $0a constant SDIO_BYPASS                    \ [0x0a] Clock divider bypass enable bit
+    $0b constant SDIO_WIDBUS                    \ [0x0b : 2] Wide bus mode enable bit
+    $0d constant SDIO_NEGEDGE                   \ [0x0d] SDIO_CK dephasing selection bit
+    $0e constant SDIO_HWFC_EN                   \ [0x0e] HW Flow Control enable
+  [then]
 
 
-\
-\ @brief SDIO command register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000003f constant SDIO_RESPCMD_RESPCMD                             \ RESPCMD
-
-
-\
-\ @brief Bits 31:0 = CARDSTATUS1
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SDIO_RESPI1_CARDSTATUS1                          \ CARDSTATUS1
+  [ifdef] SDIO_ARG_DEF
+    \
+    \ @brief Bits 31:0 = : Command argument
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CMDARG                    \ [0x00 : 32] Command argument
+  [then]
 
 
-\
-\ @brief Bits 31:0 = CARDSTATUS2
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SDIO_RESP2_CARDSTATUS2                           \ CARDSTATUS2
-
-
-\
-\ @brief Bits 31:0 = CARDSTATUS3
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SDIO_RESP3_CARDSTATUS3                           \ CARDSTATUS3
-
-
-\
-\ @brief Bits 31:0 = CARDSTATUS4
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SDIO_RESP4_CARDSTATUS4                           \ CARDSTATUS4
+  [ifdef] SDIO_CMD_DEF
+    \
+    \ @brief SDIO command register (SDIO_CMD)
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CMDINDEX                  \ [0x00 : 6] CMDINDEX
+    $06 constant SDIO_WAITRESP                  \ [0x06 : 2] WAITRESP
+    $08 constant SDIO_WAITINT                   \ [0x08] WAITINT
+    $09 constant SDIO_WAITPEND                  \ [0x09] WAITPEND
+    $0a constant SDIO_CPSMEN                    \ [0x0a] CPSMEN
+    $0b constant SDIO_SDIOSuspend               \ [0x0b] SDIOSuspend
+    $0c constant SDIO_ENCMDcompl                \ [0x0c] ENCMDcompl
+    $0d constant SDIO_nIEN                      \ [0x0d] nIEN
+    $0e constant SDIO_CE_ATACMD                 \ [0x0e] CE_ATACMD
+  [then]
 
 
-\
-\ @brief Bits 31:0 = DATATIME: Data timeout period
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SDIO_DTIMER_DATATIME                             \ Data timeout period
-
-
-\
-\ @brief Bits 24:0 = DATALENGTH: Data length value
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$01ffffff constant SDIO_DLEN_DATALENGTH                             \ Data length value
+  [ifdef] SDIO_RESPCMD_DEF
+    \
+    \ @brief SDIO command register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_RESPCMD                   \ [0x00 : 6] RESPCMD
+  [then]
 
 
-\
-\ @brief SDIO data control register (SDIO_DCTRL)
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SDIO_DCTRL_DTEN                                  \ DTEN
-$00000002 constant SDIO_DCTRL_DTDIR                                 \ DTDIR
-$00000004 constant SDIO_DCTRL_DTMODE                                \ DTMODE
-$00000008 constant SDIO_DCTRL_DMAEN                                 \ DMAEN
-$000000f0 constant SDIO_DCTRL_DBLOCKSIZE                            \ DBLOCKSIZE
-$00000100 constant SDIO_DCTRL_PWSTART                               \ PWSTART
-$00000200 constant SDIO_DCTRL_PWSTOP                                \ PWSTOP
-$00000400 constant SDIO_DCTRL_RWMOD                                 \ RWMOD
-$00000800 constant SDIO_DCTRL_SDIOEN                                \ SDIOEN
+  [ifdef] SDIO_RESPI1_DEF
+    \
+    \ @brief Bits 31:0 = CARDSTATUS1
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CARDSTATUS1               \ [0x00 : 32] CARDSTATUS1
+  [then]
 
 
-\
-\ @brief Bits 24:0 = DATACOUNT: Data count value
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$01ffffff constant SDIO_DCOUNT_DATACOUNT                            \ Data count value
-
-
-\
-\ @brief SDIO status register (SDIO_STA)
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SDIO_STA_CCRCFAIL                                \ CCRCFAIL
-$00000002 constant SDIO_STA_DCRCFAIL                                \ DCRCFAIL
-$00000004 constant SDIO_STA_CTIMEOUT                                \ CTIMEOUT
-$00000008 constant SDIO_STA_DTIMEOUT                                \ DTIMEOUT
-$00000010 constant SDIO_STA_TXUNDERR                                \ TXUNDERR
-$00000020 constant SDIO_STA_RXOVERR                                 \ RXOVERR
-$00000040 constant SDIO_STA_CMDREND                                 \ CMDREND
-$00000080 constant SDIO_STA_CMDSENT                                 \ CMDSENT
-$00000100 constant SDIO_STA_DATAEND                                 \ DATAEND
-$00000200 constant SDIO_STA_STBITERR                                \ STBITERR
-$00000400 constant SDIO_STA_DBCKEND                                 \ DBCKEND
-$00000800 constant SDIO_STA_CMDACT                                  \ CMDACT
-$00001000 constant SDIO_STA_TXACT                                   \ TXACT
-$00002000 constant SDIO_STA_RXACT                                   \ RXACT
-$00004000 constant SDIO_STA_TXFIFOHE                                \ TXFIFOHE
-$00008000 constant SDIO_STA_RXFIFOHF                                \ RXFIFOHF
-$00010000 constant SDIO_STA_TXFIFOF                                 \ TXFIFOF
-$00020000 constant SDIO_STA_RXFIFOF                                 \ RXFIFOF
-$00040000 constant SDIO_STA_TXFIFOE                                 \ TXFIFOE
-$00080000 constant SDIO_STA_RXFIFOE                                 \ RXFIFOE
-$00100000 constant SDIO_STA_TXDAVL                                  \ TXDAVL
-$00200000 constant SDIO_STA_RXDAVL                                  \ RXDAVL
-$00400000 constant SDIO_STA_SDIOIT                                  \ SDIOIT
-$00800000 constant SDIO_STA_CEATAEND                                \ CEATAEND
+  [ifdef] SDIO_RESP2_DEF
+    \
+    \ @brief Bits 31:0 = CARDSTATUS2
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CARDSTATUS2               \ [0x00 : 32] CARDSTATUS2
+  [then]
 
 
-\
-\ @brief SDIO interrupt clear register (SDIO_ICR)
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SDIO_ICR_CCRCFAILC                               \ CCRCFAILC
-$00000002 constant SDIO_ICR_DCRCFAILC                               \ DCRCFAILC
-$00000004 constant SDIO_ICR_CTIMEOUTC                               \ CTIMEOUTC
-$00000008 constant SDIO_ICR_DTIMEOUTC                               \ DTIMEOUTC
-$00000010 constant SDIO_ICR_TXUNDERRC                               \ TXUNDERRC
-$00000020 constant SDIO_ICR_RXOVERRC                                \ RXOVERRC
-$00000040 constant SDIO_ICR_CMDRENDC                                \ CMDRENDC
-$00000080 constant SDIO_ICR_CMDSENTC                                \ CMDSENTC
-$00000100 constant SDIO_ICR_DATAENDC                                \ DATAENDC
-$00000200 constant SDIO_ICR_STBITERRC                               \ STBITERRC
-$00000400 constant SDIO_ICR_DBCKENDC                                \ DBCKENDC
-$00400000 constant SDIO_ICR_SDIOITC                                 \ SDIOITC
-$00800000 constant SDIO_ICR_CEATAENDC                               \ CEATAENDC
+  [ifdef] SDIO_RESP3_DEF
+    \
+    \ @brief Bits 31:0 = CARDSTATUS3
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CARDSTATUS3               \ [0x00 : 32] CARDSTATUS3
+  [then]
 
 
-\
-\ @brief SDIO mask register (SDIO_MASK)
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SDIO_MASK_CCRCFAILIE                             \ CCRCFAILIE
-$00000002 constant SDIO_MASK_DCRCFAILIE                             \ DCRCFAILIE
-$00000004 constant SDIO_MASK_CTIMEOUTIE                             \ CTIMEOUTIE
-$00000008 constant SDIO_MASK_DTIMEOUTIE                             \ DTIMEOUTIE
-$00000010 constant SDIO_MASK_TXUNDERRIE                             \ TXUNDERRIE
-$00000020 constant SDIO_MASK_RXOVERRIE                              \ RXOVERRIE
-$00000040 constant SDIO_MASK_CMDRENDIE                              \ CMDRENDIE
-$00000080 constant SDIO_MASK_CMDSENTIE                              \ CMDSENTIE
-$00000100 constant SDIO_MASK_DATAENDIE                              \ DATAENDIE
-$00000200 constant SDIO_MASK_STBITERRIE                             \ STBITERRIE
-$00000400 constant SDIO_MASK_DBACKENDIE                             \ DBACKENDIE
-$00000800 constant SDIO_MASK_CMDACTIE                               \ CMDACTIE
-$00001000 constant SDIO_MASK_TXACTIE                                \ TXACTIE
-$00002000 constant SDIO_MASK_RXACTIE                                \ RXACTIE
-$00004000 constant SDIO_MASK_TXFIFOHEIE                             \ TXFIFOHEIE
-$00008000 constant SDIO_MASK_RXFIFOHFIE                             \ RXFIFOHFIE
-$00010000 constant SDIO_MASK_TXFIFOFIE                              \ TXFIFOFIE
-$00020000 constant SDIO_MASK_RXFIFOFIE                              \ RXFIFOFIE
-$00040000 constant SDIO_MASK_TXFIFOEIE                              \ TXFIFOEIE
-$00080000 constant SDIO_MASK_RXFIFOEIE                              \ RXFIFOEIE
-$00100000 constant SDIO_MASK_TXDAVLIE                               \ TXDAVLIE
-$00200000 constant SDIO_MASK_RXDAVLIE                               \ RXDAVLIE
-$00400000 constant SDIO_MASK_SDIOITIE                               \ SDIOITIE
-$00800000 constant SDIO_MASK_CEATENDIE                              \ CEATENDIE
+  [ifdef] SDIO_RESP4_DEF
+    \
+    \ @brief Bits 31:0 = CARDSTATUS4
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CARDSTATUS4               \ [0x00 : 32] CARDSTATUS4
+  [then]
 
 
-\
-\ @brief Bits 23:0 = FIFOCOUNT: Remaining number of words to be written to or read from the FIFO
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00ffffff constant SDIO_FIFOCNT_FIF0COUNT                           \ FIF0COUNT
-
-
-\
-\ @brief bits 31:0 = FIFOData: Receive and transmit FIFO data
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SDIO_FIFO_FIFODATA                               \ FIFOData
+  [ifdef] SDIO_DTIMER_DEF
+    \
+    \ @brief Bits 31:0 = DATATIME: Data timeout period
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_DATATIME                  \ [0x00 : 32] Data timeout period
+  [then]
 
 
-\
-\ @brief Secure digital input/output interface
-\
-$40018000 constant SDIO_POWER     \ offset: 0x00 : Bits 1:0 = PWRCTRL: Power supply control bits
-$40018004 constant SDIO_CLKCR     \ offset: 0x04 : SDI clock control register (SDIO_CLKCR)
-$40018008 constant SDIO_ARG       \ offset: 0x08 : Bits 31:0 = : Command argument
-$4001800c constant SDIO_CMD       \ offset: 0x0C : SDIO command register (SDIO_CMD)
-$40018010 constant SDIO_RESPCMD   \ offset: 0x10 : SDIO command register
-$40018014 constant SDIO_RESPI1    \ offset: 0x14 : Bits 31:0 = CARDSTATUS1
-$40018018 constant SDIO_RESP2     \ offset: 0x18 : Bits 31:0 = CARDSTATUS2
-$4001801c constant SDIO_RESP3     \ offset: 0x1C : Bits 31:0 = CARDSTATUS3
-$40018020 constant SDIO_RESP4     \ offset: 0x20 : Bits 31:0 = CARDSTATUS4
-$40018024 constant SDIO_DTIMER    \ offset: 0x24 : Bits 31:0 = DATATIME: Data timeout period
-$40018028 constant SDIO_DLEN      \ offset: 0x28 : Bits 24:0 = DATALENGTH: Data length value
-$4001802c constant SDIO_DCTRL     \ offset: 0x2C : SDIO data control register (SDIO_DCTRL)
-$40018030 constant SDIO_DCOUNT    \ offset: 0x30 : Bits 24:0 = DATACOUNT: Data count value
-$40018034 constant SDIO_STA       \ offset: 0x34 : SDIO status register (SDIO_STA)
-$40018038 constant SDIO_ICR       \ offset: 0x38 : SDIO interrupt clear register (SDIO_ICR)
-$4001803c constant SDIO_MASK      \ offset: 0x3C : SDIO mask register (SDIO_MASK)
-$40018048 constant SDIO_FIFOCNT   \ offset: 0x48 : Bits 23:0 = FIFOCOUNT: Remaining number of words to be written to or read from the FIFO
-$40018080 constant SDIO_FIFO      \ offset: 0x80 : bits 31:0 = FIFOData: Receive and transmit FIFO data
+  [ifdef] SDIO_DLEN_DEF
+    \
+    \ @brief Bits 24:0 = DATALENGTH: Data length value
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_DATALENGTH                \ [0x00 : 25] Data length value
+  [then]
 
+
+  [ifdef] SDIO_DCTRL_DEF
+    \
+    \ @brief SDIO data control register (SDIO_DCTRL)
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_DTEN                      \ [0x00] DTEN
+    $01 constant SDIO_DTDIR                     \ [0x01] DTDIR
+    $02 constant SDIO_DTMODE                    \ [0x02] DTMODE
+    $03 constant SDIO_DMAEN                     \ [0x03] DMAEN
+    $04 constant SDIO_DBLOCKSIZE                \ [0x04 : 4] DBLOCKSIZE
+    $08 constant SDIO_PWSTART                   \ [0x08] PWSTART
+    $09 constant SDIO_PWSTOP                    \ [0x09] PWSTOP
+    $0a constant SDIO_RWMOD                     \ [0x0a] RWMOD
+    $0b constant SDIO_SDIOEN                    \ [0x0b] SDIOEN
+  [then]
+
+
+  [ifdef] SDIO_DCOUNT_DEF
+    \
+    \ @brief Bits 24:0 = DATACOUNT: Data count value
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_DATACOUNT                 \ [0x00 : 25] Data count value
+  [then]
+
+
+  [ifdef] SDIO_STA_DEF
+    \
+    \ @brief SDIO status register (SDIO_STA)
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CCRCFAIL                  \ [0x00] CCRCFAIL
+    $01 constant SDIO_DCRCFAIL                  \ [0x01] DCRCFAIL
+    $02 constant SDIO_CTIMEOUT                  \ [0x02] CTIMEOUT
+    $03 constant SDIO_DTIMEOUT                  \ [0x03] DTIMEOUT
+    $04 constant SDIO_TXUNDERR                  \ [0x04] TXUNDERR
+    $05 constant SDIO_RXOVERR                   \ [0x05] RXOVERR
+    $06 constant SDIO_CMDREND                   \ [0x06] CMDREND
+    $07 constant SDIO_CMDSENT                   \ [0x07] CMDSENT
+    $08 constant SDIO_DATAEND                   \ [0x08] DATAEND
+    $09 constant SDIO_STBITERR                  \ [0x09] STBITERR
+    $0a constant SDIO_DBCKEND                   \ [0x0a] DBCKEND
+    $0b constant SDIO_CMDACT                    \ [0x0b] CMDACT
+    $0c constant SDIO_TXACT                     \ [0x0c] TXACT
+    $0d constant SDIO_RXACT                     \ [0x0d] RXACT
+    $0e constant SDIO_TXFIFOHE                  \ [0x0e] TXFIFOHE
+    $0f constant SDIO_RXFIFOHF                  \ [0x0f] RXFIFOHF
+    $10 constant SDIO_TXFIFOF                   \ [0x10] TXFIFOF
+    $11 constant SDIO_RXFIFOF                   \ [0x11] RXFIFOF
+    $12 constant SDIO_TXFIFOE                   \ [0x12] TXFIFOE
+    $13 constant SDIO_RXFIFOE                   \ [0x13] RXFIFOE
+    $14 constant SDIO_TXDAVL                    \ [0x14] TXDAVL
+    $15 constant SDIO_RXDAVL                    \ [0x15] RXDAVL
+    $16 constant SDIO_SDIOIT                    \ [0x16] SDIOIT
+    $17 constant SDIO_CEATAEND                  \ [0x17] CEATAEND
+  [then]
+
+
+  [ifdef] SDIO_ICR_DEF
+    \
+    \ @brief SDIO interrupt clear register (SDIO_ICR)
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CCRCFAILC                 \ [0x00] CCRCFAILC
+    $01 constant SDIO_DCRCFAILC                 \ [0x01] DCRCFAILC
+    $02 constant SDIO_CTIMEOUTC                 \ [0x02] CTIMEOUTC
+    $03 constant SDIO_DTIMEOUTC                 \ [0x03] DTIMEOUTC
+    $04 constant SDIO_TXUNDERRC                 \ [0x04] TXUNDERRC
+    $05 constant SDIO_RXOVERRC                  \ [0x05] RXOVERRC
+    $06 constant SDIO_CMDRENDC                  \ [0x06] CMDRENDC
+    $07 constant SDIO_CMDSENTC                  \ [0x07] CMDSENTC
+    $08 constant SDIO_DATAENDC                  \ [0x08] DATAENDC
+    $09 constant SDIO_STBITERRC                 \ [0x09] STBITERRC
+    $0a constant SDIO_DBCKENDC                  \ [0x0a] DBCKENDC
+    $16 constant SDIO_SDIOITC                   \ [0x16] SDIOITC
+    $17 constant SDIO_CEATAENDC                 \ [0x17] CEATAENDC
+  [then]
+
+
+  [ifdef] SDIO_MASK_DEF
+    \
+    \ @brief SDIO mask register (SDIO_MASK)
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_CCRCFAILIE                \ [0x00] CCRCFAILIE
+    $01 constant SDIO_DCRCFAILIE                \ [0x01] DCRCFAILIE
+    $02 constant SDIO_CTIMEOUTIE                \ [0x02] CTIMEOUTIE
+    $03 constant SDIO_DTIMEOUTIE                \ [0x03] DTIMEOUTIE
+    $04 constant SDIO_TXUNDERRIE                \ [0x04] TXUNDERRIE
+    $05 constant SDIO_RXOVERRIE                 \ [0x05] RXOVERRIE
+    $06 constant SDIO_CMDRENDIE                 \ [0x06] CMDRENDIE
+    $07 constant SDIO_CMDSENTIE                 \ [0x07] CMDSENTIE
+    $08 constant SDIO_DATAENDIE                 \ [0x08] DATAENDIE
+    $09 constant SDIO_STBITERRIE                \ [0x09] STBITERRIE
+    $0a constant SDIO_DBACKENDIE                \ [0x0a] DBACKENDIE
+    $0b constant SDIO_CMDACTIE                  \ [0x0b] CMDACTIE
+    $0c constant SDIO_TXACTIE                   \ [0x0c] TXACTIE
+    $0d constant SDIO_RXACTIE                   \ [0x0d] RXACTIE
+    $0e constant SDIO_TXFIFOHEIE                \ [0x0e] TXFIFOHEIE
+    $0f constant SDIO_RXFIFOHFIE                \ [0x0f] RXFIFOHFIE
+    $10 constant SDIO_TXFIFOFIE                 \ [0x10] TXFIFOFIE
+    $11 constant SDIO_RXFIFOFIE                 \ [0x11] RXFIFOFIE
+    $12 constant SDIO_TXFIFOEIE                 \ [0x12] TXFIFOEIE
+    $13 constant SDIO_RXFIFOEIE                 \ [0x13] RXFIFOEIE
+    $14 constant SDIO_TXDAVLIE                  \ [0x14] TXDAVLIE
+    $15 constant SDIO_RXDAVLIE                  \ [0x15] RXDAVLIE
+    $16 constant SDIO_SDIOITIE                  \ [0x16] SDIOITIE
+    $17 constant SDIO_CEATENDIE                 \ [0x17] CEATENDIE
+  [then]
+
+
+  [ifdef] SDIO_FIFOCNT_DEF
+    \
+    \ @brief Bits 23:0 = FIFOCOUNT: Remaining number of words to be written to or read from the FIFO
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_FIF0COUNT                 \ [0x00 : 24] FIF0COUNT
+  [then]
+
+
+  [ifdef] SDIO_FIFO_DEF
+    \
+    \ @brief bits 31:0 = FIFOData: Receive and transmit FIFO data
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant SDIO_FIFOData                  \ [0x00 : 32] FIFOData
+  [then]
+
+  \
+  \ @brief Secure digital input/output interface
+  \
+  $00 constant SDIO_POWER               \ Bits 1:0 = PWRCTRL: Power supply control bits
+  $04 constant SDIO_CLKCR               \ SDI clock control register (SDIO_CLKCR)
+  $08 constant SDIO_ARG                 \ Bits 31:0 = : Command argument
+  $0C constant SDIO_CMD                 \ SDIO command register (SDIO_CMD)
+  $10 constant SDIO_RESPCMD             \ SDIO command register
+  $14 constant SDIO_RESPI1              \ Bits 31:0 = CARDSTATUS1
+  $18 constant SDIO_RESP2               \ Bits 31:0 = CARDSTATUS2
+  $1C constant SDIO_RESP3               \ Bits 31:0 = CARDSTATUS3
+  $20 constant SDIO_RESP4               \ Bits 31:0 = CARDSTATUS4
+  $24 constant SDIO_DTIMER              \ Bits 31:0 = DATATIME: Data timeout period
+  $28 constant SDIO_DLEN                \ Bits 24:0 = DATALENGTH: Data length value
+  $2C constant SDIO_DCTRL               \ SDIO data control register (SDIO_DCTRL)
+  $30 constant SDIO_DCOUNT              \ Bits 24:0 = DATACOUNT: Data count value
+  $34 constant SDIO_STA                 \ SDIO status register (SDIO_STA)
+  $38 constant SDIO_ICR                 \ SDIO interrupt clear register (SDIO_ICR)
+  $3C constant SDIO_MASK                \ SDIO mask register (SDIO_MASK)
+  $48 constant SDIO_FIFOCNT             \ Bits 23:0 = FIFOCOUNT: Remaining number of words to be written to or read from the FIFO
+  $80 constant SDIO_FIFO                \ bits 31:0 = FIFOData: Receive and transmit FIFO data
+
+: SDIO_DEF ; [then]

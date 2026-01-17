@@ -6,302 +6,321 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SAI1_DEF
 
-\
-\ @brief Global configuration register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000003 constant SAI1_GCR_SYNCIN                                  \ Synchronization inputs
-$00000030 constant SAI1_GCR_SYNCOUT                                 \ Synchronization outputs
-
-
-\
-\ @brief AConfiguration register 1
-\ Address offset: 0x04
-\ Reset value: 0x00000040
-\
-
-$00000003 constant SAI1_ACR1_MODE                                   \ Audio block mode
-$0000000c constant SAI1_ACR1_PRTCFG                                 \ Protocol configuration
-$000000e0 constant SAI1_ACR1_DS                                     \ Data size
-$00000100 constant SAI1_ACR1_LSBFIRST                               \ Least significant bit first
-$00000200 constant SAI1_ACR1_CKSTR                                  \ Clock strobing edge
-$00000c00 constant SAI1_ACR1_SYNCEN                                 \ Synchronization enable
-$00001000 constant SAI1_ACR1_MONO                                   \ Mono mode
-$00002000 constant SAI1_ACR1_OUTDRI                                 \ Output drive
-$00010000 constant SAI1_ACR1_SAIBEN                                 \ Audio block B enable
-$00020000 constant SAI1_ACR1_DMAEN                                  \ DMA enable
-$00080000 constant SAI1_ACR1_NODIV                                  \ No divider
-$03f00000 constant SAI1_ACR1_MCJDIV                                 \ Master clock divider
-$04000000 constant SAI1_ACR1_OSR                                    \ Oversampling ratio for master clock
-$08000000 constant SAI1_ACR1_MCKEN                                  \ Master clock generation enable
+  [ifdef] SAI1_GCR_DEF
+    \
+    \ @brief Global configuration register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_SYNCIN                    \ [0x00 : 2] Synchronization inputs
+    $04 constant SAI1_SYNCOUT                   \ [0x04 : 2] Synchronization outputs
+  [then]
 
 
-\
-\ @brief AConfiguration register 2
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000007 constant SAI1_ACR2_FTH                                    \ FIFO threshold
-$00000008 constant SAI1_ACR2_FFLUS                                  \ FIFO flush
-$00000010 constant SAI1_ACR2_TRIS                                   \ Tristate management on data line
-$00000020 constant SAI1_ACR2_MUTE                                   \ Mute
-$00000040 constant SAI1_ACR2_MUTEVAL                                \ Mute value
-$00001f80 constant SAI1_ACR2_MUTECN                                 \ Mute counter
-$00002000 constant SAI1_ACR2_CPL                                    \ Complement bit
-$0000c000 constant SAI1_ACR2_COMP                                   \ Companding mode
-
-
-\
-\ @brief AFRCR
-\ Address offset: 0x0C
-\ Reset value: 0x00000007
-\
-
-$000000ff constant SAI1_AFRCR_FRL                                   \ Frame length
-$00007f00 constant SAI1_AFRCR_FSALL                                 \ Frame synchronization active level length
-$00010000 constant SAI1_AFRCR_FSDEF                                 \ Frame synchronization definition
-$00020000 constant SAI1_AFRCR_FSPOL                                 \ Frame synchronization polarity
-$00040000 constant SAI1_AFRCR_FSOFF                                 \ Frame synchronization offset
+  [ifdef] SAI1_ACR1_DEF
+    \
+    \ @brief AConfiguration register 1
+    \ Address offset: 0x04
+    \ Reset value: 0x00000040
+    \
+    $00 constant SAI1_MODE                      \ [0x00 : 2] Audio block mode
+    $02 constant SAI1_PRTCFG                    \ [0x02 : 2] Protocol configuration
+    $05 constant SAI1_DS                        \ [0x05 : 3] Data size
+    $08 constant SAI1_LSBFIRST                  \ [0x08] Least significant bit first
+    $09 constant SAI1_CKSTR                     \ [0x09] Clock strobing edge
+    $0a constant SAI1_SYNCEN                    \ [0x0a : 2] Synchronization enable
+    $0c constant SAI1_MONO                      \ [0x0c] Mono mode
+    $0d constant SAI1_OutDri                    \ [0x0d] Output drive
+    $10 constant SAI1_SAIBEN                    \ [0x10] Audio block B enable
+    $11 constant SAI1_DMAEN                     \ [0x11] DMA enable
+    $13 constant SAI1_NODIV                     \ [0x13] No divider
+    $14 constant SAI1_MCJDIV                    \ [0x14 : 6] Master clock divider
+    $1a constant SAI1_OSR                       \ [0x1a] Oversampling ratio for master clock
+    $1b constant SAI1_MCKEN                     \ [0x1b] Master clock generation enable
+  [then]
 
 
-\
-\ @brief ASlot register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000001f constant SAI1_ASLOTR_FBOFF                                \ First bit offset
-$000000c0 constant SAI1_ASLOTR_SLOTSZ                               \ Slot size
-$00000f00 constant SAI1_ASLOTR_NBSLOT                               \ Number of slots in an audio frame
-$ffff0000 constant SAI1_ASLOTR_SLOTEN                               \ Slot enable
-
-
-\
-\ @brief AInterrupt mask register2
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SAI1_AIM_OVRUDRIE                                \ Overrun/underrun interrupt enable
-$00000002 constant SAI1_AIM_MUTEDET                                 \ Mute detection interrupt enable
-$00000004 constant SAI1_AIM_WCKCFG                                  \ Wrong clock configuration interrupt enable
-$00000008 constant SAI1_AIM_FREQIE                                  \ FIFO request interrupt enable
-$00000010 constant SAI1_AIM_CNRDYIE                                 \ Codec not ready interrupt enable
-$00000020 constant SAI1_AIM_AFSDETIE                                \ Anticipated frame synchronization detection interrupt enable
-$00000040 constant SAI1_AIM_LFSDET                                  \ Late frame synchronization detection interrupt enable
+  [ifdef] SAI1_ACR2_DEF
+    \
+    \ @brief AConfiguration register 2
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_FTH                       \ [0x00 : 3] FIFO threshold
+    $03 constant SAI1_FFLUS                     \ [0x03] FIFO flush
+    $04 constant SAI1_TRIS                      \ [0x04] Tristate management on data line
+    $05 constant SAI1_MUTE                      \ [0x05] Mute
+    $06 constant SAI1_MUTEVAL                   \ [0x06] Mute value
+    $07 constant SAI1_MUTECN                    \ [0x07 : 6] Mute counter
+    $0d constant SAI1_CPL                       \ [0x0d] Complement bit
+    $0e constant SAI1_COMP                      \ [0x0e : 2] Companding mode
+  [then]
 
 
-\
-\ @brief AStatus register
-\ Address offset: 0x18
-\ Reset value: 0x00000008
-\
-
-$00000001 constant SAI1_ASR_OVRUDR                                  \ Overrun / underrun
-$00000002 constant SAI1_ASR_MUTEDET                                 \ Mute detection
-$00000004 constant SAI1_ASR_WCKCFG                                  \ Wrong clock configuration flag. This bit is read only
-$00000008 constant SAI1_ASR_FREQ                                    \ FIFO request
-$00000010 constant SAI1_ASR_CNRDY                                   \ Codec not ready
-$00000020 constant SAI1_ASR_AFSDET                                  \ Anticipated frame synchronization detection
-$00000040 constant SAI1_ASR_LFSDET                                  \ Late frame synchronization detection
-$00070000 constant SAI1_ASR_FLVL                                    \ FIFO level threshold
+  [ifdef] SAI1_AFRCR_DEF
+    \
+    \ @brief AFRCR
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000007
+    \
+    $00 constant SAI1_FRL                       \ [0x00 : 8] Frame length
+    $08 constant SAI1_FSALL                     \ [0x08 : 7] Frame synchronization active level length
+    $10 constant SAI1_FSDEF                     \ [0x10] Frame synchronization definition
+    $11 constant SAI1_FSPOL                     \ [0x11] Frame synchronization polarity
+    $12 constant SAI1_FSOFF                     \ [0x12] Frame synchronization offset
+  [then]
 
 
-\
-\ @brief AClear flag register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SAI1_ACLRFR_OVRUDR                               \ Clear overrun / underrun
-$00000002 constant SAI1_ACLRFR_MUTEDET                              \ Mute detection flag
-$00000004 constant SAI1_ACLRFR_WCKCFG                               \ Clear wrong clock configuration flag
-$00000010 constant SAI1_ACLRFR_CNRDY                                \ Clear codec not ready flag
-$00000020 constant SAI1_ACLRFR_CAFSDET                              \ Clear anticipated frame synchronization detection flag
-$00000040 constant SAI1_ACLRFR_LFSDET                               \ Clear late frame synchronization detection flag
-
-
-\
-\ @brief AData register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SAI1_ADR_DATA                                    \ Data
+  [ifdef] SAI1_ASLOTR_DEF
+    \
+    \ @brief ASlot register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_FBOFF                     \ [0x00 : 5] First bit offset
+    $06 constant SAI1_SLOTSZ                    \ [0x06 : 2] Slot size
+    $08 constant SAI1_NBSLOT                    \ [0x08 : 4] Number of slots in an audio frame
+    $10 constant SAI1_SLOTEN                    \ [0x10 : 16] Slot enable
+  [then]
 
 
-\
-\ @brief BConfiguration register 1
-\ Address offset: 0x24
-\ Reset value: 0x00000040
-\
-
-$00000003 constant SAI1_BCR1_MODE                                   \ Audio block mode
-$0000000c constant SAI1_BCR1_PRTCFG                                 \ Protocol configuration
-$000000e0 constant SAI1_BCR1_DS                                     \ Data size
-$00000100 constant SAI1_BCR1_LSBFIRST                               \ Least significant bit first
-$00000200 constant SAI1_BCR1_CKSTR                                  \ Clock strobing edge
-$00000c00 constant SAI1_BCR1_SYNCEN                                 \ Synchronization enable
-$00001000 constant SAI1_BCR1_MONO                                   \ Mono mode
-$00002000 constant SAI1_BCR1_OUTDRI                                 \ Output drive
-$00010000 constant SAI1_BCR1_SAIBEN                                 \ Audio block B enable
-$00020000 constant SAI1_BCR1_DMAEN                                  \ DMA enable
-$00080000 constant SAI1_BCR1_NODIV                                  \ No divider
-$03f00000 constant SAI1_BCR1_MCJDIV                                 \ Master clock divider
-$04000000 constant SAI1_BCR1_OSR                                    \ Oversampling ratio for master clock
-$08000000 constant SAI1_BCR1_MCKEN                                  \ Master clock generation enable
+  [ifdef] SAI1_AIM_DEF
+    \
+    \ @brief AInterrupt mask register2
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_OVRUDRIE                  \ [0x00] Overrun/underrun interrupt enable
+    $01 constant SAI1_MUTEDET                   \ [0x01] Mute detection interrupt enable
+    $02 constant SAI1_WCKCFG                    \ [0x02] Wrong clock configuration interrupt enable
+    $03 constant SAI1_FREQIE                    \ [0x03] FIFO request interrupt enable
+    $04 constant SAI1_CNRDYIE                   \ [0x04] Codec not ready interrupt enable
+    $05 constant SAI1_AFSDETIE                  \ [0x05] Anticipated frame synchronization detection interrupt enable
+    $06 constant SAI1_LFSDET                    \ [0x06] Late frame synchronization detection interrupt enable
+  [then]
 
 
-\
-\ @brief BConfiguration register 2
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000007 constant SAI1_BCR2_FTH                                    \ FIFO threshold
-$00000008 constant SAI1_BCR2_FFLUS                                  \ FIFO flush
-$00000010 constant SAI1_BCR2_TRIS                                   \ Tristate management on data line
-$00000020 constant SAI1_BCR2_MUTE                                   \ Mute
-$00000040 constant SAI1_BCR2_MUTEVAL                                \ Mute value
-$00001f80 constant SAI1_BCR2_MUTECN                                 \ Mute counter
-$00002000 constant SAI1_BCR2_CPL                                    \ Complement bit
-$0000c000 constant SAI1_BCR2_COMP                                   \ Companding mode
-
-
-\
-\ @brief BFRCR
-\ Address offset: 0x2C
-\ Reset value: 0x00000007
-\
-
-$000000ff constant SAI1_BFRCR_FRL                                   \ Frame length
-$00007f00 constant SAI1_BFRCR_FSALL                                 \ Frame synchronization active level length
-$00010000 constant SAI1_BFRCR_FSDEF                                 \ Frame synchronization definition
-$00020000 constant SAI1_BFRCR_FSPOL                                 \ Frame synchronization polarity
-$00040000 constant SAI1_BFRCR_FSOFF                                 \ Frame synchronization offset
+  [ifdef] SAI1_ASR_DEF
+    \
+    \ @brief AStatus register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000008
+    \
+    $00 constant SAI1_OVRUDR                    \ [0x00] Overrun / underrun
+    $01 constant SAI1_MUTEDET                   \ [0x01] Mute detection
+    $02 constant SAI1_WCKCFG                    \ [0x02] Wrong clock configuration flag. This bit is read only
+    $03 constant SAI1_FREQ                      \ [0x03] FIFO request
+    $04 constant SAI1_CNRDY                     \ [0x04] Codec not ready
+    $05 constant SAI1_AFSDET                    \ [0x05] Anticipated frame synchronization detection
+    $06 constant SAI1_LFSDET                    \ [0x06] Late frame synchronization detection
+    $10 constant SAI1_FLVL                      \ [0x10 : 3] FIFO level threshold
+  [then]
 
 
-\
-\ @brief BSlot register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$0000001f constant SAI1_BSLOTR_FBOFF                                \ First bit offset
-$000000c0 constant SAI1_BSLOTR_SLOTSZ                               \ Slot size
-$00000f00 constant SAI1_BSLOTR_NBSLOT                               \ Number of slots in an audio frame
-$ffff0000 constant SAI1_BSLOTR_SLOTEN                               \ Slot enable
-
-
-\
-\ @brief BInterrupt mask register2
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SAI1_BIM_OVRUDRIE                                \ Overrun/underrun interrupt enable
-$00000002 constant SAI1_BIM_MUTEDET                                 \ Mute detection interrupt enable
-$00000004 constant SAI1_BIM_WCKCFG                                  \ Wrong clock configuration interrupt enable
-$00000008 constant SAI1_BIM_FREQIE                                  \ FIFO request interrupt enable
-$00000010 constant SAI1_BIM_CNRDYIE                                 \ Codec not ready interrupt enable
-$00000020 constant SAI1_BIM_AFSDETIE                                \ Anticipated frame synchronization detection interrupt enable
-$00000040 constant SAI1_BIM_LFSDETIE                                \ Late frame synchronization detection interrupt enable
+  [ifdef] SAI1_ACLRFR_DEF
+    \
+    \ @brief AClear flag register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_OVRUDR                    \ [0x00] Clear overrun / underrun
+    $01 constant SAI1_MUTEDET                   \ [0x01] Mute detection flag
+    $02 constant SAI1_WCKCFG                    \ [0x02] Clear wrong clock configuration flag
+    $04 constant SAI1_CNRDY                     \ [0x04] Clear codec not ready flag
+    $05 constant SAI1_CAFSDET                   \ [0x05] Clear anticipated frame synchronization detection flag
+    $06 constant SAI1_LFSDET                    \ [0x06] Clear late frame synchronization detection flag
+  [then]
 
 
-\
-\ @brief BStatus register
-\ Address offset: 0x38
-\ Reset value: 0x00000008
-\
-
-$00000001 constant SAI1_BSR_OVRUDR                                  \ Overrun / underrun
-$00000002 constant SAI1_BSR_MUTEDET                                 \ Mute detection
-$00000004 constant SAI1_BSR_WCKCFG                                  \ Wrong clock configuration flag
-$00000008 constant SAI1_BSR_FREQ                                    \ FIFO request
-$00000010 constant SAI1_BSR_CNRDY                                   \ Codec not ready
-$00000020 constant SAI1_BSR_AFSDET                                  \ Anticipated frame synchronization detection
-$00000040 constant SAI1_BSR_LFSDET                                  \ Late frame synchronization detection
-$00070000 constant SAI1_BSR_FLVL                                    \ FIFO level threshold
+  [ifdef] SAI1_ADR_DEF
+    \
+    \ @brief AData register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_DATA                      \ [0x00 : 32] Data
+  [then]
 
 
-\
-\ @brief BClear flag register
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SAI1_BCLRFR_OVRUDR                               \ Clear overrun / underrun
-$00000002 constant SAI1_BCLRFR_MUTEDET                              \ Mute detection flag
-$00000004 constant SAI1_BCLRFR_WCKCFG                               \ Clear wrong clock configuration flag
-$00000010 constant SAI1_BCLRFR_CNRDY                                \ Clear codec not ready flag
-$00000020 constant SAI1_BCLRFR_CAFSDET                              \ Clear anticipated frame synchronization detection flag
-$00000040 constant SAI1_BCLRFR_LFSDET                               \ Clear late frame synchronization detection flag
-
-
-\
-\ @brief BData register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SAI1_BDR_DATA                                    \ Data
-
-
-\
-\ @brief PDM control register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SAI1_PDMCR_PDMEN                                 \ PDM enable
-$00000030 constant SAI1_PDMCR_MICNBR                                \ Number of microphones
-$00000100 constant SAI1_PDMCR_CKEN1                                 \ Clock enable of bitstream clock number 1
-$00000200 constant SAI1_PDMCR_CKEN2                                 \ Clock enable of bitstream clock number 2
-$00000400 constant SAI1_PDMCR_CKEN3                                 \ Clock enable of bitstream clock number 3
-$00000800 constant SAI1_PDMCR_CKEN4                                 \ Clock enable of bitstream clock number 4
+  [ifdef] SAI1_BCR1_DEF
+    \
+    \ @brief BConfiguration register 1
+    \ Address offset: 0x24
+    \ Reset value: 0x00000040
+    \
+    $00 constant SAI1_MODE                      \ [0x00 : 2] Audio block mode
+    $02 constant SAI1_PRTCFG                    \ [0x02 : 2] Protocol configuration
+    $05 constant SAI1_DS                        \ [0x05 : 3] Data size
+    $08 constant SAI1_LSBFIRST                  \ [0x08] Least significant bit first
+    $09 constant SAI1_CKSTR                     \ [0x09] Clock strobing edge
+    $0a constant SAI1_SYNCEN                    \ [0x0a : 2] Synchronization enable
+    $0c constant SAI1_MONO                      \ [0x0c] Mono mode
+    $0d constant SAI1_OutDri                    \ [0x0d] Output drive
+    $10 constant SAI1_SAIBEN                    \ [0x10] Audio block B enable
+    $11 constant SAI1_DMAEN                     \ [0x11] DMA enable
+    $13 constant SAI1_NODIV                     \ [0x13] No divider
+    $14 constant SAI1_MCJDIV                    \ [0x14 : 6] Master clock divider
+    $1a constant SAI1_OSR                       \ [0x1a] Oversampling ratio for master clock
+    $1b constant SAI1_MCKEN                     \ [0x1b] Master clock generation enable
+  [then]
 
 
-\
-\ @brief PDM delay register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
+  [ifdef] SAI1_BCR2_DEF
+    \
+    \ @brief BConfiguration register 2
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_FTH                       \ [0x00 : 3] FIFO threshold
+    $03 constant SAI1_FFLUS                     \ [0x03] FIFO flush
+    $04 constant SAI1_TRIS                      \ [0x04] Tristate management on data line
+    $05 constant SAI1_MUTE                      \ [0x05] Mute
+    $06 constant SAI1_MUTEVAL                   \ [0x06] Mute value
+    $07 constant SAI1_MUTECN                    \ [0x07 : 6] Mute counter
+    $0d constant SAI1_CPL                       \ [0x0d] Complement bit
+    $0e constant SAI1_COMP                      \ [0x0e : 2] Companding mode
+  [then]
 
-$00000007 constant SAI1_PDMDLY_DLYM1L                               \ Delay line for first microphone of pair 1
-$00000070 constant SAI1_PDMDLY_DLYM1R                               \ Delay line for second microphone of pair 1
-$00000700 constant SAI1_PDMDLY_DLYM2L                               \ Delay line for first microphone of pair 2
-$00007000 constant SAI1_PDMDLY_DLYM2R                               \ Delay line for second microphone of pair 2
-$00070000 constant SAI1_PDMDLY_DLYM3L                               \ Delay line for first microphone of pair 3
-$00700000 constant SAI1_PDMDLY_DLYM3R                               \ Delay line for second microphone of pair 3
-$07000000 constant SAI1_PDMDLY_DLYM4L                               \ Delay line for first microphone of pair 4
-$70000000 constant SAI1_PDMDLY_DLYM4R                               \ Delay line for second microphone of pair 4
+
+  [ifdef] SAI1_BFRCR_DEF
+    \
+    \ @brief BFRCR
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000007
+    \
+    $00 constant SAI1_FRL                       \ [0x00 : 8] Frame length
+    $08 constant SAI1_FSALL                     \ [0x08 : 7] Frame synchronization active level length
+    $10 constant SAI1_FSDEF                     \ [0x10] Frame synchronization definition
+    $11 constant SAI1_FSPOL                     \ [0x11] Frame synchronization polarity
+    $12 constant SAI1_FSOFF                     \ [0x12] Frame synchronization offset
+  [then]
 
 
-\
-\ @brief Serial audio interface
-\
-$40015400 constant SAI1_GCR       \ offset: 0x00 : Global configuration register
-$40015404 constant SAI1_ACR1      \ offset: 0x04 : AConfiguration register 1
-$40015408 constant SAI1_ACR2      \ offset: 0x08 : AConfiguration register 2
-$4001540c constant SAI1_AFRCR     \ offset: 0x0C : AFRCR
-$40015410 constant SAI1_ASLOTR    \ offset: 0x10 : ASlot register
-$40015414 constant SAI1_AIM       \ offset: 0x14 : AInterrupt mask register2
-$40015418 constant SAI1_ASR       \ offset: 0x18 : AStatus register
-$4001541c constant SAI1_ACLRFR    \ offset: 0x1C : AClear flag register
-$40015420 constant SAI1_ADR       \ offset: 0x20 : AData register
-$40015424 constant SAI1_BCR1      \ offset: 0x24 : BConfiguration register 1
-$40015428 constant SAI1_BCR2      \ offset: 0x28 : BConfiguration register 2
-$4001542c constant SAI1_BFRCR     \ offset: 0x2C : BFRCR
-$40015430 constant SAI1_BSLOTR    \ offset: 0x30 : BSlot register
-$40015434 constant SAI1_BIM       \ offset: 0x34 : BInterrupt mask register2
-$40015438 constant SAI1_BSR       \ offset: 0x38 : BStatus register
-$4001543c constant SAI1_BCLRFR    \ offset: 0x3C : BClear flag register
-$40015440 constant SAI1_BDR       \ offset: 0x40 : BData register
-$40015444 constant SAI1_PDMCR     \ offset: 0x44 : PDM control register
-$40015448 constant SAI1_PDMDLY    \ offset: 0x48 : PDM delay register
+  [ifdef] SAI1_BSLOTR_DEF
+    \
+    \ @brief BSlot register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_FBOFF                     \ [0x00 : 5] First bit offset
+    $06 constant SAI1_SLOTSZ                    \ [0x06 : 2] Slot size
+    $08 constant SAI1_NBSLOT                    \ [0x08 : 4] Number of slots in an audio frame
+    $10 constant SAI1_SLOTEN                    \ [0x10 : 16] Slot enable
+  [then]
 
+
+  [ifdef] SAI1_BIM_DEF
+    \
+    \ @brief BInterrupt mask register2
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_OVRUDRIE                  \ [0x00] Overrun/underrun interrupt enable
+    $01 constant SAI1_MUTEDET                   \ [0x01] Mute detection interrupt enable
+    $02 constant SAI1_WCKCFG                    \ [0x02] Wrong clock configuration interrupt enable
+    $03 constant SAI1_FREQIE                    \ [0x03] FIFO request interrupt enable
+    $04 constant SAI1_CNRDYIE                   \ [0x04] Codec not ready interrupt enable
+    $05 constant SAI1_AFSDETIE                  \ [0x05] Anticipated frame synchronization detection interrupt enable
+    $06 constant SAI1_LFSDETIE                  \ [0x06] Late frame synchronization detection interrupt enable
+  [then]
+
+
+  [ifdef] SAI1_BSR_DEF
+    \
+    \ @brief BStatus register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000008
+    \
+    $00 constant SAI1_OVRUDR                    \ [0x00] Overrun / underrun
+    $01 constant SAI1_MUTEDET                   \ [0x01] Mute detection
+    $02 constant SAI1_WCKCFG                    \ [0x02] Wrong clock configuration flag
+    $03 constant SAI1_FREQ                      \ [0x03] FIFO request
+    $04 constant SAI1_CNRDY                     \ [0x04] Codec not ready
+    $05 constant SAI1_AFSDET                    \ [0x05] Anticipated frame synchronization detection
+    $06 constant SAI1_LFSDET                    \ [0x06] Late frame synchronization detection
+    $10 constant SAI1_FLVL                      \ [0x10 : 3] FIFO level threshold
+  [then]
+
+
+  [ifdef] SAI1_BCLRFR_DEF
+    \
+    \ @brief BClear flag register
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_OVRUDR                    \ [0x00] Clear overrun / underrun
+    $01 constant SAI1_MUTEDET                   \ [0x01] Mute detection flag
+    $02 constant SAI1_WCKCFG                    \ [0x02] Clear wrong clock configuration flag
+    $04 constant SAI1_CNRDY                     \ [0x04] Clear codec not ready flag
+    $05 constant SAI1_CAFSDET                   \ [0x05] Clear anticipated frame synchronization detection flag
+    $06 constant SAI1_LFSDET                    \ [0x06] Clear late frame synchronization detection flag
+  [then]
+
+
+  [ifdef] SAI1_BDR_DEF
+    \
+    \ @brief BData register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_DATA                      \ [0x00 : 32] Data
+  [then]
+
+
+  [ifdef] SAI1_PDMCR_DEF
+    \
+    \ @brief PDM control register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_PDMEN                     \ [0x00] PDM enable
+    $04 constant SAI1_MICNBR                    \ [0x04 : 2] Number of microphones
+    $08 constant SAI1_CKEN1                     \ [0x08] Clock enable of bitstream clock number 1
+    $09 constant SAI1_CKEN2                     \ [0x09] Clock enable of bitstream clock number 2
+    $0a constant SAI1_CKEN3                     \ [0x0a] Clock enable of bitstream clock number 3
+    $0b constant SAI1_CKEN4                     \ [0x0b] Clock enable of bitstream clock number 4
+  [then]
+
+
+  [ifdef] SAI1_PDMDLY_DEF
+    \
+    \ @brief PDM delay register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant SAI1_DLYM1L                    \ [0x00 : 3] Delay line for first microphone of pair 1
+    $04 constant SAI1_DLYM1R                    \ [0x04 : 3] Delay line for second microphone of pair 1
+    $08 constant SAI1_DLYM2L                    \ [0x08 : 3] Delay line for first microphone of pair 2
+    $0c constant SAI1_DLYM2R                    \ [0x0c : 3] Delay line for second microphone of pair 2
+    $10 constant SAI1_DLYM3L                    \ [0x10 : 3] Delay line for first microphone of pair 3
+    $14 constant SAI1_DLYM3R                    \ [0x14 : 3] Delay line for second microphone of pair 3
+    $18 constant SAI1_DLYM4L                    \ [0x18 : 3] Delay line for first microphone of pair 4
+    $1c constant SAI1_DLYM4R                    \ [0x1c : 3] Delay line for second microphone of pair 4
+  [then]
+
+  \
+  \ @brief Serial audio interface
+  \
+  $00 constant SAI1_GCR                 \ Global configuration register
+  $04 constant SAI1_ACR1                \ AConfiguration register 1
+  $08 constant SAI1_ACR2                \ AConfiguration register 2
+  $0C constant SAI1_AFRCR               \ AFRCR
+  $10 constant SAI1_ASLOTR              \ ASlot register
+  $14 constant SAI1_AIM                 \ AInterrupt mask register2
+  $18 constant SAI1_ASR                 \ AStatus register
+  $1C constant SAI1_ACLRFR              \ AClear flag register
+  $20 constant SAI1_ADR                 \ AData register
+  $24 constant SAI1_BCR1                \ BConfiguration register 1
+  $28 constant SAI1_BCR2                \ BConfiguration register 2
+  $2C constant SAI1_BFRCR               \ BFRCR
+  $30 constant SAI1_BSLOTR              \ BSlot register
+  $34 constant SAI1_BIM                 \ BInterrupt mask register2
+  $38 constant SAI1_BSR                 \ BStatus register
+  $3C constant SAI1_BCLRFR              \ BClear flag register
+  $40 constant SAI1_BDR                 \ BData register
+  $44 constant SAI1_PDMCR               \ PDM control register
+  $48 constant SAI1_PDMDLY              \ PDM delay register
+
+: SAI1_DEF ; [then]

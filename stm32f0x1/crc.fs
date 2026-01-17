@@ -1,57 +1,61 @@
 \
 \ @file crc.fs
-\ @brief cyclic redundancy check calculation       unit
+\ @brief cyclic redundancy check calculation unit
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] CRC_DEF
 
-\
-\ @brief Data register
-\ Address offset: 0x00
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000000 constant CRC_DR_DR                                        \ Data register bits
-
-
-\
-\ @brief Independent data register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$000000ff constant CRC_IDR_IDR                                      \ General-purpose 8-bit data register bits
+  [ifdef] CRC_DR_DEF
+    \
+    \ @brief Data register
+    \ Address offset: 0x00
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant CRC_DR                         \ [0x00 : 32] Data register bits
+  [then]
 
 
-\
-\ @brief Control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant CRC_CR_RESET                                     \ reset bit
-$00000018 constant CRC_CR_POLYSIZE                                  \ Polynomial size
-$00000060 constant CRC_CR_REV_IN                                    \ Reverse input data
-$00000080 constant CRC_CR_REV_OUT                                   \ Reverse output data
+  [ifdef] CRC_IDR_DEF
+    \
+    \ @brief Independent data register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRC_IDR                        \ [0x00 : 8] General-purpose 8-bit data register bits
+  [then]
 
 
-\
-\ @brief Initial CRC value
-\ Address offset: 0x0C
-\ Reset value: 0xFFFFFFFF
-\
+  [ifdef] CRC_CR_DEF
+    \
+    \ @brief Control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant CRC_RESET                      \ [0x00] reset bit
+    $03 constant CRC_POLYSIZE                   \ [0x03 : 2] Polynomial size
+    $05 constant CRC_REV_IN                     \ [0x05 : 2] Reverse input data
+    $07 constant CRC_REV_OUT                    \ [0x07] Reverse output data
+  [then]
 
-$00000000 constant CRC_INIT_INIT                                    \ Programmable initial CRC value
 
+  [ifdef] CRC_INIT_DEF
+    \
+    \ @brief Initial CRC value
+    \ Address offset: 0x0C
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant CRC_INIT                       \ [0x00 : 32] Programmable initial CRC value
+  [then]
 
-\
-\ @brief cyclic redundancy check calculation unit
-\
-$40023000 constant CRC_DR         \ offset: 0x00 : Data register
-$40023004 constant CRC_IDR        \ offset: 0x04 : Independent data register
-$40023008 constant CRC_CR         \ offset: 0x08 : Control register
-$4002300c constant CRC_INIT       \ offset: 0x0C : Initial CRC value
+  \
+  \ @brief cyclic redundancy check calculation unit
+  \
+  $00 constant CRC_DR                   \ Data register
+  $04 constant CRC_IDR                  \ Independent data register
+  $08 constant CRC_CR                   \ Control register
+  $0C constant CRC_INIT                 \ Initial CRC value
 
+: CRC_DEF ; [then]

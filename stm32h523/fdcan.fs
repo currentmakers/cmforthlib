@@ -6,502 +6,539 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief FDCAN core release register
-\ Address offset: 0x00
-\ Reset value: 0x32141218
-\
-
-$000000ff constant FDCAN_FDCAN_CREL_DAY                             \ 18
-$0000ff00 constant FDCAN_FDCAN_CREL_MON                             \ 12
-$000f0000 constant FDCAN_FDCAN_CREL_YEAR                            \ 4
-$00f00000 constant FDCAN_FDCAN_CREL_SUBSTEP                         \ 1
-$0f000000 constant FDCAN_FDCAN_CREL_STEP                            \ 2
-$f0000000 constant FDCAN_FDCAN_CREL_REL                             \ 3
-
-
-\
-\ @brief FDCAN endian register
-\ Address offset: 0x04
-\ Reset value: 0x87654321
-\
-
-$00000000 constant FDCAN_FDCAN_ENDN_ETV                             \ Endianness test value
-
-
-\
-\ @brief FDCAN data bit timing and prescaler register
-\ Address offset: 0x0C
-\ Reset value: 0x00000A33
-\
-
-$0000000f constant FDCAN_FDCAN_DBTP_DSJW                            \ Synchronization jump width
-$000000f0 constant FDCAN_FDCAN_DBTP_DTSEG2                          \ Data time segment after sample point
-$00001f00 constant FDCAN_FDCAN_DBTP_DTSEG1                          \ Data time segment before sample point
-$001f0000 constant FDCAN_FDCAN_DBTP_DBRP                            \ Data bit rate prescaler
-$00800000 constant FDCAN_FDCAN_DBTP_TDC                             \ Transceiver delay compensation
-
-
-\
-\ @brief FDCAN test register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000010 constant FDCAN_FDCAN_TEST_LBCK                            \ Loop back mode
-$00000060 constant FDCAN_FDCAN_TEST_TX                              \ Control of transmit pin
-$00000080 constant FDCAN_FDCAN_TEST_RX                              \ Receive pin
-
-
-\
-\ @brief FDCAN RAM watchdog register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FDCAN_FDCAN_RWD_WDC                              \ Watchdog configuration
-$0000ff00 constant FDCAN_FDCAN_RWD_WDV                              \ Watchdog value
-
-
-\
-\ @brief FDCAN CC control register
-\ Address offset: 0x18
-\ Reset value: 0x00000001
-\
-
-$00000001 constant FDCAN_FDCAN_CCCR_INIT                            \ Initialization
-$00000002 constant FDCAN_FDCAN_CCCR_CCE                             \ Configuration change enable
-$00000004 constant FDCAN_FDCAN_CCCR_ASM                             \ ASM restricted operation mode
-$00000008 constant FDCAN_FDCAN_CCCR_CSA                             \ Clock stop acknowledge
-$00000010 constant FDCAN_FDCAN_CCCR_CSR                             \ Clock stop request
-$00000020 constant FDCAN_FDCAN_CCCR_MON                             \ Bus monitoring mode
-$00000040 constant FDCAN_FDCAN_CCCR_DAR                             \ Disable automatic retransmission
-$00000080 constant FDCAN_FDCAN_CCCR_TEST                            \ Test mode enable
-$00000100 constant FDCAN_FDCAN_CCCR_FDOE                            \ FD operation enable
-$00000200 constant FDCAN_FDCAN_CCCR_BRSE                            \ FDCAN bit rate switching
-$00001000 constant FDCAN_FDCAN_CCCR_PXHD                            \ Protocol exception handling disable
-$00002000 constant FDCAN_FDCAN_CCCR_EFBI                            \ Edge filtering during bus integration
-$00004000 constant FDCAN_FDCAN_CCCR_TXP                             \ If this bit is set, the FDCAN pauses for two CAN bit times before starting the next transmission after successfully transmitting a frame.
-$00008000 constant FDCAN_FDCAN_CCCR_NISO                            \ Non ISO operation
-
-
-\
-\ @brief FDCAN nominal bit timing and prescaler register
-\ Address offset: 0x1C
-\ Reset value: 0x06000A03
-\
-
-$0000007f constant FDCAN_FDCAN_NBTP_NTSEG2                          \ Nominal time segment after sample point
-$0000ff00 constant FDCAN_FDCAN_NBTP_NTSEG1                          \ Nominal time segment before sample point
-$01ff0000 constant FDCAN_FDCAN_NBTP_NBRP                            \ Bit rate prescaler
-$fe000000 constant FDCAN_FDCAN_NBTP_NSJW                            \ Nominal (re)synchronization jump width
-
-
-\
-\ @brief FDCAN timestamp counter configuration register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000003 constant FDCAN_FDCAN_TSCC_TSS                             \ Timestamp select
-$000f0000 constant FDCAN_FDCAN_TSCC_TCP                             \ Timestamp counter prescaler
-
-
-\
-\ @brief FDCAN timestamp counter value register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant FDCAN_FDCAN_TSCV_TSC                             \ Timestamp counter
-
-
-\
-\ @brief FDCAN timeout counter configuration register
-\ Address offset: 0x28
-\ Reset value: 0xFFFF0000
-\
-
-$00000001 constant FDCAN_FDCAN_TOCC_ETOC                            \ Timeout counter enable
-$00000006 constant FDCAN_FDCAN_TOCC_TOS                             \ Timeout select
-$ffff0000 constant FDCAN_FDCAN_TOCC_TOP                             \ Timeout period
-
-
-\
-\ @brief FDCAN timeout counter value register
-\ Address offset: 0x2C
-\ Reset value: 0x0000FFFF
-\
-
-$0000ffff constant FDCAN_FDCAN_TOCV_TOC                             \ Timeout counter
-
-
-\
-\ @brief FDCAN error counter register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FDCAN_FDCAN_ECR_TEC                              \ Transmit error counter
-$00007f00 constant FDCAN_FDCAN_ECR_REC                              \ Receive error counter
-$00008000 constant FDCAN_FDCAN_ECR_RP                               \ Receive error passive
-$00ff0000 constant FDCAN_FDCAN_ECR_CEL                              \ CAN error logging
-
-
-\
-\ @brief FDCAN protocol status register
-\ Address offset: 0x44
-\ Reset value: 0x00000707
-\
-
-$00000007 constant FDCAN_FDCAN_PSR_LEC                              \ Last error code
-$00000018 constant FDCAN_FDCAN_PSR_ACT                              \ Activity
-$00000020 constant FDCAN_FDCAN_PSR_EP                               \ Error passive
-$00000040 constant FDCAN_FDCAN_PSR_EW                               \ Warning Sstatus
-$00000080 constant FDCAN_FDCAN_PSR_BO                               \ Bus_Off status
-$00000700 constant FDCAN_FDCAN_PSR_DLEC                             \ Data last error code
-$00000800 constant FDCAN_FDCAN_PSR_RESI                             \ ESI flag of last received FDCAN message
-$00001000 constant FDCAN_FDCAN_PSR_RBRS                             \ BRS flag of last received FDCAN message
-$00002000 constant FDCAN_FDCAN_PSR_REDL                             \ Received FDCAN message
-$00004000 constant FDCAN_FDCAN_PSR_PXE                              \ Protocol exception event
-$007f0000 constant FDCAN_FDCAN_PSR_TDCV                             \ Transmitter delay compensation value
-
-
-\
-\ @brief FDCAN transmitter delay compensation register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0000007f constant FDCAN_FDCAN_TDCR_TDCF                            \ Transmitter delay compensation filter window length
-$00007f00 constant FDCAN_FDCAN_TDCR_TDCO                            \ Transmitter delay compensation offset
-
-
-\
-\ @brief FDCAN interrupt register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FDCAN_FDCAN_IR_RF0N                              \ Rx FIFO 0 new message
-$00000002 constant FDCAN_FDCAN_IR_RF0F                              \ Rx FIFO 0 full
-$00000004 constant FDCAN_FDCAN_IR_RF0L                              \ Rx FIFO 0 message lost
-$00000008 constant FDCAN_FDCAN_IR_RF1N                              \ Rx FIFO 1 new message
-$00000010 constant FDCAN_FDCAN_IR_RF1F                              \ Rx FIFO 1 full
-$00000020 constant FDCAN_FDCAN_IR_RF1L                              \ Rx FIFO 1 message lost
-$00000040 constant FDCAN_FDCAN_IR_HPM                               \ High-priority message
-$00000080 constant FDCAN_FDCAN_IR_TC                                \ Transmission completed
-$00000100 constant FDCAN_FDCAN_IR_TCF                               \ Transmission cancellation finished
-$00000200 constant FDCAN_FDCAN_IR_TFE                               \ Tx FIFO empty
-$00000400 constant FDCAN_FDCAN_IR_TEFN                              \ Tx event FIFO New Entry
-$00000800 constant FDCAN_FDCAN_IR_TEFF                              \ Tx event FIFO full
-$00001000 constant FDCAN_FDCAN_IR_TEFL                              \ Tx event FIFO element lost
-$00002000 constant FDCAN_FDCAN_IR_TSW                               \ Timestamp wraparound
-$00004000 constant FDCAN_FDCAN_IR_MRAF                              \ Message RAM access failure
-$00008000 constant FDCAN_FDCAN_IR_TOO                               \ Timeout occurred
-$00010000 constant FDCAN_FDCAN_IR_ELO                               \ Error logging overflow
-$00020000 constant FDCAN_FDCAN_IR_EP                                \ Error passive
-$00040000 constant FDCAN_FDCAN_IR_EW                                \ Warning status
-$00080000 constant FDCAN_FDCAN_IR_BO                                \ Bus_Off status
-$00100000 constant FDCAN_FDCAN_IR_WDI                               \ Watchdog interrupt
-$00200000 constant FDCAN_FDCAN_IR_PEA                               \ Protocol error in arbitration phase (nominal bit time is used)
-$00400000 constant FDCAN_FDCAN_IR_PED                               \ Protocol error in data phase (data bit time is used)
-$00800000 constant FDCAN_FDCAN_IR_ARA                               \ Access to reserved address
-
-
-\
-\ @brief FDCAN interrupt enable register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FDCAN_FDCAN_IE_RF0NE                             \ Rx FIFO 0 new message interrupt enable
-$00000002 constant FDCAN_FDCAN_IE_RF0FE                             \ Rx FIFO 0 full interrupt enable
-$00000004 constant FDCAN_FDCAN_IE_RF0LE                             \ Rx FIFO 0 message lost interrupt enable
-$00000008 constant FDCAN_FDCAN_IE_RF1NE                             \ Rx FIFO 1 new message interrupt enable
-$00000010 constant FDCAN_FDCAN_IE_RF1FE                             \ Rx FIFO 1 full interrupt enable
-$00000020 constant FDCAN_FDCAN_IE_RF1LE                             \ Rx FIFO 1 message lost interrupt enable
-$00000040 constant FDCAN_FDCAN_IE_HPME                              \ High-priority message interrupt enable
-$00000080 constant FDCAN_FDCAN_IE_TCE                               \ Transmission completed interrupt enable
-$00000100 constant FDCAN_FDCAN_IE_TCFE                              \ Transmission cancellation finished interrupt enable
-$00000200 constant FDCAN_FDCAN_IE_TFEE                              \ Tx FIFO empty interrupt enable
-$00000400 constant FDCAN_FDCAN_IE_TEFNE                             \ Tx event FIFO new entry interrupt enable
-$00000800 constant FDCAN_FDCAN_IE_TEFFE                             \ Tx event FIFO full interrupt enable
-$00001000 constant FDCAN_FDCAN_IE_TEFLE                             \ Tx event FIFO element lost interrupt enable
-$00002000 constant FDCAN_FDCAN_IE_TSWE                              \ Timestamp wraparound interrupt enable
-$00004000 constant FDCAN_FDCAN_IE_MRAFE                             \ Message RAM access failure interrupt enable
-$00008000 constant FDCAN_FDCAN_IE_TOOE                              \ Timeout occurred interrupt enable
-$00010000 constant FDCAN_FDCAN_IE_ELOE                              \ Error logging overflow interrupt enable
-$00020000 constant FDCAN_FDCAN_IE_EPE                               \ Error passive interrupt enable
-$00040000 constant FDCAN_FDCAN_IE_EWE                               \ Warning status interrupt enable
-$00080000 constant FDCAN_FDCAN_IE_BOE                               \ Bus_Off status
-$00100000 constant FDCAN_FDCAN_IE_WDIE                              \ Watchdog interrupt enable
-$00200000 constant FDCAN_FDCAN_IE_PEAE                              \ Protocol error in arbitration phase enable
-$00400000 constant FDCAN_FDCAN_IE_PEDE                              \ Protocol error in data phase enable
-$00800000 constant FDCAN_FDCAN_IE_ARAE                              \ Access to reserved address enable
-
-
-\
-\ @brief FDCAN interrupt line select register
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FDCAN_FDCAN_ILS_RXFIFO0                          \ RX FIFO bit grouping the following interruption
-$00000002 constant FDCAN_FDCAN_ILS_RXFIFO1                          \ RX FIFO bit grouping the following interruption
-$00000004 constant FDCAN_FDCAN_ILS_SMSG                             \ Status message bit grouping the following interruption
-$00000008 constant FDCAN_FDCAN_ILS_TFERR                            \ Tx FIFO ERROR grouping the following interruption
-$00000010 constant FDCAN_FDCAN_ILS_MISC                             \ Interrupt regrouping the following interruption
-$00000020 constant FDCAN_FDCAN_ILS_BERR                             \ Bit and line error grouping the following interruption
-$00000040 constant FDCAN_FDCAN_ILS_PERR                             \ Protocol error grouping the following interruption
-
-
-\
-\ @brief FDCAN interrupt line enable register
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FDCAN_FDCAN_ILE_EINT0                            \ Enable interrupt line 0
-$00000002 constant FDCAN_FDCAN_ILE_EINT1                            \ Enable interrupt line 1
-
-
-\
-\ @brief FDCAN global filter configuration register
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FDCAN_FDCAN_RXGFC_RRFE                           \ Reject remote frames extended
-$00000002 constant FDCAN_FDCAN_RXGFC_RRFS                           \ Reject remote frames standard
-$0000000c constant FDCAN_FDCAN_RXGFC_ANFE                           \ Accept non-matching frames extended
-$00000030 constant FDCAN_FDCAN_RXGFC_ANFS                           \ Accept Non-matching frames standard
-$00000100 constant FDCAN_FDCAN_RXGFC_F1OM                           \ FIFO 1 operation mode (overwrite or blocking)
-$00000200 constant FDCAN_FDCAN_RXGFC_F0OM                           \ FIFO 0 operation mode (overwrite or blocking)
-$001f0000 constant FDCAN_FDCAN_RXGFC_LSS                            \ List size standard
-$0f000000 constant FDCAN_FDCAN_RXGFC_LSE                            \ List size extended
-
-
-\
-\ @brief FDCAN extended ID and mask register
-\ Address offset: 0x84
-\ Reset value: 0x1FFFFFFF
-\
-
-$1fffffff constant FDCAN_FDCAN_XIDAM_EIDM                           \ Extended ID mask
-
-
-\
-\ @brief FDCAN high-priority message status register
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_HPMS_BIDX                            \ Buffer index
-$000000c0 constant FDCAN_FDCAN_HPMS_MSI                             \ Message storage indicator
-$00001f00 constant FDCAN_FDCAN_HPMS_FIDX                            \ Filter index
-$00008000 constant FDCAN_FDCAN_HPMS_FLST                            \ Filter list
-
-
-\
-\ @brief FDCAN Rx FIFO 0 status register
-\ Address offset: 0x90
-\ Reset value: 0x00000000
-\
-
-$0000000f constant FDCAN_FDCAN_RXF0S_F0FL                           \ Rx FIFO 0 fill level
-$00000300 constant FDCAN_FDCAN_RXF0S_F0GI                           \ Rx FIFO 0 get index
-$00030000 constant FDCAN_FDCAN_RXF0S_F0PI                           \ Rx FIFO 0 put index
-$01000000 constant FDCAN_FDCAN_RXF0S_F0F                            \ Rx FIFO 0 full
-$02000000 constant FDCAN_FDCAN_RXF0S_RF0L                           \ Rx FIFO 0 message lost
-
-
-\
-\ @brief CAN Rx FIFO 0 acknowledge register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_RXF0A_F0AI                           \ Rx FIFO 0 acknowledge index
-
-
-\
-\ @brief FDCAN Rx FIFO 1 status register
-\ Address offset: 0x98
-\ Reset value: 0x00000000
-\
-
-$0000000f constant FDCAN_FDCAN_RXF1S_F1FL                           \ Rx FIFO 1 fill level
-$00000300 constant FDCAN_FDCAN_RXF1S_F1GI                           \ Rx FIFO 1 get index
-$00030000 constant FDCAN_FDCAN_RXF1S_F1PI                           \ Rx FIFO 1 put index
-$01000000 constant FDCAN_FDCAN_RXF1S_F1F                            \ Rx FIFO 1 full
-$02000000 constant FDCAN_FDCAN_RXF1S_RF1L                           \ Rx FIFO 1 message lost
-
-
-\
-\ @brief FDCAN Rx FIFO 1 acknowledge register
-\ Address offset: 0x9C
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_RXF1A_F1AI                           \ Rx FIFO 1 acknowledge index
-
-
-\
-\ @brief FDCAN Tx buffer configuration register
-\ Address offset: 0xC0
-\ Reset value: 0x00000000
-\
-
-$01000000 constant FDCAN_FDCAN_TXBC_TFQM                            \ Tx FIFO/queue mode
-
-
-\
-\ @brief FDCAN Tx FIFO/queue status register
-\ Address offset: 0xC4
-\ Reset value: 0x00000003
-\
-
-$00000007 constant FDCAN_FDCAN_TXFQS_TFFL                           \ Tx FIFO free level
-$00000300 constant FDCAN_FDCAN_TXFQS_TFGI                           \ Tx FIFO get index
-$00030000 constant FDCAN_FDCAN_TXFQS_TFQPI                          \ Tx FIFO/queue put index
-$00200000 constant FDCAN_FDCAN_TXFQS_TFQF                           \ Tx FIFO/queue full
-
-
-\
-\ @brief FDCAN Tx buffer request pending register
-\ Address offset: 0xC8
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_TXBRP_TRP                            \ Transmission request pending
-
-
-\
-\ @brief FDCAN Tx buffer add request register
-\ Address offset: 0xCC
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_TXBAR_AR                             \ Add request
-
-
-\
-\ @brief FDCAN Tx buffer cancellation request register
-\ Address offset: 0xD0
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_TXBCR_CR                             \ Cancellation request
-
-
-\
-\ @brief FDCAN Tx buffer transmission occurred register
-\ Address offset: 0xD4
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_TXBTO_TO                             \ Transmission occurred.
-
-
-\
-\ @brief FDCAN Tx buffer cancellation finished register
-\ Address offset: 0xD8
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_TXBCF_CF                             \ Cancellation finished
-
-
-\
-\ @brief FDCAN Tx buffer transmission interrupt enable register
-\ Address offset: 0xDC
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_TXBTIE_TIE                           \ Transmission interrupt enable
-
-
-\
-\ @brief FDCAN Tx buffer cancellation finished interrupt enable register
-\ Address offset: 0xE0
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_TXBCIE_CFIE                          \ Cancellation finished interrupt enable.
-
-
-\
-\ @brief FDCAN Tx event FIFO status register
-\ Address offset: 0xE4
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FDCAN_FDCAN_TXEFS_EFFL                           \ Event FIFO fill level
-$00000300 constant FDCAN_FDCAN_TXEFS_EFGI                           \ Event FIFO get index
-$00030000 constant FDCAN_FDCAN_TXEFS_EFPI                           \ Event FIFO put index
-$01000000 constant FDCAN_FDCAN_TXEFS_EFF                            \ Event FIFO full
-$02000000 constant FDCAN_FDCAN_TXEFS_TEFL                           \ Tx event FIFO element lost
-
-
-\
-\ @brief FDCAN Tx event FIFO acknowledge register
-\ Address offset: 0xE8
-\ Reset value: 0x00000000
-\
-
-$00000003 constant FDCAN_FDCAN_TXEFA_EFAI                           \ Event FIFO acknowledge index
-
-
-\
-\ @brief FDCAN CFG clock divider register
-\ Address offset: 0x100
-\ Reset value: 0x00000000
-\
-
-$0000000f constant FDCAN_FDCAN_CKDIV_PDIV                           \ input clock divider
-
-
-\
-\ @brief FDCAN register blank and RAM
-\
-$4000a400 constant FDCAN_FDCAN_CREL  \ offset: 0x00 : FDCAN core release register
-$4000a404 constant FDCAN_FDCAN_ENDN  \ offset: 0x04 : FDCAN endian register
-$4000a40c constant FDCAN_FDCAN_DBTP  \ offset: 0x0C : FDCAN data bit timing and prescaler register
-$4000a410 constant FDCAN_FDCAN_TEST  \ offset: 0x10 : FDCAN test register
-$4000a414 constant FDCAN_FDCAN_RWD  \ offset: 0x14 : FDCAN RAM watchdog register
-$4000a418 constant FDCAN_FDCAN_CCCR  \ offset: 0x18 : FDCAN CC control register
-$4000a41c constant FDCAN_FDCAN_NBTP  \ offset: 0x1C : FDCAN nominal bit timing and prescaler register
-$4000a420 constant FDCAN_FDCAN_TSCC  \ offset: 0x20 : FDCAN timestamp counter configuration register
-$4000a424 constant FDCAN_FDCAN_TSCV  \ offset: 0x24 : FDCAN timestamp counter value register
-$4000a428 constant FDCAN_FDCAN_TOCC  \ offset: 0x28 : FDCAN timeout counter configuration register
-$4000a42c constant FDCAN_FDCAN_TOCV  \ offset: 0x2C : FDCAN timeout counter value register
-$4000a440 constant FDCAN_FDCAN_ECR  \ offset: 0x40 : FDCAN error counter register
-$4000a444 constant FDCAN_FDCAN_PSR  \ offset: 0x44 : FDCAN protocol status register
-$4000a448 constant FDCAN_FDCAN_TDCR  \ offset: 0x48 : FDCAN transmitter delay compensation register
-$4000a450 constant FDCAN_FDCAN_IR  \ offset: 0x50 : FDCAN interrupt register
-$4000a454 constant FDCAN_FDCAN_IE  \ offset: 0x54 : FDCAN interrupt enable register
-$4000a458 constant FDCAN_FDCAN_ILS  \ offset: 0x58 : FDCAN interrupt line select register
-$4000a45c constant FDCAN_FDCAN_ILE  \ offset: 0x5C : FDCAN interrupt line enable register
-$4000a480 constant FDCAN_FDCAN_RXGFC  \ offset: 0x80 : FDCAN global filter configuration register
-$4000a484 constant FDCAN_FDCAN_XIDAM  \ offset: 0x84 : FDCAN extended ID and mask register
-$4000a488 constant FDCAN_FDCAN_HPMS  \ offset: 0x88 : FDCAN high-priority message status register
-$4000a490 constant FDCAN_FDCAN_RXF0S  \ offset: 0x90 : FDCAN Rx FIFO 0 status register
-$4000a494 constant FDCAN_FDCAN_RXF0A  \ offset: 0x94 : CAN Rx FIFO 0 acknowledge register
-$4000a498 constant FDCAN_FDCAN_RXF1S  \ offset: 0x98 : FDCAN Rx FIFO 1 status register
-$4000a49c constant FDCAN_FDCAN_RXF1A  \ offset: 0x9C : FDCAN Rx FIFO 1 acknowledge register
-$4000a4c0 constant FDCAN_FDCAN_TXBC  \ offset: 0xC0 : FDCAN Tx buffer configuration register
-$4000a4c4 constant FDCAN_FDCAN_TXFQS  \ offset: 0xC4 : FDCAN Tx FIFO/queue status register
-$4000a4c8 constant FDCAN_FDCAN_TXBRP  \ offset: 0xC8 : FDCAN Tx buffer request pending register
-$4000a4cc constant FDCAN_FDCAN_TXBAR  \ offset: 0xCC : FDCAN Tx buffer add request register
-$4000a4d0 constant FDCAN_FDCAN_TXBCR  \ offset: 0xD0 : FDCAN Tx buffer cancellation request register
-$4000a4d4 constant FDCAN_FDCAN_TXBTO  \ offset: 0xD4 : FDCAN Tx buffer transmission occurred register
-$4000a4d8 constant FDCAN_FDCAN_TXBCF  \ offset: 0xD8 : FDCAN Tx buffer cancellation finished register
-$4000a4dc constant FDCAN_FDCAN_TXBTIE  \ offset: 0xDC : FDCAN Tx buffer transmission interrupt enable register
-$4000a4e0 constant FDCAN_FDCAN_TXBCIE  \ offset: 0xE0 : FDCAN Tx buffer cancellation finished interrupt enable register
-$4000a4e4 constant FDCAN_FDCAN_TXEFS  \ offset: 0xE4 : FDCAN Tx event FIFO status register
-$4000a4e8 constant FDCAN_FDCAN_TXEFA  \ offset: 0xE8 : FDCAN Tx event FIFO acknowledge register
-$4000a500 constant FDCAN_FDCAN_CKDIV  \ offset: 0x100 : FDCAN CFG clock divider register
-
+[ifndef] FDCAN_DEF
+
+  [ifdef] FDCAN_FDCAN_CREL_DEF
+    \
+    \ @brief FDCAN core release register
+    \ Address offset: 0x00
+    \ Reset value: 0x32141218
+    \
+    $00 constant FDCAN_DAY                      \ [0x00 : 8] 18
+    $08 constant FDCAN_MON                      \ [0x08 : 8] 12
+    $10 constant FDCAN_YEAR                     \ [0x10 : 4] 4
+    $14 constant FDCAN_SUBSTEP                  \ [0x14 : 4] 1
+    $18 constant FDCAN_STEP                     \ [0x18 : 4] 2
+    $1c constant FDCAN_REL                      \ [0x1c : 4] 3
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_ENDN_DEF
+    \
+    \ @brief FDCAN endian register
+    \ Address offset: 0x04
+    \ Reset value: 0x87654321
+    \
+    $00 constant FDCAN_ETV                      \ [0x00 : 32] Endianness test value
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_DBTP_DEF
+    \
+    \ @brief FDCAN data bit timing and prescaler register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000A33
+    \
+    $00 constant FDCAN_DSJW                     \ [0x00 : 4] Synchronization jump width
+    $04 constant FDCAN_DTSEG2                   \ [0x04 : 4] Data time segment after sample point
+    $08 constant FDCAN_DTSEG1                   \ [0x08 : 5] Data time segment before sample point
+    $10 constant FDCAN_DBRP                     \ [0x10 : 5] Data bit rate prescaler
+    $17 constant FDCAN_TDC                      \ [0x17] Transceiver delay compensation
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TEST_DEF
+    \
+    \ @brief FDCAN test register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $04 constant FDCAN_LBCK                     \ [0x04] Loop back mode
+    $05 constant FDCAN_TX                       \ [0x05 : 2] Control of transmit pin
+    $07 constant FDCAN_RX                       \ [0x07] Receive pin
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_RWD_DEF
+    \
+    \ @brief FDCAN RAM watchdog register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_WDC                      \ [0x00 : 8] Watchdog configuration
+    $08 constant FDCAN_WDV                      \ [0x08 : 8] Watchdog value
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_CCCR_DEF
+    \
+    \ @brief FDCAN CC control register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000001
+    \
+    $00 constant FDCAN_INIT                     \ [0x00] Initialization
+    $01 constant FDCAN_CCE                      \ [0x01] Configuration change enable
+    $02 constant FDCAN_ASM                      \ [0x02] ASM restricted operation mode
+    $03 constant FDCAN_CSA                      \ [0x03] Clock stop acknowledge
+    $04 constant FDCAN_CSR                      \ [0x04] Clock stop request
+    $05 constant FDCAN_MON                      \ [0x05] Bus monitoring mode
+    $06 constant FDCAN_DAR                      \ [0x06] Disable automatic retransmission
+    $07 constant FDCAN_TEST                     \ [0x07] Test mode enable
+    $08 constant FDCAN_FDOE                     \ [0x08] FD operation enable
+    $09 constant FDCAN_BRSE                     \ [0x09] FDCAN bit rate switching
+    $0c constant FDCAN_PXHD                     \ [0x0c] Protocol exception handling disable
+    $0d constant FDCAN_EFBI                     \ [0x0d] Edge filtering during bus integration
+    $0e constant FDCAN_TXP                      \ [0x0e] If this bit is set, the FDCAN pauses for two CAN bit times before starting the next transmission after successfully transmitting a frame.
+    $0f constant FDCAN_NISO                     \ [0x0f] Non ISO operation
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_NBTP_DEF
+    \
+    \ @brief FDCAN nominal bit timing and prescaler register
+    \ Address offset: 0x1C
+    \ Reset value: 0x06000A03
+    \
+    $00 constant FDCAN_NTSEG2                   \ [0x00 : 7] Nominal time segment after sample point
+    $08 constant FDCAN_NTSEG1                   \ [0x08 : 8] Nominal time segment before sample point
+    $10 constant FDCAN_NBRP                     \ [0x10 : 9] Bit rate prescaler
+    $19 constant FDCAN_NSJW                     \ [0x19 : 7] Nominal (re)synchronization jump width
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TSCC_DEF
+    \
+    \ @brief FDCAN timestamp counter configuration register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_TSS                      \ [0x00 : 2] Timestamp select
+    $10 constant FDCAN_TCP                      \ [0x10 : 4] Timestamp counter prescaler
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TSCV_DEF
+    \
+    \ @brief FDCAN timestamp counter value register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_TSC                      \ [0x00 : 16] Timestamp counter
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TOCC_DEF
+    \
+    \ @brief FDCAN timeout counter configuration register
+    \ Address offset: 0x28
+    \ Reset value: 0xFFFF0000
+    \
+    $00 constant FDCAN_ETOC                     \ [0x00] Timeout counter enable
+    $01 constant FDCAN_TOS                      \ [0x01 : 2] Timeout select
+    $10 constant FDCAN_TOP                      \ [0x10 : 16] Timeout period
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TOCV_DEF
+    \
+    \ @brief FDCAN timeout counter value register
+    \ Address offset: 0x2C
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant FDCAN_TOC                      \ [0x00 : 16] Timeout counter
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_ECR_DEF
+    \
+    \ @brief FDCAN error counter register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_TEC                      \ [0x00 : 8] Transmit error counter
+    $08 constant FDCAN_REC                      \ [0x08 : 7] Receive error counter
+    $0f constant FDCAN_RP                       \ [0x0f] Receive error passive
+    $10 constant FDCAN_CEL                      \ [0x10 : 8] CAN error logging
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_PSR_DEF
+    \
+    \ @brief FDCAN protocol status register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000707
+    \
+    $00 constant FDCAN_LEC                      \ [0x00 : 3] Last error code
+    $03 constant FDCAN_ACT                      \ [0x03 : 2] Activity
+    $05 constant FDCAN_EP                       \ [0x05] Error passive
+    $06 constant FDCAN_EW                       \ [0x06] Warning Sstatus
+    $07 constant FDCAN_BO                       \ [0x07] Bus_Off status
+    $08 constant FDCAN_DLEC                     \ [0x08 : 3] Data last error code
+    $0b constant FDCAN_RESI                     \ [0x0b] ESI flag of last received FDCAN message
+    $0c constant FDCAN_RBRS                     \ [0x0c] BRS flag of last received FDCAN message
+    $0d constant FDCAN_REDL                     \ [0x0d] Received FDCAN message
+    $0e constant FDCAN_PXE                      \ [0x0e] Protocol exception event
+    $10 constant FDCAN_TDCV                     \ [0x10 : 7] Transmitter delay compensation value
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TDCR_DEF
+    \
+    \ @brief FDCAN transmitter delay compensation register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_TDCF                     \ [0x00 : 7] Transmitter delay compensation filter window length
+    $08 constant FDCAN_TDCO                     \ [0x08 : 7] Transmitter delay compensation offset
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_IR_DEF
+    \
+    \ @brief FDCAN interrupt register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_RF0N                     \ [0x00] Rx FIFO 0 new message
+    $01 constant FDCAN_RF0F                     \ [0x01] Rx FIFO 0 full
+    $02 constant FDCAN_RF0L                     \ [0x02] Rx FIFO 0 message lost
+    $03 constant FDCAN_RF1N                     \ [0x03] Rx FIFO 1 new message
+    $04 constant FDCAN_RF1F                     \ [0x04] Rx FIFO 1 full
+    $05 constant FDCAN_RF1L                     \ [0x05] Rx FIFO 1 message lost
+    $06 constant FDCAN_HPM                      \ [0x06] High-priority message
+    $07 constant FDCAN_TC                       \ [0x07] Transmission completed
+    $08 constant FDCAN_TCF                      \ [0x08] Transmission cancellation finished
+    $09 constant FDCAN_TFE                      \ [0x09] Tx FIFO empty
+    $0a constant FDCAN_TEFN                     \ [0x0a] Tx event FIFO New Entry
+    $0b constant FDCAN_TEFF                     \ [0x0b] Tx event FIFO full
+    $0c constant FDCAN_TEFL                     \ [0x0c] Tx event FIFO element lost
+    $0d constant FDCAN_TSW                      \ [0x0d] Timestamp wraparound
+    $0e constant FDCAN_MRAF                     \ [0x0e] Message RAM access failure
+    $0f constant FDCAN_TOO                      \ [0x0f] Timeout occurred
+    $10 constant FDCAN_ELO                      \ [0x10] Error logging overflow
+    $11 constant FDCAN_EP                       \ [0x11] Error passive
+    $12 constant FDCAN_EW                       \ [0x12] Warning status
+    $13 constant FDCAN_BO                       \ [0x13] Bus_Off status
+    $14 constant FDCAN_WDI                      \ [0x14] Watchdog interrupt
+    $15 constant FDCAN_PEA                      \ [0x15] Protocol error in arbitration phase (nominal bit time is used)
+    $16 constant FDCAN_PED                      \ [0x16] Protocol error in data phase (data bit time is used)
+    $17 constant FDCAN_ARA                      \ [0x17] Access to reserved address
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_IE_DEF
+    \
+    \ @brief FDCAN interrupt enable register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_RF0NE                    \ [0x00] Rx FIFO 0 new message interrupt enable
+    $01 constant FDCAN_RF0FE                    \ [0x01] Rx FIFO 0 full interrupt enable
+    $02 constant FDCAN_RF0LE                    \ [0x02] Rx FIFO 0 message lost interrupt enable
+    $03 constant FDCAN_RF1NE                    \ [0x03] Rx FIFO 1 new message interrupt enable
+    $04 constant FDCAN_RF1FE                    \ [0x04] Rx FIFO 1 full interrupt enable
+    $05 constant FDCAN_RF1LE                    \ [0x05] Rx FIFO 1 message lost interrupt enable
+    $06 constant FDCAN_HPME                     \ [0x06] High-priority message interrupt enable
+    $07 constant FDCAN_TCE                      \ [0x07] Transmission completed interrupt enable
+    $08 constant FDCAN_TCFE                     \ [0x08] Transmission cancellation finished interrupt enable
+    $09 constant FDCAN_TFEE                     \ [0x09] Tx FIFO empty interrupt enable
+    $0a constant FDCAN_TEFNE                    \ [0x0a] Tx event FIFO new entry interrupt enable
+    $0b constant FDCAN_TEFFE                    \ [0x0b] Tx event FIFO full interrupt enable
+    $0c constant FDCAN_TEFLE                    \ [0x0c] Tx event FIFO element lost interrupt enable
+    $0d constant FDCAN_TSWE                     \ [0x0d] Timestamp wraparound interrupt enable
+    $0e constant FDCAN_MRAFE                    \ [0x0e] Message RAM access failure interrupt enable
+    $0f constant FDCAN_TOOE                     \ [0x0f] Timeout occurred interrupt enable
+    $10 constant FDCAN_ELOE                     \ [0x10] Error logging overflow interrupt enable
+    $11 constant FDCAN_EPE                      \ [0x11] Error passive interrupt enable
+    $12 constant FDCAN_EWE                      \ [0x12] Warning status interrupt enable
+    $13 constant FDCAN_BOE                      \ [0x13] Bus_Off status
+    $14 constant FDCAN_WDIE                     \ [0x14] Watchdog interrupt enable
+    $15 constant FDCAN_PEAE                     \ [0x15] Protocol error in arbitration phase enable
+    $16 constant FDCAN_PEDE                     \ [0x16] Protocol error in data phase enable
+    $17 constant FDCAN_ARAE                     \ [0x17] Access to reserved address enable
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_ILS_DEF
+    \
+    \ @brief FDCAN interrupt line select register
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_RXFIFO0                  \ [0x00] RX FIFO bit grouping the following interruption
+    $01 constant FDCAN_RXFIFO1                  \ [0x01] RX FIFO bit grouping the following interruption
+    $02 constant FDCAN_SMSG                     \ [0x02] Status message bit grouping the following interruption
+    $03 constant FDCAN_TFERR                    \ [0x03] Tx FIFO ERROR grouping the following interruption
+    $04 constant FDCAN_MISC                     \ [0x04] Interrupt regrouping the following interruption
+    $05 constant FDCAN_BERR                     \ [0x05] Bit and line error grouping the following interruption
+    $06 constant FDCAN_PERR                     \ [0x06] Protocol error grouping the following interruption
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_ILE_DEF
+    \
+    \ @brief FDCAN interrupt line enable register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_EINT0                    \ [0x00] Enable interrupt line 0
+    $01 constant FDCAN_EINT1                    \ [0x01] Enable interrupt line 1
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_RXGFC_DEF
+    \
+    \ @brief FDCAN global filter configuration register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_RRFE                     \ [0x00] Reject remote frames extended
+    $01 constant FDCAN_RRFS                     \ [0x01] Reject remote frames standard
+    $02 constant FDCAN_ANFE                     \ [0x02 : 2] Accept non-matching frames extended
+    $04 constant FDCAN_ANFS                     \ [0x04 : 2] Accept Non-matching frames standard
+    $08 constant FDCAN_F1OM                     \ [0x08] FIFO 1 operation mode (overwrite or blocking)
+    $09 constant FDCAN_F0OM                     \ [0x09] FIFO 0 operation mode (overwrite or blocking)
+    $10 constant FDCAN_LSS                      \ [0x10 : 5] List size standard
+    $18 constant FDCAN_LSE                      \ [0x18 : 4] List size extended
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_XIDAM_DEF
+    \
+    \ @brief FDCAN extended ID and mask register
+    \ Address offset: 0x84
+    \ Reset value: 0x1FFFFFFF
+    \
+    $00 constant FDCAN_EIDM                     \ [0x00 : 29] Extended ID mask
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_HPMS_DEF
+    \
+    \ @brief FDCAN high-priority message status register
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_BIDX                     \ [0x00 : 3] Buffer index
+    $06 constant FDCAN_MSI                      \ [0x06 : 2] Message storage indicator
+    $08 constant FDCAN_FIDX                     \ [0x08 : 5] Filter index
+    $0f constant FDCAN_FLST                     \ [0x0f] Filter list
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_RXF0S_DEF
+    \
+    \ @brief FDCAN Rx FIFO 0 status register
+    \ Address offset: 0x90
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_F0FL                     \ [0x00 : 4] Rx FIFO 0 fill level
+    $08 constant FDCAN_F0GI                     \ [0x08 : 2] Rx FIFO 0 get index
+    $10 constant FDCAN_F0PI                     \ [0x10 : 2] Rx FIFO 0 put index
+    $18 constant FDCAN_F0F                      \ [0x18] Rx FIFO 0 full
+    $19 constant FDCAN_RF0L                     \ [0x19] Rx FIFO 0 message lost
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_RXF0A_DEF
+    \
+    \ @brief CAN Rx FIFO 0 acknowledge register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_F0AI                     \ [0x00 : 3] Rx FIFO 0 acknowledge index
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_RXF1S_DEF
+    \
+    \ @brief FDCAN Rx FIFO 1 status register
+    \ Address offset: 0x98
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_F1FL                     \ [0x00 : 4] Rx FIFO 1 fill level
+    $08 constant FDCAN_F1GI                     \ [0x08 : 2] Rx FIFO 1 get index
+    $10 constant FDCAN_F1PI                     \ [0x10 : 2] Rx FIFO 1 put index
+    $18 constant FDCAN_F1F                      \ [0x18] Rx FIFO 1 full
+    $19 constant FDCAN_RF1L                     \ [0x19] Rx FIFO 1 message lost
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_RXF1A_DEF
+    \
+    \ @brief FDCAN Rx FIFO 1 acknowledge register
+    \ Address offset: 0x9C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_F1AI                     \ [0x00 : 3] Rx FIFO 1 acknowledge index
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXBC_DEF
+    \
+    \ @brief FDCAN Tx buffer configuration register
+    \ Address offset: 0xC0
+    \ Reset value: 0x00000000
+    \
+    $18 constant FDCAN_TFQM                     \ [0x18] Tx FIFO/queue mode
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXFQS_DEF
+    \
+    \ @brief FDCAN Tx FIFO/queue status register
+    \ Address offset: 0xC4
+    \ Reset value: 0x00000003
+    \
+    $00 constant FDCAN_TFFL                     \ [0x00 : 3] Tx FIFO free level
+    $08 constant FDCAN_TFGI                     \ [0x08 : 2] Tx FIFO get index
+    $10 constant FDCAN_TFQPI                    \ [0x10 : 2] Tx FIFO/queue put index
+    $15 constant FDCAN_TFQF                     \ [0x15] Tx FIFO/queue full
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXBRP_DEF
+    \
+    \ @brief FDCAN Tx buffer request pending register
+    \ Address offset: 0xC8
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_TRP                      \ [0x00 : 3] Transmission request pending
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXBAR_DEF
+    \
+    \ @brief FDCAN Tx buffer add request register
+    \ Address offset: 0xCC
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_AR                       \ [0x00 : 3] Add request
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXBCR_DEF
+    \
+    \ @brief FDCAN Tx buffer cancellation request register
+    \ Address offset: 0xD0
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_CR                       \ [0x00 : 3] Cancellation request
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXBTO_DEF
+    \
+    \ @brief FDCAN Tx buffer transmission occurred register
+    \ Address offset: 0xD4
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_TO                       \ [0x00 : 3] Transmission occurred.
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXBCF_DEF
+    \
+    \ @brief FDCAN Tx buffer cancellation finished register
+    \ Address offset: 0xD8
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_CF                       \ [0x00 : 3] Cancellation finished
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXBTIE_DEF
+    \
+    \ @brief FDCAN Tx buffer transmission interrupt enable register
+    \ Address offset: 0xDC
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_TIE                      \ [0x00 : 3] Transmission interrupt enable
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXBCIE_DEF
+    \
+    \ @brief FDCAN Tx buffer cancellation finished interrupt enable register
+    \ Address offset: 0xE0
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_CFIE                     \ [0x00 : 3] Cancellation finished interrupt enable.
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXEFS_DEF
+    \
+    \ @brief FDCAN Tx event FIFO status register
+    \ Address offset: 0xE4
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_EFFL                     \ [0x00 : 3] Event FIFO fill level
+    $08 constant FDCAN_EFGI                     \ [0x08 : 2] Event FIFO get index
+    $10 constant FDCAN_EFPI                     \ [0x10 : 2] Event FIFO put index
+    $18 constant FDCAN_EFF                      \ [0x18] Event FIFO full
+    $19 constant FDCAN_TEFL                     \ [0x19] Tx event FIFO element lost
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_TXEFA_DEF
+    \
+    \ @brief FDCAN Tx event FIFO acknowledge register
+    \ Address offset: 0xE8
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_EFAI                     \ [0x00 : 2] Event FIFO acknowledge index
+  [then]
+
+
+  [ifdef] FDCAN_FDCAN_CKDIV_DEF
+    \
+    \ @brief FDCAN CFG clock divider register
+    \ Address offset: 0x100
+    \ Reset value: 0x00000000
+    \
+    $00 constant FDCAN_PDIV                     \ [0x00 : 4] input clock divider
+  [then]
+
+  \
+  \ @brief FDCAN register blank and RAM
+  \
+  $00 constant FDCAN_FDCAN_CREL         \ FDCAN core release register
+  $04 constant FDCAN_FDCAN_ENDN         \ FDCAN endian register
+  $0C constant FDCAN_FDCAN_DBTP         \ FDCAN data bit timing and prescaler register
+  $10 constant FDCAN_FDCAN_TEST         \ FDCAN test register
+  $14 constant FDCAN_FDCAN_RWD          \ FDCAN RAM watchdog register
+  $18 constant FDCAN_FDCAN_CCCR         \ FDCAN CC control register
+  $1C constant FDCAN_FDCAN_NBTP         \ FDCAN nominal bit timing and prescaler register
+  $20 constant FDCAN_FDCAN_TSCC         \ FDCAN timestamp counter configuration register
+  $24 constant FDCAN_FDCAN_TSCV         \ FDCAN timestamp counter value register
+  $28 constant FDCAN_FDCAN_TOCC         \ FDCAN timeout counter configuration register
+  $2C constant FDCAN_FDCAN_TOCV         \ FDCAN timeout counter value register
+  $40 constant FDCAN_FDCAN_ECR          \ FDCAN error counter register
+  $44 constant FDCAN_FDCAN_PSR          \ FDCAN protocol status register
+  $48 constant FDCAN_FDCAN_TDCR         \ FDCAN transmitter delay compensation register
+  $50 constant FDCAN_FDCAN_IR           \ FDCAN interrupt register
+  $54 constant FDCAN_FDCAN_IE           \ FDCAN interrupt enable register
+  $58 constant FDCAN_FDCAN_ILS          \ FDCAN interrupt line select register
+  $5C constant FDCAN_FDCAN_ILE          \ FDCAN interrupt line enable register
+  $80 constant FDCAN_FDCAN_RXGFC        \ FDCAN global filter configuration register
+  $84 constant FDCAN_FDCAN_XIDAM        \ FDCAN extended ID and mask register
+  $88 constant FDCAN_FDCAN_HPMS         \ FDCAN high-priority message status register
+  $90 constant FDCAN_FDCAN_RXF0S        \ FDCAN Rx FIFO 0 status register
+  $94 constant FDCAN_FDCAN_RXF0A        \ CAN Rx FIFO 0 acknowledge register
+  $98 constant FDCAN_FDCAN_RXF1S        \ FDCAN Rx FIFO 1 status register
+  $9C constant FDCAN_FDCAN_RXF1A        \ FDCAN Rx FIFO 1 acknowledge register
+  $C0 constant FDCAN_FDCAN_TXBC         \ FDCAN Tx buffer configuration register
+  $C4 constant FDCAN_FDCAN_TXFQS        \ FDCAN Tx FIFO/queue status register
+  $C8 constant FDCAN_FDCAN_TXBRP        \ FDCAN Tx buffer request pending register
+  $CC constant FDCAN_FDCAN_TXBAR        \ FDCAN Tx buffer add request register
+  $D0 constant FDCAN_FDCAN_TXBCR        \ FDCAN Tx buffer cancellation request register
+  $D4 constant FDCAN_FDCAN_TXBTO        \ FDCAN Tx buffer transmission occurred register
+  $D8 constant FDCAN_FDCAN_TXBCF        \ FDCAN Tx buffer cancellation finished register
+  $DC constant FDCAN_FDCAN_TXBTIE       \ FDCAN Tx buffer transmission interrupt enable register
+  $E0 constant FDCAN_FDCAN_TXBCIE       \ FDCAN Tx buffer cancellation finished interrupt enable register
+  $E4 constant FDCAN_FDCAN_TXEFS        \ FDCAN Tx event FIFO status register
+  $E8 constant FDCAN_FDCAN_TXEFA        \ FDCAN Tx event FIFO acknowledge register
+  $100 constant FDCAN_FDCAN_CKDIV       \ FDCAN CFG clock divider register
+
+: FDCAN_DEF ; [then]

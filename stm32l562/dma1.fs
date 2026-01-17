@@ -6,637 +6,680 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief interrupt status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_ISR_GIF1                                    \ Channel x global interrupt flag (x = 1 ..7)
-$00000002 constant DMA1_ISR_TCIF1                                   \ Channel x transfer complete flag (x = 1 ..7)
-$00000004 constant DMA1_ISR_HTIF1                                   \ Channel x half transfer flag (x = 1 ..7)
-$00000008 constant DMA1_ISR_TEIF1                                   \ Channel x transfer error flag (x = 1 ..7)
-$00000010 constant DMA1_ISR_GIF2                                    \ Channel x global interrupt flag (x = 1 ..7)
-$00000020 constant DMA1_ISR_TCIF2                                   \ Channel x transfer complete flag (x = 1 ..7)
-$00000040 constant DMA1_ISR_HTIF2                                   \ Channel x half transfer flag (x = 1 ..7)
-$00000080 constant DMA1_ISR_TEIF2                                   \ Channel x transfer error flag (x = 1 ..7)
-$00000100 constant DMA1_ISR_GIF3                                    \ Channel x global interrupt flag (x = 1 ..7)
-$00000200 constant DMA1_ISR_TCIF3                                   \ Channel x transfer complete flag (x = 1 ..7)
-$00000400 constant DMA1_ISR_HTIF3                                   \ Channel x half transfer flag (x = 1 ..7)
-$00000800 constant DMA1_ISR_TEIF3                                   \ Channel x transfer error flag (x = 1 ..7)
-$00001000 constant DMA1_ISR_GIF4                                    \ Channel x global interrupt flag (x = 1 ..7)
-$00002000 constant DMA1_ISR_TCIF4                                   \ Channel x transfer complete flag (x = 1 ..7)
-$00004000 constant DMA1_ISR_HTIF4                                   \ Channel x half transfer flag (x = 1 ..7)
-$00008000 constant DMA1_ISR_TEIF4                                   \ Channel x transfer error flag (x = 1 ..7)
-$00010000 constant DMA1_ISR_GIF5                                    \ Channel x global interrupt flag (x = 1 ..7)
-$00020000 constant DMA1_ISR_TCIF5                                   \ Channel x transfer complete flag (x = 1 ..7)
-$00040000 constant DMA1_ISR_HTIF5                                   \ Channel x half transfer flag (x = 1 ..7)
-$00080000 constant DMA1_ISR_TEIF5                                   \ Channel x transfer error flag (x = 1 ..7)
-$00100000 constant DMA1_ISR_GIF6                                    \ Channel x global interrupt flag (x = 1 ..7)
-$00200000 constant DMA1_ISR_TCIF6                                   \ Channel x transfer complete flag (x = 1 ..7)
-$00400000 constant DMA1_ISR_HTIF6                                   \ Channel x half transfer flag (x = 1 ..7)
-$00800000 constant DMA1_ISR_TEIF6                                   \ Channel x transfer error flag (x = 1 ..7)
-$01000000 constant DMA1_ISR_GIF7                                    \ Channel x global interrupt flag (x = 1 ..7)
-$02000000 constant DMA1_ISR_TCIF7                                   \ Channel x transfer complete flag (x = 1 ..7)
-$04000000 constant DMA1_ISR_HTIF7                                   \ Channel x half transfer flag (x = 1 ..7)
-$08000000 constant DMA1_ISR_TEIF7                                   \ Channel x transfer error flag (x = 1 ..7)
-$10000000 constant DMA1_ISR_GIF8                                    \ global interrupt flag for channel 8
-$20000000 constant DMA1_ISR_TCIF8                                   \ transfer complete (TC) flag for channel 8
-$40000000 constant DMA1_ISR_HTIF8                                   \ half transfer (HT) flag for channel 8
-$80000000 constant DMA1_ISR_TEIF8                                   \ transfer error (TE) flag for channel 8
-
-
-\
-\ @brief interrupt flag clear register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_IFCR_CGIF1                                  \ Channel x global interrupt clear (x = 1 ..7)
-$00000002 constant DMA1_IFCR_CTCIF1                                 \ Channel x transfer complete clear (x = 1 ..7)
-$00000004 constant DMA1_IFCR_CHTIF1                                 \ Channel x half transfer clear (x = 1 ..7)
-$00000008 constant DMA1_IFCR_CTEIF1                                 \ Channel x transfer error clear (x = 1 ..7)
-$00000010 constant DMA1_IFCR_CGIF2                                  \ Channel x global interrupt clear (x = 1 ..7)
-$00000020 constant DMA1_IFCR_CTCIF2                                 \ Channel x transfer complete clear (x = 1 ..7)
-$00000040 constant DMA1_IFCR_CHTIF2                                 \ Channel x half transfer clear (x = 1 ..7)
-$00000080 constant DMA1_IFCR_CTEIF2                                 \ Channel x transfer error clear (x = 1 ..7)
-$00000100 constant DMA1_IFCR_CGIF3                                  \ Channel x global interrupt clear (x = 1 ..7)
-$00000200 constant DMA1_IFCR_CTCIF3                                 \ Channel x transfer complete clear (x = 1 ..7)
-$00000400 constant DMA1_IFCR_CHTIF3                                 \ Channel x half transfer clear (x = 1 ..7)
-$00000800 constant DMA1_IFCR_CTEIF3                                 \ Channel x transfer error clear (x = 1 ..7)
-$00001000 constant DMA1_IFCR_CGIF4                                  \ Channel x global interrupt clear (x = 1 ..7)
-$00002000 constant DMA1_IFCR_CTCIF4                                 \ Channel x transfer complete clear (x = 1 ..7)
-$00004000 constant DMA1_IFCR_CHTIF4                                 \ Channel x half transfer clear (x = 1 ..7)
-$00008000 constant DMA1_IFCR_CTEIF4                                 \ Channel x transfer error clear (x = 1 ..7)
-$00010000 constant DMA1_IFCR_CGIF5                                  \ Channel x global interrupt clear (x = 1 ..7)
-$00020000 constant DMA1_IFCR_CTCIF5                                 \ Channel x transfer complete clear (x = 1 ..7)
-$00040000 constant DMA1_IFCR_CHTIF5                                 \ Channel x half transfer clear (x = 1 ..7)
-$00080000 constant DMA1_IFCR_CTEIF5                                 \ Channel x transfer error clear (x = 1 ..7)
-$00100000 constant DMA1_IFCR_CGIF6                                  \ Channel x global interrupt clear (x = 1 ..7)
-$00200000 constant DMA1_IFCR_CTCIF6                                 \ Channel x transfer complete clear (x = 1 ..7)
-$00400000 constant DMA1_IFCR_CHTIF6                                 \ Channel x half transfer clear (x = 1 ..7)
-$00800000 constant DMA1_IFCR_CTEIF6                                 \ Channel x transfer error clear (x = 1 ..7)
-$01000000 constant DMA1_IFCR_CGIF7                                  \ Channel x global interrupt clear (x = 1 ..7)
-$02000000 constant DMA1_IFCR_CTCIF7                                 \ Channel x transfer complete clear (x = 1 ..7)
-$04000000 constant DMA1_IFCR_CHTIF7                                 \ Channel x half transfer clear (x = 1 ..7)
-$08000000 constant DMA1_IFCR_CTEIF7                                 \ Channel x transfer error clear (x = 1 ..7)
-$10000000 constant DMA1_IFCR_CGIF8                                  \ global interrupt flag clear for channel 8
-$20000000 constant DMA1_IFCR_CTCIF8                                 \ transfer complete flag clear for channel 8
-$40000000 constant DMA1_IFCR_CHTIF8                                 \ half transfer flag clear for channel 8
-$80000000 constant DMA1_IFCR_CTEIF8                                 \ transfer error flag clear for channel 8
-
-
-\
-\ @brief channel x configuration register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_CCR1_EN                                     \ Channel enable
-$00000002 constant DMA1_CCR1_TCIE                                   \ Transfer complete interrupt enable
-$00000004 constant DMA1_CCR1_HTIE                                   \ Half transfer interrupt enable
-$00000008 constant DMA1_CCR1_TEIE                                   \ Transfer error interrupt enable
-$00000010 constant DMA1_CCR1_DIR                                    \ Data transfer direction
-$00000020 constant DMA1_CCR1_CIRC                                   \ Circular mode
-$00000040 constant DMA1_CCR1_PINC                                   \ Peripheral increment mode
-$00000080 constant DMA1_CCR1_MINC                                   \ Memory increment mode
-$00000300 constant DMA1_CCR1_PSIZE                                  \ Peripheral size
-$00000c00 constant DMA1_CCR1_MSIZE                                  \ Memory size
-$00003000 constant DMA1_CCR1_PL                                     \ Channel priority level
-$00004000 constant DMA1_CCR1_MEM2MEM                                \ Memory to memory mode
-$00008000 constant DMA1_CCR1_DBM                                    \ double-buffer mode
-$00010000 constant DMA1_CCR1_CT                                     \ current target memory of DMA transfer in double-buffer mode
-$00020000 constant DMA1_CCR1_SECM                                   \ secure mode
-$00040000 constant DMA1_CCR1_SSEC                                   \ security of the DMA transfer from the source
-$00080000 constant DMA1_CCR1_DSEC                                   \ security of the DMA transfer to the destination
-$00100000 constant DMA1_CCR1_PRIV                                   \ privileged mode
-
-
-\
-\ @brief channel x number of data register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant DMA1_CNDTR1_NDT                                  \ Number of data to transfer
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CPAR1_PA                                    \ Peripheral address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM0AR1_MA                                   \ Memory address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM1AR1_MA                                   \ peripheral address
-
-
-\
-\ @brief channel x configuration register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_CCR2_EN                                     \ Channel enable
-$00000002 constant DMA1_CCR2_TCIE                                   \ Transfer complete interrupt enable
-$00000004 constant DMA1_CCR2_HTIE                                   \ Half transfer interrupt enable
-$00000008 constant DMA1_CCR2_TEIE                                   \ Transfer error interrupt enable
-$00000010 constant DMA1_CCR2_DIR                                    \ Data transfer direction
-$00000020 constant DMA1_CCR2_CIRC                                   \ Circular mode
-$00000040 constant DMA1_CCR2_PINC                                   \ Peripheral increment mode
-$00000080 constant DMA1_CCR2_MINC                                   \ Memory increment mode
-$00000300 constant DMA1_CCR2_PSIZE                                  \ Peripheral size
-$00000c00 constant DMA1_CCR2_MSIZE                                  \ Memory size
-$00003000 constant DMA1_CCR2_PL                                     \ Channel priority level
-$00004000 constant DMA1_CCR2_MEM2MEM                                \ Memory to memory mode
-$00008000 constant DMA1_CCR2_DBM                                    \ double-buffer mode
-$00010000 constant DMA1_CCR2_CT                                     \ current target memory of DMA transfer in double-buffer mode
-$00020000 constant DMA1_CCR2_SECM                                   \ secure mode
-$00040000 constant DMA1_CCR2_SSEC                                   \ security of the DMA transfer from the source
-$00080000 constant DMA1_CCR2_DSEC                                   \ security of the DMA transfer to the destination
-$00100000 constant DMA1_CCR2_PRIV                                   \ privileged mode
-
-
-\
-\ @brief channel x number of data register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant DMA1_CNDTR2_NDT                                  \ Number of data to transfer
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CPAR2_PA                                    \ Peripheral address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM0AR2_MA                                   \ Memory address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM1AR2_MA                                   \ peripheral address
-
-
-\
-\ @brief channel x configuration register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_CCR3_EN                                     \ Channel enable
-$00000002 constant DMA1_CCR3_TCIE                                   \ Transfer complete interrupt enable
-$00000004 constant DMA1_CCR3_HTIE                                   \ Half transfer interrupt enable
-$00000008 constant DMA1_CCR3_TEIE                                   \ Transfer error interrupt enable
-$00000010 constant DMA1_CCR3_DIR                                    \ Data transfer direction
-$00000020 constant DMA1_CCR3_CIRC                                   \ Circular mode
-$00000040 constant DMA1_CCR3_PINC                                   \ Peripheral increment mode
-$00000080 constant DMA1_CCR3_MINC                                   \ Memory increment mode
-$00000300 constant DMA1_CCR3_PSIZE                                  \ Peripheral size
-$00000c00 constant DMA1_CCR3_MSIZE                                  \ Memory size
-$00003000 constant DMA1_CCR3_PL                                     \ Channel priority level
-$00004000 constant DMA1_CCR3_MEM2MEM                                \ Memory to memory mode
-$00008000 constant DMA1_CCR3_DBM                                    \ double-buffer mode
-$00010000 constant DMA1_CCR3_CT                                     \ current target memory of DMA transfer in double-buffer mode
-$00020000 constant DMA1_CCR3_SECM                                   \ secure mode
-$00040000 constant DMA1_CCR3_SSEC                                   \ security of the DMA transfer from the source
-$00080000 constant DMA1_CCR3_DSEC                                   \ security of the DMA transfer to the destination
-$00100000 constant DMA1_CCR3_PRIV                                   \ privileged mode
-
-
-\
-\ @brief channel x number of data register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant DMA1_CNDTR3_NDT                                  \ Number of data to transfer
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CPAR3_PA                                    \ Peripheral address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM0AR3_MA                                   \ Memory address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM1AR3_MA                                   \ peripheral address
-
-
-\
-\ @brief channel x configuration register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_CCR4_EN                                     \ Channel enable
-$00000002 constant DMA1_CCR4_TCIE                                   \ Transfer complete interrupt enable
-$00000004 constant DMA1_CCR4_HTIE                                   \ Half transfer interrupt enable
-$00000008 constant DMA1_CCR4_TEIE                                   \ Transfer error interrupt enable
-$00000010 constant DMA1_CCR4_DIR                                    \ Data transfer direction
-$00000020 constant DMA1_CCR4_CIRC                                   \ Circular mode
-$00000040 constant DMA1_CCR4_PINC                                   \ Peripheral increment mode
-$00000080 constant DMA1_CCR4_MINC                                   \ Memory increment mode
-$00000300 constant DMA1_CCR4_PSIZE                                  \ Peripheral size
-$00000c00 constant DMA1_CCR4_MSIZE                                  \ Memory size
-$00003000 constant DMA1_CCR4_PL                                     \ Channel priority level
-$00004000 constant DMA1_CCR4_MEM2MEM                                \ Memory to memory mode
-$00008000 constant DMA1_CCR4_DBM                                    \ double-buffer mode
-$00010000 constant DMA1_CCR4_CT                                     \ current target memory of DMA transfer in double-buffer mode
-$00020000 constant DMA1_CCR4_SECM                                   \ secure mode
-$00040000 constant DMA1_CCR4_SSEC                                   \ security of the DMA transfer from the source
-$00080000 constant DMA1_CCR4_DSEC                                   \ security of the DMA transfer to the destination
-$00100000 constant DMA1_CCR4_PRIV                                   \ privileged mode
-
-
-\
-\ @brief channel x number of data register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant DMA1_CNDTR4_NDT                                  \ Number of data to transfer
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CPAR4_PA                                    \ Peripheral address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM0AR4_MA                                   \ Memory address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM1AR4_MA                                   \ Memory address
-
-
-\
-\ @brief channel x configuration register
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_CCR5_EN                                     \ Channel enable
-$00000002 constant DMA1_CCR5_TCIE                                   \ Transfer complete interrupt enable
-$00000004 constant DMA1_CCR5_HTIE                                   \ Half transfer interrupt enable
-$00000008 constant DMA1_CCR5_TEIE                                   \ Transfer error interrupt enable
-$00000010 constant DMA1_CCR5_DIR                                    \ Data transfer direction
-$00000020 constant DMA1_CCR5_CIRC                                   \ Circular mode
-$00000040 constant DMA1_CCR5_PINC                                   \ Peripheral increment mode
-$00000080 constant DMA1_CCR5_MINC                                   \ Memory increment mode
-$00000300 constant DMA1_CCR5_PSIZE                                  \ Peripheral size
-$00000c00 constant DMA1_CCR5_MSIZE                                  \ Memory size
-$00003000 constant DMA1_CCR5_PL                                     \ Channel priority level
-$00004000 constant DMA1_CCR5_MEM2MEM                                \ Memory to memory mode
-$00008000 constant DMA1_CCR5_DBM                                    \ double-buffer mode
-$00010000 constant DMA1_CCR5_CT                                     \ current target memory of DMA transfer in double-buffer mode
-$00020000 constant DMA1_CCR5_SECM                                   \ secure mode
-$00040000 constant DMA1_CCR5_SSEC                                   \ security of the DMA transfer from the source
-$00080000 constant DMA1_CCR5_DSEC                                   \ security of the DMA transfer to the destination
-$00100000 constant DMA1_CCR5_PRIV                                   \ privileged mode
-
-
-\
-\ @brief channel x number of data register
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant DMA1_CNDTR5_NDT                                  \ Number of data to transfer
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CPAR5_PA                                    \ Peripheral address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x64
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM0AR5_MA                                   \ Memory address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM1AR5_MA                                   \ peripheral address
-
-
-\
-\ @brief channel x configuration register
-\ Address offset: 0x6C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_CCR6_EN                                     \ Channel enable
-$00000002 constant DMA1_CCR6_TCIE                                   \ Transfer complete interrupt enable
-$00000004 constant DMA1_CCR6_HTIE                                   \ Half transfer interrupt enable
-$00000008 constant DMA1_CCR6_TEIE                                   \ Transfer error interrupt enable
-$00000010 constant DMA1_CCR6_DIR                                    \ Data transfer direction
-$00000020 constant DMA1_CCR6_CIRC                                   \ Circular mode
-$00000040 constant DMA1_CCR6_PINC                                   \ Peripheral increment mode
-$00000080 constant DMA1_CCR6_MINC                                   \ Memory increment mode
-$00000300 constant DMA1_CCR6_PSIZE                                  \ Peripheral size
-$00000c00 constant DMA1_CCR6_MSIZE                                  \ Memory size
-$00003000 constant DMA1_CCR6_PL                                     \ Channel priority level
-$00004000 constant DMA1_CCR6_MEM2MEM                                \ Memory to memory mode
-$00008000 constant DMA1_CCR6_DBM                                    \ double-buffer mode
-$00010000 constant DMA1_CCR6_CT                                     \ current target memory of DMA transfer in double-buffer mode
-$00020000 constant DMA1_CCR6_SECM                                   \ secure mode
-$00040000 constant DMA1_CCR6_SSEC                                   \ security of the DMA transfer from the source
-$00080000 constant DMA1_CCR6_DSEC                                   \ security of the DMA transfer to the destination
-$00100000 constant DMA1_CCR6_PRIV                                   \ privileged mode
-
-
-\
-\ @brief channel x number of data register
-\ Address offset: 0x70
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant DMA1_CNDTR6_NDT                                  \ Number of data to transfer
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0x74
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CPAR6_PA                                    \ Peripheral address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x78
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM0AR6_MA                                   \ Memory address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x7C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM1AR6_MA                                   \ peripheral address
-
-
-\
-\ @brief channel x configuration register
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_CCR7_EN                                     \ Channel enable
-$00000002 constant DMA1_CCR7_TCIE                                   \ Transfer complete interrupt enable
-$00000004 constant DMA1_CCR7_HTIE                                   \ Half transfer interrupt enable
-$00000008 constant DMA1_CCR7_TEIE                                   \ Transfer error interrupt enable
-$00000010 constant DMA1_CCR7_DIR                                    \ Data transfer direction
-$00000020 constant DMA1_CCR7_CIRC                                   \ Circular mode
-$00000040 constant DMA1_CCR7_PINC                                   \ Peripheral increment mode
-$00000080 constant DMA1_CCR7_MINC                                   \ Memory increment mode
-$00000300 constant DMA1_CCR7_PSIZE                                  \ Peripheral size
-$00000c00 constant DMA1_CCR7_MSIZE                                  \ Memory size
-$00003000 constant DMA1_CCR7_PL                                     \ Channel priority level
-$00004000 constant DMA1_CCR7_MEM2MEM                                \ Memory to memory mode
-$00008000 constant DMA1_CCR7_DBM                                    \ double-buffer mode
-$00010000 constant DMA1_CCR7_CT                                     \ current target memory of DMA transfer in double-buffer mode
-$00020000 constant DMA1_CCR7_SECM                                   \ secure mode
-$00040000 constant DMA1_CCR7_SSEC                                   \ security of the DMA transfer from the source
-$00080000 constant DMA1_CCR7_DSEC                                   \ security of the DMA transfer to the destination
-$00100000 constant DMA1_CCR7_PRIV                                   \ privileged mode
-
-
-\
-\ @brief channel x number of data register
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant DMA1_CNDTR7_NDT                                  \ Number of data to transfer
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CPAR7_PA                                    \ Peripheral address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x8C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM0AR7_MA                                   \ peripheral address
-
-
-\
-\ @brief channel x memory address register
-\ Address offset: 0x90
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM1AR7_MA                                   \ peripheral address
-
-
-\
-\ @brief channel x configuration register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DMA1_CCR8_EN                                     \ Channel enable
-$00000002 constant DMA1_CCR8_TCIE                                   \ Transfer complete interrupt enable
-$00000004 constant DMA1_CCR8_HTIE                                   \ Half transfer interrupt enable
-$00000008 constant DMA1_CCR8_TEIE                                   \ Transfer error interrupt enable
-$00000010 constant DMA1_CCR8_DIR                                    \ Data transfer direction
-$00000020 constant DMA1_CCR8_CIRC                                   \ Circular mode
-$00000040 constant DMA1_CCR8_PINC                                   \ Peripheral increment mode
-$00000080 constant DMA1_CCR8_MINC                                   \ Memory increment mode
-$00000300 constant DMA1_CCR8_PSIZE                                  \ Peripheral size
-$00000c00 constant DMA1_CCR8_MSIZE                                  \ Memory size
-$00003000 constant DMA1_CCR8_PL                                     \ Channel priority level
-$00004000 constant DMA1_CCR8_MEM2MEM                                \ Memory to memory mode
-$00008000 constant DMA1_CCR8_DBM                                    \ double-buffer mode
-$00010000 constant DMA1_CCR8_CT                                     \ current target memory of DMA transfer in double-buffer mode
-$00020000 constant DMA1_CCR8_SECM                                   \ secure mode
-$00040000 constant DMA1_CCR8_SSEC                                   \ security of the DMA transfer from the source
-$00080000 constant DMA1_CCR8_DSEC                                   \ security of the DMA transfer to the destination
-$00100000 constant DMA1_CCR8_PRIV                                   \ privileged mode
-
-
-\
-\ @brief channel x number of data register
-\ Address offset: 0x98
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant DMA1_CNDTR8_NDT                                  \ Number of data to transfer
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0x9C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CPAR8_PA                                    \ Peripheral address
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0xA0
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM0AR8_MA                                   \ Memory address
-
-
-\
-\ @brief channel x peripheral address register
-\ Address offset: 0xA4
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CM1AR8_MA                                   \ peripheral address
-
-
-\
-\ @brief channel selection register
-\ Address offset: 0xA8
-\ Reset value: 0x00000000
-\
-
-$00000000 constant DMA1_CSELR_MA                                    \ peripheral address
-
-
-\
-\ @brief Direct memory access controller
-\
-$40020000 constant DMA1_ISR       \ offset: 0x00 : interrupt status register
-$40020004 constant DMA1_IFCR      \ offset: 0x04 : interrupt flag clear register
-$40020008 constant DMA1_CCR1      \ offset: 0x08 : channel x configuration register
-$4002000c constant DMA1_CNDTR1    \ offset: 0x0C : channel x number of data register
-$40020010 constant DMA1_CPAR1     \ offset: 0x10 : channel x peripheral address register
-$40020014 constant DMA1_CM0AR1    \ offset: 0x14 : channel x memory address register
-$40020018 constant DMA1_CM1AR1    \ offset: 0x18 : channel x memory address register
-$4002001c constant DMA1_CCR2      \ offset: 0x1C : channel x configuration register
-$40020020 constant DMA1_CNDTR2    \ offset: 0x20 : channel x number of data register
-$40020024 constant DMA1_CPAR2     \ offset: 0x24 : channel x peripheral address register
-$40020028 constant DMA1_CM0AR2    \ offset: 0x28 : channel x memory address register
-$4002002c constant DMA1_CM1AR2    \ offset: 0x2C : channel x memory address register
-$40020030 constant DMA1_CCR3      \ offset: 0x30 : channel x configuration register
-$40020034 constant DMA1_CNDTR3    \ offset: 0x34 : channel x number of data register
-$40020038 constant DMA1_CPAR3     \ offset: 0x38 : channel x peripheral address register
-$4002003c constant DMA1_CM0AR3    \ offset: 0x3C : channel x memory address register
-$40020040 constant DMA1_CM1AR3    \ offset: 0x40 : channel x memory address register
-$40020044 constant DMA1_CCR4      \ offset: 0x44 : channel x configuration register
-$40020048 constant DMA1_CNDTR4    \ offset: 0x48 : channel x number of data register
-$4002004c constant DMA1_CPAR4     \ offset: 0x4C : channel x peripheral address register
-$40020050 constant DMA1_CM0AR4    \ offset: 0x50 : channel x memory address register
-$40020054 constant DMA1_CM1AR4    \ offset: 0x54 : channel x memory address register
-$40020058 constant DMA1_CCR5      \ offset: 0x58 : channel x configuration register
-$4002005c constant DMA1_CNDTR5    \ offset: 0x5C : channel x number of data register
-$40020060 constant DMA1_CPAR5     \ offset: 0x60 : channel x peripheral address register
-$40020064 constant DMA1_CM0AR5    \ offset: 0x64 : channel x memory address register
-$40020068 constant DMA1_CM1AR5    \ offset: 0x68 : channel x memory address register
-$4002006c constant DMA1_CCR6      \ offset: 0x6C : channel x configuration register
-$40020070 constant DMA1_CNDTR6    \ offset: 0x70 : channel x number of data register
-$40020074 constant DMA1_CPAR6     \ offset: 0x74 : channel x peripheral address register
-$40020078 constant DMA1_CM0AR6    \ offset: 0x78 : channel x memory address register
-$4002007c constant DMA1_CM1AR6    \ offset: 0x7C : channel x memory address register
-$40020080 constant DMA1_CCR7      \ offset: 0x80 : channel x configuration register
-$40020084 constant DMA1_CNDTR7    \ offset: 0x84 : channel x number of data register
-$40020088 constant DMA1_CPAR7     \ offset: 0x88 : channel x peripheral address register
-$4002008c constant DMA1_CM0AR7    \ offset: 0x8C : channel x memory address register
-$40020090 constant DMA1_CM1AR7    \ offset: 0x90 : channel x memory address register
-$40020094 constant DMA1_CCR8      \ offset: 0x94 : channel x configuration register
-$40020098 constant DMA1_CNDTR8    \ offset: 0x98 : channel x number of data register
-$4002009c constant DMA1_CPAR8     \ offset: 0x9C : channel x peripheral address register
-$400200a0 constant DMA1_CM0AR8    \ offset: 0xA0 : channel x peripheral address register
-$400200a4 constant DMA1_CM1AR8    \ offset: 0xA4 : channel x peripheral address register
-$400200a8 constant DMA1_CSELR     \ offset: 0xA8 : channel selection register
-
+[ifndef] DMA1_DEF
+
+  [ifdef] DMA1_ISR_DEF
+    \
+    \ @brief interrupt status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_GIF1                      \ [0x00] Channel x global interrupt flag (x = 1 ..7)
+    $01 constant DMA1_TCIF1                     \ [0x01] Channel x transfer complete flag (x = 1 ..7)
+    $02 constant DMA1_HTIF1                     \ [0x02] Channel x half transfer flag (x = 1 ..7)
+    $03 constant DMA1_TEIF1                     \ [0x03] Channel x transfer error flag (x = 1 ..7)
+    $04 constant DMA1_GIF2                      \ [0x04] Channel x global interrupt flag (x = 1 ..7)
+    $05 constant DMA1_TCIF2                     \ [0x05] Channel x transfer complete flag (x = 1 ..7)
+    $06 constant DMA1_HTIF2                     \ [0x06] Channel x half transfer flag (x = 1 ..7)
+    $07 constant DMA1_TEIF2                     \ [0x07] Channel x transfer error flag (x = 1 ..7)
+    $08 constant DMA1_GIF3                      \ [0x08] Channel x global interrupt flag (x = 1 ..7)
+    $09 constant DMA1_TCIF3                     \ [0x09] Channel x transfer complete flag (x = 1 ..7)
+    $0a constant DMA1_HTIF3                     \ [0x0a] Channel x half transfer flag (x = 1 ..7)
+    $0b constant DMA1_TEIF3                     \ [0x0b] Channel x transfer error flag (x = 1 ..7)
+    $0c constant DMA1_GIF4                      \ [0x0c] Channel x global interrupt flag (x = 1 ..7)
+    $0d constant DMA1_TCIF4                     \ [0x0d] Channel x transfer complete flag (x = 1 ..7)
+    $0e constant DMA1_HTIF4                     \ [0x0e] Channel x half transfer flag (x = 1 ..7)
+    $0f constant DMA1_TEIF4                     \ [0x0f] Channel x transfer error flag (x = 1 ..7)
+    $10 constant DMA1_GIF5                      \ [0x10] Channel x global interrupt flag (x = 1 ..7)
+    $11 constant DMA1_TCIF5                     \ [0x11] Channel x transfer complete flag (x = 1 ..7)
+    $12 constant DMA1_HTIF5                     \ [0x12] Channel x half transfer flag (x = 1 ..7)
+    $13 constant DMA1_TEIF5                     \ [0x13] Channel x transfer error flag (x = 1 ..7)
+    $14 constant DMA1_GIF6                      \ [0x14] Channel x global interrupt flag (x = 1 ..7)
+    $15 constant DMA1_TCIF6                     \ [0x15] Channel x transfer complete flag (x = 1 ..7)
+    $16 constant DMA1_HTIF6                     \ [0x16] Channel x half transfer flag (x = 1 ..7)
+    $17 constant DMA1_TEIF6                     \ [0x17] Channel x transfer error flag (x = 1 ..7)
+    $18 constant DMA1_GIF7                      \ [0x18] Channel x global interrupt flag (x = 1 ..7)
+    $19 constant DMA1_TCIF7                     \ [0x19] Channel x transfer complete flag (x = 1 ..7)
+    $1a constant DMA1_HTIF7                     \ [0x1a] Channel x half transfer flag (x = 1 ..7)
+    $1b constant DMA1_TEIF7                     \ [0x1b] Channel x transfer error flag (x = 1 ..7)
+    $1c constant DMA1_GIF8                      \ [0x1c] global interrupt flag for channel 8
+    $1d constant DMA1_TCIF8                     \ [0x1d] transfer complete (TC) flag for channel 8
+    $1e constant DMA1_HTIF8                     \ [0x1e] half transfer (HT) flag for channel 8
+    $1f constant DMA1_TEIF8                     \ [0x1f] transfer error (TE) flag for channel 8
+  [then]
+
+
+  [ifdef] DMA1_IFCR_DEF
+    \
+    \ @brief interrupt flag clear register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_CGIF1                     \ [0x00] Channel x global interrupt clear (x = 1 ..7)
+    $01 constant DMA1_CTCIF1                    \ [0x01] Channel x transfer complete clear (x = 1 ..7)
+    $02 constant DMA1_CHTIF1                    \ [0x02] Channel x half transfer clear (x = 1 ..7)
+    $03 constant DMA1_CTEIF1                    \ [0x03] Channel x transfer error clear (x = 1 ..7)
+    $04 constant DMA1_CGIF2                     \ [0x04] Channel x global interrupt clear (x = 1 ..7)
+    $05 constant DMA1_CTCIF2                    \ [0x05] Channel x transfer complete clear (x = 1 ..7)
+    $06 constant DMA1_CHTIF2                    \ [0x06] Channel x half transfer clear (x = 1 ..7)
+    $07 constant DMA1_CTEIF2                    \ [0x07] Channel x transfer error clear (x = 1 ..7)
+    $08 constant DMA1_CGIF3                     \ [0x08] Channel x global interrupt clear (x = 1 ..7)
+    $09 constant DMA1_CTCIF3                    \ [0x09] Channel x transfer complete clear (x = 1 ..7)
+    $0a constant DMA1_CHTIF3                    \ [0x0a] Channel x half transfer clear (x = 1 ..7)
+    $0b constant DMA1_CTEIF3                    \ [0x0b] Channel x transfer error clear (x = 1 ..7)
+    $0c constant DMA1_CGIF4                     \ [0x0c] Channel x global interrupt clear (x = 1 ..7)
+    $0d constant DMA1_CTCIF4                    \ [0x0d] Channel x transfer complete clear (x = 1 ..7)
+    $0e constant DMA1_CHTIF4                    \ [0x0e] Channel x half transfer clear (x = 1 ..7)
+    $0f constant DMA1_CTEIF4                    \ [0x0f] Channel x transfer error clear (x = 1 ..7)
+    $10 constant DMA1_CGIF5                     \ [0x10] Channel x global interrupt clear (x = 1 ..7)
+    $11 constant DMA1_CTCIF5                    \ [0x11] Channel x transfer complete clear (x = 1 ..7)
+    $12 constant DMA1_CHTIF5                    \ [0x12] Channel x half transfer clear (x = 1 ..7)
+    $13 constant DMA1_CTEIF5                    \ [0x13] Channel x transfer error clear (x = 1 ..7)
+    $14 constant DMA1_CGIF6                     \ [0x14] Channel x global interrupt clear (x = 1 ..7)
+    $15 constant DMA1_CTCIF6                    \ [0x15] Channel x transfer complete clear (x = 1 ..7)
+    $16 constant DMA1_CHTIF6                    \ [0x16] Channel x half transfer clear (x = 1 ..7)
+    $17 constant DMA1_CTEIF6                    \ [0x17] Channel x transfer error clear (x = 1 ..7)
+    $18 constant DMA1_CGIF7                     \ [0x18] Channel x global interrupt clear (x = 1 ..7)
+    $19 constant DMA1_CTCIF7                    \ [0x19] Channel x transfer complete clear (x = 1 ..7)
+    $1a constant DMA1_CHTIF7                    \ [0x1a] Channel x half transfer clear (x = 1 ..7)
+    $1b constant DMA1_CTEIF7                    \ [0x1b] Channel x transfer error clear (x = 1 ..7)
+    $1c constant DMA1_CGIF8                     \ [0x1c] global interrupt flag clear for channel 8
+    $1d constant DMA1_CTCIF8                    \ [0x1d] transfer complete flag clear for channel 8
+    $1e constant DMA1_CHTIF8                    \ [0x1e] half transfer flag clear for channel 8
+    $1f constant DMA1_CTEIF8                    \ [0x1f] transfer error flag clear for channel 8
+  [then]
+
+
+  [ifdef] DMA1_CCR1_DEF
+    \
+    \ @brief channel x configuration register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_EN                        \ [0x00] Channel enable
+    $01 constant DMA1_TCIE                      \ [0x01] Transfer complete interrupt enable
+    $02 constant DMA1_HTIE                      \ [0x02] Half transfer interrupt enable
+    $03 constant DMA1_TEIE                      \ [0x03] Transfer error interrupt enable
+    $04 constant DMA1_DIR                       \ [0x04] Data transfer direction
+    $05 constant DMA1_CIRC                      \ [0x05] Circular mode
+    $06 constant DMA1_PINC                      \ [0x06] Peripheral increment mode
+    $07 constant DMA1_MINC                      \ [0x07] Memory increment mode
+    $08 constant DMA1_PSIZE                     \ [0x08 : 2] Peripheral size
+    $0a constant DMA1_MSIZE                     \ [0x0a : 2] Memory size
+    $0c constant DMA1_PL                        \ [0x0c : 2] Channel priority level
+    $0e constant DMA1_MEM2MEM                   \ [0x0e] Memory to memory mode
+    $0f constant DMA1_DBM                       \ [0x0f] double-buffer mode
+    $10 constant DMA1_CT                        \ [0x10] current target memory of DMA transfer in double-buffer mode
+    $11 constant DMA1_SECM                      \ [0x11] secure mode
+    $12 constant DMA1_SSEC                      \ [0x12] security of the DMA transfer from the source
+    $13 constant DMA1_DSEC                      \ [0x13] security of the DMA transfer to the destination
+    $14 constant DMA1_PRIV                      \ [0x14] privileged mode
+  [then]
+
+
+  [ifdef] DMA1_CNDTR1_DEF
+    \
+    \ @brief channel x number of data register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_NDT                       \ [0x00 : 18] Number of data to transfer
+  [then]
+
+
+  [ifdef] DMA1_CPAR1_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_PA                        \ [0x00 : 32] Peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM0AR1_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] Memory address
+  [then]
+
+
+  [ifdef] DMA1_CM1AR1_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CCR2_DEF
+    \
+    \ @brief channel x configuration register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_EN                        \ [0x00] Channel enable
+    $01 constant DMA1_TCIE                      \ [0x01] Transfer complete interrupt enable
+    $02 constant DMA1_HTIE                      \ [0x02] Half transfer interrupt enable
+    $03 constant DMA1_TEIE                      \ [0x03] Transfer error interrupt enable
+    $04 constant DMA1_DIR                       \ [0x04] Data transfer direction
+    $05 constant DMA1_CIRC                      \ [0x05] Circular mode
+    $06 constant DMA1_PINC                      \ [0x06] Peripheral increment mode
+    $07 constant DMA1_MINC                      \ [0x07] Memory increment mode
+    $08 constant DMA1_PSIZE                     \ [0x08 : 2] Peripheral size
+    $0a constant DMA1_MSIZE                     \ [0x0a : 2] Memory size
+    $0c constant DMA1_PL                        \ [0x0c : 2] Channel priority level
+    $0e constant DMA1_MEM2MEM                   \ [0x0e] Memory to memory mode
+    $0f constant DMA1_DBM                       \ [0x0f] double-buffer mode
+    $10 constant DMA1_CT                        \ [0x10] current target memory of DMA transfer in double-buffer mode
+    $11 constant DMA1_SECM                      \ [0x11] secure mode
+    $12 constant DMA1_SSEC                      \ [0x12] security of the DMA transfer from the source
+    $13 constant DMA1_DSEC                      \ [0x13] security of the DMA transfer to the destination
+    $14 constant DMA1_PRIV                      \ [0x14] privileged mode
+  [then]
+
+
+  [ifdef] DMA1_CNDTR2_DEF
+    \
+    \ @brief channel x number of data register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_NDT                       \ [0x00 : 18] Number of data to transfer
+  [then]
+
+
+  [ifdef] DMA1_CPAR2_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_PA                        \ [0x00 : 32] Peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM0AR2_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] Memory address
+  [then]
+
+
+  [ifdef] DMA1_CM1AR2_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CCR3_DEF
+    \
+    \ @brief channel x configuration register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_EN                        \ [0x00] Channel enable
+    $01 constant DMA1_TCIE                      \ [0x01] Transfer complete interrupt enable
+    $02 constant DMA1_HTIE                      \ [0x02] Half transfer interrupt enable
+    $03 constant DMA1_TEIE                      \ [0x03] Transfer error interrupt enable
+    $04 constant DMA1_DIR                       \ [0x04] Data transfer direction
+    $05 constant DMA1_CIRC                      \ [0x05] Circular mode
+    $06 constant DMA1_PINC                      \ [0x06] Peripheral increment mode
+    $07 constant DMA1_MINC                      \ [0x07] Memory increment mode
+    $08 constant DMA1_PSIZE                     \ [0x08 : 2] Peripheral size
+    $0a constant DMA1_MSIZE                     \ [0x0a : 2] Memory size
+    $0c constant DMA1_PL                        \ [0x0c : 2] Channel priority level
+    $0e constant DMA1_MEM2MEM                   \ [0x0e] Memory to memory mode
+    $0f constant DMA1_DBM                       \ [0x0f] double-buffer mode
+    $10 constant DMA1_CT                        \ [0x10] current target memory of DMA transfer in double-buffer mode
+    $11 constant DMA1_SECM                      \ [0x11] secure mode
+    $12 constant DMA1_SSEC                      \ [0x12] security of the DMA transfer from the source
+    $13 constant DMA1_DSEC                      \ [0x13] security of the DMA transfer to the destination
+    $14 constant DMA1_PRIV                      \ [0x14] privileged mode
+  [then]
+
+
+  [ifdef] DMA1_CNDTR3_DEF
+    \
+    \ @brief channel x number of data register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_NDT                       \ [0x00 : 18] Number of data to transfer
+  [then]
+
+
+  [ifdef] DMA1_CPAR3_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_PA                        \ [0x00 : 32] Peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM0AR3_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] Memory address
+  [then]
+
+
+  [ifdef] DMA1_CM1AR3_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CCR4_DEF
+    \
+    \ @brief channel x configuration register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_EN                        \ [0x00] Channel enable
+    $01 constant DMA1_TCIE                      \ [0x01] Transfer complete interrupt enable
+    $02 constant DMA1_HTIE                      \ [0x02] Half transfer interrupt enable
+    $03 constant DMA1_TEIE                      \ [0x03] Transfer error interrupt enable
+    $04 constant DMA1_DIR                       \ [0x04] Data transfer direction
+    $05 constant DMA1_CIRC                      \ [0x05] Circular mode
+    $06 constant DMA1_PINC                      \ [0x06] Peripheral increment mode
+    $07 constant DMA1_MINC                      \ [0x07] Memory increment mode
+    $08 constant DMA1_PSIZE                     \ [0x08 : 2] Peripheral size
+    $0a constant DMA1_MSIZE                     \ [0x0a : 2] Memory size
+    $0c constant DMA1_PL                        \ [0x0c : 2] Channel priority level
+    $0e constant DMA1_MEM2MEM                   \ [0x0e] Memory to memory mode
+    $0f constant DMA1_DBM                       \ [0x0f] double-buffer mode
+    $10 constant DMA1_CT                        \ [0x10] current target memory of DMA transfer in double-buffer mode
+    $11 constant DMA1_SECM                      \ [0x11] secure mode
+    $12 constant DMA1_SSEC                      \ [0x12] security of the DMA transfer from the source
+    $13 constant DMA1_DSEC                      \ [0x13] security of the DMA transfer to the destination
+    $14 constant DMA1_PRIV                      \ [0x14] privileged mode
+  [then]
+
+
+  [ifdef] DMA1_CNDTR4_DEF
+    \
+    \ @brief channel x number of data register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_NDT                       \ [0x00 : 18] Number of data to transfer
+  [then]
+
+
+  [ifdef] DMA1_CPAR4_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_PA                        \ [0x00 : 32] Peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM0AR4_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] Memory address
+  [then]
+
+
+  [ifdef] DMA1_CM1AR4_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] Memory address
+  [then]
+
+
+  [ifdef] DMA1_CCR5_DEF
+    \
+    \ @brief channel x configuration register
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_EN                        \ [0x00] Channel enable
+    $01 constant DMA1_TCIE                      \ [0x01] Transfer complete interrupt enable
+    $02 constant DMA1_HTIE                      \ [0x02] Half transfer interrupt enable
+    $03 constant DMA1_TEIE                      \ [0x03] Transfer error interrupt enable
+    $04 constant DMA1_DIR                       \ [0x04] Data transfer direction
+    $05 constant DMA1_CIRC                      \ [0x05] Circular mode
+    $06 constant DMA1_PINC                      \ [0x06] Peripheral increment mode
+    $07 constant DMA1_MINC                      \ [0x07] Memory increment mode
+    $08 constant DMA1_PSIZE                     \ [0x08 : 2] Peripheral size
+    $0a constant DMA1_MSIZE                     \ [0x0a : 2] Memory size
+    $0c constant DMA1_PL                        \ [0x0c : 2] Channel priority level
+    $0e constant DMA1_MEM2MEM                   \ [0x0e] Memory to memory mode
+    $0f constant DMA1_DBM                       \ [0x0f] double-buffer mode
+    $10 constant DMA1_CT                        \ [0x10] current target memory of DMA transfer in double-buffer mode
+    $11 constant DMA1_SECM                      \ [0x11] secure mode
+    $12 constant DMA1_SSEC                      \ [0x12] security of the DMA transfer from the source
+    $13 constant DMA1_DSEC                      \ [0x13] security of the DMA transfer to the destination
+    $14 constant DMA1_PRIV                      \ [0x14] privileged mode
+  [then]
+
+
+  [ifdef] DMA1_CNDTR5_DEF
+    \
+    \ @brief channel x number of data register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_NDT                       \ [0x00 : 18] Number of data to transfer
+  [then]
+
+
+  [ifdef] DMA1_CPAR5_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_PA                        \ [0x00 : 32] Peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM0AR5_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x64
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] Memory address
+  [then]
+
+
+  [ifdef] DMA1_CM1AR5_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CCR6_DEF
+    \
+    \ @brief channel x configuration register
+    \ Address offset: 0x6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_EN                        \ [0x00] Channel enable
+    $01 constant DMA1_TCIE                      \ [0x01] Transfer complete interrupt enable
+    $02 constant DMA1_HTIE                      \ [0x02] Half transfer interrupt enable
+    $03 constant DMA1_TEIE                      \ [0x03] Transfer error interrupt enable
+    $04 constant DMA1_DIR                       \ [0x04] Data transfer direction
+    $05 constant DMA1_CIRC                      \ [0x05] Circular mode
+    $06 constant DMA1_PINC                      \ [0x06] Peripheral increment mode
+    $07 constant DMA1_MINC                      \ [0x07] Memory increment mode
+    $08 constant DMA1_PSIZE                     \ [0x08 : 2] Peripheral size
+    $0a constant DMA1_MSIZE                     \ [0x0a : 2] Memory size
+    $0c constant DMA1_PL                        \ [0x0c : 2] Channel priority level
+    $0e constant DMA1_MEM2MEM                   \ [0x0e] Memory to memory mode
+    $0f constant DMA1_DBM                       \ [0x0f] double-buffer mode
+    $10 constant DMA1_CT                        \ [0x10] current target memory of DMA transfer in double-buffer mode
+    $11 constant DMA1_SECM                      \ [0x11] secure mode
+    $12 constant DMA1_SSEC                      \ [0x12] security of the DMA transfer from the source
+    $13 constant DMA1_DSEC                      \ [0x13] security of the DMA transfer to the destination
+    $14 constant DMA1_PRIV                      \ [0x14] privileged mode
+  [then]
+
+
+  [ifdef] DMA1_CNDTR6_DEF
+    \
+    \ @brief channel x number of data register
+    \ Address offset: 0x70
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_NDT                       \ [0x00 : 18] Number of data to transfer
+  [then]
+
+
+  [ifdef] DMA1_CPAR6_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0x74
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_PA                        \ [0x00 : 32] Peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM0AR6_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x78
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] Memory address
+  [then]
+
+
+  [ifdef] DMA1_CM1AR6_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x7C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CCR7_DEF
+    \
+    \ @brief channel x configuration register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_EN                        \ [0x00] Channel enable
+    $01 constant DMA1_TCIE                      \ [0x01] Transfer complete interrupt enable
+    $02 constant DMA1_HTIE                      \ [0x02] Half transfer interrupt enable
+    $03 constant DMA1_TEIE                      \ [0x03] Transfer error interrupt enable
+    $04 constant DMA1_DIR                       \ [0x04] Data transfer direction
+    $05 constant DMA1_CIRC                      \ [0x05] Circular mode
+    $06 constant DMA1_PINC                      \ [0x06] Peripheral increment mode
+    $07 constant DMA1_MINC                      \ [0x07] Memory increment mode
+    $08 constant DMA1_PSIZE                     \ [0x08 : 2] Peripheral size
+    $0a constant DMA1_MSIZE                     \ [0x0a : 2] Memory size
+    $0c constant DMA1_PL                        \ [0x0c : 2] Channel priority level
+    $0e constant DMA1_MEM2MEM                   \ [0x0e] Memory to memory mode
+    $0f constant DMA1_DBM                       \ [0x0f] double-buffer mode
+    $10 constant DMA1_CT                        \ [0x10] current target memory of DMA transfer in double-buffer mode
+    $11 constant DMA1_SECM                      \ [0x11] secure mode
+    $12 constant DMA1_SSEC                      \ [0x12] security of the DMA transfer from the source
+    $13 constant DMA1_DSEC                      \ [0x13] security of the DMA transfer to the destination
+    $14 constant DMA1_PRIV                      \ [0x14] privileged mode
+  [then]
+
+
+  [ifdef] DMA1_CNDTR7_DEF
+    \
+    \ @brief channel x number of data register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_NDT                       \ [0x00 : 18] Number of data to transfer
+  [then]
+
+
+  [ifdef] DMA1_CPAR7_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_PA                        \ [0x00 : 32] Peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM0AR7_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM1AR7_DEF
+    \
+    \ @brief channel x memory address register
+    \ Address offset: 0x90
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CCR8_DEF
+    \
+    \ @brief channel x configuration register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_EN                        \ [0x00] Channel enable
+    $01 constant DMA1_TCIE                      \ [0x01] Transfer complete interrupt enable
+    $02 constant DMA1_HTIE                      \ [0x02] Half transfer interrupt enable
+    $03 constant DMA1_TEIE                      \ [0x03] Transfer error interrupt enable
+    $04 constant DMA1_DIR                       \ [0x04] Data transfer direction
+    $05 constant DMA1_CIRC                      \ [0x05] Circular mode
+    $06 constant DMA1_PINC                      \ [0x06] Peripheral increment mode
+    $07 constant DMA1_MINC                      \ [0x07] Memory increment mode
+    $08 constant DMA1_PSIZE                     \ [0x08 : 2] Peripheral size
+    $0a constant DMA1_MSIZE                     \ [0x0a : 2] Memory size
+    $0c constant DMA1_PL                        \ [0x0c : 2] Channel priority level
+    $0e constant DMA1_MEM2MEM                   \ [0x0e] Memory to memory mode
+    $0f constant DMA1_DBM                       \ [0x0f] double-buffer mode
+    $10 constant DMA1_CT                        \ [0x10] current target memory of DMA transfer in double-buffer mode
+    $11 constant DMA1_SECM                      \ [0x11] secure mode
+    $12 constant DMA1_SSEC                      \ [0x12] security of the DMA transfer from the source
+    $13 constant DMA1_DSEC                      \ [0x13] security of the DMA transfer to the destination
+    $14 constant DMA1_PRIV                      \ [0x14] privileged mode
+  [then]
+
+
+  [ifdef] DMA1_CNDTR8_DEF
+    \
+    \ @brief channel x number of data register
+    \ Address offset: 0x98
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_NDT                       \ [0x00 : 18] Number of data to transfer
+  [then]
+
+
+  [ifdef] DMA1_CPAR8_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0x9C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_PA                        \ [0x00 : 32] Peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CM0AR8_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0xA0
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] Memory address
+  [then]
+
+
+  [ifdef] DMA1_CM1AR8_DEF
+    \
+    \ @brief channel x peripheral address register
+    \ Address offset: 0xA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+
+  [ifdef] DMA1_CSELR_DEF
+    \
+    \ @brief channel selection register
+    \ Address offset: 0xA8
+    \ Reset value: 0x00000000
+    \
+    $00 constant DMA1_MA                        \ [0x00 : 32] peripheral address
+  [then]
+
+  \
+  \ @brief Direct memory access controller
+  \
+  $00 constant DMA1_ISR                 \ interrupt status register
+  $04 constant DMA1_IFCR                \ interrupt flag clear register
+  $08 constant DMA1_CCR1                \ channel x configuration register
+  $0C constant DMA1_CNDTR1              \ channel x number of data register
+  $10 constant DMA1_CPAR1               \ channel x peripheral address register
+  $14 constant DMA1_CM0AR1              \ channel x memory address register
+  $18 constant DMA1_CM1AR1              \ channel x memory address register
+  $1C constant DMA1_CCR2                \ channel x configuration register
+  $20 constant DMA1_CNDTR2              \ channel x number of data register
+  $24 constant DMA1_CPAR2               \ channel x peripheral address register
+  $28 constant DMA1_CM0AR2              \ channel x memory address register
+  $2C constant DMA1_CM1AR2              \ channel x memory address register
+  $30 constant DMA1_CCR3                \ channel x configuration register
+  $34 constant DMA1_CNDTR3              \ channel x number of data register
+  $38 constant DMA1_CPAR3               \ channel x peripheral address register
+  $3C constant DMA1_CM0AR3              \ channel x memory address register
+  $40 constant DMA1_CM1AR3              \ channel x memory address register
+  $44 constant DMA1_CCR4                \ channel x configuration register
+  $48 constant DMA1_CNDTR4              \ channel x number of data register
+  $4C constant DMA1_CPAR4               \ channel x peripheral address register
+  $50 constant DMA1_CM0AR4              \ channel x memory address register
+  $54 constant DMA1_CM1AR4              \ channel x memory address register
+  $58 constant DMA1_CCR5                \ channel x configuration register
+  $5C constant DMA1_CNDTR5              \ channel x number of data register
+  $60 constant DMA1_CPAR5               \ channel x peripheral address register
+  $64 constant DMA1_CM0AR5              \ channel x memory address register
+  $68 constant DMA1_CM1AR5              \ channel x memory address register
+  $6C constant DMA1_CCR6                \ channel x configuration register
+  $70 constant DMA1_CNDTR6              \ channel x number of data register
+  $74 constant DMA1_CPAR6               \ channel x peripheral address register
+  $78 constant DMA1_CM0AR6              \ channel x memory address register
+  $7C constant DMA1_CM1AR6              \ channel x memory address register
+  $80 constant DMA1_CCR7                \ channel x configuration register
+  $84 constant DMA1_CNDTR7              \ channel x number of data register
+  $88 constant DMA1_CPAR7               \ channel x peripheral address register
+  $8C constant DMA1_CM0AR7              \ channel x memory address register
+  $90 constant DMA1_CM1AR7              \ channel x memory address register
+  $94 constant DMA1_CCR8                \ channel x configuration register
+  $98 constant DMA1_CNDTR8              \ channel x number of data register
+  $9C constant DMA1_CPAR8               \ channel x peripheral address register
+  $A0 constant DMA1_CM0AR8              \ channel x peripheral address register
+  $A4 constant DMA1_CM1AR8              \ channel x peripheral address register
+  $A8 constant DMA1_CSELR               \ channel selection register
+
+: DMA1_DEF ; [then]

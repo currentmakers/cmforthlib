@@ -6,83 +6,89 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SYSCFG_DEF
 
-\
-\ @brief memory remap register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000003 constant SYSCFG_MEMRMP_MEM_MODE                           \ MEM_MODE
-$00000300 constant SYSCFG_MEMRMP_BOOT_MODE                          \ BOOT_MODE
-
-
-\
-\ @brief peripheral mode configuration register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_PMC_USB_PU                                \ USB pull-up
-$0000003e constant SYSCFG_PMC_LCD_CAPA                              \ USB pull-up enable on DP line
+  [ifdef] SYSCFG_MEMRMP_DEF
+    \
+    \ @brief memory remap register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_MEM_MODE                \ [0x00 : 2] MEM_MODE
+    $08 constant SYSCFG_BOOT_MODE               \ [0x08 : 2] BOOT_MODE
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 1
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR1_EXTI0                             \ EXTI x configuration (x = 0 to 3)
-$000000f0 constant SYSCFG_EXTICR1_EXTI1                             \ EXTI x configuration (x = 0 to 3)
-$00000f00 constant SYSCFG_EXTICR1_EXTI2                             \ EXTI x configuration (x = 0 to 3)
-$0000f000 constant SYSCFG_EXTICR1_EXTI3                             \ EXTI x configuration (x = 0 to 3)
-
-
-\
-\ @brief external interrupt configuration register 2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR2_EXTI4                             \ EXTI x configuration (x = 4 to 7)
-$000000f0 constant SYSCFG_EXTICR2_EXTI5                             \ EXTI x configuration (x = 4 to 7)
-$00000f00 constant SYSCFG_EXTICR2_EXTI6                             \ EXTI x configuration (x = 4 to 7)
-$0000f000 constant SYSCFG_EXTICR2_EXTI7                             \ EXTI x configuration (x = 4 to 7)
+  [ifdef] SYSCFG_PMC_DEF
+    \
+    \ @brief peripheral mode configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_USB_PU                  \ [0x00] USB pull-up
+    $01 constant SYSCFG_LCD_CAPA                \ [0x01 : 5] USB pull-up enable on DP line
+  [then]
 
 
-\
-\ @brief external interrupt configuration register 3
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR3_EXTI8                             \ EXTI x configuration (x = 8 to 11)
-$000000f0 constant SYSCFG_EXTICR3_EXTI9                             \ EXTI x configuration (x = 8 to 11)
-$00000f00 constant SYSCFG_EXTICR3_EXTI10                            \ EXTI10
-$0000f000 constant SYSCFG_EXTICR3_EXTI11                            \ EXTI x configuration (x = 8 to 11)
-
-
-\
-\ @brief external interrupt configuration register 4
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_EXTICR4_EXTI12                            \ EXTI12
-$000000f0 constant SYSCFG_EXTICR4_EXTI13                            \ EXTI13
-$00000f00 constant SYSCFG_EXTICR4_EXTI14                            \ EXTI14
-$0000f000 constant SYSCFG_EXTICR4_EXTI15                            \ EXTI x configuration (x = 12 to 15)
+  [ifdef] SYSCFG_EXTICR1_DEF
+    \
+    \ @brief external interrupt configuration register 1
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI0                   \ [0x00 : 4] EXTI x configuration (x = 0 to 3)
+    $04 constant SYSCFG_EXTI1                   \ [0x04 : 4] EXTI x configuration (x = 0 to 3)
+    $08 constant SYSCFG_EXTI2                   \ [0x08 : 4] EXTI x configuration (x = 0 to 3)
+    $0c constant SYSCFG_EXTI3                   \ [0x0c : 4] EXTI x configuration (x = 0 to 3)
+  [then]
 
 
-\
-\ @brief System configuration controller
-\
-$40010000 constant SYSCFG_MEMRMP  \ offset: 0x00 : memory remap register
-$40010004 constant SYSCFG_PMC     \ offset: 0x04 : peripheral mode configuration register
-$40010008 constant SYSCFG_EXTICR1  \ offset: 0x08 : external interrupt configuration register 1
-$4001000c constant SYSCFG_EXTICR2  \ offset: 0x0C : external interrupt configuration register 2
-$40010010 constant SYSCFG_EXTICR3  \ offset: 0x10 : external interrupt configuration register 3
-$40010014 constant SYSCFG_EXTICR4  \ offset: 0x14 : external interrupt configuration register 4
+  [ifdef] SYSCFG_EXTICR2_DEF
+    \
+    \ @brief external interrupt configuration register 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI4                   \ [0x00 : 4] EXTI x configuration (x = 4 to 7)
+    $04 constant SYSCFG_EXTI5                   \ [0x04 : 4] EXTI x configuration (x = 4 to 7)
+    $08 constant SYSCFG_EXTI6                   \ [0x08 : 4] EXTI x configuration (x = 4 to 7)
+    $0c constant SYSCFG_EXTI7                   \ [0x0c : 4] EXTI x configuration (x = 4 to 7)
+  [then]
 
+
+  [ifdef] SYSCFG_EXTICR3_DEF
+    \
+    \ @brief external interrupt configuration register 3
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI8                   \ [0x00 : 4] EXTI x configuration (x = 8 to 11)
+    $04 constant SYSCFG_EXTI9                   \ [0x04 : 4] EXTI x configuration (x = 8 to 11)
+    $08 constant SYSCFG_EXTI10                  \ [0x08 : 4] EXTI10
+    $0c constant SYSCFG_EXTI11                  \ [0x0c : 4] EXTI x configuration (x = 8 to 11)
+  [then]
+
+
+  [ifdef] SYSCFG_EXTICR4_DEF
+    \
+    \ @brief external interrupt configuration register 4
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EXTI12                  \ [0x00 : 4] EXTI12
+    $04 constant SYSCFG_EXTI13                  \ [0x04 : 4] EXTI13
+    $08 constant SYSCFG_EXTI14                  \ [0x08 : 4] EXTI14
+    $0c constant SYSCFG_EXTI15                  \ [0x0c : 4] EXTI x configuration (x = 12 to 15)
+  [then]
+
+  \
+  \ @brief System configuration controller
+  \
+  $00 constant SYSCFG_MEMRMP            \ memory remap register
+  $04 constant SYSCFG_PMC               \ peripheral mode configuration register
+  $08 constant SYSCFG_EXTICR1           \ external interrupt configuration register 1
+  $0C constant SYSCFG_EXTICR2           \ external interrupt configuration register 2
+  $10 constant SYSCFG_EXTICR3           \ external interrupt configuration register 3
+  $14 constant SYSCFG_EXTICR4           \ external interrupt configuration register 4
+
+: SYSCFG_DEF ; [then]

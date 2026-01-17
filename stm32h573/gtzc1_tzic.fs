@@ -6,408 +6,420 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GTZC1_TZIC_DEF
 
-\
-\ @brief TZIC interrupt enable register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM2IE                \ illegal access interrupt enable for TIM2
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM3IE                \ illegal access interrupt enable for TIM3
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM4IE                \ illegal access interrupt enable for TIM4
-$00000008 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM5IE                \ illegal access interrupt enable for TIM5
-$00000010 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM6IE                \ illegal access interrupt enable for TIM6
-$00000020 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM7IE                \ illegal access interrupt enable for TIM7
-$00000040 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM12IE               \ illegal access interrupt enable for TIM12
-$00000080 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM13IE               \ illegal access interrupt enable for TIM13
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_IER1_TIM14IE               \ illegal access interrupt enable for TIM14
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_IER1_WWDGIE                \ illegal access interrupt enable for WWDG
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_IER1_IWDGIE                \ illegal access interrupt enable for IWDG
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_IER1_SPI2IE                \ illegal access interrupt enable for SPI2
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_SPI3IE                \ illegal access interrupt enable for SPI3
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_USART2IE              \ illegal access interrupt enable for USART2
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_USART3IE              \ illegal access interrupt enable for USART3
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_UART4IE               \ illegal access interrupt enable for UART4
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_UART5IE               \ illegal access interrupt enable for UART5
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_I2C1IE                \ illegal access interrupt enable for I2C1
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_I2C2IE                \ illegal access interrupt enable for I2C2
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_I3C1IE                \ illegal access interrupt enable for I3C1
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_CRSIE                 \ illegal access interrupt enable for CRS
-$00200000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_USART6IE              \ illegal access interrupt enable for USART6
-$00400000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_USART10IE             \ illegal access interrupt enable for USART10
-$00800000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_USART11IE             \ illegal access interrupt enable for USART11
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_HDMICECIE             \ illegal access interrupt enable for HDMICEC
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_DAC1IE                \ illegal access interrupt enable for DAC1
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_UART7IE               \ illegal access interrupt enable for UART7
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_UART8IE               \ illegal access interrupt enable for UART8
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_UART9IE               \ illegal access interrupt enable for UART9
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_UART12IE              \ illegal access interrupt enable for UART12
-$40000000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_DTSIE                 \ illegal access interrupt enable for DTS
-$80000000 constant GTZC1_TZIC_GTZC1_TZIC_IER1_LPTIM2IE              \ illegal access interrupt enable for LPTIM2
-
-
-\
-\ @brief GTZC1 TZIC interrupt enable register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_IER2_FDCAN1IE              \ illegal access interrupt enable for FDCAN1
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_IER2_FDCAN2IE              \ illegal access interrupt enable for FDCAN2
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_IER2_UCPDIE                \ illegal access interrupt enable for UCPD
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_IER2_TIM1IE                \ illegal access interrupt enable for TIM1
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_IER2_SPI1IE                \ illegal access interrupt enable for SPI1
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_IER2_TIM8IE                \ illegal access interrupt enable for TIM8
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_IER2_USART1IE              \ illegal access interrupt enable for USART1
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_TIM15IE               \ illegal access interrupt enable for TIM15
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_TIM16IE               \ illegal access interrupt enable for TIM16
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_TIM17IE               \ illegal access interrupt enable for TIM17
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_SPI4IE                \ illegal access interrupt enable for SPI4
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_SPI6IE                \ illegal access interrupt enable for SPI6
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_SAI1IE                \ illegal access interrupt enable for SAI1
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_SAI2IE                \ illegal access interrupt enable for SAI2
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_USBIE                 \ illegal access interrupt enable for USB
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_SPI5IE                \ illegal access interrupt enable for SPI5
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_LPUART1IE             \ illegal access interrupt enable for LPUART
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_I2C3IE                \ illegal access interrupt enable for I2C3
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_I2C4IE                \ illegal access interrupt enable for I2C4
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_LPTIM1IE              \ illegal access interrupt enable for LPTIM1
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_LPTIM3IE              \ illegal access interrupt enable for LPTIM3
-$40000000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_LPTIM4IE              \ illegal access interrupt enable for LPTIM4
-$80000000 constant GTZC1_TZIC_GTZC1_TZIC_IER2_LPTIM5IE              \ illegal access interrupt enable for LPTIM5
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_IER1_DEF
+    \
+    \ @brief TZIC interrupt enable register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_TIM2IE              \ [0x00] illegal access interrupt enable for TIM2
+    $01 constant GTZC1_TZIC_TIM3IE              \ [0x01] illegal access interrupt enable for TIM3
+    $02 constant GTZC1_TZIC_TIM4IE              \ [0x02] illegal access interrupt enable for TIM4
+    $03 constant GTZC1_TZIC_TIM5IE              \ [0x03] illegal access interrupt enable for TIM5
+    $04 constant GTZC1_TZIC_TIM6IE              \ [0x04] illegal access interrupt enable for TIM6
+    $05 constant GTZC1_TZIC_TIM7IE              \ [0x05] illegal access interrupt enable for TIM7
+    $06 constant GTZC1_TZIC_TIM12IE             \ [0x06] illegal access interrupt enable for TIM12
+    $07 constant GTZC1_TZIC_TIM13IE             \ [0x07] illegal access interrupt enable for TIM13
+    $08 constant GTZC1_TZIC_TIM14IE             \ [0x08] illegal access interrupt enable for TIM14
+    $09 constant GTZC1_TZIC_WWDGIE              \ [0x09] illegal access interrupt enable for WWDG
+    $0a constant GTZC1_TZIC_IWDGIE              \ [0x0a] illegal access interrupt enable for IWDG
+    $0b constant GTZC1_TZIC_SPI2IE              \ [0x0b] illegal access interrupt enable for SPI2
+    $0c constant GTZC1_TZIC_SPI3IE              \ [0x0c] illegal access interrupt enable for SPI3
+    $0d constant GTZC1_TZIC_USART2IE            \ [0x0d] illegal access interrupt enable for USART2
+    $0e constant GTZC1_TZIC_USART3IE            \ [0x0e] illegal access interrupt enable for USART3
+    $0f constant GTZC1_TZIC_UART4IE             \ [0x0f] illegal access interrupt enable for UART4
+    $10 constant GTZC1_TZIC_UART5IE             \ [0x10] illegal access interrupt enable for UART5
+    $11 constant GTZC1_TZIC_I2C1IE              \ [0x11] illegal access interrupt enable for I2C1
+    $12 constant GTZC1_TZIC_I2C2IE              \ [0x12] illegal access interrupt enable for I2C2
+    $13 constant GTZC1_TZIC_I3C1IE              \ [0x13] illegal access interrupt enable for I3C1
+    $14 constant GTZC1_TZIC_CRSIE               \ [0x14] illegal access interrupt enable for CRS
+    $15 constant GTZC1_TZIC_USART6IE            \ [0x15] illegal access interrupt enable for USART6
+    $16 constant GTZC1_TZIC_USART10IE           \ [0x16] illegal access interrupt enable for USART10
+    $17 constant GTZC1_TZIC_USART11IE           \ [0x17] illegal access interrupt enable for USART11
+    $18 constant GTZC1_TZIC_HDMICECIE           \ [0x18] illegal access interrupt enable for HDMICEC
+    $19 constant GTZC1_TZIC_DAC1IE              \ [0x19] illegal access interrupt enable for DAC1
+    $1a constant GTZC1_TZIC_UART7IE             \ [0x1a] illegal access interrupt enable for UART7
+    $1b constant GTZC1_TZIC_UART8IE             \ [0x1b] illegal access interrupt enable for UART8
+    $1c constant GTZC1_TZIC_UART9IE             \ [0x1c] illegal access interrupt enable for UART9
+    $1d constant GTZC1_TZIC_UART12IE            \ [0x1d] illegal access interrupt enable for UART12
+    $1e constant GTZC1_TZIC_DTSIE               \ [0x1e] illegal access interrupt enable for DTS
+    $1f constant GTZC1_TZIC_LPTIM2IE            \ [0x1f] illegal access interrupt enable for LPTIM2
+  [then]
 
 
-\
-\ @brief GTZC1 TZIC interrupt enable register 3
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_IER3_LPTIM6IE              \ illegal access interrupt enable for LPTIM6
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_IER3_VREFBUFIE             \ illegal access interrupt enable for VREFBUF
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_IER3_CRCIE                 \ illegal access interrupt enable for CRC
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_IER3_CORDICIE              \ illegal access interrupt enable for CORDIC
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_IER3_FMACIE                \ illegal access interrupt enable for FMAC
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_IER3_ETHIE                 \ illegal access interrupt enable for register of ETH
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_ICACHEIE              \ illegal access interrupt enable for ICACHE
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_DCACHEIE              \ illegal access interrupt enable for DCACHE
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_ADC12IE               \ illegal access interrupt enable for ADC1 and ADC2
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_DCMIIE                \ illegal access interrupt enable for DCMI
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_AESIE                 \ illegal access interrupt enable for AES
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_HASHIE                \ illegal access interrupt enable for HASH
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_RNGIE                 \ illegal access interrupt enable for RNG
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_SAESIE                \ illegal access interrupt enable for SAES
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_PKAIE                 \ illegal access interrupt enable for PKA
-$00200000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_SDMMC2IE              \ illegal access interrupt enable for SDMMC2
-$00400000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_SDMMC1IE              \ illegal access interrupt enable for SDMMC1
-$00800000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_FMCIE                 \ illegal access interrupt enable for FMC
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_OCTOSPI1IE            \ illegal access interrupt enable for OCTOSPI1
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_IER3_RAMCFGIE              \ illegal access interrupt enable for RAMSCFG
-
-
-\
-\ @brief GTZC1 TZIC interrupt enable register 4
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_IER4_GPDMA1IE              \ illegal access interrupt enable for GPDMA1
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_IER4_GPDMA2IE              \ illegal access interrupt enable for GPDMA2
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_IER4_FLASH_REGIE           \ illegal access interrupt enable for FLASH registers
-$00000008 constant GTZC1_TZIC_GTZC1_TZIC_IER4_FLASHIE               \ illegal access interrupt enable for FLASH memory
-$00000010 constant GTZC1_TZIC_GTZC1_TZIC_IER4_OTFDEC1IE             \ illegal access interrupt enable for OTFDEC1
-$00000040 constant GTZC1_TZIC_GTZC1_TZIC_IER4_SBSIE                 \ illegal access interrupt enable for SBS
-$00000080 constant GTZC1_TZIC_GTZC1_TZIC_IER4_RTCIE                 \ illegal access interrupt enable for RTC
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_IER4_TAMPIE                \ illegal access interrupt enable for TAMP
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_IER4_PWRIE                 \ illegal access interrupt enable for PWR
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_IER4_RCCIE                 \ illegal access interrupt enable for RCC
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_IER4_EXTIIE                \ illegal access interrupt enable for EXTI
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_TZSC1IE               \ illegal access interrupt enable for GTZC1 TZSC registers
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_TZIC1IE               \ illegal access interrupt enable for GTZC1 TZIC registers
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_OCTOSPI1_MEMIE        \ illegal access interrupt enable for MPCWM1 (OCTOSPI1) memory bank
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_FMC_MEMIE             \ illegal access interrupt enable for MPCWM2 (FMC_NOR bank), MPCWM3 (FMC_NAND bank and FMC_SDRAM bank 1), and MPCWM4 (FMC_SDRAMbank 2)
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_BKPSRAMIE             \ illegal access interrupt enable for MPCWM4 (BKPSRAM) memory bank
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_SRAM1IE               \ illegal access interrupt enable for SRAM1
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_MPCBB1_REGIE          \ illegal access interrupt enable for MPCBB1 registers
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_SRAM2IE               \ illegal access interrupt enable for SRAM2
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_MPCBB2_REGIE          \ illegal access interrupt enable for MPCBB2 registers
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_SRAM3IE               \ illegal access interrupt enable for SRAM3
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_IER4_MPCBB3_REGIE          \ illegal access interrupt enable for MPCBB3 registers
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_IER2_DEF
+    \
+    \ @brief GTZC1 TZIC interrupt enable register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_FDCAN1IE            \ [0x00] illegal access interrupt enable for FDCAN1
+    $01 constant GTZC1_TZIC_FDCAN2IE            \ [0x01] illegal access interrupt enable for FDCAN2
+    $02 constant GTZC1_TZIC_UCPDIE              \ [0x02] illegal access interrupt enable for UCPD
+    $08 constant GTZC1_TZIC_TIM1IE              \ [0x08] illegal access interrupt enable for TIM1
+    $09 constant GTZC1_TZIC_SPI1IE              \ [0x09] illegal access interrupt enable for SPI1
+    $0a constant GTZC1_TZIC_TIM8IE              \ [0x0a] illegal access interrupt enable for TIM8
+    $0b constant GTZC1_TZIC_USART1IE            \ [0x0b] illegal access interrupt enable for USART1
+    $0c constant GTZC1_TZIC_TIM15IE             \ [0x0c] illegal access interrupt enable for TIM15
+    $0d constant GTZC1_TZIC_TIM16IE             \ [0x0d] illegal access interrupt enable for TIM16
+    $0e constant GTZC1_TZIC_TIM17IE             \ [0x0e] illegal access interrupt enable for TIM17
+    $0f constant GTZC1_TZIC_SPI4IE              \ [0x0f] illegal access interrupt enable for SPI4
+    $10 constant GTZC1_TZIC_SPI6IE              \ [0x10] illegal access interrupt enable for SPI6
+    $11 constant GTZC1_TZIC_SAI1IE              \ [0x11] illegal access interrupt enable for SAI1
+    $12 constant GTZC1_TZIC_SAI2IE              \ [0x12] illegal access interrupt enable for SAI2
+    $13 constant GTZC1_TZIC_USBIE               \ [0x13] illegal access interrupt enable for USB
+    $18 constant GTZC1_TZIC_SPI5IE              \ [0x18] illegal access interrupt enable for SPI5
+    $19 constant GTZC1_TZIC_LPUART1IE           \ [0x19] illegal access interrupt enable for LPUART
+    $1a constant GTZC1_TZIC_I2C3IE              \ [0x1a] illegal access interrupt enable for I2C3
+    $1b constant GTZC1_TZIC_I2C4IE              \ [0x1b] illegal access interrupt enable for I2C4
+    $1c constant GTZC1_TZIC_LPTIM1IE            \ [0x1c] illegal access interrupt enable for LPTIM1
+    $1d constant GTZC1_TZIC_LPTIM3IE            \ [0x1d] illegal access interrupt enable for LPTIM3
+    $1e constant GTZC1_TZIC_LPTIM4IE            \ [0x1e] illegal access interrupt enable for LPTIM4
+    $1f constant GTZC1_TZIC_LPTIM5IE            \ [0x1f] illegal access interrupt enable for LPTIM5
+  [then]
 
 
-\
-\ @brief TZIC status register 1
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM2F                  \ illegal access flag for TIM2
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM3F                  \ illegal access flag for TIM3
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM4F                  \ illegal access flag for TIM4
-$00000008 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM5F                  \ illegal access flag for TIM5
-$00000010 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM6F                  \ illegal access flag for TIM6
-$00000020 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM7F                  \ illegal access flag for TIM7
-$00000040 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM12F                 \ illegal access flag for TIM12
-$00000080 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM13F                 \ illegal access flag for TIM13
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_SR1_TIM14F                 \ illegal access flag for TIM14
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_SR1_WWDGF                  \ illegal access flag for WWDG
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_SR1_IWDGF                  \ illegal access flag for IWDG
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_SR1_SPI2F                  \ illegal access flag for SPI2
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_SPI3F                  \ illegal access flag for SPI3
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_USART2F                \ illegal access flag for USART2
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_USART3F                \ illegal access flag for USART3
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_UART4F                 \ illegal access flag for UART4
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_UART5F                 \ illegal access flag for UART5
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_I2C1F                  \ illegal access flag for I2C1
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_I2C2F                  \ illegal access flag for I2C2
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_I3C1F                  \ illegal access flag for I3C1
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_CRSF                   \ illegal access flag for CRS
-$00200000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_USART6F                \ illegal access flag for USART6
-$00400000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_USART10F               \ illegal access flag for USART10
-$00800000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_USART11F               \ illegal access flag for USART11
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_HDMICECF               \ illegal access flag for HDMICEC
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_DAC1F                  \ illegal access flag for DAC1
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_UART7F                 \ illegal access flag for UART7
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_UART8F                 \ illegal access flag for UART8
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_UART9F                 \ illegal access flag for UART9
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_UART12F                \ illegal access flag for UART12
-$40000000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_DTSF                   \ illegal access flag for DTS
-$80000000 constant GTZC1_TZIC_GTZC1_TZIC_SR1_LPTIM2F                \ illegal access flag for LPTIM2
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_IER3_DEF
+    \
+    \ @brief GTZC1 TZIC interrupt enable register 3
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_LPTIM6IE            \ [0x00] illegal access interrupt enable for LPTIM6
+    $01 constant GTZC1_TZIC_VREFBUFIE           \ [0x01] illegal access interrupt enable for VREFBUF
+    $08 constant GTZC1_TZIC_CRCIE               \ [0x08] illegal access interrupt enable for CRC
+    $09 constant GTZC1_TZIC_CORDICIE            \ [0x09] illegal access interrupt enable for CORDIC
+    $0a constant GTZC1_TZIC_FMACIE              \ [0x0a] illegal access interrupt enable for FMAC
+    $0b constant GTZC1_TZIC_ETHIE               \ [0x0b] illegal access interrupt enable for register of ETH
+    $0c constant GTZC1_TZIC_ICACHEIE            \ [0x0c] illegal access interrupt enable for ICACHE
+    $0d constant GTZC1_TZIC_DCACHEIE            \ [0x0d] illegal access interrupt enable for DCACHE
+    $0e constant GTZC1_TZIC_ADC12IE             \ [0x0e] illegal access interrupt enable for ADC1 and ADC2
+    $0f constant GTZC1_TZIC_DCMIIE              \ [0x0f] illegal access interrupt enable for DCMI
+    $10 constant GTZC1_TZIC_AESIE               \ [0x10] illegal access interrupt enable for AES
+    $11 constant GTZC1_TZIC_HASHIE              \ [0x11] illegal access interrupt enable for HASH
+    $12 constant GTZC1_TZIC_RNGIE               \ [0x12] illegal access interrupt enable for RNG
+    $13 constant GTZC1_TZIC_SAESIE              \ [0x13] illegal access interrupt enable for SAES
+    $14 constant GTZC1_TZIC_PKAIE               \ [0x14] illegal access interrupt enable for PKA
+    $15 constant GTZC1_TZIC_SDMMC2IE            \ [0x15] illegal access interrupt enable for SDMMC2
+    $16 constant GTZC1_TZIC_SDMMC1IE            \ [0x16] illegal access interrupt enable for SDMMC1
+    $17 constant GTZC1_TZIC_FMCIE               \ [0x17] illegal access interrupt enable for FMC
+    $18 constant GTZC1_TZIC_OCTOSPI1IE          \ [0x18] illegal access interrupt enable for OCTOSPI1
+    $1a constant GTZC1_TZIC_RAMCFGIE            \ [0x1a] illegal access interrupt enable for RAMSCFG
+  [then]
 
 
-\
-\ @brief TZIC status register 2
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_SR2_FDCAN1F                \ illegal access flag for FDCAN1
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_SR2_FDCAN2F                \ illegal access flag for FDCAN2
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_SR2_UCPDF                  \ illegal access flag for UCPD
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_SR2_TIM1F                  \ illegal access flag for TIM1
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_SR2_SPI1F                  \ illegal access flag for SPI1
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_SR2_TIM8F                  \ illegal access flag for TIM8
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_SR2_USART1F                \ illegal access flag for USART1
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_TIM15F                 \ illegal access flag for TIM15
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_TIM16F                 \ illegal access flag for TIM16
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_TIM17F                 \ illegal access flag for TIM17
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_SPI4F                  \ illegal access flag for SPI4
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_SPI6F                  \ illegal access flag for SPI6
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_SAI1F                  \ illegal access flag for SAI1
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_SAI2F                  \ illegal access flag for SAI2
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_USBF                   \ illegal access flag for USB
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_SPI5F                  \ illegal access flag for SPI5
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_LPUART1F               \ illegal access flag for LPUART
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_I2C3F                  \ illegal access flag for I2C3
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_I2C4F                  \ illegal access flag for I2C4
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_LPTIM1F                \ illegal access flag for LPTIM1
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_LPTIM3F                \ illegal access flag for LPTIM3
-$40000000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_LPTIM4F                \ illegal access flag for LPTIM4
-$80000000 constant GTZC1_TZIC_GTZC1_TZIC_SR2_LPTIM5F                \ illegal access flag for LPTIM5
-
-
-\
-\ @brief TZIC status register 3
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_SR3_LPTIM6F                \ illegal access flag for LPTIM6
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_SR3_VREFBUFF               \ illegal access flag for VREFBUF
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_SR3_CRCF                   \ illegal access flag for CRC
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_SR3_CORDICF                \ illegal access flag for CORDIC
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_SR3_FMACF                  \ illegal access flag for FMAC
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_SR3_ETHF                   \ illegal access flag for register of ETH
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_ICACHEF                \ illegal access flag for ICACHE
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_DCACHEF                \ illegal access flag for DCACHE
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_ADC12F                 \ illegal access flag for ADC1 and ADC2
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_DCMIF                  \ illegal access flag for DCMI
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_AESF                   \ illegal access flag for AES
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_HASHF                  \ illegal access flag for HASH
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_RNGF                   \ illegal access flag for RNG
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_SAESF                  \ illegal access flag for SAES
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_PKAF                   \ illegal access flag for PKA
-$00200000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_SDMMC2F                \ illegal access flag for SDMMC2
-$00400000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_SDMMC1F                \ illegal access flag for SDMMC1
-$00800000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_FMCF                   \ illegal access flag for FMC
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_OCTOSPI1F              \ illegal access flag for OCTOSPI1
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_SR3_RAMCFGF                \ illegal access flag for RAMSCFG
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_IER4_DEF
+    \
+    \ @brief GTZC1 TZIC interrupt enable register 4
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_GPDMA1IE            \ [0x00] illegal access interrupt enable for GPDMA1
+    $01 constant GTZC1_TZIC_GPDMA2IE            \ [0x01] illegal access interrupt enable for GPDMA2
+    $02 constant GTZC1_TZIC_FLASH_REGIE         \ [0x02] illegal access interrupt enable for FLASH registers
+    $03 constant GTZC1_TZIC_FLASHIE             \ [0x03] illegal access interrupt enable for FLASH memory
+    $04 constant GTZC1_TZIC_OTFDEC1IE           \ [0x04] illegal access interrupt enable for OTFDEC1
+    $06 constant GTZC1_TZIC_SBSIE               \ [0x06] illegal access interrupt enable for SBS
+    $07 constant GTZC1_TZIC_RTCIE               \ [0x07] illegal access interrupt enable for RTC
+    $08 constant GTZC1_TZIC_TAMPIE              \ [0x08] illegal access interrupt enable for TAMP
+    $09 constant GTZC1_TZIC_PWRIE               \ [0x09] illegal access interrupt enable for PWR
+    $0a constant GTZC1_TZIC_RCCIE               \ [0x0a] illegal access interrupt enable for RCC
+    $0b constant GTZC1_TZIC_EXTIIE              \ [0x0b] illegal access interrupt enable for EXTI
+    $10 constant GTZC1_TZIC_TZSC1IE             \ [0x10] illegal access interrupt enable for GTZC1 TZSC registers
+    $11 constant GTZC1_TZIC_TZIC1IE             \ [0x11] illegal access interrupt enable for GTZC1 TZIC registers
+    $12 constant GTZC1_TZIC_OCTOSPI1_MEMIE      \ [0x12] illegal access interrupt enable for MPCWM1 (OCTOSPI1) memory bank
+    $13 constant GTZC1_TZIC_FMC_MEMIE           \ [0x13] illegal access interrupt enable for MPCWM2 (FMC_NOR bank), MPCWM3 (FMC_NAND bank and FMC_SDRAM bank 1), and MPCWM4 (FMC_SDRAMbank 2)
+    $14 constant GTZC1_TZIC_BKPSRAMIE           \ [0x14] illegal access interrupt enable for MPCWM4 (BKPSRAM) memory bank
+    $18 constant GTZC1_TZIC_SRAM1IE             \ [0x18] illegal access interrupt enable for SRAM1
+    $19 constant GTZC1_TZIC_MPCBB1_REGIE        \ [0x19] illegal access interrupt enable for MPCBB1 registers
+    $1a constant GTZC1_TZIC_SRAM2IE             \ [0x1a] illegal access interrupt enable for SRAM2
+    $1b constant GTZC1_TZIC_MPCBB2_REGIE        \ [0x1b] illegal access interrupt enable for MPCBB2 registers
+    $1c constant GTZC1_TZIC_SRAM3IE             \ [0x1c] illegal access interrupt enable for SRAM3
+    $1d constant GTZC1_TZIC_MPCBB3_REGIE        \ [0x1d] illegal access interrupt enable for MPCBB3 registers
+  [then]
 
 
-\
-\ @brief GTZC1 TZIC status register 4
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_SR4_GPDMA1F                \ illegal access flag for GPDMA1
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_SR4_GPDMA2F                \ illegal access flag for GPDMA2
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_SR4_FLASH_REGF             \ illegal access flag for FLASH registers
-$00000008 constant GTZC1_TZIC_GTZC1_TZIC_SR4_FLASHF                 \ illegal access flag for FLASH memory
-$00000010 constant GTZC1_TZIC_GTZC1_TZIC_SR4_OTFDEC1F               \ illegal access flag for OTFDEC1
-$00000040 constant GTZC1_TZIC_GTZC1_TZIC_SR4_SBSF                   \ illegal access flag for SBS
-$00000080 constant GTZC1_TZIC_GTZC1_TZIC_SR4_RTCF                   \ illegal access flag for RTC
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_SR4_TAMPF                  \ illegal access flag for TAMP
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_SR4_PWRF                   \ illegal access flag for PWR
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_SR4_RCCF                   \ illegal access flag for RCC
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_SR4_EXTIF                  \ illegal access flag for EXTI
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_TZSC1F                 \ illegal access flag for GTZC1 TZSC registers
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_TZIC1F                 \ illegal access flag for GTZC1 TZIC registers
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_OCTOSPI1_MEMF          \ illegal access flag for MPCWM1 (OCTOSPI1) memory bank
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_FMC_MEMF               \ illegal access flag for MPCWM2 (FMC_NOR bank), MPCWM3 (FMC_NAND bank and FMC_SDRAM bank 1), and MPCWM4 (FMC_SDRAMbank 2)
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_BKPSRAMF               \ illegal access flag for MPCWM4 (BKPSRAM) memory bank
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_SRAM1F                 \ illegal access flag for SRAM1
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_MPCBB1_REGF            \ illegal access flag for MPCBB1 registers
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_SRAM2F                 \ illegal access flag for SRAM2
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_MPCBB2_REGF            \ illegal access flag for MPCBB2 registers
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_SRAM3F                 \ illegal access flag for SRAM3
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_SR4_MPCBB3_REGF            \ illegal access flag for MPCBB3 registers
-
-
-\
-\ @brief TZIC flag clear register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM2F                \ clear the illegal access flag for TIM2
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM3F                \ clear the illegal access flag for TIM3
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM4F                \ clear the illegal access flag for TIM4
-$00000008 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM5F                \ clear the illegal access flag for TIM5
-$00000010 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM6F                \ clear the illegal access flag for TIM6
-$00000020 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM7F                \ clear the illegal access flag for TIM7
-$00000040 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM12F               \ clear the illegal access flag for TIM12
-$00000080 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM13F               \ clear the illegal access flag for TIM13
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CTIM14F               \ clear the illegal access flag for TIM14
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CWWDGF                \ clear the illegal access flag for WWDG
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CIWDGF                \ clear the illegal access flag for IWDG
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CSPI2F                \ clear the illegal access flag for SPI2
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CSPI3F                \ clear the illegal access flag for SPI3
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUSART2F              \ clear the illegal access flag for USART2
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUSART3F              \ clear the illegal access flag for USART3
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUART4F               \ clear the illegal access flag for UART4
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUART5F               \ clear the illegal access flag for UART5
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CI2C1F                \ clear the illegal access flag for I2C1
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CI2C2F                \ clear the illegal access flag for I2C2
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CI3C1F                \ clear the illegal access flag for I3C1
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CCRSF                 \ clear the illegal access flag for CRS
-$00200000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUSART6F              \ clear the illegal access flag for USART6
-$00400000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUSART10F             \ clear the illegal access flag for USART10
-$00800000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUSART11F             \ clear the illegal access flag for USART11
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CHDMICECF             \ clear the illegal access flag for HDMICEC
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CDAC1F                \ clear the illegal access flag for DAC1
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUART7F               \ clear the illegal access flag for UART7
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUART8F               \ clear the illegal access flag for UART8
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUART9F               \ clear the illegal access flag for UART9
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CUART12F              \ clear the illegal access flag for UART12
-$40000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CDTSF                 \ clear the illegal access flag for DTS
-$80000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR1_CLPTIM2F              \ clear the illegal access flag for LPTIM2
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_SR1_DEF
+    \
+    \ @brief TZIC status register 1
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_TIM2F               \ [0x00] illegal access flag for TIM2
+    $01 constant GTZC1_TZIC_TIM3F               \ [0x01] illegal access flag for TIM3
+    $02 constant GTZC1_TZIC_TIM4F               \ [0x02] illegal access flag for TIM4
+    $03 constant GTZC1_TZIC_TIM5F               \ [0x03] illegal access flag for TIM5
+    $04 constant GTZC1_TZIC_TIM6F               \ [0x04] illegal access flag for TIM6
+    $05 constant GTZC1_TZIC_TIM7F               \ [0x05] illegal access flag for TIM7
+    $06 constant GTZC1_TZIC_TIM12F              \ [0x06] illegal access flag for TIM12
+    $07 constant GTZC1_TZIC_TIM13F              \ [0x07] illegal access flag for TIM13
+    $08 constant GTZC1_TZIC_TIM14F              \ [0x08] illegal access flag for TIM14
+    $09 constant GTZC1_TZIC_WWDGF               \ [0x09] illegal access flag for WWDG
+    $0a constant GTZC1_TZIC_IWDGF               \ [0x0a] illegal access flag for IWDG
+    $0b constant GTZC1_TZIC_SPI2F               \ [0x0b] illegal access flag for SPI2
+    $0c constant GTZC1_TZIC_SPI3F               \ [0x0c] illegal access flag for SPI3
+    $0d constant GTZC1_TZIC_USART2F             \ [0x0d] illegal access flag for USART2
+    $0e constant GTZC1_TZIC_USART3F             \ [0x0e] illegal access flag for USART3
+    $0f constant GTZC1_TZIC_UART4F              \ [0x0f] illegal access flag for UART4
+    $10 constant GTZC1_TZIC_UART5F              \ [0x10] illegal access flag for UART5
+    $11 constant GTZC1_TZIC_I2C1F               \ [0x11] illegal access flag for I2C1
+    $12 constant GTZC1_TZIC_I2C2F               \ [0x12] illegal access flag for I2C2
+    $13 constant GTZC1_TZIC_I3C1F               \ [0x13] illegal access flag for I3C1
+    $14 constant GTZC1_TZIC_CRSF                \ [0x14] illegal access flag for CRS
+    $15 constant GTZC1_TZIC_USART6F             \ [0x15] illegal access flag for USART6
+    $16 constant GTZC1_TZIC_USART10F            \ [0x16] illegal access flag for USART10
+    $17 constant GTZC1_TZIC_USART11F            \ [0x17] illegal access flag for USART11
+    $18 constant GTZC1_TZIC_HDMICECF            \ [0x18] illegal access flag for HDMICEC
+    $19 constant GTZC1_TZIC_DAC1F               \ [0x19] illegal access flag for DAC1
+    $1a constant GTZC1_TZIC_UART7F              \ [0x1a] illegal access flag for UART7
+    $1b constant GTZC1_TZIC_UART8F              \ [0x1b] illegal access flag for UART8
+    $1c constant GTZC1_TZIC_UART9F              \ [0x1c] illegal access flag for UART9
+    $1d constant GTZC1_TZIC_UART12F             \ [0x1d] illegal access flag for UART12
+    $1e constant GTZC1_TZIC_DTSF                \ [0x1e] illegal access flag for DTS
+    $1f constant GTZC1_TZIC_LPTIM2F             \ [0x1f] illegal access flag for LPTIM2
+  [then]
 
 
-\
-\ @brief TZIC flag clear register 2
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CFDCAN1F              \ clear the illegal access flag for FDCAN1
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CFDCAN2F              \ clear the illegal access flag for FDCAN2
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CUCPDF                \ clear the illegal access flag for UCPD
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CTIM1F                \ clear the illegal access flag for TIM1
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CSPI1F                \ clear the illegal access flag for SPI1
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CTIM8F                \ clear the illegal access flag for TIM8
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CUSART1F              \ clear the illegal access flag for USART1
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CTIM15F               \ clear the illegal access flag for TIM15
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CTIM16F               \ clear the illegal access flag for TIM16
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CTIM17F               \ clear the illegal access flag for TIM17
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CSPI4F                \ clear the illegal access flag for SPI4
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CSPI6F                \ clear the illegal access flag for SPI6
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CSAI1F                \ clear the illegal access flag for SAI1
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CSAI2F                \ clear the illegal access flag for SAI2
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CUSBF                 \ clear the illegal access flag for USB
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CSPI5F                \ clear the illegal access flag for SPI5
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CLPUART1F             \ clear the illegal access flag for LPUART
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CI2C3F                \ clear the illegal access flag for I2C3
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CI2C4F                \ clear the illegal access flag for I2C4
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CLPTIM1F              \ clear the illegal access flag for LPTIM1
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CLPTIM3F              \ clear the illegal access flag for LPTIM3
-$40000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CLPTIM4F              \ clear the illegal access flag for LPTIM4
-$80000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR2_CLPTIM5F              \ clear the illegal access flag for LPTIM5
-
-
-\
-\ @brief TZIC flag clear register 3
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CLPTIM6F              \ clear illegal access flag for LPTIM6
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CVREFBUFF             \ clear illegal access flag for VREFBUF
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CCRCF                 \ clear illegal access flag for CRC
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CCORDICF              \ clear illegal access flag for CORDIC
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CFMACF                \ clear illegal access flag for FMAC
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CETHF                 \ clear illegal access flag for register of ETH
-$00001000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CICACHEF              \ clear illegal access flag for ICACHE
-$00002000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CDCACHEF              \ clear illegal access flag for DCACHE
-$00004000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CADC12F               \ clear illegal access flag for ADC1 and ADC2
-$00008000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CDCMIF                \ clear illegal access flag for DCMI
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CAESF                 \ clear illegal access flag for AES
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CHASHF                \ clear illegal access flag for HASH
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CRNGF                 \ clear illegal access flag for RNG
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CSAESF                \ clear illegal access flag for SAES
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CPKAF                 \ clear illegal access flag for PKA
-$00200000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CSDMMC2F              \ clear illegal access flag for SDMMC2
-$00400000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CSDMMC1F              \ clear illegal access flag for SDMMC1
-$00800000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CFMCF                 \ clear illegal access flag for FMC
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_COCTOSPI1F            \ clear illegal access flag for OCTOSPI1
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR3_CRAMCFGF              \ clear illegal access flag for RAMSCFG
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_SR2_DEF
+    \
+    \ @brief TZIC status register 2
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_FDCAN1F             \ [0x00] illegal access flag for FDCAN1
+    $01 constant GTZC1_TZIC_FDCAN2F             \ [0x01] illegal access flag for FDCAN2
+    $02 constant GTZC1_TZIC_UCPDF               \ [0x02] illegal access flag for UCPD
+    $08 constant GTZC1_TZIC_TIM1F               \ [0x08] illegal access flag for TIM1
+    $09 constant GTZC1_TZIC_SPI1F               \ [0x09] illegal access flag for SPI1
+    $0a constant GTZC1_TZIC_TIM8F               \ [0x0a] illegal access flag for TIM8
+    $0b constant GTZC1_TZIC_USART1F             \ [0x0b] illegal access flag for USART1
+    $0c constant GTZC1_TZIC_TIM15F              \ [0x0c] illegal access flag for TIM15
+    $0d constant GTZC1_TZIC_TIM16F              \ [0x0d] illegal access flag for TIM16
+    $0e constant GTZC1_TZIC_TIM17F              \ [0x0e] illegal access flag for TIM17
+    $0f constant GTZC1_TZIC_SPI4F               \ [0x0f] illegal access flag for SPI4
+    $10 constant GTZC1_TZIC_SPI6F               \ [0x10] illegal access flag for SPI6
+    $11 constant GTZC1_TZIC_SAI1F               \ [0x11] illegal access flag for SAI1
+    $12 constant GTZC1_TZIC_SAI2F               \ [0x12] illegal access flag for SAI2
+    $13 constant GTZC1_TZIC_USBF                \ [0x13] illegal access flag for USB
+    $18 constant GTZC1_TZIC_SPI5F               \ [0x18] illegal access flag for SPI5
+    $19 constant GTZC1_TZIC_LPUART1F            \ [0x19] illegal access flag for LPUART
+    $1a constant GTZC1_TZIC_I2C3F               \ [0x1a] illegal access flag for I2C3
+    $1b constant GTZC1_TZIC_I2C4F               \ [0x1b] illegal access flag for I2C4
+    $1c constant GTZC1_TZIC_LPTIM1F             \ [0x1c] illegal access flag for LPTIM1
+    $1d constant GTZC1_TZIC_LPTIM3F             \ [0x1d] illegal access flag for LPTIM3
+    $1e constant GTZC1_TZIC_LPTIM4F             \ [0x1e] illegal access flag for LPTIM4
+    $1f constant GTZC1_TZIC_LPTIM5F             \ [0x1f] illegal access flag for LPTIM5
+  [then]
 
 
-\
-\ @brief GTZC1 TZIC flag clear register 4
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_SR3_DEF
+    \
+    \ @brief TZIC status register 3
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_LPTIM6F             \ [0x00] illegal access flag for LPTIM6
+    $01 constant GTZC1_TZIC_VREFBUFF            \ [0x01] illegal access flag for VREFBUF
+    $08 constant GTZC1_TZIC_CRCF                \ [0x08] illegal access flag for CRC
+    $09 constant GTZC1_TZIC_CORDICF             \ [0x09] illegal access flag for CORDIC
+    $0a constant GTZC1_TZIC_FMACF               \ [0x0a] illegal access flag for FMAC
+    $0b constant GTZC1_TZIC_ETHF                \ [0x0b] illegal access flag for register of ETH
+    $0c constant GTZC1_TZIC_ICACHEF             \ [0x0c] illegal access flag for ICACHE
+    $0d constant GTZC1_TZIC_DCACHEF             \ [0x0d] illegal access flag for DCACHE
+    $0e constant GTZC1_TZIC_ADC12F              \ [0x0e] illegal access flag for ADC1 and ADC2
+    $0f constant GTZC1_TZIC_DCMIF               \ [0x0f] illegal access flag for DCMI
+    $10 constant GTZC1_TZIC_AESF                \ [0x10] illegal access flag for AES
+    $11 constant GTZC1_TZIC_HASHF               \ [0x11] illegal access flag for HASH
+    $12 constant GTZC1_TZIC_RNGF                \ [0x12] illegal access flag for RNG
+    $13 constant GTZC1_TZIC_SAESF               \ [0x13] illegal access flag for SAES
+    $14 constant GTZC1_TZIC_PKAF                \ [0x14] illegal access flag for PKA
+    $15 constant GTZC1_TZIC_SDMMC2F             \ [0x15] illegal access flag for SDMMC2
+    $16 constant GTZC1_TZIC_SDMMC1F             \ [0x16] illegal access flag for SDMMC1
+    $17 constant GTZC1_TZIC_FMCF                \ [0x17] illegal access flag for FMC
+    $18 constant GTZC1_TZIC_OCTOSPI1F           \ [0x18] illegal access flag for OCTOSPI1
+    $1a constant GTZC1_TZIC_RAMCFGF             \ [0x1a] illegal access flag for RAMSCFG
+  [then]
 
-$00000001 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CGPDMA1F              \ clear the illegal access flag for GPDMA1
-$00000002 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CGPDMA2F              \ clear the illegal access flag for GPDMA2
-$00000004 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CFLASH_REGF           \ clear the illegal access flag for FLASH registers
-$00000008 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CFLASHF               \ clear the illegal access flag for FLASH memory
-$00000010 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_COTFDEC1F             \ clear the illegal access flag for OTFDEC1
-$00000040 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CSBSF                 \ clear the illegal access flag for SBS
-$00000080 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CRTCF                 \ clear the illegal access flag for RTC
-$00000100 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CTAMPF                \ clear the illegal access flag for TAMP
-$00000200 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CPWRF                 \ clear the illegal access flag for PWR
-$00000400 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CRCCF                 \ clear the illegal access flag for RCC
-$00000800 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CEXTIF                \ clear the illegal access flag for EXTI
-$00010000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CTZSC1F               \ clear the illegal access flag for GTZC1 TZSC registers
-$00020000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CTZIC1F               \ clear the illegal access flag for GTZC1 TZIC registers
-$00040000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_COCTOSPI1_MEMF        \ clear the illegal access flag for MPCWM1 (OCTOSPI1) memory bank
-$00080000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CFMC_MEMF             \ clear the illegal access flag for MPCWM2 (FMC_NOR bank), MPCWM3 (FMC_NAND bank and FMC_SDRAM bank 1), and MPCWM4 (FMC_SDRAMbank 2)
-$00100000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CBKPSRAMF             \ clear the illegal access flag for MPCWM4 (BKPSRAM) memory bank
-$01000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CSRAM1F               \ clear the illegal access flag for SRAM1
-$02000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CMPCBB1_REGF          \ clear the illegal access flag for MPCBB1 registers
-$04000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CSRAM2F               \ clear the illegal access flag for SRAM2
-$08000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CMPCBB2_REGF          \ clear the illegal access flag for MPCBB2 registers
-$10000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CSRAM3F               \ clear the illegal access flag for SRAM3
-$20000000 constant GTZC1_TZIC_GTZC1_TZIC_FCR4_CMPCBB3_REGF          \ clear the illegal access flag for MPCBB3 registers
+
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_SR4_DEF
+    \
+    \ @brief GTZC1 TZIC status register 4
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_GPDMA1F             \ [0x00] illegal access flag for GPDMA1
+    $01 constant GTZC1_TZIC_GPDMA2F             \ [0x01] illegal access flag for GPDMA2
+    $02 constant GTZC1_TZIC_FLASH_REGF          \ [0x02] illegal access flag for FLASH registers
+    $03 constant GTZC1_TZIC_FLASHF              \ [0x03] illegal access flag for FLASH memory
+    $04 constant GTZC1_TZIC_OTFDEC1F            \ [0x04] illegal access flag for OTFDEC1
+    $06 constant GTZC1_TZIC_SBSF                \ [0x06] illegal access flag for SBS
+    $07 constant GTZC1_TZIC_RTCF                \ [0x07] illegal access flag for RTC
+    $08 constant GTZC1_TZIC_TAMPF               \ [0x08] illegal access flag for TAMP
+    $09 constant GTZC1_TZIC_PWRF                \ [0x09] illegal access flag for PWR
+    $0a constant GTZC1_TZIC_RCCF                \ [0x0a] illegal access flag for RCC
+    $0b constant GTZC1_TZIC_EXTIF               \ [0x0b] illegal access flag for EXTI
+    $10 constant GTZC1_TZIC_TZSC1F              \ [0x10] illegal access flag for GTZC1 TZSC registers
+    $11 constant GTZC1_TZIC_TZIC1F              \ [0x11] illegal access flag for GTZC1 TZIC registers
+    $12 constant GTZC1_TZIC_OCTOSPI1_MEMF       \ [0x12] illegal access flag for MPCWM1 (OCTOSPI1) memory bank
+    $13 constant GTZC1_TZIC_FMC_MEMF            \ [0x13] illegal access flag for MPCWM2 (FMC_NOR bank), MPCWM3 (FMC_NAND bank and FMC_SDRAM bank 1), and MPCWM4 (FMC_SDRAMbank 2)
+    $14 constant GTZC1_TZIC_BKPSRAMF            \ [0x14] illegal access flag for MPCWM4 (BKPSRAM) memory bank
+    $18 constant GTZC1_TZIC_SRAM1F              \ [0x18] illegal access flag for SRAM1
+    $19 constant GTZC1_TZIC_MPCBB1_REGF         \ [0x19] illegal access flag for MPCBB1 registers
+    $1a constant GTZC1_TZIC_SRAM2F              \ [0x1a] illegal access flag for SRAM2
+    $1b constant GTZC1_TZIC_MPCBB2_REGF         \ [0x1b] illegal access flag for MPCBB2 registers
+    $1c constant GTZC1_TZIC_SRAM3F              \ [0x1c] illegal access flag for SRAM3
+    $1d constant GTZC1_TZIC_MPCBB3_REGF         \ [0x1d] illegal access flag for MPCBB3 registers
+  [then]
 
 
-\
-\ @brief GTZC1_TZIC
-\
-$40032800 constant GTZC1_TZIC_GTZC1_TZIC_IER1  \ offset: 0x00 : TZIC interrupt enable register 1
-$40032804 constant GTZC1_TZIC_GTZC1_TZIC_IER2  \ offset: 0x04 : GTZC1 TZIC interrupt enable register 2
-$40032808 constant GTZC1_TZIC_GTZC1_TZIC_IER3  \ offset: 0x08 : GTZC1 TZIC interrupt enable register 3
-$4003280c constant GTZC1_TZIC_GTZC1_TZIC_IER4  \ offset: 0x0C : GTZC1 TZIC interrupt enable register 4
-$40032810 constant GTZC1_TZIC_GTZC1_TZIC_SR1  \ offset: 0x10 : TZIC status register 1
-$40032814 constant GTZC1_TZIC_GTZC1_TZIC_SR2  \ offset: 0x14 : TZIC status register 2
-$40032818 constant GTZC1_TZIC_GTZC1_TZIC_SR3  \ offset: 0x18 : TZIC status register 3
-$4003281c constant GTZC1_TZIC_GTZC1_TZIC_SR4  \ offset: 0x1C : GTZC1 TZIC status register 4
-$40032820 constant GTZC1_TZIC_GTZC1_TZIC_FCR1  \ offset: 0x20 : TZIC flag clear register 1
-$40032824 constant GTZC1_TZIC_GTZC1_TZIC_FCR2  \ offset: 0x24 : TZIC flag clear register 2
-$40032828 constant GTZC1_TZIC_GTZC1_TZIC_FCR3  \ offset: 0x28 : TZIC flag clear register 3
-$4003282c constant GTZC1_TZIC_GTZC1_TZIC_FCR4  \ offset: 0x2C : GTZC1 TZIC flag clear register 4
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_FCR1_DEF
+    \
+    \ @brief TZIC flag clear register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_CTIM2F              \ [0x00] clear the illegal access flag for TIM2
+    $01 constant GTZC1_TZIC_CTIM3F              \ [0x01] clear the illegal access flag for TIM3
+    $02 constant GTZC1_TZIC_CTIM4F              \ [0x02] clear the illegal access flag for TIM4
+    $03 constant GTZC1_TZIC_CTIM5F              \ [0x03] clear the illegal access flag for TIM5
+    $04 constant GTZC1_TZIC_CTIM6F              \ [0x04] clear the illegal access flag for TIM6
+    $05 constant GTZC1_TZIC_CTIM7F              \ [0x05] clear the illegal access flag for TIM7
+    $06 constant GTZC1_TZIC_CTIM12F             \ [0x06] clear the illegal access flag for TIM12
+    $07 constant GTZC1_TZIC_CTIM13F             \ [0x07] clear the illegal access flag for TIM13
+    $08 constant GTZC1_TZIC_CTIM14F             \ [0x08] clear the illegal access flag for TIM14
+    $09 constant GTZC1_TZIC_CWWDGF              \ [0x09] clear the illegal access flag for WWDG
+    $0a constant GTZC1_TZIC_CIWDGF              \ [0x0a] clear the illegal access flag for IWDG
+    $0b constant GTZC1_TZIC_CSPI2F              \ [0x0b] clear the illegal access flag for SPI2
+    $0c constant GTZC1_TZIC_CSPI3F              \ [0x0c] clear the illegal access flag for SPI3
+    $0d constant GTZC1_TZIC_CUSART2F            \ [0x0d] clear the illegal access flag for USART2
+    $0e constant GTZC1_TZIC_CUSART3F            \ [0x0e] clear the illegal access flag for USART3
+    $0f constant GTZC1_TZIC_CUART4F             \ [0x0f] clear the illegal access flag for UART4
+    $10 constant GTZC1_TZIC_CUART5F             \ [0x10] clear the illegal access flag for UART5
+    $11 constant GTZC1_TZIC_CI2C1F              \ [0x11] clear the illegal access flag for I2C1
+    $12 constant GTZC1_TZIC_CI2C2F              \ [0x12] clear the illegal access flag for I2C2
+    $13 constant GTZC1_TZIC_CI3C1F              \ [0x13] clear the illegal access flag for I3C1
+    $14 constant GTZC1_TZIC_CCRSF               \ [0x14] clear the illegal access flag for CRS
+    $15 constant GTZC1_TZIC_CUSART6F            \ [0x15] clear the illegal access flag for USART6
+    $16 constant GTZC1_TZIC_CUSART10F           \ [0x16] clear the illegal access flag for USART10
+    $17 constant GTZC1_TZIC_CUSART11F           \ [0x17] clear the illegal access flag for USART11
+    $18 constant GTZC1_TZIC_CHDMICECF           \ [0x18] clear the illegal access flag for HDMICEC
+    $19 constant GTZC1_TZIC_CDAC1F              \ [0x19] clear the illegal access flag for DAC1
+    $1a constant GTZC1_TZIC_CUART7F             \ [0x1a] clear the illegal access flag for UART7
+    $1b constant GTZC1_TZIC_CUART8F             \ [0x1b] clear the illegal access flag for UART8
+    $1c constant GTZC1_TZIC_CUART9F             \ [0x1c] clear the illegal access flag for UART9
+    $1d constant GTZC1_TZIC_CUART12F            \ [0x1d] clear the illegal access flag for UART12
+    $1e constant GTZC1_TZIC_CDTSF               \ [0x1e] clear the illegal access flag for DTS
+    $1f constant GTZC1_TZIC_CLPTIM2F            \ [0x1f] clear the illegal access flag for LPTIM2
+  [then]
 
+
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_FCR2_DEF
+    \
+    \ @brief TZIC flag clear register 2
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_CFDCAN1F            \ [0x00] clear the illegal access flag for FDCAN1
+    $01 constant GTZC1_TZIC_CFDCAN2F            \ [0x01] clear the illegal access flag for FDCAN2
+    $02 constant GTZC1_TZIC_CUCPDF              \ [0x02] clear the illegal access flag for UCPD
+    $08 constant GTZC1_TZIC_CTIM1F              \ [0x08] clear the illegal access flag for TIM1
+    $09 constant GTZC1_TZIC_CSPI1F              \ [0x09] clear the illegal access flag for SPI1
+    $0a constant GTZC1_TZIC_CTIM8F              \ [0x0a] clear the illegal access flag for TIM8
+    $0b constant GTZC1_TZIC_CUSART1F            \ [0x0b] clear the illegal access flag for USART1
+    $0c constant GTZC1_TZIC_CTIM15F             \ [0x0c] clear the illegal access flag for TIM15
+    $0d constant GTZC1_TZIC_CTIM16F             \ [0x0d] clear the illegal access flag for TIM16
+    $0e constant GTZC1_TZIC_CTIM17F             \ [0x0e] clear the illegal access flag for TIM17
+    $0f constant GTZC1_TZIC_CSPI4F              \ [0x0f] clear the illegal access flag for SPI4
+    $10 constant GTZC1_TZIC_CSPI6F              \ [0x10] clear the illegal access flag for SPI6
+    $11 constant GTZC1_TZIC_CSAI1F              \ [0x11] clear the illegal access flag for SAI1
+    $12 constant GTZC1_TZIC_CSAI2F              \ [0x12] clear the illegal access flag for SAI2
+    $13 constant GTZC1_TZIC_CUSBF               \ [0x13] clear the illegal access flag for USB
+    $18 constant GTZC1_TZIC_CSPI5F              \ [0x18] clear the illegal access flag for SPI5
+    $19 constant GTZC1_TZIC_CLPUART1F           \ [0x19] clear the illegal access flag for LPUART
+    $1a constant GTZC1_TZIC_CI2C3F              \ [0x1a] clear the illegal access flag for I2C3
+    $1b constant GTZC1_TZIC_CI2C4F              \ [0x1b] clear the illegal access flag for I2C4
+    $1c constant GTZC1_TZIC_CLPTIM1F            \ [0x1c] clear the illegal access flag for LPTIM1
+    $1d constant GTZC1_TZIC_CLPTIM3F            \ [0x1d] clear the illegal access flag for LPTIM3
+    $1e constant GTZC1_TZIC_CLPTIM4F            \ [0x1e] clear the illegal access flag for LPTIM4
+    $1f constant GTZC1_TZIC_CLPTIM5F            \ [0x1f] clear the illegal access flag for LPTIM5
+  [then]
+
+
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_FCR3_DEF
+    \
+    \ @brief TZIC flag clear register 3
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_CLPTIM6F            \ [0x00] clear illegal access flag for LPTIM6
+    $01 constant GTZC1_TZIC_CVREFBUFF           \ [0x01] clear illegal access flag for VREFBUF
+    $08 constant GTZC1_TZIC_CCRCF               \ [0x08] clear illegal access flag for CRC
+    $09 constant GTZC1_TZIC_CCORDICF            \ [0x09] clear illegal access flag for CORDIC
+    $0a constant GTZC1_TZIC_CFMACF              \ [0x0a] clear illegal access flag for FMAC
+    $0b constant GTZC1_TZIC_CETHF               \ [0x0b] clear illegal access flag for register of ETH
+    $0c constant GTZC1_TZIC_CICACHEF            \ [0x0c] clear illegal access flag for ICACHE
+    $0d constant GTZC1_TZIC_CDCACHEF            \ [0x0d] clear illegal access flag for DCACHE
+    $0e constant GTZC1_TZIC_CADC12F             \ [0x0e] clear illegal access flag for ADC1 and ADC2
+    $0f constant GTZC1_TZIC_CDCMIF              \ [0x0f] clear illegal access flag for DCMI
+    $10 constant GTZC1_TZIC_CAESF               \ [0x10] clear illegal access flag for AES
+    $11 constant GTZC1_TZIC_CHASHF              \ [0x11] clear illegal access flag for HASH
+    $12 constant GTZC1_TZIC_CRNGF               \ [0x12] clear illegal access flag for RNG
+    $13 constant GTZC1_TZIC_CSAESF              \ [0x13] clear illegal access flag for SAES
+    $14 constant GTZC1_TZIC_CPKAF               \ [0x14] clear illegal access flag for PKA
+    $15 constant GTZC1_TZIC_CSDMMC2F            \ [0x15] clear illegal access flag for SDMMC2
+    $16 constant GTZC1_TZIC_CSDMMC1F            \ [0x16] clear illegal access flag for SDMMC1
+    $17 constant GTZC1_TZIC_CFMCF               \ [0x17] clear illegal access flag for FMC
+    $18 constant GTZC1_TZIC_COCTOSPI1F          \ [0x18] clear illegal access flag for OCTOSPI1
+    $1a constant GTZC1_TZIC_CRAMCFGF            \ [0x1a] clear illegal access flag for RAMSCFG
+  [then]
+
+
+  [ifdef] GTZC1_TZIC_GTZC1_TZIC_FCR4_DEF
+    \
+    \ @brief GTZC1 TZIC flag clear register 4
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC1_TZIC_CGPDMA1F            \ [0x00] clear the illegal access flag for GPDMA1
+    $01 constant GTZC1_TZIC_CGPDMA2F            \ [0x01] clear the illegal access flag for GPDMA2
+    $02 constant GTZC1_TZIC_CFLASH_REGF         \ [0x02] clear the illegal access flag for FLASH registers
+    $03 constant GTZC1_TZIC_CFLASHF             \ [0x03] clear the illegal access flag for FLASH memory
+    $04 constant GTZC1_TZIC_COTFDEC1F           \ [0x04] clear the illegal access flag for OTFDEC1
+    $06 constant GTZC1_TZIC_CSBSF               \ [0x06] clear the illegal access flag for SBS
+    $07 constant GTZC1_TZIC_CRTCF               \ [0x07] clear the illegal access flag for RTC
+    $08 constant GTZC1_TZIC_CTAMPF              \ [0x08] clear the illegal access flag for TAMP
+    $09 constant GTZC1_TZIC_CPWRF               \ [0x09] clear the illegal access flag for PWR
+    $0a constant GTZC1_TZIC_CRCCF               \ [0x0a] clear the illegal access flag for RCC
+    $0b constant GTZC1_TZIC_CEXTIF              \ [0x0b] clear the illegal access flag for EXTI
+    $10 constant GTZC1_TZIC_CTZSC1F             \ [0x10] clear the illegal access flag for GTZC1 TZSC registers
+    $11 constant GTZC1_TZIC_CTZIC1F             \ [0x11] clear the illegal access flag for GTZC1 TZIC registers
+    $12 constant GTZC1_TZIC_COCTOSPI1_MEMF      \ [0x12] clear the illegal access flag for MPCWM1 (OCTOSPI1) memory bank
+    $13 constant GTZC1_TZIC_CFMC_MEMF           \ [0x13] clear the illegal access flag for MPCWM2 (FMC_NOR bank), MPCWM3 (FMC_NAND bank and FMC_SDRAM bank 1), and MPCWM4 (FMC_SDRAMbank 2)
+    $14 constant GTZC1_TZIC_CBKPSRAMF           \ [0x14] clear the illegal access flag for MPCWM4 (BKPSRAM) memory bank
+    $18 constant GTZC1_TZIC_CSRAM1F             \ [0x18] clear the illegal access flag for SRAM1
+    $19 constant GTZC1_TZIC_CMPCBB1_REGF        \ [0x19] clear the illegal access flag for MPCBB1 registers
+    $1a constant GTZC1_TZIC_CSRAM2F             \ [0x1a] clear the illegal access flag for SRAM2
+    $1b constant GTZC1_TZIC_CMPCBB2_REGF        \ [0x1b] clear the illegal access flag for MPCBB2 registers
+    $1c constant GTZC1_TZIC_CSRAM3F             \ [0x1c] clear the illegal access flag for SRAM3
+    $1d constant GTZC1_TZIC_CMPCBB3_REGF        \ [0x1d] clear the illegal access flag for MPCBB3 registers
+  [then]
+
+  \
+  \ @brief GTZC1_TZIC
+  \
+  $00 constant GTZC1_TZIC_GTZC1_TZIC_IER1    \ TZIC interrupt enable register 1
+  $04 constant GTZC1_TZIC_GTZC1_TZIC_IER2    \ GTZC1 TZIC interrupt enable register 2
+  $08 constant GTZC1_TZIC_GTZC1_TZIC_IER3    \ GTZC1 TZIC interrupt enable register 3
+  $0C constant GTZC1_TZIC_GTZC1_TZIC_IER4    \ GTZC1 TZIC interrupt enable register 4
+  $10 constant GTZC1_TZIC_GTZC1_TZIC_SR1    \ TZIC status register 1
+  $14 constant GTZC1_TZIC_GTZC1_TZIC_SR2    \ TZIC status register 2
+  $18 constant GTZC1_TZIC_GTZC1_TZIC_SR3    \ TZIC status register 3
+  $1C constant GTZC1_TZIC_GTZC1_TZIC_SR4    \ GTZC1 TZIC status register 4
+  $20 constant GTZC1_TZIC_GTZC1_TZIC_FCR1    \ TZIC flag clear register 1
+  $24 constant GTZC1_TZIC_GTZC1_TZIC_FCR2    \ TZIC flag clear register 2
+  $28 constant GTZC1_TZIC_GTZC1_TZIC_FCR3    \ TZIC flag clear register 3
+  $2C constant GTZC1_TZIC_GTZC1_TZIC_FCR4    \ GTZC1 TZIC flag clear register 4
+
+: GTZC1_TZIC_DEF ; [then]

@@ -6,514 +6,552 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R0_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R0_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R0_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R1_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R1_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R1_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R2_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R2_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R2_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R3_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R3_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R3_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R4_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R4_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R4_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R5_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R5_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R5_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R6_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R6_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R6_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R7_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R7_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R7_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R8_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R8_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R8_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R9_PROCID                              \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R9_MASTERID                            \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R9_LOCK                                \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R10_PROCID                             \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R10_MASTERID                           \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R10_LOCK                               \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R11_PROCID                             \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R11_MASTERID                           \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R11_LOCK                               \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R12_PROCID                             \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R12_MASTERID                           \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R12_LOCK                               \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R13_PROCID                             \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R13_MASTERID                           \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R13_LOCK                               \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R14_PROCID                             \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R14_MASTERID                           \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R14_LOCK                               \ Lock indication
-
-
-\
-\ @brief HSEM register HSEM_R0 HSEM_R31
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_R15_PROCID                             \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_R15_MASTERID                           \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_R15_LOCK                               \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR0_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR0_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR0_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR1_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR1_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR1_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR2_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR2_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR2_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0x8C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR3_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR3_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR3_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0x90
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR4_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR4_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR4_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR5_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR5_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR5_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0x98
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR6_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR6_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR6_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0x9C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR7_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR7_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR7_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0xA0
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR8_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR8_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR8_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0xA4
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR9_PROCID                            \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR9_MASTERID                          \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR9_LOCK                              \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0xA8
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR10_PROCID                           \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR10_MASTERID                         \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR10_LOCK                             \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0xAC
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR11_PROCID                           \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR11_MASTERID                         \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR11_LOCK                             \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0xB0
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR12_PROCID                           \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR12_MASTERID                         \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR12_LOCK                             \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0xB4
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR13_PROCID                           \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR13_MASTERID                         \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR13_LOCK                             \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0xB8
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR14_PROCID                           \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR14_MASTERID                         \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR14_LOCK                             \ Lock indication
-
-
-\
-\ @brief HSEM Read lock register
-\ Address offset: 0xBC
-\ Reset value: 0x00000000
-\
-
-$000000ff constant HSEM_HSEM_RLR15_PROCID                           \ Semaphore ProcessID
-$00000f00 constant HSEM_HSEM_RLR15_MASTERID                         \ Semaphore MASTERID
-$80000000 constant HSEM_HSEM_RLR15_LOCK                             \ Lock indication
-
-
-\
-\ @brief HSEM Interrupt enable register
-\ Address offset: 0x100
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HSEM_HSEM_IER_ISE0                               \ Interrupt semaphore n enable bit
-$00000002 constant HSEM_HSEM_IER_ISE1                               \ Interrupt semaphore n enable bit
-$00000004 constant HSEM_HSEM_IER_ISE2                               \ Interrupt semaphore n enable bit
-$00000008 constant HSEM_HSEM_IER_ISE3                               \ Interrupt semaphore n enable bit
-$00000010 constant HSEM_HSEM_IER_ISE4                               \ Interrupt semaphore n enable bit
-$00000020 constant HSEM_HSEM_IER_ISE5                               \ Interrupt semaphore n enable bit
-$00000040 constant HSEM_HSEM_IER_ISE6                               \ Interrupt semaphore n enable bit
-$00000080 constant HSEM_HSEM_IER_ISE7                               \ Interrupt semaphore n enable bit
-$00000100 constant HSEM_HSEM_IER_ISE8                               \ Interrupt semaphore n enable bit
-$00000200 constant HSEM_HSEM_IER_ISE9                               \ Interrupt semaphore n enable bit
-$00000400 constant HSEM_HSEM_IER_ISE10                              \ Interrupt semaphore n enable bit
-$00000800 constant HSEM_HSEM_IER_ISE11                              \ Interrupt semaphore n enable bit
-$00001000 constant HSEM_HSEM_IER_ISE12                              \ Interrupt semaphore n enable bit
-$00002000 constant HSEM_HSEM_IER_ISE13                              \ Interrupt semaphore n enable bit
-$00004000 constant HSEM_HSEM_IER_ISE14                              \ Interrupt semaphore n enable bit
-$00008000 constant HSEM_HSEM_IER_ISE15                              \ Interrupt semaphore n enable bit
-
-
-\
-\ @brief HSEM Interrupt clear register
-\ Address offset: 0x104
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HSEM_HSEM_ICR_ISC0                               \ Interrupt(N) semaphore n clear bit
-$00000002 constant HSEM_HSEM_ICR_ISC1                               \ Interrupt(N) semaphore n clear bit
-$00000004 constant HSEM_HSEM_ICR_ISC2                               \ Interrupt(N) semaphore n clear bit
-$00000008 constant HSEM_HSEM_ICR_ISC3                               \ Interrupt(N) semaphore n clear bit
-$00000010 constant HSEM_HSEM_ICR_ISC4                               \ Interrupt(N) semaphore n clear bit
-$00000020 constant HSEM_HSEM_ICR_ISC5                               \ Interrupt(N) semaphore n clear bit
-$00000040 constant HSEM_HSEM_ICR_ISC6                               \ Interrupt(N) semaphore n clear bit
-$00000080 constant HSEM_HSEM_ICR_ISC7                               \ Interrupt(N) semaphore n clear bit
-$00000100 constant HSEM_HSEM_ICR_ISC8                               \ Interrupt(N) semaphore n clear bit
-$00000200 constant HSEM_HSEM_ICR_ISC9                               \ Interrupt(N) semaphore n clear bit
-$00000400 constant HSEM_HSEM_ICR_ISC10                              \ Interrupt(N) semaphore n clear bit
-$00000800 constant HSEM_HSEM_ICR_ISC11                              \ Interrupt(N) semaphore n clear bit
-$00001000 constant HSEM_HSEM_ICR_ISC12                              \ Interrupt(N) semaphore n clear bit
-$00002000 constant HSEM_HSEM_ICR_ISC13                              \ Interrupt(N) semaphore n clear bit
-$00004000 constant HSEM_HSEM_ICR_ISC14                              \ Interrupt(N) semaphore n clear bit
-$00008000 constant HSEM_HSEM_ICR_ISC15                              \ Interrupt(N) semaphore n clear bit
-
-
-\
-\ @brief HSEM Interrupt status register
-\ Address offset: 0x108
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HSEM_HSEM_ISR_ISF0                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000002 constant HSEM_HSEM_ISR_ISF1                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000004 constant HSEM_HSEM_ISR_ISF2                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000008 constant HSEM_HSEM_ISR_ISF3                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000010 constant HSEM_HSEM_ISR_ISF4                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000020 constant HSEM_HSEM_ISR_ISF5                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000040 constant HSEM_HSEM_ISR_ISF6                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000080 constant HSEM_HSEM_ISR_ISF7                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000100 constant HSEM_HSEM_ISR_ISF8                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000200 constant HSEM_HSEM_ISR_ISF9                               \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000400 constant HSEM_HSEM_ISR_ISF10                              \ Interrupt(N) semaphore n status bit before enable (mask)
-$00000800 constant HSEM_HSEM_ISR_ISF11                              \ Interrupt(N) semaphore n status bit before enable (mask)
-$00001000 constant HSEM_HSEM_ISR_ISF12                              \ Interrupt(N) semaphore n status bit before enable (mask)
-$00002000 constant HSEM_HSEM_ISR_ISF13                              \ Interrupt(N) semaphore n status bit before enable (mask)
-$00004000 constant HSEM_HSEM_ISR_ISF14                              \ Interrupt(N) semaphore n status bit before enable (mask)
-$00008000 constant HSEM_HSEM_ISR_ISF15                              \ Interrupt(N) semaphore n status bit before enable (mask)
-
-
-\
-\ @brief HSEM Masked interrupt status register
-\ Address offset: 0x10C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant HSEM_HSEM_MISR_MISF0                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000002 constant HSEM_HSEM_MISR_MISF1                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000004 constant HSEM_HSEM_MISR_MISF2                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000008 constant HSEM_HSEM_MISR_MISF3                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000010 constant HSEM_HSEM_MISR_MISF4                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000020 constant HSEM_HSEM_MISR_MISF5                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000040 constant HSEM_HSEM_MISR_MISF6                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000080 constant HSEM_HSEM_MISR_MISF7                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000100 constant HSEM_HSEM_MISR_MISF8                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000200 constant HSEM_HSEM_MISR_MISF9                             \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000400 constant HSEM_HSEM_MISR_MISF10                            \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00000800 constant HSEM_HSEM_MISR_MISF11                            \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00001000 constant HSEM_HSEM_MISR_MISF12                            \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00002000 constant HSEM_HSEM_MISR_MISF13                            \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00004000 constant HSEM_HSEM_MISR_MISF14                            \ masked interrupt(N) semaphore n status bit after enable (mask)
-$00008000 constant HSEM_HSEM_MISR_MISF15                            \ masked interrupt(N) semaphore n status bit after enable (mask)
-
-
-\
-\ @brief HSEM Clear register
-\ Address offset: 0x140
-\ Reset value: 0x00000000
-\
-
-$00000f00 constant HSEM_HSEM_CR_MASTERID                            \ MASTERID
-$ffff0000 constant HSEM_HSEM_CR_KEY                                 \ Semaphore clear Key
-
-
-\
-\ @brief HSEM Interrupt clear register
-\ Address offset: 0x144
-\ Reset value: 0x00000000
-\
-
-$ffff0000 constant HSEM_HSEM_KEYR_KEY                               \ Semaphore Clear Key
-
-
-\
-\ @brief Hardware semaphore
-\
-$58001400 constant HSEM_HSEM_R0   \ offset: 0x00 : HSEM register HSEM_R0 HSEM_R31
-$58001404 constant HSEM_HSEM_R1   \ offset: 0x04 : HSEM register HSEM_R0 HSEM_R31
-$58001408 constant HSEM_HSEM_R2   \ offset: 0x08 : HSEM register HSEM_R0 HSEM_R31
-$5800140c constant HSEM_HSEM_R3   \ offset: 0x0C : HSEM register HSEM_R0 HSEM_R31
-$58001410 constant HSEM_HSEM_R4   \ offset: 0x10 : HSEM register HSEM_R0 HSEM_R31
-$58001414 constant HSEM_HSEM_R5   \ offset: 0x14 : HSEM register HSEM_R0 HSEM_R31
-$58001418 constant HSEM_HSEM_R6   \ offset: 0x18 : HSEM register HSEM_R0 HSEM_R31
-$5800141c constant HSEM_HSEM_R7   \ offset: 0x1C : HSEM register HSEM_R0 HSEM_R31
-$58001420 constant HSEM_HSEM_R8   \ offset: 0x20 : HSEM register HSEM_R0 HSEM_R31
-$58001424 constant HSEM_HSEM_R9   \ offset: 0x24 : HSEM register HSEM_R0 HSEM_R31
-$58001428 constant HSEM_HSEM_R10  \ offset: 0x28 : HSEM register HSEM_R0 HSEM_R31
-$5800142c constant HSEM_HSEM_R11  \ offset: 0x2C : HSEM register HSEM_R0 HSEM_R31
-$58001430 constant HSEM_HSEM_R12  \ offset: 0x30 : HSEM register HSEM_R0 HSEM_R31
-$58001434 constant HSEM_HSEM_R13  \ offset: 0x34 : HSEM register HSEM_R0 HSEM_R31
-$58001438 constant HSEM_HSEM_R14  \ offset: 0x38 : HSEM register HSEM_R0 HSEM_R31
-$5800143c constant HSEM_HSEM_R15  \ offset: 0x3C : HSEM register HSEM_R0 HSEM_R31
-$58001480 constant HSEM_HSEM_RLR0  \ offset: 0x80 : HSEM Read lock register
-$58001484 constant HSEM_HSEM_RLR1  \ offset: 0x84 : HSEM Read lock register
-$58001488 constant HSEM_HSEM_RLR2  \ offset: 0x88 : HSEM Read lock register
-$5800148c constant HSEM_HSEM_RLR3  \ offset: 0x8C : HSEM Read lock register
-$58001490 constant HSEM_HSEM_RLR4  \ offset: 0x90 : HSEM Read lock register
-$58001494 constant HSEM_HSEM_RLR5  \ offset: 0x94 : HSEM Read lock register
-$58001498 constant HSEM_HSEM_RLR6  \ offset: 0x98 : HSEM Read lock register
-$5800149c constant HSEM_HSEM_RLR7  \ offset: 0x9C : HSEM Read lock register
-$580014a0 constant HSEM_HSEM_RLR8  \ offset: 0xA0 : HSEM Read lock register
-$580014a4 constant HSEM_HSEM_RLR9  \ offset: 0xA4 : HSEM Read lock register
-$580014a8 constant HSEM_HSEM_RLR10  \ offset: 0xA8 : HSEM Read lock register
-$580014ac constant HSEM_HSEM_RLR11  \ offset: 0xAC : HSEM Read lock register
-$580014b0 constant HSEM_HSEM_RLR12  \ offset: 0xB0 : HSEM Read lock register
-$580014b4 constant HSEM_HSEM_RLR13  \ offset: 0xB4 : HSEM Read lock register
-$580014b8 constant HSEM_HSEM_RLR14  \ offset: 0xB8 : HSEM Read lock register
-$580014bc constant HSEM_HSEM_RLR15  \ offset: 0xBC : HSEM Read lock register
-$58001500 constant HSEM_HSEM_IER  \ offset: 0x100 : HSEM Interrupt enable register
-$58001504 constant HSEM_HSEM_ICR  \ offset: 0x104 : HSEM Interrupt clear register
-$58001508 constant HSEM_HSEM_ISR  \ offset: 0x108 : HSEM Interrupt status register
-$5800150c constant HSEM_HSEM_MISR  \ offset: 0x10C : HSEM Masked interrupt status register
-$58001540 constant HSEM_HSEM_CR   \ offset: 0x140 : HSEM Clear register
-$58001544 constant HSEM_HSEM_KEYR  \ offset: 0x144 : HSEM Interrupt clear register
-
+[ifndef] HSEM_DEF
+
+  [ifdef] HSEM_HSEM_R0_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R1_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R2_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R3_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R4_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R5_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R6_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R7_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R8_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R9_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R10_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R11_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R12_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R13_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R14_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_R15_DEF
+    \
+    \ @brief HSEM register HSEM_R0 HSEM_R31
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR0_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR1_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR2_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR3_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR4_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0x90
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR5_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR6_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0x98
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR7_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0x9C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR8_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0xA0
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR9_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0xA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR10_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0xA8
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR11_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0xAC
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR12_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0xB0
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR13_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0xB4
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR14_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0xB8
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_RLR15_DEF
+    \
+    \ @brief HSEM Read lock register
+    \ Address offset: 0xBC
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_PROCID                    \ [0x00 : 8] Semaphore ProcessID
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] Semaphore MASTERID
+    $1f constant HSEM_LOCK                      \ [0x1f] Lock indication
+  [then]
+
+
+  [ifdef] HSEM_HSEM_IER_DEF
+    \
+    \ @brief HSEM Interrupt enable register
+    \ Address offset: 0x100
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_ISE0                      \ [0x00] Interrupt semaphore n enable bit
+    $01 constant HSEM_ISE1                      \ [0x01] Interrupt semaphore n enable bit
+    $02 constant HSEM_ISE2                      \ [0x02] Interrupt semaphore n enable bit
+    $03 constant HSEM_ISE3                      \ [0x03] Interrupt semaphore n enable bit
+    $04 constant HSEM_ISE4                      \ [0x04] Interrupt semaphore n enable bit
+    $05 constant HSEM_ISE5                      \ [0x05] Interrupt semaphore n enable bit
+    $06 constant HSEM_ISE6                      \ [0x06] Interrupt semaphore n enable bit
+    $07 constant HSEM_ISE7                      \ [0x07] Interrupt semaphore n enable bit
+    $08 constant HSEM_ISE8                      \ [0x08] Interrupt semaphore n enable bit
+    $09 constant HSEM_ISE9                      \ [0x09] Interrupt semaphore n enable bit
+    $0a constant HSEM_ISE10                     \ [0x0a] Interrupt semaphore n enable bit
+    $0b constant HSEM_ISE11                     \ [0x0b] Interrupt semaphore n enable bit
+    $0c constant HSEM_ISE12                     \ [0x0c] Interrupt semaphore n enable bit
+    $0d constant HSEM_ISE13                     \ [0x0d] Interrupt semaphore n enable bit
+    $0e constant HSEM_ISE14                     \ [0x0e] Interrupt semaphore n enable bit
+    $0f constant HSEM_ISE15                     \ [0x0f] Interrupt semaphore n enable bit
+  [then]
+
+
+  [ifdef] HSEM_HSEM_ICR_DEF
+    \
+    \ @brief HSEM Interrupt clear register
+    \ Address offset: 0x104
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_ISC0                      \ [0x00] Interrupt(N) semaphore n clear bit
+    $01 constant HSEM_ISC1                      \ [0x01] Interrupt(N) semaphore n clear bit
+    $02 constant HSEM_ISC2                      \ [0x02] Interrupt(N) semaphore n clear bit
+    $03 constant HSEM_ISC3                      \ [0x03] Interrupt(N) semaphore n clear bit
+    $04 constant HSEM_ISC4                      \ [0x04] Interrupt(N) semaphore n clear bit
+    $05 constant HSEM_ISC5                      \ [0x05] Interrupt(N) semaphore n clear bit
+    $06 constant HSEM_ISC6                      \ [0x06] Interrupt(N) semaphore n clear bit
+    $07 constant HSEM_ISC7                      \ [0x07] Interrupt(N) semaphore n clear bit
+    $08 constant HSEM_ISC8                      \ [0x08] Interrupt(N) semaphore n clear bit
+    $09 constant HSEM_ISC9                      \ [0x09] Interrupt(N) semaphore n clear bit
+    $0a constant HSEM_ISC10                     \ [0x0a] Interrupt(N) semaphore n clear bit
+    $0b constant HSEM_ISC11                     \ [0x0b] Interrupt(N) semaphore n clear bit
+    $0c constant HSEM_ISC12                     \ [0x0c] Interrupt(N) semaphore n clear bit
+    $0d constant HSEM_ISC13                     \ [0x0d] Interrupt(N) semaphore n clear bit
+    $0e constant HSEM_ISC14                     \ [0x0e] Interrupt(N) semaphore n clear bit
+    $0f constant HSEM_ISC15                     \ [0x0f] Interrupt(N) semaphore n clear bit
+  [then]
+
+
+  [ifdef] HSEM_HSEM_ISR_DEF
+    \
+    \ @brief HSEM Interrupt status register
+    \ Address offset: 0x108
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_ISF0                      \ [0x00] Interrupt(N) semaphore n status bit before enable (mask)
+    $01 constant HSEM_ISF1                      \ [0x01] Interrupt(N) semaphore n status bit before enable (mask)
+    $02 constant HSEM_ISF2                      \ [0x02] Interrupt(N) semaphore n status bit before enable (mask)
+    $03 constant HSEM_ISF3                      \ [0x03] Interrupt(N) semaphore n status bit before enable (mask)
+    $04 constant HSEM_ISF4                      \ [0x04] Interrupt(N) semaphore n status bit before enable (mask)
+    $05 constant HSEM_ISF5                      \ [0x05] Interrupt(N) semaphore n status bit before enable (mask)
+    $06 constant HSEM_ISF6                      \ [0x06] Interrupt(N) semaphore n status bit before enable (mask)
+    $07 constant HSEM_ISF7                      \ [0x07] Interrupt(N) semaphore n status bit before enable (mask)
+    $08 constant HSEM_ISF8                      \ [0x08] Interrupt(N) semaphore n status bit before enable (mask)
+    $09 constant HSEM_ISF9                      \ [0x09] Interrupt(N) semaphore n status bit before enable (mask)
+    $0a constant HSEM_ISF10                     \ [0x0a] Interrupt(N) semaphore n status bit before enable (mask)
+    $0b constant HSEM_ISF11                     \ [0x0b] Interrupt(N) semaphore n status bit before enable (mask)
+    $0c constant HSEM_ISF12                     \ [0x0c] Interrupt(N) semaphore n status bit before enable (mask)
+    $0d constant HSEM_ISF13                     \ [0x0d] Interrupt(N) semaphore n status bit before enable (mask)
+    $0e constant HSEM_ISF14                     \ [0x0e] Interrupt(N) semaphore n status bit before enable (mask)
+    $0f constant HSEM_ISF15                     \ [0x0f] Interrupt(N) semaphore n status bit before enable (mask)
+  [then]
+
+
+  [ifdef] HSEM_HSEM_MISR_DEF
+    \
+    \ @brief HSEM Masked interrupt status register
+    \ Address offset: 0x10C
+    \ Reset value: 0x00000000
+    \
+    $00 constant HSEM_MISF0                     \ [0x00] masked interrupt(N) semaphore n status bit after enable (mask)
+    $01 constant HSEM_MISF1                     \ [0x01] masked interrupt(N) semaphore n status bit after enable (mask)
+    $02 constant HSEM_MISF2                     \ [0x02] masked interrupt(N) semaphore n status bit after enable (mask)
+    $03 constant HSEM_MISF3                     \ [0x03] masked interrupt(N) semaphore n status bit after enable (mask)
+    $04 constant HSEM_MISF4                     \ [0x04] masked interrupt(N) semaphore n status bit after enable (mask)
+    $05 constant HSEM_MISF5                     \ [0x05] masked interrupt(N) semaphore n status bit after enable (mask)
+    $06 constant HSEM_MISF6                     \ [0x06] masked interrupt(N) semaphore n status bit after enable (mask)
+    $07 constant HSEM_MISF7                     \ [0x07] masked interrupt(N) semaphore n status bit after enable (mask)
+    $08 constant HSEM_MISF8                     \ [0x08] masked interrupt(N) semaphore n status bit after enable (mask)
+    $09 constant HSEM_MISF9                     \ [0x09] masked interrupt(N) semaphore n status bit after enable (mask)
+    $0a constant HSEM_MISF10                    \ [0x0a] masked interrupt(N) semaphore n status bit after enable (mask)
+    $0b constant HSEM_MISF11                    \ [0x0b] masked interrupt(N) semaphore n status bit after enable (mask)
+    $0c constant HSEM_MISF12                    \ [0x0c] masked interrupt(N) semaphore n status bit after enable (mask)
+    $0d constant HSEM_MISF13                    \ [0x0d] masked interrupt(N) semaphore n status bit after enable (mask)
+    $0e constant HSEM_MISF14                    \ [0x0e] masked interrupt(N) semaphore n status bit after enable (mask)
+    $0f constant HSEM_MISF15                    \ [0x0f] masked interrupt(N) semaphore n status bit after enable (mask)
+  [then]
+
+
+  [ifdef] HSEM_HSEM_CR_DEF
+    \
+    \ @brief HSEM Clear register
+    \ Address offset: 0x140
+    \ Reset value: 0x00000000
+    \
+    $08 constant HSEM_MASTERID                  \ [0x08 : 4] MASTERID
+    $10 constant HSEM_KEY                       \ [0x10 : 16] Semaphore clear Key
+  [then]
+
+
+  [ifdef] HSEM_HSEM_KEYR_DEF
+    \
+    \ @brief HSEM Interrupt clear register
+    \ Address offset: 0x144
+    \ Reset value: 0x00000000
+    \
+    $10 constant HSEM_KEY                       \ [0x10 : 16] Semaphore Clear Key
+  [then]
+
+  \
+  \ @brief Hardware semaphore
+  \
+  $00 constant HSEM_HSEM_R0             \ HSEM register HSEM_R0 HSEM_R31
+  $04 constant HSEM_HSEM_R1             \ HSEM register HSEM_R0 HSEM_R31
+  $08 constant HSEM_HSEM_R2             \ HSEM register HSEM_R0 HSEM_R31
+  $0C constant HSEM_HSEM_R3             \ HSEM register HSEM_R0 HSEM_R31
+  $10 constant HSEM_HSEM_R4             \ HSEM register HSEM_R0 HSEM_R31
+  $14 constant HSEM_HSEM_R5             \ HSEM register HSEM_R0 HSEM_R31
+  $18 constant HSEM_HSEM_R6             \ HSEM register HSEM_R0 HSEM_R31
+  $1C constant HSEM_HSEM_R7             \ HSEM register HSEM_R0 HSEM_R31
+  $20 constant HSEM_HSEM_R8             \ HSEM register HSEM_R0 HSEM_R31
+  $24 constant HSEM_HSEM_R9             \ HSEM register HSEM_R0 HSEM_R31
+  $28 constant HSEM_HSEM_R10            \ HSEM register HSEM_R0 HSEM_R31
+  $2C constant HSEM_HSEM_R11            \ HSEM register HSEM_R0 HSEM_R31
+  $30 constant HSEM_HSEM_R12            \ HSEM register HSEM_R0 HSEM_R31
+  $34 constant HSEM_HSEM_R13            \ HSEM register HSEM_R0 HSEM_R31
+  $38 constant HSEM_HSEM_R14            \ HSEM register HSEM_R0 HSEM_R31
+  $3C constant HSEM_HSEM_R15            \ HSEM register HSEM_R0 HSEM_R31
+  $80 constant HSEM_HSEM_RLR0           \ HSEM Read lock register
+  $84 constant HSEM_HSEM_RLR1           \ HSEM Read lock register
+  $88 constant HSEM_HSEM_RLR2           \ HSEM Read lock register
+  $8C constant HSEM_HSEM_RLR3           \ HSEM Read lock register
+  $90 constant HSEM_HSEM_RLR4           \ HSEM Read lock register
+  $94 constant HSEM_HSEM_RLR5           \ HSEM Read lock register
+  $98 constant HSEM_HSEM_RLR6           \ HSEM Read lock register
+  $9C constant HSEM_HSEM_RLR7           \ HSEM Read lock register
+  $A0 constant HSEM_HSEM_RLR8           \ HSEM Read lock register
+  $A4 constant HSEM_HSEM_RLR9           \ HSEM Read lock register
+  $A8 constant HSEM_HSEM_RLR10          \ HSEM Read lock register
+  $AC constant HSEM_HSEM_RLR11          \ HSEM Read lock register
+  $B0 constant HSEM_HSEM_RLR12          \ HSEM Read lock register
+  $B4 constant HSEM_HSEM_RLR13          \ HSEM Read lock register
+  $B8 constant HSEM_HSEM_RLR14          \ HSEM Read lock register
+  $BC constant HSEM_HSEM_RLR15          \ HSEM Read lock register
+  $100 constant HSEM_HSEM_IER           \ HSEM Interrupt enable register
+  $104 constant HSEM_HSEM_ICR           \ HSEM Interrupt clear register
+  $108 constant HSEM_HSEM_ISR           \ HSEM Interrupt status register
+  $10C constant HSEM_HSEM_MISR          \ HSEM Masked interrupt status register
+  $140 constant HSEM_HSEM_CR            \ HSEM Clear register
+  $144 constant HSEM_HSEM_KEYR          \ HSEM Interrupt clear register
+
+: HSEM_DEF ; [then]

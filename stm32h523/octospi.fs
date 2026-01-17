@@ -6,348 +6,375 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief OCTOSPI control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OCTOSPI_OCTOSPI_CR_EN                            \ Enable
-$00000002 constant OCTOSPI_OCTOSPI_CR_ABORT                         \ Abort request
-$00000004 constant OCTOSPI_OCTOSPI_CR_DMAEN                         \ DMA enable
-$00000008 constant OCTOSPI_OCTOSPI_CR_TCEN                          \ Timeout counter enable
-$00000040 constant OCTOSPI_OCTOSPI_CR_DMM                           \ Dual-memory configuration
-$00000080 constant OCTOSPI_OCTOSPI_CR_MSEL                          \ External memory select
-$00001f00 constant OCTOSPI_OCTOSPI_CR_FTHRES                        \ FIFO threshold level
-$00010000 constant OCTOSPI_OCTOSPI_CR_TEIE                          \ Transfer error interrupt enable
-$00020000 constant OCTOSPI_OCTOSPI_CR_TCIE                          \ Transfer complete interrupt enable
-$00040000 constant OCTOSPI_OCTOSPI_CR_FTIE                          \ FIFO threshold interrupt enable
-$00080000 constant OCTOSPI_OCTOSPI_CR_SMIE                          \ Status-match interrupt enable
-$00100000 constant OCTOSPI_OCTOSPI_CR_TOIE                          \ Timeout interrupt enable
-$00400000 constant OCTOSPI_OCTOSPI_CR_APMS                          \ Automatic status-polling mode stop
-$00800000 constant OCTOSPI_OCTOSPI_CR_PMM                           \ Polling match mode
-$30000000 constant OCTOSPI_OCTOSPI_CR_FMODE                         \ Functional mode
-
-
-\
-\ @brief OCTOSPI device configuration register 1
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OCTOSPI_OCTOSPI_DCR1_CKMODE                      \ Clock mode 0/mode 3
-$00000002 constant OCTOSPI_OCTOSPI_DCR1_FRCK                        \ Free running clock
-$00000008 constant OCTOSPI_OCTOSPI_DCR1_DLYBYP                      \ Delay block bypass
-$00003f00 constant OCTOSPI_OCTOSPI_DCR1_CSHT                        \ Chip-select high time
-$001f0000 constant OCTOSPI_OCTOSPI_DCR1_DEVSIZE                     \ Device size
-$07000000 constant OCTOSPI_OCTOSPI_DCR1_MTYP                        \ Memory type
-
-
-\
-\ @brief OCTOSPI device configuration register 2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant OCTOSPI_OCTOSPI_DCR2_PRESCALER                   \ Clock prescaler
-$00070000 constant OCTOSPI_OCTOSPI_DCR2_WRAPSIZE                    \ Wrap size
-
-
-\
-\ @brief OCTOSPI device configuration register 3
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$001f0000 constant OCTOSPI_OCTOSPI_DCR3_CSBOUND                     \ NCS boundary
-
-
-\
-\ @brief OCTOSPI device configuration register 4
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_DCR4_REFRESH                     \ Refresh rate
-
-
-\
-\ @brief OCTOSPI status register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OCTOSPI_OCTOSPI_SR_TEF                           \ Transfer error flag
-$00000002 constant OCTOSPI_OCTOSPI_SR_TCF                           \ Transfer complete flag
-$00000004 constant OCTOSPI_OCTOSPI_SR_FTF                           \ FIFO threshold flag
-$00000008 constant OCTOSPI_OCTOSPI_SR_SMF                           \ Status match flag
-$00000010 constant OCTOSPI_OCTOSPI_SR_TOF                           \ Timeout flag
-$00000020 constant OCTOSPI_OCTOSPI_SR_BUSY                          \ Busy
-$00003f00 constant OCTOSPI_OCTOSPI_SR_FLEVEL                        \ FIFO level
-
-
-\
-\ @brief OCTOSPI flag clear register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OCTOSPI_OCTOSPI_FCR_CTEF                         \ Clear transfer error flag
-$00000002 constant OCTOSPI_OCTOSPI_FCR_CTCF                         \ Clear transfer complete flag
-$00000008 constant OCTOSPI_OCTOSPI_FCR_CSMF                         \ Clear status match flag
-$00000010 constant OCTOSPI_OCTOSPI_FCR_CTOF                         \ Clear timeout flag
-
-
-\
-\ @brief OCTOSPI data length register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_DLR_DL                           \ Data length
-
-
-\
-\ @brief OCTOSPI address register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_AR_ADDRESS                       \ Address
-
-
-\
-\ @brief OCTOSPI data register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_DR_DATA                          \ Data
-
-
-\
-\ @brief OCTOSPI polling status mask register
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_PSMKR_MASK                       \ Status mask
-
-
-\
-\ @brief OCTOSPI polling status match register
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_PSMAR_MATCH                      \ Status match
-
-
-\
-\ @brief OCTOSPI polling interval register
-\ Address offset: 0x90
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OCTOSPI_OCTOSPI_PIR_INTERVAL                     \ Polling interval
-
-
-\
-\ @brief OCTOSPI communication configuration register
-\ Address offset: 0x100
-\ Reset value: 0x00000000
-\
-
-$00000007 constant OCTOSPI_OCTOSPI_CCR_IMODE                        \ Instruction mode
-$00000008 constant OCTOSPI_OCTOSPI_CCR_IDTR                         \ Instruction double transfer rate
-$00000030 constant OCTOSPI_OCTOSPI_CCR_ISIZE                        \ Instruction size
-$00000700 constant OCTOSPI_OCTOSPI_CCR_ADMODE                       \ Address mode
-$00000800 constant OCTOSPI_OCTOSPI_CCR_ADDTR                        \ Address double transfer rate
-$00003000 constant OCTOSPI_OCTOSPI_CCR_ADSIZE                       \ Address size
-$00070000 constant OCTOSPI_OCTOSPI_CCR_ABMODE                       \ Alternate-byte mode
-$00080000 constant OCTOSPI_OCTOSPI_CCR_ABDTR                        \ Alternate- byte double transfer rate
-$00300000 constant OCTOSPI_OCTOSPI_CCR_ABSIZE                       \ Alternate-byte size
-$07000000 constant OCTOSPI_OCTOSPI_CCR_DMODE                        \ Data mode
-$08000000 constant OCTOSPI_OCTOSPI_CCR_DDTR                         \ Data double transfer rate
-$20000000 constant OCTOSPI_OCTOSPI_CCR_DQSE                         \ DQS enable
-
-
-\
-\ @brief OCTOSPI timing configuration register
-\ Address offset: 0x108
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OCTOSPI_OCTOSPI_TCR_DCYC                         \ Number of dummy cycles
-$10000000 constant OCTOSPI_OCTOSPI_TCR_DHQC                         \ Delay hold quarter cycle
-$40000000 constant OCTOSPI_OCTOSPI_TCR_SSHIFT                       \ Sample shift
-
-
-\
-\ @brief OCTOSPI instruction register
-\ Address offset: 0x110
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_IR_INSTRUCTION                   \ Instruction
-
-
-\
-\ @brief OCTOSPI alternate bytes register
-\ Address offset: 0x120
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_ABR_ALTERNATE                    \ Alternate bytes
-
-
-\
-\ @brief OCTOSPI low-power timeout register
-\ Address offset: 0x130
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant OCTOSPI_OCTOSPI_LPTR_TIMEOUT                     \ Timeout period
-
-
-\
-\ @brief OCTOSPI wrap communication configuration register
-\ Address offset: 0x140
-\ Reset value: 0x00000000
-\
-
-$00000007 constant OCTOSPI_OCTOSPI_WPCCR_IMODE                      \ Instruction mode
-$00000008 constant OCTOSPI_OCTOSPI_WPCCR_IDTR                       \ Instruction double transfer rate
-$00000030 constant OCTOSPI_OCTOSPI_WPCCR_ISIZE                      \ Instruction size
-$00000700 constant OCTOSPI_OCTOSPI_WPCCR_ADMODE                     \ Address mode
-$00000800 constant OCTOSPI_OCTOSPI_WPCCR_ADDTR                      \ Address double transfer rate
-$00003000 constant OCTOSPI_OCTOSPI_WPCCR_ADSIZE                     \ Address size
-$00070000 constant OCTOSPI_OCTOSPI_WPCCR_ABMODE                     \ Alternate-byte mode
-$00080000 constant OCTOSPI_OCTOSPI_WPCCR_ABDTR                      \ Alternate-byte double transfer rate
-$00300000 constant OCTOSPI_OCTOSPI_WPCCR_ABSIZE                     \ Alternate-byte size
-$07000000 constant OCTOSPI_OCTOSPI_WPCCR_DMODE                      \ Data mode
-$08000000 constant OCTOSPI_OCTOSPI_WPCCR_DDTR                       \ Data double transfer rate
-$20000000 constant OCTOSPI_OCTOSPI_WPCCR_DQSE                       \ DQS enable
-
-
-\
-\ @brief OCTOSPI wrap timing configuration register
-\ Address offset: 0x148
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OCTOSPI_OCTOSPI_WPTCR_DCYC                       \ Number of dummy cycles
-$10000000 constant OCTOSPI_OCTOSPI_WPTCR_DHQC                       \ Delay hold quarter cycle
-$40000000 constant OCTOSPI_OCTOSPI_WPTCR_SSHIFT                     \ Sample shift
-
-
-\
-\ @brief OCTOSPI wrap instruction register
-\ Address offset: 0x150
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_WPIR_INSTRUCTION                 \ Instruction
-
-
-\
-\ @brief OCTOSPI wrap alternate bytes register
-\ Address offset: 0x160
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_WPABR_ALTERNATE                  \ Alternate bytes
-
-
-\
-\ @brief OCTOSPI write communication configuration register
-\ Address offset: 0x180
-\ Reset value: 0x00000000
-\
-
-$00000007 constant OCTOSPI_OCTOSPI_WCCR_IMODE                       \ Instruction mode
-$00000008 constant OCTOSPI_OCTOSPI_WCCR_IDTR                        \ Instruction double transfer rate
-$00000030 constant OCTOSPI_OCTOSPI_WCCR_ISIZE                       \ Instruction size
-$00000700 constant OCTOSPI_OCTOSPI_WCCR_ADMODE                      \ Address mode
-$00000800 constant OCTOSPI_OCTOSPI_WCCR_ADDTR                       \ Address double transfer rate
-$00003000 constant OCTOSPI_OCTOSPI_WCCR_ADSIZE                      \ Address size
-$00070000 constant OCTOSPI_OCTOSPI_WCCR_ABMODE                      \ Alternate-byte mode
-$00080000 constant OCTOSPI_OCTOSPI_WCCR_ABDTR                       \ Alternate bytes double transfer rate
-$00300000 constant OCTOSPI_OCTOSPI_WCCR_ABSIZE                      \ Alternate-byte size
-$07000000 constant OCTOSPI_OCTOSPI_WCCR_DMODE                       \ Data mode
-$08000000 constant OCTOSPI_OCTOSPI_WCCR_DDTR                        \ data double transfer rate
-$20000000 constant OCTOSPI_OCTOSPI_WCCR_DQSE                        \ DQS enable
-
-
-\
-\ @brief OCTOSPI write timing configuration register
-\ Address offset: 0x188
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OCTOSPI_OCTOSPI_WTCR_DCYC                        \ Number of dummy cycles
-
-
-\
-\ @brief OCTOSPI write instruction register
-\ Address offset: 0x190
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_WIR_INSTRUCTION                  \ Instruction
-
-
-\
-\ @brief OCTOSPI write alternate bytes register
-\ Address offset: 0x1A0
-\ Reset value: 0x00000000
-\
-
-$00000000 constant OCTOSPI_OCTOSPI_WABR_ALTERNATE                   \ Alternate bytes
-
-
-\
-\ @brief OCTOSPI HyperBus latency configuration register
-\ Address offset: 0x200
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OCTOSPI_OCTOSPI_HLCR_LM                          \ Latency mode
-$00000002 constant OCTOSPI_OCTOSPI_HLCR_WZL                         \ Write zero latency
-$0000ff00 constant OCTOSPI_OCTOSPI_HLCR_TACC                        \ Access time
-$00ff0000 constant OCTOSPI_OCTOSPI_HLCR_TRWR                        \ Read-write minimum recovery time
-
-
-\
-\ @brief OCTOSPI register block
-\
-$47001400 constant OCTOSPI_OCTOSPI_CR  \ offset: 0x00 : OCTOSPI control register
-$47001408 constant OCTOSPI_OCTOSPI_DCR1  \ offset: 0x08 : OCTOSPI device configuration register 1
-$4700140c constant OCTOSPI_OCTOSPI_DCR2  \ offset: 0x0C : OCTOSPI device configuration register 2
-$47001410 constant OCTOSPI_OCTOSPI_DCR3  \ offset: 0x10 : OCTOSPI device configuration register 3
-$47001414 constant OCTOSPI_OCTOSPI_DCR4  \ offset: 0x14 : OCTOSPI device configuration register 4
-$47001420 constant OCTOSPI_OCTOSPI_SR  \ offset: 0x20 : OCTOSPI status register
-$47001424 constant OCTOSPI_OCTOSPI_FCR  \ offset: 0x24 : OCTOSPI flag clear register
-$47001440 constant OCTOSPI_OCTOSPI_DLR  \ offset: 0x40 : OCTOSPI data length register
-$47001448 constant OCTOSPI_OCTOSPI_AR  \ offset: 0x48 : OCTOSPI address register
-$47001450 constant OCTOSPI_OCTOSPI_DR  \ offset: 0x50 : OCTOSPI data register
-$47001480 constant OCTOSPI_OCTOSPI_PSMKR  \ offset: 0x80 : OCTOSPI polling status mask register
-$47001488 constant OCTOSPI_OCTOSPI_PSMAR  \ offset: 0x88 : OCTOSPI polling status match register
-$47001490 constant OCTOSPI_OCTOSPI_PIR  \ offset: 0x90 : OCTOSPI polling interval register
-$47001500 constant OCTOSPI_OCTOSPI_CCR  \ offset: 0x100 : OCTOSPI communication configuration register
-$47001508 constant OCTOSPI_OCTOSPI_TCR  \ offset: 0x108 : OCTOSPI timing configuration register
-$47001510 constant OCTOSPI_OCTOSPI_IR  \ offset: 0x110 : OCTOSPI instruction register
-$47001520 constant OCTOSPI_OCTOSPI_ABR  \ offset: 0x120 : OCTOSPI alternate bytes register
-$47001530 constant OCTOSPI_OCTOSPI_LPTR  \ offset: 0x130 : OCTOSPI low-power timeout register
-$47001540 constant OCTOSPI_OCTOSPI_WPCCR  \ offset: 0x140 : OCTOSPI wrap communication configuration register
-$47001548 constant OCTOSPI_OCTOSPI_WPTCR  \ offset: 0x148 : OCTOSPI wrap timing configuration register
-$47001550 constant OCTOSPI_OCTOSPI_WPIR  \ offset: 0x150 : OCTOSPI wrap instruction register
-$47001560 constant OCTOSPI_OCTOSPI_WPABR  \ offset: 0x160 : OCTOSPI wrap alternate bytes register
-$47001580 constant OCTOSPI_OCTOSPI_WCCR  \ offset: 0x180 : OCTOSPI write communication configuration register
-$47001588 constant OCTOSPI_OCTOSPI_WTCR  \ offset: 0x188 : OCTOSPI write timing configuration register
-$47001590 constant OCTOSPI_OCTOSPI_WIR  \ offset: 0x190 : OCTOSPI write instruction register
-$470015a0 constant OCTOSPI_OCTOSPI_WABR  \ offset: 0x1A0 : OCTOSPI write alternate bytes register
-$47001600 constant OCTOSPI_OCTOSPI_HLCR  \ offset: 0x200 : OCTOSPI HyperBus latency configuration register
-
+[ifndef] OCTOSPI_DEF
+
+  [ifdef] OCTOSPI_OCTOSPI_CR_DEF
+    \
+    \ @brief OCTOSPI control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_EN                     \ [0x00] Enable
+    $01 constant OCTOSPI_ABORT                  \ [0x01] Abort request
+    $02 constant OCTOSPI_DMAEN                  \ [0x02] DMA enable
+    $03 constant OCTOSPI_TCEN                   \ [0x03] Timeout counter enable
+    $06 constant OCTOSPI_DMM                    \ [0x06] Dual-memory configuration
+    $07 constant OCTOSPI_MSEL                   \ [0x07] External memory select
+    $08 constant OCTOSPI_FTHRES                 \ [0x08 : 5] FIFO threshold level
+    $10 constant OCTOSPI_TEIE                   \ [0x10] Transfer error interrupt enable
+    $11 constant OCTOSPI_TCIE                   \ [0x11] Transfer complete interrupt enable
+    $12 constant OCTOSPI_FTIE                   \ [0x12] FIFO threshold interrupt enable
+    $13 constant OCTOSPI_SMIE                   \ [0x13] Status-match interrupt enable
+    $14 constant OCTOSPI_TOIE                   \ [0x14] Timeout interrupt enable
+    $16 constant OCTOSPI_APMS                   \ [0x16] Automatic status-polling mode stop
+    $17 constant OCTOSPI_PMM                    \ [0x17] Polling match mode
+    $1c constant OCTOSPI_FMODE                  \ [0x1c : 2] Functional mode
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_DCR1_DEF
+    \
+    \ @brief OCTOSPI device configuration register 1
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_CKMODE                 \ [0x00] Clock mode 0/mode 3
+    $01 constant OCTOSPI_FRCK                   \ [0x01] Free running clock
+    $03 constant OCTOSPI_DLYBYP                 \ [0x03] Delay block bypass
+    $08 constant OCTOSPI_CSHT                   \ [0x08 : 6] Chip-select high time
+    $10 constant OCTOSPI_DEVSIZE                \ [0x10 : 5] Device size
+    $18 constant OCTOSPI_MTYP                   \ [0x18 : 3] Memory type
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_DCR2_DEF
+    \
+    \ @brief OCTOSPI device configuration register 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_PRESCALER              \ [0x00 : 8] Clock prescaler
+    $10 constant OCTOSPI_WRAPSIZE               \ [0x10 : 3] Wrap size
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_DCR3_DEF
+    \
+    \ @brief OCTOSPI device configuration register 3
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $10 constant OCTOSPI_CSBOUND                \ [0x10 : 5] NCS boundary
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_DCR4_DEF
+    \
+    \ @brief OCTOSPI device configuration register 4
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_REFRESH                \ [0x00 : 32] Refresh rate
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_SR_DEF
+    \
+    \ @brief OCTOSPI status register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_TEF                    \ [0x00] Transfer error flag
+    $01 constant OCTOSPI_TCF                    \ [0x01] Transfer complete flag
+    $02 constant OCTOSPI_FTF                    \ [0x02] FIFO threshold flag
+    $03 constant OCTOSPI_SMF                    \ [0x03] Status match flag
+    $04 constant OCTOSPI_TOF                    \ [0x04] Timeout flag
+    $05 constant OCTOSPI_BUSY                   \ [0x05] Busy
+    $08 constant OCTOSPI_FLEVEL                 \ [0x08 : 6] FIFO level
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_FCR_DEF
+    \
+    \ @brief OCTOSPI flag clear register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_CTEF                   \ [0x00] Clear transfer error flag
+    $01 constant OCTOSPI_CTCF                   \ [0x01] Clear transfer complete flag
+    $03 constant OCTOSPI_CSMF                   \ [0x03] Clear status match flag
+    $04 constant OCTOSPI_CTOF                   \ [0x04] Clear timeout flag
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_DLR_DEF
+    \
+    \ @brief OCTOSPI data length register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_DL                     \ [0x00 : 32] Data length
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_AR_DEF
+    \
+    \ @brief OCTOSPI address register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_ADDRESS                \ [0x00 : 32] Address
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_DR_DEF
+    \
+    \ @brief OCTOSPI data register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_DATA                   \ [0x00 : 32] Data
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_PSMKR_DEF
+    \
+    \ @brief OCTOSPI polling status mask register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_MASK                   \ [0x00 : 32] Status mask
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_PSMAR_DEF
+    \
+    \ @brief OCTOSPI polling status match register
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_MATCH                  \ [0x00 : 32] Status match
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_PIR_DEF
+    \
+    \ @brief OCTOSPI polling interval register
+    \ Address offset: 0x90
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_INTERVAL               \ [0x00 : 16] Polling interval
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_CCR_DEF
+    \
+    \ @brief OCTOSPI communication configuration register
+    \ Address offset: 0x100
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_IMODE                  \ [0x00 : 3] Instruction mode
+    $03 constant OCTOSPI_IDTR                   \ [0x03] Instruction double transfer rate
+    $04 constant OCTOSPI_ISIZE                  \ [0x04 : 2] Instruction size
+    $08 constant OCTOSPI_ADMODE                 \ [0x08 : 3] Address mode
+    $0b constant OCTOSPI_ADDTR                  \ [0x0b] Address double transfer rate
+    $0c constant OCTOSPI_ADSIZE                 \ [0x0c : 2] Address size
+    $10 constant OCTOSPI_ABMODE                 \ [0x10 : 3] Alternate-byte mode
+    $13 constant OCTOSPI_ABDTR                  \ [0x13] Alternate- byte double transfer rate
+    $14 constant OCTOSPI_ABSIZE                 \ [0x14 : 2] Alternate-byte size
+    $18 constant OCTOSPI_DMODE                  \ [0x18 : 3] Data mode
+    $1b constant OCTOSPI_DDTR                   \ [0x1b] Data double transfer rate
+    $1d constant OCTOSPI_DQSE                   \ [0x1d] DQS enable
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_TCR_DEF
+    \
+    \ @brief OCTOSPI timing configuration register
+    \ Address offset: 0x108
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_DCYC                   \ [0x00 : 5] Number of dummy cycles
+    $1c constant OCTOSPI_DHQC                   \ [0x1c] Delay hold quarter cycle
+    $1e constant OCTOSPI_SSHIFT                 \ [0x1e] Sample shift
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_IR_DEF
+    \
+    \ @brief OCTOSPI instruction register
+    \ Address offset: 0x110
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_INSTRUCTION            \ [0x00 : 32] Instruction
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_ABR_DEF
+    \
+    \ @brief OCTOSPI alternate bytes register
+    \ Address offset: 0x120
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_ALTERNATE              \ [0x00 : 32] Alternate bytes
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_LPTR_DEF
+    \
+    \ @brief OCTOSPI low-power timeout register
+    \ Address offset: 0x130
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_TIMEOUT                \ [0x00 : 16] Timeout period
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_WPCCR_DEF
+    \
+    \ @brief OCTOSPI wrap communication configuration register
+    \ Address offset: 0x140
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_IMODE                  \ [0x00 : 3] Instruction mode
+    $03 constant OCTOSPI_IDTR                   \ [0x03] Instruction double transfer rate
+    $04 constant OCTOSPI_ISIZE                  \ [0x04 : 2] Instruction size
+    $08 constant OCTOSPI_ADMODE                 \ [0x08 : 3] Address mode
+    $0b constant OCTOSPI_ADDTR                  \ [0x0b] Address double transfer rate
+    $0c constant OCTOSPI_ADSIZE                 \ [0x0c : 2] Address size
+    $10 constant OCTOSPI_ABMODE                 \ [0x10 : 3] Alternate-byte mode
+    $13 constant OCTOSPI_ABDTR                  \ [0x13] Alternate-byte double transfer rate
+    $14 constant OCTOSPI_ABSIZE                 \ [0x14 : 2] Alternate-byte size
+    $18 constant OCTOSPI_DMODE                  \ [0x18 : 3] Data mode
+    $1b constant OCTOSPI_DDTR                   \ [0x1b] Data double transfer rate
+    $1d constant OCTOSPI_DQSE                   \ [0x1d] DQS enable
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_WPTCR_DEF
+    \
+    \ @brief OCTOSPI wrap timing configuration register
+    \ Address offset: 0x148
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_DCYC                   \ [0x00 : 5] Number of dummy cycles
+    $1c constant OCTOSPI_DHQC                   \ [0x1c] Delay hold quarter cycle
+    $1e constant OCTOSPI_SSHIFT                 \ [0x1e] Sample shift
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_WPIR_DEF
+    \
+    \ @brief OCTOSPI wrap instruction register
+    \ Address offset: 0x150
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_INSTRUCTION            \ [0x00 : 32] Instruction
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_WPABR_DEF
+    \
+    \ @brief OCTOSPI wrap alternate bytes register
+    \ Address offset: 0x160
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_ALTERNATE              \ [0x00 : 32] Alternate bytes
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_WCCR_DEF
+    \
+    \ @brief OCTOSPI write communication configuration register
+    \ Address offset: 0x180
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_IMODE                  \ [0x00 : 3] Instruction mode
+    $03 constant OCTOSPI_IDTR                   \ [0x03] Instruction double transfer rate
+    $04 constant OCTOSPI_ISIZE                  \ [0x04 : 2] Instruction size
+    $08 constant OCTOSPI_ADMODE                 \ [0x08 : 3] Address mode
+    $0b constant OCTOSPI_ADDTR                  \ [0x0b] Address double transfer rate
+    $0c constant OCTOSPI_ADSIZE                 \ [0x0c : 2] Address size
+    $10 constant OCTOSPI_ABMODE                 \ [0x10 : 3] Alternate-byte mode
+    $13 constant OCTOSPI_ABDTR                  \ [0x13] Alternate bytes double transfer rate
+    $14 constant OCTOSPI_ABSIZE                 \ [0x14 : 2] Alternate-byte size
+    $18 constant OCTOSPI_DMODE                  \ [0x18 : 3] Data mode
+    $1b constant OCTOSPI_DDTR                   \ [0x1b] data double transfer rate
+    $1d constant OCTOSPI_DQSE                   \ [0x1d] DQS enable
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_WTCR_DEF
+    \
+    \ @brief OCTOSPI write timing configuration register
+    \ Address offset: 0x188
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_DCYC                   \ [0x00 : 5] Number of dummy cycles
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_WIR_DEF
+    \
+    \ @brief OCTOSPI write instruction register
+    \ Address offset: 0x190
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_INSTRUCTION            \ [0x00 : 32] Instruction
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_WABR_DEF
+    \
+    \ @brief OCTOSPI write alternate bytes register
+    \ Address offset: 0x1A0
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_ALTERNATE              \ [0x00 : 32] Alternate bytes
+  [then]
+
+
+  [ifdef] OCTOSPI_OCTOSPI_HLCR_DEF
+    \
+    \ @brief OCTOSPI HyperBus latency configuration register
+    \ Address offset: 0x200
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPI_LM                     \ [0x00] Latency mode
+    $01 constant OCTOSPI_WZL                    \ [0x01] Write zero latency
+    $08 constant OCTOSPI_TACC                   \ [0x08 : 8] Access time
+    $10 constant OCTOSPI_TRWR                   \ [0x10 : 8] Read-write minimum recovery time
+  [then]
+
+  \
+  \ @brief OCTOSPI register block
+  \
+  $00 constant OCTOSPI_OCTOSPI_CR       \ OCTOSPI control register
+  $08 constant OCTOSPI_OCTOSPI_DCR1     \ OCTOSPI device configuration register 1
+  $0C constant OCTOSPI_OCTOSPI_DCR2     \ OCTOSPI device configuration register 2
+  $10 constant OCTOSPI_OCTOSPI_DCR3     \ OCTOSPI device configuration register 3
+  $14 constant OCTOSPI_OCTOSPI_DCR4     \ OCTOSPI device configuration register 4
+  $20 constant OCTOSPI_OCTOSPI_SR       \ OCTOSPI status register
+  $24 constant OCTOSPI_OCTOSPI_FCR      \ OCTOSPI flag clear register
+  $40 constant OCTOSPI_OCTOSPI_DLR      \ OCTOSPI data length register
+  $48 constant OCTOSPI_OCTOSPI_AR       \ OCTOSPI address register
+  $50 constant OCTOSPI_OCTOSPI_DR       \ OCTOSPI data register
+  $80 constant OCTOSPI_OCTOSPI_PSMKR    \ OCTOSPI polling status mask register
+  $88 constant OCTOSPI_OCTOSPI_PSMAR    \ OCTOSPI polling status match register
+  $90 constant OCTOSPI_OCTOSPI_PIR      \ OCTOSPI polling interval register
+  $100 constant OCTOSPI_OCTOSPI_CCR     \ OCTOSPI communication configuration register
+  $108 constant OCTOSPI_OCTOSPI_TCR     \ OCTOSPI timing configuration register
+  $110 constant OCTOSPI_OCTOSPI_IR      \ OCTOSPI instruction register
+  $120 constant OCTOSPI_OCTOSPI_ABR     \ OCTOSPI alternate bytes register
+  $130 constant OCTOSPI_OCTOSPI_LPTR    \ OCTOSPI low-power timeout register
+  $140 constant OCTOSPI_OCTOSPI_WPCCR   \ OCTOSPI wrap communication configuration register
+  $148 constant OCTOSPI_OCTOSPI_WPTCR   \ OCTOSPI wrap timing configuration register
+  $150 constant OCTOSPI_OCTOSPI_WPIR    \ OCTOSPI wrap instruction register
+  $160 constant OCTOSPI_OCTOSPI_WPABR   \ OCTOSPI wrap alternate bytes register
+  $180 constant OCTOSPI_OCTOSPI_WCCR    \ OCTOSPI write communication configuration register
+  $188 constant OCTOSPI_OCTOSPI_WTCR    \ OCTOSPI write timing configuration register
+  $190 constant OCTOSPI_OCTOSPI_WIR     \ OCTOSPI write instruction register
+  $1A0 constant OCTOSPI_OCTOSPI_WABR    \ OCTOSPI write alternate bytes register
+  $200 constant OCTOSPI_OCTOSPI_HLCR    \ OCTOSPI HyperBus latency configuration register
+
+: OCTOSPI_DEF ; [then]

@@ -1,122 +1,108 @@
 \
-\ @file stm32u073.h
-\ @brief Loader for all peripherals in a STM32U073
+\ @file stm32u073.fload
+\ @brief Device header for STM32U073
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include comp1.fs
-.include crc.fs
-.include crs.fs
-.include dac.fs
-.include dbgmcu.fs
-.include dmamux.fs
-.include dma1.fs
-.include dma2.fs
-.include exti.fs
-.include flash.fs
-.include gpioa.fs
-.include gpiob.fs
-.include gpioc.fs
-.include gpiod.fs
-.include gpioe.fs
-.include gpiof.fs
-.include iwdg.fs
-.include i2c1.fs
-.include i2c2.fs
-.include i2c3.fs
-.include lcd.fs
-.include lptim1.fs
-.include lptim2.fs
-.include lptim3.fs
-.include lpuart1.fs
-.include lpuart2.fs
-.include lpuart3.fs
-.include opamp.fs
-.include pwr.fs
-.include rcc.fs
-.include rng.fs
-.include rtc.fs
-.include spi1.fs
-.include spi2.fs
-.include spi3.fs
-.include syscfg.fs
-.include tamp.fs
-.include tim1.fs
-.include tim2.fs
-.include tim3.fs
-.include tim6.fs
-.include tim7.fs
-.include tim15.fs
-.include tim16.fs
-.include tsc.fs
-.include usart1.fs
-.include usart2.fs
-.include usart3.fs
-.include usart4.fs
-.include usb.fs
-.include vrefbuf.fs
-.include wwdg.fs
+[ifndef] STM32U073_LOADER
+  .include "adc.fs"
+  .include "comp1.fs"
+  .include "crc.fs"
+  .include "crs.fs"
+  .include "dac.fs"
+  .include "dbgmcu.fs"
+  .include "dmamux.fs"
+  .include "dma.fs"
+  .include "exti.fs"
+  .include "flash.fs"
+  .include "gpioa.fs"
+  .include "gpiob.fs"
+  .include "gpioc.fs"
+  .include "gpiod.fs"
+  .include "gpioe.fs"
+  .include "gpiof.fs"
+  .include "iwdg.fs"
+  .include "i2c.fs"
+  .include "lcd.fs"
+  .include "lptim1.fs"
+  .include "lptim2.fs"
+  .include "lptim3.fs"
+  .include "lpuart.fs"
+  .include "opamp.fs"
+  .include "pwr.fs"
+  .include "rcc.fs"
+  .include "rng.fs"
+  .include "rtc.fs"
+  .include "spi.fs"
+  .include "syscfg.fs"
+  .include "tamp.fs"
+  .include "tim1.fs"
+  .include "tim2.fs"
+  .include "tim3.fs"
+  .include "tim6.fs"
+  .include "tim7.fs"
+  .include "tim15.fs"
+  .include "tim16.fs"
+  .include "tsc.fs"
+  .include "usart.fs"
+  .include "usb.fs"
+  .include "vrefbuf.fs"
+  .include "wwdg.fs"
 
-decimal
+  $0x40012400 constant ADC              \ See adc.fs
+  $0x40010200 constant COMP1            \ See comp1.fs
+  $0x40023000 constant CRC              \ See crc.fs
+  $0x40006C00 constant CRS              \ See crs.fs
+  $0x40007400 constant DAC              \ See dac.fs
+  $0x40015800 constant DBGMCU           \ See dbgmcu.fs
+  $0x40020800 constant DMAMUX           \ See dmamux.fs
+  $0x40020000 constant DMA1             \ See dma.fs
+  $0x40020400 constant DMA2             \ See dma.fs
+  $0x40021800 constant EXTI             \ See exti.fs
+  $0x40022000 constant FLASH            \ See flash.fs
+  $0x50000000 constant GPIOA            \ See gpioa.fs
+  $0x50000400 constant GPIOB            \ See gpiob.fs
+  $0x50000800 constant GPIOC            \ See gpioc.fs
+  $0x50000C00 constant GPIOD            \ See gpiod.fs
+  $0x50001000 constant GPIOE            \ See gpioe.fs
+  $0x50001400 constant GPIOF            \ See gpiof.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40005400 constant I2C1             \ See i2c.fs
+  $0x40005800 constant I2C2             \ See i2c.fs
+  $0x40008800 constant I2C3             \ See i2c.fs
+  $0x40002400 constant LCD              \ See lcd.fs
+  $0x40007C00 constant LPTIM1           \ See lptim1.fs
+  $0x40009400 constant LPTIM2           \ See lptim2.fs
+  $0x40009000 constant LPTIM3           \ See lptim3.fs
+  $0x40008000 constant LPUART1          \ See lpuart.fs
+  $0x40008400 constant LPUART2          \ See lpuart.fs
+  $0x40008C00 constant LPUART3          \ See lpuart.fs
+  $0x40007800 constant OPAMP            \ See opamp.fs
+  $0x40007000 constant PWR              \ See pwr.fs
+  $0x40021000 constant RCC              \ See rcc.fs
+  $0x40025000 constant RNG              \ See rng.fs
+  $0x40002800 constant RTC              \ See rtc.fs
+  $0x40013000 constant SPI1             \ See spi.fs
+  $0x40003800 constant SPI2             \ See spi.fs
+  $0x40003C00 constant SPI3             \ See spi.fs
+  $0x40010000 constant SYSCFG           \ See syscfg.fs
+  $0x4000B000 constant TAMP             \ See tamp.fs
+  $0x40012C00 constant TIM1             \ See tim1.fs
+  $0x40000000 constant TIM2             \ See tim2.fs
+  $0x40000400 constant TIM3             \ See tim3.fs
+  $0x40001000 constant TIM6             \ See tim6.fs
+  $0x40001400 constant TIM7             \ See tim7.fs
+  $0x40014000 constant TIM15            \ See tim15.fs
+  $0x40014400 constant TIM16            \ See tim16.fs
+  $0x40024000 constant TSC              \ See tsc.fs
+  $0x40013800 constant USART1           \ See usart.fs
+  $0x40004400 constant USART2           \ See usart.fs
+  $0x40004800 constant USART3           \ See usart.fs
+  $0x40004C00 constant USART4           \ See usart.fs
+  $0x40005C00 constant USB              \ See usb.fs
+  $0x40010030 constant VREFBUF          \ See vrefbuf.fs
+  $0x40002C00 constant WWDG             \ See wwdg.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ ADC address block description
-.include COMP1                  \ COMP address block description
-.include CRC                    \ CRC address block description
-.include CRS                    \ CRS address block description
-.include DAC                    \ DAC address block description
-.include DBGMCU                 \ DBGMCU register block
-.include DMAMUX                 \ DMAMUX address block description
-.include DMA1                   \ DMA register bank
-.include DMA2                   \ DMA register bank
-.include EXTI                   \ EXTI register block
-.include FLASH                  \ Mamba FLASH register block
-.include GPIOA                  \ GPIOA address block description
-.include GPIOB                  \ GPIOB address block description
-.include GPIOC                  \ GPIOC address block description
-.include GPIOD                  \ GPIOD address block description
-.include GPIOE                  \ GPIOE address block description
-.include GPIOF                  \ GPIOF address block description
-.include IWDG                   \ IWDG address block description
-.include I2C1                   \ I2C address block description
-.include I2C2                   \ I2C2/3/4 global interrupt
-.include I2C3                   \ I2C address block description
-.include LCD                    \ LCD address block description
-.include LPTIM1                 \ LPTIM1 address block description
-.include LPTIM2                 \ LPTIM2 address block description
-.include LPTIM3                 \ LPTIM3 address block description
-.include LPUART1                \ LPUART address block description
-.include LPUART2                \ LPUART address block description
-.include LPUART3                \ LPUART address block description
-.include OPAMP                  \ OPAMP address block description
-.include PWR                    \ PWR register block
-.include RCC                    \ RCC address block description
-.include RNG                    \ RNG address block description
-.include RTC                    \ RTC register block
-.include SPI1                   \ SPI address block description
-.include SPI2                   \ SPI2/3 global interrupt
-.include SPI3                   \ SPI address block description
-.include SYSCFG                 \ SYSCFG register block
-.include TAMP                   \ TAMP register block
-.include TIM1                   \ TIM1 address block description
-.include TIM2                   \ TIM2 address block description
-.include TIM3                   \ TIM3 address block description
-.include TIM6                   \ TIM6 address block description
-.include TIM7                   \ TIM7 address block description
-.include TIM15                  \ TIM15 address block description
-.include TIM16                  \ TIM16 address block description
-.include TSC                    \ TSC address block description
-.include USART1                 \ USART address block description
-.include USART2                 \ USART2 and LPUART2 global interrupt (combined with EXTI lines 26 and 35)
-.include USART3                 \ USART3 and LPUART1 global interrupt (combined with EXTI lines 24 and 28)
-.include USART4                 \ USART4 and LPUART3 global interrupt (combined with EXTI lines 20 and 34)
-.include USB                    \ USB address block description
-.include VREFBUF                \ VREFBUF address block description
-.include WWDG                   \ WWDG address block description
-
-compiletoram
-
+: STM32U073_LOADER ; [then]

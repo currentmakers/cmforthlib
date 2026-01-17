@@ -6,111 +6,119 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DBGMCU_DEF
 
-\
-\ @brief DBGMCU Identity Code Register
-\ Address offset: 0x00
-\ Reset value: 0x10006497
-\
-
-$00000fff constant DBGMCU_IDCODER_DEV_ID                            \ Device ID
-$ffff0000 constant DBGMCU_IDCODER_REV_ID                            \ Revision
-
-
-\
-\ @brief DBGMCU Configuration Register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBGMCU_CR_DBG_SLEEP                              \ Allow debug in SLEEP mode
-$00000002 constant DBGMCU_CR_DBG_STOP                               \ Allow debug in STOP mode
-$00000004 constant DBGMCU_CR_DBG_STANDBY                            \ Allow debug in STANDBY mode
+  [ifdef] DBGMCU_IDCODER_DEF
+    \
+    \ @brief DBGMCU Identity Code Register
+    \ Address offset: 0x00
+    \ Reset value: 0x10006497
+    \
+    $00 constant DBGMCU_DEV_ID                  \ [0x00 : 12] Device ID
+    $10 constant DBGMCU_REV_ID                  \ [0x10 : 16] Revision
+  [then]
 
 
-\
-\ @brief DBGMCU CPU1 APB1 Peripheral Freeze Register 1
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBGMCU_APB1FZR1_DBG_TIM2_STOP                    \ TIM2 stop in CPU1 debug
-$00000400 constant DBGMCU_APB1FZR1_DBG_RTC_STOP                     \ RTC stop in CPU1 debug
-$00000800 constant DBGMCU_APB1FZR1_DBG_WWDG_STOP                    \ WWDG stop in CPU1 debug
-$00001000 constant DBGMCU_APB1FZR1_DBG_IWDG_STOP                    \ IWDG stop in CPU1 debug
-$00200000 constant DBGMCU_APB1FZR1_DBG_I2C1_STOP                    \ I2C1 SMBUS timeout stop in CPU1 debug
-$00400000 constant DBGMCU_APB1FZR1_DBG_I2C2_STOP                    \ I2C2 SMBUS timeout stop in CPU1 debug
-$00800000 constant DBGMCU_APB1FZR1_DBG_I2C3_STOP                    \ I2C3 SMBUS timeout stop in CPU1 debug
-$80000000 constant DBGMCU_APB1FZR1_DBG_LPTIM1_STOP                  \ LPTIM1 stop in CPU1 debug
+  [ifdef] DBGMCU_CR_DEF
+    \
+    \ @brief DBGMCU Configuration Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_DBG_SLEEP               \ [0x00] Allow debug in SLEEP mode
+    $01 constant DBGMCU_DBG_STOP                \ [0x01] Allow debug in STOP mode
+    $02 constant DBGMCU_DBG_STANDBY             \ [0x02] Allow debug in STANDBY mode
+  [then]
 
 
-\
-\ @brief DBGMCU CPU2 APB1 Peripheral Freeze Register 1 [dual core device
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DBGMCU_C2APB1FZR1_DBG_TIM2_STOP                  \ DBG_TIM2_STOP
-$00000400 constant DBGMCU_C2APB1FZR1_DBG_RTC_STOP                   \ DBG_RTC_STOP
-$00001000 constant DBGMCU_C2APB1FZR1_DBG_IWDG_STOP                  \ DBG_IWDG_STOP
-$00200000 constant DBGMCU_C2APB1FZR1_DBG_I2C1_STOP                  \ DBG_I2C1_STOP
-$00400000 constant DBGMCU_C2APB1FZR1_DBG_I2C2_STOP                  \ DBG_I2C2_STOP
-$00800000 constant DBGMCU_C2APB1FZR1_DBG_I2C3_STOP                  \ DBG_I2C3_STOP
-$80000000 constant DBGMCU_C2APB1FZR1_DBG_LPTIM1_STOP                \ DBG_LPTIM1_STOP
-
-
-\
-\ @brief DBGMCU CPU1 APB1 Peripheral Freeze Register 2
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000020 constant DBGMCU_APB1FZR2_DBG_LPTIM2_STOP                  \ DBG_LPTIM2_STOP
-$00000040 constant DBGMCU_APB1FZR2_DBG_LPTIM3_STOP                  \ DBG_LPTIM3_STOP
+  [ifdef] DBGMCU_APB1FZR1_DEF
+    \
+    \ @brief DBGMCU CPU1 APB1 Peripheral Freeze Register 1
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_DBG_TIM2_STOP           \ [0x00] TIM2 stop in CPU1 debug
+    $0a constant DBGMCU_DBG_RTC_STOP            \ [0x0a] RTC stop in CPU1 debug
+    $0b constant DBGMCU_DBG_WWDG_STOP           \ [0x0b] WWDG stop in CPU1 debug
+    $0c constant DBGMCU_DBG_IWDG_STOP           \ [0x0c] IWDG stop in CPU1 debug
+    $15 constant DBGMCU_DBG_I2C1_STOP           \ [0x15] I2C1 SMBUS timeout stop in CPU1 debug
+    $16 constant DBGMCU_DBG_I2C2_STOP           \ [0x16] I2C2 SMBUS timeout stop in CPU1 debug
+    $17 constant DBGMCU_DBG_I2C3_STOP           \ [0x17] I2C3 SMBUS timeout stop in CPU1 debug
+    $1f constant DBGMCU_DBG_LPTIM1_STOP         \ [0x1f] LPTIM1 stop in CPU1 debug
+  [then]
 
 
-\
-\ @brief DBGMCU CPU2 APB1 Peripheral Freeze Register 2 [dual core device
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000020 constant DBGMCU_C2APB1FZR2_DBG_LPTIM2_STOP                \ DBG_LPTIM2_STOP
-$00000040 constant DBGMCU_C2APB1FZR2_DBG_LPTIM3_STOP                \ DBG_LPTIM3_STOP
-
-
-\
-\ @brief DBGMCU CPU1 APB2 Peripheral Freeze Register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000800 constant DBGMCU_APB2FZR_DBG_TIM1_STOP                     \ DBG_TIM1_STOP
-$00020000 constant DBGMCU_APB2FZR_DBG_TIM16_STOP                    \ DBG_TIM16_STOP
-$00040000 constant DBGMCU_APB2FZR_DBG_TIM17_STOP                    \ DBG_TIM17_STOP
+  [ifdef] DBGMCU_C2APB1FZR1_DEF
+    \
+    \ @brief DBGMCU CPU2 APB1 Peripheral Freeze Register 1 [dual core device
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant DBGMCU_DBG_TIM2_STOP           \ [0x00] DBG_TIM2_STOP
+    $0a constant DBGMCU_DBG_RTC_STOP            \ [0x0a] DBG_RTC_STOP
+    $0c constant DBGMCU_DBG_IWDG_STOP           \ [0x0c] DBG_IWDG_STOP
+    $15 constant DBGMCU_DBG_I2C1_STOP           \ [0x15] DBG_I2C1_STOP
+    $16 constant DBGMCU_DBG_I2C2_STOP           \ [0x16] DBG_I2C2_STOP
+    $17 constant DBGMCU_DBG_I2C3_STOP           \ [0x17] DBG_I2C3_STOP
+    $1f constant DBGMCU_DBG_LPTIM1_STOP         \ [0x1f] DBG_LPTIM1_STOP
+  [then]
 
 
-\
-\ @brief DBGMCU CPU2 APB2 Peripheral Freeze Register [dual core device
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
+  [ifdef] DBGMCU_APB1FZR2_DEF
+    \
+    \ @brief DBGMCU CPU1 APB1 Peripheral Freeze Register 2
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $05 constant DBGMCU_DBG_LPTIM2_STOP         \ [0x05] DBG_LPTIM2_STOP
+    $06 constant DBGMCU_DBG_LPTIM3_STOP         \ [0x06] DBG_LPTIM3_STOP
+  [then]
 
-$00000800 constant DBGMCU_C2APB2FZR_DBG_TIM1_STOP                   \ DBG_TIM1_STOP
-$00020000 constant DBGMCU_C2APB2FZR_DBG_TIM16_STOP                  \ DBG_TIM16_STOP
-$00040000 constant DBGMCU_C2APB2FZR_DBG_TIM17_STOP                  \ DBG_TIM17_STOP
+
+  [ifdef] DBGMCU_C2APB1FZR2_DEF
+    \
+    \ @brief DBGMCU CPU2 APB1 Peripheral Freeze Register 2 [dual core device
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $05 constant DBGMCU_DBG_LPTIM2_STOP         \ [0x05] DBG_LPTIM2_STOP
+    $06 constant DBGMCU_DBG_LPTIM3_STOP         \ [0x06] DBG_LPTIM3_STOP
+  [then]
 
 
-\
-\ @brief Microcontroller Debug Unit
-\
-$e0042000 constant DBGMCU_IDCODER  \ offset: 0x00 : DBGMCU Identity Code Register
-$e0042004 constant DBGMCU_CR      \ offset: 0x04 : DBGMCU Configuration Register
-$e004203c constant DBGMCU_APB1FZR1  \ offset: 0x3C : DBGMCU CPU1 APB1 Peripheral Freeze Register 1
-$e0042040 constant DBGMCU_C2APB1FZR1  \ offset: 0x40 : DBGMCU CPU2 APB1 Peripheral Freeze Register 1 [dual core device
-$e0042044 constant DBGMCU_APB1FZR2  \ offset: 0x44 : DBGMCU CPU1 APB1 Peripheral Freeze Register 2
-$e0042048 constant DBGMCU_C2APB1FZR2  \ offset: 0x48 : DBGMCU CPU2 APB1 Peripheral Freeze Register 2 [dual core device
-$e004204c constant DBGMCU_APB2FZR  \ offset: 0x4C : DBGMCU CPU1 APB2 Peripheral Freeze Register
-$e0042050 constant DBGMCU_C2APB2FZR  \ offset: 0x50 : DBGMCU CPU2 APB2 Peripheral Freeze Register [dual core device
+  [ifdef] DBGMCU_APB2FZR_DEF
+    \
+    \ @brief DBGMCU CPU1 APB2 Peripheral Freeze Register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $0b constant DBGMCU_DBG_TIM1_STOP           \ [0x0b] DBG_TIM1_STOP
+    $11 constant DBGMCU_DBG_TIM16_STOP          \ [0x11] DBG_TIM16_STOP
+    $12 constant DBGMCU_DBG_TIM17_STOP          \ [0x12] DBG_TIM17_STOP
+  [then]
 
+
+  [ifdef] DBGMCU_C2APB2FZR_DEF
+    \
+    \ @brief DBGMCU CPU2 APB2 Peripheral Freeze Register [dual core device
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $0b constant DBGMCU_DBG_TIM1_STOP           \ [0x0b] DBG_TIM1_STOP
+    $11 constant DBGMCU_DBG_TIM16_STOP          \ [0x11] DBG_TIM16_STOP
+    $12 constant DBGMCU_DBG_TIM17_STOP          \ [0x12] DBG_TIM17_STOP
+  [then]
+
+  \
+  \ @brief Microcontroller Debug Unit
+  \
+  $00 constant DBGMCU_IDCODER           \ DBGMCU Identity Code Register
+  $04 constant DBGMCU_CR                \ DBGMCU Configuration Register
+  $3C constant DBGMCU_APB1FZR1          \ DBGMCU CPU1 APB1 Peripheral Freeze Register 1
+  $40 constant DBGMCU_C2APB1FZR1        \ DBGMCU CPU2 APB1 Peripheral Freeze Register 1 [dual core device
+  $44 constant DBGMCU_APB1FZR2          \ DBGMCU CPU1 APB1 Peripheral Freeze Register 2
+  $48 constant DBGMCU_C2APB1FZR2        \ DBGMCU CPU2 APB1 Peripheral Freeze Register 2 [dual core device
+  $4C constant DBGMCU_APB2FZR           \ DBGMCU CPU1 APB2 Peripheral Freeze Register
+  $50 constant DBGMCU_C2APB2FZR         \ DBGMCU CPU2 APB2 Peripheral Freeze Register [dual core device
+
+: DBGMCU_DEF ; [then]

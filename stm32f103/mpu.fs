@@ -6,73 +6,78 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] MPU_DEF
 
-\
-\ @brief MPU type register
-\ Address offset: 0x00
-\ Reset value: 0x00000800
-\
-
-$00000001 constant MPU_MPU_TYPER_SEPARATE                           \ Separate flag
-$0000ff00 constant MPU_MPU_TYPER_DREGION                            \ Number of MPU data regions
-$00ff0000 constant MPU_MPU_TYPER_IREGION                            \ Number of MPU instruction regions
-
-
-\
-\ @brief MPU control register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant MPU_MPU_CTRL_ENABLE                              \ Enables the MPU
-$00000002 constant MPU_MPU_CTRL_HFNMIENA                            \ Enables the operation of MPU during hard fault
-$00000004 constant MPU_MPU_CTRL_PRIVDEFENA                          \ Enable priviliged software access to default memory map
+  [ifdef] MPU_MPU_TYPER_DEF
+    \
+    \ @brief MPU type register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000800
+    \
+    $00 constant MPU_SEPARATE                   \ [0x00] Separate flag
+    $08 constant MPU_DREGION                    \ [0x08 : 8] Number of MPU data regions
+    $10 constant MPU_IREGION                    \ [0x10 : 8] Number of MPU instruction regions
+  [then]
 
 
-\
-\ @brief MPU region number register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$000000ff constant MPU_MPU_RNR_REGION                               \ MPU region
-
-
-\
-\ @brief MPU region base address register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant MPU_MPU_RBAR_REGION                              \ MPU region field
-$00000010 constant MPU_MPU_RBAR_VALID                               \ MPU region number valid
-$ffffffe0 constant MPU_MPU_RBAR_ADDR                                \ Region base address field
+  [ifdef] MPU_MPU_CTRL_DEF
+    \
+    \ @brief MPU control register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant MPU_ENABLE                     \ [0x00] Enables the MPU
+    $01 constant MPU_HFNMIENA                   \ [0x01] Enables the operation of MPU during hard fault
+    $02 constant MPU_PRIVDEFENA                 \ [0x02] Enable priviliged software access to default memory map
+  [then]
 
 
-\
-\ @brief MPU region attribute and size register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant MPU_MPU_RASR_ENABLE                              \ Region enable bit.
-$0000003e constant MPU_MPU_RASR_SIZE                                \ Size of the MPU protection region
-$0000ff00 constant MPU_MPU_RASR_SRD                                 \ Subregion disable bits
-$00010000 constant MPU_MPU_RASR_B                                   \ memory attribute
-$00020000 constant MPU_MPU_RASR_C                                   \ memory attribute
-$00040000 constant MPU_MPU_RASR_S                                   \ Shareable memory attribute
-$00380000 constant MPU_MPU_RASR_TEX                                 \ memory attribute
-$07000000 constant MPU_MPU_RASR_AP                                  \ Access permission
-$10000000 constant MPU_MPU_RASR_XN                                  \ Instruction access disable bit
+  [ifdef] MPU_MPU_RNR_DEF
+    \
+    \ @brief MPU region number register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant MPU_REGION                     \ [0x00 : 8] MPU region
+  [then]
 
 
-\
-\ @brief Memory protection unit
-\
-$e000ed90 constant MPU_MPU_TYPER  \ offset: 0x00 : MPU type register
-$e000ed94 constant MPU_MPU_CTRL   \ offset: 0x04 : MPU control register
-$e000ed98 constant MPU_MPU_RNR    \ offset: 0x08 : MPU region number register
-$e000ed9c constant MPU_MPU_RBAR   \ offset: 0x0C : MPU region base address register
-$e000eda0 constant MPU_MPU_RASR   \ offset: 0x10 : MPU region attribute and size register
+  [ifdef] MPU_MPU_RBAR_DEF
+    \
+    \ @brief MPU region base address register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant MPU_REGION                     \ [0x00 : 4] MPU region field
+    $04 constant MPU_VALID                      \ [0x04] MPU region number valid
+    $05 constant MPU_ADDR                       \ [0x05 : 27] Region base address field
+  [then]
 
+
+  [ifdef] MPU_MPU_RASR_DEF
+    \
+    \ @brief MPU region attribute and size register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant MPU_ENABLE                     \ [0x00] Region enable bit.
+    $01 constant MPU_SIZE                       \ [0x01 : 5] Size of the MPU protection region
+    $08 constant MPU_SRD                        \ [0x08 : 8] Subregion disable bits
+    $10 constant MPU_B                          \ [0x10] memory attribute
+    $11 constant MPU_C                          \ [0x11] memory attribute
+    $12 constant MPU_S                          \ [0x12] Shareable memory attribute
+    $13 constant MPU_TEX                        \ [0x13 : 3] memory attribute
+    $18 constant MPU_AP                         \ [0x18 : 3] Access permission
+    $1c constant MPU_XN                         \ [0x1c] Instruction access disable bit
+  [then]
+
+  \
+  \ @brief Memory protection unit
+  \
+  $00 constant MPU_MPU_TYPER            \ MPU type register
+  $04 constant MPU_MPU_CTRL             \ MPU control register
+  $08 constant MPU_MPU_RNR              \ MPU region number register
+  $0C constant MPU_MPU_RBAR             \ MPU region base address register
+  $10 constant MPU_MPU_RASR             \ MPU region attribute and size register
+
+: MPU_DEF ; [then]

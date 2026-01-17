@@ -6,960 +6,1032 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief DSI Host Version Register
-\ Address offset: 0x00
-\ Reset value: 0x3133302A
-\
-
-$00000000 constant DSI_DSI_VR_VERSION                               \ Version of the DSI Host
-
-
-\
-\ @brief DSI Host Control Register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_CR_EN                                    \ Enable
-
-
-\
-\ @brief DSI HOST Clock Control Register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DSI_DSI_CCR_TXECKDIV                             \ TX Escape Clock Division
-$0000ff00 constant DSI_DSI_CCR_TOCKDIV                              \ Timeout Clock Division
-
-
-\
-\ @brief DSI Host LTDC VCID Register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant DSI_DSI_LVCIDR_VCID                              \ Virtual Channel ID
-
-
-\
-\ @brief DSI Host LTDC Color Coding Register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000000f constant DSI_DSI_LCOLCR_COLC                              \ Color Coding
-$00000100 constant DSI_DSI_LCOLCR_LPE                               \ Loosely Packet Enable
-
-
-\
-\ @brief DSI Host LTDC Polarity Configuration Register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_LPCR_DEP                                 \ Data Enable Polarity
-$00000002 constant DSI_DSI_LPCR_VSP                                 \ VSYNC Polarity
-$00000004 constant DSI_DSI_LPCR_HSP                                 \ HSYNC Polarity
-
-
-\
-\ @brief DSI Host Low-Power mode Configuration Register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DSI_DSI_LPMCR_VLPSIZE                            \ VACT Largest Packet Size
-$00ff0000 constant DSI_DSI_LPMCR_LPSIZE                             \ Largest Packet Size
-
-
-\
-\ @brief DSI Host Protocol Configuration Register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_PCR_ETTXE                                \ EoTp Transmission Enable
-$00000002 constant DSI_DSI_PCR_ETRXE                                \ EoTp Reception Enable
-$00000004 constant DSI_DSI_PCR_BTAE                                 \ Bus Turn Around Enable
-$00000008 constant DSI_DSI_PCR_ECCRXE                               \ ECC Reception Enable
-$00000010 constant DSI_DSI_PCR_CRCRXE                               \ CRC Reception Enable
-
-
-\
-\ @brief DSI Host Generic VCID Register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000003 constant DSI_DSI_GVCIDR_VCID                              \ Virtual Channel ID
-
-
-\
-\ @brief DSI Host mode Configuration Register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_MCR_CMDM                                 \ Command mode
-
-
-\
-\ @brief DSI Host Video mode Configuration Register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000003 constant DSI_DSI_VMCR_VMT                                 \ Video mode Type
-$00000100 constant DSI_DSI_VMCR_LPVSAE                              \ Low-Power Vertical Sync Active Enable
-$00000200 constant DSI_DSI_VMCR_LPVBPE                              \ Low-power Vertical Back-Porch Enable
-$00000400 constant DSI_DSI_VMCR_LPVFPE                              \ Low-power Vertical Front-porch Enable
-$00000800 constant DSI_DSI_VMCR_LPVAE                               \ Low-Power Vertical Active Enable
-$00001000 constant DSI_DSI_VMCR_LPHBPE                              \ Low-Power Horizontal Back-Porch Enable
-$00002000 constant DSI_DSI_VMCR_LPHFPE                              \ Low-Power Horizontal Front-Porch Enable
-$00004000 constant DSI_DSI_VMCR_FBTAAE                              \ Frame Bus-Turn-Around Acknowledge Enable
-$00008000 constant DSI_DSI_VMCR_LPCE                                \ Low-Power Command Enable
-$00010000 constant DSI_DSI_VMCR_PGE                                 \ Pattern Generator Enable
-$00100000 constant DSI_DSI_VMCR_PGM                                 \ Pattern Generator mode
-$01000000 constant DSI_DSI_VMCR_PGO                                 \ Pattern Generator Orientation
-
-
-\
-\ @brief DSI Host Video Packet Configuration Register
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00003fff constant DSI_DSI_VPCR_VPSIZE                              \ Video Packet Size
-
-
-\
-\ @brief DSI Host Video Chunks Configuration Register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00001fff constant DSI_DSI_VCCR_NUMC                                \ Number of Chunks
-
-
-\
-\ @brief DSI Host Video Null Packet Configuration Register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00001fff constant DSI_DSI_VNPCR_NPSIZE                             \ Null Packet Size
-
-
-\
-\ @brief DSI Host Video HSA Configuration Register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DSI_DSI_VHSACR_HSA                               \ Horizontal Synchronism Active duration
-
-
-\
-\ @brief DSI Host Video HBP Configuration Register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DSI_DSI_VHBPCR_HBP                               \ Horizontal Back-Porch duration
-
-
-\
-\ @brief DSI Host Video Line Configuration Register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00007fff constant DSI_DSI_VLCR_HLINE                               \ Horizontal Line duration
-
-
-\
-\ @brief DSI Host Video VSA Configuration Register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$000003ff constant DSI_DSI_VVSACR_VSA                               \ Vertical Synchronism Active duration
-
-
-\
-\ @brief DSI Host Video VBP Configuration Register
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$000003ff constant DSI_DSI_VVBPCR_VBP                               \ Vertical Back-Porch duration
-
-
-\
-\ @brief DSI Host Video VFP Configuration Register
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$000003ff constant DSI_DSI_VVFPCR_VFP                               \ Vertical Front-Porch duration
-
-
-\
-\ @brief DSI Host Video VA Configuration Register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00003fff constant DSI_DSI_VVACR_VA                                 \ Vertical Active duration
-
-
-\
-\ @brief DSI Host LTDC Command Configuration Register
-\ Address offset: 0x64
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DSI_DSI_LCCR_CMDSIZE                             \ Command Size
-
-
-\
-\ @brief DSI Host Command mode Configuration Register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_CMCR_TEARE                               \ Tearing Effect Acknowledge Request Enable
-$00000002 constant DSI_DSI_CMCR_ARE                                 \ Acknowledge Request Enable
-$00000100 constant DSI_DSI_CMCR_GSW0TX                              \ Generic Short Write Zero parameters Transmission
-$00000200 constant DSI_DSI_CMCR_GSW1TX                              \ Generic Short Write One parameters Transmission
-$00000400 constant DSI_DSI_CMCR_GSW2TX                              \ Generic Short Write Two parameters Transmission
-$00000800 constant DSI_DSI_CMCR_GSR0TX                              \ Generic Short Read Zero parameters Transmission
-$00001000 constant DSI_DSI_CMCR_GSR1TX                              \ Generic Short Read One parameters Transmission
-$00002000 constant DSI_DSI_CMCR_GSR2TX                              \ Generic Short Read Two parameters Transmission
-$00004000 constant DSI_DSI_CMCR_GLWTX                               \ Generic Long Write Transmission
-$00010000 constant DSI_DSI_CMCR_DSW0TX                              \ DCS Short Write Zero parameter Transmission
-$00020000 constant DSI_DSI_CMCR_DSW1TX                              \ DCS Short Read One parameter Transmission
-$00040000 constant DSI_DSI_CMCR_DSR0TX                              \ DCS Short Read Zero parameter Transmission
-$00080000 constant DSI_DSI_CMCR_DLWTX                               \ DCS Long Write Transmission
-$01000000 constant DSI_DSI_CMCR_MRDPS                               \ Maximum Read Packet Size
-
-
-\
-\ @brief DSI Host Generic Header Configuration Register
-\ Address offset: 0x6C
-\ Reset value: 0x00000000
-\
-
-$0000003f constant DSI_DSI_GHCR_DT                                  \ Type
-$000000c0 constant DSI_DSI_GHCR_VCID                                \ Channel
-$0000ff00 constant DSI_DSI_GHCR_WCLSB                               \ WordCount LSB
-$00ff0000 constant DSI_DSI_GHCR_WCMSB                               \ WordCount MSB
-
-
-\
-\ @brief DSI Host Generic Payload Data Register
-\ Address offset: 0x70
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DSI_DSI_GPDR_DATA1                               \ Payload Byte 1
-$0000ff00 constant DSI_DSI_GPDR_DATA2                               \ Payload Byte 2
-$00ff0000 constant DSI_DSI_GPDR_DATA3                               \ Payload Byte 3
-$ff000000 constant DSI_DSI_GPDR_DATA4                               \ Payload Byte 4
-
-
-\
-\ @brief DSI Host Generic Packet Status Register
-\ Address offset: 0x74
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_GPSR_CMDFE                               \ Command FIFO Empty
-$00000002 constant DSI_DSI_GPSR_CMDFF                               \ Command FIFO Full
-$00000004 constant DSI_DSI_GPSR_PWRFE                               \ Payload Write FIFO Empty
-$00000008 constant DSI_DSI_GPSR_PWRFF                               \ Payload Write FIFO Full
-$00000010 constant DSI_DSI_GPSR_PRDFE                               \ Payload Read FIFO Empty
-$00000020 constant DSI_DSI_GPSR_PRDFF                               \ Payload Read FIFO Full
-$00000040 constant DSI_DSI_GPSR_RCB                                 \ Read Command Busy
-
-
-\
-\ @brief DSI Host Timeout Counter Configuration Register 0
-\ Address offset: 0x78
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DSI_DSI_TCCR0_LPRX_TOCNT                         \ Low-power Reception Timeout Counter
-$ffff0000 constant DSI_DSI_TCCR0_HSTX_TOCNT                         \ High-Speed Transmission Timeout Counter
-
-
-\
-\ @brief DSI Host Timeout Counter Configuration Register 1
-\ Address offset: 0x7C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DSI_DSI_TCCR1_HSRD_TOCNT                         \ High-Speed Read Timeout Counter
-
-
-\
-\ @brief DSI Host Timeout Counter Configuration Register 2
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DSI_DSI_TCCR2_LPRD_TOCNT                         \ Low-Power Read Timeout Counter
-
-
-\
-\ @brief DSI Host Timeout Counter Configuration Register 3
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DSI_DSI_TCCR3_HSWR_TOCNT                         \ High-Speed Write Timeout Counter
-$01000000 constant DSI_DSI_TCCR3_PM                                 \ Presp mode
-
-
-\
-\ @brief DSI Host Timeout Counter Configuration Register 4
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DSI_DSI_TCCR4_LSWR_TOCNT                         \ Low-Power Write Timeout Counter
-
-
-\
-\ @brief DSI Host Timeout Counter Configuration Register 5
-\ Address offset: 0x8C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DSI_DSI_TCCR5_BTA_TOCNT                          \ Bus-Turn-Around Timeout Counter
-
-
-\
-\ @brief DSI Host Clock Lane Configuration Register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_CLCR_DPCC                                \ D-PHY Clock Control
-$00000002 constant DSI_DSI_CLCR_ACR                                 \ Automatic Clock lane Control
-
-
-\
-\ @brief DSI Host Clock Lane Timer Configuration Register
-\ Address offset: 0x98
-\ Reset value: 0x00000000
-\
-
-$000003ff constant DSI_DSI_CLTCR_LP2HS_TIME                         \ Low-Power to High-Speed Time
-$03ff0000 constant DSI_DSI_CLTCR_HS2LP_TIME                         \ High-Speed to Low-Power Time
-
-
-\
-\ @brief DSI Host Data Lane Timer Configuration Register
-\ Address offset: 0x9C
-\ Reset value: 0x00000000
-\
-
-$00007fff constant DSI_DSI_DLTCR_MRD_TIME                           \ Maximum Read Time
-$00ff0000 constant DSI_DSI_DLTCR_LP2HS_TIME                         \ Low-Power To High-Speed Time
-$ff000000 constant DSI_DSI_DLTCR_HS2LP_TIME                         \ High-Speed To Low-Power Time
-
-
-\
-\ @brief DSI Host PHY Control Register
-\ Address offset: 0xA0
-\ Reset value: 0x00000000
-\
-
-$00000002 constant DSI_DSI_PCTLR_DEN                                \ Digital Enable
-$00000004 constant DSI_DSI_PCTLR_CKE                                \ Clock Enable
-
-
-\
-\ @brief DSI Host PHY Configuration Register
-\ Address offset: 0xA4
-\ Reset value: 0x00000000
-\
-
-$00000003 constant DSI_DSI_PCONFR_NL                                \ Number of Lanes
-$0000ff00 constant DSI_DSI_PCONFR_SW_TIME                           \ Stop Wait Time
-
-
-\
-\ @brief DSI Host PHY ULPS Control Register
-\ Address offset: 0xA8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_PUCR_URCL                                \ ULPS Request on Clock Lane
-$00000002 constant DSI_DSI_PUCR_UECL                                \ ULPS Exit on Clock Lane
-$00000004 constant DSI_DSI_PUCR_URDL                                \ ULPS Request on Data Lane
-$00000008 constant DSI_DSI_PUCR_UEDL                                \ ULPS Exit on Data Lane
-
-
-\
-\ @brief DSI Host PHY TX Triggers Configuration Register
-\ Address offset: 0xAC
-\ Reset value: 0x00000000
-\
-
-$0000000f constant DSI_DSI_PTTCR_TX_TRIG                            \ Transmission Trigger
-
-
-\
-\ @brief DSI Host PHY Status Register
-\ Address offset: 0xB0
-\ Reset value: 0x00000000
-\
-
-$00000002 constant DSI_DSI_PSR_PD                                   \ PHY Direction
-$00000004 constant DSI_DSI_PSR_PSSC                                 \ PHY Stop State Clock lane
-$00000008 constant DSI_DSI_PSR_UANC                                 \ ULPS Active Not Clock lane
-$00000010 constant DSI_DSI_PSR_PSS0                                 \ PHY Stop State lane 0
-$00000020 constant DSI_DSI_PSR_UAN0                                 \ ULPS Active Not lane 1
-$00000040 constant DSI_DSI_PSR_RUE0                                 \ RX ULPS Escape lane 0
-$00000080 constant DSI_DSI_PSR_PSS1                                 \ PHY Stop State lane 1
-$00000100 constant DSI_DSI_PSR_UAN1                                 \ ULPS Active Not lane 1
-
-
-\
-\ @brief DSI Host Interrupt & Status Register 0
-\ Address offset: 0xBC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_ISR0_AE0                                 \ Acknowledge Error 0
-$00000002 constant DSI_DSI_ISR0_AE1                                 \ Acknowledge Error 1
-$00000004 constant DSI_DSI_ISR0_AE2                                 \ Acknowledge Error 2
-$00000008 constant DSI_DSI_ISR0_AE3                                 \ Acknowledge Error 3
-$00000010 constant DSI_DSI_ISR0_AE4                                 \ Acknowledge Error 4
-$00000020 constant DSI_DSI_ISR0_AE5                                 \ Acknowledge Error 5
-$00000040 constant DSI_DSI_ISR0_AE6                                 \ Acknowledge Error 6
-$00000080 constant DSI_DSI_ISR0_AE7                                 \ Acknowledge Error 7
-$00000100 constant DSI_DSI_ISR0_AE8                                 \ Acknowledge Error 8
-$00000200 constant DSI_DSI_ISR0_AE9                                 \ Acknowledge Error 9
-$00000400 constant DSI_DSI_ISR0_AE10                                \ Acknowledge Error 10
-$00000800 constant DSI_DSI_ISR0_AE11                                \ Acknowledge Error 11
-$00001000 constant DSI_DSI_ISR0_AE12                                \ Acknowledge Error 12
-$00002000 constant DSI_DSI_ISR0_AE13                                \ Acknowledge Error 13
-$00004000 constant DSI_DSI_ISR0_AE14                                \ Acknowledge Error 14
-$00008000 constant DSI_DSI_ISR0_AE15                                \ Acknowledge Error 15
-$00010000 constant DSI_DSI_ISR0_PE0                                 \ PHY Error 0
-$00020000 constant DSI_DSI_ISR0_PE1                                 \ PHY Error 1
-$00040000 constant DSI_DSI_ISR0_PE2                                 \ PHY Error 2
-$00080000 constant DSI_DSI_ISR0_PE3                                 \ PHY Error 3
-$00100000 constant DSI_DSI_ISR0_PE4                                 \ PHY Error 4
-
-
-\
-\ @brief DSI Host Interrupt & Status Register 1
-\ Address offset: 0xC0
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_ISR1_TOHSTX                              \ Timeout High-Speed Transmission
-$00000002 constant DSI_DSI_ISR1_TOLPRX                              \ Timeout Low-Power Reception
-$00000004 constant DSI_DSI_ISR1_ECCSE                               \ ECC Single-bit Error
-$00000008 constant DSI_DSI_ISR1_ECCME                               \ ECC Multi-bit Error
-$00000010 constant DSI_DSI_ISR1_CRCE                                \ CRC Error
-$00000020 constant DSI_DSI_ISR1_PSE                                 \ Packet Size Error
-$00000040 constant DSI_DSI_ISR1_EOTPE                               \ EoTp Error
-$00000080 constant DSI_DSI_ISR1_LPWRE                               \ LTDC Payload Write Error
-$00000100 constant DSI_DSI_ISR1_GCWRE                               \ Generic Command Write Error
-$00000200 constant DSI_DSI_ISR1_GPWRE                               \ Generic Payload Write Error
-$00000400 constant DSI_DSI_ISR1_GPTXE                               \ Generic Payload Transmit Error
-$00000800 constant DSI_DSI_ISR1_GPRDE                               \ Generic Payload Read Error
-$00001000 constant DSI_DSI_ISR1_GPRXE                               \ Generic Payload Receive Error
-
-
-\
-\ @brief DSI Host Interrupt Enable Register 0
-\ Address offset: 0xC4
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_IER0_AE0IE                               \ Acknowledge Error 0 Interrupt Enable
-$00000002 constant DSI_DSI_IER0_AE1IE                               \ Acknowledge Error 1 Interrupt Enable
-$00000004 constant DSI_DSI_IER0_AE2IE                               \ Acknowledge Error 2 Interrupt Enable
-$00000008 constant DSI_DSI_IER0_AE3IE                               \ Acknowledge Error 3 Interrupt Enable
-$00000010 constant DSI_DSI_IER0_AE4IE                               \ Acknowledge Error 4 Interrupt Enable
-$00000020 constant DSI_DSI_IER0_AE5IE                               \ Acknowledge Error 5 Interrupt Enable
-$00000040 constant DSI_DSI_IER0_AE6IE                               \ Acknowledge Error 6 Interrupt Enable
-$00000080 constant DSI_DSI_IER0_AE7IE                               \ Acknowledge Error 7 Interrupt Enable
-$00000100 constant DSI_DSI_IER0_AE8IE                               \ Acknowledge Error 8 Interrupt Enable
-$00000200 constant DSI_DSI_IER0_AE9IE                               \ Acknowledge Error 9 Interrupt Enable
-$00000400 constant DSI_DSI_IER0_AE10IE                              \ Acknowledge Error 10 Interrupt Enable
-$00000800 constant DSI_DSI_IER0_AE11IE                              \ Acknowledge Error 11 Interrupt Enable
-$00001000 constant DSI_DSI_IER0_AE12IE                              \ Acknowledge Error 12 Interrupt Enable
-$00002000 constant DSI_DSI_IER0_AE13IE                              \ Acknowledge Error 13 Interrupt Enable
-$00004000 constant DSI_DSI_IER0_AE14IE                              \ Acknowledge Error 14 Interrupt Enable
-$00008000 constant DSI_DSI_IER0_AE15IE                              \ Acknowledge Error 15 Interrupt Enable
-$00010000 constant DSI_DSI_IER0_PE0IE                               \ PHY Error 0 Interrupt Enable
-$00020000 constant DSI_DSI_IER0_PE1IE                               \ PHY Error 1 Interrupt Enable
-$00040000 constant DSI_DSI_IER0_PE2IE                               \ PHY Error 2 Interrupt Enable
-$00080000 constant DSI_DSI_IER0_PE3IE                               \ PHY Error 3 Interrupt Enable
-$00100000 constant DSI_DSI_IER0_PE4IE                               \ PHY Error 4 Interrupt Enable
-
-
-\
-\ @brief DSI Host Interrupt Enable Register 1
-\ Address offset: 0xC8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_IER1_TOHSTXIE                            \ Timeout High-Speed Transmission Interrupt Enable
-$00000002 constant DSI_DSI_IER1_TOLPRXIE                            \ Timeout Low-Power Reception Interrupt Enable
-$00000004 constant DSI_DSI_IER1_ECCSEIE                             \ ECC Single-bit Error Interrupt Enable
-$00000008 constant DSI_DSI_IER1_ECCMEIE                             \ ECC Multi-bit Error Interrupt Enable
-$00000010 constant DSI_DSI_IER1_CRCEIE                              \ CRC Error Interrupt Enable
-$00000020 constant DSI_DSI_IER1_PSEIE                               \ Packet Size Error Interrupt Enable
-$00000040 constant DSI_DSI_IER1_EOTPEIE                             \ EoTp Error Interrupt Enable
-$00000080 constant DSI_DSI_IER1_LPWREIE                             \ LTDC Payload Write Error Interrupt Enable
-$00000100 constant DSI_DSI_IER1_GCWREIE                             \ Generic Command Write Error Interrupt Enable
-$00000200 constant DSI_DSI_IER1_GPWREIE                             \ Generic Payload Write Error Interrupt Enable
-$00000400 constant DSI_DSI_IER1_GPTXEIE                             \ Generic Payload Transmit Error Interrupt Enable
-$00000800 constant DSI_DSI_IER1_GPRDEIE                             \ Generic Payload Read Error Interrupt Enable
-$00001000 constant DSI_DSI_IER1_GPRXEIE                             \ Generic Payload Receive Error Interrupt Enable
-
-
-\
-\ @brief DSI Host Force Interrupt Register 0
-\ Address offset: 0xD8
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_FIR0_FAE0                                \ Force Acknowledge Error 0
-$00000002 constant DSI_DSI_FIR0_FAE1                                \ Force Acknowledge Error 1
-$00000004 constant DSI_DSI_FIR0_FAE2                                \ Force Acknowledge Error 2
-$00000008 constant DSI_DSI_FIR0_FAE3                                \ Force Acknowledge Error 3
-$00000010 constant DSI_DSI_FIR0_FAE4                                \ Force Acknowledge Error 4
-$00000020 constant DSI_DSI_FIR0_FAE5                                \ Force Acknowledge Error 5
-$00000040 constant DSI_DSI_FIR0_FAE6                                \ Force Acknowledge Error 6
-$00000080 constant DSI_DSI_FIR0_FAE7                                \ Force Acknowledge Error 7
-$00000100 constant DSI_DSI_FIR0_FAE8                                \ Force Acknowledge Error 8
-$00000200 constant DSI_DSI_FIR0_FAE9                                \ Force Acknowledge Error 9
-$00000400 constant DSI_DSI_FIR0_FAE10                               \ Force Acknowledge Error 10
-$00000800 constant DSI_DSI_FIR0_FAE11                               \ Force Acknowledge Error 11
-$00001000 constant DSI_DSI_FIR0_FAE12                               \ Force Acknowledge Error 12
-$00002000 constant DSI_DSI_FIR0_FAE13                               \ Force Acknowledge Error 13
-$00004000 constant DSI_DSI_FIR0_FAE14                               \ Force Acknowledge Error 14
-$00008000 constant DSI_DSI_FIR0_FAE15                               \ Force Acknowledge Error 15
-$00010000 constant DSI_DSI_FIR0_FPE0                                \ Force PHY Error 0
-$00020000 constant DSI_DSI_FIR0_FPE1                                \ Force PHY Error 1
-$00040000 constant DSI_DSI_FIR0_FPE2                                \ Force PHY Error 2
-$00080000 constant DSI_DSI_FIR0_FPE3                                \ Force PHY Error 3
-$00100000 constant DSI_DSI_FIR0_FPE4                                \ Force PHY Error 4
-
-
-\
-\ @brief DSI Host Force Interrupt Register 1
-\ Address offset: 0xDC
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_FIR1_FTOHSTX                             \ Force Timeout High-Speed Transmission
-$00000002 constant DSI_DSI_FIR1_FTOLPRX                             \ Force Timeout Low-Power Reception
-$00000004 constant DSI_DSI_FIR1_FECCSE                              \ Force ECC Single-bit Error
-$00000008 constant DSI_DSI_FIR1_FECCME                              \ Force ECC Multi-bit Error
-$00000010 constant DSI_DSI_FIR1_FCRCE                               \ Force CRC Error
-$00000020 constant DSI_DSI_FIR1_FPSE                                \ Force Packet Size Error
-$00000040 constant DSI_DSI_FIR1_FEOTPE                              \ Force EoTp Error
-$00000080 constant DSI_DSI_FIR1_FLPWRE                              \ Force LTDC Payload Write Error
-$00000100 constant DSI_DSI_FIR1_FGCWRE                              \ Force Generic Command Write Error
-$00000200 constant DSI_DSI_FIR1_FGPWRE                              \ Force Generic Payload Write Error
-$00000400 constant DSI_DSI_FIR1_FGPTXE                              \ Force Generic Payload Transmit Error
-$00000800 constant DSI_DSI_FIR1_FGPRDE                              \ Force Generic Payload Read Error
-$00001000 constant DSI_DSI_FIR1_FGPRXE                              \ Force Generic Payload Receive Error
-
-
-\
-\ @brief DSI Host Video Shadow Control Register
-\ Address offset: 0x100
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_VSCR_EN                                  \ Enable
-$00000100 constant DSI_DSI_VSCR_UR                                  \ Update Register
-
-
-\
-\ @brief DSI Host LTDC Current VCID Register
-\ Address offset: 0x10C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant DSI_DSI_LCVCIDR_VCID                             \ Virtual Channel ID
-
-
-\
-\ @brief DSI Host LTDC Current Color Coding Register
-\ Address offset: 0x110
-\ Reset value: 0x00000000
-\
-
-$0000000f constant DSI_DSI_LCCCR_COLC                               \ Color Coding
-$00000100 constant DSI_DSI_LCCCR_LPE                                \ Loosely Packed Enable
-
-
-\
-\ @brief DSI Host Low-Power mode Current Configuration Register
-\ Address offset: 0x118
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DSI_DSI_LPMCCR_VLPSIZE                           \ VACT Largest Packet Size
-$00ff0000 constant DSI_DSI_LPMCCR_LPSIZE                            \ Largest Packet Size
-
-
-\
-\ @brief DSI Host Video mode Current Configuration Register
-\ Address offset: 0x138
-\ Reset value: 0x00000000
-\
-
-$00000003 constant DSI_DSI_VMCCR_VMT                                \ Video mode Type
-$00000004 constant DSI_DSI_VMCCR_LPVSAE                             \ Low-Power Vertical Sync time Enable
-$00000008 constant DSI_DSI_VMCCR_LPVBPE                             \ Low-power Vertical Back-Porch Enable
-$00000010 constant DSI_DSI_VMCCR_LPVFPE                             \ Low-power Vertical Front-Porch Enable
-$00000020 constant DSI_DSI_VMCCR_LPVAE                              \ Low-Power Vertical Active Enable
-$00000040 constant DSI_DSI_VMCCR_LPHBPE                             \ Low-power Horizontal Back-Porch Enable
-$00000080 constant DSI_DSI_VMCCR_LPHFE                              \ Low-Power Horizontal Front-Porch Enable
-$00000100 constant DSI_DSI_VMCCR_FBTAAE                             \ Frame BTA Acknowledge Enable
-$00000200 constant DSI_DSI_VMCCR_LPCE                               \ Low-Power Command Enable
-
-
-\
-\ @brief DSI Host Video Packet Current Configuration Register
-\ Address offset: 0x13C
-\ Reset value: 0x00000000
-\
-
-$00003fff constant DSI_DSI_VPCCR_VPSIZE                             \ Video Packet Size
-
-
-\
-\ @brief DSI Host Video Chunks Current Configuration Register
-\ Address offset: 0x140
-\ Reset value: 0x00000000
-\
-
-$00001fff constant DSI_DSI_VCCCR_NUMC                               \ Number of Chunks
-
-
-\
-\ @brief DSI Host Video Null Packet Current Configuration Register
-\ Address offset: 0x144
-\ Reset value: 0x00000000
-\
-
-$00001fff constant DSI_DSI_VNPCCR_NPSIZE                            \ Null Packet Size
-
-
-\
-\ @brief DSI Host Video HSA Current Configuration Register
-\ Address offset: 0x148
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DSI_DSI_VHSACCR_HSA                              \ Horizontal Synchronism Active duration
-
-
-\
-\ @brief DSI Host Video HBP Current Configuration Register
-\ Address offset: 0x14C
-\ Reset value: 0x00000000
-\
-
-$00000fff constant DSI_DSI_VHBPCCR_HBP                              \ Horizontal Back-Porch duration
-
-
-\
-\ @brief DSI Host Video Line Current Configuration Register
-\ Address offset: 0x150
-\ Reset value: 0x00000000
-\
-
-$00007fff constant DSI_DSI_VLCCR_HLINE                              \ Horizontal Line duration
-
-
-\
-\ @brief DSI Host Video VSA Current Configuration Register
-\ Address offset: 0x154
-\ Reset value: 0x00000000
-\
-
-$000003ff constant DSI_DSI_VVSACCR_VSA                              \ Vertical Synchronism Active duration
-
-
-\
-\ @brief DSI Host Video VBP Current Configuration Register
-\ Address offset: 0x158
-\ Reset value: 0x00000000
-\
-
-$000003ff constant DSI_DSI_VVBPCCR_VBP                              \ Vertical Back-Porch duration
-
-
-\
-\ @brief DSI Host Video VFP Current Configuration Register
-\ Address offset: 0x15C
-\ Reset value: 0x00000000
-\
-
-$000003ff constant DSI_DSI_VVFPCCR_VFP                              \ Vertical Front-Porch duration
-
-
-\
-\ @brief DSI Host Video VA Current Configuration Register
-\ Address offset: 0x160
-\ Reset value: 0x00000000
-\
-
-$00003fff constant DSI_DSI_VVACCR_VA                                \ Vertical Active duration
-
-
-\
-\ @brief DSI Wrapper Configuration Register
-\ Address offset: 0x400
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_WCFGR_DSIM                               \ DSI Mode
-$0000000e constant DSI_DSI_WCFGR_COLMUX                             \ Color Multiplexing
-$00000010 constant DSI_DSI_WCFGR_TESRC                              \ TE Source
-$00000020 constant DSI_DSI_WCFGR_TEPOL                              \ TE Polarity
-$00000040 constant DSI_DSI_WCFGR_AR                                 \ Automatic Refresh
-$00000080 constant DSI_DSI_WCFGR_VSPOL                              \ VSync Polarity
-
-
-\
-\ @brief DSI Wrapper Control Register
-\ Address offset: 0x404
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_WCR_COLM                                 \ Color Mode
-$00000002 constant DSI_DSI_WCR_SHTDN                                \ Shutdown
-$00000004 constant DSI_DSI_WCR_LTDCEN                               \ LTDC Enable
-$00000008 constant DSI_DSI_WCR_DSIEN                                \ DSI Enable
-
-
-\
-\ @brief DSI Wrapper Interrupt Enable Register
-\ Address offset: 0x408
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_WIER_TEIE                                \ Tearing Effect Interrupt Enable
-$00000002 constant DSI_DSI_WIER_ERIE                                \ End of Refresh Interrupt Enable
-$00000200 constant DSI_DSI_WIER_PLLLIE                              \ PLL Lock Interrupt Enable
-$00000400 constant DSI_DSI_WIER_PLLUIE                              \ PLL Unlock Interrupt Enable
-$00002000 constant DSI_DSI_WIER_RRIE                                \ Regulator Ready Interrupt Enable
-
-
-\
-\ @brief DSI Wrapper Interrupt & Status Register
-\ Address offset: 0x40C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_WISR_TEIF                                \ Tearing Effect Interrupt Flag
-$00000002 constant DSI_DSI_WISR_ERIF                                \ End of Refresh Interrupt Flag
-$00000004 constant DSI_DSI_WISR_BUSY                                \ Busy Flag
-$00000100 constant DSI_DSI_WISR_PLLLS                               \ PLL Lock Status
-$00000200 constant DSI_DSI_WISR_PLLLIF                              \ PLL Lock Interrupt Flag
-$00000400 constant DSI_DSI_WISR_PLLUIF                              \ PLL Unlock Interrupt Flag
-$00001000 constant DSI_DSI_WISR_RRS                                 \ Regulator Ready Status
-$00002000 constant DSI_DSI_WISR_RRIF                                \ Regulator Ready Interrupt Flag
-
-
-\
-\ @brief DSI Wrapper Interrupt Flag Clear Register
-\ Address offset: 0x410
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_WIFCR_CTEIF                              \ Clear Tearing Effect Interrupt Flag
-$00000002 constant DSI_DSI_WIFCR_CERIF                              \ Clear End of Refresh Interrupt Flag
-$00000200 constant DSI_DSI_WIFCR_CPLLLIF                            \ Clear PLL Lock Interrupt Flag
-$00000400 constant DSI_DSI_WIFCR_CPLLUIF                            \ Clear PLL Unlock Interrupt Flag
-$00002000 constant DSI_DSI_WIFCR_CRRIF                              \ Clear Regulator Ready Interrupt Flag
-
-
-\
-\ @brief DSI Wrapper PHY Configuration Register 1
-\ Address offset: 0x418
-\ Reset value: 0x00000000
-\
-
-$0000003f constant DSI_DSI_WPCR1_UIX4                               \ Unit Interval multiplied by 4
-$00000040 constant DSI_DSI_WPCR1_SWCL                               \ Swap Clock Lane pins
-$00000080 constant DSI_DSI_WPCR1_SWDL0                              \ Swap Data Lane 0 pins
-$00000100 constant DSI_DSI_WPCR1_SWDL1                              \ Swap Data Lane 1 pins
-$00000200 constant DSI_DSI_WPCR1_HSICL                              \ Invert Hight-Speed data signal on Clock Lane
-$00000400 constant DSI_DSI_WPCR1_HSIDL0                             \ Invert the Hight-Speed data signal on Data Lane 0
-$00000800 constant DSI_DSI_WPCR1_HSIDL1                             \ Invert the High-Speed data signal on Data Lane 1
-$00001000 constant DSI_DSI_WPCR1_FTXSMCL                            \ Force in TX Stop Mode the Clock Lane
-$00002000 constant DSI_DSI_WPCR1_FTXSMDL                            \ Force in TX Stop Mode the Data Lanes
-$00004000 constant DSI_DSI_WPCR1_CDOFFDL                            \ Contention Detection OFF on Data Lanes
-$00010000 constant DSI_DSI_WPCR1_TDDL                               \ Turn Disable Data Lanes
-$00040000 constant DSI_DSI_WPCR1_PDEN                               \ Pull-Down Enable
-$00080000 constant DSI_DSI_WPCR1_TCLKPREPEN                         \ custom time for tCLK-PREPARE Enable
-$00100000 constant DSI_DSI_WPCR1_TCLKZEROEN                         \ custom time for tCLK-ZERO Enable
-$00200000 constant DSI_DSI_WPCR1_THSPREPEN                          \ custom time for tHS-PREPARE Enable
-$00400000 constant DSI_DSI_WPCR1_THSTRAILEN                         \ custom time for tHS-TRAIL Enable
-$00800000 constant DSI_DSI_WPCR1_THSZEROEN                          \ custom time for tHS-ZERO Enable
-$01000000 constant DSI_DSI_WPCR1_TLPXDEN                            \ custom time for tLPX for Data lanes Enable
-$02000000 constant DSI_DSI_WPCR1_THSEXITEN                          \ custom time for tHS-EXIT Enable
-$04000000 constant DSI_DSI_WPCR1_TLPXCEN                            \ custom time for tLPX for Clock lane Enable
-$08000000 constant DSI_DSI_WPCR1_TCLKPOSTEN                         \ custom time for tCLK-POST Enable
-
-
-\
-\ @brief DSI Wrapper PHY Configuration Register 2
-\ Address offset: 0x41C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant DSI_DSI_WPCR2_HSTXDCL                            \ High-Speed Transmission Delay on Clock Lane
-$0000000c constant DSI_DSI_WPCR2_HSTXDLL                            \ High-Speed Transmission Delay on Data Lanes
-$000000c0 constant DSI_DSI_WPCR2_LPSRCL                             \ Low-Power transmission Slew Rate Compensation on Clock Lane
-$00000300 constant DSI_DSI_WPCR2_LPSRDL                             \ Low-Power transmission Slew Rate Compensation on Data Lanes
-$00001000 constant DSI_DSI_WPCR2_SDCC                               \ SDD Control
-$00030000 constant DSI_DSI_WPCR2_HSTXSRCCL                          \ High-Speed Transmission Slew Rate Control on Clock Lane
-$000c0000 constant DSI_DSI_WPCR2_HSTXSRCDL                          \ High-Speed Transmission Slew Rate Control on Data Lanes
-$00400000 constant DSI_DSI_WPCR2_FLPRXLPM                           \ Forces LP Receiver in Low-Power Mode
-$06000000 constant DSI_DSI_WPCR2_LPRXFT                             \ Low-Power RX low-pass Filtering Tuning
-
-
-\
-\ @brief DSI Wrapper PHY Configuration Register 3
-\ Address offset: 0x420
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DSI_DSI_WPCR3_TCLKPREP                           \ tCLK-PREPARE
-$0000ff00 constant DSI_DSI_WPCR3_TCLKZEO                            \ tCLK-ZERO
-$00ff0000 constant DSI_DSI_WPCR3_THSPREP                            \ tHS-PREPARE
-$ff000000 constant DSI_DSI_WPCR3_THSTRAIL                           \ tHSTRAIL
-
-
-\
-\ @brief DSI_WPCR4
-\ Address offset: 0x424
-\ Reset value: 0x3133302A
-\
-
-$000000ff constant DSI_DSI_WPCR4_THSZERO                            \ tHS-ZERO
-$0000ff00 constant DSI_DSI_WPCR4_TLPXD                              \ tLPX for Data lanes
-$00ff0000 constant DSI_DSI_WPCR4_THSEXIT                            \ tHSEXIT
-$ff000000 constant DSI_DSI_WPCR4_TLPXC                              \ tLPXC for Clock lane
-
-
-\
-\ @brief DSI Wrapper PHY Configuration Register 5
-\ Address offset: 0x428
-\ Reset value: 0x00000000
-\
-
-$000000ff constant DSI_DSI_WPCR5_THSZERO                            \ tCLK-POST
-
-
-\
-\ @brief DSI Wrapper Regulator and PLL Control Register
-\ Address offset: 0x430
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DSI_DSI_WRPCR_PLLEN                              \ PLL Enable
-$000001fc constant DSI_DSI_WRPCR_NDIV                               \ PLL Loop Division Factor
-$00007800 constant DSI_DSI_WRPCR_IDF                                \ PLL Input Division Factor
-$00030000 constant DSI_DSI_WRPCR_ODF                                \ PLL Output Division Factor
-$01000000 constant DSI_DSI_WRPCR_REGEN                              \ Regulator Enable
-
-
-\
-\ @brief DSI Host
-\
-$40016c00 constant DSI_DSI_VR     \ offset: 0x00 : DSI Host Version Register
-$40016c04 constant DSI_DSI_CR     \ offset: 0x04 : DSI Host Control Register
-$40016c08 constant DSI_DSI_CCR    \ offset: 0x08 : DSI HOST Clock Control Register
-$40016c0c constant DSI_DSI_LVCIDR  \ offset: 0x0C : DSI Host LTDC VCID Register
-$40016c10 constant DSI_DSI_LCOLCR  \ offset: 0x10 : DSI Host LTDC Color Coding Register
-$40016c14 constant DSI_DSI_LPCR   \ offset: 0x14 : DSI Host LTDC Polarity Configuration Register
-$40016c18 constant DSI_DSI_LPMCR  \ offset: 0x18 : DSI Host Low-Power mode Configuration Register
-$40016c2c constant DSI_DSI_PCR    \ offset: 0x2C : DSI Host Protocol Configuration Register
-$40016c30 constant DSI_DSI_GVCIDR  \ offset: 0x30 : DSI Host Generic VCID Register
-$40016c34 constant DSI_DSI_MCR    \ offset: 0x34 : DSI Host mode Configuration Register
-$40016c38 constant DSI_DSI_VMCR   \ offset: 0x38 : DSI Host Video mode Configuration Register
-$40016c3c constant DSI_DSI_VPCR   \ offset: 0x3C : DSI Host Video Packet Configuration Register
-$40016c40 constant DSI_DSI_VCCR   \ offset: 0x40 : DSI Host Video Chunks Configuration Register
-$40016c44 constant DSI_DSI_VNPCR  \ offset: 0x44 : DSI Host Video Null Packet Configuration Register
-$40016c48 constant DSI_DSI_VHSACR  \ offset: 0x48 : DSI Host Video HSA Configuration Register
-$40016c4c constant DSI_DSI_VHBPCR  \ offset: 0x4C : DSI Host Video HBP Configuration Register
-$40016c50 constant DSI_DSI_VLCR   \ offset: 0x50 : DSI Host Video Line Configuration Register
-$40016c54 constant DSI_DSI_VVSACR  \ offset: 0x54 : DSI Host Video VSA Configuration Register
-$40016c58 constant DSI_DSI_VVBPCR  \ offset: 0x58 : DSI Host Video VBP Configuration Register
-$40016c5c constant DSI_DSI_VVFPCR  \ offset: 0x5C : DSI Host Video VFP Configuration Register
-$40016c60 constant DSI_DSI_VVACR  \ offset: 0x60 : DSI Host Video VA Configuration Register
-$40016c64 constant DSI_DSI_LCCR   \ offset: 0x64 : DSI Host LTDC Command Configuration Register
-$40016c68 constant DSI_DSI_CMCR   \ offset: 0x68 : DSI Host Command mode Configuration Register
-$40016c6c constant DSI_DSI_GHCR   \ offset: 0x6C : DSI Host Generic Header Configuration Register
-$40016c70 constant DSI_DSI_GPDR   \ offset: 0x70 : DSI Host Generic Payload Data Register
-$40016c74 constant DSI_DSI_GPSR   \ offset: 0x74 : DSI Host Generic Packet Status Register
-$40016c78 constant DSI_DSI_TCCR0  \ offset: 0x78 : DSI Host Timeout Counter Configuration Register 0
-$40016c7c constant DSI_DSI_TCCR1  \ offset: 0x7C : DSI Host Timeout Counter Configuration Register 1
-$40016c80 constant DSI_DSI_TCCR2  \ offset: 0x80 : DSI Host Timeout Counter Configuration Register 2
-$40016c84 constant DSI_DSI_TCCR3  \ offset: 0x84 : DSI Host Timeout Counter Configuration Register 3
-$40016c88 constant DSI_DSI_TCCR4  \ offset: 0x88 : DSI Host Timeout Counter Configuration Register 4
-$40016c8c constant DSI_DSI_TCCR5  \ offset: 0x8C : DSI Host Timeout Counter Configuration Register 5
-$40016c94 constant DSI_DSI_CLCR   \ offset: 0x94 : DSI Host Clock Lane Configuration Register
-$40016c98 constant DSI_DSI_CLTCR  \ offset: 0x98 : DSI Host Clock Lane Timer Configuration Register
-$40016c9c constant DSI_DSI_DLTCR  \ offset: 0x9C : DSI Host Data Lane Timer Configuration Register
-$40016ca0 constant DSI_DSI_PCTLR  \ offset: 0xA0 : DSI Host PHY Control Register
-$40016ca4 constant DSI_DSI_PCONFR  \ offset: 0xA4 : DSI Host PHY Configuration Register
-$40016ca8 constant DSI_DSI_PUCR   \ offset: 0xA8 : DSI Host PHY ULPS Control Register
-$40016cac constant DSI_DSI_PTTCR  \ offset: 0xAC : DSI Host PHY TX Triggers Configuration Register
-$40016cb0 constant DSI_DSI_PSR    \ offset: 0xB0 : DSI Host PHY Status Register
-$40016cbc constant DSI_DSI_ISR0   \ offset: 0xBC : DSI Host Interrupt & Status Register 0
-$40016cc0 constant DSI_DSI_ISR1   \ offset: 0xC0 : DSI Host Interrupt & Status Register 1
-$40016cc4 constant DSI_DSI_IER0   \ offset: 0xC4 : DSI Host Interrupt Enable Register 0
-$40016cc8 constant DSI_DSI_IER1   \ offset: 0xC8 : DSI Host Interrupt Enable Register 1
-$40016cd8 constant DSI_DSI_FIR0   \ offset: 0xD8 : DSI Host Force Interrupt Register 0
-$40016cdc constant DSI_DSI_FIR1   \ offset: 0xDC : DSI Host Force Interrupt Register 1
-$40016d00 constant DSI_DSI_VSCR   \ offset: 0x100 : DSI Host Video Shadow Control Register
-$40016d0c constant DSI_DSI_LCVCIDR  \ offset: 0x10C : DSI Host LTDC Current VCID Register
-$40016d10 constant DSI_DSI_LCCCR  \ offset: 0x110 : DSI Host LTDC Current Color Coding Register
-$40016d18 constant DSI_DSI_LPMCCR  \ offset: 0x118 : DSI Host Low-Power mode Current Configuration Register
-$40016d38 constant DSI_DSI_VMCCR  \ offset: 0x138 : DSI Host Video mode Current Configuration Register
-$40016d3c constant DSI_DSI_VPCCR  \ offset: 0x13C : DSI Host Video Packet Current Configuration Register
-$40016d40 constant DSI_DSI_VCCCR  \ offset: 0x140 : DSI Host Video Chunks Current Configuration Register
-$40016d44 constant DSI_DSI_VNPCCR  \ offset: 0x144 : DSI Host Video Null Packet Current Configuration Register
-$40016d48 constant DSI_DSI_VHSACCR  \ offset: 0x148 : DSI Host Video HSA Current Configuration Register
-$40016d4c constant DSI_DSI_VHBPCCR  \ offset: 0x14C : DSI Host Video HBP Current Configuration Register
-$40016d50 constant DSI_DSI_VLCCR  \ offset: 0x150 : DSI Host Video Line Current Configuration Register
-$40016d54 constant DSI_DSI_VVSACCR  \ offset: 0x154 : DSI Host Video VSA Current Configuration Register
-$40016d58 constant DSI_DSI_VVBPCCR  \ offset: 0x158 : DSI Host Video VBP Current Configuration Register
-$40016d5c constant DSI_DSI_VVFPCCR  \ offset: 0x15C : DSI Host Video VFP Current Configuration Register
-$40016d60 constant DSI_DSI_VVACCR  \ offset: 0x160 : DSI Host Video VA Current Configuration Register
-$40017000 constant DSI_DSI_WCFGR  \ offset: 0x400 : DSI Wrapper Configuration Register
-$40017004 constant DSI_DSI_WCR    \ offset: 0x404 : DSI Wrapper Control Register
-$40017008 constant DSI_DSI_WIER   \ offset: 0x408 : DSI Wrapper Interrupt Enable Register
-$4001700c constant DSI_DSI_WISR   \ offset: 0x40C : DSI Wrapper Interrupt & Status Register
-$40017010 constant DSI_DSI_WIFCR  \ offset: 0x410 : DSI Wrapper Interrupt Flag Clear Register
-$40017018 constant DSI_DSI_WPCR1  \ offset: 0x418 : DSI Wrapper PHY Configuration Register 1
-$4001701c constant DSI_DSI_WPCR2  \ offset: 0x41C : DSI Wrapper PHY Configuration Register 2
-$40017020 constant DSI_DSI_WPCR3  \ offset: 0x420 : DSI Wrapper PHY Configuration Register 3
-$40017024 constant DSI_DSI_WPCR4  \ offset: 0x424 : DSI_WPCR4
-$40017028 constant DSI_DSI_WPCR5  \ offset: 0x428 : DSI Wrapper PHY Configuration Register 5
-$40017030 constant DSI_DSI_WRPCR  \ offset: 0x430 : DSI Wrapper Regulator and PLL Control Register
-
+[ifndef] DSI_DEF
+
+  [ifdef] DSI_DSI_VR_DEF
+    \
+    \ @brief DSI Host Version Register
+    \ Address offset: 0x00
+    \ Reset value: 0x3133302A
+    \
+    $00 constant DSI_VERSION                    \ [0x00 : 32] Version of the DSI Host
+  [then]
+
+
+  [ifdef] DSI_DSI_CR_DEF
+    \
+    \ @brief DSI Host Control Register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_EN                         \ [0x00] Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_CCR_DEF
+    \
+    \ @brief DSI HOST Clock Control Register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_TXECKDIV                   \ [0x00 : 8] TX Escape Clock Division
+    $08 constant DSI_TOCKDIV                    \ [0x08 : 8] Timeout Clock Division
+  [then]
+
+
+  [ifdef] DSI_DSI_LVCIDR_DEF
+    \
+    \ @brief DSI Host LTDC VCID Register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VCID                       \ [0x00 : 2] Virtual Channel ID
+  [then]
+
+
+  [ifdef] DSI_DSI_LCOLCR_DEF
+    \
+    \ @brief DSI Host LTDC Color Coding Register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_COLC                       \ [0x00 : 4] Color Coding
+    $08 constant DSI_LPE                        \ [0x08] Loosely Packet Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_LPCR_DEF
+    \
+    \ @brief DSI Host LTDC Polarity Configuration Register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_DEP                        \ [0x00] Data Enable Polarity
+    $01 constant DSI_VSP                        \ [0x01] VSYNC Polarity
+    $02 constant DSI_HSP                        \ [0x02] HSYNC Polarity
+  [then]
+
+
+  [ifdef] DSI_DSI_LPMCR_DEF
+    \
+    \ @brief DSI Host Low-Power mode Configuration Register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VLPSIZE                    \ [0x00 : 8] VACT Largest Packet Size
+    $10 constant DSI_LPSIZE                     \ [0x10 : 8] Largest Packet Size
+  [then]
+
+
+  [ifdef] DSI_DSI_PCR_DEF
+    \
+    \ @brief DSI Host Protocol Configuration Register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_ETTXE                      \ [0x00] EoTp Transmission Enable
+    $01 constant DSI_ETRXE                      \ [0x01] EoTp Reception Enable
+    $02 constant DSI_BTAE                       \ [0x02] Bus Turn Around Enable
+    $03 constant DSI_ECCRXE                     \ [0x03] ECC Reception Enable
+    $04 constant DSI_CRCRXE                     \ [0x04] CRC Reception Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_GVCIDR_DEF
+    \
+    \ @brief DSI Host Generic VCID Register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VCID                       \ [0x00 : 2] Virtual Channel ID
+  [then]
+
+
+  [ifdef] DSI_DSI_MCR_DEF
+    \
+    \ @brief DSI Host mode Configuration Register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_CMDM                       \ [0x00] Command mode
+  [then]
+
+
+  [ifdef] DSI_DSI_VMCR_DEF
+    \
+    \ @brief DSI Host Video mode Configuration Register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VMT                        \ [0x00 : 2] Video mode Type
+    $08 constant DSI_LPVSAE                     \ [0x08] Low-Power Vertical Sync Active Enable
+    $09 constant DSI_LPVBPE                     \ [0x09] Low-power Vertical Back-Porch Enable
+    $0a constant DSI_LPVFPE                     \ [0x0a] Low-power Vertical Front-porch Enable
+    $0b constant DSI_LPVAE                      \ [0x0b] Low-Power Vertical Active Enable
+    $0c constant DSI_LPHBPE                     \ [0x0c] Low-Power Horizontal Back-Porch Enable
+    $0d constant DSI_LPHFPE                     \ [0x0d] Low-Power Horizontal Front-Porch Enable
+    $0e constant DSI_FBTAAE                     \ [0x0e] Frame Bus-Turn-Around Acknowledge Enable
+    $0f constant DSI_LPCE                       \ [0x0f] Low-Power Command Enable
+    $10 constant DSI_PGE                        \ [0x10] Pattern Generator Enable
+    $14 constant DSI_PGM                        \ [0x14] Pattern Generator mode
+    $18 constant DSI_PGO                        \ [0x18] Pattern Generator Orientation
+  [then]
+
+
+  [ifdef] DSI_DSI_VPCR_DEF
+    \
+    \ @brief DSI Host Video Packet Configuration Register
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VPSIZE                     \ [0x00 : 14] Video Packet Size
+  [then]
+
+
+  [ifdef] DSI_DSI_VCCR_DEF
+    \
+    \ @brief DSI Host Video Chunks Configuration Register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_NUMC                       \ [0x00 : 13] Number of Chunks
+  [then]
+
+
+  [ifdef] DSI_DSI_VNPCR_DEF
+    \
+    \ @brief DSI Host Video Null Packet Configuration Register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_NPSIZE                     \ [0x00 : 13] Null Packet Size
+  [then]
+
+
+  [ifdef] DSI_DSI_VHSACR_DEF
+    \
+    \ @brief DSI Host Video HSA Configuration Register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HSA                        \ [0x00 : 12] Horizontal Synchronism Active duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VHBPCR_DEF
+    \
+    \ @brief DSI Host Video HBP Configuration Register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HBP                        \ [0x00 : 12] Horizontal Back-Porch duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VLCR_DEF
+    \
+    \ @brief DSI Host Video Line Configuration Register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HLINE                      \ [0x00 : 15] Horizontal Line duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VVSACR_DEF
+    \
+    \ @brief DSI Host Video VSA Configuration Register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VSA                        \ [0x00 : 10] Vertical Synchronism Active duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VVBPCR_DEF
+    \
+    \ @brief DSI Host Video VBP Configuration Register
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VBP                        \ [0x00 : 10] Vertical Back-Porch duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VVFPCR_DEF
+    \
+    \ @brief DSI Host Video VFP Configuration Register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VFP                        \ [0x00 : 10] Vertical Front-Porch duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VVACR_DEF
+    \
+    \ @brief DSI Host Video VA Configuration Register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VA                         \ [0x00 : 14] Vertical Active duration
+  [then]
+
+
+  [ifdef] DSI_DSI_LCCR_DEF
+    \
+    \ @brief DSI Host LTDC Command Configuration Register
+    \ Address offset: 0x64
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_CMDSIZE                    \ [0x00 : 16] Command Size
+  [then]
+
+
+  [ifdef] DSI_DSI_CMCR_DEF
+    \
+    \ @brief DSI Host Command mode Configuration Register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_TEARE                      \ [0x00] Tearing Effect Acknowledge Request Enable
+    $01 constant DSI_ARE                        \ [0x01] Acknowledge Request Enable
+    $08 constant DSI_GSW0TX                     \ [0x08] Generic Short Write Zero parameters Transmission
+    $09 constant DSI_GSW1TX                     \ [0x09] Generic Short Write One parameters Transmission
+    $0a constant DSI_GSW2TX                     \ [0x0a] Generic Short Write Two parameters Transmission
+    $0b constant DSI_GSR0TX                     \ [0x0b] Generic Short Read Zero parameters Transmission
+    $0c constant DSI_GSR1TX                     \ [0x0c] Generic Short Read One parameters Transmission
+    $0d constant DSI_GSR2TX                     \ [0x0d] Generic Short Read Two parameters Transmission
+    $0e constant DSI_GLWTX                      \ [0x0e] Generic Long Write Transmission
+    $10 constant DSI_DSW0TX                     \ [0x10] DCS Short Write Zero parameter Transmission
+    $11 constant DSI_DSW1TX                     \ [0x11] DCS Short Read One parameter Transmission
+    $12 constant DSI_DSR0TX                     \ [0x12] DCS Short Read Zero parameter Transmission
+    $13 constant DSI_DLWTX                      \ [0x13] DCS Long Write Transmission
+    $18 constant DSI_MRDPS                      \ [0x18] Maximum Read Packet Size
+  [then]
+
+
+  [ifdef] DSI_DSI_GHCR_DEF
+    \
+    \ @brief DSI Host Generic Header Configuration Register
+    \ Address offset: 0x6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_DT                         \ [0x00 : 6] Type
+    $06 constant DSI_VCID                       \ [0x06 : 2] Channel
+    $08 constant DSI_WCLSB                      \ [0x08 : 8] WordCount LSB
+    $10 constant DSI_WCMSB                      \ [0x10 : 8] WordCount MSB
+  [then]
+
+
+  [ifdef] DSI_DSI_GPDR_DEF
+    \
+    \ @brief DSI Host Generic Payload Data Register
+    \ Address offset: 0x70
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_DATA1                      \ [0x00 : 8] Payload Byte 1
+    $08 constant DSI_DATA2                      \ [0x08 : 8] Payload Byte 2
+    $10 constant DSI_DATA3                      \ [0x10 : 8] Payload Byte 3
+    $18 constant DSI_DATA4                      \ [0x18 : 8] Payload Byte 4
+  [then]
+
+
+  [ifdef] DSI_DSI_GPSR_DEF
+    \
+    \ @brief DSI Host Generic Packet Status Register
+    \ Address offset: 0x74
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_CMDFE                      \ [0x00] Command FIFO Empty
+    $01 constant DSI_CMDFF                      \ [0x01] Command FIFO Full
+    $02 constant DSI_PWRFE                      \ [0x02] Payload Write FIFO Empty
+    $03 constant DSI_PWRFF                      \ [0x03] Payload Write FIFO Full
+    $04 constant DSI_PRDFE                      \ [0x04] Payload Read FIFO Empty
+    $05 constant DSI_PRDFF                      \ [0x05] Payload Read FIFO Full
+    $06 constant DSI_RCB                        \ [0x06] Read Command Busy
+  [then]
+
+
+  [ifdef] DSI_DSI_TCCR0_DEF
+    \
+    \ @brief DSI Host Timeout Counter Configuration Register 0
+    \ Address offset: 0x78
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_LPRX_TOCNT                 \ [0x00 : 16] Low-power Reception Timeout Counter
+    $10 constant DSI_HSTX_TOCNT                 \ [0x10 : 16] High-Speed Transmission Timeout Counter
+  [then]
+
+
+  [ifdef] DSI_DSI_TCCR1_DEF
+    \
+    \ @brief DSI Host Timeout Counter Configuration Register 1
+    \ Address offset: 0x7C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HSRD_TOCNT                 \ [0x00 : 16] High-Speed Read Timeout Counter
+  [then]
+
+
+  [ifdef] DSI_DSI_TCCR2_DEF
+    \
+    \ @brief DSI Host Timeout Counter Configuration Register 2
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_LPRD_TOCNT                 \ [0x00 : 16] Low-Power Read Timeout Counter
+  [then]
+
+
+  [ifdef] DSI_DSI_TCCR3_DEF
+    \
+    \ @brief DSI Host Timeout Counter Configuration Register 3
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HSWR_TOCNT                 \ [0x00 : 16] High-Speed Write Timeout Counter
+    $18 constant DSI_PM                         \ [0x18] Presp mode
+  [then]
+
+
+  [ifdef] DSI_DSI_TCCR4_DEF
+    \
+    \ @brief DSI Host Timeout Counter Configuration Register 4
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_LSWR_TOCNT                 \ [0x00 : 16] Low-Power Write Timeout Counter
+  [then]
+
+
+  [ifdef] DSI_DSI_TCCR5_DEF
+    \
+    \ @brief DSI Host Timeout Counter Configuration Register 5
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_BTA_TOCNT                  \ [0x00 : 16] Bus-Turn-Around Timeout Counter
+  [then]
+
+
+  [ifdef] DSI_DSI_CLCR_DEF
+    \
+    \ @brief DSI Host Clock Lane Configuration Register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_DPCC                       \ [0x00] D-PHY Clock Control
+    $01 constant DSI_ACR                        \ [0x01] Automatic Clock lane Control
+  [then]
+
+
+  [ifdef] DSI_DSI_CLTCR_DEF
+    \
+    \ @brief DSI Host Clock Lane Timer Configuration Register
+    \ Address offset: 0x98
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_LP2HS_TIME                 \ [0x00 : 10] Low-Power to High-Speed Time
+    $10 constant DSI_HS2LP_TIME                 \ [0x10 : 10] High-Speed to Low-Power Time
+  [then]
+
+
+  [ifdef] DSI_DSI_DLTCR_DEF
+    \
+    \ @brief DSI Host Data Lane Timer Configuration Register
+    \ Address offset: 0x9C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_MRD_TIME                   \ [0x00 : 15] Maximum Read Time
+    $10 constant DSI_LP2HS_TIME                 \ [0x10 : 8] Low-Power To High-Speed Time
+    $18 constant DSI_HS2LP_TIME                 \ [0x18 : 8] High-Speed To Low-Power Time
+  [then]
+
+
+  [ifdef] DSI_DSI_PCTLR_DEF
+    \
+    \ @brief DSI Host PHY Control Register
+    \ Address offset: 0xA0
+    \ Reset value: 0x00000000
+    \
+    $01 constant DSI_DEN                        \ [0x01] Digital Enable
+    $02 constant DSI_CKE                        \ [0x02] Clock Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_PCONFR_DEF
+    \
+    \ @brief DSI Host PHY Configuration Register
+    \ Address offset: 0xA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_NL                         \ [0x00 : 2] Number of Lanes
+    $08 constant DSI_SW_TIME                    \ [0x08 : 8] Stop Wait Time
+  [then]
+
+
+  [ifdef] DSI_DSI_PUCR_DEF
+    \
+    \ @brief DSI Host PHY ULPS Control Register
+    \ Address offset: 0xA8
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_URCL                       \ [0x00] ULPS Request on Clock Lane
+    $01 constant DSI_UECL                       \ [0x01] ULPS Exit on Clock Lane
+    $02 constant DSI_URDL                       \ [0x02] ULPS Request on Data Lane
+    $03 constant DSI_UEDL                       \ [0x03] ULPS Exit on Data Lane
+  [then]
+
+
+  [ifdef] DSI_DSI_PTTCR_DEF
+    \
+    \ @brief DSI Host PHY TX Triggers Configuration Register
+    \ Address offset: 0xAC
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_TX_TRIG                    \ [0x00 : 4] Transmission Trigger
+  [then]
+
+
+  [ifdef] DSI_DSI_PSR_DEF
+    \
+    \ @brief DSI Host PHY Status Register
+    \ Address offset: 0xB0
+    \ Reset value: 0x00000000
+    \
+    $01 constant DSI_PD                         \ [0x01] PHY Direction
+    $02 constant DSI_PSSC                       \ [0x02] PHY Stop State Clock lane
+    $03 constant DSI_UANC                       \ [0x03] ULPS Active Not Clock lane
+    $04 constant DSI_PSS0                       \ [0x04] PHY Stop State lane 0
+    $05 constant DSI_UAN0                       \ [0x05] ULPS Active Not lane 1
+    $06 constant DSI_RUE0                       \ [0x06] RX ULPS Escape lane 0
+    $07 constant DSI_PSS1                       \ [0x07] PHY Stop State lane 1
+    $08 constant DSI_UAN1                       \ [0x08] ULPS Active Not lane 1
+  [then]
+
+
+  [ifdef] DSI_DSI_ISR0_DEF
+    \
+    \ @brief DSI Host Interrupt & Status Register 0
+    \ Address offset: 0xBC
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_AE0                        \ [0x00] Acknowledge Error 0
+    $01 constant DSI_AE1                        \ [0x01] Acknowledge Error 1
+    $02 constant DSI_AE2                        \ [0x02] Acknowledge Error 2
+    $03 constant DSI_AE3                        \ [0x03] Acknowledge Error 3
+    $04 constant DSI_AE4                        \ [0x04] Acknowledge Error 4
+    $05 constant DSI_AE5                        \ [0x05] Acknowledge Error 5
+    $06 constant DSI_AE6                        \ [0x06] Acknowledge Error 6
+    $07 constant DSI_AE7                        \ [0x07] Acknowledge Error 7
+    $08 constant DSI_AE8                        \ [0x08] Acknowledge Error 8
+    $09 constant DSI_AE9                        \ [0x09] Acknowledge Error 9
+    $0a constant DSI_AE10                       \ [0x0a] Acknowledge Error 10
+    $0b constant DSI_AE11                       \ [0x0b] Acknowledge Error 11
+    $0c constant DSI_AE12                       \ [0x0c] Acknowledge Error 12
+    $0d constant DSI_AE13                       \ [0x0d] Acknowledge Error 13
+    $0e constant DSI_AE14                       \ [0x0e] Acknowledge Error 14
+    $0f constant DSI_AE15                       \ [0x0f] Acknowledge Error 15
+    $10 constant DSI_PE0                        \ [0x10] PHY Error 0
+    $11 constant DSI_PE1                        \ [0x11] PHY Error 1
+    $12 constant DSI_PE2                        \ [0x12] PHY Error 2
+    $13 constant DSI_PE3                        \ [0x13] PHY Error 3
+    $14 constant DSI_PE4                        \ [0x14] PHY Error 4
+  [then]
+
+
+  [ifdef] DSI_DSI_ISR1_DEF
+    \
+    \ @brief DSI Host Interrupt & Status Register 1
+    \ Address offset: 0xC0
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_TOHSTX                     \ [0x00] Timeout High-Speed Transmission
+    $01 constant DSI_TOLPRX                     \ [0x01] Timeout Low-Power Reception
+    $02 constant DSI_ECCSE                      \ [0x02] ECC Single-bit Error
+    $03 constant DSI_ECCME                      \ [0x03] ECC Multi-bit Error
+    $04 constant DSI_CRCE                       \ [0x04] CRC Error
+    $05 constant DSI_PSE                        \ [0x05] Packet Size Error
+    $06 constant DSI_EOTPE                      \ [0x06] EoTp Error
+    $07 constant DSI_LPWRE                      \ [0x07] LTDC Payload Write Error
+    $08 constant DSI_GCWRE                      \ [0x08] Generic Command Write Error
+    $09 constant DSI_GPWRE                      \ [0x09] Generic Payload Write Error
+    $0a constant DSI_GPTXE                      \ [0x0a] Generic Payload Transmit Error
+    $0b constant DSI_GPRDE                      \ [0x0b] Generic Payload Read Error
+    $0c constant DSI_GPRXE                      \ [0x0c] Generic Payload Receive Error
+  [then]
+
+
+  [ifdef] DSI_DSI_IER0_DEF
+    \
+    \ @brief DSI Host Interrupt Enable Register 0
+    \ Address offset: 0xC4
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_AE0IE                      \ [0x00] Acknowledge Error 0 Interrupt Enable
+    $01 constant DSI_AE1IE                      \ [0x01] Acknowledge Error 1 Interrupt Enable
+    $02 constant DSI_AE2IE                      \ [0x02] Acknowledge Error 2 Interrupt Enable
+    $03 constant DSI_AE3IE                      \ [0x03] Acknowledge Error 3 Interrupt Enable
+    $04 constant DSI_AE4IE                      \ [0x04] Acknowledge Error 4 Interrupt Enable
+    $05 constant DSI_AE5IE                      \ [0x05] Acknowledge Error 5 Interrupt Enable
+    $06 constant DSI_AE6IE                      \ [0x06] Acknowledge Error 6 Interrupt Enable
+    $07 constant DSI_AE7IE                      \ [0x07] Acknowledge Error 7 Interrupt Enable
+    $08 constant DSI_AE8IE                      \ [0x08] Acknowledge Error 8 Interrupt Enable
+    $09 constant DSI_AE9IE                      \ [0x09] Acknowledge Error 9 Interrupt Enable
+    $0a constant DSI_AE10IE                     \ [0x0a] Acknowledge Error 10 Interrupt Enable
+    $0b constant DSI_AE11IE                     \ [0x0b] Acknowledge Error 11 Interrupt Enable
+    $0c constant DSI_AE12IE                     \ [0x0c] Acknowledge Error 12 Interrupt Enable
+    $0d constant DSI_AE13IE                     \ [0x0d] Acknowledge Error 13 Interrupt Enable
+    $0e constant DSI_AE14IE                     \ [0x0e] Acknowledge Error 14 Interrupt Enable
+    $0f constant DSI_AE15IE                     \ [0x0f] Acknowledge Error 15 Interrupt Enable
+    $10 constant DSI_PE0IE                      \ [0x10] PHY Error 0 Interrupt Enable
+    $11 constant DSI_PE1IE                      \ [0x11] PHY Error 1 Interrupt Enable
+    $12 constant DSI_PE2IE                      \ [0x12] PHY Error 2 Interrupt Enable
+    $13 constant DSI_PE3IE                      \ [0x13] PHY Error 3 Interrupt Enable
+    $14 constant DSI_PE4IE                      \ [0x14] PHY Error 4 Interrupt Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_IER1_DEF
+    \
+    \ @brief DSI Host Interrupt Enable Register 1
+    \ Address offset: 0xC8
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_TOHSTXIE                   \ [0x00] Timeout High-Speed Transmission Interrupt Enable
+    $01 constant DSI_TOLPRXIE                   \ [0x01] Timeout Low-Power Reception Interrupt Enable
+    $02 constant DSI_ECCSEIE                    \ [0x02] ECC Single-bit Error Interrupt Enable
+    $03 constant DSI_ECCMEIE                    \ [0x03] ECC Multi-bit Error Interrupt Enable
+    $04 constant DSI_CRCEIE                     \ [0x04] CRC Error Interrupt Enable
+    $05 constant DSI_PSEIE                      \ [0x05] Packet Size Error Interrupt Enable
+    $06 constant DSI_EOTPEIE                    \ [0x06] EoTp Error Interrupt Enable
+    $07 constant DSI_LPWREIE                    \ [0x07] LTDC Payload Write Error Interrupt Enable
+    $08 constant DSI_GCWREIE                    \ [0x08] Generic Command Write Error Interrupt Enable
+    $09 constant DSI_GPWREIE                    \ [0x09] Generic Payload Write Error Interrupt Enable
+    $0a constant DSI_GPTXEIE                    \ [0x0a] Generic Payload Transmit Error Interrupt Enable
+    $0b constant DSI_GPRDEIE                    \ [0x0b] Generic Payload Read Error Interrupt Enable
+    $0c constant DSI_GPRXEIE                    \ [0x0c] Generic Payload Receive Error Interrupt Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_FIR0_DEF
+    \
+    \ @brief DSI Host Force Interrupt Register 0
+    \ Address offset: 0xD8
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_FAE0                       \ [0x00] Force Acknowledge Error 0
+    $01 constant DSI_FAE1                       \ [0x01] Force Acknowledge Error 1
+    $02 constant DSI_FAE2                       \ [0x02] Force Acknowledge Error 2
+    $03 constant DSI_FAE3                       \ [0x03] Force Acknowledge Error 3
+    $04 constant DSI_FAE4                       \ [0x04] Force Acknowledge Error 4
+    $05 constant DSI_FAE5                       \ [0x05] Force Acknowledge Error 5
+    $06 constant DSI_FAE6                       \ [0x06] Force Acknowledge Error 6
+    $07 constant DSI_FAE7                       \ [0x07] Force Acknowledge Error 7
+    $08 constant DSI_FAE8                       \ [0x08] Force Acknowledge Error 8
+    $09 constant DSI_FAE9                       \ [0x09] Force Acknowledge Error 9
+    $0a constant DSI_FAE10                      \ [0x0a] Force Acknowledge Error 10
+    $0b constant DSI_FAE11                      \ [0x0b] Force Acknowledge Error 11
+    $0c constant DSI_FAE12                      \ [0x0c] Force Acknowledge Error 12
+    $0d constant DSI_FAE13                      \ [0x0d] Force Acknowledge Error 13
+    $0e constant DSI_FAE14                      \ [0x0e] Force Acknowledge Error 14
+    $0f constant DSI_FAE15                      \ [0x0f] Force Acknowledge Error 15
+    $10 constant DSI_FPE0                       \ [0x10] Force PHY Error 0
+    $11 constant DSI_FPE1                       \ [0x11] Force PHY Error 1
+    $12 constant DSI_FPE2                       \ [0x12] Force PHY Error 2
+    $13 constant DSI_FPE3                       \ [0x13] Force PHY Error 3
+    $14 constant DSI_FPE4                       \ [0x14] Force PHY Error 4
+  [then]
+
+
+  [ifdef] DSI_DSI_FIR1_DEF
+    \
+    \ @brief DSI Host Force Interrupt Register 1
+    \ Address offset: 0xDC
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_FTOHSTX                    \ [0x00] Force Timeout High-Speed Transmission
+    $01 constant DSI_FTOLPRX                    \ [0x01] Force Timeout Low-Power Reception
+    $02 constant DSI_FECCSE                     \ [0x02] Force ECC Single-bit Error
+    $03 constant DSI_FECCME                     \ [0x03] Force ECC Multi-bit Error
+    $04 constant DSI_FCRCE                      \ [0x04] Force CRC Error
+    $05 constant DSI_FPSE                       \ [0x05] Force Packet Size Error
+    $06 constant DSI_FEOTPE                     \ [0x06] Force EoTp Error
+    $07 constant DSI_FLPWRE                     \ [0x07] Force LTDC Payload Write Error
+    $08 constant DSI_FGCWRE                     \ [0x08] Force Generic Command Write Error
+    $09 constant DSI_FGPWRE                     \ [0x09] Force Generic Payload Write Error
+    $0a constant DSI_FGPTXE                     \ [0x0a] Force Generic Payload Transmit Error
+    $0b constant DSI_FGPRDE                     \ [0x0b] Force Generic Payload Read Error
+    $0c constant DSI_FGPRXE                     \ [0x0c] Force Generic Payload Receive Error
+  [then]
+
+
+  [ifdef] DSI_DSI_VSCR_DEF
+    \
+    \ @brief DSI Host Video Shadow Control Register
+    \ Address offset: 0x100
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_EN                         \ [0x00] Enable
+    $08 constant DSI_UR                         \ [0x08] Update Register
+  [then]
+
+
+  [ifdef] DSI_DSI_LCVCIDR_DEF
+    \
+    \ @brief DSI Host LTDC Current VCID Register
+    \ Address offset: 0x10C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VCID                       \ [0x00 : 2] Virtual Channel ID
+  [then]
+
+
+  [ifdef] DSI_DSI_LCCCR_DEF
+    \
+    \ @brief DSI Host LTDC Current Color Coding Register
+    \ Address offset: 0x110
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_COLC                       \ [0x00 : 4] Color Coding
+    $08 constant DSI_LPE                        \ [0x08] Loosely Packed Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_LPMCCR_DEF
+    \
+    \ @brief DSI Host Low-Power mode Current Configuration Register
+    \ Address offset: 0x118
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VLPSIZE                    \ [0x00 : 8] VACT Largest Packet Size
+    $10 constant DSI_LPSIZE                     \ [0x10 : 8] Largest Packet Size
+  [then]
+
+
+  [ifdef] DSI_DSI_VMCCR_DEF
+    \
+    \ @brief DSI Host Video mode Current Configuration Register
+    \ Address offset: 0x138
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VMT                        \ [0x00 : 2] Video mode Type
+    $02 constant DSI_LPVSAE                     \ [0x02] Low-Power Vertical Sync time Enable
+    $03 constant DSI_LPVBPE                     \ [0x03] Low-power Vertical Back-Porch Enable
+    $04 constant DSI_LPVFPE                     \ [0x04] Low-power Vertical Front-Porch Enable
+    $05 constant DSI_LPVAE                      \ [0x05] Low-Power Vertical Active Enable
+    $06 constant DSI_LPHBPE                     \ [0x06] Low-power Horizontal Back-Porch Enable
+    $07 constant DSI_LPHFE                      \ [0x07] Low-Power Horizontal Front-Porch Enable
+    $08 constant DSI_FBTAAE                     \ [0x08] Frame BTA Acknowledge Enable
+    $09 constant DSI_LPCE                       \ [0x09] Low-Power Command Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_VPCCR_DEF
+    \
+    \ @brief DSI Host Video Packet Current Configuration Register
+    \ Address offset: 0x13C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VPSIZE                     \ [0x00 : 14] Video Packet Size
+  [then]
+
+
+  [ifdef] DSI_DSI_VCCCR_DEF
+    \
+    \ @brief DSI Host Video Chunks Current Configuration Register
+    \ Address offset: 0x140
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_NUMC                       \ [0x00 : 13] Number of Chunks
+  [then]
+
+
+  [ifdef] DSI_DSI_VNPCCR_DEF
+    \
+    \ @brief DSI Host Video Null Packet Current Configuration Register
+    \ Address offset: 0x144
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_NPSIZE                     \ [0x00 : 13] Null Packet Size
+  [then]
+
+
+  [ifdef] DSI_DSI_VHSACCR_DEF
+    \
+    \ @brief DSI Host Video HSA Current Configuration Register
+    \ Address offset: 0x148
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HSA                        \ [0x00 : 12] Horizontal Synchronism Active duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VHBPCCR_DEF
+    \
+    \ @brief DSI Host Video HBP Current Configuration Register
+    \ Address offset: 0x14C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HBP                        \ [0x00 : 12] Horizontal Back-Porch duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VLCCR_DEF
+    \
+    \ @brief DSI Host Video Line Current Configuration Register
+    \ Address offset: 0x150
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HLINE                      \ [0x00 : 15] Horizontal Line duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VVSACCR_DEF
+    \
+    \ @brief DSI Host Video VSA Current Configuration Register
+    \ Address offset: 0x154
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VSA                        \ [0x00 : 10] Vertical Synchronism Active duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VVBPCCR_DEF
+    \
+    \ @brief DSI Host Video VBP Current Configuration Register
+    \ Address offset: 0x158
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VBP                        \ [0x00 : 10] Vertical Back-Porch duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VVFPCCR_DEF
+    \
+    \ @brief DSI Host Video VFP Current Configuration Register
+    \ Address offset: 0x15C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VFP                        \ [0x00 : 10] Vertical Front-Porch duration
+  [then]
+
+
+  [ifdef] DSI_DSI_VVACCR_DEF
+    \
+    \ @brief DSI Host Video VA Current Configuration Register
+    \ Address offset: 0x160
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_VA                         \ [0x00 : 14] Vertical Active duration
+  [then]
+
+
+  [ifdef] DSI_DSI_WCFGR_DEF
+    \
+    \ @brief DSI Wrapper Configuration Register
+    \ Address offset: 0x400
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_DSIM                       \ [0x00] DSI Mode
+    $01 constant DSI_COLMUX                     \ [0x01 : 3] Color Multiplexing
+    $04 constant DSI_TESRC                      \ [0x04] TE Source
+    $05 constant DSI_TEPOL                      \ [0x05] TE Polarity
+    $06 constant DSI_AR                         \ [0x06] Automatic Refresh
+    $07 constant DSI_VSPOL                      \ [0x07] VSync Polarity
+  [then]
+
+
+  [ifdef] DSI_DSI_WCR_DEF
+    \
+    \ @brief DSI Wrapper Control Register
+    \ Address offset: 0x404
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_COLM                       \ [0x00] Color Mode
+    $01 constant DSI_SHTDN                      \ [0x01] Shutdown
+    $02 constant DSI_LTDCEN                     \ [0x02] LTDC Enable
+    $03 constant DSI_DSIEN                      \ [0x03] DSI Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_WIER_DEF
+    \
+    \ @brief DSI Wrapper Interrupt Enable Register
+    \ Address offset: 0x408
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_TEIE                       \ [0x00] Tearing Effect Interrupt Enable
+    $01 constant DSI_ERIE                       \ [0x01] End of Refresh Interrupt Enable
+    $09 constant DSI_PLLLIE                     \ [0x09] PLL Lock Interrupt Enable
+    $0a constant DSI_PLLUIE                     \ [0x0a] PLL Unlock Interrupt Enable
+    $0d constant DSI_RRIE                       \ [0x0d] Regulator Ready Interrupt Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_WISR_DEF
+    \
+    \ @brief DSI Wrapper Interrupt & Status Register
+    \ Address offset: 0x40C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_TEIF                       \ [0x00] Tearing Effect Interrupt Flag
+    $01 constant DSI_ERIF                       \ [0x01] End of Refresh Interrupt Flag
+    $02 constant DSI_BUSY                       \ [0x02] Busy Flag
+    $08 constant DSI_PLLLS                      \ [0x08] PLL Lock Status
+    $09 constant DSI_PLLLIF                     \ [0x09] PLL Lock Interrupt Flag
+    $0a constant DSI_PLLUIF                     \ [0x0a] PLL Unlock Interrupt Flag
+    $0c constant DSI_RRS                        \ [0x0c] Regulator Ready Status
+    $0d constant DSI_RRIF                       \ [0x0d] Regulator Ready Interrupt Flag
+  [then]
+
+
+  [ifdef] DSI_DSI_WIFCR_DEF
+    \
+    \ @brief DSI Wrapper Interrupt Flag Clear Register
+    \ Address offset: 0x410
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_CTEIF                      \ [0x00] Clear Tearing Effect Interrupt Flag
+    $01 constant DSI_CERIF                      \ [0x01] Clear End of Refresh Interrupt Flag
+    $09 constant DSI_CPLLLIF                    \ [0x09] Clear PLL Lock Interrupt Flag
+    $0a constant DSI_CPLLUIF                    \ [0x0a] Clear PLL Unlock Interrupt Flag
+    $0d constant DSI_CRRIF                      \ [0x0d] Clear Regulator Ready Interrupt Flag
+  [then]
+
+
+  [ifdef] DSI_DSI_WPCR1_DEF
+    \
+    \ @brief DSI Wrapper PHY Configuration Register 1
+    \ Address offset: 0x418
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_UIX4                       \ [0x00 : 6] Unit Interval multiplied by 4
+    $06 constant DSI_SWCL                       \ [0x06] Swap Clock Lane pins
+    $07 constant DSI_SWDL0                      \ [0x07] Swap Data Lane 0 pins
+    $08 constant DSI_SWDL1                      \ [0x08] Swap Data Lane 1 pins
+    $09 constant DSI_HSICL                      \ [0x09] Invert Hight-Speed data signal on Clock Lane
+    $0a constant DSI_HSIDL0                     \ [0x0a] Invert the Hight-Speed data signal on Data Lane 0
+    $0b constant DSI_HSIDL1                     \ [0x0b] Invert the High-Speed data signal on Data Lane 1
+    $0c constant DSI_FTXSMCL                    \ [0x0c] Force in TX Stop Mode the Clock Lane
+    $0d constant DSI_FTXSMDL                    \ [0x0d] Force in TX Stop Mode the Data Lanes
+    $0e constant DSI_CDOFFDL                    \ [0x0e] Contention Detection OFF on Data Lanes
+    $10 constant DSI_TDDL                       \ [0x10] Turn Disable Data Lanes
+    $12 constant DSI_PDEN                       \ [0x12] Pull-Down Enable
+    $13 constant DSI_TCLKPREPEN                 \ [0x13] custom time for tCLK-PREPARE Enable
+    $14 constant DSI_TCLKZEROEN                 \ [0x14] custom time for tCLK-ZERO Enable
+    $15 constant DSI_THSPREPEN                  \ [0x15] custom time for tHS-PREPARE Enable
+    $16 constant DSI_THSTRAILEN                 \ [0x16] custom time for tHS-TRAIL Enable
+    $17 constant DSI_THSZEROEN                  \ [0x17] custom time for tHS-ZERO Enable
+    $18 constant DSI_TLPXDEN                    \ [0x18] custom time for tLPX for Data lanes Enable
+    $19 constant DSI_THSEXITEN                  \ [0x19] custom time for tHS-EXIT Enable
+    $1a constant DSI_TLPXCEN                    \ [0x1a] custom time for tLPX for Clock lane Enable
+    $1b constant DSI_TCLKPOSTEN                 \ [0x1b] custom time for tCLK-POST Enable
+  [then]
+
+
+  [ifdef] DSI_DSI_WPCR2_DEF
+    \
+    \ @brief DSI Wrapper PHY Configuration Register 2
+    \ Address offset: 0x41C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_HSTXDCL                    \ [0x00 : 2] High-Speed Transmission Delay on Clock Lane
+    $02 constant DSI_HSTXDLL                    \ [0x02 : 2] High-Speed Transmission Delay on Data Lanes
+    $06 constant DSI_LPSRCL                     \ [0x06 : 2] Low-Power transmission Slew Rate Compensation on Clock Lane
+    $08 constant DSI_LPSRDL                     \ [0x08 : 2] Low-Power transmission Slew Rate Compensation on Data Lanes
+    $0c constant DSI_SDCC                       \ [0x0c] SDD Control
+    $10 constant DSI_HSTXSRCCL                  \ [0x10 : 2] High-Speed Transmission Slew Rate Control on Clock Lane
+    $12 constant DSI_HSTXSRCDL                  \ [0x12 : 2] High-Speed Transmission Slew Rate Control on Data Lanes
+    $16 constant DSI_FLPRXLPM                   \ [0x16] Forces LP Receiver in Low-Power Mode
+    $19 constant DSI_LPRXFT                     \ [0x19 : 2] Low-Power RX low-pass Filtering Tuning
+  [then]
+
+
+  [ifdef] DSI_DSI_WPCR3_DEF
+    \
+    \ @brief DSI Wrapper PHY Configuration Register 3
+    \ Address offset: 0x420
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_TCLKPREP                   \ [0x00 : 8] tCLK-PREPARE
+    $08 constant DSI_TCLKZEO                    \ [0x08 : 8] tCLK-ZERO
+    $10 constant DSI_THSPREP                    \ [0x10 : 8] tHS-PREPARE
+    $18 constant DSI_THSTRAIL                   \ [0x18 : 8] tHSTRAIL
+  [then]
+
+
+  [ifdef] DSI_DSI_WPCR4_DEF
+    \
+    \ @brief DSI_WPCR4
+    \ Address offset: 0x424
+    \ Reset value: 0x3133302A
+    \
+    $00 constant DSI_THSZERO                    \ [0x00 : 8] tHS-ZERO
+    $08 constant DSI_TLPXD                      \ [0x08 : 8] tLPX for Data lanes
+    $10 constant DSI_THSEXIT                    \ [0x10 : 8] tHSEXIT
+    $18 constant DSI_TLPXC                      \ [0x18 : 8] tLPXC for Clock lane
+  [then]
+
+
+  [ifdef] DSI_DSI_WPCR5_DEF
+    \
+    \ @brief DSI Wrapper PHY Configuration Register 5
+    \ Address offset: 0x428
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_THSZERO                    \ [0x00 : 8] tCLK-POST
+  [then]
+
+
+  [ifdef] DSI_DSI_WRPCR_DEF
+    \
+    \ @brief DSI Wrapper Regulator and PLL Control Register
+    \ Address offset: 0x430
+    \ Reset value: 0x00000000
+    \
+    $00 constant DSI_PLLEN                      \ [0x00] PLL Enable
+    $02 constant DSI_NDIV                       \ [0x02 : 7] PLL Loop Division Factor
+    $0b constant DSI_IDF                        \ [0x0b : 4] PLL Input Division Factor
+    $10 constant DSI_ODF                        \ [0x10 : 2] PLL Output Division Factor
+    $18 constant DSI_REGEN                      \ [0x18] Regulator Enable
+  [then]
+
+  \
+  \ @brief DSI Host
+  \
+  $00 constant DSI_DSI_VR               \ DSI Host Version Register
+  $04 constant DSI_DSI_CR               \ DSI Host Control Register
+  $08 constant DSI_DSI_CCR              \ DSI HOST Clock Control Register
+  $0C constant DSI_DSI_LVCIDR           \ DSI Host LTDC VCID Register
+  $10 constant DSI_DSI_LCOLCR           \ DSI Host LTDC Color Coding Register
+  $14 constant DSI_DSI_LPCR             \ DSI Host LTDC Polarity Configuration Register
+  $18 constant DSI_DSI_LPMCR            \ DSI Host Low-Power mode Configuration Register
+  $2C constant DSI_DSI_PCR              \ DSI Host Protocol Configuration Register
+  $30 constant DSI_DSI_GVCIDR           \ DSI Host Generic VCID Register
+  $34 constant DSI_DSI_MCR              \ DSI Host mode Configuration Register
+  $38 constant DSI_DSI_VMCR             \ DSI Host Video mode Configuration Register
+  $3C constant DSI_DSI_VPCR             \ DSI Host Video Packet Configuration Register
+  $40 constant DSI_DSI_VCCR             \ DSI Host Video Chunks Configuration Register
+  $44 constant DSI_DSI_VNPCR            \ DSI Host Video Null Packet Configuration Register
+  $48 constant DSI_DSI_VHSACR           \ DSI Host Video HSA Configuration Register
+  $4C constant DSI_DSI_VHBPCR           \ DSI Host Video HBP Configuration Register
+  $50 constant DSI_DSI_VLCR             \ DSI Host Video Line Configuration Register
+  $54 constant DSI_DSI_VVSACR           \ DSI Host Video VSA Configuration Register
+  $58 constant DSI_DSI_VVBPCR           \ DSI Host Video VBP Configuration Register
+  $5C constant DSI_DSI_VVFPCR           \ DSI Host Video VFP Configuration Register
+  $60 constant DSI_DSI_VVACR            \ DSI Host Video VA Configuration Register
+  $64 constant DSI_DSI_LCCR             \ DSI Host LTDC Command Configuration Register
+  $68 constant DSI_DSI_CMCR             \ DSI Host Command mode Configuration Register
+  $6C constant DSI_DSI_GHCR             \ DSI Host Generic Header Configuration Register
+  $70 constant DSI_DSI_GPDR             \ DSI Host Generic Payload Data Register
+  $74 constant DSI_DSI_GPSR             \ DSI Host Generic Packet Status Register
+  $78 constant DSI_DSI_TCCR0            \ DSI Host Timeout Counter Configuration Register 0
+  $7C constant DSI_DSI_TCCR1            \ DSI Host Timeout Counter Configuration Register 1
+  $80 constant DSI_DSI_TCCR2            \ DSI Host Timeout Counter Configuration Register 2
+  $84 constant DSI_DSI_TCCR3            \ DSI Host Timeout Counter Configuration Register 3
+  $88 constant DSI_DSI_TCCR4            \ DSI Host Timeout Counter Configuration Register 4
+  $8C constant DSI_DSI_TCCR5            \ DSI Host Timeout Counter Configuration Register 5
+  $94 constant DSI_DSI_CLCR             \ DSI Host Clock Lane Configuration Register
+  $98 constant DSI_DSI_CLTCR            \ DSI Host Clock Lane Timer Configuration Register
+  $9C constant DSI_DSI_DLTCR            \ DSI Host Data Lane Timer Configuration Register
+  $A0 constant DSI_DSI_PCTLR            \ DSI Host PHY Control Register
+  $A4 constant DSI_DSI_PCONFR           \ DSI Host PHY Configuration Register
+  $A8 constant DSI_DSI_PUCR             \ DSI Host PHY ULPS Control Register
+  $AC constant DSI_DSI_PTTCR            \ DSI Host PHY TX Triggers Configuration Register
+  $B0 constant DSI_DSI_PSR              \ DSI Host PHY Status Register
+  $BC constant DSI_DSI_ISR0             \ DSI Host Interrupt & Status Register 0
+  $C0 constant DSI_DSI_ISR1             \ DSI Host Interrupt & Status Register 1
+  $C4 constant DSI_DSI_IER0             \ DSI Host Interrupt Enable Register 0
+  $C8 constant DSI_DSI_IER1             \ DSI Host Interrupt Enable Register 1
+  $D8 constant DSI_DSI_FIR0             \ DSI Host Force Interrupt Register 0
+  $DC constant DSI_DSI_FIR1             \ DSI Host Force Interrupt Register 1
+  $100 constant DSI_DSI_VSCR            \ DSI Host Video Shadow Control Register
+  $10C constant DSI_DSI_LCVCIDR         \ DSI Host LTDC Current VCID Register
+  $110 constant DSI_DSI_LCCCR           \ DSI Host LTDC Current Color Coding Register
+  $118 constant DSI_DSI_LPMCCR          \ DSI Host Low-Power mode Current Configuration Register
+  $138 constant DSI_DSI_VMCCR           \ DSI Host Video mode Current Configuration Register
+  $13C constant DSI_DSI_VPCCR           \ DSI Host Video Packet Current Configuration Register
+  $140 constant DSI_DSI_VCCCR           \ DSI Host Video Chunks Current Configuration Register
+  $144 constant DSI_DSI_VNPCCR          \ DSI Host Video Null Packet Current Configuration Register
+  $148 constant DSI_DSI_VHSACCR         \ DSI Host Video HSA Current Configuration Register
+  $14C constant DSI_DSI_VHBPCCR         \ DSI Host Video HBP Current Configuration Register
+  $150 constant DSI_DSI_VLCCR           \ DSI Host Video Line Current Configuration Register
+  $154 constant DSI_DSI_VVSACCR         \ DSI Host Video VSA Current Configuration Register
+  $158 constant DSI_DSI_VVBPCCR         \ DSI Host Video VBP Current Configuration Register
+  $15C constant DSI_DSI_VVFPCCR         \ DSI Host Video VFP Current Configuration Register
+  $160 constant DSI_DSI_VVACCR          \ DSI Host Video VA Current Configuration Register
+  $400 constant DSI_DSI_WCFGR           \ DSI Wrapper Configuration Register
+  $404 constant DSI_DSI_WCR             \ DSI Wrapper Control Register
+  $408 constant DSI_DSI_WIER            \ DSI Wrapper Interrupt Enable Register
+  $40C constant DSI_DSI_WISR            \ DSI Wrapper Interrupt & Status Register
+  $410 constant DSI_DSI_WIFCR           \ DSI Wrapper Interrupt Flag Clear Register
+  $418 constant DSI_DSI_WPCR1           \ DSI Wrapper PHY Configuration Register 1
+  $41C constant DSI_DSI_WPCR2           \ DSI Wrapper PHY Configuration Register 2
+  $420 constant DSI_DSI_WPCR3           \ DSI Wrapper PHY Configuration Register 3
+  $424 constant DSI_DSI_WPCR4           \ DSI_WPCR4
+  $428 constant DSI_DSI_WPCR5           \ DSI Wrapper PHY Configuration Register 5
+  $430 constant DSI_DSI_WRPCR           \ DSI Wrapper Regulator and PLL Control Register
+
+: DSI_DEF ; [then]

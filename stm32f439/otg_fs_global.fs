@@ -6,295 +6,314 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] OTG_FS_GLOBAL_DEF
 
-\
-\ @brief OTG_FS control and status register (OTG_FS_GOTGCTL)
-\ Address offset: 0x00
-\ Reset value: 0x00000800
-\
-
-$00000001 constant OTG_FS_GLOBAL_FS_GOTGCTL_SRQSCS                  \ Session request success
-$00000002 constant OTG_FS_GLOBAL_FS_GOTGCTL_SRQ                     \ Session request
-$00000100 constant OTG_FS_GLOBAL_FS_GOTGCTL_HNGSCS                  \ Host negotiation success
-$00000200 constant OTG_FS_GLOBAL_FS_GOTGCTL_HNPRQ                   \ HNP request
-$00000400 constant OTG_FS_GLOBAL_FS_GOTGCTL_HSHNPEN                 \ Host set HNP enable
-$00000800 constant OTG_FS_GLOBAL_FS_GOTGCTL_DHNPEN                  \ Device HNP enabled
-$00010000 constant OTG_FS_GLOBAL_FS_GOTGCTL_CIDSTS                  \ Connector ID status
-$00020000 constant OTG_FS_GLOBAL_FS_GOTGCTL_DBCT                    \ Long/short debounce time
-$00040000 constant OTG_FS_GLOBAL_FS_GOTGCTL_ASVLD                   \ A-session valid
-$00080000 constant OTG_FS_GLOBAL_FS_GOTGCTL_BSVLD                   \ B-session valid
-
-
-\
-\ @brief OTG_FS interrupt register (OTG_FS_GOTGINT)
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000004 constant OTG_FS_GLOBAL_FS_GOTGINT_SEDET                   \ Session end detected
-$00000100 constant OTG_FS_GLOBAL_FS_GOTGINT_SRSSCHG                 \ Session request success status change
-$00000200 constant OTG_FS_GLOBAL_FS_GOTGINT_HNSSCHG                 \ Host negotiation success status change
-$00020000 constant OTG_FS_GLOBAL_FS_GOTGINT_HNGDET                  \ Host negotiation detected
-$00040000 constant OTG_FS_GLOBAL_FS_GOTGINT_ADTOCHG                 \ A-device timeout change
-$00080000 constant OTG_FS_GLOBAL_FS_GOTGINT_DBCDNE                  \ Debounce done
+  [ifdef] OTG_FS_GLOBAL_FS_GOTGCTL_DEF
+    \
+    \ @brief OTG_FS control and status register (OTG_FS_GOTGCTL)
+    \ Address offset: 0x00
+    \ Reset value: 0x00000800
+    \
+    $00 constant OTG_FS_GLOBAL_SRQSCS           \ [0x00] Session request success
+    $01 constant OTG_FS_GLOBAL_SRQ              \ [0x01] Session request
+    $08 constant OTG_FS_GLOBAL_HNGSCS           \ [0x08] Host negotiation success
+    $09 constant OTG_FS_GLOBAL_HNPRQ            \ [0x09] HNP request
+    $0a constant OTG_FS_GLOBAL_HSHNPEN          \ [0x0a] Host set HNP enable
+    $0b constant OTG_FS_GLOBAL_DHNPEN           \ [0x0b] Device HNP enabled
+    $10 constant OTG_FS_GLOBAL_CIDSTS           \ [0x10] Connector ID status
+    $11 constant OTG_FS_GLOBAL_DBCT             \ [0x11] Long/short debounce time
+    $12 constant OTG_FS_GLOBAL_ASVLD            \ [0x12] A-session valid
+    $13 constant OTG_FS_GLOBAL_BSVLD            \ [0x13] B-session valid
+  [then]
 
 
-\
-\ @brief OTG_FS AHB configuration register (OTG_FS_GAHBCFG)
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OTG_FS_GLOBAL_FS_GAHBCFG_GINT                    \ Global interrupt mask
-$00000080 constant OTG_FS_GLOBAL_FS_GAHBCFG_TXFELVL                 \ TxFIFO empty level
-$00000100 constant OTG_FS_GLOBAL_FS_GAHBCFG_PTXFELVL                \ Periodic TxFIFO empty level
-
-
-\
-\ @brief OTG_FS USB configuration register (OTG_FS_GUSBCFG)
-\ Address offset: 0x0C
-\ Reset value: 0x00000A00
-\
-
-$00000007 constant OTG_FS_GLOBAL_FS_GUSBCFG_TOCAL                   \ FS timeout calibration
-$00000040 constant OTG_FS_GLOBAL_FS_GUSBCFG_PHYSEL                  \ Full Speed serial transceiver select
-$00000100 constant OTG_FS_GLOBAL_FS_GUSBCFG_SRPCAP                  \ SRP-capable
-$00000200 constant OTG_FS_GLOBAL_FS_GUSBCFG_HNPCAP                  \ HNP-capable
-$00003c00 constant OTG_FS_GLOBAL_FS_GUSBCFG_TRDT                    \ USB turnaround time
-$20000000 constant OTG_FS_GLOBAL_FS_GUSBCFG_FHMOD                   \ Force host mode
-$40000000 constant OTG_FS_GLOBAL_FS_GUSBCFG_FDMOD                   \ Force device mode
-$80000000 constant OTG_FS_GLOBAL_FS_GUSBCFG_CTXPKT                  \ Corrupt Tx packet
+  [ifdef] OTG_FS_GLOBAL_FS_GOTGINT_DEF
+    \
+    \ @brief OTG_FS interrupt register (OTG_FS_GOTGINT)
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $02 constant OTG_FS_GLOBAL_SEDET            \ [0x02] Session end detected
+    $08 constant OTG_FS_GLOBAL_SRSSCHG          \ [0x08] Session request success status change
+    $09 constant OTG_FS_GLOBAL_HNSSCHG          \ [0x09] Host negotiation success status change
+    $11 constant OTG_FS_GLOBAL_HNGDET           \ [0x11] Host negotiation detected
+    $12 constant OTG_FS_GLOBAL_ADTOCHG          \ [0x12] A-device timeout change
+    $13 constant OTG_FS_GLOBAL_DBCDNE           \ [0x13] Debounce done
+  [then]
 
 
-\
-\ @brief OTG_FS reset register (OTG_FS_GRSTCTL)
-\ Address offset: 0x10
-\ Reset value: 0x20000000
-\
-
-$00000001 constant OTG_FS_GLOBAL_FS_GRSTCTL_CSRST                   \ Core soft reset
-$00000002 constant OTG_FS_GLOBAL_FS_GRSTCTL_HSRST                   \ HCLK soft reset
-$00000004 constant OTG_FS_GLOBAL_FS_GRSTCTL_FCRST                   \ Host frame counter reset
-$00000010 constant OTG_FS_GLOBAL_FS_GRSTCTL_RXFFLSH                 \ RxFIFO flush
-$00000020 constant OTG_FS_GLOBAL_FS_GRSTCTL_TXFFLSH                 \ TxFIFO flush
-$000007c0 constant OTG_FS_GLOBAL_FS_GRSTCTL_TXFNUM                  \ TxFIFO number
-$80000000 constant OTG_FS_GLOBAL_FS_GRSTCTL_AHBIDL                  \ AHB master idle
+  [ifdef] OTG_FS_GLOBAL_FS_GAHBCFG_DEF
+    \
+    \ @brief OTG_FS AHB configuration register (OTG_FS_GAHBCFG)
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_GLOBAL_GINT             \ [0x00] Global interrupt mask
+    $07 constant OTG_FS_GLOBAL_TXFELVL          \ [0x07] TxFIFO empty level
+    $08 constant OTG_FS_GLOBAL_PTXFELVL         \ [0x08] Periodic TxFIFO empty level
+  [then]
 
 
-\
-\ @brief OTG_FS core interrupt register (OTG_FS_GINTSTS)
-\ Address offset: 0x14
-\ Reset value: 0x04000020
-\
-
-$00000001 constant OTG_FS_GLOBAL_FS_GINTSTS_CMOD                    \ Current mode of operation
-$00000002 constant OTG_FS_GLOBAL_FS_GINTSTS_MMIS                    \ Mode mismatch interrupt
-$00000004 constant OTG_FS_GLOBAL_FS_GINTSTS_OTGINT                  \ OTG interrupt
-$00000008 constant OTG_FS_GLOBAL_FS_GINTSTS_SOF                     \ Start of frame
-$00000010 constant OTG_FS_GLOBAL_FS_GINTSTS_RXFLVL                  \ RxFIFO non-empty
-$00000020 constant OTG_FS_GLOBAL_FS_GINTSTS_NPTXFE                  \ Non-periodic TxFIFO empty
-$00000040 constant OTG_FS_GLOBAL_FS_GINTSTS_GINAKEFF                \ Global IN non-periodic NAK effective
-$00000080 constant OTG_FS_GLOBAL_FS_GINTSTS_GOUTNAKEFF              \ Global OUT NAK effective
-$00000400 constant OTG_FS_GLOBAL_FS_GINTSTS_ESUSP                   \ Early suspend
-$00000800 constant OTG_FS_GLOBAL_FS_GINTSTS_USBSUSP                 \ USB suspend
-$00001000 constant OTG_FS_GLOBAL_FS_GINTSTS_USBRST                  \ USB reset
-$00002000 constant OTG_FS_GLOBAL_FS_GINTSTS_ENUMDNE                 \ Enumeration done
-$00004000 constant OTG_FS_GLOBAL_FS_GINTSTS_ISOODRP                 \ Isochronous OUT packet dropped interrupt
-$00008000 constant OTG_FS_GLOBAL_FS_GINTSTS_EOPF                    \ End of periodic frame interrupt
-$00040000 constant OTG_FS_GLOBAL_FS_GINTSTS_IEPINT                  \ IN endpoint interrupt
-$00080000 constant OTG_FS_GLOBAL_FS_GINTSTS_OEPINT                  \ OUT endpoint interrupt
-$00100000 constant OTG_FS_GLOBAL_FS_GINTSTS_IISOIXFR                \ Incomplete isochronous IN transfer
-$00200000 constant OTG_FS_GLOBAL_FS_GINTSTS_IPXFR_INCOMPISOOUT      \ Incomplete periodic transfer(Host mode)/Incomplete isochronous OUT transfer(Device mode)
-$01000000 constant OTG_FS_GLOBAL_FS_GINTSTS_HPRTINT                 \ Host port interrupt
-$02000000 constant OTG_FS_GLOBAL_FS_GINTSTS_HCINT                   \ Host channels interrupt
-$04000000 constant OTG_FS_GLOBAL_FS_GINTSTS_PTXFE                   \ Periodic TxFIFO empty
-$10000000 constant OTG_FS_GLOBAL_FS_GINTSTS_CIDSCHG                 \ Connector ID status change
-$20000000 constant OTG_FS_GLOBAL_FS_GINTSTS_DISCINT                 \ Disconnect detected interrupt
-$40000000 constant OTG_FS_GLOBAL_FS_GINTSTS_SRQINT                  \ Session request/new session detected interrupt
-$80000000 constant OTG_FS_GLOBAL_FS_GINTSTS_WKUPINT                 \ Resume/remote wakeup detected interrupt
+  [ifdef] OTG_FS_GLOBAL_FS_GUSBCFG_DEF
+    \
+    \ @brief OTG_FS USB configuration register (OTG_FS_GUSBCFG)
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000A00
+    \
+    $00 constant OTG_FS_GLOBAL_TOCAL            \ [0x00 : 3] FS timeout calibration
+    $06 constant OTG_FS_GLOBAL_PHYSEL           \ [0x06] Full Speed serial transceiver select
+    $08 constant OTG_FS_GLOBAL_SRPCAP           \ [0x08] SRP-capable
+    $09 constant OTG_FS_GLOBAL_HNPCAP           \ [0x09] HNP-capable
+    $0a constant OTG_FS_GLOBAL_TRDT             \ [0x0a : 4] USB turnaround time
+    $1d constant OTG_FS_GLOBAL_FHMOD            \ [0x1d] Force host mode
+    $1e constant OTG_FS_GLOBAL_FDMOD            \ [0x1e] Force device mode
+    $1f constant OTG_FS_GLOBAL_CTXPKT           \ [0x1f] Corrupt Tx packet
+  [then]
 
 
-\
-\ @brief OTG_FS interrupt mask register (OTG_FS_GINTMSK)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000002 constant OTG_FS_GLOBAL_FS_GINTMSK_MMISM                   \ Mode mismatch interrupt mask
-$00000004 constant OTG_FS_GLOBAL_FS_GINTMSK_OTGINT                  \ OTG interrupt mask
-$00000008 constant OTG_FS_GLOBAL_FS_GINTMSK_SOFM                    \ Start of frame mask
-$00000010 constant OTG_FS_GLOBAL_FS_GINTMSK_RXFLVLM                 \ Receive FIFO non-empty mask
-$00000020 constant OTG_FS_GLOBAL_FS_GINTMSK_NPTXFEM                 \ Non-periodic TxFIFO empty mask
-$00000040 constant OTG_FS_GLOBAL_FS_GINTMSK_GINAKEFFM               \ Global non-periodic IN NAK effective mask
-$00000080 constant OTG_FS_GLOBAL_FS_GINTMSK_GONAKEFFM               \ Global OUT NAK effective mask
-$00000400 constant OTG_FS_GLOBAL_FS_GINTMSK_ESUSPM                  \ Early suspend mask
-$00000800 constant OTG_FS_GLOBAL_FS_GINTMSK_USBSUSPM                \ USB suspend mask
-$00001000 constant OTG_FS_GLOBAL_FS_GINTMSK_USBRST                  \ USB reset mask
-$00002000 constant OTG_FS_GLOBAL_FS_GINTMSK_ENUMDNEM                \ Enumeration done mask
-$00004000 constant OTG_FS_GLOBAL_FS_GINTMSK_ISOODRPM                \ Isochronous OUT packet dropped interrupt mask
-$00008000 constant OTG_FS_GLOBAL_FS_GINTMSK_EOPFM                   \ End of periodic frame interrupt mask
-$00020000 constant OTG_FS_GLOBAL_FS_GINTMSK_EPMISM                  \ Endpoint mismatch interrupt mask
-$00040000 constant OTG_FS_GLOBAL_FS_GINTMSK_IEPINT                  \ IN endpoints interrupt mask
-$00080000 constant OTG_FS_GLOBAL_FS_GINTMSK_OEPINT                  \ OUT endpoints interrupt mask
-$00100000 constant OTG_FS_GLOBAL_FS_GINTMSK_IISOIXFRM               \ Incomplete isochronous IN transfer mask
-$00200000 constant OTG_FS_GLOBAL_FS_GINTMSK_IPXFRM_IISOOXFRM        \ Incomplete periodic transfer mask(Host mode)/Incomplete isochronous OUT transfer mask(Device mode)
-$01000000 constant OTG_FS_GLOBAL_FS_GINTMSK_PRTIM                   \ Host port interrupt mask
-$02000000 constant OTG_FS_GLOBAL_FS_GINTMSK_HCIM                    \ Host channels interrupt mask
-$04000000 constant OTG_FS_GLOBAL_FS_GINTMSK_PTXFEM                  \ Periodic TxFIFO empty mask
-$10000000 constant OTG_FS_GLOBAL_FS_GINTMSK_CIDSCHGM                \ Connector ID status change mask
-$20000000 constant OTG_FS_GLOBAL_FS_GINTMSK_DISCINT                 \ Disconnect detected interrupt mask
-$40000000 constant OTG_FS_GLOBAL_FS_GINTMSK_SRQIM                   \ Session request/new session detected interrupt mask
-$80000000 constant OTG_FS_GLOBAL_FS_GINTMSK_WUIM                    \ Resume/remote wakeup detected interrupt mask
+  [ifdef] OTG_FS_GLOBAL_FS_GRSTCTL_DEF
+    \
+    \ @brief OTG_FS reset register (OTG_FS_GRSTCTL)
+    \ Address offset: 0x10
+    \ Reset value: 0x20000000
+    \
+    $00 constant OTG_FS_GLOBAL_CSRST            \ [0x00] Core soft reset
+    $01 constant OTG_FS_GLOBAL_HSRST            \ [0x01] HCLK soft reset
+    $02 constant OTG_FS_GLOBAL_FCRST            \ [0x02] Host frame counter reset
+    $04 constant OTG_FS_GLOBAL_RXFFLSH          \ [0x04] RxFIFO flush
+    $05 constant OTG_FS_GLOBAL_TXFFLSH          \ [0x05] TxFIFO flush
+    $06 constant OTG_FS_GLOBAL_TXFNUM           \ [0x06 : 5] TxFIFO number
+    $1f constant OTG_FS_GLOBAL_AHBIDL           \ [0x1f] AHB master idle
+  [then]
 
 
-\
-\ @brief OTG_FS Receive status debug read(Device mode)
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant OTG_FS_GLOBAL_FS_GRXSTSR_DEVICE_EPNUM            \ Endpoint number
-$00007ff0 constant OTG_FS_GLOBAL_FS_GRXSTSR_DEVICE_BCNT             \ Byte count
-$00018000 constant OTG_FS_GLOBAL_FS_GRXSTSR_DEVICE_DPID             \ Data PID
-$001e0000 constant OTG_FS_GLOBAL_FS_GRXSTSR_DEVICE_PKTSTS           \ Packet status
-$01e00000 constant OTG_FS_GLOBAL_FS_GRXSTSR_DEVICE_FRMNUM           \ Frame number
-
-
-\
-\ @brief OTG_FS Receive status debug read(Hostmode)
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant OTG_FS_GLOBAL_FS_GRXSTSR_HOST_EPNUM              \ Endpoint number
-$00007ff0 constant OTG_FS_GLOBAL_FS_GRXSTSR_HOST_BCNT               \ Byte count
-$00018000 constant OTG_FS_GLOBAL_FS_GRXSTSR_HOST_DPID               \ Data PID
-$001e0000 constant OTG_FS_GLOBAL_FS_GRXSTSR_HOST_PKTSTS             \ Packet status
-$01e00000 constant OTG_FS_GLOBAL_FS_GRXSTSR_HOST_FRMNUM             \ Frame number
-
-
-\
-\ @brief OTG_FS Receive FIFO size register (OTG_FS_GRXFSIZ)
-\ Address offset: 0x24
-\ Reset value: 0x00000200
-\
-
-$0000ffff constant OTG_FS_GLOBAL_FS_GRXFSIZ_RXFD                    \ RxFIFO depth
-
-
-\
-\ @brief OTG_FS non-periodic transmit FIFO size register (Device mode)
-\ Address offset: 0x28
-\ Reset value: 0x00000200
-\
-
-$0000ffff constant OTG_FS_GLOBAL_FS_GNPTXFSIZ_DEVICE_TX0FSA         \ Endpoint 0 transmit RAM start address
-$ffff0000 constant OTG_FS_GLOBAL_FS_GNPTXFSIZ_DEVICE_TX0FD          \ Endpoint 0 TxFIFO depth
+  [ifdef] OTG_FS_GLOBAL_FS_GINTSTS_DEF
+    \
+    \ @brief OTG_FS core interrupt register (OTG_FS_GINTSTS)
+    \ Address offset: 0x14
+    \ Reset value: 0x04000020
+    \
+    $00 constant OTG_FS_GLOBAL_CMOD             \ [0x00] Current mode of operation
+    $01 constant OTG_FS_GLOBAL_MMIS             \ [0x01] Mode mismatch interrupt
+    $02 constant OTG_FS_GLOBAL_OTGINT           \ [0x02] OTG interrupt
+    $03 constant OTG_FS_GLOBAL_SOF              \ [0x03] Start of frame
+    $04 constant OTG_FS_GLOBAL_RXFLVL           \ [0x04] RxFIFO non-empty
+    $05 constant OTG_FS_GLOBAL_NPTXFE           \ [0x05] Non-periodic TxFIFO empty
+    $06 constant OTG_FS_GLOBAL_GINAKEFF         \ [0x06] Global IN non-periodic NAK effective
+    $07 constant OTG_FS_GLOBAL_GOUTNAKEFF       \ [0x07] Global OUT NAK effective
+    $0a constant OTG_FS_GLOBAL_ESUSP            \ [0x0a] Early suspend
+    $0b constant OTG_FS_GLOBAL_USBSUSP          \ [0x0b] USB suspend
+    $0c constant OTG_FS_GLOBAL_USBRST           \ [0x0c] USB reset
+    $0d constant OTG_FS_GLOBAL_ENUMDNE          \ [0x0d] Enumeration done
+    $0e constant OTG_FS_GLOBAL_ISOODRP          \ [0x0e] Isochronous OUT packet dropped interrupt
+    $0f constant OTG_FS_GLOBAL_EOPF             \ [0x0f] End of periodic frame interrupt
+    $12 constant OTG_FS_GLOBAL_IEPINT           \ [0x12] IN endpoint interrupt
+    $13 constant OTG_FS_GLOBAL_OEPINT           \ [0x13] OUT endpoint interrupt
+    $14 constant OTG_FS_GLOBAL_IISOIXFR         \ [0x14] Incomplete isochronous IN transfer
+    $15 constant OTG_FS_GLOBAL_IPXFR_INCOMPISOOUT     \ [0x15] Incomplete periodic transfer(Host mode)/Incomplete isochronous OUT transfer(Device mode)
+    $18 constant OTG_FS_GLOBAL_HPRTINT          \ [0x18] Host port interrupt
+    $19 constant OTG_FS_GLOBAL_HCINT            \ [0x19] Host channels interrupt
+    $1a constant OTG_FS_GLOBAL_PTXFE            \ [0x1a] Periodic TxFIFO empty
+    $1c constant OTG_FS_GLOBAL_CIDSCHG          \ [0x1c] Connector ID status change
+    $1d constant OTG_FS_GLOBAL_DISCINT          \ [0x1d] Disconnect detected interrupt
+    $1e constant OTG_FS_GLOBAL_SRQINT           \ [0x1e] Session request/new session detected interrupt
+    $1f constant OTG_FS_GLOBAL_WKUPINT          \ [0x1f] Resume/remote wakeup detected interrupt
+  [then]
 
 
-\
-\ @brief OTG_FS non-periodic transmit FIFO size register (Host mode)
-\ Address offset: 0x28
-\ Reset value: 0x00000200
-\
-
-$0000ffff constant OTG_FS_GLOBAL_FS_GNPTXFSIZ_HOST_NPTXFSA          \ Non-periodic transmit RAM start address
-$ffff0000 constant OTG_FS_GLOBAL_FS_GNPTXFSIZ_HOST_NPTXFD           \ Non-periodic TxFIFO depth
-
-
-\
-\ @brief OTG_FS non-periodic transmit FIFO/queue status register (OTG_FS_GNPTXSTS)
-\ Address offset: 0x2C
-\ Reset value: 0x00080200
-\
-
-$0000ffff constant OTG_FS_GLOBAL_FS_GNPTXSTS_NPTXFSAV               \ Non-periodic TxFIFO space available
-$00ff0000 constant OTG_FS_GLOBAL_FS_GNPTXSTS_NPTQXSAV               \ Non-periodic transmit request queue space available
-$7f000000 constant OTG_FS_GLOBAL_FS_GNPTXSTS_NPTXQTOP               \ Top of the non-periodic transmit request queue
-
-
-\
-\ @brief OTG_FS general core configuration register (OTG_FS_GCCFG)
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00010000 constant OTG_FS_GLOBAL_FS_GCCFG_PWRDWN                    \ Power down
-$00040000 constant OTG_FS_GLOBAL_FS_GCCFG_VBUSASEN                  \ Enable the VBUS sensing device
-$00080000 constant OTG_FS_GLOBAL_FS_GCCFG_VBUSBSEN                  \ Enable the VBUS sensing device
-$00100000 constant OTG_FS_GLOBAL_FS_GCCFG_SOFOUTEN                  \ SOF output enable
-
-
-\
-\ @brief core ID register
-\ Address offset: 0x3C
-\ Reset value: 0x00001000
-\
-
-$00000000 constant OTG_FS_GLOBAL_FS_CID_PRODUCT_ID                  \ Product ID field
+  [ifdef] OTG_FS_GLOBAL_FS_GINTMSK_DEF
+    \
+    \ @brief OTG_FS interrupt mask register (OTG_FS_GINTMSK)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $01 constant OTG_FS_GLOBAL_MMISM            \ [0x01] Mode mismatch interrupt mask
+    $02 constant OTG_FS_GLOBAL_OTGINT           \ [0x02] OTG interrupt mask
+    $03 constant OTG_FS_GLOBAL_SOFM             \ [0x03] Start of frame mask
+    $04 constant OTG_FS_GLOBAL_RXFLVLM          \ [0x04] Receive FIFO non-empty mask
+    $05 constant OTG_FS_GLOBAL_NPTXFEM          \ [0x05] Non-periodic TxFIFO empty mask
+    $06 constant OTG_FS_GLOBAL_GINAKEFFM        \ [0x06] Global non-periodic IN NAK effective mask
+    $07 constant OTG_FS_GLOBAL_GONAKEFFM        \ [0x07] Global OUT NAK effective mask
+    $0a constant OTG_FS_GLOBAL_ESUSPM           \ [0x0a] Early suspend mask
+    $0b constant OTG_FS_GLOBAL_USBSUSPM         \ [0x0b] USB suspend mask
+    $0c constant OTG_FS_GLOBAL_USBRST           \ [0x0c] USB reset mask
+    $0d constant OTG_FS_GLOBAL_ENUMDNEM         \ [0x0d] Enumeration done mask
+    $0e constant OTG_FS_GLOBAL_ISOODRPM         \ [0x0e] Isochronous OUT packet dropped interrupt mask
+    $0f constant OTG_FS_GLOBAL_EOPFM            \ [0x0f] End of periodic frame interrupt mask
+    $11 constant OTG_FS_GLOBAL_EPMISM           \ [0x11] Endpoint mismatch interrupt mask
+    $12 constant OTG_FS_GLOBAL_IEPINT           \ [0x12] IN endpoints interrupt mask
+    $13 constant OTG_FS_GLOBAL_OEPINT           \ [0x13] OUT endpoints interrupt mask
+    $14 constant OTG_FS_GLOBAL_IISOIXFRM        \ [0x14] Incomplete isochronous IN transfer mask
+    $15 constant OTG_FS_GLOBAL_IPXFRM_IISOOXFRM     \ [0x15] Incomplete periodic transfer mask(Host mode)/Incomplete isochronous OUT transfer mask(Device mode)
+    $18 constant OTG_FS_GLOBAL_PRTIM            \ [0x18] Host port interrupt mask
+    $19 constant OTG_FS_GLOBAL_HCIM             \ [0x19] Host channels interrupt mask
+    $1a constant OTG_FS_GLOBAL_PTXFEM           \ [0x1a] Periodic TxFIFO empty mask
+    $1c constant OTG_FS_GLOBAL_CIDSCHGM         \ [0x1c] Connector ID status change mask
+    $1d constant OTG_FS_GLOBAL_DISCINT          \ [0x1d] Disconnect detected interrupt mask
+    $1e constant OTG_FS_GLOBAL_SRQIM            \ [0x1e] Session request/new session detected interrupt mask
+    $1f constant OTG_FS_GLOBAL_WUIM             \ [0x1f] Resume/remote wakeup detected interrupt mask
+  [then]
 
 
-\
-\ @brief OTG_FS Host periodic transmit FIFO size register (OTG_FS_HPTXFSIZ)
-\ Address offset: 0x100
-\ Reset value: 0x02000600
-\
-
-$0000ffff constant OTG_FS_GLOBAL_FS_HPTXFSIZ_PTXSA                  \ Host periodic TxFIFO start address
-$ffff0000 constant OTG_FS_GLOBAL_FS_HPTXFSIZ_PTXFSIZ                \ Host periodic TxFIFO depth
-
-
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF2)
-\ Address offset: 0x104
-\ Reset value: 0x02000400
-\
-
-$0000ffff constant OTG_FS_GLOBAL_FS_DIEPTXF1_INEPTXSA               \ IN endpoint FIFO2 transmit RAM start address
-$ffff0000 constant OTG_FS_GLOBAL_FS_DIEPTXF1_INEPTXFD               \ IN endpoint TxFIFO depth
+  [ifdef] OTG_FS_GLOBAL_FS_GRXSTSR_Device_DEF
+    \
+    \ @brief OTG_FS Receive status debug read(Device mode)
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_GLOBAL_EPNUM            \ [0x00 : 4] Endpoint number
+    $04 constant OTG_FS_GLOBAL_BCNT             \ [0x04 : 11] Byte count
+    $0f constant OTG_FS_GLOBAL_DPID             \ [0x0f : 2] Data PID
+    $11 constant OTG_FS_GLOBAL_PKTSTS           \ [0x11 : 4] Packet status
+    $15 constant OTG_FS_GLOBAL_FRMNUM           \ [0x15 : 4] Frame number
+  [then]
 
 
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF3)
-\ Address offset: 0x108
-\ Reset value: 0x02000400
-\
-
-$0000ffff constant OTG_FS_GLOBAL_FS_DIEPTXF2_INEPTXSA               \ IN endpoint FIFO3 transmit RAM start address
-$ffff0000 constant OTG_FS_GLOBAL_FS_DIEPTXF2_INEPTXFD               \ IN endpoint TxFIFO depth
-
-
-\
-\ @brief OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF4)
-\ Address offset: 0x10C
-\ Reset value: 0x02000400
-\
-
-$0000ffff constant OTG_FS_GLOBAL_FS_DIEPTXF3_INEPTXSA               \ IN endpoint FIFO4 transmit RAM start address
-$ffff0000 constant OTG_FS_GLOBAL_FS_DIEPTXF3_INEPTXFD               \ IN endpoint TxFIFO depth
+  [ifdef] OTG_FS_GLOBAL_FS_GRXSTSR_Host_DEF
+    \
+    \ @brief OTG_FS Receive status debug read(Hostmode)
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant OTG_FS_GLOBAL_EPNUM            \ [0x00 : 4] Endpoint number
+    $04 constant OTG_FS_GLOBAL_BCNT             \ [0x04 : 11] Byte count
+    $0f constant OTG_FS_GLOBAL_DPID             \ [0x0f : 2] Data PID
+    $11 constant OTG_FS_GLOBAL_PKTSTS           \ [0x11 : 4] Packet status
+    $15 constant OTG_FS_GLOBAL_FRMNUM           \ [0x15 : 4] Frame number
+  [then]
 
 
-\
-\ @brief USB on the go full speed
-\
-$50000000 constant OTG_FS_GLOBAL_FS_GOTGCTL  \ offset: 0x00 : OTG_FS control and status register (OTG_FS_GOTGCTL)
-$50000004 constant OTG_FS_GLOBAL_FS_GOTGINT  \ offset: 0x04 : OTG_FS interrupt register (OTG_FS_GOTGINT)
-$50000008 constant OTG_FS_GLOBAL_FS_GAHBCFG  \ offset: 0x08 : OTG_FS AHB configuration register (OTG_FS_GAHBCFG)
-$5000000c constant OTG_FS_GLOBAL_FS_GUSBCFG  \ offset: 0x0C : OTG_FS USB configuration register (OTG_FS_GUSBCFG)
-$50000010 constant OTG_FS_GLOBAL_FS_GRSTCTL  \ offset: 0x10 : OTG_FS reset register (OTG_FS_GRSTCTL)
-$50000014 constant OTG_FS_GLOBAL_FS_GINTSTS  \ offset: 0x14 : OTG_FS core interrupt register (OTG_FS_GINTSTS)
-$50000018 constant OTG_FS_GLOBAL_FS_GINTMSK  \ offset: 0x18 : OTG_FS interrupt mask register (OTG_FS_GINTMSK)
-$5000001c constant OTG_FS_GLOBAL_FS_GRXSTSR_DEVICE  \ offset: 0x1C : OTG_FS Receive status debug read(Device mode)
-$5000001c constant OTG_FS_GLOBAL_FS_GRXSTSR_HOST  \ offset: 0x1C : OTG_FS Receive status debug read(Hostmode)
-$50000024 constant OTG_FS_GLOBAL_FS_GRXFSIZ  \ offset: 0x24 : OTG_FS Receive FIFO size register (OTG_FS_GRXFSIZ)
-$50000028 constant OTG_FS_GLOBAL_FS_GNPTXFSIZ_DEVICE  \ offset: 0x28 : OTG_FS non-periodic transmit FIFO size register (Device mode)
-$50000028 constant OTG_FS_GLOBAL_FS_GNPTXFSIZ_HOST  \ offset: 0x28 : OTG_FS non-periodic transmit FIFO size register (Host mode)
-$5000002c constant OTG_FS_GLOBAL_FS_GNPTXSTS  \ offset: 0x2C : OTG_FS non-periodic transmit FIFO/queue status register (OTG_FS_GNPTXSTS)
-$50000038 constant OTG_FS_GLOBAL_FS_GCCFG  \ offset: 0x38 : OTG_FS general core configuration register (OTG_FS_GCCFG)
-$5000003c constant OTG_FS_GLOBAL_FS_CID  \ offset: 0x3C : core ID register
-$50000100 constant OTG_FS_GLOBAL_FS_HPTXFSIZ  \ offset: 0x100 : OTG_FS Host periodic transmit FIFO size register (OTG_FS_HPTXFSIZ)
-$50000104 constant OTG_FS_GLOBAL_FS_DIEPTXF1  \ offset: 0x104 : OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF2)
-$50000108 constant OTG_FS_GLOBAL_FS_DIEPTXF2  \ offset: 0x108 : OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF3)
-$5000010c constant OTG_FS_GLOBAL_FS_DIEPTXF3  \ offset: 0x10C : OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF4)
+  [ifdef] OTG_FS_GLOBAL_FS_GRXFSIZ_DEF
+    \
+    \ @brief OTG_FS Receive FIFO size register (OTG_FS_GRXFSIZ)
+    \ Address offset: 0x24
+    \ Reset value: 0x00000200
+    \
+    $00 constant OTG_FS_GLOBAL_RXFD             \ [0x00 : 16] RxFIFO depth
+  [then]
 
+
+  [ifdef] OTG_FS_GLOBAL_FS_GNPTXFSIZ_Device_DEF
+    \
+    \ @brief OTG_FS non-periodic transmit FIFO size register (Device mode)
+    \ Address offset: 0x28
+    \ Reset value: 0x00000200
+    \
+    $00 constant OTG_FS_GLOBAL_TX0FSA           \ [0x00 : 16] Endpoint 0 transmit RAM start address
+    $10 constant OTG_FS_GLOBAL_TX0FD            \ [0x10 : 16] Endpoint 0 TxFIFO depth
+  [then]
+
+
+  [ifdef] OTG_FS_GLOBAL_FS_GNPTXFSIZ_Host_DEF
+    \
+    \ @brief OTG_FS non-periodic transmit FIFO size register (Host mode)
+    \ Address offset: 0x28
+    \ Reset value: 0x00000200
+    \
+    $00 constant OTG_FS_GLOBAL_NPTXFSA          \ [0x00 : 16] Non-periodic transmit RAM start address
+    $10 constant OTG_FS_GLOBAL_NPTXFD           \ [0x10 : 16] Non-periodic TxFIFO depth
+  [then]
+
+
+  [ifdef] OTG_FS_GLOBAL_FS_GNPTXSTS_DEF
+    \
+    \ @brief OTG_FS non-periodic transmit FIFO/queue status register (OTG_FS_GNPTXSTS)
+    \ Address offset: 0x2C
+    \ Reset value: 0x00080200
+    \
+    $00 constant OTG_FS_GLOBAL_NPTXFSAV         \ [0x00 : 16] Non-periodic TxFIFO space available
+    $10 constant OTG_FS_GLOBAL_NPTQXSAV         \ [0x10 : 8] Non-periodic transmit request queue space available
+    $18 constant OTG_FS_GLOBAL_NPTXQTOP         \ [0x18 : 7] Top of the non-periodic transmit request queue
+  [then]
+
+
+  [ifdef] OTG_FS_GLOBAL_FS_GCCFG_DEF
+    \
+    \ @brief OTG_FS general core configuration register (OTG_FS_GCCFG)
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $10 constant OTG_FS_GLOBAL_PWRDWN           \ [0x10] Power down
+    $12 constant OTG_FS_GLOBAL_VBUSASEN         \ [0x12] Enable the VBUS sensing device
+    $13 constant OTG_FS_GLOBAL_VBUSBSEN         \ [0x13] Enable the VBUS sensing device
+    $14 constant OTG_FS_GLOBAL_SOFOUTEN         \ [0x14] SOF output enable
+  [then]
+
+
+  [ifdef] OTG_FS_GLOBAL_FS_CID_DEF
+    \
+    \ @brief core ID register
+    \ Address offset: 0x3C
+    \ Reset value: 0x00001000
+    \
+    $00 constant OTG_FS_GLOBAL_PRODUCT_ID       \ [0x00 : 32] Product ID field
+  [then]
+
+
+  [ifdef] OTG_FS_GLOBAL_FS_HPTXFSIZ_DEF
+    \
+    \ @brief OTG_FS Host periodic transmit FIFO size register (OTG_FS_HPTXFSIZ)
+    \ Address offset: 0x100
+    \ Reset value: 0x02000600
+    \
+    $00 constant OTG_FS_GLOBAL_PTXSA            \ [0x00 : 16] Host periodic TxFIFO start address
+    $10 constant OTG_FS_GLOBAL_PTXFSIZ          \ [0x10 : 16] Host periodic TxFIFO depth
+  [then]
+
+
+  [ifdef] OTG_FS_GLOBAL_FS_DIEPTXF1_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF2)
+    \ Address offset: 0x104
+    \ Reset value: 0x02000400
+    \
+    $00 constant OTG_FS_GLOBAL_INEPTXSA         \ [0x00 : 16] IN endpoint FIFO2 transmit RAM start address
+    $10 constant OTG_FS_GLOBAL_INEPTXFD         \ [0x10 : 16] IN endpoint TxFIFO depth
+  [then]
+
+
+  [ifdef] OTG_FS_GLOBAL_FS_DIEPTXF2_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF3)
+    \ Address offset: 0x108
+    \ Reset value: 0x02000400
+    \
+    $00 constant OTG_FS_GLOBAL_INEPTXSA         \ [0x00 : 16] IN endpoint FIFO3 transmit RAM start address
+    $10 constant OTG_FS_GLOBAL_INEPTXFD         \ [0x10 : 16] IN endpoint TxFIFO depth
+  [then]
+
+
+  [ifdef] OTG_FS_GLOBAL_FS_DIEPTXF3_DEF
+    \
+    \ @brief OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF4)
+    \ Address offset: 0x10C
+    \ Reset value: 0x02000400
+    \
+    $00 constant OTG_FS_GLOBAL_INEPTXSA         \ [0x00 : 16] IN endpoint FIFO4 transmit RAM start address
+    $10 constant OTG_FS_GLOBAL_INEPTXFD         \ [0x10 : 16] IN endpoint TxFIFO depth
+  [then]
+
+  \
+  \ @brief USB on the go full speed
+  \
+  $00 constant OTG_FS_GLOBAL_FS_GOTGCTL \ OTG_FS control and status register (OTG_FS_GOTGCTL)
+  $04 constant OTG_FS_GLOBAL_FS_GOTGINT \ OTG_FS interrupt register (OTG_FS_GOTGINT)
+  $08 constant OTG_FS_GLOBAL_FS_GAHBCFG \ OTG_FS AHB configuration register (OTG_FS_GAHBCFG)
+  $0C constant OTG_FS_GLOBAL_FS_GUSBCFG \ OTG_FS USB configuration register (OTG_FS_GUSBCFG)
+  $10 constant OTG_FS_GLOBAL_FS_GRSTCTL \ OTG_FS reset register (OTG_FS_GRSTCTL)
+  $14 constant OTG_FS_GLOBAL_FS_GINTSTS \ OTG_FS core interrupt register (OTG_FS_GINTSTS)
+  $18 constant OTG_FS_GLOBAL_FS_GINTMSK \ OTG_FS interrupt mask register (OTG_FS_GINTMSK)
+  $1C constant OTG_FS_GLOBAL_FS_GRXSTSR_DEVICE    \ OTG_FS Receive status debug read(Device mode)
+  $1C constant OTG_FS_GLOBAL_FS_GRXSTSR_HOST    \ OTG_FS Receive status debug read(Hostmode)
+  $24 constant OTG_FS_GLOBAL_FS_GRXFSIZ \ OTG_FS Receive FIFO size register (OTG_FS_GRXFSIZ)
+  $28 constant OTG_FS_GLOBAL_FS_GNPTXFSIZ_DEVICE    \ OTG_FS non-periodic transmit FIFO size register (Device mode)
+  $28 constant OTG_FS_GLOBAL_FS_GNPTXFSIZ_HOST    \ OTG_FS non-periodic transmit FIFO size register (Host mode)
+  $2C constant OTG_FS_GLOBAL_FS_GNPTXSTS    \ OTG_FS non-periodic transmit FIFO/queue status register (OTG_FS_GNPTXSTS)
+  $38 constant OTG_FS_GLOBAL_FS_GCCFG   \ OTG_FS general core configuration register (OTG_FS_GCCFG)
+  $3C constant OTG_FS_GLOBAL_FS_CID     \ core ID register
+  $100 constant OTG_FS_GLOBAL_FS_HPTXFSIZ    \ OTG_FS Host periodic transmit FIFO size register (OTG_FS_HPTXFSIZ)
+  $104 constant OTG_FS_GLOBAL_FS_DIEPTXF1    \ OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF2)
+  $108 constant OTG_FS_GLOBAL_FS_DIEPTXF2    \ OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF3)
+  $10C constant OTG_FS_GLOBAL_FS_DIEPTXF3    \ OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF4)
+
+: OTG_FS_GLOBAL_DEF ; [then]

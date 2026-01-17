@@ -6,340 +6,366 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_SR_AWD                                       \ Analog watchdog flag
-$00000002 constant ADC_SR_EOC                                       \ Regular channel end of conversion
-$00000004 constant ADC_SR_JEOC                                      \ Injected channel end of conversion
-$00000008 constant ADC_SR_JSTRT                                     \ Injected channel start flag
-$00000010 constant ADC_SR_STRT                                      \ Regular channel start flag
-$00000020 constant ADC_SR_OVR                                       \ Overrun
-$00000040 constant ADC_SR_ADONS                                     \ ADC ON status
-$00000100 constant ADC_SR_RCNR                                      \ Regular channel not ready
-$00000200 constant ADC_SR_JCNR                                      \ Injected channel not ready
-
-
-\
-\ @brief control register 1
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_CR1_AWDCH                                    \ Analog watchdog channel select bits
-$00000020 constant ADC_CR1_EOCIE                                    \ Interrupt enable for EOC
-$00000040 constant ADC_CR1_AWDIE                                    \ Analog watchdog interrupt enable
-$00000080 constant ADC_CR1_JEOCIE                                   \ Interrupt enable for injected channels
-$00000100 constant ADC_CR1_SCAN                                     \ Scan mode
-$00000200 constant ADC_CR1_AWDSGL                                   \ Enable the watchdog on a single channel in scan mode
-$00000400 constant ADC_CR1_JAUTO                                    \ Automatic injected group conversion
-$00000800 constant ADC_CR1_DISCEN                                   \ Discontinuous mode on regular channels
-$00001000 constant ADC_CR1_JDISCEN                                  \ Discontinuous mode on injected channels
-$0000e000 constant ADC_CR1_DISCNUM                                  \ Discontinuous mode channel count
-$00010000 constant ADC_CR1_PDD                                      \ Power down during the delay phase
-$00020000 constant ADC_CR1_PDI                                      \ Power down during the idle phase
-$00400000 constant ADC_CR1_JAWDEN                                   \ Analog watchdog enable on injected channels
-$00800000 constant ADC_CR1_AWDEN                                    \ Analog watchdog enable on regular channels
-$03000000 constant ADC_CR1_RES                                      \ Resolution
-$04000000 constant ADC_CR1_OVRIE                                    \ Overrun interrupt enable
-
-
-\
-\ @brief control register 2
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CR2_ADON                                     \ A/D Converter ON / OFF
-$00000002 constant ADC_CR2_CONT                                     \ Continuous conversion
-$00000004 constant ADC_CR2_ADC_CFG                                  \ ADC configuration
-$00000070 constant ADC_CR2_DELS                                     \ Delay selection
-$00000100 constant ADC_CR2_DMA                                      \ Direct memory access mode
-$00000200 constant ADC_CR2_DDS                                      \ DMA disable selection
-$00000400 constant ADC_CR2_EOCS                                     \ End of conversion selection
-$00000800 constant ADC_CR2_ALIGN                                    \ Data alignment
-$000f0000 constant ADC_CR2_JEXTSEL                                  \ External event select for injected group
-$00300000 constant ADC_CR2_JEXTEN                                   \ External trigger enable for injected channels
-$00400000 constant ADC_CR2_JSWSTART                                 \ Start conversion of injected channels
-$0f000000 constant ADC_CR2_EXTSEL                                   \ External event select for regular group
-$30000000 constant ADC_CR2_EXTEN                                    \ External trigger enable for regular channels
-$40000000 constant ADC_CR2_SWSTART                                  \ Start conversion of regular channels
-
-
-\
-\ @brief sample time register 1
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$3fffffff constant ADC_SMPR1_SMP                                    \ Channel sampling time selection
-
-
-\
-\ @brief sample time register 2
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$3fffffff constant ADC_SMPR2_SMP                                    \ Channel sampling time selection
-
-
-\
-\ @brief sample time register 3
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$3fffffff constant ADC_SMPR3_SMP                                    \ Channel Sample time selection
-
-
-\
-\ @brief injected channel data offset register x
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_JOFR1_JOFFSET1                               \ Data offset for injected channel x
-
-
-\
-\ @brief injected channel data offset register x
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_JOFR2_JOFFSET2                               \ Data offset for injected channel x
-
-
-\
-\ @brief injected channel data offset register x
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_JOFR3_JOFFSET3                               \ Data offset for injected channel x
-
-
-\
-\ @brief injected channel data offset register x
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_JOFR4_JOFFSET4                               \ Data offset for injected channel x
-
-
-\
-\ @brief watchdog higher threshold register
-\ Address offset: 0x28
-\ Reset value: 0x00000FFF
-\
-
-$00000fff constant ADC_HTR_HT                                       \ Analog watchdog higher threshold
-
-
-\
-\ @brief watchdog lower threshold register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_LTR_LT                                       \ Analog watchdog lower threshold
-
-
-\
-\ @brief regular sequence register 1
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_SQR1_SQ25                                    \ 25th conversion in regular sequence
-$000003e0 constant ADC_SQR1_SQ26                                    \ 26th conversion in regular sequence
-$00007c00 constant ADC_SQR1_SQ27                                    \ 27th conversion in regular sequence
-$000f8000 constant ADC_SQR1_SQ28                                    \ 28th conversion in regular sequence
-$00f00000 constant ADC_SQR1_L                                       \ Regular channel sequence length
-
-
-\
-\ @brief regular sequence register 2
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_SQR2_SQ19                                    \ 19th conversion in regular sequence
-$000003e0 constant ADC_SQR2_SQ20                                    \ 20th conversion in regular sequence
-$00007c00 constant ADC_SQR2_SQ21                                    \ 21st conversion in regular sequence
-$000f8000 constant ADC_SQR2_SQ22                                    \ 22nd conversion in regular sequence
-$01f00000 constant ADC_SQR2_SQ23                                    \ 23rd conversion in regular sequence
-$3e000000 constant ADC_SQR2_SQ24                                    \ 24th conversion in regular sequence
-
-
-\
-\ @brief regular sequence register 3
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_SQR3_SQ13                                    \ 13th conversion in regular sequence
-$000003e0 constant ADC_SQR3_SQ14                                    \ 14th conversion in regular sequence
-$00007c00 constant ADC_SQR3_SQ15                                    \ 15th conversion in regular sequence
-$000f8000 constant ADC_SQR3_SQ16                                    \ 16th conversion in regular sequence
-$01f00000 constant ADC_SQR3_SQ17                                    \ 17th conversion in regular sequence
-$3e000000 constant ADC_SQR3_SQ18                                    \ 18th conversion in regular sequence
-
-
-\
-\ @brief regular sequence register 4
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_SQR4_SQ7                                     \ 7th conversion in regular sequence
-$000003e0 constant ADC_SQR4_SQ8                                     \ 8th conversion in regular sequence
-$00007c00 constant ADC_SQR4_SQ9                                     \ 9th conversion in regular sequence
-$000f8000 constant ADC_SQR4_SQ10                                    \ 10th conversion in regular sequence
-$01f00000 constant ADC_SQR4_SQ11                                    \ 11th conversion in regular sequence
-$3e000000 constant ADC_SQR4_SQ12                                    \ 12th conversion in regular sequence
-
-
-\
-\ @brief regular sequence register 5
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_SQR5_SQ1                                     \ 1st conversion in regular sequence
-$000003e0 constant ADC_SQR5_SQ2                                     \ 2nd conversion in regular sequence
-$00007c00 constant ADC_SQR5_SQ3                                     \ 3rd conversion in regular sequence
-$000f8000 constant ADC_SQR5_SQ4                                     \ 4th conversion in regular sequence
-$01f00000 constant ADC_SQR5_SQ5                                     \ 5th conversion in regular sequence
-$3e000000 constant ADC_SQR5_SQ6                                     \ 6th conversion in regular sequence
-
-
-\
-\ @brief injected sequence register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_JSQR_JSQ1                                    \ 1st conversion in injected sequence
-$000003e0 constant ADC_JSQR_JSQ2                                    \ 2nd conversion in injected sequence
-$00007c00 constant ADC_JSQR_JSQ3                                    \ 3rd conversion in injected sequence
-$000f8000 constant ADC_JSQR_JSQ4                                    \ 4th conversion in injected sequence
-$00300000 constant ADC_JSQR_JL                                      \ Injected sequence length
-
-
-\
-\ @brief injected data register x
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_JDR1_JDATA                                   \ Injected data
-
-
-\
-\ @brief injected data register x
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_JDR2_JDATA                                   \ Injected data
-
-
-\
-\ @brief injected data register x
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_JDR3_JDATA                                   \ Injected data
-
-
-\
-\ @brief injected data register x
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_JDR4_JDATA                                   \ Injected data
-
-
-\
-\ @brief regular data register
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_DR_REGULARDATA                               \ Regular data
-
-
-\
-\ @brief sample time register 0
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$0000003f constant ADC_SMPR0_SMP                                    \ Channel Sample time selection
-
-
-\
-\ @brief ADC common status register
-\ Address offset: 0x300
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CSR_AWD1                                     \ Analog watchdog flag of the ADC
-$00000002 constant ADC_CSR_EOC1                                     \ End of conversion of the ADC
-$00000004 constant ADC_CSR_JEOC1                                    \ Injected channel end of conversion of the ADC
-$00000008 constant ADC_CSR_JSTRT1                                   \ Injected channel Start flag of the ADC
-$00000010 constant ADC_CSR_STRT1                                    \ Regular channel Start flag of the ADC
-$00000020 constant ADC_CSR_OVR1                                     \ Overrun flag of the ADC
-$00000040 constant ADC_CSR_ADONS1                                   \ ADON Status of ADC1
-
-
-\
-\ @brief ADC common control register
-\ Address offset: 0x304
-\ Reset value: 0x00000000
-\
-
-$00030000 constant ADC_CCR_ADCPRE                                   \ ADC prescaler
-$00800000 constant ADC_CCR_TSVREFE                                  \ Temperature sensor and VREFINT enable
-
-
-\
-\ @brief Analog-to-digital converter
-\
-$40012400 constant ADC_SR         \ offset: 0x00 : status register
-$40012404 constant ADC_CR1        \ offset: 0x04 : control register 1
-$40012408 constant ADC_CR2        \ offset: 0x08 : control register 2
-$4001240c constant ADC_SMPR1      \ offset: 0x0C : sample time register 1
-$40012410 constant ADC_SMPR2      \ offset: 0x10 : sample time register 2
-$40012414 constant ADC_SMPR3      \ offset: 0x14 : sample time register 3
-$40012418 constant ADC_JOFR1      \ offset: 0x18 : injected channel data offset register x
-$4001241c constant ADC_JOFR2      \ offset: 0x1C : injected channel data offset register x
-$40012420 constant ADC_JOFR3      \ offset: 0x20 : injected channel data offset register x
-$40012424 constant ADC_JOFR4      \ offset: 0x24 : injected channel data offset register x
-$40012428 constant ADC_HTR        \ offset: 0x28 : watchdog higher threshold register
-$4001242c constant ADC_LTR        \ offset: 0x2C : watchdog lower threshold register
-$40012430 constant ADC_SQR1       \ offset: 0x30 : regular sequence register 1
-$40012434 constant ADC_SQR2       \ offset: 0x34 : regular sequence register 2
-$40012438 constant ADC_SQR3       \ offset: 0x38 : regular sequence register 3
-$4001243c constant ADC_SQR4       \ offset: 0x3C : regular sequence register 4
-$40012440 constant ADC_SQR5       \ offset: 0x40 : regular sequence register 5
-$40012444 constant ADC_JSQR       \ offset: 0x44 : injected sequence register
-$40012448 constant ADC_JDR1       \ offset: 0x48 : injected data register x
-$4001244c constant ADC_JDR2       \ offset: 0x4C : injected data register x
-$40012450 constant ADC_JDR3       \ offset: 0x50 : injected data register x
-$40012454 constant ADC_JDR4       \ offset: 0x54 : injected data register x
-$40012458 constant ADC_DR         \ offset: 0x58 : regular data register
-$4001245c constant ADC_SMPR0      \ offset: 0x5C : sample time register 0
-$40012700 constant ADC_CSR        \ offset: 0x300 : ADC common status register
-$40012704 constant ADC_CCR        \ offset: 0x304 : ADC common control register
-
+[ifndef] ADC_DEF
+
+  [ifdef] ADC_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_AWD                        \ [0x00] Analog watchdog flag
+    $01 constant ADC_EOC                        \ [0x01] Regular channel end of conversion
+    $02 constant ADC_JEOC                       \ [0x02] Injected channel end of conversion
+    $03 constant ADC_JSTRT                      \ [0x03] Injected channel start flag
+    $04 constant ADC_STRT                       \ [0x04] Regular channel start flag
+    $05 constant ADC_OVR                        \ [0x05] Overrun
+    $06 constant ADC_ADONS                      \ [0x06] ADC ON status
+    $08 constant ADC_RCNR                       \ [0x08] Regular channel not ready
+    $09 constant ADC_JCNR                       \ [0x09] Injected channel not ready
+  [then]
+
+
+  [ifdef] ADC_CR1_DEF
+    \
+    \ @brief control register 1
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_AWDCH                      \ [0x00 : 5] Analog watchdog channel select bits
+    $05 constant ADC_EOCIE                      \ [0x05] Interrupt enable for EOC
+    $06 constant ADC_AWDIE                      \ [0x06] Analog watchdog interrupt enable
+    $07 constant ADC_JEOCIE                     \ [0x07] Interrupt enable for injected channels
+    $08 constant ADC_SCAN                       \ [0x08] Scan mode
+    $09 constant ADC_AWDSGL                     \ [0x09] Enable the watchdog on a single channel in scan mode
+    $0a constant ADC_JAUTO                      \ [0x0a] Automatic injected group conversion
+    $0b constant ADC_DISCEN                     \ [0x0b] Discontinuous mode on regular channels
+    $0c constant ADC_JDISCEN                    \ [0x0c] Discontinuous mode on injected channels
+    $0d constant ADC_DISCNUM                    \ [0x0d : 3] Discontinuous mode channel count
+    $10 constant ADC_PDD                        \ [0x10] Power down during the delay phase
+    $11 constant ADC_PDI                        \ [0x11] Power down during the idle phase
+    $16 constant ADC_JAWDEN                     \ [0x16] Analog watchdog enable on injected channels
+    $17 constant ADC_AWDEN                      \ [0x17] Analog watchdog enable on regular channels
+    $18 constant ADC_RES                        \ [0x18 : 2] Resolution
+    $1a constant ADC_OVRIE                      \ [0x1a] Overrun interrupt enable
+  [then]
+
+
+  [ifdef] ADC_CR2_DEF
+    \
+    \ @brief control register 2
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_ADON                       \ [0x00] A/D Converter ON / OFF
+    $01 constant ADC_CONT                       \ [0x01] Continuous conversion
+    $02 constant ADC_ADC_CFG                    \ [0x02] ADC configuration
+    $04 constant ADC_DELS                       \ [0x04 : 3] Delay selection
+    $08 constant ADC_DMA                        \ [0x08] Direct memory access mode
+    $09 constant ADC_DDS                        \ [0x09] DMA disable selection
+    $0a constant ADC_EOCS                       \ [0x0a] End of conversion selection
+    $0b constant ADC_ALIGN                      \ [0x0b] Data alignment
+    $10 constant ADC_JEXTSEL                    \ [0x10 : 4] External event select for injected group
+    $14 constant ADC_JEXTEN                     \ [0x14 : 2] External trigger enable for injected channels
+    $16 constant ADC_JSWSTART                   \ [0x16] Start conversion of injected channels
+    $18 constant ADC_EXTSEL                     \ [0x18 : 4] External event select for regular group
+    $1c constant ADC_EXTEN                      \ [0x1c : 2] External trigger enable for regular channels
+    $1e constant ADC_SWSTART                    \ [0x1e] Start conversion of regular channels
+  [then]
+
+
+  [ifdef] ADC_SMPR1_DEF
+    \
+    \ @brief sample time register 1
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SMP                        \ [0x00 : 30] Channel sampling time selection
+  [then]
+
+
+  [ifdef] ADC_SMPR2_DEF
+    \
+    \ @brief sample time register 2
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SMP                        \ [0x00 : 30] Channel sampling time selection
+  [then]
+
+
+  [ifdef] ADC_SMPR3_DEF
+    \
+    \ @brief sample time register 3
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SMP                        \ [0x00 : 30] Channel Sample time selection
+  [then]
+
+
+  [ifdef] ADC_JOFR1_DEF
+    \
+    \ @brief injected channel data offset register x
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JOFFSET1                   \ [0x00 : 12] Data offset for injected channel x
+  [then]
+
+
+  [ifdef] ADC_JOFR2_DEF
+    \
+    \ @brief injected channel data offset register x
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JOFFSET2                   \ [0x00 : 12] Data offset for injected channel x
+  [then]
+
+
+  [ifdef] ADC_JOFR3_DEF
+    \
+    \ @brief injected channel data offset register x
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JOFFSET3                   \ [0x00 : 12] Data offset for injected channel x
+  [then]
+
+
+  [ifdef] ADC_JOFR4_DEF
+    \
+    \ @brief injected channel data offset register x
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JOFFSET4                   \ [0x00 : 12] Data offset for injected channel x
+  [then]
+
+
+  [ifdef] ADC_HTR_DEF
+    \
+    \ @brief watchdog higher threshold register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000FFF
+    \
+    $00 constant ADC_HT                         \ [0x00 : 12] Analog watchdog higher threshold
+  [then]
+
+
+  [ifdef] ADC_LTR_DEF
+    \
+    \ @brief watchdog lower threshold register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_LT                         \ [0x00 : 12] Analog watchdog lower threshold
+  [then]
+
+
+  [ifdef] ADC_SQR1_DEF
+    \
+    \ @brief regular sequence register 1
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SQ25                       \ [0x00 : 5] 25th conversion in regular sequence
+    $05 constant ADC_SQ26                       \ [0x05 : 5] 26th conversion in regular sequence
+    $0a constant ADC_SQ27                       \ [0x0a : 5] 27th conversion in regular sequence
+    $0f constant ADC_SQ28                       \ [0x0f : 5] 28th conversion in regular sequence
+    $14 constant ADC_L                          \ [0x14 : 4] Regular channel sequence length
+  [then]
+
+
+  [ifdef] ADC_SQR2_DEF
+    \
+    \ @brief regular sequence register 2
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SQ19                       \ [0x00 : 5] 19th conversion in regular sequence
+    $05 constant ADC_SQ20                       \ [0x05 : 5] 20th conversion in regular sequence
+    $0a constant ADC_SQ21                       \ [0x0a : 5] 21st conversion in regular sequence
+    $0f constant ADC_SQ22                       \ [0x0f : 5] 22nd conversion in regular sequence
+    $14 constant ADC_SQ23                       \ [0x14 : 5] 23rd conversion in regular sequence
+    $19 constant ADC_SQ24                       \ [0x19 : 5] 24th conversion in regular sequence
+  [then]
+
+
+  [ifdef] ADC_SQR3_DEF
+    \
+    \ @brief regular sequence register 3
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SQ13                       \ [0x00 : 5] 13th conversion in regular sequence
+    $05 constant ADC_SQ14                       \ [0x05 : 5] 14th conversion in regular sequence
+    $0a constant ADC_SQ15                       \ [0x0a : 5] 15th conversion in regular sequence
+    $0f constant ADC_SQ16                       \ [0x0f : 5] 16th conversion in regular sequence
+    $14 constant ADC_SQ17                       \ [0x14 : 5] 17th conversion in regular sequence
+    $19 constant ADC_SQ18                       \ [0x19 : 5] 18th conversion in regular sequence
+  [then]
+
+
+  [ifdef] ADC_SQR4_DEF
+    \
+    \ @brief regular sequence register 4
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SQ7                        \ [0x00 : 5] 7th conversion in regular sequence
+    $05 constant ADC_SQ8                        \ [0x05 : 5] 8th conversion in regular sequence
+    $0a constant ADC_SQ9                        \ [0x0a : 5] 9th conversion in regular sequence
+    $0f constant ADC_SQ10                       \ [0x0f : 5] 10th conversion in regular sequence
+    $14 constant ADC_SQ11                       \ [0x14 : 5] 11th conversion in regular sequence
+    $19 constant ADC_SQ12                       \ [0x19 : 5] 12th conversion in regular sequence
+  [then]
+
+
+  [ifdef] ADC_SQR5_DEF
+    \
+    \ @brief regular sequence register 5
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SQ1                        \ [0x00 : 5] 1st conversion in regular sequence
+    $05 constant ADC_SQ2                        \ [0x05 : 5] 2nd conversion in regular sequence
+    $0a constant ADC_SQ3                        \ [0x0a : 5] 3rd conversion in regular sequence
+    $0f constant ADC_SQ4                        \ [0x0f : 5] 4th conversion in regular sequence
+    $14 constant ADC_SQ5                        \ [0x14 : 5] 5th conversion in regular sequence
+    $19 constant ADC_SQ6                        \ [0x19 : 5] 6th conversion in regular sequence
+  [then]
+
+
+  [ifdef] ADC_JSQR_DEF
+    \
+    \ @brief injected sequence register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JSQ1                       \ [0x00 : 5] 1st conversion in injected sequence
+    $05 constant ADC_JSQ2                       \ [0x05 : 5] 2nd conversion in injected sequence
+    $0a constant ADC_JSQ3                       \ [0x0a : 5] 3rd conversion in injected sequence
+    $0f constant ADC_JSQ4                       \ [0x0f : 5] 4th conversion in injected sequence
+    $14 constant ADC_JL                         \ [0x14 : 2] Injected sequence length
+  [then]
+
+
+  [ifdef] ADC_JDR1_DEF
+    \
+    \ @brief injected data register x
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JDATA                      \ [0x00 : 16] Injected data
+  [then]
+
+
+  [ifdef] ADC_JDR2_DEF
+    \
+    \ @brief injected data register x
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JDATA                      \ [0x00 : 16] Injected data
+  [then]
+
+
+  [ifdef] ADC_JDR3_DEF
+    \
+    \ @brief injected data register x
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JDATA                      \ [0x00 : 16] Injected data
+  [then]
+
+
+  [ifdef] ADC_JDR4_DEF
+    \
+    \ @brief injected data register x
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JDATA                      \ [0x00 : 16] Injected data
+  [then]
+
+
+  [ifdef] ADC_DR_DEF
+    \
+    \ @brief regular data register
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_RegularDATA                \ [0x00 : 16] Regular data
+  [then]
+
+
+  [ifdef] ADC_SMPR0_DEF
+    \
+    \ @brief sample time register 0
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SMP                        \ [0x00 : 6] Channel Sample time selection
+  [then]
+
+
+  [ifdef] ADC_CSR_DEF
+    \
+    \ @brief ADC common status register
+    \ Address offset: 0x300
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_AWD1                       \ [0x00] Analog watchdog flag of the ADC
+    $01 constant ADC_EOC1                       \ [0x01] End of conversion of the ADC
+    $02 constant ADC_JEOC1                      \ [0x02] Injected channel end of conversion of the ADC
+    $03 constant ADC_JSTRT1                     \ [0x03] Injected channel Start flag of the ADC
+    $04 constant ADC_STRT1                      \ [0x04] Regular channel Start flag of the ADC
+    $05 constant ADC_OVR1                       \ [0x05] Overrun flag of the ADC
+    $06 constant ADC_ADONS1                     \ [0x06] ADON Status of ADC1
+  [then]
+
+
+  [ifdef] ADC_CCR_DEF
+    \
+    \ @brief ADC common control register
+    \ Address offset: 0x304
+    \ Reset value: 0x00000000
+    \
+    $10 constant ADC_ADCPRE                     \ [0x10 : 2] ADC prescaler
+    $17 constant ADC_TSVREFE                    \ [0x17] Temperature sensor and VREFINT enable
+  [then]
+
+  \
+  \ @brief Analog-to-digital converter
+  \
+  $00 constant ADC_SR                   \ status register
+  $04 constant ADC_CR1                  \ control register 1
+  $08 constant ADC_CR2                  \ control register 2
+  $0C constant ADC_SMPR1                \ sample time register 1
+  $10 constant ADC_SMPR2                \ sample time register 2
+  $14 constant ADC_SMPR3                \ sample time register 3
+  $18 constant ADC_JOFR1                \ injected channel data offset register x
+  $1C constant ADC_JOFR2                \ injected channel data offset register x
+  $20 constant ADC_JOFR3                \ injected channel data offset register x
+  $24 constant ADC_JOFR4                \ injected channel data offset register x
+  $28 constant ADC_HTR                  \ watchdog higher threshold register
+  $2C constant ADC_LTR                  \ watchdog lower threshold register
+  $30 constant ADC_SQR1                 \ regular sequence register 1
+  $34 constant ADC_SQR2                 \ regular sequence register 2
+  $38 constant ADC_SQR3                 \ regular sequence register 3
+  $3C constant ADC_SQR4                 \ regular sequence register 4
+  $40 constant ADC_SQR5                 \ regular sequence register 5
+  $44 constant ADC_JSQR                 \ injected sequence register
+  $48 constant ADC_JDR1                 \ injected data register x
+  $4C constant ADC_JDR2                 \ injected data register x
+  $50 constant ADC_JDR3                 \ injected data register x
+  $54 constant ADC_JDR4                 \ injected data register x
+  $58 constant ADC_DR                   \ regular data register
+  $5C constant ADC_SMPR0                \ sample time register 0
+  $300 constant ADC_CSR                 \ ADC common status register
+  $304 constant ADC_CCR                 \ ADC common control register
+
+: ADC_DEF ; [then]

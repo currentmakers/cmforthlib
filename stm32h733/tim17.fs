@@ -6,237 +6,255 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM17_DEF
 
-\
-\ @brief control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM17_CR1_CEN                                    \ Counter enable
-$00000002 constant TIM17_CR1_UDIS                                   \ Update disable
-$00000004 constant TIM17_CR1_URS                                    \ Update request source
-$00000008 constant TIM17_CR1_OPM                                    \ One-pulse mode
-$00000080 constant TIM17_CR1_ARPE                                   \ Auto-reload preload enable
-$00000300 constant TIM17_CR1_CKD                                    \ Clock division
-$00000800 constant TIM17_CR1_UIFREMAP                               \ UIF status bit remapping
-
-
-\
-\ @brief control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM17_CR2_CCPC                                   \ Capture/compare preloaded control
-$00000004 constant TIM17_CR2_CCUS                                   \ Capture/compare control update selection
-$00000008 constant TIM17_CR2_CCDS                                   \ Capture/compare DMA selection
-$00000100 constant TIM17_CR2_OIS1                                   \ Output Idle state 1
-$00000200 constant TIM17_CR2_OIS1N                                  \ Output Idle state 1
+  [ifdef] TIM17_CR1_DEF
+    \
+    \ @brief control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_CEN                      \ [0x00] Counter enable
+    $01 constant TIM17_UDIS                     \ [0x01] Update disable
+    $02 constant TIM17_URS                      \ [0x02] Update request source
+    $03 constant TIM17_OPM                      \ [0x03] One-pulse mode
+    $07 constant TIM17_ARPE                     \ [0x07] Auto-reload preload enable
+    $08 constant TIM17_CKD                      \ [0x08 : 2] Clock division
+    $0b constant TIM17_UIFREMAP                 \ [0x0b] UIF status bit remapping
+  [then]
 
 
-\
-\ @brief DMA/Interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM17_DIER_UIE                                   \ Update interrupt enable
-$00000002 constant TIM17_DIER_CC1IE                                 \ Capture/Compare 1 interrupt enable
-$00000020 constant TIM17_DIER_COMIE                                 \ COM interrupt enable
-$00000080 constant TIM17_DIER_BIE                                   \ Break interrupt enable
-$00000100 constant TIM17_DIER_UDE                                   \ Update DMA request enable
-$00000200 constant TIM17_DIER_CC1DE                                 \ Capture/Compare 1 DMA request enable
-$00002000 constant TIM17_DIER_COMDE                                 \ COM DMA request enable
-
-
-\
-\ @brief status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM17_SR_UIF                                     \ Update interrupt flag
-$00000002 constant TIM17_SR_CC1IF                                   \ Capture/compare 1 interrupt flag
-$00000020 constant TIM17_SR_COMIF                                   \ COM interrupt flag
-$00000080 constant TIM17_SR_BIF                                     \ Break interrupt flag
-$00000200 constant TIM17_SR_CC1OF                                   \ Capture/Compare 1 overcapture flag
+  [ifdef] TIM17_CR2_DEF
+    \
+    \ @brief control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_CCPC                     \ [0x00] Capture/compare preloaded control
+    $02 constant TIM17_CCUS                     \ [0x02] Capture/compare control update selection
+    $03 constant TIM17_CCDS                     \ [0x03] Capture/compare DMA selection
+    $08 constant TIM17_OIS1                     \ [0x08] Output Idle state 1
+    $09 constant TIM17_OIS1N                    \ [0x09] Output Idle state 1
+  [then]
 
 
-\
-\ @brief event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM17_EGR_UG                                     \ Update generation
-$00000002 constant TIM17_EGR_CC1G                                   \ Capture/compare 1 generation
-$00000020 constant TIM17_EGR_COMG                                   \ Capture/Compare control update generation
-$00000080 constant TIM17_EGR_BG                                     \ Break generation
-
-
-\
-\ @brief capture/compare mode register (output mode)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM17_CCMR1_OUTPUT_CC1S                          \ Capture/Compare 1 selection
-$00000004 constant TIM17_CCMR1_OUTPUT_OC1FE                         \ Output Compare 1 fast enable
-$00000008 constant TIM17_CCMR1_OUTPUT_OC1PE                         \ Output Compare 1 preload enable
-$00000070 constant TIM17_CCMR1_OUTPUT_OC1M                          \ Output Compare 1 mode
-$00010000 constant TIM17_CCMR1_OUTPUT_OC1M_3                        \ Output Compare 1 mode
+  [ifdef] TIM17_DIER_DEF
+    \
+    \ @brief DMA/Interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_UIE                      \ [0x00] Update interrupt enable
+    $01 constant TIM17_CC1IE                    \ [0x01] Capture/Compare 1 interrupt enable
+    $05 constant TIM17_COMIE                    \ [0x05] COM interrupt enable
+    $07 constant TIM17_BIE                      \ [0x07] Break interrupt enable
+    $08 constant TIM17_UDE                      \ [0x08] Update DMA request enable
+    $09 constant TIM17_CC1DE                    \ [0x09] Capture/Compare 1 DMA request enable
+    $0d constant TIM17_COMDE                    \ [0x0d] COM DMA request enable
+  [then]
 
 
-\
-\ @brief capture/compare mode register 1 (input mode)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM17_CCMR1_INPUT_CC1S                           \ Capture/Compare 1 selection
-$0000000c constant TIM17_CCMR1_INPUT_IC1PSC                         \ Input capture 1 prescaler
-$000000f0 constant TIM17_CCMR1_INPUT_IC1F                           \ Input capture 1 filter
-
-
-\
-\ @brief capture/compare enable register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM17_CCER_CC1E                                  \ Capture/Compare 1 output enable
-$00000002 constant TIM17_CCER_CC1P                                  \ Capture/Compare 1 output Polarity
-$00000004 constant TIM17_CCER_CC1NE                                 \ Capture/Compare 1 complementary output enable
-$00000008 constant TIM17_CCER_CC1NP                                 \ Capture/Compare 1 output Polarity
+  [ifdef] TIM17_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_UIF                      \ [0x00] Update interrupt flag
+    $01 constant TIM17_CC1IF                    \ [0x01] Capture/compare 1 interrupt flag
+    $05 constant TIM17_COMIF                    \ [0x05] COM interrupt flag
+    $07 constant TIM17_BIF                      \ [0x07] Break interrupt flag
+    $09 constant TIM17_CC1OF                    \ [0x09] Capture/Compare 1 overcapture flag
+  [then]
 
 
-\
-\ @brief counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM17_CNT_CNT                                    \ counter value
-$80000000 constant TIM17_CNT_UIFCPY                                 \ UIF Copy
-
-
-\
-\ @brief prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM17_PSC_PSC                                    \ Prescaler value
+  [ifdef] TIM17_EGR_DEF
+    \
+    \ @brief event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_UG                       \ [0x00] Update generation
+    $01 constant TIM17_CC1G                     \ [0x01] Capture/compare 1 generation
+    $05 constant TIM17_COMG                     \ [0x05] Capture/Compare control update generation
+    $07 constant TIM17_BG                       \ [0x07] Break generation
+  [then]
 
 
-\
-\ @brief auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM17_ARR_ARR                                    \ Auto-reload value
-
-
-\
-\ @brief repetition counter register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$000000ff constant TIM17_RCR_REP                                    \ Repetition counter value
+  [ifdef] TIM17_CCMR1_Output_DEF
+    \
+    \ @brief capture/compare mode register (output mode)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM17_OC1FE                    \ [0x02] Output Compare 1 fast enable
+    $03 constant TIM17_OC1PE                    \ [0x03] Output Compare 1 preload enable
+    $04 constant TIM17_OC1M                     \ [0x04 : 3] Output Compare 1 mode
+    $10 constant TIM17_OC1M_3                   \ [0x10] Output Compare 1 mode
+  [then]
 
 
-\
-\ @brief capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM17_CCR1_CCR1                                  \ Capture/Compare 1 value
-
-
-\
-\ @brief break and dead-time register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$000000ff constant TIM17_BDTR_DTG                                   \ Dead-time generator setup
-$00000300 constant TIM17_BDTR_LOCK                                  \ Lock configuration
-$00000400 constant TIM17_BDTR_OSSI                                  \ Off-state selection for Idle mode
-$00000800 constant TIM17_BDTR_OSSR                                  \ Off-state selection for Run mode
-$00001000 constant TIM17_BDTR_BKE                                   \ Break enable
-$00002000 constant TIM17_BDTR_BKP                                   \ Break polarity
-$00004000 constant TIM17_BDTR_AOE                                   \ Automatic output enable
-$00008000 constant TIM17_BDTR_MOE                                   \ Main output enable
-$000f0000 constant TIM17_BDTR_BKF                                   \ Break filter
+  [ifdef] TIM17_CCMR1_Input_DEF
+    \
+    \ @brief capture/compare mode register 1 (input mode)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM17_IC1PSC                   \ [0x02 : 2] Input capture 1 prescaler
+    $04 constant TIM17_IC1F                     \ [0x04 : 4] Input capture 1 filter
+  [then]
 
 
-\
-\ @brief DMA control register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0000001f constant TIM17_DCR_DBA                                    \ DMA base address
-$00001f00 constant TIM17_DCR_DBL                                    \ DMA burst length
-
-
-\
-\ @brief DMA address for full transfer
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM17_DMAR_DMAB                                  \ DMA register for burst accesses
+  [ifdef] TIM17_CCER_DEF
+    \
+    \ @brief capture/compare enable register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_CC1E                     \ [0x00] Capture/Compare 1 output enable
+    $01 constant TIM17_CC1P                     \ [0x01] Capture/Compare 1 output Polarity
+    $02 constant TIM17_CC1NE                    \ [0x02] Capture/Compare 1 complementary output enable
+    $03 constant TIM17_CC1NP                    \ [0x03] Capture/Compare 1 output Polarity
+  [then]
 
 
-\
-\ @brief TIM17 alternate function register 1
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM17_TIM17_AF1_BKINE                            \ BRK BKIN input enable
-$00000002 constant TIM17_TIM17_AF1_BKCMP1E                          \ BRK COMP1 enable
-$00000004 constant TIM17_TIM17_AF1_BKCMP2E                          \ BRK COMP2 enable
-$00000100 constant TIM17_TIM17_AF1_BKDFBK1E                         \ BRK dfsdm1_break[1] enable
-$00000200 constant TIM17_TIM17_AF1_BKINP                            \ BRK BKIN input polarity
-$00000400 constant TIM17_TIM17_AF1_BKCMP1P                          \ BRK COMP1 input polarity
-$00000800 constant TIM17_TIM17_AF1_BKCMP2P                          \ BRK COMP2 input polarity
+  [ifdef] TIM17_CNT_DEF
+    \
+    \ @brief counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_CNT                      \ [0x00 : 16] counter value
+    $1f constant TIM17_UIFCPY                   \ [0x1f] UIF Copy
+  [then]
 
 
-\
-\ @brief TIM17 input selection register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
+  [ifdef] TIM17_PSC_DEF
+    \
+    \ @brief prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_PSC                      \ [0x00 : 16] Prescaler value
+  [then]
 
-$0000000f constant TIM17_TIM17_TISEL_TI1SEL                         \ selects TI1[0] to TI1[15] input
+
+  [ifdef] TIM17_ARR_DEF
+    \
+    \ @brief auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_ARR                      \ [0x00 : 16] Auto-reload value
+  [then]
 
 
-\
-\ @brief General-purpose-timers
-\
-$40014800 constant TIM17_CR1      \ offset: 0x00 : control register 1
-$40014804 constant TIM17_CR2      \ offset: 0x04 : control register 2
-$4001480c constant TIM17_DIER     \ offset: 0x0C : DMA/Interrupt enable register
-$40014810 constant TIM17_SR       \ offset: 0x10 : status register
-$40014814 constant TIM17_EGR      \ offset: 0x14 : event generation register
-$40014818 constant TIM17_CCMR1_OUTPUT  \ offset: 0x18 : capture/compare mode register (output mode)
-$40014818 constant TIM17_CCMR1_INPUT  \ offset: 0x18 : capture/compare mode register 1 (input mode)
-$40014820 constant TIM17_CCER     \ offset: 0x20 : capture/compare enable register
-$40014824 constant TIM17_CNT      \ offset: 0x24 : counter
-$40014828 constant TIM17_PSC      \ offset: 0x28 : prescaler
-$4001482c constant TIM17_ARR      \ offset: 0x2C : auto-reload register
-$40014830 constant TIM17_RCR      \ offset: 0x30 : repetition counter register
-$40014834 constant TIM17_CCR1     \ offset: 0x34 : capture/compare register 1
-$40014844 constant TIM17_BDTR     \ offset: 0x44 : break and dead-time register
-$40014848 constant TIM17_DCR      \ offset: 0x48 : DMA control register
-$4001484c constant TIM17_DMAR     \ offset: 0x4C : DMA address for full transfer
-$40014860 constant TIM17_TIM17_AF1  \ offset: 0x60 : TIM17 alternate function register 1
-$40014868 constant TIM17_TIM17_TISEL  \ offset: 0x68 : TIM17 input selection register
+  [ifdef] TIM17_RCR_DEF
+    \
+    \ @brief repetition counter register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_REP                      \ [0x00 : 8] Repetition counter value
+  [then]
 
+
+  [ifdef] TIM17_CCR1_DEF
+    \
+    \ @brief capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_CCR1                     \ [0x00 : 16] Capture/Compare 1 value
+  [then]
+
+
+  [ifdef] TIM17_BDTR_DEF
+    \
+    \ @brief break and dead-time register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_DTG                      \ [0x00 : 8] Dead-time generator setup
+    $08 constant TIM17_LOCK                     \ [0x08 : 2] Lock configuration
+    $0a constant TIM17_OSSI                     \ [0x0a] Off-state selection for Idle mode
+    $0b constant TIM17_OSSR                     \ [0x0b] Off-state selection for Run mode
+    $0c constant TIM17_BKE                      \ [0x0c] Break enable
+    $0d constant TIM17_BKP                      \ [0x0d] Break polarity
+    $0e constant TIM17_AOE                      \ [0x0e] Automatic output enable
+    $0f constant TIM17_MOE                      \ [0x0f] Main output enable
+    $10 constant TIM17_BKF                      \ [0x10 : 4] Break filter
+  [then]
+
+
+  [ifdef] TIM17_DCR_DEF
+    \
+    \ @brief DMA control register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_DBA                      \ [0x00 : 5] DMA base address
+    $08 constant TIM17_DBL                      \ [0x08 : 5] DMA burst length
+  [then]
+
+
+  [ifdef] TIM17_DMAR_DEF
+    \
+    \ @brief DMA address for full transfer
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_DMAB                     \ [0x00 : 16] DMA register for burst accesses
+  [then]
+
+
+  [ifdef] TIM17_TIM17_AF1_DEF
+    \
+    \ @brief TIM17 alternate function register 1
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_BKINE                    \ [0x00] BRK BKIN input enable
+    $01 constant TIM17_BKCMP1E                  \ [0x01] BRK COMP1 enable
+    $02 constant TIM17_BKCMP2E                  \ [0x02] BRK COMP2 enable
+    $08 constant TIM17_BKDFBK1E                 \ [0x08] BRK dfsdm1_break[1] enable
+    $09 constant TIM17_BKINP                    \ [0x09] BRK BKIN input polarity
+    $0a constant TIM17_BKCMP1P                  \ [0x0a] BRK COMP1 input polarity
+    $0b constant TIM17_BKCMP2P                  \ [0x0b] BRK COMP2 input polarity
+  [then]
+
+
+  [ifdef] TIM17_TIM17_TISEL_DEF
+    \
+    \ @brief TIM17 input selection register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM17_TI1SEL                   \ [0x00 : 4] selects TI1[0] to TI1[15] input
+  [then]
+
+  \
+  \ @brief General-purpose-timers
+  \
+  $00 constant TIM17_CR1                \ control register 1
+  $04 constant TIM17_CR2                \ control register 2
+  $0C constant TIM17_DIER               \ DMA/Interrupt enable register
+  $10 constant TIM17_SR                 \ status register
+  $14 constant TIM17_EGR                \ event generation register
+  $18 constant TIM17_CCMR1_OUTPUT       \ capture/compare mode register (output mode)
+  $18 constant TIM17_CCMR1_INPUT        \ capture/compare mode register 1 (input mode)
+  $20 constant TIM17_CCER               \ capture/compare enable register
+  $24 constant TIM17_CNT                \ counter
+  $28 constant TIM17_PSC                \ prescaler
+  $2C constant TIM17_ARR                \ auto-reload register
+  $30 constant TIM17_RCR                \ repetition counter register
+  $34 constant TIM17_CCR1               \ capture/compare register 1
+  $44 constant TIM17_BDTR               \ break and dead-time register
+  $48 constant TIM17_DCR                \ DMA control register
+  $4C constant TIM17_DMAR               \ DMA address for full transfer
+  $60 constant TIM17_TIM17_AF1          \ TIM17 alternate function register 1
+  $68 constant TIM17_TIM17_TISEL        \ TIM17 input selection register
+
+: TIM17_DEF ; [then]

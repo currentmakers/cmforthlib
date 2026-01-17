@@ -6,123 +6,129 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] OPAMP_DEF
 
-\
-\ @brief OPAMP1 control/status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP_OPAMP1_CSR_OPAEN                           \ Operational amplifier Enable
-$00000002 constant OPAMP_OPAMP1_CSR_FORCE_VP                        \ FORCE_VP
-$0000000c constant OPAMP_OPAMP1_CSR_VP_SEL                          \ VP_SEL
-$00000010 constant OPAMP_OPAMP1_CSR_USERTRIM                        \ USERTRIM
-$00000060 constant OPAMP_OPAMP1_CSR_VM_SEL                          \ VM_SEL
-$00000080 constant OPAMP_OPAMP1_CSR_OPAHSM                          \ OPAHSM
-$00000100 constant OPAMP_OPAMP1_CSR_OPAINTOEN                       \ OPAINTOEN
-$00000800 constant OPAMP_OPAMP1_CSR_CALON                           \ CALON
-$00003000 constant OPAMP_OPAMP1_CSR_CALSEL                          \ CALSEL
-$0007c000 constant OPAMP_OPAMP1_CSR_PGA_GAIN                        \ PGA_GAIN
-$00f80000 constant OPAMP_OPAMP1_CSR_TRIMOFFSETP                     \ TRIMOFFSETP
-$1f000000 constant OPAMP_OPAMP1_CSR_TRIMOFFSETN                     \ TRIMOFFSETN
-$40000000 constant OPAMP_OPAMP1_CSR_CALOUT                          \ CALOUT
-$80000000 constant OPAMP_OPAMP1_CSR_LOCK                            \ LOCK
-
-
-\
-\ @brief OPAMP2 control/status register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP_OPAMP2_CSR_OPAEN                           \ Operational amplifier Enable
-$00000002 constant OPAMP_OPAMP2_CSR_FORCE_VP                        \ FORCE_VP
-$0000000c constant OPAMP_OPAMP2_CSR_VP_SEL                          \ VP_SEL
-$00000010 constant OPAMP_OPAMP2_CSR_USERTRIM                        \ USERTRIM
-$00000060 constant OPAMP_OPAMP2_CSR_VM_SEL                          \ VM_SEL
-$00000080 constant OPAMP_OPAMP2_CSR_OPAHSM                          \ OPAHSM
-$00000100 constant OPAMP_OPAMP2_CSR_OPAINTOEN                       \ OPAINTOEN
-$00000800 constant OPAMP_OPAMP2_CSR_CALON                           \ CALON
-$00003000 constant OPAMP_OPAMP2_CSR_CALSEL                          \ CALSEL
-$0007c000 constant OPAMP_OPAMP2_CSR_PGA_GAIN                        \ PGA_GAIN
-$00f80000 constant OPAMP_OPAMP2_CSR_TRIMOFFSETP                     \ TRIMOFFSETP
-$1f000000 constant OPAMP_OPAMP2_CSR_TRIMOFFSETN                     \ TRIMOFFSETN
-$40000000 constant OPAMP_OPAMP2_CSR_CALOUT                          \ CALOUT
-$80000000 constant OPAMP_OPAMP2_CSR_LOCK                            \ LOCK
+  [ifdef] OPAMP_OPAMP1_CSR_DEF
+    \
+    \ @brief OPAMP1 control/status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_OPAEN                    \ [0x00] Operational amplifier Enable
+    $01 constant OPAMP_FORCE_VP                 \ [0x01] FORCE_VP
+    $02 constant OPAMP_VP_SEL                   \ [0x02 : 2] VP_SEL
+    $04 constant OPAMP_USERTRIM                 \ [0x04] USERTRIM
+    $05 constant OPAMP_VM_SEL                   \ [0x05 : 2] VM_SEL
+    $07 constant OPAMP_OPAHSM                   \ [0x07] OPAHSM
+    $08 constant OPAMP_OPAINTOEN                \ [0x08] OPAINTOEN
+    $0b constant OPAMP_CALON                    \ [0x0b] CALON
+    $0c constant OPAMP_CALSEL                   \ [0x0c : 2] CALSEL
+    $0e constant OPAMP_PGA_GAIN                 \ [0x0e : 5] PGA_GAIN
+    $13 constant OPAMP_TRIMOFFSETP              \ [0x13 : 5] TRIMOFFSETP
+    $18 constant OPAMP_TRIMOFFSETN              \ [0x18 : 5] TRIMOFFSETN
+    $1e constant OPAMP_CALOUT                   \ [0x1e] CALOUT
+    $1f constant OPAMP_LOCK                     \ [0x1f] LOCK
+  [then]
 
 
-\
-\ @brief OPAMP3 control/status register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP_OPAMP3_CSR_OPAEN                           \ Operational amplifier Enable
-$00000002 constant OPAMP_OPAMP3_CSR_FORCE_VP                        \ FORCE_VP
-$0000000c constant OPAMP_OPAMP3_CSR_VP_SEL                          \ VP_SEL
-$00000010 constant OPAMP_OPAMP3_CSR_USERTRIM                        \ USERTRIM
-$00000060 constant OPAMP_OPAMP3_CSR_VM_SEL                          \ VM_SEL
-$00000080 constant OPAMP_OPAMP3_CSR_OPAHSM                          \ OPAHSM
-$00000100 constant OPAMP_OPAMP3_CSR_OPAINTOEN                       \ OPAINTOEN
-$00000800 constant OPAMP_OPAMP3_CSR_CALON                           \ CALON
-$00003000 constant OPAMP_OPAMP3_CSR_CALSEL                          \ CALSEL
-$0007c000 constant OPAMP_OPAMP3_CSR_PGA_GAIN                        \ PGA_GAIN
-$00f80000 constant OPAMP_OPAMP3_CSR_TRIMOFFSETP                     \ TRIMOFFSETP
-$1f000000 constant OPAMP_OPAMP3_CSR_TRIMOFFSETN                     \ TRIMOFFSETN
-$40000000 constant OPAMP_OPAMP3_CSR_CALOUT                          \ CALOUT
-$80000000 constant OPAMP_OPAMP3_CSR_LOCK                            \ LOCK
-
-
-\
-\ @brief OPAMP1 control/status register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP_OPAMP1_TCMR_VMS_SEL                        \ VMS_SEL
-$00000006 constant OPAMP_OPAMP1_TCMR_VPS_SEL                        \ VPS_SEL
-$00000008 constant OPAMP_OPAMP1_TCMR_T1CM_EN                        \ T1CM_EN
-$00000010 constant OPAMP_OPAMP1_TCMR_T8CM_EN                        \ T8CM_EN
-$00000020 constant OPAMP_OPAMP1_TCMR_T20CM_EN                       \ T20CM_EN
-$80000000 constant OPAMP_OPAMP1_TCMR_LOCK                           \ LOCK
+  [ifdef] OPAMP_OPAMP2_CSR_DEF
+    \
+    \ @brief OPAMP2 control/status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_OPAEN                    \ [0x00] Operational amplifier Enable
+    $01 constant OPAMP_FORCE_VP                 \ [0x01] FORCE_VP
+    $02 constant OPAMP_VP_SEL                   \ [0x02 : 2] VP_SEL
+    $04 constant OPAMP_USERTRIM                 \ [0x04] USERTRIM
+    $05 constant OPAMP_VM_SEL                   \ [0x05 : 2] VM_SEL
+    $07 constant OPAMP_OPAHSM                   \ [0x07] OPAHSM
+    $08 constant OPAMP_OPAINTOEN                \ [0x08] OPAINTOEN
+    $0b constant OPAMP_CALON                    \ [0x0b] CALON
+    $0c constant OPAMP_CALSEL                   \ [0x0c : 2] CALSEL
+    $0e constant OPAMP_PGA_GAIN                 \ [0x0e : 5] PGA_GAIN
+    $13 constant OPAMP_TRIMOFFSETP              \ [0x13 : 5] TRIMOFFSETP
+    $18 constant OPAMP_TRIMOFFSETN              \ [0x18 : 5] TRIMOFFSETN
+    $1e constant OPAMP_CALOUT                   \ [0x1e] CALOUT
+    $1f constant OPAMP_LOCK                     \ [0x1f] LOCK
+  [then]
 
 
-\
-\ @brief OPAMP2 control/status register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP_OPAMP2_TCMR_VMS_SEL                        \ VMS_SEL
-$00000006 constant OPAMP_OPAMP2_TCMR_VPS_SEL                        \ VPS_SEL
-$00000008 constant OPAMP_OPAMP2_TCMR_T1CM_EN                        \ T1CM_EN
-$00000010 constant OPAMP_OPAMP2_TCMR_T8CM_EN                        \ T8CM_EN
-$00000020 constant OPAMP_OPAMP2_TCMR_T20CM_EN                       \ T20CM_EN
-$80000000 constant OPAMP_OPAMP2_TCMR_LOCK                           \ LOCK
-
-
-\
-\ @brief OPAMP3 control/status register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP_OPAMP3_TCMR_VMS_SEL                        \ VMS_SEL
-$00000006 constant OPAMP_OPAMP3_TCMR_VPS_SEL                        \ VPS_SEL
-$00000008 constant OPAMP_OPAMP3_TCMR_T1CM_EN                        \ T1CM_EN
-$00000010 constant OPAMP_OPAMP3_TCMR_T8CM_EN                        \ T8CM_EN
-$00000020 constant OPAMP_OPAMP3_TCMR_T20CM_EN                       \ T20CM_EN
-$80000000 constant OPAMP_OPAMP3_TCMR_LOCK                           \ LOCK
+  [ifdef] OPAMP_OPAMP3_CSR_DEF
+    \
+    \ @brief OPAMP3 control/status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_OPAEN                    \ [0x00] Operational amplifier Enable
+    $01 constant OPAMP_FORCE_VP                 \ [0x01] FORCE_VP
+    $02 constant OPAMP_VP_SEL                   \ [0x02 : 2] VP_SEL
+    $04 constant OPAMP_USERTRIM                 \ [0x04] USERTRIM
+    $05 constant OPAMP_VM_SEL                   \ [0x05 : 2] VM_SEL
+    $07 constant OPAMP_OPAHSM                   \ [0x07] OPAHSM
+    $08 constant OPAMP_OPAINTOEN                \ [0x08] OPAINTOEN
+    $0b constant OPAMP_CALON                    \ [0x0b] CALON
+    $0c constant OPAMP_CALSEL                   \ [0x0c : 2] CALSEL
+    $0e constant OPAMP_PGA_GAIN                 \ [0x0e : 5] PGA_GAIN
+    $13 constant OPAMP_TRIMOFFSETP              \ [0x13 : 5] TRIMOFFSETP
+    $18 constant OPAMP_TRIMOFFSETN              \ [0x18 : 5] TRIMOFFSETN
+    $1e constant OPAMP_CALOUT                   \ [0x1e] CALOUT
+    $1f constant OPAMP_LOCK                     \ [0x1f] LOCK
+  [then]
 
 
-\
-\ @brief Operational amplifiers
-\
-$40010300 constant OPAMP_OPAMP1_CSR  \ offset: 0x00 : OPAMP1 control/status register
-$40010304 constant OPAMP_OPAMP2_CSR  \ offset: 0x04 : OPAMP2 control/status register
-$40010308 constant OPAMP_OPAMP3_CSR  \ offset: 0x08 : OPAMP3 control/status register
-$40010318 constant OPAMP_OPAMP1_TCMR  \ offset: 0x18 : OPAMP1 control/status register
-$4001031c constant OPAMP_OPAMP2_TCMR  \ offset: 0x1C : OPAMP2 control/status register
-$40010320 constant OPAMP_OPAMP3_TCMR  \ offset: 0x20 : OPAMP3 control/status register
+  [ifdef] OPAMP_OPAMP1_TCMR_DEF
+    \
+    \ @brief OPAMP1 control/status register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_VMS_SEL                  \ [0x00] VMS_SEL
+    $01 constant OPAMP_VPS_SEL                  \ [0x01 : 2] VPS_SEL
+    $03 constant OPAMP_T1CM_EN                  \ [0x03] T1CM_EN
+    $04 constant OPAMP_T8CM_EN                  \ [0x04] T8CM_EN
+    $05 constant OPAMP_T20CM_EN                 \ [0x05] T20CM_EN
+    $1f constant OPAMP_LOCK                     \ [0x1f] LOCK
+  [then]
 
+
+  [ifdef] OPAMP_OPAMP2_TCMR_DEF
+    \
+    \ @brief OPAMP2 control/status register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_VMS_SEL                  \ [0x00] VMS_SEL
+    $01 constant OPAMP_VPS_SEL                  \ [0x01 : 2] VPS_SEL
+    $03 constant OPAMP_T1CM_EN                  \ [0x03] T1CM_EN
+    $04 constant OPAMP_T8CM_EN                  \ [0x04] T8CM_EN
+    $05 constant OPAMP_T20CM_EN                 \ [0x05] T20CM_EN
+    $1f constant OPAMP_LOCK                     \ [0x1f] LOCK
+  [then]
+
+
+  [ifdef] OPAMP_OPAMP3_TCMR_DEF
+    \
+    \ @brief OPAMP3 control/status register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP_VMS_SEL                  \ [0x00] VMS_SEL
+    $01 constant OPAMP_VPS_SEL                  \ [0x01 : 2] VPS_SEL
+    $03 constant OPAMP_T1CM_EN                  \ [0x03] T1CM_EN
+    $04 constant OPAMP_T8CM_EN                  \ [0x04] T8CM_EN
+    $05 constant OPAMP_T20CM_EN                 \ [0x05] T20CM_EN
+    $1f constant OPAMP_LOCK                     \ [0x1f] LOCK
+  [then]
+
+  \
+  \ @brief Operational amplifiers
+  \
+  $00 constant OPAMP_OPAMP1_CSR         \ OPAMP1 control/status register
+  $04 constant OPAMP_OPAMP2_CSR         \ OPAMP2 control/status register
+  $08 constant OPAMP_OPAMP3_CSR         \ OPAMP3 control/status register
+  $18 constant OPAMP_OPAMP1_TCMR        \ OPAMP1 control/status register
+  $1C constant OPAMP_OPAMP2_TCMR        \ OPAMP2 control/status register
+  $20 constant OPAMP_OPAMP3_TCMR        \ OPAMP3 control/status register
+
+: OPAMP_DEF ; [then]

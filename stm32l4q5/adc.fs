@@ -6,395 +6,423 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief interrupt and status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_ISR_ADRDY                                    \ ADRDY
-$00000002 constant ADC_ISR_EOSMP                                    \ EOSMP
-$00000004 constant ADC_ISR_EOC                                      \ EOC
-$00000008 constant ADC_ISR_EOS                                      \ EOS
-$00000010 constant ADC_ISR_OVR                                      \ OVR
-$00000020 constant ADC_ISR_JEOC                                     \ JEOC
-$00000040 constant ADC_ISR_JEOS                                     \ JEOS
-$00000080 constant ADC_ISR_AWD1                                     \ AWD1
-$00000100 constant ADC_ISR_AWD2                                     \ AWD2
-$00000200 constant ADC_ISR_AWD3                                     \ AWD3
-$00000400 constant ADC_ISR_JQOVF                                    \ JQOVF
-
-
-\
-\ @brief interrupt enable register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_IER_ADRDYIE                                  \ ADRDYIE
-$00000002 constant ADC_IER_EOSMPIE                                  \ EOSMPIE
-$00000004 constant ADC_IER_EOCIE                                    \ EOCIE
-$00000008 constant ADC_IER_EOSIE                                    \ EOSIE
-$00000010 constant ADC_IER_OVRIE                                    \ OVRIE
-$00000020 constant ADC_IER_JEOCIE                                   \ JEOCIE
-$00000040 constant ADC_IER_JEOSIE                                   \ JEOSIE
-$00000080 constant ADC_IER_AWD1IE                                   \ AWD1IE
-$00000100 constant ADC_IER_AWD2IE                                   \ AWD2IE
-$00000200 constant ADC_IER_AWD3IE                                   \ AWD3IE
-$00000400 constant ADC_IER_JQOVFIE                                  \ JQOVFIE
-
-
-\
-\ @brief control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CR_ADEN                                      \ ADEN
-$00000002 constant ADC_CR_ADDIS                                     \ ADDIS
-$00000004 constant ADC_CR_ADSTART                                   \ ADSTART
-$00000008 constant ADC_CR_JADSTART                                  \ JADSTART
-$00000010 constant ADC_CR_ADSTP                                     \ ADSTP
-$00000020 constant ADC_CR_JADSTP                                    \ JADSTP
-$10000000 constant ADC_CR_ADVREGEN                                  \ ADVREGEN
-$20000000 constant ADC_CR_DEEPPWD                                   \ DEEPPWD
-$40000000 constant ADC_CR_ADCALDIF                                  \ ADCALDIF
-$80000000 constant ADC_CR_ADCAL                                     \ ADCAL
-
-
-\
-\ @brief configuration register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CFGR_DMAEN                                   \ DMAEN
-$00000002 constant ADC_CFGR_DMACFG                                  \ DMACFG
-$00000004 constant ADC_CFGR_DFSDMCFG                                \ DFSDM mode configuration
-$00000018 constant ADC_CFGR_RES                                     \ RES
-$00000020 constant ADC_CFGR_ALIGN                                   \ ALIGN
-$00000040 constant ADC_CFGR_EXTSEL0                                 \ EXTSEL0
-$00000080 constant ADC_CFGR_EXTSEL1                                 \ EXTSEL1
-$00000100 constant ADC_CFGR_EXTSEL2                                 \ EXTSEL2
-$00000200 constant ADC_CFGR_EXTSEL3                                 \ EXTSEL3
-$00000c00 constant ADC_CFGR_EXTEN                                   \ EXTEN
-$00001000 constant ADC_CFGR_OVRMOD                                  \ OVRMOD
-$00002000 constant ADC_CFGR_CONT                                    \ CONT
-$00004000 constant ADC_CFGR_AUTDLY                                  \ AUTDLY
-$00010000 constant ADC_CFGR_DISCEN                                  \ DISCEN
-$000e0000 constant ADC_CFGR_DISCNUM                                 \ DISCNUM
-$00100000 constant ADC_CFGR_JDISCEN                                 \ JDISCEN
-$00200000 constant ADC_CFGR_JQM                                     \ JQM
-$00400000 constant ADC_CFGR_AWD1SGL                                 \ AWD1SGL
-$00800000 constant ADC_CFGR_AWD1EN                                  \ AWD1EN
-$01000000 constant ADC_CFGR_JAWD1EN                                 \ JAWD1EN
-$02000000 constant ADC_CFGR_JAUTO                                   \ JAUTO
-$7c000000 constant ADC_CFGR_AWDCH1CH                                \ AWDCH1CH
-$80000000 constant ADC_CFGR_JQDIS                                   \ Injected Queue disable
-
-
-\
-\ @brief configuration register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CFGR2_ROVSE                                  \ DMAEN
-$00000002 constant ADC_CFGR2_JOVSE                                  \ DMACFG
-$0000001c constant ADC_CFGR2_OVSR                                   \ RES
-$000001e0 constant ADC_CFGR2_OVSS                                   \ ALIGN
-$00000200 constant ADC_CFGR2_TROVS                                  \ Triggered Regular Oversampling
-$00000400 constant ADC_CFGR2_ROVSM                                  \ Regular Oversampling mode
-
-
-\
-\ @brief sample time register 1
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000007 constant ADC_SMPR1_SMP0                                   \ SMP0
-$00000038 constant ADC_SMPR1_SMP1                                   \ SMP1
-$000001c0 constant ADC_SMPR1_SMP2                                   \ SMP2
-$00000e00 constant ADC_SMPR1_SMP3                                   \ SMP3
-$00007000 constant ADC_SMPR1_SMP4                                   \ SMP4
-$00038000 constant ADC_SMPR1_SMP5                                   \ SMP5
-$001c0000 constant ADC_SMPR1_SMP6                                   \ SMP6
-$00e00000 constant ADC_SMPR1_SMP7                                   \ SMP7
-$07000000 constant ADC_SMPR1_SMP8                                   \ SMP8
-$38000000 constant ADC_SMPR1_SMP9                                   \ SMP9
-$80000000 constant ADC_SMPR1_SMPPLUS                                \ Addition of one clock cycle to the sampling time
-
-
-\
-\ @brief sample time register 2
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000007 constant ADC_SMPR2_SMP10                                  \ SMP10
-$00000038 constant ADC_SMPR2_SMP11                                  \ SMP11
-$000001c0 constant ADC_SMPR2_SMP12                                  \ SMP12
-$00000e00 constant ADC_SMPR2_SMP13                                  \ SMP13
-$00007000 constant ADC_SMPR2_SMP14                                  \ SMP14
-$00038000 constant ADC_SMPR2_SMP15                                  \ SMP15
-$001c0000 constant ADC_SMPR2_SMP16                                  \ SMP16
-$00e00000 constant ADC_SMPR2_SMP17                                  \ SMP17
-$07000000 constant ADC_SMPR2_SMP18                                  \ SMP18
-
-
-\
-\ @brief watchdog threshold register 1
-\ Address offset: 0x20
-\ Reset value: 0x0FFF0000
-\
-
-$00000fff constant ADC_TR1_LT1                                      \ LT1
-$0fff0000 constant ADC_TR1_HT1                                      \ HT1
-
-
-\
-\ @brief watchdog threshold register
-\ Address offset: 0x24
-\ Reset value: 0x0FFF0000
-\
-
-$000000ff constant ADC_TR2_LT2                                      \ LT2
-$00ff0000 constant ADC_TR2_HT2                                      \ HT2
-
-
-\
-\ @brief watchdog threshold register 3
-\ Address offset: 0x28
-\ Reset value: 0x0FFF0000
-\
-
-$000000ff constant ADC_TR3_LT3                                      \ LT3
-$00ff0000 constant ADC_TR3_HT3                                      \ HT3
-
-
-\
-\ @brief regular sequence register 1
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$0000000f constant ADC_SQR1_L                                       \ Regular channel sequence length
-$000007c0 constant ADC_SQR1_SQ1                                     \ SQ1
-$0001f000 constant ADC_SQR1_SQ2                                     \ SQ2
-$007c0000 constant ADC_SQR1_SQ3                                     \ SQ3
-$1f000000 constant ADC_SQR1_SQ4                                     \ SQ4
-
-
-\
-\ @brief regular sequence register 2
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_SQR2_SQ5                                     \ SQ5
-$000007c0 constant ADC_SQR2_SQ6                                     \ SQ6
-$0001f000 constant ADC_SQR2_SQ7                                     \ SQ7
-$007c0000 constant ADC_SQR2_SQ8                                     \ SQ8
-$1f000000 constant ADC_SQR2_SQ9                                     \ SQ9
-
-
-\
-\ @brief regular sequence register 3
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_SQR3_SQ10                                    \ SQ10
-$000007c0 constant ADC_SQR3_SQ11                                    \ SQ11
-$0001f000 constant ADC_SQR3_SQ12                                    \ SQ12
-$007c0000 constant ADC_SQR3_SQ13                                    \ SQ13
-$1f000000 constant ADC_SQR3_SQ14                                    \ SQ14
-
-
-\
-\ @brief regular sequence register 4
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_SQR4_SQ15                                    \ SQ15
-$000007c0 constant ADC_SQR4_SQ16                                    \ SQ16
-
-
-\
-\ @brief regular Data Register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_DR_RDATA                                     \ Regular Data converted
-
-
-\
-\ @brief injected sequence register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant ADC_JSQR_JL                                      \ JL
-$0000003c constant ADC_JSQR_JEXTSEL                                 \ JEXTSEL
-$000000c0 constant ADC_JSQR_JEXTEN                                  \ JEXTEN
-$00001f00 constant ADC_JSQR_JSQ1                                    \ JSQ1
-$0007c000 constant ADC_JSQR_JSQ2                                    \ JSQ2
-$01f00000 constant ADC_JSQR_JSQ3                                    \ JSQ3
-$7c000000 constant ADC_JSQR_JSQ4                                    \ JSQ4
-
-
-\
-\ @brief offset register 1
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_OFR1_OFFSET1                                 \ OFFSET1
-$7c000000 constant ADC_OFR1_OFFSET1_CH                              \ OFFSET1_CH
-$80000000 constant ADC_OFR1_OFFSET1_EN                              \ OFFSET1_EN
-
-
-\
-\ @brief offset register 2
-\ Address offset: 0x64
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_OFR2_OFFSET2                                 \ OFFSET2
-$7c000000 constant ADC_OFR2_OFFSET2_CH                              \ OFFSET2_CH
-$80000000 constant ADC_OFR2_OFFSET2_EN                              \ OFFSET2_EN
-
-
-\
-\ @brief offset register 3
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_OFR3_OFFSET3                                 \ OFFSET3
-$7c000000 constant ADC_OFR3_OFFSET3_CH                              \ OFFSET3_CH
-$80000000 constant ADC_OFR3_OFFSET3_EN                              \ OFFSET3_EN
-
-
-\
-\ @brief offset register 4
-\ Address offset: 0x6C
-\ Reset value: 0x00000000
-\
-
-$00000fff constant ADC_OFR4_OFFSET4                                 \ OFFSET4
-$7c000000 constant ADC_OFR4_OFFSET4_CH                              \ OFFSET4_CH
-$80000000 constant ADC_OFR4_OFFSET4_EN                              \ OFFSET4_EN
-
-
-\
-\ @brief injected data register 1
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_JDR1_JDATA1                                  \ JDATA1
-
-
-\
-\ @brief injected data register 2
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_JDR2_JDATA2                                  \ JDATA2
-
-
-\
-\ @brief injected data register 3
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_JDR3_JDATA3                                  \ JDATA3
-
-
-\
-\ @brief injected data register 4
-\ Address offset: 0x8C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_JDR4_JDATA4                                  \ JDATA4
-
-
-\
-\ @brief Analog Watchdog 2 Configuration Register
-\ Address offset: 0xA0
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant ADC_AWD2CR_AWD2CH                                \ AWD2CH
-
-
-\
-\ @brief Analog Watchdog 3 Configuration Register
-\ Address offset: 0xA4
-\ Reset value: 0x00000000
-\
-
-$0003ffff constant ADC_AWD3CR_AWD3CH                                \ AWD3CH
-
-
-\
-\ @brief Differential Mode Selection Register 2
-\ Address offset: 0xB0
-\ Reset value: 0x00000000
-\
-
-$0000fffe constant ADC_DIFSEL_DIFSEL_1_15                           \ Differential mode for channels 15 to 1
-$00070000 constant ADC_DIFSEL_DIFSEL_16_18                          \ Differential mode for channels 18 to 16
-
-
-\
-\ @brief Calibration Factors
-\ Address offset: 0xB4
-\ Reset value: 0x00000000
-\
-
-$0000007f constant ADC_CALFACT_CALFACT_S                            \ CALFACT_S
-$007f0000 constant ADC_CALFACT_CALFACT_D                            \ CALFACT_D
-
-
-\
-\ @brief Analog-to-Digital Converter
-\
-$50040000 constant ADC_ISR        \ offset: 0x00 : interrupt and status register
-$50040004 constant ADC_IER        \ offset: 0x04 : interrupt enable register
-$50040008 constant ADC_CR         \ offset: 0x08 : control register
-$5004000c constant ADC_CFGR       \ offset: 0x0C : configuration register
-$50040010 constant ADC_CFGR2      \ offset: 0x10 : configuration register
-$50040014 constant ADC_SMPR1      \ offset: 0x14 : sample time register 1
-$50040018 constant ADC_SMPR2      \ offset: 0x18 : sample time register 2
-$50040020 constant ADC_TR1        \ offset: 0x20 : watchdog threshold register 1
-$50040024 constant ADC_TR2        \ offset: 0x24 : watchdog threshold register
-$50040028 constant ADC_TR3        \ offset: 0x28 : watchdog threshold register 3
-$50040030 constant ADC_SQR1       \ offset: 0x30 : regular sequence register 1
-$50040034 constant ADC_SQR2       \ offset: 0x34 : regular sequence register 2
-$50040038 constant ADC_SQR3       \ offset: 0x38 : regular sequence register 3
-$5004003c constant ADC_SQR4       \ offset: 0x3C : regular sequence register 4
-$50040040 constant ADC_DR         \ offset: 0x40 : regular Data Register
-$5004004c constant ADC_JSQR       \ offset: 0x4C : injected sequence register
-$50040060 constant ADC_OFR1       \ offset: 0x60 : offset register 1
-$50040064 constant ADC_OFR2       \ offset: 0x64 : offset register 2
-$50040068 constant ADC_OFR3       \ offset: 0x68 : offset register 3
-$5004006c constant ADC_OFR4       \ offset: 0x6C : offset register 4
-$50040080 constant ADC_JDR1       \ offset: 0x80 : injected data register 1
-$50040084 constant ADC_JDR2       \ offset: 0x84 : injected data register 2
-$50040088 constant ADC_JDR3       \ offset: 0x88 : injected data register 3
-$5004008c constant ADC_JDR4       \ offset: 0x8C : injected data register 4
-$500400a0 constant ADC_AWD2CR     \ offset: 0xA0 : Analog Watchdog 2 Configuration Register
-$500400a4 constant ADC_AWD3CR     \ offset: 0xA4 : Analog Watchdog 3 Configuration Register
-$500400b0 constant ADC_DIFSEL     \ offset: 0xB0 : Differential Mode Selection Register 2
-$500400b4 constant ADC_CALFACT    \ offset: 0xB4 : Calibration Factors
-
+[ifndef] ADC_DEF
+
+  [ifdef] ADC_ISR_DEF
+    \
+    \ @brief interrupt and status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_ADRDY                      \ [0x00] ADRDY
+    $01 constant ADC_EOSMP                      \ [0x01] EOSMP
+    $02 constant ADC_EOC                        \ [0x02] EOC
+    $03 constant ADC_EOS                        \ [0x03] EOS
+    $04 constant ADC_OVR                        \ [0x04] OVR
+    $05 constant ADC_JEOC                       \ [0x05] JEOC
+    $06 constant ADC_JEOS                       \ [0x06] JEOS
+    $07 constant ADC_AWD1                       \ [0x07] AWD1
+    $08 constant ADC_AWD2                       \ [0x08] AWD2
+    $09 constant ADC_AWD3                       \ [0x09] AWD3
+    $0a constant ADC_JQOVF                      \ [0x0a] JQOVF
+  [then]
+
+
+  [ifdef] ADC_IER_DEF
+    \
+    \ @brief interrupt enable register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_ADRDYIE                    \ [0x00] ADRDYIE
+    $01 constant ADC_EOSMPIE                    \ [0x01] EOSMPIE
+    $02 constant ADC_EOCIE                      \ [0x02] EOCIE
+    $03 constant ADC_EOSIE                      \ [0x03] EOSIE
+    $04 constant ADC_OVRIE                      \ [0x04] OVRIE
+    $05 constant ADC_JEOCIE                     \ [0x05] JEOCIE
+    $06 constant ADC_JEOSIE                     \ [0x06] JEOSIE
+    $07 constant ADC_AWD1IE                     \ [0x07] AWD1IE
+    $08 constant ADC_AWD2IE                     \ [0x08] AWD2IE
+    $09 constant ADC_AWD3IE                     \ [0x09] AWD3IE
+    $0a constant ADC_JQOVFIE                    \ [0x0a] JQOVFIE
+  [then]
+
+
+  [ifdef] ADC_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_ADEN                       \ [0x00] ADEN
+    $01 constant ADC_ADDIS                      \ [0x01] ADDIS
+    $02 constant ADC_ADSTART                    \ [0x02] ADSTART
+    $03 constant ADC_JADSTART                   \ [0x03] JADSTART
+    $04 constant ADC_ADSTP                      \ [0x04] ADSTP
+    $05 constant ADC_JADSTP                     \ [0x05] JADSTP
+    $1c constant ADC_ADVREGEN                   \ [0x1c] ADVREGEN
+    $1d constant ADC_DEEPPWD                    \ [0x1d] DEEPPWD
+    $1e constant ADC_ADCALDIF                   \ [0x1e] ADCALDIF
+    $1f constant ADC_ADCAL                      \ [0x1f] ADCAL
+  [then]
+
+
+  [ifdef] ADC_CFGR_DEF
+    \
+    \ @brief configuration register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_DMAEN                      \ [0x00] DMAEN
+    $01 constant ADC_DMACFG                     \ [0x01] DMACFG
+    $02 constant ADC_DFSDMCFG                   \ [0x02] DFSDM mode configuration
+    $03 constant ADC_RES                        \ [0x03 : 2] RES
+    $05 constant ADC_ALIGN                      \ [0x05] ALIGN
+    $06 constant ADC_EXTSEL0                    \ [0x06] EXTSEL0
+    $07 constant ADC_EXTSEL1                    \ [0x07] EXTSEL1
+    $08 constant ADC_EXTSEL2                    \ [0x08] EXTSEL2
+    $09 constant ADC_EXTSEL3                    \ [0x09] EXTSEL3
+    $0a constant ADC_EXTEN                      \ [0x0a : 2] EXTEN
+    $0c constant ADC_OVRMOD                     \ [0x0c] OVRMOD
+    $0d constant ADC_CONT                       \ [0x0d] CONT
+    $0e constant ADC_AUTDLY                     \ [0x0e] AUTDLY
+    $10 constant ADC_DISCEN                     \ [0x10] DISCEN
+    $11 constant ADC_DISCNUM                    \ [0x11 : 3] DISCNUM
+    $14 constant ADC_JDISCEN                    \ [0x14] JDISCEN
+    $15 constant ADC_JQM                        \ [0x15] JQM
+    $16 constant ADC_AWD1SGL                    \ [0x16] AWD1SGL
+    $17 constant ADC_AWD1EN                     \ [0x17] AWD1EN
+    $18 constant ADC_JAWD1EN                    \ [0x18] JAWD1EN
+    $19 constant ADC_JAUTO                      \ [0x19] JAUTO
+    $1a constant ADC_AWDCH1CH                   \ [0x1a : 5] AWDCH1CH
+    $1f constant ADC_JQDIS                      \ [0x1f] Injected Queue disable
+  [then]
+
+
+  [ifdef] ADC_CFGR2_DEF
+    \
+    \ @brief configuration register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_ROVSE                      \ [0x00] DMAEN
+    $01 constant ADC_JOVSE                      \ [0x01] DMACFG
+    $02 constant ADC_OVSR                       \ [0x02 : 3] RES
+    $05 constant ADC_OVSS                       \ [0x05 : 4] ALIGN
+    $09 constant ADC_TROVS                      \ [0x09] Triggered Regular Oversampling
+    $0a constant ADC_ROVSM                      \ [0x0a] Regular Oversampling mode
+  [then]
+
+
+  [ifdef] ADC_SMPR1_DEF
+    \
+    \ @brief sample time register 1
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SMP0                       \ [0x00 : 3] SMP0
+    $03 constant ADC_SMP1                       \ [0x03 : 3] SMP1
+    $06 constant ADC_SMP2                       \ [0x06 : 3] SMP2
+    $09 constant ADC_SMP3                       \ [0x09 : 3] SMP3
+    $0c constant ADC_SMP4                       \ [0x0c : 3] SMP4
+    $0f constant ADC_SMP5                       \ [0x0f : 3] SMP5
+    $12 constant ADC_SMP6                       \ [0x12 : 3] SMP6
+    $15 constant ADC_SMP7                       \ [0x15 : 3] SMP7
+    $18 constant ADC_SMP8                       \ [0x18 : 3] SMP8
+    $1b constant ADC_SMP9                       \ [0x1b : 3] SMP9
+    $1f constant ADC_SMPPLUS                    \ [0x1f] Addition of one clock cycle to the sampling time
+  [then]
+
+
+  [ifdef] ADC_SMPR2_DEF
+    \
+    \ @brief sample time register 2
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SMP10                      \ [0x00 : 3] SMP10
+    $03 constant ADC_SMP11                      \ [0x03 : 3] SMP11
+    $06 constant ADC_SMP12                      \ [0x06 : 3] SMP12
+    $09 constant ADC_SMP13                      \ [0x09 : 3] SMP13
+    $0c constant ADC_SMP14                      \ [0x0c : 3] SMP14
+    $0f constant ADC_SMP15                      \ [0x0f : 3] SMP15
+    $12 constant ADC_SMP16                      \ [0x12 : 3] SMP16
+    $15 constant ADC_SMP17                      \ [0x15 : 3] SMP17
+    $18 constant ADC_SMP18                      \ [0x18 : 3] SMP18
+  [then]
+
+
+  [ifdef] ADC_TR1_DEF
+    \
+    \ @brief watchdog threshold register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x0FFF0000
+    \
+    $00 constant ADC_LT1                        \ [0x00 : 12] LT1
+    $10 constant ADC_HT1                        \ [0x10 : 12] HT1
+  [then]
+
+
+  [ifdef] ADC_TR2_DEF
+    \
+    \ @brief watchdog threshold register
+    \ Address offset: 0x24
+    \ Reset value: 0x0FFF0000
+    \
+    $00 constant ADC_LT2                        \ [0x00 : 8] LT2
+    $10 constant ADC_HT2                        \ [0x10 : 8] HT2
+  [then]
+
+
+  [ifdef] ADC_TR3_DEF
+    \
+    \ @brief watchdog threshold register 3
+    \ Address offset: 0x28
+    \ Reset value: 0x0FFF0000
+    \
+    $00 constant ADC_LT3                        \ [0x00 : 8] LT3
+    $10 constant ADC_HT3                        \ [0x10 : 8] HT3
+  [then]
+
+
+  [ifdef] ADC_SQR1_DEF
+    \
+    \ @brief regular sequence register 1
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_L                          \ [0x00 : 4] Regular channel sequence length
+    $06 constant ADC_SQ1                        \ [0x06 : 5] SQ1
+    $0c constant ADC_SQ2                        \ [0x0c : 5] SQ2
+    $12 constant ADC_SQ3                        \ [0x12 : 5] SQ3
+    $18 constant ADC_SQ4                        \ [0x18 : 5] SQ4
+  [then]
+
+
+  [ifdef] ADC_SQR2_DEF
+    \
+    \ @brief regular sequence register 2
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SQ5                        \ [0x00 : 5] SQ5
+    $06 constant ADC_SQ6                        \ [0x06 : 5] SQ6
+    $0c constant ADC_SQ7                        \ [0x0c : 5] SQ7
+    $12 constant ADC_SQ8                        \ [0x12 : 5] SQ8
+    $18 constant ADC_SQ9                        \ [0x18 : 5] SQ9
+  [then]
+
+
+  [ifdef] ADC_SQR3_DEF
+    \
+    \ @brief regular sequence register 3
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SQ10                       \ [0x00 : 5] SQ10
+    $06 constant ADC_SQ11                       \ [0x06 : 5] SQ11
+    $0c constant ADC_SQ12                       \ [0x0c : 5] SQ12
+    $12 constant ADC_SQ13                       \ [0x12 : 5] SQ13
+    $18 constant ADC_SQ14                       \ [0x18 : 5] SQ14
+  [then]
+
+
+  [ifdef] ADC_SQR4_DEF
+    \
+    \ @brief regular sequence register 4
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SQ15                       \ [0x00 : 5] SQ15
+    $06 constant ADC_SQ16                       \ [0x06 : 5] SQ16
+  [then]
+
+
+  [ifdef] ADC_DR_DEF
+    \
+    \ @brief regular Data Register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_RDATA                      \ [0x00 : 16] Regular Data converted
+  [then]
+
+
+  [ifdef] ADC_JSQR_DEF
+    \
+    \ @brief injected sequence register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JL                         \ [0x00 : 2] JL
+    $02 constant ADC_JEXTSEL                    \ [0x02 : 4] JEXTSEL
+    $06 constant ADC_JEXTEN                     \ [0x06 : 2] JEXTEN
+    $08 constant ADC_JSQ1                       \ [0x08 : 5] JSQ1
+    $0e constant ADC_JSQ2                       \ [0x0e : 5] JSQ2
+    $14 constant ADC_JSQ3                       \ [0x14 : 5] JSQ3
+    $1a constant ADC_JSQ4                       \ [0x1a : 5] JSQ4
+  [then]
+
+
+  [ifdef] ADC_OFR1_DEF
+    \
+    \ @brief offset register 1
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_OFFSET1                    \ [0x00 : 12] OFFSET1
+    $1a constant ADC_OFFSET1_CH                 \ [0x1a : 5] OFFSET1_CH
+    $1f constant ADC_OFFSET1_EN                 \ [0x1f] OFFSET1_EN
+  [then]
+
+
+  [ifdef] ADC_OFR2_DEF
+    \
+    \ @brief offset register 2
+    \ Address offset: 0x64
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_OFFSET2                    \ [0x00 : 12] OFFSET2
+    $1a constant ADC_OFFSET2_CH                 \ [0x1a : 5] OFFSET2_CH
+    $1f constant ADC_OFFSET2_EN                 \ [0x1f] OFFSET2_EN
+  [then]
+
+
+  [ifdef] ADC_OFR3_DEF
+    \
+    \ @brief offset register 3
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_OFFSET3                    \ [0x00 : 12] OFFSET3
+    $1a constant ADC_OFFSET3_CH                 \ [0x1a : 5] OFFSET3_CH
+    $1f constant ADC_OFFSET3_EN                 \ [0x1f] OFFSET3_EN
+  [then]
+
+
+  [ifdef] ADC_OFR4_DEF
+    \
+    \ @brief offset register 4
+    \ Address offset: 0x6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_OFFSET4                    \ [0x00 : 12] OFFSET4
+    $1a constant ADC_OFFSET4_CH                 \ [0x1a : 5] OFFSET4_CH
+    $1f constant ADC_OFFSET4_EN                 \ [0x1f] OFFSET4_EN
+  [then]
+
+
+  [ifdef] ADC_JDR1_DEF
+    \
+    \ @brief injected data register 1
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JDATA1                     \ [0x00 : 16] JDATA1
+  [then]
+
+
+  [ifdef] ADC_JDR2_DEF
+    \
+    \ @brief injected data register 2
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JDATA2                     \ [0x00 : 16] JDATA2
+  [then]
+
+
+  [ifdef] ADC_JDR3_DEF
+    \
+    \ @brief injected data register 3
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JDATA3                     \ [0x00 : 16] JDATA3
+  [then]
+
+
+  [ifdef] ADC_JDR4_DEF
+    \
+    \ @brief injected data register 4
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_JDATA4                     \ [0x00 : 16] JDATA4
+  [then]
+
+
+  [ifdef] ADC_AWD2CR_DEF
+    \
+    \ @brief Analog Watchdog 2 Configuration Register
+    \ Address offset: 0xA0
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_AWD2CH                     \ [0x00 : 18] AWD2CH
+  [then]
+
+
+  [ifdef] ADC_AWD3CR_DEF
+    \
+    \ @brief Analog Watchdog 3 Configuration Register
+    \ Address offset: 0xA4
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_AWD3CH                     \ [0x00 : 18] AWD3CH
+  [then]
+
+
+  [ifdef] ADC_DIFSEL_DEF
+    \
+    \ @brief Differential Mode Selection Register 2
+    \ Address offset: 0xB0
+    \ Reset value: 0x00000000
+    \
+    $01 constant ADC_DIFSEL_1_15                \ [0x01 : 15] Differential mode for channels 15 to 1
+    $10 constant ADC_DIFSEL_16_18               \ [0x10 : 3] Differential mode for channels 18 to 16
+  [then]
+
+
+  [ifdef] ADC_CALFACT_DEF
+    \
+    \ @brief Calibration Factors
+    \ Address offset: 0xB4
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_CALFACT_S                  \ [0x00 : 7] CALFACT_S
+    $10 constant ADC_CALFACT_D                  \ [0x10 : 7] CALFACT_D
+  [then]
+
+  \
+  \ @brief Analog-to-Digital Converter
+  \
+  $00 constant ADC_ISR                  \ interrupt and status register
+  $04 constant ADC_IER                  \ interrupt enable register
+  $08 constant ADC_CR                   \ control register
+  $0C constant ADC_CFGR                 \ configuration register
+  $10 constant ADC_CFGR2                \ configuration register
+  $14 constant ADC_SMPR1                \ sample time register 1
+  $18 constant ADC_SMPR2                \ sample time register 2
+  $20 constant ADC_TR1                  \ watchdog threshold register 1
+  $24 constant ADC_TR2                  \ watchdog threshold register
+  $28 constant ADC_TR3                  \ watchdog threshold register 3
+  $30 constant ADC_SQR1                 \ regular sequence register 1
+  $34 constant ADC_SQR2                 \ regular sequence register 2
+  $38 constant ADC_SQR3                 \ regular sequence register 3
+  $3C constant ADC_SQR4                 \ regular sequence register 4
+  $40 constant ADC_DR                   \ regular Data Register
+  $4C constant ADC_JSQR                 \ injected sequence register
+  $60 constant ADC_OFR1                 \ offset register 1
+  $64 constant ADC_OFR2                 \ offset register 2
+  $68 constant ADC_OFR3                 \ offset register 3
+  $6C constant ADC_OFR4                 \ offset register 4
+  $80 constant ADC_JDR1                 \ injected data register 1
+  $84 constant ADC_JDR2                 \ injected data register 2
+  $88 constant ADC_JDR3                 \ injected data register 3
+  $8C constant ADC_JDR4                 \ injected data register 4
+  $A0 constant ADC_AWD2CR               \ Analog Watchdog 2 Configuration Register
+  $A4 constant ADC_AWD3CR               \ Analog Watchdog 3 Configuration Register
+  $B0 constant ADC_DIFSEL               \ Differential Mode Selection Register 2
+  $B4 constant ADC_CALFACT              \ Calibration Factors
+
+: ADC_DEF ; [then]

@@ -6,299 +6,326 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief AES control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant AES_AES_CR_EN                                    \ Enable
-$00000006 constant AES_AES_CR_DATATYPE                              \ Data type
-$00000018 constant AES_AES_CR_MODE                                  \ Operating mode
-$00000060 constant AES_AES_CR_CHMOD                                 \ CHMOD[1:0]: Chaining mode
-$00000800 constant AES_AES_CR_DMAINEN                               \ DMA input enable
-$00001000 constant AES_AES_CR_DMAOUTEN                              \ DMA output enable
-$00006000 constant AES_AES_CR_GCMPH                                 \ GCM or CCM phase selection
-$00010000 constant AES_AES_CR_CHMOD_1                               \ CHMOD[2]
-$00040000 constant AES_AES_CR_KEYSIZE                               \ Key size selection
-$00f00000 constant AES_AES_CR_NPBLB                                 \ Number of padding bytes in last block
-$03000000 constant AES_AES_CR_KMOD                                  \ Key mode selection
-$80000000 constant AES_AES_CR_IPRST                                 \ AES peripheral software reset
-
-
-\
-\ @brief AES status register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000002 constant AES_AES_SR_RDERRF                                \ Read error flag
-$00000004 constant AES_AES_SR_WRERRF                                \ Write error flag
-$00000008 constant AES_AES_SR_BUSY                                  \ Busy
-$00000080 constant AES_AES_SR_KEYVALID                              \ Key valid flag
-
-
-\
-\ @brief AES data input register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_DINR_DIN                                 \ Data input
-
-
-\
-\ @brief AES data output register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_DOUTR_DOUT                               \ Data output
-
-
-\
-\ @brief AES key register 0
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_KEYR0_KEY                                \ Cryptographic key, bits [31:0]
-
-
-\
-\ @brief AES key register 1
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_KEYR1_KEY                                \ Cryptographic key, bits [63:32]
-
-
-\
-\ @brief AES key register 2
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_KEYR2_KEY                                \ Cryptographic key, bits [95:64]
-
-
-\
-\ @brief AES key register 3
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_KEYR3_KEY                                \ Cryptographic key, bits [127:96]
-
-
-\
-\ @brief AES initialization vector register 0
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_IVR0_IVI                                 \ Initialization vector input, bits [31:0]
-
-
-\
-\ @brief AES initialization vector register 1
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_IVR1_IVI                                 \ Initialization vector input, bits [63:32]
-
-
-\
-\ @brief AES initialization vector register 2
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_IVR2_IVI                                 \ Initialization vector input, bits [95:64]
-
-
-\
-\ @brief AES initialization vector register 3
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_IVR3_IVI                                 \ Initialization vector input, bits [127:96]
-
-
-\
-\ @brief AES key register 4
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_KEYR4_KEY                                \ Cryptographic key, bits [159:128]
-
-
-\
-\ @brief AES key register 5
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_KEYR5_KEY                                \ Cryptographic key, bits [191:160]
-
-
-\
-\ @brief AES key register 6
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_KEYR6_KEY                                \ Cryptographic key, bits [223:192]
-
-
-\
-\ @brief AES key register 7
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_KEYR7_KEY                                \ Cryptographic key, bits [255:224]
-
-
-\
-\ @brief AES suspend registers
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_SUSPR0_SUSP                              \ Suspend data
-
-
-\
-\ @brief AES suspend registers
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_SUSPR1_SUSP                              \ Suspend data
-
-
-\
-\ @brief AES suspend registers
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_SUSPR2_SUSP                              \ Suspend data
-
-
-\
-\ @brief AES suspend registers
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_SUSPR3_SUSP                              \ Suspend data
-
-
-\
-\ @brief AES suspend registers
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_SUSPR4_SUSP                              \ Suspend data
-
-
-\
-\ @brief AES suspend registers
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_SUSPR5_SUSP                              \ Suspend data
-
-
-\
-\ @brief AES suspend registers
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_SUSPR6_SUSP                              \ Suspend data
-
-
-\
-\ @brief AES suspend registers
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant AES_AES_SUSPR7_SUSP                              \ Suspend data
-
-
-\
-\ @brief AES interrupt enable register
-\ Address offset: 0x300
-\ Reset value: 0x00000000
-\
-
-$00000001 constant AES_AES_IER_CCFIE                                \ Computation complete flag interrupt enable
-$00000002 constant AES_AES_IER_RWEIE                                \ Read or write error interrupt enable
-$00000004 constant AES_AES_IER_KEIE                                 \ Key error interrupt enable
-
-
-\
-\ @brief AES interrupt status register
-\ Address offset: 0x304
-\ Reset value: 0x00000000
-\
-
-$00000001 constant AES_AES_ISR_CCF                                  \ Computation complete flag
-$00000002 constant AES_AES_ISR_RWEIF                                \ Read or write error interrupt flag
-$00000004 constant AES_AES_ISR_KEIF                                 \ Key error interrupt flag
-
-
-\
-\ @brief AES interrupt clear register
-\ Address offset: 0x308
-\ Reset value: 0x00000000
-\
-
-$00000001 constant AES_AES_ICR_CCF                                  \ Computation complete flag clear
-$00000002 constant AES_AES_ICR_RWEIF                                \ Read or write error interrupt flag clear
-$00000004 constant AES_AES_ICR_KEIF                                 \ Key error interrupt flag clear
-
-
-\
-\ @brief AES register block
-\
-$420c0000 constant AES_AES_CR     \ offset: 0x00 : AES control register
-$420c0004 constant AES_AES_SR     \ offset: 0x04 : AES status register
-$420c0008 constant AES_AES_DINR   \ offset: 0x08 : AES data input register
-$420c000c constant AES_AES_DOUTR  \ offset: 0x0C : AES data output register
-$420c0010 constant AES_AES_KEYR0  \ offset: 0x10 : AES key register 0
-$420c0014 constant AES_AES_KEYR1  \ offset: 0x14 : AES key register 1
-$420c0018 constant AES_AES_KEYR2  \ offset: 0x18 : AES key register 2
-$420c001c constant AES_AES_KEYR3  \ offset: 0x1C : AES key register 3
-$420c0020 constant AES_AES_IVR0   \ offset: 0x20 : AES initialization vector register 0
-$420c0024 constant AES_AES_IVR1   \ offset: 0x24 : AES initialization vector register 1
-$420c0028 constant AES_AES_IVR2   \ offset: 0x28 : AES initialization vector register 2
-$420c002c constant AES_AES_IVR3   \ offset: 0x2C : AES initialization vector register 3
-$420c0030 constant AES_AES_KEYR4  \ offset: 0x30 : AES key register 4
-$420c0034 constant AES_AES_KEYR5  \ offset: 0x34 : AES key register 5
-$420c0038 constant AES_AES_KEYR6  \ offset: 0x38 : AES key register 6
-$420c003c constant AES_AES_KEYR7  \ offset: 0x3C : AES key register 7
-$420c0040 constant AES_AES_SUSPR0  \ offset: 0x40 : AES suspend registers
-$420c0044 constant AES_AES_SUSPR1  \ offset: 0x44 : AES suspend registers
-$420c0048 constant AES_AES_SUSPR2  \ offset: 0x48 : AES suspend registers
-$420c004c constant AES_AES_SUSPR3  \ offset: 0x4C : AES suspend registers
-$420c0050 constant AES_AES_SUSPR4  \ offset: 0x50 : AES suspend registers
-$420c0054 constant AES_AES_SUSPR5  \ offset: 0x54 : AES suspend registers
-$420c0058 constant AES_AES_SUSPR6  \ offset: 0x58 : AES suspend registers
-$420c005c constant AES_AES_SUSPR7  \ offset: 0x5C : AES suspend registers
-$420c0300 constant AES_AES_IER    \ offset: 0x300 : AES interrupt enable register
-$420c0304 constant AES_AES_ISR    \ offset: 0x304 : AES interrupt status register
-$420c0308 constant AES_AES_ICR    \ offset: 0x308 : AES interrupt clear register
-
+[ifndef] AES_DEF
+
+  [ifdef] AES_AES_CR_DEF
+    \
+    \ @brief AES control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_EN                         \ [0x00] Enable
+    $01 constant AES_DATATYPE                   \ [0x01 : 2] Data type
+    $03 constant AES_MODE                       \ [0x03 : 2] Operating mode
+    $05 constant AES_CHMOD                      \ [0x05 : 2] CHMOD[1:0]: Chaining mode
+    $0b constant AES_DMAINEN                    \ [0x0b] DMA input enable
+    $0c constant AES_DMAOUTEN                   \ [0x0c] DMA output enable
+    $0d constant AES_GCMPH                      \ [0x0d : 2] GCM or CCM phase selection
+    $10 constant AES_CHMOD_1                    \ [0x10] CHMOD[2]
+    $12 constant AES_KEYSIZE                    \ [0x12] Key size selection
+    $14 constant AES_NPBLB                      \ [0x14 : 4] Number of padding bytes in last block
+    $18 constant AES_KMOD                       \ [0x18 : 2] Key mode selection
+    $1f constant AES_IPRST                      \ [0x1f] AES peripheral software reset
+  [then]
+
+
+  [ifdef] AES_AES_SR_DEF
+    \
+    \ @brief AES status register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $01 constant AES_RDERRF                     \ [0x01] Read error flag
+    $02 constant AES_WRERRF                     \ [0x02] Write error flag
+    $03 constant AES_BUSY                       \ [0x03] Busy
+    $07 constant AES_KEYVALID                   \ [0x07] Key valid flag
+  [then]
+
+
+  [ifdef] AES_AES_DINR_DEF
+    \
+    \ @brief AES data input register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_DIN                        \ [0x00 : 32] Data input
+  [then]
+
+
+  [ifdef] AES_AES_DOUTR_DEF
+    \
+    \ @brief AES data output register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_DOUT                       \ [0x00 : 32] Data output
+  [then]
+
+
+  [ifdef] AES_AES_KEYR0_DEF
+    \
+    \ @brief AES key register 0
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_KEY                        \ [0x00 : 32] Cryptographic key, bits [31:0]
+  [then]
+
+
+  [ifdef] AES_AES_KEYR1_DEF
+    \
+    \ @brief AES key register 1
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_KEY                        \ [0x00 : 32] Cryptographic key, bits [63:32]
+  [then]
+
+
+  [ifdef] AES_AES_KEYR2_DEF
+    \
+    \ @brief AES key register 2
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_KEY                        \ [0x00 : 32] Cryptographic key, bits [95:64]
+  [then]
+
+
+  [ifdef] AES_AES_KEYR3_DEF
+    \
+    \ @brief AES key register 3
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_KEY                        \ [0x00 : 32] Cryptographic key, bits [127:96]
+  [then]
+
+
+  [ifdef] AES_AES_IVR0_DEF
+    \
+    \ @brief AES initialization vector register 0
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_IVI                        \ [0x00 : 32] Initialization vector input, bits [31:0]
+  [then]
+
+
+  [ifdef] AES_AES_IVR1_DEF
+    \
+    \ @brief AES initialization vector register 1
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_IVI                        \ [0x00 : 32] Initialization vector input, bits [63:32]
+  [then]
+
+
+  [ifdef] AES_AES_IVR2_DEF
+    \
+    \ @brief AES initialization vector register 2
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_IVI                        \ [0x00 : 32] Initialization vector input, bits [95:64]
+  [then]
+
+
+  [ifdef] AES_AES_IVR3_DEF
+    \
+    \ @brief AES initialization vector register 3
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_IVI                        \ [0x00 : 32] Initialization vector input, bits [127:96]
+  [then]
+
+
+  [ifdef] AES_AES_KEYR4_DEF
+    \
+    \ @brief AES key register 4
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_KEY                        \ [0x00 : 32] Cryptographic key, bits [159:128]
+  [then]
+
+
+  [ifdef] AES_AES_KEYR5_DEF
+    \
+    \ @brief AES key register 5
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_KEY                        \ [0x00 : 32] Cryptographic key, bits [191:160]
+  [then]
+
+
+  [ifdef] AES_AES_KEYR6_DEF
+    \
+    \ @brief AES key register 6
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_KEY                        \ [0x00 : 32] Cryptographic key, bits [223:192]
+  [then]
+
+
+  [ifdef] AES_AES_KEYR7_DEF
+    \
+    \ @brief AES key register 7
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_KEY                        \ [0x00 : 32] Cryptographic key, bits [255:224]
+  [then]
+
+
+  [ifdef] AES_AES_SUSPR0_DEF
+    \
+    \ @brief AES suspend registers
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_SUSP                       \ [0x00 : 32] Suspend data
+  [then]
+
+
+  [ifdef] AES_AES_SUSPR1_DEF
+    \
+    \ @brief AES suspend registers
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_SUSP                       \ [0x00 : 32] Suspend data
+  [then]
+
+
+  [ifdef] AES_AES_SUSPR2_DEF
+    \
+    \ @brief AES suspend registers
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_SUSP                       \ [0x00 : 32] Suspend data
+  [then]
+
+
+  [ifdef] AES_AES_SUSPR3_DEF
+    \
+    \ @brief AES suspend registers
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_SUSP                       \ [0x00 : 32] Suspend data
+  [then]
+
+
+  [ifdef] AES_AES_SUSPR4_DEF
+    \
+    \ @brief AES suspend registers
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_SUSP                       \ [0x00 : 32] Suspend data
+  [then]
+
+
+  [ifdef] AES_AES_SUSPR5_DEF
+    \
+    \ @brief AES suspend registers
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_SUSP                       \ [0x00 : 32] Suspend data
+  [then]
+
+
+  [ifdef] AES_AES_SUSPR6_DEF
+    \
+    \ @brief AES suspend registers
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_SUSP                       \ [0x00 : 32] Suspend data
+  [then]
+
+
+  [ifdef] AES_AES_SUSPR7_DEF
+    \
+    \ @brief AES suspend registers
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_SUSP                       \ [0x00 : 32] Suspend data
+  [then]
+
+
+  [ifdef] AES_AES_IER_DEF
+    \
+    \ @brief AES interrupt enable register
+    \ Address offset: 0x300
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_CCFIE                      \ [0x00] Computation complete flag interrupt enable
+    $01 constant AES_RWEIE                      \ [0x01] Read or write error interrupt enable
+    $02 constant AES_KEIE                       \ [0x02] Key error interrupt enable
+  [then]
+
+
+  [ifdef] AES_AES_ISR_DEF
+    \
+    \ @brief AES interrupt status register
+    \ Address offset: 0x304
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_CCF                        \ [0x00] Computation complete flag
+    $01 constant AES_RWEIF                      \ [0x01] Read or write error interrupt flag
+    $02 constant AES_KEIF                       \ [0x02] Key error interrupt flag
+  [then]
+
+
+  [ifdef] AES_AES_ICR_DEF
+    \
+    \ @brief AES interrupt clear register
+    \ Address offset: 0x308
+    \ Reset value: 0x00000000
+    \
+    $00 constant AES_CCF                        \ [0x00] Computation complete flag clear
+    $01 constant AES_RWEIF                      \ [0x01] Read or write error interrupt flag clear
+    $02 constant AES_KEIF                       \ [0x02] Key error interrupt flag clear
+  [then]
+
+  \
+  \ @brief AES register block
+  \
+  $00 constant AES_AES_CR               \ AES control register
+  $04 constant AES_AES_SR               \ AES status register
+  $08 constant AES_AES_DINR             \ AES data input register
+  $0C constant AES_AES_DOUTR            \ AES data output register
+  $10 constant AES_AES_KEYR0            \ AES key register 0
+  $14 constant AES_AES_KEYR1            \ AES key register 1
+  $18 constant AES_AES_KEYR2            \ AES key register 2
+  $1C constant AES_AES_KEYR3            \ AES key register 3
+  $20 constant AES_AES_IVR0             \ AES initialization vector register 0
+  $24 constant AES_AES_IVR1             \ AES initialization vector register 1
+  $28 constant AES_AES_IVR2             \ AES initialization vector register 2
+  $2C constant AES_AES_IVR3             \ AES initialization vector register 3
+  $30 constant AES_AES_KEYR4            \ AES key register 4
+  $34 constant AES_AES_KEYR5            \ AES key register 5
+  $38 constant AES_AES_KEYR6            \ AES key register 6
+  $3C constant AES_AES_KEYR7            \ AES key register 7
+  $40 constant AES_AES_SUSPR0           \ AES suspend registers
+  $44 constant AES_AES_SUSPR1           \ AES suspend registers
+  $48 constant AES_AES_SUSPR2           \ AES suspend registers
+  $4C constant AES_AES_SUSPR3           \ AES suspend registers
+  $50 constant AES_AES_SUSPR4           \ AES suspend registers
+  $54 constant AES_AES_SUSPR5           \ AES suspend registers
+  $58 constant AES_AES_SUSPR6           \ AES suspend registers
+  $5C constant AES_AES_SUSPR7           \ AES suspend registers
+  $300 constant AES_AES_IER             \ AES interrupt enable register
+  $304 constant AES_AES_ISR             \ AES interrupt status register
+  $308 constant AES_AES_ICR             \ AES interrupt clear register
+
+: AES_DEF ; [then]

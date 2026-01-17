@@ -6,128 +6,139 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GPIOH_DEF
 
-\
-\ @brief GPIO port mode register
-\ Address offset: 0x00
-\ Reset value: 0x000000C0
-\
-
-$000000c0 constant GPIOH_MODER_MODER3                               \ Port x configuration bits (y = 0..15)
-
-
-\
-\ @brief GPIO port output type register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000008 constant GPIOH_OTYPER_OT3                                 \ Port x configuration bits (y = 0..15)
+  [ifdef] GPIOH_MODER_DEF
+    \
+    \ @brief GPIO port mode register
+    \ Address offset: 0x00
+    \ Reset value: 0x000000C0
+    \
+    $06 constant GPIOH_MODER3                   \ [0x06 : 2] Port x configuration bits (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO port output speed register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$000000c0 constant GPIOH_OSPEEDR_OSPEEDR3                           \ Port x configuration bits (y = 0..15)
-
-
-\
-\ @brief GPIO port pull-up/pull-down register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$000000c0 constant GPIOH_PUPDR_PUPDR3                               \ Port x configuration bits (y = 0..15)
+  [ifdef] GPIOH_OTYPER_DEF
+    \
+    \ @brief GPIO port output type register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $03 constant GPIOH_OT3                      \ [0x03] Port x configuration bits (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO port input data register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000008 constant GPIOH_IDR_IDR3                                   \ Port input data (y = 0..15)
-
-
-\
-\ @brief GPIO port output data register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000008 constant GPIOH_ODR_ODR3                                   \ Port output data (y = 0..15)
+  [ifdef] GPIOH_OSPEEDR_DEF
+    \
+    \ @brief GPIO port output speed register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $06 constant GPIOH_OSPEEDR3                 \ [0x06 : 2] Port x configuration bits (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO port bit set/reset register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000008 constant GPIOH_BSRR_BS3                                   \ Port x set bit y (y= 0..15)
-$00080000 constant GPIOH_BSRR_BR3                                   \ Port x reset bit y (y = 0..15)
-
-
-\
-\ @brief GPIO port configuration lock register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000008 constant GPIOH_LCKR_LCK3                                  \ Port x lock bit y (y= 0..15)
-$00010000 constant GPIOH_LCKR_LCKK                                  \ Port x lock bit y (y= 0..15)
+  [ifdef] GPIOH_PUPDR_DEF
+    \
+    \ @brief GPIO port pull-up/pull-down register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $06 constant GPIOH_PUPDR3                   \ [0x06 : 2] Port x configuration bits (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO alternate function low register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$0000f000 constant GPIOH_AFRL_AFRL3                                 \ Alternate function selection for port x bit y (y = 0..7)
-
-
-\
-\ @brief GPIO alternate function high register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOH_AFRH_AFRH8                                 \ Alternate function selection for port x bit y (y = 8..15)
-$000000f0 constant GPIOH_AFRH_AFRH9                                 \ Alternate function selection for port x bit y (y = 8..15)
-$00000f00 constant GPIOH_AFRH_AFRH10                                \ Alternate function selection for port x bit y (y = 8..15)
-$0000f000 constant GPIOH_AFRH_AFRH11                                \ Alternate function selection for port x bit y (y = 8..15)
-$000f0000 constant GPIOH_AFRH_AFRH12                                \ Alternate function selection for port x bit y (y = 8..15)
-$00f00000 constant GPIOH_AFRH_AFRH13                                \ Alternate function selection for port x bit y (y = 8..15)
-$0f000000 constant GPIOH_AFRH_AFRH14                                \ Alternate function selection for port x bit y (y = 8..15)
-$f0000000 constant GPIOH_AFRH_AFRH15                                \ Alternate function selection for port x bit y (y = 8..15)
+  [ifdef] GPIOH_IDR_DEF
+    \
+    \ @brief GPIO port input data register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $03 constant GPIOH_IDR3                     \ [0x03] Port input data (y = 0..15)
+  [then]
 
 
-\
-\ @brief GPIO port bit reset register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
+  [ifdef] GPIOH_ODR_DEF
+    \
+    \ @brief GPIO port output data register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $03 constant GPIOH_ODR3                     \ [0x03] Port output data (y = 0..15)
+  [then]
 
-$00000008 constant GPIOH_BRR_BR3                                    \ Port Reset bit
+
+  [ifdef] GPIOH_BSRR_DEF
+    \
+    \ @brief GPIO port bit set/reset register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $03 constant GPIOH_BS3                      \ [0x03] Port x set bit y (y= 0..15)
+    $13 constant GPIOH_BR3                      \ [0x13] Port x reset bit y (y = 0..15)
+  [then]
 
 
-\
-\ @brief General-purpose I/Os
-\
-$48001c00 constant GPIOH_MODER    \ offset: 0x00 : GPIO port mode register
-$48001c04 constant GPIOH_OTYPER   \ offset: 0x04 : GPIO port output type register
-$48001c08 constant GPIOH_OSPEEDR  \ offset: 0x08 : GPIO port output speed register
-$48001c0c constant GPIOH_PUPDR    \ offset: 0x0C : GPIO port pull-up/pull-down register
-$48001c10 constant GPIOH_IDR      \ offset: 0x10 : GPIO port input data register
-$48001c14 constant GPIOH_ODR      \ offset: 0x14 : GPIO port output data register
-$48001c18 constant GPIOH_BSRR     \ offset: 0x18 : GPIO port bit set/reset register
-$48001c1c constant GPIOH_LCKR     \ offset: 0x1C : GPIO port configuration lock register
-$48001c20 constant GPIOH_AFRL     \ offset: 0x20 : GPIO alternate function low register
-$48001c24 constant GPIOH_AFRH     \ offset: 0x24 : GPIO alternate function high register
-$48001c28 constant GPIOH_BRR      \ offset: 0x28 : GPIO port bit reset register
+  [ifdef] GPIOH_LCKR_DEF
+    \
+    \ @brief GPIO port configuration lock register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $03 constant GPIOH_LCK3                     \ [0x03] Port x lock bit y (y= 0..15)
+    $10 constant GPIOH_LCKK                     \ [0x10] Port x lock bit y (y= 0..15)
+  [then]
 
+
+  [ifdef] GPIOH_AFRL_DEF
+    \
+    \ @brief GPIO alternate function low register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $0c constant GPIOH_AFRL3                    \ [0x0c : 4] Alternate function selection for port x bit y (y = 0..7)
+  [then]
+
+
+  [ifdef] GPIOH_AFRH_DEF
+    \
+    \ @brief GPIO alternate function high register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOH_AFRH8                    \ [0x00 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $04 constant GPIOH_AFRH9                    \ [0x04 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $08 constant GPIOH_AFRH10                   \ [0x08 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $0c constant GPIOH_AFRH11                   \ [0x0c : 4] Alternate function selection for port x bit y (y = 8..15)
+    $10 constant GPIOH_AFRH12                   \ [0x10 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $14 constant GPIOH_AFRH13                   \ [0x14 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $18 constant GPIOH_AFRH14                   \ [0x18 : 4] Alternate function selection for port x bit y (y = 8..15)
+    $1c constant GPIOH_AFRH15                   \ [0x1c : 4] Alternate function selection for port x bit y (y = 8..15)
+  [then]
+
+
+  [ifdef] GPIOH_BRR_DEF
+    \
+    \ @brief GPIO port bit reset register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $03 constant GPIOH_BR3                      \ [0x03] Port Reset bit
+  [then]
+
+  \
+  \ @brief General-purpose I/Os
+  \
+  $00 constant GPIOH_MODER              \ GPIO port mode register
+  $04 constant GPIOH_OTYPER             \ GPIO port output type register
+  $08 constant GPIOH_OSPEEDR            \ GPIO port output speed register
+  $0C constant GPIOH_PUPDR              \ GPIO port pull-up/pull-down register
+  $10 constant GPIOH_IDR                \ GPIO port input data register
+  $14 constant GPIOH_ODR                \ GPIO port output data register
+  $18 constant GPIOH_BSRR               \ GPIO port bit set/reset register
+  $1C constant GPIOH_LCKR               \ GPIO port configuration lock register
+  $20 constant GPIOH_AFRL               \ GPIO alternate function low register
+  $24 constant GPIOH_AFRH               \ GPIO alternate function high register
+  $28 constant GPIOH_BRR                \ GPIO port bit reset register
+
+: GPIOH_DEF ; [then]

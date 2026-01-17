@@ -6,96 +6,104 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM6_DEF
 
-\
-\ @brief TIM6 control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM6_TIM6_CR1_CEN                                \ CEN
-$00000002 constant TIM6_TIM6_CR1_UDIS                               \ UDIS
-$00000004 constant TIM6_TIM6_CR1_URS                                \ URS
-$00000008 constant TIM6_TIM6_CR1_OPM                                \ OPM
-$00000080 constant TIM6_TIM6_CR1_ARPE                               \ ARPE
-$00000800 constant TIM6_TIM6_CR1_UIFREMAP                           \ UIFREMAP
-
-
-\
-\ @brief TIM6 control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000070 constant TIM6_TIM6_CR2_MMS                                \ MMS
+  [ifdef] TIM6_TIM6_CR1_DEF
+    \
+    \ @brief TIM6 control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM6_CEN                       \ [0x00] CEN
+    $01 constant TIM6_UDIS                      \ [0x01] UDIS
+    $02 constant TIM6_URS                       \ [0x02] URS
+    $03 constant TIM6_OPM                       \ [0x03] OPM
+    $07 constant TIM6_ARPE                      \ [0x07] ARPE
+    $0b constant TIM6_UIFREMAP                  \ [0x0b] UIFREMAP
+  [then]
 
 
-\
-\ @brief TIM6 DMA/interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM6_TIM6_DIER_UIE                               \ UIE
-$00000100 constant TIM6_TIM6_DIER_UDE                               \ UDE
-
-
-\
-\ @brief TIM6 status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM6_TIM6_SR_UIF                                 \ UIF
+  [ifdef] TIM6_TIM6_CR2_DEF
+    \
+    \ @brief TIM6 control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $04 constant TIM6_MMS                       \ [0x04 : 3] MMS
+  [then]
 
 
-\
-\ @brief TIM6 event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM6_TIM6_EGR_UG                                 \ UG
-
-
-\
-\ @brief TIM6 counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM6_TIM6_CNT_CNT                                \ CNT
-$80000000 constant TIM6_TIM6_CNT_UIFCPY                             \ UIFCPY
+  [ifdef] TIM6_TIM6_DIER_DEF
+    \
+    \ @brief TIM6 DMA/interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM6_UIE                       \ [0x00] UIE
+    $08 constant TIM6_UDE                       \ [0x08] UDE
+  [then]
 
 
-\
-\ @brief TIM6 prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM6_TIM6_PSC_PSC                                \ PSC
-
-
-\
-\ @brief TIM6 auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x0000FFFF
-\
-
-$0000ffff constant TIM6_TIM6_ARR_ARR                                \ ARR
+  [ifdef] TIM6_TIM6_SR_DEF
+    \
+    \ @brief TIM6 status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM6_UIF                       \ [0x00] UIF
+  [then]
 
 
-\
-\ @brief TIM6
-\
-$40004000 constant TIM6_TIM6_CR1  \ offset: 0x00 : TIM6 control register 1
-$40004004 constant TIM6_TIM6_CR2  \ offset: 0x04 : TIM6 control register 2
-$4000400c constant TIM6_TIM6_DIER  \ offset: 0x0C : TIM6 DMA/interrupt enable register
-$40004010 constant TIM6_TIM6_SR   \ offset: 0x10 : TIM6 status register
-$40004014 constant TIM6_TIM6_EGR  \ offset: 0x14 : TIM6 event generation register
-$40004024 constant TIM6_TIM6_CNT  \ offset: 0x24 : TIM6 counter
-$40004028 constant TIM6_TIM6_PSC  \ offset: 0x28 : TIM6 prescaler
-$4000402c constant TIM6_TIM6_ARR  \ offset: 0x2C : TIM6 auto-reload register
+  [ifdef] TIM6_TIM6_EGR_DEF
+    \
+    \ @brief TIM6 event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM6_UG                        \ [0x00] UG
+  [then]
 
+
+  [ifdef] TIM6_TIM6_CNT_DEF
+    \
+    \ @brief TIM6 counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM6_CNT                       \ [0x00 : 16] CNT
+    $1f constant TIM6_UIFCPY                    \ [0x1f] UIFCPY
+  [then]
+
+
+  [ifdef] TIM6_TIM6_PSC_DEF
+    \
+    \ @brief TIM6 prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM6_PSC                       \ [0x00 : 16] PSC
+  [then]
+
+
+  [ifdef] TIM6_TIM6_ARR_DEF
+    \
+    \ @brief TIM6 auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant TIM6_ARR                       \ [0x00 : 16] ARR
+  [then]
+
+  \
+  \ @brief TIM6
+  \
+  $00 constant TIM6_TIM6_CR1            \ TIM6 control register 1
+  $04 constant TIM6_TIM6_CR2            \ TIM6 control register 2
+  $0C constant TIM6_TIM6_DIER           \ TIM6 DMA/interrupt enable register
+  $10 constant TIM6_TIM6_SR             \ TIM6 status register
+  $14 constant TIM6_TIM6_EGR            \ TIM6 event generation register
+  $24 constant TIM6_TIM6_CNT            \ TIM6 counter
+  $28 constant TIM6_TIM6_PSC            \ TIM6 prescaler
+  $2C constant TIM6_TIM6_ARR            \ TIM6 auto-reload register
+
+: TIM6_DEF ; [then]

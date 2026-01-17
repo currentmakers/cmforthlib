@@ -1,72 +1,68 @@
 \
-\ @file stm32wb06.h
-\ @brief Loader for all peripherals in a STM32WB06
+\ @file stm32wb06.fload
+\ @brief Device header for STM32WB06
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-compiletoram
-.include adc.fs
-.include crc.fs
-.include dma.fs
-.include dmamux.fs
-.include gpioa.fs
-.include i2c1.fs
-.include rcc.fs
-.include spi3.fs
-.include usart.fs
-.include blue.fs
-.include globalstatmach.fs
-.include radio_control.fs
-.include radio.fs
-.include rrm.fs
-.include wakeup.fs
-.include flash_ctrl.fs
-.include rng.fs
-.include pwrc.fs
-.include pka.fs
-.include gpiob.fs
-.include lpuart.fs
-.include spi2.fs
-.include spi1.fs
-.include i2c2.fs
-.include rtc.fs
-.include iwdg.fs
-.include tim1.fs
-.include system_ctrl.fs
+[ifndef] STM32WB06_LOADER
+  .include "adc.fs"
+  .include "crc.fs"
+  .include "dma.fs"
+  .include "dmamux.fs"
+  .include "gpioa.fs"
+  .include "i2c1.fs"
+  .include "rcc.fs"
+  .include "spi3.fs"
+  .include "usart.fs"
+  .include "blue.fs"
+  .include "globalstatmach.fs"
+  .include "radio_control.fs"
+  .include "radio.fs"
+  .include "rrm.fs"
+  .include "wakeup.fs"
+  .include "flash_ctrl.fs"
+  .include "rng.fs"
+  .include "pwrc.fs"
+  .include "pka.fs"
+  .include "gpiob.fs"
+  .include "lpuart.fs"
+  .include "spi2.fs"
+  .include "spi1.fs"
+  .include "i2c2.fs"
+  .include "rtc.fs"
+  .include "iwdg.fs"
+  .include "tim1.fs"
+  .include "system_ctrl.fs"
 
-decimal
+  $0x41006000 constant ADC              \ See adc.fs
+  $0x48200000 constant CRC              \ See crc.fs
+  $0x48700000 constant DMA              \ See dma.fs
+  $0x48800000 constant DMAMUX           \ See dmamux.fs
+  $0x48000000 constant GPIOA            \ See gpioa.fs
+  $0x41000000 constant I2C1             \ See i2c1.fs
+  $0x48400000 constant RCC              \ See rcc.fs
+  $0x41007000 constant SPI3             \ See spi3.fs
+  $0x41004000 constant USART            \ See usart.fs
+  $0x60000000 constant BLUE             \ See blue.fs
+  $0x200000C0 constant GLOBALSTATMACH   \ See globalstatmach.fs
+  $0x60001000 constant RADIO_CONTROL    \ See radio_control.fs
+  $0x60001500 constant RADIO            \ See radio.fs
+  $0x60001400 constant RRM              \ See rrm.fs
+  $0x60001800 constant WAKEUP           \ See wakeup.fs
+  $0x40001000 constant FLASH_CTRL       \ See flash_ctrl.fs
+  $0x48600000 constant RNG              \ See rng.fs
+  $0x48500000 constant PWRC             \ See pwrc.fs
+  $0x48300000 constant PKA              \ See pka.fs
+  $0x48100000 constant GPIOB            \ See gpiob.fs
+  $0x41005000 constant LPUART           \ See lpuart.fs
+  $0x41003000 constant SPI2             \ See spi2.fs
+  $0x41002000 constant SPI1             \ See spi1.fs
+  $0x41001000 constant I2C2             \ See i2c2.fs
+  $0x40004000 constant RTC              \ See rtc.fs
+  $0x40003000 constant IWDG             \ See iwdg.fs
+  $0x40002000 constant TIM1             \ See tim1.fs
+  $0x40000000 constant SYSTEM_CTRL      \ See system_ctrl.fs
 
-\ Peripheral Instance Definitions
-.include ADC                    \ ADC address block description
-.include CRC                    \ CRC address block description
-.include DMA                    \ DMA interrupt
-.include DMAMUX                 \ CxCR register
-.include GPIOA                  \ GPIOA address block description
-.include I2C1                   \ I2C address block description
-.include RCC                    \ Reset and Clock Controller
-.include SPI3                   \ SPI address block description
-.include USART                  \ USART address block description
-.include BLUE                   \ BLE Tx/Rx interrupt
-.include GLOBALSTATMACH         \ WORD0 register
-.include RADIO_CONTROL          \ RADIO_CONTROL_ID register
-.include RADIO                  \ RADIO Error interrupt
-.include RRM                    \ UDRA_CTRL0 register
-.include WAKEUP                 \ WAKEUP_OFFSET register
-.include FLASH_CTRL             \ 4kb addressable space
-.include RNG                    \ RNG_CR register
-.include PWRC                   \ CR1 register
-.include PKA                    \ PKA interrupt
-.include GPIOB                  \ GPIOB interrupt
-.include LPUART                 \ LPUART interrupt
-.include SPI2                   \ SPI2 interrupt
-.include SPI1                   \ SPI1 interrupt
-.include I2C2                   \ I2C2 interrupt
-.include RTC                    \ RTC interrupt
-.include IWDG                   \ IWDG_KR register
-.include TIM1                   \ TIM1 interrupt
-.include SYSTEM_CTRL            \ DIE_ID register
-
-compiletoram
-
+: STM32WB06_LOADER ; [then]

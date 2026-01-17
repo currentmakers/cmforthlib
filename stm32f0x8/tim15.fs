@@ -6,249 +6,267 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TIM15_DEF
 
-\
-\ @brief control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM15_CR1_CEN                                    \ Counter enable
-$00000002 constant TIM15_CR1_UDIS                                   \ Update disable
-$00000004 constant TIM15_CR1_URS                                    \ Update request source
-$00000008 constant TIM15_CR1_OPM                                    \ One-pulse mode
-$00000080 constant TIM15_CR1_ARPE                                   \ Auto-reload preload enable
-$00000300 constant TIM15_CR1_CKD                                    \ Clock division
-
-
-\
-\ @brief control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM15_CR2_CCPC                                   \ Capture/compare preloaded control
-$00000004 constant TIM15_CR2_CCUS                                   \ Capture/compare control update selection
-$00000008 constant TIM15_CR2_CCDS                                   \ Capture/compare DMA selection
-$00000070 constant TIM15_CR2_MMS                                    \ Master mode selection
-$00000100 constant TIM15_CR2_OIS1                                   \ Output Idle state 1
-$00000200 constant TIM15_CR2_OIS1N                                  \ Output Idle state 1
-$00000400 constant TIM15_CR2_OIS2                                   \ Output Idle state 2
+  [ifdef] TIM15_CR1_DEF
+    \
+    \ @brief control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_CEN                      \ [0x00] Counter enable
+    $01 constant TIM15_UDIS                     \ [0x01] Update disable
+    $02 constant TIM15_URS                      \ [0x02] Update request source
+    $03 constant TIM15_OPM                      \ [0x03] One-pulse mode
+    $07 constant TIM15_ARPE                     \ [0x07] Auto-reload preload enable
+    $08 constant TIM15_CKD                      \ [0x08 : 2] Clock division
+  [then]
 
 
-\
-\ @brief slave mode control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000007 constant TIM15_SMCR_SMS                                   \ Slave mode selection
-$00000070 constant TIM15_SMCR_TS                                    \ Trigger selection
-$00000080 constant TIM15_SMCR_MSM                                   \ Master/Slave mode
-
-
-\
-\ @brief DMA/Interrupt enable register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM15_DIER_UIE                                   \ Update interrupt enable
-$00000002 constant TIM15_DIER_CC1IE                                 \ Capture/Compare 1 interrupt enable
-$00000004 constant TIM15_DIER_CC2IE                                 \ Capture/Compare 2 interrupt enable
-$00000020 constant TIM15_DIER_COMIE                                 \ COM interrupt enable
-$00000040 constant TIM15_DIER_TIE                                   \ Trigger interrupt enable
-$00000080 constant TIM15_DIER_BIE                                   \ Break interrupt enable
-$00000100 constant TIM15_DIER_UDE                                   \ Update DMA request enable
-$00000200 constant TIM15_DIER_CC1DE                                 \ Capture/Compare 1 DMA request enable
-$00000400 constant TIM15_DIER_CC2DE                                 \ Capture/Compare 2 DMA request enable
-$00004000 constant TIM15_DIER_TDE                                   \ Trigger DMA request enable
+  [ifdef] TIM15_CR2_DEF
+    \
+    \ @brief control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_CCPC                     \ [0x00] Capture/compare preloaded control
+    $02 constant TIM15_CCUS                     \ [0x02] Capture/compare control update selection
+    $03 constant TIM15_CCDS                     \ [0x03] Capture/compare DMA selection
+    $04 constant TIM15_MMS                      \ [0x04 : 3] Master mode selection
+    $08 constant TIM15_OIS1                     \ [0x08] Output Idle state 1
+    $09 constant TIM15_OIS1N                    \ [0x09] Output Idle state 1
+    $0a constant TIM15_OIS2                     \ [0x0a] Output Idle state 2
+  [then]
 
 
-\
-\ @brief status register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM15_SR_UIF                                     \ Update interrupt flag
-$00000002 constant TIM15_SR_CC1IF                                   \ Capture/compare 1 interrupt flag
-$00000004 constant TIM15_SR_CC2IF                                   \ Capture/Compare 2 interrupt flag
-$00000020 constant TIM15_SR_COMIF                                   \ COM interrupt flag
-$00000040 constant TIM15_SR_TIF                                     \ Trigger interrupt flag
-$00000080 constant TIM15_SR_BIF                                     \ Break interrupt flag
-$00000200 constant TIM15_SR_CC1OF                                   \ Capture/Compare 1 overcapture flag
-$00000400 constant TIM15_SR_CC2OF                                   \ Capture/compare 2 overcapture flag
+  [ifdef] TIM15_SMCR_DEF
+    \
+    \ @brief slave mode control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_SMS                      \ [0x00 : 3] Slave mode selection
+    $04 constant TIM15_TS                       \ [0x04 : 3] Trigger selection
+    $07 constant TIM15_MSM                      \ [0x07] Master/Slave mode
+  [then]
 
 
-\
-\ @brief event generation register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM15_EGR_UG                                     \ Update generation
-$00000002 constant TIM15_EGR_CC1G                                   \ Capture/compare 1 generation
-$00000004 constant TIM15_EGR_CC2G                                   \ Capture/compare 2 generation
-$00000020 constant TIM15_EGR_COMG                                   \ Capture/Compare control update generation
-$00000040 constant TIM15_EGR_TG                                     \ Trigger generation
-$00000080 constant TIM15_EGR_BG                                     \ Break generation
-
-
-\
-\ @brief capture/compare mode register (output mode)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM15_CCMR1_OUTPUT_CC1S                          \ Capture/Compare 1 selection
-$00000004 constant TIM15_CCMR1_OUTPUT_OC1FE                         \ Output Compare 1 fast enable
-$00000008 constant TIM15_CCMR1_OUTPUT_OC1PE                         \ Output Compare 1 preload enable
-$00000070 constant TIM15_CCMR1_OUTPUT_OC1M                          \ Output Compare 1 mode
-$00000300 constant TIM15_CCMR1_OUTPUT_CC2S                          \ Capture/Compare 2 selection
-$00000400 constant TIM15_CCMR1_OUTPUT_OC2FE                         \ Output Compare 2 fast enable
-$00000800 constant TIM15_CCMR1_OUTPUT_OC2PE                         \ Output Compare 2 preload enable
-$00007000 constant TIM15_CCMR1_OUTPUT_OC2M                          \ Output Compare 2 mode
+  [ifdef] TIM15_DIER_DEF
+    \
+    \ @brief DMA/Interrupt enable register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_UIE                      \ [0x00] Update interrupt enable
+    $01 constant TIM15_CC1IE                    \ [0x01] Capture/Compare 1 interrupt enable
+    $02 constant TIM15_CC2IE                    \ [0x02] Capture/Compare 2 interrupt enable
+    $05 constant TIM15_COMIE                    \ [0x05] COM interrupt enable
+    $06 constant TIM15_TIE                      \ [0x06] Trigger interrupt enable
+    $07 constant TIM15_BIE                      \ [0x07] Break interrupt enable
+    $08 constant TIM15_UDE                      \ [0x08] Update DMA request enable
+    $09 constant TIM15_CC1DE                    \ [0x09] Capture/Compare 1 DMA request enable
+    $0a constant TIM15_CC2DE                    \ [0x0a] Capture/Compare 2 DMA request enable
+    $0e constant TIM15_TDE                      \ [0x0e] Trigger DMA request enable
+  [then]
 
 
-\
-\ @brief capture/compare mode register 1 (input mode)
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000003 constant TIM15_CCMR1_INPUT_CC1S                           \ Capture/Compare 1 selection
-$0000000c constant TIM15_CCMR1_INPUT_IC1PSC                         \ Input capture 1 prescaler
-$000000f0 constant TIM15_CCMR1_INPUT_IC1F                           \ Input capture 1 filter
-$00000300 constant TIM15_CCMR1_INPUT_CC2S                           \ Capture/Compare 2 selection
-$00000c00 constant TIM15_CCMR1_INPUT_IC2PSC                         \ Input capture 2 prescaler
-$0000f000 constant TIM15_CCMR1_INPUT_IC2F                           \ Input capture 2 filter
-
-
-\
-\ @brief capture/compare enable register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TIM15_CCER_CC1E                                  \ Capture/Compare 1 output enable
-$00000002 constant TIM15_CCER_CC1P                                  \ Capture/Compare 1 output Polarity
-$00000004 constant TIM15_CCER_CC1NE                                 \ Capture/Compare 1 complementary output enable
-$00000008 constant TIM15_CCER_CC1NP                                 \ Capture/Compare 1 output Polarity
-$00000010 constant TIM15_CCER_CC2E                                  \ Capture/Compare 2 output enable
-$00000020 constant TIM15_CCER_CC2P                                  \ Capture/Compare 2 output Polarity
-$00000080 constant TIM15_CCER_CC2NP                                 \ Capture/Compare 2 output Polarity
+  [ifdef] TIM15_SR_DEF
+    \
+    \ @brief status register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_UIF                      \ [0x00] Update interrupt flag
+    $01 constant TIM15_CC1IF                    \ [0x01] Capture/compare 1 interrupt flag
+    $02 constant TIM15_CC2IF                    \ [0x02] Capture/Compare 2 interrupt flag
+    $05 constant TIM15_COMIF                    \ [0x05] COM interrupt flag
+    $06 constant TIM15_TIF                      \ [0x06] Trigger interrupt flag
+    $07 constant TIM15_BIF                      \ [0x07] Break interrupt flag
+    $09 constant TIM15_CC1OF                    \ [0x09] Capture/Compare 1 overcapture flag
+    $0a constant TIM15_CC2OF                    \ [0x0a] Capture/compare 2 overcapture flag
+  [then]
 
 
-\
-\ @brief counter
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM15_CNT_CNT                                    \ counter value
-
-
-\
-\ @brief prescaler
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM15_PSC_PSC                                    \ Prescaler value
+  [ifdef] TIM15_EGR_DEF
+    \
+    \ @brief event generation register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_UG                       \ [0x00] Update generation
+    $01 constant TIM15_CC1G                     \ [0x01] Capture/compare 1 generation
+    $02 constant TIM15_CC2G                     \ [0x02] Capture/compare 2 generation
+    $05 constant TIM15_COMG                     \ [0x05] Capture/Compare control update generation
+    $06 constant TIM15_TG                       \ [0x06] Trigger generation
+    $07 constant TIM15_BG                       \ [0x07] Break generation
+  [then]
 
 
-\
-\ @brief auto-reload register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM15_ARR_ARR                                    \ Auto-reload value
-
-
-\
-\ @brief repetition counter register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$000000ff constant TIM15_RCR_REP                                    \ Repetition counter value
-
-
-\
-\ @brief capture/compare register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM15_CCR1_CCR1                                  \ Capture/Compare 1 value
+  [ifdef] TIM15_CCMR1_Output_DEF
+    \
+    \ @brief capture/compare mode register (output mode)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM15_OC1FE                    \ [0x02] Output Compare 1 fast enable
+    $03 constant TIM15_OC1PE                    \ [0x03] Output Compare 1 preload enable
+    $04 constant TIM15_OC1M                     \ [0x04 : 3] Output Compare 1 mode
+    $08 constant TIM15_CC2S                     \ [0x08 : 2] Capture/Compare 2 selection
+    $0a constant TIM15_OC2FE                    \ [0x0a] Output Compare 2 fast enable
+    $0b constant TIM15_OC2PE                    \ [0x0b] Output Compare 2 preload enable
+    $0c constant TIM15_OC2M                     \ [0x0c : 3] Output Compare 2 mode
+  [then]
 
 
-\
-\ @brief capture/compare register 2
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM15_CCR2_CCR2                                  \ Capture/Compare 2 value
-
-
-\
-\ @brief break and dead-time register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$000000ff constant TIM15_BDTR_DTG                                   \ Dead-time generator setup
-$00000300 constant TIM15_BDTR_LOCK                                  \ Lock configuration
-$00000400 constant TIM15_BDTR_OSSI                                  \ Off-state selection for Idle mode
-$00000800 constant TIM15_BDTR_OSSR                                  \ Off-state selection for Run mode
-$00001000 constant TIM15_BDTR_BKE                                   \ Break enable
-$00002000 constant TIM15_BDTR_BKP                                   \ Break polarity
-$00004000 constant TIM15_BDTR_AOE                                   \ Automatic output enable
-$00008000 constant TIM15_BDTR_MOE                                   \ Main output enable
+  [ifdef] TIM15_CCMR1_Input_DEF
+    \
+    \ @brief capture/compare mode register 1 (input mode)
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_CC1S                     \ [0x00 : 2] Capture/Compare 1 selection
+    $02 constant TIM15_IC1PSC                   \ [0x02 : 2] Input capture 1 prescaler
+    $04 constant TIM15_IC1F                     \ [0x04 : 4] Input capture 1 filter
+    $08 constant TIM15_CC2S                     \ [0x08 : 2] Capture/Compare 2 selection
+    $0a constant TIM15_IC2PSC                   \ [0x0a : 2] Input capture 2 prescaler
+    $0c constant TIM15_IC2F                     \ [0x0c : 4] Input capture 2 filter
+  [then]
 
 
-\
-\ @brief DMA control register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0000001f constant TIM15_DCR_DBA                                    \ DMA base address
-$00001f00 constant TIM15_DCR_DBL                                    \ DMA burst length
-
-
-\
-\ @brief DMA address for full transfer
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant TIM15_DMAR_DMAB                                  \ DMA register for burst accesses
+  [ifdef] TIM15_CCER_DEF
+    \
+    \ @brief capture/compare enable register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_CC1E                     \ [0x00] Capture/Compare 1 output enable
+    $01 constant TIM15_CC1P                     \ [0x01] Capture/Compare 1 output Polarity
+    $02 constant TIM15_CC1NE                    \ [0x02] Capture/Compare 1 complementary output enable
+    $03 constant TIM15_CC1NP                    \ [0x03] Capture/Compare 1 output Polarity
+    $04 constant TIM15_CC2E                     \ [0x04] Capture/Compare 2 output enable
+    $05 constant TIM15_CC2P                     \ [0x05] Capture/Compare 2 output Polarity
+    $07 constant TIM15_CC2NP                    \ [0x07] Capture/Compare 2 output Polarity
+  [then]
 
 
-\
-\ @brief General-purpose-timers
-\
-$40014000 constant TIM15_CR1      \ offset: 0x00 : control register 1
-$40014004 constant TIM15_CR2      \ offset: 0x04 : control register 2
-$40014008 constant TIM15_SMCR     \ offset: 0x08 : slave mode control register
-$4001400c constant TIM15_DIER     \ offset: 0x0C : DMA/Interrupt enable register
-$40014010 constant TIM15_SR       \ offset: 0x10 : status register
-$40014014 constant TIM15_EGR      \ offset: 0x14 : event generation register
-$40014018 constant TIM15_CCMR1_OUTPUT  \ offset: 0x18 : capture/compare mode register (output mode)
-$40014018 constant TIM15_CCMR1_INPUT  \ offset: 0x18 : capture/compare mode register 1 (input mode)
-$40014020 constant TIM15_CCER     \ offset: 0x20 : capture/compare enable register
-$40014024 constant TIM15_CNT      \ offset: 0x24 : counter
-$40014028 constant TIM15_PSC      \ offset: 0x28 : prescaler
-$4001402c constant TIM15_ARR      \ offset: 0x2C : auto-reload register
-$40014030 constant TIM15_RCR      \ offset: 0x30 : repetition counter register
-$40014034 constant TIM15_CCR1     \ offset: 0x34 : capture/compare register 1
-$40014038 constant TIM15_CCR2     \ offset: 0x38 : capture/compare register 2
-$40014044 constant TIM15_BDTR     \ offset: 0x44 : break and dead-time register
-$40014048 constant TIM15_DCR      \ offset: 0x48 : DMA control register
-$4001404c constant TIM15_DMAR     \ offset: 0x4C : DMA address for full transfer
+  [ifdef] TIM15_CNT_DEF
+    \
+    \ @brief counter
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_CNT                      \ [0x00 : 16] counter value
+  [then]
 
+
+  [ifdef] TIM15_PSC_DEF
+    \
+    \ @brief prescaler
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_PSC                      \ [0x00 : 16] Prescaler value
+  [then]
+
+
+  [ifdef] TIM15_ARR_DEF
+    \
+    \ @brief auto-reload register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_ARR                      \ [0x00 : 16] Auto-reload value
+  [then]
+
+
+  [ifdef] TIM15_RCR_DEF
+    \
+    \ @brief repetition counter register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_REP                      \ [0x00 : 8] Repetition counter value
+  [then]
+
+
+  [ifdef] TIM15_CCR1_DEF
+    \
+    \ @brief capture/compare register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_CCR1                     \ [0x00 : 16] Capture/Compare 1 value
+  [then]
+
+
+  [ifdef] TIM15_CCR2_DEF
+    \
+    \ @brief capture/compare register 2
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_CCR2                     \ [0x00 : 16] Capture/Compare 2 value
+  [then]
+
+
+  [ifdef] TIM15_BDTR_DEF
+    \
+    \ @brief break and dead-time register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_DTG                      \ [0x00 : 8] Dead-time generator setup
+    $08 constant TIM15_LOCK                     \ [0x08 : 2] Lock configuration
+    $0a constant TIM15_OSSI                     \ [0x0a] Off-state selection for Idle mode
+    $0b constant TIM15_OSSR                     \ [0x0b] Off-state selection for Run mode
+    $0c constant TIM15_BKE                      \ [0x0c] Break enable
+    $0d constant TIM15_BKP                      \ [0x0d] Break polarity
+    $0e constant TIM15_AOE                      \ [0x0e] Automatic output enable
+    $0f constant TIM15_MOE                      \ [0x0f] Main output enable
+  [then]
+
+
+  [ifdef] TIM15_DCR_DEF
+    \
+    \ @brief DMA control register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_DBA                      \ [0x00 : 5] DMA base address
+    $08 constant TIM15_DBL                      \ [0x08 : 5] DMA burst length
+  [then]
+
+
+  [ifdef] TIM15_DMAR_DEF
+    \
+    \ @brief DMA address for full transfer
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant TIM15_DMAB                     \ [0x00 : 16] DMA register for burst accesses
+  [then]
+
+  \
+  \ @brief General-purpose-timers
+  \
+  $00 constant TIM15_CR1                \ control register 1
+  $04 constant TIM15_CR2                \ control register 2
+  $08 constant TIM15_SMCR               \ slave mode control register
+  $0C constant TIM15_DIER               \ DMA/Interrupt enable register
+  $10 constant TIM15_SR                 \ status register
+  $14 constant TIM15_EGR                \ event generation register
+  $18 constant TIM15_CCMR1_OUTPUT       \ capture/compare mode register (output mode)
+  $18 constant TIM15_CCMR1_INPUT        \ capture/compare mode register 1 (input mode)
+  $20 constant TIM15_CCER               \ capture/compare enable register
+  $24 constant TIM15_CNT                \ counter
+  $28 constant TIM15_PSC                \ prescaler
+  $2C constant TIM15_ARR                \ auto-reload register
+  $30 constant TIM15_RCR                \ repetition counter register
+  $34 constant TIM15_CCR1               \ capture/compare register 1
+  $38 constant TIM15_CCR2               \ capture/compare register 2
+  $44 constant TIM15_BDTR               \ break and dead-time register
+  $48 constant TIM15_DCR                \ DMA control register
+  $4C constant TIM15_DMAR               \ DMA address for full transfer
+
+: TIM15_DEF ; [then]

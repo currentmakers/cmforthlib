@@ -6,176 +6,187 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ADC_DEF
 
-\
-\ @brief interrupt and status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_ISR_ADRDY                                    \ ADC ready
-$00000002 constant ADC_ISR_EOSMP                                    \ End of sampling flag
-$00000004 constant ADC_ISR_EOC                                      \ End of conversion flag
-$00000008 constant ADC_ISR_EOS                                      \ End of sequence flag
-$00000010 constant ADC_ISR_OVR                                      \ ADC overrun
-$00000080 constant ADC_ISR_AWD                                      \ Analog watchdog flag
-$00000800 constant ADC_ISR_EOCAL                                    \ End Of Calibration flag
-
-
-\
-\ @brief interrupt enable register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_IER_ADRDYIE                                  \ ADC ready interrupt enable
-$00000002 constant ADC_IER_EOSMPIE                                  \ End of sampling flag interrupt enable
-$00000004 constant ADC_IER_EOCIE                                    \ End of conversion interrupt enable
-$00000008 constant ADC_IER_EOSIE                                    \ End of conversion sequence interrupt enable
-$00000010 constant ADC_IER_OVRIE                                    \ Overrun interrupt enable
-$00000080 constant ADC_IER_AWDIE                                    \ Analog watchdog interrupt enable
-$00000800 constant ADC_IER_EOCALIE                                  \ End of calibration interrupt enable
+  [ifdef] ADC_ISR_DEF
+    \
+    \ @brief interrupt and status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_ADRDY                      \ [0x00] ADC ready
+    $01 constant ADC_EOSMP                      \ [0x01] End of sampling flag
+    $02 constant ADC_EOC                        \ [0x02] End of conversion flag
+    $03 constant ADC_EOS                        \ [0x03] End of sequence flag
+    $04 constant ADC_OVR                        \ [0x04] ADC overrun
+    $07 constant ADC_AWD                        \ [0x07] Analog watchdog flag
+    $0b constant ADC_EOCAL                      \ [0x0b] End Of Calibration flag
+  [then]
 
 
-\
-\ @brief control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CR_ADEN                                      \ ADC enable command
-$00000002 constant ADC_CR_ADDIS                                     \ ADC disable command
-$00000004 constant ADC_CR_ADSTART                                   \ ADC start conversion command
-$00000010 constant ADC_CR_ADSTP                                     \ ADC stop conversion command
-$10000000 constant ADC_CR_ADVREGEN                                  \ ADC Voltage Regulator Enable
-$80000000 constant ADC_CR_ADCAL                                     \ ADC calibration
-
-
-\
-\ @brief configuration register 1
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CFGR1_DMAEN                                  \ Direct memory access enable
-$00000002 constant ADC_CFGR1_DMACFG                                 \ Direct memery access configuration
-$00000004 constant ADC_CFGR1_SCANDIR                                \ Scan sequence direction
-$00000018 constant ADC_CFGR1_RES                                    \ Data resolution
-$00000020 constant ADC_CFGR1_ALIGN                                  \ Data alignment
-$000001c0 constant ADC_CFGR1_EXTSEL                                 \ External trigger selection
-$00000c00 constant ADC_CFGR1_EXTEN                                  \ External trigger enable and polarity selection
-$00001000 constant ADC_CFGR1_OVRMOD                                 \ Overrun management mode
-$00002000 constant ADC_CFGR1_CONT                                   \ Single / continuous conversion mode
-$00004000 constant ADC_CFGR1_AUTDLY                                 \ Auto-delayed conversion mode
-$00008000 constant ADC_CFGR1_AUTOFF                                 \ Auto-off mode
-$00010000 constant ADC_CFGR1_DISCEN                                 \ Discontinuous mode
-$00400000 constant ADC_CFGR1_AWDSGL                                 \ Enable the watchdog on a single channel or on all channels
-$00800000 constant ADC_CFGR1_AWDEN                                  \ Analog watchdog enable
-$7c000000 constant ADC_CFGR1_AWDCH                                  \ Analog watchdog channel selection
+  [ifdef] ADC_IER_DEF
+    \
+    \ @brief interrupt enable register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_ADRDYIE                    \ [0x00] ADC ready interrupt enable
+    $01 constant ADC_EOSMPIE                    \ [0x01] End of sampling flag interrupt enable
+    $02 constant ADC_EOCIE                      \ [0x02] End of conversion interrupt enable
+    $03 constant ADC_EOSIE                      \ [0x03] End of conversion sequence interrupt enable
+    $04 constant ADC_OVRIE                      \ [0x04] Overrun interrupt enable
+    $07 constant ADC_AWDIE                      \ [0x07] Analog watchdog interrupt enable
+    $0b constant ADC_EOCALIE                    \ [0x0b] End of calibration interrupt enable
+  [then]
 
 
-\
-\ @brief configuration register 2
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CFGR2_OVSE                                   \ Oversampler Enable
-$0000001c constant ADC_CFGR2_OVSR                                   \ Oversampling ratio
-$000001e0 constant ADC_CFGR2_OVSS                                   \ Oversampling shift
-$00000200 constant ADC_CFGR2_TOVS                                   \ Triggered Oversampling
-$c0000000 constant ADC_CFGR2_CKMODE                                 \ ADC clock mode
-
-
-\
-\ @brief sampling time register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000007 constant ADC_SMPR_SMPR                                    \ Sampling time selection
+  [ifdef] ADC_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_ADEN                       \ [0x00] ADC enable command
+    $01 constant ADC_ADDIS                      \ [0x01] ADC disable command
+    $02 constant ADC_ADSTART                    \ [0x02] ADC start conversion command
+    $04 constant ADC_ADSTP                      \ [0x04] ADC stop conversion command
+    $1c constant ADC_ADVREGEN                   \ [0x1c] ADC Voltage Regulator Enable
+    $1f constant ADC_ADCAL                      \ [0x1f] ADC calibration
+  [then]
 
 
-\
-\ @brief watchdog threshold register
-\ Address offset: 0x20
-\ Reset value: 0x0FFF0000
-\
-
-$00000fff constant ADC_TR_LT                                        \ Analog watchdog lower threshold
-$0fff0000 constant ADC_TR_HT                                        \ Analog watchdog higher threshold
-
-
-\
-\ @brief channel selection register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_CHSELR_CHSEL0                                \ Channel-x selection
-$00000002 constant ADC_CHSELR_CHSEL1                                \ Channel-x selection
-$00000004 constant ADC_CHSELR_CHSEL2                                \ Channel-x selection
-$00000008 constant ADC_CHSELR_CHSEL3                                \ Channel-x selection
-$00000010 constant ADC_CHSELR_CHSEL4                                \ Channel-x selection
-$00000020 constant ADC_CHSELR_CHSEL5                                \ Channel-x selection
-$00000040 constant ADC_CHSELR_CHSEL6                                \ Channel-x selection
-$00000080 constant ADC_CHSELR_CHSEL7                                \ Channel-x selection
-$00000100 constant ADC_CHSELR_CHSEL8                                \ Channel-x selection
-$00000200 constant ADC_CHSELR_CHSEL9                                \ Channel-x selection
-$00000400 constant ADC_CHSELR_CHSEL10                               \ Channel-x selection
-$00000800 constant ADC_CHSELR_CHSEL11                               \ Channel-x selection
-$00001000 constant ADC_CHSELR_CHSEL12                               \ Channel-x selection
-$00002000 constant ADC_CHSELR_CHSEL13                               \ Channel-x selection
-$00004000 constant ADC_CHSELR_CHSEL14                               \ Channel-x selection
-$00008000 constant ADC_CHSELR_CHSEL15                               \ Channel-x selection
-$00010000 constant ADC_CHSELR_CHSEL16                               \ Channel-x selection
-$00020000 constant ADC_CHSELR_CHSEL17                               \ Channel-x selection
-$00040000 constant ADC_CHSELR_CHSEL18                               \ Channel-x selection
+  [ifdef] ADC_CFGR1_DEF
+    \
+    \ @brief configuration register 1
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_DMAEN                      \ [0x00] Direct memory access enable
+    $01 constant ADC_DMACFG                     \ [0x01] Direct memery access configuration
+    $02 constant ADC_SCANDIR                    \ [0x02] Scan sequence direction
+    $03 constant ADC_RES                        \ [0x03 : 2] Data resolution
+    $05 constant ADC_ALIGN                      \ [0x05] Data alignment
+    $06 constant ADC_EXTSEL                     \ [0x06 : 3] External trigger selection
+    $0a constant ADC_EXTEN                      \ [0x0a : 2] External trigger enable and polarity selection
+    $0c constant ADC_OVRMOD                     \ [0x0c] Overrun management mode
+    $0d constant ADC_CONT                       \ [0x0d] Single / continuous conversion mode
+    $0e constant ADC_AUTDLY                     \ [0x0e] Auto-delayed conversion mode
+    $0f constant ADC_AUTOFF                     \ [0x0f] Auto-off mode
+    $10 constant ADC_DISCEN                     \ [0x10] Discontinuous mode
+    $16 constant ADC_AWDSGL                     \ [0x16] Enable the watchdog on a single channel or on all channels
+    $17 constant ADC_AWDEN                      \ [0x17] Analog watchdog enable
+    $1a constant ADC_AWDCH                      \ [0x1a : 5] Analog watchdog channel selection
+  [then]
 
 
-\
-\ @brief data register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC_DR_DATA                                      \ Converted data
-
-
-\
-\ @brief ADC Calibration factor
-\ Address offset: 0xB4
-\ Reset value: 0x00000000
-\
-
-$0000007f constant ADC_CALFACT_CALFACT                              \ Calibration factor
+  [ifdef] ADC_CFGR2_DEF
+    \
+    \ @brief configuration register 2
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_OVSE                       \ [0x00] Oversampler Enable
+    $02 constant ADC_OVSR                       \ [0x02 : 3] Oversampling ratio
+    $05 constant ADC_OVSS                       \ [0x05 : 4] Oversampling shift
+    $09 constant ADC_TOVS                       \ [0x09] Triggered Oversampling
+    $1e constant ADC_CKMODE                     \ [0x1e : 2] ADC clock mode
+  [then]
 
 
-\
-\ @brief ADC common configuration register
-\ Address offset: 0x308
-\ Reset value: 0x00000000
-\
-
-$003c0000 constant ADC_CCR_PRESC                                    \ ADC prescaler
-$00400000 constant ADC_CCR_VREFEN                                   \ VREFINT enable
-$00800000 constant ADC_CCR_TSEN                                     \ Temperature sensor enable
-$02000000 constant ADC_CCR_LFMEN                                    \ Low Frequency Mode enable
+  [ifdef] ADC_SMPR_DEF
+    \
+    \ @brief sampling time register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_SMPR                       \ [0x00 : 3] Sampling time selection
+  [then]
 
 
-\
-\ @brief Analog-to-digital converter
-\
-$40012400 constant ADC_ISR        \ offset: 0x00 : interrupt and status register
-$40012404 constant ADC_IER        \ offset: 0x04 : interrupt enable register
-$40012408 constant ADC_CR         \ offset: 0x08 : control register
-$4001240c constant ADC_CFGR1      \ offset: 0x0C : configuration register 1
-$40012410 constant ADC_CFGR2      \ offset: 0x10 : configuration register 2
-$40012414 constant ADC_SMPR       \ offset: 0x14 : sampling time register
-$40012420 constant ADC_TR         \ offset: 0x20 : watchdog threshold register
-$40012428 constant ADC_CHSELR     \ offset: 0x28 : channel selection register
-$40012440 constant ADC_DR         \ offset: 0x40 : data register
-$400124b4 constant ADC_CALFACT    \ offset: 0xB4 : ADC Calibration factor
-$40012708 constant ADC_CCR        \ offset: 0x308 : ADC common configuration register
+  [ifdef] ADC_TR_DEF
+    \
+    \ @brief watchdog threshold register
+    \ Address offset: 0x20
+    \ Reset value: 0x0FFF0000
+    \
+    $00 constant ADC_LT                         \ [0x00 : 12] Analog watchdog lower threshold
+    $10 constant ADC_HT                         \ [0x10 : 12] Analog watchdog higher threshold
+  [then]
 
+
+  [ifdef] ADC_CHSELR_DEF
+    \
+    \ @brief channel selection register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_CHSEL0                     \ [0x00] Channel-x selection
+    $01 constant ADC_CHSEL1                     \ [0x01] Channel-x selection
+    $02 constant ADC_CHSEL2                     \ [0x02] Channel-x selection
+    $03 constant ADC_CHSEL3                     \ [0x03] Channel-x selection
+    $04 constant ADC_CHSEL4                     \ [0x04] Channel-x selection
+    $05 constant ADC_CHSEL5                     \ [0x05] Channel-x selection
+    $06 constant ADC_CHSEL6                     \ [0x06] Channel-x selection
+    $07 constant ADC_CHSEL7                     \ [0x07] Channel-x selection
+    $08 constant ADC_CHSEL8                     \ [0x08] Channel-x selection
+    $09 constant ADC_CHSEL9                     \ [0x09] Channel-x selection
+    $0a constant ADC_CHSEL10                    \ [0x0a] Channel-x selection
+    $0b constant ADC_CHSEL11                    \ [0x0b] Channel-x selection
+    $0c constant ADC_CHSEL12                    \ [0x0c] Channel-x selection
+    $0d constant ADC_CHSEL13                    \ [0x0d] Channel-x selection
+    $0e constant ADC_CHSEL14                    \ [0x0e] Channel-x selection
+    $0f constant ADC_CHSEL15                    \ [0x0f] Channel-x selection
+    $10 constant ADC_CHSEL16                    \ [0x10] Channel-x selection
+    $11 constant ADC_CHSEL17                    \ [0x11] Channel-x selection
+    $12 constant ADC_CHSEL18                    \ [0x12] Channel-x selection
+  [then]
+
+
+  [ifdef] ADC_DR_DEF
+    \
+    \ @brief data register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_DATA                       \ [0x00 : 16] Converted data
+  [then]
+
+
+  [ifdef] ADC_CALFACT_DEF
+    \
+    \ @brief ADC Calibration factor
+    \ Address offset: 0xB4
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_CALFACT                    \ [0x00 : 7] Calibration factor
+  [then]
+
+
+  [ifdef] ADC_CCR_DEF
+    \
+    \ @brief ADC common configuration register
+    \ Address offset: 0x308
+    \ Reset value: 0x00000000
+    \
+    $12 constant ADC_PRESC                      \ [0x12 : 4] ADC prescaler
+    $16 constant ADC_VREFEN                     \ [0x16] VREFINT enable
+    $17 constant ADC_TSEN                       \ [0x17] Temperature sensor enable
+    $19 constant ADC_LFMEN                      \ [0x19] Low Frequency Mode enable
+  [then]
+
+  \
+  \ @brief Analog-to-digital converter
+  \
+  $00 constant ADC_ISR                  \ interrupt and status register
+  $04 constant ADC_IER                  \ interrupt enable register
+  $08 constant ADC_CR                   \ control register
+  $0C constant ADC_CFGR1                \ configuration register 1
+  $10 constant ADC_CFGR2                \ configuration register 2
+  $14 constant ADC_SMPR                 \ sampling time register
+  $20 constant ADC_TR                   \ watchdog threshold register
+  $28 constant ADC_CHSELR               \ channel selection register
+  $40 constant ADC_DR                   \ data register
+  $B4 constant ADC_CALFACT              \ ADC Calibration factor
+  $308 constant ADC_CCR                 \ ADC common configuration register
+
+: ADC_DEF ; [then]

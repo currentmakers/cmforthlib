@@ -6,164 +6,176 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SYSCFG_DEF
 
-\
-\ @brief SYSCFG secure configuration register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_SECCFGR_SYSCFGSEC                         \ SYSCFG clock control security
-$00000002 constant SYSCFG_SECCFGR_CLASSBSEC                         \ CLASSBSEC
-$00000008 constant SYSCFG_SECCFGR_FPUSEC                            \ FPUSEC
-
-
-\
-\ @brief configuration register 1
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000100 constant SYSCFG_CFGR1_BOOSTEN                             \ I/O analog switch voltage booster enable
-$00000200 constant SYSCFG_CFGR1_ANASWVDD                            \ GPIO analog switch control voltage selection
-$00010000 constant SYSCFG_CFGR1_PB6_FMP                             \ PB6_FMP
-$00020000 constant SYSCFG_CFGR1_PB7_FMP                             \ PB7_FMP
-$00040000 constant SYSCFG_CFGR1_PB8_FMP                             \ PB8_FMP
-$00080000 constant SYSCFG_CFGR1_PB9_FMP                             \ PB9_FMP
-$03000000 constant SYSCFG_CFGR1_ENDCAP                              \ ENDCAP
+  [ifdef] SYSCFG_SECCFGR_DEF
+    \
+    \ @brief SYSCFG secure configuration register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_SYSCFGSEC               \ [0x00] SYSCFG clock control security
+    $01 constant SYSCFG_CLASSBSEC               \ [0x01] CLASSBSEC
+    $03 constant SYSCFG_FPUSEC                  \ [0x03] FPUSEC
+  [then]
 
 
-\
-\ @brief FPU interrupt mask register
-\ Address offset: 0x08
-\ Reset value: 0x0000001F
-\
-
-$0000003f constant SYSCFG_FPUIMR_FPU_IE                             \ Floating point unit interrupts enable bits
-
-
-\
-\ @brief SYSCFG CPU non-secure lock register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CNSLCKR_LOCKNSVTOR                        \ VTOR_NS register lock
-$00000002 constant SYSCFG_CNSLCKR_LOCKNSMPU                         \ Non-secure MPU registers lock
+  [ifdef] SYSCFG_CFGR1_DEF
+    \
+    \ @brief configuration register 1
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $08 constant SYSCFG_BOOSTEN                 \ [0x08] I/O analog switch voltage booster enable
+    $09 constant SYSCFG_ANASWVDD                \ [0x09] GPIO analog switch control voltage selection
+    $10 constant SYSCFG_PB6_FMP                 \ [0x10] PB6_FMP
+    $11 constant SYSCFG_PB7_FMP                 \ [0x11] PB7_FMP
+    $12 constant SYSCFG_PB8_FMP                 \ [0x12] PB8_FMP
+    $13 constant SYSCFG_PB9_FMP                 \ [0x13] PB9_FMP
+    $18 constant SYSCFG_ENDCAP                  \ [0x18 : 2] ENDCAP
+  [then]
 
 
-\
-\ @brief SYSCFG CPU secure lock register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CSLOCKR_LOCKSVTAIRCR                      \ LOCKSVTAIRCR
-$00000002 constant SYSCFG_CSLOCKR_LOCKSMPU                          \ LOCKSMPU
-$00000004 constant SYSCFG_CSLOCKR_LOCKSAU                           \ LOCKSAU
-
-
-\
-\ @brief configuration register 2
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CFGR2_CLL                                 \ LOCKUP (hardfault) output enable bit
-$00000002 constant SYSCFG_CFGR2_SPL                                 \ SRAM ECC lock bit
-$00000004 constant SYSCFG_CFGR2_PVDL                                \ PVD lock enable bit
-$00000008 constant SYSCFG_CFGR2_ECCL                                \ ECC Lock
+  [ifdef] SYSCFG_FPUIMR_DEF
+    \
+    \ @brief FPU interrupt mask register
+    \ Address offset: 0x08
+    \ Reset value: 0x0000001F
+    \
+    $00 constant SYSCFG_FPU_IE                  \ [0x00 : 6] Floating point unit interrupts enable bits
+  [then]
 
 
-\
-\ @brief memory erase status register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_MESR_MCLR                                 \ MCLR
-$00010000 constant SYSCFG_MESR_IPMEE                                \ IPMEE
-
-
-\
-\ @brief compensation cell control/status register
-\ Address offset: 0x1C
-\ Reset value: 0x0000000A
-\
-
-$00000001 constant SYSCFG_CCCSR_EN1                                 \ EN1
-$00000002 constant SYSCFG_CCCSR_CS1                                 \ CS1
-$00000004 constant SYSCFG_CCCSR_EN2                                 \ EN2
-$00000008 constant SYSCFG_CCCSR_CS2                                 \ CS2
-$00000010 constant SYSCFG_CCCSR_EN3                                 \ EN3
-$00000020 constant SYSCFG_CCCSR_CS3                                 \ CS3
-$00000100 constant SYSCFG_CCCSR_RDY1                                \ RDY1
-$00000200 constant SYSCFG_CCCSR_RDY2                                \ RDY2
-$00000400 constant SYSCFG_CCCSR_RDY3                                \ RDY3
+  [ifdef] SYSCFG_CNSLCKR_DEF
+    \
+    \ @brief SYSCFG CPU non-secure lock register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_LOCKNSVTOR              \ [0x00] VTOR_NS register lock
+    $01 constant SYSCFG_LOCKNSMPU               \ [0x01] Non-secure MPU registers lock
+  [then]
 
 
-\
-\ @brief compensation cell value register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SYSCFG_CCVR_NCV1                                 \ NCV1
-$000000f0 constant SYSCFG_CCVR_PCV1                                 \ PCV1
-$00000f00 constant SYSCFG_CCVR_NCV2                                 \ NCV2
-$0000f000 constant SYSCFG_CCVR_PCV2                                 \ PCV2
-$000f0000 constant SYSCFG_CCVR_NCV3                                 \ NCV3
-$00f00000 constant SYSCFG_CCVR_PCV3                                 \ PCV3
+  [ifdef] SYSCFG_CSLOCKR_DEF
+    \
+    \ @brief SYSCFG CPU secure lock register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_LOCKSVTAIRCR            \ [0x00] LOCKSVTAIRCR
+    $01 constant SYSCFG_LOCKSMPU                \ [0x01] LOCKSMPU
+    $02 constant SYSCFG_LOCKSAU                 \ [0x02] LOCKSAU
+  [then]
 
 
-\
-\ @brief compensation cell code register
-\ Address offset: 0x24
-\ Reset value: 0x00007878
-\
-
-$0000000f constant SYSCFG_CCCR_NCC1                                 \ NCC1
-$000000f0 constant SYSCFG_CCCR_PCC1                                 \ PCC1
-$00000f00 constant SYSCFG_CCCR_NCC2                                 \ NCC2
-$0000f000 constant SYSCFG_CCCR_PCC2                                 \ PCC2
-$000f0000 constant SYSCFG_CCCR_NCC3                                 \ NCC3
-$00f00000 constant SYSCFG_CCCR_PCC3                                 \ PCC3
-
-
-\
-\ @brief RSS command register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SYSCFG_RSSCMDR_RSSCMD                            \ RSS commands
+  [ifdef] SYSCFG_CFGR2_DEF
+    \
+    \ @brief configuration register 2
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_CLL                     \ [0x00] LOCKUP (hardfault) output enable bit
+    $01 constant SYSCFG_SPL                     \ [0x01] SRAM ECC lock bit
+    $02 constant SYSCFG_PVDL                    \ [0x02] PVD lock enable bit
+    $03 constant SYSCFG_ECCL                    \ [0x03] ECC Lock
+  [then]
 
 
-\
-\ @brief SYSCFG USB OTG_HS PHY register
-\ Address offset: 0x74
-\ Reset value: 0x00000000
-\
+  [ifdef] SYSCFG_MESR_DEF
+    \
+    \ @brief memory erase status register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_MCLR                    \ [0x00] MCLR
+    $10 constant SYSCFG_IPMEE                   \ [0x10] IPMEE
+  [then]
 
-$00000001 constant SYSCFG_OTGHSPHYCR_EN                             \ EN
-$00000002 constant SYSCFG_OTGHSPHYCR_PDCTRL                         \ PDCTRL
-$0000003c constant SYSCFG_OTGHSPHYCR_CLKSEL                         \ CLKSEL
+
+  [ifdef] SYSCFG_CCCSR_DEF
+    \
+    \ @brief compensation cell control/status register
+    \ Address offset: 0x1C
+    \ Reset value: 0x0000000A
+    \
+    $00 constant SYSCFG_EN1                     \ [0x00] EN1
+    $01 constant SYSCFG_CS1                     \ [0x01] CS1
+    $02 constant SYSCFG_EN2                     \ [0x02] EN2
+    $03 constant SYSCFG_CS2                     \ [0x03] CS2
+    $04 constant SYSCFG_EN3                     \ [0x04] EN3
+    $05 constant SYSCFG_CS3                     \ [0x05] CS3
+    $08 constant SYSCFG_RDY1                    \ [0x08] RDY1
+    $09 constant SYSCFG_RDY2                    \ [0x09] RDY2
+    $0a constant SYSCFG_RDY3                    \ [0x0a] RDY3
+  [then]
 
 
-\
-\ @brief System configuration controller
-\
-$46000400 constant SYSCFG_SECCFGR  \ offset: 0x00 : SYSCFG secure configuration register
-$46000404 constant SYSCFG_CFGR1   \ offset: 0x04 : configuration register 1
-$46000408 constant SYSCFG_FPUIMR  \ offset: 0x08 : FPU interrupt mask register
-$4600040c constant SYSCFG_CNSLCKR  \ offset: 0x0C : SYSCFG CPU non-secure lock register
-$46000410 constant SYSCFG_CSLOCKR  \ offset: 0x10 : SYSCFG CPU secure lock register
-$46000414 constant SYSCFG_CFGR2   \ offset: 0x14 : configuration register 2
-$46000418 constant SYSCFG_MESR    \ offset: 0x18 : memory erase status register
-$4600041c constant SYSCFG_CCCSR   \ offset: 0x1C : compensation cell control/status register
-$46000420 constant SYSCFG_CCVR    \ offset: 0x20 : compensation cell value register
-$46000424 constant SYSCFG_CCCR    \ offset: 0x24 : compensation cell code register
-$4600042c constant SYSCFG_RSSCMDR  \ offset: 0x2C : RSS command register
-$46000474 constant SYSCFG_OTGHSPHYCR  \ offset: 0x74 : SYSCFG USB OTG_HS PHY register
+  [ifdef] SYSCFG_CCVR_DEF
+    \
+    \ @brief compensation cell value register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_NCV1                    \ [0x00 : 4] NCV1
+    $04 constant SYSCFG_PCV1                    \ [0x04 : 4] PCV1
+    $08 constant SYSCFG_NCV2                    \ [0x08 : 4] NCV2
+    $0c constant SYSCFG_PCV2                    \ [0x0c : 4] PCV2
+    $10 constant SYSCFG_NCV3                    \ [0x10 : 4] NCV3
+    $14 constant SYSCFG_PCV3                    \ [0x14 : 4] PCV3
+  [then]
 
+
+  [ifdef] SYSCFG_CCCR_DEF
+    \
+    \ @brief compensation cell code register
+    \ Address offset: 0x24
+    \ Reset value: 0x00007878
+    \
+    $00 constant SYSCFG_NCC1                    \ [0x00 : 4] NCC1
+    $04 constant SYSCFG_PCC1                    \ [0x04 : 4] PCC1
+    $08 constant SYSCFG_NCC2                    \ [0x08 : 4] NCC2
+    $0c constant SYSCFG_PCC2                    \ [0x0c : 4] PCC2
+    $10 constant SYSCFG_NCC3                    \ [0x10 : 4] NCC3
+    $14 constant SYSCFG_PCC3                    \ [0x14 : 4] PCC3
+  [then]
+
+
+  [ifdef] SYSCFG_RSSCMDR_DEF
+    \
+    \ @brief RSS command register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_RSSCMD                  \ [0x00 : 16] RSS commands
+  [then]
+
+
+  [ifdef] SYSCFG_OTGHSPHYCR_DEF
+    \
+    \ @brief SYSCFG USB OTG_HS PHY register
+    \ Address offset: 0x74
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_EN                      \ [0x00] EN
+    $01 constant SYSCFG_PDCTRL                  \ [0x01] PDCTRL
+    $02 constant SYSCFG_CLKSEL                  \ [0x02 : 4] CLKSEL
+  [then]
+
+  \
+  \ @brief System configuration controller
+  \
+  $00 constant SYSCFG_SECCFGR           \ SYSCFG secure configuration register
+  $04 constant SYSCFG_CFGR1             \ configuration register 1
+  $08 constant SYSCFG_FPUIMR            \ FPU interrupt mask register
+  $0C constant SYSCFG_CNSLCKR           \ SYSCFG CPU non-secure lock register
+  $10 constant SYSCFG_CSLOCKR           \ SYSCFG CPU secure lock register
+  $14 constant SYSCFG_CFGR2             \ configuration register 2
+  $18 constant SYSCFG_MESR              \ memory erase status register
+  $1C constant SYSCFG_CCCSR             \ compensation cell control/status register
+  $20 constant SYSCFG_CCVR              \ compensation cell value register
+  $24 constant SYSCFG_CCCR              \ compensation cell code register
+  $2C constant SYSCFG_RSSCMDR           \ RSS command register
+  $74 constant SYSCFG_OTGHSPHYCR        \ SYSCFG USB OTG_HS PHY register
+
+: SYSCFG_DEF ; [then]

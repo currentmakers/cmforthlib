@@ -6,58 +6,61 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] OCTOSPII_O_MANAGER_DEF
 
-\
-\ @brief OctoSPI IO Manager Control Register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OCTOSPII_O_MANAGER_CR_MUXEN                      \ Multiplexed mode Enable
-$00ff0000 constant OCTOSPII_O_MANAGER_CR_REQ2ACK_TIME               \ REQ to ACK Time
-
-
-\
-\ @brief OctoSPI IO Manager Port 1 configuration register
-\ Address offset: 0x04
-\ Reset value: 0x03010111
-\
-
-$00000001 constant OCTOSPII_O_MANAGER_P1CR_CLKEN                    \ CLK/CLKn Enable for Port n
-$00000002 constant OCTOSPII_O_MANAGER_P1CR_CLKSRC                   \ CLK/CLKn Source for Port n
-$00000010 constant OCTOSPII_O_MANAGER_P1CR_DQSEN                    \ DQSEN
-$00000020 constant OCTOSPII_O_MANAGER_P1CR_DQSSRC                   \ DQSSRC
-$00000100 constant OCTOSPII_O_MANAGER_P1CR_NCSEN                    \ NCSEN
-$00000200 constant OCTOSPII_O_MANAGER_P1CR_NCSSRC                   \ NCSSRC
-$00010000 constant OCTOSPII_O_MANAGER_P1CR_IOLEN                    \ IOLEN
-$00060000 constant OCTOSPII_O_MANAGER_P1CR_IOLSRC                   \ IOLSRC
-$01000000 constant OCTOSPII_O_MANAGER_P1CR_IOHEN                    \ IOHEN
-$06000000 constant OCTOSPII_O_MANAGER_P1CR_IOHSRC                   \ IOHSRC
+  [ifdef] OCTOSPII_O_MANAGER_CR_DEF
+    \
+    \ @brief OctoSPI IO Manager Control Register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant OCTOSPII_O_MANAGER_MUXEN       \ [0x00] Multiplexed mode Enable
+    $10 constant OCTOSPII_O_MANAGER_REQ2ACK_TIME     \ [0x10 : 8] REQ to ACK Time
+  [then]
 
 
-\
-\ @brief OctoSPI IO Manager Port 2 configuration register
-\ Address offset: 0x08
-\ Reset value: 0x07050333
-\
+  [ifdef] OCTOSPII_O_MANAGER_P1CR_DEF
+    \
+    \ @brief OctoSPI IO Manager Port 1 configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x03010111
+    \
+    $00 constant OCTOSPII_O_MANAGER_CLKEN       \ [0x00] CLK/CLKn Enable for Port n
+    $01 constant OCTOSPII_O_MANAGER_CLKSRC      \ [0x01] CLK/CLKn Source for Port n
+    $04 constant OCTOSPII_O_MANAGER_DQSEN       \ [0x04] DQSEN
+    $05 constant OCTOSPII_O_MANAGER_DQSSRC      \ [0x05] DQSSRC
+    $08 constant OCTOSPII_O_MANAGER_NCSEN       \ [0x08] NCSEN
+    $09 constant OCTOSPII_O_MANAGER_NCSSRC      \ [0x09] NCSSRC
+    $10 constant OCTOSPII_O_MANAGER_IOLEN       \ [0x10] IOLEN
+    $11 constant OCTOSPII_O_MANAGER_IOLSRC      \ [0x11 : 2] IOLSRC
+    $18 constant OCTOSPII_O_MANAGER_IOHEN       \ [0x18] IOHEN
+    $19 constant OCTOSPII_O_MANAGER_IOHSRC      \ [0x19 : 2] IOHSRC
+  [then]
 
-$00000001 constant OCTOSPII_O_MANAGER_P2CR_CLKEN                    \ CLKEN
-$00000002 constant OCTOSPII_O_MANAGER_P2CR_CLKSRC                   \ CLKSRC
-$00000010 constant OCTOSPII_O_MANAGER_P2CR_DQSEN                    \ DQSEN
-$00000020 constant OCTOSPII_O_MANAGER_P2CR_DQSSRC                   \ DQSSRC
-$00000100 constant OCTOSPII_O_MANAGER_P2CR_NCSEN                    \ NCSEN
-$00000200 constant OCTOSPII_O_MANAGER_P2CR_NCSSRC                   \ NCSSRC
-$00010000 constant OCTOSPII_O_MANAGER_P2CR_IOLEN                    \ IOLEN
-$00060000 constant OCTOSPII_O_MANAGER_P2CR_IOLSRC                   \ IOLSRC
-$01000000 constant OCTOSPII_O_MANAGER_P2CR_IOHEN                    \ IOHEN
-$06000000 constant OCTOSPII_O_MANAGER_P2CR_IOHSRC                   \ IOHSRC
 
+  [ifdef] OCTOSPII_O_MANAGER_P2CR_DEF
+    \
+    \ @brief OctoSPI IO Manager Port 2 configuration register
+    \ Address offset: 0x08
+    \ Reset value: 0x07050333
+    \
+    $00 constant OCTOSPII_O_MANAGER_CLKEN       \ [0x00] CLKEN
+    $01 constant OCTOSPII_O_MANAGER_CLKSRC      \ [0x01] CLKSRC
+    $04 constant OCTOSPII_O_MANAGER_DQSEN       \ [0x04] DQSEN
+    $05 constant OCTOSPII_O_MANAGER_DQSSRC      \ [0x05] DQSSRC
+    $08 constant OCTOSPII_O_MANAGER_NCSEN       \ [0x08] NCSEN
+    $09 constant OCTOSPII_O_MANAGER_NCSSRC      \ [0x09] NCSSRC
+    $10 constant OCTOSPII_O_MANAGER_IOLEN       \ [0x10] IOLEN
+    $11 constant OCTOSPII_O_MANAGER_IOLSRC      \ [0x11 : 2] IOLSRC
+    $18 constant OCTOSPII_O_MANAGER_IOHEN       \ [0x18] IOHEN
+    $19 constant OCTOSPII_O_MANAGER_IOHSRC      \ [0x19 : 2] IOHSRC
+  [then]
 
-\
-\ @brief OctoSPI IO Manager
-\
-$5200b400 constant OCTOSPII_O_MANAGER_CR  \ offset: 0x00 : OctoSPI IO Manager Control Register
-$5200b404 constant OCTOSPII_O_MANAGER_P1CR  \ offset: 0x04 : OctoSPI IO Manager Port 1 configuration register
-$5200b408 constant OCTOSPII_O_MANAGER_P2CR  \ offset: 0x08 : OctoSPI IO Manager Port 2 configuration register
+  \
+  \ @brief OctoSPI IO Manager
+  \
+  $00 constant OCTOSPII_O_MANAGER_CR    \ OctoSPI IO Manager Control Register
+  $04 constant OCTOSPII_O_MANAGER_P1CR  \ OctoSPI IO Manager Port 1 configuration register
+  $08 constant OCTOSPII_O_MANAGER_P2CR  \ OctoSPI IO Manager Port 2 configuration register
 
+: OCTOSPII_O_MANAGER_DEF ; [then]

@@ -6,73 +6,77 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ADC12_DEF
 
-\
-\ @brief ADC12 common status register
-\ Address offset: 0x300
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC12_ADC12_CSR_ADRDY_MST                        \ Master ADC ready
-$00000002 constant ADC12_ADC12_CSR_EOSMP_MST                        \ End of Sampling phase flag of the master ADC
-$00000004 constant ADC12_ADC12_CSR_EOC_MST                          \ End of regular conversion of the master ADC
-$00000008 constant ADC12_ADC12_CSR_EOS_MST                          \ End of regular sequence flag of the master ADC
-$00000010 constant ADC12_ADC12_CSR_OVR_MST                          \ Overrun flag of the master ADC
-$00000020 constant ADC12_ADC12_CSR_JEOC_MST                         \ End of injected conversion flag of the master ADC
-$00000040 constant ADC12_ADC12_CSR_JEOS_MST                         \ End of injected sequence flag of the master ADC
-$00000080 constant ADC12_ADC12_CSR_AWD1_MST                         \ Analog watchdog 1 flag of the master ADC
-$00000100 constant ADC12_ADC12_CSR_AWD2_MST                         \ Analog watchdog 2 flag of the master ADC
-$00000200 constant ADC12_ADC12_CSR_AWD3_MST                         \ Analog watchdog 3 flag of the master ADC
-$00010000 constant ADC12_ADC12_CSR_ADRDY_SLV                        \ Slave ADC ready
-$00020000 constant ADC12_ADC12_CSR_EOSMP_SLV                        \ End of Sampling phase flag of the slave ADC
-$00040000 constant ADC12_ADC12_CSR_EOC_SLV                          \ End of regular conversion of the slave ADC
-$00080000 constant ADC12_ADC12_CSR_EOS_SLV                          \ End of regular sequence flag of the slave ADC. This bit is a copy of the EOS bit in the corresponding ADC_ISR register.
-$00100000 constant ADC12_ADC12_CSR_OVR_SLV                          \ Overrun flag of the slave ADC
-$00200000 constant ADC12_ADC12_CSR_JEOC_SLV                         \ End of injected conversion flag of the slave ADC
-$00400000 constant ADC12_ADC12_CSR_JEOS_SLV                         \ End of injected sequence flag of the slave ADC
-$00800000 constant ADC12_ADC12_CSR_AWD1_SLV                         \ Analog watchdog 1 flag of the slave ADC
-$01000000 constant ADC12_ADC12_CSR_AWD2_SLV                         \ Analog watchdog 2 flag of the slave ADC
-$02000000 constant ADC12_ADC12_CSR_AWD3_SLV                         \ Analog watchdog 3 flag of the slave ADC
-
-
-\
-\ @brief ADC12 common control register
-\ Address offset: 0x308
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC12_ADC12_CCR_DUAL                             \ Dual ADC mode selection
-$00000f00 constant ADC12_ADC12_CCR_DELAY                            \ Delay between two sampling phases
-$0000c000 constant ADC12_ADC12_CCR_DAMDF                            \ Dual ADC mode data format
-$00400000 constant ADC12_ADC12_CCR_VREFEN                           \ V less than sub>REFINT less than /sub> enable
-$01000000 constant ADC12_ADC12_CCR_VBATEN                           \ VBAT enable
+  [ifdef] ADC12_ADC12_CSR_DEF
+    \
+    \ @brief ADC12 common status register
+    \ Address offset: 0x300
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC12_ADRDY_MST                \ [0x00] Master ADC ready
+    $01 constant ADC12_EOSMP_MST                \ [0x01] End of Sampling phase flag of the master ADC
+    $02 constant ADC12_EOC_MST                  \ [0x02] End of regular conversion of the master ADC
+    $03 constant ADC12_EOS_MST                  \ [0x03] End of regular sequence flag of the master ADC
+    $04 constant ADC12_OVR_MST                  \ [0x04] Overrun flag of the master ADC
+    $05 constant ADC12_JEOC_MST                 \ [0x05] End of injected conversion flag of the master ADC
+    $06 constant ADC12_JEOS_MST                 \ [0x06] End of injected sequence flag of the master ADC
+    $07 constant ADC12_AWD1_MST                 \ [0x07] Analog watchdog 1 flag of the master ADC
+    $08 constant ADC12_AWD2_MST                 \ [0x08] Analog watchdog 2 flag of the master ADC
+    $09 constant ADC12_AWD3_MST                 \ [0x09] Analog watchdog 3 flag of the master ADC
+    $10 constant ADC12_ADRDY_SLV                \ [0x10] Slave ADC ready
+    $11 constant ADC12_EOSMP_SLV                \ [0x11] End of Sampling phase flag of the slave ADC
+    $12 constant ADC12_EOC_SLV                  \ [0x12] End of regular conversion of the slave ADC
+    $13 constant ADC12_EOS_SLV                  \ [0x13] End of regular sequence flag of the slave ADC. This bit is a copy of the EOS bit in the corresponding ADC_ISR register.
+    $14 constant ADC12_OVR_SLV                  \ [0x14] Overrun flag of the slave ADC
+    $15 constant ADC12_JEOC_SLV                 \ [0x15] End of injected conversion flag of the slave ADC
+    $16 constant ADC12_JEOS_SLV                 \ [0x16] End of injected sequence flag of the slave ADC
+    $17 constant ADC12_AWD1_SLV                 \ [0x17] Analog watchdog 1 flag of the slave ADC
+    $18 constant ADC12_AWD2_SLV                 \ [0x18] Analog watchdog 2 flag of the slave ADC
+    $19 constant ADC12_AWD3_SLV                 \ [0x19] Analog watchdog 3 flag of the slave ADC
+  [then]
 
 
-\
-\ @brief ADC12 common regular data register for Dual mode
-\ Address offset: 0x30C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant ADC12_ADC12_CDR_RDATA_MST                        \ Regular data of the master ADC.
-$ffff0000 constant ADC12_ADC12_CDR_RDATA_SLV                        \ Regular data of the slave ADC
-
-
-\
-\ @brief ADC12 common regular data register for Dual mode
-\ Address offset: 0x310
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ADC12_ADC12_CDR2_RDATA_ALT                       \ Regular data of the master/slave alternated ADCs.
+  [ifdef] ADC12_ADC12_CCR_DEF
+    \
+    \ @brief ADC12 common control register
+    \ Address offset: 0x308
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC12_DUAL                     \ [0x00 : 5] Dual ADC mode selection
+    $08 constant ADC12_DELAY                    \ [0x08 : 4] Delay between two sampling phases
+    $0e constant ADC12_DAMDF                    \ [0x0e : 2] Dual ADC mode data format
+    $16 constant ADC12_VREFEN                   \ [0x16] V less than sub>REFINT less than /sub> enable
+    $18 constant ADC12_VBATEN                   \ [0x18] VBAT enable
+  [then]
 
 
-\
-\ @brief ADC common registers
-\
-$40022600 constant ADC12_ADC12_CSR  \ offset: 0x300 : ADC12 common status register
-$40022608 constant ADC12_ADC12_CCR  \ offset: 0x308 : ADC12 common control register
-$4002260c constant ADC12_ADC12_CDR  \ offset: 0x30C : ADC12 common regular data register for Dual mode
-$40022610 constant ADC12_ADC12_CDR2  \ offset: 0x310 : ADC12 common regular data register for Dual mode
+  [ifdef] ADC12_ADC12_CDR_DEF
+    \
+    \ @brief ADC12 common regular data register for Dual mode
+    \ Address offset: 0x30C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC12_RDATA_MST                \ [0x00 : 16] Regular data of the master ADC.
+    $10 constant ADC12_RDATA_SLV                \ [0x10 : 16] Regular data of the slave ADC
+  [then]
 
+
+  [ifdef] ADC12_ADC12_CDR2_DEF
+    \
+    \ @brief ADC12 common regular data register for Dual mode
+    \ Address offset: 0x310
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC12_RDATA_ALT                \ [0x00 : 32] Regular data of the master/slave alternated ADCs.
+  [then]
+
+  \
+  \ @brief ADC common registers
+  \
+  $300 constant ADC12_ADC12_CSR         \ ADC12 common status register
+  $308 constant ADC12_ADC12_CCR         \ ADC12 common control register
+  $30C constant ADC12_ADC12_CDR         \ ADC12 common regular data register for Dual mode
+  $310 constant ADC12_ADC12_CDR2        \ ADC12 common regular data register for Dual mode
+
+: ADC12_DEF ; [then]

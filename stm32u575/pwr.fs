@@ -6,740 +6,778 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief PWR control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000007 constant PWR_PWR_CR1_LPMS                                 \ Low-power mode selection These bits select the low-power mode entered when the CPU enters the Deepsleep mode. 10x: Standby mode (Standby mode also entered if LPMS = 11X in PWR_CR1 with BREN = 1 in PWR_BDCR1) 11x: Shutdown mode if BREN = 0 in PWR_BDCR1
-$00000020 constant PWR_PWR_CR1_RRSB1                                \ SRAM2 page 1 retention in Stop 3 and Standby modes This bit is used to keep the SRAM2 page 1 content in Stop 3 and Standby modes. The SRAM2 page 1 corresponds to the first 8 Kbytes of the SRAM2 (from SRAM2 base address to SRAM2 base address + 0x1FFF). Note: This bit has no effect in Shutdown mode.
-$00000040 constant PWR_PWR_CR1_RRSB2                                \ SRAM2 page 2 retention in Stop 3 and Standby modes This bit is used to keep the SRAM2 page 2 content in Stop 3 and Standby modes. The SRAM2 page 2 corresponds to the last 56 Kbytes of the SRAM2 (from SRAM2 base address + 0x2000 to SRAM2 base address + 0xFFFF). Note: This bit has no effect in Shutdown mode.
-$00000080 constant PWR_PWR_CR1_ULPMEN                               \ BOR ultra-low power mode This bit is used to reduce the consumption by configuring the BOR in discontinuous mode. This bit must be set to reach the lowest power consumption in the low-power modes.
-$00000100 constant PWR_PWR_CR1_SRAM1PD                              \ SRAM1 power down This bit is used to reduce the consumption by powering off the SRAM1.
-$00000200 constant PWR_PWR_CR1_SRAM2PD                              \ SRAM2 power down This bit is used to reduce the consumption by powering off the SRAM2.
-$00000400 constant PWR_PWR_CR1_SRAM3PD                              \ SRAM3 power down This bit is used to reduce the consumption by powering off the SRAM3.
-$00000800 constant PWR_PWR_CR1_SRAM4PD                              \ SRAM4 power down This bit is used to reduce the consumption by powering off the SRAM4.
-
-
-\
-\ @brief PWR control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_CR2_SRAM1PDS1                            \ SRAM1 page 1 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00000002 constant PWR_PWR_CR2_SRAM1PDS2                            \ SRAM1 page 2 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00000004 constant PWR_PWR_CR2_SRAM1PDS3                            \ SRAM1 page 3 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00000010 constant PWR_PWR_CR2_SRAM2PDS1                            \ SRAM2 page 1 (8 Kbytes) power-down in Stop modes (Stop 0, 1, 2) Note: The SRAM2 page 1 retention in Stop 3 is controlled by RRSB1 bit in PWR_CR1.
-$00000020 constant PWR_PWR_CR2_SRAM2PDS2                            \ SRAM2 page 2 (56 Kbytes) power-down in Stop modes (Stop 0, 1, 2) Note: The SRAM2 page 2 retention in Stop 3 is controlled by RRSB2 bit in PWR_CR1.
-$00000040 constant PWR_PWR_CR2_SRAM4PDS                             \ SRAM4 power-down in Stop modes (Stop 0, 1, 2, 3)
-$00000100 constant PWR_PWR_CR2_ICRAMPDS                             \ ICACHE SRAM power-down in Stop modes (Stop 0, 1, 2, 3)
-$00000200 constant PWR_PWR_CR2_DC1RAMPDS                            \ DCACHE1 SRAM power-down in Stop modes (Stop 0, 1, 2, 3)
-$00000400 constant PWR_PWR_CR2_DMA2DRAMPDS                          \ DMA2D SRAM power-down in Stop modes (Stop 0, 1, 2, 3)
-$00000800 constant PWR_PWR_CR2_PRAMPDS                              \ FMAC, FDCAN and USB peripherals SRAM power-down in Stop modes (Stop 0, 1, 2, 3)
-$00001000 constant PWR_PWR_CR2_PKARAMPDS                            \ PKA SRAM power-down
-$00002000 constant PWR_PWR_CR2_SRAM4FWU                             \ SRAM4 fast wakeup from Stop 0, Stop 1 and Stop 2 modes This bit is used to obtain the best trade-off between low-power consumption and wakeup time. SRAM4 wakeup time increases the wakeup time when exiting Stop 0, 1 and 2 modes, and also increases the LPDMA access time to SRAM4 during Stop modes.
-$00004000 constant PWR_PWR_CR2_FLASHFWU                             \ Flash memory fast wakeup from Stop 0 and Stop 1 modes This bit is used to obtain the best trade-off between low-power consumption and wakeup time when exiting the Stop 0 or Stop 1 modes. When this bit is set, the Flash memory remains in normal mode in Stop 0 and Stop 1 modes, which offers a faster startup time with higher consumption.
-$00010000 constant PWR_PWR_CR2_SRAM3PDS1                            \ SRAM3 page 1 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00020000 constant PWR_PWR_CR2_SRAM3PDS2                            \ SRAM3 page 2 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00040000 constant PWR_PWR_CR2_SRAM3PDS3                            \ SRAM3 page 3 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00080000 constant PWR_PWR_CR2_SRAM3PDS4                            \ SRAM3 page 4 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00100000 constant PWR_PWR_CR2_SRAM3PDS5                            \ SRAM3 page 5 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00200000 constant PWR_PWR_CR2_SRAM3PDS6                            \ SRAM3 page 6 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00400000 constant PWR_PWR_CR2_SRAM3PDS7                            \ SRAM3 page 7 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$00800000 constant PWR_PWR_CR2_SRAM3PDS8                            \ SRAM3 page 8 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
-$80000000 constant PWR_PWR_CR2_SRDRUN                               \ SmartRun domain in Run mode
-
-
-\
-\ @brief PWR control register 3
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000002 constant PWR_PWR_CR3_REGSEL                               \ Regulator selection Note: REGSEL is reserved and must be kept at reset value in packages without SMPS.
-$00000004 constant PWR_PWR_CR3_FSTEN                                \ Fast soft start
-
-
-\
-\ @brief PWR voltage scaling register
-\ Address offset: 0x0C
-\ Reset value: 0x00008000
-\
-
-$00004000 constant PWR_PWR_VOSR_BOOSTRDY                            \ EPOD booster ready This bit is set to 1 by hardware when the power booster startup time is reached. The system clock frequency can be switched higher than 50 MHz only after this bit is set.
-$00008000 constant PWR_PWR_VOSR_VOSRDY                              \ Ready bit for VCORE voltage scaling output selection
-$00030000 constant PWR_PWR_VOSR_VOS                                 \ Voltage scaling range selection This field is protected against non-secure access when SYSCLKSEC = 1 in RCC_SECCFGR. It is protected against unprivileged access when SYSCLKSEC = 1 in RCC_SECCFGR and SPRIV = 1 in PWR_PRIVCFGR, or when SYSCLKSEC = 0 and NSPRIV = 1.
-$00040000 constant PWR_PWR_VOSR_BOOSTEN                             \ EPOD booster enable
-
-
-\
-\ @brief PWR supply voltage monitoring control register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000010 constant PWR_PWR_SVMCR_PVDE                               \ Power voltage detector enable
-$000000e0 constant PWR_PWR_SVMCR_PVDLS                              \ Power voltage detector level selection These bits select the voltage threshold detected by the power voltage detector:
-$01000000 constant PWR_PWR_SVMCR_UVMEN                              \ VDDUSB independent USB voltage monitor enable
-$02000000 constant PWR_PWR_SVMCR_IO2VMEN                            \ VDDIO2 independent I/Os voltage monitor enable
-$04000000 constant PWR_PWR_SVMCR_AVM1EN                             \ VDDA independent analog supply voltage monitor 1 enable (1.6 V threshold)
-$08000000 constant PWR_PWR_SVMCR_AVM2EN                             \ VDDA independent analog supply voltage monitor 2 enable (1.8 V threshold)
-$10000000 constant PWR_PWR_SVMCR_USV                                \ VDDUSB independent USB supply valid
-$20000000 constant PWR_PWR_SVMCR_IO2SV                              \ VDDIO2 independent I/Os supply valid This bit is used to validate the VDDIO2 supply for electrical and logical isolation purpose. Setting this bit is mandatory to use PG[15:2]. If VDDIO2 is not always present in the application, the VDDIO2 voltage monitor can be used to determine whether this supply is ready or not.
-$40000000 constant PWR_PWR_SVMCR_ASV                                \ VDDA independent analog supply valid
-
-
-\
-\ @brief PWR wakeup control register 1
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_WUCR1_WUPEN1                             \ Wakeup pin WKUP1 enable
-$00000002 constant PWR_PWR_WUCR1_WUPEN2                             \ Wakeup pin WKUP2 enable
-$00000004 constant PWR_PWR_WUCR1_WUPEN3                             \ Wakeup pin WKUP3 enable
-$00000008 constant PWR_PWR_WUCR1_WUPEN4                             \ Wakeup pin WKUP4 enable
-$00000010 constant PWR_PWR_WUCR1_WUPEN5                             \ Wakeup pin WKUP5 enable
-$00000020 constant PWR_PWR_WUCR1_WUPEN6                             \ Wakeup pin WKUP6 enable
-$00000040 constant PWR_PWR_WUCR1_WUPEN7                             \ Wakeup pin WKUP7 enable
-$00000080 constant PWR_PWR_WUCR1_WUPEN8                             \ Wakeup pin WKUP8 enable
-
-
-\
-\ @brief PWR wakeup control register 2
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_WUCR2_WUPP1                              \ Wakeup pin WKUP1 polarity. This bit must be configured when WUPEN1 = 0.
-$00000002 constant PWR_PWR_WUCR2_WUPP2                              \ Wakeup pin WKUP2 polarity This bit must be configured when WUPEN2 = 0.
-$00000004 constant PWR_PWR_WUCR2_WUPP3                              \ Wakeup pin WKUP3 polarity This bit must be configured when WUPEN3 = 0.
-$00000008 constant PWR_PWR_WUCR2_WUPP4                              \ Wakeup pin WKUP4 polarity This bit must be configured when WUPEN4 = 0.
-$00000010 constant PWR_PWR_WUCR2_WUPP5                              \ Wakeup pin WKUP5 polarity This bit must be configured when WUPEN5 = 0.
-$00000020 constant PWR_PWR_WUCR2_WUPP6                              \ Wakeup pin WKUP6 polarity This bit must be configured when WUPEN6 = 0.
-$00000040 constant PWR_PWR_WUCR2_WUPP7                              \ Wakeup pin WKUP7 polarity This bit must be configured when WUPEN7 = 0.
-$00000080 constant PWR_PWR_WUCR2_WUPP8                              \ Wakeup pin WKUP8 polarity This bit must be configured when WUPEN8 = 0.
-
-
-\
-\ @brief PWR wakeup control register 3
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant PWR_PWR_WUCR3_WUSEL1                             \ Wakeup pin WKUP1 selection This field must be configured when WUPEN1 = 0.
-$0000000c constant PWR_PWR_WUCR3_WUSEL2                             \ Wakeup pin WKUP2 selection This field must be configured when WUPEN2 = 0.
-$00000030 constant PWR_PWR_WUCR3_WUSEL3                             \ Wakeup pin WKUP3 selection This field must be configured when WUPEN3 = 0.
-$000000c0 constant PWR_PWR_WUCR3_WUSEL4                             \ Wakeup pin WKUP4 selection This field must be configured when WUPEN4 = 0.
-$00000300 constant PWR_PWR_WUCR3_WUSEL5                             \ Wakeup pin WKUP5 selection This field must be configured when WUPEN5 = 0.
-$00000c00 constant PWR_PWR_WUCR3_WUSEL6                             \ Wakeup pin WKUP6 selection This field must be configured when WUPEN6 = 0.
-$00003000 constant PWR_PWR_WUCR3_WUSEL7                             \ Wakeup pin WKUP7 selection This field must be configured when WUPEN7 = 0.
-$0000c000 constant PWR_PWR_WUCR3_WUSEL8                             \ Wakeup pin WKUP8 selection This field must be configured when WUPEN8 = 0.
-
-
-\
-\ @brief PWR Backup domain control register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_BDCR1_BREN                               \ Backup RAM retention in Standby and VBAT modes When this bit is set, the backup RAM content is kept in Standby and VBAT modes. If BREN is reset, the backup RAM can still be used in Run, Sleep and Stop modes. However, its content is lost in Standby, Shutdown and VBAT modes. This bit can be written only when the regulator is LDO, which must be configured before switching to SMPS. Note: Backup RAM cannot be preserved in Shutdown mode.
-$00000010 constant PWR_PWR_BDCR1_MONEN                              \ Backup domain voltage and temperature monitoring enable
-
-
-\
-\ @brief PWR Backup domain control register 2
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_BDCR2_VBE                                \ VBAT charging enable
-$00000002 constant PWR_PWR_BDCR2_VBRS                               \ VBAT charging resistor selection
-
-
-\
-\ @brief PWR disable Backup domain register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_DBPR_DBP                                 \ Disable Backup domain write protection In reset state, all registers and SRAM in Backup domain are protected against parasitic write access. This bit must be set to enable the write access to these registers.
-
-
-\
-\ @brief PWR USB Type-C™ and Power Delivery register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_UCPDR_UCPD_DBDIS                         \ UCPD dead battery disable After exiting reset, the USB Type-C “dead battery” behavior is enabled, which may have a pull-down effect on CC1 and CC2 pins. It is recommended to disable it in all cases, either to stop this pull-down or to handover control to the UCPD (the UCPD must be initialized before doing the disable).
-$00000002 constant PWR_PWR_UCPDR_UCPD_STBY                          \ UCPD Standby mode When set, this bit is used to memorize the UCPD configuration in Standby mode. This bit must be written to 1 just before entering Standby mode when using UCPD. It must be written to 0 after exiting the Standby mode and before writing any UCPD registers.
-
-
-\
-\ @brief PWR security configuration register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_SECCFGR_WUP1SEC                          \ WUP1 secure protection
-$00000002 constant PWR_PWR_SECCFGR_WUP2SEC                          \ WUP2 secure protection
-$00000004 constant PWR_PWR_SECCFGR_WUP3SEC                          \ WUP3 secure protection
-$00000008 constant PWR_PWR_SECCFGR_WUP4SEC                          \ WUP4 secure protection
-$00000010 constant PWR_PWR_SECCFGR_WUP5SEC                          \ WUP5 secure protection
-$00000020 constant PWR_PWR_SECCFGR_WUP6SEC                          \ WUP6 secure protection
-$00000040 constant PWR_PWR_SECCFGR_WUP7SEC                          \ WUP7 secure protection
-$00000080 constant PWR_PWR_SECCFGR_WUP8SEC                          \ WUP8 secure protection
-$00001000 constant PWR_PWR_SECCFGR_LPMSEC                           \ Low-power modes secure protection
-$00002000 constant PWR_PWR_SECCFGR_VDMSEC                           \ Voltage detection and monitoring secure protection
-$00004000 constant PWR_PWR_SECCFGR_VBSEC                            \ Backup domain secure protection
-$00008000 constant PWR_PWR_SECCFGR_APCSEC                           \ Pull-up/pull-down secure protection
-
-
-\
-\ @brief PWR privilege control register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PRIVCFGR_SPRIV                           \ PWR secure functions privilege configuration This bit is set and reset by software. It can be written only by a secure privileged access.
-$00000002 constant PWR_PWR_PRIVCFGR_NSPRIV                          \ PWR non-secure functions privilege configuration This bit is set and reset by software. It can be written only by privileged access, secure or non-secure.
-
-
-\
-\ @brief PWR status register
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_SR_CSSF                                  \ Clear Stop and Standby flags This bit is protected against non-secure access when LPMSEC = 1 in PWR_SECCFGR. This bit is protected against unprivileged access when LPMSEC = 1 and SPRIV = 1 in PWR_PRIVCFGR, or when LPMSEC = 0 and NSPRIV = 1. Writing 1 to this bit clears the STOPF and SBF flags.
-$00000002 constant PWR_PWR_SR_STOPF                                 \ Stop flag This bit is set by hardware when the device enters a Stop mode, and is cleared by software by writing 1 to the CSSF bit.
-$00000004 constant PWR_PWR_SR_SBF                                   \ Standby flag This bit is set by hardware when the device enters the Standby mode, and is cleared by writing 1 to the CSSF bit, or by a power-on reset. It is not cleared by the system reset.
-
-
-\
-\ @brief Regulator selection
-\ Address offset: 0x3C
-\ Reset value: 0x00008000
-\
-
-$00000002 constant PWR_PWR_SVMSR_REGS                               \ Regulator selection
-$00000010 constant PWR_PWR_SVMSR_PVDO                               \ VDD voltage detector output
-$00008000 constant PWR_PWR_SVMSR_ACTVOSRDY                          \ Voltage level ready for currently used VOS
-$00030000 constant PWR_PWR_SVMSR_ACTVOS                             \ VOS currently applied to VCORE This field provides the last VOS value.
-$01000000 constant PWR_PWR_SVMSR_VDDUSBRDY                          \ VDDUSB ready
-$02000000 constant PWR_PWR_SVMSR_VDDIO2RDY                          \ VDDIO2 ready
-$04000000 constant PWR_PWR_SVMSR_VDDA1RDY                           \ VDDA ready versus 1.6V voltage monitor
-$08000000 constant PWR_PWR_SVMSR_VDDA2RDY                           \ VDDA ready versus 1.8 V voltage monitor
-
-
-\
-\ @brief PWR Backup domain status register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000002 constant PWR_PWR_BDSR_VBATH                               \ Backup domain voltage level monitoring versus high threshold
-$00000004 constant PWR_PWR_BDSR_TEMPL                               \ Temperature level monitoring versus low threshold
-$00000008 constant PWR_PWR_BDSR_TEMPH                               \ Temperature level monitoring versus high threshold
-
-
-\
-\ @brief PWR wakeup status register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_WUSR_WUF1                                \ Wakeup flag 1 This bit is set when a wakeup event is detected on WKUP1 pin. This bit is cleared by writing 1 in the CWUF1 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN1 = 0.
-$00000002 constant PWR_PWR_WUSR_WUF2                                \ Wakeup flag 2 This bit is set when a wakeup event is detected on WKUP2 pin. This bit is cleared by writing 1 in the CWUF2 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN2 = 0.
-$00000004 constant PWR_PWR_WUSR_WUF3                                \ Wakeup flag 3 This bit is set when a wakeup event is detected on WKUP3 pin. This bit is cleared by writing 1 in the CWUF3 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN3 = 0.
-$00000008 constant PWR_PWR_WUSR_WUF4                                \ Wakeup flag 4 This bit is set when a wakeup event is detected on WKUP4 pin. This bit is cleared by writing 1 in the CWUF4 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN4 = 0.
-$00000010 constant PWR_PWR_WUSR_WUF5                                \ Wakeup flag 5 This bit is set when a wakeup event is detected on WKUP5 pin. This bit is cleared by writing 1 in the CWUF5 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN5 = 0.
-$00000020 constant PWR_PWR_WUSR_WUF6                                \ Wakeup flag 6 This bit is set when a wakeup event is detected on WKUP6 pin. This bit is cleared by writing 1 in the CWUF6 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN6 = 0. If WUSEL = 11, this bit is cleared by hardware when all internal wakeup source are cleared.
-$00000040 constant PWR_PWR_WUSR_WUF7                                \ Wakeup flag 7 This bit is set when a wakeup event is detected on WKUP7 pin. This bit is cleared by writing 1 in the CWUF7 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN7 = 0. If WUSEL = 11, this bit is cleared by hardware when all internal wakeup source are cleared.
-$00000080 constant PWR_PWR_WUSR_WUF8                                \ Wakeup flag 8 This bit is set when a wakeup event is detected on WKUP8 pin. This bit is cleared by writing 1 in the CWUF8 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN8 = 0. If WUSEL = 11, this bit is cleared by hardware when all internal wakeup source are cleared.
-
-
-\
-\ @brief PWR wakeup status clear register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_WUSCR_CWUF1                              \ Wakeup flag 1 Writing 1 to this bit clears the WUF1 flag in PWR_WUSR.
-$00000002 constant PWR_PWR_WUSCR_CWUF2                              \ Wakeup flag 2 Writing 1 to this bit clears the WUF2 flag in PWR_WUSR.
-$00000004 constant PWR_PWR_WUSCR_CWUF3                              \ Wakeup flag 3 Writing 1 to this bit clears the WUF3 flag in PWR_WUSR.
-$00000008 constant PWR_PWR_WUSCR_CWUF4                              \ Wakeup flag 4 Writing 1 to this bit clears the WUF4 flag in PWR_WUSR.
-$00000010 constant PWR_PWR_WUSCR_CWUF5                              \ Wakeup flag 5 Writing 1 to this bit clears the WUF5 flag in PWR_WUSR.
-$00000020 constant PWR_PWR_WUSCR_CWUF6                              \ Wakeup flag 6 Writing 1 to this bit clears the WUF6 flag in PWR_WUSR.
-$00000040 constant PWR_PWR_WUSCR_CWUF7                              \ Wakeup flag 7 Writing 1 to this bit clears the WUF7 flag in PWR_WUSR.
-$00000080 constant PWR_PWR_WUSCR_CWUF8                              \ Wakeup flag 8 Writing 1 to this bit clears the WUF8 flag in PWR_WUSR.
-
-
-\
-\ @brief PWR apply pull configuration register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_APCR_APC                                 \ Apply pull-up and pull-down configuration When this bit is set, the I/O pull-up and pull-down configurations defined in PWR_PUCRx and PWR_PDCRx are applied. When this bit is cleared, PWR_PUCRx and PWR_PDCRx are not applied to the I/Os.
-
-
-\
-\ @brief PWR port A pull-up control register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRA_PU0                                \ Port A pull-up bit
-$00000002 constant PWR_PWR_PUCRA_PU1                                \ Port A pull-up bit
-$00000004 constant PWR_PWR_PUCRA_PU2                                \ Port A pull-up bit
-$00000008 constant PWR_PWR_PUCRA_PU3                                \ Port A pull-up bit
-$00000010 constant PWR_PWR_PUCRA_PU4                                \ Port A pull-up bit
-$00000020 constant PWR_PWR_PUCRA_PU5                                \ Port A pull-up bit
-$00000040 constant PWR_PWR_PUCRA_PU6                                \ Port A pull-up bit
-$00000080 constant PWR_PWR_PUCRA_PU7                                \ Port A pull-up bit
-$00000100 constant PWR_PWR_PUCRA_PU8                                \ Port A pull-up bit
-$00000200 constant PWR_PWR_PUCRA_PU9                                \ Port A pull-up bit
-$00000400 constant PWR_PWR_PUCRA_PU10                               \ Port A pull-up bit
-$00000800 constant PWR_PWR_PUCRA_PU11                               \ Port A pull-up bit
-$00001000 constant PWR_PWR_PUCRA_PU12                               \ Port A pull-up bit
-$00002000 constant PWR_PWR_PUCRA_PU13                               \ Port A pull-up bit
-$00008000 constant PWR_PWR_PUCRA_PU15                               \ Port A pull-up bit 15 When set, this bit activates the pull-up on PA15 when the APC bit is set in PWR_APCR. The pull-up is not activated if the corresponding PD15 bit is also set.
-
-
-\
-\ @brief PWR port A pull-down control register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRA_PD0                                \ Port A pull-down bit
-$00000002 constant PWR_PWR_PDCRA_PD1                                \ Port A pull-down bit
-$00000004 constant PWR_PWR_PDCRA_PD2                                \ Port A pull-down bit
-$00000008 constant PWR_PWR_PDCRA_PD3                                \ Port A pull-down bit
-$00000010 constant PWR_PWR_PDCRA_PD4                                \ Port A pull-down bit
-$00000020 constant PWR_PWR_PDCRA_PD5                                \ Port A pull-down bit
-$00000040 constant PWR_PWR_PDCRA_PD6                                \ Port A pull-down bit
-$00000080 constant PWR_PWR_PDCRA_PD7                                \ Port A pull-down bit
-$00000100 constant PWR_PWR_PDCRA_PD8                                \ Port A pull-down bit
-$00000200 constant PWR_PWR_PDCRA_PD9                                \ Port A pull-down bit
-$00000400 constant PWR_PWR_PDCRA_PD10                               \ Port A pull-down bit
-$00000800 constant PWR_PWR_PDCRA_PD11                               \ Port A pull-down bit
-$00001000 constant PWR_PWR_PDCRA_PD12                               \ Port A pull-down bit
-$00004000 constant PWR_PWR_PDCRA_PD14                               \ Port A pull-down bit
-
-
-\
-\ @brief PWR port B pull-up control register
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRB_PU0                                \ Port B pull-up bit
-$00000002 constant PWR_PWR_PUCRB_PU1                                \ Port B pull-up bit
-$00000004 constant PWR_PWR_PUCRB_PU2                                \ Port B pull-up bit
-$00000008 constant PWR_PWR_PUCRB_PU3                                \ Port B pull-up bit
-$00000010 constant PWR_PWR_PUCRB_PU4                                \ Port B pull-up bit
-$00000020 constant PWR_PWR_PUCRB_PU5                                \ Port B pull-up bit
-$00000040 constant PWR_PWR_PUCRB_PU6                                \ Port B pull-up bit
-$00000080 constant PWR_PWR_PUCRB_PU7                                \ Port B pull-up bit
-$00000100 constant PWR_PWR_PUCRB_PU8                                \ Port B pull-up bit
-$00000200 constant PWR_PWR_PUCRB_PU9                                \ Port B pull-up bit
-$00000400 constant PWR_PWR_PUCRB_PU10                               \ Port B pull-up bit
-$00000800 constant PWR_PWR_PUCRB_PU11                               \ Port B pull-up bit
-$00001000 constant PWR_PWR_PUCRB_PU12                               \ Port B pull-up bit
-$00002000 constant PWR_PWR_PUCRB_PU13                               \ Port B pull-up bit
-$00004000 constant PWR_PWR_PUCRB_PU14                               \ Port B pull-up bit
-$00008000 constant PWR_PWR_PUCRB_PU15                               \ Port B pull-up bit
-
-
-\
-\ @brief PWR port B pull-down control register
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRB_PD0                                \ Port B pull-down bit
-$00000002 constant PWR_PWR_PDCRB_PD1                                \ Port B pull-down bit
-$00000004 constant PWR_PWR_PDCRB_PD2                                \ Port B pull-down bit
-$00000008 constant PWR_PWR_PDCRB_PD3                                \ Port B pull-down bit
-$00000020 constant PWR_PWR_PDCRB_PD5                                \ Port B pull-down bit
-$00000040 constant PWR_PWR_PDCRB_PD6                                \ Port B pull-down bit
-$00000080 constant PWR_PWR_PDCRB_PD7                                \ Port B pull-down bit
-$00000100 constant PWR_PWR_PDCRB_PD8                                \ Port B pull-down bit
-$00000200 constant PWR_PWR_PDCRB_PD9                                \ Port B pull-down bit
-$00000400 constant PWR_PWR_PDCRB_PD10                               \ Port B pull-down bit
-$00000800 constant PWR_PWR_PDCRB_PD11                               \ Port B pull-down bit
-$00001000 constant PWR_PWR_PDCRB_PD12                               \ Port B pull-down bit
-$00002000 constant PWR_PWR_PDCRB_PD13                               \ Port B pull-down bit
-$00004000 constant PWR_PWR_PDCRB_PD14                               \ Port B pull-down bit
-$00008000 constant PWR_PWR_PDCRB_PD15                               \ Port B pull-down bit
-
-
-\
-\ @brief PWR port C pull-up control register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRC_PU0                                \ Port C pull-up bit
-$00000002 constant PWR_PWR_PUCRC_PU1                                \ Port C pull-up bit
-$00000004 constant PWR_PWR_PUCRC_PU2                                \ Port C pull-up bit
-$00000008 constant PWR_PWR_PUCRC_PU3                                \ Port C pull-up bit
-$00000010 constant PWR_PWR_PUCRC_PU4                                \ Port C pull-up bit
-$00000020 constant PWR_PWR_PUCRC_PU5                                \ Port C pull-up bit
-$00000040 constant PWR_PWR_PUCRC_PU6                                \ Port C pull-up bit
-$00000080 constant PWR_PWR_PUCRC_PU7                                \ Port C pull-up bit
-$00000100 constant PWR_PWR_PUCRC_PU8                                \ Port C pull-up bit
-$00000200 constant PWR_PWR_PUCRC_PU9                                \ Port C pull-up bit
-$00000400 constant PWR_PWR_PUCRC_PU10                               \ Port C pull-up bit
-$00000800 constant PWR_PWR_PUCRC_PU11                               \ Port C pull-up bit
-$00001000 constant PWR_PWR_PUCRC_PU12                               \ Port C pull-up bit
-$00002000 constant PWR_PWR_PUCRC_PU13                               \ Port C pull-up bit
-$00004000 constant PWR_PWR_PUCRC_PU14                               \ Port C pull-up bit
-$00008000 constant PWR_PWR_PUCRC_PU15                               \ Port C pull-up bit
-
-
-\
-\ @brief PWR port C pull-down control register
-\ Address offset: 0x64
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRC_PD0                                \ Port C pull-down bit
-$00000002 constant PWR_PWR_PDCRC_PD1                                \ Port C pull-down bit
-$00000004 constant PWR_PWR_PDCRC_PD2                                \ Port C pull-down bit
-$00000008 constant PWR_PWR_PDCRC_PD3                                \ Port C pull-down bit
-$00000010 constant PWR_PWR_PDCRC_PD4                                \ Port C pull-down bit
-$00000020 constant PWR_PWR_PDCRC_PD5                                \ Port C pull-down bit
-$00000040 constant PWR_PWR_PDCRC_PD6                                \ Port C pull-down bit
-$00000080 constant PWR_PWR_PDCRC_PD7                                \ Port C pull-down bit
-$00000100 constant PWR_PWR_PDCRC_PD8                                \ Port C pull-down bit
-$00000200 constant PWR_PWR_PDCRC_PD9                                \ Port C pull-down bit
-$00000400 constant PWR_PWR_PDCRC_PD10                               \ Port C pull-down bit
-$00000800 constant PWR_PWR_PDCRC_PD11                               \ Port C pull-down bit
-$00001000 constant PWR_PWR_PDCRC_PD12                               \ Port C pull-down bit
-$00002000 constant PWR_PWR_PDCRC_PD13                               \ Port C pull-down bit
-$00004000 constant PWR_PWR_PDCRC_PD14                               \ Port C pull-down bit
-$00008000 constant PWR_PWR_PDCRC_PD15                               \ Port C pull-down bit
-
-
-\
-\ @brief PWR port D pull-up control register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRD_PU0                                \ Port D pull-up bit
-$00000002 constant PWR_PWR_PUCRD_PU1                                \ Port D pull-up bit
-$00000004 constant PWR_PWR_PUCRD_PU2                                \ Port D pull-up bit
-$00000008 constant PWR_PWR_PUCRD_PU3                                \ Port D pull-up bit
-$00000010 constant PWR_PWR_PUCRD_PU4                                \ Port D pull-up bit
-$00000020 constant PWR_PWR_PUCRD_PU5                                \ Port D pull-up bit
-$00000040 constant PWR_PWR_PUCRD_PU6                                \ Port D pull-up bit
-$00000080 constant PWR_PWR_PUCRD_PU7                                \ Port D pull-up bit
-$00000100 constant PWR_PWR_PUCRD_PU8                                \ Port D pull-up bit
-$00000200 constant PWR_PWR_PUCRD_PU9                                \ Port D pull-up bit
-$00000400 constant PWR_PWR_PUCRD_PU10                               \ Port D pull-up bit
-$00000800 constant PWR_PWR_PUCRD_PU11                               \ Port D pull-up bit
-$00001000 constant PWR_PWR_PUCRD_PU12                               \ Port D pull-up bit
-$00002000 constant PWR_PWR_PUCRD_PU13                               \ Port D pull-up bit
-$00004000 constant PWR_PWR_PUCRD_PU14                               \ Port D pull-up bit
-$00008000 constant PWR_PWR_PUCRD_PU15                               \ Port D pull-up bit
-
-
-\
-\ @brief PWR port D pull-down control register
-\ Address offset: 0x6C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRD_PD0                                \ Port D pull-down bit
-$00000002 constant PWR_PWR_PDCRD_PD1                                \ Port D pull-down bit
-$00000004 constant PWR_PWR_PDCRD_PD2                                \ Port D pull-down bit
-$00000008 constant PWR_PWR_PDCRD_PD3                                \ Port D pull-down bit
-$00000010 constant PWR_PWR_PDCRD_PD4                                \ Port D pull-down bit
-$00000020 constant PWR_PWR_PDCRD_PD5                                \ Port D pull-down bit
-$00000040 constant PWR_PWR_PDCRD_PD6                                \ Port D pull-down bit
-$00000080 constant PWR_PWR_PDCRD_PD7                                \ Port D pull-down bit
-$00000100 constant PWR_PWR_PDCRD_PD8                                \ Port D pull-down bit
-$00000200 constant PWR_PWR_PDCRD_PD9                                \ Port D pull-down bit
-$00000400 constant PWR_PWR_PDCRD_PD10                               \ Port D pull-down bit
-$00000800 constant PWR_PWR_PDCRD_PD11                               \ Port D pull-down bit
-$00001000 constant PWR_PWR_PDCRD_PD12                               \ Port D pull-down bit
-$00002000 constant PWR_PWR_PDCRD_PD13                               \ Port D pull-down bit
-$00004000 constant PWR_PWR_PDCRD_PD14                               \ Port D pull-down bit
-$00008000 constant PWR_PWR_PDCRD_PD15                               \ Port D pull-down bit
-
-
-\
-\ @brief PWR port E pull-up control register
-\ Address offset: 0x70
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRE_PU0                                \ Port E pull-up bit
-$00000002 constant PWR_PWR_PUCRE_PU1                                \ Port E pull-up bit
-$00000004 constant PWR_PWR_PUCRE_PU2                                \ Port E pull-up bit
-$00000008 constant PWR_PWR_PUCRE_PU3                                \ Port E pull-up bit
-$00000010 constant PWR_PWR_PUCRE_PU4                                \ Port E pull-up bit
-$00000020 constant PWR_PWR_PUCRE_PU5                                \ Port E pull-up bit
-$00000040 constant PWR_PWR_PUCRE_PU6                                \ Port E pull-up bit
-$00000080 constant PWR_PWR_PUCRE_PU7                                \ Port E pull-up bit
-$00000100 constant PWR_PWR_PUCRE_PU8                                \ Port E pull-up bit
-$00000200 constant PWR_PWR_PUCRE_PU9                                \ Port E pull-up bit
-$00000400 constant PWR_PWR_PUCRE_PU10                               \ Port E pull-up bit
-$00000800 constant PWR_PWR_PUCRE_PU11                               \ Port E pull-up bit
-$00001000 constant PWR_PWR_PUCRE_PU12                               \ Port E pull-up bit
-$00002000 constant PWR_PWR_PUCRE_PU13                               \ Port E pull-up bit
-$00004000 constant PWR_PWR_PUCRE_PU14                               \ Port E pull-up bit
-$00008000 constant PWR_PWR_PUCRE_PU15                               \ Port E pull-up bit
-
-
-\
-\ @brief PWR port E pull-down control register
-\ Address offset: 0x74
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRE_PD0                                \ Port E pull-down bit
-$00000002 constant PWR_PWR_PDCRE_PD1                                \ Port E pull-down bit
-$00000004 constant PWR_PWR_PDCRE_PD2                                \ Port E pull-down bit
-$00000008 constant PWR_PWR_PDCRE_PD3                                \ Port E pull-down bit
-$00000010 constant PWR_PWR_PDCRE_PD4                                \ Port E pull-down bit
-$00000020 constant PWR_PWR_PDCRE_PD5                                \ Port E pull-down bit
-$00000040 constant PWR_PWR_PDCRE_PD6                                \ Port E pull-down bit
-$00000080 constant PWR_PWR_PDCRE_PD7                                \ Port E pull-down bit
-$00000100 constant PWR_PWR_PDCRE_PD8                                \ Port E pull-down bit
-$00000200 constant PWR_PWR_PDCRE_PD9                                \ Port E pull-down bit
-$00000400 constant PWR_PWR_PDCRE_PD10                               \ Port E pull-down bit
-$00000800 constant PWR_PWR_PDCRE_PD11                               \ Port E pull-down bit
-$00001000 constant PWR_PWR_PDCRE_PD12                               \ Port E pull-down bit
-$00002000 constant PWR_PWR_PDCRE_PD13                               \ Port E pull-down bit
-$00004000 constant PWR_PWR_PDCRE_PD14                               \ Port E pull-down bit
-$00008000 constant PWR_PWR_PDCRE_PD15                               \ Port E pull-down bit
-
-
-\
-\ @brief PWR port F pull-up control register
-\ Address offset: 0x78
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRF_PU0                                \ Port F pull-up bit
-$00000002 constant PWR_PWR_PUCRF_PU1                                \ Port F pull-up bit
-$00000004 constant PWR_PWR_PUCRF_PU2                                \ Port F pull-up bit
-$00000008 constant PWR_PWR_PUCRF_PU3                                \ Port F pull-up bit
-$00000010 constant PWR_PWR_PUCRF_PU4                                \ Port F pull-up bit
-$00000020 constant PWR_PWR_PUCRF_PU5                                \ Port F pull-up bit
-$00000040 constant PWR_PWR_PUCRF_PU6                                \ Port F pull-up bit
-$00000080 constant PWR_PWR_PUCRF_PU7                                \ Port F pull-up bit
-$00000100 constant PWR_PWR_PUCRF_PU8                                \ Port F pull-up bit
-$00000200 constant PWR_PWR_PUCRF_PU9                                \ Port F pull-up bit
-$00000400 constant PWR_PWR_PUCRF_PU10                               \ Port F pull-up bit
-$00000800 constant PWR_PWR_PUCRF_PU11                               \ Port F pull-up bit
-$00001000 constant PWR_PWR_PUCRF_PU12                               \ Port F pull-up bit
-$00002000 constant PWR_PWR_PUCRF_PU13                               \ Port F pull-up bit
-$00004000 constant PWR_PWR_PUCRF_PU14                               \ Port F pull-up bit
-$00008000 constant PWR_PWR_PUCRF_PU15                               \ Port F pull-up bit
-
-
-\
-\ @brief PWR port F pull-down control register
-\ Address offset: 0x7C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRF_PD0                                \ Port F pull-down bit
-$00000002 constant PWR_PWR_PDCRF_PD1                                \ Port F pull-down bit
-$00000004 constant PWR_PWR_PDCRF_PD2                                \ Port F pull-down bit
-$00000008 constant PWR_PWR_PDCRF_PD3                                \ Port F pull-down bit
-$00000010 constant PWR_PWR_PDCRF_PD4                                \ Port F pull-down bit
-$00000020 constant PWR_PWR_PDCRF_PD5                                \ Port F pull-down bit
-$00000040 constant PWR_PWR_PDCRF_PD6                                \ Port F pull-down bit
-$00000080 constant PWR_PWR_PDCRF_PD7                                \ Port F pull-down bit
-$00000100 constant PWR_PWR_PDCRF_PD8                                \ Port F pull-down bit
-$00000200 constant PWR_PWR_PDCRF_PD9                                \ Port F pull-down bit
-$00000400 constant PWR_PWR_PDCRF_PD10                               \ Port F pull-down bit
-$00000800 constant PWR_PWR_PDCRF_PD11                               \ Port F pull-down bit
-$00001000 constant PWR_PWR_PDCRF_PD12                               \ Port F pull-down bit
-$00002000 constant PWR_PWR_PDCRF_PD13                               \ Port F pull-down bit
-$00004000 constant PWR_PWR_PDCRF_PD14                               \ Port F pull-down bit
-$00008000 constant PWR_PWR_PDCRF_PD15                               \ Port F pull-down bit
-
-
-\
-\ @brief PWR port G pull-up control register
-\ Address offset: 0x80
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRG_PU0                                \ Port G pull-up bit
-$00000002 constant PWR_PWR_PUCRG_PU1                                \ Port G pull-up bit
-$00000004 constant PWR_PWR_PUCRG_PU2                                \ Port G pull-up bit
-$00000008 constant PWR_PWR_PUCRG_PU3                                \ Port G pull-up bit
-$00000010 constant PWR_PWR_PUCRG_PU4                                \ Port G pull-up bit
-$00000020 constant PWR_PWR_PUCRG_PU5                                \ Port G pull-up bit
-$00000040 constant PWR_PWR_PUCRG_PU6                                \ Port G pull-up bit
-$00000080 constant PWR_PWR_PUCRG_PU7                                \ Port G pull-up bit
-$00000100 constant PWR_PWR_PUCRG_PU8                                \ Port G pull-up bit
-$00000200 constant PWR_PWR_PUCRG_PU9                                \ Port G pull-up bit
-$00000400 constant PWR_PWR_PUCRG_PU10                               \ Port G pull-up bit
-$00000800 constant PWR_PWR_PUCRG_PU11                               \ Port G pull-up bit
-$00001000 constant PWR_PWR_PUCRG_PU12                               \ Port G pull-up bit
-$00002000 constant PWR_PWR_PUCRG_PU13                               \ Port G pull-up bit
-$00004000 constant PWR_PWR_PUCRG_PU14                               \ Port G pull-up bit
-$00008000 constant PWR_PWR_PUCRG_PU15                               \ Port G pull-up bit
-
-
-\
-\ @brief PWR port G pull-down control register
-\ Address offset: 0x84
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRG_PD0                                \ Port G pull-down bit
-$00000002 constant PWR_PWR_PDCRG_PD1                                \ Port G pull-down bit
-$00000004 constant PWR_PWR_PDCRG_PD2                                \ Port G pull-down bit
-$00000008 constant PWR_PWR_PDCRG_PD3                                \ Port G pull-down bit
-$00000010 constant PWR_PWR_PDCRG_PD4                                \ Port G pull-down bit
-$00000020 constant PWR_PWR_PDCRG_PD5                                \ Port G pull-down bit
-$00000040 constant PWR_PWR_PDCRG_PD6                                \ Port G pull-down bit
-$00000080 constant PWR_PWR_PDCRG_PD7                                \ Port G pull-down bit
-$00000100 constant PWR_PWR_PDCRG_PD8                                \ Port G pull-down bit
-$00000200 constant PWR_PWR_PDCRG_PD9                                \ Port G pull-down bit
-$00000400 constant PWR_PWR_PDCRG_PD10                               \ Port G pull-down bit
-$00000800 constant PWR_PWR_PDCRG_PD11                               \ Port G pull-down bit
-$00001000 constant PWR_PWR_PDCRG_PD12                               \ Port G pull-down bit
-$00002000 constant PWR_PWR_PDCRG_PD13                               \ Port G pull-down bit
-$00004000 constant PWR_PWR_PDCRG_PD14                               \ Port G pull-down bit
-$00008000 constant PWR_PWR_PDCRG_PD15                               \ Port G pull-down bit
-
-
-\
-\ @brief PWR port H pull-up control register
-\ Address offset: 0x88
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRH_PU0                                \ Port H pull-up bit
-$00000002 constant PWR_PWR_PUCRH_PU1                                \ Port H pull-up bit
-$00000004 constant PWR_PWR_PUCRH_PU2                                \ Port H pull-up bit
-$00000008 constant PWR_PWR_PUCRH_PU3                                \ Port H pull-up bit
-$00000010 constant PWR_PWR_PUCRH_PU4                                \ Port H pull-up bit
-$00000020 constant PWR_PWR_PUCRH_PU5                                \ Port H pull-up bit
-$00000040 constant PWR_PWR_PUCRH_PU6                                \ Port H pull-up bit
-$00000080 constant PWR_PWR_PUCRH_PU7                                \ Port H pull-up bit
-$00000100 constant PWR_PWR_PUCRH_PU8                                \ Port H pull-up bit
-$00000200 constant PWR_PWR_PUCRH_PU9                                \ Port H pull-up bit
-$00000400 constant PWR_PWR_PUCRH_PU10                               \ Port H pull-up bit
-$00000800 constant PWR_PWR_PUCRH_PU11                               \ Port H pull-up bit
-$00001000 constant PWR_PWR_PUCRH_PU12                               \ Port H pull-up bit
-$00002000 constant PWR_PWR_PUCRH_PU13                               \ Port H pull-up bit
-$00004000 constant PWR_PWR_PUCRH_PU14                               \ Port H pull-up bit
-$00008000 constant PWR_PWR_PUCRH_PU15                               \ Port H pull-up bit
-
-
-\
-\ @brief PWR port H pull-down control register
-\ Address offset: 0x8C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRH_PD0                                \ Port H pull-down bit
-$00000002 constant PWR_PWR_PDCRH_PD1                                \ Port H pull-down bit
-$00000004 constant PWR_PWR_PDCRH_PD2                                \ Port H pull-down bit
-$00000008 constant PWR_PWR_PDCRH_PD3                                \ Port H pull-down bit
-$00000010 constant PWR_PWR_PDCRH_PD4                                \ Port H pull-down bit
-$00000020 constant PWR_PWR_PDCRH_PD5                                \ Port H pull-down bit
-$00000040 constant PWR_PWR_PDCRH_PD6                                \ Port H pull-down bit
-$00000080 constant PWR_PWR_PDCRH_PD7                                \ Port H pull-down bit
-$00000100 constant PWR_PWR_PDCRH_PD8                                \ Port H pull-down bit
-$00000200 constant PWR_PWR_PDCRH_PD9                                \ Port H pull-down bit
-$00000400 constant PWR_PWR_PDCRH_PD10                               \ Port H pull-down bit
-$00000800 constant PWR_PWR_PDCRH_PD11                               \ Port H pull-down bit
-$00001000 constant PWR_PWR_PDCRH_PD12                               \ Port H pull-down bit
-$00002000 constant PWR_PWR_PDCRH_PD13                               \ Port H pull-down bit
-$00004000 constant PWR_PWR_PDCRH_PD14                               \ Port H pull-down bit
-$00008000 constant PWR_PWR_PDCRH_PD15                               \ Port H pull-down bit
-
-
-\
-\ @brief PWR port I pull-up control register
-\ Address offset: 0x90
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PUCRI_PU0                                \ Port I pull-up bit
-$00000002 constant PWR_PWR_PUCRI_PU1                                \ Port I pull-up bit
-$00000004 constant PWR_PWR_PUCRI_PU2                                \ Port I pull-up bit
-$00000008 constant PWR_PWR_PUCRI_PU3                                \ Port I pull-up bit
-$00000010 constant PWR_PWR_PUCRI_PU4                                \ Port I pull-up bit
-$00000020 constant PWR_PWR_PUCRI_PU5                                \ Port I pull-up bit
-$00000040 constant PWR_PWR_PUCRI_PU6                                \ Port I pull-up bit
-$00000080 constant PWR_PWR_PUCRI_PU7                                \ Port I pull-up bit
-
-
-\
-\ @brief PWR port I pull-down control register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00000001 constant PWR_PWR_PDCRI_PD0                                \ Port I pull-down bit
-$00000002 constant PWR_PWR_PDCRI_PD1                                \ Port I pull-down bit
-$00000004 constant PWR_PWR_PDCRI_PD2                                \ Port I pull-down bit
-$00000008 constant PWR_PWR_PDCRI_PD3                                \ Port I pull-down bit
-$00000010 constant PWR_PWR_PDCRI_PD4                                \ Port I pull-down bit
-$00000020 constant PWR_PWR_PDCRI_PD5                                \ Port I pull-down bit
-$00000040 constant PWR_PWR_PDCRI_PD6                                \ Port I pull-down bit
-$00000080 constant PWR_PWR_PDCRI_PD7                                \ Port I pull-down bit
-
-
-\
-\ @brief Power control
-\
-$46020800 constant PWR_PWR_CR1    \ offset: 0x00 : PWR control register 1
-$46020804 constant PWR_PWR_CR2    \ offset: 0x04 : PWR control register 2
-$46020808 constant PWR_PWR_CR3    \ offset: 0x08 : PWR control register 3
-$4602080c constant PWR_PWR_VOSR   \ offset: 0x0C : PWR voltage scaling register
-$46020810 constant PWR_PWR_SVMCR  \ offset: 0x10 : PWR supply voltage monitoring control register
-$46020814 constant PWR_PWR_WUCR1  \ offset: 0x14 : PWR wakeup control register 1
-$46020818 constant PWR_PWR_WUCR2  \ offset: 0x18 : PWR wakeup control register 2
-$4602081c constant PWR_PWR_WUCR3  \ offset: 0x1C : PWR wakeup control register 3
-$46020820 constant PWR_PWR_BDCR1  \ offset: 0x20 : PWR Backup domain control register 1
-$46020824 constant PWR_PWR_BDCR2  \ offset: 0x24 : PWR Backup domain control register 2
-$46020828 constant PWR_PWR_DBPR   \ offset: 0x28 : PWR disable Backup domain register
-$4602082c constant PWR_PWR_UCPDR  \ offset: 0x2C : PWR USB Type-C™ and Power Delivery register
-$46020830 constant PWR_PWR_SECCFGR  \ offset: 0x30 : PWR security configuration register
-$46020834 constant PWR_PWR_PRIVCFGR  \ offset: 0x34 : PWR privilege control register
-$46020838 constant PWR_PWR_SR     \ offset: 0x38 : PWR status register
-$4602083c constant PWR_PWR_SVMSR  \ offset: 0x3C : Regulator selection
-$46020840 constant PWR_PWR_BDSR   \ offset: 0x40 : PWR Backup domain status register
-$46020844 constant PWR_PWR_WUSR   \ offset: 0x44 : PWR wakeup status register
-$46020848 constant PWR_PWR_WUSCR  \ offset: 0x48 : PWR wakeup status clear register
-$4602084c constant PWR_PWR_APCR   \ offset: 0x4C : PWR apply pull configuration register
-$46020850 constant PWR_PWR_PUCRA  \ offset: 0x50 : PWR port A pull-up control register
-$46020854 constant PWR_PWR_PDCRA  \ offset: 0x54 : PWR port A pull-down control register
-$46020858 constant PWR_PWR_PUCRB  \ offset: 0x58 : PWR port B pull-up control register
-$4602085c constant PWR_PWR_PDCRB  \ offset: 0x5C : PWR port B pull-down control register
-$46020860 constant PWR_PWR_PUCRC  \ offset: 0x60 : PWR port C pull-up control register
-$46020864 constant PWR_PWR_PDCRC  \ offset: 0x64 : PWR port C pull-down control register
-$46020868 constant PWR_PWR_PUCRD  \ offset: 0x68 : PWR port D pull-up control register
-$4602086c constant PWR_PWR_PDCRD  \ offset: 0x6C : PWR port D pull-down control register
-$46020870 constant PWR_PWR_PUCRE  \ offset: 0x70 : PWR port E pull-up control register
-$46020874 constant PWR_PWR_PDCRE  \ offset: 0x74 : PWR port E pull-down control register
-$46020878 constant PWR_PWR_PUCRF  \ offset: 0x78 : PWR port F pull-up control register
-$4602087c constant PWR_PWR_PDCRF  \ offset: 0x7C : PWR port F pull-down control register
-$46020880 constant PWR_PWR_PUCRG  \ offset: 0x80 : PWR port G pull-up control register
-$46020884 constant PWR_PWR_PDCRG  \ offset: 0x84 : PWR port G pull-down control register
-$46020888 constant PWR_PWR_PUCRH  \ offset: 0x88 : PWR port H pull-up control register
-$4602088c constant PWR_PWR_PDCRH  \ offset: 0x8C : PWR port H pull-down control register
-$46020890 constant PWR_PWR_PUCRI  \ offset: 0x90 : PWR port I pull-up control register
-$46020894 constant PWR_PWR_PDCRI  \ offset: 0x94 : PWR port I pull-down control register
-
+[ifndef] PWR_DEF
+
+  [ifdef] PWR_PWR_CR1_DEF
+    \
+    \ @brief PWR control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_LPMS                       \ [0x00 : 3] Low-power mode selection These bits select the low-power mode entered when the CPU enters the Deepsleep mode. 10x: Standby mode (Standby mode also entered if LPMS = 11X in PWR_CR1 with BREN = 1 in PWR_BDCR1) 11x: Shutdown mode if BREN = 0 in PWR_BDCR1
+    $05 constant PWR_RRSB1                      \ [0x05] SRAM2 page 1 retention in Stop 3 and Standby modes This bit is used to keep the SRAM2 page 1 content in Stop 3 and Standby modes. The SRAM2 page 1 corresponds to the first 8 Kbytes of the SRAM2 (from SRAM2 base address to SRAM2 base address + 0x1FFF). Note: This bit has no effect in Shutdown mode.
+    $06 constant PWR_RRSB2                      \ [0x06] SRAM2 page 2 retention in Stop 3 and Standby modes This bit is used to keep the SRAM2 page 2 content in Stop 3 and Standby modes. The SRAM2 page 2 corresponds to the last 56 Kbytes of the SRAM2 (from SRAM2 base address + 0x2000 to SRAM2 base address + 0xFFFF). Note: This bit has no effect in Shutdown mode.
+    $07 constant PWR_ULPMEN                     \ [0x07] BOR ultra-low power mode This bit is used to reduce the consumption by configuring the BOR in discontinuous mode. This bit must be set to reach the lowest power consumption in the low-power modes.
+    $08 constant PWR_SRAM1PD                    \ [0x08] SRAM1 power down This bit is used to reduce the consumption by powering off the SRAM1.
+    $09 constant PWR_SRAM2PD                    \ [0x09] SRAM2 power down This bit is used to reduce the consumption by powering off the SRAM2.
+    $0a constant PWR_SRAM3PD                    \ [0x0a] SRAM3 power down This bit is used to reduce the consumption by powering off the SRAM3.
+    $0b constant PWR_SRAM4PD                    \ [0x0b] SRAM4 power down This bit is used to reduce the consumption by powering off the SRAM4.
+  [then]
+
+
+  [ifdef] PWR_PWR_CR2_DEF
+    \
+    \ @brief PWR control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_SRAM1PDS1                  \ [0x00] SRAM1 page 1 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $01 constant PWR_SRAM1PDS2                  \ [0x01] SRAM1 page 2 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $02 constant PWR_SRAM1PDS3                  \ [0x02] SRAM1 page 3 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $04 constant PWR_SRAM2PDS1                  \ [0x04] SRAM2 page 1 (8 Kbytes) power-down in Stop modes (Stop 0, 1, 2) Note: The SRAM2 page 1 retention in Stop 3 is controlled by RRSB1 bit in PWR_CR1.
+    $05 constant PWR_SRAM2PDS2                  \ [0x05] SRAM2 page 2 (56 Kbytes) power-down in Stop modes (Stop 0, 1, 2) Note: The SRAM2 page 2 retention in Stop 3 is controlled by RRSB2 bit in PWR_CR1.
+    $06 constant PWR_SRAM4PDS                   \ [0x06] SRAM4 power-down in Stop modes (Stop 0, 1, 2, 3)
+    $08 constant PWR_ICRAMPDS                   \ [0x08] ICACHE SRAM power-down in Stop modes (Stop 0, 1, 2, 3)
+    $09 constant PWR_DC1RAMPDS                  \ [0x09] DCACHE1 SRAM power-down in Stop modes (Stop 0, 1, 2, 3)
+    $0a constant PWR_DMA2DRAMPDS                \ [0x0a] DMA2D SRAM power-down in Stop modes (Stop 0, 1, 2, 3)
+    $0b constant PWR_PRAMPDS                    \ [0x0b] FMAC, FDCAN and USB peripherals SRAM power-down in Stop modes (Stop 0, 1, 2, 3)
+    $0c constant PWR_PKARAMPDS                  \ [0x0c] PKA SRAM power-down
+    $0d constant PWR_SRAM4FWU                   \ [0x0d] SRAM4 fast wakeup from Stop 0, Stop 1 and Stop 2 modes This bit is used to obtain the best trade-off between low-power consumption and wakeup time. SRAM4 wakeup time increases the wakeup time when exiting Stop 0, 1 and 2 modes, and also increases the LPDMA access time to SRAM4 during Stop modes.
+    $0e constant PWR_FLASHFWU                   \ [0x0e] Flash memory fast wakeup from Stop 0 and Stop 1 modes This bit is used to obtain the best trade-off between low-power consumption and wakeup time when exiting the Stop 0 or Stop 1 modes. When this bit is set, the Flash memory remains in normal mode in Stop 0 and Stop 1 modes, which offers a faster startup time with higher consumption.
+    $10 constant PWR_SRAM3PDS1                  \ [0x10] SRAM3 page 1 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $11 constant PWR_SRAM3PDS2                  \ [0x11] SRAM3 page 2 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $12 constant PWR_SRAM3PDS3                  \ [0x12] SRAM3 page 3 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $13 constant PWR_SRAM3PDS4                  \ [0x13] SRAM3 page 4 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $14 constant PWR_SRAM3PDS5                  \ [0x14] SRAM3 page 5 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $15 constant PWR_SRAM3PDS6                  \ [0x15] SRAM3 page 6 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $16 constant PWR_SRAM3PDS7                  \ [0x16] SRAM3 page 7 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $17 constant PWR_SRAM3PDS8                  \ [0x17] SRAM3 page 8 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)
+    $1f constant PWR_SRDRUN                     \ [0x1f] SmartRun domain in Run mode
+  [then]
+
+
+  [ifdef] PWR_PWR_CR3_DEF
+    \
+    \ @brief PWR control register 3
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $01 constant PWR_REGSEL                     \ [0x01] Regulator selection Note: REGSEL is reserved and must be kept at reset value in packages without SMPS.
+    $02 constant PWR_FSTEN                      \ [0x02] Fast soft start
+  [then]
+
+
+  [ifdef] PWR_PWR_VOSR_DEF
+    \
+    \ @brief PWR voltage scaling register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00008000
+    \
+    $0e constant PWR_BOOSTRDY                   \ [0x0e] EPOD booster ready This bit is set to 1 by hardware when the power booster startup time is reached. The system clock frequency can be switched higher than 50 MHz only after this bit is set.
+    $0f constant PWR_VOSRDY                     \ [0x0f] Ready bit for VCORE voltage scaling output selection
+    $10 constant PWR_VOS                        \ [0x10 : 2] Voltage scaling range selection This field is protected against non-secure access when SYSCLKSEC = 1 in RCC_SECCFGR. It is protected against unprivileged access when SYSCLKSEC = 1 in RCC_SECCFGR and SPRIV = 1 in PWR_PRIVCFGR, or when SYSCLKSEC = 0 and NSPRIV = 1.
+    $12 constant PWR_BOOSTEN                    \ [0x12] EPOD booster enable
+  [then]
+
+
+  [ifdef] PWR_PWR_SVMCR_DEF
+    \
+    \ @brief PWR supply voltage monitoring control register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $04 constant PWR_PVDE                       \ [0x04] Power voltage detector enable
+    $05 constant PWR_PVDLS                      \ [0x05 : 3] Power voltage detector level selection These bits select the voltage threshold detected by the power voltage detector:
+    $18 constant PWR_UVMEN                      \ [0x18] VDDUSB independent USB voltage monitor enable
+    $19 constant PWR_IO2VMEN                    \ [0x19] VDDIO2 independent I/Os voltage monitor enable
+    $1a constant PWR_AVM1EN                     \ [0x1a] VDDA independent analog supply voltage monitor 1 enable (1.6 V threshold)
+    $1b constant PWR_AVM2EN                     \ [0x1b] VDDA independent analog supply voltage monitor 2 enable (1.8 V threshold)
+    $1c constant PWR_USV                        \ [0x1c] VDDUSB independent USB supply valid
+    $1d constant PWR_IO2SV                      \ [0x1d] VDDIO2 independent I/Os supply valid This bit is used to validate the VDDIO2 supply for electrical and logical isolation purpose. Setting this bit is mandatory to use PG[15:2]. If VDDIO2 is not always present in the application, the VDDIO2 voltage monitor can be used to determine whether this supply is ready or not.
+    $1e constant PWR_ASV                        \ [0x1e] VDDA independent analog supply valid
+  [then]
+
+
+  [ifdef] PWR_PWR_WUCR1_DEF
+    \
+    \ @brief PWR wakeup control register 1
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_WUPEN1                     \ [0x00] Wakeup pin WKUP1 enable
+    $01 constant PWR_WUPEN2                     \ [0x01] Wakeup pin WKUP2 enable
+    $02 constant PWR_WUPEN3                     \ [0x02] Wakeup pin WKUP3 enable
+    $03 constant PWR_WUPEN4                     \ [0x03] Wakeup pin WKUP4 enable
+    $04 constant PWR_WUPEN5                     \ [0x04] Wakeup pin WKUP5 enable
+    $05 constant PWR_WUPEN6                     \ [0x05] Wakeup pin WKUP6 enable
+    $06 constant PWR_WUPEN7                     \ [0x06] Wakeup pin WKUP7 enable
+    $07 constant PWR_WUPEN8                     \ [0x07] Wakeup pin WKUP8 enable
+  [then]
+
+
+  [ifdef] PWR_PWR_WUCR2_DEF
+    \
+    \ @brief PWR wakeup control register 2
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_WUPP1                      \ [0x00] Wakeup pin WKUP1 polarity. This bit must be configured when WUPEN1 = 0.
+    $01 constant PWR_WUPP2                      \ [0x01] Wakeup pin WKUP2 polarity This bit must be configured when WUPEN2 = 0.
+    $02 constant PWR_WUPP3                      \ [0x02] Wakeup pin WKUP3 polarity This bit must be configured when WUPEN3 = 0.
+    $03 constant PWR_WUPP4                      \ [0x03] Wakeup pin WKUP4 polarity This bit must be configured when WUPEN4 = 0.
+    $04 constant PWR_WUPP5                      \ [0x04] Wakeup pin WKUP5 polarity This bit must be configured when WUPEN5 = 0.
+    $05 constant PWR_WUPP6                      \ [0x05] Wakeup pin WKUP6 polarity This bit must be configured when WUPEN6 = 0.
+    $06 constant PWR_WUPP7                      \ [0x06] Wakeup pin WKUP7 polarity This bit must be configured when WUPEN7 = 0.
+    $07 constant PWR_WUPP8                      \ [0x07] Wakeup pin WKUP8 polarity This bit must be configured when WUPEN8 = 0.
+  [then]
+
+
+  [ifdef] PWR_PWR_WUCR3_DEF
+    \
+    \ @brief PWR wakeup control register 3
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_WUSEL1                     \ [0x00 : 2] Wakeup pin WKUP1 selection This field must be configured when WUPEN1 = 0.
+    $02 constant PWR_WUSEL2                     \ [0x02 : 2] Wakeup pin WKUP2 selection This field must be configured when WUPEN2 = 0.
+    $04 constant PWR_WUSEL3                     \ [0x04 : 2] Wakeup pin WKUP3 selection This field must be configured when WUPEN3 = 0.
+    $06 constant PWR_WUSEL4                     \ [0x06 : 2] Wakeup pin WKUP4 selection This field must be configured when WUPEN4 = 0.
+    $08 constant PWR_WUSEL5                     \ [0x08 : 2] Wakeup pin WKUP5 selection This field must be configured when WUPEN5 = 0.
+    $0a constant PWR_WUSEL6                     \ [0x0a : 2] Wakeup pin WKUP6 selection This field must be configured when WUPEN6 = 0.
+    $0c constant PWR_WUSEL7                     \ [0x0c : 2] Wakeup pin WKUP7 selection This field must be configured when WUPEN7 = 0.
+    $0e constant PWR_WUSEL8                     \ [0x0e : 2] Wakeup pin WKUP8 selection This field must be configured when WUPEN8 = 0.
+  [then]
+
+
+  [ifdef] PWR_PWR_BDCR1_DEF
+    \
+    \ @brief PWR Backup domain control register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_BREN                       \ [0x00] Backup RAM retention in Standby and VBAT modes When this bit is set, the backup RAM content is kept in Standby and VBAT modes. If BREN is reset, the backup RAM can still be used in Run, Sleep and Stop modes. However, its content is lost in Standby, Shutdown and VBAT modes. This bit can be written only when the regulator is LDO, which must be configured before switching to SMPS. Note: Backup RAM cannot be preserved in Shutdown mode.
+    $04 constant PWR_MONEN                      \ [0x04] Backup domain voltage and temperature monitoring enable
+  [then]
+
+
+  [ifdef] PWR_PWR_BDCR2_DEF
+    \
+    \ @brief PWR Backup domain control register 2
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_VBE                        \ [0x00] VBAT charging enable
+    $01 constant PWR_VBRS                       \ [0x01] VBAT charging resistor selection
+  [then]
+
+
+  [ifdef] PWR_PWR_DBPR_DEF
+    \
+    \ @brief PWR disable Backup domain register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_DBP                        \ [0x00] Disable Backup domain write protection In reset state, all registers and SRAM in Backup domain are protected against parasitic write access. This bit must be set to enable the write access to these registers.
+  [then]
+
+
+  [ifdef] PWR_PWR_UCPDR_DEF
+    \
+    \ @brief PWR USB Type-C™ and Power Delivery register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_UCPD_DBDIS                 \ [0x00] UCPD dead battery disable After exiting reset, the USB Type-C “dead battery” behavior is enabled, which may have a pull-down effect on CC1 and CC2 pins. It is recommended to disable it in all cases, either to stop this pull-down or to handover control to the UCPD (the UCPD must be initialized before doing the disable).
+    $01 constant PWR_UCPD_STBY                  \ [0x01] UCPD Standby mode When set, this bit is used to memorize the UCPD configuration in Standby mode. This bit must be written to 1 just before entering Standby mode when using UCPD. It must be written to 0 after exiting the Standby mode and before writing any UCPD registers.
+  [then]
+
+
+  [ifdef] PWR_PWR_SECCFGR_DEF
+    \
+    \ @brief PWR security configuration register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_WUP1SEC                    \ [0x00] WUP1 secure protection
+    $01 constant PWR_WUP2SEC                    \ [0x01] WUP2 secure protection
+    $02 constant PWR_WUP3SEC                    \ [0x02] WUP3 secure protection
+    $03 constant PWR_WUP4SEC                    \ [0x03] WUP4 secure protection
+    $04 constant PWR_WUP5SEC                    \ [0x04] WUP5 secure protection
+    $05 constant PWR_WUP6SEC                    \ [0x05] WUP6 secure protection
+    $06 constant PWR_WUP7SEC                    \ [0x06] WUP7 secure protection
+    $07 constant PWR_WUP8SEC                    \ [0x07] WUP8 secure protection
+    $0c constant PWR_LPMSEC                     \ [0x0c] Low-power modes secure protection
+    $0d constant PWR_VDMSEC                     \ [0x0d] Voltage detection and monitoring secure protection
+    $0e constant PWR_VBSEC                      \ [0x0e] Backup domain secure protection
+    $0f constant PWR_APCSEC                     \ [0x0f] Pull-up/pull-down secure protection
+  [then]
+
+
+  [ifdef] PWR_PWR_PRIVCFGR_DEF
+    \
+    \ @brief PWR privilege control register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_SPRIV                      \ [0x00] PWR secure functions privilege configuration This bit is set and reset by software. It can be written only by a secure privileged access.
+    $01 constant PWR_NSPRIV                     \ [0x01] PWR non-secure functions privilege configuration This bit is set and reset by software. It can be written only by privileged access, secure or non-secure.
+  [then]
+
+
+  [ifdef] PWR_PWR_SR_DEF
+    \
+    \ @brief PWR status register
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_CSSF                       \ [0x00] Clear Stop and Standby flags This bit is protected against non-secure access when LPMSEC = 1 in PWR_SECCFGR. This bit is protected against unprivileged access when LPMSEC = 1 and SPRIV = 1 in PWR_PRIVCFGR, or when LPMSEC = 0 and NSPRIV = 1. Writing 1 to this bit clears the STOPF and SBF flags.
+    $01 constant PWR_STOPF                      \ [0x01] Stop flag This bit is set by hardware when the device enters a Stop mode, and is cleared by software by writing 1 to the CSSF bit.
+    $02 constant PWR_SBF                        \ [0x02] Standby flag This bit is set by hardware when the device enters the Standby mode, and is cleared by writing 1 to the CSSF bit, or by a power-on reset. It is not cleared by the system reset.
+  [then]
+
+
+  [ifdef] PWR_PWR_SVMSR_DEF
+    \
+    \ @brief Regulator selection
+    \ Address offset: 0x3C
+    \ Reset value: 0x00008000
+    \
+    $01 constant PWR_REGS                       \ [0x01] Regulator selection
+    $04 constant PWR_PVDO                       \ [0x04] VDD voltage detector output
+    $0f constant PWR_ACTVOSRDY                  \ [0x0f] Voltage level ready for currently used VOS
+    $10 constant PWR_ACTVOS                     \ [0x10 : 2] VOS currently applied to VCORE This field provides the last VOS value.
+    $18 constant PWR_VDDUSBRDY                  \ [0x18] VDDUSB ready
+    $19 constant PWR_VDDIO2RDY                  \ [0x19] VDDIO2 ready
+    $1a constant PWR_VDDA1RDY                   \ [0x1a] VDDA ready versus 1.6V voltage monitor
+    $1b constant PWR_VDDA2RDY                   \ [0x1b] VDDA ready versus 1.8 V voltage monitor
+  [then]
+
+
+  [ifdef] PWR_PWR_BDSR_DEF
+    \
+    \ @brief PWR Backup domain status register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $01 constant PWR_VBATH                      \ [0x01] Backup domain voltage level monitoring versus high threshold
+    $02 constant PWR_TEMPL                      \ [0x02] Temperature level monitoring versus low threshold
+    $03 constant PWR_TEMPH                      \ [0x03] Temperature level monitoring versus high threshold
+  [then]
+
+
+  [ifdef] PWR_PWR_WUSR_DEF
+    \
+    \ @brief PWR wakeup status register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_WUF1                       \ [0x00] Wakeup flag 1 This bit is set when a wakeup event is detected on WKUP1 pin. This bit is cleared by writing 1 in the CWUF1 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN1 = 0.
+    $01 constant PWR_WUF2                       \ [0x01] Wakeup flag 2 This bit is set when a wakeup event is detected on WKUP2 pin. This bit is cleared by writing 1 in the CWUF2 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN2 = 0.
+    $02 constant PWR_WUF3                       \ [0x02] Wakeup flag 3 This bit is set when a wakeup event is detected on WKUP3 pin. This bit is cleared by writing 1 in the CWUF3 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN3 = 0.
+    $03 constant PWR_WUF4                       \ [0x03] Wakeup flag 4 This bit is set when a wakeup event is detected on WKUP4 pin. This bit is cleared by writing 1 in the CWUF4 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN4 = 0.
+    $04 constant PWR_WUF5                       \ [0x04] Wakeup flag 5 This bit is set when a wakeup event is detected on WKUP5 pin. This bit is cleared by writing 1 in the CWUF5 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN5 = 0.
+    $05 constant PWR_WUF6                       \ [0x05] Wakeup flag 6 This bit is set when a wakeup event is detected on WKUP6 pin. This bit is cleared by writing 1 in the CWUF6 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN6 = 0. If WUSEL = 11, this bit is cleared by hardware when all internal wakeup source are cleared.
+    $06 constant PWR_WUF7                       \ [0x06] Wakeup flag 7 This bit is set when a wakeup event is detected on WKUP7 pin. This bit is cleared by writing 1 in the CWUF7 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN7 = 0. If WUSEL = 11, this bit is cleared by hardware when all internal wakeup source are cleared.
+    $07 constant PWR_WUF8                       \ [0x07] Wakeup flag 8 This bit is set when a wakeup event is detected on WKUP8 pin. This bit is cleared by writing 1 in the CWUF8 bit of PWR_WUSCR when WUSEL ≠ 11, or by hardware when WUPEN8 = 0. If WUSEL = 11, this bit is cleared by hardware when all internal wakeup source are cleared.
+  [then]
+
+
+  [ifdef] PWR_PWR_WUSCR_DEF
+    \
+    \ @brief PWR wakeup status clear register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_CWUF1                      \ [0x00] Wakeup flag 1 Writing 1 to this bit clears the WUF1 flag in PWR_WUSR.
+    $01 constant PWR_CWUF2                      \ [0x01] Wakeup flag 2 Writing 1 to this bit clears the WUF2 flag in PWR_WUSR.
+    $02 constant PWR_CWUF3                      \ [0x02] Wakeup flag 3 Writing 1 to this bit clears the WUF3 flag in PWR_WUSR.
+    $03 constant PWR_CWUF4                      \ [0x03] Wakeup flag 4 Writing 1 to this bit clears the WUF4 flag in PWR_WUSR.
+    $04 constant PWR_CWUF5                      \ [0x04] Wakeup flag 5 Writing 1 to this bit clears the WUF5 flag in PWR_WUSR.
+    $05 constant PWR_CWUF6                      \ [0x05] Wakeup flag 6 Writing 1 to this bit clears the WUF6 flag in PWR_WUSR.
+    $06 constant PWR_CWUF7                      \ [0x06] Wakeup flag 7 Writing 1 to this bit clears the WUF7 flag in PWR_WUSR.
+    $07 constant PWR_CWUF8                      \ [0x07] Wakeup flag 8 Writing 1 to this bit clears the WUF8 flag in PWR_WUSR.
+  [then]
+
+
+  [ifdef] PWR_PWR_APCR_DEF
+    \
+    \ @brief PWR apply pull configuration register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_APC                        \ [0x00] Apply pull-up and pull-down configuration When this bit is set, the I/O pull-up and pull-down configurations defined in PWR_PUCRx and PWR_PDCRx are applied. When this bit is cleared, PWR_PUCRx and PWR_PDCRx are not applied to the I/Os.
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRA_DEF
+    \
+    \ @brief PWR port A pull-up control register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port A pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port A pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port A pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port A pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port A pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port A pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port A pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port A pull-up bit
+    $08 constant PWR_PU8                        \ [0x08] Port A pull-up bit
+    $09 constant PWR_PU9                        \ [0x09] Port A pull-up bit
+    $0a constant PWR_PU10                       \ [0x0a] Port A pull-up bit
+    $0b constant PWR_PU11                       \ [0x0b] Port A pull-up bit
+    $0c constant PWR_PU12                       \ [0x0c] Port A pull-up bit
+    $0d constant PWR_PU13                       \ [0x0d] Port A pull-up bit
+    $0f constant PWR_PU15                       \ [0x0f] Port A pull-up bit 15 When set, this bit activates the pull-up on PA15 when the APC bit is set in PWR_APCR. The pull-up is not activated if the corresponding PD15 bit is also set.
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRA_DEF
+    \
+    \ @brief PWR port A pull-down control register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port A pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port A pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port A pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port A pull-down bit
+    $04 constant PWR_PD4                        \ [0x04] Port A pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port A pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port A pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port A pull-down bit
+    $08 constant PWR_PD8                        \ [0x08] Port A pull-down bit
+    $09 constant PWR_PD9                        \ [0x09] Port A pull-down bit
+    $0a constant PWR_PD10                       \ [0x0a] Port A pull-down bit
+    $0b constant PWR_PD11                       \ [0x0b] Port A pull-down bit
+    $0c constant PWR_PD12                       \ [0x0c] Port A pull-down bit
+    $0e constant PWR_PD14                       \ [0x0e] Port A pull-down bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRB_DEF
+    \
+    \ @brief PWR port B pull-up control register
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port B pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port B pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port B pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port B pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port B pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port B pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port B pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port B pull-up bit
+    $08 constant PWR_PU8                        \ [0x08] Port B pull-up bit
+    $09 constant PWR_PU9                        \ [0x09] Port B pull-up bit
+    $0a constant PWR_PU10                       \ [0x0a] Port B pull-up bit
+    $0b constant PWR_PU11                       \ [0x0b] Port B pull-up bit
+    $0c constant PWR_PU12                       \ [0x0c] Port B pull-up bit
+    $0d constant PWR_PU13                       \ [0x0d] Port B pull-up bit
+    $0e constant PWR_PU14                       \ [0x0e] Port B pull-up bit
+    $0f constant PWR_PU15                       \ [0x0f] Port B pull-up bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRB_DEF
+    \
+    \ @brief PWR port B pull-down control register
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port B pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port B pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port B pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port B pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port B pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port B pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port B pull-down bit
+    $08 constant PWR_PD8                        \ [0x08] Port B pull-down bit
+    $09 constant PWR_PD9                        \ [0x09] Port B pull-down bit
+    $0a constant PWR_PD10                       \ [0x0a] Port B pull-down bit
+    $0b constant PWR_PD11                       \ [0x0b] Port B pull-down bit
+    $0c constant PWR_PD12                       \ [0x0c] Port B pull-down bit
+    $0d constant PWR_PD13                       \ [0x0d] Port B pull-down bit
+    $0e constant PWR_PD14                       \ [0x0e] Port B pull-down bit
+    $0f constant PWR_PD15                       \ [0x0f] Port B pull-down bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRC_DEF
+    \
+    \ @brief PWR port C pull-up control register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port C pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port C pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port C pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port C pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port C pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port C pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port C pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port C pull-up bit
+    $08 constant PWR_PU8                        \ [0x08] Port C pull-up bit
+    $09 constant PWR_PU9                        \ [0x09] Port C pull-up bit
+    $0a constant PWR_PU10                       \ [0x0a] Port C pull-up bit
+    $0b constant PWR_PU11                       \ [0x0b] Port C pull-up bit
+    $0c constant PWR_PU12                       \ [0x0c] Port C pull-up bit
+    $0d constant PWR_PU13                       \ [0x0d] Port C pull-up bit
+    $0e constant PWR_PU14                       \ [0x0e] Port C pull-up bit
+    $0f constant PWR_PU15                       \ [0x0f] Port C pull-up bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRC_DEF
+    \
+    \ @brief PWR port C pull-down control register
+    \ Address offset: 0x64
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port C pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port C pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port C pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port C pull-down bit
+    $04 constant PWR_PD4                        \ [0x04] Port C pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port C pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port C pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port C pull-down bit
+    $08 constant PWR_PD8                        \ [0x08] Port C pull-down bit
+    $09 constant PWR_PD9                        \ [0x09] Port C pull-down bit
+    $0a constant PWR_PD10                       \ [0x0a] Port C pull-down bit
+    $0b constant PWR_PD11                       \ [0x0b] Port C pull-down bit
+    $0c constant PWR_PD12                       \ [0x0c] Port C pull-down bit
+    $0d constant PWR_PD13                       \ [0x0d] Port C pull-down bit
+    $0e constant PWR_PD14                       \ [0x0e] Port C pull-down bit
+    $0f constant PWR_PD15                       \ [0x0f] Port C pull-down bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRD_DEF
+    \
+    \ @brief PWR port D pull-up control register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port D pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port D pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port D pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port D pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port D pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port D pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port D pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port D pull-up bit
+    $08 constant PWR_PU8                        \ [0x08] Port D pull-up bit
+    $09 constant PWR_PU9                        \ [0x09] Port D pull-up bit
+    $0a constant PWR_PU10                       \ [0x0a] Port D pull-up bit
+    $0b constant PWR_PU11                       \ [0x0b] Port D pull-up bit
+    $0c constant PWR_PU12                       \ [0x0c] Port D pull-up bit
+    $0d constant PWR_PU13                       \ [0x0d] Port D pull-up bit
+    $0e constant PWR_PU14                       \ [0x0e] Port D pull-up bit
+    $0f constant PWR_PU15                       \ [0x0f] Port D pull-up bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRD_DEF
+    \
+    \ @brief PWR port D pull-down control register
+    \ Address offset: 0x6C
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port D pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port D pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port D pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port D pull-down bit
+    $04 constant PWR_PD4                        \ [0x04] Port D pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port D pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port D pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port D pull-down bit
+    $08 constant PWR_PD8                        \ [0x08] Port D pull-down bit
+    $09 constant PWR_PD9                        \ [0x09] Port D pull-down bit
+    $0a constant PWR_PD10                       \ [0x0a] Port D pull-down bit
+    $0b constant PWR_PD11                       \ [0x0b] Port D pull-down bit
+    $0c constant PWR_PD12                       \ [0x0c] Port D pull-down bit
+    $0d constant PWR_PD13                       \ [0x0d] Port D pull-down bit
+    $0e constant PWR_PD14                       \ [0x0e] Port D pull-down bit
+    $0f constant PWR_PD15                       \ [0x0f] Port D pull-down bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRE_DEF
+    \
+    \ @brief PWR port E pull-up control register
+    \ Address offset: 0x70
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port E pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port E pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port E pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port E pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port E pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port E pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port E pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port E pull-up bit
+    $08 constant PWR_PU8                        \ [0x08] Port E pull-up bit
+    $09 constant PWR_PU9                        \ [0x09] Port E pull-up bit
+    $0a constant PWR_PU10                       \ [0x0a] Port E pull-up bit
+    $0b constant PWR_PU11                       \ [0x0b] Port E pull-up bit
+    $0c constant PWR_PU12                       \ [0x0c] Port E pull-up bit
+    $0d constant PWR_PU13                       \ [0x0d] Port E pull-up bit
+    $0e constant PWR_PU14                       \ [0x0e] Port E pull-up bit
+    $0f constant PWR_PU15                       \ [0x0f] Port E pull-up bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRE_DEF
+    \
+    \ @brief PWR port E pull-down control register
+    \ Address offset: 0x74
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port E pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port E pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port E pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port E pull-down bit
+    $04 constant PWR_PD4                        \ [0x04] Port E pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port E pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port E pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port E pull-down bit
+    $08 constant PWR_PD8                        \ [0x08] Port E pull-down bit
+    $09 constant PWR_PD9                        \ [0x09] Port E pull-down bit
+    $0a constant PWR_PD10                       \ [0x0a] Port E pull-down bit
+    $0b constant PWR_PD11                       \ [0x0b] Port E pull-down bit
+    $0c constant PWR_PD12                       \ [0x0c] Port E pull-down bit
+    $0d constant PWR_PD13                       \ [0x0d] Port E pull-down bit
+    $0e constant PWR_PD14                       \ [0x0e] Port E pull-down bit
+    $0f constant PWR_PD15                       \ [0x0f] Port E pull-down bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRF_DEF
+    \
+    \ @brief PWR port F pull-up control register
+    \ Address offset: 0x78
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port F pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port F pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port F pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port F pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port F pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port F pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port F pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port F pull-up bit
+    $08 constant PWR_PU8                        \ [0x08] Port F pull-up bit
+    $09 constant PWR_PU9                        \ [0x09] Port F pull-up bit
+    $0a constant PWR_PU10                       \ [0x0a] Port F pull-up bit
+    $0b constant PWR_PU11                       \ [0x0b] Port F pull-up bit
+    $0c constant PWR_PU12                       \ [0x0c] Port F pull-up bit
+    $0d constant PWR_PU13                       \ [0x0d] Port F pull-up bit
+    $0e constant PWR_PU14                       \ [0x0e] Port F pull-up bit
+    $0f constant PWR_PU15                       \ [0x0f] Port F pull-up bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRF_DEF
+    \
+    \ @brief PWR port F pull-down control register
+    \ Address offset: 0x7C
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port F pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port F pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port F pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port F pull-down bit
+    $04 constant PWR_PD4                        \ [0x04] Port F pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port F pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port F pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port F pull-down bit
+    $08 constant PWR_PD8                        \ [0x08] Port F pull-down bit
+    $09 constant PWR_PD9                        \ [0x09] Port F pull-down bit
+    $0a constant PWR_PD10                       \ [0x0a] Port F pull-down bit
+    $0b constant PWR_PD11                       \ [0x0b] Port F pull-down bit
+    $0c constant PWR_PD12                       \ [0x0c] Port F pull-down bit
+    $0d constant PWR_PD13                       \ [0x0d] Port F pull-down bit
+    $0e constant PWR_PD14                       \ [0x0e] Port F pull-down bit
+    $0f constant PWR_PD15                       \ [0x0f] Port F pull-down bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRG_DEF
+    \
+    \ @brief PWR port G pull-up control register
+    \ Address offset: 0x80
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port G pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port G pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port G pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port G pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port G pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port G pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port G pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port G pull-up bit
+    $08 constant PWR_PU8                        \ [0x08] Port G pull-up bit
+    $09 constant PWR_PU9                        \ [0x09] Port G pull-up bit
+    $0a constant PWR_PU10                       \ [0x0a] Port G pull-up bit
+    $0b constant PWR_PU11                       \ [0x0b] Port G pull-up bit
+    $0c constant PWR_PU12                       \ [0x0c] Port G pull-up bit
+    $0d constant PWR_PU13                       \ [0x0d] Port G pull-up bit
+    $0e constant PWR_PU14                       \ [0x0e] Port G pull-up bit
+    $0f constant PWR_PU15                       \ [0x0f] Port G pull-up bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRG_DEF
+    \
+    \ @brief PWR port G pull-down control register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port G pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port G pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port G pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port G pull-down bit
+    $04 constant PWR_PD4                        \ [0x04] Port G pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port G pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port G pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port G pull-down bit
+    $08 constant PWR_PD8                        \ [0x08] Port G pull-down bit
+    $09 constant PWR_PD9                        \ [0x09] Port G pull-down bit
+    $0a constant PWR_PD10                       \ [0x0a] Port G pull-down bit
+    $0b constant PWR_PD11                       \ [0x0b] Port G pull-down bit
+    $0c constant PWR_PD12                       \ [0x0c] Port G pull-down bit
+    $0d constant PWR_PD13                       \ [0x0d] Port G pull-down bit
+    $0e constant PWR_PD14                       \ [0x0e] Port G pull-down bit
+    $0f constant PWR_PD15                       \ [0x0f] Port G pull-down bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRH_DEF
+    \
+    \ @brief PWR port H pull-up control register
+    \ Address offset: 0x88
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port H pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port H pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port H pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port H pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port H pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port H pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port H pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port H pull-up bit
+    $08 constant PWR_PU8                        \ [0x08] Port H pull-up bit
+    $09 constant PWR_PU9                        \ [0x09] Port H pull-up bit
+    $0a constant PWR_PU10                       \ [0x0a] Port H pull-up bit
+    $0b constant PWR_PU11                       \ [0x0b] Port H pull-up bit
+    $0c constant PWR_PU12                       \ [0x0c] Port H pull-up bit
+    $0d constant PWR_PU13                       \ [0x0d] Port H pull-up bit
+    $0e constant PWR_PU14                       \ [0x0e] Port H pull-up bit
+    $0f constant PWR_PU15                       \ [0x0f] Port H pull-up bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRH_DEF
+    \
+    \ @brief PWR port H pull-down control register
+    \ Address offset: 0x8C
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port H pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port H pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port H pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port H pull-down bit
+    $04 constant PWR_PD4                        \ [0x04] Port H pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port H pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port H pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port H pull-down bit
+    $08 constant PWR_PD8                        \ [0x08] Port H pull-down bit
+    $09 constant PWR_PD9                        \ [0x09] Port H pull-down bit
+    $0a constant PWR_PD10                       \ [0x0a] Port H pull-down bit
+    $0b constant PWR_PD11                       \ [0x0b] Port H pull-down bit
+    $0c constant PWR_PD12                       \ [0x0c] Port H pull-down bit
+    $0d constant PWR_PD13                       \ [0x0d] Port H pull-down bit
+    $0e constant PWR_PD14                       \ [0x0e] Port H pull-down bit
+    $0f constant PWR_PD15                       \ [0x0f] Port H pull-down bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PUCRI_DEF
+    \
+    \ @brief PWR port I pull-up control register
+    \ Address offset: 0x90
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PU0                        \ [0x00] Port I pull-up bit
+    $01 constant PWR_PU1                        \ [0x01] Port I pull-up bit
+    $02 constant PWR_PU2                        \ [0x02] Port I pull-up bit
+    $03 constant PWR_PU3                        \ [0x03] Port I pull-up bit
+    $04 constant PWR_PU4                        \ [0x04] Port I pull-up bit
+    $05 constant PWR_PU5                        \ [0x05] Port I pull-up bit
+    $06 constant PWR_PU6                        \ [0x06] Port I pull-up bit
+    $07 constant PWR_PU7                        \ [0x07] Port I pull-up bit
+  [then]
+
+
+  [ifdef] PWR_PWR_PDCRI_DEF
+    \
+    \ @brief PWR port I pull-down control register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant PWR_PD0                        \ [0x00] Port I pull-down bit
+    $01 constant PWR_PD1                        \ [0x01] Port I pull-down bit
+    $02 constant PWR_PD2                        \ [0x02] Port I pull-down bit
+    $03 constant PWR_PD3                        \ [0x03] Port I pull-down bit
+    $04 constant PWR_PD4                        \ [0x04] Port I pull-down bit
+    $05 constant PWR_PD5                        \ [0x05] Port I pull-down bit
+    $06 constant PWR_PD6                        \ [0x06] Port I pull-down bit
+    $07 constant PWR_PD7                        \ [0x07] Port I pull-down bit
+  [then]
+
+  \
+  \ @brief Power control
+  \
+  $00 constant PWR_PWR_CR1              \ PWR control register 1
+  $04 constant PWR_PWR_CR2              \ PWR control register 2
+  $08 constant PWR_PWR_CR3              \ PWR control register 3
+  $0C constant PWR_PWR_VOSR             \ PWR voltage scaling register
+  $10 constant PWR_PWR_SVMCR            \ PWR supply voltage monitoring control register
+  $14 constant PWR_PWR_WUCR1            \ PWR wakeup control register 1
+  $18 constant PWR_PWR_WUCR2            \ PWR wakeup control register 2
+  $1C constant PWR_PWR_WUCR3            \ PWR wakeup control register 3
+  $20 constant PWR_PWR_BDCR1            \ PWR Backup domain control register 1
+  $24 constant PWR_PWR_BDCR2            \ PWR Backup domain control register 2
+  $28 constant PWR_PWR_DBPR             \ PWR disable Backup domain register
+  $2C constant PWR_PWR_UCPDR            \ PWR USB Type-C™ and Power Delivery register
+  $30 constant PWR_PWR_SECCFGR          \ PWR security configuration register
+  $34 constant PWR_PWR_PRIVCFGR         \ PWR privilege control register
+  $38 constant PWR_PWR_SR               \ PWR status register
+  $3C constant PWR_PWR_SVMSR            \ Regulator selection
+  $40 constant PWR_PWR_BDSR             \ PWR Backup domain status register
+  $44 constant PWR_PWR_WUSR             \ PWR wakeup status register
+  $48 constant PWR_PWR_WUSCR            \ PWR wakeup status clear register
+  $4C constant PWR_PWR_APCR             \ PWR apply pull configuration register
+  $50 constant PWR_PWR_PUCRA            \ PWR port A pull-up control register
+  $54 constant PWR_PWR_PDCRA            \ PWR port A pull-down control register
+  $58 constant PWR_PWR_PUCRB            \ PWR port B pull-up control register
+  $5C constant PWR_PWR_PDCRB            \ PWR port B pull-down control register
+  $60 constant PWR_PWR_PUCRC            \ PWR port C pull-up control register
+  $64 constant PWR_PWR_PDCRC            \ PWR port C pull-down control register
+  $68 constant PWR_PWR_PUCRD            \ PWR port D pull-up control register
+  $6C constant PWR_PWR_PDCRD            \ PWR port D pull-down control register
+  $70 constant PWR_PWR_PUCRE            \ PWR port E pull-up control register
+  $74 constant PWR_PWR_PDCRE            \ PWR port E pull-down control register
+  $78 constant PWR_PWR_PUCRF            \ PWR port F pull-up control register
+  $7C constant PWR_PWR_PDCRF            \ PWR port F pull-down control register
+  $80 constant PWR_PWR_PUCRG            \ PWR port G pull-up control register
+  $84 constant PWR_PWR_PDCRG            \ PWR port G pull-down control register
+  $88 constant PWR_PWR_PUCRH            \ PWR port H pull-up control register
+  $8C constant PWR_PWR_PDCRH            \ PWR port H pull-down control register
+  $90 constant PWR_PWR_PUCRI            \ PWR port I pull-up control register
+  $94 constant PWR_PWR_PDCRI            \ PWR port I pull-down control register
+
+: PWR_DEF ; [then]

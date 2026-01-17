@@ -6,33 +6,35 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DLYBOS1_DEF
 
-\
-\ @brief control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DLYBOS1_DLYB_CR_DEN                              \ Operational amplifier Enable
-$00000002 constant DLYBOS1_DLYB_CR_SEN                              \ OPALPM
-
-
-\
-\ @brief configuration register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000000f constant DLYBOS1_DLYB_CFGR_SEL                            \ SEL
-$00007f00 constant DLYBOS1_DLYB_CFGR_UNIT                           \ UNIT
-$0fff0000 constant DLYBOS1_DLYB_CFGR_LNG                            \ LNG
-$80000000 constant DLYBOS1_DLYB_CFGR_LNGF                           \ LNGF
+  [ifdef] DLYBOS1_DLYB_CR_DEF
+    \
+    \ @brief control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DLYBOS1_DEN                    \ [0x00] Operational amplifier Enable
+    $01 constant DLYBOS1_SEN                    \ [0x01] OPALPM
+  [then]
 
 
-\
-\ @brief The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
-\
-$420cf000 constant DLYBOS1_DLYB_CR  \ offset: 0x00 : control register
-$420cf004 constant DLYBOS1_DLYB_CFGR  \ offset: 0x04 : configuration register
+  [ifdef] DLYBOS1_DLYB_CFGR_DEF
+    \
+    \ @brief configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DLYBOS1_SEL                    \ [0x00 : 4] SEL
+    $08 constant DLYBOS1_UNIT                   \ [0x08 : 7] UNIT
+    $10 constant DLYBOS1_LNG                    \ [0x10 : 12] LNG
+    $1f constant DLYBOS1_LNGF                   \ [0x1f] LNGF
+  [then]
 
+  \
+  \ @brief The delay block (DLYB) is used to generate an output clock that is dephased from the input clock
+  \
+  $00 constant DLYBOS1_DLYB_CR          \ control register
+  $04 constant DLYBOS1_DLYB_CFGR        \ configuration register
+
+: DLYBOS1_DEF ; [then]

@@ -6,212 +6,222 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GTZC_TZSC_DEF
 
-\
-\ @brief TZSC control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZSC_TZSC_CR_LCK                            \ LCK
-
-
-\
-\ @brief TZSC secure configuration register 1
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZSC_TZSC_SECCFGR1_TIM2SEC                  \ TIM2SEC
-$00000002 constant GTZC_TZSC_TZSC_SECCFGR1_TIM3SEC                  \ TIM3SEC
-$00000004 constant GTZC_TZSC_TZSC_SECCFGR1_TIM4SEC                  \ TIM4SEC
-$00000008 constant GTZC_TZSC_TZSC_SECCFGR1_TIM5SEC                  \ TIM5SEC
-$00000010 constant GTZC_TZSC_TZSC_SECCFGR1_TIM6SEC                  \ TIM6SEC
-$00000020 constant GTZC_TZSC_TZSC_SECCFGR1_TIM7SEC                  \ TIM7SEC
-$00000040 constant GTZC_TZSC_TZSC_SECCFGR1_WWDGSEC                  \ WWDGSEC
-$00000080 constant GTZC_TZSC_TZSC_SECCFGR1_IWDGSEC                  \ IWDGSEC
-$00000100 constant GTZC_TZSC_TZSC_SECCFGR1_SPI2SEC                  \ SPI2SEC
-$00000200 constant GTZC_TZSC_TZSC_SECCFGR1_SPI3SEC                  \ SPI3SEC
-$00000400 constant GTZC_TZSC_TZSC_SECCFGR1_USART2SEC                \ USART2SEC
-$00000800 constant GTZC_TZSC_TZSC_SECCFGR1_USART3SEC                \ USART3SEC
-$00001000 constant GTZC_TZSC_TZSC_SECCFGR1_UART4SEC                 \ UART4SEC
-$00002000 constant GTZC_TZSC_TZSC_SECCFGR1_UART5SEC                 \ UART5SEC
-$00004000 constant GTZC_TZSC_TZSC_SECCFGR1_I2C1SEC                  \ I2C1SEC
-$00008000 constant GTZC_TZSC_TZSC_SECCFGR1_I2C2SEC                  \ I2C2SEC
-$00010000 constant GTZC_TZSC_TZSC_SECCFGR1_I2C3SEC                  \ I2C3SEC
-$00020000 constant GTZC_TZSC_TZSC_SECCFGR1_CRSSEC                   \ CRSSEC
-$00040000 constant GTZC_TZSC_TZSC_SECCFGR1_DACSEC                   \ DACSEC
-$00080000 constant GTZC_TZSC_TZSC_SECCFGR1_OPAMPSEC                 \ OPAMPSEC
-$00100000 constant GTZC_TZSC_TZSC_SECCFGR1_LPTIM1SEC                \ LPTIM1SEC
-$00200000 constant GTZC_TZSC_TZSC_SECCFGR1_LPUART1SEC               \ LPUART1SEC
-$00400000 constant GTZC_TZSC_TZSC_SECCFGR1_I2C4SEC                  \ I2C4SEC
-$00800000 constant GTZC_TZSC_TZSC_SECCFGR1_LPTIM2SEC                \ LPTIM2SEC
-$01000000 constant GTZC_TZSC_TZSC_SECCFGR1_LPTIM3SEC                \ LPTIM3SEC
-$02000000 constant GTZC_TZSC_TZSC_SECCFGR1_FDCAN1SEC                \ FDCAN1SEC
-$04000000 constant GTZC_TZSC_TZSC_SECCFGR1_USBFSSEC                 \ USBFSSEC
-$08000000 constant GTZC_TZSC_TZSC_SECCFGR1_UCPD1SEC                 \ UCPD1SEC
-$10000000 constant GTZC_TZSC_TZSC_SECCFGR1_VREFBUFSEC               \ VREFBUFSEC
-$20000000 constant GTZC_TZSC_TZSC_SECCFGR1_COMPSEC                  \ COMPSEC
-$40000000 constant GTZC_TZSC_TZSC_SECCFGR1_TIM1SEC                  \ TIM1SEC
-$80000000 constant GTZC_TZSC_TZSC_SECCFGR1_SPI1SEC                  \ SPI1SEC
+  [ifdef] GTZC_TZSC_TZSC_CR_DEF
+    \
+    \ @brief TZSC control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_LCK                  \ [0x00] LCK
+  [then]
 
 
-\
-\ @brief TZSC secure configuration register 2
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZSC_TZSC_SECCFGR2_TIM8SEC                  \ TIM8SEC
-$00000002 constant GTZC_TZSC_TZSC_SECCFGR2_USART1SEC                \ USART1SEC
-$00000004 constant GTZC_TZSC_TZSC_SECCFGR2_TIM15SEC                 \ TIM15SEC
-$00000008 constant GTZC_TZSC_TZSC_SECCFGR2_TIM16SEC                 \ TIM16SEC
-$00000010 constant GTZC_TZSC_TZSC_SECCFGR2_TIM17SEC                 \ TIM17SEC
-$00000020 constant GTZC_TZSC_TZSC_SECCFGR2_SAI1SEC                  \ SAI1SEC
-$00000040 constant GTZC_TZSC_TZSC_SECCFGR2_SAI2SEC                  \ SAI2SEC
-$00000080 constant GTZC_TZSC_TZSC_SECCFGR2_DFSDM1SEC                \ DFSDM1SEC
-$00000100 constant GTZC_TZSC_TZSC_SECCFGR2_CRCSEC                   \ CRCSEC
-$00000200 constant GTZC_TZSC_TZSC_SECCFGR2_TSCSEC                   \ TSCSEC
-$00000400 constant GTZC_TZSC_TZSC_SECCFGR2_ICACHESEC                \ ICACHESEC
-$00000800 constant GTZC_TZSC_TZSC_SECCFGR2_ADCSEC                   \ ADCSEC
-$00001000 constant GTZC_TZSC_TZSC_SECCFGR2_AESSEC                   \ AESSEC
-$00002000 constant GTZC_TZSC_TZSC_SECCFGR2_HASHSEC                  \ HASHSEC
-$00004000 constant GTZC_TZSC_TZSC_SECCFGR2_RNGSEC                   \ RNGSEC
-$00008000 constant GTZC_TZSC_TZSC_SECCFGR2_PKASEC                   \ PKASEC
-$00010000 constant GTZC_TZSC_TZSC_SECCFGR2_SDMMC1SEC                \ SDMMC1SEC
-$00020000 constant GTZC_TZSC_TZSC_SECCFGR2_FSMC_REGSEC              \ FSMC_REGSEC
-$00040000 constant GTZC_TZSC_TZSC_SECCFGR2_OCTOSPI1_REGSEC          \ OCTOSPI1_REGSEC
-
-
-\
-\ @brief TZSC privilege configuration register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZSC_TZSC_PRIVCFGR1_TIM2PRIV                \ TIM2PRIV
-$00000002 constant GTZC_TZSC_TZSC_PRIVCFGR1_TIM3PRIV                \ TIM3PRIV
-$00000004 constant GTZC_TZSC_TZSC_PRIVCFGR1_TIM4PRIV                \ TIM4PRIV
-$00000008 constant GTZC_TZSC_TZSC_PRIVCFGR1_TIM5PRIV                \ TIM5PRIV
-$00000010 constant GTZC_TZSC_TZSC_PRIVCFGR1_TIM6PRIV                \ TIM6PRIV
-$00000020 constant GTZC_TZSC_TZSC_PRIVCFGR1_TIM7PRIV                \ TIM7PRIV
-$00000040 constant GTZC_TZSC_TZSC_PRIVCFGR1_WWDGPRIV                \ WWDGPRIV
-$00000080 constant GTZC_TZSC_TZSC_PRIVCFGR1_IWDGPRIV                \ IWDGPRIV
-$00000100 constant GTZC_TZSC_TZSC_PRIVCFGR1_SPI2PRIV                \ SPI2PRIV
-$00000200 constant GTZC_TZSC_TZSC_PRIVCFGR1_SPI3PRIV                \ SPI3PRIV
-$00000400 constant GTZC_TZSC_TZSC_PRIVCFGR1_USART2PRIV              \ USART2PRIV
-$00000800 constant GTZC_TZSC_TZSC_PRIVCFGR1_USART3PRIV              \ USART3PRIV
-$00001000 constant GTZC_TZSC_TZSC_PRIVCFGR1_UART4PRIV               \ UART4PRIV
-$00002000 constant GTZC_TZSC_TZSC_PRIVCFGR1_UART5PRIV               \ UART5PRIV
-$00004000 constant GTZC_TZSC_TZSC_PRIVCFGR1_I2C1PRIV                \ I2C1PRIV
-$00008000 constant GTZC_TZSC_TZSC_PRIVCFGR1_I2C2PRIV                \ I2C2PRIV
-$00010000 constant GTZC_TZSC_TZSC_PRIVCFGR1_I2C3PRIV                \ I2C3PRIV
-$00020000 constant GTZC_TZSC_TZSC_PRIVCFGR1_CRSPRIV                 \ CRSPRIV
-$00040000 constant GTZC_TZSC_TZSC_PRIVCFGR1_DACPRIV                 \ DACPRIV
-$00080000 constant GTZC_TZSC_TZSC_PRIVCFGR1_OPAMPPRIV               \ OPAMPPRIV
-$00100000 constant GTZC_TZSC_TZSC_PRIVCFGR1_LPTIM1PRIV              \ LPTIM1PRIV
-$00200000 constant GTZC_TZSC_TZSC_PRIVCFGR1_LPUART1PRIV             \ LPUART1PRIV
-$00400000 constant GTZC_TZSC_TZSC_PRIVCFGR1_I2C4PRIV                \ I2C4PRIV
-$00800000 constant GTZC_TZSC_TZSC_PRIVCFGR1_LPTIM2PRIV              \ LPTIM2PRIV
-$01000000 constant GTZC_TZSC_TZSC_PRIVCFGR1_LPTIM3PRIV              \ LPTIM3PRIV
-$02000000 constant GTZC_TZSC_TZSC_PRIVCFGR1_FDCAN1PRIV              \ FDCAN1PRIV
-$04000000 constant GTZC_TZSC_TZSC_PRIVCFGR1_USBFSPRIV               \ USBFSPRIV
-$08000000 constant GTZC_TZSC_TZSC_PRIVCFGR1_UCPD1PRIV               \ UCPD1PRIV
-$10000000 constant GTZC_TZSC_TZSC_PRIVCFGR1_VREFBUFPRIV             \ VREFBUFPRIV
-$20000000 constant GTZC_TZSC_TZSC_PRIVCFGR1_COMPPRIV                \ COMPPRIV
-$40000000 constant GTZC_TZSC_TZSC_PRIVCFGR1_TIM1PRIV                \ TIM1PRIV
-$80000000 constant GTZC_TZSC_TZSC_PRIVCFGR1_SPI1PRIV                \ SPI1PRIV
+  [ifdef] GTZC_TZSC_TZSC_SECCFGR1_DEF
+    \
+    \ @brief TZSC secure configuration register 1
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_TIM2SEC              \ [0x00] TIM2SEC
+    $01 constant GTZC_TZSC_TIM3SEC              \ [0x01] TIM3SEC
+    $02 constant GTZC_TZSC_TIM4SEC              \ [0x02] TIM4SEC
+    $03 constant GTZC_TZSC_TIM5SEC              \ [0x03] TIM5SEC
+    $04 constant GTZC_TZSC_TIM6SEC              \ [0x04] TIM6SEC
+    $05 constant GTZC_TZSC_TIM7SEC              \ [0x05] TIM7SEC
+    $06 constant GTZC_TZSC_WWDGSEC              \ [0x06] WWDGSEC
+    $07 constant GTZC_TZSC_IWDGSEC              \ [0x07] IWDGSEC
+    $08 constant GTZC_TZSC_SPI2SEC              \ [0x08] SPI2SEC
+    $09 constant GTZC_TZSC_SPI3SEC              \ [0x09] SPI3SEC
+    $0a constant GTZC_TZSC_USART2SEC            \ [0x0a] USART2SEC
+    $0b constant GTZC_TZSC_USART3SEC            \ [0x0b] USART3SEC
+    $0c constant GTZC_TZSC_UART4SEC             \ [0x0c] UART4SEC
+    $0d constant GTZC_TZSC_UART5SEC             \ [0x0d] UART5SEC
+    $0e constant GTZC_TZSC_I2C1SEC              \ [0x0e] I2C1SEC
+    $0f constant GTZC_TZSC_I2C2SEC              \ [0x0f] I2C2SEC
+    $10 constant GTZC_TZSC_I2C3SEC              \ [0x10] I2C3SEC
+    $11 constant GTZC_TZSC_CRSSEC               \ [0x11] CRSSEC
+    $12 constant GTZC_TZSC_DACSEC               \ [0x12] DACSEC
+    $13 constant GTZC_TZSC_OPAMPSEC             \ [0x13] OPAMPSEC
+    $14 constant GTZC_TZSC_LPTIM1SEC            \ [0x14] LPTIM1SEC
+    $15 constant GTZC_TZSC_LPUART1SEC           \ [0x15] LPUART1SEC
+    $16 constant GTZC_TZSC_I2C4SEC              \ [0x16] I2C4SEC
+    $17 constant GTZC_TZSC_LPTIM2SEC            \ [0x17] LPTIM2SEC
+    $18 constant GTZC_TZSC_LPTIM3SEC            \ [0x18] LPTIM3SEC
+    $19 constant GTZC_TZSC_FDCAN1SEC            \ [0x19] FDCAN1SEC
+    $1a constant GTZC_TZSC_USBFSSEC             \ [0x1a] USBFSSEC
+    $1b constant GTZC_TZSC_UCPD1SEC             \ [0x1b] UCPD1SEC
+    $1c constant GTZC_TZSC_VREFBUFSEC           \ [0x1c] VREFBUFSEC
+    $1d constant GTZC_TZSC_COMPSEC              \ [0x1d] COMPSEC
+    $1e constant GTZC_TZSC_TIM1SEC              \ [0x1e] TIM1SEC
+    $1f constant GTZC_TZSC_SPI1SEC              \ [0x1f] SPI1SEC
+  [then]
 
 
-\
-\ @brief TZSC privilege configuration register 2
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GTZC_TZSC_TZSC_PRIVCFGR2_TIM8PRIV                \ TIM8PRIV
-$00000002 constant GTZC_TZSC_TZSC_PRIVCFGR2_USART1PRIV              \ USART1PRIV
-$00000004 constant GTZC_TZSC_TZSC_PRIVCFGR2_TIM15PRIV               \ TIM15PRIV
-$00000008 constant GTZC_TZSC_TZSC_PRIVCFGR2_TIM16PRIV               \ TIM16PRIV
-$00000010 constant GTZC_TZSC_TZSC_PRIVCFGR2_TIM17PRIV               \ TIM17PRIV
-$00000020 constant GTZC_TZSC_TZSC_PRIVCFGR2_SAI1PRIV                \ SAI1PRIV
-$00000040 constant GTZC_TZSC_TZSC_PRIVCFGR2_SAI2PRIV                \ SAI2PRIV
-$00000080 constant GTZC_TZSC_TZSC_PRIVCFGR2_DFSDM1PRIV              \ DFSDM1PRIV
-$00000100 constant GTZC_TZSC_TZSC_PRIVCFGR2_CRCPRIV                 \ CRCPRIV
-$00000200 constant GTZC_TZSC_TZSC_PRIVCFGR2_TSCPRIV                 \ TSCPRIV
-$00000400 constant GTZC_TZSC_TZSC_PRIVCFGR2_ICACHEPRIV              \ ICACHEPRIV
-$00000800 constant GTZC_TZSC_TZSC_PRIVCFGR2_ADCPRIV                 \ ADCPRIV
-$00001000 constant GTZC_TZSC_TZSC_PRIVCFGR2_AESPRIV                 \ AESPRIV
-$00002000 constant GTZC_TZSC_TZSC_PRIVCFGR2_HASHPRIV                \ HASHPRIV
-$00004000 constant GTZC_TZSC_TZSC_PRIVCFGR2_RNGPRIV                 \ RNGPRIV
-$00008000 constant GTZC_TZSC_TZSC_PRIVCFGR2_PKAPRIV                 \ PKAPRIV
-$00010000 constant GTZC_TZSC_TZSC_PRIVCFGR2_SDMMC1PRIV              \ SDMMC1PRIV
-$00020000 constant GTZC_TZSC_TZSC_PRIVCFGR2_FSMC_REGPRIV            \ FSMC_REGPRIV
-$00040000 constant GTZC_TZSC_TZSC_PRIVCFGR2_OCTOSPI1_REGPRIV        \ OCTOSPI1_REGRIV
-
-
-\
-\ @brief TZSC external memory non-secure watermark register 1
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$000007ff constant GTZC_TZSC_TZSC_MPCWM1_NSWMR1_NSWM1STRT           \ NSWM1STRT
-$0fff0000 constant GTZC_TZSC_TZSC_MPCWM1_NSWMR1_NSWM1LGTH           \ NSWM1LGTH
+  [ifdef] GTZC_TZSC_TZSC_SECCFGR2_DEF
+    \
+    \ @brief TZSC secure configuration register 2
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_TIM8SEC              \ [0x00] TIM8SEC
+    $01 constant GTZC_TZSC_USART1SEC            \ [0x01] USART1SEC
+    $02 constant GTZC_TZSC_TIM15SEC             \ [0x02] TIM15SEC
+    $03 constant GTZC_TZSC_TIM16SEC             \ [0x03] TIM16SEC
+    $04 constant GTZC_TZSC_TIM17SEC             \ [0x04] TIM17SEC
+    $05 constant GTZC_TZSC_SAI1SEC              \ [0x05] SAI1SEC
+    $06 constant GTZC_TZSC_SAI2SEC              \ [0x06] SAI2SEC
+    $07 constant GTZC_TZSC_DFSDM1SEC            \ [0x07] DFSDM1SEC
+    $08 constant GTZC_TZSC_CRCSEC               \ [0x08] CRCSEC
+    $09 constant GTZC_TZSC_TSCSEC               \ [0x09] TSCSEC
+    $0a constant GTZC_TZSC_ICACHESEC            \ [0x0a] ICACHESEC
+    $0b constant GTZC_TZSC_ADCSEC               \ [0x0b] ADCSEC
+    $0c constant GTZC_TZSC_AESSEC               \ [0x0c] AESSEC
+    $0d constant GTZC_TZSC_HASHSEC              \ [0x0d] HASHSEC
+    $0e constant GTZC_TZSC_RNGSEC               \ [0x0e] RNGSEC
+    $0f constant GTZC_TZSC_PKASEC               \ [0x0f] PKASEC
+    $10 constant GTZC_TZSC_SDMMC1SEC            \ [0x10] SDMMC1SEC
+    $11 constant GTZC_TZSC_FSMC_REGSEC          \ [0x11] FSMC_REGSEC
+    $12 constant GTZC_TZSC_OCTOSPI1_REGSEC      \ [0x12] OCTOSPI1_REGSEC
+  [then]
 
 
-\
-\ @brief TZSC external memory non-secure watermark register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
+  [ifdef] GTZC_TZSC_TZSC_PRIVCFGR1_DEF
+    \
+    \ @brief TZSC privilege configuration register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_TIM2PRIV             \ [0x00] TIM2PRIV
+    $01 constant GTZC_TZSC_TIM3PRIV             \ [0x01] TIM3PRIV
+    $02 constant GTZC_TZSC_TIM4PRIV             \ [0x02] TIM4PRIV
+    $03 constant GTZC_TZSC_TIM5PRIV             \ [0x03] TIM5PRIV
+    $04 constant GTZC_TZSC_TIM6PRIV             \ [0x04] TIM6PRIV
+    $05 constant GTZC_TZSC_TIM7PRIV             \ [0x05] TIM7PRIV
+    $06 constant GTZC_TZSC_WWDGPRIV             \ [0x06] WWDGPRIV
+    $07 constant GTZC_TZSC_IWDGPRIV             \ [0x07] IWDGPRIV
+    $08 constant GTZC_TZSC_SPI2PRIV             \ [0x08] SPI2PRIV
+    $09 constant GTZC_TZSC_SPI3PRIV             \ [0x09] SPI3PRIV
+    $0a constant GTZC_TZSC_USART2PRIV           \ [0x0a] USART2PRIV
+    $0b constant GTZC_TZSC_USART3PRIV           \ [0x0b] USART3PRIV
+    $0c constant GTZC_TZSC_UART4PRIV            \ [0x0c] UART4PRIV
+    $0d constant GTZC_TZSC_UART5PRIV            \ [0x0d] UART5PRIV
+    $0e constant GTZC_TZSC_I2C1PRIV             \ [0x0e] I2C1PRIV
+    $0f constant GTZC_TZSC_I2C2PRIV             \ [0x0f] I2C2PRIV
+    $10 constant GTZC_TZSC_I2C3PRIV             \ [0x10] I2C3PRIV
+    $11 constant GTZC_TZSC_CRSPRIV              \ [0x11] CRSPRIV
+    $12 constant GTZC_TZSC_DACPRIV              \ [0x12] DACPRIV
+    $13 constant GTZC_TZSC_OPAMPPRIV            \ [0x13] OPAMPPRIV
+    $14 constant GTZC_TZSC_LPTIM1PRIV           \ [0x14] LPTIM1PRIV
+    $15 constant GTZC_TZSC_LPUART1PRIV          \ [0x15] LPUART1PRIV
+    $16 constant GTZC_TZSC_I2C4PRIV             \ [0x16] I2C4PRIV
+    $17 constant GTZC_TZSC_LPTIM2PRIV           \ [0x17] LPTIM2PRIV
+    $18 constant GTZC_TZSC_LPTIM3PRIV           \ [0x18] LPTIM3PRIV
+    $19 constant GTZC_TZSC_FDCAN1PRIV           \ [0x19] FDCAN1PRIV
+    $1a constant GTZC_TZSC_USBFSPRIV            \ [0x1a] USBFSPRIV
+    $1b constant GTZC_TZSC_UCPD1PRIV            \ [0x1b] UCPD1PRIV
+    $1c constant GTZC_TZSC_VREFBUFPRIV          \ [0x1c] VREFBUFPRIV
+    $1d constant GTZC_TZSC_COMPPRIV             \ [0x1d] COMPPRIV
+    $1e constant GTZC_TZSC_TIM1PRIV             \ [0x1e] TIM1PRIV
+    $1f constant GTZC_TZSC_SPI1PRIV             \ [0x1f] SPI1PRIV
+  [then]
 
-$000007ff constant GTZC_TZSC_TZSC_MPCWM1_NSWMR2_NSWM2STRT           \ NSWM2STRT
-$0fff0000 constant GTZC_TZSC_TZSC_MPCWM1_NSWMR2_NSWM2LGTH           \ NSWM2LGTH
+
+  [ifdef] GTZC_TZSC_TZSC_PRIVCFGR2_DEF
+    \
+    \ @brief TZSC privilege configuration register 2
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_TIM8PRIV             \ [0x00] TIM8PRIV
+    $01 constant GTZC_TZSC_USART1PRIV           \ [0x01] USART1PRIV
+    $02 constant GTZC_TZSC_TIM15PRIV            \ [0x02] TIM15PRIV
+    $03 constant GTZC_TZSC_TIM16PRIV            \ [0x03] TIM16PRIV
+    $04 constant GTZC_TZSC_TIM17PRIV            \ [0x04] TIM17PRIV
+    $05 constant GTZC_TZSC_SAI1PRIV             \ [0x05] SAI1PRIV
+    $06 constant GTZC_TZSC_SAI2PRIV             \ [0x06] SAI2PRIV
+    $07 constant GTZC_TZSC_DFSDM1PRIV           \ [0x07] DFSDM1PRIV
+    $08 constant GTZC_TZSC_CRCPRIV              \ [0x08] CRCPRIV
+    $09 constant GTZC_TZSC_TSCPRIV              \ [0x09] TSCPRIV
+    $0a constant GTZC_TZSC_ICACHEPRIV           \ [0x0a] ICACHEPRIV
+    $0b constant GTZC_TZSC_ADCPRIV              \ [0x0b] ADCPRIV
+    $0c constant GTZC_TZSC_AESPRIV              \ [0x0c] AESPRIV
+    $0d constant GTZC_TZSC_HASHPRIV             \ [0x0d] HASHPRIV
+    $0e constant GTZC_TZSC_RNGPRIV              \ [0x0e] RNGPRIV
+    $0f constant GTZC_TZSC_PKAPRIV              \ [0x0f] PKAPRIV
+    $10 constant GTZC_TZSC_SDMMC1PRIV           \ [0x10] SDMMC1PRIV
+    $11 constant GTZC_TZSC_FSMC_REGPRIV         \ [0x11] FSMC_REGPRIV
+    $12 constant GTZC_TZSC_OCTOSPI1_REGPRIV     \ [0x12] OCTOSPI1_REGRIV
+  [then]
 
 
-\
-\ @brief TZSC external memory non-secure watermark register 1
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$000007ff constant GTZC_TZSC_TZSC_MPCWM2_NSWMR1_NSWM1STRT           \ NSWM1STRT
-$0fff0000 constant GTZC_TZSC_TZSC_MPCWM2_NSWMR1_NSWM1LGTH           \ NSWM1LGTH
-
-
-\
-\ @brief TZSC external memory non-secure watermark register 2
-\ Address offset: 0x3C
-\ Reset value: 0x00000000
-\
-
-$000007ff constant GTZC_TZSC_TZSC_MPCWM2_NSWMR2_NSWM2STRT           \ NSWM2STRT
-$0fff0000 constant GTZC_TZSC_TZSC_MPCWM2_NSWMR2_NSWM2LGTH           \ NSWM2LGTH
+  [ifdef] GTZC_TZSC_TZSC_MPCWM1_NSWMR1_DEF
+    \
+    \ @brief TZSC external memory non-secure watermark register 1
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_NSWM1STRT            \ [0x00 : 11] NSWM1STRT
+    $10 constant GTZC_TZSC_NSWM1LGTH            \ [0x10 : 12] NSWM1LGTH
+  [then]
 
 
-\
-\ @brief TZSC external memory non-secure watermark register 2
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
+  [ifdef] GTZC_TZSC_TZSC_MPCWM1_NSWMR2_DEF
+    \
+    \ @brief TZSC external memory non-secure watermark register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_NSWM2STRT            \ [0x00 : 11] NSWM2STRT
+    $10 constant GTZC_TZSC_NSWM2LGTH            \ [0x10 : 12] NSWM2LGTH
+  [then]
 
-$000007ff constant GTZC_TZSC_TZSC_MPCWM3_NSWMR1_NSWM2STRT           \ NSWM2STRT
-$0fff0000 constant GTZC_TZSC_TZSC_MPCWM3_NSWMR1_NSWM2LGTH           \ NSWM2LGTH
+
+  [ifdef] GTZC_TZSC_TZSC_MPCWM2_NSWMR1_DEF
+    \
+    \ @brief TZSC external memory non-secure watermark register 1
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_NSWM1STRT            \ [0x00 : 11] NSWM1STRT
+    $10 constant GTZC_TZSC_NSWM1LGTH            \ [0x10 : 12] NSWM1LGTH
+  [then]
 
 
-\
-\ @brief GTZC_TZSC
-\
-$40032400 constant GTZC_TZSC_TZSC_CR  \ offset: 0x00 : TZSC control register
-$40032410 constant GTZC_TZSC_TZSC_SECCFGR1  \ offset: 0x10 : TZSC secure configuration register 1
-$40032414 constant GTZC_TZSC_TZSC_SECCFGR2  \ offset: 0x14 : TZSC secure configuration register 2
-$40032420 constant GTZC_TZSC_TZSC_PRIVCFGR1  \ offset: 0x20 : TZSC privilege configuration register 1
-$40032424 constant GTZC_TZSC_TZSC_PRIVCFGR2  \ offset: 0x24 : TZSC privilege configuration register 2
-$40032430 constant GTZC_TZSC_TZSC_MPCWM1_NSWMR1  \ offset: 0x30 : TZSC external memory non-secure watermark register 1
-$40032434 constant GTZC_TZSC_TZSC_MPCWM1_NSWMR2  \ offset: 0x34 : TZSC external memory non-secure watermark register 1
-$40032438 constant GTZC_TZSC_TZSC_MPCWM2_NSWMR1  \ offset: 0x38 : TZSC external memory non-secure watermark register 1
-$4003243c constant GTZC_TZSC_TZSC_MPCWM2_NSWMR2  \ offset: 0x3C : TZSC external memory non-secure watermark register 2
-$40032440 constant GTZC_TZSC_TZSC_MPCWM3_NSWMR1  \ offset: 0x40 : TZSC external memory non-secure watermark register 2
+  [ifdef] GTZC_TZSC_TZSC_MPCWM2_NSWMR2_DEF
+    \
+    \ @brief TZSC external memory non-secure watermark register 2
+    \ Address offset: 0x3C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_NSWM2STRT            \ [0x00 : 11] NSWM2STRT
+    $10 constant GTZC_TZSC_NSWM2LGTH            \ [0x10 : 12] NSWM2LGTH
+  [then]
 
+
+  [ifdef] GTZC_TZSC_TZSC_MPCWM3_NSWMR1_DEF
+    \
+    \ @brief TZSC external memory non-secure watermark register 2
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant GTZC_TZSC_NSWM2STRT            \ [0x00 : 11] NSWM2STRT
+    $10 constant GTZC_TZSC_NSWM2LGTH            \ [0x10 : 12] NSWM2LGTH
+  [then]
+
+  \
+  \ @brief GTZC_TZSC
+  \
+  $00 constant GTZC_TZSC_TZSC_CR        \ TZSC control register
+  $10 constant GTZC_TZSC_TZSC_SECCFGR1  \ TZSC secure configuration register 1
+  $14 constant GTZC_TZSC_TZSC_SECCFGR2  \ TZSC secure configuration register 2
+  $20 constant GTZC_TZSC_TZSC_PRIVCFGR1 \ TZSC privilege configuration register 1
+  $24 constant GTZC_TZSC_TZSC_PRIVCFGR2 \ TZSC privilege configuration register 2
+  $30 constant GTZC_TZSC_TZSC_MPCWM1_NSWMR1    \ TZSC external memory non-secure watermark register 1
+  $34 constant GTZC_TZSC_TZSC_MPCWM1_NSWMR2    \ TZSC external memory non-secure watermark register 1
+  $38 constant GTZC_TZSC_TZSC_MPCWM2_NSWMR1    \ TZSC external memory non-secure watermark register 1
+  $3C constant GTZC_TZSC_TZSC_MPCWM2_NSWMR2    \ TZSC external memory non-secure watermark register 2
+  $40 constant GTZC_TZSC_TZSC_MPCWM3_NSWMR1    \ TZSC external memory non-secure watermark register 2
+
+: GTZC_TZSC_DEF ; [then]

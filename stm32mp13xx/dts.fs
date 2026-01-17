@@ -6,154 +6,163 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DTS_DEF
 
-\
-\ @brief DTS_CFGR1 is the configuration register for temperature sensor 1.
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DTS_DTS_CFGR1_TS1_EN                             \ TS1_EN
-$00000010 constant DTS_DTS_CFGR1_TS1_START                          \ TS1_START
-$00000f00 constant DTS_DTS_CFGR1_TS1_INTRIG_SEL                     \ TS1_INTRIG_SEL
-$000f0000 constant DTS_DTS_CFGR1_TS1_SMP_TIME                       \ TS1_SMP_TIME
-$00100000 constant DTS_DTS_CFGR1_REFCLK_SEL                         \ REFCLK_SEL
-$00200000 constant DTS_DTS_CFGR1_Q_MEAS_OPT                         \ Q_MEAS_opt
-$7f000000 constant DTS_DTS_CFGR1_HSREF_CLK_DIV                      \ HSREF_CLK_DIV
-
-
-\
-\ @brief DTS_T0VALR1 contains the value of the factory calibration temperature (T0) for temperature sensor 1. The system reset value is factory trimmed.
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DTS_DTS_T0VALR1_TS1_FMT0                         \ TS1_FMT0
-$00030000 constant DTS_DTS_T0VALR1_TS1_T0                           \ TS1_T0
+  [ifdef] DTS_DTS_CFGR1_DEF
+    \
+    \ @brief DTS_CFGR1 is the configuration register for temperature sensor 1.
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS1_EN                     \ [0x00] TS1_EN
+    $04 constant DTS_TS1_START                  \ [0x04] TS1_START
+    $08 constant DTS_TS1_INTRIG_SEL             \ [0x08 : 4] TS1_INTRIG_SEL
+    $10 constant DTS_TS1_SMP_TIME               \ [0x10 : 4] TS1_SMP_TIME
+    $14 constant DTS_REFCLK_SEL                 \ [0x14] REFCLK_SEL
+    $15 constant DTS_Q_MEAS_opt                 \ [0x15] Q_MEAS_opt
+    $18 constant DTS_HSREF_CLK_DIV              \ [0x18 : 7] HSREF_CLK_DIV
+  [then]
 
 
-\
-\ @brief The DTS_RAMPVALR is the ramp coefficient for the temperature sensor. The system reset value is factory trimmed.
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DTS_DTS_RAMPVALR_TS1_RAMP_COEFF                  \ TS1_RAMP_COEFF
-
-
-\
-\ @brief DTS_ITR1 contains the threshold values for sensor 1.
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DTS_DTS_ITR1_TS1_LITTHD                          \ TS1_LITTHD
-$ffff0000 constant DTS_DTS_ITR1_TS1_HITTHD                          \ TS1_HITTHD
+  [ifdef] DTS_DTS_T0VALR1_DEF
+    \
+    \ @brief DTS_T0VALR1 contains the value of the factory calibration temperature (T0) for temperature sensor 1. The system reset value is factory trimmed.
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS1_FMT0                   \ [0x00 : 16] TS1_FMT0
+    $10 constant DTS_TS1_T0                     \ [0x10 : 2] TS1_T0
+  [then]
 
 
-\
-\ @brief The DTS_DR contains the number of REF_CLK cycles used to compute the FM(T) frequency.
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant DTS_DTS_DR_TS1_MFREQ                             \ TS1_MFREQ
-
-
-\
-\ @brief Temperature sensor status register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DTS_DTS_SR_TS1_ITEF                              \ TS1_ITEF
-$00000002 constant DTS_DTS_SR_TS1_ITLF                              \ TS1_ITLF
-$00000004 constant DTS_DTS_SR_TS1_ITHF                              \ TS1_ITHF
-$00000010 constant DTS_DTS_SR_TS1_AITEF                             \ TS1_AITEF
-$00000020 constant DTS_DTS_SR_TS1_AITLF                             \ TS1_AITLF
-$00000040 constant DTS_DTS_SR_TS1_AITHF                             \ TS1_AITHF
-$00008000 constant DTS_DTS_SR_TS1_RDY                               \ TS1_RDY
+  [ifdef] DTS_DTS_RAMPVALR_DEF
+    \
+    \ @brief The DTS_RAMPVALR is the ramp coefficient for the temperature sensor. The system reset value is factory trimmed.
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS1_RAMP_COEFF             \ [0x00 : 16] TS1_RAMP_COEFF
+  [then]
 
 
-\
-\ @brief Temperature sensor interrupt enable register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DTS_DTS_ITENR_TS1_ITEEN                          \ TS1_ITEEN
-$00000002 constant DTS_DTS_ITENR_TS1_ITLEN                          \ TS1_ITLEN
-$00000004 constant DTS_DTS_ITENR_TS1_ITHEN                          \ TS1_ITHEN
-$00000010 constant DTS_DTS_ITENR_TS1_AITEEN                         \ TS1_AITEEN
-$00000020 constant DTS_DTS_ITENR_TS1_AITLEN                         \ TS1_AITLEN
-$00000040 constant DTS_DTS_ITENR_TS1_AITHEN                         \ TS1_AITHEN
+  [ifdef] DTS_DTS_ITR1_DEF
+    \
+    \ @brief DTS_ITR1 contains the threshold values for sensor 1.
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS1_LITTHD                 \ [0x00 : 16] TS1_LITTHD
+    $10 constant DTS_TS1_HITTHD                 \ [0x10 : 16] TS1_HITTHD
+  [then]
 
 
-\
-\ @brief DTS_ICIFR is the control register for the interrupt flags.
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DTS_DTS_ICIFR_TS1_CITEF                          \ TS1_CITEF
-$00000002 constant DTS_DTS_ICIFR_TS1_CITLF                          \ TS1_CITLF
-$00000004 constant DTS_DTS_ICIFR_TS1_CITHF                          \ TS1_CITHF
-$00000010 constant DTS_DTS_ICIFR_TS1_CAITEF                         \ TS1_CAITEF
-$00000020 constant DTS_DTS_ICIFR_TS1_CAITLF                         \ TS1_CAITLF
-$00000040 constant DTS_DTS_ICIFR_TS1_CAITHF                         \ TS1_CAITHF
+  [ifdef] DTS_DTS_DR_DEF
+    \
+    \ @brief The DTS_DR contains the number of REF_CLK cycles used to compute the FM(T) frequency.
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS1_MFREQ                  \ [0x00 : 16] TS1_MFREQ
+  [then]
 
 
-\
-\ @brief The DTS_OR contains general-purpose option bits.
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DTS_DTS_OR_TS_OP0                                \ TS_Op0
-$00000002 constant DTS_DTS_OR_TS_OP1                                \ TS_Op1
-$00000004 constant DTS_DTS_OR_TS_OP2                                \ TS_Op2
-$00000008 constant DTS_DTS_OR_TS_OP3                                \ TS_Op3
-$00000010 constant DTS_DTS_OR_TS_OP4                                \ TS_Op4
-$00000020 constant DTS_DTS_OR_TS_OP5                                \ TS_Op5
-$00000040 constant DTS_DTS_OR_TS_OP6                                \ TS_Op6
-$00000080 constant DTS_DTS_OR_TS_OP7                                \ TS_Op7
-$00000100 constant DTS_DTS_OR_TS_OP8                                \ TS_Op8
-$00000200 constant DTS_DTS_OR_TS_OP9                                \ TS_Op9
-$00000400 constant DTS_DTS_OR_TS_OP10                               \ TS_Op10
-$00000800 constant DTS_DTS_OR_TS_OP11                               \ TS_Op11
-$00001000 constant DTS_DTS_OR_TS_OP12                               \ TS_Op12
-$00002000 constant DTS_DTS_OR_TS_OP13                               \ TS_Op13
-$00004000 constant DTS_DTS_OR_TS_OP14                               \ TS_Op14
-$00008000 constant DTS_DTS_OR_TS_OP15                               \ TS_Op15
-$00010000 constant DTS_DTS_OR_TS_OP16                               \ TS_Op16
-$00020000 constant DTS_DTS_OR_TS_OP17                               \ TS_Op17
-$00040000 constant DTS_DTS_OR_TS_OP18                               \ TS_Op18
-$00080000 constant DTS_DTS_OR_TS_OP19                               \ TS_Op19
-$00100000 constant DTS_DTS_OR_TS_OP20                               \ TS_Op20
-$00200000 constant DTS_DTS_OR_TS_OP21                               \ TS_Op21
-$00400000 constant DTS_DTS_OR_TS_OP22                               \ TS_Op22
-$00800000 constant DTS_DTS_OR_TS_OP23                               \ TS_Op23
-$01000000 constant DTS_DTS_OR_TS_OP24                               \ TS_Op24
-$02000000 constant DTS_DTS_OR_TS_OP25                               \ TS_Op25
-$04000000 constant DTS_DTS_OR_TS_OP26                               \ TS_Op26
-$08000000 constant DTS_DTS_OR_TS_OP27                               \ TS_Op27
-$10000000 constant DTS_DTS_OR_TS_OP28                               \ TS_Op28
-$20000000 constant DTS_DTS_OR_TS_OP29                               \ TS_Op29
-$40000000 constant DTS_DTS_OR_TS_OP30                               \ TS_Op30
-$80000000 constant DTS_DTS_OR_TS_OP31                               \ TS_Op31
+  [ifdef] DTS_DTS_SR_DEF
+    \
+    \ @brief Temperature sensor status register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS1_ITEF                   \ [0x00] TS1_ITEF
+    $01 constant DTS_TS1_ITLF                   \ [0x01] TS1_ITLF
+    $02 constant DTS_TS1_ITHF                   \ [0x02] TS1_ITHF
+    $04 constant DTS_TS1_AITEF                  \ [0x04] TS1_AITEF
+    $05 constant DTS_TS1_AITLF                  \ [0x05] TS1_AITLF
+    $06 constant DTS_TS1_AITHF                  \ [0x06] TS1_AITHF
+    $0f constant DTS_TS1_RDY                    \ [0x0f] TS1_RDY
+  [then]
 
 
-\
-\ @brief DTS register block
-\
-$50028000 constant DTS_DTS_CFGR1  \ offset: 0x00 : DTS_CFGR1 is the configuration register for temperature sensor 1.
-$50028008 constant DTS_DTS_T0VALR1  \ offset: 0x08 : DTS_T0VALR1 contains the value of the factory calibration temperature (T0) for temperature sensor 1. The system reset value is factory trimmed.
-$50028010 constant DTS_DTS_RAMPVALR  \ offset: 0x10 : The DTS_RAMPVALR is the ramp coefficient for the temperature sensor. The system reset value is factory trimmed.
-$50028014 constant DTS_DTS_ITR1   \ offset: 0x14 : DTS_ITR1 contains the threshold values for sensor 1.
-$5002801c constant DTS_DTS_DR     \ offset: 0x1C : The DTS_DR contains the number of REF_CLK cycles used to compute the FM(T) frequency.
-$50028020 constant DTS_DTS_SR     \ offset: 0x20 : Temperature sensor status register
-$50028024 constant DTS_DTS_ITENR  \ offset: 0x24 : Temperature sensor interrupt enable register
-$50028028 constant DTS_DTS_ICIFR  \ offset: 0x28 : DTS_ICIFR is the control register for the interrupt flags.
-$5002802c constant DTS_DTS_OR     \ offset: 0x2C : The DTS_OR contains general-purpose option bits.
+  [ifdef] DTS_DTS_ITENR_DEF
+    \
+    \ @brief Temperature sensor interrupt enable register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS1_ITEEN                  \ [0x00] TS1_ITEEN
+    $01 constant DTS_TS1_ITLEN                  \ [0x01] TS1_ITLEN
+    $02 constant DTS_TS1_ITHEN                  \ [0x02] TS1_ITHEN
+    $04 constant DTS_TS1_AITEEN                 \ [0x04] TS1_AITEEN
+    $05 constant DTS_TS1_AITLEN                 \ [0x05] TS1_AITLEN
+    $06 constant DTS_TS1_AITHEN                 \ [0x06] TS1_AITHEN
+  [then]
 
+
+  [ifdef] DTS_DTS_ICIFR_DEF
+    \
+    \ @brief DTS_ICIFR is the control register for the interrupt flags.
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS1_CITEF                  \ [0x00] TS1_CITEF
+    $01 constant DTS_TS1_CITLF                  \ [0x01] TS1_CITLF
+    $02 constant DTS_TS1_CITHF                  \ [0x02] TS1_CITHF
+    $04 constant DTS_TS1_CAITEF                 \ [0x04] TS1_CAITEF
+    $05 constant DTS_TS1_CAITLF                 \ [0x05] TS1_CAITLF
+    $06 constant DTS_TS1_CAITHF                 \ [0x06] TS1_CAITHF
+  [then]
+
+
+  [ifdef] DTS_DTS_OR_DEF
+    \
+    \ @brief The DTS_OR contains general-purpose option bits.
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant DTS_TS_Op0                     \ [0x00] TS_Op0
+    $01 constant DTS_TS_Op1                     \ [0x01] TS_Op1
+    $02 constant DTS_TS_Op2                     \ [0x02] TS_Op2
+    $03 constant DTS_TS_Op3                     \ [0x03] TS_Op3
+    $04 constant DTS_TS_Op4                     \ [0x04] TS_Op4
+    $05 constant DTS_TS_Op5                     \ [0x05] TS_Op5
+    $06 constant DTS_TS_Op6                     \ [0x06] TS_Op6
+    $07 constant DTS_TS_Op7                     \ [0x07] TS_Op7
+    $08 constant DTS_TS_Op8                     \ [0x08] TS_Op8
+    $09 constant DTS_TS_Op9                     \ [0x09] TS_Op9
+    $0a constant DTS_TS_Op10                    \ [0x0a] TS_Op10
+    $0b constant DTS_TS_Op11                    \ [0x0b] TS_Op11
+    $0c constant DTS_TS_Op12                    \ [0x0c] TS_Op12
+    $0d constant DTS_TS_Op13                    \ [0x0d] TS_Op13
+    $0e constant DTS_TS_Op14                    \ [0x0e] TS_Op14
+    $0f constant DTS_TS_Op15                    \ [0x0f] TS_Op15
+    $10 constant DTS_TS_Op16                    \ [0x10] TS_Op16
+    $11 constant DTS_TS_Op17                    \ [0x11] TS_Op17
+    $12 constant DTS_TS_Op18                    \ [0x12] TS_Op18
+    $13 constant DTS_TS_Op19                    \ [0x13] TS_Op19
+    $14 constant DTS_TS_Op20                    \ [0x14] TS_Op20
+    $15 constant DTS_TS_Op21                    \ [0x15] TS_Op21
+    $16 constant DTS_TS_Op22                    \ [0x16] TS_Op22
+    $17 constant DTS_TS_Op23                    \ [0x17] TS_Op23
+    $18 constant DTS_TS_Op24                    \ [0x18] TS_Op24
+    $19 constant DTS_TS_Op25                    \ [0x19] TS_Op25
+    $1a constant DTS_TS_Op26                    \ [0x1a] TS_Op26
+    $1b constant DTS_TS_Op27                    \ [0x1b] TS_Op27
+    $1c constant DTS_TS_Op28                    \ [0x1c] TS_Op28
+    $1d constant DTS_TS_Op29                    \ [0x1d] TS_Op29
+    $1e constant DTS_TS_Op30                    \ [0x1e] TS_Op30
+    $1f constant DTS_TS_Op31                    \ [0x1f] TS_Op31
+  [then]
+
+  \
+  \ @brief DTS register block
+  \
+  $00 constant DTS_DTS_CFGR1            \ DTS_CFGR1 is the configuration register for temperature sensor 1.
+  $08 constant DTS_DTS_T0VALR1          \ DTS_T0VALR1 contains the value of the factory calibration temperature (T0) for temperature sensor 1. The system reset value is factory trimmed.
+  $10 constant DTS_DTS_RAMPVALR         \ The DTS_RAMPVALR is the ramp coefficient for the temperature sensor. The system reset value is factory trimmed.
+  $14 constant DTS_DTS_ITR1             \ DTS_ITR1 contains the threshold values for sensor 1.
+  $1C constant DTS_DTS_DR               \ The DTS_DR contains the number of REF_CLK cycles used to compute the FM(T) frequency.
+  $20 constant DTS_DTS_SR               \ Temperature sensor status register
+  $24 constant DTS_DTS_ITENR            \ Temperature sensor interrupt enable register
+  $28 constant DTS_DTS_ICIFR            \ DTS_ICIFR is the control register for the interrupt flags.
+  $2C constant DTS_DTS_OR               \ The DTS_OR contains general-purpose option bits.
+
+: DTS_DEF ; [then]

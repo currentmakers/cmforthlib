@@ -6,187 +6,198 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] FMPI2C_DEF
 
-\
-\ @brief Control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMPI2C_CR1_PE                                    \ Peripheral enable
-$00000002 constant FMPI2C_CR1_TXIE                                  \ TXIE
-$00000004 constant FMPI2C_CR1_RXIE                                  \ RXIE
-$00000008 constant FMPI2C_CR1_ADDRE                                 \ ADDRE
-$00000010 constant FMPI2C_CR1_NACKIE                                \ NACKIE
-$00000020 constant FMPI2C_CR1_STOPIE                                \ STOPIE
-$00000040 constant FMPI2C_CR1_TCIE                                  \ TCIE
-$00000080 constant FMPI2C_CR1_ERRIE                                 \ ERRIE
-$00000f00 constant FMPI2C_CR1_DNF                                   \ DNF
-$00001000 constant FMPI2C_CR1_ANFOFF                                \ ANFOFF
-$00004000 constant FMPI2C_CR1_TCDMAEN                               \ TCDMAEN
-$00008000 constant FMPI2C_CR1_RXDMAEN                               \ RXDMAEN
-$00010000 constant FMPI2C_CR1_SBC                                   \ SBC
-$00020000 constant FMPI2C_CR1_NOSTRETCH                             \ NOSTRETCH
-$00080000 constant FMPI2C_CR1_GCEN                                  \ GCEN
-$00100000 constant FMPI2C_CR1_SMBHEN                                \ SMBHEN
-$00200000 constant FMPI2C_CR1_SMBDEN                                \ SMBDEN
-$00400000 constant FMPI2C_CR1_ALERTEN                               \ ALERTEN
-$00800000 constant FMPI2C_CR1_PECEN                                 \ PECEN
-
-
-\
-\ @brief Control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMPI2C_CR2_SADD0                                 \ Slave address bit 0
-$000000fe constant FMPI2C_CR2_SADD1_7                               \ Slave address bit 7_1
-$00000300 constant FMPI2C_CR2_SADD8_9                               \ Slave address bit 8_9
-$00000400 constant FMPI2C_CR2_RD_WRN                                \ Transfer direction
-$00000800 constant FMPI2C_CR2_ADD10                                 \ 10-bit addressing mode
-$00001000 constant FMPI2C_CR2_HEAD10R                               \ 10-bit address header only read direction
-$00002000 constant FMPI2C_CR2_START                                 \ Start generation
-$00004000 constant FMPI2C_CR2_STOP                                  \ Stop generation
-$00008000 constant FMPI2C_CR2_NACK                                  \ NACK generation
-$00ff0000 constant FMPI2C_CR2_NBYTES                                \ Number of bytes
-$01000000 constant FMPI2C_CR2_RELOAD                                \ NBYTES reload mode
-$02000000 constant FMPI2C_CR2_AUTOEND                               \ Automatic end mode
-$04000000 constant FMPI2C_CR2_PECBYTE                               \ Packet error checking byte
+  [ifdef] FMPI2C_CR1_DEF
+    \
+    \ @brief Control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMPI2C_PE                      \ [0x00] Peripheral enable
+    $01 constant FMPI2C_TXIE                    \ [0x01] TXIE
+    $02 constant FMPI2C_RXIE                    \ [0x02] RXIE
+    $03 constant FMPI2C_ADDRE                   \ [0x03] ADDRE
+    $04 constant FMPI2C_NACKIE                  \ [0x04] NACKIE
+    $05 constant FMPI2C_STOPIE                  \ [0x05] STOPIE
+    $06 constant FMPI2C_TCIE                    \ [0x06] TCIE
+    $07 constant FMPI2C_ERRIE                   \ [0x07] ERRIE
+    $08 constant FMPI2C_DNF                     \ [0x08 : 4] DNF
+    $0c constant FMPI2C_ANFOFF                  \ [0x0c] ANFOFF
+    $0e constant FMPI2C_TCDMAEN                 \ [0x0e] TCDMAEN
+    $0f constant FMPI2C_RXDMAEN                 \ [0x0f] RXDMAEN
+    $10 constant FMPI2C_SBC                     \ [0x10] SBC
+    $11 constant FMPI2C_NOSTRETCH               \ [0x11] NOSTRETCH
+    $13 constant FMPI2C_GCEN                    \ [0x13] GCEN
+    $14 constant FMPI2C_SMBHEN                  \ [0x14] SMBHEN
+    $15 constant FMPI2C_SMBDEN                  \ [0x15] SMBDEN
+    $16 constant FMPI2C_ALERTEN                 \ [0x16] ALERTEN
+    $17 constant FMPI2C_PECEN                   \ [0x17] PECEN
+  [then]
 
 
-\
-\ @brief Own address register 1
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMPI2C_OAR1_OA1                                  \ OA1
-$000000fe constant FMPI2C_OAR1_OA11_7                               \ OA11_7
-$00000300 constant FMPI2C_OAR1_OA18_9                               \ OA18_9
-$00000400 constant FMPI2C_OAR1_OA1MODE                              \ OA1MODE
-$00008000 constant FMPI2C_OAR1_OA1EN                                \ OA1EN
-
-
-\
-\ @brief Own address register 2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$000000fe constant FMPI2C_OAR2_OA21_7                               \ OA21_7
-$00000700 constant FMPI2C_OAR2_OA2MSK                               \ OA2MSK
-$00008000 constant FMPI2C_OAR2_OA2EN                                \ OA2EN
+  [ifdef] FMPI2C_CR2_DEF
+    \
+    \ @brief Control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMPI2C_SADD0                   \ [0x00] Slave address bit 0
+    $01 constant FMPI2C_SADD1_7                 \ [0x01 : 7] Slave address bit 7_1
+    $08 constant FMPI2C_SADD8_9                 \ [0x08 : 2] Slave address bit 8_9
+    $0a constant FMPI2C_RD_WRN                  \ [0x0a] Transfer direction
+    $0b constant FMPI2C_ADD10                   \ [0x0b] 10-bit addressing mode
+    $0c constant FMPI2C_HEAD10R                 \ [0x0c] 10-bit address header only read direction
+    $0d constant FMPI2C_START                   \ [0x0d] Start generation
+    $0e constant FMPI2C_STOP                    \ [0x0e] Stop generation
+    $0f constant FMPI2C_NACK                    \ [0x0f] NACK generation
+    $10 constant FMPI2C_NBYTES                  \ [0x10 : 8] Number of bytes
+    $18 constant FMPI2C_RELOAD                  \ [0x18] NBYTES reload mode
+    $19 constant FMPI2C_AUTOEND                 \ [0x19] Automatic end mode
+    $1a constant FMPI2C_PECBYTE                 \ [0x1a] Packet error checking byte
+  [then]
 
 
-\
-\ @brief Timing register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMPI2C_TIMINGR_SCLL                              \ SCLL
-$0000ff00 constant FMPI2C_TIMINGR_SCLH                              \ SCLH
-$000f0000 constant FMPI2C_TIMINGR_SDADEL                            \ SDADEL
-$00f00000 constant FMPI2C_TIMINGR_SCLDEL                            \ SCLDEL
-$f0000000 constant FMPI2C_TIMINGR_PRESC                             \ PRESC
-
-
-\
-\ @brief Timeout register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000fff constant FMPI2C_TIMEOUTR_TIMEOUTA                         \ TIMEOUTA
-$00001000 constant FMPI2C_TIMEOUTR_TIDLE                            \ TIDLE
-$00008000 constant FMPI2C_TIMEOUTR_TIMOUTEN                         \ TIMOUTEN
-$0fff0000 constant FMPI2C_TIMEOUTR_TIMEOUTB                         \ TIMEOUTB
-$80000000 constant FMPI2C_TIMEOUTR_TEXTEN                           \ TEXTEN
+  [ifdef] FMPI2C_OAR1_DEF
+    \
+    \ @brief Own address register 1
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMPI2C_OA1                     \ [0x00] OA1
+    $01 constant FMPI2C_OA11_7                  \ [0x01 : 7] OA11_7
+    $08 constant FMPI2C_OA18_9                  \ [0x08 : 2] OA18_9
+    $0a constant FMPI2C_OA1MODE                 \ [0x0a] OA1MODE
+    $0f constant FMPI2C_OA1EN                   \ [0x0f] OA1EN
+  [then]
 
 
-\
-\ @brief Interrupt and Status register
-\ Address offset: 0x18
-\ Reset value: 0x00000001
-\
-
-$00000001 constant FMPI2C_ISR_TXE                                   \ TXE
-$00000002 constant FMPI2C_ISR_TXIS                                  \ TXIS
-$00000004 constant FMPI2C_ISR_RXNE                                  \ RXNE
-$00000008 constant FMPI2C_ISR_ADDR                                  \ ADDR
-$00000010 constant FMPI2C_ISR_NACKF                                 \ NACKF
-$00000020 constant FMPI2C_ISR_STOPF                                 \ STOPF
-$00000040 constant FMPI2C_ISR_TC                                    \ TC
-$00000080 constant FMPI2C_ISR_TCR                                   \ TCR
-$00000100 constant FMPI2C_ISR_BERR                                  \ BERR
-$00000200 constant FMPI2C_ISR_ARLO                                  \ ARLO
-$00000400 constant FMPI2C_ISR_OVR                                   \ OVR
-$00000800 constant FMPI2C_ISR_PECERR                                \ PECERR
-$00001000 constant FMPI2C_ISR_TIMEOUT                               \ TIMEOUT
-$00002000 constant FMPI2C_ISR_ALERT                                 \ ALERT
-$00008000 constant FMPI2C_ISR_BUSY                                  \ BUSY
-$00010000 constant FMPI2C_ISR_DIR                                   \ DIR
-$00fe0000 constant FMPI2C_ISR_ADDCODE                               \ ADDCODE
+  [ifdef] FMPI2C_OAR2_DEF
+    \
+    \ @brief Own address register 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $01 constant FMPI2C_OA21_7                  \ [0x01 : 7] OA21_7
+    $08 constant FMPI2C_OA2MSK                  \ [0x08 : 3] OA2MSK
+    $0f constant FMPI2C_OA2EN                   \ [0x0f] OA2EN
+  [then]
 
 
-\
-\ @brief Interrupt clear register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000008 constant FMPI2C_ICR_ADDRCF                                \ Address matched flag clear
-$00000010 constant FMPI2C_ICR_NACKCF                                \ Not Acknowledge flag clear
-$00000020 constant FMPI2C_ICR_STOPCF                                \ Stop detection flag clear
-$00000100 constant FMPI2C_ICR_BERRCF                                \ Bus error flag clear
-$00000200 constant FMPI2C_ICR_ARLOCF                                \ Arbitration Lost flag clear
-$00000400 constant FMPI2C_ICR_OVRCF                                 \ Overrun/Underrun flag clear
-$00000800 constant FMPI2C_ICR_PECCF                                 \ PEC Error flag clear
-$00001000 constant FMPI2C_ICR_TIMOUTCF                              \ Timeout detection flag clear
-$00002000 constant FMPI2C_ICR_ALERTCF                               \ Alert flag clear
+  [ifdef] FMPI2C_TIMINGR_DEF
+    \
+    \ @brief Timing register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMPI2C_SCLL                    \ [0x00 : 8] SCLL
+    $08 constant FMPI2C_SCLH                    \ [0x08 : 8] SCLH
+    $10 constant FMPI2C_SDADEL                  \ [0x10 : 4] SDADEL
+    $14 constant FMPI2C_SCLDEL                  \ [0x14 : 4] SCLDEL
+    $1c constant FMPI2C_PRESC                   \ [0x1c : 4] PRESC
+  [then]
 
 
-\
-\ @brief PEC register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMPI2C_PECR_PEC                                  \ PEC
-
-
-\
-\ @brief Receive data register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMPI2C_RXDR_RXDATA                               \ RXDATA
+  [ifdef] FMPI2C_TIMEOUTR_DEF
+    \
+    \ @brief Timeout register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMPI2C_TIMEOUTA                \ [0x00 : 12] TIMEOUTA
+    $0c constant FMPI2C_TIDLE                   \ [0x0c] TIDLE
+    $0f constant FMPI2C_TIMOUTEN                \ [0x0f] TIMOUTEN
+    $10 constant FMPI2C_TIMEOUTB                \ [0x10 : 12] TIMEOUTB
+    $1f constant FMPI2C_TEXTEN                  \ [0x1f] TEXTEN
+  [then]
 
 
-\
-\ @brief Transmit data register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
+  [ifdef] FMPI2C_ISR_DEF
+    \
+    \ @brief Interrupt and Status register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000001
+    \
+    $00 constant FMPI2C_TXE                     \ [0x00] TXE
+    $01 constant FMPI2C_TXIS                    \ [0x01] TXIS
+    $02 constant FMPI2C_RXNE                    \ [0x02] RXNE
+    $03 constant FMPI2C_ADDR                    \ [0x03] ADDR
+    $04 constant FMPI2C_NACKF                   \ [0x04] NACKF
+    $05 constant FMPI2C_STOPF                   \ [0x05] STOPF
+    $06 constant FMPI2C_TC                      \ [0x06] TC
+    $07 constant FMPI2C_TCR                     \ [0x07] TCR
+    $08 constant FMPI2C_BERR                    \ [0x08] BERR
+    $09 constant FMPI2C_ARLO                    \ [0x09] ARLO
+    $0a constant FMPI2C_OVR                     \ [0x0a] OVR
+    $0b constant FMPI2C_PECERR                  \ [0x0b] PECERR
+    $0c constant FMPI2C_TIMEOUT                 \ [0x0c] TIMEOUT
+    $0d constant FMPI2C_ALERT                   \ [0x0d] ALERT
+    $0f constant FMPI2C_BUSY                    \ [0x0f] BUSY
+    $10 constant FMPI2C_DIR                     \ [0x10] DIR
+    $11 constant FMPI2C_ADDCODE                 \ [0x11 : 7] ADDCODE
+  [then]
 
-$000000ff constant FMPI2C_TXDR_TXDATA                               \ TXDATA
+
+  [ifdef] FMPI2C_ICR_DEF
+    \
+    \ @brief Interrupt clear register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $03 constant FMPI2C_ADDRCF                  \ [0x03] Address matched flag clear
+    $04 constant FMPI2C_NACKCF                  \ [0x04] Not Acknowledge flag clear
+    $05 constant FMPI2C_STOPCF                  \ [0x05] Stop detection flag clear
+    $08 constant FMPI2C_BERRCF                  \ [0x08] Bus error flag clear
+    $09 constant FMPI2C_ARLOCF                  \ [0x09] Arbitration Lost flag clear
+    $0a constant FMPI2C_OVRCF                   \ [0x0a] Overrun/Underrun flag clear
+    $0b constant FMPI2C_PECCF                   \ [0x0b] PEC Error flag clear
+    $0c constant FMPI2C_TIMOUTCF                \ [0x0c] Timeout detection flag clear
+    $0d constant FMPI2C_ALERTCF                 \ [0x0d] Alert flag clear
+  [then]
 
 
-\
-\ @brief fast-mode Inter-integrated circuit
-\
-$40006000 constant FMPI2C_CR1     \ offset: 0x00 : Control register 1
-$40006004 constant FMPI2C_CR2     \ offset: 0x04 : Control register 2
-$40006008 constant FMPI2C_OAR1    \ offset: 0x08 : Own address register 1
-$4000600c constant FMPI2C_OAR2    \ offset: 0x0C : Own address register 2
-$40006010 constant FMPI2C_TIMINGR  \ offset: 0x10 : Timing register
-$40006014 constant FMPI2C_TIMEOUTR  \ offset: 0x14 : Timeout register
-$40006018 constant FMPI2C_ISR     \ offset: 0x18 : Interrupt and Status register
-$4000601c constant FMPI2C_ICR     \ offset: 0x1C : Interrupt clear register
-$40006020 constant FMPI2C_PECR    \ offset: 0x20 : PEC register
-$40006024 constant FMPI2C_RXDR    \ offset: 0x24 : Receive data register
-$40006028 constant FMPI2C_TXDR    \ offset: 0x28 : Transmit data register
+  [ifdef] FMPI2C_PECR_DEF
+    \
+    \ @brief PEC register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMPI2C_PEC                     \ [0x00 : 8] PEC
+  [then]
 
+
+  [ifdef] FMPI2C_RXDR_DEF
+    \
+    \ @brief Receive data register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMPI2C_RXDATA                  \ [0x00 : 8] RXDATA
+  [then]
+
+
+  [ifdef] FMPI2C_TXDR_DEF
+    \
+    \ @brief Transmit data register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMPI2C_TXDATA                  \ [0x00 : 8] TXDATA
+  [then]
+
+  \
+  \ @brief fast-mode Inter-integrated circuit
+  \
+  $00 constant FMPI2C_CR1               \ Control register 1
+  $04 constant FMPI2C_CR2               \ Control register 2
+  $08 constant FMPI2C_OAR1              \ Own address register 1
+  $0C constant FMPI2C_OAR2              \ Own address register 2
+  $10 constant FMPI2C_TIMINGR           \ Timing register
+  $14 constant FMPI2C_TIMEOUTR          \ Timeout register
+  $18 constant FMPI2C_ISR               \ Interrupt and Status register
+  $1C constant FMPI2C_ICR               \ Interrupt clear register
+  $20 constant FMPI2C_PECR              \ PEC register
+  $24 constant FMPI2C_RXDR              \ Receive data register
+  $28 constant FMPI2C_TXDR              \ Transmit data register
+
+: FMPI2C_DEF ; [then]

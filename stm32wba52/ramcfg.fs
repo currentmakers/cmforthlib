@@ -6,188 +6,199 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] RAMCFG_DEF
 
-\
-\ @brief RAMCFG SRAM1 control register
-\ Address offset: 0x00
-\ Reset value: 0x00010000
-\
-
-$00000100 constant RAMCFG_RAMCFG_M1CR_SRAMER                        \ SRAM1 erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_M1ERKEYR register. Setting this bit starts the SRAM1 erase. This bit is automatically cleared by hardware at the end of the erase operation.
-$00070000 constant RAMCFG_RAMCFG_M1CR_WSC                           \ SRAM1 wait state configuration This field is used to program the number of wait states inserted on the AHB when reading the SRAM1, depending on its access time. ... Note: Before entering Stop 1 mode software must set SRAM1 wait states to at least 1.
-
-
-\
-\ @brief RAMCFG SRAM1 interrupt status register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000100 constant RAMCFG_RAMCFG_M1ISR_SRAMBUSY                     \ SRAM busy with erase operation. Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the enabled by user option, tamper detection or RDP regression. Refer to Table38.
+  [ifdef] RAMCFG_RAMCFG_M1CR_DEF
+    \
+    \ @brief RAMCFG SRAM1 control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00010000
+    \
+    $08 constant RAMCFG_SRAMER                  \ [0x08] SRAM1 erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_M1ERKEYR register. Setting this bit starts the SRAM1 erase. This bit is automatically cleared by hardware at the end of the erase operation.
+    $10 constant RAMCFG_WSC                     \ [0x10 : 3] SRAM1 wait state configuration This field is used to program the number of wait states inserted on the AHB when reading the SRAM1, depending on its access time. ... Note: Before entering Stop 1 mode software must set SRAM1 wait states to at least 1.
+  [then]
 
 
-\
-\ @brief RAMCFG SRAM1 erase key register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$000000ff constant RAMCFG_RAMCFG_M1ERKEYR_ERASEKEY                  \ Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. Write 0xCA into ERASEKEY[7:0] Write 0x53 into ERASEKEY[7:0] Note: Writing a wrong key reactivates the write protection.
-
-
-\
-\ @brief RAMCFG SRAM2 control register
-\ Address offset: 0x40
-\ Reset value: 0x00010000
-\
-
-$00000010 constant RAMCFG_RAMCFG_M2CR_ALE                           \ SRAM2 parity fail address latch enable
-$00000100 constant RAMCFG_RAMCFG_M2CR_SRAMER                        \ SRAM2 erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_M2ERKEYR register. Setting this bit starts the SRAM2 erase. This bit is automatically cleared by hardware at the end of the erase operation.
-$00070000 constant RAMCFG_RAMCFG_M2CR_WSC                           \ SRAM2 wait state configuration This field is used to program the number of wait states inserted on the AHB when reading the SRAM2, depending on its access time. ... Note: Before entering Stop 1 mode software must set SRAM2 wait states to at least 1.
+  [ifdef] RAMCFG_RAMCFG_M1ISR_DEF
+    \
+    \ @brief RAMCFG SRAM1 interrupt status register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $08 constant RAMCFG_SRAMBUSY                \ [0x08] SRAM busy with erase operation. Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the enabled by user option, tamper detection or RDP regression. Refer to Table38.
+  [then]
 
 
-\
-\ @brief RAMCFG SRAM2 interrupt enable register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RAMCFG_RAMCFG_M2IER_PEIE                         \ Parity error interrupt enable
-$00000008 constant RAMCFG_RAMCFG_M2IER_PENMI                        \ Parity error NMI. This bit is set by software and cleared only by a global RAMCFG reset Note: When PENMI bit is set, the RAMCFG maskable interrupt is not generated for a parity error whatever PEIE bit value.
-
-
-\
-\ @brief RAMCFG SRAM2 interrupt status register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RAMCFG_RAMCFG_M2ISR_PED                          \ Parity error detected
-$00000100 constant RAMCFG_RAMCFG_M2ISR_SRAMBUSY                     \ SRAM2 busy with erase operation. Note: Depending on the SRAM2, the erase operation can be performed due to software request, system reset if the enabled by user option, tamper detection or RDP regression. Refer to Table38.
+  [ifdef] RAMCFG_RAMCFG_M1ERKEYR_DEF
+    \
+    \ @brief RAMCFG SRAM1 erase key register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMCFG_ERASEKEY                \ [0x00 : 8] Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. Write 0xCA into ERASEKEY[7:0] Write 0x53 into ERASEKEY[7:0] Note: Writing a wrong key reactivates the write protection.
+  [then]
 
 
-\
-\ @brief RAMCFG SRAM2 parity error address register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant RAMCFG_RAMCFG_M2PEAR_PEA                         \ Parity error SRAM word aligned address offset.PEA[1:0] read 0b00. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with the SRAM word aligned address offset corresponding to the parity error.
-$0f000000 constant RAMCFG_RAMCFG_M2PEAR_ID                          \ Parity error AHB bus master ID. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with: Others: reserved
-$f0000000 constant RAMCFG_RAMCFG_M2PEAR_BYTE                        \ Byte parity error flag. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with: 1xxx: parity error detected on fourth byte in word aligned address x1xx: parity error detected on third byte in word aligned address xx1x: parity error detected on second byte in word aligned address xxx1: parity error detected on first byte in word aligned address
-
-
-\
-\ @brief RAMCFG SRAM2 interrupt clear register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000002 constant RAMCFG_RAMCFG_M2ICR_CPED                         \ Clear parity error detect bit Writing 1 to this bit clears the PED bit in RAMCFG_M2ISR. Reading this bit returns the value of the RAMCFG_M2ISR PED bit.
+  [ifdef] RAMCFG_RAMCFG_M2CR_DEF
+    \
+    \ @brief RAMCFG SRAM2 control register
+    \ Address offset: 0x40
+    \ Reset value: 0x00010000
+    \
+    $04 constant RAMCFG_ALE                     \ [0x04] SRAM2 parity fail address latch enable
+    $08 constant RAMCFG_SRAMER                  \ [0x08] SRAM2 erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_M2ERKEYR register. Setting this bit starts the SRAM2 erase. This bit is automatically cleared by hardware at the end of the erase operation.
+    $10 constant RAMCFG_WSC                     \ [0x10 : 3] SRAM2 wait state configuration This field is used to program the number of wait states inserted on the AHB when reading the SRAM2, depending on its access time. ... Note: Before entering Stop 1 mode software must set SRAM2 wait states to at least 1.
+  [then]
 
 
-\
-\ @brief RAMCFG SRAM2 write protection register 1
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RAMCFG_RAMCFG_M2WPR1_P0WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000002 constant RAMCFG_RAMCFG_M2WPR1_P1WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000004 constant RAMCFG_RAMCFG_M2WPR1_P2WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000008 constant RAMCFG_RAMCFG_M2WPR1_P3WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000010 constant RAMCFG_RAMCFG_M2WPR1_P4WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000020 constant RAMCFG_RAMCFG_M2WPR1_P5WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000040 constant RAMCFG_RAMCFG_M2WPR1_P6WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000080 constant RAMCFG_RAMCFG_M2WPR1_P7WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000100 constant RAMCFG_RAMCFG_M2WPR1_P8WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000200 constant RAMCFG_RAMCFG_M2WPR1_P9WP                        \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000400 constant RAMCFG_RAMCFG_M2WPR1_P10WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000800 constant RAMCFG_RAMCFG_M2WPR1_P11WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00001000 constant RAMCFG_RAMCFG_M2WPR1_P12WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00002000 constant RAMCFG_RAMCFG_M2WPR1_P13WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00004000 constant RAMCFG_RAMCFG_M2WPR1_P14WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00008000 constant RAMCFG_RAMCFG_M2WPR1_P15WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00010000 constant RAMCFG_RAMCFG_M2WPR1_P16WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00020000 constant RAMCFG_RAMCFG_M2WPR1_P17WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00040000 constant RAMCFG_RAMCFG_M2WPR1_P18WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00080000 constant RAMCFG_RAMCFG_M2WPR1_P19WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00100000 constant RAMCFG_RAMCFG_M2WPR1_P20WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00200000 constant RAMCFG_RAMCFG_M2WPR1_P21WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00400000 constant RAMCFG_RAMCFG_M2WPR1_P22WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00800000 constant RAMCFG_RAMCFG_M2WPR1_P23WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$01000000 constant RAMCFG_RAMCFG_M2WPR1_P24WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$02000000 constant RAMCFG_RAMCFG_M2WPR1_P25WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$04000000 constant RAMCFG_RAMCFG_M2WPR1_P26WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$08000000 constant RAMCFG_RAMCFG_M2WPR1_P27WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$10000000 constant RAMCFG_RAMCFG_M2WPR1_P28WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$20000000 constant RAMCFG_RAMCFG_M2WPR1_P29WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$40000000 constant RAMCFG_RAMCFG_M2WPR1_P30WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$80000000 constant RAMCFG_RAMCFG_M2WPR1_P31WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+  [ifdef] RAMCFG_RAMCFG_M2IER_DEF
+    \
+    \ @brief RAMCFG SRAM2 interrupt enable register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $01 constant RAMCFG_PEIE                    \ [0x01] Parity error interrupt enable
+    $03 constant RAMCFG_PENMI                   \ [0x03] Parity error NMI. This bit is set by software and cleared only by a global RAMCFG reset Note: When PENMI bit is set, the RAMCFG maskable interrupt is not generated for a parity error whatever PEIE bit value.
+  [then]
 
 
-\
-\ @brief RAMCFG SRAM2 write protection register 2
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RAMCFG_RAMCFG_M2WPR2_P32WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000002 constant RAMCFG_RAMCFG_M2WPR2_P33WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000004 constant RAMCFG_RAMCFG_M2WPR2_P34WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000008 constant RAMCFG_RAMCFG_M2WPR2_P35WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000010 constant RAMCFG_RAMCFG_M2WPR2_P36WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000020 constant RAMCFG_RAMCFG_M2WPR2_P37WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000040 constant RAMCFG_RAMCFG_M2WPR2_P38WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000080 constant RAMCFG_RAMCFG_M2WPR2_P39WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000100 constant RAMCFG_RAMCFG_M2WPR2_P40WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000200 constant RAMCFG_RAMCFG_M2WPR2_P41WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000400 constant RAMCFG_RAMCFG_M2WPR2_P42WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00000800 constant RAMCFG_RAMCFG_M2WPR2_P43WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00001000 constant RAMCFG_RAMCFG_M2WPR2_P44WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00002000 constant RAMCFG_RAMCFG_M2WPR2_P45WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00004000 constant RAMCFG_RAMCFG_M2WPR2_P46WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00008000 constant RAMCFG_RAMCFG_M2WPR2_P47WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00010000 constant RAMCFG_RAMCFG_M2WPR2_P48WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00020000 constant RAMCFG_RAMCFG_M2WPR2_P49WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00040000 constant RAMCFG_RAMCFG_M2WPR2_P50WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00080000 constant RAMCFG_RAMCFG_M2WPR2_P51WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00100000 constant RAMCFG_RAMCFG_M2WPR2_P52WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00200000 constant RAMCFG_RAMCFG_M2WPR2_P53WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00400000 constant RAMCFG_RAMCFG_M2WPR2_P54WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$00800000 constant RAMCFG_RAMCFG_M2WPR2_P55WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$01000000 constant RAMCFG_RAMCFG_M2WPR2_P56WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$02000000 constant RAMCFG_RAMCFG_M2WPR2_P57WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$04000000 constant RAMCFG_RAMCFG_M2WPR2_P58WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$08000000 constant RAMCFG_RAMCFG_M2WPR2_P59WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$10000000 constant RAMCFG_RAMCFG_M2WPR2_P60WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$20000000 constant RAMCFG_RAMCFG_M2WPR2_P61WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$40000000 constant RAMCFG_RAMCFG_M2WPR2_P62WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
-$80000000 constant RAMCFG_RAMCFG_M2WPR2_P63WP                       \ SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+  [ifdef] RAMCFG_RAMCFG_M2ISR_DEF
+    \
+    \ @brief RAMCFG SRAM2 interrupt status register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $01 constant RAMCFG_PED                     \ [0x01] Parity error detected
+    $08 constant RAMCFG_SRAMBUSY                \ [0x08] SRAM2 busy with erase operation. Note: Depending on the SRAM2, the erase operation can be performed due to software request, system reset if the enabled by user option, tamper detection or RDP regression. Refer to Table38.
+  [then]
 
 
-\
-\ @brief RAMCFG SRAM2 erase key register
-\ Address offset: 0x68
-\ Reset value: 0x00000000
-\
+  [ifdef] RAMCFG_RAMCFG_M2PEAR_DEF
+    \
+    \ @brief RAMCFG SRAM2 parity error address register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMCFG_PEA                     \ [0x00 : 16] Parity error SRAM word aligned address offset.PEA[1:0] read 0b00. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with the SRAM word aligned address offset corresponding to the parity error.
+    $18 constant RAMCFG_ID                      \ [0x18 : 4] Parity error AHB bus master ID. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with: Others: reserved
+    $1c constant RAMCFG_BYTE                    \ [0x1c : 4] Byte parity error flag. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with: 1xxx: parity error detected on fourth byte in word aligned address x1xx: parity error detected on third byte in word aligned address xx1x: parity error detected on second byte in word aligned address xxx1: parity error detected on first byte in word aligned address
+  [then]
 
-$000000ff constant RAMCFG_RAMCFG_M2ERKEYR_ERASEKEY                  \ Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. Write 0xCA into ERASEKEY[7:0] Write 0x53 into ERASEKEY[7:0] Note: Writing a wrong key reactivates the write protection.
+
+  [ifdef] RAMCFG_RAMCFG_M2ICR_DEF
+    \
+    \ @brief RAMCFG SRAM2 interrupt clear register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $01 constant RAMCFG_CPED                    \ [0x01] Clear parity error detect bit Writing 1 to this bit clears the PED bit in RAMCFG_M2ISR. Reading this bit returns the value of the RAMCFG_M2ISR PED bit.
+  [then]
 
 
-\
-\ @brief RAMs configuration controller
-\
-$40026000 constant RAMCFG_RAMCFG_M1CR  \ offset: 0x00 : RAMCFG SRAM1 control register
-$40026008 constant RAMCFG_RAMCFG_M1ISR  \ offset: 0x08 : RAMCFG SRAM1 interrupt status register
-$40026028 constant RAMCFG_RAMCFG_M1ERKEYR  \ offset: 0x28 : RAMCFG SRAM1 erase key register
-$40026040 constant RAMCFG_RAMCFG_M2CR  \ offset: 0x40 : RAMCFG SRAM2 control register
-$40026044 constant RAMCFG_RAMCFG_M2IER  \ offset: 0x44 : RAMCFG SRAM2 interrupt enable register
-$40026048 constant RAMCFG_RAMCFG_M2ISR  \ offset: 0x48 : RAMCFG SRAM2 interrupt status register
-$40026050 constant RAMCFG_RAMCFG_M2PEAR  \ offset: 0x50 : RAMCFG SRAM2 parity error address register
-$40026054 constant RAMCFG_RAMCFG_M2ICR  \ offset: 0x54 : RAMCFG SRAM2 interrupt clear register
-$40026058 constant RAMCFG_RAMCFG_M2WPR1  \ offset: 0x58 : RAMCFG SRAM2 write protection register 1
-$4002605c constant RAMCFG_RAMCFG_M2WPR2  \ offset: 0x5C : RAMCFG SRAM2 write protection register 2
-$40026068 constant RAMCFG_RAMCFG_M2ERKEYR  \ offset: 0x68 : RAMCFG SRAM2 erase key register
+  [ifdef] RAMCFG_RAMCFG_M2WPR1_DEF
+    \
+    \ @brief RAMCFG SRAM2 write protection register 1
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMCFG_P0WP                    \ [0x00] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $01 constant RAMCFG_P1WP                    \ [0x01] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $02 constant RAMCFG_P2WP                    \ [0x02] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $03 constant RAMCFG_P3WP                    \ [0x03] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $04 constant RAMCFG_P4WP                    \ [0x04] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $05 constant RAMCFG_P5WP                    \ [0x05] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $06 constant RAMCFG_P6WP                    \ [0x06] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $07 constant RAMCFG_P7WP                    \ [0x07] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $08 constant RAMCFG_P8WP                    \ [0x08] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $09 constant RAMCFG_P9WP                    \ [0x09] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0a constant RAMCFG_P10WP                   \ [0x0a] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0b constant RAMCFG_P11WP                   \ [0x0b] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0c constant RAMCFG_P12WP                   \ [0x0c] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0d constant RAMCFG_P13WP                   \ [0x0d] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0e constant RAMCFG_P14WP                   \ [0x0e] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0f constant RAMCFG_P15WP                   \ [0x0f] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $10 constant RAMCFG_P16WP                   \ [0x10] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $11 constant RAMCFG_P17WP                   \ [0x11] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $12 constant RAMCFG_P18WP                   \ [0x12] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $13 constant RAMCFG_P19WP                   \ [0x13] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $14 constant RAMCFG_P20WP                   \ [0x14] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $15 constant RAMCFG_P21WP                   \ [0x15] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $16 constant RAMCFG_P22WP                   \ [0x16] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $17 constant RAMCFG_P23WP                   \ [0x17] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $18 constant RAMCFG_P24WP                   \ [0x18] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $19 constant RAMCFG_P25WP                   \ [0x19] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1a constant RAMCFG_P26WP                   \ [0x1a] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1b constant RAMCFG_P27WP                   \ [0x1b] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1c constant RAMCFG_P28WP                   \ [0x1c] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1d constant RAMCFG_P29WP                   \ [0x1d] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1e constant RAMCFG_P30WP                   \ [0x1e] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1f constant RAMCFG_P31WP                   \ [0x1f] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+  [then]
 
+
+  [ifdef] RAMCFG_RAMCFG_M2WPR2_DEF
+    \
+    \ @brief RAMCFG SRAM2 write protection register 2
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMCFG_P32WP                   \ [0x00] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $01 constant RAMCFG_P33WP                   \ [0x01] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $02 constant RAMCFG_P34WP                   \ [0x02] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $03 constant RAMCFG_P35WP                   \ [0x03] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $04 constant RAMCFG_P36WP                   \ [0x04] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $05 constant RAMCFG_P37WP                   \ [0x05] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $06 constant RAMCFG_P38WP                   \ [0x06] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $07 constant RAMCFG_P39WP                   \ [0x07] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $08 constant RAMCFG_P40WP                   \ [0x08] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $09 constant RAMCFG_P41WP                   \ [0x09] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0a constant RAMCFG_P42WP                   \ [0x0a] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0b constant RAMCFG_P43WP                   \ [0x0b] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0c constant RAMCFG_P44WP                   \ [0x0c] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0d constant RAMCFG_P45WP                   \ [0x0d] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0e constant RAMCFG_P46WP                   \ [0x0e] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $0f constant RAMCFG_P47WP                   \ [0x0f] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $10 constant RAMCFG_P48WP                   \ [0x10] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $11 constant RAMCFG_P49WP                   \ [0x11] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $12 constant RAMCFG_P50WP                   \ [0x12] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $13 constant RAMCFG_P51WP                   \ [0x13] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $14 constant RAMCFG_P52WP                   \ [0x14] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $15 constant RAMCFG_P53WP                   \ [0x15] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $16 constant RAMCFG_P54WP                   \ [0x16] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $17 constant RAMCFG_P55WP                   \ [0x17] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $18 constant RAMCFG_P56WP                   \ [0x18] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $19 constant RAMCFG_P57WP                   \ [0x19] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1a constant RAMCFG_P58WP                   \ [0x1a] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1b constant RAMCFG_P59WP                   \ [0x1b] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1c constant RAMCFG_P60WP                   \ [0x1c] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1d constant RAMCFG_P61WP                   \ [0x1d] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1e constant RAMCFG_P62WP                   \ [0x1e] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+    $1f constant RAMCFG_P63WP                   \ [0x1f] SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.
+  [then]
+
+
+  [ifdef] RAMCFG_RAMCFG_M2ERKEYR_DEF
+    \
+    \ @brief RAMCFG SRAM2 erase key register
+    \ Address offset: 0x68
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMCFG_ERASEKEY                \ [0x00 : 8] Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. Write 0xCA into ERASEKEY[7:0] Write 0x53 into ERASEKEY[7:0] Note: Writing a wrong key reactivates the write protection.
+  [then]
+
+  \
+  \ @brief RAMs configuration controller
+  \
+  $00 constant RAMCFG_RAMCFG_M1CR       \ RAMCFG SRAM1 control register
+  $08 constant RAMCFG_RAMCFG_M1ISR      \ RAMCFG SRAM1 interrupt status register
+  $28 constant RAMCFG_RAMCFG_M1ERKEYR   \ RAMCFG SRAM1 erase key register
+  $40 constant RAMCFG_RAMCFG_M2CR       \ RAMCFG SRAM2 control register
+  $44 constant RAMCFG_RAMCFG_M2IER      \ RAMCFG SRAM2 interrupt enable register
+  $48 constant RAMCFG_RAMCFG_M2ISR      \ RAMCFG SRAM2 interrupt status register
+  $50 constant RAMCFG_RAMCFG_M2PEAR     \ RAMCFG SRAM2 parity error address register
+  $54 constant RAMCFG_RAMCFG_M2ICR      \ RAMCFG SRAM2 interrupt clear register
+  $58 constant RAMCFG_RAMCFG_M2WPR1     \ RAMCFG SRAM2 write protection register 1
+  $5C constant RAMCFG_RAMCFG_M2WPR2     \ RAMCFG SRAM2 write protection register 2
+  $68 constant RAMCFG_RAMCFG_M2ERKEYR   \ RAMCFG SRAM2 erase key register
+
+: RAMCFG_DEF ; [then]

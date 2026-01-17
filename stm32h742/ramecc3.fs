@@ -1,157 +1,170 @@
 \
 \ @file ramecc3.fs
-\ @brief ECC controller is associated to each RAM       area
+\ @brief ECC controller is associated to each RAM area
 \
 \ This file is auto-generated from SVD file.
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] RAMECC3_DEF
 
-\
-\ @brief RAMECC interrupt enable register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RAMECC3_IER_GIE                                  \ Global interrupt enable
-$00000002 constant RAMECC3_IER_GECCSEIE_                            \ Global ECC single error interrupt enable
-$00000004 constant RAMECC3_IER_GECCDEIE                             \ Global ECC double error interrupt enable
-$00000008 constant RAMECC3_IER_GECCDEBWIE                           \ Global ECC double error on byte write (BW) interrupt enable
-
-
-\
-\ @brief RAMECC monitor x configuration register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RAMECC3_M1CR_ECCSEIE                             \ ECC single error interrupt enable
-$00000008 constant RAMECC3_M1CR_ECCDEIE                             \ ECC double error interrupt enable
-$00000010 constant RAMECC3_M1CR_ECCDEBWIE                           \ ECC double error on byte write (BW) interrupt enable
-$00000020 constant RAMECC3_M1CR_ECCELEN                             \ ECC error latching enable
+  [ifdef] RAMECC3_IER_DEF
+    \
+    \ @brief RAMECC interrupt enable register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_GIE                    \ [0x00] Global interrupt enable
+    $01 constant RAMECC3_GECCSEIE_              \ [0x01] Global ECC single error interrupt enable
+    $02 constant RAMECC3_GECCDEIE               \ [0x02] Global ECC double error interrupt enable
+    $03 constant RAMECC3_GECCDEBWIE             \ [0x03] Global ECC double error on byte write (BW) interrupt enable
+  [then]
 
 
-\
-\ @brief RAMECC monitor x status register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RAMECC3_M1SR_SEDCF                               \ ECC single error detected and corrected flag
-$00000002 constant RAMECC3_M1SR_DEDF                                \ ECC double error detected flag
-$00000004 constant RAMECC3_M1SR_DEBWDF                              \ ECC double error on byte write (BW) detected flag
-
-
-\
-\ @brief RAMECC monitor x failing address register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000000 constant RAMECC3_M1FAR_FADD                               \ ECC error failing address
+  [ifdef] RAMECC3_M1CR_DEF
+    \
+    \ @brief RAMECC monitor x configuration register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $02 constant RAMECC3_ECCSEIE                \ [0x02] ECC single error interrupt enable
+    $03 constant RAMECC3_ECCDEIE                \ [0x03] ECC double error interrupt enable
+    $04 constant RAMECC3_ECCDEBWIE              \ [0x04] ECC double error on byte write (BW) interrupt enable
+    $05 constant RAMECC3_ECCELEN                \ [0x05] ECC error latching enable
+  [then]
 
 
-\
-\ @brief RAMECC monitor x failing data low register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant RAMECC3_M1FDRL_FDATAL                            \ Failing data low
-
-
-\
-\ @brief RAMECC monitor x failing data high register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000000 constant RAMECC3_M1FDRH_FDATAH                            \ Failing data high (64-bit memory)
+  [ifdef] RAMECC3_M1SR_DEF
+    \
+    \ @brief RAMECC monitor x status register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_SEDCF                  \ [0x00] ECC single error detected and corrected flag
+    $01 constant RAMECC3_DEDF                   \ [0x01] ECC double error detected flag
+    $02 constant RAMECC3_DEBWDF                 \ [0x02] ECC double error on byte write (BW) detected flag
+  [then]
 
 
-\
-\ @brief RAMECC monitor x failing ECC error code register
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$00000000 constant RAMECC3_M1FECR_FEC                               \ Failing error code
-
-
-\
-\ @brief RAMECC monitor x configuration register
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$00000004 constant RAMECC3_M2CR_ECCSEIE                             \ ECC single error interrupt enable
-$00000008 constant RAMECC3_M2CR_ECCDEIE                             \ ECC double error interrupt enable
-$00000010 constant RAMECC3_M2CR_ECCDEBWIE                           \ ECC double error on byte write (BW) interrupt enable
-$00000020 constant RAMECC3_M2CR_ECCELEN                             \ ECC error latching enable
+  [ifdef] RAMECC3_M1FAR_DEF
+    \
+    \ @brief RAMECC monitor x failing address register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_FADD                   \ [0x00 : 32] ECC error failing address
+  [then]
 
 
-\
-\ @brief RAMECC monitor x status register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RAMECC3_M2SR_SEDCF                               \ ECC single error detected and corrected flag
-$00000002 constant RAMECC3_M2SR_DEDF                                \ ECC double error detected flag
-$00000004 constant RAMECC3_M2SR_DEBWDF                              \ ECC double error on byte write (BW) detected flag
-
-
-\
-\ @brief RAMECC monitor x failing address register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000000 constant RAMECC3_M2FAR_FADD                               \ ECC error failing address
+  [ifdef] RAMECC3_M1FDRL_DEF
+    \
+    \ @brief RAMECC monitor x failing data low register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_FDATAL                 \ [0x00 : 32] Failing data low
+  [then]
 
 
-\
-\ @brief RAMECC monitor x failing data low register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant RAMECC3_M2FDRL_FDATAL                            \ Failing data low
-
-
-\
-\ @brief RAMECC monitor x failing data high register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000000 constant RAMECC3_M2FDRH_FDATAH                            \ Failing data high (64-bit memory)
+  [ifdef] RAMECC3_M1FDRH_DEF
+    \
+    \ @brief RAMECC monitor x failing data high register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_FDATAH                 \ [0x00 : 32] Failing data high (64-bit memory)
+  [then]
 
 
-\
-\ @brief RAMECC monitor x failing ECC error code register
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
+  [ifdef] RAMECC3_M1FECR_DEF
+    \
+    \ @brief RAMECC monitor x failing ECC error code register
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_FEC                    \ [0x00 : 32] Failing error code
+  [then]
 
-$00000000 constant RAMECC3_M2FECR_FEC                               \ Failing error code
+
+  [ifdef] RAMECC3_M2CR_DEF
+    \
+    \ @brief RAMECC monitor x configuration register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $02 constant RAMECC3_ECCSEIE                \ [0x02] ECC single error interrupt enable
+    $03 constant RAMECC3_ECCDEIE                \ [0x03] ECC double error interrupt enable
+    $04 constant RAMECC3_ECCDEBWIE              \ [0x04] ECC double error on byte write (BW) interrupt enable
+    $05 constant RAMECC3_ECCELEN                \ [0x05] ECC error latching enable
+  [then]
 
 
-\
-\ @brief ECC controller is associated to each RAM area
-\
-$58027000 constant RAMECC3_IER    \ offset: 0x00 : RAMECC interrupt enable register
-$58027020 constant RAMECC3_M1CR   \ offset: 0x20 : RAMECC monitor x configuration register
-$58027024 constant RAMECC3_M1SR   \ offset: 0x24 : RAMECC monitor x status register
-$58027028 constant RAMECC3_M1FAR  \ offset: 0x28 : RAMECC monitor x failing address register
-$5802702c constant RAMECC3_M1FDRL  \ offset: 0x2C : RAMECC monitor x failing data low register
-$58027030 constant RAMECC3_M1FDRH  \ offset: 0x30 : RAMECC monitor x failing data high register
-$58027034 constant RAMECC3_M1FECR  \ offset: 0x34 : RAMECC monitor x failing ECC error code register
-$58027040 constant RAMECC3_M2CR   \ offset: 0x40 : RAMECC monitor x configuration register
-$58027044 constant RAMECC3_M2SR   \ offset: 0x44 : RAMECC monitor x status register
-$58027048 constant RAMECC3_M2FAR  \ offset: 0x48 : RAMECC monitor x failing address register
-$5802704c constant RAMECC3_M2FDRL  \ offset: 0x4C : RAMECC monitor x failing data low register
-$58027050 constant RAMECC3_M2FDRH  \ offset: 0x50 : RAMECC monitor x failing data high register
-$58027058 constant RAMECC3_M2FECR  \ offset: 0x58 : RAMECC monitor x failing ECC error code register
+  [ifdef] RAMECC3_M2SR_DEF
+    \
+    \ @brief RAMECC monitor x status register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_SEDCF                  \ [0x00] ECC single error detected and corrected flag
+    $01 constant RAMECC3_DEDF                   \ [0x01] ECC double error detected flag
+    $02 constant RAMECC3_DEBWDF                 \ [0x02] ECC double error on byte write (BW) detected flag
+  [then]
 
+
+  [ifdef] RAMECC3_M2FAR_DEF
+    \
+    \ @brief RAMECC monitor x failing address register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_FADD                   \ [0x00 : 32] ECC error failing address
+  [then]
+
+
+  [ifdef] RAMECC3_M2FDRL_DEF
+    \
+    \ @brief RAMECC monitor x failing data low register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_FDATAL                 \ [0x00 : 32] Failing data low
+  [then]
+
+
+  [ifdef] RAMECC3_M2FDRH_DEF
+    \
+    \ @brief RAMECC monitor x failing data high register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_FDATAH                 \ [0x00 : 32] Failing data high (64-bit memory)
+  [then]
+
+
+  [ifdef] RAMECC3_M2FECR_DEF
+    \
+    \ @brief RAMECC monitor x failing ECC error code register
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant RAMECC3_FEC                    \ [0x00 : 32] Failing error code
+  [then]
+
+  \
+  \ @brief ECC controller is associated to each RAM area
+  \
+  $00 constant RAMECC3_IER              \ RAMECC interrupt enable register
+  $20 constant RAMECC3_M1CR             \ RAMECC monitor x configuration register
+  $24 constant RAMECC3_M1SR             \ RAMECC monitor x status register
+  $28 constant RAMECC3_M1FAR            \ RAMECC monitor x failing address register
+  $2C constant RAMECC3_M1FDRL           \ RAMECC monitor x failing data low register
+  $30 constant RAMECC3_M1FDRH           \ RAMECC monitor x failing data high register
+  $34 constant RAMECC3_M1FECR           \ RAMECC monitor x failing ECC error code register
+  $40 constant RAMECC3_M2CR             \ RAMECC monitor x configuration register
+  $44 constant RAMECC3_M2SR             \ RAMECC monitor x status register
+  $48 constant RAMECC3_M2FAR            \ RAMECC monitor x failing address register
+  $4C constant RAMECC3_M2FDRL           \ RAMECC monitor x failing data low register
+  $50 constant RAMECC3_M2FDRH           \ RAMECC monitor x failing data high register
+  $58 constant RAMECC3_M2FECR           \ RAMECC monitor x failing ECC error code register
+
+: RAMECC3_DEF ; [then]

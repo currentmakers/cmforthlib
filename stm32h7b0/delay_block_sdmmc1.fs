@@ -6,33 +6,35 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] DELAY_BLOCK_SDMMC1_DEF
 
-\
-\ @brief DLYB control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant DELAY_BLOCK_SDMMC1_CR_DEN                        \ Delay block enable bit
-$00000002 constant DELAY_BLOCK_SDMMC1_CR_SEN                        \ Sampler length enable bit
-
-
-\
-\ @brief DLYB configuration register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000000f constant DELAY_BLOCK_SDMMC1_CFGR_SEL                      \ Select the phase for the Output clock
-$00007f00 constant DELAY_BLOCK_SDMMC1_CFGR_UNIT                     \ Delay Defines the delay of a Unit delay cell
-$0fff0000 constant DELAY_BLOCK_SDMMC1_CFGR_LNG                      \ Delay line length value
-$80000000 constant DELAY_BLOCK_SDMMC1_CFGR_LNGF                     \ Length valid flag
+  [ifdef] DELAY_BLOCK_SDMMC1_CR_DEF
+    \
+    \ @brief DLYB control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant DELAY_BLOCK_SDMMC1_DEN         \ [0x00] Delay block enable bit
+    $01 constant DELAY_BLOCK_SDMMC1_SEN         \ [0x01] Sampler length enable bit
+  [then]
 
 
-\
-\ @brief DELAY_Block_SDMMC1
-\
-$52008000 constant DELAY_BLOCK_SDMMC1_CR  \ offset: 0x00 : DLYB control register
-$52008004 constant DELAY_BLOCK_SDMMC1_CFGR  \ offset: 0x04 : DLYB configuration register
+  [ifdef] DELAY_BLOCK_SDMMC1_CFGR_DEF
+    \
+    \ @brief DLYB configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant DELAY_BLOCK_SDMMC1_SEL         \ [0x00 : 4] Select the phase for the Output clock
+    $08 constant DELAY_BLOCK_SDMMC1_UNIT        \ [0x08 : 7] Delay Defines the delay of a Unit delay cell
+    $10 constant DELAY_BLOCK_SDMMC1_LNG         \ [0x10 : 12] Delay line length value
+    $1f constant DELAY_BLOCK_SDMMC1_LNGF        \ [0x1f] Length valid flag
+  [then]
 
+  \
+  \ @brief DELAY_Block_SDMMC1
+  \
+  $00 constant DELAY_BLOCK_SDMMC1_CR    \ DLYB control register
+  $04 constant DELAY_BLOCK_SDMMC1_CFGR  \ DLYB configuration register
+
+: DELAY_BLOCK_SDMMC1_DEF ; [then]

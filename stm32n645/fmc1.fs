@@ -6,729 +6,779 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief SRAM/NOR Flash chip-select control register for memory region 1
-\ Address offset: 0x00
-\ Reset value: 0x000030DB
-\
-
-$00000001 constant FMC1_FMC_BCR1_MBKEN                              \ Memory region enable bit
-$00000002 constant FMC1_FMC_BCR1_MUXEN                              \ Address/data multiplexing enable bit
-$0000000c constant FMC1_FMC_BCR1_MTYP                               \ Memory type
-$00000030 constant FMC1_FMC_BCR1_MWID                               \ Memory data bus width
-$00000040 constant FMC1_FMC_BCR1_FACCEN                             \ Flash memory access enable
-$00000100 constant FMC1_FMC_BCR1_BURSTEN                            \ Burst enable bit
-$00000200 constant FMC1_FMC_BCR1_WAITPOL                            \ Wait signal polarity bit
-$00000800 constant FMC1_FMC_BCR1_WAITCFG                            \ Wait timing configuration
-$00001000 constant FMC1_FMC_BCR1_WREN                               \ Write enable bit
-$00002000 constant FMC1_FMC_BCR1_WAITEN                             \ Wait enable bit
-$00004000 constant FMC1_FMC_BCR1_EXTMOD                             \ Extended mode enable
-$00008000 constant FMC1_FMC_BCR1_ASYNCWAIT                          \ Wait signal during asynchronous transfers
-$00070000 constant FMC1_FMC_BCR1_CPSIZE                             \ CRAM page size
-$00080000 constant FMC1_FMC_BCR1_CBURSTRW                           \ Write burst enable
-$00300000 constant FMC1_FMC_BCR1_CSCOUNT0                           \ Chip Select (CS) counter
-$00c00000 constant FMC1_FMC_BCR1_NBLSET                             \ Byte lane (NBL) setup
-
-
-\
-\ @brief SRAM/NOR Flash chip-select timing registers for memory region 1
-\ Address offset: 0x04
-\ Reset value: 0x0FFFFFFF
-\
-
-$0000000f constant FMC1_FMC_BTR1_ADDSET                             \ Address setup phase duration
-$000000f0 constant FMC1_FMC_BTR1_ADDHLD                             \ Address-hold phase duration
-$0000ff00 constant FMC1_FMC_BTR1_DATAST                             \ Data-phase duration
-$000f0000 constant FMC1_FMC_BTR1_BUSTURN                            \ Bus turnaround phase duration
-$00f00000 constant FMC1_FMC_BTR1_CLKDIV                             \ Clock divide ratio (for FMC_CLK signal)
-$0f000000 constant FMC1_FMC_BTR1_DATLAT                             \ Data latency for synchronous memory (see note below bit descriptions)
-$30000000 constant FMC1_FMC_BTR1_ACCMOD                             \ Access mode
-$c0000000 constant FMC1_FMC_BTR1_DATAHLD                            \ Data Hold phase duration
-
-
-\
-\ @brief SRAM/NOR Flash chip-select control register for memory region 2
-\ Address offset: 0x08
-\ Reset value: 0x000030D2
-\
-
-$00000001 constant FMC1_FMC_BCR2_MBKEN                              \ Memory region enable bit
-$00000002 constant FMC1_FMC_BCR2_MUXEN                              \ Address/data multiplexing enable bit
-$0000000c constant FMC1_FMC_BCR2_MTYP                               \ Memory type
-$00000030 constant FMC1_FMC_BCR2_MWID                               \ Memory data bus width
-$00000040 constant FMC1_FMC_BCR2_FACCEN                             \ Flash memory access enable
-$00000100 constant FMC1_FMC_BCR2_BURSTEN                            \ Burst enable bit
-$00000200 constant FMC1_FMC_BCR2_WAITPOL                            \ Wait signal polarity bit
-$00000800 constant FMC1_FMC_BCR2_WAITCFG                            \ Wait timing configuration
-$00001000 constant FMC1_FMC_BCR2_WREN                               \ Write enable bit
-$00002000 constant FMC1_FMC_BCR2_WAITEN                             \ Wait enable bit
-$00004000 constant FMC1_FMC_BCR2_EXTMOD                             \ Extended mode enable
-$00008000 constant FMC1_FMC_BCR2_ASYNCWAIT                          \ Wait signal during asynchronous transfers
-$00070000 constant FMC1_FMC_BCR2_CPSIZE                             \ CRAM page size
-$00080000 constant FMC1_FMC_BCR2_CBURSTRW                           \ Write burst enable
-$00300000 constant FMC1_FMC_BCR2_CSCOUNT0                           \ Chip Select (CS) counter
-$00c00000 constant FMC1_FMC_BCR2_NBLSET                             \ Byte lane (NBL) setup
-
-
-\
-\ @brief SRAM/NOR Flash chip-select timing registers for memory region 2
-\ Address offset: 0x0C
-\ Reset value: 0x0FFFFFFF
-\
-
-$0000000f constant FMC1_FMC_BTR2_ADDSET                             \ Address setup phase duration
-$000000f0 constant FMC1_FMC_BTR2_ADDHLD                             \ Address-hold phase duration
-$0000ff00 constant FMC1_FMC_BTR2_DATAST                             \ Data-phase duration
-$000f0000 constant FMC1_FMC_BTR2_BUSTURN                            \ Bus turnaround phase duration
-$00f00000 constant FMC1_FMC_BTR2_CLKDIV                             \ Clock divide ratio (for FMC_CLK signal)
-$0f000000 constant FMC1_FMC_BTR2_DATLAT                             \ Data latency for synchronous memory (see note below bit descriptions)
-$30000000 constant FMC1_FMC_BTR2_ACCMOD                             \ Access mode
-$c0000000 constant FMC1_FMC_BTR2_DATAHLD                            \ Data Hold phase duration
-
-
-\
-\ @brief SRAM/NOR Flash chip-select control register for memory region 3
-\ Address offset: 0x10
-\ Reset value: 0x000030D2
-\
-
-$00000001 constant FMC1_FMC_BCR3_MBKEN                              \ Memory region enable bit
-$00000002 constant FMC1_FMC_BCR3_MUXEN                              \ Address/data multiplexing enable bit
-$0000000c constant FMC1_FMC_BCR3_MTYP                               \ Memory type
-$00000030 constant FMC1_FMC_BCR3_MWID                               \ Memory data bus width
-$00000040 constant FMC1_FMC_BCR3_FACCEN                             \ Flash memory access enable
-$00000100 constant FMC1_FMC_BCR3_BURSTEN                            \ Burst enable bit
-$00000200 constant FMC1_FMC_BCR3_WAITPOL                            \ Wait signal polarity bit
-$00000800 constant FMC1_FMC_BCR3_WAITCFG                            \ Wait timing configuration
-$00001000 constant FMC1_FMC_BCR3_WREN                               \ Write enable bit
-$00002000 constant FMC1_FMC_BCR3_WAITEN                             \ Wait enable bit
-$00004000 constant FMC1_FMC_BCR3_EXTMOD                             \ Extended mode enable
-$00008000 constant FMC1_FMC_BCR3_ASYNCWAIT                          \ Wait signal during asynchronous transfers
-$00070000 constant FMC1_FMC_BCR3_CPSIZE                             \ CRAM page size
-$00080000 constant FMC1_FMC_BCR3_CBURSTRW                           \ Write burst enable
-$00300000 constant FMC1_FMC_BCR3_CSCOUNT0                           \ Chip Select (CS) counter
-$00c00000 constant FMC1_FMC_BCR3_NBLSET                             \ Byte lane (NBL) setup
-
-
-\
-\ @brief SRAM/NOR Flash chip-select timing registers for memory region 3
-\ Address offset: 0x14
-\ Reset value: 0x0FFFFFFF
-\
-
-$0000000f constant FMC1_FMC_BTR3_ADDSET                             \ Address setup phase duration
-$000000f0 constant FMC1_FMC_BTR3_ADDHLD                             \ Address-hold phase duration
-$0000ff00 constant FMC1_FMC_BTR3_DATAST                             \ Data-phase duration
-$000f0000 constant FMC1_FMC_BTR3_BUSTURN                            \ Bus turnaround phase duration
-$00f00000 constant FMC1_FMC_BTR3_CLKDIV                             \ Clock divide ratio (for FMC_CLK signal)
-$0f000000 constant FMC1_FMC_BTR3_DATLAT                             \ Data latency for synchronous memory (see note below bit descriptions)
-$30000000 constant FMC1_FMC_BTR3_ACCMOD                             \ Access mode
-$c0000000 constant FMC1_FMC_BTR3_DATAHLD                            \ Data Hold phase duration
-
-
-\
-\ @brief SRAM/NOR Flash chip-select control register for memory region 4
-\ Address offset: 0x18
-\ Reset value: 0x000030D2
-\
-
-$00000001 constant FMC1_FMC_BCR4_MBKEN                              \ Memory region enable bit
-$00000002 constant FMC1_FMC_BCR4_MUXEN                              \ Address/data multiplexing enable bit
-$0000000c constant FMC1_FMC_BCR4_MTYP                               \ Memory type
-$00000030 constant FMC1_FMC_BCR4_MWID                               \ Memory data bus width
-$00000040 constant FMC1_FMC_BCR4_FACCEN                             \ Flash memory access enable
-$00000100 constant FMC1_FMC_BCR4_BURSTEN                            \ Burst enable bit
-$00000200 constant FMC1_FMC_BCR4_WAITPOL                            \ Wait signal polarity bit
-$00000800 constant FMC1_FMC_BCR4_WAITCFG                            \ Wait timing configuration
-$00001000 constant FMC1_FMC_BCR4_WREN                               \ Write enable bit
-$00002000 constant FMC1_FMC_BCR4_WAITEN                             \ Wait enable bit
-$00004000 constant FMC1_FMC_BCR4_EXTMOD                             \ Extended mode enable
-$00008000 constant FMC1_FMC_BCR4_ASYNCWAIT                          \ Wait signal during asynchronous transfers
-$00070000 constant FMC1_FMC_BCR4_CPSIZE                             \ CRAM page size
-$00080000 constant FMC1_FMC_BCR4_CBURSTRW                           \ Write burst enable
-$00300000 constant FMC1_FMC_BCR4_CSCOUNT0                           \ Chip Select (CS) counter
-$00c00000 constant FMC1_FMC_BCR4_NBLSET                             \ Byte lane (NBL) setup
-
-
-\
-\ @brief SRAM/NOR Flash chip-select timing registers for memory region 4
-\ Address offset: 0x1C
-\ Reset value: 0x0FFFFFFF
-\
-
-$0000000f constant FMC1_FMC_BTR4_ADDSET                             \ Address setup phase duration
-$000000f0 constant FMC1_FMC_BTR4_ADDHLD                             \ Address-hold phase duration
-$0000ff00 constant FMC1_FMC_BTR4_DATAST                             \ Data-phase duration
-$000f0000 constant FMC1_FMC_BTR4_BUSTURN                            \ Bus turnaround phase duration
-$00f00000 constant FMC1_FMC_BTR4_CLKDIV                             \ Clock divide ratio (for FMC_CLK signal)
-$0f000000 constant FMC1_FMC_BTR4_DATLAT                             \ Data latency for synchronous memory (see note below bit descriptions)
-$30000000 constant FMC1_FMC_BTR4_ACCMOD                             \ Access mode
-$c0000000 constant FMC1_FMC_BTR4_DATAHLD                            \ Data Hold phase duration
-
-
-\
-\ @brief FMC common configuration register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$000f0000 constant FMC1_FMC_CFGR_CLKDIV                             \ Clock divide ratio (for FMC_CLK signal)
-$00100000 constant FMC1_FMC_CFGR_CCLKEN                             \ Continuous clock enable
-$01000000 constant FMC1_FMC_CFGR_BMAP0                              \ FMC memory region mapping
-$02000000 constant FMC1_FMC_CFGR_BMAP1                              \ FMC memory region mapping
-$80000000 constant FMC1_FMC_CFGR_FMCEN                              \ FMC controller enable
-
-
-\
-\ @brief NAND Flash programmable control register
-\ Address offset: 0x80
-\ Reset value: 0x0007FE08
-\
-
-$00000002 constant FMC1_FMC_PCR_PWAITEN                             \ Wait feature enable bit
-$00000004 constant FMC1_FMC_PCR_PBKEN                               \ NAND Flash memory region enable bit
-$00000030 constant FMC1_FMC_PCR_PWID                                \ Data bus width
-$00000040 constant FMC1_FMC_PCR_ECCEN                               \ ECC computation logic enable bit
-$00000100 constant FMC1_FMC_PCR_ECCALG                              \ ECC algorithm
-$00001e00 constant FMC1_FMC_PCR_TCLR                                \ CLE to RE delay.
-$0001e000 constant FMC1_FMC_PCR_TAR                                 \ ALE to RE delay.
-$000e0000 constant FMC1_FMC_PCR_ECCSS                               \ ECC sector size (used to access spare area)
-$01000000 constant FMC1_FMC_PCR_BCHECC                              \ BCH error correction capability
-$02000000 constant FMC1_FMC_PCR_WEN                                 \ Write enable
-
-
-\
-\ @brief FMC status register
-\ Address offset: 0x84
-\ Reset value: 0x00000053
-\
-
-$00000003 constant FMC1_FMC_SR_ISOST                                \ FMC isolation state with respect to the AXI interface
-$00000010 constant FMC1_FMC_SR_PEF                                  \ Pipe Empty Flag
-$00000040 constant FMC1_FMC_SR_NWRF                                 \ NAND write request flag
-
-
-\
-\ @brief FMC common memory space timing register
-\ Address offset: 0x88
-\ Reset value: 0x0A0A0A0A
-\
-
-$000000ff constant FMC1_FMC_PMEM_MEMSET                             \ Common memory setup time
-$0000ff00 constant FMC1_FMC_PMEM_MEMWAIT                            \ Common memory wait time
-$00ff0000 constant FMC1_FMC_PMEM_MEMHOLD                            \ Common memory hold time
-$ff000000 constant FMC1_FMC_PMEM_MEMHIZ                             \ Common memory data bus Hi-Z time
-
-
-\
-\ @brief FMC attribute memory space timing registers
-\ Address offset: 0x8C
-\ Reset value: 0x0A0A0A0A
-\
-
-$000000ff constant FMC1_FMC_PATT_ATTSET                             \ Attribute memory setup time
-$0000ff00 constant FMC1_FMC_PATT_ATTWAIT                            \ Attribute memory wait time
-$00ff0000 constant FMC1_FMC_PATT_ATTHOLD                            \ Attribute memory hold time
-$ff000000 constant FMC1_FMC_PATT_ATTHIZ                             \ Attribute memory data bus Hi-Z time
-
-
-\
-\ @brief FMC Hamming parity result registers
-\ Address offset: 0x90
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FMC1_FMC_HPR_HPR                                 \ Hamming parity result
-
-
-\
-\ @brief FMC Hamming code ECC result register
-\ Address offset: 0x94
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FMC1_FMC_HECCR_HECC                              \ ECC result
-
-
-\
-\ @brief SRAM/NOR-Flash write timing registers for memory region 1
-\ Address offset: 0x104
-\ Reset value: 0x000FFFFF
-\
-
-$0000000f constant FMC1_FMC_BWTR1_ADDSET                            \ Address setup phase duration.
-$000000f0 constant FMC1_FMC_BWTR1_ADDHLD                            \ Address-hold phase duration.
-$0000ff00 constant FMC1_FMC_BWTR1_DATAST                            \ Data-phase duration.
-$000f0000 constant FMC1_FMC_BWTR1_BUSTURN                           \ Bus turnaround phase duration
-$30000000 constant FMC1_FMC_BWTR1_ACCMOD                            \ Access mode.
-$c0000000 constant FMC1_FMC_BWTR1_DATAHLD                           \ Data Hold phase duration
-
-
-\
-\ @brief SRAM/NOR-Flash write timing registers for memory region 2
-\ Address offset: 0x10C
-\ Reset value: 0x000FFFFF
-\
-
-$0000000f constant FMC1_FMC_BWTR2_ADDSET                            \ Address setup phase duration.
-$000000f0 constant FMC1_FMC_BWTR2_ADDHLD                            \ Address-hold phase duration.
-$0000ff00 constant FMC1_FMC_BWTR2_DATAST                            \ Data-phase duration.
-$000f0000 constant FMC1_FMC_BWTR2_BUSTURN                           \ Bus turnaround phase duration
-$30000000 constant FMC1_FMC_BWTR2_ACCMOD                            \ Access mode.
-$c0000000 constant FMC1_FMC_BWTR2_DATAHLD                           \ Data Hold phase duration
-
-
-\
-\ @brief SRAM/NOR-Flash write timing registers for memory region 3
-\ Address offset: 0x114
-\ Reset value: 0x000FFFFF
-\
-
-$0000000f constant FMC1_FMC_BWTR3_ADDSET                            \ Address setup phase duration.
-$000000f0 constant FMC1_FMC_BWTR3_ADDHLD                            \ Address-hold phase duration.
-$0000ff00 constant FMC1_FMC_BWTR3_DATAST                            \ Data-phase duration.
-$000f0000 constant FMC1_FMC_BWTR3_BUSTURN                           \ Bus turnaround phase duration
-$30000000 constant FMC1_FMC_BWTR3_ACCMOD                            \ Access mode.
-$c0000000 constant FMC1_FMC_BWTR3_DATAHLD                           \ Data Hold phase duration
-
-
-\
-\ @brief SRAM/NOR-Flash write timing registers for memory region 4
-\ Address offset: 0x11C
-\ Reset value: 0x000FFFFF
-\
-
-$0000000f constant FMC1_FMC_BWTR4_ADDSET                            \ Address setup phase duration.
-$000000f0 constant FMC1_FMC_BWTR4_ADDHLD                            \ Address-hold phase duration.
-$0000ff00 constant FMC1_FMC_BWTR4_DATAST                            \ Data-phase duration.
-$000f0000 constant FMC1_FMC_BWTR4_BUSTURN                           \ Bus turnaround phase duration
-$30000000 constant FMC1_FMC_BWTR4_ACCMOD                            \ Access mode.
-$c0000000 constant FMC1_FMC_BWTR4_DATAHLD                           \ Data Hold phase duration
-
-
-\
-\ @brief SDRAM control registers for SDRAM device 1
-\ Address offset: 0x140
-\ Reset value: 0x000002D0
-\
-
-$00000003 constant FMC1_FMC_SDCR1_NC                                \ Number of column address bits
-$0000000c constant FMC1_FMC_SDCR1_NR                                \ Number of row address bits
-$00000030 constant FMC1_FMC_SDCR1_MWID                              \ Memory data bus width.
-$00000040 constant FMC1_FMC_SDCR1_NB                                \ Number of banks
-$00000180 constant FMC1_FMC_SDCR1_CAS                               \ CAS Latency
-$00000200 constant FMC1_FMC_SDCR1_WP                                \ Write protection
-$00000c00 constant FMC1_FMC_SDCR1_SDCLK                             \ SDRAM clock configuration
-$00006000 constant FMC1_FMC_SDCR1_RPIPE                             \ Read pipe
-$00010000 constant FMC1_FMC_SDCR1_SDEN                              \ SDRAM device enable
-$00020000 constant FMC1_FMC_SDCR1_SDINIT                            \ SDRAM device initialization
-
-
-\
-\ @brief SDRAM control registers for SDRAM device 2
-\ Address offset: 0x144
-\ Reset value: 0x000002D0
-\
-
-$00000003 constant FMC1_FMC_SDCR2_NC                                \ Number of column address bits
-$0000000c constant FMC1_FMC_SDCR2_NR                                \ Number of row address bits
-$00000030 constant FMC1_FMC_SDCR2_MWID                              \ Memory data bus width.
-$00000040 constant FMC1_FMC_SDCR2_NB                                \ Number of banks
-$00000180 constant FMC1_FMC_SDCR2_CAS                               \ CAS Latency
-$00000200 constant FMC1_FMC_SDCR2_WP                                \ Write protection
-$00010000 constant FMC1_FMC_SDCR2_SDEN                              \ SDRAM device enable
-$00020000 constant FMC1_FMC_SDCR2_SDINIT                            \ SDRAM device initialization
-
-
-\
-\ @brief SDRAM timing register
-\ Address offset: 0x148
-\ Reset value: 0x0FFFFFFF
-\
-
-$0000000f constant FMC1_FMC_SDTR_TMRD                               \ Load mode register to active
-$000000f0 constant FMC1_FMC_SDTR_TXSR                               \ Exit self-refresh delay
-$00000f00 constant FMC1_FMC_SDTR_TRAS                               \ Self-refresh time
-$0000f000 constant FMC1_FMC_SDTR_TRC                                \ Row cycle delay
-$000f0000 constant FMC1_FMC_SDTR_TWR                                \ Recovery delay
-$00f00000 constant FMC1_FMC_SDTR_TRP                                \ Row precharge delay
-$0f000000 constant FMC1_FMC_SDTR_TRCD                               \ Row to column delay
-
-
-\
-\ @brief SDRAM command mode register
-\ Address offset: 0x150
-\ Reset value: 0x00000000
-\
-
-$00000007 constant FMC1_FMC_SDCMR_MODE                              \ Command mode
-$00000008 constant FMC1_FMC_SDCMR_DS2                               \ Command targeting SDRAM device 2
-$00000010 constant FMC1_FMC_SDCMR_DS1                               \ Command targeting SDRAM device 1
-$000001e0 constant FMC1_FMC_SDCMR_NRFS                              \ Number of Refresh commands
-$007ffe00 constant FMC1_FMC_SDCMR_MRD                               \ Mode register definition
-
-
-\
-\ @brief SDRAM refresh timer register
-\ Address offset: 0x154
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_SDRTR_CRE                               \ Clear Refresh error flag
-$00003ffe constant FMC1_FMC_SDRTR_RFSCNT                            \ Refresh Timer Count
-$00004000 constant FMC1_FMC_SDRTR_REIE                              \ RES Interrupt Enable
-
-
-\
-\ @brief SDRAM status register
-\ Address offset: 0x158
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_SDSR_RE                                 \ Refresh error flag
-$00000006 constant FMC1_FMC_SDSR_MODES1                             \ Status Mode for SDRAM device 1
-$00000018 constant FMC1_FMC_SDSR_MODES2                             \ Status mode for SDRAM device 2
-$00008000 constant FMC1_FMC_SDSR_CMDOK                              \ Previous command status
-
-
-\
-\ @brief FMC NAND interrupt enable register
-\ Address offset: 0x180
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_IER_IREE                                \ Interrupt rising edge detection enable bit
-$00000002 constant FMC1_FMC_IER_IHLE                                \ Interrupt high-level detection enable bit
-$00000004 constant FMC1_FMC_IER_IFEE                                \ Interrupt falling edge detection enable bit
-
-
-\
-\ @brief FMC controller interrupt status register
-\ Address offset: 0x184
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_ISR_IREF                                \ Interrupt rising edge flag
-$00000002 constant FMC1_FMC_ISR_IHLF                                \ Interrupt high-level flag
-$00000004 constant FMC1_FMC_ISR_IFEF                                \ Interrupt falling edge flag
-
-
-\
-\ @brief FMC NAND controller interrupt clear register
-\ Address offset: 0x188
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_ICR_CIREF                               \ Clear Interrupt rising edge flag
-$00000002 constant FMC1_FMC_ICR_CIHLF                               \ Clear Interrupt high-level flag
-$00000004 constant FMC1_FMC_ICR_CIFEF                               \ Clear Interrupt falling edge flag
-
-
-\
-\ @brief FMC NAND command sequencer control register
-\ Address offset: 0x200
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_CSQCR_CSQSTART                          \ Command Sequencer Enable
-
-
-\
-\ @brief FMC NAND command sequencer configuration register 1
-\ Address offset: 0x204
-\ Reset value: 0x00000000
-\
-
-$00000002 constant FMC1_FMC_CSQCFGR1_CMD2EN                         \ Command cycle 2 Enable
-$00000004 constant FMC1_FMC_CSQCFGR1_DMADEN                         \ Command sequencer DMA request data enable
-$00000070 constant FMC1_FMC_CSQCFGR1_ACYNBR                         \ Address Cycle number
-$0000ff00 constant FMC1_FMC_CSQCFGR1_CMD1                           \ Command 1 sequencer
-$00ff0000 constant FMC1_FMC_CSQCFGR1_CMD2                           \ Command 2 sequencer
-$01000000 constant FMC1_FMC_CSQCFGR1_CMD1T                          \ Command 1 Sequencer timings
-$02000000 constant FMC1_FMC_CSQCFGR1_CMD2T                          \ Command 2 Sequencer timings
-
-
-\
-\ @brief FMC NAND command sequencer configuration register 2
-\ Address offset: 0x208
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_CSQCFGR2_SQSDTEN                        \ Sequencer spare data transfer enable
-$00000002 constant FMC1_FMC_CSQCFGR2_RCMD2EN                        \ Random Command 2 sequencer enable
-$00000004 constant FMC1_FMC_CSQCFGR2_DMASEN                         \ Command sequencer DMA request decoding status enable
-$0000ff00 constant FMC1_FMC_CSQCFGR2_RCMD1                          \ Random Command 1 sequencer
-$00ff0000 constant FMC1_FMC_CSQCFGR2_RCMD2                          \ Random Command 2 sequencer
-$01000000 constant FMC1_FMC_CSQCFGR2_RCMD1T                         \ Command 1 sequencer timings
-$02000000 constant FMC1_FMC_CSQCFGR2_RCMD2T                         \ Command 1 sequencer timings
-
-
-\
-\ @brief FMC NAND sequencer configuration register 3
-\ Address offset: 0x20C
-\ Reset value: 0x00000000
-\
-
-$00003f00 constant FMC1_FMC_CSQCFGR3_SNBR                           \ Number of sectors to be read/written
-$00010000 constant FMC1_FMC_CSQCFGR3_AC1T                           \ Address cycle 1 sequencer timings
-$00020000 constant FMC1_FMC_CSQCFGR3_AC2T                           \ Address cycle 2 sequencer timings
-$00040000 constant FMC1_FMC_CSQCFGR3_AC3T                           \ Address cycle 3 sequencer timings
-$00080000 constant FMC1_FMC_CSQCFGR3_AC4T                           \ Address cycle 4sequencer timings
-$00100000 constant FMC1_FMC_CSQCFGR3_AC5T                           \ Address cycle 5 sequencer timings
-$00200000 constant FMC1_FMC_CSQCFGR3_SDT                            \ Spare data transfer sequencer timings
-$00400000 constant FMC1_FMC_CSQCFGR3_RAC1T                          \ Random Address cycle 1 sequencer timings
-$00800000 constant FMC1_FMC_CSQCFGR3_RAC2T                          \ Random Address cycle 2 sequencer timings
-
-
-\
-\ @brief FMC NAND command sequencer address register 1
-\ Address offset: 0x210
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMC1_FMC_CSQAR1_ADDC1                            \ Address Cycle 1
-$0000ff00 constant FMC1_FMC_CSQAR1_ADDC2                            \ Address Cycle 2
-$00ff0000 constant FMC1_FMC_CSQAR1_ADDC3                            \ Address Cycle 3
-$ff000000 constant FMC1_FMC_CSQAR1_ADDC4                            \ Address Cycle 4
-
-
-\
-\ @brief FMC NAND command sequencer address register 2
-\ Address offset: 0x214
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMC1_FMC_CSQAR2_ADDC5                            \ Address Cycle 5
-$ffff0000 constant FMC1_FMC_CSQAR2_SAO                              \ Spare Area Address Offset
-
-
-\
-\ @brief FMC NAND command sequencer interrupt enable register
-\ Address offset: 0x220
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_CSQIER_TCIE                             \ Transfer Complete Interrupt enable
-$00000002 constant FMC1_FMC_CSQIER_SCIE                             \ Sector Complete interrupt enable
-$00000004 constant FMC1_FMC_CSQIER_SEIE                             \ Sector Error interrupt enable
-$00000008 constant FMC1_FMC_CSQIER_SUEIE                            \ Sector Uncorrectable Error interrupt enable
-$00000010 constant FMC1_FMC_CSQIER_CMDTCIE                          \ Command Transfer Complete interrupt enable
-
-
-\
-\ @brief FMC NAND command sequencer interrupt status register
-\ Address offset: 0x224
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_CSQISR_TCF                              \ Transfer Complete flag
-$00000002 constant FMC1_FMC_CSQISR_SCF                              \ Sector Complete flag
-$00000004 constant FMC1_FMC_CSQISR_SEF                              \ Sector Error flag
-$00000008 constant FMC1_FMC_CSQISR_SUEF                             \ Sector Uncorrectable Error flag
-$00000010 constant FMC1_FMC_CSQISR_CMDTCF                           \ Command Transfer Complete flag
-
-
-\
-\ @brief FMC NAND command sequencer interrupt clear register
-\ Address offset: 0x228
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_CSQICR_CTCF                             \ Clear Transfer Complete flag
-$00000002 constant FMC1_FMC_CSQICR_CSCF                             \ Clear Sector Complete flag
-$00000004 constant FMC1_FMC_CSQICR_CSEF                             \ Clear Sector Error flag
-$00000008 constant FMC1_FMC_CSQICR_CSUEF                            \ Clear Sector uncorrectable Error flag
-$00000010 constant FMC1_FMC_CSQICR_CCMDTCF                          \ Clear Command Transfer Complete flag
-
-
-\
-\ @brief FMC command sequencer error mapping status register
-\ Address offset: 0x230
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant FMC1_FMC_CSQEMSR_SEM                             \ Sector Error mapping
-
-
-\
-\ @brief FMC BCH interrupt enable register
-\ Address offset: 0x250
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_BCHIER_DUEIE                            \ Decoder Uncorrectable Errors Interrupt enable
-$00000002 constant FMC1_FMC_BCHIER_DERIE                            \ Decoder Error Ready Interrupt enable
-$00000004 constant FMC1_FMC_BCHIER_DEFIE                            \ Decoder Error Found Interrupt enable
-$00000008 constant FMC1_FMC_BCHIER_DSRIE                            \ Decoder Syndrome Ready Interrupt enable
-$00000010 constant FMC1_FMC_BCHIER_EPBRIE                           \ Decoder Parity Bits Ready Interrupt enable
-
-
-\
-\ @brief FMC BCH interrupt and status register
-\ Address offset: 0x254
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_BCHISR_DUEF                             \ Decoder Uncorrectable Errors flag
-$00000002 constant FMC1_FMC_BCHISR_DERF                             \ Decoder Error Ready flag
-$00000004 constant FMC1_FMC_BCHISR_DEFF                             \ Decoder Error Found flag
-$00000008 constant FMC1_FMC_BCHISR_DSRF                             \ Decoder Syndrome Ready flag
-$00000010 constant FMC1_FMC_BCHISR_EPBRF                            \ Encoder Parity Bits Ready flag
-
-
-\
-\ @brief FMC BCH interrupt clear register
-\ Address offset: 0x258
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_BCHICR_CDUEF                            \ Clear Decoder Uncorrectable Error flag
-$00000002 constant FMC1_FMC_BCHICR_CDERF                            \ Clear Decoder Error ready flag
-$00000004 constant FMC1_FMC_BCHICR_CDEFF                            \ Clear Decoder Error Found flag
-$00000008 constant FMC1_FMC_BCHICR_CDSRF                            \ Clear Decoder Syndrome Ready flag
-$00000010 constant FMC1_FMC_BCHICR_CEPBRF                           \ Clear Encoder Parity Bits Ready flag
-
-
-\
-\ @brief FMC BCH parity bits register 1
-\ Address offset: 0x260
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FMC1_FMC_BCHPBR1_BCHPB                           \ BCH parity bits
-
-
-\
-\ @brief FMC BCH parity bits register 2
-\ Address offset: 0x264
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FMC1_FMC_BCHPBR2_BCHPB                           \ BCH parity bits
-
-
-\
-\ @brief FMC BCH parity bits register 3
-\ Address offset: 0x268
-\ Reset value: 0x00000000
-\
-
-$00000000 constant FMC1_FMC_BCHPBR3_BCHPB                           \ BCH parity bits
-
-
-\
-\ @brief FMC BCH parity bits register 4
-\ Address offset: 0x26C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMC1_FMC_BCHPBR4_BCHPB                           \ BCH parity bits
-
-
-\
-\ @brief FMC BCH decoder status register 0
-\ Address offset: 0x27C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMC1_FMC_BCHDSR0_DUE                             \ Decoder uncorrectable error
-$00000002 constant FMC1_FMC_BCHDSR0_DEF                             \ Decoder error found
-$000000f0 constant FMC1_FMC_BCHDSR0_DEN                             \ Decoder error number
-
-
-\
-\ @brief FMC BCH decoder status register for memory region 1
-\ Address offset: 0x280
-\ Reset value: 0x00000000
-\
-
-$00001fff constant FMC1_FMC_BCHDSR1_EBP1                            \ Error bit position for error number 1
-$1fff0000 constant FMC1_FMC_BCHDSR1_EBP2                            \ Error bit position for error number 2
-
-
-\
-\ @brief FMC BCH decoder status register for memory region 2
-\ Address offset: 0x284
-\ Reset value: 0x00000000
-\
-
-$00001fff constant FMC1_FMC_BCHDSR2_EBP3                            \ Error bit position for error number 3
-$1fff0000 constant FMC1_FMC_BCHDSR2_EBP4                            \ Error bit position for error number 4
-
-
-\
-\ @brief FMC BCH decoder status register for memory region 3
-\ Address offset: 0x288
-\ Reset value: 0x00000000
-\
-
-$00001fff constant FMC1_FMC_BCHDSR3_EBP5                            \ Error bit position for error number 5
-$1fff0000 constant FMC1_FMC_BCHDSR3_EBP6                            \ Error bit position for error number 6
-
-
-\
-\ @brief FMC BCH decoder status register for memory region 4
-\ Address offset: 0x28C
-\ Reset value: 0x00000000
-\
-
-$00001fff constant FMC1_FMC_BCHDSR4_EBP7                            \ Error bit position for error number 7
-$1fff0000 constant FMC1_FMC_BCHDSR4_EBP8                            \ Error bit position for error number 8
-
-
-\
-\ @brief Flexible memory controller
-\
-$48024000 constant FMC1_FMC_BCR1  \ offset: 0x00 : SRAM/NOR Flash chip-select control register for memory region 1
-$48024004 constant FMC1_FMC_BTR1  \ offset: 0x04 : SRAM/NOR Flash chip-select timing registers for memory region 1
-$48024008 constant FMC1_FMC_BCR2  \ offset: 0x08 : SRAM/NOR Flash chip-select control register for memory region 2
-$4802400c constant FMC1_FMC_BTR2  \ offset: 0x0C : SRAM/NOR Flash chip-select timing registers for memory region 2
-$48024010 constant FMC1_FMC_BCR3  \ offset: 0x10 : SRAM/NOR Flash chip-select control register for memory region 3
-$48024014 constant FMC1_FMC_BTR3  \ offset: 0x14 : SRAM/NOR Flash chip-select timing registers for memory region 3
-$48024018 constant FMC1_FMC_BCR4  \ offset: 0x18 : SRAM/NOR Flash chip-select control register for memory region 4
-$4802401c constant FMC1_FMC_BTR4  \ offset: 0x1C : SRAM/NOR Flash chip-select timing registers for memory region 4
-$48024020 constant FMC1_FMC_CFGR  \ offset: 0x20 : FMC common configuration register
-$48024080 constant FMC1_FMC_PCR   \ offset: 0x80 : NAND Flash programmable control register
-$48024084 constant FMC1_FMC_SR    \ offset: 0x84 : FMC status register
-$48024088 constant FMC1_FMC_PMEM  \ offset: 0x88 : FMC common memory space timing register
-$4802408c constant FMC1_FMC_PATT  \ offset: 0x8C : FMC attribute memory space timing registers
-$48024090 constant FMC1_FMC_HPR   \ offset: 0x90 : FMC Hamming parity result registers
-$48024094 constant FMC1_FMC_HECCR  \ offset: 0x94 : FMC Hamming code ECC result register
-$48024104 constant FMC1_FMC_BWTR1  \ offset: 0x104 : SRAM/NOR-Flash write timing registers for memory region 1
-$4802410c constant FMC1_FMC_BWTR2  \ offset: 0x10C : SRAM/NOR-Flash write timing registers for memory region 2
-$48024114 constant FMC1_FMC_BWTR3  \ offset: 0x114 : SRAM/NOR-Flash write timing registers for memory region 3
-$4802411c constant FMC1_FMC_BWTR4  \ offset: 0x11C : SRAM/NOR-Flash write timing registers for memory region 4
-$48024140 constant FMC1_FMC_SDCR1  \ offset: 0x140 : SDRAM control registers for SDRAM device 1
-$48024144 constant FMC1_FMC_SDCR2  \ offset: 0x144 : SDRAM control registers for SDRAM device 2
-$48024148 constant FMC1_FMC_SDTR  \ offset: 0x148 : SDRAM timing register
-$48024150 constant FMC1_FMC_SDCMR  \ offset: 0x150 : SDRAM command mode register
-$48024154 constant FMC1_FMC_SDRTR  \ offset: 0x154 : SDRAM refresh timer register
-$48024158 constant FMC1_FMC_SDSR  \ offset: 0x158 : SDRAM status register
-$48024180 constant FMC1_FMC_IER   \ offset: 0x180 : FMC NAND interrupt enable register
-$48024184 constant FMC1_FMC_ISR   \ offset: 0x184 : FMC controller interrupt status register
-$48024188 constant FMC1_FMC_ICR   \ offset: 0x188 : FMC NAND controller interrupt clear register
-$48024200 constant FMC1_FMC_CSQCR  \ offset: 0x200 : FMC NAND command sequencer control register
-$48024204 constant FMC1_FMC_CSQCFGR1  \ offset: 0x204 : FMC NAND command sequencer configuration register 1
-$48024208 constant FMC1_FMC_CSQCFGR2  \ offset: 0x208 : FMC NAND command sequencer configuration register 2
-$4802420c constant FMC1_FMC_CSQCFGR3  \ offset: 0x20C : FMC NAND sequencer configuration register 3
-$48024210 constant FMC1_FMC_CSQAR1  \ offset: 0x210 : FMC NAND command sequencer address register 1
-$48024214 constant FMC1_FMC_CSQAR2  \ offset: 0x214 : FMC NAND command sequencer address register 2
-$48024220 constant FMC1_FMC_CSQIER  \ offset: 0x220 : FMC NAND command sequencer interrupt enable register
-$48024224 constant FMC1_FMC_CSQISR  \ offset: 0x224 : FMC NAND command sequencer interrupt status register
-$48024228 constant FMC1_FMC_CSQICR  \ offset: 0x228 : FMC NAND command sequencer interrupt clear register
-$48024230 constant FMC1_FMC_CSQEMSR  \ offset: 0x230 : FMC command sequencer error mapping status register
-$48024250 constant FMC1_FMC_BCHIER  \ offset: 0x250 : FMC BCH interrupt enable register
-$48024254 constant FMC1_FMC_BCHISR  \ offset: 0x254 : FMC BCH interrupt and status register
-$48024258 constant FMC1_FMC_BCHICR  \ offset: 0x258 : FMC BCH interrupt clear register
-$48024260 constant FMC1_FMC_BCHPBR1  \ offset: 0x260 : FMC BCH parity bits register 1
-$48024264 constant FMC1_FMC_BCHPBR2  \ offset: 0x264 : FMC BCH parity bits register 2
-$48024268 constant FMC1_FMC_BCHPBR3  \ offset: 0x268 : FMC BCH parity bits register 3
-$4802426c constant FMC1_FMC_BCHPBR4  \ offset: 0x26C : FMC BCH parity bits register 4
-$4802427c constant FMC1_FMC_BCHDSR0  \ offset: 0x27C : FMC BCH decoder status register 0
-$48024280 constant FMC1_FMC_BCHDSR1  \ offset: 0x280 : FMC BCH decoder status register for memory region 1
-$48024284 constant FMC1_FMC_BCHDSR2  \ offset: 0x284 : FMC BCH decoder status register for memory region 2
-$48024288 constant FMC1_FMC_BCHDSR3  \ offset: 0x288 : FMC BCH decoder status register for memory region 3
-$4802428c constant FMC1_FMC_BCHDSR4  \ offset: 0x28C : FMC BCH decoder status register for memory region 4
-
+[ifndef] FMC1_DEF
+
+  [ifdef] FMC1_FMC_BCR1_DEF
+    \
+    \ @brief SRAM/NOR Flash chip-select control register for memory region 1
+    \ Address offset: 0x00
+    \ Reset value: 0x000030DB
+    \
+    $00 constant FMC1_MBKEN                     \ [0x00] Memory region enable bit
+    $01 constant FMC1_MUXEN                     \ [0x01] Address/data multiplexing enable bit
+    $02 constant FMC1_MTYP                      \ [0x02 : 2] Memory type
+    $04 constant FMC1_MWID                      \ [0x04 : 2] Memory data bus width
+    $06 constant FMC1_FACCEN                    \ [0x06] Flash memory access enable
+    $08 constant FMC1_BURSTEN                   \ [0x08] Burst enable bit
+    $09 constant FMC1_WAITPOL                   \ [0x09] Wait signal polarity bit
+    $0b constant FMC1_WAITCFG                   \ [0x0b] Wait timing configuration
+    $0c constant FMC1_WREN                      \ [0x0c] Write enable bit
+    $0d constant FMC1_WAITEN                    \ [0x0d] Wait enable bit
+    $0e constant FMC1_EXTMOD                    \ [0x0e] Extended mode enable
+    $0f constant FMC1_ASYNCWAIT                 \ [0x0f] Wait signal during asynchronous transfers
+    $10 constant FMC1_CPSIZE                    \ [0x10 : 3] CRAM page size
+    $13 constant FMC1_CBURSTRW                  \ [0x13] Write burst enable
+    $14 constant FMC1_CSCOUNT0                  \ [0x14 : 2] Chip Select (CS) counter
+    $16 constant FMC1_NBLSET                    \ [0x16 : 2] Byte lane (NBL) setup
+  [then]
+
+
+  [ifdef] FMC1_FMC_BTR1_DEF
+    \
+    \ @brief SRAM/NOR Flash chip-select timing registers for memory region 1
+    \ Address offset: 0x04
+    \ Reset value: 0x0FFFFFFF
+    \
+    $00 constant FMC1_ADDSET                    \ [0x00 : 4] Address setup phase duration
+    $04 constant FMC1_ADDHLD                    \ [0x04 : 4] Address-hold phase duration
+    $08 constant FMC1_DATAST                    \ [0x08 : 8] Data-phase duration
+    $10 constant FMC1_BUSTURN                   \ [0x10 : 4] Bus turnaround phase duration
+    $14 constant FMC1_CLKDIV                    \ [0x14 : 4] Clock divide ratio (for FMC_CLK signal)
+    $18 constant FMC1_DATLAT                    \ [0x18 : 4] Data latency for synchronous memory (see note below bit descriptions)
+    $1c constant FMC1_ACCMOD                    \ [0x1c : 2] Access mode
+    $1e constant FMC1_DATAHLD                   \ [0x1e : 2] Data Hold phase duration
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCR2_DEF
+    \
+    \ @brief SRAM/NOR Flash chip-select control register for memory region 2
+    \ Address offset: 0x08
+    \ Reset value: 0x000030D2
+    \
+    $00 constant FMC1_MBKEN                     \ [0x00] Memory region enable bit
+    $01 constant FMC1_MUXEN                     \ [0x01] Address/data multiplexing enable bit
+    $02 constant FMC1_MTYP                      \ [0x02 : 2] Memory type
+    $04 constant FMC1_MWID                      \ [0x04 : 2] Memory data bus width
+    $06 constant FMC1_FACCEN                    \ [0x06] Flash memory access enable
+    $08 constant FMC1_BURSTEN                   \ [0x08] Burst enable bit
+    $09 constant FMC1_WAITPOL                   \ [0x09] Wait signal polarity bit
+    $0b constant FMC1_WAITCFG                   \ [0x0b] Wait timing configuration
+    $0c constant FMC1_WREN                      \ [0x0c] Write enable bit
+    $0d constant FMC1_WAITEN                    \ [0x0d] Wait enable bit
+    $0e constant FMC1_EXTMOD                    \ [0x0e] Extended mode enable
+    $0f constant FMC1_ASYNCWAIT                 \ [0x0f] Wait signal during asynchronous transfers
+    $10 constant FMC1_CPSIZE                    \ [0x10 : 3] CRAM page size
+    $13 constant FMC1_CBURSTRW                  \ [0x13] Write burst enable
+    $14 constant FMC1_CSCOUNT0                  \ [0x14 : 2] Chip Select (CS) counter
+    $16 constant FMC1_NBLSET                    \ [0x16 : 2] Byte lane (NBL) setup
+  [then]
+
+
+  [ifdef] FMC1_FMC_BTR2_DEF
+    \
+    \ @brief SRAM/NOR Flash chip-select timing registers for memory region 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x0FFFFFFF
+    \
+    $00 constant FMC1_ADDSET                    \ [0x00 : 4] Address setup phase duration
+    $04 constant FMC1_ADDHLD                    \ [0x04 : 4] Address-hold phase duration
+    $08 constant FMC1_DATAST                    \ [0x08 : 8] Data-phase duration
+    $10 constant FMC1_BUSTURN                   \ [0x10 : 4] Bus turnaround phase duration
+    $14 constant FMC1_CLKDIV                    \ [0x14 : 4] Clock divide ratio (for FMC_CLK signal)
+    $18 constant FMC1_DATLAT                    \ [0x18 : 4] Data latency for synchronous memory (see note below bit descriptions)
+    $1c constant FMC1_ACCMOD                    \ [0x1c : 2] Access mode
+    $1e constant FMC1_DATAHLD                   \ [0x1e : 2] Data Hold phase duration
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCR3_DEF
+    \
+    \ @brief SRAM/NOR Flash chip-select control register for memory region 3
+    \ Address offset: 0x10
+    \ Reset value: 0x000030D2
+    \
+    $00 constant FMC1_MBKEN                     \ [0x00] Memory region enable bit
+    $01 constant FMC1_MUXEN                     \ [0x01] Address/data multiplexing enable bit
+    $02 constant FMC1_MTYP                      \ [0x02 : 2] Memory type
+    $04 constant FMC1_MWID                      \ [0x04 : 2] Memory data bus width
+    $06 constant FMC1_FACCEN                    \ [0x06] Flash memory access enable
+    $08 constant FMC1_BURSTEN                   \ [0x08] Burst enable bit
+    $09 constant FMC1_WAITPOL                   \ [0x09] Wait signal polarity bit
+    $0b constant FMC1_WAITCFG                   \ [0x0b] Wait timing configuration
+    $0c constant FMC1_WREN                      \ [0x0c] Write enable bit
+    $0d constant FMC1_WAITEN                    \ [0x0d] Wait enable bit
+    $0e constant FMC1_EXTMOD                    \ [0x0e] Extended mode enable
+    $0f constant FMC1_ASYNCWAIT                 \ [0x0f] Wait signal during asynchronous transfers
+    $10 constant FMC1_CPSIZE                    \ [0x10 : 3] CRAM page size
+    $13 constant FMC1_CBURSTRW                  \ [0x13] Write burst enable
+    $14 constant FMC1_CSCOUNT0                  \ [0x14 : 2] Chip Select (CS) counter
+    $16 constant FMC1_NBLSET                    \ [0x16 : 2] Byte lane (NBL) setup
+  [then]
+
+
+  [ifdef] FMC1_FMC_BTR3_DEF
+    \
+    \ @brief SRAM/NOR Flash chip-select timing registers for memory region 3
+    \ Address offset: 0x14
+    \ Reset value: 0x0FFFFFFF
+    \
+    $00 constant FMC1_ADDSET                    \ [0x00 : 4] Address setup phase duration
+    $04 constant FMC1_ADDHLD                    \ [0x04 : 4] Address-hold phase duration
+    $08 constant FMC1_DATAST                    \ [0x08 : 8] Data-phase duration
+    $10 constant FMC1_BUSTURN                   \ [0x10 : 4] Bus turnaround phase duration
+    $14 constant FMC1_CLKDIV                    \ [0x14 : 4] Clock divide ratio (for FMC_CLK signal)
+    $18 constant FMC1_DATLAT                    \ [0x18 : 4] Data latency for synchronous memory (see note below bit descriptions)
+    $1c constant FMC1_ACCMOD                    \ [0x1c : 2] Access mode
+    $1e constant FMC1_DATAHLD                   \ [0x1e : 2] Data Hold phase duration
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCR4_DEF
+    \
+    \ @brief SRAM/NOR Flash chip-select control register for memory region 4
+    \ Address offset: 0x18
+    \ Reset value: 0x000030D2
+    \
+    $00 constant FMC1_MBKEN                     \ [0x00] Memory region enable bit
+    $01 constant FMC1_MUXEN                     \ [0x01] Address/data multiplexing enable bit
+    $02 constant FMC1_MTYP                      \ [0x02 : 2] Memory type
+    $04 constant FMC1_MWID                      \ [0x04 : 2] Memory data bus width
+    $06 constant FMC1_FACCEN                    \ [0x06] Flash memory access enable
+    $08 constant FMC1_BURSTEN                   \ [0x08] Burst enable bit
+    $09 constant FMC1_WAITPOL                   \ [0x09] Wait signal polarity bit
+    $0b constant FMC1_WAITCFG                   \ [0x0b] Wait timing configuration
+    $0c constant FMC1_WREN                      \ [0x0c] Write enable bit
+    $0d constant FMC1_WAITEN                    \ [0x0d] Wait enable bit
+    $0e constant FMC1_EXTMOD                    \ [0x0e] Extended mode enable
+    $0f constant FMC1_ASYNCWAIT                 \ [0x0f] Wait signal during asynchronous transfers
+    $10 constant FMC1_CPSIZE                    \ [0x10 : 3] CRAM page size
+    $13 constant FMC1_CBURSTRW                  \ [0x13] Write burst enable
+    $14 constant FMC1_CSCOUNT0                  \ [0x14 : 2] Chip Select (CS) counter
+    $16 constant FMC1_NBLSET                    \ [0x16 : 2] Byte lane (NBL) setup
+  [then]
+
+
+  [ifdef] FMC1_FMC_BTR4_DEF
+    \
+    \ @brief SRAM/NOR Flash chip-select timing registers for memory region 4
+    \ Address offset: 0x1C
+    \ Reset value: 0x0FFFFFFF
+    \
+    $00 constant FMC1_ADDSET                    \ [0x00 : 4] Address setup phase duration
+    $04 constant FMC1_ADDHLD                    \ [0x04 : 4] Address-hold phase duration
+    $08 constant FMC1_DATAST                    \ [0x08 : 8] Data-phase duration
+    $10 constant FMC1_BUSTURN                   \ [0x10 : 4] Bus turnaround phase duration
+    $14 constant FMC1_CLKDIV                    \ [0x14 : 4] Clock divide ratio (for FMC_CLK signal)
+    $18 constant FMC1_DATLAT                    \ [0x18 : 4] Data latency for synchronous memory (see note below bit descriptions)
+    $1c constant FMC1_ACCMOD                    \ [0x1c : 2] Access mode
+    $1e constant FMC1_DATAHLD                   \ [0x1e : 2] Data Hold phase duration
+  [then]
+
+
+  [ifdef] FMC1_FMC_CFGR_DEF
+    \
+    \ @brief FMC common configuration register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $10 constant FMC1_CLKDIV                    \ [0x10 : 4] Clock divide ratio (for FMC_CLK signal)
+    $14 constant FMC1_CCLKEN                    \ [0x14] Continuous clock enable
+    $18 constant FMC1_BMAP0                     \ [0x18] FMC memory region mapping
+    $19 constant FMC1_BMAP1                     \ [0x19] FMC memory region mapping
+    $1f constant FMC1_FMCEN                     \ [0x1f] FMC controller enable
+  [then]
+
+
+  [ifdef] FMC1_FMC_PCR_DEF
+    \
+    \ @brief NAND Flash programmable control register
+    \ Address offset: 0x80
+    \ Reset value: 0x0007FE08
+    \
+    $01 constant FMC1_PWAITEN                   \ [0x01] Wait feature enable bit
+    $02 constant FMC1_PBKEN                     \ [0x02] NAND Flash memory region enable bit
+    $04 constant FMC1_PWID                      \ [0x04 : 2] Data bus width
+    $06 constant FMC1_ECCEN                     \ [0x06] ECC computation logic enable bit
+    $08 constant FMC1_ECCALG                    \ [0x08] ECC algorithm
+    $09 constant FMC1_TCLR                      \ [0x09 : 4] CLE to RE delay.
+    $0d constant FMC1_TAR                       \ [0x0d : 4] ALE to RE delay.
+    $11 constant FMC1_ECCSS                     \ [0x11 : 3] ECC sector size (used to access spare area)
+    $18 constant FMC1_BCHECC                    \ [0x18] BCH error correction capability
+    $19 constant FMC1_WEN                       \ [0x19] Write enable
+  [then]
+
+
+  [ifdef] FMC1_FMC_SR_DEF
+    \
+    \ @brief FMC status register
+    \ Address offset: 0x84
+    \ Reset value: 0x00000053
+    \
+    $00 constant FMC1_ISOST                     \ [0x00 : 2] FMC isolation state with respect to the AXI interface
+    $04 constant FMC1_PEF                       \ [0x04] Pipe Empty Flag
+    $06 constant FMC1_NWRF                      \ [0x06] NAND write request flag
+  [then]
+
+
+  [ifdef] FMC1_FMC_PMEM_DEF
+    \
+    \ @brief FMC common memory space timing register
+    \ Address offset: 0x88
+    \ Reset value: 0x0A0A0A0A
+    \
+    $00 constant FMC1_MEMSET                    \ [0x00 : 8] Common memory setup time
+    $08 constant FMC1_MEMWAIT                   \ [0x08 : 8] Common memory wait time
+    $10 constant FMC1_MEMHOLD                   \ [0x10 : 8] Common memory hold time
+    $18 constant FMC1_MEMHIZ                    \ [0x18 : 8] Common memory data bus Hi-Z time
+  [then]
+
+
+  [ifdef] FMC1_FMC_PATT_DEF
+    \
+    \ @brief FMC attribute memory space timing registers
+    \ Address offset: 0x8C
+    \ Reset value: 0x0A0A0A0A
+    \
+    $00 constant FMC1_ATTSET                    \ [0x00 : 8] Attribute memory setup time
+    $08 constant FMC1_ATTWAIT                   \ [0x08 : 8] Attribute memory wait time
+    $10 constant FMC1_ATTHOLD                   \ [0x10 : 8] Attribute memory hold time
+    $18 constant FMC1_ATTHIZ                    \ [0x18 : 8] Attribute memory data bus Hi-Z time
+  [then]
+
+
+  [ifdef] FMC1_FMC_HPR_DEF
+    \
+    \ @brief FMC Hamming parity result registers
+    \ Address offset: 0x90
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_HPR                       \ [0x00 : 32] Hamming parity result
+  [then]
+
+
+  [ifdef] FMC1_FMC_HECCR_DEF
+    \
+    \ @brief FMC Hamming code ECC result register
+    \ Address offset: 0x94
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_HECC                      \ [0x00 : 32] ECC result
+  [then]
+
+
+  [ifdef] FMC1_FMC_BWTR1_DEF
+    \
+    \ @brief SRAM/NOR-Flash write timing registers for memory region 1
+    \ Address offset: 0x104
+    \ Reset value: 0x000FFFFF
+    \
+    $00 constant FMC1_ADDSET                    \ [0x00 : 4] Address setup phase duration.
+    $04 constant FMC1_ADDHLD                    \ [0x04 : 4] Address-hold phase duration.
+    $08 constant FMC1_DATAST                    \ [0x08 : 8] Data-phase duration.
+    $10 constant FMC1_BUSTURN                   \ [0x10 : 4] Bus turnaround phase duration
+    $1c constant FMC1_ACCMOD                    \ [0x1c : 2] Access mode.
+    $1e constant FMC1_DATAHLD                   \ [0x1e : 2] Data Hold phase duration
+  [then]
+
+
+  [ifdef] FMC1_FMC_BWTR2_DEF
+    \
+    \ @brief SRAM/NOR-Flash write timing registers for memory region 2
+    \ Address offset: 0x10C
+    \ Reset value: 0x000FFFFF
+    \
+    $00 constant FMC1_ADDSET                    \ [0x00 : 4] Address setup phase duration.
+    $04 constant FMC1_ADDHLD                    \ [0x04 : 4] Address-hold phase duration.
+    $08 constant FMC1_DATAST                    \ [0x08 : 8] Data-phase duration.
+    $10 constant FMC1_BUSTURN                   \ [0x10 : 4] Bus turnaround phase duration
+    $1c constant FMC1_ACCMOD                    \ [0x1c : 2] Access mode.
+    $1e constant FMC1_DATAHLD                   \ [0x1e : 2] Data Hold phase duration
+  [then]
+
+
+  [ifdef] FMC1_FMC_BWTR3_DEF
+    \
+    \ @brief SRAM/NOR-Flash write timing registers for memory region 3
+    \ Address offset: 0x114
+    \ Reset value: 0x000FFFFF
+    \
+    $00 constant FMC1_ADDSET                    \ [0x00 : 4] Address setup phase duration.
+    $04 constant FMC1_ADDHLD                    \ [0x04 : 4] Address-hold phase duration.
+    $08 constant FMC1_DATAST                    \ [0x08 : 8] Data-phase duration.
+    $10 constant FMC1_BUSTURN                   \ [0x10 : 4] Bus turnaround phase duration
+    $1c constant FMC1_ACCMOD                    \ [0x1c : 2] Access mode.
+    $1e constant FMC1_DATAHLD                   \ [0x1e : 2] Data Hold phase duration
+  [then]
+
+
+  [ifdef] FMC1_FMC_BWTR4_DEF
+    \
+    \ @brief SRAM/NOR-Flash write timing registers for memory region 4
+    \ Address offset: 0x11C
+    \ Reset value: 0x000FFFFF
+    \
+    $00 constant FMC1_ADDSET                    \ [0x00 : 4] Address setup phase duration.
+    $04 constant FMC1_ADDHLD                    \ [0x04 : 4] Address-hold phase duration.
+    $08 constant FMC1_DATAST                    \ [0x08 : 8] Data-phase duration.
+    $10 constant FMC1_BUSTURN                   \ [0x10 : 4] Bus turnaround phase duration
+    $1c constant FMC1_ACCMOD                    \ [0x1c : 2] Access mode.
+    $1e constant FMC1_DATAHLD                   \ [0x1e : 2] Data Hold phase duration
+  [then]
+
+
+  [ifdef] FMC1_FMC_SDCR1_DEF
+    \
+    \ @brief SDRAM control registers for SDRAM device 1
+    \ Address offset: 0x140
+    \ Reset value: 0x000002D0
+    \
+    $00 constant FMC1_NC                        \ [0x00 : 2] Number of column address bits
+    $02 constant FMC1_NR                        \ [0x02 : 2] Number of row address bits
+    $04 constant FMC1_MWID                      \ [0x04 : 2] Memory data bus width.
+    $06 constant FMC1_NB                        \ [0x06] Number of banks
+    $07 constant FMC1_CAS                       \ [0x07 : 2] CAS Latency
+    $09 constant FMC1_WP                        \ [0x09] Write protection
+    $0a constant FMC1_SDCLK                     \ [0x0a : 2] SDRAM clock configuration
+    $0d constant FMC1_RPIPE                     \ [0x0d : 2] Read pipe
+    $10 constant FMC1_SDEN                      \ [0x10] SDRAM device enable
+    $11 constant FMC1_SDINIT                    \ [0x11] SDRAM device initialization
+  [then]
+
+
+  [ifdef] FMC1_FMC_SDCR2_DEF
+    \
+    \ @brief SDRAM control registers for SDRAM device 2
+    \ Address offset: 0x144
+    \ Reset value: 0x000002D0
+    \
+    $00 constant FMC1_NC                        \ [0x00 : 2] Number of column address bits
+    $02 constant FMC1_NR                        \ [0x02 : 2] Number of row address bits
+    $04 constant FMC1_MWID                      \ [0x04 : 2] Memory data bus width.
+    $06 constant FMC1_NB                        \ [0x06] Number of banks
+    $07 constant FMC1_CAS                       \ [0x07 : 2] CAS Latency
+    $09 constant FMC1_WP                        \ [0x09] Write protection
+    $10 constant FMC1_SDEN                      \ [0x10] SDRAM device enable
+    $11 constant FMC1_SDINIT                    \ [0x11] SDRAM device initialization
+  [then]
+
+
+  [ifdef] FMC1_FMC_SDTR_DEF
+    \
+    \ @brief SDRAM timing register
+    \ Address offset: 0x148
+    \ Reset value: 0x0FFFFFFF
+    \
+    $00 constant FMC1_TMRD                      \ [0x00 : 4] Load mode register to active
+    $04 constant FMC1_TXSR                      \ [0x04 : 4] Exit self-refresh delay
+    $08 constant FMC1_TRAS                      \ [0x08 : 4] Self-refresh time
+    $0c constant FMC1_TRC                       \ [0x0c : 4] Row cycle delay
+    $10 constant FMC1_TWR                       \ [0x10 : 4] Recovery delay
+    $14 constant FMC1_TRP                       \ [0x14 : 4] Row precharge delay
+    $18 constant FMC1_TRCD                      \ [0x18 : 4] Row to column delay
+  [then]
+
+
+  [ifdef] FMC1_FMC_SDCMR_DEF
+    \
+    \ @brief SDRAM command mode register
+    \ Address offset: 0x150
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_MODE                      \ [0x00 : 3] Command mode
+    $03 constant FMC1_DS2                       \ [0x03] Command targeting SDRAM device 2
+    $04 constant FMC1_DS1                       \ [0x04] Command targeting SDRAM device 1
+    $05 constant FMC1_NRFS                      \ [0x05 : 4] Number of Refresh commands
+    $09 constant FMC1_MRD                       \ [0x09 : 14] Mode register definition
+  [then]
+
+
+  [ifdef] FMC1_FMC_SDRTR_DEF
+    \
+    \ @brief SDRAM refresh timer register
+    \ Address offset: 0x154
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_CRE                       \ [0x00] Clear Refresh error flag
+    $01 constant FMC1_RFSCNT                    \ [0x01 : 13] Refresh Timer Count
+    $0e constant FMC1_REIE                      \ [0x0e] RES Interrupt Enable
+  [then]
+
+
+  [ifdef] FMC1_FMC_SDSR_DEF
+    \
+    \ @brief SDRAM status register
+    \ Address offset: 0x158
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_RE                        \ [0x00] Refresh error flag
+    $01 constant FMC1_MODES1                    \ [0x01 : 2] Status Mode for SDRAM device 1
+    $03 constant FMC1_MODES2                    \ [0x03 : 2] Status mode for SDRAM device 2
+    $0f constant FMC1_CMDOK                     \ [0x0f] Previous command status
+  [then]
+
+
+  [ifdef] FMC1_FMC_IER_DEF
+    \
+    \ @brief FMC NAND interrupt enable register
+    \ Address offset: 0x180
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_IREE                      \ [0x00] Interrupt rising edge detection enable bit
+    $01 constant FMC1_IHLE                      \ [0x01] Interrupt high-level detection enable bit
+    $02 constant FMC1_IFEE                      \ [0x02] Interrupt falling edge detection enable bit
+  [then]
+
+
+  [ifdef] FMC1_FMC_ISR_DEF
+    \
+    \ @brief FMC controller interrupt status register
+    \ Address offset: 0x184
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_IREF                      \ [0x00] Interrupt rising edge flag
+    $01 constant FMC1_IHLF                      \ [0x01] Interrupt high-level flag
+    $02 constant FMC1_IFEF                      \ [0x02] Interrupt falling edge flag
+  [then]
+
+
+  [ifdef] FMC1_FMC_ICR_DEF
+    \
+    \ @brief FMC NAND controller interrupt clear register
+    \ Address offset: 0x188
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_CIREF                     \ [0x00] Clear Interrupt rising edge flag
+    $01 constant FMC1_CIHLF                     \ [0x01] Clear Interrupt high-level flag
+    $02 constant FMC1_CIFEF                     \ [0x02] Clear Interrupt falling edge flag
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQCR_DEF
+    \
+    \ @brief FMC NAND command sequencer control register
+    \ Address offset: 0x200
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_CSQSTART                  \ [0x00] Command Sequencer Enable
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQCFGR1_DEF
+    \
+    \ @brief FMC NAND command sequencer configuration register 1
+    \ Address offset: 0x204
+    \ Reset value: 0x00000000
+    \
+    $01 constant FMC1_CMD2EN                    \ [0x01] Command cycle 2 Enable
+    $02 constant FMC1_DMADEN                    \ [0x02] Command sequencer DMA request data enable
+    $04 constant FMC1_ACYNBR                    \ [0x04 : 3] Address Cycle number
+    $08 constant FMC1_CMD1                      \ [0x08 : 8] Command 1 sequencer
+    $10 constant FMC1_CMD2                      \ [0x10 : 8] Command 2 sequencer
+    $18 constant FMC1_CMD1T                     \ [0x18] Command 1 Sequencer timings
+    $19 constant FMC1_CMD2T                     \ [0x19] Command 2 Sequencer timings
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQCFGR2_DEF
+    \
+    \ @brief FMC NAND command sequencer configuration register 2
+    \ Address offset: 0x208
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_SQSDTEN                   \ [0x00] Sequencer spare data transfer enable
+    $01 constant FMC1_RCMD2EN                   \ [0x01] Random Command 2 sequencer enable
+    $02 constant FMC1_DMASEN                    \ [0x02] Command sequencer DMA request decoding status enable
+    $08 constant FMC1_RCMD1                     \ [0x08 : 8] Random Command 1 sequencer
+    $10 constant FMC1_RCMD2                     \ [0x10 : 8] Random Command 2 sequencer
+    $18 constant FMC1_RCMD1T                    \ [0x18] Command 1 sequencer timings
+    $19 constant FMC1_RCMD2T                    \ [0x19] Command 1 sequencer timings
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQCFGR3_DEF
+    \
+    \ @brief FMC NAND sequencer configuration register 3
+    \ Address offset: 0x20C
+    \ Reset value: 0x00000000
+    \
+    $08 constant FMC1_SNBR                      \ [0x08 : 6] Number of sectors to be read/written
+    $10 constant FMC1_AC1T                      \ [0x10] Address cycle 1 sequencer timings
+    $11 constant FMC1_AC2T                      \ [0x11] Address cycle 2 sequencer timings
+    $12 constant FMC1_AC3T                      \ [0x12] Address cycle 3 sequencer timings
+    $13 constant FMC1_AC4T                      \ [0x13] Address cycle 4sequencer timings
+    $14 constant FMC1_AC5T                      \ [0x14] Address cycle 5 sequencer timings
+    $15 constant FMC1_SDT                       \ [0x15] Spare data transfer sequencer timings
+    $16 constant FMC1_RAC1T                     \ [0x16] Random Address cycle 1 sequencer timings
+    $17 constant FMC1_RAC2T                     \ [0x17] Random Address cycle 2 sequencer timings
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQAR1_DEF
+    \
+    \ @brief FMC NAND command sequencer address register 1
+    \ Address offset: 0x210
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_ADDC1                     \ [0x00 : 8] Address Cycle 1
+    $08 constant FMC1_ADDC2                     \ [0x08 : 8] Address Cycle 2
+    $10 constant FMC1_ADDC3                     \ [0x10 : 8] Address Cycle 3
+    $18 constant FMC1_ADDC4                     \ [0x18 : 8] Address Cycle 4
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQAR2_DEF
+    \
+    \ @brief FMC NAND command sequencer address register 2
+    \ Address offset: 0x214
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_ADDC5                     \ [0x00 : 8] Address Cycle 5
+    $10 constant FMC1_SAO                       \ [0x10 : 16] Spare Area Address Offset
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQIER_DEF
+    \
+    \ @brief FMC NAND command sequencer interrupt enable register
+    \ Address offset: 0x220
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_TCIE                      \ [0x00] Transfer Complete Interrupt enable
+    $01 constant FMC1_SCIE                      \ [0x01] Sector Complete interrupt enable
+    $02 constant FMC1_SEIE                      \ [0x02] Sector Error interrupt enable
+    $03 constant FMC1_SUEIE                     \ [0x03] Sector Uncorrectable Error interrupt enable
+    $04 constant FMC1_CMDTCIE                   \ [0x04] Command Transfer Complete interrupt enable
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQISR_DEF
+    \
+    \ @brief FMC NAND command sequencer interrupt status register
+    \ Address offset: 0x224
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_TCF                       \ [0x00] Transfer Complete flag
+    $01 constant FMC1_SCF                       \ [0x01] Sector Complete flag
+    $02 constant FMC1_SEF                       \ [0x02] Sector Error flag
+    $03 constant FMC1_SUEF                      \ [0x03] Sector Uncorrectable Error flag
+    $04 constant FMC1_CMDTCF                    \ [0x04] Command Transfer Complete flag
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQICR_DEF
+    \
+    \ @brief FMC NAND command sequencer interrupt clear register
+    \ Address offset: 0x228
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_CTCF                      \ [0x00] Clear Transfer Complete flag
+    $01 constant FMC1_CSCF                      \ [0x01] Clear Sector Complete flag
+    $02 constant FMC1_CSEF                      \ [0x02] Clear Sector Error flag
+    $03 constant FMC1_CSUEF                     \ [0x03] Clear Sector uncorrectable Error flag
+    $04 constant FMC1_CCMDTCF                   \ [0x04] Clear Command Transfer Complete flag
+  [then]
+
+
+  [ifdef] FMC1_FMC_CSQEMSR_DEF
+    \
+    \ @brief FMC command sequencer error mapping status register
+    \ Address offset: 0x230
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_SEM                       \ [0x00 : 16] Sector Error mapping
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHIER_DEF
+    \
+    \ @brief FMC BCH interrupt enable register
+    \ Address offset: 0x250
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_DUEIE                     \ [0x00] Decoder Uncorrectable Errors Interrupt enable
+    $01 constant FMC1_DERIE                     \ [0x01] Decoder Error Ready Interrupt enable
+    $02 constant FMC1_DEFIE                     \ [0x02] Decoder Error Found Interrupt enable
+    $03 constant FMC1_DSRIE                     \ [0x03] Decoder Syndrome Ready Interrupt enable
+    $04 constant FMC1_EPBRIE                    \ [0x04] Decoder Parity Bits Ready Interrupt enable
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHISR_DEF
+    \
+    \ @brief FMC BCH interrupt and status register
+    \ Address offset: 0x254
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_DUEF                      \ [0x00] Decoder Uncorrectable Errors flag
+    $01 constant FMC1_DERF                      \ [0x01] Decoder Error Ready flag
+    $02 constant FMC1_DEFF                      \ [0x02] Decoder Error Found flag
+    $03 constant FMC1_DSRF                      \ [0x03] Decoder Syndrome Ready flag
+    $04 constant FMC1_EPBRF                     \ [0x04] Encoder Parity Bits Ready flag
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHICR_DEF
+    \
+    \ @brief FMC BCH interrupt clear register
+    \ Address offset: 0x258
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_CDUEF                     \ [0x00] Clear Decoder Uncorrectable Error flag
+    $01 constant FMC1_CDERF                     \ [0x01] Clear Decoder Error ready flag
+    $02 constant FMC1_CDEFF                     \ [0x02] Clear Decoder Error Found flag
+    $03 constant FMC1_CDSRF                     \ [0x03] Clear Decoder Syndrome Ready flag
+    $04 constant FMC1_CEPBRF                    \ [0x04] Clear Encoder Parity Bits Ready flag
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHPBR1_DEF
+    \
+    \ @brief FMC BCH parity bits register 1
+    \ Address offset: 0x260
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_BCHPB                     \ [0x00 : 32] BCH parity bits
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHPBR2_DEF
+    \
+    \ @brief FMC BCH parity bits register 2
+    \ Address offset: 0x264
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_BCHPB                     \ [0x00 : 32] BCH parity bits
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHPBR3_DEF
+    \
+    \ @brief FMC BCH parity bits register 3
+    \ Address offset: 0x268
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_BCHPB                     \ [0x00 : 32] BCH parity bits
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHPBR4_DEF
+    \
+    \ @brief FMC BCH parity bits register 4
+    \ Address offset: 0x26C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_BCHPB                     \ [0x00 : 8] BCH parity bits
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHDSR0_DEF
+    \
+    \ @brief FMC BCH decoder status register 0
+    \ Address offset: 0x27C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_DUE                       \ [0x00] Decoder uncorrectable error
+    $01 constant FMC1_DEF                       \ [0x01] Decoder error found
+    $04 constant FMC1_DEN                       \ [0x04 : 4] Decoder error number
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHDSR1_DEF
+    \
+    \ @brief FMC BCH decoder status register for memory region 1
+    \ Address offset: 0x280
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_EBP1                      \ [0x00 : 13] Error bit position for error number 1
+    $10 constant FMC1_EBP2                      \ [0x10 : 13] Error bit position for error number 2
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHDSR2_DEF
+    \
+    \ @brief FMC BCH decoder status register for memory region 2
+    \ Address offset: 0x284
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_EBP3                      \ [0x00 : 13] Error bit position for error number 3
+    $10 constant FMC1_EBP4                      \ [0x10 : 13] Error bit position for error number 4
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHDSR3_DEF
+    \
+    \ @brief FMC BCH decoder status register for memory region 3
+    \ Address offset: 0x288
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_EBP5                      \ [0x00 : 13] Error bit position for error number 5
+    $10 constant FMC1_EBP6                      \ [0x10 : 13] Error bit position for error number 6
+  [then]
+
+
+  [ifdef] FMC1_FMC_BCHDSR4_DEF
+    \
+    \ @brief FMC BCH decoder status register for memory region 4
+    \ Address offset: 0x28C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMC1_EBP7                      \ [0x00 : 13] Error bit position for error number 7
+    $10 constant FMC1_EBP8                      \ [0x10 : 13] Error bit position for error number 8
+  [then]
+
+  \
+  \ @brief Flexible memory controller
+  \
+  $00 constant FMC1_FMC_BCR1            \ SRAM/NOR Flash chip-select control register for memory region 1
+  $04 constant FMC1_FMC_BTR1            \ SRAM/NOR Flash chip-select timing registers for memory region 1
+  $08 constant FMC1_FMC_BCR2            \ SRAM/NOR Flash chip-select control register for memory region 2
+  $0C constant FMC1_FMC_BTR2            \ SRAM/NOR Flash chip-select timing registers for memory region 2
+  $10 constant FMC1_FMC_BCR3            \ SRAM/NOR Flash chip-select control register for memory region 3
+  $14 constant FMC1_FMC_BTR3            \ SRAM/NOR Flash chip-select timing registers for memory region 3
+  $18 constant FMC1_FMC_BCR4            \ SRAM/NOR Flash chip-select control register for memory region 4
+  $1C constant FMC1_FMC_BTR4            \ SRAM/NOR Flash chip-select timing registers for memory region 4
+  $20 constant FMC1_FMC_CFGR            \ FMC common configuration register
+  $80 constant FMC1_FMC_PCR             \ NAND Flash programmable control register
+  $84 constant FMC1_FMC_SR              \ FMC status register
+  $88 constant FMC1_FMC_PMEM            \ FMC common memory space timing register
+  $8C constant FMC1_FMC_PATT            \ FMC attribute memory space timing registers
+  $90 constant FMC1_FMC_HPR             \ FMC Hamming parity result registers
+  $94 constant FMC1_FMC_HECCR           \ FMC Hamming code ECC result register
+  $104 constant FMC1_FMC_BWTR1          \ SRAM/NOR-Flash write timing registers for memory region 1
+  $10C constant FMC1_FMC_BWTR2          \ SRAM/NOR-Flash write timing registers for memory region 2
+  $114 constant FMC1_FMC_BWTR3          \ SRAM/NOR-Flash write timing registers for memory region 3
+  $11C constant FMC1_FMC_BWTR4          \ SRAM/NOR-Flash write timing registers for memory region 4
+  $140 constant FMC1_FMC_SDCR1          \ SDRAM control registers for SDRAM device 1
+  $144 constant FMC1_FMC_SDCR2          \ SDRAM control registers for SDRAM device 2
+  $148 constant FMC1_FMC_SDTR           \ SDRAM timing register
+  $150 constant FMC1_FMC_SDCMR          \ SDRAM command mode register
+  $154 constant FMC1_FMC_SDRTR          \ SDRAM refresh timer register
+  $158 constant FMC1_FMC_SDSR           \ SDRAM status register
+  $180 constant FMC1_FMC_IER            \ FMC NAND interrupt enable register
+  $184 constant FMC1_FMC_ISR            \ FMC controller interrupt status register
+  $188 constant FMC1_FMC_ICR            \ FMC NAND controller interrupt clear register
+  $200 constant FMC1_FMC_CSQCR          \ FMC NAND command sequencer control register
+  $204 constant FMC1_FMC_CSQCFGR1       \ FMC NAND command sequencer configuration register 1
+  $208 constant FMC1_FMC_CSQCFGR2       \ FMC NAND command sequencer configuration register 2
+  $20C constant FMC1_FMC_CSQCFGR3       \ FMC NAND sequencer configuration register 3
+  $210 constant FMC1_FMC_CSQAR1         \ FMC NAND command sequencer address register 1
+  $214 constant FMC1_FMC_CSQAR2         \ FMC NAND command sequencer address register 2
+  $220 constant FMC1_FMC_CSQIER         \ FMC NAND command sequencer interrupt enable register
+  $224 constant FMC1_FMC_CSQISR         \ FMC NAND command sequencer interrupt status register
+  $228 constant FMC1_FMC_CSQICR         \ FMC NAND command sequencer interrupt clear register
+  $230 constant FMC1_FMC_CSQEMSR        \ FMC command sequencer error mapping status register
+  $250 constant FMC1_FMC_BCHIER         \ FMC BCH interrupt enable register
+  $254 constant FMC1_FMC_BCHISR         \ FMC BCH interrupt and status register
+  $258 constant FMC1_FMC_BCHICR         \ FMC BCH interrupt clear register
+  $260 constant FMC1_FMC_BCHPBR1        \ FMC BCH parity bits register 1
+  $264 constant FMC1_FMC_BCHPBR2        \ FMC BCH parity bits register 2
+  $268 constant FMC1_FMC_BCHPBR3        \ FMC BCH parity bits register 3
+  $26C constant FMC1_FMC_BCHPBR4        \ FMC BCH parity bits register 4
+  $27C constant FMC1_FMC_BCHDSR0        \ FMC BCH decoder status register 0
+  $280 constant FMC1_FMC_BCHDSR1        \ FMC BCH decoder status register for memory region 1
+  $284 constant FMC1_FMC_BCHDSR2        \ FMC BCH decoder status register for memory region 2
+  $288 constant FMC1_FMC_BCHDSR3        \ FMC BCH decoder status register for memory region 3
+  $28C constant FMC1_FMC_BCHDSR4        \ FMC BCH decoder status register for memory region 4
+
+: FMC1_DEF ; [then]

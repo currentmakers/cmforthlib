@@ -6,110 +6,118 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] FMAC_DEF
 
-\
-\ @brief FMAC X1 Buffer Configuration register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMAC_X1BUFCFG_X1_BASE                            \ Base address of X1 buffer
-$0000ff00 constant FMAC_X1BUFCFG_X1_BUF_SIZE                        \ Allocated size of X1 buffer in 16-bit words
-$03000000 constant FMAC_X1BUFCFG_FULL_WM                            \ Watermark for buffer full flag
-
-
-\
-\ @brief FMAC X2 Buffer Configuration register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMAC_X2BUFCFG_X2_BASE                            \ Base address of X2 buffer
-$0000ff00 constant FMAC_X2BUFCFG_X2_BUF_SIZE                        \ Size of X2 buffer in 16-bit words
+  [ifdef] FMAC_X1BUFCFG_DEF
+    \
+    \ @brief FMAC X1 Buffer Configuration register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMAC_X1_BASE                   \ [0x00 : 8] Base address of X1 buffer
+    $08 constant FMAC_X1_BUF_SIZE               \ [0x08 : 8] Allocated size of X1 buffer in 16-bit words
+    $18 constant FMAC_FULL_WM                   \ [0x18 : 2] Watermark for buffer full flag
+  [then]
 
 
-\
-\ @brief FMAC Y Buffer Configuration register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMAC_YBUFCFG_Y_BASE                              \ Base address of Y buffer
-$0000ff00 constant FMAC_YBUFCFG_Y_BUF_SIZE                          \ Size of Y buffer in 16-bit words
-$03000000 constant FMAC_YBUFCFG_EMPTY_WM                            \ Watermark for buffer empty flag
-
-
-\
-\ @brief FMAC Parameter register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$000000ff constant FMAC_PARAM_P                                     \ Input parameter P
-$0000ff00 constant FMAC_PARAM_Q                                     \ Input parameter Q
-$00ff0000 constant FMAC_PARAM_R                                     \ Input parameter R
-$7f000000 constant FMAC_PARAM_FUNC                                  \ Function
-$80000000 constant FMAC_PARAM_START                                 \ Enable execution
+  [ifdef] FMAC_X2BUFCFG_DEF
+    \
+    \ @brief FMAC X2 Buffer Configuration register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMAC_X2_BASE                   \ [0x00 : 8] Base address of X2 buffer
+    $08 constant FMAC_X2_BUF_SIZE               \ [0x08 : 8] Size of X2 buffer in 16-bit words
+  [then]
 
 
-\
-\ @brief FMAC Control register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant FMAC_CR_RIEN                                     \ Enable read interrupt
-$00000002 constant FMAC_CR_WIEN                                     \ Enable write interrupt
-$00000004 constant FMAC_CR_OVFLIEN                                  \ Enable overflow error interrupts
-$00000008 constant FMAC_CR_UNFLIEN                                  \ Enable underflow error interrupts
-$00000010 constant FMAC_CR_SATIEN                                   \ Enable saturation error interrupts
-$00000100 constant FMAC_CR_DMAREN                                   \ Enable DMA read channel requests
-$00000200 constant FMAC_CR_DMAWEN                                   \ Enable DMA write channel requests
-$00008000 constant FMAC_CR_CLIPEN                                   \ Enable clipping
-$00010000 constant FMAC_CR_RESET                                    \ Reset FMAC unit
+  [ifdef] FMAC_YBUFCFG_DEF
+    \
+    \ @brief FMAC Y Buffer Configuration register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMAC_Y_BASE                    \ [0x00 : 8] Base address of Y buffer
+    $08 constant FMAC_Y_BUF_SIZE                \ [0x08 : 8] Size of Y buffer in 16-bit words
+    $18 constant FMAC_EMPTY_WM                  \ [0x18 : 2] Watermark for buffer empty flag
+  [then]
 
 
-\
-\ @brief FMAC Status register
-\ Address offset: 0x14
-\ Reset value: 0x00000001
-\
-
-$00000001 constant FMAC_SR_YEMPTY                                   \ Y buffer empty flag
-$00000002 constant FMAC_SR_X1FULL                                   \ X1 buffer full flag
-$00000100 constant FMAC_SR_OVFL                                     \ Overflow error flag
-$00000200 constant FMAC_SR_UNFL                                     \ Underflow error flag
-$00000400 constant FMAC_SR_SAT                                      \ Saturation error flag
-
-
-\
-\ @brief FMAC Write Data register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant FMAC_WDATA_WDATA                                 \ Write data
+  [ifdef] FMAC_PARAM_DEF
+    \
+    \ @brief FMAC Parameter register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMAC_P                         \ [0x00 : 8] Input parameter P
+    $08 constant FMAC_Q                         \ [0x08 : 8] Input parameter Q
+    $10 constant FMAC_R                         \ [0x10 : 8] Input parameter R
+    $18 constant FMAC_FUNC                      \ [0x18 : 7] Function
+    $1f constant FMAC_START                     \ [0x1f] Enable execution
+  [then]
 
 
-\
-\ @brief FMAC Read Data register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
+  [ifdef] FMAC_CR_DEF
+    \
+    \ @brief FMAC Control register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMAC_RIEN                      \ [0x00] Enable read interrupt
+    $01 constant FMAC_WIEN                      \ [0x01] Enable write interrupt
+    $02 constant FMAC_OVFLIEN                   \ [0x02] Enable overflow error interrupts
+    $03 constant FMAC_UNFLIEN                   \ [0x03] Enable underflow error interrupts
+    $04 constant FMAC_SATIEN                    \ [0x04] Enable saturation error interrupts
+    $08 constant FMAC_DMAREN                    \ [0x08] Enable DMA read channel requests
+    $09 constant FMAC_DMAWEN                    \ [0x09] Enable DMA write channel requests
+    $0f constant FMAC_CLIPEN                    \ [0x0f] Enable clipping
+    $10 constant FMAC_RESET                     \ [0x10] Reset FMAC unit
+  [then]
 
-$0000ffff constant FMAC_RDATA_RDATA                                 \ Read data
+
+  [ifdef] FMAC_SR_DEF
+    \
+    \ @brief FMAC Status register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000001
+    \
+    $00 constant FMAC_YEMPTY                    \ [0x00] Y buffer empty flag
+    $01 constant FMAC_X1FULL                    \ [0x01] X1 buffer full flag
+    $08 constant FMAC_OVFL                      \ [0x08] Overflow error flag
+    $09 constant FMAC_UNFL                      \ [0x09] Underflow error flag
+    $0a constant FMAC_SAT                       \ [0x0a] Saturation error flag
+  [then]
 
 
-\
-\ @brief Filter Math Accelerator
-\
-$40021400 constant FMAC_X1BUFCFG  \ offset: 0x00 : FMAC X1 Buffer Configuration register
-$40021404 constant FMAC_X2BUFCFG  \ offset: 0x04 : FMAC X2 Buffer Configuration register
-$40021408 constant FMAC_YBUFCFG   \ offset: 0x08 : FMAC Y Buffer Configuration register
-$4002140c constant FMAC_PARAM     \ offset: 0x0C : FMAC Parameter register
-$40021410 constant FMAC_CR        \ offset: 0x10 : FMAC Control register
-$40021414 constant FMAC_SR        \ offset: 0x14 : FMAC Status register
-$40021418 constant FMAC_WDATA     \ offset: 0x18 : FMAC Write Data register
-$4002141c constant FMAC_RDATA     \ offset: 0x1C : FMAC Read Data register
+  [ifdef] FMAC_WDATA_DEF
+    \
+    \ @brief FMAC Write Data register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMAC_WDATA                     \ [0x00 : 16] Write data
+  [then]
 
+
+  [ifdef] FMAC_RDATA_DEF
+    \
+    \ @brief FMAC Read Data register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant FMAC_RDATA                     \ [0x00 : 16] Read data
+  [then]
+
+  \
+  \ @brief Filter Math Accelerator
+  \
+  $00 constant FMAC_X1BUFCFG            \ FMAC X1 Buffer Configuration register
+  $04 constant FMAC_X2BUFCFG            \ FMAC X2 Buffer Configuration register
+  $08 constant FMAC_YBUFCFG             \ FMAC Y Buffer Configuration register
+  $0C constant FMAC_PARAM               \ FMAC Parameter register
+  $10 constant FMAC_CR                  \ FMAC Control register
+  $14 constant FMAC_SR                  \ FMAC Status register
+  $18 constant FMAC_WDATA               \ FMAC Write Data register
+  $1C constant FMAC_RDATA               \ FMAC Read Data register
+
+: FMAC_DEF ; [then]

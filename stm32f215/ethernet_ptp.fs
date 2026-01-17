@@ -6,137 +6,148 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ETHERNET_PTP_DEF
 
-\
-\ @brief Ethernet PTP time stamp control register
-\ Address offset: 0x00
-\ Reset value: 0x00002000
-\
-
-$00000001 constant ETHERNET_PTP_PTPTSCR_TSE                         \ Time stamp enable
-$00000002 constant ETHERNET_PTP_PTPTSCR_TSFCU                       \ Time stamp fine or coarse update
-$00000004 constant ETHERNET_PTP_PTPTSCR_TSSTI                       \ Time stamp system time initialize
-$00000008 constant ETHERNET_PTP_PTPTSCR_TSSTU                       \ Time stamp system time update
-$00000010 constant ETHERNET_PTP_PTPTSCR_TSITE                       \ Time stamp interrupt trigger enable
-$00000020 constant ETHERNET_PTP_PTPTSCR_TTSARU                      \ Time stamp addend register update
-$00000100 constant ETHERNET_PTP_PTPTSCR_TSSARFE                     \ Time stamp snapshot for all received frames enable
-$00000200 constant ETHERNET_PTP_PTPTSCR_TSSSR                       \ Time stamp subsecond rollover: digital or binary rollover control
-$00000400 constant ETHERNET_PTP_PTPTSCR_TSPTPPSV2E                  \ Time stamp PTP packet snooping for version2 format enable
-$00000800 constant ETHERNET_PTP_PTPTSCR_TSSPTPOEFE                  \ Time stamp snapshot for PTP over ethernet frames enable
-$00001000 constant ETHERNET_PTP_PTPTSCR_TSSIPV6FE                   \ Time stamp snapshot for IPv6 frames enable
-$00002000 constant ETHERNET_PTP_PTPTSCR_TSSIPV4FE                   \ Time stamp snapshot for IPv4 frames enable
-$00004000 constant ETHERNET_PTP_PTPTSCR_TSSEME                      \ Time stamp snapshot for event message enable
-$00008000 constant ETHERNET_PTP_PTPTSCR_TSSMRME                     \ Time stamp snapshot for message relevant to master enable
-$00030000 constant ETHERNET_PTP_PTPTSCR_TSCNT                       \ Time stamp clock node type
-$00040000 constant ETHERNET_PTP_PTPTSCR_TSPFFMAE                    \ Time stamp PTP frame filtering MAC address enable
-
-
-\
-\ @brief Ethernet PTP subsecond increment register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$000000ff constant ETHERNET_PTP_PTPSSIR_STSSI                       \ System time subsecond increment
+  [ifdef] ETHERNET_PTP_PTPTSCR_DEF
+    \
+    \ @brief Ethernet PTP time stamp control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00002000
+    \
+    $00 constant ETHERNET_PTP_TSE               \ [0x00] Time stamp enable
+    $01 constant ETHERNET_PTP_TSFCU             \ [0x01] Time stamp fine or coarse update
+    $02 constant ETHERNET_PTP_TSSTI             \ [0x02] Time stamp system time initialize
+    $03 constant ETHERNET_PTP_TSSTU             \ [0x03] Time stamp system time update
+    $04 constant ETHERNET_PTP_TSITE             \ [0x04] Time stamp interrupt trigger enable
+    $05 constant ETHERNET_PTP_TTSARU            \ [0x05] Time stamp addend register update
+    $08 constant ETHERNET_PTP_TSSARFE           \ [0x08] Time stamp snapshot for all received frames enable
+    $09 constant ETHERNET_PTP_TSSSR             \ [0x09] Time stamp subsecond rollover: digital or binary rollover control
+    $0a constant ETHERNET_PTP_TSPTPPSV2E        \ [0x0a] Time stamp PTP packet snooping for version2 format enable
+    $0b constant ETHERNET_PTP_TSSPTPOEFE        \ [0x0b] Time stamp snapshot for PTP over ethernet frames enable
+    $0c constant ETHERNET_PTP_TSSIPV6FE         \ [0x0c] Time stamp snapshot for IPv6 frames enable
+    $0d constant ETHERNET_PTP_TSSIPV4FE         \ [0x0d] Time stamp snapshot for IPv4 frames enable
+    $0e constant ETHERNET_PTP_TSSEME            \ [0x0e] Time stamp snapshot for event message enable
+    $0f constant ETHERNET_PTP_TSSMRME           \ [0x0f] Time stamp snapshot for message relevant to master enable
+    $10 constant ETHERNET_PTP_TSCNT             \ [0x10 : 2] Time stamp clock node type
+    $12 constant ETHERNET_PTP_TSPFFMAE          \ [0x12] Time stamp PTP frame filtering MAC address enable
+  [then]
 
 
-\
-\ @brief Ethernet PTP time stamp high register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_PTP_PTPTSHR_STS                         \ System time second
-
-
-\
-\ @brief Ethernet PTP time stamp low register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$7fffffff constant ETHERNET_PTP_PTPTSLR_STSS                        \ System time subseconds
-$80000000 constant ETHERNET_PTP_PTPTSLR_STPNS                       \ System time positive or negative sign
+  [ifdef] ETHERNET_PTP_PTPSSIR_DEF
+    \
+    \ @brief Ethernet PTP subsecond increment register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_STSSI             \ [0x00 : 8] System time subsecond increment
+  [then]
 
 
-\
-\ @brief Ethernet PTP time stamp high update register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_PTP_PTPTSHUR_TSUS                       \ Time stamp update second
-
-
-\
-\ @brief Ethernet PTP time stamp low update register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$7fffffff constant ETHERNET_PTP_PTPTSLUR_TSUSS                      \ Time stamp update subseconds
-$80000000 constant ETHERNET_PTP_PTPTSLUR_TSUPNS                     \ Time stamp update positive or negative sign
+  [ifdef] ETHERNET_PTP_PTPTSHR_DEF
+    \
+    \ @brief Ethernet PTP time stamp high register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_STS               \ [0x00 : 32] System time second
+  [then]
 
 
-\
-\ @brief Ethernet PTP time stamp addend register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_PTP_PTPTSAR_TSA                         \ Time stamp addend
-
-
-\
-\ @brief Ethernet PTP target time high register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_PTP_PTPTTHR_TTSH                        \ Target time stamp high
+  [ifdef] ETHERNET_PTP_PTPTSLR_DEF
+    \
+    \ @brief Ethernet PTP time stamp low register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_STSS              \ [0x00 : 31] System time subseconds
+    $1f constant ETHERNET_PTP_STPNS             \ [0x1f] System time positive or negative sign
+  [then]
 
 
-\
-\ @brief Ethernet PTP target time low register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant ETHERNET_PTP_PTPTTLR_TTSL                        \ Target time stamp low
-
-
-\
-\ @brief Ethernet PTP time stamp status register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ETHERNET_PTP_PTPTSSR_TSSO                        \ Time stamp second overflow
-$00000002 constant ETHERNET_PTP_PTPTSSR_TSTTR                       \ Time stamp target time reached
+  [ifdef] ETHERNET_PTP_PTPTSHUR_DEF
+    \
+    \ @brief Ethernet PTP time stamp high update register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_TSUS              \ [0x00 : 32] Time stamp update second
+  [then]
 
 
-\
-\ @brief Ethernet PTP PPS control register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
+  [ifdef] ETHERNET_PTP_PTPTSLUR_DEF
+    \
+    \ @brief Ethernet PTP time stamp low update register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_TSUSS             \ [0x00 : 31] Time stamp update subseconds
+    $1f constant ETHERNET_PTP_TSUPNS            \ [0x1f] Time stamp update positive or negative sign
+  [then]
 
-$0000000f constant ETHERNET_PTP_PTPPPSCR_PPSFREQ                    \ PPS frequency selection
+
+  [ifdef] ETHERNET_PTP_PTPTSAR_DEF
+    \
+    \ @brief Ethernet PTP time stamp addend register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_TSA               \ [0x00 : 32] Time stamp addend
+  [then]
 
 
-\
-\ @brief Ethernet: Precision time protocol
-\
-$40028700 constant ETHERNET_PTP_PTPTSCR  \ offset: 0x00 : Ethernet PTP time stamp control register
-$40028704 constant ETHERNET_PTP_PTPSSIR  \ offset: 0x04 : Ethernet PTP subsecond increment register
-$40028708 constant ETHERNET_PTP_PTPTSHR  \ offset: 0x08 : Ethernet PTP time stamp high register
-$4002870c constant ETHERNET_PTP_PTPTSLR  \ offset: 0x0C : Ethernet PTP time stamp low register
-$40028710 constant ETHERNET_PTP_PTPTSHUR  \ offset: 0x10 : Ethernet PTP time stamp high update register
-$40028714 constant ETHERNET_PTP_PTPTSLUR  \ offset: 0x14 : Ethernet PTP time stamp low update register
-$40028718 constant ETHERNET_PTP_PTPTSAR  \ offset: 0x18 : Ethernet PTP time stamp addend register
-$4002871c constant ETHERNET_PTP_PTPTTHR  \ offset: 0x1C : Ethernet PTP target time high register
-$40028720 constant ETHERNET_PTP_PTPTTLR  \ offset: 0x20 : Ethernet PTP target time low register
-$40028728 constant ETHERNET_PTP_PTPTSSR  \ offset: 0x28 : Ethernet PTP time stamp status register
-$4002872c constant ETHERNET_PTP_PTPPPSCR  \ offset: 0x2C : Ethernet PTP PPS control register
+  [ifdef] ETHERNET_PTP_PTPTTHR_DEF
+    \
+    \ @brief Ethernet PTP target time high register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_TTSH              \ [0x00 : 32] Target time stamp high
+  [then]
 
+
+  [ifdef] ETHERNET_PTP_PTPTTLR_DEF
+    \
+    \ @brief Ethernet PTP target time low register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_TTSL              \ [0x00 : 32] Target time stamp low
+  [then]
+
+
+  [ifdef] ETHERNET_PTP_PTPTSSR_DEF
+    \
+    \ @brief Ethernet PTP time stamp status register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_TSSO              \ [0x00] Time stamp second overflow
+    $01 constant ETHERNET_PTP_TSTTR             \ [0x01] Time stamp target time reached
+  [then]
+
+
+  [ifdef] ETHERNET_PTP_PTPPPSCR_DEF
+    \
+    \ @brief Ethernet PTP PPS control register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ETHERNET_PTP_PPSFREQ           \ [0x00 : 4] PPS frequency selection
+  [then]
+
+  \
+  \ @brief Ethernet: Precision time protocol
+  \
+  $00 constant ETHERNET_PTP_PTPTSCR     \ Ethernet PTP time stamp control register
+  $04 constant ETHERNET_PTP_PTPSSIR     \ Ethernet PTP subsecond increment register
+  $08 constant ETHERNET_PTP_PTPTSHR     \ Ethernet PTP time stamp high register
+  $0C constant ETHERNET_PTP_PTPTSLR     \ Ethernet PTP time stamp low register
+  $10 constant ETHERNET_PTP_PTPTSHUR    \ Ethernet PTP time stamp high update register
+  $14 constant ETHERNET_PTP_PTPTSLUR    \ Ethernet PTP time stamp low update register
+  $18 constant ETHERNET_PTP_PTPTSAR     \ Ethernet PTP time stamp addend register
+  $1C constant ETHERNET_PTP_PTPTTHR     \ Ethernet PTP target time high register
+  $20 constant ETHERNET_PTP_PTPTTLR     \ Ethernet PTP target time low register
+  $28 constant ETHERNET_PTP_PTPTSSR     \ Ethernet PTP time stamp status register
+  $2C constant ETHERNET_PTP_PTPPPSCR    \ Ethernet PTP PPS control register
+
+: ETHERNET_PTP_DEF ; [then]

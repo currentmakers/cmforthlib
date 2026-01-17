@@ -6,285 +6,296 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] GPIOA_DEF
 
-\
-\ @brief GPIO port mode register
-\ Address offset: 0x00
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000003 constant GPIOA_GPIOA_MODER_MODER0                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$0000000c constant GPIOA_GPIOA_MODER_MODER1                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$00000030 constant GPIOA_GPIOA_MODER_MODER2                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$000000c0 constant GPIOA_GPIOA_MODER_MODER3                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$00000300 constant GPIOA_GPIOA_MODER_MODER4                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$00000c00 constant GPIOA_GPIOA_MODER_MODER5                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$00003000 constant GPIOA_GPIOA_MODER_MODER6                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$0000c000 constant GPIOA_GPIOA_MODER_MODER7                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$00030000 constant GPIOA_GPIOA_MODER_MODER8                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$000c0000 constant GPIOA_GPIOA_MODER_MODER9                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$00300000 constant GPIOA_GPIOA_MODER_MODER10                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$00c00000 constant GPIOA_GPIOA_MODER_MODER11                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$03000000 constant GPIOA_GPIOA_MODER_MODER12                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$0c000000 constant GPIOA_GPIOA_MODER_MODER13                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$30000000 constant GPIOA_GPIOA_MODER_MODER14                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-$c0000000 constant GPIOA_GPIOA_MODER_MODER15                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
-
-
-\
-\ @brief GPIO port output type register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_GPIOA_OTYPER_OT0                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000002 constant GPIOA_GPIOA_OTYPER_OT1                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000004 constant GPIOA_GPIOA_OTYPER_OT2                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000008 constant GPIOA_GPIOA_OTYPER_OT3                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000010 constant GPIOA_GPIOA_OTYPER_OT4                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000020 constant GPIOA_GPIOA_OTYPER_OT5                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000040 constant GPIOA_GPIOA_OTYPER_OT6                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000080 constant GPIOA_GPIOA_OTYPER_OT7                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000100 constant GPIOA_GPIOA_OTYPER_OT8                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000200 constant GPIOA_GPIOA_OTYPER_OT9                           \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000400 constant GPIOA_GPIOA_OTYPER_OT10                          \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00000800 constant GPIOA_GPIOA_OTYPER_OT11                          \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00001000 constant GPIOA_GPIOA_OTYPER_OT12                          \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00002000 constant GPIOA_GPIOA_OTYPER_OT13                          \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00004000 constant GPIOA_GPIOA_OTYPER_OT14                          \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
-$00008000 constant GPIOA_GPIOA_OTYPER_OT15                          \ Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+  [ifdef] GPIOA_GPIOA_MODER_DEF
+    \
+    \ @brief GPIO port mode register
+    \ Address offset: 0x00
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant GPIOA_MODER0                   \ [0x00 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $02 constant GPIOA_MODER1                   \ [0x02 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $04 constant GPIOA_MODER2                   \ [0x04 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $06 constant GPIOA_MODER3                   \ [0x06 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $08 constant GPIOA_MODER4                   \ [0x08 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $0a constant GPIOA_MODER5                   \ [0x0a : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $0c constant GPIOA_MODER6                   \ [0x0c : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $0e constant GPIOA_MODER7                   \ [0x0e : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $10 constant GPIOA_MODER8                   \ [0x10 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $12 constant GPIOA_MODER9                   \ [0x12 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $14 constant GPIOA_MODER10                  \ [0x14 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $16 constant GPIOA_MODER11                  \ [0x16 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $18 constant GPIOA_MODER12                  \ [0x18 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $1a constant GPIOA_MODER13                  \ [0x1a : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $1c constant GPIOA_MODER14                  \ [0x1c : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+    $1e constant GPIOA_MODER15                  \ [0x1e : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O mode.
+  [then]
 
 
-\
-\ @brief GPIO port output speed register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000003 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR0                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$0000000c constant GPIOA_GPIOA_OSPEEDR_OSPEEDR1                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$00000030 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR2                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$000000c0 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR3                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$00000300 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR4                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$00000c00 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR5                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$00003000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR6                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$0000c000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR7                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$00030000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR8                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$000c0000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR9                     \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$00300000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR10                    \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$00c00000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR11                    \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$03000000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR12                    \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$0c000000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR13                    \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$30000000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR14                    \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-$c0000000 constant GPIOA_GPIOA_OSPEEDR_OSPEEDR15                    \ Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
-
-
-\
-\ @brief GPIO port pull-up/pull-down register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant GPIOA_GPIOA_PUPDR_PUPDR0                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$0000000c constant GPIOA_GPIOA_PUPDR_PUPDR1                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$00000030 constant GPIOA_GPIOA_PUPDR_PUPDR2                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$000000c0 constant GPIOA_GPIOA_PUPDR_PUPDR3                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$00000300 constant GPIOA_GPIOA_PUPDR_PUPDR4                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$00000c00 constant GPIOA_GPIOA_PUPDR_PUPDR5                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$00003000 constant GPIOA_GPIOA_PUPDR_PUPDR6                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$0000c000 constant GPIOA_GPIOA_PUPDR_PUPDR7                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$00030000 constant GPIOA_GPIOA_PUPDR_PUPDR8                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$000c0000 constant GPIOA_GPIOA_PUPDR_PUPDR9                         \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$00300000 constant GPIOA_GPIOA_PUPDR_PUPDR10                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$00c00000 constant GPIOA_GPIOA_PUPDR_PUPDR11                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$03000000 constant GPIOA_GPIOA_PUPDR_PUPDR12                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$0c000000 constant GPIOA_GPIOA_PUPDR_PUPDR13                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$30000000 constant GPIOA_GPIOA_PUPDR_PUPDR14                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
-$c0000000 constant GPIOA_GPIOA_PUPDR_PUPDR15                        \ Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+  [ifdef] GPIOA_GPIOA_OTYPER_DEF
+    \
+    \ @brief GPIO port output type register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_OT0                      \ [0x00] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $01 constant GPIOA_OT1                      \ [0x01] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $02 constant GPIOA_OT2                      \ [0x02] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $03 constant GPIOA_OT3                      \ [0x03] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $04 constant GPIOA_OT4                      \ [0x04] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $05 constant GPIOA_OT5                      \ [0x05] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $06 constant GPIOA_OT6                      \ [0x06] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $07 constant GPIOA_OT7                      \ [0x07] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $08 constant GPIOA_OT8                      \ [0x08] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $09 constant GPIOA_OT9                      \ [0x09] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $0a constant GPIOA_OT10                     \ [0x0a] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $0b constant GPIOA_OT11                     \ [0x0b] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $0c constant GPIOA_OT12                     \ [0x0c] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $0d constant GPIOA_OT13                     \ [0x0d] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $0e constant GPIOA_OT14                     \ [0x0e] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+    $0f constant GPIOA_OT15                     \ [0x0f] Port x configuration I/O pin y These bits are written by software to configure the I/O output type.
+  [then]
 
 
-\
-\ @brief GPIO port input data register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_GPIOA_IDR_IDR0                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000002 constant GPIOA_GPIOA_IDR_IDR1                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000004 constant GPIOA_GPIOA_IDR_IDR2                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000008 constant GPIOA_GPIOA_IDR_IDR3                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000010 constant GPIOA_GPIOA_IDR_IDR4                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000020 constant GPIOA_GPIOA_IDR_IDR5                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000040 constant GPIOA_GPIOA_IDR_IDR6                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000080 constant GPIOA_GPIOA_IDR_IDR7                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000100 constant GPIOA_GPIOA_IDR_IDR8                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000200 constant GPIOA_GPIOA_IDR_IDR9                             \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000400 constant GPIOA_GPIOA_IDR_IDR10                            \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00000800 constant GPIOA_GPIOA_IDR_IDR11                            \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00001000 constant GPIOA_GPIOA_IDR_IDR12                            \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00002000 constant GPIOA_GPIOA_IDR_IDR13                            \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00004000 constant GPIOA_GPIOA_IDR_IDR14                            \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-$00008000 constant GPIOA_GPIOA_IDR_IDR15                            \ Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
-
-
-\
-\ @brief GPIO port output data register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_GPIOA_ODR_ODR0                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000002 constant GPIOA_GPIOA_ODR_ODR1                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000004 constant GPIOA_GPIOA_ODR_ODR2                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000008 constant GPIOA_GPIOA_ODR_ODR3                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000010 constant GPIOA_GPIOA_ODR_ODR4                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000020 constant GPIOA_GPIOA_ODR_ODR5                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000040 constant GPIOA_GPIOA_ODR_ODR6                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000080 constant GPIOA_GPIOA_ODR_ODR7                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000100 constant GPIOA_GPIOA_ODR_ODR8                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000200 constant GPIOA_GPIOA_ODR_ODR9                             \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000400 constant GPIOA_GPIOA_ODR_ODR10                            \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00000800 constant GPIOA_GPIOA_ODR_ODR11                            \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00001000 constant GPIOA_GPIOA_ODR_ODR12                            \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00002000 constant GPIOA_GPIOA_ODR_ODR13                            \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00004000 constant GPIOA_GPIOA_ODR_ODR14                            \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
-$00008000 constant GPIOA_GPIOA_ODR_ODR15                            \ Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+  [ifdef] GPIOA_GPIOA_OSPEEDR_DEF
+    \
+    \ @brief GPIO port output speed register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_OSPEEDR0                 \ [0x00 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $02 constant GPIOA_OSPEEDR1                 \ [0x02 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $04 constant GPIOA_OSPEEDR2                 \ [0x04 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $06 constant GPIOA_OSPEEDR3                 \ [0x06 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $08 constant GPIOA_OSPEEDR4                 \ [0x08 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $0a constant GPIOA_OSPEEDR5                 \ [0x0a : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $0c constant GPIOA_OSPEEDR6                 \ [0x0c : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $0e constant GPIOA_OSPEEDR7                 \ [0x0e : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $10 constant GPIOA_OSPEEDR8                 \ [0x10 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $12 constant GPIOA_OSPEEDR9                 \ [0x12 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $14 constant GPIOA_OSPEEDR10                \ [0x14 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $16 constant GPIOA_OSPEEDR11                \ [0x16 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $18 constant GPIOA_OSPEEDR12                \ [0x18 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $1a constant GPIOA_OSPEEDR13                \ [0x1a : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $1c constant GPIOA_OSPEEDR14                \ [0x1c : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+    $1e constant GPIOA_OSPEEDR15                \ [0x1e : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O output speed. Note: Refer to the product datasheets for the values of OSPEEDRy bits versus V<sub>DD</sub> range and external load.
+  [then]
 
 
-\
-\ @brief GPIO port bit set/reset register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_GPIOA_BSRR_BS0                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000002 constant GPIOA_GPIOA_BSRR_BS1                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000004 constant GPIOA_GPIOA_BSRR_BS2                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000008 constant GPIOA_GPIOA_BSRR_BS3                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000010 constant GPIOA_GPIOA_BSRR_BS4                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000020 constant GPIOA_GPIOA_BSRR_BS5                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000040 constant GPIOA_GPIOA_BSRR_BS6                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000080 constant GPIOA_GPIOA_BSRR_BS7                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000100 constant GPIOA_GPIOA_BSRR_BS8                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000200 constant GPIOA_GPIOA_BSRR_BS9                             \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000400 constant GPIOA_GPIOA_BSRR_BS10                            \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000800 constant GPIOA_GPIOA_BSRR_BS11                            \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00001000 constant GPIOA_GPIOA_BSRR_BS12                            \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00002000 constant GPIOA_GPIOA_BSRR_BS13                            \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00004000 constant GPIOA_GPIOA_BSRR_BS14                            \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00008000 constant GPIOA_GPIOA_BSRR_BS15                            \ Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00010000 constant GPIOA_GPIOA_BSRR_BR0                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$00020000 constant GPIOA_GPIOA_BSRR_BR1                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$00040000 constant GPIOA_GPIOA_BSRR_BR2                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$00080000 constant GPIOA_GPIOA_BSRR_BR3                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$00100000 constant GPIOA_GPIOA_BSRR_BR4                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$00200000 constant GPIOA_GPIOA_BSRR_BR5                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$00400000 constant GPIOA_GPIOA_BSRR_BR6                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$00800000 constant GPIOA_GPIOA_BSRR_BR7                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$01000000 constant GPIOA_GPIOA_BSRR_BR8                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$02000000 constant GPIOA_GPIOA_BSRR_BR9                             \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$04000000 constant GPIOA_GPIOA_BSRR_BR10                            \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$08000000 constant GPIOA_GPIOA_BSRR_BR11                            \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$10000000 constant GPIOA_GPIOA_BSRR_BR12                            \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$20000000 constant GPIOA_GPIOA_BSRR_BR13                            \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$40000000 constant GPIOA_GPIOA_BSRR_BR14                            \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
-$80000000 constant GPIOA_GPIOA_BSRR_BR15                            \ Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+  [ifdef] GPIOA_GPIOA_PUPDR_DEF
+    \
+    \ @brief GPIO port pull-up/pull-down register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_PUPDR0                   \ [0x00 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $02 constant GPIOA_PUPDR1                   \ [0x02 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $04 constant GPIOA_PUPDR2                   \ [0x04 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $06 constant GPIOA_PUPDR3                   \ [0x06 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $08 constant GPIOA_PUPDR4                   \ [0x08 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $0a constant GPIOA_PUPDR5                   \ [0x0a : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $0c constant GPIOA_PUPDR6                   \ [0x0c : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $0e constant GPIOA_PUPDR7                   \ [0x0e : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $10 constant GPIOA_PUPDR8                   \ [0x10 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $12 constant GPIOA_PUPDR9                   \ [0x12 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $14 constant GPIOA_PUPDR10                  \ [0x14 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $16 constant GPIOA_PUPDR11                  \ [0x16 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $18 constant GPIOA_PUPDR12                  \ [0x18 : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $1a constant GPIOA_PUPDR13                  \ [0x1a : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $1c constant GPIOA_PUPDR14                  \ [0x1c : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+    $1e constant GPIOA_PUPDR15                  \ [0x1e : 2] Port x configuration I/O pin y These bits are written by software to configure the I/O pull-up or pull-down
+  [then]
 
 
-\
-\ @brief GPIO port configuration lock register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_GPIOA_LCKR_LCK0                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000002 constant GPIOA_GPIOA_LCKR_LCK1                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000004 constant GPIOA_GPIOA_LCKR_LCK2                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000008 constant GPIOA_GPIOA_LCKR_LCK3                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000010 constant GPIOA_GPIOA_LCKR_LCK4                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000020 constant GPIOA_GPIOA_LCKR_LCK5                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000040 constant GPIOA_GPIOA_LCKR_LCK6                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000080 constant GPIOA_GPIOA_LCKR_LCK7                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000100 constant GPIOA_GPIOA_LCKR_LCK8                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000200 constant GPIOA_GPIOA_LCKR_LCK9                            \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000400 constant GPIOA_GPIOA_LCKR_LCK10                           \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00000800 constant GPIOA_GPIOA_LCKR_LCK11                           \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00001000 constant GPIOA_GPIOA_LCKR_LCK12                           \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00002000 constant GPIOA_GPIOA_LCKR_LCK13                           \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00004000 constant GPIOA_GPIOA_LCKR_LCK14                           \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00008000 constant GPIOA_GPIOA_LCKR_LCK15                           \ Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
-$00010000 constant GPIOA_GPIOA_LCKR_LCKK                            \ Lock key This bit can be read any time. It can only be modified using the lock key write sequence. LOCK key write sequence: WR LCKR[16] = '1' + LCKR[15:0] WR LCKR[16] = '0' + LCKR[15:0] WR LCKR[16] = '1' + LCKR[15:0] RD LCKR RD LCKR[16] = '1' (this read operation is optional but it confirms that the lock is active) Note: During the LOCK key write sequence, the value of LCK[15:0] must not change. Note: Any error in the lock sequence aborts the lock. Note: After the first lock sequence on any bit of the port, any read access on the LCKK bit returns '1' until the next MCU reset or peripheral reset.
-
-
-\
-\ @brief GPIO alternate function low register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOA_GPIOA_AFRL_AFR0                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$000000f0 constant GPIOA_GPIOA_AFRL_AFR1                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$00000f00 constant GPIOA_GPIOA_AFRL_AFR2                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$0000f000 constant GPIOA_GPIOA_AFRL_AFR3                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$000f0000 constant GPIOA_GPIOA_AFRL_AFR4                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$00f00000 constant GPIOA_GPIOA_AFRL_AFR5                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$0f000000 constant GPIOA_GPIOA_AFRL_AFR6                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$f0000000 constant GPIOA_GPIOA_AFRL_AFR7                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+  [ifdef] GPIOA_GPIOA_IDR_DEF
+    \
+    \ @brief GPIO port input data register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_IDR0                     \ [0x00] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $01 constant GPIOA_IDR1                     \ [0x01] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $02 constant GPIOA_IDR2                     \ [0x02] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $03 constant GPIOA_IDR3                     \ [0x03] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $04 constant GPIOA_IDR4                     \ [0x04] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $05 constant GPIOA_IDR5                     \ [0x05] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $06 constant GPIOA_IDR6                     \ [0x06] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $07 constant GPIOA_IDR7                     \ [0x07] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $08 constant GPIOA_IDR8                     \ [0x08] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $09 constant GPIOA_IDR9                     \ [0x09] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $0a constant GPIOA_IDR10                    \ [0x0a] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $0b constant GPIOA_IDR11                    \ [0x0b] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $0c constant GPIOA_IDR12                    \ [0x0c] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $0d constant GPIOA_IDR13                    \ [0x0d] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $0e constant GPIOA_IDR14                    \ [0x0e] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+    $0f constant GPIOA_IDR15                    \ [0x0f] Port x input data I/O pin y These bits are read-only. They contain the input value of the corresponding I/O port.
+  [then]
 
 
-\
-\ @brief GPIO alternate function high register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$0000000f constant GPIOA_GPIOA_AFRH_AFR8                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$000000f0 constant GPIOA_GPIOA_AFRH_AFR9                            \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$00000f00 constant GPIOA_GPIOA_AFRH_AFR10                           \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$0000f000 constant GPIOA_GPIOA_AFRH_AFR11                           \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$000f0000 constant GPIOA_GPIOA_AFRH_AFR12                           \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$00f00000 constant GPIOA_GPIOA_AFRH_AFR13                           \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$0f000000 constant GPIOA_GPIOA_AFRH_AFR14                           \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-$f0000000 constant GPIOA_GPIOA_AFRH_AFR15                           \ Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
-
-
-\
-\ @brief GPIO port bit reset register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000001 constant GPIOA_GPIOA_BRR_BR0                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000002 constant GPIOA_GPIOA_BRR_BR1                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000004 constant GPIOA_GPIOA_BRR_BR2                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000008 constant GPIOA_GPIOA_BRR_BR3                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000010 constant GPIOA_GPIOA_BRR_BR4                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000020 constant GPIOA_GPIOA_BRR_BR5                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000040 constant GPIOA_GPIOA_BRR_BR6                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000080 constant GPIOA_GPIOA_BRR_BR7                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000100 constant GPIOA_GPIOA_BRR_BR8                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000200 constant GPIOA_GPIOA_BRR_BR9                              \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000400 constant GPIOA_GPIOA_BRR_BR10                             \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00000800 constant GPIOA_GPIOA_BRR_BR11                             \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00001000 constant GPIOA_GPIOA_BRR_BR12                             \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00002000 constant GPIOA_GPIOA_BRR_BR13                             \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00004000 constant GPIOA_GPIOA_BRR_BR14                             \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
-$00008000 constant GPIOA_GPIOA_BRR_BR15                             \ Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+  [ifdef] GPIOA_GPIOA_ODR_DEF
+    \
+    \ @brief GPIO port output data register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_ODR0                     \ [0x00] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $01 constant GPIOA_ODR1                     \ [0x01] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $02 constant GPIOA_ODR2                     \ [0x02] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $03 constant GPIOA_ODR3                     \ [0x03] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $04 constant GPIOA_ODR4                     \ [0x04] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $05 constant GPIOA_ODR5                     \ [0x05] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $06 constant GPIOA_ODR6                     \ [0x06] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $07 constant GPIOA_ODR7                     \ [0x07] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $08 constant GPIOA_ODR8                     \ [0x08] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $09 constant GPIOA_ODR9                     \ [0x09] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $0a constant GPIOA_ODR10                    \ [0x0a] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $0b constant GPIOA_ODR11                    \ [0x0b] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $0c constant GPIOA_ODR12                    \ [0x0c] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $0d constant GPIOA_ODR13                    \ [0x0d] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $0e constant GPIOA_ODR14                    \ [0x0e] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+    $0f constant GPIOA_ODR15                    \ [0x0f] Port output data I/O pin y These bits can be read and written by software. Note: For atomic bit set/reset, the ODR bits can be individually set and/or reset by writing to the GPIOx_BSRR register (x = A..F).
+  [then]
 
 
-\
-\ @brief GPIOA address block description
-\
-$48000000 constant GPIOA_GPIOA_MODER  \ offset: 0x00 : GPIO port mode register
-$48000004 constant GPIOA_GPIOA_OTYPER  \ offset: 0x04 : GPIO port output type register
-$48000008 constant GPIOA_GPIOA_OSPEEDR  \ offset: 0x08 : GPIO port output speed register
-$4800000c constant GPIOA_GPIOA_PUPDR  \ offset: 0x0C : GPIO port pull-up/pull-down register
-$48000010 constant GPIOA_GPIOA_IDR  \ offset: 0x10 : GPIO port input data register
-$48000014 constant GPIOA_GPIOA_ODR  \ offset: 0x14 : GPIO port output data register
-$48000018 constant GPIOA_GPIOA_BSRR  \ offset: 0x18 : GPIO port bit set/reset register
-$4800001c constant GPIOA_GPIOA_LCKR  \ offset: 0x1C : GPIO port configuration lock register
-$48000020 constant GPIOA_GPIOA_AFRL  \ offset: 0x20 : GPIO alternate function low register
-$48000024 constant GPIOA_GPIOA_AFRH  \ offset: 0x24 : GPIO alternate function high register
-$48000028 constant GPIOA_GPIOA_BRR  \ offset: 0x28 : GPIO port bit reset register
+  [ifdef] GPIOA_GPIOA_BSRR_DEF
+    \
+    \ @brief GPIO port bit set/reset register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_BS0                      \ [0x00] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $01 constant GPIOA_BS1                      \ [0x01] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $02 constant GPIOA_BS2                      \ [0x02] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $03 constant GPIOA_BS3                      \ [0x03] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $04 constant GPIOA_BS4                      \ [0x04] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $05 constant GPIOA_BS5                      \ [0x05] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $06 constant GPIOA_BS6                      \ [0x06] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $07 constant GPIOA_BS7                      \ [0x07] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $08 constant GPIOA_BS8                      \ [0x08] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $09 constant GPIOA_BS9                      \ [0x09] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0a constant GPIOA_BS10                     \ [0x0a] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0b constant GPIOA_BS11                     \ [0x0b] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0c constant GPIOA_BS12                     \ [0x0c] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0d constant GPIOA_BS13                     \ [0x0d] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0e constant GPIOA_BS14                     \ [0x0e] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0f constant GPIOA_BS15                     \ [0x0f] Port x set I/O pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $10 constant GPIOA_BR0                      \ [0x10] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $11 constant GPIOA_BR1                      \ [0x11] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $12 constant GPIOA_BR2                      \ [0x12] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $13 constant GPIOA_BR3                      \ [0x13] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $14 constant GPIOA_BR4                      \ [0x14] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $15 constant GPIOA_BR5                      \ [0x15] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $16 constant GPIOA_BR6                      \ [0x16] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $17 constant GPIOA_BR7                      \ [0x17] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $18 constant GPIOA_BR8                      \ [0x18] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $19 constant GPIOA_BR9                      \ [0x19] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $1a constant GPIOA_BR10                     \ [0x1a] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $1b constant GPIOA_BR11                     \ [0x1b] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $1c constant GPIOA_BR12                     \ [0x1c] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $1d constant GPIOA_BR13                     \ [0x1d] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $1e constant GPIOA_BR14                     \ [0x1e] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+    $1f constant GPIOA_BR15                     \ [0x1f] Port x reset I/O pin y These bits are write-only. A read to these bits returns the value 0x0000. Note: If both BSx and BRx are set, BSx has priority.
+  [then]
 
+
+  [ifdef] GPIOA_GPIOA_LCKR_DEF
+    \
+    \ @brief GPIO port configuration lock register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_LCK0                     \ [0x00] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $01 constant GPIOA_LCK1                     \ [0x01] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $02 constant GPIOA_LCK2                     \ [0x02] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $03 constant GPIOA_LCK3                     \ [0x03] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $04 constant GPIOA_LCK4                     \ [0x04] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $05 constant GPIOA_LCK5                     \ [0x05] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $06 constant GPIOA_LCK6                     \ [0x06] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $07 constant GPIOA_LCK7                     \ [0x07] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $08 constant GPIOA_LCK8                     \ [0x08] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $09 constant GPIOA_LCK9                     \ [0x09] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $0a constant GPIOA_LCK10                    \ [0x0a] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $0b constant GPIOA_LCK11                    \ [0x0b] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $0c constant GPIOA_LCK12                    \ [0x0c] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $0d constant GPIOA_LCK13                    \ [0x0d] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $0e constant GPIOA_LCK14                    \ [0x0e] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $0f constant GPIOA_LCK15                    \ [0x0f] Port x lock I/O pin y These bits are read/write but can only be written when the LCKK bit is '0.
+    $10 constant GPIOA_LCKK                     \ [0x10] Lock key This bit can be read any time. It can only be modified using the lock key write sequence. LOCK key write sequence: WR LCKR[16] = '1' + LCKR[15:0] WR LCKR[16] = '0' + LCKR[15:0] WR LCKR[16] = '1' + LCKR[15:0] RD LCKR RD LCKR[16] = '1' (this read operation is optional but it confirms that the lock is active) Note: During the LOCK key write sequence, the value of LCK[15:0] must not change. Note: Any error in the lock sequence aborts the lock. Note: After the first lock sequence on any bit of the port, any read access on the LCKK bit returns '1' until the next MCU reset or peripheral reset.
+  [then]
+
+
+  [ifdef] GPIOA_GPIOA_AFRL_DEF
+    \
+    \ @brief GPIO alternate function low register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_AFR0                     \ [0x00 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $04 constant GPIOA_AFR1                     \ [0x04 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $08 constant GPIOA_AFR2                     \ [0x08 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $0c constant GPIOA_AFR3                     \ [0x0c : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $10 constant GPIOA_AFR4                     \ [0x10 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $14 constant GPIOA_AFR5                     \ [0x14 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $18 constant GPIOA_AFR6                     \ [0x18 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $1c constant GPIOA_AFR7                     \ [0x1c : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+  [then]
+
+
+  [ifdef] GPIOA_GPIOA_AFRH_DEF
+    \
+    \ @brief GPIO alternate function high register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_AFR8                     \ [0x00 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $04 constant GPIOA_AFR9                     \ [0x04 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $08 constant GPIOA_AFR10                    \ [0x08 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $0c constant GPIOA_AFR11                    \ [0x0c : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $10 constant GPIOA_AFR12                    \ [0x10 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $14 constant GPIOA_AFR13                    \ [0x14 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $18 constant GPIOA_AFR14                    \ [0x18 : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+    $1c constant GPIOA_AFR15                    \ [0x1c : 4] Alternate function selection for port x I/O pin y These bits are written by software to configure alternate function I/Os.
+  [then]
+
+
+  [ifdef] GPIOA_GPIOA_BRR_DEF
+    \
+    \ @brief GPIO port bit reset register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant GPIOA_BR0                      \ [0x00] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $01 constant GPIOA_BR1                      \ [0x01] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $02 constant GPIOA_BR2                      \ [0x02] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $03 constant GPIOA_BR3                      \ [0x03] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $04 constant GPIOA_BR4                      \ [0x04] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $05 constant GPIOA_BR5                      \ [0x05] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $06 constant GPIOA_BR6                      \ [0x06] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $07 constant GPIOA_BR7                      \ [0x07] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $08 constant GPIOA_BR8                      \ [0x08] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $09 constant GPIOA_BR9                      \ [0x09] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0a constant GPIOA_BR10                     \ [0x0a] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0b constant GPIOA_BR11                     \ [0x0b] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0c constant GPIOA_BR12                     \ [0x0c] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0d constant GPIOA_BR13                     \ [0x0d] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0e constant GPIOA_BR14                     \ [0x0e] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+    $0f constant GPIOA_BR15                     \ [0x0f] Port x reset IO pin y These bits are write-only. A read to these bits returns the value 0x0000.
+  [then]
+
+  \
+  \ @brief GPIOA address block description
+  \
+  $00 constant GPIOA_GPIOA_MODER        \ GPIO port mode register
+  $04 constant GPIOA_GPIOA_OTYPER       \ GPIO port output type register
+  $08 constant GPIOA_GPIOA_OSPEEDR      \ GPIO port output speed register
+  $0C constant GPIOA_GPIOA_PUPDR        \ GPIO port pull-up/pull-down register
+  $10 constant GPIOA_GPIOA_IDR          \ GPIO port input data register
+  $14 constant GPIOA_GPIOA_ODR          \ GPIO port output data register
+  $18 constant GPIOA_GPIOA_BSRR         \ GPIO port bit set/reset register
+  $1C constant GPIOA_GPIOA_LCKR         \ GPIO port configuration lock register
+  $20 constant GPIOA_GPIOA_AFRL         \ GPIO alternate function low register
+  $24 constant GPIOA_GPIOA_AFRH         \ GPIO alternate function high register
+  $28 constant GPIOA_GPIOA_BRR          \ GPIO port bit reset register
+
+: GPIOA_DEF ; [then]

@@ -6,85 +6,92 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] IWDG_DEF
 
-\
-\ @brief IWDG key register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant IWDG_IWDG_KR_KEY                                 \ Key value (write only, read 0x0000)
-
-
-\
-\ @brief IWDG prescaler register
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000000f constant IWDG_IWDG_PR_PR                                  \ Prescaler divider
+  [ifdef] IWDG_IWDG_KR_DEF
+    \
+    \ @brief IWDG key register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant IWDG_KEY                       \ [0x00 : 16] Key value (write only, read 0x0000)
+  [then]
 
 
-\
-\ @brief IWDG reload register
-\ Address offset: 0x08
-\ Reset value: 0x00000FFF
-\
-
-$00000fff constant IWDG_IWDG_RLR_RL                                 \ Watchdog counter reload value
-
-
-\
-\ @brief IWDG status register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant IWDG_IWDG_SR_PVU                                 \ Watchdog prescaler value update
-$00000002 constant IWDG_IWDG_SR_RVU                                 \ Watchdog counter reload value update
-$00000004 constant IWDG_IWDG_SR_WVU                                 \ Watchdog counter window value update
-$00000008 constant IWDG_IWDG_SR_EWU                                 \ Watchdog interrupt comparator value update
-$00000100 constant IWDG_IWDG_SR_ONF                                 \ Watchdog enable status bit
-$00008000 constant IWDG_IWDG_SR_EWIF                                \ Watchdog early interrupt flag
+  [ifdef] IWDG_IWDG_PR_DEF
+    \
+    \ @brief IWDG prescaler register
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant IWDG_PR                        \ [0x00 : 4] Prescaler divider
+  [then]
 
 
-\
-\ @brief IWDG window register
-\ Address offset: 0x10
-\ Reset value: 0x00000FFF
-\
-
-$00000fff constant IWDG_IWDG_WINR_WIN                               \ Watchdog counter window value
-
-
-\
-\ @brief IWDG early wake-up interrupt register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000fff constant IWDG_IWDG_EWCR_EWIT                              \ Watchdog counter window value
-$00008000 constant IWDG_IWDG_EWCR_EWIE                              \ Watchdog early interrupt enable
+  [ifdef] IWDG_IWDG_RLR_DEF
+    \
+    \ @brief IWDG reload register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000FFF
+    \
+    $00 constant IWDG_RL                        \ [0x00 : 12] Watchdog counter reload value
+  [then]
 
 
-\
-\ @brief IWDG interrupt clear register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
+  [ifdef] IWDG_IWDG_SR_DEF
+    \
+    \ @brief IWDG status register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant IWDG_PVU                       \ [0x00] Watchdog prescaler value update
+    $01 constant IWDG_RVU                       \ [0x01] Watchdog counter reload value update
+    $02 constant IWDG_WVU                       \ [0x02] Watchdog counter window value update
+    $03 constant IWDG_EWU                       \ [0x03] Watchdog interrupt comparator value update
+    $08 constant IWDG_ONF                       \ [0x08] Watchdog enable status bit
+    $0f constant IWDG_EWIF                      \ [0x0f] Watchdog early interrupt flag
+  [then]
 
-$00008000 constant IWDG_IWDG_ICR_EWIC                               \ Watchdog early interrupt acknowledge
+
+  [ifdef] IWDG_IWDG_WINR_DEF
+    \
+    \ @brief IWDG window register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000FFF
+    \
+    $00 constant IWDG_WIN                       \ [0x00 : 12] Watchdog counter window value
+  [then]
 
 
-\
-\ @brief Independent watchdog
-\
-$46004800 constant IWDG_IWDG_KR   \ offset: 0x00 : IWDG key register
-$46004804 constant IWDG_IWDG_PR   \ offset: 0x04 : IWDG prescaler register
-$46004808 constant IWDG_IWDG_RLR  \ offset: 0x08 : IWDG reload register
-$4600480c constant IWDG_IWDG_SR   \ offset: 0x0C : IWDG status register
-$46004810 constant IWDG_IWDG_WINR  \ offset: 0x10 : IWDG window register
-$46004814 constant IWDG_IWDG_EWCR  \ offset: 0x14 : IWDG early wake-up interrupt register
-$46004818 constant IWDG_IWDG_ICR  \ offset: 0x18 : IWDG interrupt clear register
+  [ifdef] IWDG_IWDG_EWCR_DEF
+    \
+    \ @brief IWDG early wake-up interrupt register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant IWDG_EWIT                      \ [0x00 : 12] Watchdog counter window value
+    $0f constant IWDG_EWIE                      \ [0x0f] Watchdog early interrupt enable
+  [then]
 
+
+  [ifdef] IWDG_IWDG_ICR_DEF
+    \
+    \ @brief IWDG interrupt clear register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $0f constant IWDG_EWIC                      \ [0x0f] Watchdog early interrupt acknowledge
+  [then]
+
+  \
+  \ @brief Independent watchdog
+  \
+  $00 constant IWDG_IWDG_KR             \ IWDG key register
+  $04 constant IWDG_IWDG_PR             \ IWDG prescaler register
+  $08 constant IWDG_IWDG_RLR            \ IWDG reload register
+  $0C constant IWDG_IWDG_SR             \ IWDG status register
+  $10 constant IWDG_IWDG_WINR           \ IWDG window register
+  $14 constant IWDG_IWDG_EWCR           \ IWDG early wake-up interrupt register
+  $18 constant IWDG_IWDG_ICR            \ IWDG interrupt clear register
+
+: IWDG_DEF ; [then]

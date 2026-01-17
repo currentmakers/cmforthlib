@@ -6,59 +6,64 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] OPAMP1_DEF
 
-\
-\ @brief OPAMP1 control/status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant OPAMP1_OPAMP1_CSR_OPAEN                          \ Operational amplifier Enable Note: If OPAMP1 is unconnected in a specific package, it must remain disabled (keep OPAMP1_CSR register default value).
-$00000002 constant OPAMP1_OPAMP1_CSR_FORCE_VP                       \ Force internal reference on VP (reserved for test)
-$0000000c constant OPAMP1_OPAMP1_CSR_VP_SEL                         \ Non inverted input selection
-$00000060 constant OPAMP1_OPAMP1_CSR_VM_SEL                         \ Inverting input selection
-$00000100 constant OPAMP1_OPAMP1_CSR_OPAHSM                         \ Operational amplifier high-speed mode The operational amplifier must be disable to change this configuration.
-$00000800 constant OPAMP1_OPAMP1_CSR_CALON                          \ Calibration mode enabled
-$00003000 constant OPAMP1_OPAMP1_CSR_CALSEL                         \ Calibration selection It is used to select the offset calibration bus used to generate the internal reference voltage when CALON = 1 or FORCE_VP= 1.
-$0003c000 constant OPAMP1_OPAMP1_CSR_PGA_GAIN                       \ Operational amplifier Programmable amplifier gain value
-$00040000 constant OPAMP1_OPAMP1_CSR_USERTRIM                       \ User trimming enable This bit allows to switch from 'factory' AOP offset trimmed values to 'user' AOP offset trimmed values This bit is active for both mode normal and high-power.
-$20000000 constant OPAMP1_OPAMP1_CSR_TSTREF                         \ OPAMP calibration reference voltage output control (reserved for test)
-$40000000 constant OPAMP1_OPAMP1_CSR_CALOUT                         \ Operational amplifier calibration output OPAMP output status flag. During the calibration mode, OPAMP is used as comparator.
-
-
-\
-\ @brief OPAMP1 trimming register in normal mode
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OPAMP1_OPAMP1_OTR_TRIMOFFSETN                    \ Trim for NMOS differential pairs
-$00001f00 constant OPAMP1_OPAMP1_OTR_TRIMOFFSETP                    \ Trim for PMOS differential pairs
+  [ifdef] OPAMP1_OPAMP1_CSR_DEF
+    \
+    \ @brief OPAMP1 control/status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP1_OPAEN                   \ [0x00] Operational amplifier Enable Note: If OPAMP1 is unconnected in a specific package, it must remain disabled (keep OPAMP1_CSR register default value).
+    $01 constant OPAMP1_FORCE_VP                \ [0x01] Force internal reference on VP (reserved for test)
+    $02 constant OPAMP1_VP_SEL                  \ [0x02 : 2] Non inverted input selection
+    $05 constant OPAMP1_VM_SEL                  \ [0x05 : 2] Inverting input selection
+    $08 constant OPAMP1_OPAHSM                  \ [0x08] Operational amplifier high-speed mode The operational amplifier must be disable to change this configuration.
+    $0b constant OPAMP1_CALON                   \ [0x0b] Calibration mode enabled
+    $0c constant OPAMP1_CALSEL                  \ [0x0c : 2] Calibration selection It is used to select the offset calibration bus used to generate the internal reference voltage when CALON = 1 or FORCE_VP= 1.
+    $0e constant OPAMP1_PGA_GAIN                \ [0x0e : 4] Operational amplifier Programmable amplifier gain value
+    $12 constant OPAMP1_USERTRIM                \ [0x12] User trimming enable This bit allows to switch from 'factory' AOP offset trimmed values to 'user' AOP offset trimmed values This bit is active for both mode normal and high-power.
+    $1d constant OPAMP1_TSTREF                  \ [0x1d] OPAMP calibration reference voltage output control (reserved for test)
+    $1e constant OPAMP1_CALOUT                  \ [0x1e] Operational amplifier calibration output OPAMP output status flag. During the calibration mode, OPAMP is used as comparator.
+  [then]
 
 
-\
-\ @brief OPAMP1 trimming register in high-speed mode
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000001f constant OPAMP1_OPAMP1_HSOTR_TRIMHSOFFSETN                \ High-speed mode trim for NMOS differential pairs
-$00001f00 constant OPAMP1_OPAMP1_HSOTR_TRIMHSOFFSETP                \ High-speed mode trim for PMOS differential pairs
-
-
-\
-\ @brief OPAMP option register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
+  [ifdef] OPAMP1_OPAMP1_OTR_DEF
+    \
+    \ @brief OPAMP1 trimming register in normal mode
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP1_TRIMOFFSETN             \ [0x00 : 5] Trim for NMOS differential pairs
+    $08 constant OPAMP1_TRIMOFFSETP             \ [0x08 : 5] Trim for PMOS differential pairs
+  [then]
 
 
-\
-\ @brief Operational amplifiers
-\
-$40003400 constant OPAMP1_OPAMP1_CSR  \ offset: 0x00 : OPAMP1 control/status register
-$40003404 constant OPAMP1_OPAMP1_OTR  \ offset: 0x04 : OPAMP1 trimming register in normal mode
-$40003408 constant OPAMP1_OPAMP1_HSOTR  \ offset: 0x08 : OPAMP1 trimming register in high-speed mode
-$4000340c constant OPAMP1_OPAMP_OR  \ offset: 0x0C : OPAMP option register
+  [ifdef] OPAMP1_OPAMP1_HSOTR_DEF
+    \
+    \ @brief OPAMP1 trimming register in high-speed mode
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant OPAMP1_TRIMHSOFFSETN           \ [0x00 : 5] High-speed mode trim for NMOS differential pairs
+    $08 constant OPAMP1_TRIMHSOFFSETP           \ [0x08 : 5] High-speed mode trim for PMOS differential pairs
+  [then]
 
+
+  [ifdef] OPAMP1_OPAMP_OR_DEF
+    \
+    \ @brief OPAMP option register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+  [then]
+
+  \
+  \ @brief Operational amplifiers
+  \
+  $00 constant OPAMP1_OPAMP1_CSR        \ OPAMP1 control/status register
+  $04 constant OPAMP1_OPAMP1_OTR        \ OPAMP1 trimming register in normal mode
+  $08 constant OPAMP1_OPAMP1_HSOTR      \ OPAMP1 trimming register in high-speed mode
+  $0C constant OPAMP1_OPAMP_OR          \ OPAMP option register
+
+: OPAMP1_DEF ; [then]

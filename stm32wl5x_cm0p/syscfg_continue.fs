@@ -6,104 +6,108 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SYSCFG_CONTINUE_DEF
 
-\
-\ @brief IMR1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CONTINUE_IMR1_RTCSTAMPTAMPLSECSSIM        \ RTCSTAMPTAMPLSECSSIM
-$00000004 constant SYSCFG_CONTINUE_IMR1_RTCSSRUIM                   \ RTCSSRUIM
-$00200000 constant SYSCFG_CONTINUE_IMR1_EXTI5IM                     \ Peripheral EXTI5 interrupt mask to CPU1
-$00400000 constant SYSCFG_CONTINUE_IMR1_EXTI6IM                     \ Peripheral EXTI6 interrupt mask to CPU1
-$00800000 constant SYSCFG_CONTINUE_IMR1_EXTI7IM                     \ Peripheral EXTI7 interrupt mask to CPU1
-$01000000 constant SYSCFG_CONTINUE_IMR1_EXTI8IM                     \ Peripheral EXTI8 interrupt mask to CPU1
-$02000000 constant SYSCFG_CONTINUE_IMR1_EXTI9IM                     \ Peripheral EXTI9 interrupt mask to CPU1
-$04000000 constant SYSCFG_CONTINUE_IMR1_EXTI10IM                    \ Peripheral EXTI10 interrupt mask to CPU1
-$08000000 constant SYSCFG_CONTINUE_IMR1_EXTI11IM                    \ Peripheral EXTI11 interrupt mask to CPU1
-$10000000 constant SYSCFG_CONTINUE_IMR1_EXTI12IM                    \ Peripheral EXTI12 interrupt mask to CPU1
-$20000000 constant SYSCFG_CONTINUE_IMR1_EXTI13IM                    \ Peripheral EXTI13 interrupt mask to CPU1
-$40000000 constant SYSCFG_CONTINUE_IMR1_EXTI14IM                    \ Peripheral EXTI14 interrupt mask to CPU1
-$80000000 constant SYSCFG_CONTINUE_IMR1_EXTI15IM                    \ Peripheral EXTI15 interrupt mask to CPU1
-
-
-\
-\ @brief IMR2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00040000 constant SYSCFG_CONTINUE_IMR2_PVM3IM                      \ Peripheral xxx interrupt mask to CPU1
-$00100000 constant SYSCFG_CONTINUE_IMR2_PVDIM                       \ Peripheral xxx interrupt mask to CPU1
+  [ifdef] SYSCFG_CONTINUE_IMR1_DEF
+    \
+    \ @brief IMR1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_CONTINUE_RTCSTAMPTAMPLSECSSIM     \ [0x00] RTCSTAMPTAMPLSECSSIM
+    $02 constant SYSCFG_CONTINUE_RTCSSRUIM      \ [0x02] RTCSSRUIM
+    $15 constant SYSCFG_CONTINUE_EXTI5IM        \ [0x15] Peripheral EXTI5 interrupt mask to CPU1
+    $16 constant SYSCFG_CONTINUE_EXTI6IM        \ [0x16] Peripheral EXTI6 interrupt mask to CPU1
+    $17 constant SYSCFG_CONTINUE_EXTI7IM        \ [0x17] Peripheral EXTI7 interrupt mask to CPU1
+    $18 constant SYSCFG_CONTINUE_EXTI8IM        \ [0x18] Peripheral EXTI8 interrupt mask to CPU1
+    $19 constant SYSCFG_CONTINUE_EXTI9IM        \ [0x19] Peripheral EXTI9 interrupt mask to CPU1
+    $1a constant SYSCFG_CONTINUE_EXTI10IM       \ [0x1a] Peripheral EXTI10 interrupt mask to CPU1
+    $1b constant SYSCFG_CONTINUE_EXTI11IM       \ [0x1b] Peripheral EXTI11 interrupt mask to CPU1
+    $1c constant SYSCFG_CONTINUE_EXTI12IM       \ [0x1c] Peripheral EXTI12 interrupt mask to CPU1
+    $1d constant SYSCFG_CONTINUE_EXTI13IM       \ [0x1d] Peripheral EXTI13 interrupt mask to CPU1
+    $1e constant SYSCFG_CONTINUE_EXTI14IM       \ [0x1e] Peripheral EXTI14 interrupt mask to CPU1
+    $1f constant SYSCFG_CONTINUE_EXTI15IM       \ [0x1f] Peripheral EXTI15 interrupt mask to CPU1
+  [then]
 
 
-\
-\ @brief C2IMR1
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SYSCFG_CONTINUE_C2IMR1_RTCSTAMPTAMPLSECSSIM      \ Peripheral RTCSTAMPTAMPLSECSS interrupt mask to CPU2
-$00000002 constant SYSCFG_CONTINUE_C2IMR1_RTCALARMIM                \ Peripheral RTCALARM interrupt mask to CPU2
-$00000004 constant SYSCFG_CONTINUE_C2IMR1_RTCSSRUIM                 \ RTCSSRUIM
-$00000008 constant SYSCFG_CONTINUE_C2IMR1_RTCWKUPIM                 \ Peripheral RTCWKUP interrupt mask to CPU2
-$00000020 constant SYSCFG_CONTINUE_C2IMR1_RCCIM                     \ Peripheral RCC interrupt mask to CPU2
-$00000040 constant SYSCFG_CONTINUE_C2IMR1_FLASHIM                   \ Peripheral FLASH interrupt mask to CPU2
-$00000100 constant SYSCFG_CONTINUE_C2IMR1_PKAIM                     \ PKAIM
-$00000400 constant SYSCFG_CONTINUE_C2IMR1_AES1IM                    \ AES1IM
-$00000800 constant SYSCFG_CONTINUE_C2IMR1_COMPIM                    \ Peripheral COMP interrupt mask to CPU2
-$00001000 constant SYSCFG_CONTINUE_C2IMR1_ADCIM                     \ Peripheral ADC interrupt mask to CPU2
-$00002000 constant SYSCFG_CONTINUE_C2IMR1_DAC1IM                    \ Peripheral DAC1 interrupt mask to CPU2
-$00010000 constant SYSCFG_CONTINUE_C2IMR1_EXTI0IM                   \ Peripheral EXTI0 interrupt mask to CPU2
-$00020000 constant SYSCFG_CONTINUE_C2IMR1_EXTI1IM                   \ Peripheral EXTI1 interrupt mask to CPU2
-$00040000 constant SYSCFG_CONTINUE_C2IMR1_EXTI2IM                   \ Peripheral EXTI2 interrupt mask to CPU2
-$00080000 constant SYSCFG_CONTINUE_C2IMR1_EXTI3IM                   \ Peripheral EXTI3 interrupt mask to CPU2
-$00100000 constant SYSCFG_CONTINUE_C2IMR1_EXTI4IM                   \ Peripheral EXTI4 interrupt mask to CPU2
-$00200000 constant SYSCFG_CONTINUE_C2IMR1_EXTI5IM                   \ Peripheral EXTI5 interrupt mask to CPU2
-$00400000 constant SYSCFG_CONTINUE_C2IMR1_EXTI6IM                   \ Peripheral EXTI6 interrupt mask to CPU2
-$00800000 constant SYSCFG_CONTINUE_C2IMR1_EXTI7IM                   \ Peripheral EXTI7 interrupt mask to CPU2
-$01000000 constant SYSCFG_CONTINUE_C2IMR1_EXTI8IM                   \ Peripheral EXTI8 interrupt mask to CPU2
-$02000000 constant SYSCFG_CONTINUE_C2IMR1_EXTI9IM                   \ Peripheral EXTI9 interrupt mask to CPU2
-$04000000 constant SYSCFG_CONTINUE_C2IMR1_EXTI10IM                  \ Peripheral EXTI10 interrupt mask to CPU2
-$08000000 constant SYSCFG_CONTINUE_C2IMR1_EXTI11IM                  \ Peripheral EXTI11 interrupt mask to CPU2
-$10000000 constant SYSCFG_CONTINUE_C2IMR1_EXTI12IM                  \ Peripheral EXTI12 interrupt mask to CPU2
-$20000000 constant SYSCFG_CONTINUE_C2IMR1_EXTI13IM                  \ Peripheral EXTI13 interrupt mask to CPU2
-$40000000 constant SYSCFG_CONTINUE_C2IMR1_EXTI14IM                  \ Peripheral EXTI14 interrupt mask to CPU2
-$80000000 constant SYSCFG_CONTINUE_C2IMR1_EXTI15IM                  \ Peripheral EXTI15 interrupt mask to CPU2
+  [ifdef] SYSCFG_CONTINUE_IMR2_DEF
+    \
+    \ @brief IMR2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $12 constant SYSCFG_CONTINUE_PVM3IM         \ [0x12] Peripheral xxx interrupt mask to CPU1
+    $14 constant SYSCFG_CONTINUE_PVDIM          \ [0x14] Peripheral xxx interrupt mask to CPU1
+  [then]
 
 
-\
-\ @brief C2IMR2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
+  [ifdef] SYSCFG_CONTINUE_C2IMR1_DEF
+    \
+    \ @brief C2IMR1
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_CONTINUE_RTCSTAMPTAMPLSECSSIM     \ [0x00] Peripheral RTCSTAMPTAMPLSECSS interrupt mask to CPU2
+    $01 constant SYSCFG_CONTINUE_RTCALARMIM     \ [0x01] Peripheral RTCALARM interrupt mask to CPU2
+    $02 constant SYSCFG_CONTINUE_RTCSSRUIM      \ [0x02] RTCSSRUIM
+    $03 constant SYSCFG_CONTINUE_RTCWKUPIM      \ [0x03] Peripheral RTCWKUP interrupt mask to CPU2
+    $05 constant SYSCFG_CONTINUE_RCCIM          \ [0x05] Peripheral RCC interrupt mask to CPU2
+    $06 constant SYSCFG_CONTINUE_FLASHIM        \ [0x06] Peripheral FLASH interrupt mask to CPU2
+    $08 constant SYSCFG_CONTINUE_PKAIM          \ [0x08] PKAIM
+    $0a constant SYSCFG_CONTINUE_AES1IM         \ [0x0a] AES1IM
+    $0b constant SYSCFG_CONTINUE_COMPIM         \ [0x0b] Peripheral COMP interrupt mask to CPU2
+    $0c constant SYSCFG_CONTINUE_ADCIM          \ [0x0c] Peripheral ADC interrupt mask to CPU2
+    $0d constant SYSCFG_CONTINUE_DAC1IM         \ [0x0d] Peripheral DAC1 interrupt mask to CPU2
+    $10 constant SYSCFG_CONTINUE_EXTI0IM        \ [0x10] Peripheral EXTI0 interrupt mask to CPU2
+    $11 constant SYSCFG_CONTINUE_EXTI1IM        \ [0x11] Peripheral EXTI1 interrupt mask to CPU2
+    $12 constant SYSCFG_CONTINUE_EXTI2IM        \ [0x12] Peripheral EXTI2 interrupt mask to CPU2
+    $13 constant SYSCFG_CONTINUE_EXTI3IM        \ [0x13] Peripheral EXTI3 interrupt mask to CPU2
+    $14 constant SYSCFG_CONTINUE_EXTI4IM        \ [0x14] Peripheral EXTI4 interrupt mask to CPU2
+    $15 constant SYSCFG_CONTINUE_EXTI5IM        \ [0x15] Peripheral EXTI5 interrupt mask to CPU2
+    $16 constant SYSCFG_CONTINUE_EXTI6IM        \ [0x16] Peripheral EXTI6 interrupt mask to CPU2
+    $17 constant SYSCFG_CONTINUE_EXTI7IM        \ [0x17] Peripheral EXTI7 interrupt mask to CPU2
+    $18 constant SYSCFG_CONTINUE_EXTI8IM        \ [0x18] Peripheral EXTI8 interrupt mask to CPU2
+    $19 constant SYSCFG_CONTINUE_EXTI9IM        \ [0x19] Peripheral EXTI9 interrupt mask to CPU2
+    $1a constant SYSCFG_CONTINUE_EXTI10IM       \ [0x1a] Peripheral EXTI10 interrupt mask to CPU2
+    $1b constant SYSCFG_CONTINUE_EXTI11IM       \ [0x1b] Peripheral EXTI11 interrupt mask to CPU2
+    $1c constant SYSCFG_CONTINUE_EXTI12IM       \ [0x1c] Peripheral EXTI12 interrupt mask to CPU2
+    $1d constant SYSCFG_CONTINUE_EXTI13IM       \ [0x1d] Peripheral EXTI13 interrupt mask to CPU2
+    $1e constant SYSCFG_CONTINUE_EXTI14IM       \ [0x1e] Peripheral EXTI14 interrupt mask to CPU2
+    $1f constant SYSCFG_CONTINUE_EXTI15IM       \ [0x1f] Peripheral EXTI15 interrupt mask to CPU2
+  [then]
 
-$00000001 constant SYSCFG_CONTINUE_C2IMR2_DMA1CH1IM                 \ Peripheral DMA1CH1 interrupt mask to CPU2
-$00000002 constant SYSCFG_CONTINUE_C2IMR2_DMA1CH2IM                 \ Peripheral DMA1CH2 interrupt mask to CPU2
-$00000004 constant SYSCFG_CONTINUE_C2IMR2_DMA1CH3IM                 \ Peripheral DMA1CH3 interrupt mask to CPU2
-$00000008 constant SYSCFG_CONTINUE_C2IMR2_DMA1CH4IM                 \ Peripheral DMA1CH4 interrupt mask to CPU2
-$00000010 constant SYSCFG_CONTINUE_C2IMR2_DMA1CH5IM                 \ Peripheral DMA1CH5 interrupt mask to CPU2
-$00000020 constant SYSCFG_CONTINUE_C2IMR2_DMA1CH6IM                 \ Peripheral DMA1CH6 interrupt mask to CPU2
-$00000040 constant SYSCFG_CONTINUE_C2IMR2_DMA1CH7IM                 \ Peripheral DMA1CH7 interrupt mask to CPU2
-$00000100 constant SYSCFG_CONTINUE_C2IMR2_DMA2CH1IM                 \ Peripheral DMA2CH1 interrupt mask to CPU2
-$00000200 constant SYSCFG_CONTINUE_C2IMR2_DMA2CH2IM                 \ Peripheral DMA2CH2 interrupt mask to CPU2
-$00000400 constant SYSCFG_CONTINUE_C2IMR2_DMA2CH3IM                 \ Peripheral DMA2CH3 interrupt mask to CPU2
-$00000800 constant SYSCFG_CONTINUE_C2IMR2_DMA2CH4IM                 \ Peripheral DMA2CH4 interrupt mask to CPU2
-$00001000 constant SYSCFG_CONTINUE_C2IMR2_DMA2CH5IM                 \ Peripheral DMA2CH5 interrupt mask to CPU2
-$00002000 constant SYSCFG_CONTINUE_C2IMR2_DMA2CH6IM                 \ Peripheral DMA2CH6 interrupt mask to CPU2
-$00004000 constant SYSCFG_CONTINUE_C2IMR2_DMA2CH7IM                 \ Peripheral DMA2CH7 interrupt mask to CPU2
-$00008000 constant SYSCFG_CONTINUE_C2IMR2_DMAMUX1IM                 \ Peripheral DMAMUX1 interrupt mask to CPU2
-$00040000 constant SYSCFG_CONTINUE_C2IMR2_PVM3IM                    \ Peripheral PVM3 interrupt mask to CPU2
-$00100000 constant SYSCFG_CONTINUE_C2IMR2_PVDIM                     \ Peripheral PVD interrupt mask to CPU2
 
+  [ifdef] SYSCFG_CONTINUE_C2IMR2_DEF
+    \
+    \ @brief C2IMR2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SYSCFG_CONTINUE_DMA1CH1IM      \ [0x00] Peripheral DMA1CH1 interrupt mask to CPU2
+    $01 constant SYSCFG_CONTINUE_DMA1CH2IM      \ [0x01] Peripheral DMA1CH2 interrupt mask to CPU2
+    $02 constant SYSCFG_CONTINUE_DMA1CH3IM      \ [0x02] Peripheral DMA1CH3 interrupt mask to CPU2
+    $03 constant SYSCFG_CONTINUE_DMA1CH4IM      \ [0x03] Peripheral DMA1CH4 interrupt mask to CPU2
+    $04 constant SYSCFG_CONTINUE_DMA1CH5IM      \ [0x04] Peripheral DMA1CH5 interrupt mask to CPU2
+    $05 constant SYSCFG_CONTINUE_DMA1CH6IM      \ [0x05] Peripheral DMA1CH6 interrupt mask to CPU2
+    $06 constant SYSCFG_CONTINUE_DMA1CH7IM      \ [0x06] Peripheral DMA1CH7 interrupt mask to CPU2
+    $08 constant SYSCFG_CONTINUE_DMA2CH1IM      \ [0x08] Peripheral DMA2CH1 interrupt mask to CPU2
+    $09 constant SYSCFG_CONTINUE_DMA2CH2IM      \ [0x09] Peripheral DMA2CH2 interrupt mask to CPU2
+    $0a constant SYSCFG_CONTINUE_DMA2CH3IM      \ [0x0a] Peripheral DMA2CH3 interrupt mask to CPU2
+    $0b constant SYSCFG_CONTINUE_DMA2CH4IM      \ [0x0b] Peripheral DMA2CH4 interrupt mask to CPU2
+    $0c constant SYSCFG_CONTINUE_DMA2CH5IM      \ [0x0c] Peripheral DMA2CH5 interrupt mask to CPU2
+    $0d constant SYSCFG_CONTINUE_DMA2CH6IM      \ [0x0d] Peripheral DMA2CH6 interrupt mask to CPU2
+    $0e constant SYSCFG_CONTINUE_DMA2CH7IM      \ [0x0e] Peripheral DMA2CH7 interrupt mask to CPU2
+    $0f constant SYSCFG_CONTINUE_DMAMUX1IM      \ [0x0f] Peripheral DMAMUX1 interrupt mask to CPU2
+    $12 constant SYSCFG_CONTINUE_PVM3IM         \ [0x12] Peripheral PVM3 interrupt mask to CPU2
+    $14 constant SYSCFG_CONTINUE_PVDIM          \ [0x14] Peripheral PVD interrupt mask to CPU2
+  [then]
 
-\
-\ @brief System configuration controller
-\
-$40010100 constant SYSCFG_CONTINUE_IMR1  \ offset: 0x00 : IMR1
-$40010104 constant SYSCFG_CONTINUE_IMR2  \ offset: 0x04 : IMR2
-$40010108 constant SYSCFG_CONTINUE_C2IMR1  \ offset: 0x08 : C2IMR1
-$4001010c constant SYSCFG_CONTINUE_C2IMR2  \ offset: 0x0C : C2IMR2
+  \
+  \ @brief System configuration controller
+  \
+  $00 constant SYSCFG_CONTINUE_IMR1     \ IMR1
+  $04 constant SYSCFG_CONTINUE_IMR2     \ IMR2
+  $08 constant SYSCFG_CONTINUE_C2IMR1   \ C2IMR1
+  $0C constant SYSCFG_CONTINUE_C2IMR2   \ C2IMR2
 
+: SYSCFG_CONTINUE_DEF ; [then]

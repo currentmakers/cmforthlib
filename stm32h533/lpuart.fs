@@ -6,261 +6,274 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] LPUART_DEF
 
-\
-\ @brief LPUART control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPUART_LPUART_CR1_UE                             \ LPUART enable
-$00000002 constant LPUART_LPUART_CR1_UESM                           \ LPUART enable in low-power mode
-$00000004 constant LPUART_LPUART_CR1_RE                             \ Receiver enable
-$00000008 constant LPUART_LPUART_CR1_TE                             \ Transmitter enable
-$00000010 constant LPUART_LPUART_CR1_IDLEIE                         \ IDLE interrupt enable
-$00000020 constant LPUART_LPUART_CR1_RXFNEIE                        \ RXFIFO not empty interrupt enable
-$00000040 constant LPUART_LPUART_CR1_TCIE                           \ Transmission complete interrupt enable
-$00000080 constant LPUART_LPUART_CR1_TXFNFIE                        \ TXFIFO not full interrupt enable
-$00000100 constant LPUART_LPUART_CR1_PEIE                           \ PE interrupt enable
-$00000200 constant LPUART_LPUART_CR1_PS                             \ Parity selection
-$00000400 constant LPUART_LPUART_CR1_PCE                            \ Parity control enable
-$00000800 constant LPUART_LPUART_CR1_WAKE                           \ Receiver wake-up method
-$00001000 constant LPUART_LPUART_CR1_M0                             \ Word length
-$00002000 constant LPUART_LPUART_CR1_MME                            \ Mute mode enable
-$00004000 constant LPUART_LPUART_CR1_CMIE                           \ Character match interrupt enable
-$001f0000 constant LPUART_LPUART_CR1_DEDT                           \ Driver Enable deassertion time
-$03e00000 constant LPUART_LPUART_CR1_DEAT                           \ Driver Enable assertion time
-$10000000 constant LPUART_LPUART_CR1_M1                             \ Word length
-$20000000 constant LPUART_LPUART_CR1_FIFOEN                         \ FIFO mode enable
-$40000000 constant LPUART_LPUART_CR1_TXFEIE                         \ TXFIFO empty interrupt enable
-$80000000 constant LPUART_LPUART_CR1_RXFFIE                         \ RXFIFO Full interrupt enable
-
-
-\
-\ @brief LPUART control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPUART_LPUART_CR1_ALTERNATE1_UE                  \ LPUART enable
-$00000002 constant LPUART_LPUART_CR1_ALTERNATE1_UESM                \ LPUART enable in low-power mode
-$00000004 constant LPUART_LPUART_CR1_ALTERNATE1_RE                  \ Receiver enable
-$00000008 constant LPUART_LPUART_CR1_ALTERNATE1_TE                  \ Transmitter enable
-$00000010 constant LPUART_LPUART_CR1_ALTERNATE1_IDLEIE              \ IDLE interrupt enable
-$00000020 constant LPUART_LPUART_CR1_ALTERNATE1_RXNEIE              \ Receive data register not empty
-$00000040 constant LPUART_LPUART_CR1_ALTERNATE1_TCIE                \ Transmission complete interrupt enable
-$00000080 constant LPUART_LPUART_CR1_ALTERNATE1_TXEIE               \ Transmit data register empty
-$00000100 constant LPUART_LPUART_CR1_ALTERNATE1_PEIE                \ PE interrupt enable
-$00000200 constant LPUART_LPUART_CR1_ALTERNATE1_PS                  \ Parity selection
-$00000400 constant LPUART_LPUART_CR1_ALTERNATE1_PCE                 \ Parity control enable
-$00000800 constant LPUART_LPUART_CR1_ALTERNATE1_WAKE                \ Receiver wake-up method
-$00001000 constant LPUART_LPUART_CR1_ALTERNATE1_M0                  \ Word length
-$00002000 constant LPUART_LPUART_CR1_ALTERNATE1_MME                 \ Mute mode enable
-$00004000 constant LPUART_LPUART_CR1_ALTERNATE1_CMIE                \ Character match interrupt enable
-$001f0000 constant LPUART_LPUART_CR1_ALTERNATE1_DEDT                \ Driver Enable deassertion time
-$03e00000 constant LPUART_LPUART_CR1_ALTERNATE1_DEAT                \ Driver Enable assertion time
-$10000000 constant LPUART_LPUART_CR1_ALTERNATE1_M1                  \ Word length
-$20000000 constant LPUART_LPUART_CR1_ALTERNATE1_FIFOEN              \ FIFO mode enable
+  [ifdef] LPUART_LPUART_CR1_DEF
+    \
+    \ @brief LPUART control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_UE                      \ [0x00] LPUART enable
+    $01 constant LPUART_UESM                    \ [0x01] LPUART enable in low-power mode
+    $02 constant LPUART_RE                      \ [0x02] Receiver enable
+    $03 constant LPUART_TE                      \ [0x03] Transmitter enable
+    $04 constant LPUART_IDLEIE                  \ [0x04] IDLE interrupt enable
+    $05 constant LPUART_RXFNEIE                 \ [0x05] RXFIFO not empty interrupt enable
+    $06 constant LPUART_TCIE                    \ [0x06] Transmission complete interrupt enable
+    $07 constant LPUART_TXFNFIE                 \ [0x07] TXFIFO not full interrupt enable
+    $08 constant LPUART_PEIE                    \ [0x08] PE interrupt enable
+    $09 constant LPUART_PS                      \ [0x09] Parity selection
+    $0a constant LPUART_PCE                     \ [0x0a] Parity control enable
+    $0b constant LPUART_WAKE                    \ [0x0b] Receiver wake-up method
+    $0c constant LPUART_M0                      \ [0x0c] Word length
+    $0d constant LPUART_MME                     \ [0x0d] Mute mode enable
+    $0e constant LPUART_CMIE                    \ [0x0e] Character match interrupt enable
+    $10 constant LPUART_DEDT                    \ [0x10 : 5] Driver Enable deassertion time
+    $15 constant LPUART_DEAT                    \ [0x15 : 5] Driver Enable assertion time
+    $1c constant LPUART_M1                      \ [0x1c] Word length
+    $1d constant LPUART_FIFOEN                  \ [0x1d] FIFO mode enable
+    $1e constant LPUART_TXFEIE                  \ [0x1e] TXFIFO empty interrupt enable
+    $1f constant LPUART_RXFFIE                  \ [0x1f] RXFIFO Full interrupt enable
+  [then]
 
 
-\
-\ @brief LPUART control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000010 constant LPUART_LPUART_CR2_ADDM7                          \ 7-bit Address Detection/4-bit Address Detection
-$00003000 constant LPUART_LPUART_CR2_STOP                           \ STOP bits
-$00008000 constant LPUART_LPUART_CR2_SWAP                           \ Swap TX/RX pins
-$00010000 constant LPUART_LPUART_CR2_RXINV                          \ RX pin active level inversion
-$00020000 constant LPUART_LPUART_CR2_TXINV                          \ TX pin active level inversion
-$00040000 constant LPUART_LPUART_CR2_DATAINV                        \ Binary data inversion
-$00080000 constant LPUART_LPUART_CR2_MSBFIRST                       \ Most significant bit first
-$ff000000 constant LPUART_LPUART_CR2_ADD                            \ Address of the LPUART node
-
-
-\
-\ @brief LPUART control register 3
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPUART_LPUART_CR3_EIE                            \ Error interrupt enable
-$00000008 constant LPUART_LPUART_CR3_HDSEL                          \ Half-duplex selection
-$00000040 constant LPUART_LPUART_CR3_DMAR                           \ DMA enable receiver
-$00000080 constant LPUART_LPUART_CR3_DMAT                           \ DMA enable transmitter
-$00000100 constant LPUART_LPUART_CR3_RTSE                           \ RTS enable
-$00000200 constant LPUART_LPUART_CR3_CTSE                           \ CTS enable
-$00000400 constant LPUART_LPUART_CR3_CTSIE                          \ CTS interrupt enable
-$00001000 constant LPUART_LPUART_CR3_OVRDIS                         \ Overrun Disable
-$00002000 constant LPUART_LPUART_CR3_DDRE                           \ DMA Disable on reception Error
-$00004000 constant LPUART_LPUART_CR3_DEM                            \ Driver enable mode
-$00008000 constant LPUART_LPUART_CR3_DEP                            \ Driver enable polarity selection
-$00100000 constant LPUART_LPUART_CR3_WUS0                           \ Wake-up from low-power mode interrupt flag selection
-$00200000 constant LPUART_LPUART_CR3_WUS1                           \ Wake-up from low-power mode interrupt flag selection
-$00400000 constant LPUART_LPUART_CR3_WUFIE                          \ Wake-up from low-power mode interrupt enable
-$00800000 constant LPUART_LPUART_CR3_TXFTIE                         \ TXFIFO threshold interrupt enable
-$0e000000 constant LPUART_LPUART_CR3_RXFTCFG                        \ Receive FIFO threshold configuration
-$10000000 constant LPUART_LPUART_CR3_RXFTIE                         \ RXFIFO threshold interrupt enable
-$e0000000 constant LPUART_LPUART_CR3_TXFTCFG                        \ TXFIFO threshold configuration
+  [ifdef] LPUART_LPUART_CR1_ALTERNATE1_DEF
+    \
+    \ @brief LPUART control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_UE                      \ [0x00] LPUART enable
+    $01 constant LPUART_UESM                    \ [0x01] LPUART enable in low-power mode
+    $02 constant LPUART_RE                      \ [0x02] Receiver enable
+    $03 constant LPUART_TE                      \ [0x03] Transmitter enable
+    $04 constant LPUART_IDLEIE                  \ [0x04] IDLE interrupt enable
+    $05 constant LPUART_RXNEIE                  \ [0x05] Receive data register not empty
+    $06 constant LPUART_TCIE                    \ [0x06] Transmission complete interrupt enable
+    $07 constant LPUART_TXEIE                   \ [0x07] Transmit data register empty
+    $08 constant LPUART_PEIE                    \ [0x08] PE interrupt enable
+    $09 constant LPUART_PS                      \ [0x09] Parity selection
+    $0a constant LPUART_PCE                     \ [0x0a] Parity control enable
+    $0b constant LPUART_WAKE                    \ [0x0b] Receiver wake-up method
+    $0c constant LPUART_M0                      \ [0x0c] Word length
+    $0d constant LPUART_MME                     \ [0x0d] Mute mode enable
+    $0e constant LPUART_CMIE                    \ [0x0e] Character match interrupt enable
+    $10 constant LPUART_DEDT                    \ [0x10 : 5] Driver Enable deassertion time
+    $15 constant LPUART_DEAT                    \ [0x15 : 5] Driver Enable assertion time
+    $1c constant LPUART_M1                      \ [0x1c] Word length
+    $1d constant LPUART_FIFOEN                  \ [0x1d] FIFO mode enable
+  [then]
 
 
-\
-\ @brief LPUART control register 3
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPUART_LPUART_CR3_ALTERNATE1_EIE                 \ Error interrupt enable
-$00000008 constant LPUART_LPUART_CR3_ALTERNATE1_HDSEL               \ Half-duplex selection
-$00000040 constant LPUART_LPUART_CR3_ALTERNATE1_DMAR                \ DMA enable receiver
-$00000080 constant LPUART_LPUART_CR3_ALTERNATE1_DMAT                \ DMA enable transmitter
-$00000100 constant LPUART_LPUART_CR3_ALTERNATE1_RTSE                \ RTS enable
-$00000200 constant LPUART_LPUART_CR3_ALTERNATE1_CTSE                \ CTS enable
-$00000400 constant LPUART_LPUART_CR3_ALTERNATE1_CTSIE               \ CTS interrupt enable
-$00001000 constant LPUART_LPUART_CR3_ALTERNATE1_OVRDIS              \ Overrun Disable
-$00002000 constant LPUART_LPUART_CR3_ALTERNATE1_DDRE                \ DMA Disable on reception Error
-$00004000 constant LPUART_LPUART_CR3_ALTERNATE1_DEM                 \ Driver enable mode
-$00008000 constant LPUART_LPUART_CR3_ALTERNATE1_DEP                 \ Driver enable polarity selection
-$00100000 constant LPUART_LPUART_CR3_ALTERNATE1_WUS0                \ Wake-up from low-power mode interrupt flag selection
-$00200000 constant LPUART_LPUART_CR3_ALTERNATE1_WUS1                \ Wake-up from low-power mode interrupt flag selection
-$00400000 constant LPUART_LPUART_CR3_ALTERNATE1_WUFIE               \ Wake-up from low-power mode interrupt enable
+  [ifdef] LPUART_LPUART_CR2_DEF
+    \
+    \ @brief LPUART control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $04 constant LPUART_ADDM7                   \ [0x04] 7-bit Address Detection/4-bit Address Detection
+    $0c constant LPUART_STOP                    \ [0x0c : 2] STOP bits
+    $0f constant LPUART_SWAP                    \ [0x0f] Swap TX/RX pins
+    $10 constant LPUART_RXINV                   \ [0x10] RX pin active level inversion
+    $11 constant LPUART_TXINV                   \ [0x11] TX pin active level inversion
+    $12 constant LPUART_DATAINV                 \ [0x12] Binary data inversion
+    $13 constant LPUART_MSBFIRST                \ [0x13] Most significant bit first
+    $18 constant LPUART_ADD                     \ [0x18 : 8] Address of the LPUART node
+  [then]
 
 
-\
-\ @brief LPUART baud rate register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$000fffff constant LPUART_LPUART_BRR_BRR                            \ LPUART baud rate division (LPUARTDIV)
-
-
-\
-\ @brief LPUART request register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000002 constant LPUART_LPUART_RQR_SBKRQ                          \ Send break request
-$00000004 constant LPUART_LPUART_RQR_MMRQ                           \ Mute mode request
-$00000008 constant LPUART_LPUART_RQR_RXFRQ                          \ Receive data flush request
-$00000010 constant LPUART_LPUART_RQR_TXFRQ                          \ Transmit data flush request
-
-
-\
-\ @brief LPUART interrupt and status register
-\ Address offset: 0x1C
-\ Reset value: 0x008000C0
-\
-
-$00000001 constant LPUART_LPUART_ISR_PE                             \ Parity error
-$00000002 constant LPUART_LPUART_ISR_FE                             \ Framing error
-$00000004 constant LPUART_LPUART_ISR_NE                             \ Start bit noise detection flag
-$00000008 constant LPUART_LPUART_ISR_ORE                            \ Overrun error
-$00000010 constant LPUART_LPUART_ISR_IDLE                           \ Idle line detected
-$00000020 constant LPUART_LPUART_ISR_RXFNE                          \ RXFIFO not empty
-$00000040 constant LPUART_LPUART_ISR_TC                             \ Transmission complete
-$00000080 constant LPUART_LPUART_ISR_TXFNF                          \ TXFIFO not full
-$00000200 constant LPUART_LPUART_ISR_CTSIF                          \ CTS interrupt flag
-$00000400 constant LPUART_LPUART_ISR_CTS                            \ CTS flag
-$00010000 constant LPUART_LPUART_ISR_BUSY                           \ Busy flag
-$00020000 constant LPUART_LPUART_ISR_CMF                            \ Character match flag
-$00040000 constant LPUART_LPUART_ISR_SBKF                           \ Send break flag
-$00080000 constant LPUART_LPUART_ISR_RWU                            \ Receiver wake-up from mute mode
-$00100000 constant LPUART_LPUART_ISR_WUF                            \ Wake-up from low-power mode flag
-$00200000 constant LPUART_LPUART_ISR_TEACK                          \ Transmit enable acknowledge flag
-$00400000 constant LPUART_LPUART_ISR_REACK                          \ Receive enable acknowledge flag
-$00800000 constant LPUART_LPUART_ISR_TXFE                           \ TXFIFO Empty
-$01000000 constant LPUART_LPUART_ISR_RXFF                           \ RXFIFO Full
-$04000000 constant LPUART_LPUART_ISR_RXFT                           \ RXFIFO threshold flag
-$08000000 constant LPUART_LPUART_ISR_TXFT                           \ TXFIFO threshold flag
+  [ifdef] LPUART_LPUART_CR3_DEF
+    \
+    \ @brief LPUART control register 3
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_EIE                     \ [0x00] Error interrupt enable
+    $03 constant LPUART_HDSEL                   \ [0x03] Half-duplex selection
+    $06 constant LPUART_DMAR                    \ [0x06] DMA enable receiver
+    $07 constant LPUART_DMAT                    \ [0x07] DMA enable transmitter
+    $08 constant LPUART_RTSE                    \ [0x08] RTS enable
+    $09 constant LPUART_CTSE                    \ [0x09] CTS enable
+    $0a constant LPUART_CTSIE                   \ [0x0a] CTS interrupt enable
+    $0c constant LPUART_OVRDIS                  \ [0x0c] Overrun Disable
+    $0d constant LPUART_DDRE                    \ [0x0d] DMA Disable on reception Error
+    $0e constant LPUART_DEM                     \ [0x0e] Driver enable mode
+    $0f constant LPUART_DEP                     \ [0x0f] Driver enable polarity selection
+    $14 constant LPUART_WUS0                    \ [0x14] Wake-up from low-power mode interrupt flag selection
+    $15 constant LPUART_WUS1                    \ [0x15] Wake-up from low-power mode interrupt flag selection
+    $16 constant LPUART_WUFIE                   \ [0x16] Wake-up from low-power mode interrupt enable
+    $17 constant LPUART_TXFTIE                  \ [0x17] TXFIFO threshold interrupt enable
+    $19 constant LPUART_RXFTCFG                 \ [0x19 : 3] Receive FIFO threshold configuration
+    $1c constant LPUART_RXFTIE                  \ [0x1c] RXFIFO threshold interrupt enable
+    $1d constant LPUART_TXFTCFG                 \ [0x1d : 3] TXFIFO threshold configuration
+  [then]
 
 
-\
-\ @brief LPUART interrupt and status register
-\ Address offset: 0x1C
-\ Reset value: 0x000000C0
-\
-
-$00000001 constant LPUART_LPUART_ISR_ALTERNATE1_PE                  \ Parity error
-$00000002 constant LPUART_LPUART_ISR_ALTERNATE1_FE                  \ Framing error
-$00000004 constant LPUART_LPUART_ISR_ALTERNATE1_NE                  \ Start bit noise detection flag
-$00000008 constant LPUART_LPUART_ISR_ALTERNATE1_ORE                 \ Overrun error
-$00000010 constant LPUART_LPUART_ISR_ALTERNATE1_IDLE                \ Idle line detected
-$00000020 constant LPUART_LPUART_ISR_ALTERNATE1_RXNE                \ Read data register not empty
-$00000040 constant LPUART_LPUART_ISR_ALTERNATE1_TC                  \ Transmission complete
-$00000080 constant LPUART_LPUART_ISR_ALTERNATE1_TXE                 \ Transmit data register empty
-$00000200 constant LPUART_LPUART_ISR_ALTERNATE1_CTSIF               \ CTS interrupt flag
-$00000400 constant LPUART_LPUART_ISR_ALTERNATE1_CTS                 \ CTS flag
-$00010000 constant LPUART_LPUART_ISR_ALTERNATE1_BUSY                \ Busy flag
-$00020000 constant LPUART_LPUART_ISR_ALTERNATE1_CMF                 \ Character match flag
-$00040000 constant LPUART_LPUART_ISR_ALTERNATE1_SBKF                \ Send break flag
-$00080000 constant LPUART_LPUART_ISR_ALTERNATE1_RWU                 \ Receiver wake-up from mute mode
-$00100000 constant LPUART_LPUART_ISR_ALTERNATE1_WUF                 \ Wake-up from low-power mode flag
-$00200000 constant LPUART_LPUART_ISR_ALTERNATE1_TEACK               \ Transmit enable acknowledge flag
-$00400000 constant LPUART_LPUART_ISR_ALTERNATE1_REACK               \ Receive enable acknowledge flag
+  [ifdef] LPUART_LPUART_CR3_ALTERNATE1_DEF
+    \
+    \ @brief LPUART control register 3
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_EIE                     \ [0x00] Error interrupt enable
+    $03 constant LPUART_HDSEL                   \ [0x03] Half-duplex selection
+    $06 constant LPUART_DMAR                    \ [0x06] DMA enable receiver
+    $07 constant LPUART_DMAT                    \ [0x07] DMA enable transmitter
+    $08 constant LPUART_RTSE                    \ [0x08] RTS enable
+    $09 constant LPUART_CTSE                    \ [0x09] CTS enable
+    $0a constant LPUART_CTSIE                   \ [0x0a] CTS interrupt enable
+    $0c constant LPUART_OVRDIS                  \ [0x0c] Overrun Disable
+    $0d constant LPUART_DDRE                    \ [0x0d] DMA Disable on reception Error
+    $0e constant LPUART_DEM                     \ [0x0e] Driver enable mode
+    $0f constant LPUART_DEP                     \ [0x0f] Driver enable polarity selection
+    $14 constant LPUART_WUS0                    \ [0x14] Wake-up from low-power mode interrupt flag selection
+    $15 constant LPUART_WUS1                    \ [0x15] Wake-up from low-power mode interrupt flag selection
+    $16 constant LPUART_WUFIE                   \ [0x16] Wake-up from low-power mode interrupt enable
+  [then]
 
 
-\
-\ @brief LPUART interrupt flag clear register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPUART_LPUART_ICR_PECF                           \ Parity error clear flag
-$00000002 constant LPUART_LPUART_ICR_FECF                           \ Framing error clear flag
-$00000004 constant LPUART_LPUART_ICR_NECF                           \ Noise detected clear flag
-$00000008 constant LPUART_LPUART_ICR_ORECF                          \ Overrun error clear flag
-$00000010 constant LPUART_LPUART_ICR_IDLECF                         \ Idle line detected clear flag
-$00000040 constant LPUART_LPUART_ICR_TCCF                           \ Transmission complete clear flag
-$00000200 constant LPUART_LPUART_ICR_CTSCF                          \ CTS clear flag
-$00020000 constant LPUART_LPUART_ICR_CMCF                           \ Character match clear flag
-$00100000 constant LPUART_LPUART_ICR_WUCF                           \ Wake-up from low-power mode clear flag
+  [ifdef] LPUART_LPUART_BRR_DEF
+    \
+    \ @brief LPUART baud rate register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_BRR                     \ [0x00 : 20] LPUART baud rate division (LPUARTDIV)
+  [then]
 
 
-\
-\ @brief LPUART receive data register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000001ff constant LPUART_LPUART_RDR_RDR                            \ Receive data value
-
-
-\
-\ @brief LPUART transmit data register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$000001ff constant LPUART_LPUART_TDR_TDR                            \ Transmit data value
+  [ifdef] LPUART_LPUART_RQR_DEF
+    \
+    \ @brief LPUART request register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $01 constant LPUART_SBKRQ                   \ [0x01] Send break request
+    $02 constant LPUART_MMRQ                    \ [0x02] Mute mode request
+    $03 constant LPUART_RXFRQ                   \ [0x03] Receive data flush request
+    $04 constant LPUART_TXFRQ                   \ [0x04] Transmit data flush request
+  [then]
 
 
-\
-\ @brief LPUART prescaler register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
+  [ifdef] LPUART_LPUART_ISR_DEF
+    \
+    \ @brief LPUART interrupt and status register
+    \ Address offset: 0x1C
+    \ Reset value: 0x008000C0
+    \
+    $00 constant LPUART_PE                      \ [0x00] Parity error
+    $01 constant LPUART_FE                      \ [0x01] Framing error
+    $02 constant LPUART_NE                      \ [0x02] Start bit noise detection flag
+    $03 constant LPUART_ORE                     \ [0x03] Overrun error
+    $04 constant LPUART_IDLE                    \ [0x04] Idle line detected
+    $05 constant LPUART_RXFNE                   \ [0x05] RXFIFO not empty
+    $06 constant LPUART_TC                      \ [0x06] Transmission complete
+    $07 constant LPUART_TXFNF                   \ [0x07] TXFIFO not full
+    $09 constant LPUART_CTSIF                   \ [0x09] CTS interrupt flag
+    $0a constant LPUART_CTS                     \ [0x0a] CTS flag
+    $10 constant LPUART_BUSY                    \ [0x10] Busy flag
+    $11 constant LPUART_CMF                     \ [0x11] Character match flag
+    $12 constant LPUART_SBKF                    \ [0x12] Send break flag
+    $13 constant LPUART_RWU                     \ [0x13] Receiver wake-up from mute mode
+    $14 constant LPUART_WUF                     \ [0x14] Wake-up from low-power mode flag
+    $15 constant LPUART_TEACK                   \ [0x15] Transmit enable acknowledge flag
+    $16 constant LPUART_REACK                   \ [0x16] Receive enable acknowledge flag
+    $17 constant LPUART_TXFE                    \ [0x17] TXFIFO Empty
+    $18 constant LPUART_RXFF                    \ [0x18] RXFIFO Full
+    $1a constant LPUART_RXFT                    \ [0x1a] RXFIFO threshold flag
+    $1b constant LPUART_TXFT                    \ [0x1b] TXFIFO threshold flag
+  [then]
 
-$0000000f constant LPUART_LPUART_PRESC_PRESCALER                    \ Clock prescaler
+
+  [ifdef] LPUART_LPUART_ISR_ALTERNATE1_DEF
+    \
+    \ @brief LPUART interrupt and status register
+    \ Address offset: 0x1C
+    \ Reset value: 0x000000C0
+    \
+    $00 constant LPUART_PE                      \ [0x00] Parity error
+    $01 constant LPUART_FE                      \ [0x01] Framing error
+    $02 constant LPUART_NE                      \ [0x02] Start bit noise detection flag
+    $03 constant LPUART_ORE                     \ [0x03] Overrun error
+    $04 constant LPUART_IDLE                    \ [0x04] Idle line detected
+    $05 constant LPUART_RXNE                    \ [0x05] Read data register not empty
+    $06 constant LPUART_TC                      \ [0x06] Transmission complete
+    $07 constant LPUART_TXE                     \ [0x07] Transmit data register empty
+    $09 constant LPUART_CTSIF                   \ [0x09] CTS interrupt flag
+    $0a constant LPUART_CTS                     \ [0x0a] CTS flag
+    $10 constant LPUART_BUSY                    \ [0x10] Busy flag
+    $11 constant LPUART_CMF                     \ [0x11] Character match flag
+    $12 constant LPUART_SBKF                    \ [0x12] Send break flag
+    $13 constant LPUART_RWU                     \ [0x13] Receiver wake-up from mute mode
+    $14 constant LPUART_WUF                     \ [0x14] Wake-up from low-power mode flag
+    $15 constant LPUART_TEACK                   \ [0x15] Transmit enable acknowledge flag
+    $16 constant LPUART_REACK                   \ [0x16] Receive enable acknowledge flag
+  [then]
 
 
-\
-\ @brief LPUART address block description
-\
-$44002400 constant LPUART_LPUART_CR1  \ offset: 0x00 : LPUART control register 1
-$44002400 constant LPUART_LPUART_CR1_ALTERNATE1  \ offset: 0x00 : LPUART control register 1
-$44002404 constant LPUART_LPUART_CR2  \ offset: 0x04 : LPUART control register 2
-$44002408 constant LPUART_LPUART_CR3  \ offset: 0x08 : LPUART control register 3
-$44002408 constant LPUART_LPUART_CR3_ALTERNATE1  \ offset: 0x08 : LPUART control register 3
-$4400240c constant LPUART_LPUART_BRR  \ offset: 0x0C : LPUART baud rate register
-$44002418 constant LPUART_LPUART_RQR  \ offset: 0x18 : LPUART request register
-$4400241c constant LPUART_LPUART_ISR  \ offset: 0x1C : LPUART interrupt and status register
-$4400241c constant LPUART_LPUART_ISR_ALTERNATE1  \ offset: 0x1C : LPUART interrupt and status register
-$44002420 constant LPUART_LPUART_ICR  \ offset: 0x20 : LPUART interrupt flag clear register
-$44002424 constant LPUART_LPUART_RDR  \ offset: 0x24 : LPUART receive data register
-$44002428 constant LPUART_LPUART_TDR  \ offset: 0x28 : LPUART transmit data register
-$4400242c constant LPUART_LPUART_PRESC  \ offset: 0x2C : LPUART prescaler register
+  [ifdef] LPUART_LPUART_ICR_DEF
+    \
+    \ @brief LPUART interrupt flag clear register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_PECF                    \ [0x00] Parity error clear flag
+    $01 constant LPUART_FECF                    \ [0x01] Framing error clear flag
+    $02 constant LPUART_NECF                    \ [0x02] Noise detected clear flag
+    $03 constant LPUART_ORECF                   \ [0x03] Overrun error clear flag
+    $04 constant LPUART_IDLECF                  \ [0x04] Idle line detected clear flag
+    $06 constant LPUART_TCCF                    \ [0x06] Transmission complete clear flag
+    $09 constant LPUART_CTSCF                   \ [0x09] CTS clear flag
+    $11 constant LPUART_CMCF                    \ [0x11] Character match clear flag
+    $14 constant LPUART_WUCF                    \ [0x14] Wake-up from low-power mode clear flag
+  [then]
 
+
+  [ifdef] LPUART_LPUART_RDR_DEF
+    \
+    \ @brief LPUART receive data register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_RDR                     \ [0x00 : 9] Receive data value
+  [then]
+
+
+  [ifdef] LPUART_LPUART_TDR_DEF
+    \
+    \ @brief LPUART transmit data register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_TDR                     \ [0x00 : 9] Transmit data value
+  [then]
+
+
+  [ifdef] LPUART_LPUART_PRESC_DEF
+    \
+    \ @brief LPUART prescaler register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPUART_PRESCALER               \ [0x00 : 4] Clock prescaler
+  [then]
+
+  \
+  \ @brief LPUART address block description
+  \
+  $00 constant LPUART_LPUART_CR1        \ LPUART control register 1
+  $00 constant LPUART_LPUART_CR1_ALTERNATE1    \ LPUART control register 1
+  $04 constant LPUART_LPUART_CR2        \ LPUART control register 2
+  $08 constant LPUART_LPUART_CR3        \ LPUART control register 3
+  $08 constant LPUART_LPUART_CR3_ALTERNATE1    \ LPUART control register 3
+  $0C constant LPUART_LPUART_BRR        \ LPUART baud rate register
+  $18 constant LPUART_LPUART_RQR        \ LPUART request register
+  $1C constant LPUART_LPUART_ISR        \ LPUART interrupt and status register
+  $1C constant LPUART_LPUART_ISR_ALTERNATE1    \ LPUART interrupt and status register
+  $20 constant LPUART_LPUART_ICR        \ LPUART interrupt flag clear register
+  $24 constant LPUART_LPUART_RDR        \ LPUART receive data register
+  $28 constant LPUART_LPUART_TDR        \ LPUART transmit data register
+  $2C constant LPUART_LPUART_PRESC      \ LPUART prescaler register
+
+: LPUART_DEF ; [then]

@@ -6,223 +6,237 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] SPI_DEF
 
-\
-\ @brief SPI/I2S control register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPI_SPI_CR1_SPE                                  \ serial peripheral enable
-$00000100 constant SPI_SPI_CR1_MASRX                                \ master automatic suspension in Receive mode
-$00000200 constant SPI_SPI_CR1_CSTART                               \ master transfer start
-$00000400 constant SPI_SPI_CR1_CSUSP                                \ master suspend request
-$00000800 constant SPI_SPI_CR1_HDDIR                                \ Rx/Tx direction at half-duplex mode
-$00001000 constant SPI_SPI_CR1_SSI                                  \ internal SS signal input level
-$00002000 constant SPI_SPI_CR1_CRC33_17                             \ 32-bit CRC polynomial configuration
-$00004000 constant SPI_SPI_CR1_RCRCINI                              \ CRC calculation initialization pattern control for receiver
-$00008000 constant SPI_SPI_CR1_TCRCINI                              \ CRC calculation initialization pattern control for transmitter
-$00010000 constant SPI_SPI_CR1_IOLOCK                               \ locking the AF configuration of associated I/Os
-
-
-\
-\ @brief SPI/I2S control register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant SPI_SPI_CR2_TSIZE                                \ number of data at current transfer
+  [ifdef] SPI_SPI_CR1_DEF
+    \
+    \ @brief SPI/I2S control register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_SPE                        \ [0x00] serial peripheral enable
+    $08 constant SPI_MASRX                      \ [0x08] master automatic suspension in Receive mode
+    $09 constant SPI_CSTART                     \ [0x09] master transfer start
+    $0a constant SPI_CSUSP                      \ [0x0a] master suspend request
+    $0b constant SPI_HDDIR                      \ [0x0b] Rx/Tx direction at half-duplex mode
+    $0c constant SPI_SSI                        \ [0x0c] internal SS signal input level
+    $0d constant SPI_CRC33_17                   \ [0x0d] 32-bit CRC polynomial configuration
+    $0e constant SPI_RCRCINI                    \ [0x0e] CRC calculation initialization pattern control for receiver
+    $0f constant SPI_TCRCINI                    \ [0x0f] CRC calculation initialization pattern control for transmitter
+    $10 constant SPI_IOLOCK                     \ [0x10] locking the AF configuration of associated I/Os
+  [then]
 
 
-\
-\ @brief SPI/I2S configuration register 1
-\ Address offset: 0x08
-\ Reset value: 0x00070007
-\
-
-$0000001f constant SPI_SPI_CFG1_DSIZE                               \ number of bits in a single SPI data frame
-$000001e0 constant SPI_SPI_CFG1_FTHLV                               \ FIFO threshold level
-$00000200 constant SPI_SPI_CFG1_UDRCFG                              \ behavior of slave transmitter at underrun condition
-$00004000 constant SPI_SPI_CFG1_RXDMAEN                             \ Rx DMA stream enable
-$00008000 constant SPI_SPI_CFG1_TXDMAEN                             \ Tx DMA stream enable
-$001f0000 constant SPI_SPI_CFG1_CRCSIZE                             \ length of CRC frame to be transacted and compared
-$00400000 constant SPI_SPI_CFG1_CRCEN                               \ hardware CRC computation enable
-$70000000 constant SPI_SPI_CFG1_MBR                                 \ master baud rate prescaler setting
-$80000000 constant SPI_SPI_CFG1_BPASS                               \ bypass of the prescaler at master baud rate clock generator
+  [ifdef] SPI_SPI_CR2_DEF
+    \
+    \ @brief SPI/I2S control register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_TSIZE                      \ [0x00 : 16] number of data at current transfer
+  [then]
 
 
-\
-\ @brief SPI/I2S configuration register 2
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$0000000f constant SPI_SPI_CFG2_MSSI                                \ Master SS Idleness
-$000000f0 constant SPI_SPI_CFG2_MIDI                                \ master Inter-Data Idleness
-$00002000 constant SPI_SPI_CFG2_RDIOM                               \ RDY signal input/output management
-$00004000 constant SPI_SPI_CFG2_RDIOP                               \ RDY signal input/output polarity
-$00008000 constant SPI_SPI_CFG2_IOSWP                               \ swap functionality of MISO and MOSI pins
-$00060000 constant SPI_SPI_CFG2_COMM                                \ SPI Communication Mode
-$00380000 constant SPI_SPI_CFG2_SP                                  \ serial protocol
-$00400000 constant SPI_SPI_CFG2_MASTER                              \ SPI master
-$00800000 constant SPI_SPI_CFG2_LSBFRST                             \ data frame format
-$01000000 constant SPI_SPI_CFG2_CPHA                                \ clock phase
-$02000000 constant SPI_SPI_CFG2_CPOL                                \ clock polarity
-$04000000 constant SPI_SPI_CFG2_SSM                                 \ software management of SS signal input
-$10000000 constant SPI_SPI_CFG2_SSIOP                               \ SS input/output polarity
-$20000000 constant SPI_SPI_CFG2_SSOE                                \ SS output enable
-$40000000 constant SPI_SPI_CFG2_SSOM                                \ SS output management in master mode
-$80000000 constant SPI_SPI_CFG2_AFCNTR                              \ alternate function GPIOs control
+  [ifdef] SPI_SPI_CFG1_DEF
+    \
+    \ @brief SPI/I2S configuration register 1
+    \ Address offset: 0x08
+    \ Reset value: 0x00070007
+    \
+    $00 constant SPI_DSIZE                      \ [0x00 : 5] number of bits in a single SPI data frame
+    $05 constant SPI_FTHLV                      \ [0x05 : 4] FIFO threshold level
+    $09 constant SPI_UDRCFG                     \ [0x09] behavior of slave transmitter at underrun condition
+    $0e constant SPI_RXDMAEN                    \ [0x0e] Rx DMA stream enable
+    $0f constant SPI_TXDMAEN                    \ [0x0f] Tx DMA stream enable
+    $10 constant SPI_CRCSIZE                    \ [0x10 : 5] length of CRC frame to be transacted and compared
+    $16 constant SPI_CRCEN                      \ [0x16] hardware CRC computation enable
+    $1c constant SPI_MBR                        \ [0x1c : 3] master baud rate prescaler setting
+    $1f constant SPI_BPASS                      \ [0x1f] bypass of the prescaler at master baud rate clock generator
+  [then]
 
 
-\
-\ @brief SPI/I2S interrupt enable register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPI_SPI_IER_RXPIE                                \ RXP interrupt enable
-$00000002 constant SPI_SPI_IER_TXPIE                                \ TXP interrupt enable
-$00000004 constant SPI_SPI_IER_DXPIE                                \ DXP interrupt enabled
-$00000008 constant SPI_SPI_IER_EOTIE                                \ EOT, SUSP and TXC interrupt enable
-$00000010 constant SPI_SPI_IER_TXTFIE                               \ TXTFIE interrupt enable
-$00000020 constant SPI_SPI_IER_UDRIE                                \ UDR interrupt enable
-$00000040 constant SPI_SPI_IER_OVRIE                                \ OVR interrupt enable
-$00000080 constant SPI_SPI_IER_CRCEIE                               \ CRC error interrupt enable
-$00000100 constant SPI_SPI_IER_TIFREIE                              \ TIFRE interrupt enable
-$00000200 constant SPI_SPI_IER_MODFIE                               \ mode Fault interrupt enable
-
-
-\
-\ @brief SPI/I2S status register
-\ Address offset: 0x14
-\ Reset value: 0x00001002
-\
-
-$00000001 constant SPI_SPI_SR_RXP                                   \ Rx-packet available
-$00000002 constant SPI_SPI_SR_TXP                                   \ Tx-packet space available
-$00000004 constant SPI_SPI_SR_DXP                                   \ duplex packet
-$00000008 constant SPI_SPI_SR_EOT                                   \ end of transfer
-$00000010 constant SPI_SPI_SR_TXTF                                  \ transmission transfer filled
-$00000020 constant SPI_SPI_SR_UDR                                   \ underrun
-$00000040 constant SPI_SPI_SR_OVR                                   \ overrun
-$00000080 constant SPI_SPI_SR_CRCE                                  \ CRC error
-$00000100 constant SPI_SPI_SR_TIFRE                                 \ TI frame format error
-$00000200 constant SPI_SPI_SR_MODF                                  \ mode fault
-$00000800 constant SPI_SPI_SR_SUSP                                  \ suspension status
-$00001000 constant SPI_SPI_SR_TXC                                   \ TxFIFO transmission complete
-$00006000 constant SPI_SPI_SR_RXPLVL                                \ RxFIFO packing level
-$00008000 constant SPI_SPI_SR_RXWNE                                 \ RxFIFO word not empty
-$ffff0000 constant SPI_SPI_SR_CTSIZE                                \ number of data frames remaining in current TSIZE session
+  [ifdef] SPI_SPI_CFG2_DEF
+    \
+    \ @brief SPI/I2S configuration register 2
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_MSSI                       \ [0x00 : 4] Master SS Idleness
+    $04 constant SPI_MIDI                       \ [0x04 : 4] master Inter-Data Idleness
+    $0d constant SPI_RDIOM                      \ [0x0d] RDY signal input/output management
+    $0e constant SPI_RDIOP                      \ [0x0e] RDY signal input/output polarity
+    $0f constant SPI_IOSWP                      \ [0x0f] swap functionality of MISO and MOSI pins
+    $11 constant SPI_COMM                       \ [0x11 : 2] SPI Communication Mode
+    $13 constant SPI_SP                         \ [0x13 : 3] serial protocol
+    $16 constant SPI_MASTER                     \ [0x16] SPI master
+    $17 constant SPI_LSBFRST                    \ [0x17] data frame format
+    $18 constant SPI_CPHA                       \ [0x18] clock phase
+    $19 constant SPI_CPOL                       \ [0x19] clock polarity
+    $1a constant SPI_SSM                        \ [0x1a] software management of SS signal input
+    $1c constant SPI_SSIOP                      \ [0x1c] SS input/output polarity
+    $1d constant SPI_SSOE                       \ [0x1d] SS output enable
+    $1e constant SPI_SSOM                       \ [0x1e] SS output management in master mode
+    $1f constant SPI_AFCNTR                     \ [0x1f] alternate function GPIOs control
+  [then]
 
 
-\
-\ @brief SPI/I2S interrupt/status flags clear register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000008 constant SPI_SPI_IFCR_EOTC                                \ end of transfer flag clear
-$00000010 constant SPI_SPI_IFCR_TXTFC                               \ transmission transfer filled flag clear
-$00000020 constant SPI_SPI_IFCR_UDRC                                \ underrun flag clear
-$00000040 constant SPI_SPI_IFCR_OVRC                                \ overrun flag clear
-$00000080 constant SPI_SPI_IFCR_CRCEC                               \ CRC error flag clear
-$00000100 constant SPI_SPI_IFCR_TIFREC                              \ TI frame format error flag clear
-$00000200 constant SPI_SPI_IFCR_MODFC                               \ mode fault flag clear
-$00000800 constant SPI_SPI_IFCR_SUSPC                               \ Suspend flag clear
-
-
-\
-\ @brief /I2SSPI/I2S transmit data register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SPI_SPI_TXDR_TXDR                                \ transmit data register
+  [ifdef] SPI_SPI_IER_DEF
+    \
+    \ @brief SPI/I2S interrupt enable register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_RXPIE                      \ [0x00] RXP interrupt enable
+    $01 constant SPI_TXPIE                      \ [0x01] TXP interrupt enable
+    $02 constant SPI_DXPIE                      \ [0x02] DXP interrupt enabled
+    $03 constant SPI_EOTIE                      \ [0x03] EOT, SUSP and TXC interrupt enable
+    $04 constant SPI_TXTFIE                     \ [0x04] TXTFIE interrupt enable
+    $05 constant SPI_UDRIE                      \ [0x05] UDR interrupt enable
+    $06 constant SPI_OVRIE                      \ [0x06] OVR interrupt enable
+    $07 constant SPI_CRCEIE                     \ [0x07] CRC error interrupt enable
+    $08 constant SPI_TIFREIE                    \ [0x08] TIFRE interrupt enable
+    $09 constant SPI_MODFIE                     \ [0x09] mode Fault interrupt enable
+  [then]
 
 
-\
-\ @brief SPI/I2S receive data register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SPI_SPI_RXDR_RXDR                                \ receive data register
-
-
-\
-\ @brief SPI/I2S polynomial register
-\ Address offset: 0x40
-\ Reset value: 0x00000107
-\
-
-$00000000 constant SPI_SPI_CRCPOLY_CRCPOLY                          \ CRC polynomial register
-
-
-\
-\ @brief SPI/I2S transmitter CRC register
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SPI_SPI_TXCRC_TXCRC                              \ CRC register for transmitter
+  [ifdef] SPI_SPI_SR_DEF
+    \
+    \ @brief SPI/I2S status register
+    \ Address offset: 0x14
+    \ Reset value: 0x00001002
+    \
+    $00 constant SPI_RXP                        \ [0x00] Rx-packet available
+    $01 constant SPI_TXP                        \ [0x01] Tx-packet space available
+    $02 constant SPI_DXP                        \ [0x02] duplex packet
+    $03 constant SPI_EOT                        \ [0x03] end of transfer
+    $04 constant SPI_TXTF                       \ [0x04] transmission transfer filled
+    $05 constant SPI_UDR                        \ [0x05] underrun
+    $06 constant SPI_OVR                        \ [0x06] overrun
+    $07 constant SPI_CRCE                       \ [0x07] CRC error
+    $08 constant SPI_TIFRE                      \ [0x08] TI frame format error
+    $09 constant SPI_MODF                       \ [0x09] mode fault
+    $0b constant SPI_SUSP                       \ [0x0b] suspension status
+    $0c constant SPI_TXC                        \ [0x0c] TxFIFO transmission complete
+    $0d constant SPI_RXPLVL                     \ [0x0d : 2] RxFIFO packing level
+    $0f constant SPI_RXWNE                      \ [0x0f] RxFIFO word not empty
+    $10 constant SPI_CTSIZE                     \ [0x10 : 16] number of data frames remaining in current TSIZE session
+  [then]
 
 
-\
-\ @brief SPI/I2S receiver CRC register
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SPI_SPI_RXCRC_RXCRC                              \ CRC register for receiver
-
-
-\
-\ @brief SPI underrun data register
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00000000 constant SPI_SPI_UDRDR_UDRDR                              \ data at slave underrun condition
-
-
-\
-\ @brief SPI/I2S configuration register
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000001 constant SPI_SPI_I2SCFGR_I2SMOD                           \ I2S mode selection
-$0000000e constant SPI_SPI_I2SCFGR_I2SCFG                           \ I2S configuration mode
-$00000030 constant SPI_SPI_I2SCFGR_I2SSTD                           \ Iless thansup>2less than/sup>S standard selection
-$00000080 constant SPI_SPI_I2SCFGR_PCMSYNC                          \ PCM frame synchronization
-$00000300 constant SPI_SPI_I2SCFGR_DATLEN                           \ data length to be transferred.
-$00000400 constant SPI_SPI_I2SCFGR_CHLEN                            \ channel length (number of bits per audio channel)
-$00000800 constant SPI_SPI_I2SCFGR_CKPOL                            \ serial audio clock polarity
-$00001000 constant SPI_SPI_I2SCFGR_FIXCH                            \ fixed channel length in slave
-$00002000 constant SPI_SPI_I2SCFGR_WSINV                            \ word select inversion
-$00004000 constant SPI_SPI_I2SCFGR_DATFMT                           \ data format
-$00ff0000 constant SPI_SPI_I2SCFGR_I2SDIV                           \ Iless thansup>2less than/sup>S linear prescaler
-$01000000 constant SPI_SPI_I2SCFGR_ODD                              \ odd factor for the prescaler
-$02000000 constant SPI_SPI_I2SCFGR_MCKOE                            \ master clock output enable
+  [ifdef] SPI_SPI_IFCR_DEF
+    \
+    \ @brief SPI/I2S interrupt/status flags clear register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $03 constant SPI_EOTC                       \ [0x03] end of transfer flag clear
+    $04 constant SPI_TXTFC                      \ [0x04] transmission transfer filled flag clear
+    $05 constant SPI_UDRC                       \ [0x05] underrun flag clear
+    $06 constant SPI_OVRC                       \ [0x06] overrun flag clear
+    $07 constant SPI_CRCEC                      \ [0x07] CRC error flag clear
+    $08 constant SPI_TIFREC                     \ [0x08] TI frame format error flag clear
+    $09 constant SPI_MODFC                      \ [0x09] mode fault flag clear
+    $0b constant SPI_SUSPC                      \ [0x0b] Suspend flag clear
+  [then]
 
 
-\
-\ @brief SPI address block description
-\
-$40013000 constant SPI_SPI_CR1    \ offset: 0x00 : SPI/I2S control register 1
-$40013004 constant SPI_SPI_CR2    \ offset: 0x04 : SPI/I2S control register 2
-$40013008 constant SPI_SPI_CFG1   \ offset: 0x08 : SPI/I2S configuration register 1
-$4001300c constant SPI_SPI_CFG2   \ offset: 0x0C : SPI/I2S configuration register 2
-$40013010 constant SPI_SPI_IER    \ offset: 0x10 : SPI/I2S interrupt enable register
-$40013014 constant SPI_SPI_SR     \ offset: 0x14 : SPI/I2S status register
-$40013018 constant SPI_SPI_IFCR   \ offset: 0x18 : SPI/I2S interrupt/status flags clear register
-$40013020 constant SPI_SPI_TXDR   \ offset: 0x20 : /I2SSPI/I2S transmit data register
-$40013030 constant SPI_SPI_RXDR   \ offset: 0x30 : SPI/I2S receive data register
-$40013040 constant SPI_SPI_CRCPOLY  \ offset: 0x40 : SPI/I2S polynomial register
-$40013044 constant SPI_SPI_TXCRC  \ offset: 0x44 : SPI/I2S transmitter CRC register
-$40013048 constant SPI_SPI_RXCRC  \ offset: 0x48 : SPI/I2S receiver CRC register
-$4001304c constant SPI_SPI_UDRDR  \ offset: 0x4C : SPI underrun data register
-$40013050 constant SPI_SPI_I2SCFGR  \ offset: 0x50 : SPI/I2S configuration register
+  [ifdef] SPI_SPI_TXDR_DEF
+    \
+    \ @brief /I2SSPI/I2S transmit data register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_TXDR                       \ [0x00 : 32] transmit data register
+  [then]
 
+
+  [ifdef] SPI_SPI_RXDR_DEF
+    \
+    \ @brief SPI/I2S receive data register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_RXDR                       \ [0x00 : 32] receive data register
+  [then]
+
+
+  [ifdef] SPI_SPI_CRCPOLY_DEF
+    \
+    \ @brief SPI/I2S polynomial register
+    \ Address offset: 0x40
+    \ Reset value: 0x00000107
+    \
+    $00 constant SPI_CRCPOLY                    \ [0x00 : 32] CRC polynomial register
+  [then]
+
+
+  [ifdef] SPI_SPI_TXCRC_DEF
+    \
+    \ @brief SPI/I2S transmitter CRC register
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_TXCRC                      \ [0x00 : 32] CRC register for transmitter
+  [then]
+
+
+  [ifdef] SPI_SPI_RXCRC_DEF
+    \
+    \ @brief SPI/I2S receiver CRC register
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_RXCRC                      \ [0x00 : 32] CRC register for receiver
+  [then]
+
+
+  [ifdef] SPI_SPI_UDRDR_DEF
+    \
+    \ @brief SPI underrun data register
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_UDRDR                      \ [0x00 : 32] data at slave underrun condition
+  [then]
+
+
+  [ifdef] SPI_SPI_I2SCFGR_DEF
+    \
+    \ @brief SPI/I2S configuration register
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant SPI_I2SMOD                     \ [0x00] I2S mode selection
+    $01 constant SPI_I2SCFG                     \ [0x01 : 3] I2S configuration mode
+    $04 constant SPI_I2SSTD                     \ [0x04 : 2] Iless thansup>2less than/sup>S standard selection
+    $07 constant SPI_PCMSYNC                    \ [0x07] PCM frame synchronization
+    $08 constant SPI_DATLEN                     \ [0x08 : 2] data length to be transferred.
+    $0a constant SPI_CHLEN                      \ [0x0a] channel length (number of bits per audio channel)
+    $0b constant SPI_CKPOL                      \ [0x0b] serial audio clock polarity
+    $0c constant SPI_FIXCH                      \ [0x0c] fixed channel length in slave
+    $0d constant SPI_WSINV                      \ [0x0d] word select inversion
+    $0e constant SPI_DATFMT                     \ [0x0e] data format
+    $10 constant SPI_I2SDIV                     \ [0x10 : 8] Iless thansup>2less than/sup>S linear prescaler
+    $18 constant SPI_ODD                        \ [0x18] odd factor for the prescaler
+    $19 constant SPI_MCKOE                      \ [0x19] master clock output enable
+  [then]
+
+  \
+  \ @brief SPI address block description
+  \
+  $00 constant SPI_SPI_CR1              \ SPI/I2S control register 1
+  $04 constant SPI_SPI_CR2              \ SPI/I2S control register 2
+  $08 constant SPI_SPI_CFG1             \ SPI/I2S configuration register 1
+  $0C constant SPI_SPI_CFG2             \ SPI/I2S configuration register 2
+  $10 constant SPI_SPI_IER              \ SPI/I2S interrupt enable register
+  $14 constant SPI_SPI_SR               \ SPI/I2S status register
+  $18 constant SPI_SPI_IFCR             \ SPI/I2S interrupt/status flags clear register
+  $20 constant SPI_SPI_TXDR             \ /I2SSPI/I2S transmit data register
+  $30 constant SPI_SPI_RXDR             \ SPI/I2S receive data register
+  $40 constant SPI_SPI_CRCPOLY          \ SPI/I2S polynomial register
+  $44 constant SPI_SPI_TXCRC            \ SPI/I2S transmitter CRC register
+  $48 constant SPI_SPI_RXCRC            \ SPI/I2S receiver CRC register
+  $4C constant SPI_SPI_UDRDR            \ SPI underrun data register
+  $50 constant SPI_SPI_I2SCFGR          \ SPI/I2S configuration register
+
+: SPI_DEF ; [then]

@@ -6,78 +6,81 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] TZIC_DEF
 
-\
-\ @brief TZIC interrupt enable register 1
-\ Address offset: 0x00
-\ Reset value: 0xFFFFFFFF
-\
-
-$00000001 constant TZIC_IER1_TZICIE                                 \ TZICIE
-$00000002 constant TZIC_IER1_TZSCIE                                 \ TZSCIE
-$00000004 constant TZIC_IER1_AESIE                                  \ AESIE
-$00000008 constant TZIC_IER1_RNGIE                                  \ RNGIE
-$00000010 constant TZIC_IER1_SUBGHZSPIIE                            \ SUBGHZSPIIE
-$00000020 constant TZIC_IER1_PWRIE                                  \ PWRIE
-$00000040 constant TZIC_IER1_FLASHIFIE                              \ FLASHIFIE
-$00000080 constant TZIC_IER1_DMA1IE                                 \ DMA1IE
-$00000100 constant TZIC_IER1_DMA2IE                                 \ DMA2IE
-$00000200 constant TZIC_IER1_DMAMUX1IE                              \ DMAMUX1IE
-$00000400 constant TZIC_IER1_FLASHIE                                \ FLASHIE
-$00000800 constant TZIC_IER1_SRAM1IE                                \ SRAM1IE
-$00001000 constant TZIC_IER1_SRAM2IE                                \ SRAM2IE
-$00002000 constant TZIC_IER1_PKAIE                                  \ PKAIE
-
-
-\
-\ @brief TZIC status register 1
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant TZIC_MISR1_TZICMF                                \ TZICMF
-$00000002 constant TZIC_MISR1_TZSCMF                                \ TZSCMF
-$00000004 constant TZIC_MISR1_AESMF                                 \ AESMF
-$00000008 constant TZIC_MISR1_RNGMF                                 \ RNGMF
-$00000010 constant TZIC_MISR1_SUBGHZSPIMF                           \ SUBGHZSPIMF
-$00000020 constant TZIC_MISR1_PWRMF                                 \ PWRMF
-$00000040 constant TZIC_MISR1_FLASHIFMF                             \ FLASHIFMF
-$00000080 constant TZIC_MISR1_DMA1MF                                \ DMA1MF
-$00000100 constant TZIC_MISR1_DMA2MF                                \ DMA2MF
-$00000200 constant TZIC_MISR1_DMAMUX1MF                             \ DMAMUX1MF
-$00000400 constant TZIC_MISR1_FLASHMF                               \ FLASHMF
-$00000800 constant TZIC_MISR1_SRAM1MF                               \ SRAM1MF
-$00001000 constant TZIC_MISR1_SRAM2MF                               \ SRAM2MF
-$00002000 constant TZIC_MISR1_PKAMF                                 \ PKAMF
+  [ifdef] TZIC_IER1_DEF
+    \
+    \ @brief TZIC interrupt enable register 1
+    \ Address offset: 0x00
+    \ Reset value: 0xFFFFFFFF
+    \
+    $00 constant TZIC_TZICIE                    \ [0x00] TZICIE
+    $01 constant TZIC_TZSCIE                    \ [0x01] TZSCIE
+    $02 constant TZIC_AESIE                     \ [0x02] AESIE
+    $03 constant TZIC_RNGIE                     \ [0x03] RNGIE
+    $04 constant TZIC_SUBGHZSPIIE               \ [0x04] SUBGHZSPIIE
+    $05 constant TZIC_PWRIE                     \ [0x05] PWRIE
+    $06 constant TZIC_FLASHIFIE                 \ [0x06] FLASHIFIE
+    $07 constant TZIC_DMA1IE                    \ [0x07] DMA1IE
+    $08 constant TZIC_DMA2IE                    \ [0x08] DMA2IE
+    $09 constant TZIC_DMAMUX1IE                 \ [0x09] DMAMUX1IE
+    $0a constant TZIC_FLASHIE                   \ [0x0a] FLASHIE
+    $0b constant TZIC_SRAM1IE                   \ [0x0b] SRAM1IE
+    $0c constant TZIC_SRAM2IE                   \ [0x0c] SRAM2IE
+    $0d constant TZIC_PKAIE                     \ [0x0d] PKAIE
+  [then]
 
 
-\
-\ @brief TZIC interrupt status clear register 1
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
+  [ifdef] TZIC_MISR1_DEF
+    \
+    \ @brief TZIC status register 1
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant TZIC_TZICMF                    \ [0x00] TZICMF
+    $01 constant TZIC_TZSCMF                    \ [0x01] TZSCMF
+    $02 constant TZIC_AESMF                     \ [0x02] AESMF
+    $03 constant TZIC_RNGMF                     \ [0x03] RNGMF
+    $04 constant TZIC_SUBGHZSPIMF               \ [0x04] SUBGHZSPIMF
+    $05 constant TZIC_PWRMF                     \ [0x05] PWRMF
+    $06 constant TZIC_FLASHIFMF                 \ [0x06] FLASHIFMF
+    $07 constant TZIC_DMA1MF                    \ [0x07] DMA1MF
+    $08 constant TZIC_DMA2MF                    \ [0x08] DMA2MF
+    $09 constant TZIC_DMAMUX1MF                 \ [0x09] DMAMUX1MF
+    $0a constant TZIC_FLASHMF                   \ [0x0a] FLASHMF
+    $0b constant TZIC_SRAM1MF                   \ [0x0b] SRAM1MF
+    $0c constant TZIC_SRAM2MF                   \ [0x0c] SRAM2MF
+    $0d constant TZIC_PKAMF                     \ [0x0d] PKAMF
+  [then]
 
-$00000001 constant TZIC_ICR1_TZICCF                                 \ TZICCF
-$00000002 constant TZIC_ICR1_TZSCCF                                 \ TZSCCF
-$00000004 constant TZIC_ICR1_AESCF                                  \ AESCF
-$00000008 constant TZIC_ICR1_RNGCF                                  \ RNGCF
-$00000010 constant TZIC_ICR1_SUBGHZSPICF                            \ SUBGHZSPICF
-$00000020 constant TZIC_ICR1_PWRCF                                  \ PWRCF
-$00000040 constant TZIC_ICR1_FLASHIFCF                              \ FLASHIFCF
-$00000080 constant TZIC_ICR1_DMA1CF                                 \ DMA1CF
-$00000100 constant TZIC_ICR1_DMA2CF                                 \ DMA2CF
-$00000200 constant TZIC_ICR1_DMAMUX1CF                              \ DMAMUX1CF
-$00000400 constant TZIC_ICR1_FLASHCF                                \ FLASHCF
-$00000800 constant TZIC_ICR1_SRAM1CF                                \ SRAM1CF
-$00001000 constant TZIC_ICR1_SRAM2CF                                \ SRAM2CF
-$00002000 constant TZIC_ICR1_PKACF                                  \ PKACF
 
+  [ifdef] TZIC_ICR1_DEF
+    \
+    \ @brief TZIC interrupt status clear register 1
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant TZIC_TZICCF                    \ [0x00] TZICCF
+    $01 constant TZIC_TZSCCF                    \ [0x01] TZSCCF
+    $02 constant TZIC_AESCF                     \ [0x02] AESCF
+    $03 constant TZIC_RNGCF                     \ [0x03] RNGCF
+    $04 constant TZIC_SUBGHZSPICF               \ [0x04] SUBGHZSPICF
+    $05 constant TZIC_PWRCF                     \ [0x05] PWRCF
+    $06 constant TZIC_FLASHIFCF                 \ [0x06] FLASHIFCF
+    $07 constant TZIC_DMA1CF                    \ [0x07] DMA1CF
+    $08 constant TZIC_DMA2CF                    \ [0x08] DMA2CF
+    $09 constant TZIC_DMAMUX1CF                 \ [0x09] DMAMUX1CF
+    $0a constant TZIC_FLASHCF                   \ [0x0a] FLASHCF
+    $0b constant TZIC_SRAM1CF                   \ [0x0b] SRAM1CF
+    $0c constant TZIC_SRAM2CF                   \ [0x0c] SRAM2CF
+    $0d constant TZIC_PKACF                     \ [0x0d] PKACF
+  [then]
 
-\
-\ @brief TrustZone Interrupt Control
-\
-$58004800 constant TZIC_IER1      \ offset: 0x00 : TZIC interrupt enable register 1
-$58004810 constant TZIC_MISR1     \ offset: 0x10 : TZIC status register 1
-$58004820 constant TZIC_ICR1      \ offset: 0x20 : TZIC interrupt status clear register 1
+  \
+  \ @brief TrustZone Interrupt Control
+  \
+  $00 constant TZIC_IER1                \ TZIC interrupt enable register 1
+  $10 constant TZIC_MISR1               \ TZIC status register 1
+  $20 constant TZIC_ICR1                \ TZIC interrupt status clear register 1
 
+: TZIC_DEF ; [then]

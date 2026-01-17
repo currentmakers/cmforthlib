@@ -6,79 +6,83 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] ADC_COMMON_DEF
 
-\
-\ @brief ADC Common status register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant ADC_COMMON_CSR_ADDRDY_MST                        \ ADDRDY_MST
-$00000002 constant ADC_COMMON_CSR_EOSMP_MST                         \ EOSMP_MST
-$00000004 constant ADC_COMMON_CSR_EOC_MST                           \ EOC_MST
-$00000008 constant ADC_COMMON_CSR_EOS_MST                           \ EOS_MST
-$00000010 constant ADC_COMMON_CSR_OVR_MST                           \ OVR_MST
-$00000020 constant ADC_COMMON_CSR_JEOC_MST                          \ JEOC_MST
-$00000040 constant ADC_COMMON_CSR_JEOS_MST                          \ JEOS_MST
-$00000080 constant ADC_COMMON_CSR_AWD1_MST                          \ AWD1_MST
-$00000100 constant ADC_COMMON_CSR_AWD2_MST                          \ AWD2_MST
-$00000200 constant ADC_COMMON_CSR_AWD3_MST                          \ AWD3_MST
-$00000400 constant ADC_COMMON_CSR_JQOVF_MST                         \ JQOVF_MST
-$00010000 constant ADC_COMMON_CSR_ADRDY_SLV                         \ ADRDY_SLV
-$00020000 constant ADC_COMMON_CSR_EOSMP_SLV                         \ EOSMP_SLV
-$00040000 constant ADC_COMMON_CSR_EOC_SLV                           \ EOC_SLV
-$00080000 constant ADC_COMMON_CSR_EOS_SLV                           \ EOS_SLV
-$00100000 constant ADC_COMMON_CSR_OVR_SLV                           \ OVR_SLV
-$00200000 constant ADC_COMMON_CSR_JEOC_SLV                          \ JEOC_SLV
-$00400000 constant ADC_COMMON_CSR_JEOS_SLV                          \ JEOS_SLV
-$00800000 constant ADC_COMMON_CSR_AWD1_SLV                          \ AWD1_SLV
-$01000000 constant ADC_COMMON_CSR_AWD2_SLV                          \ AWD2_SLV
-$02000000 constant ADC_COMMON_CSR_AWD3_SLV                          \ AWD3_SLV
-$04000000 constant ADC_COMMON_CSR_JQOVF_SLV                         \ JQOVF_SLV
-
-
-\
-\ @brief ADC common control register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000001f constant ADC_COMMON_CCR_DUAL                              \ DUAL
-$00000700 constant ADC_COMMON_CCR_DELAY                             \ DELAY
-$00002000 constant ADC_COMMON_CCR_DMACFG                            \ DMACFG
-$0000c000 constant ADC_COMMON_CCR_MDMA                              \ MDMA
-$00030000 constant ADC_COMMON_CCR_CKMODE                            \ ADC clock mode
-$003c0000 constant ADC_COMMON_CCR_PRESC                             \ ADC prescaler
-$00400000 constant ADC_COMMON_CCR_VREFEN                            \ VREFINT enable
-$00800000 constant ADC_COMMON_CCR_CH17SEL                           \ CH17SEL
-$01000000 constant ADC_COMMON_CCR_CH18SEL                           \ CH18SEL
+  [ifdef] ADC_COMMON_CSR_DEF
+    \
+    \ @brief ADC Common status register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_COMMON_ADDRDY_MST          \ [0x00] ADDRDY_MST
+    $01 constant ADC_COMMON_EOSMP_MST           \ [0x01] EOSMP_MST
+    $02 constant ADC_COMMON_EOC_MST             \ [0x02] EOC_MST
+    $03 constant ADC_COMMON_EOS_MST             \ [0x03] EOS_MST
+    $04 constant ADC_COMMON_OVR_MST             \ [0x04] OVR_MST
+    $05 constant ADC_COMMON_JEOC_MST            \ [0x05] JEOC_MST
+    $06 constant ADC_COMMON_JEOS_MST            \ [0x06] JEOS_MST
+    $07 constant ADC_COMMON_AWD1_MST            \ [0x07] AWD1_MST
+    $08 constant ADC_COMMON_AWD2_MST            \ [0x08] AWD2_MST
+    $09 constant ADC_COMMON_AWD3_MST            \ [0x09] AWD3_MST
+    $0a constant ADC_COMMON_JQOVF_MST           \ [0x0a] JQOVF_MST
+    $10 constant ADC_COMMON_ADRDY_SLV           \ [0x10] ADRDY_SLV
+    $11 constant ADC_COMMON_EOSMP_SLV           \ [0x11] EOSMP_SLV
+    $12 constant ADC_COMMON_EOC_SLV             \ [0x12] EOC_SLV
+    $13 constant ADC_COMMON_EOS_SLV             \ [0x13] EOS_SLV
+    $14 constant ADC_COMMON_OVR_SLV             \ [0x14] OVR_SLV
+    $15 constant ADC_COMMON_JEOC_SLV            \ [0x15] JEOC_SLV
+    $16 constant ADC_COMMON_JEOS_SLV            \ [0x16] JEOS_SLV
+    $17 constant ADC_COMMON_AWD1_SLV            \ [0x17] AWD1_SLV
+    $18 constant ADC_COMMON_AWD2_SLV            \ [0x18] AWD2_SLV
+    $19 constant ADC_COMMON_AWD3_SLV            \ [0x19] AWD3_SLV
+    $1a constant ADC_COMMON_JQOVF_SLV           \ [0x1a] JQOVF_SLV
+  [then]
 
 
-\
-\ @brief Common regular data register for dual mode
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
+  [ifdef] ADC_COMMON_CCR_DEF
+    \
+    \ @brief ADC common control register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_COMMON_DUAL                \ [0x00 : 5] DUAL
+    $08 constant ADC_COMMON_DELAY               \ [0x08 : 3] DELAY
+    $0d constant ADC_COMMON_DMACFG              \ [0x0d] DMACFG
+    $0e constant ADC_COMMON_MDMA                \ [0x0e : 2] MDMA
+    $10 constant ADC_COMMON_CKMODE              \ [0x10 : 2] ADC clock mode
+    $12 constant ADC_COMMON_PRESC               \ [0x12 : 4] ADC prescaler
+    $16 constant ADC_COMMON_VREFEN              \ [0x16] VREFINT enable
+    $17 constant ADC_COMMON_CH17SEL             \ [0x17] CH17SEL
+    $18 constant ADC_COMMON_CH18SEL             \ [0x18] CH18SEL
+  [then]
 
-$0000ffff constant ADC_COMMON_CDR_RDATA_MST                         \ RDATA_MST
-$ffff0000 constant ADC_COMMON_CDR_RDATA_SLV                         \ RDATA_SLV
+
+  [ifdef] ADC_COMMON_CDR_DEF
+    \
+    \ @brief Common regular data register for dual mode
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_COMMON_RDATA_MST           \ [0x00 : 16] RDATA_MST
+    $10 constant ADC_COMMON_RDATA_SLV           \ [0x10 : 16] RDATA_SLV
+  [then]
 
 
-\
-\ @brief Common regular data register for dual mode
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
+  [ifdef] ADC_COMMON_CDR2_DEF
+    \
+    \ @brief Common regular data register for dual mode
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant ADC_COMMON_RDATA_ALT           \ [0x00 : 32] RDATA_ALT
+  [then]
 
-$00000000 constant ADC_COMMON_CDR2_RDATA_ALT                        \ RDATA_ALT
+  \
+  \ @brief Analog-to-Digital Converter
+  \
+  $00 constant ADC_COMMON_CSR           \ ADC Common status register
+  $08 constant ADC_COMMON_CCR           \ ADC common control register
+  $0C constant ADC_COMMON_CDR           \ Common regular data register for dual mode
+  $10 constant ADC_COMMON_CDR2          \ Common regular data register for dual mode
 
-
-\
-\ @brief Analog-to-Digital Converter
-\
-$48003300 constant ADC_COMMON_CSR  \ offset: 0x00 : ADC Common status register
-$48003308 constant ADC_COMMON_CCR  \ offset: 0x08 : ADC common control register
-$4800330c constant ADC_COMMON_CDR  \ offset: 0x0C : Common regular data register for dual mode
-$48003310 constant ADC_COMMON_CDR2  \ offset: 0x10 : Common regular data register for dual mode
-
+: ADC_COMMON_DEF ; [then]

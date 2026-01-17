@@ -6,135 +6,140 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] LPGPIO1_DEF
 
-\
-\ @brief LPGPIO port mode register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPGPIO1_LPGPIO_MODER_MODE0                       \ MODE0
-$00000002 constant LPGPIO1_LPGPIO_MODER_MODE1                       \ MODE1
-$00000004 constant LPGPIO1_LPGPIO_MODER_MODE2                       \ MODE2
-$00000008 constant LPGPIO1_LPGPIO_MODER_MODE3                       \ MODE3
-$00000010 constant LPGPIO1_LPGPIO_MODER_MODE4                       \ MODE4
-$00000020 constant LPGPIO1_LPGPIO_MODER_MODE5                       \ MODE5
-$00000040 constant LPGPIO1_LPGPIO_MODER_MODE6                       \ MODE6
-$00000080 constant LPGPIO1_LPGPIO_MODER_MODE7                       \ MODE7
-$00000100 constant LPGPIO1_LPGPIO_MODER_MODE8                       \ MODE8
-$00000200 constant LPGPIO1_LPGPIO_MODER_MODE9                       \ MODE9
-$00000400 constant LPGPIO1_LPGPIO_MODER_MODE10                      \ MODE10
-$00000800 constant LPGPIO1_LPGPIO_MODER_MODE11                      \ MODE11
-$00001000 constant LPGPIO1_LPGPIO_MODER_MODE12                      \ MODE12
-$00002000 constant LPGPIO1_LPGPIO_MODER_MODE13                      \ MODE13
-$00004000 constant LPGPIO1_LPGPIO_MODER_MODE14                      \ MODE14
-$00008000 constant LPGPIO1_LPGPIO_MODER_MODE15                      \ MODE15
-
-
-\
-\ @brief LPGPIO port input data register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant LPGPIO1_LPGPIO_IDR_IDY                           \ IDy
+  [ifdef] LPGPIO1_LPGPIO_MODER_DEF
+    \
+    \ @brief LPGPIO port mode register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPGPIO1_MODE0                  \ [0x00] MODE0
+    $01 constant LPGPIO1_MODE1                  \ [0x01] MODE1
+    $02 constant LPGPIO1_MODE2                  \ [0x02] MODE2
+    $03 constant LPGPIO1_MODE3                  \ [0x03] MODE3
+    $04 constant LPGPIO1_MODE4                  \ [0x04] MODE4
+    $05 constant LPGPIO1_MODE5                  \ [0x05] MODE5
+    $06 constant LPGPIO1_MODE6                  \ [0x06] MODE6
+    $07 constant LPGPIO1_MODE7                  \ [0x07] MODE7
+    $08 constant LPGPIO1_MODE8                  \ [0x08] MODE8
+    $09 constant LPGPIO1_MODE9                  \ [0x09] MODE9
+    $0a constant LPGPIO1_MODE10                 \ [0x0a] MODE10
+    $0b constant LPGPIO1_MODE11                 \ [0x0b] MODE11
+    $0c constant LPGPIO1_MODE12                 \ [0x0c] MODE12
+    $0d constant LPGPIO1_MODE13                 \ [0x0d] MODE13
+    $0e constant LPGPIO1_MODE14                 \ [0x0e] MODE14
+    $0f constant LPGPIO1_MODE15                 \ [0x0f] MODE15
+  [then]
 
 
-\
-\ @brief LPGPIO port output data register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPGPIO1_LPGPIO_ODR_ODY0                          \ ODy0
-$00000002 constant LPGPIO1_LPGPIO_ODR_ODY1                          \ ODy1
-$00000004 constant LPGPIO1_LPGPIO_ODR_ODY2                          \ ODy2
-$00000008 constant LPGPIO1_LPGPIO_ODR_ODY3                          \ ODy3
-$00000010 constant LPGPIO1_LPGPIO_ODR_ODY4                          \ ODy4
-$00000020 constant LPGPIO1_LPGPIO_ODR_ODY5                          \ ODy5
-$00000040 constant LPGPIO1_LPGPIO_ODR_ODY6                          \ ODy6
-$00000080 constant LPGPIO1_LPGPIO_ODR_ODY7                          \ ODy7
-$00000100 constant LPGPIO1_LPGPIO_ODR_ODY8                          \ ODy8
-$00000200 constant LPGPIO1_LPGPIO_ODR_ODY9                          \ ODy9
-$00000400 constant LPGPIO1_LPGPIO_ODR_ODY10                         \ ODy10
-$00000800 constant LPGPIO1_LPGPIO_ODR_ODY11                         \ ODy11
-$00001000 constant LPGPIO1_LPGPIO_ODR_ODY12                         \ ODy12
-$00002000 constant LPGPIO1_LPGPIO_ODR_ODY13                         \ ODy13
-$00004000 constant LPGPIO1_LPGPIO_ODR_ODY14                         \ ODy14
-$00008000 constant LPGPIO1_LPGPIO_ODR_ODY15                         \ ODy15
+  [ifdef] LPGPIO1_LPGPIO_IDR_DEF
+    \
+    \ @brief LPGPIO port input data register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPGPIO1_IDy                    \ [0x00 : 16] IDy
+  [then]
 
 
-\
-\ @brief LPGPIO port bit set/reset register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000001 constant LPGPIO1_LPGPIO_BSRR_BSY0                         \ BSy0
-$00000002 constant LPGPIO1_LPGPIO_BSRR_BSY1                         \ BSy1
-$00000004 constant LPGPIO1_LPGPIO_BSRR_BSY2                         \ BSy2
-$00000008 constant LPGPIO1_LPGPIO_BSRR_BSY3                         \ BSy3
-$00000010 constant LPGPIO1_LPGPIO_BSRR_BSY4                         \ BSy4
-$00000020 constant LPGPIO1_LPGPIO_BSRR_BSY5                         \ BSy5
-$00000040 constant LPGPIO1_LPGPIO_BSRR_BSY6                         \ BSy6
-$00000080 constant LPGPIO1_LPGPIO_BSRR_BSY7                         \ BSy7
-$00000100 constant LPGPIO1_LPGPIO_BSRR_BSY8                         \ BSy8
-$00000200 constant LPGPIO1_LPGPIO_BSRR_BSY9                         \ BSy9
-$00000400 constant LPGPIO1_LPGPIO_BSRR_BSY10                        \ BSy10
-$00000800 constant LPGPIO1_LPGPIO_BSRR_BSY11                        \ BSy11
-$00001000 constant LPGPIO1_LPGPIO_BSRR_BSY12                        \ BSy12
-$00002000 constant LPGPIO1_LPGPIO_BSRR_BSY13                        \ BSy13
-$00004000 constant LPGPIO1_LPGPIO_BSRR_BSY14                        \ BSy14
-$00008000 constant LPGPIO1_LPGPIO_BSRR_BSY15                        \ BSy15
-$00010000 constant LPGPIO1_LPGPIO_BSRR_BRY16                        \ BRy16
-$00020000 constant LPGPIO1_LPGPIO_BSRR_BRY17                        \ BRy17
-$00040000 constant LPGPIO1_LPGPIO_BSRR_BRY18                        \ BRy18
-$00080000 constant LPGPIO1_LPGPIO_BSRR_BRY19                        \ BRy19
-$00100000 constant LPGPIO1_LPGPIO_BSRR_BRY20                        \ BRy20
-$00200000 constant LPGPIO1_LPGPIO_BSRR_BRY21                        \ BRy21
-$00400000 constant LPGPIO1_LPGPIO_BSRR_BRY22                        \ BRy22
-$00800000 constant LPGPIO1_LPGPIO_BSRR_BRY23                        \ BRy23
-$01000000 constant LPGPIO1_LPGPIO_BSRR_BRY24                        \ BRy24
-$02000000 constant LPGPIO1_LPGPIO_BSRR_BRY25                        \ BRy25
-$04000000 constant LPGPIO1_LPGPIO_BSRR_BRY26                        \ BRy26
-$08000000 constant LPGPIO1_LPGPIO_BSRR_BRY27                        \ BRy27
-$10000000 constant LPGPIO1_LPGPIO_BSRR_BRY28                        \ BRy28
-$20000000 constant LPGPIO1_LPGPIO_BSRR_BRY29                        \ BRy29
-$40000000 constant LPGPIO1_LPGPIO_BSRR_BRY30                        \ BRy30
-$80000000 constant LPGPIO1_LPGPIO_BSRR_BRY31                        \ BRy31
+  [ifdef] LPGPIO1_LPGPIO_ODR_DEF
+    \
+    \ @brief LPGPIO port output data register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPGPIO1_ODy0                   \ [0x00] ODy0
+    $01 constant LPGPIO1_ODy1                   \ [0x01] ODy1
+    $02 constant LPGPIO1_ODy2                   \ [0x02] ODy2
+    $03 constant LPGPIO1_ODy3                   \ [0x03] ODy3
+    $04 constant LPGPIO1_ODy4                   \ [0x04] ODy4
+    $05 constant LPGPIO1_ODy5                   \ [0x05] ODy5
+    $06 constant LPGPIO1_ODy6                   \ [0x06] ODy6
+    $07 constant LPGPIO1_ODy7                   \ [0x07] ODy7
+    $08 constant LPGPIO1_ODy8                   \ [0x08] ODy8
+    $09 constant LPGPIO1_ODy9                   \ [0x09] ODy9
+    $0a constant LPGPIO1_ODy10                  \ [0x0a] ODy10
+    $0b constant LPGPIO1_ODy11                  \ [0x0b] ODy11
+    $0c constant LPGPIO1_ODy12                  \ [0x0c] ODy12
+    $0d constant LPGPIO1_ODy13                  \ [0x0d] ODy13
+    $0e constant LPGPIO1_ODy14                  \ [0x0e] ODy14
+    $0f constant LPGPIO1_ODy15                  \ [0x0f] ODy15
+  [then]
 
 
-\
-\ @brief LPGPIO port bit reset register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
+  [ifdef] LPGPIO1_LPGPIO_BSRR_DEF
+    \
+    \ @brief LPGPIO port bit set/reset register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPGPIO1_BSy0                   \ [0x00] BSy0
+    $01 constant LPGPIO1_BSy1                   \ [0x01] BSy1
+    $02 constant LPGPIO1_BSy2                   \ [0x02] BSy2
+    $03 constant LPGPIO1_BSy3                   \ [0x03] BSy3
+    $04 constant LPGPIO1_BSy4                   \ [0x04] BSy4
+    $05 constant LPGPIO1_BSy5                   \ [0x05] BSy5
+    $06 constant LPGPIO1_BSy6                   \ [0x06] BSy6
+    $07 constant LPGPIO1_BSy7                   \ [0x07] BSy7
+    $08 constant LPGPIO1_BSy8                   \ [0x08] BSy8
+    $09 constant LPGPIO1_BSy9                   \ [0x09] BSy9
+    $0a constant LPGPIO1_BSy10                  \ [0x0a] BSy10
+    $0b constant LPGPIO1_BSy11                  \ [0x0b] BSy11
+    $0c constant LPGPIO1_BSy12                  \ [0x0c] BSy12
+    $0d constant LPGPIO1_BSy13                  \ [0x0d] BSy13
+    $0e constant LPGPIO1_BSy14                  \ [0x0e] BSy14
+    $0f constant LPGPIO1_BSy15                  \ [0x0f] BSy15
+    $10 constant LPGPIO1_BRy16                  \ [0x10] BRy16
+    $11 constant LPGPIO1_BRy17                  \ [0x11] BRy17
+    $12 constant LPGPIO1_BRy18                  \ [0x12] BRy18
+    $13 constant LPGPIO1_BRy19                  \ [0x13] BRy19
+    $14 constant LPGPIO1_BRy20                  \ [0x14] BRy20
+    $15 constant LPGPIO1_BRy21                  \ [0x15] BRy21
+    $16 constant LPGPIO1_BRy22                  \ [0x16] BRy22
+    $17 constant LPGPIO1_BRy23                  \ [0x17] BRy23
+    $18 constant LPGPIO1_BRy24                  \ [0x18] BRy24
+    $19 constant LPGPIO1_BRy25                  \ [0x19] BRy25
+    $1a constant LPGPIO1_BRy26                  \ [0x1a] BRy26
+    $1b constant LPGPIO1_BRy27                  \ [0x1b] BRy27
+    $1c constant LPGPIO1_BRy28                  \ [0x1c] BRy28
+    $1d constant LPGPIO1_BRy29                  \ [0x1d] BRy29
+    $1e constant LPGPIO1_BRy30                  \ [0x1e] BRy30
+    $1f constant LPGPIO1_BRy31                  \ [0x1f] BRy31
+  [then]
 
-$00000001 constant LPGPIO1_LPGPIO_BRR_BRY0                          \ BRy0
-$00000002 constant LPGPIO1_LPGPIO_BRR_BRY1                          \ BRy1
-$00000004 constant LPGPIO1_LPGPIO_BRR_BRY2                          \ BRy2
-$00000008 constant LPGPIO1_LPGPIO_BRR_BRY3                          \ BRy3
-$00000010 constant LPGPIO1_LPGPIO_BRR_BRY4                          \ BRy4
-$00000020 constant LPGPIO1_LPGPIO_BRR_BRY5                          \ BRy5
-$00000040 constant LPGPIO1_LPGPIO_BRR_BRY6                          \ BRy6
-$00000080 constant LPGPIO1_LPGPIO_BRR_BRY7                          \ BRy7
-$00000100 constant LPGPIO1_LPGPIO_BRR_BRY8                          \ BRy8
-$00000200 constant LPGPIO1_LPGPIO_BRR_BRY9                          \ BRy9
-$00000400 constant LPGPIO1_LPGPIO_BRR_BRY10                         \ BRy10
-$00000800 constant LPGPIO1_LPGPIO_BRR_BRY11                         \ BRy11
-$00001000 constant LPGPIO1_LPGPIO_BRR_BRY12                         \ BRy12
-$00002000 constant LPGPIO1_LPGPIO_BRR_BRY13                         \ BRy13
-$00004000 constant LPGPIO1_LPGPIO_BRR_BRY14                         \ BRy14
-$00008000 constant LPGPIO1_LPGPIO_BRR_BRY15                         \ BRy15
 
+  [ifdef] LPGPIO1_LPGPIO_BRR_DEF
+    \
+    \ @brief LPGPIO port bit reset register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant LPGPIO1_BRy0                   \ [0x00] BRy0
+    $01 constant LPGPIO1_BRy1                   \ [0x01] BRy1
+    $02 constant LPGPIO1_BRy2                   \ [0x02] BRy2
+    $03 constant LPGPIO1_BRy3                   \ [0x03] BRy3
+    $04 constant LPGPIO1_BRy4                   \ [0x04] BRy4
+    $05 constant LPGPIO1_BRy5                   \ [0x05] BRy5
+    $06 constant LPGPIO1_BRy6                   \ [0x06] BRy6
+    $07 constant LPGPIO1_BRy7                   \ [0x07] BRy7
+    $08 constant LPGPIO1_BRy8                   \ [0x08] BRy8
+    $09 constant LPGPIO1_BRy9                   \ [0x09] BRy9
+    $0a constant LPGPIO1_BRy10                  \ [0x0a] BRy10
+    $0b constant LPGPIO1_BRy11                  \ [0x0b] BRy11
+    $0c constant LPGPIO1_BRy12                  \ [0x0c] BRy12
+    $0d constant LPGPIO1_BRy13                  \ [0x0d] BRy13
+    $0e constant LPGPIO1_BRy14                  \ [0x0e] BRy14
+    $0f constant LPGPIO1_BRy15                  \ [0x0f] BRy15
+  [then]
 
-\
-\ @brief LPGPIO1
-\
-$46020000 constant LPGPIO1_LPGPIO_MODER  \ offset: 0x00 : LPGPIO port mode register
-$46020010 constant LPGPIO1_LPGPIO_IDR  \ offset: 0x10 : LPGPIO port input data register
-$46020014 constant LPGPIO1_LPGPIO_ODR  \ offset: 0x14 : LPGPIO port output data register
-$46020018 constant LPGPIO1_LPGPIO_BSRR  \ offset: 0x18 : LPGPIO port bit set/reset register
-$46020028 constant LPGPIO1_LPGPIO_BRR  \ offset: 0x28 : LPGPIO port bit reset register
+  \
+  \ @brief LPGPIO1
+  \
+  $00 constant LPGPIO1_LPGPIO_MODER     \ LPGPIO port mode register
+  $10 constant LPGPIO1_LPGPIO_IDR       \ LPGPIO port input data register
+  $14 constant LPGPIO1_LPGPIO_ODR       \ LPGPIO port output data register
+  $18 constant LPGPIO1_LPGPIO_BSRR      \ LPGPIO port bit set/reset register
+  $28 constant LPGPIO1_LPGPIO_BRR       \ LPGPIO port bit reset register
 
+: LPGPIO1_DEF ; [then]

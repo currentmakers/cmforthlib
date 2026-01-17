@@ -6,19 +6,20 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] FPU_CPACR_DEF
 
-\
-\ @brief Coprocessor access control register
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
+  [ifdef] FPU_CPACR_CPACR_DEF
+    \
+    \ @brief Coprocessor access control register
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $14 constant FPU_CPACR_CP                   \ [0x14 : 4] CP
+  [then]
 
-$00f00000 constant FPU_CPACR_CPACR_CP                               \ CP
+  \
+  \ @brief Floating point unit CPACR
+  \
+  $00 constant FPU_CPACR_CPACR          \ Coprocessor access control register
 
-
-\
-\ @brief Floating point unit CPACR
-\
-$e000ed88 constant FPU_CPACR_CPACR  \ offset: 0x00 : Coprocessor access control register
-
+: FPU_CPACR_DEF ; [then]

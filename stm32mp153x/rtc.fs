@@ -6,400 +6,427 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
-
-\
-\ @brief The RTC_TR is the calendar time shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page1830 and Reading the calendar on page1831. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_RTC_TR_SU                                    \ SU
-$00000070 constant RTC_RTC_TR_ST                                    \ ST
-$00000f00 constant RTC_RTC_TR_MNU                                   \ MNU
-$00007000 constant RTC_RTC_TR_MNT                                   \ MNT
-$000f0000 constant RTC_RTC_TR_HU                                    \ HU
-$00300000 constant RTC_RTC_TR_HT                                    \ HT
-$00400000 constant RTC_RTC_TR_PM                                    \ PM
-
-
-\
-\ @brief The RTC_DR is the calendar date shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page1830 and Reading the calendar on page1831. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x04
-\ Reset value: 0x00002101
-\
-
-$0000000f constant RTC_RTC_DR_DU                                    \ DU
-$00000030 constant RTC_RTC_DR_DT                                    \ DT
-$00000f00 constant RTC_RTC_DR_MU                                    \ MU
-$00001000 constant RTC_RTC_DR_MT                                    \ MT
-$0000e000 constant RTC_RTC_DR_WDU                                   \ WDU
-$000f0000 constant RTC_RTC_DR_YU                                    \ YU
-$00f00000 constant RTC_RTC_DR_YT                                    \ YT
-
-
-\
-\ @brief RTC sub second register
-\ Address offset: 0x08
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant RTC_RTC_SSR_SS                                   \ SS
-
-
-\
-\ @brief This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be globally protected, or each bit of this register can be individually protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x0C
-\ Reset value: 0x00000007
-\
-
-$00000001 constant RTC_RTC_ICSR_ALRAWF                              \ ALRAWF
-$00000002 constant RTC_RTC_ICSR_ALRBWF                              \ ALRBWF
-$00000004 constant RTC_RTC_ICSR_WUTWF                               \ WUTWF
-$00000008 constant RTC_RTC_ICSR_SHPF                                \ SHPF
-$00000010 constant RTC_RTC_ICSR_INITS                               \ INITS
-$00000020 constant RTC_RTC_ICSR_RSF                                 \ RSF
-$00000040 constant RTC_RTC_ICSR_INITF                               \ INITF
-$00000080 constant RTC_RTC_ICSR_INIT                                \ INIT
-$00010000 constant RTC_RTC_ICSR_RECALPF                             \ RECALPF
-
-
-\
-\ @brief This register must be written in initialization mode only. The initialization must be performed in two separate write accesses. Refer to Calendar initialization and configuration on page1830. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x10
-\ Reset value: 0x007F00FF
-\
-
-$00007fff constant RTC_RTC_PRER_PREDIV_S                            \ PREDIV_S
-$007f0000 constant RTC_RTC_PRER_PREDIV_A                            \ PREDIV_A
-
-
-\
-\ @brief This register can be written only when WUTWF is set to 1 in RTC_ICSR. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x14
-\ Reset value: 0x0000FFFF
-\
-
-$0000ffff constant RTC_RTC_WUTR_WUT                                 \ WUT
-
-
-\
-\ @brief This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be globally protected, or each bit of this register can be individually protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000007 constant RTC_RTC_CR_WUCKSEL                               \ WUCKSEL
-$00000008 constant RTC_RTC_CR_TSEDGE                                \ TSEDGE
-$00000010 constant RTC_RTC_CR_REFCKON                               \ REFCKON
-$00000020 constant RTC_RTC_CR_BYPSHAD                               \ BYPSHAD
-$00000040 constant RTC_RTC_CR_FMT                                   \ FMT
-$00000100 constant RTC_RTC_CR_ALRAE                                 \ ALRAE
-$00000200 constant RTC_RTC_CR_ALRBE                                 \ ALRBE
-$00000400 constant RTC_RTC_CR_WUTE                                  \ WUTE
-$00000800 constant RTC_RTC_CR_TSE                                   \ TSE
-$00001000 constant RTC_RTC_CR_ALRAIE                                \ ALRAIE
-$00002000 constant RTC_RTC_CR_ALRBIE                                \ ALRBIE
-$00004000 constant RTC_RTC_CR_WUTIE                                 \ WUTIE
-$00008000 constant RTC_RTC_CR_TSIE                                  \ TSIE
-$00010000 constant RTC_RTC_CR_ADD1H                                 \ ADD1H
-$00020000 constant RTC_RTC_CR_SUB1H                                 \ SUB1H
-$00040000 constant RTC_RTC_CR_BKP                                   \ BKP
-$00080000 constant RTC_RTC_CR_COSEL                                 \ COSEL
-$00100000 constant RTC_RTC_CR_POL                                   \ POL
-$00600000 constant RTC_RTC_CR_OSEL                                  \ OSEL
-$00800000 constant RTC_RTC_CR_COE                                   \ COE
-$01000000 constant RTC_RTC_CR_ITSE                                  \ ITSE
-$02000000 constant RTC_RTC_CR_TAMPTS                                \ TAMPTS
-$04000000 constant RTC_RTC_CR_TAMPOE                                \ TAMPOE
-$20000000 constant RTC_RTC_CR_TAMPALRM_PU                           \ TAMPALRM_PU
-$40000000 constant RTC_RTC_CR_TAMPALRM_TYPE                         \ TAMPALRM_TYPE
-$80000000 constant RTC_RTC_CR_OUT2EN                                \ OUT2EN
-
-
-\
-\ @brief This register can be written only when the APB access is secure.
-\ Address offset: 0x20
-\ Reset value: 0x0000E00F
-\
-
-$00000001 constant RTC_RTC_SMCR_ALRADPROT                           \ ALRADPROT
-$00000002 constant RTC_RTC_SMCR_ALRBDPROT                           \ ALRBDPROT
-$00000004 constant RTC_RTC_SMCR_WUTDPROT                            \ WUTDPROT
-$00000008 constant RTC_RTC_SMCR_TSDPROT                             \ TSDPROT
-$00002000 constant RTC_RTC_SMCR_CALDPROT                            \ CALDPROT
-$00004000 constant RTC_RTC_SMCR_INITDPROT                           \ INITDPROT
-$00008000 constant RTC_RTC_SMCR_DECPROT                             \ DECPROT
-
-
-\
-\ @brief RTC write protection register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000000ff constant RTC_RTC_WPR_KEY                                  \ KEY
-
-
-\
-\ @brief This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$000001ff constant RTC_RTC_CALR_CALM                                \ CALM
-$00002000 constant RTC_RTC_CALR_CALW16                              \ CALW16
-$00004000 constant RTC_RTC_CALR_CALW8                               \ CALW8
-$00008000 constant RTC_RTC_CALR_CALP                                \ CALP
-
-
-\
-\ @brief This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$00007fff constant RTC_RTC_SHIFTR_SUBFS                             \ SUBFS
-$80000000 constant RTC_RTC_SHIFTR_ADD1S                             \ ADD1S
-
-
-\
-\ @brief The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_RTC_TSTR_SU                                  \ SU
-$00000070 constant RTC_RTC_TSTR_ST                                  \ ST
-$00000f00 constant RTC_RTC_TSTR_MNU                                 \ MNU
-$00007000 constant RTC_RTC_TSTR_MNT                                 \ MNT
-$000f0000 constant RTC_RTC_TSTR_HU                                  \ HU
-$00300000 constant RTC_RTC_TSTR_HT                                  \ HT
-$00400000 constant RTC_RTC_TSTR_PM                                  \ PM
-
-
-\
-\ @brief The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_RTC_TSDR_DU                                  \ DU
-$00000030 constant RTC_RTC_TSDR_DT                                  \ DT
-$00000f00 constant RTC_RTC_TSDR_MU                                  \ MU
-$00001000 constant RTC_RTC_TSDR_MT                                  \ MT
-$0000e000 constant RTC_RTC_TSDR_WDU                                 \ WDU
-
-
-\
-\ @brief The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when the TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
-
-$0000ffff constant RTC_RTC_TSSSR_SS                                 \ SS
-
-
-\
-\ @brief This register can be written only when ALRAWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x40
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_RTC_ALRMAR_SU                                \ SU
-$00000070 constant RTC_RTC_ALRMAR_ST                                \ ST
-$00000080 constant RTC_RTC_ALRMAR_MSK1                              \ MSK1
-$00000f00 constant RTC_RTC_ALRMAR_MNU                               \ MNU
-$00007000 constant RTC_RTC_ALRMAR_MNT                               \ MNT
-$00008000 constant RTC_RTC_ALRMAR_MSK2                              \ MSK2
-$000f0000 constant RTC_RTC_ALRMAR_HU                                \ HU
-$00300000 constant RTC_RTC_ALRMAR_HT                                \ HT
-$00400000 constant RTC_RTC_ALRMAR_PM                                \ PM
-$00800000 constant RTC_RTC_ALRMAR_MSK3                              \ MSK3
-$0f000000 constant RTC_RTC_ALRMAR_DU                                \ DU
-$30000000 constant RTC_RTC_ALRMAR_DT                                \ DT
-$40000000 constant RTC_RTC_ALRMAR_WDSEL                             \ WDSEL
-$80000000 constant RTC_RTC_ALRMAR_MSK4                              \ MSK4
-
-
-\
-\ @brief This register can be written only when ALRAWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x44
-\ Reset value: 0x00000000
-\
-
-$00007fff constant RTC_RTC_ALRMASSR_SS                              \ SS
-$0f000000 constant RTC_RTC_ALRMASSR_MASKSS                          \ MASKSS
-
-
-\
-\ @brief This register can be written only when ALRBWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x48
-\ Reset value: 0x00000000
-\
-
-$0000000f constant RTC_RTC_ALRMBR_SU                                \ SU
-$00000070 constant RTC_RTC_ALRMBR_ST                                \ ST
-$00000080 constant RTC_RTC_ALRMBR_MSK1                              \ MSK1
-$00000f00 constant RTC_RTC_ALRMBR_MNU                               \ MNU
-$00007000 constant RTC_RTC_ALRMBR_MNT                               \ MNT
-$00008000 constant RTC_RTC_ALRMBR_MSK2                              \ MSK2
-$000f0000 constant RTC_RTC_ALRMBR_HU                                \ HU
-$00300000 constant RTC_RTC_ALRMBR_HT                                \ HT
-$00400000 constant RTC_RTC_ALRMBR_PM                                \ PM
-$00800000 constant RTC_RTC_ALRMBR_MSK3                              \ MSK3
-$0f000000 constant RTC_RTC_ALRMBR_DU                                \ DU
-$30000000 constant RTC_RTC_ALRMBR_DT                                \ DT
-$40000000 constant RTC_RTC_ALRMBR_WDSEL                             \ WDSEL
-$80000000 constant RTC_RTC_ALRMBR_MSK4                              \ MSK4
-
-
-\
-\ @brief This register can be written only when ALRBE is reset in RTC_CR register, or in initialization mode. This register is write protected.The write access procedure is described in Section: RTC register write protection. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x4C
-\ Reset value: 0x00000000
-\
-
-$00007fff constant RTC_RTC_ALRMBSSR_SS                              \ SS
-$0f000000 constant RTC_RTC_ALRMBSSR_MASKSS                          \ MASKSS
-
-
-\
-\ @brief This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x50
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RTC_RTC_SR_ALRAF                                 \ ALRAF
-$00000002 constant RTC_RTC_SR_ALRBF                                 \ ALRBF
-$00000004 constant RTC_RTC_SR_WUTF                                  \ WUTF
-$00000008 constant RTC_RTC_SR_TSF                                   \ TSF
-$00000010 constant RTC_RTC_SR_TSOVF                                 \ TSOVF
-$00000020 constant RTC_RTC_SR_ITSF                                  \ ITSF
-
-
-\
-\ @brief RTC non-secure masked interrupt status register
-\ Address offset: 0x54
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RTC_RTC_MISR_ALRAMF                              \ ALRAMF
-$00000002 constant RTC_RTC_MISR_ALRBMF                              \ ALRBMF
-$00000004 constant RTC_RTC_MISR_WUTMF                               \ WUTMF
-$00000008 constant RTC_RTC_MISR_TSMF                                \ TSMF
-$00000010 constant RTC_RTC_MISR_TSOVMF                              \ TSOVMF
-$00000020 constant RTC_RTC_MISR_ITSMF                               \ ITSMF
-
-
-\
-\ @brief This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x58
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RTC_RTC_SMISR_ALRAMF                             \ ALRAMF
-$00000002 constant RTC_RTC_SMISR_ALRBMF                             \ ALRBMF
-$00000004 constant RTC_RTC_SMISR_WUTMF                              \ WUTMF
-$00000008 constant RTC_RTC_SMISR_TSMF                               \ TSMF
-$00000010 constant RTC_RTC_SMISR_TSOVMF                             \ TSOVMF
-$00000020 constant RTC_RTC_SMISR_ITSMF                              \ ITSMF
-
-
-\
-\ @brief This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-\ Address offset: 0x5C
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RTC_RTC_SCR_CALRAF                               \ CALRAF
-$00000002 constant RTC_RTC_SCR_CALRBF                               \ CALRBF
-$00000004 constant RTC_RTC_SCR_CWUTF                                \ CWUTF
-$00000008 constant RTC_RTC_SCR_CTSF                                 \ CTSF
-$00000010 constant RTC_RTC_SCR_CTSOVF                               \ CTSOVF
-$00000020 constant RTC_RTC_SCR_CITSF                                \ CITSF
-
-
-\
-\ @brief RTC configuration register
-\ Address offset: 0x60
-\ Reset value: 0x00000000
-\
-
-$00000001 constant RTC_RTC_CFGR_OUT2_RMP                            \ OUT2_RMP
-$00000006 constant RTC_RTC_CFGR_LSCOEN                              \ LSCOEN
-
-
-\
-\ @brief RTC hardware configuration register
-\ Address offset: 0x3F0
-\ Reset value: 0x01031111
-\
-
-$0000000f constant RTC_RTC_HWCFGR_ALARMB                            \ ALARMB
-$000000f0 constant RTC_RTC_HWCFGR_WAKEUP                            \ WAKEUP
-$00000f00 constant RTC_RTC_HWCFGR_SMOOTH_CALIB                      \ SMOOTH_CALIB
-$0000f000 constant RTC_RTC_HWCFGR_TIMESTAMP                         \ TIMESTAMP
-$00ff0000 constant RTC_RTC_HWCFGR_OPTIONREG_OUT                     \ OPTIONREG_OUT
-$0f000000 constant RTC_RTC_HWCFGR_TRUST_ZONE                        \ TRUST_ZONE
-
-
-\
-\ @brief RTC version register
-\ Address offset: 0x3F4
-\ Reset value: 0x00000010
-\
-
-$0000000f constant RTC_RTC_VERR_MINREV                              \ MINREV
-$000000f0 constant RTC_RTC_VERR_MAJREV                              \ MAJREV
-
-
-\
-\ @brief RTC identification register
-\ Address offset: 0x3F8
-\ Reset value: 0x00120033
-\
-
-$00000000 constant RTC_RTC_IPIDR_ID                                 \ ID
-
-
-\
-\ @brief RTC size identification register
-\ Address offset: 0x3FC
-\ Reset value: 0xA3C5DD01
-\
-
-$00000000 constant RTC_RTC_SIDR_SID                                 \ SID
-
-
-\
-\ @brief RTC
-\
-$5c004000 constant RTC_RTC_TR     \ offset: 0x00 : The RTC_TR is the calendar time shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page1830 and Reading the calendar on page1831. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004004 constant RTC_RTC_DR     \ offset: 0x04 : The RTC_DR is the calendar date shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page1830 and Reading the calendar on page1831. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004008 constant RTC_RTC_SSR    \ offset: 0x08 : RTC sub second register
-$5c00400c constant RTC_RTC_ICSR   \ offset: 0x0C : This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be globally protected, or each bit of this register can be individually protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004010 constant RTC_RTC_PRER   \ offset: 0x10 : This register must be written in initialization mode only. The initialization must be performed in two separate write accesses. Refer to Calendar initialization and configuration on page1830. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004014 constant RTC_RTC_WUTR   \ offset: 0x14 : This register can be written only when WUTWF is set to 1 in RTC_ICSR. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004018 constant RTC_RTC_CR     \ offset: 0x18 : This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be globally protected, or each bit of this register can be individually protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004020 constant RTC_RTC_SMCR   \ offset: 0x20 : This register can be written only when the APB access is secure.
-$5c004024 constant RTC_RTC_WPR    \ offset: 0x24 : RTC write protection register
-$5c004028 constant RTC_RTC_CALR   \ offset: 0x28 : This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c00402c constant RTC_RTC_SHIFTR  \ offset: 0x2C : This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004030 constant RTC_RTC_TSTR   \ offset: 0x30 : The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004034 constant RTC_RTC_TSDR   \ offset: 0x34 : The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004038 constant RTC_RTC_TSSSR  \ offset: 0x38 : The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when the TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004040 constant RTC_RTC_ALRMAR  \ offset: 0x40 : This register can be written only when ALRAWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004044 constant RTC_RTC_ALRMASSR  \ offset: 0x44 : This register can be written only when ALRAWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004048 constant RTC_RTC_ALRMBR  \ offset: 0x48 : This register can be written only when ALRBWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c00404c constant RTC_RTC_ALRMBSSR  \ offset: 0x4C : This register can be written only when ALRBE is reset in RTC_CR register, or in initialization mode. This register is write protected.The write access procedure is described in Section: RTC register write protection. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004050 constant RTC_RTC_SR     \ offset: 0x50 : This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004054 constant RTC_RTC_MISR   \ offset: 0x54 : RTC non-secure masked interrupt status register
-$5c004058 constant RTC_RTC_SMISR  \ offset: 0x58 : This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c00405c constant RTC_RTC_SCR    \ offset: 0x5C : This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
-$5c004060 constant RTC_RTC_CFGR   \ offset: 0x60 : RTC configuration register
-$5c0043f0 constant RTC_RTC_HWCFGR  \ offset: 0x3F0 : RTC hardware configuration register
-$5c0043f4 constant RTC_RTC_VERR   \ offset: 0x3F4 : RTC version register
-$5c0043f8 constant RTC_RTC_IPIDR  \ offset: 0x3F8 : RTC identification register
-$5c0043fc constant RTC_RTC_SIDR   \ offset: 0x3FC : RTC size identification register
-
+[ifndef] RTC_DEF
+
+  [ifdef] RTC_RTC_TR_DEF
+    \
+    \ @brief The RTC_TR is the calendar time shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page1830 and Reading the calendar on page1831. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SU                         \ [0x00 : 4] SU
+    $04 constant RTC_ST                         \ [0x04 : 3] ST
+    $08 constant RTC_MNU                        \ [0x08 : 4] MNU
+    $0c constant RTC_MNT                        \ [0x0c : 3] MNT
+    $10 constant RTC_HU                         \ [0x10 : 4] HU
+    $14 constant RTC_HT                         \ [0x14 : 2] HT
+    $16 constant RTC_PM                         \ [0x16] PM
+  [then]
+
+
+  [ifdef] RTC_RTC_DR_DEF
+    \
+    \ @brief The RTC_DR is the calendar date shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page1830 and Reading the calendar on page1831. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x04
+    \ Reset value: 0x00002101
+    \
+    $00 constant RTC_DU                         \ [0x00 : 4] DU
+    $04 constant RTC_DT                         \ [0x04 : 2] DT
+    $08 constant RTC_MU                         \ [0x08 : 4] MU
+    $0c constant RTC_MT                         \ [0x0c] MT
+    $0d constant RTC_WDU                        \ [0x0d : 3] WDU
+    $10 constant RTC_YU                         \ [0x10 : 4] YU
+    $14 constant RTC_YT                         \ [0x14 : 4] YT
+  [then]
+
+
+  [ifdef] RTC_RTC_SSR_DEF
+    \
+    \ @brief RTC sub second register
+    \ Address offset: 0x08
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SS                         \ [0x00 : 16] SS
+  [then]
+
+
+  [ifdef] RTC_RTC_ICSR_DEF
+    \
+    \ @brief This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be globally protected, or each bit of this register can be individually protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000007
+    \
+    $00 constant RTC_ALRAWF                     \ [0x00] ALRAWF
+    $01 constant RTC_ALRBWF                     \ [0x01] ALRBWF
+    $02 constant RTC_WUTWF                      \ [0x02] WUTWF
+    $03 constant RTC_SHPF                       \ [0x03] SHPF
+    $04 constant RTC_INITS                      \ [0x04] INITS
+    $05 constant RTC_RSF                        \ [0x05] RSF
+    $06 constant RTC_INITF                      \ [0x06] INITF
+    $07 constant RTC_INIT                       \ [0x07] INIT
+    $10 constant RTC_RECALPF                    \ [0x10] RECALPF
+  [then]
+
+
+  [ifdef] RTC_RTC_PRER_DEF
+    \
+    \ @brief This register must be written in initialization mode only. The initialization must be performed in two separate write accesses. Refer to Calendar initialization and configuration on page1830. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x10
+    \ Reset value: 0x007F00FF
+    \
+    $00 constant RTC_PREDIV_S                   \ [0x00 : 15] PREDIV_S
+    $10 constant RTC_PREDIV_A                   \ [0x10 : 7] PREDIV_A
+  [then]
+
+
+  [ifdef] RTC_RTC_WUTR_DEF
+    \
+    \ @brief This register can be written only when WUTWF is set to 1 in RTC_ICSR. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x14
+    \ Reset value: 0x0000FFFF
+    \
+    $00 constant RTC_WUT                        \ [0x00 : 16] WUT
+  [then]
+
+
+  [ifdef] RTC_RTC_CR_DEF
+    \
+    \ @brief This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be globally protected, or each bit of this register can be individually protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_WUCKSEL                    \ [0x00 : 3] WUCKSEL
+    $03 constant RTC_TSEDGE                     \ [0x03] TSEDGE
+    $04 constant RTC_REFCKON                    \ [0x04] REFCKON
+    $05 constant RTC_BYPSHAD                    \ [0x05] BYPSHAD
+    $06 constant RTC_FMT                        \ [0x06] FMT
+    $08 constant RTC_ALRAE                      \ [0x08] ALRAE
+    $09 constant RTC_ALRBE                      \ [0x09] ALRBE
+    $0a constant RTC_WUTE                       \ [0x0a] WUTE
+    $0b constant RTC_TSE                        \ [0x0b] TSE
+    $0c constant RTC_ALRAIE                     \ [0x0c] ALRAIE
+    $0d constant RTC_ALRBIE                     \ [0x0d] ALRBIE
+    $0e constant RTC_WUTIE                      \ [0x0e] WUTIE
+    $0f constant RTC_TSIE                       \ [0x0f] TSIE
+    $10 constant RTC_ADD1H                      \ [0x10] ADD1H
+    $11 constant RTC_SUB1H                      \ [0x11] SUB1H
+    $12 constant RTC_BKP                        \ [0x12] BKP
+    $13 constant RTC_COSEL                      \ [0x13] COSEL
+    $14 constant RTC_POL                        \ [0x14] POL
+    $15 constant RTC_OSEL                       \ [0x15 : 2] OSEL
+    $17 constant RTC_COE                        \ [0x17] COE
+    $18 constant RTC_ITSE                       \ [0x18] ITSE
+    $19 constant RTC_TAMPTS                     \ [0x19] TAMPTS
+    $1a constant RTC_TAMPOE                     \ [0x1a] TAMPOE
+    $1d constant RTC_TAMPALRM_PU                \ [0x1d] TAMPALRM_PU
+    $1e constant RTC_TAMPALRM_TYPE              \ [0x1e] TAMPALRM_TYPE
+    $1f constant RTC_OUT2EN                     \ [0x1f] OUT2EN
+  [then]
+
+
+  [ifdef] RTC_RTC_SMCR_DEF
+    \
+    \ @brief This register can be written only when the APB access is secure.
+    \ Address offset: 0x20
+    \ Reset value: 0x0000E00F
+    \
+    $00 constant RTC_ALRADPROT                  \ [0x00] ALRADPROT
+    $01 constant RTC_ALRBDPROT                  \ [0x01] ALRBDPROT
+    $02 constant RTC_WUTDPROT                   \ [0x02] WUTDPROT
+    $03 constant RTC_TSDPROT                    \ [0x03] TSDPROT
+    $0d constant RTC_CALDPROT                   \ [0x0d] CALDPROT
+    $0e constant RTC_INITDPROT                  \ [0x0e] INITDPROT
+    $0f constant RTC_DECPROT                    \ [0x0f] DECPROT
+  [then]
+
+
+  [ifdef] RTC_RTC_WPR_DEF
+    \
+    \ @brief RTC write protection register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_KEY                        \ [0x00 : 8] KEY
+  [then]
+
+
+  [ifdef] RTC_RTC_CALR_DEF
+    \
+    \ @brief This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_CALM                       \ [0x00 : 9] CALM
+    $0d constant RTC_CALW16                     \ [0x0d] CALW16
+    $0e constant RTC_CALW8                      \ [0x0e] CALW8
+    $0f constant RTC_CALP                       \ [0x0f] CALP
+  [then]
+
+
+  [ifdef] RTC_RTC_SHIFTR_DEF
+    \
+    \ @brief This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SUBFS                      \ [0x00 : 15] SUBFS
+    $1f constant RTC_ADD1S                      \ [0x1f] ADD1S
+  [then]
+
+
+  [ifdef] RTC_RTC_TSTR_DEF
+    \
+    \ @brief The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SU                         \ [0x00 : 4] SU
+    $04 constant RTC_ST                         \ [0x04 : 3] ST
+    $08 constant RTC_MNU                        \ [0x08 : 4] MNU
+    $0c constant RTC_MNT                        \ [0x0c : 3] MNT
+    $10 constant RTC_HU                         \ [0x10 : 4] HU
+    $14 constant RTC_HT                         \ [0x14 : 2] HT
+    $16 constant RTC_PM                         \ [0x16] PM
+  [then]
+
+
+  [ifdef] RTC_RTC_TSDR_DEF
+    \
+    \ @brief The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_DU                         \ [0x00 : 4] DU
+    $04 constant RTC_DT                         \ [0x04 : 2] DT
+    $08 constant RTC_MU                         \ [0x08 : 4] MU
+    $0c constant RTC_MT                         \ [0x0c] MT
+    $0d constant RTC_WDU                        \ [0x0d : 3] WDU
+  [then]
+
+
+  [ifdef] RTC_RTC_TSSSR_DEF
+    \
+    \ @brief The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when the TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SS                         \ [0x00 : 16] SS
+  [then]
+
+
+  [ifdef] RTC_RTC_ALRMAR_DEF
+    \
+    \ @brief This register can be written only when ALRAWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x40
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SU                         \ [0x00 : 4] SU
+    $04 constant RTC_ST                         \ [0x04 : 3] ST
+    $07 constant RTC_MSK1                       \ [0x07] MSK1
+    $08 constant RTC_MNU                        \ [0x08 : 4] MNU
+    $0c constant RTC_MNT                        \ [0x0c : 3] MNT
+    $0f constant RTC_MSK2                       \ [0x0f] MSK2
+    $10 constant RTC_HU                         \ [0x10 : 4] HU
+    $14 constant RTC_HT                         \ [0x14 : 2] HT
+    $16 constant RTC_PM                         \ [0x16] PM
+    $17 constant RTC_MSK3                       \ [0x17] MSK3
+    $18 constant RTC_DU                         \ [0x18 : 4] DU
+    $1c constant RTC_DT                         \ [0x1c : 2] DT
+    $1e constant RTC_WDSEL                      \ [0x1e] WDSEL
+    $1f constant RTC_MSK4                       \ [0x1f] MSK4
+  [then]
+
+
+  [ifdef] RTC_RTC_ALRMASSR_DEF
+    \
+    \ @brief This register can be written only when ALRAWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x44
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SS                         \ [0x00 : 15] SS
+    $18 constant RTC_MASKSS                     \ [0x18 : 4] MASKSS
+  [then]
+
+
+  [ifdef] RTC_RTC_ALRMBR_DEF
+    \
+    \ @brief This register can be written only when ALRBWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x48
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SU                         \ [0x00 : 4] SU
+    $04 constant RTC_ST                         \ [0x04 : 3] ST
+    $07 constant RTC_MSK1                       \ [0x07] MSK1
+    $08 constant RTC_MNU                        \ [0x08 : 4] MNU
+    $0c constant RTC_MNT                        \ [0x0c : 3] MNT
+    $0f constant RTC_MSK2                       \ [0x0f] MSK2
+    $10 constant RTC_HU                         \ [0x10 : 4] HU
+    $14 constant RTC_HT                         \ [0x14 : 2] HT
+    $16 constant RTC_PM                         \ [0x16] PM
+    $17 constant RTC_MSK3                       \ [0x17] MSK3
+    $18 constant RTC_DU                         \ [0x18 : 4] DU
+    $1c constant RTC_DT                         \ [0x1c : 2] DT
+    $1e constant RTC_WDSEL                      \ [0x1e] WDSEL
+    $1f constant RTC_MSK4                       \ [0x1f] MSK4
+  [then]
+
+
+  [ifdef] RTC_RTC_ALRMBSSR_DEF
+    \
+    \ @brief This register can be written only when ALRBE is reset in RTC_CR register, or in initialization mode. This register is write protected.The write access procedure is described in Section: RTC register write protection. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x4C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_SS                         \ [0x00 : 15] SS
+    $18 constant RTC_MASKSS                     \ [0x18 : 4] MASKSS
+  [then]
+
+
+  [ifdef] RTC_RTC_SR_DEF
+    \
+    \ @brief This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x50
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_ALRAF                      \ [0x00] ALRAF
+    $01 constant RTC_ALRBF                      \ [0x01] ALRBF
+    $02 constant RTC_WUTF                       \ [0x02] WUTF
+    $03 constant RTC_TSF                        \ [0x03] TSF
+    $04 constant RTC_TSOVF                      \ [0x04] TSOVF
+    $05 constant RTC_ITSF                       \ [0x05] ITSF
+  [then]
+
+
+  [ifdef] RTC_RTC_MISR_DEF
+    \
+    \ @brief RTC non-secure masked interrupt status register
+    \ Address offset: 0x54
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_ALRAMF                     \ [0x00] ALRAMF
+    $01 constant RTC_ALRBMF                     \ [0x01] ALRBMF
+    $02 constant RTC_WUTMF                      \ [0x02] WUTMF
+    $03 constant RTC_TSMF                       \ [0x03] TSMF
+    $04 constant RTC_TSOVMF                     \ [0x04] TSOVMF
+    $05 constant RTC_ITSMF                      \ [0x05] ITSMF
+  [then]
+
+
+  [ifdef] RTC_RTC_SMISR_DEF
+    \
+    \ @brief This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x58
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_ALRAMF                     \ [0x00] ALRAMF
+    $01 constant RTC_ALRBMF                     \ [0x01] ALRBMF
+    $02 constant RTC_WUTMF                      \ [0x02] WUTMF
+    $03 constant RTC_TSMF                       \ [0x03] TSMF
+    $04 constant RTC_TSOVMF                     \ [0x04] TSOVMF
+    $05 constant RTC_ITSMF                      \ [0x05] ITSMF
+  [then]
+
+
+  [ifdef] RTC_RTC_SCR_DEF
+    \
+    \ @brief This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+    \ Address offset: 0x5C
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_CALRAF                     \ [0x00] CALRAF
+    $01 constant RTC_CALRBF                     \ [0x01] CALRBF
+    $02 constant RTC_CWUTF                      \ [0x02] CWUTF
+    $03 constant RTC_CTSF                       \ [0x03] CTSF
+    $04 constant RTC_CTSOVF                     \ [0x04] CTSOVF
+    $05 constant RTC_CITSF                      \ [0x05] CITSF
+  [then]
+
+
+  [ifdef] RTC_RTC_CFGR_DEF
+    \
+    \ @brief RTC configuration register
+    \ Address offset: 0x60
+    \ Reset value: 0x00000000
+    \
+    $00 constant RTC_OUT2_RMP                   \ [0x00] OUT2_RMP
+    $01 constant RTC_LSCOEN                     \ [0x01 : 2] LSCOEN
+  [then]
+
+
+  [ifdef] RTC_RTC_HWCFGR_DEF
+    \
+    \ @brief RTC hardware configuration register
+    \ Address offset: 0x3F0
+    \ Reset value: 0x01031111
+    \
+    $00 constant RTC_ALARMB                     \ [0x00 : 4] ALARMB
+    $04 constant RTC_WAKEUP                     \ [0x04 : 4] WAKEUP
+    $08 constant RTC_SMOOTH_CALIB               \ [0x08 : 4] SMOOTH_CALIB
+    $0c constant RTC_TIMESTAMP                  \ [0x0c : 4] TIMESTAMP
+    $10 constant RTC_OPTIONREG_OUT              \ [0x10 : 8] OPTIONREG_OUT
+    $18 constant RTC_TRUST_ZONE                 \ [0x18 : 4] TRUST_ZONE
+  [then]
+
+
+  [ifdef] RTC_RTC_VERR_DEF
+    \
+    \ @brief RTC version register
+    \ Address offset: 0x3F4
+    \ Reset value: 0x00000010
+    \
+    $00 constant RTC_MINREV                     \ [0x00 : 4] MINREV
+    $04 constant RTC_MAJREV                     \ [0x04 : 4] MAJREV
+  [then]
+
+
+  [ifdef] RTC_RTC_IPIDR_DEF
+    \
+    \ @brief RTC identification register
+    \ Address offset: 0x3F8
+    \ Reset value: 0x00120033
+    \
+    $00 constant RTC_ID                         \ [0x00 : 32] ID
+  [then]
+
+
+  [ifdef] RTC_RTC_SIDR_DEF
+    \
+    \ @brief RTC size identification register
+    \ Address offset: 0x3FC
+    \ Reset value: 0xA3C5DD01
+    \
+    $00 constant RTC_SID                        \ [0x00 : 32] SID
+  [then]
+
+  \
+  \ @brief RTC
+  \
+  $00 constant RTC_RTC_TR               \ The RTC_TR is the calendar time shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page1830 and Reading the calendar on page1831. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $04 constant RTC_RTC_DR               \ The RTC_DR is the calendar date shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page1830 and Reading the calendar on page1831. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $08 constant RTC_RTC_SSR              \ RTC sub second register
+  $0C constant RTC_RTC_ICSR             \ This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be globally protected, or each bit of this register can be individually protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $10 constant RTC_RTC_PRER             \ This register must be written in initialization mode only. The initialization must be performed in two separate write accesses. Refer to Calendar initialization and configuration on page1830. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $14 constant RTC_RTC_WUTR             \ This register can be written only when WUTWF is set to 1 in RTC_ICSR. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $18 constant RTC_RTC_CR               \ This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be globally protected, or each bit of this register can be individually protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $20 constant RTC_RTC_SMCR             \ This register can be written only when the APB access is secure.
+  $24 constant RTC_RTC_WPR              \ RTC write protection register
+  $28 constant RTC_RTC_CALR             \ This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be write-protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $2C constant RTC_RTC_SHIFTR           \ This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $30 constant RTC_RTC_TSTR             \ The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $34 constant RTC_RTC_TSDR             \ The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $38 constant RTC_RTC_TSSSR            \ The content of this register is valid only when TSF is set to 1 in RTC_SR. It is cleared when the TSF bit is reset. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $40 constant RTC_RTC_ALRMAR           \ This register can be written only when ALRAWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $44 constant RTC_RTC_ALRMASSR         \ This register can be written only when ALRAWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $48 constant RTC_RTC_ALRMBR           \ This register can be written only when ALRBWF is set to 1 in RTC_ICSR, or in initialization mode. This register is write protected. The write access procedure is described in RTC register write protection on page1830. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $4C constant RTC_RTC_ALRMBSSR         \ This register can be written only when ALRBE is reset in RTC_CR register, or in initialization mode. This register is write protected.The write access procedure is described in Section: RTC register write protection. This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $50 constant RTC_RTC_SR               \ This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $54 constant RTC_RTC_MISR             \ RTC non-secure masked interrupt status register
+  $58 constant RTC_RTC_SMISR            \ This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $5C constant RTC_RTC_SCR              \ This register can be protected against non-secure access. Refer to Section50.3.4: RTC secure protection modes.
+  $60 constant RTC_RTC_CFGR             \ RTC configuration register
+  $3F0 constant RTC_RTC_HWCFGR          \ RTC hardware configuration register
+  $3F4 constant RTC_RTC_VERR            \ RTC version register
+  $3F8 constant RTC_RTC_IPIDR           \ RTC identification register
+  $3FC constant RTC_RTC_SIDR            \ RTC size identification register
+
+: RTC_DEF ; [then]

@@ -6,218 +6,232 @@
 \ DO NOT EDIT MANUALLY.
 \
 
-.include ../common.fs
+[ifndef] UCPD_DEF
 
-\
-\ @brief UCPD configuration register 1
-\ Address offset: 0x00
-\ Reset value: 0x00000000
-\
-
-$0000003f constant UCPD_UCPD_CFGR1_HBITCLKDIV                       \ Division ratio for producing half-bit clock The bitfield determines the division ratio (the bitfield value plus one) of a ucpd_clk divider producing half-bit clock (hbit_clk).
-$000007c0 constant UCPD_UCPD_CFGR1_IFRGAP                           \ Division ratio for producing inter-frame gap timer clock The bitfield determines the division ratio (the bitfield value minus one) of a ucpd_clk divider producing inter-frame gap timer clock (tInterFrameGap). The division ratio 15 is to apply for Tx clock at the USB PD 2.0 specification nominal value. The division ratios below 15 are to apply for Tx clock below nominal, and the division ratios above 15 for Tx clock above nominal.
-$0000f800 constant UCPD_UCPD_CFGR1_TRANSWIN                         \ Transition window duration The bitfield determines the division ratio (the bitfield value minus one) of a hbit_clk divider producing tTransitionWindow interval. Set a value that produces an interval of 12 to 20 us, taking into account the ucpd_clk frequency and the HBITCLKDIV[5:0] bitfield setting.
-$000e0000 constant UCPD_UCPD_CFGR1_PSC_USBPDCLK                     \ Pre-scaler division ratio for generating ucpd_clk The bitfield determines the division ratio of a kernel clock pre-scaler producing UCPD peripheral clock (ucpd_clk). It is recommended to use the pre-scaler so as to set the ucpd_clk frequency in the range from 6 to 9 MHz.
-$1ff00000 constant UCPD_UCPD_CFGR1_RXORDSETEN                       \ Receiver ordered set enable The bitfield determines the types of ordered sets that the receiver must detect. When set/cleared, each bit enables/disables a specific function: 0bxxxxxxxx1: SOP detect enabled 0bxxxxxxx1x: SOP' detect enabled 0bxxxxxx1xx: SOP'' detect enabled 0bxxxxx1xxx: Hard Reset detect enabled 0bxxxx1xxxx: Cable Detect reset enabled 0bxxx1xxxxx: SOP'_Debug enabled 0bxx1xxxxxx: SOP''_Debug enabled 0bx1xxxxxxx: SOP extension#1 enabled 0b1xxxxxxxx: SOP extension#2 enabled
-$20000000 constant UCPD_UCPD_CFGR1_TXDMAEN                          \ Transmission DMA mode enable When set, the bit enables DMA mode for transmission.
-$40000000 constant UCPD_UCPD_CFGR1_RXDMAEN                          \ Reception DMA mode enable When set, the bit enables DMA mode for reception.
-$80000000 constant UCPD_UCPD_CFGR1_UCPDEN                           \ UCPD peripheral enable General enable of the UCPD peripheral. Upon disabling, the peripheral instantly quits any ongoing activity and all control bits and bitfields default to their reset values. They must be set to their desired values each time the peripheral transits from disabled to enabled state.
-
-
-\
-\ @brief UCPD configuration register 2
-\ Address offset: 0x04
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD_UCPD_CFGR2_RXFILTDIS                        \ BMC decoder Rx pre-filter enable The sampling clock is that of the receiver (that is, after pre-scaler).
-$00000002 constant UCPD_UCPD_CFGR2_RXFILT2N3                        \ BMC decoder Rx pre-filter sampling method Number of consistent consecutive samples before confirming a new value.
-$00000004 constant UCPD_UCPD_CFGR2_FORCECLK                         \ Force ClkReq clock request
-$00000008 constant UCPD_UCPD_CFGR2_WUPEN                            \ Wakeup from Stop mode enable Setting the bit enables the UCPD_ASYNC_INT signal.
-$00000100 constant UCPD_UCPD_CFGR2_RXAFILTEN                        \ Rx analog filter enable Setting the bit enables the Rx analog filter required for optimum Power Delivery reception.
+  [ifdef] UCPD_UCPD_CFGR1_DEF
+    \
+    \ @brief UCPD configuration register 1
+    \ Address offset: 0x00
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_HBITCLKDIV                \ [0x00 : 6] Division ratio for producing half-bit clock The bitfield determines the division ratio (the bitfield value plus one) of a ucpd_clk divider producing half-bit clock (hbit_clk).
+    $06 constant UCPD_IFRGAP                    \ [0x06 : 5] Division ratio for producing inter-frame gap timer clock The bitfield determines the division ratio (the bitfield value minus one) of a ucpd_clk divider producing inter-frame gap timer clock (tInterFrameGap). The division ratio 15 is to apply for Tx clock at the USB PD 2.0 specification nominal value. The division ratios below 15 are to apply for Tx clock below nominal, and the division ratios above 15 for Tx clock above nominal.
+    $0b constant UCPD_TRANSWIN                  \ [0x0b : 5] Transition window duration The bitfield determines the division ratio (the bitfield value minus one) of a hbit_clk divider producing tTransitionWindow interval. Set a value that produces an interval of 12 to 20 us, taking into account the ucpd_clk frequency and the HBITCLKDIV[5:0] bitfield setting.
+    $11 constant UCPD_PSC_USBPDCLK              \ [0x11 : 3] Pre-scaler division ratio for generating ucpd_clk The bitfield determines the division ratio of a kernel clock pre-scaler producing UCPD peripheral clock (ucpd_clk). It is recommended to use the pre-scaler so as to set the ucpd_clk frequency in the range from 6 to 9 MHz.
+    $14 constant UCPD_RXORDSETEN                \ [0x14 : 9] Receiver ordered set enable The bitfield determines the types of ordered sets that the receiver must detect. When set/cleared, each bit enables/disables a specific function: 0bxxxxxxxx1: SOP detect enabled 0bxxxxxxx1x: SOP' detect enabled 0bxxxxxx1xx: SOP'' detect enabled 0bxxxxx1xxx: Hard Reset detect enabled 0bxxxx1xxxx: Cable Detect reset enabled 0bxxx1xxxxx: SOP'_Debug enabled 0bxx1xxxxxx: SOP''_Debug enabled 0bx1xxxxxxx: SOP extension#1 enabled 0b1xxxxxxxx: SOP extension#2 enabled
+    $1d constant UCPD_TXDMAEN                   \ [0x1d] Transmission DMA mode enable When set, the bit enables DMA mode for transmission.
+    $1e constant UCPD_RXDMAEN                   \ [0x1e] Reception DMA mode enable When set, the bit enables DMA mode for reception.
+    $1f constant UCPD_UCPDEN                    \ [0x1f] UCPD peripheral enable General enable of the UCPD peripheral. Upon disabling, the peripheral instantly quits any ongoing activity and all control bits and bitfields default to their reset values. They must be set to their desired values each time the peripheral transits from disabled to enabled state.
+  [then]
 
 
-\
-\ @brief UCPD control register
-\ Address offset: 0x0C
-\ Reset value: 0x00000000
-\
-
-$00000003 constant UCPD_UCPD_CR_TXMODE                              \ Type of Tx packet
-$00000004 constant UCPD_UCPD_CR_TXSEND                              \ Command to send a Tx packet The bit is cleared by hardware as soon as the packet transmission begins or is discarded.
-$00000008 constant UCPD_UCPD_CR_TXHRST                              \ Command to send a Tx Hard Reset The bit is cleared by hardware as soon as the message transmission begins or is discarded.
-$00000010 constant UCPD_UCPD_CR_RXMODE                              \ Receiver mode Determines the mode of the receiver. When the bit is set, RXORDSET behaves normally, RXDR no longer receives bytes yet the CRC checking still proceeds as for a normal message. As this mode prevents reception of the header (containing MessageID), software has to auto-increment a received MessageID counter for inclusion in the GoodCRC acknowledge that must still be transmitted during this test.
-$00000020 constant UCPD_UCPD_CR_PHYRXEN                             \ USB Power Delivery receiver enable Both CC1 and CC2 receivers are disabled when the bit is cleared. Only the CC receiver selected via the PHYCCSEL bit is enabled when the bit is set.
-$00000040 constant UCPD_UCPD_CR_PHYCCSEL                            \ CC1/CC2 line selector for USB Power Delivery signaling The selection depends on the cable orientation as discovered at attach.
-$00000180 constant UCPD_UCPD_CR_ANASUBMODE                          \ Analog PHY sub-mode Refer to Table 876: Coding for ANAMODE, ANASUBMODE and link with TYPEC_VSTATE_CCx for the effect of this bitfield.
-$00000200 constant UCPD_UCPD_CR_ANAMODE                             \ Analog PHY operating mode The use of CC1 and CC2 depends on CCENABLE. Refer to Table 876: Coding for ANAMODE, ANASUBMODE and link with TYPEC_VSTATE_CCx for the effect of this bitfield in conjunction with ANASUBMODE[1:0].
-$00000c00 constant UCPD_UCPD_CR_CCENABLE                            \ CC line enable This bitfield enables CC1 and CC2 line analog PHYs (pull-ups and pull-downs) according to ANAMODE and ANASUBMODE[1:0] setting. A single line PHY can be enabled when, for example, the other line is driven by VCONN via an external VCONN switch. Enabling both PHYs is the normal usage for sink/source.
-$00010000 constant UCPD_UCPD_CR_FRSRXEN                             \ FRS event detection enable Setting the bit enables FRS Rx event (FRSEVT) detection on the CC line selected through the PHYCCSEL bit. 0: Disable Clear the bit when the device is attached to an FRS-incapable source/sink.
-$00020000 constant UCPD_UCPD_CR_FRSTX                               \ FRS Tx signaling enable. Setting the bit enables FRS Tx signaling. The bit is cleared by hardware after a delay respecting the USB Power Delivery specification Revision 3.1.
-$00040000 constant UCPD_UCPD_CR_RDCH                                \ Rdch condition drive
-$00100000 constant UCPD_UCPD_CR_CC1TCDIS                            \ CC1 Type-C detector disable The bit disables the Type-C detector on the CC1 line. When enabled, the Type-C detector for CC1 is configured through ANAMODE and ANASUBMODE[1:0].
-$00200000 constant UCPD_UCPD_CR_CC2TCDIS                            \ CC2 Type-C detector disable The bit disables the Type-C detector on the CC2 line. When enabled, the Type-C detector for CC2 is configured through ANAMODE and ANASUBMODE[1:0].
+  [ifdef] UCPD_UCPD_CFGR2_DEF
+    \
+    \ @brief UCPD configuration register 2
+    \ Address offset: 0x04
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXFILTDIS                 \ [0x00] BMC decoder Rx pre-filter enable The sampling clock is that of the receiver (that is, after pre-scaler).
+    $01 constant UCPD_RXFILT2N3                 \ [0x01] BMC decoder Rx pre-filter sampling method Number of consistent consecutive samples before confirming a new value.
+    $02 constant UCPD_FORCECLK                  \ [0x02] Force ClkReq clock request
+    $03 constant UCPD_WUPEN                     \ [0x03] Wakeup from Stop mode enable Setting the bit enables the UCPD_ASYNC_INT signal.
+    $08 constant UCPD_RXAFILTEN                 \ [0x08] Rx analog filter enable Setting the bit enables the Rx analog filter required for optimum Power Delivery reception.
+  [then]
 
 
-\
-\ @brief UCPD interrupt mask register
-\ Address offset: 0x10
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD_UCPD_IMR_TXISIE                             \ TXIS interrupt enable
-$00000002 constant UCPD_UCPD_IMR_TXMSGDISCIE                        \ TXMSGDISC interrupt enable
-$00000004 constant UCPD_UCPD_IMR_TXMSGSENTIE                        \ TXMSGSENT interrupt enable
-$00000008 constant UCPD_UCPD_IMR_TXMSGABTIE                         \ TXMSGABT interrupt enable
-$00000010 constant UCPD_UCPD_IMR_HRSTDISCIE                         \ HRSTDISC interrupt enable
-$00000020 constant UCPD_UCPD_IMR_HRSTSENTIE                         \ HRSTSENT interrupt enable
-$00000040 constant UCPD_UCPD_IMR_TXUNDIE                            \ TXUND interrupt enable
-$00000100 constant UCPD_UCPD_IMR_RXNEIE                             \ RXNE interrupt enable
-$00000200 constant UCPD_UCPD_IMR_RXORDDETIE                         \ RXORDDET interrupt enable
-$00000400 constant UCPD_UCPD_IMR_RXHRSTDETIE                        \ RXHRSTDET interrupt enable
-$00000800 constant UCPD_UCPD_IMR_RXOVRIE                            \ RXOVR interrupt enable
-$00001000 constant UCPD_UCPD_IMR_RXMSGENDIE                         \ RXMSGEND interrupt enable
-$00004000 constant UCPD_UCPD_IMR_TYPECEVT1IE                        \ TYPECEVT1 interrupt enable
-$00008000 constant UCPD_UCPD_IMR_TYPECEVT2IE                        \ TYPECEVT2 interrupt enable
-$00100000 constant UCPD_UCPD_IMR_FRSEVTIE                           \ FRSEVT interrupt enable
-
-
-\
-\ @brief UCPD status register
-\ Address offset: 0x14
-\ Reset value: 0x00000000
-\
-
-$00000001 constant UCPD_UCPD_SR_TXIS                                \ Transmit interrupt status The flag indicates that the UCPD_TXDR register is empty and new data write is required (as the amount of data sent has not reached the payload size defined in the TXPAYSZ bitfield). The flag is cleared with the data write into the UCPD_TXDR register.
-$00000002 constant UCPD_UCPD_SR_TXMSGDISC                           \ Message transmission discarded The flag indicates that a message transmission was dropped. The flag is cleared by setting the TXMSGDISCCF bit. Transmission of a message can be dropped if there is a concurrent receive in progress or at excessive noise on the line. After a Tx message is discarded, the flag is only raised when the CC line becomes idle.
-$00000004 constant UCPD_UCPD_SR_TXMSGSENT                           \ Message transmission completed The flag indicates the completion of packet transmission. It is cleared by setting the TXMSGSENTCF bit. In the event of a message transmission interrupted by a Hard Reset, the flag is not raised.
-$00000008 constant UCPD_UCPD_SR_TXMSGABT                            \ Transmit message abort The flag indicates that a Tx message is aborted due to a subsequent Hard Reset message send request taking priority during transmit. It is cleared by setting the TXMSGABTCF bit.
-$00000010 constant UCPD_UCPD_SR_HRSTDISC                            \ Hard Reset discarded The flag indicates that the Hard Reset message is discarded. The flag is cleared by setting the HRSTDISCCF bit.
-$00000020 constant UCPD_UCPD_SR_HRSTSENT                            \ Hard Reset message sent The flag indicates that the Hard Reset message is sent. The flag is cleared by setting the HRSTSENTCF bit.
-$00000040 constant UCPD_UCPD_SR_TXUND                               \ Tx data underrun detection The flag indicates that the Tx data register (UCPD_TXDR) was not written in time for a transmit message to execute normally. It is cleared by setting the TXUNDCF bit.
-$00000100 constant UCPD_UCPD_SR_RXNE                                \ Receive data register not empty detection The flag indicates that the UCPD_RXDR register is not empty. It is automatically cleared upon reading UCPD_RXDR.
-$00000200 constant UCPD_UCPD_SR_RXORDDET                            \ Rx ordered set (4 K-codes) detection The flag indicates the detection of an ordered set. The relevant information is stored in the RXORDSET[2:0] bitfield of the UCPD_RX_ORDSET register. It is cleared by setting the RXORDDETCF bit.
-$00000400 constant UCPD_UCPD_SR_RXHRSTDET                           \ Rx Hard Reset receipt detection The flag indicates the receipt of valid Hard Reset message. It is cleared by setting the RXHRSTDETCF bit.
-$00000800 constant UCPD_UCPD_SR_RXOVR                               \ Rx data overflow detection The flag indicates Rx data buffer overflow. It is cleared by setting the RXOVRCF bit. The buffer overflow can occur if the received data are not read fast enough.
-$00001000 constant UCPD_UCPD_SR_RXMSGEND                            \ Rx message received The flag indicates whether a message (except Hard Reset message) has been received, regardless the CRC value. The flag is cleared by setting the RXMSGENDCF bit. The RXERR flag set when the RXMSGEND flag goes high indicates errors in the last-received message.
-$00002000 constant UCPD_UCPD_SR_RXERR                               \ Receive message error The flag indicates errors of the last Rx message declared (via RXMSGEND), such as incorrect CRC or truncated message (a line becoming static before EOP is met). It is asserted whenever the RXMSGEND flag is set.
-$00004000 constant UCPD_UCPD_SR_TYPECEVT1                           \ Type-C voltage level event on CC1 line The flag indicates a change of the TYPEC_VSTATE_CC1[1:0] bitfield value, which corresponds to a new Type-C event. It is cleared by setting the TYPECEVT2CF bit.
-$00008000 constant UCPD_UCPD_SR_TYPECEVT2                           \ Type-C voltage level event on CC2 line The flag indicates a change of the TYPEC_VSTATE_CC2[1:0] bitfield value, which corresponds to a new Type-C event. It is cleared by setting the TYPECEVT2CF bit.
-$00030000 constant UCPD_UCPD_SR_TYPEC_VSTATE_CC1                    \ The status bitfield indicates the voltage level on the CC1 line in its steady state. The voltage variation on the CC1 line during USB PD messages due to the BMC PHY modulation does not impact the bitfield value.
-$000c0000 constant UCPD_UCPD_SR_TYPEC_VSTATE_CC2                    \ CC2 line voltage level The status bitfield indicates the voltage level on the CC2 line in its steady state. The voltage variation on the CC2 line during USB PD messages due to the BMC PHY modulation does not impact the bitfield value.
-$00100000 constant UCPD_UCPD_SR_FRSEVT                              \ FRS detection event The flag is cleared by setting the FRSEVTCF bit.
+  [ifdef] UCPD_UCPD_CR_DEF
+    \
+    \ @brief UCPD control register
+    \ Address offset: 0x0C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXMODE                    \ [0x00 : 2] Type of Tx packet
+    $02 constant UCPD_TXSEND                    \ [0x02] Command to send a Tx packet The bit is cleared by hardware as soon as the packet transmission begins or is discarded.
+    $03 constant UCPD_TXHRST                    \ [0x03] Command to send a Tx Hard Reset The bit is cleared by hardware as soon as the message transmission begins or is discarded.
+    $04 constant UCPD_RXMODE                    \ [0x04] Receiver mode Determines the mode of the receiver. When the bit is set, RXORDSET behaves normally, RXDR no longer receives bytes yet the CRC checking still proceeds as for a normal message. As this mode prevents reception of the header (containing MessageID), software has to auto-increment a received MessageID counter for inclusion in the GoodCRC acknowledge that must still be transmitted during this test.
+    $05 constant UCPD_PHYRXEN                   \ [0x05] USB Power Delivery receiver enable Both CC1 and CC2 receivers are disabled when the bit is cleared. Only the CC receiver selected via the PHYCCSEL bit is enabled when the bit is set.
+    $06 constant UCPD_PHYCCSEL                  \ [0x06] CC1/CC2 line selector for USB Power Delivery signaling The selection depends on the cable orientation as discovered at attach.
+    $07 constant UCPD_ANASUBMODE                \ [0x07 : 2] Analog PHY sub-mode Refer to Table 876: Coding for ANAMODE, ANASUBMODE and link with TYPEC_VSTATE_CCx for the effect of this bitfield.
+    $09 constant UCPD_ANAMODE                   \ [0x09] Analog PHY operating mode The use of CC1 and CC2 depends on CCENABLE. Refer to Table 876: Coding for ANAMODE, ANASUBMODE and link with TYPEC_VSTATE_CCx for the effect of this bitfield in conjunction with ANASUBMODE[1:0].
+    $0a constant UCPD_CCENABLE                  \ [0x0a : 2] CC line enable This bitfield enables CC1 and CC2 line analog PHYs (pull-ups and pull-downs) according to ANAMODE and ANASUBMODE[1:0] setting. A single line PHY can be enabled when, for example, the other line is driven by VCONN via an external VCONN switch. Enabling both PHYs is the normal usage for sink/source.
+    $10 constant UCPD_FRSRXEN                   \ [0x10] FRS event detection enable Setting the bit enables FRS Rx event (FRSEVT) detection on the CC line selected through the PHYCCSEL bit. 0: Disable Clear the bit when the device is attached to an FRS-incapable source/sink.
+    $11 constant UCPD_FRSTX                     \ [0x11] FRS Tx signaling enable. Setting the bit enables FRS Tx signaling. The bit is cleared by hardware after a delay respecting the USB Power Delivery specification Revision 3.1.
+    $12 constant UCPD_RDCH                      \ [0x12] Rdch condition drive
+    $14 constant UCPD_CC1TCDIS                  \ [0x14] CC1 Type-C detector disable The bit disables the Type-C detector on the CC1 line. When enabled, the Type-C detector for CC1 is configured through ANAMODE and ANASUBMODE[1:0].
+    $15 constant UCPD_CC2TCDIS                  \ [0x15] CC2 Type-C detector disable The bit disables the Type-C detector on the CC2 line. When enabled, the Type-C detector for CC2 is configured through ANAMODE and ANASUBMODE[1:0].
+  [then]
 
 
-\
-\ @brief UCPD interrupt clear register
-\ Address offset: 0x18
-\ Reset value: 0x00000000
-\
-
-$00000002 constant UCPD_UCPD_ICR_TXMSGDISCCF                        \ Tx message discard flag (TXMSGDISC) clear Setting the bit clears the TXMSGDISC flag in the UCPD_SR register.
-$00000004 constant UCPD_UCPD_ICR_TXMSGSENTCF                        \ Tx message send flag (TXMSGSENT) clear Setting the bit clears the TXMSGSENT flag in the UCPD_SR register.
-$00000008 constant UCPD_UCPD_ICR_TXMSGABTCF                         \ Tx message abort flag (TXMSGABT) clear Setting the bit clears the TXMSGABT flag in the UCPD_SR register.
-$00000010 constant UCPD_UCPD_ICR_HRSTDISCCF                         \ Hard reset discard flag (HRSTDISC) clear Setting the bit clears the HRSTDISC flag in the UCPD_SR register.
-$00000020 constant UCPD_UCPD_ICR_HRSTSENTCF                         \ Hard reset send flag (HRSTSENT) clear Setting the bit clears the HRSTSENT flag in the UCPD_SR register.
-$00000040 constant UCPD_UCPD_ICR_TXUNDCF                            \ Tx underflow flag (TXUND) clear Setting the bit clears the TXUND flag in the UCPD_SR register.
-$00000200 constant UCPD_UCPD_ICR_RXORDDETCF                         \ Rx ordered set detect flag (RXORDDET) clear Setting the bit clears the RXORDDET flag in the UCPD_SR register.
-$00000400 constant UCPD_UCPD_ICR_RXHRSTDETCF                        \ Rx Hard Reset detect flag (RXHRSTDET) clear Setting the bit clears the RXHRSTDET flag in the UCPD_SR register.
-$00000800 constant UCPD_UCPD_ICR_RXOVRCF                            \ Rx overflow flag (RXOVR) clear Setting the bit clears the RXOVR flag in the UCPD_SR register.
-$00001000 constant UCPD_UCPD_ICR_RXMSGENDCF                         \ Rx message received flag (RXMSGEND) clear Setting the bit clears the RXMSGEND flag in the UCPD_SR register.
-$00004000 constant UCPD_UCPD_ICR_TYPECEVT1CF                        \ Type-C CC1 event flag (TYPECEVT1) clear Setting the bit clears the TYPECEVT1 flag in the UCPD_SR register
-$00008000 constant UCPD_UCPD_ICR_TYPECEVT2CF                        \ Type-C CC2 line event flag (TYPECEVT2) clear Setting the bit clears the TYPECEVT2 flag in the UCPD_SR register
-$00100000 constant UCPD_UCPD_ICR_FRSEVTCF                           \ FRS event flag (FRSEVT) clear Setting the bit clears the FRSEVT flag in the UCPD_SR register.
-
-
-\
-\ @brief UCPD Tx ordered set type register
-\ Address offset: 0x1C
-\ Reset value: 0x00000000
-\
-
-$000fffff constant UCPD_UCPD_TX_ORDSETR_TXORDSET                    \ Ordered set to transmit The bitfield determines a full 20-bit sequence to transmit, consisting of four K-codes, each of five bits, defining the packet to transmit. The bit 0 (bit 0 of K-code1) is the first, the bit 19 (bit 4 of code 4) the last.
+  [ifdef] UCPD_UCPD_IMR_DEF
+    \
+    \ @brief UCPD interrupt mask register
+    \ Address offset: 0x10
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXISIE                    \ [0x00] TXIS interrupt enable
+    $01 constant UCPD_TXMSGDISCIE               \ [0x01] TXMSGDISC interrupt enable
+    $02 constant UCPD_TXMSGSENTIE               \ [0x02] TXMSGSENT interrupt enable
+    $03 constant UCPD_TXMSGABTIE                \ [0x03] TXMSGABT interrupt enable
+    $04 constant UCPD_HRSTDISCIE                \ [0x04] HRSTDISC interrupt enable
+    $05 constant UCPD_HRSTSENTIE                \ [0x05] HRSTSENT interrupt enable
+    $06 constant UCPD_TXUNDIE                   \ [0x06] TXUND interrupt enable
+    $08 constant UCPD_RXNEIE                    \ [0x08] RXNE interrupt enable
+    $09 constant UCPD_RXORDDETIE                \ [0x09] RXORDDET interrupt enable
+    $0a constant UCPD_RXHRSTDETIE               \ [0x0a] RXHRSTDET interrupt enable
+    $0b constant UCPD_RXOVRIE                   \ [0x0b] RXOVR interrupt enable
+    $0c constant UCPD_RXMSGENDIE                \ [0x0c] RXMSGEND interrupt enable
+    $0e constant UCPD_TYPECEVT1IE               \ [0x0e] TYPECEVT1 interrupt enable
+    $0f constant UCPD_TYPECEVT2IE               \ [0x0f] TYPECEVT2 interrupt enable
+    $14 constant UCPD_FRSEVTIE                  \ [0x14] FRSEVT interrupt enable
+  [then]
 
 
-\
-\ @brief UCPD Tx payload size register
-\ Address offset: 0x20
-\ Reset value: 0x00000000
-\
-
-$000003ff constant UCPD_UCPD_TX_PAYSZR_TXPAYSZ                      \ Payload size yet to transmit The bitfield is modified by software and by hardware. It contains the number of bytes of a payload (including header but excluding CRC) yet to transmit: each time a data byte is written into the UCPD_TXDR register, the bitfield value decrements and the TXIS bit is set, except when the bitfield value reaches zero. The enumerated values are standard payload sizes before the start of transmission.
-
-
-\
-\ @brief UCPD Tx data register
-\ Address offset: 0x24
-\ Reset value: 0x00000000
-\
-
-$000000ff constant UCPD_UCPD_TXDR_TXDATA                            \ Data byte to transmit
-
-
-\
-\ @brief UCPD Rx ordered set register
-\ Address offset: 0x28
-\ Reset value: 0x00000000
-\
-
-$00000007 constant UCPD_UCPD_RX_ORDSETR_RXORDSET                    \ Rx ordered set code detected
-$00000008 constant UCPD_UCPD_RX_ORDSETR_RXSOP3OF4                   \ The bit indicates the number of correct codes. For debug purposes only.
-$00000070 constant UCPD_UCPD_RX_ORDSETR_RXSOPKINVALID               \ The bitfield is for debug purposes only. Others: Invalid
+  [ifdef] UCPD_UCPD_SR_DEF
+    \
+    \ @brief UCPD status register
+    \ Address offset: 0x14
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXIS                      \ [0x00] Transmit interrupt status The flag indicates that the UCPD_TXDR register is empty and new data write is required (as the amount of data sent has not reached the payload size defined in the TXPAYSZ bitfield). The flag is cleared with the data write into the UCPD_TXDR register.
+    $01 constant UCPD_TXMSGDISC                 \ [0x01] Message transmission discarded The flag indicates that a message transmission was dropped. The flag is cleared by setting the TXMSGDISCCF bit. Transmission of a message can be dropped if there is a concurrent receive in progress or at excessive noise on the line. After a Tx message is discarded, the flag is only raised when the CC line becomes idle.
+    $02 constant UCPD_TXMSGSENT                 \ [0x02] Message transmission completed The flag indicates the completion of packet transmission. It is cleared by setting the TXMSGSENTCF bit. In the event of a message transmission interrupted by a Hard Reset, the flag is not raised.
+    $03 constant UCPD_TXMSGABT                  \ [0x03] Transmit message abort The flag indicates that a Tx message is aborted due to a subsequent Hard Reset message send request taking priority during transmit. It is cleared by setting the TXMSGABTCF bit.
+    $04 constant UCPD_HRSTDISC                  \ [0x04] Hard Reset discarded The flag indicates that the Hard Reset message is discarded. The flag is cleared by setting the HRSTDISCCF bit.
+    $05 constant UCPD_HRSTSENT                  \ [0x05] Hard Reset message sent The flag indicates that the Hard Reset message is sent. The flag is cleared by setting the HRSTSENTCF bit.
+    $06 constant UCPD_TXUND                     \ [0x06] Tx data underrun detection The flag indicates that the Tx data register (UCPD_TXDR) was not written in time for a transmit message to execute normally. It is cleared by setting the TXUNDCF bit.
+    $08 constant UCPD_RXNE                      \ [0x08] Receive data register not empty detection The flag indicates that the UCPD_RXDR register is not empty. It is automatically cleared upon reading UCPD_RXDR.
+    $09 constant UCPD_RXORDDET                  \ [0x09] Rx ordered set (4 K-codes) detection The flag indicates the detection of an ordered set. The relevant information is stored in the RXORDSET[2:0] bitfield of the UCPD_RX_ORDSET register. It is cleared by setting the RXORDDETCF bit.
+    $0a constant UCPD_RXHRSTDET                 \ [0x0a] Rx Hard Reset receipt detection The flag indicates the receipt of valid Hard Reset message. It is cleared by setting the RXHRSTDETCF bit.
+    $0b constant UCPD_RXOVR                     \ [0x0b] Rx data overflow detection The flag indicates Rx data buffer overflow. It is cleared by setting the RXOVRCF bit. The buffer overflow can occur if the received data are not read fast enough.
+    $0c constant UCPD_RXMSGEND                  \ [0x0c] Rx message received The flag indicates whether a message (except Hard Reset message) has been received, regardless the CRC value. The flag is cleared by setting the RXMSGENDCF bit. The RXERR flag set when the RXMSGEND flag goes high indicates errors in the last-received message.
+    $0d constant UCPD_RXERR                     \ [0x0d] Receive message error The flag indicates errors of the last Rx message declared (via RXMSGEND), such as incorrect CRC or truncated message (a line becoming static before EOP is met). It is asserted whenever the RXMSGEND flag is set.
+    $0e constant UCPD_TYPECEVT1                 \ [0x0e] Type-C voltage level event on CC1 line The flag indicates a change of the TYPEC_VSTATE_CC1[1:0] bitfield value, which corresponds to a new Type-C event. It is cleared by setting the TYPECEVT2CF bit.
+    $0f constant UCPD_TYPECEVT2                 \ [0x0f] Type-C voltage level event on CC2 line The flag indicates a change of the TYPEC_VSTATE_CC2[1:0] bitfield value, which corresponds to a new Type-C event. It is cleared by setting the TYPECEVT2CF bit.
+    $10 constant UCPD_TYPEC_VSTATE_CC1          \ [0x10 : 2] The status bitfield indicates the voltage level on the CC1 line in its steady state. The voltage variation on the CC1 line during USB PD messages due to the BMC PHY modulation does not impact the bitfield value.
+    $12 constant UCPD_TYPEC_VSTATE_CC2          \ [0x12 : 2] CC2 line voltage level The status bitfield indicates the voltage level on the CC2 line in its steady state. The voltage variation on the CC2 line during USB PD messages due to the BMC PHY modulation does not impact the bitfield value.
+    $14 constant UCPD_FRSEVT                    \ [0x14] FRS detection event The flag is cleared by setting the FRSEVTCF bit.
+  [then]
 
 
-\
-\ @brief UCPD Rx payload size register
-\ Address offset: 0x2C
-\ Reset value: 0x00000000
-\
-
-$000003ff constant UCPD_UCPD_RX_PAYSZR_RXPAYSZ                      \ Rx payload size received This bitfield contains the number of bytes of a payload (including header but excluding CRC) received: each time a new data byte is received in the UCPD_RXDR register, the bitfield value increments and the RXMSGEND flag is set (and an interrupt generated if enabled). The bitfield may return a spurious value when a byte reception is ongoing (the RXMSGEND flag is low).
-
-
-\
-\ @brief UCPD receive data register
-\ Address offset: 0x30
-\ Reset value: 0x00000000
-\
-
-$000000ff constant UCPD_UCPD_RXDR_RXDATA                            \ Data byte received
-
-
-\
-\ @brief UCPD Rx ordered set extension register 1
-\ Address offset: 0x34
-\ Reset value: 0x00000000
-\
-
-$000fffff constant UCPD_UCPD_RX_ORDEXTR1_RXSOPX1                    \ Ordered set 1 received
+  [ifdef] UCPD_UCPD_ICR_DEF
+    \
+    \ @brief UCPD interrupt clear register
+    \ Address offset: 0x18
+    \ Reset value: 0x00000000
+    \
+    $01 constant UCPD_TXMSGDISCCF               \ [0x01] Tx message discard flag (TXMSGDISC) clear Setting the bit clears the TXMSGDISC flag in the UCPD_SR register.
+    $02 constant UCPD_TXMSGSENTCF               \ [0x02] Tx message send flag (TXMSGSENT) clear Setting the bit clears the TXMSGSENT flag in the UCPD_SR register.
+    $03 constant UCPD_TXMSGABTCF                \ [0x03] Tx message abort flag (TXMSGABT) clear Setting the bit clears the TXMSGABT flag in the UCPD_SR register.
+    $04 constant UCPD_HRSTDISCCF                \ [0x04] Hard reset discard flag (HRSTDISC) clear Setting the bit clears the HRSTDISC flag in the UCPD_SR register.
+    $05 constant UCPD_HRSTSENTCF                \ [0x05] Hard reset send flag (HRSTSENT) clear Setting the bit clears the HRSTSENT flag in the UCPD_SR register.
+    $06 constant UCPD_TXUNDCF                   \ [0x06] Tx underflow flag (TXUND) clear Setting the bit clears the TXUND flag in the UCPD_SR register.
+    $09 constant UCPD_RXORDDETCF                \ [0x09] Rx ordered set detect flag (RXORDDET) clear Setting the bit clears the RXORDDET flag in the UCPD_SR register.
+    $0a constant UCPD_RXHRSTDETCF               \ [0x0a] Rx Hard Reset detect flag (RXHRSTDET) clear Setting the bit clears the RXHRSTDET flag in the UCPD_SR register.
+    $0b constant UCPD_RXOVRCF                   \ [0x0b] Rx overflow flag (RXOVR) clear Setting the bit clears the RXOVR flag in the UCPD_SR register.
+    $0c constant UCPD_RXMSGENDCF                \ [0x0c] Rx message received flag (RXMSGEND) clear Setting the bit clears the RXMSGEND flag in the UCPD_SR register.
+    $0e constant UCPD_TYPECEVT1CF               \ [0x0e] Type-C CC1 event flag (TYPECEVT1) clear Setting the bit clears the TYPECEVT1 flag in the UCPD_SR register
+    $0f constant UCPD_TYPECEVT2CF               \ [0x0f] Type-C CC2 line event flag (TYPECEVT2) clear Setting the bit clears the TYPECEVT2 flag in the UCPD_SR register
+    $14 constant UCPD_FRSEVTCF                  \ [0x14] FRS event flag (FRSEVT) clear Setting the bit clears the FRSEVT flag in the UCPD_SR register.
+  [then]
 
 
-\
-\ @brief UCPD Rx ordered set extension register 2
-\ Address offset: 0x38
-\ Reset value: 0x00000000
-\
+  [ifdef] UCPD_UCPD_TX_ORDSETR_DEF
+    \
+    \ @brief UCPD Tx ordered set type register
+    \ Address offset: 0x1C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXORDSET                  \ [0x00 : 20] Ordered set to transmit The bitfield determines a full 20-bit sequence to transmit, consisting of four K-codes, each of five bits, defining the packet to transmit. The bit 0 (bit 0 of K-code1) is the first, the bit 19 (bit 4 of code 4) the last.
+  [then]
 
-$000fffff constant UCPD_UCPD_RX_ORDEXTR2_RXSOPX2                    \ Ordered set 2 received
+
+  [ifdef] UCPD_UCPD_TX_PAYSZR_DEF
+    \
+    \ @brief UCPD Tx payload size register
+    \ Address offset: 0x20
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXPAYSZ                   \ [0x00 : 10] Payload size yet to transmit The bitfield is modified by software and by hardware. It contains the number of bytes of a payload (including header but excluding CRC) yet to transmit: each time a data byte is written into the UCPD_TXDR register, the bitfield value decrements and the TXIS bit is set, except when the bitfield value reaches zero. The enumerated values are standard payload sizes before the start of transmission.
+  [then]
 
 
-\
-\ @brief USB Type-C/USB Power Delivery interface
-\
-$4000ec00 constant UCPD_UCPD_CFGR1  \ offset: 0x00 : UCPD configuration register 1
-$4000ec04 constant UCPD_UCPD_CFGR2  \ offset: 0x04 : UCPD configuration register 2
-$4000ec0c constant UCPD_UCPD_CR   \ offset: 0x0C : UCPD control register
-$4000ec10 constant UCPD_UCPD_IMR  \ offset: 0x10 : UCPD interrupt mask register
-$4000ec14 constant UCPD_UCPD_SR   \ offset: 0x14 : UCPD status register
-$4000ec18 constant UCPD_UCPD_ICR  \ offset: 0x18 : UCPD interrupt clear register
-$4000ec1c constant UCPD_UCPD_TX_ORDSETR  \ offset: 0x1C : UCPD Tx ordered set type register
-$4000ec20 constant UCPD_UCPD_TX_PAYSZR  \ offset: 0x20 : UCPD Tx payload size register
-$4000ec24 constant UCPD_UCPD_TXDR  \ offset: 0x24 : UCPD Tx data register
-$4000ec28 constant UCPD_UCPD_RX_ORDSETR  \ offset: 0x28 : UCPD Rx ordered set register
-$4000ec2c constant UCPD_UCPD_RX_PAYSZR  \ offset: 0x2C : UCPD Rx payload size register
-$4000ec30 constant UCPD_UCPD_RXDR  \ offset: 0x30 : UCPD receive data register
-$4000ec34 constant UCPD_UCPD_RX_ORDEXTR1  \ offset: 0x34 : UCPD Rx ordered set extension register 1
-$4000ec38 constant UCPD_UCPD_RX_ORDEXTR2  \ offset: 0x38 : UCPD Rx ordered set extension register 2
+  [ifdef] UCPD_UCPD_TXDR_DEF
+    \
+    \ @brief UCPD Tx data register
+    \ Address offset: 0x24
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_TXDATA                    \ [0x00 : 8] Data byte to transmit
+  [then]
 
+
+  [ifdef] UCPD_UCPD_RX_ORDSETR_DEF
+    \
+    \ @brief UCPD Rx ordered set register
+    \ Address offset: 0x28
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXORDSET                  \ [0x00 : 3] Rx ordered set code detected
+    $03 constant UCPD_RXSOP3OF4                 \ [0x03] The bit indicates the number of correct codes. For debug purposes only.
+    $04 constant UCPD_RXSOPKINVALID             \ [0x04 : 3] The bitfield is for debug purposes only. Others: Invalid
+  [then]
+
+
+  [ifdef] UCPD_UCPD_RX_PAYSZR_DEF
+    \
+    \ @brief UCPD Rx payload size register
+    \ Address offset: 0x2C
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXPAYSZ                   \ [0x00 : 10] Rx payload size received This bitfield contains the number of bytes of a payload (including header but excluding CRC) received: each time a new data byte is received in the UCPD_RXDR register, the bitfield value increments and the RXMSGEND flag is set (and an interrupt generated if enabled). The bitfield may return a spurious value when a byte reception is ongoing (the RXMSGEND flag is low).
+  [then]
+
+
+  [ifdef] UCPD_UCPD_RXDR_DEF
+    \
+    \ @brief UCPD receive data register
+    \ Address offset: 0x30
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXDATA                    \ [0x00 : 8] Data byte received
+  [then]
+
+
+  [ifdef] UCPD_UCPD_RX_ORDEXTR1_DEF
+    \
+    \ @brief UCPD Rx ordered set extension register 1
+    \ Address offset: 0x34
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXSOPX1                   \ [0x00 : 20] Ordered set 1 received
+  [then]
+
+
+  [ifdef] UCPD_UCPD_RX_ORDEXTR2_DEF
+    \
+    \ @brief UCPD Rx ordered set extension register 2
+    \ Address offset: 0x38
+    \ Reset value: 0x00000000
+    \
+    $00 constant UCPD_RXSOPX2                   \ [0x00 : 20] Ordered set 2 received
+  [then]
+
+  \
+  \ @brief USB Type-C/USB Power Delivery interface
+  \
+  $00 constant UCPD_UCPD_CFGR1          \ UCPD configuration register 1
+  $04 constant UCPD_UCPD_CFGR2          \ UCPD configuration register 2
+  $0C constant UCPD_UCPD_CR             \ UCPD control register
+  $10 constant UCPD_UCPD_IMR            \ UCPD interrupt mask register
+  $14 constant UCPD_UCPD_SR             \ UCPD status register
+  $18 constant UCPD_UCPD_ICR            \ UCPD interrupt clear register
+  $1C constant UCPD_UCPD_TX_ORDSETR     \ UCPD Tx ordered set type register
+  $20 constant UCPD_UCPD_TX_PAYSZR      \ UCPD Tx payload size register
+  $24 constant UCPD_UCPD_TXDR           \ UCPD Tx data register
+  $28 constant UCPD_UCPD_RX_ORDSETR     \ UCPD Rx ordered set register
+  $2C constant UCPD_UCPD_RX_PAYSZR      \ UCPD Rx payload size register
+  $30 constant UCPD_UCPD_RXDR           \ UCPD receive data register
+  $34 constant UCPD_UCPD_RX_ORDEXTR1    \ UCPD Rx ordered set extension register 1
+  $38 constant UCPD_UCPD_RX_ORDEXTR2    \ UCPD Rx ordered set extension register 2
+
+: UCPD_DEF ; [then]
